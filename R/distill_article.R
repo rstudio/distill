@@ -68,6 +68,30 @@ distill_article <- function(fig_width = 7,
   knitr_options$opts_chunk$message = FALSE
   knitr_options$opts_chunk$comment = NA
 
+  # preprocessor
+  pre_processor <- function (metadata, input_file, runtime, knit_meta,
+                             files_dir, output_dir) {
+
+    args <- c()
+
+    # write front-matter into script tag
+    front_matter <- c(
+      '<script type="text/front-matter">',
+      yaml::as.yaml(list(
+        title = metadata$title,
+        description = metadata$description,
+        authors = metadata$authors,
+        affiliations = metadata$affiliations
+      )),
+      '</script>'
+    )
+    front_matter_file <- tempfile(fileext = "html")
+    writeLines(front_matter, front_matter_file)
+    args <- c(args, pandoc_include_args(in_header = front_matter_file))
+
+    # return args
+    args
+  }
 
   # return format
   output_format(
@@ -77,6 +101,7 @@ distill_article <- function(fig_width = 7,
                             args = args),
     keep_md = keep_md,
     clean_supporting = self_contained,
+    pre_processor = pre_processor,
     base_format = html_document_base(
       smart = smart,
       self_contained = self_contained,
