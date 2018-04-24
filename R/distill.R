@@ -97,7 +97,8 @@ html_dependency_distill <- function() {
     version = "1.0",
     src = system.file("rmarkdown/templates/distill_article/resources/distill-1.0",
                       package = "distill"),
-    script = "template.v1.js"
+    script = "template.v1.js",
+    stylesheet = "distill.css"
   )
 }
 
