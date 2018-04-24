@@ -1,0 +1,104 @@
+
+
+#'
+#' @import rmarkdown
+#'
+#' @export
+distill_article <- function(fig_width = 7,
+                            fig_height = 5,
+                            fig_retina = 2,
+                            fig_caption = TRUE,
+                            dev = "png",
+                            df_print = "paged",
+                            smart = TRUE,
+                            self_contained = TRUE,
+                            mathjax = "default",
+                            extra_dependencies = NULL,
+                            css = NULL,
+                            includes = NULL,
+                            keep_md = FALSE,
+                            lib_dir = NULL,
+                            md_extensions = NULL,
+                            pandoc_args = NULL,
+                            ...) {
+
+
+  # function for resolving resources
+  resource <- function(name) {
+    system.file("rmarkdown/templates/distill_article/resources", name,
+                package = "distill")
+  }
+
+  # build pandoc args
+  args <- c("--standalone")
+
+  # use section divs
+  args <- c(args, "--section-divs")
+
+  # additional css
+  for (css_file in css)
+    args <- c(args, "--css", pandoc_path_arg(css_file))
+
+  # content includes
+  args <- c(args, includes_to_pandoc_args(includes))
+
+  # add template
+  args <- c(args, "--template",
+            pandoc_path_arg(resource("default.html")))
+
+  # html dependency for distill
+  extra_dependencies <- append(extra_dependencies,
+                               list(html_dependency_distill()))
+
+  # pagedtables
+  if (identical(df_print, "paged")) {
+    extra_dependencies <- append(extra_dependencies,
+                                 list(html_dependency_pagedtable()))
+
+  }
+
+  # determine knitr options
+  knitr_options <- knitr_options_html(fig_width = fig_width,
+                                      fig_height = fig_height,
+                                      fig_retina = fig_retina,
+                                      keep_md = keep_md,
+                                      dev = dev)
+  knitr_options$opts_chunk$echo = FALSE
+  knitr_options$opts_chunk$warning = FALSE
+  knitr_options$opts_chunk$message = FALSE
+  knitr_options$opts_chunk$comment = NA
+
+
+  # return format
+  output_format(
+    knitr = knitr_options,
+    pandoc = pandoc_options(to = "html",
+                            from = rmarkdown_format(md_extensions),
+                            args = args),
+    keep_md = keep_md,
+    clean_supporting = self_contained,
+    base_format = html_document_base(
+      smart = smart,
+      self_contained = self_contained,
+      lib_dir = lib_dir,
+      mathjax = mathjax,
+      template = "default",
+      pandoc_args = pandoc_args,
+      bootstrap_compatible = FALSE,
+      extra_dependencies = extra_dependencies,
+      ...
+    )
+  )
+}
+
+html_dependency_distill <- function() {
+  htmltools::htmlDependency(
+    name = "distill",
+    version = "1.0",
+    src = system.file("rmarkdown/templates/distill_article/resources/distill-1.0",
+                      package = "distill"),
+    script = "template.v1.js"
+  )
+}
+
+
