@@ -37,4 +37,7 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
     pre.replaceWith(dt_code);
   });
 
+  // move appendixes to dt-appendix section
+  $(".appendix").appendTo("dt-appendix");
+
 });
