@@ -1,5 +1,15 @@
 
 
+#' R Markdown format for Distill articles
+#'
+#' Distill is a framework for creating academic articles for the web.
+#'
+#' Distill articles feature attractive, reader-friendly typography, flexible
+#' layout options for visualizations, and full support for footnotes and
+#' citations.
+#'
+#' @param centered `TRUE` (default) to center the article within the display
+#' @inheritParams rmarkdown::html_document
 #'
 #' @import rmarkdown
 #'
