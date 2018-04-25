@@ -37,6 +37,12 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
     pre.replaceWith(dt_code);
   });
 
+  // apply fig.layout to figures
+  $('.fig-layout-chunk').each(function(i, val) {
+    var fig_layout = $(this).attr('data-fig-layout');
+    $(this).find('img').addClass(fig_layout);
+  });
+
   // move appendixes to dt-appendix section
   $(".appendix").appendTo("dt-appendix");
 

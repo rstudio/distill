@@ -79,6 +79,21 @@ distill_article <- function(fig_width = 7,
   knitr_options$opts_chunk$message = FALSE
   knitr_options$opts_chunk$comment = NA
 
+  # hook to record fig.layout
+  knitr_options$knit_hooks <- list()
+  knitr_options$knit_hooks$chunk  <- function(x, options) {
+    if (!is.null(options$fig.layout)) {
+      paste0(
+        '<div class="fig-layout-chunk ', options$fig.layout,
+        '" data-fig-layout="', options$fig.layout, '">',
+        x,
+        '</div>'
+      )
+    } else {
+      x
+    }
+  }
+
   # preprocessor
   pre_processor <- function (metadata, input_file, runtime, knit_meta,
                              files_dir, output_dir) {
