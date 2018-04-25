@@ -35,6 +35,9 @@ distill_article <- function(fig_width = 7,
   # use section divs
   args <- c(args, "--section-divs")
 
+  # prevent highlighting
+  args <- c(args, "--no-highlight")
+
   # additional css
   for (css_file in css)
     args <- c(args, "--css", pandoc_path_arg(css_file))
@@ -45,6 +48,10 @@ distill_article <- function(fig_width = 7,
   # add template
   args <- c(args, "--template",
             pandoc_path_arg(resource("default.html")))
+
+  # lua filter
+  args <- c(args, "--lua-filter",
+            pandoc_path_arg(resource("distill-1.0/distill.lua")))
 
   # use link citations (so we can do citation conversion)
   args <- c(args, "--metadata=link-citations:true")

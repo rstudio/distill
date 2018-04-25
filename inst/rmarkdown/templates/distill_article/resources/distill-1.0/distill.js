@@ -24,4 +24,15 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
     $(this).replaceWith(dtfn);
   });
 
+  // replace code blocks with dt-code
+  $('pre>code').each(function(i, val) {
+    var code = $(this);
+    var pre = code.parent();
+    var language = pre.attr('class') || "none";
+    language = ' language="' + language + '"';
+    var dt_code = $('<dt-code block' + language + '></dt-code>');
+    dt_code.text(code.text());
+    pre.replaceWith(dt_code);
+  });
+
 });
