@@ -4,8 +4,9 @@
 #' @import rmarkdown
 #'
 #' @export
-distill_article <- function(fig_width = 7,
-                            fig_height = 5,
+distill_article <- function(centered = TRUE,
+                            fig_width = 6,
+                            fig_height = 4,
                             fig_retina = 2,
                             fig_caption = TRUE,
                             dev = "png",
@@ -37,6 +38,10 @@ distill_article <- function(fig_width = 7,
 
   # prevent highlighting
   args <- c(args, "--no-highlight")
+
+  # forward centered
+  if (centered)
+    args <- c(args, pandoc_variable_arg("centered", "1"))
 
   # additional css
   for (css_file in css)

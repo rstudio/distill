@@ -36,7 +36,7 @@ $if(include-before)$
   $endfor$
 $endif$
 
-<dt-article>
+<dt-article $if(centered)$class="centered"$endif$>
   <h1>$if(title-prefix)$$title-prefix$ - $endif$$pagetitle$</h1>
   $if(description)$<h2>$description$</h2>$endif$
   <dt-byline></dt-byline>
@@ -47,7 +47,7 @@ $for(include-after)$
   $include-after$
 $endfor$
 
-<dt-appendix>
+<dt-appendix $if(centered)$class="centered"$endif$>
 </dt-appendix>
 
 $if(mathjax-url)$
