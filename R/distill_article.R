@@ -46,9 +46,13 @@ distill_article <- function(fig_width = 7,
   args <- c(args, "--template",
             pandoc_path_arg(resource("default.html")))
 
+  # use link citations (so we can do citation conversion)
+  args <- c(args, "--metadata=link-citations:true")
+
   # html dependency for distill
   extra_dependencies <- append(extra_dependencies,
-                               list(html_dependency_distill()))
+                               list(html_dependency_jquery(),
+                                    html_dependency_distill()))
 
   # pagedtables
   if (identical(df_print, "paged")) {
@@ -74,6 +78,9 @@ distill_article <- function(fig_width = 7,
 
     args <- c()
 
+    # files to write into the header
+    in_header <- c()
+
     # write front-matter into script tag
     front_matter <- c(
       '<script type="text/front-matter">',
@@ -87,7 +94,21 @@ distill_article <- function(fig_width = 7,
     )
     front_matter_file <- tempfile(fileext = "html")
     writeLines(front_matter, front_matter_file)
-    args <- c(args, pandoc_include_args(in_header = front_matter_file))
+    in_header <- c(in_header, front_matter_file)
+
+    # write bibliography into script tag
+    if (!is.null(metadata$bibliography)) {
+      bibliography_file <-  tempfile(fileext = "html")
+      writeLines(c(
+        '<script type="text/bibliography">',
+        readLines(metadata$bibliography, warn = FALSE),
+        '</script>'
+      ), con = bibliography_file)
+    }
+    in_header <- c(in_header, bibliography_file)
+
+    # include files in the header
+    args <- c(args, pandoc_include_args(in_header = in_header))
 
     # return args
     args
@@ -122,7 +143,7 @@ html_dependency_distill <- function() {
     version = "1.0",
     src = system.file("rmarkdown/templates/distill_article/resources/distill-1.0",
                       package = "distill"),
-    script = "template.v1.js",
+    script = c("distill.js", "template.v1.js"),
     stylesheet = "distill.css"
   )
 }
