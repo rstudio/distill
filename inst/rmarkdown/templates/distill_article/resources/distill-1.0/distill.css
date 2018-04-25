@@ -1,5 +1,9 @@
 
-/* Hide pandoc bibliography since distill has it's own native one  */
-#refs {
+/* Hide pandoc bibliography and footnotes  */
+
+#refs, .footnotes {
   display: none;
 }
+
+
+
