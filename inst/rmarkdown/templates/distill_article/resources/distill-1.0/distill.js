@@ -39,8 +39,13 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 
   // apply fig.layout to figures
   $('.fig-layout-chunk').each(function(i, val) {
+
     var fig_layout = $(this).attr('data-fig-layout');
-    $(this).find('img').addClass(fig_layout);
+
+    var img = $(this).children('img');
+    if (img.length > 0)
+      img.addClass(fig_layout).unwrap();
+
   });
 
   // move appendixes to dt-appendix section
