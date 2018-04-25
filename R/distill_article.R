@@ -10,7 +10,6 @@ distill_article <- function(centered = TRUE,
                             fig_retina = 2,
                             fig_caption = TRUE,
                             dev = "png",
-                            df_print = "paged",
                             smart = TRUE,
                             self_contained = TRUE,
                             mathjax = "default",
@@ -65,13 +64,6 @@ distill_article <- function(centered = TRUE,
   extra_dependencies <- append(extra_dependencies,
                                list(html_dependency_jquery(),
                                     html_dependency_distill()))
-
-  # pagedtables
-  if (identical(df_print, "paged")) {
-    extra_dependencies <- append(extra_dependencies,
-                                 list(html_dependency_pagedtable()))
-
-  }
 
   # determine knitr options
   knitr_options <- knitr_options_html(fig_width = fig_width,
