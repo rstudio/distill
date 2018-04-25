@@ -29,6 +29,8 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
     var code = $(this);
     var pre = code.parent();
     var language = pre.attr('class') || "none";
+    if ($.inArray(language, ["r", "cpp", "c", "java"]) != -1)
+      language = "clike";
     language = ' language="' + language + '"';
     var dt_code = $('<dt-code block' + language + '></dt-code>');
     dt_code.text(code.text());
