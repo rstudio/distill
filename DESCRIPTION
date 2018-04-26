@@ -1,14 +1,21 @@
 Package: distill
 Type: Package
-Title: What the Package Does (Title Case)
+Title: 'R Markdown' Format for 'Distill' Articles
 Version: 0.1.0
-Author: Who wrote it
-Maintainer: The package maintainer <yourself@somewhere.net>
-Description: More about what it does (maybe more than one line)
-    Use four spaces when indenting paragraphs within the Description.
-License: What license is it under?
+Authors@R: c(
+  person("JJ", "Allaire", role = c("aut", "cre"), email = "jj@rstudio.com"),
+  person(family = "RStudio, Inc.", role = "cph"),
+  person(family = "Google LLC", role = c("ctb", "cph"), comment = "https://distill.pub/guide/")
+  )
+Description: Technical article format for the web. 'Distill' articles 
+    feature attractive, reader-friendly typography, flexible layout options
+    for visualizations, and full support for footnotes and citations.
+License: Apache License 2.0
+URL: https://github.com/jjallaire/distill
+BugReports: https://github.com/jjallaire/distill/issues
 Encoding: UTF-8
 LazyData: true
 RoxygenNote: 6.0.1
+Imports: rmarkdown, htmltools, yaml
 Suggests:
   knitr (>= 1.15.6)

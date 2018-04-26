@@ -66,7 +66,7 @@ additional details.}
 base R Markdown HTML output formatter \code{\link{html_document_base}}}
 }
 \description{
-Distill is a framework for creating academic articles for the web.
+Distill is a framework for creating technical articles for the web.
 }
 \details{
 Distill articles feature attractive, reader-friendly typography, flexible

@@ -2,7 +2,7 @@
 
 #' R Markdown format for Distill articles
 #'
-#' Distill is a framework for creating academic articles for the web.
+#' Distill is a framework for creating technical articles for the web.
 #'
 #' Distill articles feature attractive, reader-friendly typography, flexible
 #' layout options for visualizations, and full support for footnotes and
