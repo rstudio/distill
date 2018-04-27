@@ -137,8 +137,9 @@ distill_article <- function(centered = TRUE,
         readLines(metadata$bibliography, warn = FALSE),
         '</script>'
       ), con = bibliography_file)
+      in_header <- c(in_header, bibliography_file)
     }
-    in_header <- c(in_header, bibliography_file)
+
 
     # include files in the header
     args <- c(args, pandoc_include_args(in_header = in_header))
