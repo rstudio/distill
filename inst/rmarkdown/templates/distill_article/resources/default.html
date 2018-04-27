@@ -43,12 +43,12 @@ $endif$
   $body$
 </dt-article>
 
+<dt-appendix $if(centered)$class="centered"$endif$>
+</dt-appendix>
+
 $for(include-after)$
   $include-after$
 $endfor$
-
-<dt-appendix $if(centered)$class="centered"$endif$>
-</dt-appendix>
 
 $if(mathjax-url)$
 <!-- dynamically load mathjax for compatibility with self-contained -->
