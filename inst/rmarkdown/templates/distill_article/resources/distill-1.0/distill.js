@@ -2,8 +2,12 @@
 
 window.document.addEventListener("DOMContentLoaded", function (event) {
 
+  // flag indicating that we have appendix items
+  var appendix = false;
+
   // replace citations with <dt-cite>
   $('.citation>a').each(function(i, val) {
+    appendix = true;
     var href = $(this).attr('href');
     var key = href.replace('#ref-', '');
     var cite = $('<dt-cite></dt-cite>');
@@ -13,6 +17,7 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 
   // replace footnotes with <dt-fn>
   $('.footnote-ref').each(function(i, val) {
+    appendix = true;
     var href = $(this).attr('href');
     var id = href.replace('#', '');
     var fn = $('#' + id);
@@ -23,6 +28,15 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
     dtfn.text(text);
     $(this).replaceWith(dtfn);
   });
+
+  // move appendixes to dt-appendix section
+  $(".appendix").each(function(i, val) {
+    appendix = true;
+    $(this).appendTo("dt-appendix");
+  });
+
+  // show dt-appendix if we have appendix content
+  $("dt-appendix").css('display', appendix ? 'inherit' : 'none');
 
   // replace code blocks with dt-code
   $('pre>code').each(function(i, val) {
@@ -48,7 +62,5 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 
   });
 
-  // move appendixes to dt-appendix section
-  $(".appendix").appendTo("dt-appendix");
 
 });
