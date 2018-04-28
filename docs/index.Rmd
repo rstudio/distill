@@ -2,4 +2,9 @@
 title: "Untitled"
 ---
 
-Here we go!!!!
+Here we go!!!! ^[A footnote for us all]
+
+
+## Appendix 1 {.appendix}
+
+This is the appendix which we were hoping for.
