@@ -105,6 +105,19 @@ distill_article <- function(centered = TRUE,
     }
   }
 
+  post_knit <- function(metadata, input_file, runtime, encoding, ...) {
+
+    # extra args
+    args <- c()
+
+    # get site_config and generate additional header/footer html
+    config <- site_config(input_file, encoding)
+    args <- c(args, include_args_from_site_config(config, runtime))
+
+    # return args
+    args
+  }
+
   # preprocessor
   pre_processor <- function (metadata, input_file, runtime, knit_meta,
                              files_dir, output_dir) {
@@ -156,6 +169,7 @@ distill_article <- function(centered = TRUE,
                             args = args),
     keep_md = keep_md,
     clean_supporting = self_contained,
+    post_knit = post_knit,
     pre_processor = pre_processor,
     base_format = html_document_base(
       smart = smart,
@@ -181,5 +195,26 @@ html_dependency_distill <- function() {
     stylesheet = "distill.css"
   )
 }
+
+include_args_from_site_config <- function(config, runtime) {
+
+  includes <- list(
+    in_header = NULL,
+    before_body = NULL,
+    after_body = NULL
+  )
+
+  includes_to_pandoc_args(includes,
+                          filter = if (is_shiny_classic(runtime))
+                            function(x) normalize_path(x, mustWork = FALSE)
+                          else
+                            identity)
+}
+
+
+
+
+
+
 
 
