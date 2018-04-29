@@ -1,12 +1,53 @@
 ---
 title: "Distill for R Markdown"
-description: |
-  Distill is a technical article format for the web. Distill features attractive,
-  reader-friendly typography, flexible layout options for visualizations, 
-  and full support for footnotes and citations.
 ---
 
-## Introduction
+Distill is a new publication format created for use in <https://distill.pub>, a machine learning journal devoted to clear explanations, native to the web. The Distill format features:
+
+- Attractive, reader-friendly typography that adapts well to mobile devices.
+- Flexible layout options for visualizations, including visualizations that occupy the full  width of the screen.
+- Support for features essential to technical writing like LaTeX math, footnotes, and citations.
+
+## Getting Started
+
+To create an [R Markdown](https://rmarkdown.rstudio.com) document that uses the Distill format, first install the **distill** R package:
+
+```r
+devtools::install_github("jjallaire/distill")
+```
+
+Then, use the **New R Markdown** dialog within RStudio to create a new Distill article:
+
+![](images/new_distill_article.png){.l-body .screenshot}
+
+You can also create a new Distill article from the command line with:
+
+```r
+rmarkdown::draft("article.Rmd", "distill_article", "distill")
+```
+
+Distill articles use `distill::distill_article` as their output format, and typically include title, description, and author/affiliation entires in their YAML front-matter:
+
+```yaml
+---
+title: "My Article"
+description: |
+  A new article created using the Distill format.
+authors:
+  JJ Allaire: https://github.com/jjallaire
+  Yihui Xie: https://github.com/yihui
+affiliations:
+  RStudio: https://www.rstudio.com
+  RStudio: https://www.rstudio.com
+output: distill::distill_article
+---
+```
+
+
+
+
+
+
 
 Cras finibus maximus eros, id fermentum odio auctor id. Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos. Pellentesque vitae orci hendrerit, finibus est sed, mattis magna. Nunc sed arcu non enim mattis porta sit amet in nunc. Nunc non lorem eget nisi sodales congue quis non neque. Etiam eget urna vulputate, pharetra est ac, elementum nisi. Phasellus hendrerit diam at quam mollis, vel molestie nunc dapibus. Morbi quam risus, consequat in efficitur at, tincidunt ac libero. Aenean libero sem, cursus eget mollis a, sollicitudin sed ante. Aliquam et pellentesque erat, `foobar` vel mattis justo. Morbi purus metus, semper non egestas in, porta sed risus. Sed et lorem hendrerit, molestie ante ac, posuere arcu. Donec tincidunt lectus nec neque finibus sollicitudin. Donec faucibus justo non sapien malesuada maximus.
 

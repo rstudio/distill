@@ -15,9 +15,7 @@
   <script src="site_libs/distill-1.0/template.v1.js"></script>
   <script type="text/front-matter">
   title: Distill for R Markdown
-  description: "Distill is a technical article format for the web. Distill features
-    attractive,\nreader-friendly typography, flexible layout options for visualizations,
-    \nand full support for footnotes and citations."
+  description: ~
   authors: ~
   affiliations: ~
   
@@ -31,6 +29,7 @@ pre>code {
 </style>
 
 
+  <link rel="stylesheet" href="styles.css" type="text/css" />
 
 </head>
 
@@ -54,9 +53,37 @@ pre>code {
   
 <dt-article class="centered">
   <h1>Distill for R Markdown</h1>
-  <h2>Distill is a technical article format for the web. Distill features attractive, reader-friendly typography, flexible layout options for visualizations, and full support for footnotes and citations.</h2>
-    <div id="introduction" class="section level2">
-<h2>Introduction</h2>
+  
+    <p>Distill is a new publication format created for use in <a href="https://distill.pub" class="uri">https://distill.pub</a>, a machine learning journal devoted to clear explanations, native to the web. The Distill format features:</p>
+<ul>
+<li>Attractive, reader-friendly typography that adapts well to mobile devices.</li>
+<li>Flexible layout options for visualizations, including visualizations that occupy the full width of the screen.</li>
+<li>Support for features essential to technical writing like LaTeX math, footnotes, and citations.</li>
+</ul>
+<div id="getting-started" class="section level2">
+<h2>Getting Started</h2>
+<p>To create an <a href="https://rmarkdown.rstudio.com">R Markdown</a> document that uses the Distill format, first install the <strong>distill</strong> R package:</p>
+<pre class="r"><code>
+devtools::install_github(&quot;jjallaire/distill&quot;)</code></pre>
+<p>Then, use the <strong>New R Markdown</strong> dialog within RStudio to create a new Distill article:</p>
+<p><img src="images/new_distill_article.png" class="l-body screenshot" /></p>
+<p>You can also create a new Distill article from the command line with:</p>
+<pre class="r"><code>
+rmarkdown::draft(&quot;article.Rmd&quot;, &quot;distill_article&quot;, &quot;distill&quot;)</code></pre>
+<p>Distill articles use <code>distill::distill_article</code> as their output format, and typically include title, description, and author/affiliation entires in their YAML front-matter:</p>
+<pre class="yaml"><code>
+---
+title: &quot;My Article&quot;
+description: |
+  A new article created using the Distill format.
+authors:
+  JJ Allaire: https://github.com/jjallaire
+  Yihui Xie: https://github.com/yihui
+affiliations:
+  RStudio: https://www.rstudio.com
+  RStudio: https://www.rstudio.com
+output: distill::distill_article
+---</code></pre>
 <p>Cras finibus maximus eros, id fermentum odio auctor id. Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos. Pellentesque vitae orci hendrerit, finibus est sed, mattis magna. Nunc sed arcu non enim mattis porta sit amet in nunc. Nunc non lorem eget nisi sodales congue quis non neque. Etiam eget urna vulputate, pharetra est ac, elementum nisi. Phasellus hendrerit diam at quam mollis, vel molestie nunc dapibus. Morbi quam risus, consequat in efficitur at, tincidunt ac libero. Aenean libero sem, cursus eget mollis a, sollicitudin sed ante. Aliquam et pellentesque erat, <code>foobar</code> vel mattis justo. Morbi purus metus, semper non egestas in, porta sed risus. Sed et lorem hendrerit, molestie ante ac, posuere arcu. Donec tincidunt lectus nec neque finibus sollicitudin. Donec faucibus justo non sapien malesuada maximus.</p>
 </div>
 <div id="appendix-1" class="section level2 appendix">
@@ -71,12 +98,7 @@ pre>code {
   <dt-footer>
   <div class="l-page">
     <div class="description">
-    <a href="/index.html" class="logo">
-      <svg viewBox="-607 419 64 64">
-        <path d="M-573.4,478.9c-8,0-14.6-6.4-14.6-14.5s14.6-25.9,14.6-40.8c0,14.9,14.6,32.8,14.6,40.8S-565.4,478.9-573.4,478.9z"/>
-          </svg>
-      Distill for R Markdown
-    </a>
+    Site created using <a style="color: rgba(255, 255, 255, 0.4)" href="https://jjallaire.github.io/distill">Distill for R Markdown</a>
     </div>
     <div class="nav">
       <a href="/index.html">About</a>

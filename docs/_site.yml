@@ -2,7 +2,7 @@ name: "rmarkdown-distill"
 output_dir: "."
 output:
   distill::distill_article:
-    center: true
+    css: styles.css
     include:
       before_body: header.html
       after_body: footer.html
