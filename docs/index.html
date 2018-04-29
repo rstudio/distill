@@ -20,6 +20,23 @@
   affiliations: ~
   
   </script>
+  <script type="text/bibliography">
+  @article{gregor2015draw,
+    title={DRAW: A recurrent neural network for image generation},
+    author={Gregor, Karol and Danihelka, Ivo and Graves, Alex and Rezende, Danilo Jimenez and Wierstra, Daan},
+    journal={arXivreprint arXiv:1502.04623},
+    year={2015},
+    url={https://arxiv.org/pdf/1502.04623.pdf},
+  }
+  @article{gregor2015draw2,
+    title={DRAW: A recurrent neural network for image generation},
+    author={Gregor, Karol and Danihelka, Ivo and Graves, Alex and Rezende, Danilo Jimenez and Wierstra, Daan},
+    journal={arXivreprint arXiv:1502.04623},
+    year={2015},
+    url={https://arxiv.org/pdf/1502.04623.pdf},
+  }
+  
+  </script>
 
 <style type="text/css">
 pre>code {
@@ -43,8 +60,7 @@ pre>code {
       </a>
       <div class="nav">
         <a href="/index.html">About</a>
-        <a href="/layout.html">Layout</a>
-        <a href="/shiny.html">Shiny</a>
+        <a href="/visualizations.html">Visualizations</a>
         <a href="/reference.html">Reference</a>
         <a href="https://github.com/jjallaire/distill">GitHub</a>
       </div>
@@ -65,6 +81,9 @@ pre>code {
 <p>To create an <a href="https://rmarkdown.rstudio.com">R Markdown</a> document that uses the Distill format, first install the <strong>distill</strong> R package:</p>
 <pre class="r"><code>
 devtools::install_github(&quot;jjallaire/distill&quot;)</code></pre>
+<p>Next, be sure that you are running <a href="https://github.com/jgm/pandoc/releases/latest">Pandoc v2.0</a> or higher (the Distill format requires a later version of Pandoc than ships by default with RStudio). You can check the current version of Pandoc with:</p>
+<pre class="r"><code>
+rmarkdown::pandoc_version()</code></pre>
 <p>Then, use the <strong>New R Markdown</strong> dialog within RStudio to create a new Distill article:</p>
 <p><img src="images/new_distill_article.png" class="l-body screenshot" /></p>
 <p>You can also create a new Distill article from the command line with:</p>
@@ -83,12 +102,37 @@ affiliations:
   RStudio: https://www.rstudio.com
   RStudio: https://www.rstudio.com
 output: distill::distill_article
+bibliography: biblio.bib
 ---</code></pre>
-<p>Cras finibus maximus eros, id fermentum odio auctor id. Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos. Pellentesque vitae orci hendrerit, finibus est sed, mattis magna. Nunc sed arcu non enim mattis porta sit amet in nunc. Nunc non lorem eget nisi sodales congue quis non neque. Etiam eget urna vulputate, pharetra est ac, elementum nisi. Phasellus hendrerit diam at quam mollis, vel molestie nunc dapibus. Morbi quam risus, consequat in efficitur at, tincidunt ac libero. Aenean libero sem, cursus eget mollis a, sollicitudin sed ante. Aliquam et pellentesque erat, <code>foobar</code> vel mattis justo. Morbi purus metus, semper non egestas in, porta sed risus. Sed et lorem hendrerit, molestie ante ac, posuere arcu. Donec tincidunt lectus nec neque finibus sollicitudin. Donec faucibus justo non sapien malesuada maximus.</p>
+<p>The article’s description and author bylines are automatically rendered as part of the title area of the document.</p>
+<p>Note the <code>bibliography</code> field is used to provide a reference to the Bibtex file where all of the sources cited in your article are defined. The next section explains how to include citations in your article.</p>
 </div>
-<div id="appendix-1" class="section level2 appendix">
-<h2>Appendix 1</h2>
-<p>This is the appendix which we were hoping for.</p>
+<div id="citations" class="section level2">
+<h2>Citations</h2>
+<p>Bibtex is the supported way of making academic citations. To include citations, first create a bibtex file and refer to it from the <code>bibliography</code> field of the YAML front-matter (as illustrated above).</p>
+<p>For example, your bibliography file might contain:</p>
+<pre class="bibtex"><code>
+@article{gregor2015draw,
+  title={DRAW: A recurrent neural network for image generation},
+  author={Gregor, Karol and Danihelka, Ivo and Graves, Alex and Rezende, Danilo Jimenez and Wierstra, Daan},
+  journal={arXivreprint arXiv:1502.04623},
+  year={2015},
+  url={https://arxiv.org/pdf/1502.04623.pdf},
+}</code></pre>
+<p>You are strongly encouraged you to populate the url bibtex field where possible so that links can be provided for citations.</p>
+<p>Citations are then used in the article body with standard markdown notation, for example: <code>[@gregor2015draw]</code> (which references an id provided in the bibiography). Note that multiple ids (separated by semicolons) can be provided.</p>
+<p>The citation is presented inline like this: <span class="citation">(Gregor et al. <a href="#ref-gregor2015draw">2015</a>)</span> (a number that displays more information on hover). If you have an appendix, a bibliography is automatically created and populated in it.</p>
+<p>Distill chose a numerical inline citation style to improve readability of citation dense articles and because many of the benefits of longer citations are obviated by dispalying more information on hover. However, we consider it good style to mention author last names if you discuss something at length and it fits into the flow well—the authors are human and it’s nice for them to have the community associate them with their work.</p>
+</div>
+<div id="footnotes" class="section level2">
+<h2>Footnotes</h2>
+<p>Just wrap the text you would like to show up in a footnote in a <dt-fn> tag. The number of the footnote will be automatically generated. 1</p>
+<p><dt-fn>This will become a hoverable footnote.</dt-fn></p>
+<div id="refs" class="references">
+<div id="ref-gregor2015draw">
+<p>Gregor, Karol, Ivo Danihelka, Alex Graves, Danilo Jimenez Rezende, and Daan Wierstra. 2015. “DRAW: A Recurrent Neural Network for Image Generation.” <em>arXivreprint arXiv:1502.04623</em>. <a href="https://arxiv.org/pdf/1502.04623.pdf" class="uri">https://arxiv.org/pdf/1502.04623.pdf</a>.</p>
+</div>
+</div>
 </div>
 </dt-article>
 
@@ -102,8 +146,7 @@ output: distill::distill_article
     </div>
     <div class="nav">
       <a href="/index.html">About</a>
-      <a href="/layout.html">Layout</a>
-      <a href="/shiny.html">Shiny</a>
+      <a href="/visualizations.html">Visualizations</a>
       <a href="/reference.html">Reference</a>
       <a href="https://github.com/jjallaire/distill">GitHub</a>
     </div>
