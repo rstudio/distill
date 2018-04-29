@@ -1,10 +1,15 @@
 ---
-title: "Untitled"
+title: "Distill for R Markdown"
 description: |
-  This is a high-level description of what this article is all about.
+  Distill is a technical article format for the web. Distill features attractive,
+  reader-friendly typography, flexible layout options for visualizations, 
+  and full support for footnotes and citations.
 ---
 
-Here we go!!!! ^[A footnote for us all]
+## Introduction
+
+Cras finibus maximus eros, id fermentum odio auctor id. Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos. Pellentesque vitae orci hendrerit, finibus est sed, mattis magna. Nunc sed arcu non enim mattis porta sit amet in nunc. Nunc non lorem eget nisi sodales congue quis non neque. Etiam eget urna vulputate, pharetra est ac, elementum nisi. Phasellus hendrerit diam at quam mollis, vel molestie nunc dapibus. Morbi quam risus, consequat in efficitur at, tincidunt ac libero. Aenean libero sem, cursus eget mollis a, sollicitudin sed ante. Aliquam et pellentesque erat, `foobar` vel mattis justo. Morbi purus metus, semper non egestas in, porta sed risus. Sed et lorem hendrerit, molestie ante ac, posuere arcu. Donec tincidunt lectus nec neque finibus sollicitudin. Donec faucibus justo non sapien malesuada maximus.
+
 
 
 ## Appendix 1 {.appendix}
