@@ -6,13 +6,21 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
   var appendix = false;
 
   // replace citations with <dt-cite>
-  $('.citation>a').each(function(i, val) {
+  $('.citation').each(function(i, val) {
     appendix = true;
-    var href = $(this).attr('href');
-    var key = href.replace('#ref-', '');
-    var cite = $('<dt-cite></dt-cite>');
-    cite.attr('key', key);
-    $(this).parent().replaceWith(cite);
+    // pull out all unique citation references
+    var anchors = $(this).children('a');
+    var cites = [];
+    anchors.each(function(i, val) {
+      var href = $(val).attr('href');
+      var cite = href.replace('#ref-', '');
+      if ($.inArray(cite, cites) === -1)
+        cites.push(cite);
+    });
+    // create dt-site
+    var dt_cite = $('<dt-cite></dt-cite>');
+    dt_cite.attr('key', cites.join());
+    $(this).replaceWith(dt_cite);
   });
 
   // replace footnotes with <dt-fn>
