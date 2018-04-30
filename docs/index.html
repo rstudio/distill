@@ -32,7 +32,7 @@
     publisher={British Computer Society}
   }
   @Book{xie2015,
-    title = {Dynamic Documents with {R} and knitr},
+    title = {Dynamic Documents with R and knitr},
     author = {Yihui Xie},
     publisher = {Chapman and Hall/CRC},
     address = {Boca Raton, Florida},
@@ -40,14 +40,6 @@
     edition = {2nd},
     note = {ISBN 978-1498716963},
     url = {http://yihui.name/knitr/},
-  }
-  @Manual{R-knitr,
-    title = {knitr: A General-Purpose Package for Dynamic Report
-      Generation in R},
-    author = {Yihui Xie},
-    note = {R package version 1.20.2},
-    url = {https://yihui.name/knitr/},
-    year = {2018},
   }
   @Manual{R-base,
     title = {R: A Language and Environment for Statistical
@@ -137,28 +129,35 @@ bibliography: biblio.bib
 <p>Bibtex is the supported way of making academic citations. To include citations, first create a bibtex file and refer to it from the <code>bibliography</code> field of the YAML front-matter (as illustrated above).</p>
 <p>For example, your bibliography file might contain:</p>
 <pre class="bibtex"><code>
-@Manual{R-knitr,
-  title = {knitr: A General-Purpose Package for Dynamic Report
-    Generation in R},
+@Book{xie2015,
+  title = {Dynamic Documents with {R} and knitr},
   author = {Yihui Xie},
-  note = {R package version 1.20.2},
-  url = {https://yihui.name/knitr/},
-  year = {2018},
+  publisher = {Chapman and Hall/CRC},
+  address = {Boca Raton, Florida},
+  year = {2015},
+  edition = {2nd},
+  note = {ISBN 978-1498716963},
+  url = {http://yihui.name/knitr/},
 }</code></pre>
 <p>You are strongly encouraged you to populate the url bibtex field where possible so that links can be provided for citations.</p>
-<p>Citations are then used in the article body with standard markdown notation, for example: <code>[@R-knitr]</code> (which references an id provided in the bibiography). Note that multiple ids (separated by semicolons) can be provided.</p>
-<p>The citation is presented inline like this: <span class="citation">(Xie <a href="#ref-R-knitr">2018</a>)</span> (a number that displays more information on hover). If you have an appendix, a bibliography is automatically created and populated in it.</p>
+<p>Citations are then used in the article body with standard Pandoc markdown notation, for example: <code>[@xie2015]</code> (which references an id provided in the bibiography). Note that multiple ids (separated by semicolons) can be provided.</p>
+<p>The citation is presented inline like this: <span class="citation">(Xie <a href="#ref-xie2015">2015</a>)</span> (a number that displays more information on hover). If you have an appendix, a bibliography is automatically created and populated in it.</p>
 <p>Distill chose a numerical inline citation style to improve readability of citation dense articles and because many of the benefits of longer citations are obviated by dispalying more information on hover. However, we consider it good style to mention author last names if you discuss something at length and it fits into the flow well—the authors are human and it’s nice for them to have the community associate them with their work.</p>
 </div>
 <div id="footnotes" class="section level2">
 <h2>Footnotes</h2>
-<p>Just wrap the text you would like to show up in a footnote in a <dt-fn> tag. The number of the footnote will be automatically generated. 1</p>
-<p><dt-fn>This will become a hoverable footnote.</dt-fn></p>
+<p>Footnotes use standard Pandoc markdown notation, for example <code>^[This will become a hoverable footnote]</code>. The number of the footnote will be automatically generated.<a href="#fn1" class="footnote-ref" id="fnref1"><sup>1</sup></a></p>
 <div id="refs" class="references">
-<div id="ref-R-knitr">
-<p>Xie, Yihui. 2018. <em>Knitr: A General-Purpose Package for Dynamic Report Generation in R</em>. <a href="https://yihui.name/knitr/" class="uri">https://yihui.name/knitr/</a>.</p>
+<div id="ref-xie2015">
+<p>Xie, Yihui. 2015. <em>Dynamic Documents with R and Knitr</em>. 2nd ed. Boca Raton, Florida: Chapman; Hall/CRC. <a href="http://yihui.name/knitr/" class="uri">http://yihui.name/knitr/</a>.</p>
 </div>
 </div>
+</div>
+<div class="footnotes">
+<hr />
+<ol>
+<li id="fn1"><p>This will become a hoverable footnote<a href="#fnref1" class="footnote-back">↩</a></p></li>
+</ol>
 </div>
 </dt-article>
 
