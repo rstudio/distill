@@ -7,7 +7,7 @@ authors:
   - Nora Jones: https://example.com/norajones
 affiliations:
   - Whoville College: https://example.com/whoville
-  - Spacely Sprockets: https://www.rstudio.com
+  - Spacely Sprockets: https://example.com/spacelysprokets
 output: 
   distill::distill_article: 
     center: true
