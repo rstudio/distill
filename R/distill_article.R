@@ -93,16 +93,14 @@ distill_article <- function(centered = TRUE,
   # hook to record fig.layout
   knitr_options$knit_hooks <- list()
   knitr_options$knit_hooks$chunk  <- function(x, options) {
-    if (!is.null(options$fig.layout)) {
-      paste0(
-        '<div class="fig-layout-chunk ', options$fig.layout,
-        '" data-fig-layout="', options$fig.layout, '">',
-        x,
-        '</div>'
-      )
-    } else {
-      x
-    }
+    if (is.null(options$fig.layout))
+      options$fig.layout <- "l-body"
+    paste0(
+      '<div class="fig-layout-chunk ', options$fig.layout,
+      '" data-fig-layout="', options$fig.layout, '">',
+      x,
+      '</div>'
+    )
   }
 
   post_knit <- function(metadata, input_file, runtime, encoding, ...) {

@@ -86,5 +86,124 @@ Distill chose a numerical inline citation style to improve readability of citati
 
 Footnotes use standard Pandoc markdown notation, for example `^[This will become a hoverable footnote]`. The number of the footnote will be automatically generated. ^[This will become a hoverable footnote]
 
+## Code Blocks
+
+Syntax highlighting is provided for code chunks and markdown code blocks. Note that by default the Distill format does not display the code for chunks that are evaluated to produce output (knitr option `echo = FALSE`). 
+
+To display the code that was evaluated to produce output you can set the `echo` chunk option to `TRUE`:
+
+    ```{r, echo=FALSE}`r ''`
+    1 + 1
+    ```
+
+To include code that is only displayed and not evaluated specify the `eval=FALSE` option:
+
+    ```{r, eval=FALSE, echo=FALSE}`r ''`
+    1 + 1
+    ```
+
+## Equations
+
+Inline and display equations are supported via standard markdown [MathJax](https://www.mathjax.org/) syntax. For example, the following [LaTeX math](https://en.wikibooks.org/wiki/LaTeX/Mathematics):
+
+
+    $$
+    \sigma = \sqrt{ \frac{1}{N} \sum_{i=1}^N (x_i -\mu)^2}
+    $$
+    
+Will be rendered as:
+
+$$
+\sigma = \sqrt{ \frac{1}{N} \sum_{i=1}^N (x_i -\mu)^2}
+$$
+
+## Diagrams
+
+To include diagrams within a distill article, we recommend trying out the [DiagrammerR](http://rich-iannone.github.io/DiagrammeR/) package, which enables you to generate graph diagrams using text in a markdown-like syntax.
+
+If you need more flexibilty than DiagrammeR affords, you can also try out the [r2d3](https://rstudio.github.io/r2d3) package to include diagrames created with [D3.js](https://d3js.org/).
+
+For more highly customized static diagrams you can use a vector graphics tools like [Inkscape](https://inkscape.org/en/), [Adobe Illustrator](https://www.adobe.com/products/illustrator.html), or [Sketch](https://www.sketchapp.com/). For equations in diagrams, inkscape has a plugin to support LaTeX equations, while Illustrator integrates well with tools like Equation Maker. 
+
+## Figures
+
+There are a variety of ways to layout figures included within Distill articles. This layout is controlled by a set of layout classes, which are in turn applied to R Markdown chunks using the `fig.layout` chunk option.
+
+The default layout if `fig.layout` is not specified is `l-body`, which will cause figures to span with width of the main article body:
+
+<div class="fake-img l-body"><p>l-body</p></div>
+
+For example, a figure with the default `l-body` layout would look like this:
+
+![](images/l-body-figure.png){.l-body}
+
+
+For figures you want to display a little larger, try these:
+
+<div class="fake-img l-middle"><p>l-middle</p></div>
+
+<div class="fake-img l-page"><p>l-page</p></div>
+
+For example, this plot specifies the `l-middle` layout using the `fig.layout` chunk option:
+
+    ```{r, fig.layout="l-middle", fig.width=6, fig.height=1.5}`r ''`
+    ggplot(diamonds, aes(carat, price)) + geom_smooth() +
+      facet_grid(~ cut)
+    ```
+
+![](images/l-middle-figure.png){.l-middle}
+
+
+Note that when specifying an alternate `fig.layout` you should also specify and appropriate `fig.width` and `fig.height` for that layout.
+
+All of these have an `outset` variant if you want to poke out from the body text a little bit. For instance:
+
+<div class="fake-img l-body-outset"><p>l-body-outset</p></div>
+
+<div class="fake-img l-middle-outset"><p>l-middle-outset</p></div>
+
+<div class="fake-img l-page-outset"><p>l-page-outset</p></div>
+
+Occasionally you’ll want to use the full browser width. For this, use `l-screen`. You can also inset the element a little from the edge of the browser by using the inset variant:
+
+<div class="fake-img l-screen"><p>l-screen</p></div>
+
+<div class="fake-img l-screen-inset"><p>l-screen-inset</p></div>
+
+## Interactive Visualizations
+
+htmlwidgets
+
+crosstalk
+
+shiny
+
+
+## Appendices
+
+An appendix can be added after your article by adding the `.appendix` class to a markdown header (e.g. `##`). For example:
+
+    ## Acknowledgments {.appendix}
+
+You may with to include the following sections in your appendix:
+
+- **Acknowledgments:** This is a place to recognize people and institutions. It may also be a good place to acknowledge and cite software that makes your work possible.
+
+- **Author Contributions:** We strongly encourage you to include an author contributions statement briefly describing what each author did.
+
+
+## TODO
+
+- Tables
+- Definition list
+
+## Acknowledgments {.appendix}
+
+The Distill R Markdown format builds upon many years of work on 
+
+
+
+
+
 
 

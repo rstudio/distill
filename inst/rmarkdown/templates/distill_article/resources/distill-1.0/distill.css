@@ -115,3 +115,11 @@ dt-footer .nav a {
 }
 
 
+dt-appendix h1, dt-appendix h2 {
+  font-size: 16px;
+  font-weight: 500;
+  margin-top: 18px;
+  margin-bottom: 18px;
+  color: rgba(0,0,0,0.65);
+}
+

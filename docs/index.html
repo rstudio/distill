@@ -41,6 +41,13 @@
     note = {ISBN 978-1498716963},
     url = {http://yihui.name/knitr/},
   }
+  @Manual{R-rmarkdown,
+      title = {rmarkdown: Dynamic Documents for R},
+      author = {JJ Allaire and Yihui Xie and Jonathan McPherson and Javier Luraschi and Kevin Ushey and Aron Atkins and Hadley Wickham and Joe Cheng and Winston Chang},
+      year = {2018},
+      note = {R package version 1.9},
+      url = {https://CRAN.R-project.org/package=rmarkdown},
+    }
   @Manual{R-base,
     title = {R: A Language and Environment for Statistical
       Computing},
@@ -130,7 +137,7 @@ bibliography: biblio.bib
 <p>For example, your bibliography file might contain:</p>
 <pre class="bibtex"><code>
 @Book{xie2015,
-  title = {Dynamic Documents with {R} and knitr},
+  title = {Dynamic Documents with R and knitr},
   author = {Yihui Xie},
   publisher = {Chapman and Hall/CRC},
   address = {Boca Raton, Florida},
@@ -147,6 +154,124 @@ bibliography: biblio.bib
 <div id="footnotes" class="section level2">
 <h2>Footnotes</h2>
 <p>Footnotes use standard Pandoc markdown notation, for example <code>^[This will become a hoverable footnote]</code>. The number of the footnote will be automatically generated.<a href="#fn1" class="footnote-ref" id="fnref1"><sup>1</sup></a></p>
+</div>
+<div id="code-blocks" class="section level2">
+<h2>Code Blocks</h2>
+<p>Syntax highlighting is provided for code chunks and markdown code blocks. Note that by default the Distill format does not display the code for chunks that are evaluated to produce output (knitr option <code>echo = FALSE</code>).</p>
+<p>To display the code that was evaluated to produce output you can set the <code>echo</code> chunk option to <code>TRUE</code>:</p>
+<pre><code>
+```{r, echo=FALSE}
+1 + 1
+```</code></pre>
+<p>To include code that is only displayed and not evaluated specify the <code>eval=FALSE</code> option:</p>
+<pre><code>
+```{r, eval=FALSE, echo=FALSE}
+1 + 1
+```</code></pre>
+</div>
+<div id="equations" class="section level2">
+<h2>Equations</h2>
+<p>Inline and display equations are supported via standard markdown <a href="https://www.mathjax.org/">MathJax</a> syntax. For example, the following <a href="https://en.wikibooks.org/wiki/LaTeX/Mathematics">LaTeX math</a>:</p>
+<pre><code>
+$$
+\sigma = \sqrt{ \frac{1}{N} \sum_{i=1}^N (x_i -\mu)^2}
+$$</code></pre>
+<p>Will be rendered as:</p>
+<p><span class="math display">\[
+\sigma = \sqrt{ \frac{1}{N} \sum_{i=1}^N (x_i -\mu)^2}
+\]</span></p>
+</div>
+<div id="diagrams" class="section level2">
+<h2>Diagrams</h2>
+<p>To include diagrams within a distill article, we recommend trying out the <a href="http://rich-iannone.github.io/DiagrammeR/">DiagrammerR</a> package, which enables you to generate graph diagrams using text in a markdown-like syntax.</p>
+<p>If you need more flexibilty than DiagrammeR affords, you can also try out the <a href="https://rstudio.github.io/r2d3">r2d3</a> package to include diagrames created with <a href="https://d3js.org/">D3.js</a>.</p>
+<p>For more highly customized static diagrams you can use a vector graphics tools like <a href="https://inkscape.org/en/">Inkscape</a>, <a href="https://www.adobe.com/products/illustrator.html">Adobe Illustrator</a>, or <a href="https://www.sketchapp.com/">Sketch</a>. For equations in diagrams, inkscape has a plugin to support LaTeX equations, while Illustrator integrates well with tools like Equation Maker.</p>
+</div>
+<div id="figures" class="section level2">
+<h2>Figures</h2>
+<p>There are a variety of ways to layout figures included within Distill articles. This layout is controlled by a set of layout classes, which are in turn applied to R Markdown chunks using the <code>fig.layout</code> chunk option.</p>
+<p>The default layout if <code>fig.layout</code> is not specified is <code>l-body</code>, which will cause figures to span with width of the main article body:</p>
+<div class="fake-img l-body">
+<p>
+l-body
+</p>
+</div>
+<p>For example, a figure with the default <code>l-body</code> layout would look like this:</p>
+<p><img src="images/l-body-figure.png" class="l-body" /></p>
+<p>For figures you want to display a little larger, try these:</p>
+<div class="fake-img l-middle">
+<p>
+l-middle
+</p>
+</div>
+<div class="fake-img l-page">
+<p>
+l-page
+</p>
+</div>
+<p>For example, this plot specifies the <code>l-middle</code> layout using the <code>fig.layout</code> chunk option:</p>
+<pre><code>
+```{r, fig.layout=&quot;l-middle&quot;, fig.width=6, fig.height=1.5}
+ggplot(diamonds, aes(carat, price)) + geom_smooth() +
+  facet_grid(~ cut)
+```</code></pre>
+<p><img src="images/l-middle-figure.png" class="l-middle" /></p>
+<p>Note that when specifying an alternate <code>fig.layout</code> you should also specify and appropriate <code>fig.width</code> and <code>fig.height</code> for that layout.</p>
+<p>All of these have an <code>outset</code> variant if you want to poke out from the body text a little bit. For instance:</p>
+<div class="fake-img l-body-outset">
+<p>
+l-body-outset
+</p>
+</div>
+<div class="fake-img l-middle-outset">
+<p>
+l-middle-outset
+</p>
+</div>
+<div class="fake-img l-page-outset">
+<p>
+l-page-outset
+</p>
+</div>
+<p>Occasionally you’ll want to use the full browser width. For this, use <code>l-screen</code>. You can also inset the element a little from the edge of the browser by using the inset variant:</p>
+<div class="fake-img l-screen">
+<p>
+l-screen
+</p>
+</div>
+<div class="fake-img l-screen-inset">
+<p>
+l-screen-inset
+</p>
+</div>
+</div>
+<div id="interactive-visualizations" class="section level2">
+<h2>Interactive Visualizations</h2>
+<p>htmlwidgets</p>
+<p>crosstalk</p>
+<p>shiny</p>
+</div>
+<div id="appendices" class="section level2">
+<h2>Appendices</h2>
+<p>An appendix can be added after your article by adding the <code>.appendix</code> class to a markdown header (e.g. <code>##</code>). For example:</p>
+<pre><code>
+## Acknowledgments {.appendix}</code></pre>
+<p>You may with to include the following sections in your appendix:</p>
+<ul>
+<li><p><strong>Acknowledgments:</strong> This is a place to recognize people and institutions. It may also be a good place to acknowledge and cite software that makes your work possible.</p></li>
+<li><p><strong>Author Contributions:</strong> We strongly encourage you to include an author contributions statement briefly describing what each author did.</p></li>
+</ul>
+</div>
+<div id="todo" class="section level2">
+<h2>TODO</h2>
+<ul>
+<li>Tables</li>
+<li>Definition list</li>
+</ul>
+</div>
+<div id="acknowledgments" class="section level2 appendix">
+<h2>Acknowledgments</h2>
+<p>The Distill R Markdown format builds upon many years of work on</p>
 <div id="refs" class="references">
 <div id="ref-xie2015">
 <p>Xie, Yihui. 2015. <em>Dynamic Documents with R and Knitr</em>. 2nd ed. Boca Raton, Florida: Chapman; Hall/CRC. <a href="http://yihui.name/knitr/" class="uri">http://yihui.name/knitr/</a>.</p>
