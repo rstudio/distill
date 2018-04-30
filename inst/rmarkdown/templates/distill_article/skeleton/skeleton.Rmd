@@ -1,6 +1,21 @@
 ---
 title: "Untitled"
+description: |
+  A new article created using the Distill format.
+authors:
+  - Joe Smith: https://example.com/joesmith
+  - Nora Jones: https://example.com/norajones
+affiliations:
+  - Whoville College: https://example.com/whoville
+  - Spacely Sprockets: https://www.rstudio.com
 output: 
-   distill::distill_article: default
+  distill::distill_article: 
+    center: true
+    fig_width: 6
+    fig_height: 4   
 ---
+
+Distill is an online publication format devoted to clear explanations, native to the web. Learn more about using Distill with R Markdown at <https://jjallaire.github.io/distill>.
+
+
 
