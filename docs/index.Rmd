@@ -7,7 +7,7 @@ bibliography: biblio.bib
 library(ggplot2)
 ```
 
-Distill is a new online publication format devoted to clear explanations, native to the web. Distill was originally created for use in <https://distill.pub> (a machine learning journal) but is also an open-source framework available for broader use. Distill features:
+Distill is an online publication format devoted to clear explanations, native to the web. Distill was originally created for use in <https://distill.pub> (a machine learning journal) but is also an open-source framework available for broader use. Distill features:
 
 - Attractive, reader-friendly typography that adapts well to mobile devices.
 - Flexible layout options for visualizations, including visualizations that occupy the full  width of the screen.
@@ -45,11 +45,11 @@ title: "My Article"
 description: |
   A new article created using the Distill format.
 authors:
-  JJ Allaire: https://github.com/jjallaire
-  Yihui Xie: https://github.com/yihui
+  - JJ Allaire: https://github.com/jjallaire
+  - Yihui Xie: https://github.com/yihui
 affiliations:
-  RStudio: https://www.rstudio.com
-  RStudio: https://www.rstudio.com
+  - RStudio: https://www.rstudio.com
+  - RStudio: https://www.rstudio.com
 output: distill::distill_article
 bibliography: biblio.bib
 ---
