@@ -7,7 +7,7 @@ bibliography: biblio.bib
 library(ggplot2)
 ```
 
-Distill is a new publication format created for use in <https://distill.pub>, a machine learning journal devoted to clear explanations, native to the web. The Distill format features:
+Distill is a new online publication format created for use in <https://distill.pub>, a machine learning journal devoted to clear explanations, native to the web. The Distill format features:
 
 - Attractive, reader-friendly typography that adapts well to mobile devices.
 - Flexible layout options for visualizations, including visualizations that occupy the full  width of the screen.
@@ -78,7 +78,7 @@ For example, your bibliography file might contain:
 }
 ```
 
-You are strongly encouraged you to populate the url bibtex field where possible so that links can be provided for citations.
+You are strongly encouraged you to populate the `url` bibtex field where possible so that links can be provided for citations.
 
 Citations are then used in the article body with standard Pandoc markdown notation, for example: `[@xie2015]` (which references an id provided in the bibiography). Note that multiple ids (separated by semicolons) can be provided.
 

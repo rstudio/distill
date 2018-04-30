@@ -56,12 +56,12 @@
     url = {http://yihui.name/knitr/},
   }
   @Manual{R-rmarkdown,
-      title = {rmarkdown: Dynamic Documents for R},
-      author = {JJ Allaire and Yihui Xie and Jonathan McPherson and Javier Luraschi and Kevin Ushey and Aron Atkins and Hadley Wickham and Joe Cheng and Winston Chang},
-      year = {2018},
-      note = {R package version 1.9},
-      url = {https://CRAN.R-project.org/package=rmarkdown},
-    }
+    title = {rmarkdown: Dynamic Documents for R},
+    author = {JJ Allaire and Yihui Xie and Jonathan McPherson and Javier Luraschi and Kevin Ushey and Aron Atkins and Hadley Wickham and Joe Cheng and Winston Chang},
+    year = {2018},
+    note = {R package version 1.9},
+    url = {https://CRAN.R-project.org/package=rmarkdown},
+  }
   @Manual{R-base,
     title = {R: A Language and Environment for Statistical
       Computing},
@@ -100,9 +100,9 @@ dt-article table th, dt-article table td {
         Distill for R Markdown
       </a>
       <div class="nav">
-        <a href="/index.html">About</a>
-        <a href="/visualizations.html">Visualizations</a>
-        <a href="/reference.html">Reference</a>
+        <a href="index.html">Using</a>
+        <a href="visualizations.html">Visualizations</a>
+        <a href="reference.html">Reference</a>
         <a href="https://github.com/jjallaire/distill">GitHub</a>
       </div>
     </div>
@@ -111,7 +111,7 @@ dt-article table th, dt-article table td {
 <dt-article class="centered">
   <h1>Distill for R Markdown</h1>
   
-    <p>Distill is a new publication format created for use in <a href="https://distill.pub" class="uri">https://distill.pub</a>, a machine learning journal devoted to clear explanations, native to the web. The Distill format features:</p>
+    <p>Distill is a new online publication format created for use in <a href="https://distill.pub" class="uri">https://distill.pub</a>, a machine learning journal devoted to clear explanations, native to the web. The Distill format features:</p>
 <ul>
 <li>Attractive, reader-friendly typography that adapts well to mobile devices.</li>
 <li>Flexible layout options for visualizations, including visualizations that occupy the full width of the screen.</li>
@@ -160,7 +160,7 @@ bibliography: biblio.bib
   note = {ISBN 978-1498716963},
   url = {http://yihui.name/knitr/},
 }</code></pre>
-<p>You are strongly encouraged you to populate the url bibtex field where possible so that links can be provided for citations.</p>
+<p>You are strongly encouraged you to populate the <code>url</code> bibtex field where possible so that links can be provided for citations.</p>
 <p>Citations are then used in the article body with standard Pandoc markdown notation, for example: <code>[@xie2015]</code> (which references an id provided in the bibiography). Note that multiple ids (separated by semicolons) can be provided.</p>
 <p>The citation is presented inline like this: <span class="citation">(Xie <a href="#ref-xie2015">2015</a>)</span> (a number that displays more information on hover). If you have an appendix, a bibliography is automatically created and populated in it.</p>
 <p>Distill chose a numerical inline citation style to improve readability of citation dense articles and because many of the benefits of longer citations are obviated by dispalying more information on hover. However, we consider it good style to mention author last names if you discuss something at length and it fits into the flow well—the authors are human and it’s nice for them to have the community associate them with their work.</p>
@@ -293,8 +293,8 @@ leaflet() %&gt;%
   addMarkers(lng=174.768, lat=-36.852, popup=&quot;The birthplace of R&quot;)
 ```</code></pre>
 <div class="fig-layout-chunk l-body" data-fig-layout="l-body">
-<div id="htmlwidget-bee0f82245951715019e" style="width:576px;height:384px;" class="leaflet html-widget"></div>
-<script type="application/json" data-for="htmlwidget-bee0f82245951715019e">{"x":{"options":{"crs":{"crsClass":"L.CRS.EPSG3857","code":null,"proj4def":null,"projectedBounds":null,"options":{}}},"calls":[{"method":"addTiles","args":["//{s}.tile.openstreetmap.org/{z}/{x}/{y}.png",null,null,{"minZoom":0,"maxZoom":18,"tileSize":256,"subdomains":"abc","errorTileUrl":"","tms":false,"noWrap":false,"zoomOffset":0,"zoomReverse":false,"opacity":1,"zIndex":1,"detectRetina":false,"attribution":"&copy; <a href=\"http://openstreetmap.org\">OpenStreetMap<\/a> contributors, <a href=\"http://creativecommons.org/licenses/by-sa/2.0/\">CC-BY-SA<\/a>"}]},{"method":"addMarkers","args":[-36.852,174.768,null,null,null,{"interactive":true,"draggable":false,"keyboard":true,"title":"","alt":"","zIndexOffset":0,"opacity":1,"riseOnHover":false,"riseOffset":250},"The birthplace of R",null,null,null,null,{"interactive":false,"permanent":false,"direction":"auto","opacity":1,"offset":[0,0],"textsize":"10px","textOnly":false,"className":"","sticky":true},null]}],"limits":{"lat":[-36.852,-36.852],"lng":[174.768,174.768]}},"evals":[],"jsHooks":[]}</script>
+<div id="htmlwidget-a1c039ee4bb359ecc92e" style="width:576px;height:384px;" class="leaflet html-widget"></div>
+<script type="application/json" data-for="htmlwidget-a1c039ee4bb359ecc92e">{"x":{"options":{"crs":{"crsClass":"L.CRS.EPSG3857","code":null,"proj4def":null,"projectedBounds":null,"options":{}}},"calls":[{"method":"addTiles","args":["//{s}.tile.openstreetmap.org/{z}/{x}/{y}.png",null,null,{"minZoom":0,"maxZoom":18,"tileSize":256,"subdomains":"abc","errorTileUrl":"","tms":false,"noWrap":false,"zoomOffset":0,"zoomReverse":false,"opacity":1,"zIndex":1,"detectRetina":false,"attribution":"&copy; <a href=\"http://openstreetmap.org\">OpenStreetMap<\/a> contributors, <a href=\"http://creativecommons.org/licenses/by-sa/2.0/\">CC-BY-SA<\/a>"}]},{"method":"addMarkers","args":[-36.852,174.768,null,null,null,{"interactive":true,"draggable":false,"keyboard":true,"title":"","alt":"","zIndexOffset":0,"opacity":1,"riseOnHover":false,"riseOffset":250},"The birthplace of R",null,null,null,null,{"interactive":false,"permanent":false,"direction":"auto","opacity":1,"offset":[0,0],"textsize":"10px","textOnly":false,"className":"","sticky":true},null]}],"limits":{"lat":[-36.852,-36.852],"lng":[174.768,174.768]}},"evals":[],"jsHooks":[]}</script>
 </div>
 <p>If you want an htmlwidget to use one of the alternate figure layouts (e.g. <code>l-page</code>) then things work a bit differently due to the way widgets handle dynamic resizing. While you still use the <code>fig.layout</code> chunk option to specify the layout, the sizing is handled directly on the call to the htmlwidget via the <code>width</code> and <code>height</code> parameters, for example:</p>
 <pre><code>
@@ -303,8 +303,8 @@ library(dygraphs)
 dygraph(ldeaths, width=&quot;100%&quot;, height=&quot;200px&quot;)
 ```</code></pre>
 <div class="fig-layout-chunk l-page" data-fig-layout="l-page">
-<div id="htmlwidget-23c12285f67b73dd0db2" style="width:100%;height:200px;" class="dygraphs html-widget"></div>
-<script type="application/json" data-for="htmlwidget-23c12285f67b73dd0db2">{"x":{"attrs":{"labels":["month","V1"],"legend":"auto","retainDateWindow":false,"axes":{"x":{"pixelsPerLabel":60}},"showRangeSelector":true,"rangeSelectorHeight":40,"rangeSelectorPlotFillColor":" #A7B1C4","rangeSelectorPlotStrokeColor":"#808FAB","interactionModel":"Dygraph.Interaction.defaultModel"},"scale":"monthly","annotations":[],"shadings":[],"events":[],"format":"date","data":[["1974-01-01T00:00:00.000Z","1974-02-01T00:00:00.000Z","1974-03-01T00:00:00.000Z","1974-04-01T00:00:00.000Z","1974-05-01T00:00:00.000Z","1974-06-01T00:00:00.000Z","1974-07-01T00:00:00.000Z","1974-08-01T00:00:00.000Z","1974-09-01T00:00:00.000Z","1974-10-01T00:00:00.000Z","1974-11-01T00:00:00.000Z","1974-12-01T00:00:00.000Z","1975-01-01T00:00:00.000Z","1975-02-01T00:00:00.000Z","1975-03-01T00:00:00.000Z","1975-04-01T00:00:00.000Z","1975-05-01T00:00:00.000Z","1975-06-01T00:00:00.000Z","1975-07-01T00:00:00.000Z","1975-08-01T00:00:00.000Z","1975-09-01T00:00:00.000Z","1975-10-01T00:00:00.000Z","1975-11-01T00:00:00.000Z","1975-12-01T00:00:00.000Z","1976-01-01T00:00:00.000Z","1976-02-01T00:00:00.000Z","1976-03-01T00:00:00.000Z","1976-04-01T00:00:00.000Z","1976-05-01T00:00:00.000Z","1976-06-01T00:00:00.000Z","1976-07-01T00:00:00.000Z","1976-08-01T00:00:00.000Z","1976-09-01T00:00:00.000Z","1976-10-01T00:00:00.000Z","1976-11-01T00:00:00.000Z","1976-12-01T00:00:00.000Z","1977-01-01T00:00:00.000Z","1977-02-01T00:00:00.000Z","1977-03-01T00:00:00.000Z","1977-04-01T00:00:00.000Z","1977-05-01T00:00:00.000Z","1977-06-01T00:00:00.000Z","1977-07-01T00:00:00.000Z","1977-08-01T00:00:00.000Z","1977-09-01T00:00:00.000Z","1977-10-01T00:00:00.000Z","1977-11-01T00:00:00.000Z","1977-12-01T00:00:00.000Z","1978-01-01T00:00:00.000Z","1978-02-01T00:00:00.000Z","1978-03-01T00:00:00.000Z","1978-04-01T00:00:00.000Z","1978-05-01T00:00:00.000Z","1978-06-01T00:00:00.000Z","1978-07-01T00:00:00.000Z","1978-08-01T00:00:00.000Z","1978-09-01T00:00:00.000Z","1978-10-01T00:00:00.000Z","1978-11-01T00:00:00.000Z","1978-12-01T00:00:00.000Z","1979-01-01T00:00:00.000Z","1979-02-01T00:00:00.000Z","1979-03-01T00:00:00.000Z","1979-04-01T00:00:00.000Z","1979-05-01T00:00:00.000Z","1979-06-01T00:00:00.000Z","1979-07-01T00:00:00.000Z","1979-08-01T00:00:00.000Z","1979-09-01T00:00:00.000Z","1979-10-01T00:00:00.000Z","1979-11-01T00:00:00.000Z","1979-12-01T00:00:00.000Z"],[3035,2552,2704,2554,2014,1655,1721,1524,1596,2074,2199,2512,2933,2889,2938,2497,1870,1726,1607,1545,1396,1787,2076,2837,2787,3891,3179,2011,1636,1580,1489,1300,1356,1653,2013,2823,3102,2294,2385,2444,1748,1554,1498,1361,1346,1564,1640,2293,2815,3137,2679,1969,1870,1633,1529,1366,1357,1570,1535,2491,3084,2605,2573,2143,1693,1504,1461,1354,1333,1492,1781,1915]]},"evals":["attrs.interactionModel"],"jsHooks":[]}</script>
+<div id="htmlwidget-8d55436c99ea8c6210c5" style="width:100%;height:200px;" class="dygraphs html-widget"></div>
+<script type="application/json" data-for="htmlwidget-8d55436c99ea8c6210c5">{"x":{"attrs":{"labels":["month","V1"],"legend":"auto","retainDateWindow":false,"axes":{"x":{"pixelsPerLabel":60}},"showRangeSelector":true,"rangeSelectorHeight":40,"rangeSelectorPlotFillColor":" #A7B1C4","rangeSelectorPlotStrokeColor":"#808FAB","interactionModel":"Dygraph.Interaction.defaultModel"},"scale":"monthly","annotations":[],"shadings":[],"events":[],"format":"date","data":[["1974-01-01T00:00:00.000Z","1974-02-01T00:00:00.000Z","1974-03-01T00:00:00.000Z","1974-04-01T00:00:00.000Z","1974-05-01T00:00:00.000Z","1974-06-01T00:00:00.000Z","1974-07-01T00:00:00.000Z","1974-08-01T00:00:00.000Z","1974-09-01T00:00:00.000Z","1974-10-01T00:00:00.000Z","1974-11-01T00:00:00.000Z","1974-12-01T00:00:00.000Z","1975-01-01T00:00:00.000Z","1975-02-01T00:00:00.000Z","1975-03-01T00:00:00.000Z","1975-04-01T00:00:00.000Z","1975-05-01T00:00:00.000Z","1975-06-01T00:00:00.000Z","1975-07-01T00:00:00.000Z","1975-08-01T00:00:00.000Z","1975-09-01T00:00:00.000Z","1975-10-01T00:00:00.000Z","1975-11-01T00:00:00.000Z","1975-12-01T00:00:00.000Z","1976-01-01T00:00:00.000Z","1976-02-01T00:00:00.000Z","1976-03-01T00:00:00.000Z","1976-04-01T00:00:00.000Z","1976-05-01T00:00:00.000Z","1976-06-01T00:00:00.000Z","1976-07-01T00:00:00.000Z","1976-08-01T00:00:00.000Z","1976-09-01T00:00:00.000Z","1976-10-01T00:00:00.000Z","1976-11-01T00:00:00.000Z","1976-12-01T00:00:00.000Z","1977-01-01T00:00:00.000Z","1977-02-01T00:00:00.000Z","1977-03-01T00:00:00.000Z","1977-04-01T00:00:00.000Z","1977-05-01T00:00:00.000Z","1977-06-01T00:00:00.000Z","1977-07-01T00:00:00.000Z","1977-08-01T00:00:00.000Z","1977-09-01T00:00:00.000Z","1977-10-01T00:00:00.000Z","1977-11-01T00:00:00.000Z","1977-12-01T00:00:00.000Z","1978-01-01T00:00:00.000Z","1978-02-01T00:00:00.000Z","1978-03-01T00:00:00.000Z","1978-04-01T00:00:00.000Z","1978-05-01T00:00:00.000Z","1978-06-01T00:00:00.000Z","1978-07-01T00:00:00.000Z","1978-08-01T00:00:00.000Z","1978-09-01T00:00:00.000Z","1978-10-01T00:00:00.000Z","1978-11-01T00:00:00.000Z","1978-12-01T00:00:00.000Z","1979-01-01T00:00:00.000Z","1979-02-01T00:00:00.000Z","1979-03-01T00:00:00.000Z","1979-04-01T00:00:00.000Z","1979-05-01T00:00:00.000Z","1979-06-01T00:00:00.000Z","1979-07-01T00:00:00.000Z","1979-08-01T00:00:00.000Z","1979-09-01T00:00:00.000Z","1979-10-01T00:00:00.000Z","1979-11-01T00:00:00.000Z","1979-12-01T00:00:00.000Z"],[3035,2552,2704,2554,2014,1655,1721,1524,1596,2074,2199,2512,2933,2889,2938,2497,1870,1726,1607,1545,1396,1787,2076,2837,2787,3891,3179,2011,1636,1580,1489,1300,1356,1653,2013,2823,3102,2294,2385,2444,1748,1554,1498,1361,1346,1564,1640,2293,2815,3137,2679,1969,1870,1633,1529,1366,1357,1570,1535,2491,3084,2605,2573,2143,1693,1504,1461,1354,1333,1492,1781,1915]]},"evals":["attrs.interactionModel"],"jsHooks":[]}</script>
 </div>
 <p>Note that we specify <code>width=&quot;100%&quot;</code> to ensure that the widget always occupies the full width of the layout region.</p>
 <h2 id="diagrams">Diagrams</h2>
@@ -326,31 +326,6 @@ We strongly encourage you to include an author contributions statement briefly
 describing what each author did.
 &lt;/div&gt;</code></pre>
 <p>Footnotes and references will be included in the same section, immediately beneath any custom appendices.</p>
-<h2 id="tables">Tables</h2>
-<table>
-<colgroup>
-<col width="28%" />
-<col width="71%" />
-</colgroup>
-<tbody>
-<tr class="odd">
-<td>Flexibility</td>
-<td>Distill encourages you to go beyond traditional academic forms. The goal is to best communicate science and serve the reader.</td>
-</tr>
-<tr class="even">
-<td>Scholarly Recognition</td>
-<td>Distill articles are peer reviewed and appear in Google Scholar. Distill is also registered with the Library of Congress and CrossRef.</td>
-</tr>
-<tr class="odd">
-<td>Neutrality</td>
-<td>Distill provides a neutral platform for multiple authors to jointly publish. This is in contrast to a personal website, where outside contributors may get less credit.</td>
-</tr>
-<tr class="even">
-<td>Impact</td>
-<td>Distill articles are read by tens of thousands of people.</td>
-</tr>
-</tbody>
-</table>
 <div id="refs" class="references">
 <div id="ref-xie2015">
 <p>Xie, Yihui. 2015. <em>Dynamic Documents with R and Knitr</em>. 2nd ed. Boca Raton, Florida: Chapman; Hall/CRC. <a href="http://yihui.name/knitr/" class="uri">http://yihui.name/knitr/</a>.</p>
@@ -370,12 +345,12 @@ describing what each author did.
   <dt-footer>
   <div class="l-page">
     <div class="description">
-    Site created using <a style="color: rgba(255, 255, 255, 0.4)" href="https://jjallaire.github.io/distill">Distill for R Markdown</a>
+    Created using <a class="logo" style="color: rgba(255, 255, 255, 0.4)" href="https://jjallaire.github.io/distill">Distill for R Markdown</a>
     </div>
     <div class="nav">
-      <a href="/index.html">About</a>
-      <a href="/visualizations.html">Visualizations</a>
-      <a href="/reference.html">Reference</a>
+      <a href="index.html">Using</a>
+      <a href="visualizations.html">Visualizations</a>
+      <a href="reference.html">Reference</a>
       <a href="https://github.com/jjallaire/distill">GitHub</a>
     </div>
     <p>

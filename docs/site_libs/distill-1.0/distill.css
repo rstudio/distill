@@ -106,6 +106,10 @@ dt-footer .logo {
   text-decoration: none;
   margin-right: 6px;
 }
+dt-footer .logo:hover {
+  text-decoration: underline;
+}
+
 dt-footer .nav {
   margin-top: 12px;
 }

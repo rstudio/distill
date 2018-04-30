@@ -1,8 +1,12 @@
 
+
+dt-article {
+  min-height: 800px;
+}
+
 .screenshot {
   border: 1px solid rgba(0, 0, 0, 0.2);
 }
-
 
 .fake-img {
   background: #bbb;
