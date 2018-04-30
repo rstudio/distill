@@ -135,14 +135,6 @@ $$
 \sigma = \sqrt{ \frac{1}{N} \sum_{i=1}^N (x_i -\mu)^2}
 $$
 
-## Diagrams
-
-To include diagrams within a distill article, we recommend trying out the [DiagrammerR](http://rich-iannone.github.io/DiagrammeR/) package, which enables you to generate graph diagrams using text in a markdown-like syntax.
-
-If you need more flexibilty than DiagrammeR affords, you can also try out the [r2d3](https://rstudio.github.io/r2d3) package to include diagrams created with [D3.js](https://d3js.org/).
-
-For more highly customized static diagrams you can use a vector graphics tools like [Inkscape](https://inkscape.org/en/), [Adobe Illustrator](https://www.adobe.com/products/illustrator.html), or [Sketch](https://www.sketchapp.com/). For equations in diagrams, inkscape has a plugin to support LaTeX equations, while Illustrator integrates well with tools like Equation Maker. 
-
 ## Figures
 
 There are a variety of ways to layout figures included within Distill articles. This layout is controlled by a set of layout classes, which are in turn applied to R Markdown chunks using the `fig.layout` chunk option.
@@ -219,13 +211,46 @@ You can also use the same layouts with static images. In this case, just add the
 
 Note that for the side layout we also specify an explicit `width` which will constrain the image from overflowing the layout region.
 
-## Interactive Visualizations
+### htmlwidgets
 
-htmlwidgets
+Using [htmlwidgets](http://www.htmlwidgets.org) is very similar to using standard R figures. For example, the following code embeds a Leaflet map:
 
-crosstalk
+    ```{r}`r ''`
+    library(leaflet)
+    leaflet() %>%
+      addTiles() %>%  # Add default OpenStreetMap map tiles
+      addMarkers(lng=174.768, lat=-36.852, popup="The birthplace of R")
+    ```
 
-shiny
+```{r}
+library(leaflet)
+leaflet() %>%
+  addTiles() %>%  # Add default OpenStreetMap map tiles
+  addMarkers(lng=174.768, lat=-36.852, popup="The birthplace of R")
+```
+
+If you want an htmlwidget to use one of the alternate figure layouts (e.g. `l-page`) then things work a bit differently due to the way widgets handle dynamic resizing. While you still use the `fig.layout` chunk option to specify the layout, the sizing is handled directly on the call to the htmlwidget via the `width` and `height` parameters, for example:
+
+    ```{r, fig.layout="l-page"}`r ''`
+    library(dygraphs)
+    dygraph(ldeaths, width="100%", height="200px")
+    ```
+
+```{r, fig.layout="l-page"}
+library(dygraphs)
+dygraph(ldeaths, width="100%", height="200px") %>% 
+  dyRangeSelector()
+```
+
+Note that we specify `width="100%"` to ensure that the widget always occupies the full width of the layout region.
+
+## Diagrams
+
+To include diagrams within a distill article, we recommend trying out the [DiagrammerR](http://rich-iannone.github.io/DiagrammeR/) package, which enables you to generate graph diagrams using text in a markdown-like syntax.
+
+If you need more flexibilty than DiagrammeR affords, you can also try out the [r2d3](https://rstudio.github.io/r2d3) package to include diagrams created with [D3.js](https://d3js.org/).
+
+For more highly customized static diagrams you can use a vector graphics tools like [Inkscape](https://inkscape.org/en/), [Adobe Illustrator](https://www.adobe.com/products/illustrator.html), or [Sketch](https://www.sketchapp.com/). For equations in diagrams, inkscape has a plugin to support LaTeX equations, while Illustrator integrates well with tools like Equation Maker. 
 
 
 ## Appendices
@@ -248,10 +273,6 @@ describing what each author did.
 
 Footnotes and references will be included in the same section, immediately beneath any custom appendices.
 
-## TODO
-
-- Tables
-- Definition list
 
 
 

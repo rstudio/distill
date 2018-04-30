@@ -9,10 +9,24 @@
 <title>Distill for R Markdown</title>
 
 
-  <script src="site_libs/jquery-1.11.3/jquery.min.js"></script>
+  <script src="site_libs/jquery-1.12.4/jquery.min.js"></script>
   <link href="site_libs/distill-1.0/distill.css" rel="stylesheet" />
   <script src="site_libs/distill-1.0/distill.js"></script>
   <script src="site_libs/distill-1.0/template.v1.js"></script>
+  <script src="site_libs/htmlwidgets-1.2/htmlwidgets.js"></script>
+  <link href="site_libs/leaflet-1.3.1/leaflet.css" rel="stylesheet" />
+  <script src="site_libs/leaflet-1.3.1/leaflet.js"></script>
+  <link href="site_libs/leafletfix-1.0.0/leafletfix.css" rel="stylesheet" />
+  <script src="site_libs/Proj4Leaflet-1.0.1/proj4-compressed.js"></script>
+  <script src="site_libs/Proj4Leaflet-1.0.1/proj4leaflet.js"></script>
+  <link href="site_libs/rstudio_leaflet-1.3.1/rstudio_leaflet.css" rel="stylesheet" />
+  <script src="site_libs/leaflet-binding-2.0.0/leaflet.js"></script>
+  <link href="site_libs/dygraphs-1.1.1/dygraph.css" rel="stylesheet" />
+  <script src="site_libs/dygraphs-1.1.1/dygraph-combined.js"></script>
+  <script src="site_libs/moment-2.8.4/moment.js"></script>
+  <script src="site_libs/moment-timezone-0.2.5/moment-timezone-with-data.js"></script>
+  <script src="site_libs/moment-fquarter-1.0.0/moment-fquarter.min.js"></script>
+  <script src="site_libs/dygraphs-binding-1.1.1.4/dygraphs.js"></script>
   <script type="text/front-matter">
   title: Distill for R Markdown
   description: ~
@@ -66,6 +80,9 @@
 pre>code {
   white-space: pre-wrap;
   line-height: 1.5;
+}
+dt-article table th, dt-article table td {
+  padding: 2px 10px;
 }
 </style>
 
@@ -179,10 +196,6 @@ $$</code></pre>
 <p><span class="math display">\[
 \sigma = \sqrt{ \frac{1}{N} \sum_{i=1}^N (x_i -\mu)^2}
 \]</span></p>
-<h2 id="diagrams">Diagrams</h2>
-<p>To include diagrams within a distill article, we recommend trying out the <a href="http://rich-iannone.github.io/DiagrammeR/">DiagrammerR</a> package, which enables you to generate graph diagrams using text in a markdown-like syntax.</p>
-<p>If you need more flexibilty than DiagrammeR affords, you can also try out the <a href="https://rstudio.github.io/r2d3">r2d3</a> package to include diagrams created with <a href="https://d3js.org/">D3.js</a>.</p>
-<p>For more highly customized static diagrams you can use a vector graphics tools like <a href="https://inkscape.org/en/">Inkscape</a>, <a href="https://www.adobe.com/products/illustrator.html">Adobe Illustrator</a>, or <a href="https://www.sketchapp.com/">Sketch</a>. For equations in diagrams, inkscape has a plugin to support LaTeX equations, while Illustrator integrates well with tools like Equation Maker.</p>
 <h2 id="figures">Figures</h2>
 <p>There are a variety of ways to layout figures included within Distill articles. This layout is controlled by a set of layout classes, which are in turn applied to R Markdown chunks using the <code>fig.layout</code> chunk option.</p>
 <p>The default layout if <code>fig.layout</code> is not specified is <code>l-body</code>, which will cause figures to span with width of the main article body:</p>
@@ -270,10 +283,34 @@ ggplot(mtcars, aes(wt, hp)) + geom_point() +
 ![](images/l-middle-figure.png){.l-middle}
 ![](images/l-page-side-figure.png){.l-page .side width=480}</code></pre>
 <p>Note that for the side layout we also specify an explicit <code>width</code> which will constrain the image from overflowing the layout region.</p>
-<h2 id="interactive-visualizations">Interactive Visualizations</h2>
-<p>htmlwidgets</p>
-<p>crosstalk</p>
-<p>shiny</p>
+<h3 id="htmlwidgets">htmlwidgets</h3>
+<p>Using <a href="http://www.htmlwidgets.org">htmlwidgets</a> is very similar to using standard R figures. For example, the following code embeds a Leaflet map:</p>
+<pre><code>
+```{r}
+library(leaflet)
+leaflet() %&gt;%
+  addTiles() %&gt;%  # Add default OpenStreetMap map tiles
+  addMarkers(lng=174.768, lat=-36.852, popup=&quot;The birthplace of R&quot;)
+```</code></pre>
+<div class="fig-layout-chunk l-body" data-fig-layout="l-body">
+<div id="htmlwidget-bee0f82245951715019e" style="width:576px;height:384px;" class="leaflet html-widget"></div>
+<script type="application/json" data-for="htmlwidget-bee0f82245951715019e">{"x":{"options":{"crs":{"crsClass":"L.CRS.EPSG3857","code":null,"proj4def":null,"projectedBounds":null,"options":{}}},"calls":[{"method":"addTiles","args":["//{s}.tile.openstreetmap.org/{z}/{x}/{y}.png",null,null,{"minZoom":0,"maxZoom":18,"tileSize":256,"subdomains":"abc","errorTileUrl":"","tms":false,"noWrap":false,"zoomOffset":0,"zoomReverse":false,"opacity":1,"zIndex":1,"detectRetina":false,"attribution":"&copy; <a href=\"http://openstreetmap.org\">OpenStreetMap<\/a> contributors, <a href=\"http://creativecommons.org/licenses/by-sa/2.0/\">CC-BY-SA<\/a>"}]},{"method":"addMarkers","args":[-36.852,174.768,null,null,null,{"interactive":true,"draggable":false,"keyboard":true,"title":"","alt":"","zIndexOffset":0,"opacity":1,"riseOnHover":false,"riseOffset":250},"The birthplace of R",null,null,null,null,{"interactive":false,"permanent":false,"direction":"auto","opacity":1,"offset":[0,0],"textsize":"10px","textOnly":false,"className":"","sticky":true},null]}],"limits":{"lat":[-36.852,-36.852],"lng":[174.768,174.768]}},"evals":[],"jsHooks":[]}</script>
+</div>
+<p>If you want an htmlwidget to use one of the alternate figure layouts (e.g. <code>l-page</code>) then things work a bit differently due to the way widgets handle dynamic resizing. While you still use the <code>fig.layout</code> chunk option to specify the layout, the sizing is handled directly on the call to the htmlwidget via the <code>width</code> and <code>height</code> parameters, for example:</p>
+<pre><code>
+```{r, fig.layout=&quot;l-page&quot;}
+library(dygraphs)
+dygraph(ldeaths, width=&quot;100%&quot;, height=&quot;200px&quot;)
+```</code></pre>
+<div class="fig-layout-chunk l-page" data-fig-layout="l-page">
+<div id="htmlwidget-23c12285f67b73dd0db2" style="width:100%;height:200px;" class="dygraphs html-widget"></div>
+<script type="application/json" data-for="htmlwidget-23c12285f67b73dd0db2">{"x":{"attrs":{"labels":["month","V1"],"legend":"auto","retainDateWindow":false,"axes":{"x":{"pixelsPerLabel":60}},"showRangeSelector":true,"rangeSelectorHeight":40,"rangeSelectorPlotFillColor":" #A7B1C4","rangeSelectorPlotStrokeColor":"#808FAB","interactionModel":"Dygraph.Interaction.defaultModel"},"scale":"monthly","annotations":[],"shadings":[],"events":[],"format":"date","data":[["1974-01-01T00:00:00.000Z","1974-02-01T00:00:00.000Z","1974-03-01T00:00:00.000Z","1974-04-01T00:00:00.000Z","1974-05-01T00:00:00.000Z","1974-06-01T00:00:00.000Z","1974-07-01T00:00:00.000Z","1974-08-01T00:00:00.000Z","1974-09-01T00:00:00.000Z","1974-10-01T00:00:00.000Z","1974-11-01T00:00:00.000Z","1974-12-01T00:00:00.000Z","1975-01-01T00:00:00.000Z","1975-02-01T00:00:00.000Z","1975-03-01T00:00:00.000Z","1975-04-01T00:00:00.000Z","1975-05-01T00:00:00.000Z","1975-06-01T00:00:00.000Z","1975-07-01T00:00:00.000Z","1975-08-01T00:00:00.000Z","1975-09-01T00:00:00.000Z","1975-10-01T00:00:00.000Z","1975-11-01T00:00:00.000Z","1975-12-01T00:00:00.000Z","1976-01-01T00:00:00.000Z","1976-02-01T00:00:00.000Z","1976-03-01T00:00:00.000Z","1976-04-01T00:00:00.000Z","1976-05-01T00:00:00.000Z","1976-06-01T00:00:00.000Z","1976-07-01T00:00:00.000Z","1976-08-01T00:00:00.000Z","1976-09-01T00:00:00.000Z","1976-10-01T00:00:00.000Z","1976-11-01T00:00:00.000Z","1976-12-01T00:00:00.000Z","1977-01-01T00:00:00.000Z","1977-02-01T00:00:00.000Z","1977-03-01T00:00:00.000Z","1977-04-01T00:00:00.000Z","1977-05-01T00:00:00.000Z","1977-06-01T00:00:00.000Z","1977-07-01T00:00:00.000Z","1977-08-01T00:00:00.000Z","1977-09-01T00:00:00.000Z","1977-10-01T00:00:00.000Z","1977-11-01T00:00:00.000Z","1977-12-01T00:00:00.000Z","1978-01-01T00:00:00.000Z","1978-02-01T00:00:00.000Z","1978-03-01T00:00:00.000Z","1978-04-01T00:00:00.000Z","1978-05-01T00:00:00.000Z","1978-06-01T00:00:00.000Z","1978-07-01T00:00:00.000Z","1978-08-01T00:00:00.000Z","1978-09-01T00:00:00.000Z","1978-10-01T00:00:00.000Z","1978-11-01T00:00:00.000Z","1978-12-01T00:00:00.000Z","1979-01-01T00:00:00.000Z","1979-02-01T00:00:00.000Z","1979-03-01T00:00:00.000Z","1979-04-01T00:00:00.000Z","1979-05-01T00:00:00.000Z","1979-06-01T00:00:00.000Z","1979-07-01T00:00:00.000Z","1979-08-01T00:00:00.000Z","1979-09-01T00:00:00.000Z","1979-10-01T00:00:00.000Z","1979-11-01T00:00:00.000Z","1979-12-01T00:00:00.000Z"],[3035,2552,2704,2554,2014,1655,1721,1524,1596,2074,2199,2512,2933,2889,2938,2497,1870,1726,1607,1545,1396,1787,2076,2837,2787,3891,3179,2011,1636,1580,1489,1300,1356,1653,2013,2823,3102,2294,2385,2444,1748,1554,1498,1361,1346,1564,1640,2293,2815,3137,2679,1969,1870,1633,1529,1366,1357,1570,1535,2491,3084,2605,2573,2143,1693,1504,1461,1354,1333,1492,1781,1915]]},"evals":["attrs.interactionModel"],"jsHooks":[]}</script>
+</div>
+<p>Note that we specify <code>width=&quot;100%&quot;</code> to ensure that the widget always occupies the full width of the layout region.</p>
+<h2 id="diagrams">Diagrams</h2>
+<p>To include diagrams within a distill article, we recommend trying out the <a href="http://rich-iannone.github.io/DiagrammeR/">DiagrammerR</a> package, which enables you to generate graph diagrams using text in a markdown-like syntax.</p>
+<p>If you need more flexibilty than DiagrammeR affords, you can also try out the <a href="https://rstudio.github.io/r2d3">r2d3</a> package to include diagrams created with <a href="https://d3js.org/">D3.js</a>.</p>
+<p>For more highly customized static diagrams you can use a vector graphics tools like <a href="https://inkscape.org/en/">Inkscape</a>, <a href="https://www.adobe.com/products/illustrator.html">Adobe Illustrator</a>, or <a href="https://www.sketchapp.com/">Sketch</a>. For equations in diagrams, inkscape has a plugin to support LaTeX equations, while Illustrator integrates well with tools like Equation Maker.</p>
 <h2 id="appendices">Appendices</h2>
 <p>Appendices can be added after your article by creating a <code>&lt;div&gt;</code> with class <code>appendix</code>. For example:</p>
 <pre class="html"><code>
@@ -289,11 +326,31 @@ We strongly encourage you to include an author contributions statement briefly
 describing what each author did.
 &lt;/div&gt;</code></pre>
 <p>Footnotes and references will be included in the same section, immediately beneath any custom appendices.</p>
-<h2 id="todo">TODO</h2>
-<ul>
-<li>Tables</li>
-<li>Definition list</li>
-</ul>
+<h2 id="tables">Tables</h2>
+<table>
+<colgroup>
+<col width="28%" />
+<col width="71%" />
+</colgroup>
+<tbody>
+<tr class="odd">
+<td>Flexibility</td>
+<td>Distill encourages you to go beyond traditional academic forms. The goal is to best communicate science and serve the reader.</td>
+</tr>
+<tr class="even">
+<td>Scholarly Recognition</td>
+<td>Distill articles are peer reviewed and appear in Google Scholar. Distill is also registered with the Library of Congress and CrossRef.</td>
+</tr>
+<tr class="odd">
+<td>Neutrality</td>
+<td>Distill provides a neutral platform for multiple authors to jointly publish. This is in contrast to a personal website, where outside contributors may get less credit.</td>
+</tr>
+<tr class="even">
+<td>Impact</td>
+<td>Distill articles are read by tens of thousands of people.</td>
+</tr>
+</tbody>
+</table>
 <div id="refs" class="references">
 <div id="ref-xie2015">
 <p>Xie, Yihui. 2015. <em>Dynamic Documents with R and Knitr</em>. 2nd ed. Boca Raton, Florida: Chapman; Hall/CRC. <a href="http://yihui.name/knitr/" class="uri">http://yihui.name/knitr/</a>.</p>
