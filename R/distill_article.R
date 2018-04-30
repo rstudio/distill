@@ -41,7 +41,7 @@ distill_article <- function(centered = TRUE,
 
   # validate pandoc version
   if (!pandoc_available("2.0"))
-    stop("distill_article requires pandoc >= 2.0")
+    stop("Distill requires pandoc >= 2.0 (https://github.com/jgm/pandoc/releases/latest)")
 
   # build pandoc args
   args <- c("--standalone")
