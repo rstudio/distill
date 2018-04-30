@@ -110,13 +110,13 @@ Syntax highlighting is provided for code chunks and markdown code blocks. Note t
 
 To display the code that was evaluated to produce output you can set the `echo` chunk option to `TRUE`:
 
-    ```{r, echo=FALSE}`r ''`
+    ```{r, echo=TRUE}`r ''`
     1 + 1
     ```
 
 To include code that is only displayed and not evaluated specify the `eval=FALSE` option:
 
-    ```{r, eval=FALSE, echo=FALSE}`r ''`
+    ```{r, eval=FALSE, echo=TRUE}`r ''`
     1 + 1
     ```
 
