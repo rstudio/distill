@@ -100,8 +100,7 @@ pre>code {
 <li>Flexible layout options for visualizations, including visualizations that occupy the full width of the screen.</li>
 <li>Support for features essential to technical writing like LaTeX math, footnotes, and citations.</li>
 </ul>
-<div id="getting-started" class="section level2">
-<h2>Getting Started</h2>
+<h2 id="getting-started">Getting Started</h2>
 <p>To create an <a href="https://rmarkdown.rstudio.com">R Markdown</a> document that uses the Distill format, first install the <strong>distill</strong> R package:</p>
 <pre class="r"><code>
 devtools::install_github(&quot;jjallaire/distill&quot;)</code></pre>
@@ -130,9 +129,7 @@ bibliography: biblio.bib
 ---</code></pre>
 <p>The article’s description and author bylines are automatically rendered as part of the title area of the document.</p>
 <p>Note the <code>bibliography</code> field is used to provide a reference to the Bibtex file where all of the sources cited in your article are defined. The next section explains how to include citations in your article.</p>
-</div>
-<div id="citations" class="section level2">
-<h2>Citations</h2>
+<h2 id="citations">Citations</h2>
 <p>Bibtex is the supported way of making academic citations. To include citations, first create a bibtex file and refer to it from the <code>bibliography</code> field of the YAML front-matter (as illustrated above).</p>
 <p>For example, your bibliography file might contain:</p>
 <pre class="bibtex"><code>
@@ -150,13 +147,17 @@ bibliography: biblio.bib
 <p>Citations are then used in the article body with standard Pandoc markdown notation, for example: <code>[@xie2015]</code> (which references an id provided in the bibiography). Note that multiple ids (separated by semicolons) can be provided.</p>
 <p>The citation is presented inline like this: <span class="citation">(Xie <a href="#ref-xie2015">2015</a>)</span> (a number that displays more information on hover). If you have an appendix, a bibliography is automatically created and populated in it.</p>
 <p>Distill chose a numerical inline citation style to improve readability of citation dense articles and because many of the benefits of longer citations are obviated by dispalying more information on hover. However, we consider it good style to mention author last names if you discuss something at length and it fits into the flow well—the authors are human and it’s nice for them to have the community associate them with their work.</p>
-</div>
-<div id="footnotes" class="section level2">
-<h2>Footnotes</h2>
+<h2 id="footnotes">Footnotes</h2>
 <p>Footnotes use standard Pandoc markdown notation, for example <code>^[This will become a hoverable footnote]</code>. The number of the footnote will be automatically generated.<a href="#fn1" class="footnote-ref" id="fnref1"><sup>1</sup></a></p>
+<p>You can also optionally include notes in the gutter of the article (immediately to the right of the article text). To do this create a <code>&lt;div&gt;</code> with class <code>l-gutter</code>. For example:</p>
+<div class="l-gutter">
+<p>This content will appear in the gutter of the article.</p>
 </div>
-<div id="code-blocks" class="section level2">
-<h2>Code Blocks</h2>
+<pre class="html"><code>
+&lt;div class=&quot;l-gutter&quot;&gt;
+This content will appear in the gutter of the article.
+&lt;/div&gt;</code></pre>
+<h2 id="code-blocks">Code Blocks</h2>
 <p>Syntax highlighting is provided for code chunks and markdown code blocks. Note that by default the Distill format does not display the code for chunks that are evaluated to produce output (knitr option <code>echo = FALSE</code>).</p>
 <p>To display the code that was evaluated to produce output you can set the <code>echo</code> chunk option to <code>TRUE</code>:</p>
 <pre><code>
@@ -168,9 +169,7 @@ bibliography: biblio.bib
 ```{r, eval=FALSE, echo=FALSE}
 1 + 1
 ```</code></pre>
-</div>
-<div id="equations" class="section level2">
-<h2>Equations</h2>
+<h2 id="equations">Equations</h2>
 <p>Inline and display equations are supported via standard markdown <a href="https://www.mathjax.org/">MathJax</a> syntax. For example, the following <a href="https://en.wikibooks.org/wiki/LaTeX/Mathematics">LaTeX math</a>:</p>
 <pre><code>
 $$
@@ -180,15 +179,11 @@ $$</code></pre>
 <p><span class="math display">\[
 \sigma = \sqrt{ \frac{1}{N} \sum_{i=1}^N (x_i -\mu)^2}
 \]</span></p>
-</div>
-<div id="diagrams" class="section level2">
-<h2>Diagrams</h2>
+<h2 id="diagrams">Diagrams</h2>
 <p>To include diagrams within a distill article, we recommend trying out the <a href="http://rich-iannone.github.io/DiagrammeR/">DiagrammerR</a> package, which enables you to generate graph diagrams using text in a markdown-like syntax.</p>
-<p>If you need more flexibilty than DiagrammeR affords, you can also try out the <a href="https://rstudio.github.io/r2d3">r2d3</a> package to include diagrames created with <a href="https://d3js.org/">D3.js</a>.</p>
+<p>If you need more flexibilty than DiagrammeR affords, you can also try out the <a href="https://rstudio.github.io/r2d3">r2d3</a> package to include diagrams created with <a href="https://d3js.org/">D3.js</a>.</p>
 <p>For more highly customized static diagrams you can use a vector graphics tools like <a href="https://inkscape.org/en/">Inkscape</a>, <a href="https://www.adobe.com/products/illustrator.html">Adobe Illustrator</a>, or <a href="https://www.sketchapp.com/">Sketch</a>. For equations in diagrams, inkscape has a plugin to support LaTeX equations, while Illustrator integrates well with tools like Equation Maker.</p>
-</div>
-<div id="figures" class="section level2">
-<h2>Figures</h2>
+<h2 id="figures">Figures</h2>
 <p>There are a variety of ways to layout figures included within Distill articles. This layout is controlled by a set of layout classes, which are in turn applied to R Markdown chunks using the <code>fig.layout</code> chunk option.</p>
 <p>The default layout if <code>fig.layout</code> is not specified is <code>l-body</code>, which will cause figures to span with width of the main article body:</p>
 <div class="fake-img l-body">
@@ -244,38 +239,64 @@ l-screen
 l-screen-inset
 </p>
 </div>
+<p>Often you want to position smaller figures so as not to completely interrupt the flow of your text. Or perhaps you want to put some text in the margin as an aside or to signal that it’s optional content. For these cases we’ll add the <code>side</code> class to our layouts.</p>
+<div class="fake-img l-body side">
+<p>
+l-body side
+</p>
 </div>
-<div id="interactive-visualizations" class="section level2">
-<h2>Interactive Visualizations</h2>
+<div class="fake-img l-middle side">
+<p>
+l-middle side
+</p>
+</div>
+<div class="fake-img l-page side">
+<p>
+l-page side
+</p>
+</div>
+<p>They are all floated to the right and anchored to the right-hand edge of the position you specify. By default, each will take up approximately half of the width of the standard layout position.</p>
+<p>Here’s an example of floating a figure to the right using the <code>fig.layout</code> option:</p>
+<pre><code>
+```{r, fig.layout=&quot;l-page side&quot;, fig.width=5, fig.height=2}
+ggplot(mtcars, aes(wt, hp)) + geom_point() + 
+  geom_smooth(method = &#39;lm&#39;) +
+  facet_grid(~ gear)
+```</code></pre>
+<p><img src="images/l-page-side-figure.png" class="l-page side" width="480" /></p>
+<p>The figure will be displayed to the right using the requested layout boundary. Note that we also specify values for <code>fig.width</code> and <code>fig.height</code> that are appropriate for this layout.</p>
+<p>You can also use the same layouts with static images. In this case, just add the requisite classes using standard markdown image class syntax:</p>
+<pre class="markdown"><code>
+![](images/l-middle-figure.png){.l-middle}
+![](images/l-page-side-figure.png){.l-page .side width=480}</code></pre>
+<p>Note that for the side layout we also specify an explicit <code>width</code> which will constrain the image from overflowing the layout region.</p>
+<h2 id="interactive-visualizations">Interactive Visualizations</h2>
 <p>htmlwidgets</p>
 <p>crosstalk</p>
 <p>shiny</p>
-</div>
-<div id="appendices" class="section level2">
-<h2>Appendices</h2>
-<p>An appendix can be added after your article by adding the <code>.appendix</code> class to a markdown header (e.g. <code>##</code>). For example:</p>
-<pre><code>
-## Acknowledgments {.appendix}</code></pre>
-<p>You may with to include the following sections in your appendix:</p>
-<ul>
-<li><p><strong>Acknowledgments:</strong> This is a place to recognize people and institutions. It may also be a good place to acknowledge and cite software that makes your work possible.</p></li>
-<li><p><strong>Author Contributions:</strong> We strongly encourage you to include an author contributions statement briefly describing what each author did.</p></li>
-</ul>
-</div>
-<div id="todo" class="section level2">
-<h2>TODO</h2>
+<h2 id="appendices">Appendices</h2>
+<p>Appendices can be added after your article by creating a <code>&lt;div&gt;</code> with class <code>appendix</code>. For example:</p>
+<pre class="html"><code>
+&lt;div class=&quot;appendix&quot;&gt;
+## Acknowledgments
+
+This is a place to recognize people and institutions. It may also be a good place
+to acknowledge and cite software that makes your work possible.
+
+## Author Contributions
+
+We strongly encourage you to include an author contributions statement briefly 
+describing what each author did.
+&lt;/div&gt;</code></pre>
+<p>Footnotes and references will be included in the same section, immediately beneath any custom appendices.</p>
+<h2 id="todo">TODO</h2>
 <ul>
 <li>Tables</li>
 <li>Definition list</li>
 </ul>
-</div>
-<div id="acknowledgments" class="section level2 appendix">
-<h2>Acknowledgments</h2>
-<p>The Distill R Markdown format builds upon many years of work on</p>
 <div id="refs" class="references">
 <div id="ref-xie2015">
 <p>Xie, Yihui. 2015. <em>Dynamic Documents with R and Knitr</em>. 2nd ed. Boca Raton, Florida: Chapman; Hall/CRC. <a href="http://yihui.name/knitr/" class="uri">http://yihui.name/knitr/</a>.</p>
-</div>
 </div>
 </div>
 <div class="footnotes">

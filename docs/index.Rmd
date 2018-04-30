@@ -3,6 +3,10 @@ title: "Distill for R Markdown"
 bibliography: biblio.bib
 ---
 
+```{r setup, include=FALSE}
+library(ggplot2)
+```
+
 Distill is a new publication format created for use in <https://distill.pub>, a machine learning journal devoted to clear explanations, native to the web. The Distill format features:
 
 - Attractive, reader-friendly typography that adapts well to mobile devices.
@@ -86,6 +90,20 @@ Distill chose a numerical inline citation style to improve readability of citati
 
 Footnotes use standard Pandoc markdown notation, for example `^[This will become a hoverable footnote]`. The number of the footnote will be automatically generated. ^[This will become a hoverable footnote]
 
+You can also optionally include notes in the gutter of the article (immediately to the right of the article text). To do this create a `<div>` with class `l-gutter`. For example:
+
+<div class="l-gutter">
+This content will appear in the gutter of the article.
+</div>
+
+
+```html
+<div class="l-gutter">
+This content will appear in the gutter of the article.
+</div>
+```
+
+
 ## Code Blocks
 
 Syntax highlighting is provided for code chunks and markdown code blocks. Note that by default the Distill format does not display the code for chunks that are evaluated to produce output (knitr option `echo = FALSE`). 
@@ -121,7 +139,7 @@ $$
 
 To include diagrams within a distill article, we recommend trying out the [DiagrammerR](http://rich-iannone.github.io/DiagrammeR/) package, which enables you to generate graph diagrams using text in a markdown-like syntax.
 
-If you need more flexibilty than DiagrammeR affords, you can also try out the [r2d3](https://rstudio.github.io/r2d3) package to include diagrames created with [D3.js](https://d3js.org/).
+If you need more flexibilty than DiagrammeR affords, you can also try out the [r2d3](https://rstudio.github.io/r2d3) package to include diagrams created with [D3.js](https://d3js.org/).
 
 For more highly customized static diagrams you can use a vector graphics tools like [Inkscape](https://inkscape.org/en/), [Adobe Illustrator](https://www.adobe.com/products/illustrator.html), or [Sketch](https://www.sketchapp.com/). For equations in diagrams, inkscape has a plugin to support LaTeX equations, while Illustrator integrates well with tools like Equation Maker. 
 
@@ -170,6 +188,37 @@ Occasionally you’ll want to use the full browser width. For this, use `l-scree
 
 <div class="fake-img l-screen-inset"><p>l-screen-inset</p></div>
 
+Often you want to position smaller figures so as not to completely interrupt the flow of your text. Or perhaps you want to put some text in the margin as an aside or to signal that it’s optional content. For these cases we’ll add the `side` class to our layouts.
+
+<div class="fake-img l-body side"><p>l-body side</p></div>
+
+<div class="fake-img l-middle side"><p>l-middle side</p></div>
+
+<div class="fake-img l-page side"><p>l-page side</p></div>
+
+They are all floated to the right and anchored to the right-hand edge of the position you specify. By default, each will take up approximately half of the width of the standard layout position.
+
+Here's an example of floating a figure to the right using the `fig.layout` option:
+
+    ```{r, fig.layout="l-page side", fig.width=5, fig.height=2}`r ''`
+    ggplot(mtcars, aes(wt, hp)) + geom_point() + 
+      geom_smooth(method = 'lm') +
+      facet_grid(~ gear)
+    ```
+
+![](images/l-page-side-figure.png){.l-page .side width=480}
+
+The figure will be displayed to the right using the requested layout boundary. Note that we also specify values for `fig.width` and `fig.height` that are appropriate for this layout.
+
+You can also use the same layouts with static images. In this case, just add the requisite classes using standard markdown image class syntax:
+
+```markdown
+![](images/l-middle-figure.png){.l-middle}
+![](images/l-page-side-figure.png){.l-page .side width=480}
+```
+
+Note that for the side layout we also specify an explicit `width` which will constrain the image from overflowing the layout region.
+
 ## Interactive Visualizations
 
 htmlwidgets
@@ -181,25 +230,29 @@ shiny
 
 ## Appendices
 
-An appendix can be added after your article by adding the `.appendix` class to a markdown header (e.g. `##`). For example:
+Appendices can be added after your article by creating a `<div>` with class `appendix`. For example:
 
-    ## Acknowledgments {.appendix}
+```html
+<div class="appendix">
+## Acknowledgments
 
-You may with to include the following sections in your appendix:
+This is a place to recognize people and institutions. It may also be a good place
+to acknowledge and cite software that makes your work possible.
 
-- **Acknowledgments:** This is a place to recognize people and institutions. It may also be a good place to acknowledge and cite software that makes your work possible.
+## Author Contributions
 
-- **Author Contributions:** We strongly encourage you to include an author contributions statement briefly describing what each author did.
+We strongly encourage you to include an author contributions statement briefly 
+describing what each author did.
+</div>
+```
 
+Footnotes and references will be included in the same section, immediately beneath any custom appendices.
 
 ## TODO
 
 - Tables
 - Definition list
 
-## Acknowledgments {.appendix}
-
-The Distill R Markdown format builds upon many years of work on 
 
 
 

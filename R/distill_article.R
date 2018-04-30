@@ -46,9 +46,6 @@ distill_article <- function(centered = TRUE,
   # build pandoc args
   args <- c("--standalone")
 
-  # use section divs
-  args <- c(args, "--section-divs")
-
   # prevent highlighting
   args <- c(args, "--no-highlight")
 

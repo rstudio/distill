@@ -40,7 +40,7 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
   // move appendixes to dt-appendix section
   $(".appendix").each(function(i, val) {
     appendix = true;
-    $(this).appendTo("dt-appendix");
+    $(this).children().appendTo("dt-appendix");
   });
 
   // show dt-appendix if we have appendix content
@@ -59,16 +59,37 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
     pre.replaceWith(dt_code);
   });
 
+
   // apply fig.layout to figures
   $('.fig-layout-chunk').each(function(i, val) {
-
     var fig_layout = $(this).attr('data-fig-layout');
-
     var img = $(this).children('img');
-    if (img.length > 0)
-      img.addClass(fig_layout).unwrap();
-
+    if (img.length > 0 && !$(this).hasClass('side'))
+      img.addClass(fig_layout);
   });
 
+  // propagate image layout classes to enclosing div
+  $("img[class^='l-']:only-child,img[class*=' l-']:only-child").each(function(i, img) {
+    if ($(img).parent().is('p')) {
+      var layouts = [
+        "l-body", "l-middle", "l-page",
+        "l-body-outset", "l-middle-outset", "l-page-outset",
+        "l-screen", "l-screen-inset"
+      ];
+      $.each(layouts, function(i, layout) {
+        if ($(img).hasClass(layout)) {
+          var div = $('<div class="' + layout + '"></div>');
+          if ($(img).hasClass('side')) {
+            div.addClass('side');
+            $(img).removeClass(layout);
+            $(img).removeClass('side');
+          }
+          $(img).parent().replaceWith(div);
+          div.append(img);
+          return false;
+        }
+      });
+    }
+  });
 
 });
