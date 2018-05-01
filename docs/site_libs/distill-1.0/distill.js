@@ -37,8 +37,6 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
     $(this).replaceWith(dtfn);
   });
 
-  appendix = false;
-
   $('h1.appendix').each(function(i, val) {
     appendix = true;
     $(this).nextUntil($('h1')).addBack().appendTo($('dt-appendix'));
