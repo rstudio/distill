@@ -9,29 +9,22 @@
 <title>Distill for R Markdown</title>
 
 
-  <script src="site_libs/jquery-1.12.4/jquery.min.js"></script>
+  <script src="site_libs/jquery-1.11.3/jquery.min.js"></script>
   <link href="site_libs/distill-1.0/distill.css" rel="stylesheet" />
   <script src="site_libs/distill-1.0/distill.js"></script>
   <script src="site_libs/distill-1.0/template.v1.js"></script>
-  <script src="site_libs/htmlwidgets-1.2/htmlwidgets.js"></script>
-  <link href="site_libs/leaflet-1.3.1/leaflet.css" rel="stylesheet" />
-  <script src="site_libs/leaflet-1.3.1/leaflet.js"></script>
-  <link href="site_libs/leafletfix-1.0.0/leafletfix.css" rel="stylesheet" />
-  <script src="site_libs/Proj4Leaflet-1.0.1/proj4-compressed.js"></script>
-  <script src="site_libs/Proj4Leaflet-1.0.1/proj4leaflet.js"></script>
-  <link href="site_libs/rstudio_leaflet-1.3.1/rstudio_leaflet.css" rel="stylesheet" />
-  <script src="site_libs/leaflet-binding-2.0.0/leaflet.js"></script>
-  <link href="site_libs/dygraphs-1.1.1/dygraph.css" rel="stylesheet" />
-  <script src="site_libs/dygraphs-1.1.1/dygraph-combined.js"></script>
-  <script src="site_libs/moment-2.8.4/moment.js"></script>
-  <script src="site_libs/moment-timezone-0.2.5/moment-timezone-with-data.js"></script>
-  <script src="site_libs/moment-fquarter-1.0.0/moment-fquarter.min.js"></script>
-  <script src="site_libs/dygraphs-binding-1.1.1.4/dygraphs.js"></script>
   <script type="text/front-matter">
   title: Distill for R Markdown
-  description: ~
-  authors: ~
-  affiliations: ~
+  description: |
+    A format devoted to clear explanations, native to the web
+  authors:
+  - JJ Allaire: https://github.com/jjallaire
+  - Rich Iannone: https://github.com/rich-iannone
+  - Yihui Xie: https://github.com/yihui
+  affiliations:
+  - RStudio: https://www.rstudio.com
+  - RStudio: https://www.rstudio.com
+  - RStudio: https://www.rstudio.com
   
   </script>
   <script type="text/bibliography">
@@ -101,21 +94,28 @@ dt-article table th, dt-article table td {
       </a>
       <div class="nav">
         <a href="index.html">Basics</a>
-        <a href="reference.html">Reference</a>
-        <a href="https://github.com/jjallaire/distill">GitHub</a>
+        <a href="layout.html">Layout</a>
+        <a href="diagrams.html">Diagrams</a>
+        <a href="interactivity.html">Interactivity</a>
       </div>
     </div>
     </dt-header>
   
 <dt-article class="centered">
   <h1>Distill for R Markdown</h1>
-  
-    <p>Distill is an online publication format devoted to clear explanations, native to the web. Distill was originally created for use in <a href="https://distill.pub" class="uri">https://distill.pub</a> (a machine learning journal) but is also an open-source framework available for broader use. Distill features:</p>
+  <h2>A format devoted to clear explanations, native to the web</h2>
+    <dt-byline></dt-byline>
+    <!---
+- Eliminate pandoc 2 requirement
+
+--->
+<p>Distill is an online publication format designed for technical and academic communication. Distill features:</p>
 <ul>
 <li>Attractive, reader-friendly typography that adapts well to mobile devices.</li>
 <li>Flexible layout options for visualizations, including visualizations that occupy the full width of the screen.</li>
 <li>Support for features essential to technical writing like LaTeX math, footnotes, and citations.</li>
 </ul>
+<p>The Distill web framework was originally created for use in <a href="https://distill.pub" class="uri">https://distill.pub</a> (a machine learning journal). Distill for R Markdown enables you to easily author Distill articles from R using a fully reproducible workflow.</p>
 <h2 id="getting-started">Getting Started</h2>
 <p>To create an <a href="https://rmarkdown.rstudio.com">R Markdown</a> document that uses the Distill format, first install the <strong>distill</strong> R package:</p>
 <pre class="r"><code>
@@ -145,6 +145,29 @@ bibliography: biblio.bib
 ---</code></pre>
 <p>The article’s description and author bylines are automatically rendered as part of the title area of the document.</p>
 <p>Note the <code>bibliography</code> field is used to provide a reference to the Bibtex file where all of the sources cited in your article are defined. The next section explains how to include citations in your article.</p>
+<h2 id="figures">Figures</h2>
+<p>Distill articles include a number of options for laying out figures. By default figures span the width of the main article body:</p>
+<p><img src="images/l-body-figure.png" class="l-body" /></p>
+<p>However, some figures benefit from using additional horizontal space. In this cases the <code>distill.layout</code> chunk option enables you to specify a wide variety of other layouts.</p>
+<p>For example, if we wanted to display a figure a bit outside the bounds of the article text, we could specify the <code>l-middle</code> layout via the <code>distill.layout</code> chunk option:</p>
+<pre><code>
+```{r, distill.layout=&quot;l-middle&quot;, fig.width=6, fig.height=1.5}
+ggplot(diamonds, aes(carat, price)) + geom_smooth() +
+  facet_grid(~ cut)
+```</code></pre>
+<p><img src="images/l-middle-figure.png" class="l-middle" /></p>
+<p>Note that when specifying an alternate <code>distill.layout</code> you should also specify an appropriate <code>fig.width</code> and <code>fig.height</code> for that layout.</p>
+<p>See the documentation on <a href="layout.html">Distill Layout</a> for details on additional layout options.</p>
+<h2 id="equations">Equations</h2>
+<p>Inline and display equations are supported via standard markdown <a href="https://www.mathjax.org/">MathJax</a> syntax. For example, the following <a href="https://en.wikibooks.org/wiki/LaTeX/Mathematics">LaTeX math</a>:</p>
+<pre><code>
+$$
+\sigma = \sqrt{ \frac{1}{N} \sum_{i=1}^N (x_i -\mu)^2}
+$$</code></pre>
+<p>Will be rendered as:</p>
+<p><span class="math display">\[
+\sigma = \sqrt{ \frac{1}{N} \sum_{i=1}^N (x_i -\mu)^2}
+\]</span></p>
 <h2 id="citations">Citations</h2>
 <p>Bibtex is the supported way of making academic citations. To include citations, first create a bibtex file and refer to it from the <code>bibliography</code> field of the YAML front-matter (as illustrated above).</p>
 <p>For example, your bibliography file might contain:</p>
@@ -185,131 +208,6 @@ This content will appear in the gutter of the article.
 ```{r, eval=FALSE, echo=TRUE}
 1 + 1
 ```</code></pre>
-<h2 id="equations">Equations</h2>
-<p>Inline and display equations are supported via standard markdown <a href="https://www.mathjax.org/">MathJax</a> syntax. For example, the following <a href="https://en.wikibooks.org/wiki/LaTeX/Mathematics">LaTeX math</a>:</p>
-<pre><code>
-$$
-\sigma = \sqrt{ \frac{1}{N} \sum_{i=1}^N (x_i -\mu)^2}
-$$</code></pre>
-<p>Will be rendered as:</p>
-<p><span class="math display">\[
-\sigma = \sqrt{ \frac{1}{N} \sum_{i=1}^N (x_i -\mu)^2}
-\]</span></p>
-<h2 id="layout">Layout</h2>
-<p>There are a variety of ways to layout elements included within Distill articles. This layout is controlled by a set of layout classes, which are in turn applied to R Markdown chunks using the <code>distill.layout</code> chunk option.</p>
-<p>The default layout if <code>distill.layout</code> is not specified is <code>l-body</code>, which will cause content to span the width of the main article body:</p>
-<div class="fake-img l-body">
-<p>
-l-body
-</p>
-</div>
-<p>For example, a plot with the default <code>l-body</code> layout would look like this:</p>
-<p><img src="images/l-body-figure.png" class="l-body" /></p>
-<p>For elements you want to display a little larger, try these:</p>
-<div class="fake-img l-middle">
-<p>
-l-middle
-</p>
-</div>
-<div class="fake-img l-page">
-<p>
-l-page
-</p>
-</div>
-<p>For example, this plot specifies the <code>l-middle</code> layout using the <code>distill.layout</code> chunk option:</p>
-<pre><code>
-```{r, distill.layout=&quot;l-middle&quot;, fig.width=6, fig.height=1.5}
-ggplot(diamonds, aes(carat, price)) + geom_smooth() +
-  facet_grid(~ cut)
-```</code></pre>
-<p><img src="images/l-middle-figure.png" class="l-middle" /></p>
-<p>Note that when specifying an alternate <code>distill.layout</code> you should also specify an appropriate <code>fig.width</code> and <code>fig.height</code> for that layout.</p>
-<p>All of these have an <code>outset</code> variant if you want to poke out from the body text a little bit. For instance:</p>
-<div class="fake-img l-body-outset">
-<p>
-l-body-outset
-</p>
-</div>
-<div class="fake-img l-middle-outset">
-<p>
-l-middle-outset
-</p>
-</div>
-<div class="fake-img l-page-outset">
-<p>
-l-page-outset
-</p>
-</div>
-<p>Occasionally you’ll want to use the full browser width. For this, use <code>l-screen</code>. You can also inset the element a little from the edge of the browser by using the inset variant:</p>
-<div class="fake-img l-screen">
-<p>
-l-screen
-</p>
-</div>
-<div class="fake-img l-screen-inset">
-<p>
-l-screen-inset
-</p>
-</div>
-<p>Often you want to position smaller figures so as not to completely interrupt the flow of your text. For these cases we’ll add the <code>side</code> class to our layouts:</p>
-<div class="fake-img l-body side">
-<p>
-l-body side
-</p>
-</div>
-<div class="fake-img l-middle side">
-<p>
-l-middle side
-</p>
-</div>
-<div class="fake-img l-page side">
-<p>
-l-page side
-</p>
-</div>
-<p>They are all floated to the right and anchored to the right-hand edge of the position you specify. By default, each will take up approximately half of the width of the standard layout position.</p>
-<p>Here’s an example of floating a figure to the right using the <code>distill.layout</code> option:</p>
-<pre><code>
-```{r, distill.layout=&quot;l-page side&quot;, fig.width=5, fig.height=2}
-ggplot(mtcars, aes(wt, hp)) + geom_point() + 
-  geom_smooth(method = &#39;lm&#39;) +
-  facet_grid(~ gear)
-```</code></pre>
-<p><img src="images/l-page-side-figure.png" class="l-page side" width="480" /></p>
-<p>The figure will be displayed to the right using the requested layout boundary. Note that we also specify values for <code>fig.width</code> and <code>fig.height</code> that are appropriate for this layout.</p>
-<p>You can also use the same layouts with static images not generated by R code chunks. In this case, just add the requisite classes using standard markdown image class syntax:</p>
-<pre class="markdown"><code>
-![](images/l-middle-figure.png){.l-middle}
-![](images/l-page-side-figure.png){.l-page .side width=480}</code></pre>
-<p>Note that for the side layout we also specify an explicit <code>width</code> which will constrain the image from overflowing the layout region.</p>
-<h3 id="htmlwidgets">htmlwidgets</h3>
-<p>Using layout classes with <a href="http://www.htmlwidgets.org">htmlwidgets</a> is very similar to using them with R plots. For example, the following code embeds a Leaflet map:</p>
-<pre><code>
-```{r}
-library(leaflet)
-leaflet() %&gt;%
-  addTiles() %&gt;%  # Add default OpenStreetMap map tiles
-  addMarkers(lng=174.768, lat=-36.852, popup=&quot;The birthplace of R&quot;)
-```</code></pre>
-<div class="distill-layout-chunk l-body" data-distill-layout="l-body">
-<div id="htmlwidget-8adaa91904343a5bce8a" style="width:576px;height:384px;" class="leaflet html-widget"></div>
-<script type="application/json" data-for="htmlwidget-8adaa91904343a5bce8a">{"x":{"options":{"crs":{"crsClass":"L.CRS.EPSG3857","code":null,"proj4def":null,"projectedBounds":null,"options":{}}},"calls":[{"method":"addTiles","args":["//{s}.tile.openstreetmap.org/{z}/{x}/{y}.png",null,null,{"minZoom":0,"maxZoom":18,"tileSize":256,"subdomains":"abc","errorTileUrl":"","tms":false,"noWrap":false,"zoomOffset":0,"zoomReverse":false,"opacity":1,"zIndex":1,"detectRetina":false,"attribution":"&copy; <a href=\"http://openstreetmap.org\">OpenStreetMap<\/a> contributors, <a href=\"http://creativecommons.org/licenses/by-sa/2.0/\">CC-BY-SA<\/a>"}]},{"method":"addMarkers","args":[-36.852,174.768,null,null,null,{"interactive":true,"draggable":false,"keyboard":true,"title":"","alt":"","zIndexOffset":0,"opacity":1,"riseOnHover":false,"riseOffset":250},"The birthplace of R",null,null,null,null,{"interactive":false,"permanent":false,"direction":"auto","opacity":1,"offset":[0,0],"textsize":"10px","textOnly":false,"className":"","sticky":true},null]}],"limits":{"lat":[-36.852,-36.852],"lng":[174.768,174.768]}},"evals":[],"jsHooks":[]}</script>
-</div>
-<p>If you want an htmlwidget to use one of the alternate layouts (e.g. <code>l-page</code>) then things work a bit differently due to the way widgets handle dynamic resizing. While you still use the <code>distill.layout</code> chunk option to specify the layout, the sizing is handled directly on the call to the htmlwidget via the <code>width</code> and <code>height</code> parameters, for example:</p>
-<pre><code>
-```{r, distill.layout=&quot;l-page&quot;}
-library(dygraphs)
-dygraph(ldeaths, width=&quot;100%&quot;, height=&quot;200px&quot;)
-```</code></pre>
-<div class="distill-layout-chunk l-page" data-distill-layout="l-page">
-<div id="htmlwidget-666302b135f93684f787" style="width:100%;height:200px;" class="dygraphs html-widget"></div>
-<script type="application/json" data-for="htmlwidget-666302b135f93684f787">{"x":{"attrs":{"labels":["month","V1"],"legend":"auto","retainDateWindow":false,"axes":{"x":{"pixelsPerLabel":60}},"showRangeSelector":true,"rangeSelectorHeight":40,"rangeSelectorPlotFillColor":" #A7B1C4","rangeSelectorPlotStrokeColor":"#808FAB","interactionModel":"Dygraph.Interaction.defaultModel"},"scale":"monthly","annotations":[],"shadings":[],"events":[],"format":"date","data":[["1974-01-01T00:00:00.000Z","1974-02-01T00:00:00.000Z","1974-03-01T00:00:00.000Z","1974-04-01T00:00:00.000Z","1974-05-01T00:00:00.000Z","1974-06-01T00:00:00.000Z","1974-07-01T00:00:00.000Z","1974-08-01T00:00:00.000Z","1974-09-01T00:00:00.000Z","1974-10-01T00:00:00.000Z","1974-11-01T00:00:00.000Z","1974-12-01T00:00:00.000Z","1975-01-01T00:00:00.000Z","1975-02-01T00:00:00.000Z","1975-03-01T00:00:00.000Z","1975-04-01T00:00:00.000Z","1975-05-01T00:00:00.000Z","1975-06-01T00:00:00.000Z","1975-07-01T00:00:00.000Z","1975-08-01T00:00:00.000Z","1975-09-01T00:00:00.000Z","1975-10-01T00:00:00.000Z","1975-11-01T00:00:00.000Z","1975-12-01T00:00:00.000Z","1976-01-01T00:00:00.000Z","1976-02-01T00:00:00.000Z","1976-03-01T00:00:00.000Z","1976-04-01T00:00:00.000Z","1976-05-01T00:00:00.000Z","1976-06-01T00:00:00.000Z","1976-07-01T00:00:00.000Z","1976-08-01T00:00:00.000Z","1976-09-01T00:00:00.000Z","1976-10-01T00:00:00.000Z","1976-11-01T00:00:00.000Z","1976-12-01T00:00:00.000Z","1977-01-01T00:00:00.000Z","1977-02-01T00:00:00.000Z","1977-03-01T00:00:00.000Z","1977-04-01T00:00:00.000Z","1977-05-01T00:00:00.000Z","1977-06-01T00:00:00.000Z","1977-07-01T00:00:00.000Z","1977-08-01T00:00:00.000Z","1977-09-01T00:00:00.000Z","1977-10-01T00:00:00.000Z","1977-11-01T00:00:00.000Z","1977-12-01T00:00:00.000Z","1978-01-01T00:00:00.000Z","1978-02-01T00:00:00.000Z","1978-03-01T00:00:00.000Z","1978-04-01T00:00:00.000Z","1978-05-01T00:00:00.000Z","1978-06-01T00:00:00.000Z","1978-07-01T00:00:00.000Z","1978-08-01T00:00:00.000Z","1978-09-01T00:00:00.000Z","1978-10-01T00:00:00.000Z","1978-11-01T00:00:00.000Z","1978-12-01T00:00:00.000Z","1979-01-01T00:00:00.000Z","1979-02-01T00:00:00.000Z","1979-03-01T00:00:00.000Z","1979-04-01T00:00:00.000Z","1979-05-01T00:00:00.000Z","1979-06-01T00:00:00.000Z","1979-07-01T00:00:00.000Z","1979-08-01T00:00:00.000Z","1979-09-01T00:00:00.000Z","1979-10-01T00:00:00.000Z","1979-11-01T00:00:00.000Z","1979-12-01T00:00:00.000Z"],[3035,2552,2704,2554,2014,1655,1721,1524,1596,2074,2199,2512,2933,2889,2938,2497,1870,1726,1607,1545,1396,1787,2076,2837,2787,3891,3179,2011,1636,1580,1489,1300,1356,1653,2013,2823,3102,2294,2385,2444,1748,1554,1498,1361,1346,1564,1640,2293,2815,3137,2679,1969,1870,1633,1529,1366,1357,1570,1535,2491,3084,2605,2573,2143,1693,1504,1461,1354,1333,1492,1781,1915]]},"evals":["attrs.interactionModel"],"jsHooks":[]}</script>
-</div>
-<p>Note that we specify <code>width=&quot;100%&quot;</code> to ensure that the widget always occupies the full width of the layout region.</p>
-<h2 id="diagrams">Diagrams</h2>
-<p>To include diagrams within a distill article, we recommend trying out the <a href="http://rich-iannone.github.io/DiagrammeR/">DiagrammerR</a> package, which enables you to generate graph diagrams using text in a markdown-like syntax.</p>
-<p>If you need more flexibilty than DiagrammeR affords, you can also try out the <a href="https://rstudio.github.io/r2d3">r2d3</a> package to include diagrams created with <a href="https://d3js.org/">D3.js</a>.</p>
-<p>For more highly customized static diagrams you can use a vector graphics tools like <a href="https://inkscape.org/en/">Inkscape</a>, <a href="https://www.adobe.com/products/illustrator.html">Adobe Illustrator</a>, or <a href="https://www.sketchapp.com/">Sketch</a>. For equations in diagrams, inkscape has a plugin to support LaTeX equations, while Illustrator integrates well with tools like Equation Maker.</p>
 <h2 id="appendices">Appendices</h2>
 <p>Appendices can be added after your article by creating a <code>&lt;div&gt;</code> with class <code>appendix</code>. For example:</p>
 <pre class="html"><code>

@@ -1,0 +1,134 @@
+<!doctype html>
+
+<head>
+<meta charset="utf-8">
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta http-equiv="X-UA-Compatible" content="chrome=1">
+<meta name="generator" content="pandoc" />
+
+<title>Interactivity</title>
+
+
+  <script src="site_libs/jquery-1.12.4/jquery.min.js"></script>
+  <link href="site_libs/distill-1.0/distill.css" rel="stylesheet" />
+  <script src="site_libs/distill-1.0/distill.js"></script>
+  <script src="site_libs/distill-1.0/template.v1.js"></script>
+  <script src="site_libs/htmlwidgets-1.2/htmlwidgets.js"></script>
+  <link href="site_libs/leaflet-1.3.1/leaflet.css" rel="stylesheet" />
+  <script src="site_libs/leaflet-1.3.1/leaflet.js"></script>
+  <link href="site_libs/leafletfix-1.0.0/leafletfix.css" rel="stylesheet" />
+  <script src="site_libs/Proj4Leaflet-1.0.1/proj4-compressed.js"></script>
+  <script src="site_libs/Proj4Leaflet-1.0.1/proj4leaflet.js"></script>
+  <link href="site_libs/rstudio_leaflet-1.3.1/rstudio_leaflet.css" rel="stylesheet" />
+  <script src="site_libs/leaflet-binding-2.0.0/leaflet.js"></script>
+  <link href="site_libs/dygraphs-1.1.1/dygraph.css" rel="stylesheet" />
+  <script src="site_libs/dygraphs-1.1.1/dygraph-combined.js"></script>
+  <script src="site_libs/moment-2.8.4/moment.js"></script>
+  <script src="site_libs/moment-timezone-0.2.5/moment-timezone-with-data.js"></script>
+  <script src="site_libs/moment-fquarter-1.0.0/moment-fquarter.min.js"></script>
+  <script src="site_libs/dygraphs-binding-1.1.1.4/dygraphs.js"></script>
+  <script type="text/front-matter">
+  title: Interactivity
+  description: Enhance communication with interactive visualizations
+  authors: ~
+  affiliations: ~
+  
+  </script>
+
+<style type="text/css">
+pre>code {
+  white-space: pre-wrap;
+  line-height: 1.5;
+}
+dt-article table th, dt-article table td {
+  padding: 7px 10px;
+}
+</style>
+
+
+  <link rel="stylesheet" href="styles.css" type="text/css" />
+
+</head>
+
+      <dt-header>
+    <div class="content l-page">
+      <a href="/index.html" class="logo">
+        <svg viewBox="-607 419 64 64">
+          <path d="M-573.4,478.9c-8,0-14.6-6.4-14.6-14.5s14.6-25.9,14.6-40.8c0,14.9,14.6,32.8,14.6,40.8S-565.4,478.9-573.4,478.9z"/>
+            </svg>
+        Distill for R Markdown
+      </a>
+      <div class="nav">
+        <a href="index.html">Basics</a>
+        <a href="layout.html">Layout</a>
+        <a href="diagrams.html">Diagrams</a>
+        <a href="interactivity.html">Interactivity</a>
+      </div>
+    </div>
+    </dt-header>
+  
+<dt-article class="centered">
+  <h1>Interactivity</h1>
+  <h2>Enhance communication with interactive visualizations</h2>
+    <p>There are a variety of ways to add interactivity to your Distill articles, including:</p>
+<ul>
+<li><p>Using pre-built <a href="http://www.htmlwidgets.org">htmlwidgets</a> that wrap JavaScript visualization libraries like <a href="http://rstudio.github.io/leaflet/">Leaflet</a>, <a href="https://plot.ly/r/">Plotly</a>, <a href="http://rstudio.github.io/dygraphs/">dygraphs</a>, and <a href="https://bwlewis.github.io/rthreejs/">threejs</a>.</p></li>
+<li><p>Creating custom <a href="https://d3js.org/">D3.js</a> interctive visualizations using the <a href="https://rstudio.github.io/r2d3/">r2d3</a> package.</p></li>
+<li><p>Using <a href="https://shiny.rstudio.com">Shiny</a> to create an <a href="https://rmarkdown.rstudio.com/authoring_shiny.html#embedded_applications">interactive document</a> that embeds interactive components within your article.</p></li>
+</ul>
+<h2 id="htmlwidgets">htmlwidgets</h2>
+<p>Including <a href="http://www.htmlwidgets.org">htmlwidgets</a> within a Distill article is as easy as including an R plot. For example, the following code embeds a Leaflet map:</p>
+<pre><code>
+```{r}
+library(leaflet)
+leaflet() %&gt;%
+  addTiles() %&gt;%  # Add default OpenStreetMap map tiles
+  addMarkers(lng=174.768, lat=-36.852, popup=&quot;The birthplace of R&quot;)
+```</code></pre>
+<div class="distill-layout-chunk l-body" data-distill-layout="l-body">
+<div id="htmlwidget-0d2408d7db4996678ad9" style="width:576px;height:384px;" class="leaflet html-widget"></div>
+<script type="application/json" data-for="htmlwidget-0d2408d7db4996678ad9">{"x":{"options":{"crs":{"crsClass":"L.CRS.EPSG3857","code":null,"proj4def":null,"projectedBounds":null,"options":{}}},"calls":[{"method":"addTiles","args":["//{s}.tile.openstreetmap.org/{z}/{x}/{y}.png",null,null,{"minZoom":0,"maxZoom":18,"tileSize":256,"subdomains":"abc","errorTileUrl":"","tms":false,"noWrap":false,"zoomOffset":0,"zoomReverse":false,"opacity":1,"zIndex":1,"detectRetina":false,"attribution":"&copy; <a href=\"http://openstreetmap.org\">OpenStreetMap<\/a> contributors, <a href=\"http://creativecommons.org/licenses/by-sa/2.0/\">CC-BY-SA<\/a>"}]},{"method":"addMarkers","args":[-36.852,174.768,null,null,null,{"interactive":true,"draggable":false,"keyboard":true,"title":"","alt":"","zIndexOffset":0,"opacity":1,"riseOnHover":false,"riseOffset":250},"The birthplace of R",null,null,null,null,{"interactive":false,"permanent":false,"direction":"auto","opacity":1,"offset":[0,0],"textsize":"10px","textOnly":false,"className":"","sticky":true},null]}],"limits":{"lat":[-36.852,-36.852],"lng":[174.768,174.768]}},"evals":[],"jsHooks":[]}</script>
+</div>
+<p>You can also use [custom layout] with htmlwidgets. For example, here we set <code>distill.layout=&quot;l-page&quot;</code> to specify that we want the widget to span the width of the page:</p>
+<pre><code>
+```{r, distill.layout=&quot;l-page&quot;, fig.height=2}
+library(dygraphs)
+dygraph(ldeaths) %&gt;% 
+  dyRangeSelector()
+```</code></pre>
+<div class="distill-layout-chunk l-page" data-distill-layout="l-page">
+<div id="htmlwidget-9c051958568da2f77f4a" style="width:576px;height:192px;" class="dygraphs html-widget"></div>
+<script type="application/json" data-for="htmlwidget-9c051958568da2f77f4a">{"x":{"attrs":{"labels":["month","V1"],"legend":"auto","retainDateWindow":false,"axes":{"x":{"pixelsPerLabel":60}},"showRangeSelector":true,"rangeSelectorHeight":40,"rangeSelectorPlotFillColor":" #A7B1C4","rangeSelectorPlotStrokeColor":"#808FAB","interactionModel":"Dygraph.Interaction.defaultModel"},"scale":"monthly","annotations":[],"shadings":[],"events":[],"format":"date","data":[["1974-01-01T00:00:00.000Z","1974-02-01T00:00:00.000Z","1974-03-01T00:00:00.000Z","1974-04-01T00:00:00.000Z","1974-05-01T00:00:00.000Z","1974-06-01T00:00:00.000Z","1974-07-01T00:00:00.000Z","1974-08-01T00:00:00.000Z","1974-09-01T00:00:00.000Z","1974-10-01T00:00:00.000Z","1974-11-01T00:00:00.000Z","1974-12-01T00:00:00.000Z","1975-01-01T00:00:00.000Z","1975-02-01T00:00:00.000Z","1975-03-01T00:00:00.000Z","1975-04-01T00:00:00.000Z","1975-05-01T00:00:00.000Z","1975-06-01T00:00:00.000Z","1975-07-01T00:00:00.000Z","1975-08-01T00:00:00.000Z","1975-09-01T00:00:00.000Z","1975-10-01T00:00:00.000Z","1975-11-01T00:00:00.000Z","1975-12-01T00:00:00.000Z","1976-01-01T00:00:00.000Z","1976-02-01T00:00:00.000Z","1976-03-01T00:00:00.000Z","1976-04-01T00:00:00.000Z","1976-05-01T00:00:00.000Z","1976-06-01T00:00:00.000Z","1976-07-01T00:00:00.000Z","1976-08-01T00:00:00.000Z","1976-09-01T00:00:00.000Z","1976-10-01T00:00:00.000Z","1976-11-01T00:00:00.000Z","1976-12-01T00:00:00.000Z","1977-01-01T00:00:00.000Z","1977-02-01T00:00:00.000Z","1977-03-01T00:00:00.000Z","1977-04-01T00:00:00.000Z","1977-05-01T00:00:00.000Z","1977-06-01T00:00:00.000Z","1977-07-01T00:00:00.000Z","1977-08-01T00:00:00.000Z","1977-09-01T00:00:00.000Z","1977-10-01T00:00:00.000Z","1977-11-01T00:00:00.000Z","1977-12-01T00:00:00.000Z","1978-01-01T00:00:00.000Z","1978-02-01T00:00:00.000Z","1978-03-01T00:00:00.000Z","1978-04-01T00:00:00.000Z","1978-05-01T00:00:00.000Z","1978-06-01T00:00:00.000Z","1978-07-01T00:00:00.000Z","1978-08-01T00:00:00.000Z","1978-09-01T00:00:00.000Z","1978-10-01T00:00:00.000Z","1978-11-01T00:00:00.000Z","1978-12-01T00:00:00.000Z","1979-01-01T00:00:00.000Z","1979-02-01T00:00:00.000Z","1979-03-01T00:00:00.000Z","1979-04-01T00:00:00.000Z","1979-05-01T00:00:00.000Z","1979-06-01T00:00:00.000Z","1979-07-01T00:00:00.000Z","1979-08-01T00:00:00.000Z","1979-09-01T00:00:00.000Z","1979-10-01T00:00:00.000Z","1979-11-01T00:00:00.000Z","1979-12-01T00:00:00.000Z"],[3035,2552,2704,2554,2014,1655,1721,1524,1596,2074,2199,2512,2933,2889,2938,2497,1870,1726,1607,1545,1396,1787,2076,2837,2787,3891,3179,2011,1636,1580,1489,1300,1356,1653,2013,2823,3102,2294,2385,2444,1748,1554,1498,1361,1346,1564,1640,2293,2815,3137,2679,1969,1870,1633,1529,1366,1357,1570,1535,2491,3084,2605,2573,2143,1693,1504,1461,1354,1333,1492,1781,1915]]},"evals":["attrs.interactionModel"],"jsHooks":[]}</script>
+</div>
+<p>Note that we specify <code>fig.height=2</code> to provide a more natural height for a widget that spans the entire width of the page.</p>
+<p>To learn about available htmlwidgets see the <a href="http://www.htmlwidgets.org/showcase_leaflet.html">showcase page</a> and the <a href="http://gallery.htmlwidgets.org/">htmlwidget gallery</a>.</p>
+</dt-article>
+
+<dt-appendix class="centered">
+</dt-appendix>
+
+  <dt-footer>
+  <div class="l-page">
+    <div class="description">
+    Created using <a class="logo" style="color: rgba(255, 255, 255, 0.4)" href="https://jjallaire.github.io/distill">Distill for R Markdown</a>
+    </div>
+    <div class="nav">
+      <a href="index.html">Basics</a>
+      <a href="reference.html">Reference</a>
+      <a href="https://github.com/jjallaire/distill">GitHub</a>
+    </div>
+    <p>
+    © Copyright 2018 The Distill Template Authors and RStudio, Inc.
+    </p>
+  </div>
+  </dt-footer>
+
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    script.src  = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML";
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script>

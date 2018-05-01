@@ -1,0 +1,11 @@
+---
+title: "Diagrams"
+description: "Illustrate concepts with diagrams"
+---
+
+To include diagrams within a distill article, we recommend trying out the [DiagrammerR](http://rich-iannone.github.io/DiagrammeR/) package, which enables you to generate graph diagrams using text in a markdown-like syntax.
+
+If you need more flexibilty than DiagrammeR affords, you can also try out the [r2d3](https://rstudio.github.io/r2d3) package to include diagrams created with [D3.js](https://d3js.org/).
+
+For more highly customized static diagrams you can use a vector graphics tools like [Inkscape](https://inkscape.org/en/), [Adobe Illustrator](https://www.adobe.com/products/illustrator.html), or [Sketch](https://www.sketchapp.com/). For equations in diagrams, inkscape has a plugin to support LaTeX equations, while Illustrator integrates well with tools like Equation Maker. 
+
