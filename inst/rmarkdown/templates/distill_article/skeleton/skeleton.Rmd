@@ -15,6 +15,12 @@ output:
     fig_height: 4   
 ---
 
+
+```{r setup, include=FALSE}
+library(distill)
+knitr::opts_chunk$set(echo = FALSE)
+```
+
 Distill is an online publication format devoted to clear explanations, native to the web. Learn more about using Distill with R Markdown at <https://jjallaire.github.io/distill>.
 
 

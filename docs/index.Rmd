@@ -18,6 +18,7 @@ bibliography: biblio.bib
 - Add r2d3 and shiny sections
 - Add diagrams sections
 - Eliminate pandoc 2 requirement
+- Tables/pagedtables
 
 --->
 
