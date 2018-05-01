@@ -15,7 +15,6 @@ bibliography: biblio.bib
 
 <!---
 - Images aren't responsive on mobile (width: 100%?)
-- Forward df_print = "kable" to output_format
 - Add more footnotes/appendix to index.Rmd
 - Add r2d3 and shiny sections 
 - Add diagrams sections

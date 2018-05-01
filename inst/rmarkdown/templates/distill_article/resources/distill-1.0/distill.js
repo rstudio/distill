@@ -107,4 +107,8 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
       });
     }
   });
+
+  // add class to pandoc style tables
+  $('tr.header').parent('thead').parent('table').addClass('pandoc-table');
+  $('.kable-table').children('table').addClass('pandoc-table');
 });
