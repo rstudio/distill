@@ -109,11 +109,16 @@ dt-article table th, dt-article table td {
   <h2>A format devoted to clear explanations, native to the web</h2>
     <dt-byline></dt-byline>
     <!---
+- Images aren't responsive on mobile (width: 100%?)
+- Forward df_print = "kable" to output_format
 - Add more footnotes/appendix to index.Rmd
-- Add r2d3 and shiny sections
+- Add r2d3 and shiny sections 
 - Add diagrams sections
-- Eliminate pandoc 2 requirement
+- Add df_print
 - Tables/pagedtables
+- Learning more section
+- web page metadata generation/redaction
+- article metadata (DOI, citation, etc.)
 
 --->
 <p>Distill is an online publication format designed for technical and academic communication. Distill articles include:</p>
@@ -129,9 +134,6 @@ dt-article table th, dt-article table td {
 <p>To create an <a href="https://rmarkdown.rstudio.com">R Markdown</a> document that uses the Distill format, first install the <strong>distill</strong> R package:</p>
 <pre class="r"><code>
 devtools::install_github(&quot;jjallaire/distill&quot;)</code></pre>
-<p>Next, be sure that you are running <a href="https://github.com/jgm/pandoc/releases/latest">Pandoc v2.0</a> or higher (the Distill format requires a later version of Pandoc than ships by default with RStudio). You can check the current version of Pandoc with:</p>
-<pre class="r"><code>
-rmarkdown::pandoc_version()</code></pre>
 <p>Then, use the <strong>New R Markdown</strong> dialog within RStudio to create a new Distill article:</p>
 <p><img src="images/new_distill_article.png" class="l-body screenshot" /></p>
 <p>You can also create a new Distill article from the command line with:</p>

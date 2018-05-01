@@ -39,10 +39,6 @@ distill_article <- function(centered = TRUE,
                 package = "distill")
   }
 
-  # validate pandoc version
-  if (!pandoc_available("2.0"))
-    stop("Distill requires pandoc >= 2.0 (https://github.com/jgm/pandoc/releases/latest)")
-
   # build pandoc args
   args <- c("--standalone")
 
@@ -65,8 +61,10 @@ distill_article <- function(centered = TRUE,
             pandoc_path_arg(resource("default.html")))
 
   # lua filter
-  args <- c(args, "--lua-filter",
-            pandoc_path_arg(resource("distill-1.0/distill.lua")))
+  if (pandoc_version() >= "2.0") {
+    args <- c(args, "--lua-filter",
+              pandoc_path_arg(resource("distill-1.0/distill.lua")))
+  }
 
   # use link citations (so we can do citation conversion)
   args <- c(args, "--metadata=link-citations:true")
@@ -87,8 +85,33 @@ distill_article <- function(centered = TRUE,
   knitr_options$opts_chunk$message = FALSE
   knitr_options$opts_chunk$comment = NA
 
-  # hook to apply distill.layout
+  # hook to ensure newline at the beginning of chunks
   knitr_options$knit_hooks <- list()
+  knitr_options$knit_hooks$source  <- function(x, options) {
+
+    # determine language/class
+    language <- tolower(options$engine)
+    if (language == 'node') language <- 'javascript'
+    if (!is.null(options$class.source))
+      language <- block_class(c(language, options$class.source))
+
+    # pad newline if necessary
+    if (length(x) > 0 && !nzchar(x[[1]]))
+      x <- c("", x)
+
+    # form output
+    paste(
+      '',
+      sprintf('```%s', language),
+      '',
+      paste0(x, collapse = '\n'),
+      '```',
+      '',
+      sep = '\n'
+    )
+  }
+
+  # hook to apply distill.layout
   knitr_options$knit_hooks$chunk  <- function(x, options) {
     if (is.null(options$distill.layout))
       options$distill.layout <- "l-body"
@@ -207,6 +230,12 @@ include_args_from_site_config <- function(config, runtime) {
 }
 
 
+block_class = function(x){
+  if (length(x) == 0) return()
+  classes = unlist(strsplit(x, '\\s+'))
+  .classes = paste0('.', classes, collapse = ' ')
+  paste0('{', .classes, '}')
+}
 
 
 

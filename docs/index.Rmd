@@ -14,11 +14,16 @@ bibliography: biblio.bib
 ---
 
 <!---
+- Images aren't responsive on mobile (width: 100%?)
+- Forward df_print = "kable" to output_format
 - Add more footnotes/appendix to index.Rmd
-- Add r2d3 and shiny sections
+- Add r2d3 and shiny sections 
 - Add diagrams sections
-- Eliminate pandoc 2 requirement
+- Add df_print
 - Tables/pagedtables
+- Learning more section
+- web page metadata generation/redaction
+- article metadata (DOI, citation, etc.)
 
 --->
 
@@ -42,12 +47,6 @@ To create an [R Markdown](https://rmarkdown.rstudio.com) document that uses the 
 
 ```r
 devtools::install_github("jjallaire/distill")
-```
-
-Next, be sure that you are running [Pandoc v2.0](https://github.com/jgm/pandoc/releases/latest) or higher (the Distill format requires a later version of Pandoc than ships by default with RStudio). You can check the current version of Pandoc with:
-
-```r
-rmarkdown::pandoc_version()
 ```
 
 Then, use the **New R Markdown** dialog within RStudio to create a new Distill article:
