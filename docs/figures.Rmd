@@ -1,9 +1,9 @@
 ---
-title: "Layout"
-description: Amplify figures and accent narrative with layout
+title: "Figures"
+description: Amplify figures by customizing layout
 ---
 
-There are a variety of ways to layout elements included within Distill articles. This layout is controlled by a set of layout classes, which are in turn applied to R Markdown chunks using the `distill.layout` chunk option.
+There are a variety of ways to layout figures included within Distill articles. This layout is controlled by a set of layout classes, which are in turn applied to R Markdown chunks using the `distill.layout` chunk option.
 
 The default layout if `distill.layout` is not specified is `l-body`, which will cause content to span the width of the main article body:
 

@@ -18,9 +18,7 @@ bibliography: biblio.bib
 - Add more footnotes/appendix to index.Rmd
 - Add r2d3 and shiny sections 
 - Add diagrams sections
-- Add df_print
 - Tables/pagedtables
-- Learning more section
 - web page metadata generation/redaction
 - article metadata (DOI, citation, etc.)
 
@@ -33,7 +31,7 @@ library(ggplot2)
 Distill is an online publication format designed for technical and academic communication. Distill articles include:
 
 - Attractive, reader-friendly typography that adapts well to mobile devices.
-- Flexible [layout options](layout.html) for page elements (e.g. displaying figures at a larger width than the article text).
+- Flexible [figure layout](figures.html) options (e.g. displaying figures at a larger width than the article text).
 - Features essential to technical writing like [LaTeX math](#equations), [citations], and [footnotes].
 - Support for a wide variety of [diagramming tools](diagrams.html) for illustrating concepts.
 - A variety of ways to enhance articles with [interactive visualiztions](interactivity.html).
@@ -86,7 +84,7 @@ The `bibliography` field is used to provide a reference to the Bibtex file where
 
 ## Figures
 
-Distill articles include a number of options for laying out figures. By default figures span the width of the main article body:
+Distill provides a number of options for laying out figures within your article. By default figures span the width of the main article body:
 
 ![](images/l-body-figure.png){.l-body}
 
@@ -104,7 +102,7 @@ For example, if we wanted to display a figure a bit outside the bounds of the ar
 
 Note that when specifying an alternate `distill.layout` you should also specify an appropriate `fig.width` and `fig.height` for that layout.
 
-See the documentation on [Distill Layout](layout.html)  for details on additional layout options.
+See the documentation on [figure layout](figures.html) for details on additional layout options.
 
 ## Equations
 

@@ -97,7 +97,7 @@ dt-article table th, dt-article table td {
       </a>
       <div class="nav">
         <a href="index.html">Basics</a>
-        <a href="layout.html">Layout</a>
+        <a href="figures.html">Figures</a>
         <a href="diagrams.html">Diagrams</a>
         <a href="interactivity.html">Interactivity</a>
       </div>
@@ -113,9 +113,7 @@ dt-article table th, dt-article table td {
 - Add more footnotes/appendix to index.Rmd
 - Add r2d3 and shiny sections 
 - Add diagrams sections
-- Add df_print
 - Tables/pagedtables
-- Learning more section
 - web page metadata generation/redaction
 - article metadata (DOI, citation, etc.)
 
@@ -123,7 +121,7 @@ dt-article table th, dt-article table td {
 <p>Distill is an online publication format designed for technical and academic communication. Distill articles include:</p>
 <ul>
 <li>Attractive, reader-friendly typography that adapts well to mobile devices.</li>
-<li>Flexible <a href="layout.html">layout options</a> for page elements (e.g. displaying figures at a larger width than the article text).</li>
+<li>Flexible <a href="figures.html">figure layout</a> options (e.g. displaying figures at a larger width than the article text).</li>
 <li>Features essential to technical writing like <a href="#equations">LaTeX math</a>, <a href="#citations">citations</a>, and <a href="#footnotes">footnotes</a>.</li>
 <li>Support for a wide variety of <a href="diagrams.html">diagramming tools</a> for illustrating concepts.</li>
 <li>A variety of ways to enhance articles with <a href="interactivity.html">interactive visualiztions</a>.</li>
@@ -161,7 +159,7 @@ bibliography: biblio.bib
 <p>The article’s description and author bylines are automatically rendered as part of the title area of the document.</p>
 <p>The <code>bibliography</code> field is used to provide a reference to the Bibtex file where all of the sources cited in your article are defined. The <a href="#citations">citations</a> section describes how to include references to these sources in your article.</p>
 <h2 id="figures">Figures</h2>
-<p>Distill articles include a number of options for laying out figures. By default figures span the width of the main article body:</p>
+<p>Distill provides a number of options for laying out figures within your article. By default figures span the width of the main article body:</p>
 <p><img src="images/l-body-figure.png" class="l-body" /></p>
 <p>However, some figures benefit from using additional horizontal space. In this cases the <code>distill.layout</code> chunk option enables you to specify a wide variety of other layouts.</p>
 <p>For example, if we wanted to display a figure a bit outside the bounds of the article text, we could specify the <code>l-middle</code> layout via the <code>distill.layout</code> chunk option:</p>
@@ -172,7 +170,7 @@ ggplot(diamonds, aes(carat, price)) + geom_smooth() +
 ```</code></pre>
 <p><img src="images/l-middle-figure.png" class="l-middle" /></p>
 <p>Note that when specifying an alternate <code>distill.layout</code> you should also specify an appropriate <code>fig.width</code> and <code>fig.height</code> for that layout.</p>
-<p>See the documentation on <a href="layout.html">Distill Layout</a> for details on additional layout options.</p>
+<p>See the documentation on <a href="figures.html">figure layout</a> for details on additional layout options.</p>
 <h2 id="equations">Equations</h2>
 <p>Inline and display equations are supported via standard markdown <a href="https://www.mathjax.org/">MathJax</a> syntax. For example, the following <a href="https://en.wikibooks.org/wiki/LaTeX/Mathematics">LaTeX math</a>:</p>
 <pre><code>
@@ -259,7 +257,7 @@ describing what each author did.</code></pre>
     </div>
     <div class="nav">
       <a href="index.html">Basics</a>
-      <a href="layout.html">Layout</a>
+      <a href="figures.html">Figures</a>
       <a href="diagrams.html">Diagrams</a>
       <a href="interactivity.html">Interactivity</a>
       <a href="https://github.com/jjallaire/distill">GitHub</a>
