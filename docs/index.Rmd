@@ -105,6 +105,19 @@ Note that when specifying an alternate `distill.layout` you should also specify 
 
 See the documentation on [figure layout](figures.html) for details on additional layout options.
 
+## Tables
+
+There are a number of options available for HTML display of data frames within Distill articles. Here, we use the `paged_table()` function to display a pageable view of the `mtcars` dataset built in to R:
+
+```{r, distill.layout="l-body-outset"}
+library(distill)
+paged_table(mtcars)
+```
+
+Note that we used `distill.layout="l-body-outset"` to cause the table to occupy slightly more horizontal space than the article text. All of available [figure layout options](figures.html) work as expected for tables.
+
+See the documentation on [table display](tables.html) for additioanl details on the various method available.
+
 ## Equations
 
 Inline and display equations are supported via standard markdown [MathJax](https://www.mathjax.org/) syntax. For example, the following [LaTeX math](https://en.wikibooks.org/wiki/LaTeX/Mathematics):
