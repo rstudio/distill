@@ -66,10 +66,18 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 
   // apply distill.layout to figures
   $('.distill-layout-chunk').each(function(i, val) {
+
+    // propagate to img children
     var distill_layout = $(this).attr('data-distill-layout');
     var img = $(this).children('img');
     if (img.length > 0 && !$(this).hasClass('side'))
       img.addClass(distill_layout);
+
+    // set width of htmlwidgets that are immediate children to 100%
+    // (if they aren't immediate children then some other layout scheme
+    // is presumably in place)
+    var html_widget = $(this).children('.html-widget');
+    html_widget.css('width', '100%');
   });
 
   // propagate image layout classes to enclosing div
