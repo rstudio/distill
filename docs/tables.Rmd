@@ -6,15 +6,21 @@ description: Display data in attractive, compact formats
 ## kable
 
 ```{r, echo=TRUE}
-library(distill)
+library(knitr)
 kable(head(mtcars))
 ```
-
 
 ## Paged tables
 
 ```{r, echo=TRUE}
-library(distill)
+library(rmarkdown)
 paged_table(mtcars)
+```
+
+## DT
+
+```{r, echo=TRUE}
+library(DT)
+datatable(mtcars)
 ```
 

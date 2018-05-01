@@ -16,11 +16,14 @@ bibliography: biblio.bib
 <!---
 - Images aren't responsive on mobile (width: 100%?)
 - Add more footnotes/appendix to index.Rmd
+- Spell check 
 - Add r2d3 and shiny sections 
 - Add diagrams sections
 - Tables/pagedtables
 - web page metadata generation/redaction
 - article metadata (DOI, citation, etc.)
+- index pages
+- site generation
 
 --->
 
@@ -110,7 +113,7 @@ See the documentation on [figure layout](figures.html) for details on additional
 There are a number of options available for HTML display of data frames within Distill articles. Here, we use the `paged_table()` function to display a pageable view of the `mtcars` dataset built in to R:
 
 ```{r, distill.layout="l-body-outset"}
-library(distill)
+library(rmarkdown)
 paged_table(mtcars)
 ```
 
