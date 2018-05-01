@@ -196,8 +196,8 @@ $$</code></pre>
 \sigma = \sqrt{ \frac{1}{N} \sum_{i=1}^N (x_i -\mu)^2}
 \]</span></p>
 <h2 id="figures">Figures</h2>
-<p>There are a variety of ways to layout figures included within Distill articles. This layout is controlled by a set of layout classes, which are in turn applied to R Markdown chunks using the <code>fig.layout</code> chunk option.</p>
-<p>The default layout if <code>fig.layout</code> is not specified is <code>l-body</code>, which will cause figures to span with width of the main article body:</p>
+<p>There are a variety of ways to layout figures included within Distill articles. This layout is controlled by a set of layout classes, which are in turn applied to R Markdown chunks using the <code>distill.layout</code> chunk option.</p>
+<p>The default layout if <code>distill.layout</code> is not specified is <code>l-body</code>, which will cause figures to span with width of the main article body:</p>
 <div class="fake-img l-body">
 <p>
 l-body
@@ -216,14 +216,14 @@ l-middle
 l-page
 </p>
 </div>
-<p>For example, this plot specifies the <code>l-middle</code> layout using the <code>fig.layout</code> chunk option:</p>
+<p>For example, this plot specifies the <code>l-middle</code> layout using the <code>distill.layout</code> chunk option:</p>
 <pre><code>
-```{r, fig.layout=&quot;l-middle&quot;, fig.width=6, fig.height=1.5}
+```{r, distill.layout=&quot;l-middle&quot;, fig.width=6, fig.height=1.5}
 ggplot(diamonds, aes(carat, price)) + geom_smooth() +
   facet_grid(~ cut)
 ```</code></pre>
 <p><img src="images/l-middle-figure.png" class="l-middle" /></p>
-<p>Note that when specifying an alternate <code>fig.layout</code> you should also specify and appropriate <code>fig.width</code> and <code>fig.height</code> for that layout.</p>
+<p>Note that when specifying an alternate <code>distill.layout</code> you should also specify and appropriate <code>fig.width</code> and <code>fig.height</code> for that layout.</p>
 <p>All of these have an <code>outset</code> variant if you want to poke out from the body text a little bit. For instance:</p>
 <div class="fake-img l-body-outset">
 <p>
@@ -268,9 +268,9 @@ l-page side
 </p>
 </div>
 <p>They are all floated to the right and anchored to the right-hand edge of the position you specify. By default, each will take up approximately half of the width of the standard layout position.</p>
-<p>Here’s an example of floating a figure to the right using the <code>fig.layout</code> option:</p>
+<p>Here’s an example of floating a figure to the right using the <code>distill.layout</code> option:</p>
 <pre><code>
-```{r, fig.layout=&quot;l-page side&quot;, fig.width=5, fig.height=2}
+```{r, distill.layout=&quot;l-page side&quot;, fig.width=5, fig.height=2}
 ggplot(mtcars, aes(wt, hp)) + geom_point() + 
   geom_smooth(method = &#39;lm&#39;) +
   facet_grid(~ gear)
@@ -291,19 +291,19 @@ leaflet() %&gt;%
   addTiles() %&gt;%  # Add default OpenStreetMap map tiles
   addMarkers(lng=174.768, lat=-36.852, popup=&quot;The birthplace of R&quot;)
 ```</code></pre>
-<div class="fig-layout-chunk l-body" data-fig-layout="l-body">
-<div id="htmlwidget-d2963aeb0793bdfa83b8" style="width:576px;height:384px;" class="leaflet html-widget"></div>
-<script type="application/json" data-for="htmlwidget-d2963aeb0793bdfa83b8">{"x":{"options":{"crs":{"crsClass":"L.CRS.EPSG3857","code":null,"proj4def":null,"projectedBounds":null,"options":{}}},"calls":[{"method":"addTiles","args":["//{s}.tile.openstreetmap.org/{z}/{x}/{y}.png",null,null,{"minZoom":0,"maxZoom":18,"tileSize":256,"subdomains":"abc","errorTileUrl":"","tms":false,"noWrap":false,"zoomOffset":0,"zoomReverse":false,"opacity":1,"zIndex":1,"detectRetina":false,"attribution":"&copy; <a href=\"http://openstreetmap.org\">OpenStreetMap<\/a> contributors, <a href=\"http://creativecommons.org/licenses/by-sa/2.0/\">CC-BY-SA<\/a>"}]},{"method":"addMarkers","args":[-36.852,174.768,null,null,null,{"interactive":true,"draggable":false,"keyboard":true,"title":"","alt":"","zIndexOffset":0,"opacity":1,"riseOnHover":false,"riseOffset":250},"The birthplace of R",null,null,null,null,{"interactive":false,"permanent":false,"direction":"auto","opacity":1,"offset":[0,0],"textsize":"10px","textOnly":false,"className":"","sticky":true},null]}],"limits":{"lat":[-36.852,-36.852],"lng":[174.768,174.768]}},"evals":[],"jsHooks":[]}</script>
+<div class="distill-layout-chunk l-body" data-distill-layout="l-body">
+<div id="htmlwidget-142c2a65159f92aa6339" style="width:576px;height:384px;" class="leaflet html-widget"></div>
+<script type="application/json" data-for="htmlwidget-142c2a65159f92aa6339">{"x":{"options":{"crs":{"crsClass":"L.CRS.EPSG3857","code":null,"proj4def":null,"projectedBounds":null,"options":{}}},"calls":[{"method":"addTiles","args":["//{s}.tile.openstreetmap.org/{z}/{x}/{y}.png",null,null,{"minZoom":0,"maxZoom":18,"tileSize":256,"subdomains":"abc","errorTileUrl":"","tms":false,"noWrap":false,"zoomOffset":0,"zoomReverse":false,"opacity":1,"zIndex":1,"detectRetina":false,"attribution":"&copy; <a href=\"http://openstreetmap.org\">OpenStreetMap<\/a> contributors, <a href=\"http://creativecommons.org/licenses/by-sa/2.0/\">CC-BY-SA<\/a>"}]},{"method":"addMarkers","args":[-36.852,174.768,null,null,null,{"interactive":true,"draggable":false,"keyboard":true,"title":"","alt":"","zIndexOffset":0,"opacity":1,"riseOnHover":false,"riseOffset":250},"The birthplace of R",null,null,null,null,{"interactive":false,"permanent":false,"direction":"auto","opacity":1,"offset":[0,0],"textsize":"10px","textOnly":false,"className":"","sticky":true},null]}],"limits":{"lat":[-36.852,-36.852],"lng":[174.768,174.768]}},"evals":[],"jsHooks":[]}</script>
 </div>
-<p>If you want an htmlwidget to use one of the alternate figure layouts (e.g. <code>l-page</code>) then things work a bit differently due to the way widgets handle dynamic resizing. While you still use the <code>fig.layout</code> chunk option to specify the layout, the sizing is handled directly on the call to the htmlwidget via the <code>width</code> and <code>height</code> parameters, for example:</p>
+<p>If you want an htmlwidget to use one of the alternate figure layouts (e.g. <code>l-page</code>) then things work a bit differently due to the way widgets handle dynamic resizing. While you still use the <code>distill.layout</code> chunk option to specify the layout, the sizing is handled directly on the call to the htmlwidget via the <code>width</code> and <code>height</code> parameters, for example:</p>
 <pre><code>
-```{r, fig.layout=&quot;l-page&quot;}
+```{r, distill.layout=&quot;l-page&quot;}
 library(dygraphs)
 dygraph(ldeaths, width=&quot;100%&quot;, height=&quot;200px&quot;)
 ```</code></pre>
-<div class="fig-layout-chunk l-page" data-fig-layout="l-page">
-<div id="htmlwidget-ed6c5500d850659146a3" style="width:100%;height:200px;" class="dygraphs html-widget"></div>
-<script type="application/json" data-for="htmlwidget-ed6c5500d850659146a3">{"x":{"attrs":{"labels":["month","V1"],"legend":"auto","retainDateWindow":false,"axes":{"x":{"pixelsPerLabel":60}},"showRangeSelector":true,"rangeSelectorHeight":40,"rangeSelectorPlotFillColor":" #A7B1C4","rangeSelectorPlotStrokeColor":"#808FAB","interactionModel":"Dygraph.Interaction.defaultModel"},"scale":"monthly","annotations":[],"shadings":[],"events":[],"format":"date","data":[["1974-01-01T00:00:00.000Z","1974-02-01T00:00:00.000Z","1974-03-01T00:00:00.000Z","1974-04-01T00:00:00.000Z","1974-05-01T00:00:00.000Z","1974-06-01T00:00:00.000Z","1974-07-01T00:00:00.000Z","1974-08-01T00:00:00.000Z","1974-09-01T00:00:00.000Z","1974-10-01T00:00:00.000Z","1974-11-01T00:00:00.000Z","1974-12-01T00:00:00.000Z","1975-01-01T00:00:00.000Z","1975-02-01T00:00:00.000Z","1975-03-01T00:00:00.000Z","1975-04-01T00:00:00.000Z","1975-05-01T00:00:00.000Z","1975-06-01T00:00:00.000Z","1975-07-01T00:00:00.000Z","1975-08-01T00:00:00.000Z","1975-09-01T00:00:00.000Z","1975-10-01T00:00:00.000Z","1975-11-01T00:00:00.000Z","1975-12-01T00:00:00.000Z","1976-01-01T00:00:00.000Z","1976-02-01T00:00:00.000Z","1976-03-01T00:00:00.000Z","1976-04-01T00:00:00.000Z","1976-05-01T00:00:00.000Z","1976-06-01T00:00:00.000Z","1976-07-01T00:00:00.000Z","1976-08-01T00:00:00.000Z","1976-09-01T00:00:00.000Z","1976-10-01T00:00:00.000Z","1976-11-01T00:00:00.000Z","1976-12-01T00:00:00.000Z","1977-01-01T00:00:00.000Z","1977-02-01T00:00:00.000Z","1977-03-01T00:00:00.000Z","1977-04-01T00:00:00.000Z","1977-05-01T00:00:00.000Z","1977-06-01T00:00:00.000Z","1977-07-01T00:00:00.000Z","1977-08-01T00:00:00.000Z","1977-09-01T00:00:00.000Z","1977-10-01T00:00:00.000Z","1977-11-01T00:00:00.000Z","1977-12-01T00:00:00.000Z","1978-01-01T00:00:00.000Z","1978-02-01T00:00:00.000Z","1978-03-01T00:00:00.000Z","1978-04-01T00:00:00.000Z","1978-05-01T00:00:00.000Z","1978-06-01T00:00:00.000Z","1978-07-01T00:00:00.000Z","1978-08-01T00:00:00.000Z","1978-09-01T00:00:00.000Z","1978-10-01T00:00:00.000Z","1978-11-01T00:00:00.000Z","1978-12-01T00:00:00.000Z","1979-01-01T00:00:00.000Z","1979-02-01T00:00:00.000Z","1979-03-01T00:00:00.000Z","1979-04-01T00:00:00.000Z","1979-05-01T00:00:00.000Z","1979-06-01T00:00:00.000Z","1979-07-01T00:00:00.000Z","1979-08-01T00:00:00.000Z","1979-09-01T00:00:00.000Z","1979-10-01T00:00:00.000Z","1979-11-01T00:00:00.000Z","1979-12-01T00:00:00.000Z"],[3035,2552,2704,2554,2014,1655,1721,1524,1596,2074,2199,2512,2933,2889,2938,2497,1870,1726,1607,1545,1396,1787,2076,2837,2787,3891,3179,2011,1636,1580,1489,1300,1356,1653,2013,2823,3102,2294,2385,2444,1748,1554,1498,1361,1346,1564,1640,2293,2815,3137,2679,1969,1870,1633,1529,1366,1357,1570,1535,2491,3084,2605,2573,2143,1693,1504,1461,1354,1333,1492,1781,1915]]},"evals":["attrs.interactionModel"],"jsHooks":[]}</script>
+<div class="distill-layout-chunk l-page" data-distill-layout="l-page">
+<div id="htmlwidget-6ab3d19963b17415648a" style="width:100%;height:200px;" class="dygraphs html-widget"></div>
+<script type="application/json" data-for="htmlwidget-6ab3d19963b17415648a">{"x":{"attrs":{"labels":["month","V1"],"legend":"auto","retainDateWindow":false,"axes":{"x":{"pixelsPerLabel":60}},"showRangeSelector":true,"rangeSelectorHeight":40,"rangeSelectorPlotFillColor":" #A7B1C4","rangeSelectorPlotStrokeColor":"#808FAB","interactionModel":"Dygraph.Interaction.defaultModel"},"scale":"monthly","annotations":[],"shadings":[],"events":[],"format":"date","data":[["1974-01-01T00:00:00.000Z","1974-02-01T00:00:00.000Z","1974-03-01T00:00:00.000Z","1974-04-01T00:00:00.000Z","1974-05-01T00:00:00.000Z","1974-06-01T00:00:00.000Z","1974-07-01T00:00:00.000Z","1974-08-01T00:00:00.000Z","1974-09-01T00:00:00.000Z","1974-10-01T00:00:00.000Z","1974-11-01T00:00:00.000Z","1974-12-01T00:00:00.000Z","1975-01-01T00:00:00.000Z","1975-02-01T00:00:00.000Z","1975-03-01T00:00:00.000Z","1975-04-01T00:00:00.000Z","1975-05-01T00:00:00.000Z","1975-06-01T00:00:00.000Z","1975-07-01T00:00:00.000Z","1975-08-01T00:00:00.000Z","1975-09-01T00:00:00.000Z","1975-10-01T00:00:00.000Z","1975-11-01T00:00:00.000Z","1975-12-01T00:00:00.000Z","1976-01-01T00:00:00.000Z","1976-02-01T00:00:00.000Z","1976-03-01T00:00:00.000Z","1976-04-01T00:00:00.000Z","1976-05-01T00:00:00.000Z","1976-06-01T00:00:00.000Z","1976-07-01T00:00:00.000Z","1976-08-01T00:00:00.000Z","1976-09-01T00:00:00.000Z","1976-10-01T00:00:00.000Z","1976-11-01T00:00:00.000Z","1976-12-01T00:00:00.000Z","1977-01-01T00:00:00.000Z","1977-02-01T00:00:00.000Z","1977-03-01T00:00:00.000Z","1977-04-01T00:00:00.000Z","1977-05-01T00:00:00.000Z","1977-06-01T00:00:00.000Z","1977-07-01T00:00:00.000Z","1977-08-01T00:00:00.000Z","1977-09-01T00:00:00.000Z","1977-10-01T00:00:00.000Z","1977-11-01T00:00:00.000Z","1977-12-01T00:00:00.000Z","1978-01-01T00:00:00.000Z","1978-02-01T00:00:00.000Z","1978-03-01T00:00:00.000Z","1978-04-01T00:00:00.000Z","1978-05-01T00:00:00.000Z","1978-06-01T00:00:00.000Z","1978-07-01T00:00:00.000Z","1978-08-01T00:00:00.000Z","1978-09-01T00:00:00.000Z","1978-10-01T00:00:00.000Z","1978-11-01T00:00:00.000Z","1978-12-01T00:00:00.000Z","1979-01-01T00:00:00.000Z","1979-02-01T00:00:00.000Z","1979-03-01T00:00:00.000Z","1979-04-01T00:00:00.000Z","1979-05-01T00:00:00.000Z","1979-06-01T00:00:00.000Z","1979-07-01T00:00:00.000Z","1979-08-01T00:00:00.000Z","1979-09-01T00:00:00.000Z","1979-10-01T00:00:00.000Z","1979-11-01T00:00:00.000Z","1979-12-01T00:00:00.000Z"],[3035,2552,2704,2554,2014,1655,1721,1524,1596,2074,2199,2512,2933,2889,2938,2497,1870,1726,1607,1545,1396,1787,2076,2837,2787,3891,3179,2011,1636,1580,1489,1300,1356,1653,2013,2823,3102,2294,2385,2444,1748,1554,1498,1361,1346,1564,1640,2293,2815,3137,2679,1969,1870,1633,1529,1366,1357,1570,1535,2491,3084,2605,2573,2143,1693,1504,1461,1354,1333,1492,1781,1915]]},"evals":["attrs.interactionModel"],"jsHooks":[]}</script>
 </div>
 <p>Note that we specify <code>width=&quot;100%&quot;</code> to ensure that the widget always occupies the full width of the layout region.</p>
 <h2 id="diagrams">Diagrams</h2>

@@ -87,14 +87,14 @@ distill_article <- function(centered = TRUE,
   knitr_options$opts_chunk$message = FALSE
   knitr_options$opts_chunk$comment = NA
 
-  # hook to record fig.layout
+  # hook to apply distill.layout
   knitr_options$knit_hooks <- list()
   knitr_options$knit_hooks$chunk  <- function(x, options) {
-    if (is.null(options$fig.layout))
-      options$fig.layout <- "l-body"
+    if (is.null(options$distill.layout))
+      options$distill.layout <- "l-body"
     paste0(
-      '<div class="fig-layout-chunk ', options$fig.layout,
-      '" data-fig-layout="', options$fig.layout, '">',
+      '<div class="distill-layout-chunk ', options$distill.layout,
+      '" data-distill-layout="', options$distill.layout, '">',
       x,
       '</div>'
     )

@@ -137,9 +137,9 @@ $$
 
 ## Figures
 
-There are a variety of ways to layout figures included within Distill articles. This layout is controlled by a set of layout classes, which are in turn applied to R Markdown chunks using the `fig.layout` chunk option.
+There are a variety of ways to layout figures included within Distill articles. This layout is controlled by a set of layout classes, which are in turn applied to R Markdown chunks using the `distill.layout` chunk option.
 
-The default layout if `fig.layout` is not specified is `l-body`, which will cause figures to span with width of the main article body:
+The default layout if `distill.layout` is not specified is `l-body`, which will cause figures to span with width of the main article body:
 
 <div class="fake-img l-body"><p>l-body</p></div>
 
@@ -154,9 +154,9 @@ For figures you want to display a little larger, try these:
 
 <div class="fake-img l-page"><p>l-page</p></div>
 
-For example, this plot specifies the `l-middle` layout using the `fig.layout` chunk option:
+For example, this plot specifies the `l-middle` layout using the `distill.layout` chunk option:
 
-    ```{r, fig.layout="l-middle", fig.width=6, fig.height=1.5}`r ''`
+    ```{r, distill.layout="l-middle", fig.width=6, fig.height=1.5}`r ''`
     ggplot(diamonds, aes(carat, price)) + geom_smooth() +
       facet_grid(~ cut)
     ```
@@ -164,7 +164,7 @@ For example, this plot specifies the `l-middle` layout using the `fig.layout` ch
 ![](images/l-middle-figure.png){.l-middle}
 
 
-Note that when specifying an alternate `fig.layout` you should also specify and appropriate `fig.width` and `fig.height` for that layout.
+Note that when specifying an alternate `distill.layout` you should also specify and appropriate `fig.width` and `fig.height` for that layout.
 
 All of these have an `outset` variant if you want to poke out from the body text a little bit. For instance:
 
@@ -190,9 +190,9 @@ Often you want to position smaller figures so as not to completely interrupt the
 
 They are all floated to the right and anchored to the right-hand edge of the position you specify. By default, each will take up approximately half of the width of the standard layout position.
 
-Here's an example of floating a figure to the right using the `fig.layout` option:
+Here's an example of floating a figure to the right using the `distill.layout` option:
 
-    ```{r, fig.layout="l-page side", fig.width=5, fig.height=2}`r ''`
+    ```{r, distill.layout="l-page side", fig.width=5, fig.height=2}`r ''`
     ggplot(mtcars, aes(wt, hp)) + geom_point() + 
       geom_smooth(method = 'lm') +
       facet_grid(~ gear)
@@ -229,14 +229,14 @@ leaflet() %>%
   addMarkers(lng=174.768, lat=-36.852, popup="The birthplace of R")
 ```
 
-If you want an htmlwidget to use one of the alternate figure layouts (e.g. `l-page`) then things work a bit differently due to the way widgets handle dynamic resizing. While you still use the `fig.layout` chunk option to specify the layout, the sizing is handled directly on the call to the htmlwidget via the `width` and `height` parameters, for example:
+If you want an htmlwidget to use one of the alternate figure layouts (e.g. `l-page`) then things work a bit differently due to the way widgets handle dynamic resizing. While you still use the `distill.layout` chunk option to specify the layout, the sizing is handled directly on the call to the htmlwidget via the `width` and `height` parameters, for example:
 
-    ```{r, fig.layout="l-page"}`r ''`
+    ```{r, distill.layout="l-page"}`r ''`
     library(dygraphs)
     dygraph(ldeaths, width="100%", height="200px")
     ```
 
-```{r, fig.layout="l-page"}
+```{r, distill.layout="l-page"}
 library(dygraphs)
 dygraph(ldeaths, width="100%", height="200px") %>% 
   dyRangeSelector()
