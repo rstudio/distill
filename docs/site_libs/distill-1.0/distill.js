@@ -56,16 +56,20 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
     language = ' language="' + language + '"';
     var dt_code = $('<dt-code block' + language + '></dt-code>');
     dt_code.text(code.text());
-    pre.replaceWith(dt_code);
+    if (pre.parent().is('.distill-layout-chunk')) {
+      dt_code.insertBefore(pre.parent());
+      pre.remove();
+    } else {
+      pre.replaceWith(dt_code);
+    }
   });
 
-
-  // apply fig.layout to figures
-  $('.fig-layout-chunk').each(function(i, val) {
-    var fig_layout = $(this).attr('data-fig-layout');
+  // apply distill.layout to figures
+  $('.distill-layout-chunk').each(function(i, val) {
+    var distill_layout = $(this).attr('data-distill-layout');
     var img = $(this).children('img');
     if (img.length > 0 && !$(this).hasClass('side'))
-      img.addClass(fig_layout);
+      img.addClass(distill_layout);
   });
 
   // propagate image layout classes to enclosing div
