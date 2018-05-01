@@ -14,7 +14,10 @@ bibliography: biblio.bib
 ---
 
 <!---
-- Improve appendix treatment
+- Add links to top level summary
+- Add more footnotes/appendix to index.Rmd
+- Add r2d3 and shiny sections
+- Add diagrams sections
 - Eliminate pandoc 2 requirement
 
 --->
@@ -179,27 +182,21 @@ To include code that is only displayed and not evaluated specify the `eval=FALSE
 
 ## Appendices
 
-Appendices can be added after your article by creating a `<div>` with class `appendix`. For example:
+Appendices can be added after your article by adding the `.appendix` class to any level 1 or level 2 header. For example:
 
 ```html
-<div class="appendix">
-## Acknowledgments
+## Acknowledgments {.appendix}
 
 This is a place to recognize people and institutions. It may also be a good place
 to acknowledge and cite software that makes your work possible.
 
-## Author Contributions
+## Author Contributions {.appendix}
 
 We strongly encourage you to include an author contributions statement briefly 
 describing what each author did.
-</div>
 ```
 
 Footnotes and references will be included in the same section, immediately beneath any custom appendices.
-
-
-
-
 
 
 

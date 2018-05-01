@@ -106,6 +106,10 @@ dt-article table th, dt-article table td {
   <h2>A format devoted to clear explanations, native to the web</h2>
     <dt-byline></dt-byline>
     <!---
+- Add links to top level summary
+- Add more footnotes/appendix to index.Rmd
+- Add r2d3 and shiny sections
+- Add diagrams sections
 - Improve appendix treatment
 - Eliminate pandoc 2 requirement
 
@@ -210,20 +214,22 @@ This content will appear in the gutter of the article.
 1 + 1
 ```</code></pre>
 <h2 id="appendices">Appendices</h2>
-<p>Appendices can be added after your article by creating a <code>&lt;div&gt;</code> with class <code>appendix</code>. For example:</p>
+<p>Appendices can be added after your article by adding the <code>.appendix</code> class to any level 1 or level 2 header. For example:</p>
 <pre class="html"><code>
-&lt;div class=&quot;appendix&quot;&gt;
-## Acknowledgments
+## Acknowledgments {.appendix}
 
 This is a place to recognize people and institutions. It may also be a good place
 to acknowledge and cite software that makes your work possible.
 
-## Author Contributions
+## Author Contributions {.appendix}
 
 We strongly encourage you to include an author contributions statement briefly 
-describing what each author did.
-&lt;/div&gt;</code></pre>
+describing what each author did.</code></pre>
 <p>Footnotes and references will be included in the same section, immediately beneath any custom appendices.</p>
+<h2 id="acknowledgments" class="appendix">Acknowledgments</h2>
+<p>This is a place to recognize people and institutions. It may also be a good place to acknowledge and cite software that makes your work possible.</p>
+<h2 id="author-contributions" class="appendix">Author Contributions</h2>
+<p>We strongly encourage you to include an author contributions statement briefly describing what each author did.</p>
 <div id="refs" class="references">
 <div id="ref-xie2015">
 <p>Xie, Yihui. 2015. <em>Dynamic Documents with R and Knitr</em>. 2nd ed. Boca Raton, Florida: Chapman; Hall/CRC. <a href="http://yihui.name/knitr/" class="uri">http://yihui.name/knitr/</a>.</p>

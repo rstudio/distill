@@ -37,10 +37,16 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
     $(this).replaceWith(dtfn);
   });
 
-  // move appendixes to dt-appendix section
-  $(".appendix").each(function(i, val) {
+  appendix = false;
+
+  $('h1.appendix').each(function(i, val) {
     appendix = true;
-    $(this).children().appendTo("dt-appendix");
+    $(this).nextUntil($('h1')).addBack().appendTo($('dt-appendix'));
+  });
+
+   $('h2.appendix').each(function(i, val) {
+    appendix = true;
+    $(this).nextUntil($('h1, h2')).addBack().appendTo($('dt-appendix'));
   });
 
   // show dt-appendix if we have appendix content
@@ -103,5 +109,4 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
       });
     }
   });
-
 });
