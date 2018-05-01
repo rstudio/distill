@@ -1,0 +1,20 @@
+---
+title: "Tables"
+description: Display data in attractive, compact formats
+---
+
+## kable
+
+```{r, echo=TRUE}
+library(distill)
+kable(head(mtcars))
+```
+
+
+## Paged tables
+
+```{r, echo=TRUE}
+library(distill)
+paged_table(mtcars)
+```
+

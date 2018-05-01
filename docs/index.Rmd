@@ -30,9 +30,10 @@ library(ggplot2)
 
 Distill is an online publication format designed for technical and academic communication. Distill articles include:
 
-- Attractive, reader-friendly typography that adapts well to mobile devices.
-- Flexible [figure layout](figures.html) options (e.g. displaying figures at a larger width than the article text).
+- Reader-friendly typography that adapts well to mobile devices.
 - Features essential to technical writing like [LaTeX math](#equations), [citations], and [footnotes].
+- Flexible [figure layout](figures.html) options (e.g. displaying figures at a larger width than the article text).
+- Attractively rendered [tables](tables.html), with optional support for pagination, filtering, and sorting.
 - Support for a wide variety of [diagramming tools](diagrams.html) for illustrating concepts.
 - A variety of ways to enhance articles with [interactive visualiztions](interactivity.html).
 
