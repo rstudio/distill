@@ -14,7 +14,6 @@ bibliography: biblio.bib
 ---
 
 <!---
-- Add links to top level summary
 - Add more footnotes/appendix to index.Rmd
 - Add r2d3 and shiny sections
 - Add diagrams sections
@@ -26,11 +25,13 @@ bibliography: biblio.bib
 library(ggplot2)
 ```
 
-Distill is an online publication format designed for technical and academic communication. Distill features:
+Distill is an online publication format designed for technical and academic communication. Distill articles include:
 
 - Attractive, reader-friendly typography that adapts well to mobile devices.
-- Flexible layout options for visualizations, including visualizations that occupy the full  width of the screen.
-- Support for features essential to technical writing like LaTeX math, footnotes, and citations.
+- Flexible [layout options](layout.html) for page elements (e.g. displaying figures at a larger width than the article text).
+- Features essential to technical writing like [LaTeX math](#equations), [citations], and [footnotes].
+- Support for a wide variety of [diagramming tools](diagrams.html) for illustrating concepts.
+- A variety of ways to enhance articles with [interactive visualiztions](interactivity.html).
 
 The Distill web framework was originally created for use in <https://distill.pub> (a machine learning journal). Distill for R Markdown enables you to easily author Distill articles from R using a fully reproducible workflow.
 
@@ -58,17 +59,21 @@ You can also create a new Distill article from the command line with:
 rmarkdown::draft("article.Rmd", "distill_article", "distill")
 ```
 
-Distill articles use `distill::distill_article` as their output format, and typically include title, description, and author/affiliation entires in their YAML front-matter:
+<div id="front-matter"></div>
+
+Distill articles use `distill::distill_article` as their output format, and typically include title, description, author/affiliation, and bibliography entires in their YAML front-matter:
 
 ```yaml
 ---
-title: "My Article"
-description: |
-  A new article created using the Distill format.
+title: "Distill for R Markdown"
+description: | 
+  A format devoted to clear explanations, native to the web
 authors:
   - JJ Allaire: https://github.com/jjallaire
+  - Rich Iannone: https://github.com/rich-iannone
   - Yihui Xie: https://github.com/yihui
 affiliations:
+  - RStudio: https://www.rstudio.com
   - RStudio: https://www.rstudio.com
   - RStudio: https://www.rstudio.com
 output: distill::distill_article
@@ -78,7 +83,7 @@ bibliography: biblio.bib
 
 The article's description and author bylines are automatically rendered as part of the title area of the document.
 
-Note the `bibliography` field is used to provide a reference to the Bibtex file where all of the sources cited in your article are defined. The next section explains how to include citations in your article.
+The `bibliography` field is used to provide a reference to the Bibtex file where all of the sources cited in your article are defined. The [citations] section describes how to include references to these sources in your article.
 
 ## Figures
 
@@ -120,7 +125,7 @@ $$
 
 ## Citations
 
-Bibtex is the supported way of making academic citations. To include citations, first create a bibtex file and refer to it from the `bibliography` field of the YAML front-matter (as illustrated above).
+Bibtex is the supported way of making academic citations. To include citations, first create a bibtex file and refer to it from the `bibliography` field of the YAML front-matter (as [illustrated above](#front-matter)).
 
 For example, your bibliography file might contain:
 
@@ -178,7 +183,6 @@ To include code that is only displayed and not evaluated specify the `eval=FALSE
     ```{r, eval=FALSE, echo=TRUE}`r ''`
     1 + 1
     ```
-
 
 ## Appendices
 

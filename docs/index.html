@@ -113,11 +113,13 @@ dt-article table th, dt-article table td {
 - Eliminate pandoc 2 requirement
 
 --->
-<p>Distill is an online publication format designed for technical and academic communication. Distill features:</p>
+<p>Distill is an online publication format designed for technical and academic communication. Distill articles include:</p>
 <ul>
 <li>Attractive, reader-friendly typography that adapts well to mobile devices.</li>
-<li>Flexible layout options for visualizations, including visualizations that occupy the full width of the screen.</li>
-<li>Support for features essential to technical writing like LaTeX math, footnotes, and citations.</li>
+<li>Flexible <a href="layout.html">layout options</a> for page elements (e.g. displaying figures at a larger width than the article text).</li>
+<li>Features essential to technical writing like <a href="#equations">LaTeX math</a>, <a href="#citations">citations</a>, and <a href="#footnotes">footnotes</a>.</li>
+<li>Support for a wide variety of <a href="diagrams.html">diagramming tools</a> for illustrating concepts.</li>
+<li>A variety of ways to enhance articles with <a href="interactivity.html">interactive visualiztions</a>.</li>
 </ul>
 <p>The Distill web framework was originally created for use in <a href="https://distill.pub" class="uri">https://distill.pub</a> (a machine learning journal). Distill for R Markdown enables you to easily author Distill articles from R using a fully reproducible workflow.</p>
 <h2 id="getting-started">Getting Started</h2>
@@ -132,23 +134,28 @@ rmarkdown::pandoc_version()</code></pre>
 <p>You can also create a new Distill article from the command line with:</p>
 <pre class="r"><code>
 rmarkdown::draft(&quot;article.Rmd&quot;, &quot;distill_article&quot;, &quot;distill&quot;)</code></pre>
-<p>Distill articles use <code>distill::distill_article</code> as their output format, and typically include title, description, and author/affiliation entires in their YAML front-matter:</p>
+<div id="front-matter">
+
+</div>
+<p>Distill articles use <code>distill::distill_article</code> as their output format, and typically include title, description, author/affiliation, and bibliography entires in their YAML front-matter:</p>
 <pre class="yaml"><code>
 ---
-title: &quot;My Article&quot;
-description: |
-  A new article created using the Distill format.
+title: &quot;Distill for R Markdown&quot;
+description: | 
+  A format devoted to clear explanations, native to the web
 authors:
   - JJ Allaire: https://github.com/jjallaire
+  - Rich Iannone: https://github.com/rich-iannone
   - Yihui Xie: https://github.com/yihui
 affiliations:
+  - RStudio: https://www.rstudio.com
   - RStudio: https://www.rstudio.com
   - RStudio: https://www.rstudio.com
 output: distill::distill_article
 bibliography: biblio.bib
 ---</code></pre>
 <p>The article’s description and author bylines are automatically rendered as part of the title area of the document.</p>
-<p>Note the <code>bibliography</code> field is used to provide a reference to the Bibtex file where all of the sources cited in your article are defined. The next section explains how to include citations in your article.</p>
+<p>The <code>bibliography</code> field is used to provide a reference to the Bibtex file where all of the sources cited in your article are defined. The <a href="#citations">citations</a> section describes how to include references to these sources in your article.</p>
 <h2 id="figures">Figures</h2>
 <p>Distill articles include a number of options for laying out figures. By default figures span the width of the main article body:</p>
 <p><img src="images/l-body-figure.png" class="l-body" /></p>
@@ -173,7 +180,7 @@ $$</code></pre>
 \sigma = \sqrt{ \frac{1}{N} \sum_{i=1}^N (x_i -\mu)^2}
 \]</span></p>
 <h2 id="citations">Citations</h2>
-<p>Bibtex is the supported way of making academic citations. To include citations, first create a bibtex file and refer to it from the <code>bibliography</code> field of the YAML front-matter (as illustrated above).</p>
+<p>Bibtex is the supported way of making academic citations. To include citations, first create a bibtex file and refer to it from the <code>bibliography</code> field of the YAML front-matter (as <a href="#front-matter">illustrated above</a>).</p>
 <p>For example, your bibliography file might contain:</p>
 <pre class="bibtex"><code>
 @Book{xie2015,
