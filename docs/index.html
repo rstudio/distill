@@ -50,22 +50,6 @@
     note = {ISBN 978-1498716963},
     url = {http://yihui.name/knitr/},
   }
-  @Manual{R-rmarkdown,
-    title = {rmarkdown: Dynamic Documents for R},
-    author = {JJ Allaire and Yihui Xie and Jonathan McPherson and Javier Luraschi and Kevin Ushey and Aron Atkins and Hadley Wickham and Joe Cheng and Winston Chang},
-    year = {2018},
-    note = {R package version 1.9},
-    url = {https://CRAN.R-project.org/package=rmarkdown},
-  }
-  @Manual{R-base,
-    title = {R: A Language and Environment for Statistical
-      Computing},
-    author = {{R Core Team}},
-    organization = {R Foundation for Statistical Computing},
-    address = {Vienna, Austria},
-    year = {2016},
-    url = {https://www.R-project.org/},
-  }
   
   
   
@@ -91,7 +75,7 @@ dt-article table th, dt-article table td {
 
       <dt-header>
     <div class="content l-page">
-      <a href="/index.html" class="logo">
+      <a href="index.html" class="logo">
         <svg viewBox="-607 419 64 64">
           <path d="M-573.4,478.9c-8,0-14.6-6.4-14.6-14.5s14.6-25.9,14.6-40.8c0,14.9,14.6,32.8,14.6,40.8S-565.4,478.9-573.4,478.9z"/>
             </svg>
@@ -133,7 +117,7 @@ dt-article table th, dt-article table td {
 <li>Support for a wide variety of <a href="diagrams.html">diagramming tools</a> for illustrating concepts.</li>
 <li>A variety of ways to enhance articles with <a href="interactivity.html">interactive visualiztions</a>.</li>
 </ul>
-<p>The Distill web framework was originally created for use in <a href="https://distill.pub" class="uri">https://distill.pub</a> (a machine learning journal). Distill for R Markdown enables you to easily author Distill articles from R using a fully reproducible workflow.</p>
+<p>The Distill web framework was originally created for use in <a href="https://distill.pub" class="uri">https://distill.pub</a> (a machine learning journal). Distill for R Markdown enables you to easily author Distill articles using a fully reproducible workflow based on literate programming<span class="citation">(Knuth <a href="#ref-knuth1984">1984</a>)</span>.</p>
 <h2 id="getting-started">Getting Started</h2>
 <p>To create an <a href="https://rmarkdown.rstudio.com">R Markdown</a> document that uses the Distill format, first install the <strong>distill</strong> R package:</p>
 <pre class="r"><code>
@@ -142,7 +126,8 @@ devtools::install_github(&quot;jjallaire/distill&quot;)</code></pre>
 <p><img src="images/new_distill_article.png" class="l-body screenshot" /></p>
 <p>You can also create a new Distill article from the command line with:</p>
 <pre class="r"><code>
-rmarkdown::draft(&quot;article.Rmd&quot;, &quot;distill_article&quot;, &quot;distill&quot;)</code></pre>
+library(rmarkdown)
+draft(&quot;article.Rmd&quot;, &quot;distill_article&quot;, package = &quot;distill&quot;)</code></pre>
 <div id="front-matter">
 
 </div>
@@ -180,6 +165,11 @@ ggplot(diamonds, aes(carat, price)) + geom_smooth() +
 <p>See the documentation on <a href="figures.html">figure layout</a> for details on additional layout options.</p>
 <h2 id="tables">Tables</h2>
 <p>There are a number of options available for HTML display of data frames within Distill articles. Here, we use the <code>paged_table()</code> function to display a page-able view of the <code>mtcars</code> dataset built in to R:</p>
+<pre><code>
+```{r, distill.layout=&quot;l-body-outset&quot;}
+library(rmarkdown)
+paged_table(mtcars)
+```</code></pre>
 <div class="distill-layout-chunk l-body-outset" data-distill-layout="l-body-outset">
 <div data-pagedtable="false">
 <script data-pagedtable-source type="application/json">
@@ -188,7 +178,7 @@ ggplot(diamonds, aes(carat, price)) + geom_smooth() +
 </div>
 </div>
 <p>Note that we used <code>distill.layout=&quot;l-body-outset&quot;</code> to cause the table to occupy slightly more horizontal space than the article text. All of available <a href="figures.html">figure layout options</a> work as expected for tables.</p>
-<p>See the documentation on <a href="tables.html">table display</a> for additional details on the various method available.</p>
+<p>See the documentation on <a href="tables.html">table display</a> for details on the various techniques available for rendering tables.</p>
 <h2 id="equations">Equations</h2>
 <p>Inline and display equations are supported via standard markdown <a href="https://www.mathjax.org/">MathJax</a> syntax. For example, the following <a href="https://en.wikibooks.org/wiki/LaTeX/Mathematics">LaTeX math</a>:</p>
 <pre><code>
@@ -218,7 +208,7 @@ $$</code></pre>
 <p>The citation is presented inline like this: <span class="citation">(Xie <a href="#ref-xie2015">2015</a>)</span> (a number that displays more information on hover). If you have an appendix, a bibliography is automatically created and populated in it.</p>
 <p>Distill chose a numerical inline citation style to improve readability of citation dense articles and because many of the benefits of longer citations are obviated by displaying more information on hover. However, we consider it good style to mention author last names if you discuss something at length and it fits into the flow well—the authors are human and it’s nice for them to have the community associate them with their work.</p>
 <h2 id="footnotes">Footnotes</h2>
-<p>Footnotes use standard Pandoc markdown notation, for example <code>^[This will become a hoverable footnote]</code>. The number of the footnote will be automatically generated.<a href="#fn1" class="footnote-ref" id="fnref1"><sup>1</sup></a></p>
+<p>Footnotes use standard Pandoc markdown notation, for example <code>^[This will become a hover-able footnote]</code>. The number of the footnote will be automatically generated.<a href="#fn1" class="footnote-ref" id="fnref1"><sup>1</sup></a></p>
 <p>You can also optionally include notes in the gutter of the article (immediately to the right of the article text). To do this create a <code>&lt;div&gt;</code> with class <code>l-gutter</code>. For example:</p>
 <div class="l-gutter">
 <p>This content will appear in the gutter of the article.</p>
@@ -228,7 +218,7 @@ $$</code></pre>
 This content will appear in the gutter of the article.
 &lt;/div&gt;</code></pre>
 <h2 id="code-blocks">Code Blocks</h2>
-<p>Syntax highlighting is provided for code chunks and markdown code blocks. Note that by default the Distill format does not display the code for chunks that are evaluated to produce output (knitr option <code>echo = FALSE</code>).</p>
+<p>Syntax highlighting is provided for knitr code chunks. Note that by default the Distill format does not display the code for chunks that are evaluated to produce output (knitr option <code>echo = FALSE</code>).</p>
 <p>To display the code that was evaluated to produce output you can set the <code>echo</code> chunk option to <code>TRUE</code>:</p>
 <pre><code>
 ```{r, echo=TRUE}
@@ -252,7 +242,12 @@ to acknowledge and cite software that makes your work possible.
 We strongly encourage you to include an author contributions statement briefly 
 describing what each author did.</code></pre>
 <p>Footnotes and references will be included in the same section, immediately beneath any custom appendices.</p>
+<h2 id="acknowledgments" class="appendix">Acknowledgments</h2>
+<p>Distill for R Markdown builds on the work of many individuals and projects. <a href="https://github.com/shancarter">Shan Carter</a>, <a href="https://github.com/ludwigschubert">Ludwig Schubert</a>, and <a href="https://github.com/colah">Christopher Olah</a> created the Distill web framework. <a href="https://github.com/jgm">John MacFarlane</a> created the Pandoc universal markup converter. <a href="https://github.com/dpvc">Davide Cervone</a> and <a href="https://github.com/zorkow">Volker Sorge</a> created the MathJax library for rendering mathmatical notation on the web. <a href="https://github.com/mbostock">Mike Bostock</a> created the D3 library for producing dynamic, interactive data visualizations for the web. We are grateful for the spirit of generousity that moved these individuals to create high-quality open source software for the benefit of all.</p>
 <div id="refs" class="references">
+<div id="ref-knuth1984">
+<p>Knuth, Donald E. 1984. “Literate Programming.” <em>The Computer Journal</em> 27 (2). British Computer Society:97–111.</p>
+</div>
 <div id="ref-xie2015">
 <p>Xie, Yihui. 2015. <em>Dynamic Documents with R and Knitr</em>. 2nd ed. Boca Raton, Florida: Chapman; Hall/CRC. <a href="http://yihui.name/knitr/" class="uri">http://yihui.name/knitr/</a>.</p>
 </div>
@@ -271,7 +266,7 @@ describing what each author did.</code></pre>
   <dt-footer>
   <div class="l-page">
     <div class="description">
-    Created using <a class="logo" style="color: rgba(255, 255, 255, 0.4)" href="https://jjallaire.github.io/distill">Distill for R Markdown</a>
+    Created using <a class="logo" style="color: rgba(255, 255, 255, 0.4)" href="index.html">Distill for R Markdown</a>
     </div>
     <div class="nav">
       <a href="index.html">Basics</a>
