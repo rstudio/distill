@@ -31,7 +31,7 @@ leaflet() %>%
   addMarkers(lng=174.768, lat=-36.852, popup="The birthplace of R")
 ```
 
-You can also use [custom layout] with htmlwidgets. For example, here we set `distill.layout="l-page"` to specify that we want the widget to span the width of the page:
+You can also use [figure layout](figures.html) options with htmlwidgets. For example, here we set `distill.layout="l-page"` to specify that we want the widget to span the width of the page:
 
 ````clike
 ```{r, distill.layout="l-page", fig.height=2}`r ''`
@@ -50,4 +50,73 @@ dygraph(ldeaths) %>%
 Note that we specify `fig.height=2` to provide a more natural height for a widget that spans the entire width of the page.
 
 To learn about available htmlwidgets see the [showcase page](http://www.htmlwidgets.org/showcase_leaflet.html) and the [htmlwidget gallery](http://gallery.htmlwidgets.org/).
+
+
+## r2d3
+
+The [r2d3](https://rstudio.github.io/r2d3/) package enables you to easily incorporate interactive graphics created using [D3.js](https://d3js.org/) in your Distill articles.
+
+For example, the following renders an interactive [Veronoi diagram](https://en.wikipedia.org/wiki/Voronoi_diagram) created using D3:
+
+````clike
+```{r, distill.layout="l-page", fig.height=6}`r ''`
+library(r2d3)
+r2d3(script = "voronoi.js")
+```
+````
+
+```{r, distill.layout="l-page", fig.height=6}
+library(r2d3)
+r2d3(script = "d3/voronoi/voronoi.js")
+```
+
+Note that we specify `distill.layout="l-page"` to indicate that we want the visualization to occupy the full width of the page.
+
+## Shiny
+
+You can use [Shiny](https://shiny.rstudio.com) components within your Distill articles to allow your readers to change the parameters underlying your analysis and see the results immediately. To use Shiny with Distill, first specify that you want to use the Shiny runtime with your document:
+
+```
+---
+title: "Interactive Distill with Shiny"
+output: distill::distill_article()
+runtime: shiny
+---
+```
+
+This turns your Distill article into an [interactive document](https://rmarkdown.rstudio.com/authoring_shiny.html), enabling you to add Shiny inputs and output directly to the document.
+
+Here's an example of a Distill article with interactive Shiny components (<https://jjallaire.shinyapps.io/distill-interactive-document/>):
+
+![](images/shiny.png){width=100% .screenshot}
+
+This was the R code used to create the interactive Shiny components:
+
+```{r eruptions, echo=TRUE, eval=FALSE}
+inputPanel(
+  selectInput("n_breaks", label = "Number of bins:",
+              choices = c(10, 20, 35, 50), selected = 20),
+  
+  sliderInput("bw_adjust", label = "Bandwidth adjustment:",
+              min = 0.2, max = 2, value = 1, step = 0.2)
+)
+
+renderPlot({
+  hist(faithful$eruptions, probability = TRUE, breaks = as.numeric(input$n_breaks),
+       xlab = "Duration (minutes)", main = "Geyser eruption duration")
+  
+  dens <- density(faithful$eruptions, adjust = input$bw_adjust)
+  lines(dens, col = "blue")
+})
+```
+
+You can see the full source code for this example at [distill-interactive-document.Rmd](https://github.com/jjallaire/distill/blob/master/inst/examples/distill-interactive-document.Rmd). 
+
+Learn more [interactive documents](https://rmarkdown.rstudio.com/authoring_shiny.html) on the R Markdown website.
+
+
+
+
+
+
 

@@ -75,14 +75,14 @@ The [r2d3](https://rstudio.github.io/r2d3) package enables you to include illust
 ```{r, distill.layout="l-screen-inset", fig.height=10}`r ''`
 library(r2d3)
 data <- jsonlite::read_json("flare.json")
-r2d3(data, d3_version = 4, script = "circlepacking.js")
+r2d3(data, script = "circlepacking.js")
 ```
 ````
 
 ```{r, distill.layout="l-screen-inset", fig.height=10}
 library(r2d3)
 data <- jsonlite::read_json("d3/circlepacking/flare.json")
-r2d3(data, d3_version = 4, script = "d3/circlepacking/circlepacking.js")
+r2d3(data, script = "d3/circlepacking/circlepacking.js")
 ```
 
 This is an illustration that has lots of detail so it benefits from being rendered at nearly full screen width (`distill.layout="l-screen-inset"`). We also specify `fig.height=10` to cause the illustration (which has a square aspect ratio) to take advantage of the additional horizontal space.

@@ -1,0 +1,12 @@
+name: interactive_document
+title: interactive_document
+username:
+account: jjallaire
+server: shinyapps.io
+hostUrl: https://api.shinyapps.io/v1
+appId: 335915
+bundleId: 1351973
+url: https://jjallaire.shinyapps.io/interactive_document/
+when: 1525282806.58926
+asMultiple: FALSE
+asStatic: FALSE
