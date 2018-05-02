@@ -116,8 +116,7 @@ distill_article <- function(centered = TRUE,
     if (is.null(options$distill.layout))
       options$distill.layout <- "l-body"
     paste0(
-      '<div class="distill-layout-chunk ', options$distill.layout,
-      '" data-distill-layout="', options$distill.layout, '">',
+      '<div class="distill-layout-chunk ', options$distill.layout, '">',
       x,
       '</div>'
     )

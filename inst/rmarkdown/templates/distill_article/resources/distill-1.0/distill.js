@@ -68,44 +68,9 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
     }
   });
 
-  // apply distill.layout to figures
+  // mark child figures created by R chunks 100% width
   $('.distill-layout-chunk').each(function(i, val) {
-
-    // propagate to img children
-    var distill_layout = $(this).attr('data-distill-layout');
-    var img = $(this).children('img');
-    if (img.length > 0 && !$(this).hasClass('side'))
-      img.addClass(distill_layout);
-
-    // set width of htmlwidgets that are immediate children to 100%
-    // (if they aren't immediate children then some other layout scheme
-    // is presumably in place)
-    var html_widget = $(this).children('.html-widget');
-    html_widget.css('width', '100%');
-  });
-
-  // propagate image layout classes to enclosing div
-  $("img[class^='l-']:only-child,img[class*=' l-']:only-child").each(function(i, img) {
-    if ($(img).parent().is('p')) {
-      var layouts = [
-        "l-body", "l-middle", "l-page",
-        "l-body-outset", "l-middle-outset", "l-page-outset",
-        "l-screen", "l-screen-inset"
-      ];
-      $.each(layouts, function(i, layout) {
-        if ($(img).hasClass(layout)) {
-          var div = $('<div class="' + layout + '"></div>');
-          if ($(img).hasClass('side')) {
-            div.addClass('side');
-            $(img).removeClass(layout);
-            $(img).removeClass('side');
-          }
-          $(img).parent().replaceWith(div);
-          div.append(img);
-          return false;
-        }
-      });
-    }
+    $(this).children('img, .html-widget').css('width', '100%');
   });
 
   // add class to pandoc style tables

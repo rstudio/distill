@@ -17,7 +17,6 @@ output:
 
 
 ```{r setup, include=FALSE}
-library(distill)
 knitr::opts_chunk$set(echo = FALSE)
 ```
 

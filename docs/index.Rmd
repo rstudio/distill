@@ -14,12 +14,11 @@ bibliography: biblio.bib
 ---
 
 <!---
-- Images aren't responsive on mobile (width: 100%?)
-- Add more footnotes/appendix to index.Rmd
-- Spell check 
 - Add r2d3 and shiny sections 
 - Add diagrams sections
 - Tables/pagedtables
+
+- larger scale visualization layouts
 - web page metadata generation/redaction
 - article metadata (DOI, citation, etc.)
 - index pages
@@ -29,6 +28,7 @@ bibliography: biblio.bib
 
 ```{r setup, include=FALSE}
 library(ggplot2)
+library(knitr)
 ```
 
 Distill is an online publication format designed for technical and academic communication. Distill articles include:
@@ -36,7 +36,7 @@ Distill is an online publication format designed for technical and academic comm
 - Reader-friendly typography that adapts well to mobile devices.
 - Features essential to technical writing like [LaTeX math](#equations), [citations], and [footnotes].
 - Flexible [figure layout](figures.html) options (e.g. displaying figures at a larger width than the article text).
-- Attractively rendered [tables](tables.html), with optional support for pagination, filtering, and sorting.
+- Attractively rendered [tables](tables.html) with optional support for pagination.
 - Support for a wide variety of [diagramming tools](diagrams.html) for illustrating concepts.
 - A variety of ways to enhance articles with [interactive visualiztions](interactivity.html).
 
@@ -52,7 +52,7 @@ devtools::install_github("jjallaire/distill")
 
 Then, use the **New R Markdown** dialog within RStudio to create a new Distill article:
 
-![](images/new_distill_article.png){.l-body .screenshot}
+![](images/new_distill_article.png){width="100%" .screenshot}
 
 You can also create a new Distill article from the command line with:
 
@@ -91,7 +91,7 @@ The `bibliography` field is used to provide a reference to the Bibtex file where
 
 Distill provides a number of options for laying out figures within your article. By default figures span the width of the main article body:
 
-![](images/l-body-figure.png){.l-body}
+![](images/l-body-figure.png){width=100%}
 
 However, some figures benefit from using additional horizontal space. In this cases the `distill.layout` chunk option enables you to specify a wide variety of other layouts. 
 
@@ -99,13 +99,16 @@ For example, if we wanted to display a figure a bit outside the bounds of the ar
 
 
     ```{r, distill.layout="l-middle", fig.width=6, fig.height=1.5}`r ''`
+    library(ggplot2)
     ggplot(diamonds, aes(carat, price)) + geom_smooth() +
       facet_grid(~ cut)
     ```
 
-![](images/l-middle-figure.png){.l-middle}
+```{r, distill.layout="l-middle"}
+include_graphics("images/l-middle-figure.png")
+```
 
-Note that when specifying an alternate `distill.layout` you should also specify an appropriate `fig.width` and `fig.height` for that layout.
+Note that when specifying an alternate `distill.layout` you should also specify an appropriate `fig.width` and `fig.height` for that layout. These values don't determine the absolute size of the figure (that's dynamic based on the layout) but they do determine the aspect ratio of the figure.
 
 See the documentation on [figure layout](figures.html) for details on additional layout options.
 

@@ -17,10 +17,3 @@ library(rmarkdown)
 paged_table(mtcars)
 ```
 
-## DT
-
-```{r, echo=TRUE}
-library(DT)
-datatable(mtcars)
-```
-
