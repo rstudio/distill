@@ -15,6 +15,14 @@ bibliography: biblio.bib
 
 <!---
 - larger scale visualization layouts
+    - iframe with npr library (pym.js) for sizing (generic) (check with shinyapps.io)
+    - ggplot2 theme for distill
+    - distillVisualization() top level shinyApp equivalent with distill bootstrap theme 
+       - use the less compiler for this
+    "full bleed"
+    - crosstalk compatibility?
+        - distillRow/distillRow
+
 - web page metadata generation/redaction
 - article metadata (DOI, citation, etc.)
 - index pages (consider using iframes for distributed content authoring)
@@ -33,9 +41,9 @@ Distill is an online publication format designed for technical and academic comm
 - Flexible [figure layout](figures.html) options (e.g. displaying figures at a larger width than the article text).
 - Attractively rendered [tables](tables.html) with optional support for pagination.
 - Support for a wide variety of [diagramming tools](diagrams.html) for illustrating concepts.
-- A variety of ways to enhance articles with [interactive visualiztions](interactivity.html).
+- A variety of ways to enhance articles with [interactive visualizations](interactivity.html).
 
-The Distill web framework was originally created for use in <https://distill.pub> (a machine learning journal). Distill for R Markdown enables you to easily author Distill articles using a fully reproducible workflow based on literate programming[@knuth1984].
+The Distill web framework was originally created for use in <https://distill.pub> (a machine learning journal). Distill for [R Markdown](https://rmarkdown.rstudio.com/) enables you to easily author Distill articles using a fully reproducible workflow based on literate programming[@knuth1984].
 
 ## Getting Started
 

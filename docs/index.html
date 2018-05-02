@@ -100,14 +100,19 @@ dt-article table th, dt-article table td {
   <h2>A format devoted to clear explanations, native to the web</h2>
     <dt-byline></dt-byline>
     <!---
-- Add r2d3 and shiny sections 
-
 - larger scale visualization layouts
+    - iframe with npr library (pym.js) for sizing (generic) (check with shinyapps.io)
+    - ggplot2 theme for distill
+    - distillVisualization() top level shinyApp equivalent with distill bootstrap theme 
+       - use the less compiler for this
+    "full bleed"
+    - crosstalk compatibility?
+        - distillRow/distillRow
+
 - web page metadata generation/redaction
 - article metadata (DOI, citation, etc.)
 - index pages (consider using iframes for distributed content authoring)
 - site generation
-
 --->
 <p>Distill is an online publication format designed for technical and academic communication. Distill articles include:</p>
 <ul>
@@ -116,9 +121,9 @@ dt-article table th, dt-article table td {
 <li>Flexible <a href="figures.html">figure layout</a> options (e.g. displaying figures at a larger width than the article text).</li>
 <li>Attractively rendered <a href="tables.html">tables</a> with optional support for pagination.</li>
 <li>Support for a wide variety of <a href="diagrams.html">diagramming tools</a> for illustrating concepts.</li>
-<li>A variety of ways to enhance articles with <a href="interactivity.html">interactive visualiztions</a>.</li>
+<li>A variety of ways to enhance articles with <a href="interactivity.html">interactive visualizations</a>.</li>
 </ul>
-<p>The Distill web framework was originally created for use in <a href="https://distill.pub" class="uri">https://distill.pub</a> (a machine learning journal). Distill for R Markdown enables you to easily author Distill articles using a fully reproducible workflow based on literate programming<span class="citation">(Knuth <a href="#ref-knuth1984">1984</a>)</span>.</p>
+<p>The Distill web framework was originally created for use in <a href="https://distill.pub" class="uri">https://distill.pub</a> (a machine learning journal). Distill for <a href="https://rmarkdown.rstudio.com/">R Markdown</a> enables you to easily author Distill articles using a fully reproducible workflow based on literate programming<span class="citation">(Knuth <a href="#ref-knuth1984">1984</a>)</span>.</p>
 <h2 id="getting-started">Getting Started</h2>
 <p>To create an <a href="https://rmarkdown.rstudio.com">R Markdown</a> document that uses the Distill format, first install the <strong>distill</strong> R package:</p>
 <pre class="r"><code>
