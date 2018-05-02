@@ -14,6 +14,9 @@ bibliography: biblio.bib
 ---
 
 <!---
+
+- Cite license and creative commons in the footer.
+
 - larger scale visualization layouts
     - iframe with npr library (pym.js) for sizing (generic) (check with shinyapps.io)
     - ggplot2 theme for distill
