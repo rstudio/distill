@@ -131,7 +131,7 @@ See the documentation on [table display](tables.html) for details on the various
 
 ## Diagrams
 
-There are many options for including diagrams within Distill articles, including support for [GraphViz](https://www.graphviz.org/), [D3.js](https://d3js.org/), and SVG files exported from illustration programs like [Inkscape](https://inkscape.org/en/).
+There are many options for including diagrams within Distill articles, including support for [GraphViz](https://www.graphviz.org/), [D3.js](https://d3js.org/), and [SVG](https://en.wikipedia.org/wiki/Scalable_Vector_Graphics) files exported from illustration programs like [Inkscape](https://inkscape.org/en/).
 
 For example, here we use the [DiagrammerR](http://rich-iannone.github.io/DiagrammeR/) package to include a GraphViz illustration:
 
