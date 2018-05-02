@@ -15,10 +15,12 @@ There are a number of options available for displaying tables within Distill art
 
 The `knitr::kable()` function will render an R data frame as an HTML table. For example:
 
-    ```{r, distill.layout="l-body-outset"}`r ''`
-    library(knitr)
-    kable(head(mtcars))
-    ```
+````clike
+```{r, distill.layout="l-body-outset"}`r ''`
+library(knitr)
+kable(head(mtcars))
+```
+````
 
 
 ```{r, distill.layout="l-body-outset"}
@@ -32,10 +34,12 @@ Often times tables will require more width for their display than the standard D
 
 If a data frame has a large number of rows it might not be practical to display it fully inline. In these situations you can use the `rmarkdown::paged_table()` function to create a table that allows pagination of rows and columns. For example:
 
-    ```{r, distill.layout="l-body-outset"}`r ''`
-    library(rmarkdown)
-    paged_table(mtcars)
-    ```
+````clike
+```{r, distill.layout="l-body-outset"}`r ''`
+library(rmarkdown)
+paged_table(mtcars)
+```
+````
 
 ```{r, distill.layout="l-body-outset"}
 library(rmarkdown)
@@ -44,10 +48,12 @@ paged_table(mtcars)
 
 There are a number of options available that control the display of paged tables. By default, 10 rows at a time are displayed but you can use the `rows.print` option to increase this. For example:
 
-    ```{r, distill.layout="l-body-outset"}`r ''`
-    library(rmarkdown)
-    paged_table(mtcars, options = list(rows.print = 15))
-    ```
+````clike
+```{r, distill.layout="l-body-outset"}`r ''`
+library(rmarkdown)
+paged_table(mtcars, options = list(rows.print = 15))
+```
+````
 
 ```{r, distill.layout="l-body-outset"}
 library(rmarkdown)

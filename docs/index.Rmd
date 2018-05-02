@@ -15,7 +15,7 @@ bibliography: biblio.bib
 
 <!---
 - Add r2d3 and shiny sections 
-- Add diagrams sections
+- Markdown code block jank on initial render 
 
 - larger scale visualization layouts
 - web page metadata generation/redaction
@@ -64,7 +64,7 @@ draft("article.Rmd", "distill_article", package = "distill")
 
 Distill articles use `distill::distill_article` as their output format, and typically include title, description, author/affiliation, and bibliography entries in their YAML front-matter:
 
-```yaml
+```markup
 ---
 title: "Distill for R Markdown"
 description: | 
@@ -96,12 +96,13 @@ However, some figures benefit from using additional horizontal space. In this ca
 
 For example, if we wanted to display a figure a bit outside the bounds of the article text, we could specify the `l-middle` layout via the `distill.layout` chunk option:
 
-
-    ```{r, distill.layout="l-middle", fig.width=6, fig.height=1.5}`r ''`
-    library(ggplot2)
-    ggplot(diamonds, aes(carat, price)) + geom_smooth() +
-      facet_grid(~ cut)
-    ```
+````clike
+```{r, distill.layout="l-middle", fig.width=6, fig.height=1.5}`r ''`
+library(ggplot2)
+ggplot(diamonds, aes(carat, price)) + geom_smooth() +
+  facet_grid(~ cut)
+```
+````
 
 ```{r, distill.layout="l-middle"}
 include_graphics("images/l-middle-figure.png")
@@ -115,10 +116,12 @@ See the documentation on [figure layout](figures.html) for details on additional
 
 There are a number of options available for HTML display of data frames within Distill articles. Here, we use the `paged_table()` function to display a page-able view of the `mtcars` dataset built in to R:
 
-    ```{r, distill.layout="l-body-outset"}`r ''`
-    library(rmarkdown)
-    paged_table(mtcars)
-    ```
+````clike
+```{r, distill.layout="l-body-outset"}`r ''`
+library(rmarkdown)
+paged_table(mtcars)
+```
+````
 
 ```{r, distill.layout="l-body-outset"}
 library(rmarkdown)
@@ -135,10 +138,12 @@ There are many options for including diagrams within Distill articles, including
 
 For example, here we use the [DiagrammerR](http://rich-iannone.github.io/DiagrammeR/) package to include a GraphViz illustration:
 
-    ```{r, distill.layout="l-page", fig.height=2}`r ''`
-    library(DiagrammeR)
-    grViz("images/graph.gv")
-    ```
+````clike
+```{r, distill.layout="l-page", fig.height=2}`r ''`
+library(DiagrammeR)
+grViz("images/graph.gv")
+```
+````
 
 ```{r, distill.layout="l-page", fig.height=2}
 library(DiagrammeR)
@@ -217,15 +222,19 @@ Syntax highlighting is provided for knitr code chunks. Note that by default the 
 
 To display the code that was evaluated to produce output you can set the `echo` chunk option to `TRUE`:
 
-    ```{r, echo=TRUE}`r ''`
-    1 + 1
-    ```
+````clike
+```{r, echo=TRUE}`r ''`
+1 + 1
+```
+````
 
 To include code that is only displayed and not evaluated specify the `eval=FALSE` option:
 
-    ```{r, eval=FALSE, echo=TRUE}`r ''`
-    1 + 1
-    ```
+````clike
+```{r, eval=FALSE, echo=TRUE}`r ''`
+1 + 1
+```
+````
 
 ## Appendices
 

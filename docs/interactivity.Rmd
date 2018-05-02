@@ -15,12 +15,14 @@ There are a variety of ways to add interactivity to your Distill articles, inclu
 
 Including [htmlwidgets](http://www.htmlwidgets.org) within a Distill article is as easy as including an R plot. For example, the following code embeds a Leaflet map:
 
-    ```{r}`r ''`
-    library(leaflet)
-    leaflet() %>%
-      addTiles() %>%  # Add default OpenStreetMap map tiles
-      addMarkers(lng=174.768, lat=-36.852, popup="The birthplace of R")
-    ```
+````clike
+```{r}`r ''`
+library(leaflet)
+leaflet() %>%
+  addTiles() %>%  # Add default OpenStreetMap map tiles
+  addMarkers(lng=174.768, lat=-36.852, popup="The birthplace of R")
+```
+````
 
 ```{r}
 library(leaflet)
@@ -31,11 +33,13 @@ leaflet() %>%
 
 You can also use [custom layout] with htmlwidgets. For example, here we set `distill.layout="l-page"` to specify that we want the widget to span the width of the page:
 
-    ```{r, distill.layout="l-page", fig.height=2}`r ''`
-    library(dygraphs)
-    dygraph(ldeaths) %>% 
-      dyRangeSelector()
-    ```
+````clike
+```{r, distill.layout="l-page", fig.height=2}`r ''`
+library(dygraphs)
+dygraph(ldeaths) %>% 
+  dyRangeSelector()
+```
+````
 
 ```{r, distill.layout="l-page", fig.height=2}
 library(dygraphs)

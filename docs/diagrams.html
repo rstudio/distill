@@ -81,7 +81,7 @@ dt-article table th, dt-article table td {
 </ul>
 <h2 id="diagrammer">DiagrammeR</h2>
 <p>You can use the <a href="http://rich-iannone.github.io/DiagrammeR/">DiagrammerR</a> package to include <a href="https://www.graphviz.org/">GraphViz</a> visualizations within a Distill article. For example, if you have a GraphViz file <a href="https://github.com/jjallaire/distill/blob/master/docs/images/graph.gv">graph.gv</a>, you can include it with the following code:</p>
-<pre><code>
+<pre class="clike"><code>
 ```{r, distill.layout=&quot;l-page&quot;, fig.height=2}
 library(DiagrammeR)
 grViz(&quot;images/graph.gv&quot;)
@@ -92,7 +92,7 @@ grViz(&quot;images/graph.gv&quot;)
 </div>
 <p>Note that since this diagram is much wider than it is tall, we specify <code>distill.layout=&quot;l-page&quot;</code> to provide adequate horizontal layout space and <code>fig.height=2</code> to ensure the correct aspect ratio. See the documentation on <a href="figures.html">figure layout</a> for details on all available layout options.</p>
 <p>DiagrammeR also supports diagrams created with <a href="https://mermaidjs.github.io/">Mermaid</a>. For example:</p>
-<pre><code>
+<pre class="clike"><code>
 ```{r}
 library(DiagrammeR)
 mermaid(diagram = &#39;
@@ -114,8 +114,8 @@ sequenceDiagram
 <script type="application/json" data-for="htmlwidget-9fe14766c3ab345b5cb0">{"x":{"diagram":"\nsequenceDiagram\n  participant Alice\n  participant Bob\n  Alice->>John: Hello John, how are you?\n  loop Healthcheck\n      John->>John: Fight against hypochondria\n  end\n  Note right of John: Rational thoughts<br/>prevail...\n  John-->>Alice: Great!\n  John->>Bob: How about you?\n  Bob-->>John: Jolly good!\n"},"evals":[],"jsHooks":[]}</script>
 </div>
 <h2 id="r2d3">r2d3</h2>
-<p>The <a href="https://rstudio.github.io/r2d3">r2d3</a> package enables you to include illustrations created using D3. For example, the following code renders <a href="https://github.com/jjallaire/distill/blob/master/docs/d3/circlepacking/flare.json">flare.json</a> using the <a href="https://github.com/jjallaire/distill/blob/master/docs/d3/circlepacking/circlepacking.js">circlepacking.js</a> script:</p>
-<pre><code>
+<p>The <a href="https://rstudio.github.io/r2d3">r2d3</a> package enables you to include illustrations created using <a href="https://d3js.org/">D3.js</a>. For example, the following code renders <a href="https://github.com/jjallaire/distill/blob/master/docs/d3/circlepacking/flare.json">flare.json</a> using the <a href="https://github.com/jjallaire/distill/blob/master/docs/d3/circlepacking/circlepacking.js">circlepacking.js</a> script:</p>
+<pre class="clike"><code>
 ```{r, distill.layout=&quot;l-screen-inset&quot;, fig.height=10}
 library(r2d3)
 data &lt;- jsonlite::read_json(&quot;flare.json&quot;)

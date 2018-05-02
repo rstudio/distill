@@ -28,11 +28,13 @@ For elements you want to display a little larger, try these:
 
 For example, here the `l-middle` layout is selected using the `distill.layout` chunk option:
 
-    ```{r, distill.layout="l-middle", fig.width=6, fig.height=1.5}`r ''`
-    library(ggplot2)
-    ggplot(diamonds, aes(carat, price)) + geom_smooth() +
-      facet_grid(~ cut)
-    ```
+````clike
+```{r, distill.layout="l-middle", fig.width=6, fig.height=1.5}`r ''`
+library(ggplot2)
+ggplot(diamonds, aes(carat, price)) + geom_smooth() +
+  facet_grid(~ cut)
+```
+````
     
 ```{r, distill.layout="l-middle"}
 include_graphics("images/l-middle-figure.png")
@@ -66,11 +68,13 @@ They are all floated to the right and anchored to the right-hand edge of the pos
 
 Here's an example of floating a figure to the right using the `distill.layout` option:
 
-    ```{r, distill.layout="l-page side", fig.width=5, fig.height=2}`r ''`
-    ggplot(mtcars, aes(wt, hp)) + geom_point() + 
-      geom_smooth(method = 'lm') +
-      facet_grid(~ gear)
-    ```
+````clike
+```{r, distill.layout="l-page side", fig.width=5, fig.height=2}`r ''`
+ggplot(mtcars, aes(wt, hp)) + geom_point() + 
+  geom_smooth(method = 'lm') +
+  facet_grid(~ gear)
+```
+````
 
 ```{r, distill.layout="l-page side"}
 include_graphics("images/l-page-side-figure.png")
@@ -96,11 +100,12 @@ To include a static images that adheres to a Disill layout, wrap it in a `<div>`
 
 Alternatively, you can use the `knitr::include_graphics()` function within an R code chunk:
 
-    ```{r, distill.layout="l-middle"}`r ''`
-    library(knitr)
-    include_graphics("images/figure.png")
-    ```
-
+````clike
+```{r, distill.layout="l-middle"}`r ''`
+library(knitr)
+include_graphics("images/figure.png")
+```
+````
 
 
 
