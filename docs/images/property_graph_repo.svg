@@ -1,0 +1,326 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="772px" height="386px" viewBox="0 0 772 386" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" style="background: #FFFFFF;">
+    <!-- Generator: Sketch 48.2 (47327) - http://www.bohemiancoding.com/sketch -->
+    <title>property_graph_chp_01</title>
+    <desc>Created with Sketch.</desc>
+    <defs></defs>
+    <g id="Figures" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <text id="Property-Graph" font-family="Helvetica" font-size="16" font-weight="normal" fill="#4A4A4A">
+            <tspan x="648.617188" y="347">Property Graph</tspan>
+        </text>
+        <text id="A-simple-graph-model" font-family="Helvetica" font-size="14" font-weight="normal" fill="#4A4A4A">
+            <tspan x="469.311523" y="367">A simple graph model of a software repository.</tspan>
+        </text>
+        <g id="node-copy-3" transform="translate(657.000000, 150.000000)">
+            <circle id="Oval-2-Copy-4" stroke="#B3B3B3" stroke-width="3" fill="#F0F8FF" cx="43" cy="43" r="43"></circle>
+            <text id="Repository" font-family="Menlo-Regular, Menlo" font-size="12" font-weight="normal" fill="#4A4A4A">
+                <tspan x="6.87695312" y="48">Repository</tspan>
+            </text>
+        </g>
+        <g id="node-copy-2" transform="translate(47.000000, 150.000000)">
+            <circle id="Oval-2-Copy-4" stroke="#B3B3B3" stroke-width="3" fill="#F0F8FF" cx="43" cy="43" r="43"></circle>
+            <text id="User" font-family="Menlo-Regular, Menlo" font-size="12" font-weight="normal" fill="#4A4A4A">
+                <tspan x="28.5507812" y="48">User</tspan>
+            </text>
+        </g>
+        <g id="node-copy-9" transform="translate(47.000000, 12.000000)">
+            <circle id="Oval-2-Copy-4" stroke="#B3B3B3" stroke-width="3" fill="#F0F8FF" cx="43" cy="43" r="43"></circle>
+            <text id="User" font-family="Menlo-Regular, Menlo" font-size="12" font-weight="normal" fill="#4A4A4A">
+                <tspan x="28.5507812" y="48">User</tspan>
+            </text>
+        </g>
+        <g id="node-copy-10" transform="translate(481.000000, 48.000000)">
+            <circle id="Oval-2-Copy-4" stroke="#B3B3B3" stroke-width="3" fill="#F0F8FF" cx="43" cy="43" r="43"></circle>
+            <text id="User" font-family="Menlo-Regular, Menlo" font-size="12" font-weight="normal" fill="#4A4A4A">
+                <tspan x="28.5507812" y="48">User</tspan>
+            </text>
+        </g>
+        <g id="node-copy-6" transform="translate(439.000000, 243.000000)">
+            <circle id="Oval-2-Copy-4" stroke="#B3B3B3" stroke-width="3" fill="#F0F8FF" cx="43" cy="43" r="43"></circle>
+            <text id="Issue" font-family="Menlo-Regular, Menlo" font-size="12" font-weight="normal" fill="#4A4A4A">
+                <tspan x="24.9384766" y="48">Issue</tspan>
+            </text>
+        </g>
+        <g id="node-copy-8" transform="translate(265.000000, 56.000000)">
+            <circle id="Oval-2-Copy-4" stroke="#B3B3B3" stroke-width="3" fill="#F0F8FF" cx="43" cy="43" r="43"></circle>
+            <text id="Commit" font-family="Menlo-Regular, Menlo" font-size="12" font-weight="normal" fill="#4A4A4A">
+                <tspan x="21.3261719" y="48">Commit</tspan>
+            </text>
+        </g>
+        <g id="node-copy-7" transform="translate(265.000000, 243.000000)">
+            <circle id="Oval-2-Copy-4" stroke="#B3B3B3" stroke-width="3" fill="#F0F8FF" cx="43" cy="43" r="43"></circle>
+            <text id="Comment" font-family="Menlo-Regular, Menlo" font-size="12" font-weight="normal" fill="#4A4A4A">
+                <tspan x="17.7138672" y="48">Comment</tspan>
+            </text>
+        </g>
+        <g id="node-copy-5" transform="translate(654.000000, 12.000000)">
+            <circle id="Oval-2-Copy-4" stroke="#B3B3B3" stroke-width="3" fill="#F0F8FF" cx="46" cy="43" r="43"></circle>
+            <text id="Organization" font-family="Menlo-Regular, Menlo" font-size="12" font-weight="normal" letter-spacing="-0.699999988" fill="#4A4A4A">
+                <tspan x="7.00234368" y="48">Organizatio</tspan>
+                <tspan x="78.7730469" y="48">n</tspan>
+            </text>
+        </g>
+        <g id="node-copy-4" transform="translate(47.000000, 288.000000)">
+            <circle id="Oval-2-Copy-4" stroke="#B3B3B3" stroke-width="3" fill="#F0F8FF" cx="43" cy="43" r="43"></circle>
+            <text id="Gist" font-family="Menlo-Regular, Menlo" font-size="12" font-weight="normal" fill="#4A4A4A">
+                <tspan x="28.5507812" y="48">Gist</tspan>
+            </text>
+        </g>
+        <g id="Wireframe-Line-01" transform="translate(352.000000, 276.000000)" stroke="#666666">
+            <g>
+                <polyline id="arrowhead" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" points="78 2 86 10 78 18"></polyline>
+                <path d="M85,10 L0,10" id="Line" stroke-width="2"></path>
+            </g>
+        </g>
+        <g id="Wireframe-Line-01" transform="translate(119.000000, 216.000000)" stroke="#666666">
+            <g>
+                <polyline id="arrowhead" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" points="543 2 551 10 543 18"></polyline>
+                <path d="M550,10 L0,10" id="Line" stroke-width="2"></path>
+            </g>
+        </g>
+        <g id="Wireframe-Line-01" transform="translate(90.000000, 261.500000) rotate(-270.000000) translate(-90.000000, -261.500000) translate(65.500000, 251.500000)" stroke="#666666">
+            <g>
+                <polyline id="arrowhead" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" points="41 2 49 10 41 18"></polyline>
+                <path d="M48,10 L0,10" id="Line" stroke-width="2"></path>
+            </g>
+        </g>
+        <g id="Wireframe-Line-01" transform="translate(700.000000, 123.500000) rotate(-270.000000) translate(-700.000000, -123.500000) translate(675.500000, 113.500000)" stroke="#666666">
+            <g>
+                <polyline id="arrowhead" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" points="41 2 49 10 41 18"></polyline>
+                <path d="M48,10 L0,10" id="Line" stroke-width="2"></path>
+            </g>
+        </g>
+        <g id="Wireframe-Line-01" transform="translate(90.000000, 124.500000) rotate(-90.000000) translate(-90.000000, -124.500000) translate(65.500000, 114.500000)" stroke="#666666">
+            <g>
+                <polyline id="arrowhead" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" points="41 2 49 10 41 18"></polyline>
+                <path d="M48,10 L0,10" id="Line" stroke-width="2"></path>
+            </g>
+        </g>
+        <g id="Wireframe-Line-01" transform="translate(130.000000, 200.000000)" stroke="#666666">
+            <g>
+                <polyline id="arrowhead" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" points="521 2 529 10 521 18"></polyline>
+                <path d="M528,10 L0,10" id="Line" stroke-width="2"></path>
+            </g>
+        </g>
+        <g id="Wireframe-Line-01" transform="translate(133.000000, 184.000000)" stroke="#666666">
+            <g>
+                <polyline id="arrowhead" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" points="514 2 522 10 514 18"></polyline>
+                <path d="M521,10 L0,10" id="Line" stroke-width="2"></path>
+            </g>
+        </g>
+        <g id="Wireframe-Line-01" transform="translate(129.000000, 167.000000)" stroke="#666666">
+            <g>
+                <polyline id="arrowhead" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" points="523 2 531 10 523 18"></polyline>
+                <path d="M530,10 L0,10" id="Line" stroke-width="2"></path>
+            </g>
+        </g>
+        <g id="Wireframe-Line-01" transform="translate(119.000000, 151.000000)" stroke="#666666">
+            <g>
+                <polyline id="arrowhead" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" points="543 2 551 10 543 18"></polyline>
+                <path d="M550,10 L0,10" id="Line" stroke-width="2"></path>
+            </g>
+        </g>
+        <g id="Wireframe-Line-01" transform="translate(556.000000, 53.000000)" stroke="#666666">
+            <g>
+                <polyline id="arrowhead" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" points="93 2 101 10 93 18"></polyline>
+                <path d="M100,10 L0,10" id="Line" stroke-width="2"></path>
+            </g>
+        </g>
+        <g id="Group-3-Copy-4" transform="translate(408.000000, 216.000000)">
+            <rect id="Rectangle" fill="#FFFFFF" x="0" y="0" width="79" height="20"></rect>
+            <text id="downloaded" font-family="Menlo-Regular, Menlo" font-size="12" font-weight="normal" fill="#4A4A4A">
+                <tspan x="3.37695312" y="14">downloaded</tspan>
+            </text>
+        </g>
+        <g id="Wireframe-Line-04" transform="translate(161.500000, 244.000000) scale(-1, 1) rotate(-270.000000) translate(-161.500000, -244.000000) translate(148.500000, 194.500000)" stroke="#666666">
+            <g id="bend-line-07">
+                <path d="M0,88 C0,88 0,86.2022898 0,83.9901533 L0,4.00984669 C0,1.79526951 1.79775299,0 4.00328408,0 L13.9701493,0" stroke-width="2" transform="translate(6.985075, 44.000000) scale(-1, 1) translate(-6.985075, -44.000000) "></path>
+            </g>
+        </g>
+        <g id="Group-3-Copy" transform="translate(214.000000, 167.000000)">
+            <rect id="Rectangle" fill="#FFFFFF" x="0" y="0" width="58" height="20"></rect>
+            <text id="deleted" font-family="Menlo-Regular, Menlo" font-size="12" font-weight="normal" fill="#4A4A4A">
+                <tspan x="3.21386719" y="14">deleted</tspan>
+            </text>
+        </g>
+        <g id="Group-3-Copy-2" transform="translate(277.000000, 184.000000)">
+            <rect id="Rectangle" fill="#FFFFFF" x="0" y="0" width="53" height="20"></rect>
+            <text id="forked" font-family="Menlo-Regular, Menlo" font-size="12" font-weight="normal" fill="#4A4A4A">
+                <tspan x="4.82617188" y="14">forked</tspan>
+            </text>
+        </g>
+        <g id="Group-3" transform="translate(151.000000, 151.000000)">
+            <rect id="Rectangle" fill="#FFFFFF" x="0" y="0" width="57" height="20"></rect>
+            <text id="created" font-family="Menlo-Regular, Menlo" font-size="12" font-weight="normal" fill="#4A4A4A">
+                <tspan x="3.21386719" y="14">created</tspan>
+            </text>
+        </g>
+        <g id="Wireframe-Line-01" transform="translate(129.000000, 31.000000)" stroke="#666666">
+            <g>
+                <polyline id="arrowhead" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" points="522 2 530 10 522 18"></polyline>
+                <path d="M529,10 L0,10" id="Line" stroke-width="2"></path>
+            </g>
+        </g>
+        <g id="Group-3-Copy-3" transform="translate(337.000000, 200.000000)">
+            <rect id="Rectangle" fill="#FFFFFF" x="0" y="0" width="59" height="20"></rect>
+            <text id="watched" font-family="Menlo-Regular, Menlo" font-size="12" font-weight="normal" fill="#4A4A4A">
+                <tspan x="4.21386719" y="14">watched</tspan>
+            </text>
+        </g>
+        <g id="Group-3-Copy-7" transform="translate(337.000000, 200.000000)">
+            <rect id="Rectangle" fill="#FFFFFF" x="0" y="0" width="59" height="20"></rect>
+            <text id="watched" font-family="Menlo-Regular, Menlo" font-size="12" font-weight="normal" fill="#4A4A4A">
+                <tspan x="4.21386719" y="14">watched</tspan>
+            </text>
+        </g>
+        <g id="Group-3-Copy-9" transform="translate(379.000000, 276.000000)">
+            <rect id="Rectangle" fill="#FFFFFF" x="0.5" y="0" width="22" height="20"></rect>
+            <text id="on" font-family="Menlo-Regular, Menlo" font-size="12" font-weight="normal" fill="#4A4A4A">
+                <tspan x="4.27539062" y="14">on</tspan>
+            </text>
+        </g>
+        <g id="Group-3-Copy-13" transform="translate(379.000000, 276.000000)">
+            <rect id="Rectangle" fill="#FFFFFF" x="0.5" y="0" width="22" height="20"></rect>
+            <text id="on" font-family="Menlo-Regular, Menlo" font-size="12" font-weight="normal" fill="#4A4A4A">
+                <tspan x="4.27539062" y="14">on</tspan>
+            </text>
+        </g>
+        <g id="Wireframe-Line-04" transform="translate(194.000000, 245.000000)" stroke="#666666">
+            <g>
+                <path d="M0,42 L27.1904372,42 C29.3982136,42 31.1879699,40.2087482 31.1879699,37.9918888 L31.1879699,4.00811116 C31.1879699,1.79449249 32.9884103,0 35.1975788,0 L68,0" id="bend-line-07" stroke-width="2" transform="translate(34.000000, 21.000000) scale(-1, 1) translate(-34.000000, -21.000000) "></path>
+                <polyline id="Path-2" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" points="61 34 69 42 61 50"></polyline>
+            </g>
+        </g>
+        <g id="Group-3-Copy-8" transform="translate(151.000000, 235.000000)">
+            <rect id="Rectangle" fill="#FFFFFF" x="0" y="0" width="57" height="20"></rect>
+            <text id="created" font-family="Menlo-Regular, Menlo" font-size="12" font-weight="normal" fill="#4A4A4A">
+                <tspan x="3.21386719" y="14">created</tspan>
+            </text>
+        </g>
+        <g id="Wireframe-Line-04" transform="translate(161.500000, 142.000000) scale(-1, -1) rotate(-270.000000) translate(-161.500000, -142.000000) translate(148.500000, 92.500000)" stroke="#666666">
+            <g id="bend-line-07">
+                <path d="M0,88 C0,88 0,86.2022898 0,83.9901533 L0,4.00984669 C0,1.79526951 1.79775299,0 4.00328408,0 L13.9701493,0" stroke-width="2" transform="translate(6.985075, 44.000000) scale(-1, 1) translate(-6.985075, -44.000000) "></path>
+            </g>
+        </g>
+        <g id="Wireframe-Line-04" transform="translate(197.000000, 331.000000) rotate(-270.000000) translate(-197.000000, -331.000000) translate(184.000000, 250.000000)" stroke="#666666">
+            <g id="bend-line-07">
+                <path d="M0,144 C0,144 0,142.205373 0,139.998322 L0,4.00167775 C0,1.79161216 1.79775299,0 4.00328408,0 L13.9701493,0" stroke-width="2" transform="translate(6.985075, 72.000000) scale(-1, 1) translate(-6.985075, -72.000000) "></path>
+            </g>
+        </g>
+        <g id="Wireframe-Line-04" transform="translate(45.000000, 135.500000) scale(-1, -1) rotate(-360.000000) translate(-45.000000, -135.500000) translate(32.000000, 109.000000)" stroke="#666666">
+            <g id="bend-line-07">
+                <path d="M0,47.1111111 C0,47.1111111 0,45.3218274 0,43.1147669 L0,3.99634418 C0,1.78922423 1.79775299,0 4.00328408,0 L13.9701493,0" stroke-width="2" transform="translate(6.985075, 23.555556) scale(-1, 1) translate(-6.985075, -23.555556) "></path>
+            </g>
+        </g>
+        <g id="Wireframe-Line-04" transform="translate(45.000000, 112.500000) scale(1, -1) rotate(-180.000000) translate(-45.000000, -112.500000) translate(32.000000, 86.000000)" stroke="#666666">
+            <g id="bend-line-07">
+                <path d="M0,47.1111111 C0,47.1111111 0,45.3218274 0,43.1147669 L0,3.99634418 C0,1.78922423 1.79775299,0 4.00328408,0 L13.9701493,0" stroke-width="2" transform="translate(6.985075, 23.555556) scale(-1, 1) translate(-6.985075, -23.555556) "></path>
+            </g>
+        </g>
+        <g id="Wireframe-Line-04" transform="translate(630.500000, 142.000000) scale(1, -1) rotate(-270.000000) translate(-630.500000, -142.000000) translate(617.500000, 92.500000)" stroke="#666666">
+            <g id="bend-line-07">
+                <path d="M0,88 C0,88 0,86.2022898 0,83.9901533 L0,4.00984669 C0,1.79526951 1.79775299,0 4.00328408,0 L13.9701493,0" stroke-width="2" transform="translate(6.985075, 44.000000) scale(-1, 1) translate(-6.985075, -44.000000) "></path>
+            </g>
+        </g>
+        <g id="Wireframe-Line-04" transform="translate(228.500000, 116.000000) scale(1, -1) translate(-228.500000, -116.000000) translate(194.000000, 91.000000)" stroke="#666666">
+            <g>
+                <path d="M0,42 L27.1904372,42 C29.3982136,42 31.1879699,40.2087482 31.1879699,37.9918888 L31.1879699,4.00811116 C31.1879699,1.79449249 32.9884103,0 35.1975788,0 L68,0" id="bend-line-07" stroke-width="2" transform="translate(34.000000, 21.000000) scale(-1, 1) translate(-34.000000, -21.000000) "></path>
+                <polyline id="Path-2" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" points="61 34 69 42 61 50"></polyline>
+            </g>
+        </g>
+        <g id="Wireframe-Line-04-Copy-4" transform="translate(473.000000, 120.000000) scale(-1, -1) translate(-473.000000, -120.000000) translate(352.000000, 99.000000)" stroke="#666666" stroke-width="2">
+            <g id="Wireframe-Line-04">
+                <path d="M0,42 L47.1355879,42 L106.997947,42 C109.204067,42 110.992481,40.2087482 110.992481,37.9918888 L110.992481,4.00811116 C110.992481,1.79449249 112.782225,0 114.984808,0 L242,0" id="bend-line-07" transform="translate(121.000000, 21.000000) scale(-1, 1) translate(-121.000000, -21.000000) "></path>
+            </g>
+        </g>
+        <g id="Wireframe-Line-04" transform="translate(602.000000, 282.500000) rotate(-270.000000) translate(-602.000000, -282.500000) translate(556.500000, 184.500000)" stroke="#666666">
+            <g id="bend-line-07">
+                <path d="M0,174.222222 C0,174.222222 0,172.441134 0,170.214165 L0,4.00805736 C0,1.7944684 1.79820608,0 4.00132581,0 L48.8955224,0" stroke-width="2" transform="translate(24.447761, 87.111111) scale(-1, 1) translate(-24.447761, -87.111111) "></path>
+            </g>
+        </g>
+        <g id="Group-3-Copy-10" transform="translate(151.000000, 130.000000)">
+            <rect id="Rectangle" fill="#FFFFFF" x="0" y="0" width="57" height="20"></rect>
+            <text id="pushed" font-family="Menlo-Regular, Menlo" font-size="12" font-weight="normal" fill="#4A4A4A">
+                <tspan x="6.82617188" y="14">pushed</tspan>
+            </text>
+        </g>
+        <g id="Group-3-Copy-16" transform="translate(62.000000, 116.000000)">
+            <rect id="Rectangle" fill="#FFFFFF" x="0" y="0" width="57" height="20"></rect>
+            <text id="added" font-family="Menlo-Regular, Menlo" font-size="12" font-weight="normal" fill="#4A4A4A">
+                <tspan x="10.4384766" y="14">added</tspan>
+            </text>
+        </g>
+        <g id="Group-3-Copy-17" transform="translate(15.000000, 133.000000)">
+            <rect id="Rectangle" fill="#FFFFFF" x="16" y="0" width="22" height="20"></rect>
+            <text id="followed" font-family="Menlo-Regular, Menlo" font-size="12" font-weight="normal" letter-spacing="-0.300000012" fill="#4A4A4A">
+                <tspan x="0.651562542" y="14">followe</tspan>
+                <tspan x="49.1238281" y="14">d</tspan>
+            </text>
+        </g>
+        <g id="Group-3-Copy-11" transform="translate(392.000000, 89.000000)">
+            <rect id="Rectangle" fill="#FFFFFF" x="0" y="0" width="24" height="20"></rect>
+            <text id="to" font-family="Menlo-Regular, Menlo" font-size="12" font-weight="normal" fill="#4A4A4A">
+                <tspan x="4.27539062" y="14">to</tspan>
+            </text>
+        </g>
+        <g id="Group-3-Copy-12" transform="translate(168.000000, 31.000000)">
+            <rect id="Rectangle" fill="#FFFFFF" x="0" y="0" width="24" height="20"></rect>
+            <text id="to" font-family="Menlo-Regular, Menlo" font-size="12" font-weight="normal" fill="#4A4A4A">
+                <tspan x="4.27539062" y="14">to</tspan>
+            </text>
+        </g>
+        <polyline id="Path-2" stroke="#666666" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" transform="translate(680.000000, 151.000000) rotate(-270.000000) translate(-680.000000, -151.000000) " points="676 143 684 151 676 159"></polyline>
+        <polyline id="Path-2-Copy-3" stroke="#666666" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" transform="translate(138.000000, 332.000000) rotate(-180.000000) translate(-138.000000, -332.000000) " points="134 324 142 332 134 340"></polyline>
+        <polyline id="Path-2-Copy-2" stroke="#666666" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" points="50 78 58 86 50 94"></polyline>
+        <polyline id="Path-2-Copy" stroke="#666666" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" transform="translate(700.000000, 241.000000) rotate(-90.000000) translate(-700.000000, -241.000000) " points="696 233 704 241 696 249"></polyline>
+        <g id="Group-3-Copy-5" transform="translate(60.000000, 248.000000)">
+            <rect id="Rectangle" fill="#FFFFFF" x="0" y="0" width="57" height="20"></rect>
+            <text id="created" font-family="Menlo-Regular, Menlo" font-size="12" font-weight="normal" fill="#4A4A4A">
+                <tspan x="3.21386719" y="14">created</tspan>
+            </text>
+        </g>
+        <g id="Group-3-Copy-6" transform="translate(672.000000, 109.000000)">
+            <rect id="Rectangle" fill="#FFFFFF" x="0" y="0" width="57" height="20"></rect>
+            <text id="owns" font-family="Menlo-Regular, Menlo" font-size="12" font-weight="normal" fill="#4A4A4A">
+                <tspan x="14.0507812" y="14">owns</tspan>
+            </text>
+        </g>
+        <g id="Group-3-Copy-18" transform="translate(587.000000, 53.000000)">
+            <rect id="Rectangle" fill="#FFFFFF" x="0" y="0" width="37" height="20"></rect>
+            <text id="owns" font-family="Menlo-Regular, Menlo" font-size="12" font-weight="normal" fill="#4A4A4A">
+                <tspan x="4.05078125" y="14">owns</tspan>
+            </text>
+        </g>
+        <g id="Wireframe-Line-01" transform="translate(567.000000, 75.000000)" stroke="#666666">
+            <g>
+                <polyline id="arrowhead" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" points="91 2 99 10 91 18"></polyline>
+                <path d="M98,10 L0,10" id="Line" stroke-width="2"></path>
+            </g>
+        </g>
+        <g id="Group-3-Copy-19" transform="translate(579.000000, 75.000000)">
+            <rect id="Rectangle" fill="#FFFFFF" x="0" y="0" width="70" height="20"></rect>
+            <text id="member_of" font-family="Menlo-Regular, Menlo" font-size="12" font-weight="normal" letter-spacing="-0.300000012" fill="#4A4A4A">
+                <tspan x="4.18925786" y="14">member_o</tspan>
+                <tspan x="59.5861328" y="14">f</tspan>
+            </text>
+        </g>
+        <g id="Group-3-Copy-15" transform="translate(547.000000, 276.000000)">
+            <rect id="Rectangle" fill="#FFFFFF" x="0.5" y="0" width="22" height="20"></rect>
+            <text id="on" font-family="Menlo-Regular, Menlo" font-size="12" font-weight="normal" fill="#4A4A4A">
+                <tspan x="4.27539062" y="14">on</tspan>
+            </text>
+        </g>
+        <g id="Group-3-Copy-14" transform="translate(547.000000, 276.000000)">
+            <rect id="Rectangle" fill="#FFFFFF" x="0.5" y="0" width="22" height="20"></rect>
+            <text id="on" font-family="Menlo-Regular, Menlo" font-size="12" font-weight="normal" fill="#4A4A4A">
+                <tspan x="4.27539062" y="14">on</tspan>
+            </text>
+        </g>
+        <g id="Group-3-Copy-20" transform="translate(229.000000, 322.000000)">
+            <rect id="Rectangle" fill="#FFFFFF" x="0.5" y="0" width="22" height="20"></rect>
+            <text id="on" font-family="Menlo-Regular, Menlo" font-size="12" font-weight="normal" fill="#4A4A4A">
+                <tspan x="4.27539062" y="14">on</tspan>
+            </text>
+        </g>
+    </g>
+</svg>
