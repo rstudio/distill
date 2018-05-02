@@ -16,6 +16,12 @@ BugReports: https://github.com/jjallaire/distill/issues
 Encoding: UTF-8
 LazyData: true
 RoxygenNote: 6.0.1
-Imports: rmarkdown (>= 1.9.9), htmltools, yaml
+Imports: rmarkdown (>= 1.9.10), htmltools, yaml
+Remotes:
+  rstudio/rmarkdown
 Suggests:
-  knitr (>= 1.15.6)
+  knitr (>= 1.15.6),
+  htmlwidgets,
+  r2d3,
+  DiagrammeR,
+  shiny

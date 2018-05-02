@@ -150,10 +150,10 @@ ggplot(mtcars, aes(wt, hp)) + geom_point() +
 <p>The figure will be displayed to the right using the requested layout boundary. Note that we also specify values for <code>fig.width</code> and <code>fig.height</code> that are appropriate for this layout.</p>
 <h3 id="static-images">Static images</h3>
 <p>To include static images that occupy the full width of the article text, be sure to add the <code>width=100%</code> attribute. For example:</p>
-<pre class="markup"><code>
+<pre class="markdown"><code>
 ![](images/figure.png){width=100%}    </code></pre>
 <p>To include a static images that adheres to a Disill layout, wrap it in a <code>&lt;div&gt;</code> tag with the appropriate <code>class</code>. For example:</p>
-<pre class="html"><code>
+<pre class="markdown"><code>
 &lt;div class=&quot;l-middle&quot;&gt;
 ![](images/figure.png){width=100%}  
 &lt;/div&gt;</code></pre>

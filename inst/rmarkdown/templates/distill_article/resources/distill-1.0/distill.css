@@ -15,6 +15,10 @@
   width: 100%;
 }
 
+.pandoc-table th:not([align]) {
+  text-align: left;
+}
+
 /* Distill header and footer CSS (not included automatically by script, but rather
    injected dynamically when rendering the standard Distill header and footer).
    To update this see the components directory of the distill template

@@ -82,13 +82,13 @@ The figure will be displayed to the right using the requested layout boundary. N
 
 To include static images that occupy the full width of the article text, be sure to add the `width=100%` attribute. For example:
 
-```markup
+```markdown
 ![](images/figure.png){width=100%}    
 ```
 
 To include a static images that adheres to a Disill layout, wrap it in a `<div>` tag with the appropriate `class`. For example:
 
-```html
+```markdown
 <div class="l-middle">
 ![](images/figure.png){width=100%}  
 </div>
