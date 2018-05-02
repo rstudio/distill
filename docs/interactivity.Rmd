@@ -79,7 +79,7 @@ You can use [Shiny](https://shiny.rstudio.com) components within your Distill ar
 ```
 ---
 title: "Interactive Distill with Shiny"
-output: distill::distill_article()
+output: distill::distill_article
 runtime: shiny
 ---
 ```
