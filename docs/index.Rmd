@@ -15,7 +15,6 @@ bibliography: biblio.bib
 
 <!---
 - Add r2d3 and shiny sections 
-- Markdown code block jank on initial render 
 
 - larger scale visualization layouts
 - web page metadata generation/redaction

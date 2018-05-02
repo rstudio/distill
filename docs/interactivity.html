@@ -82,7 +82,7 @@ dt-article table th, dt-article table td {
 </ul>
 <h2 id="htmlwidgets">htmlwidgets</h2>
 <p>Including <a href="http://www.htmlwidgets.org">htmlwidgets</a> within a Distill article is as easy as including an R plot. For example, the following code embeds a Leaflet map:</p>
-<pre><code>
+<pre class="clike"><code>
 ```{r}
 library(leaflet)
 leaflet() %&gt;%
@@ -94,7 +94,7 @@ leaflet() %&gt;%
 <script type="application/json" data-for="htmlwidget-54ddc7d39a7dc7e2354e">{"x":{"options":{"crs":{"crsClass":"L.CRS.EPSG3857","code":null,"proj4def":null,"projectedBounds":null,"options":{}}},"calls":[{"method":"addTiles","args":["//{s}.tile.openstreetmap.org/{z}/{x}/{y}.png",null,null,{"minZoom":0,"maxZoom":18,"tileSize":256,"subdomains":"abc","errorTileUrl":"","tms":false,"noWrap":false,"zoomOffset":0,"zoomReverse":false,"opacity":1,"zIndex":1,"detectRetina":false,"attribution":"&copy; <a href=\"http://openstreetmap.org\">OpenStreetMap<\/a> contributors, <a href=\"http://creativecommons.org/licenses/by-sa/2.0/\">CC-BY-SA<\/a>"}]},{"method":"addMarkers","args":[-36.852,174.768,null,null,null,{"interactive":true,"draggable":false,"keyboard":true,"title":"","alt":"","zIndexOffset":0,"opacity":1,"riseOnHover":false,"riseOffset":250},"The birthplace of R",null,null,null,null,{"interactive":false,"permanent":false,"direction":"auto","opacity":1,"offset":[0,0],"textsize":"10px","textOnly":false,"className":"","sticky":true},null]}],"limits":{"lat":[-36.852,-36.852],"lng":[174.768,174.768]}},"evals":[],"jsHooks":[]}</script>
 </div>
 <p>You can also use [custom layout] with htmlwidgets. For example, here we set <code>distill.layout=&quot;l-page&quot;</code> to specify that we want the widget to span the width of the page:</p>
-<pre><code>
+<pre class="clike"><code>
 ```{r, distill.layout=&quot;l-page&quot;, fig.height=2}
 library(dygraphs)
 dygraph(ldeaths) %&gt;% 
@@ -138,4 +138,12 @@ dygraph(ldeaths) %&gt;%
     script.src  = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML";
     document.getElementsByTagName("head")[0].appendChild(script);
   })();
+</script>
+
+<!-- code blocks were janky on document load so we hide them initially and
+     reveal them once the document has loaded and distill.js has run   -->
+<script type="text/javascript">
+window.document.addEventListener("DOMContentLoaded", function (event) {
+  $('pre').css('visibility', 'visible');
+});
 </script>

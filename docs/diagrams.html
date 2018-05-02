@@ -129,7 +129,7 @@ r2d3(data, d3_version = 4, script = &quot;circlepacking.js&quot;)
 <h2 id="static-diagrams">Static diagrams</h2>
 <p>For more highly customized static diagrams you can use a vector graphics tools like <a href="https://inkscape.org/en/">Inkscape</a>, <a href="https://www.adobe.com/products/illustrator.html">Adobe Illustrator</a>, or <a href="https://www.sketchapp.com/">Sketch</a>.</p>
 <p>These programs are all capable of exporting <a href="https://en.wikipedia.org/wiki/Scalable_Vector_Graphics">SVG (Scalable Vector Graphics)</a>. Once you’ve exported an SVG you can include it in your article using the <code>knitr::include_graphics()</code> function. For example, to include the SVG file created within this <a href="http://www.ioncannon.net/utilities/123/10-tips-for-creating-good-looking-diagrams-using-inkscape/">Inkscape tutorial</a> you would use the following code:</p>
-<pre><code>
+<pre class="clike"><code>
 ```{r}
 library(knitr)
 include_graphics(&quot;images/flowchart.svg&quot;)
@@ -170,4 +170,12 @@ include_graphics(&quot;images/flowchart.svg&quot;)
     script.src  = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML";
     document.getElementsByTagName("head")[0].appendChild(script);
   })();
+</script>
+
+<!-- code blocks were janky on document load so we hide them initially and
+     reveal them once the document has loaded and distill.js has run   -->
+<script type="text/javascript">
+window.document.addEventListener("DOMContentLoaded", function (event) {
+  $('pre').css('visibility', 'visible');
+});
 </script>

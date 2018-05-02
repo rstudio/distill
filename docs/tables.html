@@ -288,3 +288,11 @@ paged_table(mtcars, options = list(rows.print = 15))
     document.getElementsByTagName("head")[0].appendChild(script);
   })();
 </script>
+
+<!-- code blocks were janky on document load so we hide them initially and
+     reveal them once the document has loaded and distill.js has run   -->
+<script type="text/javascript">
+window.document.addEventListener("DOMContentLoaded", function (event) {
+  $('pre').css('visibility', 'visible');
+});
+</script>

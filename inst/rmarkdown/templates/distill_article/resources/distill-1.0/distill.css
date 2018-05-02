@@ -1,4 +1,11 @@
 
+/* Hide 'pre' until after the document is loaded (janky) */
+
+pre {
+  visibility: hidden;
+}
+
+
 /* Hide pandoc bibliography and footnotes  */
 
 #refs, .footnotes {

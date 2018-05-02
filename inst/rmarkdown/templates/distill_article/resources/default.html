@@ -69,3 +69,11 @@ $if(mathjax-url)$
   })();
 </script>
 $endif$
+
+<!-- code blocks were janky on document load so we hide them initially and
+     reveal them once the document has loaded and distill.js has run   -->
+<script type="text/javascript">
+window.document.addEventListener("DOMContentLoaded", function (event) {
+  $$('pre').css('visibility', 'visible');
+});
+</script>

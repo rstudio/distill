@@ -83,7 +83,7 @@ l-page
 </p>
 </div>
 <p>For example, here the <code>l-middle</code> layout is selected using the <code>distill.layout</code> chunk option:</p>
-<pre><code>
+<pre class="clike"><code>
 ```{r, distill.layout=&quot;l-middle&quot;, fig.width=6, fig.height=1.5}
 library(ggplot2)
 ggplot(diamonds, aes(carat, price)) + geom_smooth() +
@@ -138,7 +138,7 @@ l-page side
 </div>
 <p>They are all floated to the right and anchored to the right-hand edge of the position you specify. By default, each will take up approximately half of the width of the standard layout position.</p>
 <p>Here’s an example of floating a figure to the right using the <code>distill.layout</code> option:</p>
-<pre><code>
+<pre class="clike"><code>
 ```{r, distill.layout=&quot;l-page side&quot;, fig.width=5, fig.height=2}
 ggplot(mtcars, aes(wt, hp)) + geom_point() + 
   geom_smooth(method = &#39;lm&#39;) +
@@ -158,7 +158,7 @@ ggplot(mtcars, aes(wt, hp)) + geom_point() +
 ![](images/figure.png){width=100%}  
 &lt;/div&gt;</code></pre>
 <p>Alternatively, you can use the <code>knitr::include_graphics()</code> function within an R code chunk:</p>
-<pre><code>
+<pre class="clike"><code>
 ```{r, distill.layout=&quot;l-middle&quot;}
 library(knitr)
 include_graphics(&quot;images/figure.png&quot;)
@@ -195,4 +195,12 @@ include_graphics(&quot;images/figure.png&quot;)
     script.src  = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML";
     document.getElementsByTagName("head")[0].appendChild(script);
   })();
+</script>
+
+<!-- code blocks were janky on document load so we hide them initially and
+     reveal them once the document has loaded and distill.js has run   -->
+<script type="text/javascript">
+window.document.addEventListener("DOMContentLoaded", function (event) {
+  $('pre').css('visibility', 'visible');
+});
 </script>
