@@ -146,7 +146,7 @@ rmarkdown::draft(&quot;article.Rmd&quot;, &quot;distill_article&quot;, &quot;dis
 <div id="front-matter">
 
 </div>
-<p>Distill articles use <code>distill::distill_article</code> as their output format, and typically include title, description, author/affiliation, and bibliography entires in their YAML front-matter:</p>
+<p>Distill articles use <code>distill::distill_article</code> as their output format, and typically include title, description, author/affiliation, and bibliography entries in their YAML front-matter:</p>
 <pre class="yaml"><code>
 ---
 title: &quot;Distill for R Markdown&quot;
@@ -179,7 +179,7 @@ ggplot(diamonds, aes(carat, price)) + geom_smooth() +
 <p>Note that when specifying an alternate <code>distill.layout</code> you should also specify an appropriate <code>fig.width</code> and <code>fig.height</code> for that layout.</p>
 <p>See the documentation on <a href="figures.html">figure layout</a> for details on additional layout options.</p>
 <h2 id="tables">Tables</h2>
-<p>There are a number of options available for HTML display of data frames within Distill articles. Here, we use the <code>paged_table()</code> function to display a pageable view of the <code>mtcars</code> dataset built in to R:</p>
+<p>There are a number of options available for HTML display of data frames within Distill articles. Here, we use the <code>paged_table()</code> function to display a page-able view of the <code>mtcars</code> dataset built in to R:</p>
 <div class="distill-layout-chunk l-body-outset" data-distill-layout="l-body-outset">
 <div data-pagedtable="false">
 <script data-pagedtable-source type="application/json">
@@ -188,7 +188,7 @@ ggplot(diamonds, aes(carat, price)) + geom_smooth() +
 </div>
 </div>
 <p>Note that we used <code>distill.layout=&quot;l-body-outset&quot;</code> to cause the table to occupy slightly more horizontal space than the article text. All of available <a href="figures.html">figure layout options</a> work as expected for tables.</p>
-<p>See the documentation on <a href="tables.html">table display</a> for additioanl details on the various method available.</p>
+<p>See the documentation on <a href="tables.html">table display</a> for additional details on the various method available.</p>
 <h2 id="equations">Equations</h2>
 <p>Inline and display equations are supported via standard markdown <a href="https://www.mathjax.org/">MathJax</a> syntax. For example, the following <a href="https://en.wikibooks.org/wiki/LaTeX/Mathematics">LaTeX math</a>:</p>
 <pre><code>
@@ -214,9 +214,9 @@ $$</code></pre>
   url = {http://yihui.name/knitr/},
 }</code></pre>
 <p>You are strongly encouraged you to populate the <code>url</code> bibtex field where possible so that links can be provided for citations.</p>
-<p>Citations are then used in the article body with standard Pandoc markdown notation, for example: <code>[@xie2015]</code> (which references an id provided in the bibiography). Note that multiple ids (separated by semicolons) can be provided.</p>
+<p>Citations are then used in the article body with standard Pandoc markdown notation, for example: <code>[@xie2015]</code> (which references an id provided in the bibliography). Note that multiple ids (separated by semicolons) can be provided.</p>
 <p>The citation is presented inline like this: <span class="citation">(Xie <a href="#ref-xie2015">2015</a>)</span> (a number that displays more information on hover). If you have an appendix, a bibliography is automatically created and populated in it.</p>
-<p>Distill chose a numerical inline citation style to improve readability of citation dense articles and because many of the benefits of longer citations are obviated by dispalying more information on hover. However, we consider it good style to mention author last names if you discuss something at length and it fits into the flow well—the authors are human and it’s nice for them to have the community associate them with their work.</p>
+<p>Distill chose a numerical inline citation style to improve readability of citation dense articles and because many of the benefits of longer citations are obviated by displaying more information on hover. However, we consider it good style to mention author last names if you discuss something at length and it fits into the flow well—the authors are human and it’s nice for them to have the community associate them with their work.</p>
 <h2 id="footnotes">Footnotes</h2>
 <p>Footnotes use standard Pandoc markdown notation, for example <code>^[This will become a hoverable footnote]</code>. The number of the footnote will be automatically generated.<a href="#fn1" class="footnote-ref" id="fnref1"><sup>1</sup></a></p>
 <p>You can also optionally include notes in the gutter of the article (immediately to the right of the article text). To do this create a <code>&lt;div&gt;</code> with class <code>l-gutter</code>. For example:</p>
@@ -260,7 +260,7 @@ describing what each author did.</code></pre>
 <div class="footnotes">
 <hr />
 <ol>
-<li id="fn1"><p>This will become a hoverable footnote<a href="#fnref1" class="footnote-back">↩</a></p></li>
+<li id="fn1"><p>This will become a hover-able footnote<a href="#fnref1" class="footnote-back">↩</a></p></li>
 </ol>
 </div>
 </dt-article>
