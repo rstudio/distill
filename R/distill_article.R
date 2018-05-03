@@ -63,7 +63,7 @@ distill_article <- function(centered = TRUE,
   # lua filter
   if (pandoc_version() >= "2.0") {
     args <- c(args, "--lua-filter",
-              pandoc_path_arg(resource("distill-1.0/distill.lua")))
+              pandoc_path_arg(resource("distill-2.0/distill.lua")))
   }
 
   # use link citations (so we can do citation conversion)
