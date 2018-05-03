@@ -3,13 +3,18 @@ title: "Distill for R Markdown"
 description: | 
   A format devoted to clear explanations, native to the web
 authors:
-  - JJ Allaire: https://github.com/jjallaire
-  - Rich Iannone: https://github.com/rich-iannone
-  - Yihui Xie: https://github.com/yihui
-affiliations:
-  - RStudio: https://www.rstudio.com
-  - RStudio: https://www.rstudio.com
-  - RStudio: https://www.rstudio.com
+  - author: "JJ Allaire"
+    authorURL: https://github.com/jjallaire
+    affiliation: RStudio
+    affiliationURL: https://www.rstudio.com
+  - author: "Rich Iannone"
+    authorURL: https://github.com/rich-iannone
+    affiliation: RStudio
+    affiliationURL: https://www.rstudio.com
+  - author: "Yihui Xie"
+    authorURL: https://github.com/yihui
+    affiliation: RStudio
+    affiliationURL: https://www.rstudio.com
 bibliography: biblio.bib
 ---
 
@@ -30,6 +35,17 @@ bibliography: biblio.bib
 - article metadata (DOI, citation, etc.)
 - index pages (consider using iframes for federated content authoring)
 - site generation
+
+- Distill v2:
+
+    - examples:
+        https://github.com/distillpub/template/blob/master/examples/article.html
+        https://github.com/distillpub/post--ctc/blob/master/public/index.html
+        https://github.com/distillpub/post--aia/blob/master/public/index.html
+        https://github.com/distillpub/post--research-debt/blob/master/public/index.html
+    
+    
+
 --->
 
 ```{r setup, include=FALSE}
@@ -261,7 +277,7 @@ describing what each author did.
 
 Footnotes and references will be included in the same section, immediately beneath any custom appendices.
 
-## Acknowledgments {.appendix}
+### Acknowledgments {.appendix}
 
 Distill for R Markdown builds on the work of many individuals and projects. [Shan Carter](https://github.com/shancarter), [Ludwig Schubert](https://github.com/ludwigschubert), and [Christopher Olah](https://github.com/colah) created the Distill web framework. [John MacFarlane](https://github.com/jgm) created the Pandoc universal markup converter. [Davide Cervone](https://github.com/dpvc) and [Volker Sorge](https://github.com/zorkow) created the MathJax library for rendering mathmatical notation on the web. [Mike Bostock](https://github.com/mbostock) created the D3 library for producing dynamic, interactive data visualizations for the web. We are grateful for the spirit of generousity that moved these individuals to create high-quality open source software for the benefit of all.
 

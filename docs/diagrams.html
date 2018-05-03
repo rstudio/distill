@@ -2,8 +2,7 @@
 
 <head>
 <meta charset="utf-8">
-<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-<meta http-equiv="X-UA-Compatible" content="chrome=1">
+<meta name="viewport" content="width=device-width, initial-scale=1" >
 <meta name="generator" content="pandoc" />
 
 <title>Diagrams</title>
@@ -20,10 +19,10 @@ body {
 </style>
 
   <script src="site_libs/jquery-1.11.3/jquery.min.js"></script>
-  <link href="site_libs/distill-1.0/distill.css" rel="stylesheet" />
-  <script src="site_libs/distill-1.0/distill.js"></script>
-  <script src="site_libs/distill-1.0/template.v1.js"></script>
-  <script src="site_libs/distill-1.0/distill-post.js"></script>
+  <link href="site_libs/distill-2.0/distill.css" rel="stylesheet" />
+  <script src="site_libs/distill-2.0/distill.js"></script>
+  <script src="site_libs/distill-2.0/template.v2.js"></script>
+  <script src="site_libs/distill-2.0/distill-post.js"></script>
   <script src="site_libs/htmlwidgets-1.2/htmlwidgets.js"></script>
   <script src="site_libs/viz-0.3/viz.js"></script>
   <link href="site_libs/DiagrammeR-styles-0.2/styles.css" rel="stylesheet" />
@@ -37,13 +36,11 @@ body {
   <script src="site_libs/r2d3-render-0.1.0/r2d3-render.js"></script>
   <script src="site_libs/r2d3-binding-0.2/r2d3.js"></script>
   <script src="site_libs/d3v5-5.0.0/d3.js"></script>
-  <script type="text/front-matter">
-  title: Diagrams
-  description: Illustrate concepts with diagrams
-  authors: ~
-  affiliations: ~
-  
+  <d-front-matter>
+  <script id="distill-front-matter" type="text/json">
+  {"title":"Diagrams","description":"Illustrate concepts with diagrams","authors":{}}
   </script>
+  </d-front-matter>
   <script type="text/javascript">
   window.distill_data = {
   };
@@ -54,7 +51,7 @@ pre>code {
   white-space: pre-wrap;
   line-height: 1.5;
 }
-dt-article table th, dt-article table td {
+d-article table th, d-article table td {
   padding: 7px 10px;
 }
 .pagedtable-footer {
@@ -67,8 +64,10 @@ dt-article table th, dt-article table td {
 
 </head>
 
-      <dt-header>
-    <div class="content l-page">
+<body>
+
+      <div class="distill-header">
+    <div class="content">
       <a href="index.html" class="logo">
         <svg width="24px" viewBox="-607 419 64 64">
           <path d="M-573.4,478.9c-8,0-14.6-6.4-14.6-14.5s14.6-25.9,14.6-40.8c0,14.9,14.6,32.8,14.6,40.8S-565.4,478.9-573.4,478.9z"/>
@@ -83,9 +82,12 @@ dt-article table th, dt-article table td {
         <a href="interactivity.html">Interactivity</a>
       </div>
     </div>
-    </dt-header>
+    </div>
   
-<dt-article class="centered">
+<d-title>
+</d-title>
+
+<d-article class="centered">
   <h1>Diagrams</h1>
   <h2>Illustrate concepts with diagrams</h2>
     <p>There are a number of ways to create diagrams for use in Distill articles, a few worth considering are:</p>
@@ -153,12 +155,12 @@ include_graphics(&quot;images/flowchart.svg&quot;)
 <img src="images/flowchart.svg" /><!-- -->
 </div>
 <p>This particular illustration uses the default layout (occupying the full width of the article text). Note though that you can use the various <a href="figures.html">figure layout</a> options to control the size and placement of SVG files included from illustration programs.</p>
-</dt-article>
+</d-article>
 
-<dt-appendix class="centered">
-</dt-appendix>
+<d-appendix class="centered">
+</d-appendix>
 
-  <dt-footer>
+  <div class="distill-footer">
   <div class="l-page">
     <div class="description">
     Created using <a class="logo" style="color: rgba(255, 255, 255, 0.4)" href="index.html">Distill for R Markdown</a>
@@ -179,7 +181,7 @@ include_graphics(&quot;images/flowchart.svg&quot;)
     Docs licensed under <a class="logo" style="color: rgba(255, 255, 255, 0.4)" href="https://creativecommons.org/licenses/by/3.0/us/">Creative Commons Attribution License, v3.0</a>
     </p>
   </div>
-  </dt-footer>
+  </div>
 
 <!-- dynamically load mathjax for compatibility with self-contained -->
 <script>
@@ -190,3 +192,5 @@ include_graphics(&quot;images/flowchart.svg&quot;)
     document.getElementsByTagName("head")[0].appendChild(script);
   })();
 </script>
+
+</body>

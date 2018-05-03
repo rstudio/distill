@@ -2,8 +2,7 @@
 
 <head>
 <meta charset="utf-8">
-<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-<meta http-equiv="X-UA-Compatible" content="chrome=1">
+<meta name="viewport" content="width=device-width, initial-scale=1" >
 <meta name="generator" content="pandoc" />
 
 <title>$if(title-prefix)$$title-prefix$ - $endif$$pagetitle$</title>
@@ -31,7 +30,7 @@ pre>code {
   white-space: pre-wrap;
   line-height: 1.5;
 }
-dt-article table th, dt-article table td {
+d-article table th, d-article table td {
   padding: 7px 10px;
 }
 .pagedtable-footer {
@@ -46,23 +45,28 @@ $endfor$
 
 </head>
 
+<body>
+
 $if(include-before)$
   $for(include-before)$
     $include-before$
   $endfor$
 $endif$
 
-<dt-article $if(centered)$class="centered"$endif$>
+<d-title>
+</d-title>
+
+<d-article $if(centered)$class="centered"$endif$>
   <h1>$if(title-prefix)$$title-prefix$ - $endif$$pagetitle$</h1>
   $if(description)$<h2>$description$</h2>$endif$
   $if(authors)$
   <dt-byline></dt-byline>
   $endif$
   $body$
-</dt-article>
+</d-article>
 
-<dt-appendix $if(centered)$class="centered"$endif$>
-</dt-appendix>
+<d-appendix $if(centered)$class="centered"$endif$>
+</d-appendix>
 
 $for(include-after)$
   $include-after$
@@ -79,4 +83,6 @@ $if(mathjax-url)$
   })();
 </script>
 $endif$
+
+</body>
 

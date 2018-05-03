@@ -2,15 +2,14 @@
 
 <head>
 <meta charset="utf-8">
-<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-<meta http-equiv="X-UA-Compatible" content="chrome=1">
+<meta name="viewport" content="width=device-width, initial-scale=1" >
 <meta name="generator" content="pandoc" />
 
 <title>Distill for R Markdown</title>
 
 
 <script id="distill-metadata" type="application/json">
-{"link-citations":true,"affiliations":[{"RStudio":"<a href=\"https://www.rstudio.com\" class=\"uri\">https://www.rstudio.com</a>"},{"RStudio":"<a href=\"https://www.rstudio.com\" class=\"uri\">https://www.rstudio.com</a>"},{"RStudio":"<a href=\"https://www.rstudio.com\" class=\"uri\">https://www.rstudio.com</a>"}],"bibliography":"biblio.bib","authors":[{"JJ Allaire":"<a href=\"https://github.com/jjallaire\" class=\"uri\">https://github.com/jjallaire</a>"},{"Rich Iannone":"<a href=\"https://github.com/rich-iannone\" class=\"uri\">https://github.com/rich-iannone</a>"},{"Yihui Xie":"<a href=\"https://github.com/yihui\" class=\"uri\">https://github.com/yihui</a>"}],"title":"Distill for R Markdown","description":"A format devoted to clear explanations, native to the web"}
+{"link-citations":true,"bibliography":"biblio.bib","authors":[{"author":"JJ Allaire","affiliation":"RStudio","affiliationURL":"<a href=\"https://www.rstudio.com\" class=\"uri\">https://www.rstudio.com</a>","authorURL":"<a href=\"https://github.com/jjallaire\" class=\"uri\">https://github.com/jjallaire</a>"},{"author":"Rich Iannone","affiliation":"RStudio","affiliationURL":"<a href=\"https://www.rstudio.com\" class=\"uri\">https://www.rstudio.com</a>","authorURL":"<a href=\"https://github.com/rich-iannone\" class=\"uri\">https://github.com/rich-iannone</a>"},{"author":"Yihui Xie","affiliation":"RStudio","affiliationURL":"<a href=\"https://www.rstudio.com\" class=\"uri\">https://www.rstudio.com</a>","authorURL":"<a href=\"https://github.com/yihui\" class=\"uri\">https://github.com/yihui</a>"}],"title":"Distill for R Markdown","description":"A format devoted to clear explanations, native to the web"}
 </script>
 
 <style type="text/css">
@@ -20,58 +19,24 @@ body {
 </style>
 
   <script src="site_libs/jquery-1.11.3/jquery.min.js"></script>
-  <link href="site_libs/distill-1.0/distill.css" rel="stylesheet" />
-  <script src="site_libs/distill-1.0/distill.js"></script>
-  <script src="site_libs/distill-1.0/template.v1.js"></script>
-  <script src="site_libs/distill-1.0/distill-post.js"></script>
+  <link href="site_libs/distill-2.0/distill.css" rel="stylesheet" />
+  <script src="site_libs/distill-2.0/distill.js"></script>
+  <script src="site_libs/distill-2.0/template.v2.js"></script>
+  <script src="site_libs/distill-2.0/distill-post.js"></script>
   <link href="site_libs/pagedtable-1.1/css/pagedtable.css" rel="stylesheet" />
   <script src="site_libs/pagedtable-1.1/js/pagedtable.js"></script>
   <script src="site_libs/htmlwidgets-1.2/htmlwidgets.js"></script>
   <script src="site_libs/viz-0.3/viz.js"></script>
   <link href="site_libs/DiagrammeR-styles-0.2/styles.css" rel="stylesheet" />
   <script src="site_libs/grViz-binding-1.0.0/grViz.js"></script>
-  <script type="text/front-matter">
-  title: Distill for R Markdown
-  description: |
-    A format devoted to clear explanations, native to the web
-  authors:
-  - JJ Allaire: https://github.com/jjallaire
-  - Rich Iannone: https://github.com/rich-iannone
-  - Yihui Xie: https://github.com/yihui
-  affiliations:
-  - RStudio: https://www.rstudio.com
-  - RStudio: https://www.rstudio.com
-  - RStudio: https://www.rstudio.com
-  
+  <d-front-matter>
+  <script id="distill-front-matter" type="text/json">
+  {"title":"Distill for R Markdown","description":"A format devoted to clear explanations, native to the web\n","authors":[{"author":"JJ Allaire","authorURL":"https://github.com/jjallaire","affiliation":"RStudio","affiliationURL":"https://www.rstudio.com"},{"author":"Rich Iannone","authorURL":"https://github.com/rich-iannone","affiliation":"RStudio","affiliationURL":"https://www.rstudio.com"},{"author":"Yihui Xie","authorURL":"https://github.com/yihui","affiliation":"RStudio","affiliationURL":"https://www.rstudio.com"}]}
   </script>
+  </d-front-matter>
   <script type="text/javascript">
   window.distill_data = {
   };
-  </script>
-  <script type="text/bibliography">
-  @article{knuth1984,
-    title={Literate programming},
-    author={Knuth, Donald E.},
-    journal={The Computer Journal},
-    volume={27},
-    number={2},
-    pages={97--111},
-    year={1984},
-    publisher={British Computer Society}
-  }
-  @Book{xie2015,
-    title = {Dynamic Documents with R and knitr},
-    author = {Yihui Xie},
-    publisher = {Chapman and Hall/CRC},
-    address = {Boca Raton, Florida},
-    year = {2015},
-    edition = {2nd},
-    note = {ISBN 978-1498716963},
-    url = {http://yihui.name/knitr/},
-  }
-  
-  
-  
   </script>
 
 <style type="text/css">
@@ -79,7 +44,7 @@ pre>code {
   white-space: pre-wrap;
   line-height: 1.5;
 }
-dt-article table th, dt-article table td {
+d-article table th, d-article table td {
   padding: 7px 10px;
 }
 .pagedtable-footer {
@@ -92,8 +57,10 @@ dt-article table th, dt-article table td {
 
 </head>
 
-      <dt-header>
-    <div class="content l-page">
+<body>
+
+      <div class="distill-header">
+    <div class="content">
       <a href="index.html" class="logo">
         <svg width="24px" viewBox="-607 419 64 64">
           <path d="M-573.4,478.9c-8,0-14.6-6.4-14.6-14.5s14.6-25.9,14.6-40.8c0,14.9,14.6,32.8,14.6,40.8S-565.4,478.9-573.4,478.9z"/>
@@ -108,9 +75,12 @@ dt-article table th, dt-article table td {
         <a href="interactivity.html">Interactivity</a>
       </div>
     </div>
-    </dt-header>
+    </div>
   
-<dt-article class="centered">
+<d-title>
+</d-title>
+
+<d-article class="centered">
   <h1>Distill for R Markdown</h1>
   <h2>A format devoted to clear explanations, native to the web</h2>
     <dt-byline></dt-byline>
@@ -131,6 +101,17 @@ dt-article table th, dt-article table td {
 - article metadata (DOI, citation, etc.)
 - index pages (consider using iframes for federated content authoring)
 - site generation
+
+- Distill v2:
+
+    - examples:
+        https://github.com/distillpub/template/blob/master/examples/article.html
+        https://github.com/distillpub/post--ctc/blob/master/public/index.html
+        https://github.com/distillpub/post--aia/blob/master/public/index.html
+        https://github.com/distillpub/post--research-debt/blob/master/public/index.html
+    
+    
+
 --->
 <p>Distill is an online publication format designed for technical and academic communication. Distill articles include:</p>
 <ul>
@@ -283,7 +264,7 @@ to acknowledge and cite software that makes your work possible.
 We strongly encourage you to include an author contributions statement briefly 
 describing what each author did.</code></pre>
 <p>Footnotes and references will be included in the same section, immediately beneath any custom appendices.</p>
-<h2 id="acknowledgments" class="appendix">Acknowledgments</h2>
+<h3 id="acknowledgments" class="appendix">Acknowledgments</h3>
 <p>Distill for R Markdown builds on the work of many individuals and projects. <a href="https://github.com/shancarter">Shan Carter</a>, <a href="https://github.com/ludwigschubert">Ludwig Schubert</a>, and <a href="https://github.com/colah">Christopher Olah</a> created the Distill web framework. <a href="https://github.com/jgm">John MacFarlane</a> created the Pandoc universal markup converter. <a href="https://github.com/dpvc">Davide Cervone</a> and <a href="https://github.com/zorkow">Volker Sorge</a> created the MathJax library for rendering mathmatical notation on the web. <a href="https://github.com/mbostock">Mike Bostock</a> created the D3 library for producing dynamic, interactive data visualizations for the web. We are grateful for the spirit of generousity that moved these individuals to create high-quality open source software for the benefit of all.</p>
 <div id="refs" class="references">
 <div id="ref-knuth1984">
@@ -299,12 +280,12 @@ describing what each author did.</code></pre>
 <li id="fn1"><p>This will become a hover-able footnote<a href="#fnref1" class="footnote-back">↩</a></p></li>
 </ol>
 </div>
-</dt-article>
+</d-article>
 
-<dt-appendix class="centered">
-</dt-appendix>
+<d-appendix class="centered">
+</d-appendix>
 
-  <dt-footer>
+  <div class="distill-footer">
   <div class="l-page">
     <div class="description">
     Created using <a class="logo" style="color: rgba(255, 255, 255, 0.4)" href="index.html">Distill for R Markdown</a>
@@ -325,7 +306,34 @@ describing what each author did.</code></pre>
     Docs licensed under <a class="logo" style="color: rgba(255, 255, 255, 0.4)" href="https://creativecommons.org/licenses/by/3.0/us/">Creative Commons Attribution License, v3.0</a>
     </p>
   </div>
-  </dt-footer>
+  </div>
+  <d-bibliography>
+  <script type="text/bibtex">
+  @article{knuth1984,
+    title={Literate programming},
+    author={Knuth, Donald E.},
+    journal={The Computer Journal},
+    volume={27},
+    number={2},
+    pages={97--111},
+    year={1984},
+    publisher={British Computer Society}
+  }
+  @Book{xie2015,
+    title = {Dynamic Documents with R and knitr},
+    author = {Yihui Xie},
+    publisher = {Chapman and Hall/CRC},
+    address = {Boca Raton, Florida},
+    year = {2015},
+    edition = {2nd},
+    note = {ISBN 978-1498716963},
+    url = {http://yihui.name/knitr/},
+  }
+  
+  
+  
+  </script>
+  </d-bibliography>
 
 <!-- dynamically load mathjax for compatibility with self-contained -->
 <script>
@@ -336,3 +344,5 @@ describing what each author did.</code></pre>
     document.getElementsByTagName("head")[0].appendChild(script);
   })();
 </script>
+
+</body>

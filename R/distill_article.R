@@ -141,19 +141,21 @@ distill_article <- function(centered = TRUE,
 
     args <- c()
 
-    # files to write into the header
+    # files to write into the header/footer
     in_header <- c()
+    after_body <- c()
 
     # write front-matter into script tag
     front_matter <- c(
-      '<script type="text/front-matter">',
-      yaml::as.yaml(list(
+      '<d-front-matter>',
+      '<script id="distill-front-matter" type="text/json">',
+      jsonlite::toJSON(list(
         title = metadata$title,
         description = metadata$description,
-        authors = metadata$authors,
-        affiliations = metadata$affiliations
-      )),
-      '</script>'
+        authors = metadata$authors
+      ), auto_unbox = TRUE),
+      '</script>',
+      '</d-front-matter>'
     )
     front_matter_file <- tempfile(fileext = "html")
     writeLines(front_matter, front_matter_file)
@@ -172,20 +174,22 @@ distill_article <- function(centered = TRUE,
     writeLines(distill_data, distill_data_file)
     in_header <- c(in_header, distill_data_file)
 
-    # write bibliography into script tag
+    # write bibliography into tag
     if (!is.null(metadata$bibliography)) {
       bibliography_file <-  tempfile(fileext = "html")
       writeLines(c(
-        '<script type="text/bibliography">',
+        '<d-bibliography>',
+        '<script type="text/bibtex">',
         readLines(metadata$bibliography, warn = FALSE),
-        '</script>'
+        '</script>',
+        '</d-bibliography>'
       ), con = bibliography_file)
-      in_header <- c(in_header, bibliography_file)
+      after_body <- c(after_body, bibliography_file)
     }
 
 
     # include files in the header
-    args <- c(args, pandoc_include_args(in_header = in_header))
+    args <- c(args, pandoc_include_args(in_header = in_header, after_body = after_body))
 
     # return args
     args
@@ -218,10 +222,10 @@ distill_article <- function(centered = TRUE,
 html_dependency_distill <- function() {
   htmltools::htmlDependency(
     name = "distill",
-    version = "1.0",
-    src = system.file("rmarkdown/templates/distill_article/resources/distill-1.0",
+    version = "2.0",
+    src = system.file("rmarkdown/templates/distill_article/resources/distill-2.0",
                       package = "distill"),
-    script = c("distill.js", "template.v1.js", "distill-post.js"),
+    script = c("distill.js", "template.v2.js", "distill-post.js"),
     stylesheet = "distill.css"
   )
 }

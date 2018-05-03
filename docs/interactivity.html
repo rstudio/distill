@@ -2,8 +2,7 @@
 
 <head>
 <meta charset="utf-8">
-<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-<meta http-equiv="X-UA-Compatible" content="chrome=1">
+<meta name="viewport" content="width=device-width, initial-scale=1" >
 <meta name="generator" content="pandoc" />
 
 <title>Interactivity</title>
@@ -20,10 +19,10 @@ body {
 </style>
 
   <script src="site_libs/jquery-1.12.4/jquery.min.js"></script>
-  <link href="site_libs/distill-1.0/distill.css" rel="stylesheet" />
-  <script src="site_libs/distill-1.0/distill.js"></script>
-  <script src="site_libs/distill-1.0/template.v1.js"></script>
-  <script src="site_libs/distill-1.0/distill-post.js"></script>
+  <link href="site_libs/distill-2.0/distill.css" rel="stylesheet" />
+  <script src="site_libs/distill-2.0/distill.js"></script>
+  <script src="site_libs/distill-2.0/template.v2.js"></script>
+  <script src="site_libs/distill-2.0/distill-post.js"></script>
   <script src="site_libs/htmlwidgets-1.2/htmlwidgets.js"></script>
   <link href="site_libs/leaflet-1.3.1/leaflet.css" rel="stylesheet" />
   <script src="site_libs/leaflet-1.3.1/leaflet.js"></script>
@@ -41,13 +40,11 @@ body {
   <script src="site_libs/r2d3-render-0.1.0/r2d3-render.js"></script>
   <script src="site_libs/r2d3-binding-0.2/r2d3.js"></script>
   <script src="site_libs/d3v5-5.0.0/d3.js"></script>
-  <script type="text/front-matter">
-  title: Interactivity
-  description: Enhance communication with interactive visualizations
-  authors: ~
-  affiliations: ~
-  
+  <d-front-matter>
+  <script id="distill-front-matter" type="text/json">
+  {"title":"Interactivity","description":"Enhance communication with interactive visualizations","authors":{}}
   </script>
+  </d-front-matter>
   <script type="text/javascript">
   window.distill_data = {
   };
@@ -58,7 +55,7 @@ pre>code {
   white-space: pre-wrap;
   line-height: 1.5;
 }
-dt-article table th, dt-article table td {
+d-article table th, d-article table td {
   padding: 7px 10px;
 }
 .pagedtable-footer {
@@ -71,8 +68,10 @@ dt-article table th, dt-article table td {
 
 </head>
 
-      <dt-header>
-    <div class="content l-page">
+<body>
+
+      <div class="distill-header">
+    <div class="content">
       <a href="index.html" class="logo">
         <svg width="24px" viewBox="-607 419 64 64">
           <path d="M-573.4,478.9c-8,0-14.6-6.4-14.6-14.5s14.6-25.9,14.6-40.8c0,14.9,14.6,32.8,14.6,40.8S-565.4,478.9-573.4,478.9z"/>
@@ -87,9 +86,12 @@ dt-article table th, dt-article table td {
         <a href="interactivity.html">Interactivity</a>
       </div>
     </div>
-    </dt-header>
+    </div>
   
-<dt-article class="centered">
+<d-title>
+</d-title>
+
+<d-article class="centered">
   <h1>Interactivity</h1>
   <h2>Enhance communication with interactive visualizations</h2>
     <p>There are a variety of ways to add interactivity to your Distill articles, including:</p>
@@ -169,12 +171,12 @@ renderPlot({
 </div>
 <p>You can see the full source code for this example at <a href="https://github.com/jjallaire/distill/blob/master/inst/examples/distill-interactive-document.Rmd">distill-interactive-document.Rmd</a>.</p>
 <p>Learn more <a href="https://rmarkdown.rstudio.com/authoring_shiny.html">interactive documents</a> on the R Markdown website.</p>
-</dt-article>
+</d-article>
 
-<dt-appendix class="centered">
-</dt-appendix>
+<d-appendix class="centered">
+</d-appendix>
 
-  <dt-footer>
+  <div class="distill-footer">
   <div class="l-page">
     <div class="description">
     Created using <a class="logo" style="color: rgba(255, 255, 255, 0.4)" href="index.html">Distill for R Markdown</a>
@@ -195,7 +197,7 @@ renderPlot({
     Docs licensed under <a class="logo" style="color: rgba(255, 255, 255, 0.4)" href="https://creativecommons.org/licenses/by/3.0/us/">Creative Commons Attribution License, v3.0</a>
     </p>
   </div>
-  </dt-footer>
+  </div>
 
 <!-- dynamically load mathjax for compatibility with self-contained -->
 <script>
@@ -206,3 +208,5 @@ renderPlot({
     document.getElementsByTagName("head")[0].appendChild(script);
   })();
 </script>
+
+</body>
