@@ -24,10 +24,6 @@ bibliography: biblio.bib
     - crosstalk compatibility?
         - distillRow/distillRow
 
-- see if we can get the distill code to load/run before the htmlwidgets
-
-- distill svg too large on load
-
 - web page metadata generation/redaction
 - article metadata (DOI, citation, etc.)
 - index pages (consider using iframes for distributed content authoring)
