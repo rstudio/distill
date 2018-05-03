@@ -9,10 +9,21 @@
 <title>Distill for R Markdown</title>
 
 
+<script id="pandoc-metadata" type="application/json">
+{"link-citations":true,"affiliations":[{"RStudio":"<a href=\"https://www.rstudio.com\" class=\"uri\">https://www.rstudio.com</a>"},{"RStudio":"<a href=\"https://www.rstudio.com\" class=\"uri\">https://www.rstudio.com</a>"},{"RStudio":"<a href=\"https://www.rstudio.com\" class=\"uri\">https://www.rstudio.com</a>"}],"bibliography":"biblio.bib","authors":[{"JJ Allaire":"<a href=\"https://github.com/jjallaire\" class=\"uri\">https://github.com/jjallaire</a>"},{"Rich Iannone":"<a href=\"https://github.com/rich-iannone\" class=\"uri\">https://github.com/rich-iannone</a>"},{"Yihui Xie":"<a href=\"https://github.com/yihui\" class=\"uri\">https://github.com/yihui</a>"}],"title":"Distill for R Markdown","description":"A format devoted to clear explanations, native to the web"}
+</script>
+
+<style type="text/css">
+body {
+  display: none;
+}
+</style>
+
   <script src="site_libs/jquery-1.11.3/jquery.min.js"></script>
   <link href="site_libs/distill-1.0/distill.css" rel="stylesheet" />
   <script src="site_libs/distill-1.0/distill.js"></script>
   <script src="site_libs/distill-1.0/template.v1.js"></script>
+  <script src="site_libs/distill-1.0/distill-post.js"></script>
   <link href="site_libs/pagedtable-1.1/css/pagedtable.css" rel="stylesheet" />
   <script src="site_libs/pagedtable-1.1/js/pagedtable.js"></script>
   <script src="site_libs/htmlwidgets-1.2/htmlwidgets.js"></script>
@@ -80,7 +91,7 @@ dt-article table th, dt-article table td {
       <dt-header>
     <div class="content l-page">
       <a href="index.html" class="logo">
-        <svg viewBox="-607 419 64 64">
+        <svg width="24px" viewBox="-607 419 64 64">
           <path d="M-573.4,478.9c-8,0-14.6-6.4-14.6-14.5s14.6-25.9,14.6-40.8c0,14.9,14.6,32.8,14.6,40.8S-565.4,478.9-573.4,478.9z"/>
             </svg>
         Distill for R Markdown
@@ -101,8 +112,6 @@ dt-article table th, dt-article table td {
     <dt-byline></dt-byline>
     <!---
 
-- Cite license and creative commons in the footer.
-
 - larger scale visualization layouts
     - iframe with npr library (pym.js) for sizing (generic) (check with shinyapps.io)
     - ggplot2 theme for distill
@@ -112,6 +121,7 @@ dt-article table th, dt-article table td {
     - crosstalk compatibility?
         - distillRow/distillRow
 
+- centering option
 - web page metadata generation/redaction
 - article metadata (DOI, citation, etc.)
 - index pages (consider using iframes for distributed content authoring)
@@ -327,5 +337,6 @@ describing what each author did.</code></pre>
 <script type="text/javascript">
 window.document.addEventListener("DOMContentLoaded", function (event) {
   $('pre').css('visibility', 'visible');
+  $('.logo svg').css('visibility', 'visible');
 });
 </script>

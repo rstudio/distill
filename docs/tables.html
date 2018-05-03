@@ -9,10 +9,21 @@
 <title>Tables</title>
 
 
+<script id="pandoc-metadata" type="application/json">
+{"link-citations":true,"title":"Tables","description":"Display data in attractive, compact formats"}
+</script>
+
+<style type="text/css">
+body {
+  display: none;
+}
+</style>
+
   <script src="site_libs/jquery-1.11.3/jquery.min.js"></script>
   <link href="site_libs/distill-1.0/distill.css" rel="stylesheet" />
   <script src="site_libs/distill-1.0/distill.js"></script>
   <script src="site_libs/distill-1.0/template.v1.js"></script>
+  <script src="site_libs/distill-1.0/distill-post.js"></script>
   <link href="site_libs/pagedtable-1.1/css/pagedtable.css" rel="stylesheet" />
   <script src="site_libs/pagedtable-1.1/js/pagedtable.js"></script>
   <script type="text/front-matter">
@@ -44,7 +55,7 @@ dt-article table th, dt-article table td {
       <dt-header>
     <div class="content l-page">
       <a href="index.html" class="logo">
-        <svg viewBox="-607 419 64 64">
+        <svg width="24px" viewBox="-607 419 64 64">
           <path d="M-573.4,478.9c-8,0-14.6-6.4-14.6-14.5s14.6-25.9,14.6-40.8c0,14.9,14.6,32.8,14.6,40.8S-565.4,478.9-573.4,478.9z"/>
             </svg>
         Distill for R Markdown
@@ -298,5 +309,6 @@ paged_table(mtcars, options = list(rows.print = 15))
 <script type="text/javascript">
 window.document.addEventListener("DOMContentLoaded", function (event) {
   $('pre').css('visibility', 'visible');
+  $('.logo svg').css('visibility', 'visible');
 });
 </script>
