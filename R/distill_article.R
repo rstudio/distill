@@ -159,6 +159,19 @@ distill_article <- function(centered = TRUE,
     writeLines(front_matter, front_matter_file)
     in_header <- c(in_header, front_matter_file)
 
+    # write distill_metadata into script tag
+    distill_data <- c(
+      '<script type="text/javascript">',
+      'window.distill_data = {',
+      # TODO: draw date from document metadata
+      # sprintf('  publishedDate: new Date("%s")', '2016-09-08T07:00:00.000Z'),
+      '};',
+      '</script>'
+    )
+    distill_data_file <- tempfile(fileext = "html")
+    writeLines(distill_data, distill_data_file)
+    in_header <- c(in_header, distill_data_file)
+
     # write bibliography into script tag
     if (!is.null(metadata$bibliography)) {
       bibliography_file <-  tempfile(fileext = "html")

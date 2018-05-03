@@ -9,7 +9,7 @@
 <title>Distill for R Markdown</title>
 
 
-<script id="pandoc-metadata" type="application/json">
+<script id="distill-metadata" type="application/json">
 {"link-citations":true,"affiliations":[{"RStudio":"<a href=\"https://www.rstudio.com\" class=\"uri\">https://www.rstudio.com</a>"},{"RStudio":"<a href=\"https://www.rstudio.com\" class=\"uri\">https://www.rstudio.com</a>"},{"RStudio":"<a href=\"https://www.rstudio.com\" class=\"uri\">https://www.rstudio.com</a>"}],"bibliography":"biblio.bib","authors":[{"JJ Allaire":"<a href=\"https://github.com/jjallaire\" class=\"uri\">https://github.com/jjallaire</a>"},{"Rich Iannone":"<a href=\"https://github.com/rich-iannone\" class=\"uri\">https://github.com/rich-iannone</a>"},{"Yihui Xie":"<a href=\"https://github.com/yihui\" class=\"uri\">https://github.com/yihui</a>"}],"title":"Distill for R Markdown","description":"A format devoted to clear explanations, native to the web"}
 </script>
 
@@ -43,6 +43,10 @@ body {
   - RStudio: https://www.rstudio.com
   - RStudio: https://www.rstudio.com
   
+  </script>
+  <script type="text/javascript">
+  window.distill_data = {
+  };
   </script>
   <script type="text/bibliography">
   @article{knuth1984,
@@ -121,10 +125,11 @@ dt-article table th, dt-article table td {
     - crosstalk compatibility?
         - distillRow/distillRow
 
-- centering option
-- web page metadata generation/redaction
+- embed fonts used on distill.pub?
+
+- web page metadata generation/redaction (see expandData)
 - article metadata (DOI, citation, etc.)
-- index pages (consider using iframes for distributed content authoring)
+- index pages (consider using iframes for federated content authoring)
 - site generation
 --->
 <p>Distill is an online publication format designed for technical and academic communication. Distill articles include:</p>

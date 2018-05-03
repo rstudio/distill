@@ -18224,6 +18224,7 @@ if (browser) {
     var data = {};
     renderImmediately(window.document);
     window.document.addEventListener("DOMContentLoaded", function (event) {
+      data = window.distill_data;
       renderOnLoad(window.document, data);
       // Add a banner if we're not on localhost.
       if (window.location.hostname !== "localhost" && window.location.origin !== "file://") {
