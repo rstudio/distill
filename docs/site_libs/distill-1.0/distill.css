@@ -1,15 +1,4 @@
 
-/* Hide logo and 'pre' until after the document is loaded (janky) */
-
-pre {
-  visibility: hidden;
-}
-
-.logo svg {
-  visibility: hidden;
-}
-
-
 /* Hide pandoc bibliography and footnotes  */
 
 #refs, .footnotes {
