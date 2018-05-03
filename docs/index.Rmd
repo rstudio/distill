@@ -15,8 +15,6 @@ bibliography: biblio.bib
 
 <!---
 
-- Cite license and creative commons in the footer.
-
 - larger scale visualization layouts
     - iframe with npr library (pym.js) for sizing (generic) (check with shinyapps.io)
     - ggplot2 theme for distill
@@ -25,6 +23,10 @@ bibliography: biblio.bib
     "full bleed"
     - crosstalk compatibility?
         - distillRow/distillRow
+
+- see if we can get the distill code to load/run before the htmlwidgets
+
+- distill svg too large on load
 
 - web page metadata generation/redaction
 - article metadata (DOI, citation, etc.)
