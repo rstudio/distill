@@ -91,7 +91,6 @@ d-article table th, d-article table td {
     - crosstalk compatibility?
         - distillRow/distillRow
 
-- JS error when there are no authors at all (need stub)
 - Some default padding for html-widget (same as img)
 - create author section using pandoc
 - test out aside tag
@@ -186,8 +185,8 @@ library(DiagrammeR)
 grViz(&quot;images/graph.gv&quot;)
 ```</code></pre>
 <div class="distill-layout-chunk l-page">
-<div id="htmlwidget-7ded59f4b1e32ea1fd21" style="width:576px;height:192px;" class="grViz html-widget"></div>
-<script type="application/json" data-for="htmlwidget-7ded59f4b1e32ea1fd21">{"x":{"diagram":"graph {\n    rankdir=LR; // Left to Right, instead of Top to Bottom\n    a -- { b c d };\n    b -- { c e };\n    c -- { e f };\n    d -- { f g };\n    e -- h;\n    f -- { h i j g };\n    g -- k;\n    h -- { o l };\n    i -- { l m j };\n    j -- { m n k };\n    k -- { n r };\n    l -- { o m };\n    m -- { o p n };\n    n -- { q r };\n    o -- { s p };\n    p -- { s t q };\n    q -- { t r };\n    r -- t;\n    s -- z;\n    t -- z;\n}","config":{"engine":"dot","options":null}},"evals":[],"jsHooks":[]}</script>
+<div id="htmlwidget-4e418d0e777bcf5e8b2b" style="width:576px;height:192px;" class="grViz html-widget"></div>
+<script type="application/json" data-for="htmlwidget-4e418d0e777bcf5e8b2b">{"x":{"diagram":"graph {\n    rankdir=LR; // Left to Right, instead of Top to Bottom\n    a -- { b c d };\n    b -- { c e };\n    c -- { e f };\n    d -- { f g };\n    e -- h;\n    f -- { h i j g };\n    g -- k;\n    h -- { o l };\n    i -- { l m j };\n    j -- { m n k };\n    k -- { n r };\n    l -- { o m };\n    m -- { o p n };\n    n -- { q r };\n    o -- { s p };\n    p -- { s t q };\n    q -- { t r };\n    r -- t;\n    s -- z;\n    t -- z;\n}","config":{"engine":"dot","options":null}},"evals":[],"jsHooks":[]}</script>
 </div>
 <p>Note that since this diagram is much wider than it is tall, we specify <code>distill.layout=&quot;l-page&quot;</code> to provide adequate horizontal layout space and <code>fig.height=2</code> to ensure the correct aspect ratio. See the documentation on <a href="figures.html">figure layout</a> for details on all available layout options.</p>
 <p>See the documentation on <a href="diagrams.html">diagrams</a> to learn more.</p>
