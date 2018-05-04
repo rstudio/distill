@@ -79,7 +79,7 @@ d-article table th, d-article table td {
 <p>A format devoted to clear explanations, native to the web</p>
 </d-title>
 
-<d-article class="centered">
+<d-article >
 <!---
 
 - larger scale visualization layouts
@@ -91,7 +91,9 @@ d-article table th, d-article table td {
     - crosstalk compatibility?
         - distillRow/distillRow
 
-- check v2 layouts to see if they are all applicable/working
+- JS error when there are no authors at all (need stub)
+- Some default padding for html-widget (same as img)
+- centered no longer works?
 - create author section using pandoc
 - test out aside tag
 - take another shot at load latency (hiding the dom is not great)
@@ -100,16 +102,6 @@ d-article table th, d-article table td {
 - article metadata (DOI, citation, etc.)
 - index pages (consider using iframes for federated content authoring)
 - site generation
-
-- Distill v2:
-
-    - examples:
-        https://github.com/distillpub/template/blob/master/examples/article.html
-        https://github.com/distillpub/post--ctc/blob/master/public/index.html
-        https://github.com/distillpub/post--aia/blob/master/public/index.html
-        https://github.com/distillpub/post--research-debt/blob/master/public/index.html
-    
-    
 
 --->
 <p>Distill is an online publication format designed for technical and academic communication. Distill articles include:</p>
@@ -158,14 +150,14 @@ bibliography: biblio.bib
 <p>Distill provides a number of options for laying out figures within your article. By default figures span the width of the main article body:</p>
 <p><img src="images/l-body-figure.png" style="width:100.0%" /></p>
 <p>However, some figures benefit from using additional horizontal space. In this cases the <code>distill.layout</code> chunk option enables you to specify a wide variety of other layouts.</p>
-<p>For example, if we wanted to display a figure a bit outside the bounds of the article text, we could specify the <code>l-middle</code> layout via the <code>distill.layout</code> chunk option:</p>
+<p>For example, if we wanted to display a figure a bit outside the bounds of the article text, we could specify the <code>l-body-outset</code> layout via the <code>distill.layout</code> chunk option:</p>
 <pre class="clike"><code>
-```{r, distill.layout=&quot;l-middle&quot;, fig.width=6, fig.height=1.5}
+```{r, distill.layout=&quot;l-body-outset&quot;, fig.width=6, fig.height=1.5}
 library(ggplot2)
 ggplot(diamonds, aes(carat, price)) + geom_smooth() +
   facet_grid(~ cut)
 ```</code></pre>
-<div class="distill-layout-chunk l-middle">
+<div class="distill-layout-chunk l-body-outset">
 <img src="images/l-middle-figure.png" width="576" />
 </div>
 <p>Note that when specifying an alternate <code>distill.layout</code> you should also specify an appropriate <code>fig.width</code> and <code>fig.height</code> for that layout. These values don’t determine the absolute size of the figure (that’s dynamic based on the layout) but they do determine the aspect ratio of the figure.</p>
@@ -195,8 +187,8 @@ library(DiagrammeR)
 grViz(&quot;images/graph.gv&quot;)
 ```</code></pre>
 <div class="distill-layout-chunk l-page">
-<div id="htmlwidget-4e418d0e777bcf5e8b2b" style="width:576px;height:192px;" class="grViz html-widget"></div>
-<script type="application/json" data-for="htmlwidget-4e418d0e777bcf5e8b2b">{"x":{"diagram":"graph {\n    rankdir=LR; // Left to Right, instead of Top to Bottom\n    a -- { b c d };\n    b -- { c e };\n    c -- { e f };\n    d -- { f g };\n    e -- h;\n    f -- { h i j g };\n    g -- k;\n    h -- { o l };\n    i -- { l m j };\n    j -- { m n k };\n    k -- { n r };\n    l -- { o m };\n    m -- { o p n };\n    n -- { q r };\n    o -- { s p };\n    p -- { s t q };\n    q -- { t r };\n    r -- t;\n    s -- z;\n    t -- z;\n}","config":{"engine":"dot","options":null}},"evals":[],"jsHooks":[]}</script>
+<div id="htmlwidget-7ded59f4b1e32ea1fd21" style="width:576px;height:192px;" class="grViz html-widget"></div>
+<script type="application/json" data-for="htmlwidget-7ded59f4b1e32ea1fd21">{"x":{"diagram":"graph {\n    rankdir=LR; // Left to Right, instead of Top to Bottom\n    a -- { b c d };\n    b -- { c e };\n    c -- { e f };\n    d -- { f g };\n    e -- h;\n    f -- { h i j g };\n    g -- k;\n    h -- { o l };\n    i -- { l m j };\n    j -- { m n k };\n    k -- { n r };\n    l -- { o m };\n    m -- { o p n };\n    n -- { q r };\n    o -- { s p };\n    p -- { s t q };\n    q -- { t r };\n    r -- t;\n    s -- z;\n    t -- z;\n}","config":{"engine":"dot","options":null}},"evals":[],"jsHooks":[]}</script>
 </div>
 <p>Note that since this diagram is much wider than it is tall, we specify <code>distill.layout=&quot;l-page&quot;</code> to provide adequate horizontal layout space and <code>fig.height=2</code> to ensure the correct aspect ratio. See the documentation on <a href="figures.html">figure layout</a> for details on all available layout options.</p>
 <p>See the documentation on <a href="diagrams.html">diagrams</a> to learn more.</p>
@@ -281,7 +273,7 @@ describing what each author did.</code></pre>
 </div>
 </d-article>
 
-<d-appendix class="centered">
+<d-appendix >
 </d-appendix>
 
   <div class="distill-footer">

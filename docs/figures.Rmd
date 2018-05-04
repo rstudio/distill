@@ -20,67 +20,35 @@ For example, a plot with the default `l-body` layout would look like this:
 include_graphics("images/l-body-figure.png")
 ```
 
-For elements you want to display a little larger, try these:
 
-<div class="fake-img l-middle"><p>l-middle</p></div>
+For elements you want to display a little larger, try `l-body-outset` or `l-page`:
+
+<div class="fake-img l-body-outset"><p>l-body-outset</p></div>
 
 <div class="fake-img l-page"><p>l-page</p></div>
 
-For example, here the `l-middle` layout is selected using the `distill.layout` chunk option:
+For example, here the `l-body-outset` layout is selected using the `distill.layout` chunk option:
 
 ````clike
-```{r, distill.layout="l-middle", fig.width=6, fig.height=1.5}`r ''`
+```{r, distill.layout="l-body-outset", fig.width=6, fig.height=1.5}`r ''`
 library(ggplot2)
 ggplot(diamonds, aes(carat, price)) + geom_smooth() +
   facet_grid(~ cut)
 ```
 ````
     
-```{r, distill.layout="l-middle"}
+```{r, distill.layout="l-body-outset"}
 include_graphics("images/l-middle-figure.png")
 ```
 
 Note that when specifying an alternate `distill.layout` you should also specify an appropriate `fig.width` and `fig.height` for that layout.
 
-All of these have an `outset` variant if you want to poke out from the body text a little bit. For instance:
-
-<div class="fake-img l-body-outset"><p>l-body-outset</p></div>
-
-<div class="fake-img l-middle-outset"><p>l-middle-outset</p></div>
-
-<div class="fake-img l-page-outset"><p>l-page-outset</p></div>
-
-Occasionally you’ll want to use the full browser width. For this, use `l-screen`. You can also inset the element a little from the edge of the browser by using the inset variant:
+Occasionally you’ll want to use the full browser width. For this, use `l-screen`:
 
 <div class="fake-img l-screen"><p>l-screen</p></div>
 
-<div class="fake-img l-screen-inset"><p>l-screen-inset</p></div>
+If you want a bit space at the edges then you can use the `l-screen-inset` layout, which adds 15 pixels of padding to each side.
 
-Often you want to position smaller figures so as not to completely interrupt the flow of your text. For these cases we’ll add the `side` class to our layouts:
-
-<div class="fake-img l-body side"><p>l-body side</p></div>
-
-<div class="fake-img l-middle side"><p>l-middle side</p></div>
-
-<div class="fake-img l-page side"><p>l-page side</p></div>
-
-They are all floated to the right and anchored to the right-hand edge of the position you specify. By default, each will take up approximately half of the width of the standard layout position.
-
-Here's an example of floating a figure to the right using the `distill.layout` option:
-
-````clike
-```{r, distill.layout="l-page side", fig.width=5, fig.height=2}`r ''`
-ggplot(mtcars, aes(wt, hp)) + geom_point() + 
-  geom_smooth(method = 'lm') +
-  facet_grid(~ gear)
-```
-````
-
-```{r, distill.layout="l-page side"}
-include_graphics("images/l-page-side-figure.png")
-```
-
-The figure will be displayed to the right using the requested layout boundary. Note that we also specify values for `fig.width` and `fig.height` that are appropriate for this layout.
 
 ### Static images
 
@@ -93,7 +61,7 @@ To include static images that occupy the full width of the article text, be sure
 To include a static images that adheres to a Disill layout, wrap it in a `<div>` tag with the appropriate `class`. For example:
 
 ```markdown
-<div class="l-middle">
+<div class="l-body-outset">
 ![](images/figure.png){width=100%}  
 </div>
 ```
@@ -101,7 +69,7 @@ To include a static images that adheres to a Disill layout, wrap it in a `<div>`
 Alternatively, you can use the `knitr::include_graphics()` function within an R code chunk:
 
 ````clike
-```{r, distill.layout="l-middle"}`r ''`
+```{r, distill.layout="l-body-outset"}`r ''`
 library(knitr)
 include_graphics("images/figure.png")
 ```
