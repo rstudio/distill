@@ -1,17 +1,17 @@
 
 
 (function($) {
-    $.fn.changeElementType = function(newType) {
-        var attrs = {};
+  $.fn.changeElementType = function(newType) {
+    var attrs = {};
 
-        $.each(this[0].attributes, function(idx, attr) {
-            attrs[attr.nodeName] = attr.nodeValue;
-        });
+    $.each(this[0].attributes, function(idx, attr) {
+      attrs[attr.nodeName] = attr.nodeValue;
+    });
 
-        this.replaceWith(function() {
-            return $("<" + newType + "/>", attrs).append($(this).contents());
-        });
-    };
+    this.replaceWith(function() {
+      return $("<" + newType + "/>", attrs).append($(this).contents());
+    });
+  };
 })(jQuery);
 
 window.document.addEventListener("DOMContentLoaded", function (event) {
@@ -66,17 +66,22 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
   $('pre>code').each(function(i, val) {
     var code = $(this);
     var pre = code.parent();
-    var language = pre.attr('class') || "none";
-    if ($.inArray(language, ["r", "cpp", "c", "java"]) != -1)
-      language = "clike";
-    language = ' language="' + language + '"';
-    var dt_code = $('<d-code block' + language + '></d-code>');
-    dt_code.text(code.text());
-    if (pre.parent().is('.distill-layout-chunk')) {
-      dt_code.insertBefore(pre.parent());
-      pre.remove();
+    var clz = "";
+    var language = pre.attr('class');
+    if (language) {
+      if ($.inArray(language, ["r", "cpp", "c", "java"]) != -1)
+        language = "clike";
+      language = ' language="' + language + '"';
+      var dt_code = $('<d-code block' + language + clz + '></d-code>');
+      dt_code.text(code.text());
+      if (pre.parent().is('.distill-layout-chunk')) {
+        dt_code.insertBefore(pre.parent());
+        pre.remove();
+      } else {
+        pre.replaceWith(dt_code);
+      }
     } else {
-      pre.replaceWith(dt_code);
+      code.addClass('text-output').unwrap().changeElementType('pre');
     }
   });
 

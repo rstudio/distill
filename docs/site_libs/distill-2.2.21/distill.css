@@ -19,12 +19,25 @@
   text-align: left;
 }
 
+.pagedtable-footer {
+  font-size: 15px;
+}
+
+d-article table th, d-article table td {
+  padding: 7px 10px;
+}
+
 .html-widget {
   margin-bottom: 2.0em;
 }
 
 .l-screen-inset {
   padding-right: 16px;
+}
+
+.text-output {
+  margin-top: 0;
+  line-height: 1em;
 }
 
 @media print {

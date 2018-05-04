@@ -216,7 +216,7 @@ distill_article <- function(fig_width = 6,
 html_dependency_distill <- function() {
   htmltools::htmlDependency(
     name = "distill",
-    version = "2.0",
+    version = "2.2.21",
     src = system.file("rmarkdown/templates/distill_article/resources/distill-2.0",
                       package = "distill"),
     script = c("distill.js", "template.v2.js", "distill-post.js"),

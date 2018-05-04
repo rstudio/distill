@@ -30,9 +30,11 @@ bibliography: biblio.bib
         - distillRow/distillRow
 
 - One more shot at improved width for 1000/1100
+- only 1 author showing right now
 - create author section using pandoc
 - test out aside tag
 - take another shot at load latency (hiding the dom is not great)
+   - is the problem just DiagrammeR / GraphViz
 
 - web page metadata generation/redaction (see expandData)
 - article metadata (DOI, citation, etc.)
@@ -179,7 +181,7 @@ Inline and display equations are supported via standard markdown [MathJax](https
     $$
     \sigma = \sqrt{ \frac{1}{N} \sum_{i=1}^N (x_i -\mu)^2}
     $$
-    
+  
 Will be rendered as:
 
 $$
@@ -193,7 +195,7 @@ Bibtex is the supported way of making academic citations. To include citations, 
 
 For example, your bibliography file might contain:
 
-```bibtex
+```markup
 @Book{xie2015,
   title = {Dynamic Documents with R and knitr},
   author = {Yihui Xie},

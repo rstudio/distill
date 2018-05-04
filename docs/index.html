@@ -15,10 +15,10 @@ body {
 </style>
 
   <script src="site_libs/jquery-1.11.3/jquery.min.js"></script>
-  <link href="site_libs/distill-2.0/distill.css" rel="stylesheet" />
-  <script src="site_libs/distill-2.0/distill.js"></script>
-  <script src="site_libs/distill-2.0/template.v2.js"></script>
-  <script src="site_libs/distill-2.0/distill-post.js"></script>
+  <link href="site_libs/distill-2.2.21/distill.css" rel="stylesheet" />
+  <script src="site_libs/distill-2.2.21/distill.js"></script>
+  <script src="site_libs/distill-2.2.21/template.v2.js"></script>
+  <script src="site_libs/distill-2.2.21/distill-post.js"></script>
   <link href="site_libs/pagedtable-1.1/css/pagedtable.css" rel="stylesheet" />
   <script src="site_libs/pagedtable-1.1/js/pagedtable.js"></script>
   <script src="site_libs/htmlwidgets-1.2/htmlwidgets.js"></script>
@@ -36,16 +36,6 @@ body {
   </script>
 
 <style type="text/css">
-pre>code {
-  white-space: pre-wrap;
-  line-height: 1.5;
-}
-d-article table th, d-article table td {
-  padding: 7px 10px;
-}
-.pagedtable-footer {
-  font-size: 15px;
-}
 </style>
 
 
@@ -92,9 +82,11 @@ d-article table th, d-article table td {
         - distillRow/distillRow
 
 - One more shot at improved width for 1000/1100
+- only 1 author showing right now
 - create author section using pandoc
 - test out aside tag
 - take another shot at load latency (hiding the dom is not great)
+   - is the problem just DiagrammeR / GraphViz
 
 - web page metadata generation/redaction (see expandData)
 - article metadata (DOI, citation, etc.)
@@ -185,8 +177,8 @@ library(DiagrammeR)
 grViz(&quot;images/graph.gv&quot;)
 ```</code></pre>
 <div class="distill-layout-chunk l-page">
-<div id="htmlwidget-7ded59f4b1e32ea1fd21" style="width:576px;height:192px;" class="grViz html-widget"></div>
-<script type="application/json" data-for="htmlwidget-7ded59f4b1e32ea1fd21">{"x":{"diagram":"graph {\n    rankdir=LR; // Left to Right, instead of Top to Bottom\n    a -- { b c d };\n    b -- { c e };\n    c -- { e f };\n    d -- { f g };\n    e -- h;\n    f -- { h i j g };\n    g -- k;\n    h -- { o l };\n    i -- { l m j };\n    j -- { m n k };\n    k -- { n r };\n    l -- { o m };\n    m -- { o p n };\n    n -- { q r };\n    o -- { s p };\n    p -- { s t q };\n    q -- { t r };\n    r -- t;\n    s -- z;\n    t -- z;\n}","config":{"engine":"dot","options":null}},"evals":[],"jsHooks":[]}</script>
+<div id="htmlwidget-54ddc7d39a7dc7e2354e" style="width:576px;height:192px;" class="grViz html-widget"></div>
+<script type="application/json" data-for="htmlwidget-54ddc7d39a7dc7e2354e">{"x":{"diagram":"graph {\n    rankdir=LR; // Left to Right, instead of Top to Bottom\n    a -- { b c d };\n    b -- { c e };\n    c -- { e f };\n    d -- { f g };\n    e -- h;\n    f -- { h i j g };\n    g -- k;\n    h -- { o l };\n    i -- { l m j };\n    j -- { m n k };\n    k -- { n r };\n    l -- { o m };\n    m -- { o p n };\n    n -- { q r };\n    o -- { s p };\n    p -- { s t q };\n    q -- { t r };\n    r -- t;\n    s -- z;\n    t -- z;\n}","config":{"engine":"dot","options":null}},"evals":[],"jsHooks":[]}</script>
 </div>
 <p>Note that since this diagram is much wider than it is tall, we specify <code>distill.layout=&quot;l-page&quot;</code> to provide adequate horizontal layout space and <code>fig.height=2</code> to ensure the correct aspect ratio. See the documentation on <a href="figures.html">figure layout</a> for details on all available layout options.</p>
 <p>See the documentation on <a href="diagrams.html">diagrams</a> to learn more.</p>
@@ -203,7 +195,7 @@ $$</code></pre>
 <h2 id="citations">Citations</h2>
 <p>Bibtex is the supported way of making academic citations. To include citations, first create a bibtex file and refer to it from the <code>bibliography</code> field of the YAML front-matter (as <a href="#front-matter">illustrated above</a>).</p>
 <p>For example, your bibliography file might contain:</p>
-<pre class="bibtex"><code>
+<pre class="markup"><code>
 @Book{xie2015,
   title = {Dynamic Documents with R and knitr},
   author = {Yihui Xie},
@@ -257,7 +249,7 @@ describing what each author did.</code></pre>
 <p>Distill for R Markdown builds on the work of many individuals and projects. <a href="https://github.com/shancarter">Shan Carter</a>, <a href="https://github.com/ludwigschubert">Ludwig Schubert</a>, and <a href="https://github.com/colah">Christopher Olah</a> created the Distill web framework. <a href="https://github.com/jgm">John MacFarlane</a> created the Pandoc universal markup converter. <a href="https://github.com/dpvc">Davide Cervone</a> and <a href="https://github.com/zorkow">Volker Sorge</a> created the MathJax library for rendering mathmatical notation on the web. <a href="https://github.com/mbostock">Mike Bostock</a> created the D3 library for producing dynamic, interactive data visualizations for the web. We are grateful for the spirit of generousity that moved these individuals to create high-quality open source software for the benefit of all.</p>
 <div id="refs" class="references">
 <div id="ref-knuth1984">
-<p>Knuth, Donald E. 1984. “Literate Programming.” <em>The Computer Journal</em> 27 (2). British Computer Society:97–111.</p>
+<p>Knuth, Donald E. 1984. “Literate Programming.” <em>The Computer Journal</em> 27 (2). British Computer Society: 97–111.</p>
 </div>
 <div id="ref-xie2015">
 <p>Xie, Yihui. 2015. <em>Dynamic Documents with R and Knitr</em>. 2nd ed. Boca Raton, Florida: Chapman; Hall/CRC. <a href="http://yihui.name/knitr/" class="uri">http://yihui.name/knitr/</a>.</p>
