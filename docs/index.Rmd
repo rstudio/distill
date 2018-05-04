@@ -2,19 +2,19 @@
 title: "Distill for R Markdown"
 description: | 
   A format devoted to clear explanations, native to the web
-authors:
-  - author: "JJ Allaire"
-    authorURL: https://github.com/jjallaire
+author:
+  - name: "JJ Allaire"
+    url: https://github.com/jjallaire
     affiliation: RStudio
-    affiliationURL: https://www.rstudio.com
-  - author: "Rich Iannone"
-    authorURL: https://github.com/rich-iannone
+    affiliation_url: https://www.rstudio.com
+  - name: "Rich Iannone"
+    url: https://github.com/rich-iannone
     affiliation: RStudio
-    affiliationURL: https://www.rstudio.com
-  - author: "Yihui Xie"
-    authorURL: https://github.com/yihui
+    affiliation_url: https://www.rstudio.com
+  - name: "Yihui Xie"
+    url: https://github.com/yihui
     affiliation: RStudio
-    affiliationURL: https://www.rstudio.com
+    affiliation_url: https://www.rstudio.com
 bibliography: biblio.bib
 ---
 
@@ -31,6 +31,7 @@ bibliography: biblio.bib
 
 - web page metadata generation/redaction (see expandData)
 - article metadata (DOI, citation, etc.)
+
 - index pages (consider using iframes for federated content authoring)
 - site generation
 
@@ -80,18 +81,24 @@ Distill articles use `distill::distill_article` as their output format, and typi
 title: "Distill for R Markdown"
 description: | 
   A format devoted to clear explanations, native to the web
-authors:
-  - JJ Allaire: https://github.com/jjallaire
-  - Rich Iannone: https://github.com/rich-iannone
-  - Yihui Xie: https://github.com/yihui
-affiliations:
-  - RStudio: https://www.rstudio.com
-  - RStudio: https://www.rstudio.com
-  - RStudio: https://www.rstudio.com
-output: distill::distill_article
+author:
+  - name: "JJ Allaire"
+    url: https://github.com/jjallaire
+    affiliation: RStudio
+    affiliation_url: https://www.rstudio.com
+  - name: "Rich Iannone"
+    url: https://github.com/rich-iannone
+    affiliation: RStudio
+    affiliation_url: https://www.rstudio.com
+  - name: "Yihui Xie"
+    url: https://github.com/yihui
+    affiliation: RStudio
+    affiliation_url: https://www.rstudio.com
 bibliography: biblio.bib
 ---
 ```
+
+Note that at a minimum each author must have a `name` and `url` specified (the affiliation fields are optional).
 
 The article's description and author bylines are automatically rendered as part of the title area of the document.
 

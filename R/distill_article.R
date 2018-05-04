@@ -139,6 +139,7 @@ distill_article <- function(fig_width = 6,
     in_header <- c()
     after_body <- c()
 
+
     # write front-matter into script tag
     front_matter <- c(
       '<d-front-matter>',
@@ -146,7 +147,18 @@ distill_article <- function(fig_width = 6,
       jsonlite::toJSON(list(
         title = metadata$title,
         description = metadata$description,
-        authors = if (is.null(metadata$authors)) list() else metadata$authors
+        authors = if (is.null(metadata$author))
+                    list()
+                  else lapply(metadata$author, function(author) {
+                     if (!is.list(author) || is.null(author$name))
+                        stop("author metadata must include name and url fields", call. = FALSE)
+                    list(
+                      author = author$name,
+                      authorURL = author$url,
+                      affiliation = not_null(author$affiliation, "&nbsp;"),
+                      affiliationURL = not_null(author$affiliation_url, "#")
+                    )
+                  })
       ), auto_unbox = TRUE),
       '</script>',
       '</d-front-matter>'

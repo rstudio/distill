@@ -8,6 +8,7 @@
 <title>Distill for R Markdown</title>
 
 
+
 <style type="text/css">
 body {
   display: none;
@@ -70,25 +71,19 @@ body {
 <div class="authors-affiliations grid">
 <h3>Authors</h3>
 <h3>Affiliations</h3>
-  <p class="author">
+    <p class="author">
       <a class="name" href="<a href="https://github.com/jjallaire" class="uri">https://github.com/jjallaire</a>">JJ Allaire</a>
   </p>
-  <p class="affiliation">
-      <a class="affiliation" href="<a href="https://www.rstudio.com" class="uri">https://www.rstudio.com</a>">RStudio</a>
-  </p>
-  <p class="author">
+  <p class="affiliation"><a class="affiliation" href="<a href="https://www.rstudio.com" class="uri">https://www.rstudio.com</a>">RStudio</a></p>
+      <p class="author">
       <a class="name" href="<a href="https://github.com/rich-iannone" class="uri">https://github.com/rich-iannone</a>">Rich Iannone</a>
   </p>
-  <p class="affiliation">
-      <a class="affiliation" href="<a href="https://www.rstudio.com" class="uri">https://www.rstudio.com</a>">RStudio</a>
-  </p>
-  <p class="author">
+  <p class="affiliation"><a class="affiliation" href="<a href="https://www.rstudio.com" class="uri">https://www.rstudio.com</a>">RStudio</a></p>
+      <p class="author">
       <a class="name" href="<a href="https://github.com/yihui" class="uri">https://github.com/yihui</a>">Yihui Xie</a>
   </p>
-  <p class="affiliation">
-      <a class="affiliation" href="<a href="https://www.rstudio.com" class="uri">https://www.rstudio.com</a>">RStudio</a>
-  </p>
-</div>
+  <p class="affiliation"><a class="affiliation" href="<a href="https://www.rstudio.com" class="uri">https://www.rstudio.com</a>">RStudio</a></p>
+  </div>
 </div>
 </d-byline>
 
@@ -106,6 +101,7 @@ body {
 
 - web page metadata generation/redaction (see expandData)
 - article metadata (DOI, citation, etc.)
+
 - index pages (consider using iframes for federated content authoring)
 - site generation
 
@@ -139,17 +135,22 @@ draft(&quot;article.Rmd&quot;, &quot;distill_article&quot;, package = &quot;dist
 title: &quot;Distill for R Markdown&quot;
 description: | 
   A format devoted to clear explanations, native to the web
-authors:
-  - JJ Allaire: https://github.com/jjallaire
-  - Rich Iannone: https://github.com/rich-iannone
-  - Yihui Xie: https://github.com/yihui
-affiliations:
-  - RStudio: https://www.rstudio.com
-  - RStudio: https://www.rstudio.com
-  - RStudio: https://www.rstudio.com
-output: distill::distill_article
+author:
+  - name: &quot;JJ Allaire&quot;
+    url: https://github.com/jjallaire
+    affiliation: RStudio
+    affiliation_url: https://www.rstudio.com
+  - name: &quot;Rich Iannone&quot;
+    url: https://github.com/rich-iannone
+    affiliation: RStudio
+    affiliation_url: https://www.rstudio.com
+  - name: &quot;Yihui Xie&quot;
+    url: https://github.com/yihui
+    affiliation: RStudio
+    affiliation_url: https://www.rstudio.com
 bibliography: biblio.bib
 ---</code></pre>
+<p>Note that at a minimum each author must have a <code>name</code> and <code>url</code> specified (the affiliation fields are optional).</p>
 <p>The article’s description and author bylines are automatically rendered as part of the title area of the document.</p>
 <p>The <code>bibliography</code> field is used to provide a reference to the Bibtex file where all of the sources cited in your article are defined. The <a href="#citations">citations</a> section describes how to include references to these sources in your article.</p>
 <h2 id="figures">Figures</h2>

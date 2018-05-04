@@ -7,6 +7,10 @@
 
 <title>$if(title-prefix)$$title-prefix$ - $endif$$pagetitle$</title>
 
+$for(author-meta)$
+<meta name="author" content="$author-meta$" />
+$endfor$
+
 $if(date-meta)$
   <meta name="date" content="$date-meta$" />
 $endif$
@@ -22,7 +26,7 @@ $for(header-includes)$
 $endfor$
 
 <style type="text/css">
-$if(authors)$
+$if(author)$
 $else$
 d-byline {
   display: none;
@@ -50,19 +54,23 @@ $endif$
 $if(description)$<p>$description$</p>$endif$
 </d-title>
 
-$if(authors)$
+$if(author)$
 <d-byline>
 <div class="byline grid">
 <div class="authors-affiliations grid">
 <h3>Authors</h3>
 <h3>Affiliations</h3>
-$for(authors)$
+$for(author)$
+  $if(author.name)$
   <p class="author">
-      <a class="name" href="$authors.authorURL$">$authors.author$</a>
+      <a class="name" href="$author.url$">$author.name$</a>
   </p>
-  <p class="affiliation">
-      <a class="affiliation" href="$authors.affiliationURL$">$authors.affiliation$</a>
+  <p class="affiliation"><a class="affiliation" href="$author.affiliation_url$">$author.affiliation$</a></p>
+  $else$
+  <p class="author">
+      $author$
   </p>
+  $endif$
 $endfor$
 </div>
 </div>

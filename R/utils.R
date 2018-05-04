@@ -15,3 +15,9 @@ normalize_path <- function(path,
 }
 
 
+not_null <- function(x, default="") {
+  if (is.null(x))
+    default
+  else
+    x
+}
