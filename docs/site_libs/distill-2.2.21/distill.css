@@ -40,6 +40,27 @@ d-article table th, d-article table td {
   line-height: 1em;
 }
 
+@media(min-width: 1100px) {
+  .base-grid,
+  distill-header,
+  d-title,
+  d-abstract,
+  d-article,
+  d-appendix,
+  distill-appendix,
+  d-byline,
+  d-footnote-list,
+  d-citation-list,
+  distill-footer {
+    grid-template-columns: [screen-start] 1fr [page-start kicker-start] 55px [middle-start] 55px [text-start kicker-end] 55px 55px 55px 55px 55px 55px 55px 55px [text-end gutter-start] 55px [middle-end] 55px [page-end gutter-end] 1fr [screen-end];
+    grid-column-gap: 32px;
+  }
+
+  .grid {
+    grid-column-gap: 32px;
+  }
+}
+
 @media print {
 
   @page {

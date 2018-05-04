@@ -50,6 +50,25 @@ $endif$
 $if(description)$<p>$description$</p>$endif$
 </d-title>
 
+$if(authors)$
+<d-byline>
+<div class="byline grid">
+<div class="authors-affiliations grid">
+<h3>Authors</h3>
+<h3>Affiliations</h3>
+$for(authors)$
+  <p class="author">
+      <a class="name" href="$authors.authorURL$">$authors.author$</a>
+  </p>
+  <p class="affiliation">
+      <a class="affiliation" href="$authors.affiliationURL$">$authors.affiliation$</a>
+  </p>
+$endfor$
+</div>
+</div>
+</d-byline>
+$endif$
+
 <d-article>
 $body$
 </d-article>
