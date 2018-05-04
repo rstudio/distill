@@ -8,14 +8,12 @@
 #' layout options for visualizations, and full support for footnotes and
 #' citations.
 #'
-#' @param centered `TRUE` (default) to center the article within the display
 #' @inheritParams rmarkdown::html_document
 #'
 #' @import rmarkdown
 #'
 #' @export
-distill_article <- function(centered = TRUE,
-                            fig_width = 6,
+distill_article <- function(fig_width = 6,
                             fig_height = 4,
                             fig_retina = 2,
                             fig_caption = TRUE,
@@ -44,10 +42,6 @@ distill_article <- function(centered = TRUE,
 
   # prevent highlighting
   args <- c(args, "--no-highlight")
-
-  # forward centered
-  if (centered)
-    args <- c(args, pandoc_variable_arg("centered", "1"))
 
   # additional css
   for (css_file in css)

@@ -31,7 +31,6 @@ bibliography: biblio.bib
 
 - JS error when there are no authors at all (need stub)
 - Some default padding for html-widget (same as img)
-- centered no longer works?
 - create author section using pandoc
 - test out aside tag
 - take another shot at load latency (hiding the dom is not great)
