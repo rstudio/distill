@@ -30,8 +30,6 @@ bibliography: biblio.bib
         - distillRow/distillRow
 
 - test out aside tag
-- take another shot at load latency (hiding the dom is not great)
-   - is the problem just DiagrammeR / GraphViz?
 
 - web page metadata generation/redaction (see expandData)
 - article metadata (DOI, citation, etc.)
