@@ -29,7 +29,7 @@ bibliography: biblio.bib
     - crosstalk compatibility?
         - distillRow/distillRow
 
-- JS error when there are no authors at all (need stub)
+- Test horizontal rules
 - Some default padding for html-widget (same as img)
 - create author section using pandoc
 - test out aside tag

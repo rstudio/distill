@@ -32,6 +32,12 @@ d-article table th, d-article table td {
 .pagedtable-footer {
   font-size: 15px;
 }
+$if(authors)$
+$else$
+d-byline {
+  display: none;
+}
+$endif$
 </style>
 
 
