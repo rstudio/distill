@@ -30,7 +30,6 @@ bibliography: biblio.bib
         - distillRow/distillRow
 
 - One more shot at improved width for 1000/1100
-- only 1 author showing right now
 - create author section using pandoc
 - test out aside tag
 - take another shot at load latency (hiding the dom is not great)

@@ -146,7 +146,7 @@ distill_article <- function(fig_width = 6,
       jsonlite::toJSON(list(
         title = metadata$title,
         description = metadata$description,
-        authors = ifelse(is.null(metadata$authors), list(), metadata$authors)
+        authors = if (is.null(metadata$authors)) list() else metadata$authors
       ), auto_unbox = TRUE),
       '</script>',
       '</d-front-matter>'
