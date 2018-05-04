@@ -147,29 +147,6 @@ Note that we used `distill.layout="l-body-outset"` to cause the table to occupy 
 
 See the documentation on [table display](tables.html) for details on the various techniques available for rendering tables.
 
-## Diagrams
-
-There are many options for including diagrams within Distill articles, including support for [GraphViz](https://www.graphviz.org/), [D3.js](https://d3js.org/), and [SVG](https://en.wikipedia.org/wiki/Scalable_Vector_Graphics) files exported from illustration programs like [Inkscape](https://inkscape.org/en/).
-
-For example, here we use the [DiagrammerR](http://rich-iannone.github.io/DiagrammeR/) package to include a GraphViz illustration:
-
-````clike
-```{r, distill.layout="l-page", fig.height=2}`r ''`
-library(DiagrammeR)
-grViz("images/graph.gv")
-```
-````
-
-```{r, distill.layout="l-page", fig.height=2}
-library(DiagrammeR)
-grViz("images/graph.gv")
-```
-
-Note that since this diagram is much wider than it is tall, we specify `distill.layout="l-page"` to provide adequate horizontal layout space and `fig.height=2` to ensure the correct aspect ratio. See the documentation on [figure layout](figures.html) for details on all available layout options.
-
-See the documentation on [diagrams](diagrams.html) to learn more.
-
-
 ## Equations
 
 Inline and display equations are supported via standard markdown [MathJax](https://www.mathjax.org/) syntax. For example, the following [LaTeX math](https://en.wikibooks.org/wiki/LaTeX/Mathematics):

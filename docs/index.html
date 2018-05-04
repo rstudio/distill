@@ -21,10 +21,6 @@ body {
   <script src="site_libs/distill-2.2.21/distill-post.js"></script>
   <link href="site_libs/pagedtable-1.1/css/pagedtable.css" rel="stylesheet" />
   <script src="site_libs/pagedtable-1.1/js/pagedtable.js"></script>
-  <script src="site_libs/htmlwidgets-1.2/htmlwidgets.js"></script>
-  <script src="site_libs/viz-0.3/viz.js"></script>
-  <link href="site_libs/DiagrammeR-styles-0.2/styles.css" rel="stylesheet" />
-  <script src="site_libs/grViz-binding-1.0.0/grViz.js"></script>
   <d-front-matter>
   <script id="distill-front-matter" type="text/json">
   {"title":"Distill for R Markdown","description":"A format devoted to clear explanations, native to the web\n","authors":[{"author":"JJ Allaire","authorURL":"https://github.com/jjallaire","affiliation":"RStudio","affiliationURL":"https://www.rstudio.com"},{"author":"Rich Iannone","authorURL":"https://github.com/rich-iannone","affiliation":"RStudio","affiliationURL":"https://www.rstudio.com"},{"author":"Yihui Xie","authorURL":"https://github.com/yihui","affiliation":"RStudio","affiliationURL":"https://www.rstudio.com"}]}
@@ -192,20 +188,6 @@ paged_table(mtcars)
 </div>
 <p>Note that we used <code>distill.layout=&quot;l-body-outset&quot;</code> to cause the table to occupy slightly more horizontal space than the article text. All of available <a href="figures.html">figure layout options</a> work as expected for tables.</p>
 <p>See the documentation on <a href="tables.html">table display</a> for details on the various techniques available for rendering tables.</p>
-<h2 id="diagrams">Diagrams</h2>
-<p>There are many options for including diagrams within Distill articles, including support for <a href="https://www.graphviz.org/">GraphViz</a>, <a href="https://d3js.org/">D3.js</a>, and <a href="https://en.wikipedia.org/wiki/Scalable_Vector_Graphics">SVG</a> files exported from illustration programs like <a href="https://inkscape.org/en/">Inkscape</a>.</p>
-<p>For example, here we use the <a href="http://rich-iannone.github.io/DiagrammeR/">DiagrammerR</a> package to include a GraphViz illustration:</p>
-<pre class="clike"><code>
-```{r, distill.layout=&quot;l-page&quot;, fig.height=2}
-library(DiagrammeR)
-grViz(&quot;images/graph.gv&quot;)
-```</code></pre>
-<div class="distill-layout-chunk l-page">
-<div id="htmlwidget-54ddc7d39a7dc7e2354e" style="width:576px;height:192px;" class="grViz html-widget"></div>
-<script type="application/json" data-for="htmlwidget-54ddc7d39a7dc7e2354e">{"x":{"diagram":"graph {\n    rankdir=LR; // Left to Right, instead of Top to Bottom\n    a -- { b c d };\n    b -- { c e };\n    c -- { e f };\n    d -- { f g };\n    e -- h;\n    f -- { h i j g };\n    g -- k;\n    h -- { o l };\n    i -- { l m j };\n    j -- { m n k };\n    k -- { n r };\n    l -- { o m };\n    m -- { o p n };\n    n -- { q r };\n    o -- { s p };\n    p -- { s t q };\n    q -- { t r };\n    r -- t;\n    s -- z;\n    t -- z;\n}","config":{"engine":"dot","options":null}},"evals":[],"jsHooks":[]}</script>
-</div>
-<p>Note that since this diagram is much wider than it is tall, we specify <code>distill.layout=&quot;l-page&quot;</code> to provide adequate horizontal layout space and <code>fig.height=2</code> to ensure the correct aspect ratio. See the documentation on <a href="figures.html">figure layout</a> for details on all available layout options.</p>
-<p>See the documentation on <a href="diagrams.html">diagrams</a> to learn more.</p>
 <h2 id="equations">Equations</h2>
 <p>Inline and display equations are supported via standard markdown <a href="https://www.mathjax.org/">MathJax</a> syntax. For example, the following <a href="https://en.wikibooks.org/wiki/LaTeX/Mathematics">LaTeX math</a>:</p>
 <pre><code>
