@@ -29,8 +29,6 @@ bibliography: biblio.bib
     - crosstalk compatibility?
         - distillRow/distillRow
 
-- test out aside tag
-
 - web page metadata generation/redaction (see expandData)
 - article metadata (DOI, citation, etc.)
 - index pages (consider using iframes for federated content authoring)
@@ -192,19 +190,17 @@ Distill chose a numerical inline citation style to improve readability of citati
 
 Footnotes use standard Pandoc markdown notation, for example `^[This will become a hover-able footnote]`. The number of the footnote will be automatically generated. ^[This will become a hover-able footnote]
 
-You can also optionally include notes in the gutter of the article (immediately to the right of the article text). To do this create a `<div>` with class `l-gutter`. For example:
+You can also optionally include note in the gutter of the article (immediately to the right of the article text). To do this use the `<aside>` tag.
 
-<div class="l-gutter">
+<aside>
 This content will appear in the gutter of the article.
-</div>
-
+</aside>
 
 ```html
-<div class="l-gutter">
+<aside>
 This content will appear in the gutter of the article.
-</div>
+</aside>
 ```
-
 
 ## Code Blocks
 

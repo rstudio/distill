@@ -105,8 +105,6 @@ body {
         - distillRow/distillRow
 
 - test out aside tag
-- take another shot at load latency (hiding the dom is not great)
-   - is the problem just DiagrammeR / GraphViz?
 
 - web page metadata generation/redaction (see expandData)
 - article metadata (DOI, citation, etc.)
@@ -218,14 +216,14 @@ $$</code></pre>
 <p>Distill chose a numerical inline citation style to improve readability of citation dense articles and because many of the benefits of longer citations are obviated by displaying more information on hover. However, we consider it good style to mention author last names if you discuss something at length and it fits into the flow well—the authors are human and it’s nice for them to have the community associate them with their work.</p>
 <h2 id="footnotes">Footnotes</h2>
 <p>Footnotes use standard Pandoc markdown notation, for example <code>^[This will become a hover-able footnote]</code>. The number of the footnote will be automatically generated.<a href="#fn1" class="footnote-ref" id="fnref1"><sup>1</sup></a></p>
-<p>You can also optionally include notes in the gutter of the article (immediately to the right of the article text). To do this create a <code>&lt;div&gt;</code> with class <code>l-gutter</code>. For example:</p>
-<div class="l-gutter">
-<p>This content will appear in the gutter of the article.</p>
-</div>
-<pre class="html"><code>
-&lt;div class=&quot;l-gutter&quot;&gt;
+<p>You can also optionally include note in the gutter of the article (immediately to the right of the article text). To do this use the <code>&lt;aside&gt;</code> tag.</p>
+<aside>
 This content will appear in the gutter of the article.
-&lt;/div&gt;</code></pre>
+</aside>
+<pre class="html"><code>
+&lt;aside&gt;
+This content will appear in the gutter of the article.
+&lt;/aside&gt;</code></pre>
 <h2 id="code-blocks">Code Blocks</h2>
 <p>Syntax highlighting is provided for knitr code chunks. Note that by default the Distill format does not display the code for chunks that are evaluated to produce output (knitr option <code>echo = FALSE</code>).</p>
 <p>To display the code that was evaluated to produce output you can set the <code>echo</code> chunk option to <code>TRUE</code>:</p>
