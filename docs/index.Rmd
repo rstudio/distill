@@ -29,7 +29,7 @@ bibliography: biblio.bib
     - crosstalk compatibility?
         - distillRow/distillRow
 
-- Some default padding for html-widget (same as img)
+- One more shot at improved width for 1000/1100
 - create author section using pandoc
 - test out aside tag
 - take another shot at load latency (hiding the dom is not great)
