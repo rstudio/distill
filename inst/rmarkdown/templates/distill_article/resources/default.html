@@ -7,8 +7,8 @@
 
 <title>$if(title-prefix)$$title-prefix$ - $endif$$pagetitle$</title>
 
-$for(author-meta)$
-<meta name="author" content="$author-meta$" />
+$for(author)$
+<meta name="author" content="$author.name$" />
 $endfor$
 
 $if(date-meta)$
