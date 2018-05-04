@@ -20,6 +20,7 @@
   grid-column-gap: 8px;
 }
 
+/* This caused the menu to dissapear at some widths
 @media(min-width: 768px) {
   .distill-header,
   .distill-footer {
@@ -27,6 +28,7 @@
     grid-column-gap: 16px;
   }
 }
+*/
 
 @media(min-width: 1000px) {
   .distill-header,
