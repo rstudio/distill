@@ -23,6 +23,10 @@
   margin-bottom: 2.0em;
 }
 
+.l-screen-inset {
+  padding-right: 16px;
+}
+
 @media print {
 
   @page {

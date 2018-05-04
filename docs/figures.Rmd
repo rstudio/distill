@@ -47,7 +47,24 @@ Occasionally you’ll want to use the full browser width. For this, use `l-scree
 
 <div class="fake-img l-screen"><p>l-screen</p></div>
 
-If you want a bit space at the edges then you can use the `l-screen-inset` layout, which adds 15 pixels of padding to each side.
+If you want a bit space at the edges then you can use the `l-screen-inset` layout, which adds 15 pixels of padding to each side. Here we use `l-screen-inset` to display a Leaflet map:
+
+````clike
+```{r, distill.layout="l-screen-inset"}`r ''`
+library(leaflet)
+leaflet() %>%
+  addTiles() %>%  # Add default OpenStreetMap map tiles
+  addMarkers(lng=174.768, lat=-36.852, popup="The birthplace of R")
+```
+````
+
+```{r, distill.layout="l-screen-inset"}
+library(leaflet)
+leaflet() %>%
+  addTiles() %>%  # Add default OpenStreetMap map tiles
+  addMarkers(lng=174.768, lat=-36.852, popup="The birthplace of R")
+```
+
 
 
 ### Static images
