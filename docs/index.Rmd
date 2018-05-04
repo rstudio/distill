@@ -2,6 +2,7 @@
 title: "Distill for R Markdown"
 description: | 
   A format devoted to clear explanations, native to the web
+date: May 4, 2018
 author:
   - name: "JJ Allaire"
     url: https://github.com/jjallaire
@@ -28,9 +29,10 @@ bibliography: biblio.bib
     "full bleed"
     - crosstalk compatibility?
         - distillRow/distillRow
-
+- may need separate metadata section in the docs
 - web page metadata generation/redaction (see expandData)
 - article metadata (DOI, citation, etc.)
+- https://github.com/distillpub/template/blob/master/src/transforms/meta.js
 
 - index pages (consider using iframes for federated content authoring)
 - site generation
@@ -74,13 +76,14 @@ draft("article.Rmd", "distill_article", package = "distill")
 
 <div id="front-matter"></div>
 
-Distill articles use `distill::distill_article` as their output format, and typically include title, description, author/affiliation, and bibliography entries in their YAML front-matter:
+Distill articles use `distill::distill_article` as their output format, and typically include title, description, date, author/affiliation, and bibliography entries in their YAML front-matter:
 
 ```markup
 ---
 title: "Distill for R Markdown"
 description: | 
   A format devoted to clear explanations, native to the web
+date: May 4, 2018
 author:
   - name: "JJ Allaire"
     url: https://github.com/jjallaire
@@ -98,7 +101,7 @@ bibliography: biblio.bib
 ---
 ```
 
-Note that at a minimum each author must have a `name` and `url` specified (the affiliation fields are optional).
+Author entires must have at least `name` and `url` specified (the affiliation fields are optional). The `date` field should be formatted as month, day, year (various notations are supported as long as the compontents appear in that order).
 
 The article's description and author bylines are automatically rendered as part of the title area of the document.
 

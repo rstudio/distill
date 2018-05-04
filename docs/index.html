@@ -7,16 +7,11 @@
 
 <title>Distill for R Markdown</title>
 
-<meta name="author" content="JJ Allaire" />
-<meta name="author" content="Rich Iannone" />
-<meta name="author" content="Yihui Xie" />
+<meta name="article:author" content="JJ Allaire" />
+<meta name="article:author" content="Rich Iannone" />
+<meta name="article:author" content="Yihui Xie" />
 
-
-<style type="text/css">
-body {
-  display: none;
-}
-</style>
+<meta name="date" content="2018-05-04" />
 
   <script src="site_libs/jquery-1.11.3/jquery.min.js"></script>
   <link href="site_libs/distill-2.2.21/distill.css" rel="stylesheet" />
@@ -27,7 +22,7 @@ body {
   <script src="site_libs/pagedtable-1.1/js/pagedtable.js"></script>
   <d-front-matter>
   <script id="distill-front-matter" type="text/json">
-  {"title":"Distill for R Markdown","description":"A format devoted to clear explanations, native to the web\n","authors":[{"author":"JJ Allaire","authorURL":"https://github.com/jjallaire","affiliation":"RStudio","affiliationURL":"https://www.rstudio.com"},{"author":"Rich Iannone","authorURL":"https://github.com/rich-iannone","affiliation":"RStudio","affiliationURL":"https://www.rstudio.com"},{"author":"Yihui Xie","authorURL":"https://github.com/yihui","affiliation":"RStudio","affiliationURL":"https://www.rstudio.com"}]}
+  {"title":"Distill for R Markdown","description":"A format devoted to clear explanations, native to the web\n","authors":[{"author":"JJ Allaire","authorURL":"https://github.com/jjallaire","affiliation":"RStudio","affiliationURL":"https://www.rstudio.com"},{"author":"Rich Iannone","authorURL":"https://github.com/rich-iannone","affiliation":"RStudio","affiliationURL":"https://www.rstudio.com"},{"author":"Yihui Xie","authorURL":"https://github.com/yihui","affiliation":"RStudio","affiliationURL":"https://www.rstudio.com"}],"publishedDate":"2018-05-04T00:00:00.000-0400"}
   </script>
   </d-front-matter>
   <script type="text/javascript">
@@ -104,6 +99,7 @@ body {
 
 - web page metadata generation/redaction (see expandData)
 - article metadata (DOI, citation, etc.)
+- https://github.com/distillpub/template/blob/master/src/transforms/meta.js
 
 - index pages (consider using iframes for federated content authoring)
 - site generation
@@ -132,12 +128,13 @@ draft(&quot;article.Rmd&quot;, &quot;distill_article&quot;, package = &quot;dist
 <div id="front-matter">
 
 </div>
-<p>Distill articles use <code>distill::distill_article</code> as their output format, and typically include title, description, author/affiliation, and bibliography entries in their YAML front-matter:</p>
+<p>Distill articles use <code>distill::distill_article</code> as their output format, and typically include title, description, date, author/affiliation, and bibliography entries in their YAML front-matter:</p>
 <pre class="markup"><code>
 ---
 title: &quot;Distill for R Markdown&quot;
 description: | 
   A format devoted to clear explanations, native to the web
+date: May 4, 2018
 author:
   - name: &quot;JJ Allaire&quot;
     url: https://github.com/jjallaire
@@ -153,7 +150,7 @@ author:
     affiliation_url: https://www.rstudio.com
 bibliography: biblio.bib
 ---</code></pre>
-<p>Note that at a minimum each author must have a <code>name</code> and <code>url</code> specified (the affiliation fields are optional).</p>
+<p>Author entires must have at least <code>name</code> and <code>url</code> specified (the affiliation fields are optional). The <code>date</code> field should be formatted as month, day, year (various notations are supported as long as the compontents appear in that order).</p>
 <p>The article’s description and author bylines are automatically rendered as part of the title area of the document.</p>
 <p>The <code>bibliography</code> field is used to provide a reference to the Bibtex file where all of the sources cited in your article are defined. The <a href="#citations">citations</a> section describes how to include references to these sources in your article.</p>
 <h2 id="figures">Figures</h2>

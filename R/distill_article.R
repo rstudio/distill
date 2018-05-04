@@ -139,32 +139,16 @@ distill_article <- function(fig_width = 6,
     in_header <- c()
     after_body <- c()
 
-
     # write front-matter into script tag
-    front_matter <- c(
+    front_matter_tag <- c(
       '<d-front-matter>',
       '<script id="distill-front-matter" type="text/json">',
-      jsonlite::toJSON(list(
-        title = metadata$title,
-        description = metadata$description,
-        authors = if (is.null(metadata$author))
-                    list()
-                  else lapply(metadata$author, function(author) {
-                     if (!is.list(author) || is.null(author$name))
-                        stop("author metadata must include name and url fields", call. = FALSE)
-                    list(
-                      author = author$name,
-                      authorURL = author$url,
-                      affiliation = not_null(author$affiliation, "&nbsp;"),
-                      affiliationURL = not_null(author$affiliation_url, "#")
-                    )
-                  })
-      ), auto_unbox = TRUE),
+      front_matter_from_metadata(metadata),
       '</script>',
       '</d-front-matter>'
     )
     front_matter_file <- tempfile(fileext = "html")
-    writeLines(front_matter, front_matter_file)
+    writeLines(front_matter_tag, front_matter_file)
     in_header <- c(in_header, front_matter_file)
 
     # write distill_metadata into script tag
@@ -251,6 +235,30 @@ include_args_from_site_config <- function(config, runtime) {
                             identity)
 }
 
+front_matter_from_metadata <- function(metadata) {
+  front_matter <- list()
+  front_matter$title <- metadata$title
+  front_matter$description <- metadata$description
+  front_matter$authors <-
+    if (is.null(metadata$author))
+      list()
+    else lapply(metadata$author, function(author) {
+       if (!is.list(author) || is.null(author$name))
+          stop("author metadata must include name and url fields", call. = FALSE)
+      list(
+        author = author$name,
+        authorURL = author$url,
+        affiliation = not_null(author$affiliation, "&nbsp;"),
+        affiliationURL = not_null(author$affiliation_url, "#")
+      )
+    })
+  if (!is.null(metadata$date)) {
+    date <- lubridate::mdy(metadata$date, tz = Sys.timezone(), quiet = TRUE)
+    if (lubridate::is.POSIXct(date))
+      front_matter$publishedDate <- format.Date(date, "%Y-%m-%dT00:00:00.000%z")
+  }
+  jsonlite::toJSON(front_matter, auto_unbox = TRUE)
+}
 
 block_class = function(x){
   if (length(x) == 0) return()

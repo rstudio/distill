@@ -1,4 +1,10 @@
 
+/* Hide doc at startup (prevent jankiness while JS renders/transforms) */
+
+body {
+  display: none;
+}
+
 /* Hide pandoc bibliography and footnotes  */
 
 #refs, .footnotes {

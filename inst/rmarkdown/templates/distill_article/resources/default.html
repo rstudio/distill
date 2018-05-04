@@ -8,18 +8,12 @@
 <title>$if(title-prefix)$$title-prefix$ - $endif$$pagetitle$</title>
 
 $for(author)$
-<meta name="author" content="$author.name$" />
+<meta name="article:author" content="$author.name$" />
 $endfor$
 
 $if(date-meta)$
-  <meta name="date" content="$date-meta$" />
+<meta name="date" content="$date-meta$" />
 $endif$
-
-<style type="text/css">
-body {
-  display: none;
-}
-</style>
 
 $for(header-includes)$
   $header-includes$
