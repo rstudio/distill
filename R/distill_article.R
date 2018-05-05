@@ -156,6 +156,15 @@ in_header_includes <- function(metadata) {
 
   in_header <- c()
 
+  # links
+  links <- list()
+  if (!is.null(metadata$url)) {
+    links[[1]] <- tags$link(
+      rel="cannonical",
+      href = metadata$url
+    )
+  }
+
   # date meta tag
   date_meta <- list()
   if (!is.null(metadata$date)) {
@@ -173,7 +182,11 @@ in_header_includes <- function(metadata) {
   })
 
   # render meta tags
-  meta_tags <- do.call(tagList, list(date_meta, author_meta))
+  meta_tags <- do.call(tagList, list(
+    links,
+    date_meta,
+    author_meta
+  ))
   meta_html <- as.character(meta_tags)
   meta_file <- tempfile(fileext = "html")
   writeLines(meta_html, meta_file)
