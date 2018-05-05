@@ -38,6 +38,9 @@ bibliography: biblio.bib
 - article metadata (DOI, citation, etc.)
 - https://github.com/distillpub/template/blob/master/src/transforms/meta.js
 
+- consdier using figure tag? (css advantages?)
+- use pandoc filters more?
+
 - index pages (consider using iframes for federated content authoring)
 - site generation
 
@@ -120,6 +123,7 @@ Distill provides a number of options for laying out figures within your article.
 However, some figures benefit from using additional horizontal space. In this cases the `distill.layout` chunk option enables you to specify a wide variety of other layouts. 
 
 For example, if we wanted to display a figure a bit outside the bounds of the article text, we could specify the `l-body-outset` layout via the `distill.layout` chunk option:
+
 
 ````clike
 ```{r, distill.layout="l-body-outset", fig.width=6, fig.height=1.5}`r ''`

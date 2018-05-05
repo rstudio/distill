@@ -46,6 +46,8 @@ d-article table th, d-article table td {
   line-height: 1em;
 }
 
+/* Add an additional media break (since the text column was a bit narrow at 1100px) */
+
 @media(min-width: 1100px) {
   .base-grid,
   distill-header,
@@ -67,25 +69,4 @@ d-article table th, d-article table td {
   }
 }
 
-@media print {
-
-  @page {
-    size: 8in 11in;
-    @bottom-right {
-      content: counter(page) " of " counter(pages);
-    }
-  }
-
-  html {
-    /* no general margins -- CSS Grid takes care of those */
-  }
-
-  p, code {
-    page-break-inside: avoid;
-  }
-
-  h2, h3 {
-    page-break-after: avoid;
-  }
-}
 

@@ -81,95 +81,23 @@ distill_article <- function(fig_width = 6,
 
   # hook to ensure newline at the beginning of chunks
   knitr_options$knit_hooks <- list()
-  knitr_options$knit_hooks$source  <- function(x, options) {
+  knitr_options$knit_hooks$source <- knitr_source_hook
+  knitr_options$knit_hooks$chunk <- knitr_chunk_hook
 
-    # determine language/class
-    language <- tolower(options$engine)
-    if (language == 'node') language <- 'javascript'
-    if (!is.null(options$class.source))
-      language <- block_class(c(language, options$class.source))
-
-    # pad newline if necessary
-    if (length(x) > 0 && !nzchar(x[[1]]))
-      x <- c("", x)
-
-    # form output
-    paste(
-      '',
-      sprintf('```%s', language),
-      '',
-      paste0(x, collapse = '\n'),
-      '```',
-      '',
-      sep = '\n'
-    )
-  }
-
-  # hook to apply distill.layout
-  knitr_options$knit_hooks$chunk  <- function(x, options) {
-    if (is.null(options$distill.layout))
-      options$distill.layout <- "l-body"
-    paste0(
-      '<div class="distill-layout-chunk ', options$distill.layout, '">',
-      x,
-      '</div>'
-    )
-  }
-
+  # post-knit
   post_knit <- function(metadata, input_file, runtime, encoding, ...) {
-
-    # extra args
-    args <- c()
-
-    # get site_config and generate additional header/footer html
     config <- site_config(input_file, encoding)
-    args <- c(args, include_args_from_site_config(config, runtime))
-
-    # return args
-    args
+    include_args_from_site_config(config, runtime)
   }
 
   # preprocessor
   pre_processor <- function (metadata, input_file, runtime, knit_meta,
                              files_dir, output_dir) {
-
-    args <- c()
-
-    # files to write into the header/footer
-    in_header <- c()
-    after_body <- c()
-
-    # write front-matter into script tag
-    front_matter_tag <- c(
-      '<d-front-matter>',
-      '<script id="distill-front-matter" type="text/json">',
-      front_matter_from_metadata(metadata),
-      '</script>',
-      '</d-front-matter>'
+    pandoc_include_args(
+      in_header = in_header_includes(metadata),
+      before_body = before_body_includes(metadata),
+      after_body = after_body_includes(metadata)
     )
-    front_matter_file <- tempfile(fileext = "html")
-    writeLines(front_matter_tag, front_matter_file)
-    in_header <- c(in_header, front_matter_file)
-
-    # write bibliography into tag
-    if (!is.null(metadata$bibliography)) {
-      bibliography_file <-  tempfile(fileext = "html")
-      writeLines(c(
-        '<d-bibliography>',
-        '<script type="text/bibtex">',
-        readLines(metadata$bibliography, warn = FALSE),
-        '</script>',
-        '</d-bibliography>'
-      ), con = bibliography_file)
-      after_body <- c(after_body, bibliography_file)
-    }
-
-
-    # include files in the header
-    args <- c(args, pandoc_include_args(in_header = in_header, after_body = after_body))
-
-    # return args
-    args
   }
 
   # return format
@@ -207,19 +135,53 @@ html_dependency_distill <- function() {
   )
 }
 
-include_args_from_site_config <- function(config, runtime) {
+in_header_includes <- function(metadata) {
 
-  includes <- list(
-    in_header = NULL,
-    before_body = NULL,
-    after_body = NULL
+  in_header <- c()
+
+  # write front-matter into script tag
+  front_matter_tag <- c(
+    '<d-front-matter>',
+    '<script id="distill-front-matter" type="text/json">',
+    front_matter_from_metadata(metadata),
+    '</script>',
+    '</d-front-matter>'
   )
+  front_matter_file <- tempfile(fileext = "html")
+  writeLines(front_matter_tag, front_matter_file)
+  in_header <- c(in_header, front_matter_file)
 
-  includes_to_pandoc_args(includes,
-                          filter = if (is_shiny_classic(runtime))
-                            function(x) normalize_path(x, mustWork = FALSE)
-                          else
-                            identity)
+  in_header
+
+}
+
+
+before_body_includes <- function(metadata) {
+
+  before_body <- c()
+
+  before_body
+}
+
+
+after_body_includes <- function(metadata) {
+
+  after_body <- c()
+
+  # write bibliography after body
+  if (!is.null(metadata$bibliography)) {
+    bibliography_file <-  tempfile(fileext = "html")
+    writeLines(c(
+      '<d-bibliography>',
+      '<script type="text/bibtex">',
+      readLines(metadata$bibliography, warn = FALSE),
+      '</script>',
+      '</d-bibliography>'
+    ), con = bibliography_file)
+    after_body <- c(after_body, bibliography_file)
+  }
+
+  after_body
 }
 
 front_matter_from_metadata <- function(metadata) {
@@ -245,6 +207,56 @@ front_matter_from_metadata <- function(metadata) {
       front_matter$publishedDate <- format.Date(date, "%Y-%m-%dT00:00:00.000%z")
   }
   jsonlite::toJSON(front_matter, auto_unbox = TRUE)
+}
+
+include_args_from_site_config <- function(config, runtime) {
+
+  includes <- list(
+    in_header = NULL,
+    before_body = NULL,
+    after_body = NULL
+  )
+
+  includes_to_pandoc_args(includes,
+                          filter = if (is_shiny_classic(runtime))
+                            function(x) normalize_path(x, mustWork = FALSE)
+                          else
+                            identity)
+}
+
+
+knitr_source_hook <- function(x, options) {
+
+  # determine language/class
+  language <- tolower(options$engine)
+  if (language == 'node') language <- 'javascript'
+  if (!is.null(options$class.source))
+    language <- block_class(c(language, options$class.source))
+
+  # pad newline if necessary
+  if (length(x) > 0 && !nzchar(x[[1]]))
+    x <- c("", x)
+
+  # form output
+  paste(
+    '',
+    sprintf('```%s', language),
+    '',
+    paste0(x, collapse = '\n'),
+    '```',
+    '',
+    sep = '\n'
+  )
+}
+
+knitr_chunk_hook <- function(x, options) {
+  if (is.null(options$distill.layout))
+    options$distill.layout <- "l-body"
+  paste0(
+    '<div class="distill-layout-chunk ', options$distill.layout, '">',
+    x,
+    '</div>'
+  )
 }
 
 block_class = function(x){

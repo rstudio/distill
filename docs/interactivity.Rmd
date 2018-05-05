@@ -112,7 +112,7 @@ renderPlot({
 
 You can see the full source code for this example at [distill-interactive-document.Rmd](https://github.com/jjallaire/distill/blob/master/inst/examples/distill-interactive-document.Rmd). 
 
-Learn more [interactive documents](https://rmarkdown.rstudio.com/authoring_shiny.html) on the R Markdown website.
+Learn more about [interactive documents](https://rmarkdown.rstudio.com/authoring_shiny.html) on the R Markdown website.
 
 
 
