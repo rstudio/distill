@@ -94,6 +94,13 @@ distill_article <- function(fig_width = 6,
     config <- site_config(input_file, encoding)
     args <- c(args, include_args_from_site_config(config, runtime))
 
+    # transform metadata values (e.g. date)
+    if (!is.null(metadata$date)) {
+      date <- lubridate::mdy(metadata$date, tz = Sys.timezone(), quiet = TRUE)
+      if (lubridate::is.POSIXct(date))
+        metadata$date <- date
+    }
+
     # metadata
     args <- c(args, pandoc_include_args(
       in_header = in_header_includes(metadata),
@@ -149,6 +156,15 @@ in_header_includes <- function(metadata) {
 
   in_header <- c()
 
+  # date meta tag
+  date_meta <- list()
+  if (!is.null(metadata$date)) {
+    date_meta[[1]] <- tags$meta(
+      name="date",
+      content=format.Date(metadata$date, "%Y-%m-%d")
+    )
+  }
+
   # authors meta tags
   author_meta <- lapply(metadata$author, function(author) {
     if (!is.list(author) || is.null(author$name) || is.null(author$url))
@@ -156,9 +172,8 @@ in_header_includes <- function(metadata) {
     tags$meta(name="article:author", content=author$name)
   })
 
-
   # render meta tags
-  meta_tags <- do.call(tagList, author_meta)
+  meta_tags <- do.call(tagList, list(date_meta, author_meta))
   meta_html <- as.character(meta_tags)
   meta_file <- tempfile(fileext = "html")
   writeLines(meta_html, meta_file)
@@ -222,11 +237,8 @@ front_matter_from_metadata <- function(metadata) {
       affiliationURL = not_null(author$affiliation_url, "#")
     )
   })
-  if (!is.null(metadata$date)) {
-    date <- lubridate::mdy(metadata$date, tz = Sys.timezone(), quiet = TRUE)
-    if (lubridate::is.POSIXct(date))
-      front_matter$publishedDate <- format.Date(date, "%Y-%m-%dT00:00:00.000%z")
-  }
+  if (!is.null(metadata$date))
+    front_matter$publishedDate <- format.Date(metadata$date, "%Y-%m-%dT00:00:00.000%z")
   jsonlite::toJSON(front_matter, auto_unbox = TRUE)
 }
 
