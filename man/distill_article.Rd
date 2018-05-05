@@ -4,15 +4,13 @@
 \alias{distill_article}
 \title{R Markdown format for Distill articles}
 \usage{
-distill_article(centered = TRUE, fig_width = 6, fig_height = 4,
-  fig_retina = 2, fig_caption = TRUE, dev = "png", smart = TRUE,
-  self_contained = TRUE, mathjax = "default", extra_dependencies = NULL,
-  css = NULL, includes = NULL, keep_md = FALSE, lib_dir = NULL,
+distill_article(fig_width = 6, fig_height = 4, fig_retina = 2,
+  fig_caption = TRUE, dev = "png", smart = TRUE, self_contained = TRUE,
+  mathjax = "default", extra_dependencies = NULL, css = NULL,
+  includes = NULL, keep_md = FALSE, lib_dir = NULL,
   md_extensions = NULL, pandoc_args = NULL, ...)
 }
 \arguments{
-\item{centered}{`TRUE` (default) to center the article within the display}
-
 \item{fig_width}{Default width (in inches) for figures}
 
 \item{fig_height}{Default width (in inches) for figures}

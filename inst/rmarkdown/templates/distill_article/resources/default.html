@@ -1,34 +1,29 @@
 <!doctype html>
 
 <head>
-<meta charset="utf-8">
-<meta name="viewport" content="width=device-width, initial-scale=1" >
-<meta http-equiv="X-UA-Compatible" content="IE=Edge,chrome=1">
-<meta name="generator" content="pandoc" />
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1" >
+  <meta http-equiv="X-UA-Compatible" content="IE=Edge,chrome=1">
+  <meta name="generator" content="pandoc" />
 
-<title>$if(title-prefix)$$title-prefix$ - $endif$$pagetitle$</title>
+  <title>$if(title-prefix)$$title-prefix$ - $endif$$pagetitle$</title>
 
-$for(author)$
-<meta name="article:author" content="$author.name$" />
-$endfor$
-
-$if(date-meta)$
-<meta name="date" content="$date-meta$" />
-$endif$
+  $if(date-meta)$
+  <meta name="date" content="$date-meta$" />
+  $endif$
 
 $for(header-includes)$
   $header-includes$
 $endfor$
 
-<style type="text/css">
 $if(author)$
 $else$
-d-byline {
-  display: none;
-}
+  <style type="text/css">
+  d-byline {
+    display: none;
+  }
+  </style>
 $endif$
-</style>
-
 
 $for(css)$
   <link rel="stylesheet" href="$css$" $if(html5)$$else$type="text/css" $endif$/>

@@ -11,6 +11,7 @@
 #' @inheritParams rmarkdown::html_document
 #'
 #' @import rmarkdown
+#' @import htmltools
 #'
 #' @export
 distill_article <- function(fig_width = 6,
@@ -139,6 +140,22 @@ in_header_includes <- function(metadata) {
 
   in_header <- c()
 
+  # authors meta tags
+  author_meta <- lapply(metadata$author, function(author) {
+    if (!is.list(author) || is.null(author$name) || is.null(author$url))
+      stop("author metadata must include name and url fields", call. = FALSE)
+    tags$meta(name="article:author", content=author$name)
+  })
+
+
+  # render meta tags
+  meta_tags <- do.call(tagList, author_meta)
+  meta_html <- as.character(meta_tags)
+  meta_file <- tempfile(fileext = "html")
+  writeLines(meta_html, meta_file)
+  in_header <- c(in_header, meta_file)
+
+
   # write front-matter into script tag
   front_matter_tag <- c(
     '<d-front-matter>',
@@ -188,19 +205,14 @@ front_matter_from_metadata <- function(metadata) {
   front_matter <- list()
   front_matter$title <- metadata$title
   front_matter$description <- metadata$description
-  front_matter$authors <-
-    if (is.null(metadata$author))
-      list()
-    else lapply(metadata$author, function(author) {
-       if (!is.list(author) || is.null(author$name))
-          stop("author metadata must include name and url fields", call. = FALSE)
-      list(
-        author = author$name,
-        authorURL = author$url,
-        affiliation = not_null(author$affiliation, "&nbsp;"),
-        affiliationURL = not_null(author$affiliation_url, "#")
-      )
-    })
+  front_matter$authors <- lapply(metadata$author, function(author) {
+    list(
+      author = author$name,
+      authorURL = author$url,
+      affiliation = not_null(author$affiliation, "&nbsp;"),
+      affiliationURL = not_null(author$affiliation_url, "#")
+    )
+  })
   if (!is.null(metadata$date)) {
     date <- lubridate::mdy(metadata$date, tz = Sys.timezone(), quiet = TRUE)
     if (lubridate::is.POSIXct(date))
