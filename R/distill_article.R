@@ -87,18 +87,27 @@ distill_article <- function(fig_width = 6,
 
   # post-knit
   post_knit <- function(metadata, input_file, runtime, encoding, ...) {
+
+    args <- c()
+
+    # site config
     config <- site_config(input_file, encoding)
-    include_args_from_site_config(config, runtime)
+    args <- c(args, include_args_from_site_config(config, runtime))
+
+    # metadata
+    args <- c(args, pandoc_include_args(
+      in_header = in_header_includes(metadata),
+      before_body = before_body_includes(metadata),
+      after_body = after_body_includes(metadata)
+    ))
+
+    args
   }
 
   # preprocessor
   pre_processor <- function (metadata, input_file, runtime, knit_meta,
                              files_dir, output_dir) {
-    pandoc_include_args(
-      in_header = in_header_includes(metadata),
-      before_body = before_body_includes(metadata),
-      after_body = after_body_includes(metadata)
-    )
+    c()
   }
 
   # return format

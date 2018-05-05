@@ -28,7 +28,7 @@ bibliography: biblio.bib
        - use the less compiler for this
     "full bleed"
     - crosstalk compatibility?
-        - distillRow/distillRow
+        - distillRow/distillCol
         
 - alternative to DOI is citation (which just needs a URL)
         
