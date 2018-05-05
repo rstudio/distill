@@ -11,12 +11,6 @@ body {
   display: none;
 }
 
-
-.l-gutter {
-  font-size: 12px;
-  line-height: 1.5em;
-}
-
 .pandoc-table {
   width: 100%;
 }
@@ -27,10 +21,6 @@ body {
 
 .pagedtable-footer {
   font-size: 15px;
-}
-
-d-article table th, d-article table td {
-  padding: 7px 10px;
 }
 
 .html-widget {
