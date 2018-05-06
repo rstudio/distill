@@ -8,10 +8,25 @@
 
   <title>Distill for R Markdown</title>
 
-  <meta name="date" content="2018-05-04"/>
+  
+  <!--  https://schema.org/Article -->
+  <meta property="description" itemprop="description" content="A format devoted to clear explanations, native to the web&#10;"/>
+  <meta property="article:published" itemprop="datePublished" content="2018-05-04"/>
+  <meta property="article:created" itemprop="dateCreated" content="2018-05-04"/>
   <meta name="article:author" content="JJ Allaire"/>
   <meta name="article:author" content="Rich Iannone"/>
   <meta name="article:author" content="Yihui Xie"/>
+  
+  <!--  https://developers.facebook.com/docs/sharing/webmasters#markup -->
+  <meta property="og:type" content="article"/>
+  <meta property="og:description" content="A format devoted to clear explanations, native to the web&#10;"/>
+  <meta property="og:locale" content="en_US"/>
+  <meta property="og:site_name" content="Distill for R Markdown"/>
+  
+  <!--  https://dev.twitter.com/cards/types/summary -->
+  <meta property="twitter:card" content="summary"/>
+  <meta property="twitter:title" content="Distill for R Markdown"/>
+  <meta property="twitter:description" content="A format devoted to clear explanations, native to the web&#10;"/>
   <d-front-matter>
   <script id="distill-front-matter" type="text/json">
   {"title":"Distill for R Markdown","description":"A format devoted to clear explanations, native to the web\n","authors":[{"author":"JJ Allaire","authorURL":"https://github.com/jjallaire","affiliation":"RStudio","affiliationURL":"https://www.rstudio.com"},{"author":"Rich Iannone","authorURL":"https://github.com/rich-iannone","affiliation":"RStudio","affiliationURL":"https://www.rstudio.com"},{"author":"Yihui Xie","authorURL":"https://github.com/yihui","affiliation":"RStudio","affiliationURL":"https://www.rstudio.com"}],"publishedDate":"2018-05-04T00:00:00.000-0400"}
@@ -90,8 +105,12 @@
         - distillRow/distillCol
         
 - alternative to DOI is citation (which just needs a URL)
+
+- consider supporting full ISO8601 dates (could we parse them w/o ld?)
+   http://www.w3.org/TR/NOTE-datetime
         
-- generate all of the metadata in R with htmltags / in_header
+- validate that title and description are provided
+        
 - may need separate metadata section in the docs
 - web page metadata generation/redaction (see expandData)
 - article metadata (DOI, citation, etc.)
@@ -99,6 +118,8 @@
 
 - consdier using figure tag? (css advantages?)
 - use pandoc filters more?
+
+- jquery based menu that uses alternate theming
 
 - index pages (consider using iframes for federated content authoring)
 - site generation

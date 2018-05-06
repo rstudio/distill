@@ -90,22 +90,18 @@ distill_article <- function(fig_width = 6,
 
     args <- c()
 
-    # site config
-    config <- site_config(input_file, encoding)
-    args <- c(args, include_args_from_site_config(config, runtime))
+    # get site config
+    site_config <- site_config(input_file, encoding)
 
     # transform metadata values (e.g. date)
-    if (!is.null(metadata$date)) {
-      date <- lubridate::mdy(metadata$date, tz = Sys.timezone(), quiet = TRUE)
-      if (lubridate::is.POSIXct(date))
-        metadata$date <- date
-    }
+    metadata$date <- parse_date(metadata$date)
+    metadata$updated <- parse_date(metadata$updated)
 
     # metadata
     args <- c(args, pandoc_include_args(
-      in_header = in_header_includes(metadata),
-      before_body = before_body_includes(metadata),
-      after_body = after_body_includes(metadata)
+      in_header = in_header_includes(site_config, metadata),
+      before_body = before_body_includes(site_config, metadata),
+      after_body = after_body_includes(site_config, metadata)
     ))
 
     args
@@ -152,7 +148,7 @@ html_dependency_distill <- function() {
   )
 }
 
-in_header_includes <- function(metadata) {
+in_header_includes <- function(site_config, metadata) {
 
   in_header <- c()
 
@@ -165,15 +161,6 @@ in_header_includes <- function(metadata) {
     )
   }
 
-  # date meta tag
-  date_meta <- list()
-  if (!is.null(metadata$date)) {
-    date_meta[[1]] <- tags$meta(
-      name="date",
-      content=format.Date(metadata$date, "%Y-%m-%d")
-    )
-  }
-
   # authors meta tags
   author_meta <- lapply(metadata$author, function(author) {
     if (!is.list(author) || is.null(author$name) || is.null(author$url))
@@ -181,17 +168,50 @@ in_header_includes <- function(metadata) {
     tags$meta(name="article:author", content=author$name)
   })
 
-  # render meta tags
+
+  # article meta (https://schema.org/Article)
+  article_meta <- list()
+  if (!is.null(metadata$date)) {
+    date <- format.Date(metadata$date, "%Y-%m-%d")
+    article_meta <- tagList(
+      HTML("<!--  https://schema.org/Article -->"),
+      tags$meta(property="description", itemprop="description", content=metadata$description),
+      tags$meta(property="article:published", itemprop="datePublished", content=date),
+      tags$meta(property="article:created", itemprop="dateCreated", content=date)
+    )
+  }
+
+  # updated date
+  updated_meta <- list()
+  if (!is.null(metadata$updated)) {
+    updated <-  date_as_iso_8601(metadata$updated)
+    updated_meta[[1]] <- tags$meta(
+      property="article:modified", itemprop="dateModified", content=updated
+    )
+  }
+
+  # open graph (https://developers.facebook.com/docs/sharing/webmasters#markup)
+  open_graph_meta <- open_graph_metadata(site_config, metadata)
+
+  # twitter card (https://dev.twitter.com/cards/types/summary)
+  twitter_card_meta <- twitter_card_metadata(site_config, metadata)
+
+  # render head tags
   meta_tags <- do.call(tagList, list(
     links,
-    date_meta,
-    author_meta
+    HTML(''),
+    article_meta,
+    updated_meta,
+    author_meta,
+    HTML(''),
+    open_graph_meta,
+    HTML(''),
+    twitter_card_meta
   ))
   meta_html <- as.character(meta_tags)
   meta_file <- tempfile(fileext = "html")
   writeLines(meta_html, meta_file)
   in_header <- c(in_header, meta_file)
-
 
   # write front-matter into script tag
   front_matter_tag <- c(
@@ -209,8 +229,90 @@ in_header_includes <- function(metadata) {
 
 }
 
+open_graph_metadata <- function(site_config, metadata) {
 
-before_body_includes <- function(metadata) {
+  # core descriptors
+  open_graph_meta <- list(
+    HTML("<!--  https://developers.facebook.com/docs/sharing/webmasters#markup -->"),
+    tags$meta(property = "og:type", content = "article"),
+    tags$meta(property = "og:description", content = metadata$description)
+  )
+
+  # add a property
+  add_open_graph_meta <- function(property, content) {
+    open_graph_meta[[length(open_graph_meta)+1]] <<-
+      tags$meta(property = property, content = content)
+  }
+
+  # cannonical url
+  if (!is.null(metadata$url))
+    add_open_graph_meta("og:url", metadata$url)
+
+  # preivew/thumbnail url
+  if (!is.null(metadata$preview))
+    add_open_graph_meta("og:image", metadata$preview)
+
+  # locale
+  locale <- if (!is.null(metadata$locale))
+    metadata$locale
+  else if (!is.null(site_config$locale))
+    site_config$locale
+  else
+    "en_US"
+  add_open_graph_meta("og:locale", locale)
+
+  # site name
+  site_name <- if (!is.null(site_config$title))
+    site_config$title
+  else if (!is.null(site_config$navbar) && !is.null(site_config$navbar$title))
+    site_config$navbar$title
+  else
+    NULL
+  if (!is.null(site_name))
+    add_open_graph_meta("og:site_name", site_name)
+
+  open_graph_meta
+}
+
+twitter_card_metadata <- function(site_config, metadata) {
+
+  twitter_card_meta <- list(
+    HTML("<!--  https://dev.twitter.com/cards/types/summary -->")
+  )
+
+  # add a property
+  add_twitter_card_meta <- function(property, content) {
+    twitter_card_meta[[length(twitter_card_meta)+1]] <<-
+      tags$meta(property = property, content = content)
+  }
+
+  # card type
+  card_type <- if(!is.null(metadata$preview)) "summary_large_image" else "summary"
+  add_twitter_card_meta("twitter:card", card_type)
+
+  # title and description
+  add_twitter_card_meta("twitter:title", metadata$title)
+  add_twitter_card_meta("twitter:description", metadata$description)
+
+  # cannonical url
+  if (!is.null(metadata$url))
+    add_twitter_card_meta("twitter:url", metadata$url)
+
+  # preview image
+  if (!is.null(metadata$preview)) {
+    add_twitter_card_meta("twitter:image", metadata$preview)
+    if (file.exists(metadata$preview) && is_file_type(metadata$preview, "png")) {
+      png <- png::readPNG(metadata$preview)
+      add_twitter_card_meta("twitter:image:width", ncol(png))
+      add_twitter_card_meta("twitter:image:height", nrow(png))
+    }
+  }
+
+  twitter_card_meta
+}
+
+
+before_body_includes <- function(site_config, metadata) {
 
   before_body <- c()
 
@@ -218,7 +320,7 @@ before_body_includes <- function(metadata) {
 }
 
 
-after_body_includes <- function(metadata) {
+after_body_includes <- function(site_config, metadata) {
 
   after_body <- c()
 
@@ -251,25 +353,9 @@ front_matter_from_metadata <- function(metadata) {
     )
   })
   if (!is.null(metadata$date))
-    front_matter$publishedDate <- format.Date(metadata$date, "%Y-%m-%dT00:00:00.000%z")
+    front_matter$publishedDate <- date_as_iso_8601(metadata$date)
   jsonlite::toJSON(front_matter, auto_unbox = TRUE)
 }
-
-include_args_from_site_config <- function(config, runtime) {
-
-  includes <- list(
-    in_header = NULL,
-    before_body = NULL,
-    after_body = NULL
-  )
-
-  includes_to_pandoc_args(includes,
-                          filter = if (is_shiny_classic(runtime))
-                            function(x) normalize_path(x, mustWork = FALSE)
-                          else
-                            identity)
-}
-
 
 knitr_source_hook <- function(x, options) {
 
@@ -311,6 +397,24 @@ block_class = function(x){
   .classes = paste0('.', classes, collapse = ' ')
   paste0('{', .classes, '}')
 }
+
+parse_date <- function(date) {
+  if (!is.null(date)) {
+    parsed_date <- lubridate::mdy(date, tz = Sys.timezone(), quiet = TRUE)
+    if (lubridate::is.POSIXct(parsed_date))
+      date <- parsed_date
+  }
+  date
+}
+
+date_as_iso_8601 <- function(date) {
+  format.Date(date, "%Y-%m-%dT00:00:00.000%z")
+}
+
+is_file_type <- function(file, type) {
+  identical(tolower(tools::file_ext(file)), type)
+}
+
 
 
 

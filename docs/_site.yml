@@ -1,4 +1,5 @@
 name: "rmarkdown-distill"
+title: "Distill for R Markdown"
 output_dir: "."
 output:
   distill::distill_article:

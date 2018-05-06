@@ -2,7 +2,6 @@
 title: "Distill for R Markdown"
 description: | 
   A format devoted to clear explanations, native to the web
-date: May 4, 2018
 author:
   - name: "JJ Allaire"
     url: https://github.com/jjallaire
@@ -16,6 +15,7 @@ author:
     url: https://github.com/yihui
     affiliation: RStudio
     affiliation_url: https://www.rstudio.com
+date: May 4, 2018
 bibliography: biblio.bib
 ---
 
@@ -31,8 +31,12 @@ bibliography: biblio.bib
         - distillRow/distillCol
         
 - alternative to DOI is citation (which just needs a URL)
+
+- consider supporting full ISO8601 dates (could we parse them w/o ld?)
+   http://www.w3.org/TR/NOTE-datetime
         
-- generate all of the metadata in R with htmltags / in_header
+- validate that title and description are provided
+        
 - may need separate metadata section in the docs
 - web page metadata generation/redaction (see expandData)
 - article metadata (DOI, citation, etc.)
@@ -40,6 +44,8 @@ bibliography: biblio.bib
 
 - consdier using figure tag? (css advantages?)
 - use pandoc filters more?
+
+- jquery based menu that uses alternate theming
 
 - index pages (consider using iframes for federated content authoring)
 - site generation
