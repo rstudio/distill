@@ -31,17 +31,17 @@ leaflet() %>%
   addMarkers(lng=174.768, lat=-36.852, popup="The birthplace of R")
 ```
 
-You can also use [figure layout](figures.html) options with htmlwidgets. For example, here we set `distill.layout="l-page"` to specify that we want the widget to span the width of the page:
+You can also use [figure layout](figures.html) options with htmlwidgets. For example, here we set `layout="l-page"` to specify that we want the widget to span the width of the page:
 
 ````clike
-```{r, distill.layout="l-page", fig.height=2}`r ''`
+```{r, layout="l-page", fig.height=2}`r ''`
 library(dygraphs)
 dygraph(ldeaths) %>% 
   dyRangeSelector()
 ```
 ````
 
-```{r, distill.layout="l-page", fig.height=2}
+```{r, layout="l-page", fig.height=2}
 library(dygraphs)
 dygraph(ldeaths) %>% 
   dyRangeSelector()
@@ -59,18 +59,18 @@ The [r2d3](https://rstudio.github.io/r2d3/) package enables you to easily incorp
 For example, the following renders an interactive [Veronoi diagram](https://en.wikipedia.org/wiki/Voronoi_diagram) created using D3:
 
 ````clike
-```{r, distill.layout="l-page", fig.height=6}`r ''`
+```{r, layout="l-page", fig.height=6}`r ''`
 library(r2d3)
 r2d3(script = "voronoi.js")
 ```
 ````
 
-```{r, distill.layout="l-page", fig.height=6}
+```{r, layout="l-page", fig.height=6}
 library(r2d3)
 r2d3(script = "d3/voronoi/voronoi.js")
 ```
 
-Note that we specify `distill.layout="l-page"` to indicate that we want the visualization to occupy the full width of the page.
+Note that we specify `layout="l-page"` to indicate that we want the visualization to occupy the full width of the page.
 
 ## Shiny
 

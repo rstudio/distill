@@ -16,32 +16,32 @@ There are a number of options available for displaying tables within Distill art
 The `knitr::kable()` function will render an R data frame as an HTML table. For example:
 
 ````clike
-```{r, distill.layout="l-body-outset"}`r ''`
+```{r, layout="l-body-outset"}`r ''`
 library(knitr)
 kable(head(mtcars))
 ```
 ````
 
 
-```{r, distill.layout="l-body-outset"}
+```{r, layout="l-body-outset"}
 library(knitr)
 kable(head(mtcars))
 ```
 
-Often times tables will require more width for their display than the standard Distill article text width. Here we use `distill.layout="l-body-outset"` to cause the table to outset slightly from the main text column. All of the available [figure layouts](figures.html) can also be used with tables.
+Often times tables will require more width for their display than the standard Distill article text width. Here we use `layout="l-body-outset"` to cause the table to outset slightly from the main text column. All of the available [figure layouts](figures.html) can also be used with tables.
 
 ## Paged tables
 
 If a data frame has a large number of rows it might not be practical to display it fully inline. In these situations you can use the `rmarkdown::paged_table()` function to create a table that allows pagination of rows and columns. For example:
 
 ````clike
-```{r, distill.layout="l-body-outset"}`r ''`
+```{r, layout="l-body-outset"}`r ''`
 library(rmarkdown)
 paged_table(mtcars)
 ```
 ````
 
-```{r, distill.layout="l-body-outset"}
+```{r, layout="l-body-outset"}
 library(rmarkdown)
 paged_table(mtcars)
 ```
@@ -49,13 +49,13 @@ paged_table(mtcars)
 There are a number of options available that control the display of paged tables. By default, 10 rows at a time are displayed but you can use the `rows.print` option to increase this. For example:
 
 ````clike
-```{r, distill.layout="l-body-outset"}`r ''`
+```{r, layout="l-body-outset"}`r ''`
 library(rmarkdown)
 paged_table(mtcars, options = list(rows.print = 15))
 ```
 ````
 
-```{r, distill.layout="l-body-outset"}
+```{r, layout="l-body-outset"}
 library(rmarkdown)
 paged_table(mtcars, options = list(rows.print = 15, cols.print = 5))
 ```

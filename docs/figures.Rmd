@@ -8,15 +8,15 @@ library(knitr)
 ```
 
 
-There are a variety of ways to layout figures included within Distill articles. This layout is controlled by a set of layout classes, which are in turn applied to R Markdown chunks using the `distill.layout` chunk option.
+There are a variety of ways to layout figures included within Distill articles. This layout is controlled by a set of layout classes, which are in turn applied to R Markdown chunks using the `layout` chunk option.
 
-The default layout if `distill.layout` is not specified is `l-body`, which will cause content to span the width of the main article body:
+The default layout if `layout` is not specified is `l-body`, which will cause content to span the width of the main article body:
 
 <div class="fake-img l-body"><p>l-body</p></div>
 
 For example, a plot with the default `l-body` layout would look like this:
 
-```{r, distill.layout="l-body"}
+```{r, layout="l-body"}
 include_graphics("images/l-body-figure.png")
 ```
 
@@ -27,21 +27,21 @@ For elements you want to display a little larger, try `l-body-outset` or `l-page
 
 <div class="fake-img l-page"><p>l-page</p></div>
 
-For example, here the `l-body-outset` layout is selected using the `distill.layout` chunk option:
+For example, here the `l-body-outset` layout is selected using the `layout` chunk option:
 
 ````clike
-```{r, distill.layout="l-body-outset", fig.width=6, fig.height=1.5}`r ''`
+```{r, layout="l-body-outset", fig.width=6, fig.height=1.5}`r ''`
 library(ggplot2)
 ggplot(diamonds, aes(carat, price)) + geom_smooth() +
   facet_grid(~ cut)
 ```
 ````
     
-```{r, distill.layout="l-body-outset"}
+```{r, layout="l-body-outset"}
 include_graphics("images/l-middle-figure.png")
 ```
 
-Note that when specifying an alternate `distill.layout` you should also specify an appropriate `fig.width` and `fig.height` for that layout.
+Note that when specifying an alternate `layout` you should also specify an appropriate `fig.width` and `fig.height` for that layout.
 
 Occasionally you’ll want to use the full browser width. For this, use `l-screen`:
 
@@ -50,7 +50,7 @@ Occasionally you’ll want to use the full browser width. For this, use `l-scree
 If you want a bit space at the edges then you can use the `l-screen-inset` layout, which adds 15 pixels of padding to each side. Here we use `l-screen-inset` to display a Leaflet map:
 
 ````clike
-```{r, distill.layout="l-screen-inset"}`r ''`
+```{r, layout="l-screen-inset"}`r ''`
 library(leaflet)
 leaflet() %>%
   addTiles() %>%  # Add default OpenStreetMap map tiles
@@ -58,7 +58,7 @@ leaflet() %>%
 ```
 ````
 
-```{r, distill.layout="l-screen-inset"}
+```{r, layout="l-screen-inset"}
 library(leaflet)
 leaflet() %>%
   addTiles() %>%  # Add default OpenStreetMap map tiles
@@ -86,7 +86,7 @@ To include a static images that adheres to a Disill layout, wrap it in a `<div>`
 Alternatively, you can use the `knitr::include_graphics()` function within an R code chunk:
 
 ````clike
-```{r, distill.layout="l-body-outset"}`r ''`
+```{r, layout="l-body-outset"}`r ''`
 library(knitr)
 include_graphics("images/figure.png")
 ```

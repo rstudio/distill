@@ -16,18 +16,18 @@ There are a number of ways to create diagrams for use in Distill articles, a few
 You can use the [DiagrammerR](http://rich-iannone.github.io/DiagrammeR/) package to include [GraphViz](https://www.graphviz.org/) visualizations within a Distill article. For example, if you have a GraphViz file [graph.gv](https://github.com/jjallaire/distill/blob/master/docs/images/graph.gv), you can include it with the following code:
 
 ````clike
-```{r, distill.layout="l-page", fig.height=2}`r ''`
+```{r, layout="l-page", fig.height=2}`r ''`
 library(DiagrammeR)
 grViz("images/graph.gv")
 ```
 ````
     
-```{r, distill.layout="l-page", fig.height=2}
+```{r, layout="l-page", fig.height=2}
 library(DiagrammeR)
 grViz("images/graph.gv")
 ```
 
-Note that since this diagram is much wider than it is tall, we specify `distill.layout="l-page"` to provide adequate horizontal layout space and `fig.height=2` to ensure the correct aspect ratio. See the documentation on [figure layout](figures.html) for details on all available layout options.
+Note that since this diagram is much wider than it is tall, we specify `layout="l-page"` to provide adequate horizontal layout space and `fig.height=2` to ensure the correct aspect ratio. See the documentation on [figure layout](figures.html) for details on all available layout options.
 
 DiagrammeR also supports diagrams created with [Mermaid](https://mermaidjs.github.io/). For example:
 
@@ -72,20 +72,20 @@ sequenceDiagram
 The [r2d3](https://rstudio.github.io/r2d3) package enables you to include illustrations created using [D3.js](https://d3js.org/). For example, the following code renders [flare.json](https://github.com/jjallaire/distill/blob/master/docs/d3/circlepacking/flare.json) using the [circlepacking.js](https://github.com/jjallaire/distill/blob/master/docs/d3/circlepacking/circlepacking.js) script:
 
 ````clike
-```{r, distill.layout="l-screen-inset", fig.height=8}`r ''`
+```{r, layout="l-screen-inset", fig.height=8}`r ''`
 library(r2d3)
 data <- jsonlite::read_json("flare.json")
 r2d3(data, script = "circlepacking.js")
 ```
 ````
 
-```{r, distill.layout="l-screen-inset", fig.height=8}
+```{r, layout="l-screen-inset", fig.height=8}
 library(r2d3)
 data <- jsonlite::read_json("d3/circlepacking/flare.json")
 r2d3(data, script = "d3/circlepacking/circlepacking.js")
 ```
 
-This is an illustration that has lots of detail so it benefits from being rendered at nearly full screen width (`distill.layout="l-screen-inset"`). We also specify `fig.height=8` to cause the illustration (which has a square aspect ratio) to take advantage of the additional horizontal space.
+This is an illustration that has lots of detail so it benefits from being rendered at nearly full screen width (`layout="l-screen-inset"`). We also specify `fig.height=8` to cause the illustration (which has a square aspect ratio) to take advantage of the additional horizontal space.
 
 ## Static diagrams
 

@@ -132,24 +132,24 @@ Distill provides a number of options for laying out figures within your article.
 
 ![](images/l-body-figure.png){width=100%}
 
-However, some figures benefit from using additional horizontal space. In this cases the `distill.layout` chunk option enables you to specify a wide variety of other layouts. 
+However, some figures benefit from using additional horizontal space. In this cases the `layout` chunk option enables you to specify a wide variety of other layouts. 
 
-For example, if we wanted to display a figure a bit outside the bounds of the article text, we could specify the `l-body-outset` layout via the `distill.layout` chunk option:
+For example, if we wanted to display a figure a bit outside the bounds of the article text, we could specify the `l-body-outset` layout via the `layout` chunk option:
 
 
 ````clike
-```{r, distill.layout="l-body-outset", fig.width=6, fig.height=1.5}`r ''`
+```{r, layout="l-body-outset", fig.width=6, fig.height=1.5}`r ''`
 library(ggplot2)
 ggplot(diamonds, aes(carat, price)) + geom_smooth() +
   facet_grid(~ cut)
 ```
 ````
 
-```{r, distill.layout="l-body-outset"}
+```{r, layout="l-body-outset"}
 include_graphics("images/l-middle-figure.png")
 ```
 
-Note that when specifying an alternate `distill.layout` you should also specify an appropriate `fig.width` and `fig.height` for that layout. These values don't determine the absolute size of the figure (that's dynamic based on the layout) but they do determine the aspect ratio of the figure.
+Note that when specifying an alternate `layout` you should also specify an appropriate `fig.width` and `fig.height` for that layout. These values don't determine the absolute size of the figure (that's dynamic based on the layout) but they do determine the aspect ratio of the figure.
 
 See the documentation on [figure layout](figures.html) for details on additional layout options.
 
@@ -158,18 +158,18 @@ See the documentation on [figure layout](figures.html) for details on additional
 There are a number of options available for HTML display of data frames within Distill articles. Here, we use the `paged_table()` function to display a page-able view of the `mtcars` dataset built in to R:
 
 ````clike
-```{r, distill.layout="l-body-outset"}`r ''`
+```{r, layout="l-body-outset"}`r ''`
 library(rmarkdown)
 paged_table(mtcars)
 ```
 ````
 
-```{r, distill.layout="l-body-outset"}
+```{r, layout="l-body-outset"}
 library(rmarkdown)
 paged_table(mtcars)
 ```
 
-Note that we used `distill.layout="l-body-outset"` to cause the table to occupy slightly more horizontal space than the article text. All of available [figure layout options](figures.html) work as expected for tables.
+Note that we used `layout="l-body-outset"` to cause the table to occupy slightly more horizontal space than the article text. All of available [figure layout options](figures.html) work as expected for tables.
 
 See the documentation on [table display](tables.html) for details on the various techniques available for rendering tables.
 

@@ -382,10 +382,10 @@ knitr_source_hook <- function(x, options) {
 }
 
 knitr_chunk_hook <- function(x, options) {
-  if (is.null(options$distill.layout))
-    options$distill.layout <- "l-body"
+  if (is.null(options$layout))
+    options$layout <- "l-body"
   paste0(
-    '<div class="distill-layout-chunk ', options$distill.layout, '">',
+    '<div class="layout-chunk ', options$layout, '">',
     x,
     '</div>'
   )
