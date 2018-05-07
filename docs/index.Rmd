@@ -25,6 +25,7 @@ bibliography: biblio.bib
     1) Rename on Github
     2) Get interactive document working
     3) Republish and update links for interactive document
+    Radix newdoc screenshot
     3) distill-header, distill-footer renames
     4) Alt fonts/color scheme for header/footer
 

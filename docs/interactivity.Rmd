@@ -3,13 +3,11 @@ title: "Interactivity"
 description: Enhance communication with interactive visualizations 
 ---
 
-There are a variety of ways to add interactivity to your Radix articles, including:
+You can add interactivity to your Radix articles by:
 
 - Using pre-built [htmlwidgets](http://www.htmlwidgets.org) that wrap JavaScript visualization libraries like [Leaflet](http://rstudio.github.io/leaflet/), [Plotly](https://plot.ly/r/), [dygraphs](http://rstudio.github.io/dygraphs/), and [threejs](https://bwlewis.github.io/rthreejs/).
 
 - Creating custom [D3.js](https://d3js.org/) interactive visualizations using the [r2d3](https://rstudio.github.io/r2d3/) package.
-
-- Using [Shiny](https://shiny.rstudio.com) to create an [interactive document](https://rmarkdown.rstudio.com/authoring_shiny.html#embedded_applications) that embeds interactive components within your article.
 
 ## htmlwidgets
 
@@ -71,52 +69,5 @@ r2d3(script = "d3/voronoi/voronoi.js")
 ```
 
 Note that we specify `layout="l-page"` to indicate that we want the visualization to occupy the full width of the page.
-
-## Shiny
-
-You can use [Shiny](https://shiny.rstudio.com) components within your Radix articles to allow your readers to change the parameters underlying your analysis and see the results immediately. To use Shiny with Radix, first specify that you want to use the Shiny runtime with your document:
-
-```markup
----
-title: "Interactive Distill with Shiny"
-output: radix::radix_article
-runtime: shiny
----
-```
-
-This turns your Radix article into an [interactive document](https://rmarkdown.rstudio.com/authoring_shiny.html), enabling you to add Shiny inputs and output directly to the document.
-
-Here's an example of a Radix article with interactive Shiny components (<https://jjallaire.shinyapps.io/distill-interactive-document/>):
-
-![](images/shiny.png){width=100% .screenshot}
-
-This was the R code used to create the interactive Shiny components:
-
-```{r eruptions, echo=TRUE, eval=FALSE}
-inputPanel(
-  selectInput("n_breaks", label = "Number of bins:",
-              choices = c(10, 20, 35, 50), selected = 20),
-  
-  sliderInput("bw_adjust", label = "Bandwidth adjustment:",
-              min = 0.2, max = 2, value = 1, step = 0.2)
-)
-
-renderPlot({
-  hist(faithful$eruptions, probability = TRUE, breaks = as.numeric(input$n_breaks),
-       xlab = "Duration (minutes)", main = "Geyser eruption duration")
-  
-  dens <- density(faithful$eruptions, adjust = input$bw_adjust)
-  lines(dens, col = "blue")
-})
-```
-
-You can see the full source code for this example at [distill-interactive-document.Rmd](https://github.com/jjallaire/distill/blob/master/inst/examples/distill-interactive-document.Rmd). 
-
-Learn more about [interactive documents](https://rmarkdown.rstudio.com/authoring_shiny.html) on the R Markdown website.
-
-
-
-
-
 
 

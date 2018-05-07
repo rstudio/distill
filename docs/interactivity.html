@@ -83,11 +83,10 @@
 
 
 <d-article>
-<p>There are a variety of ways to add interactivity to your Radix articles, including:</p>
+<p>You can add interactivity to your Radix articles by:</p>
 <ul>
 <li><p>Using pre-built <a href="http://www.htmlwidgets.org">htmlwidgets</a> that wrap JavaScript visualization libraries like <a href="http://rstudio.github.io/leaflet/">Leaflet</a>, <a href="https://plot.ly/r/">Plotly</a>, <a href="http://rstudio.github.io/dygraphs/">dygraphs</a>, and <a href="https://bwlewis.github.io/rthreejs/">threejs</a>.</p></li>
 <li><p>Creating custom <a href="https://d3js.org/">D3.js</a> interactive visualizations using the <a href="https://rstudio.github.io/r2d3/">r2d3</a> package.</p></li>
-<li><p>Using <a href="https://shiny.rstudio.com">Shiny</a> to create an <a href="https://rmarkdown.rstudio.com/authoring_shiny.html#embedded_applications">interactive document</a> that embeds interactive components within your article.</p></li>
 </ul>
 <h2 id="htmlwidgets">htmlwidgets</h2>
 <p>Including <a href="http://www.htmlwidgets.org">htmlwidgets</a> within a Distill article is as easy as including an R plot. For example, the following code embeds a Leaflet map:</p>
@@ -128,38 +127,6 @@ r2d3(script = &quot;voronoi.js&quot;)
 <script type="application/json" data-for="htmlwidget-76a5f5ad715b74723eb1">{"x":{"data":null,"type":"NULL","container":"svg","options":null,"script":"var d3Script = function(d3, r2d3, data, svg, width, height, options, theme, console) {\nthis.d3 = d3;\n\nsvg = d3.select(svg.node());\n/* R2D3 Source File:  d3/voronoi/voronoi.js */\n// !preview r2d3 d3_version = 4\n\n// Based on: https://bl.ocks.org/mbostock/4060366\n\nsvg.on(\"touchmove mousemove\", moved);\n\nvar sites = d3.range(100)\n    .map(function(d) { return [Math.random() * width, Math.random() * height]; });\n\nvar voronoi = d3.voronoi()\n    .extent([[-8, -8], [width + 8, height + 8]]);\n\nvar polygon = svg.append(\"g\")\n    .attr(\"class\", \"polygons\")\n  .selectAll(\"path\")\n  .data(voronoi.polygons(sites))\n  .enter().append(\"path\")\n    .call(redrawPolygon);\n\nvar link = svg.append(\"g\")\n    .attr(\"class\", \"links\")\n  .selectAll(\"line\")\n  .data(voronoi.links(sites))\n  .enter().append(\"line\")\n    .call(redrawLink);\n\nvar site = svg.append(\"g\")\n    .attr(\"class\", \"sites\")\n  .selectAll(\"circle\")\n  .data(sites)\n  .enter().append(\"circle\")\n    .attr(\"r\", 2.5)\n    .call(redrawSite);\n\nfunction moved() {\n  sites[0] = d3.mouse(this);\n  redraw();\n}\n\nfunction redraw() {\n  var diagram = voronoi(sites);\n  polygon = polygon.data(diagram.polygons()).call(redrawPolygon);\n  link = link.data(diagram.links()), link.exit().remove();\n  link = link.enter().append(\"line\").merge(link).call(redrawLink);\n  site = site.data(sites).call(redrawSite);\n}\n\nfunction redrawPolygon(polygon) {\n  polygon\n      .attr(\"d\", function(d) { return d ? \"M\" + d.join(\"L\") + \"Z\" : null; });\n}\n\nfunction redrawLink(link) {\n  link\n      .attr(\"x1\", function(d) { return d.source[0]; })\n      .attr(\"y1\", function(d) { return d.source[1]; })\n      .attr(\"x2\", function(d) { return d.target[0]; })\n      .attr(\"y2\", function(d) { return d.target[1]; });\n}\n\nfunction redrawSite(site) {\n  site\n      .attr(\"cx\", function(d) { return d[0]; })\n      .attr(\"cy\", function(d) { return d[1]; });\n}\n};","style":"/* R2D3 Source File:  d3/voronoi/voronoi.css */\n.links {\n  stroke: #000;\n  stroke-opacity: 0.2;\n}\n\n.polygons {\n  fill: none;\n  stroke: #000;\n}\n\n.polygons :first-child {\n  fill: #f00;\n}\n\n.sites {\n  fill: #000;\n  stroke: #fff;\n}\n\n.sites :first-child {\n  fill: #fff;\n}","version":5,"theme":{"default":{"background":"#FFFFFF","foreground":"#000000"},"runtime":null}},"evals":[],"jsHooks":[]}</script>
 </div>
 <p>Note that we specify <code>layout=&quot;l-page&quot;</code> to indicate that we want the visualization to occupy the full width of the page.</p>
-<h2 id="shiny">Shiny</h2>
-<p>You can use <a href="https://shiny.rstudio.com">Shiny</a> components within your Radix articles to allow your readers to change the parameters underlying your analysis and see the results immediately. To use Shiny with Radix, first specify that you want to use the Shiny runtime with your document:</p>
-<pre class="markup"><code>
----
-title: &quot;Interactive Distill with Shiny&quot;
-output: radix::radix_article
-runtime: shiny
----</code></pre>
-<p>This turns your Radix article into an <a href="https://rmarkdown.rstudio.com/authoring_shiny.html">interactive document</a>, enabling you to add Shiny inputs and output directly to the document.</p>
-<p>Here’s an example of a Radix article with interactive Shiny components (<a href="https://jjallaire.shinyapps.io/distill-interactive-document/" class="uri">https://jjallaire.shinyapps.io/distill-interactive-document/</a>):</p>
-<p><img src="images/shiny.png" class="screenshot" style="width:100.0%" /></p>
-<p>This was the R code used to create the interactive Shiny components:</p>
-<div class="layout-chunk l-body">
-<pre class="r"><code>
-inputPanel(
-  selectInput(&quot;n_breaks&quot;, label = &quot;Number of bins:&quot;,
-              choices = c(10, 20, 35, 50), selected = 20),
-  
-  sliderInput(&quot;bw_adjust&quot;, label = &quot;Bandwidth adjustment:&quot;,
-              min = 0.2, max = 2, value = 1, step = 0.2)
-)
-
-renderPlot({
-  hist(faithful$eruptions, probability = TRUE, breaks = as.numeric(input$n_breaks),
-       xlab = &quot;Duration (minutes)&quot;, main = &quot;Geyser eruption duration&quot;)
-  
-  dens &lt;- density(faithful$eruptions, adjust = input$bw_adjust)
-  lines(dens, col = &quot;blue&quot;)
-})</code></pre>
-</div>
-<p>You can see the full source code for this example at <a href="https://github.com/jjallaire/distill/blob/master/inst/examples/distill-interactive-document.Rmd">distill-interactive-document.Rmd</a>.</p>
-<p>Learn more about <a href="https://rmarkdown.rstudio.com/authoring_shiny.html">interactive documents</a> on the R Markdown website.</p>
 </d-article>
 
 <d-appendix>
