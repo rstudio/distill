@@ -1,7 +1,7 @@
 ---
-title: "Distill for R Markdown"
+title: "Radix for R Markdown"
 description: | 
-  A format devoted to clear explanations, native to the web
+  Scientific and technical writing, native to the web
 author:
   - name: "JJ Allaire"
     url: https://github.com/jjallaire
@@ -20,6 +20,13 @@ bibliography: biblio.bib
 ---
 
 <!---
+
+- name chnage:
+    1) Rename on Github
+    2) Get interactive document working
+    3) Republish and update links for interactive document
+    3) distill-header, distill-footer renames
+    4) Alt fonts/color scheme for header/footer
 
 - larger scale visualization layouts
     - iframe with npr library (pym.js) for sizing (generic) (check with shinyapps.io)
@@ -63,7 +70,7 @@ library(ggplot2)
 library(knitr)
 ```
 
-Distill is an online publication format designed for technical and academic communication. Distill articles include:
+Radix is an online publication format designed for scientific and technical communication. Radix articles include:
 
 - Reader-friendly typography that adapts well to mobile devices.
 - Features essential to technical writing like [LaTeX math](#equations), [citations], and [footnotes].
@@ -72,36 +79,36 @@ Distill is an online publication format designed for technical and academic comm
 - Support for a wide variety of [diagramming tools](diagrams.html) for illustrating concepts.
 - A variety of ways to enhance articles with [interactive visualizations](interactivity.html).
 
-The Distill web framework was originally created for use in <https://distill.pub> (a machine learning journal). Distill for [R Markdown](https://rmarkdown.rstudio.com/) enables you to easily author Distill articles using a fully reproducible workflow based on literate programming[@knuth1984].
+Radix is based on the [Distill web framework](https://github.com/distillpub/template), which was originally created for use in the [Distill](https://distill.pub) machine learning journal. Radix combines the technical authoring features of Distill with [R Markdown](https://rmarkdown.rstudio.com/), enabling a fully reproducible workflow based on literate programming[@knuth1984].
 
 ## Getting Started
 
-To create an [R Markdown](https://rmarkdown.rstudio.com) document that uses the Distill format, first install the **distill** R package:
+To create an [R Markdown](https://rmarkdown.rstudio.com) document that uses the Radix format, first install the **radix** R package:
 
 ```r
-devtools::install_github("jjallaire/distill")
+devtools::install_github("jjallaire/radix")
 ```
 
-Then, use the **New R Markdown** dialog within RStudio to create a new Distill article:
+Then, use the **New R Markdown** dialog within RStudio to create a new Radix article:
 
-![](images/new_distill_article.png){width="100%" .screenshot}
+![](images/new_radix_article.png){width="100%" .screenshot}
 
-You can also create a new Distill article from the command line with:
+You can also create a new Radix article from the command line with:
 
 ```r
 library(rmarkdown)
-draft("article.Rmd", "distill_article", package = "distill")
+draft("article.Rmd", "radix_article", package = "radix")
 ```
 
 <div id="front-matter"></div>
 
-Distill articles use `distill::distill_article` as their output format, and typically include title, description, date, author/affiliation, and bibliography entries in their YAML front-matter:
+Radix articles use `radix::radix_article` as their output format, and typically include title, description, date, author/affiliation, and bibliography entries in their YAML front-matter:
 
 ```markup
 ---
-title: "Distill for R Markdown"
+title: "Radix for R Markdown"
 description: | 
-  A format devoted to clear explanations, native to the web
+  Scientific and technical writing, native to the web
 date: May 4, 2018
 author:
   - name: "JJ Allaire"
@@ -117,6 +124,7 @@ author:
     affiliation: RStudio
     affiliation_url: https://www.rstudio.com
 bibliography: biblio.bib
+output: radix::radix_article
 ---
 ```
 
@@ -128,7 +136,7 @@ The `bibliography` field is used to provide a reference to the Bibtex file where
 
 ## Figures
 
-Distill provides a number of options for laying out figures within your article. By default figures span the width of the main article body:
+Radix provides a number of options for laying out figures within your article. By default figures span the width of the main article body:
 
 ![](images/l-body-figure.png){width=100%}
 
@@ -155,7 +163,7 @@ See the documentation on [figure layout](figures.html) for details on additional
 
 ## Tables
 
-There are a number of options available for HTML display of data frames within Distill articles. Here, we use the `paged_table()` function to display a page-able view of the `mtcars` dataset built in to R:
+There are a number of options available for HTML display of data frames within Radix articles. Here, we use the `paged_table()` function to display a page-able view of the `mtcars` dataset built in to R:
 
 ````clike
 ```{r, layout="l-body-outset"}`r ''`
@@ -214,7 +222,7 @@ Citations are then used in the article body with standard Pandoc markdown notati
 
 The citation is presented inline like this: [@xie2015] (a number that displays more information on hover). If you have an appendix, a bibliography is automatically created and populated in it.
 
-Distill chose a numerical inline citation style to improve readability of citation dense articles and because many of the benefits of longer citations are obviated by displaying more information on hover. However, we consider it good style to mention author last names if you discuss something at length and it fits into the flow well---the authors are human and it’s nice for them to have the community associate them with their work.
+Radix chose a numerical inline citation style to improve readability of citation dense articles and because many of the benefits of longer citations are obviated by displaying more information on hover. However, we consider it good style to mention author last names if you discuss something at length and it fits into the flow well---the authors are human and it’s nice for them to have the community associate them with their work.
 
 ## Footnotes
 
@@ -234,7 +242,7 @@ This content will appear in the gutter of the article.
 
 ## Code Blocks
 
-Syntax highlighting is provided for knitr code chunks. Note that by default the Distill format does not display the code for chunks that are evaluated to produce output (knitr option `echo = FALSE`). 
+Syntax highlighting is provided for knitr code chunks. Note that by default the Radix format does not display the code for chunks that are evaluated to produce output (knitr option `echo = FALSE`). 
 
 To display the code that was evaluated to produce output you can set the `echo` chunk option to `TRUE`:
 
@@ -272,7 +280,7 @@ Footnotes and references will be included in the same section, immediately benea
 
 ## Acknowledgments {.appendix}
 
-Distill for R Markdown builds on the work of many individuals and projects. [Shan Carter](https://github.com/shancarter), [Ludwig Schubert](https://github.com/ludwigschubert), and [Christopher Olah](https://github.com/colah) created the Distill web framework. [John MacFarlane](https://github.com/jgm) created the Pandoc universal markup converter. [Davide Cervone](https://github.com/dpvc) and [Volker Sorge](https://github.com/zorkow) created the MathJax library for rendering mathmatical notation on the web. [Mike Bostock](https://github.com/mbostock) created the D3 library for producing dynamic, interactive data visualizations for the web. We are grateful for the spirit of generousity that moved these individuals to create high-quality open source software for the benefit of all.
+Radix builds on the work of many individuals and projects. [Shan Carter](https://github.com/shancarter), [Ludwig Schubert](https://github.com/ludwigschubert), and [Christopher Olah](https://github.com/colah) created the Distill web framework. [John MacFarlane](https://github.com/jgm) created the Pandoc universal markup converter. [Davide Cervone](https://github.com/dpvc) and [Volker Sorge](https://github.com/zorkow) created the MathJax library for rendering mathmatical notation on the web. [Mike Bostock](https://github.com/mbostock) created the D3 library for producing dynamic, interactive data visualizations for the web. We are grateful for the spirit of generousity that moved these individuals to create high-quality open source software for the benefit of all.
 
 
 

@@ -6,11 +6,11 @@
   <meta http-equiv="X-UA-Compatible" content="IE=Edge,chrome=1">
   <meta name="generator" content="pandoc" />
 
-  <title>Distill for R Markdown</title>
+  <title>Radix for R Markdown</title>
 
   
   <!--  https://schema.org/Article -->
-  <meta property="description" itemprop="description" content="A format devoted to clear explanations, native to the web&#10;"/>
+  <meta property="description" itemprop="description" content="Scientific and technical writing, native to the web&#10;"/>
   <meta property="article:published" itemprop="datePublished" content="2018-05-04"/>
   <meta property="article:created" itemprop="dateCreated" content="2018-05-04"/>
   <meta name="article:author" content="JJ Allaire"/>
@@ -19,17 +19,17 @@
   
   <!--  https://developers.facebook.com/docs/sharing/webmasters#markup -->
   <meta property="og:type" content="article"/>
-  <meta property="og:description" content="A format devoted to clear explanations, native to the web&#10;"/>
+  <meta property="og:description" content="Scientific and technical writing, native to the web&#10;"/>
   <meta property="og:locale" content="en_US"/>
-  <meta property="og:site_name" content="Distill for R Markdown"/>
+  <meta property="og:site_name" content="Radix for R Markdown"/>
   
   <!--  https://dev.twitter.com/cards/types/summary -->
   <meta property="twitter:card" content="summary"/>
-  <meta property="twitter:title" content="Distill for R Markdown"/>
-  <meta property="twitter:description" content="A format devoted to clear explanations, native to the web&#10;"/>
+  <meta property="twitter:title" content="Radix for R Markdown"/>
+  <meta property="twitter:description" content="Scientific and technical writing, native to the web&#10;"/>
   <d-front-matter>
   <script id="distill-front-matter" type="text/json">
-  {"title":"Distill for R Markdown","description":"A format devoted to clear explanations, native to the web\n","authors":[{"author":"JJ Allaire","authorURL":"https://github.com/jjallaire","affiliation":"RStudio","affiliationURL":"https://www.rstudio.com"},{"author":"Rich Iannone","authorURL":"https://github.com/rich-iannone","affiliation":"RStudio","affiliationURL":"https://www.rstudio.com"},{"author":"Yihui Xie","authorURL":"https://github.com/yihui","affiliation":"RStudio","affiliationURL":"https://www.rstudio.com"}],"publishedDate":"2018-05-04T00:00:00.000-0400"}
+  {"title":"Radix for R Markdown","description":"Scientific and technical writing, native to the web\n","authors":[{"author":"JJ Allaire","authorURL":"https://github.com/jjallaire","affiliation":"RStudio","affiliationURL":"https://www.rstudio.com"},{"author":"Rich Iannone","authorURL":"https://github.com/rich-iannone","affiliation":"RStudio","affiliationURL":"https://www.rstudio.com"},{"author":"Yihui Xie","authorURL":"https://github.com/yihui","affiliation":"RStudio","affiliationURL":"https://www.rstudio.com"}],"publishedDate":"2018-05-04T00:00:00.000-0400"}
   </script>
   </d-front-matter>
   <script src="site_libs/jquery-1.11.3/jquery.min.js"></script>
@@ -51,10 +51,7 @@
       <div class="distill-header">
     <div class="content">
       <a href="index.html" class="logo">
-        <svg width="24px" viewBox="-607 419 64 64">
-          <path d="M-573.4,478.9c-8,0-14.6-6.4-14.6-14.5s14.6-25.9,14.6-40.8c0,14.9,14.6,32.8,14.6,40.8S-565.4,478.9-573.4,478.9z"/>
-            </svg>
-        Distill for R Markdown
+        Radix for R Markdown
       </a>
       <div class="nav">
         <a href="index.html">Basics</a>
@@ -67,8 +64,8 @@
     </div>
   
 <d-title>
-<h1>Distill for R Markdown</h1>
-<p>A format devoted to clear explanations, native to the web</p>
+<h1>Radix for R Markdown</h1>
+<p>Scientific and technical writing, native to the web</p>
 </d-title>
 
 <d-byline>
@@ -131,7 +128,7 @@
 - site generation
 
 --->
-<p>Distill is an online publication format designed for technical and academic communication. Distill articles include:</p>
+<p>Radix is an online publication format designed for scientific and technical communication. Radix articles include:</p>
 <ul>
 <li>Reader-friendly typography that adapts well to mobile devices.</li>
 <li>Features essential to technical writing like <a href="#equations">LaTeX math</a>, <a href="#citations">citations</a>, and <a href="#footnotes">footnotes</a>.</li>
@@ -140,26 +137,26 @@
 <li>Support for a wide variety of <a href="diagrams.html">diagramming tools</a> for illustrating concepts.</li>
 <li>A variety of ways to enhance articles with <a href="interactivity.html">interactive visualizations</a>.</li>
 </ul>
-<p>The Distill web framework was originally created for use in <a href="https://distill.pub" class="uri">https://distill.pub</a> (a machine learning journal). Distill for <a href="https://rmarkdown.rstudio.com/">R Markdown</a> enables you to easily author Distill articles using a fully reproducible workflow based on literate programming<span class="citation">(Knuth <a href="#ref-knuth1984">1984</a>)</span>.</p>
+<p>Radix is based on the <a href="https://github.com/distillpub/template">Distill web framework</a>, which was originally created for use in the <a href="https://distill.pub">Distill</a> machine learning journal. Radix combines the technical authoring features of Distill with <a href="https://rmarkdown.rstudio.com/">R Markdown</a>, enabling a fully reproducible workflow based on literate programming<span class="citation">(Knuth <a href="#ref-knuth1984">1984</a>)</span>.</p>
 <h2 id="getting-started">Getting Started</h2>
-<p>To create an <a href="https://rmarkdown.rstudio.com">R Markdown</a> document that uses the Distill format, first install the <strong>distill</strong> R package:</p>
+<p>To create an <a href="https://rmarkdown.rstudio.com">R Markdown</a> document that uses the Radix format, first install the <strong>radix</strong> R package:</p>
 <pre class="r"><code>
-devtools::install_github(&quot;jjallaire/distill&quot;)</code></pre>
-<p>Then, use the <strong>New R Markdown</strong> dialog within RStudio to create a new Distill article:</p>
-<p><img src="images/new_distill_article.png" class="screenshot" style="width:100.0%" /></p>
-<p>You can also create a new Distill article from the command line with:</p>
+devtools::install_github(&quot;jjallaire/radix&quot;)</code></pre>
+<p>Then, use the <strong>New R Markdown</strong> dialog within RStudio to create a new Radix article:</p>
+<p><img src="images/new_radix_article.png" class="screenshot" style="width:100.0%" /></p>
+<p>You can also create a new Radix article from the command line with:</p>
 <pre class="r"><code>
 library(rmarkdown)
-draft(&quot;article.Rmd&quot;, &quot;distill_article&quot;, package = &quot;distill&quot;)</code></pre>
+draft(&quot;article.Rmd&quot;, &quot;radix_article&quot;, package = &quot;radix&quot;)</code></pre>
 <div id="front-matter">
 
 </div>
-<p>Distill articles use <code>distill::distill_article</code> as their output format, and typically include title, description, date, author/affiliation, and bibliography entries in their YAML front-matter:</p>
+<p>Radix articles use <code>radix::radix_article</code> as their output format, and typically include title, description, date, author/affiliation, and bibliography entries in their YAML front-matter:</p>
 <pre class="markup"><code>
 ---
-title: &quot;Distill for R Markdown&quot;
+title: &quot;Radix for R Markdown&quot;
 description: | 
-  A format devoted to clear explanations, native to the web
+  Scientific and technical writing, native to the web
 date: May 4, 2018
 author:
   - name: &quot;JJ Allaire&quot;
@@ -175,12 +172,13 @@ author:
     affiliation: RStudio
     affiliation_url: https://www.rstudio.com
 bibliography: biblio.bib
+output: radix::radix_article
 ---</code></pre>
 <p>Author entires must have at least <code>name</code> and <code>url</code> specified (the affiliation fields are optional). The <code>date</code> field should be formatted as month, day, year (various notations are supported as long as the compontents appear in that order).</p>
 <p>The article’s description and author bylines are automatically rendered as part of the title area of the document.</p>
 <p>The <code>bibliography</code> field is used to provide a reference to the Bibtex file where all of the sources cited in your article are defined. The <a href="#citations">citations</a> section describes how to include references to these sources in your article.</p>
 <h2 id="figures">Figures</h2>
-<p>Distill provides a number of options for laying out figures within your article. By default figures span the width of the main article body:</p>
+<p>Radix provides a number of options for laying out figures within your article. By default figures span the width of the main article body:</p>
 <p><img src="images/l-body-figure.png" style="width:100.0%" /></p>
 <p>However, some figures benefit from using additional horizontal space. In this cases the <code>layout</code> chunk option enables you to specify a wide variety of other layouts.</p>
 <p>For example, if we wanted to display a figure a bit outside the bounds of the article text, we could specify the <code>l-body-outset</code> layout via the <code>layout</code> chunk option:</p>
@@ -196,7 +194,7 @@ ggplot(diamonds, aes(carat, price)) + geom_smooth() +
 <p>Note that when specifying an alternate <code>layout</code> you should also specify an appropriate <code>fig.width</code> and <code>fig.height</code> for that layout. These values don’t determine the absolute size of the figure (that’s dynamic based on the layout) but they do determine the aspect ratio of the figure.</p>
 <p>See the documentation on <a href="figures.html">figure layout</a> for details on additional layout options.</p>
 <h2 id="tables">Tables</h2>
-<p>There are a number of options available for HTML display of data frames within Distill articles. Here, we use the <code>paged_table()</code> function to display a page-able view of the <code>mtcars</code> dataset built in to R:</p>
+<p>There are a number of options available for HTML display of data frames within Radix articles. Here, we use the <code>paged_table()</code> function to display a page-able view of the <code>mtcars</code> dataset built in to R:</p>
 <pre class="clike"><code>
 ```{r, layout=&quot;l-body-outset&quot;}
 library(rmarkdown)
@@ -238,7 +236,7 @@ $$</code></pre>
 <p>You are strongly encouraged you to populate the <code>url</code> bibtex field where possible so that links can be provided for citations.</p>
 <p>Citations are then used in the article body with standard Pandoc markdown notation, for example: <code>[@xie2015]</code> (which references an id provided in the bibliography). Note that multiple ids (separated by semicolons) can be provided.</p>
 <p>The citation is presented inline like this: <span class="citation">(Xie <a href="#ref-xie2015">2015</a>)</span> (a number that displays more information on hover). If you have an appendix, a bibliography is automatically created and populated in it.</p>
-<p>Distill chose a numerical inline citation style to improve readability of citation dense articles and because many of the benefits of longer citations are obviated by displaying more information on hover. However, we consider it good style to mention author last names if you discuss something at length and it fits into the flow well—the authors are human and it’s nice for them to have the community associate them with their work.</p>
+<p>Radix chose a numerical inline citation style to improve readability of citation dense articles and because many of the benefits of longer citations are obviated by displaying more information on hover. However, we consider it good style to mention author last names if you discuss something at length and it fits into the flow well—the authors are human and it’s nice for them to have the community associate them with their work.</p>
 <h2 id="footnotes">Footnotes</h2>
 <p>Footnotes use standard Pandoc markdown notation, for example <code>^[This will become a hover-able footnote]</code>. The number of the footnote will be automatically generated.<a href="#fn1" class="footnote-ref" id="fnref1"><sup>1</sup></a></p>
 <p>You can also optionally include note in the gutter of the article (immediately to the right of the article text). To do this use the <code>&lt;aside&gt;</code> tag.</p>
@@ -250,7 +248,7 @@ This content will appear in the gutter of the article.
 This content will appear in the gutter of the article.
 &lt;/aside&gt;</code></pre>
 <h2 id="code-blocks">Code Blocks</h2>
-<p>Syntax highlighting is provided for knitr code chunks. Note that by default the Distill format does not display the code for chunks that are evaluated to produce output (knitr option <code>echo = FALSE</code>).</p>
+<p>Syntax highlighting is provided for knitr code chunks. Note that by default the Radix format does not display the code for chunks that are evaluated to produce output (knitr option <code>echo = FALSE</code>).</p>
 <p>To display the code that was evaluated to produce output you can set the <code>echo</code> chunk option to <code>TRUE</code>:</p>
 <pre class="clike"><code>
 ```{r, echo=TRUE}
@@ -275,7 +273,7 @@ We strongly encourage you to include an author contributions statement briefly
 describing what each author did.</code></pre>
 <p>Footnotes and references will be included in the same section, immediately beneath any custom appendices.</p>
 <h2 id="acknowledgments" class="appendix">Acknowledgments</h2>
-<p>Distill for R Markdown builds on the work of many individuals and projects. <a href="https://github.com/shancarter">Shan Carter</a>, <a href="https://github.com/ludwigschubert">Ludwig Schubert</a>, and <a href="https://github.com/colah">Christopher Olah</a> created the Distill web framework. <a href="https://github.com/jgm">John MacFarlane</a> created the Pandoc universal markup converter. <a href="https://github.com/dpvc">Davide Cervone</a> and <a href="https://github.com/zorkow">Volker Sorge</a> created the MathJax library for rendering mathmatical notation on the web. <a href="https://github.com/mbostock">Mike Bostock</a> created the D3 library for producing dynamic, interactive data visualizations for the web. We are grateful for the spirit of generousity that moved these individuals to create high-quality open source software for the benefit of all.</p>
+<p>Radix builds on the work of many individuals and projects. <a href="https://github.com/shancarter">Shan Carter</a>, <a href="https://github.com/ludwigschubert">Ludwig Schubert</a>, and <a href="https://github.com/colah">Christopher Olah</a> created the Distill web framework. <a href="https://github.com/jgm">John MacFarlane</a> created the Pandoc universal markup converter. <a href="https://github.com/dpvc">Davide Cervone</a> and <a href="https://github.com/zorkow">Volker Sorge</a> created the MathJax library for rendering mathmatical notation on the web. <a href="https://github.com/mbostock">Mike Bostock</a> created the D3 library for producing dynamic, interactive data visualizations for the web. We are grateful for the spirit of generousity that moved these individuals to create high-quality open source software for the benefit of all.</p>
 <div id="refs" class="references">
 <div id="ref-knuth1984">
 <p>Knuth, Donald E. 1984. “Literate Programming.” <em>The Computer Journal</em> 27 (2). British Computer Society: 97–111.</p>
@@ -298,7 +296,7 @@ describing what each author did.</code></pre>
   <div class="distill-footer">
   <div class="l-page">
     <div class="description">
-    Created using <a class="logo" style="color: rgba(255, 255, 255, 0.4)" href="index.html">Distill for R Markdown</a>
+    Created using <a class="logo" style="color: rgba(255, 255, 255, 0.4)" href="index.html">Radix for R Markdown</a>
     </div>
     <div class="nav">
       <a href="index.html">Basics</a>
@@ -306,7 +304,7 @@ describing what each author did.</code></pre>
       <a href="tables.html">Tables</a>
       <a href="diagrams.html">Diagrams</a>
       <a href="interactivity.html">Interactivity</a>
-      <a href="https://github.com/jjallaire/distill">GitHub</a>
+      <a href="https://github.com/jjallaire/radix">GitHub</a>
     </div>
     <p>
     © Copyright 2018 The Distill Template Authors and RStudio, Inc.

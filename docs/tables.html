@@ -14,7 +14,7 @@
   <meta property="og:type" content="article"/>
   <meta property="og:description" content="Display data in attractive, compact formats"/>
   <meta property="og:locale" content="en_US"/>
-  <meta property="og:site_name" content="Distill for R Markdown"/>
+  <meta property="og:site_name" content="Radix for R Markdown"/>
   
   <!--  https://dev.twitter.com/cards/types/summary -->
   <meta property="twitter:card" content="summary"/>
@@ -49,10 +49,7 @@
       <div class="distill-header">
     <div class="content">
       <a href="index.html" class="logo">
-        <svg width="24px" viewBox="-607 419 64 64">
-          <path d="M-573.4,478.9c-8,0-14.6-6.4-14.6-14.5s14.6-25.9,14.6-40.8c0,14.9,14.6,32.8,14.6,40.8S-565.4,478.9-573.4,478.9z"/>
-            </svg>
-        Distill for R Markdown
+        Radix for R Markdown
       </a>
       <div class="nav">
         <a href="index.html">Basics</a>
@@ -71,7 +68,7 @@
 
 
 <d-article>
-<p>There are a number of options available for displaying tables within Distill articles, including:</p>
+<p>There are a number of options available for displaying tables within Radix articles, including:</p>
 <ul>
 <li><p>Using the <code>knitr::kable()</code> function to render a data frame as HTML.</p></li>
 <li><p>Using the <code>rmarkdown::paged_table()</code> function to create a page-able version of a data frame.</p></li>
@@ -190,7 +187,7 @@ kable(head(mtcars))
 </tbody>
 </table>
 </div>
-<p>Often times tables will require more width for their display than the standard Distill article text width. Here we use <code>layout=&quot;l-body-outset&quot;</code> to cause the table to outset slightly from the main text column. All of the available <a href="figures.html">figure layouts</a> can also be used with tables.</p>
+<p>Often times tables will require more width for their display than the standard Radix article text width. Here we use <code>layout=&quot;l-body-outset&quot;</code> to cause the table to outset slightly from the main text column. All of the available <a href="figures.html">figure layouts</a> can also be used with tables.</p>
 <h2 id="paged-tables">Paged tables</h2>
 <p>If a data frame has a large number of rows it might not be practical to display it fully inline. In these situations you can use the <code>rmarkdown::paged_table()</code> function to create a table that allows pagination of rows and columns. For example:</p>
 <pre class="clike"><code>
@@ -254,7 +251,7 @@ paged_table(mtcars, options = list(rows.print = 15))
 | `max.print`      | Maximum rows in the table (defaults to 1000).  |
 | `cols.print`     | Maximum columns in the table (defaults to 10). |
 | `rownames.print` | Print row names as part of the table.          |</code></pre>
-<p>You can use Distill <a href="figures.html">figure layout</a> classes with markdown tables by enclosing them in a <code>&lt;div&gt;</code> with the appropriate class, for example:</p>
+<p>You can use Radix <a href="figures.html">figure layout</a> classes with markdown tables by enclosing them in a <code>&lt;div&gt;</code> with the appropriate class, for example:</p>
 <pre class="markdown"><code>
 &lt;div class=&quot;l-middle&quot;&gt;
 | Option           | Description                                    |
@@ -272,7 +269,7 @@ paged_table(mtcars, options = list(rows.print = 15))
   <div class="distill-footer">
   <div class="l-page">
     <div class="description">
-    Created using <a class="logo" style="color: rgba(255, 255, 255, 0.4)" href="index.html">Distill for R Markdown</a>
+    Created using <a class="logo" style="color: rgba(255, 255, 255, 0.4)" href="index.html">Radix for R Markdown</a>
     </div>
     <div class="nav">
       <a href="index.html">Basics</a>
@@ -280,7 +277,7 @@ paged_table(mtcars, options = list(rows.print = 15))
       <a href="tables.html">Tables</a>
       <a href="diagrams.html">Diagrams</a>
       <a href="interactivity.html">Interactivity</a>
-      <a href="https://github.com/jjallaire/distill">GitHub</a>
+      <a href="https://github.com/jjallaire/radix">GitHub</a>
     </div>
     <p>
     © Copyright 2018 The Distill Template Authors and RStudio, Inc.

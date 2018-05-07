@@ -3,7 +3,7 @@ title: "Diagrams"
 description: "Illustrate concepts with diagrams"
 ---
 
-There are a number of ways to create diagrams for use in Distill articles, a few worth considering are:
+There are a number of ways to create diagrams for use in Radix articles, a few worth considering are:
 
 - The [DiagrammerR](http://rich-iannone.github.io/DiagrammeR/) package, which enables you to generate graph diagrams using text (both [GraphViz](https://www.graphviz.org/) and [Mermaid](https://mermaidjs.github.io/) are supported). 
 
@@ -13,7 +13,7 @@ There are a number of ways to create diagrams for use in Distill articles, a few
 
 ## DiagrammeR
 
-You can use the [DiagrammerR](http://rich-iannone.github.io/DiagrammeR/) package to include [GraphViz](https://www.graphviz.org/) visualizations within a Distill article. For example, if you have a GraphViz file [graph.gv](https://github.com/jjallaire/distill/blob/master/docs/images/graph.gv), you can include it with the following code:
+You can use the [DiagrammerR](http://rich-iannone.github.io/DiagrammeR/) package to include [GraphViz](https://www.graphviz.org/) visualizations within a Radix article. For example, if you have a GraphViz file [graph.gv](https://github.com/jjallaire/distill/blob/master/docs/images/graph.gv), you can include it with the following code:
 
 ````clike
 ```{r, layout="l-page", fig.height=2}`r ''`

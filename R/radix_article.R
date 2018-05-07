@@ -1,10 +1,10 @@
 
 
-#' R Markdown format for Distill articles
+#' R Markdown format for Radix articles
 #'
-#' Distill is a framework for creating technical articles for the web.
+#' Scientific and technical writing, native to the web.
 #'
-#' Distill articles feature attractive, reader-friendly typography, flexible
+#' Radix articles feature attractive, reader-friendly typography, flexible
 #' layout options for visualizations, and full support for footnotes and
 #' citations.
 #'
@@ -14,28 +14,28 @@
 #' @import htmltools
 #'
 #' @export
-distill_article <- function(fig_width = 6,
-                            fig_height = 4,
-                            fig_retina = 2,
-                            fig_caption = TRUE,
-                            dev = "png",
-                            smart = TRUE,
-                            self_contained = TRUE,
-                            mathjax = "default",
-                            extra_dependencies = NULL,
-                            css = NULL,
-                            includes = NULL,
-                            keep_md = FALSE,
-                            lib_dir = NULL,
-                            md_extensions = NULL,
-                            pandoc_args = NULL,
-                            ...) {
+radix_article <- function(fig_width = 6,
+                          fig_height = 4,
+                          fig_retina = 2,
+                          fig_caption = TRUE,
+                          dev = "png",
+                          smart = TRUE,
+                          self_contained = TRUE,
+                          mathjax = "default",
+                          extra_dependencies = NULL,
+                          css = NULL,
+                          includes = NULL,
+                          keep_md = FALSE,
+                          lib_dir = NULL,
+                          md_extensions = NULL,
+                          pandoc_args = NULL,
+                          ...) {
 
 
   # function for resolving resources
   resource <- function(name) {
-    system.file("rmarkdown/templates/distill_article/resources", name,
-                package = "distill")
+    system.file("rmarkdown/templates/radix_article/resources", name,
+                package = "radix")
   }
 
   # build pandoc args
@@ -141,8 +141,8 @@ html_dependency_distill <- function() {
   htmltools::htmlDependency(
     name = "distill",
     version = "2.2.21",
-    src = system.file("rmarkdown/templates/distill_article/resources/distill-2.0",
-                      package = "distill"),
+    src = system.file("rmarkdown/templates/radix_article/resources/distill-2.0",
+                      package = "radix"),
     script = c("distill.js", "template.v2.js", "distill-post.js"),
     stylesheet = "distill.css"
   )

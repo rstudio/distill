@@ -1,7 +1,7 @@
 ---
 title: "Untitled"
 description: |
-  A new article created using the Distill format.
+  A new article created using the Radix format.
 author:
   - name: Joe Smith
     url: https://example.com/joesmith
@@ -11,16 +11,16 @@ author:
     url: https://example.com/norajones
     affiliation: Spacely Sprockets
     affiliation_url: https://example.com/spacelysprokets
-output: distill::distill_article
+output: radix::radix_article
 ---
 
 
 ```{r setup, include=FALSE}
-library(distill)
+library(radix)
 knitr::opts_chunk$set(echo = FALSE)
 ```
 
-Distill is an online publication format devoted to clear explanations, native to the web. Learn more about using Distill with R Markdown at <https://jjallaire.github.io/distill>.
+Radix is a publication format for scientific and technical writing, native to the web. Learn more about using Radix at <https://jjallaire.github.io/radix>.
 
 
 

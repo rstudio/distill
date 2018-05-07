@@ -8,7 +8,7 @@ library(knitr)
 ```
 
 
-There are a variety of ways to layout figures included within Distill articles. This layout is controlled by a set of layout classes, which are in turn applied to R Markdown chunks using the `layout` chunk option.
+There are a variety of ways to layout figures included within Radix articles. This layout is controlled by a set of layout classes, which are in turn applied to R Markdown chunks using the `layout` chunk option.
 
 The default layout if `layout` is not specified is `l-body`, which will cause content to span the width of the main article body:
 
@@ -75,7 +75,7 @@ To include static images that occupy the full width of the article text, be sure
 ![](images/figure.png){width=100%}    
 ```
 
-To include a static images that adheres to a Disill layout, wrap it in a `<div>` tag with the appropriate `class`. For example:
+To include a static images that adheres to a Radix layout, wrap it in a `<div>` tag with the appropriate `class`. For example:
 
 ```markdown
 <div class="l-body-outset">

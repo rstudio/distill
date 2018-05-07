@@ -14,7 +14,7 @@
   <meta property="og:type" content="article"/>
   <meta property="og:description" content="Enhance communication with interactive visualizations"/>
   <meta property="og:locale" content="en_US"/>
-  <meta property="og:site_name" content="Distill for R Markdown"/>
+  <meta property="og:site_name" content="Radix for R Markdown"/>
   
   <!--  https://dev.twitter.com/cards/types/summary -->
   <meta property="twitter:card" content="summary"/>
@@ -64,10 +64,7 @@
       <div class="distill-header">
     <div class="content">
       <a href="index.html" class="logo">
-        <svg width="24px" viewBox="-607 419 64 64">
-          <path d="M-573.4,478.9c-8,0-14.6-6.4-14.6-14.5s14.6-25.9,14.6-40.8c0,14.9,14.6,32.8,14.6,40.8S-565.4,478.9-573.4,478.9z"/>
-            </svg>
-        Distill for R Markdown
+        Radix for R Markdown
       </a>
       <div class="nav">
         <a href="index.html">Basics</a>
@@ -86,7 +83,7 @@
 
 
 <d-article>
-<p>There are a variety of ways to add interactivity to your Distill articles, including:</p>
+<p>There are a variety of ways to add interactivity to your Radix articles, including:</p>
 <ul>
 <li><p>Using pre-built <a href="http://www.htmlwidgets.org">htmlwidgets</a> that wrap JavaScript visualization libraries like <a href="http://rstudio.github.io/leaflet/">Leaflet</a>, <a href="https://plot.ly/r/">Plotly</a>, <a href="http://rstudio.github.io/dygraphs/">dygraphs</a>, and <a href="https://bwlewis.github.io/rthreejs/">threejs</a>.</p></li>
 <li><p>Creating custom <a href="https://d3js.org/">D3.js</a> interactive visualizations using the <a href="https://rstudio.github.io/r2d3/">r2d3</a> package.</p></li>
@@ -132,15 +129,15 @@ r2d3(script = &quot;voronoi.js&quot;)
 </div>
 <p>Note that we specify <code>layout=&quot;l-page&quot;</code> to indicate that we want the visualization to occupy the full width of the page.</p>
 <h2 id="shiny">Shiny</h2>
-<p>You can use <a href="https://shiny.rstudio.com">Shiny</a> components within your Distill articles to allow your readers to change the parameters underlying your analysis and see the results immediately. To use Shiny with Distill, first specify that you want to use the Shiny runtime with your document:</p>
+<p>You can use <a href="https://shiny.rstudio.com">Shiny</a> components within your Radix articles to allow your readers to change the parameters underlying your analysis and see the results immediately. To use Shiny with Radix, first specify that you want to use the Shiny runtime with your document:</p>
 <pre class="markup"><code>
 ---
 title: &quot;Interactive Distill with Shiny&quot;
-output: distill::distill_article
+output: radix::radix_article
 runtime: shiny
 ---</code></pre>
-<p>This turns your Distill article into an <a href="https://rmarkdown.rstudio.com/authoring_shiny.html">interactive document</a>, enabling you to add Shiny inputs and output directly to the document.</p>
-<p>Here’s an example of a Distill article with interactive Shiny components (<a href="https://jjallaire.shinyapps.io/distill-interactive-document/" class="uri">https://jjallaire.shinyapps.io/distill-interactive-document/</a>):</p>
+<p>This turns your Radix article into an <a href="https://rmarkdown.rstudio.com/authoring_shiny.html">interactive document</a>, enabling you to add Shiny inputs and output directly to the document.</p>
+<p>Here’s an example of a Radix article with interactive Shiny components (<a href="https://jjallaire.shinyapps.io/distill-interactive-document/" class="uri">https://jjallaire.shinyapps.io/distill-interactive-document/</a>):</p>
 <p><img src="images/shiny.png" class="screenshot" style="width:100.0%" /></p>
 <p>This was the R code used to create the interactive Shiny components:</p>
 <div class="layout-chunk l-body">
@@ -171,7 +168,7 @@ renderPlot({
   <div class="distill-footer">
   <div class="l-page">
     <div class="description">
-    Created using <a class="logo" style="color: rgba(255, 255, 255, 0.4)" href="index.html">Distill for R Markdown</a>
+    Created using <a class="logo" style="color: rgba(255, 255, 255, 0.4)" href="index.html">Radix for R Markdown</a>
     </div>
     <div class="nav">
       <a href="index.html">Basics</a>
@@ -179,7 +176,7 @@ renderPlot({
       <a href="tables.html">Tables</a>
       <a href="diagrams.html">Diagrams</a>
       <a href="interactivity.html">Interactivity</a>
-      <a href="https://github.com/jjallaire/distill">GitHub</a>
+      <a href="https://github.com/jjallaire/radix">GitHub</a>
     </div>
     <p>
     © Copyright 2018 The Distill Template Authors and RStudio, Inc.

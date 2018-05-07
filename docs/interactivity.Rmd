@@ -3,7 +3,7 @@ title: "Interactivity"
 description: Enhance communication with interactive visualizations 
 ---
 
-There are a variety of ways to add interactivity to your Distill articles, including:
+There are a variety of ways to add interactivity to your Radix articles, including:
 
 - Using pre-built [htmlwidgets](http://www.htmlwidgets.org) that wrap JavaScript visualization libraries like [Leaflet](http://rstudio.github.io/leaflet/), [Plotly](https://plot.ly/r/), [dygraphs](http://rstudio.github.io/dygraphs/), and [threejs](https://bwlewis.github.io/rthreejs/).
 
@@ -74,19 +74,19 @@ Note that we specify `layout="l-page"` to indicate that we want the visualizatio
 
 ## Shiny
 
-You can use [Shiny](https://shiny.rstudio.com) components within your Distill articles to allow your readers to change the parameters underlying your analysis and see the results immediately. To use Shiny with Distill, first specify that you want to use the Shiny runtime with your document:
+You can use [Shiny](https://shiny.rstudio.com) components within your Radix articles to allow your readers to change the parameters underlying your analysis and see the results immediately. To use Shiny with Radix, first specify that you want to use the Shiny runtime with your document:
 
 ```markup
 ---
 title: "Interactive Distill with Shiny"
-output: distill::distill_article
+output: radix::radix_article
 runtime: shiny
 ---
 ```
 
-This turns your Distill article into an [interactive document](https://rmarkdown.rstudio.com/authoring_shiny.html), enabling you to add Shiny inputs and output directly to the document.
+This turns your Radix article into an [interactive document](https://rmarkdown.rstudio.com/authoring_shiny.html), enabling you to add Shiny inputs and output directly to the document.
 
-Here's an example of a Distill article with interactive Shiny components (<https://jjallaire.shinyapps.io/distill-interactive-document/>):
+Here's an example of a Radix article with interactive Shiny components (<https://jjallaire.shinyapps.io/distill-interactive-document/>):
 
 ![](images/shiny.png){width=100% .screenshot}
 
