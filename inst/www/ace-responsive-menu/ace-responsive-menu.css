@@ -1,9 +1,12 @@
-/*
+/* 
 Ace Responsive Menu Plugin
 Version: 1.0
 Author: Samson Onna
 E-mail: samson3d@gmail.com
 ----------------------------------------*/
+/* Import Fonts
+----------------------------------------*/
+@import url(http://fonts.googleapis.com/css?family=Roboto);
 
 /* Ace Responsive Menu
 ----------------------------------------*/
@@ -19,11 +22,11 @@ ul {
     list-style: none;
     margin: 0;
     padding: 0;
-    background: #333;
+    background: #333;  
     float:left;
     width:100%;
     font-family: 'Roboto', sans-serif;
-    border-bottom: 3px solid #FD5025;
+    border-bottom: 3px solid #FD5025;        
 }
 .ace-responsive-menu li{
     list-style: none;
@@ -71,7 +74,7 @@ ul {
 .ace-responsive-menu li .menu-active {
     position: relative;
 }
-.ace-responsive-menu > li > a > .arrow:before {
+.ace-responsive-menu > li > a > .arrow:before {  
     margin-left: 15px;
     display: inline;
     font-size: 16px;
@@ -189,7 +192,7 @@ ul {
 ul[data-menu-style="accordion"] {
     width: 250px;
 }
-ul[data-menu-style="accordion"] > li {
+ul[data-menu-style="accordion"] > li {    
     display: block;
     margin: 0;
     padding: 0;
@@ -293,7 +296,7 @@ ul[data-menu-style="vertical"] li a:hover {
     ul[data-menu-style="vertical"] , ul[data-menu-style="accordion"],
     ul[data-menu-style="vertical"] li ul.sub-menu {
         width: 100% !important;
-    }
+    } 
     .ace-responsive-menu {
         float: left;
         width:100%;
@@ -301,13 +304,13 @@ ul[data-menu-style="vertical"] li a:hover {
     .ace-responsive-menu > li {
         border-bottom: 1px solid #242424;
        float: none;
-    }
+    }   
     .ace-responsive-menu li a:hover {
         background: #272727 !important;
     }
     .ace-responsive-menu > li:first-child {
         border-top: 2px solid #FD5025;
-    }
+    }    
     .ace-responsive-menu > li > a i {
         padding-right: 10px;
         color: #FF5737;
@@ -325,11 +328,11 @@ ul[data-menu-style="vertical"] li a:hover {
     .ace-responsive-menu li ul.sub-menu li ul.sub-menu li a
         {
         padding-left: 30px;
-    }
-    .ace-responsive-menu li ul.sub-menu li ul.sub-menu li ul.sub-menu li a
+    }  
+    .ace-responsive-menu li ul.sub-menu li ul.sub-menu li ul.sub-menu li a 
        {
         padding-left: 50px;
-    }
+    }  
     .ace-responsive-menu > li > ul.sub-menu {
         position: static;
     }
