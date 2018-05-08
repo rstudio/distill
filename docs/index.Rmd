@@ -31,14 +31,11 @@ bibliography: biblio.bib
     - crosstalk compatibility?
         - distillRow/distillCol
         
-- alternative to DOI is citation (which just needs a URL) or source
-
 - Google Scholar data will require us to have programmatic access to all citations
   use pandoc-citeproc to convert bibliogrpahy to json?
   https://github.com/jgm/pandoc-citeproc/blob/master/man/pandoc-citeproc.1.md
 
-- get interactive Rmd working with v2  
-        
+- alternative to DOI is citation (which just needs a URL) or source
 - may need separate metadata section in the docs
 - web page metadata generation/redaction (see expandData)
 - article metadata (DOI, citation, etc.)
