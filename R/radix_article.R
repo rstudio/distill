@@ -262,10 +262,10 @@ open_graph_metadata <- function(site_config, metadata) {
     add_open_graph_meta("og:image", metadata$preview)
 
   # locale
-  locale <- if (!is.null(metadata$locale))
-    metadata$locale
-  else if (!is.null(site_config$locale))
-    site_config$locale
+  locale <- if (!is.null(metadata$lang))
+    metadata$lang
+  else if (!is.null(site_config$lang))
+    site_config$lang
   else
     "en_US"
   add_open_graph_meta("og:locale", locale)

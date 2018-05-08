@@ -37,13 +37,7 @@ bibliography: biblio.bib
   use pandoc-citeproc to convert bibliogrpahy to json?
   https://github.com/jgm/pandoc-citeproc/blob/master/man/pandoc-citeproc.1.md
 
-- consider supporting full ISO8601 dates (could we parse them w/o ld?)
-   http://www.w3.org/TR/NOTE-datetime
-  
 - get interactive Rmd working with v2  
-        
-  
-- use lang metadata field rather than locale  
         
 - may need separate metadata section in the docs
 - web page metadata generation/redaction (see expandData)
