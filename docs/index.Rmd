@@ -35,6 +35,8 @@ bibliography: biblio.bib
   use pandoc-citeproc to convert bibliogrpahy to json?
   https://github.com/jgm/pandoc-citeproc/blob/master/man/pandoc-citeproc.1.md
 
+- https://github.com/distillpub/template/blob/a6df55253793f5fa5189afc00edad4a22209c15e/src/distill-components/distill-appendix.js
+
 - alternative to DOI is citation (which just needs a URL) or source
 - may need separate metadata section in the docs
 - web page metadata generation/redaction (see expandData)
@@ -43,6 +45,9 @@ bibliography: biblio.bib
 
 - work out TZ display issues with date
 - use pandoc filters more?
+- cc search engine compatibility
+
+- dublin core metadata including cc license
 
 - index pages (consider using iframes for federated content authoring)
 - site generation

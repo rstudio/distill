@@ -102,14 +102,13 @@
     - crosstalk compatibility?
         - distillRow/distillCol
         
-- alternative to DOI is citation (which just needs a URL) or source
-
 - Google Scholar data will require us to have programmatic access to all citations
   use pandoc-citeproc to convert bibliogrpahy to json?
   https://github.com/jgm/pandoc-citeproc/blob/master/man/pandoc-citeproc.1.md
 
-- get interactive Rmd working with v2  
-        
+- https://github.com/distillpub/template/blob/a6df55253793f5fa5189afc00edad4a22209c15e/src/distill-components/distill-appendix.js
+
+- alternative to DOI is citation (which just needs a URL) or source
 - may need separate metadata section in the docs
 - web page metadata generation/redaction (see expandData)
 - article metadata (DOI, citation, etc.)
@@ -117,6 +116,7 @@
 
 - work out TZ display issues with date
 - use pandoc filters more?
+- cc search engine compatibility
 
 - index pages (consider using iframes for federated content authoring)
 - site generation
@@ -293,7 +293,7 @@ describing what each author did.</code></pre>
   <div class="distill-footer">
   <div class="l-page">
     <div class="description">
-    Created using <a class="logo" style="color: rgba(255, 255, 255, 0.4)" href="index.html">Radix for R Markdown</a>
+    Created using <a href="index.html">Radix for R Markdown</a>
     </div>
     <div class="nav">
       <a href="index.html">Basics</a>
@@ -307,11 +307,12 @@ describing what each author did.</code></pre>
     © Copyright 2018 The Distill Template Authors and RStudio, Inc.
     </p>
     <p>
-    Software licensed under the <a class="logo" style="color: rgba(255, 255, 255, 0.4)" href="https://www.apache.org/licenses/LICENSE-2.0">Apache License, v2.0</a>.<br/>
-    Docs licensed under <a class="logo" style="color: rgba(255, 255, 255, 0.4)" href="https://creativecommons.org/licenses/by/3.0/us/">Creative Commons Attribution License, v3.0</a>
+    Software licensed under the <a href="https://www.apache.org/licenses/LICENSE-2.0">Apache License, v2.0</a>.<br/>
+    Docs licensed under <a href="https://creativecommons.org/licenses/by/3.0/us/">Creative Commons Attribution License, v3.0</a>
     </p>
   </div>
   </div>
+  <div class="appendix-bottom"></div>
   <d-bibliography>
   <script type="text/bibtex">
   @misc{distill,

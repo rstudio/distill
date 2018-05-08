@@ -334,6 +334,80 @@ after_body_includes <- function(site_config, metadata) {
 
   after_body <- c()
 
+  # write appendix
+
+  # updates and corrections
+  updates_and_corrections <- list()
+  if (!is.null(metadata$repository_url)) {
+
+    updates_and_corrections <- list(
+      tags$h3(id = "updates-and-corrections", "Updates and Corrections")
+    )
+
+    if (!is.null(metadata$compare_updates_url)) {
+      updates_and_corrections[[length(updates_and_corrections) + 1]] <-
+        tags$p(
+          tags$a(href = metadata$compare_updates_url, "View all changes"),
+          " to this article since it was first published."
+        )
+    }
+
+    issues_url <- metadata$repository_url
+    if (grepl("github.com", issues_url, fixed = TRUE)) {
+      issues_url <- sub("/$", "", issues_url)
+      issues_url <- paste0(issues_url, "/issues/new")
+    }
+    updates_and_corrections[[length(updates_and_corrections) + 1]] <-
+      tags$p(HTML(sprintf(paste0(
+        'If you see mistakes or want to suggest changes, please <a href="%s">create an issue</a> ',
+        'on the source repository.'
+      ), htmlEscape(issues_url, attribute = TRUE))))
+  }
+
+  # creative commons re-use
+  creative_commons <- list()
+  if (!is.null(metadata$creative_commons)) {
+
+    # validate
+    cc <- metadata$creative_commons
+    valid_licenses <- c("CC-BY", "CC-BY-SA", "CC-BY-ND", "CC-BY-NC", "CC-BY-NC-SA", "CC-BY-NC-ND")
+    if (!cc %in% valid_licenses)
+      stop("creative_commonds license must be one of ", paste(valid_licenses, collapse = ", "))
+
+    # compute url
+    cc_url <- paste0("https://creativecommons.org/licenses/", tolower(sub("^CC-", "", cc)), "/4.0/")
+
+    source_note <- if (!is.null(metadata$repository_url)) {
+      sprintf('Source code is available at <a rel="license" href="%s">%s</a>, unless otherwise noted. ',
+                   htmlEscape(metadata$repository_url, attribute = TRUE),
+                   htmlEscape(metadata$repository_url)
+      )
+    } else {
+      ""
+    }
+
+    reuse_note <- sprintf(paste0('Diagrams and text are licensed under Creative Commons Attribution ',
+                                 '<a href="%s">%s 4.0</a>. %sThe figures that have been reused from ',
+                                 'other sources don’t fall under this license and can be ',
+                                 'recognized by a note in their caption: “Figure from …”.'),
+                          htmlEscape(cc_url, TRUE), htmlEscape(cc), source_note)
+
+    creative_commons <- list(
+      tags$h3(id = "reuse", "Reuse"),
+      tags$p(HTML(reuse_note))
+    )
+  }
+
+  # write bottom entries for appendix
+  appendix <- tags$div(class = "appendix-bottom",
+    updates_and_corrections,
+    creative_commons
+  )
+  appendix_html <- as.character(appendix)
+  appendix_file <- tempfile(fileext = "html")
+  writeLines(appendix_html, appendix_file)
+  after_body <- c(after_body, appendix_file)
+
   # write bibliography after body
   if (!is.null(metadata$bibliography)) {
     bibliography_file <-  tempfile(fileext = "html")

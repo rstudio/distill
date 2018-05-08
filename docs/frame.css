@@ -73,12 +73,7 @@
 .distill-header a:hover {
   color: rgba(255, 255, 255, 1);
 }
-.distill-header svg {
-  width: 24px;
-  position: relative;
-  top: 4px;
-  margin-right: 2px;
-}
+
 @media(min-width: 1080px) {
   .distill-header {
     height: 70px;
@@ -91,11 +86,7 @@
   .distill-header .logo {
   }
 }
-.distill-header svg path {
-  fill: none;
-  stroke: rgba(255, 255, 255, 0.8);
-  stroke-width: 3px;
-}
+
 .distill-header .logo {
   font-size: 20px;
   font-weight: 300;
@@ -109,35 +100,24 @@
 }
 
 .distill-footer {
-  margin-top: 60px;
+  margin-top: 40px;
   color: rgba(255, 255, 255, 0.5);
   font-weight: 300;
   padding: 2rem 0;
   border-top: 1px solid rgba(0, 0, 0, 0.1);
-  background-color: #455a64; 
+  background-color: #455a64;
   text-align: center;
   contain: content;
 }
 
-.distill-footer .logo svg {
-  width: 24px;
-  position: relative;
-  top: 4px;
-  margin-right: 2px;
-}
-
-.distill-footer .logo svg path {
-  fill: none;
-  stroke: rgba(255, 255, 255, 0.8);
-  stroke-width: 3px;
-}
-
-.distill-footer .logo {
-  font-size: 17px;
-  font-weight: 200;
-  color: rgba(255, 255, 255, 0.8);
+.distill-footer a {
+  color: rgba(255, 255, 255, 0.5);
   text-decoration: none;
-  margin-right: 6px;
+}
+
+.distill-footer a:hover {
+  text-decoration: underline;
+  color: rgba(255, 255, 255, 0.8);
 }
 
 .distill-footer .container {

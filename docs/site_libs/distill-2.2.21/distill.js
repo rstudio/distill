@@ -17,7 +17,7 @@
 window.document.addEventListener("DOMContentLoaded", function (event) {
 
   // flag indicating that we have appendix items
-  var appendix = false;
+  var appendix = $('.appendix-bottom').length > 0;
 
   // replace citations with <d-cite>
   $('.citation').each(function(i, val) {
@@ -36,6 +36,8 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
     dt_cite.attr('key', cites.join());
     $(this).replaceWith(dt_cite);
   });
+  // remove refs
+  $('#refs').remove();
 
   // replace footnotes with <d-footnote>
   $('.footnote-ref').each(function(i, val) {
@@ -50,6 +52,8 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
     dtfn.text(text);
     $(this).replaceWith(dtfn);
   });
+  // remove footnotes
+  $('.footnotes').remove();
 
   $('h1.appendix, h2.appendix').each(function(i, val) {
     $(this).changeElementType('h3');
