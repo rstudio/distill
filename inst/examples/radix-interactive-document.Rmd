@@ -1,10 +1,11 @@
 ---
 title: "Interactive Radix with Shiny"
-runtime: shiny
+runtime: shiny_prerendered
 output: radix::radix_article
 ---
 
-You can embed Shiny inputs and outputs in your document. Outputs are automatically updated whenever inputs change.  This demonstrates how a standard R plot can be made interactive by wrapping it in the Shiny `renderPlot` function. The `selectInput` and `sliderInput` functions create the input widgets used to drive the plot.
+You can embed Shiny inputs and outputs in your document. Outputs are automatically updated whenever inputs change.  This demonstrates how a standard R plot can be made interactive by wrapping it in the Shiny `renderPlot` function. The `selectInput` and `sliderInput` functions create the input widgets used to drive the plot. The `plotOutput` function indicates where to include the plot.
+
 
 ```{r eruptions, echo=FALSE}
 inputPanel(
@@ -15,7 +16,12 @@ inputPanel(
               min = 0.2, max = 2, value = 1, step = 0.2)
 )
 
-renderPlot({
+plotOutput("eruptions")
+```
+
+
+```{r, context="server"}
+output$eruptions <- renderPlot({
   hist(faithful$eruptions, probability = TRUE, breaks = as.numeric(input$n_breaks),
        xlab = "Duration (minutes)", main = "Geyser eruption duration")
   

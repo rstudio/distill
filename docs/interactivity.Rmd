@@ -3,11 +3,13 @@ title: "Interactivity"
 description: Enhance communication with interactive visualizations 
 ---
 
-You can add interactivity to your Radix articles by:
+There are a variety of ways to add interactivity to your Radix articles, including:
 
 - Using pre-built [htmlwidgets](http://www.htmlwidgets.org) that wrap JavaScript visualization libraries like [Leaflet](http://rstudio.github.io/leaflet/), [Plotly](https://plot.ly/r/), [dygraphs](http://rstudio.github.io/dygraphs/), and [threejs](https://bwlewis.github.io/rthreejs/).
 
 - Creating custom [D3.js](https://d3js.org/) interactive visualizations using the [r2d3](https://rstudio.github.io/r2d3/) package.
+
+- Using [Shiny](https://shiny.rstudio.com) to create an [interactive document](https://rmarkdown.rstudio.com/authoring_shiny_prerendered.html) that embeds interactive components within your article.
 
 ## htmlwidgets
 
@@ -69,5 +71,60 @@ r2d3(script = "d3/voronoi/voronoi.js")
 ```
 
 Note that we specify `layout="l-page"` to indicate that we want the visualization to occupy the full width of the page.
+
+## Shiny
+
+You can use [Shiny](https://shiny.rstudio.com) components within your Radix articles to allow your readers to change the parameters underlying your analysis and see the results immediately. To use Shiny with Radix, first specify that you want to use the `shiny_prerendered` runtime with your document:
+
+```markup
+---
+title: "Interactive Distill with Shiny"
+output: radix::radix_article
+runtime: shiny_prerendered
+---
+```
+
+This turns your Radix article into an [interactive document](https://rmarkdown.rstudio.com/authoring_shiny_prerendered.html), enabling you to add Shiny inputs and output directly to the document.
+
+Here's an example of a Radix article with interactive Shiny components (<https://jjallaire.shinyapps.io/radix-interactive-document/>):
+
+![](images/shiny.png){width=100% .screenshot}
+
+Here's the R code used to create the interactive Shiny components. First the UI (inputs and plot output) are specified in an R code chunk:
+
+````clike
+```{r eruptions, echo=FALSE}`r ''`
+inputPanel(
+  selectInput("n_breaks", label = "Number of bins:",
+              choices = c(10, 20, 35, 50), selected = 20),
+  
+  sliderInput("bw_adjust", label = "Bandwidth adjustment:",
+              min = 0.2, max = 2, value = 1, step = 0.2)
+)
+
+plotOutput("eruptions")
+```
+````
+
+Then the server-side computations are specified in another R code chunk with the `context="server"` attribute:
+
+
+````clike
+```{r, context="server"}`r ''`
+output$eruptions <- renderPlot({
+  hist(faithful$eruptions, probability = TRUE, breaks = as.numeric(input$n_breaks),
+       xlab = "Duration (minutes)", main = "Geyser eruption duration")
+  
+  dens <- density(faithful$eruptions, adjust = input$bw_adjust)
+  lines(dens, col = "blue")
+})
+```
+````
+
+
+You can see the full source code for this example at [radix-interactive-document.Rmd](https://github.com/jjallaire/distill/blob/master/inst/examples/radix-interactive-document.Rmd). 
+
+Learn more about [interactive documents](https://rmarkdown.rstudio.com/authoring_shiny_prerendered.html) on the R Markdown website.
+
 
 
