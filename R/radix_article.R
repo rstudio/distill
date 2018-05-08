@@ -399,14 +399,17 @@ after_body_includes <- function(site_config, metadata) {
   }
 
   # write bottom entries for appendix
-  appendix <- tags$div(class = "appendix-bottom",
-    updates_and_corrections,
-    creative_commons
-  )
-  appendix_html <- as.character(appendix)
-  appendix_file <- tempfile(fileext = "html")
-  writeLines(appendix_html, appendix_file)
-  after_body <- c(after_body, appendix_file)
+  if(length(updates_and_corrections) > 0 ||
+     length(creative_commons) > 0) {
+    appendix <- tags$div(class = "appendix-bottom",
+      updates_and_corrections,
+      creative_commons
+    )
+    appendix_html <- as.character(appendix)
+    appendix_file <- tempfile(fileext = "html")
+    writeLines(appendix_html, appendix_file)
+    after_body <- c(after_body, appendix_file)
+  }
 
   # write bibliography after body
   if (!is.null(metadata$bibliography)) {
