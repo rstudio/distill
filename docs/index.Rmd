@@ -25,6 +25,10 @@ bibliography: biblio.bib
     - Move to RStudio domain
     - Note to Distill team
 
+
+- validate that title and description are provided
+- Remove Published and DOI when not available
+
 - larger scale visualization layouts
     - iframe with npr library (pym.js) for sizing (generic) (check with shinyapps.io)
     - ggplot2 theme for distill
@@ -45,7 +49,6 @@ bibliography: biblio.bib
   
 - get interactive Rmd working with v2  
         
-- validate that title and description are provided
   
 - use lang metadata field rather than locale  
         
@@ -78,7 +81,7 @@ Radix is an online publication format designed for scientific and technical comm
 - Support for a wide variety of [diagramming tools](diagrams.html) for illustrating concepts.
 - A variety of ways to enhance articles with [interactive visualizations](interactivity.html).
 
-Radix is based on the [Distill web framework](https://github.com/distillpub/template), which was originally created for use in the [Distill](https://distill.pub) machine learning journal. Radix combines the technical authoring features of Distill with [R Markdown](https://rmarkdown.rstudio.com/), enabling a fully reproducible workflow based on literate programming[@knuth1984].
+Radix is based on the [Distill web framework](https://github.com/distillpub/template), which was originally created for use in the Distill Machine Learning Journal [@distill]. Radix combines the technical authoring features of Distill with [R Markdown](https://rmarkdown.rstudio.com/), enabling a fully reproducible workflow based on literate programming [@knuth1984].
 
 ## Getting Started
 
