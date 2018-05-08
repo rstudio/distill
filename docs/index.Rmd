@@ -22,10 +22,8 @@ bibliography: biblio.bib
 <!---
 
 - name change:
-    - Radix newdoc screenshot
-    - distill-header, distill-footer renames
-    - Alt fonts/color scheme for header/footer
     - Move to RStudio domain
+    - Note to Distill team
 
 - larger scale visualization layouts
     - iframe with npr library (pym.js) for sizing (generic) (check with shinyapps.io)
@@ -44,6 +42,8 @@ bibliography: biblio.bib
 
 - consider supporting full ISO8601 dates (could we parse them w/o ld?)
    http://www.w3.org/TR/NOTE-datetime
+  
+- get interactive Rmd working with v2  
         
 - validate that title and description are provided
   
