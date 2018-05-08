@@ -152,6 +152,14 @@ in_header_includes <- function(site_config, metadata) {
 
   in_header <- c()
 
+  # description
+  description_meta <- list()
+  if (!is.null(metadata$description)) {
+    description_meta[[1]] <- tags$meta(
+      property="description", itemprop="description", content=metadata$description
+    )
+  }
+
   # links
   links <- list()
   if (!is.null(metadata$url)) {
@@ -168,14 +176,11 @@ in_header_includes <- function(site_config, metadata) {
     tags$meta(name="article:author", content=author$name)
   })
 
-
-  # article meta (https://schema.org/Article)
   article_meta <- list()
   if (!is.null(metadata$date)) {
     date <- format.Date(metadata$date, "%Y-%m-%d")
     article_meta <- tagList(
       HTML("<!--  https://schema.org/Article -->"),
-      tags$meta(property="description", itemprop="description", content=metadata$description),
       tags$meta(property="article:published", itemprop="datePublished", content=date),
       tags$meta(property="article:created", itemprop="dateCreated", content=date)
     )
@@ -198,6 +203,7 @@ in_header_includes <- function(site_config, metadata) {
 
   # render head tags
   meta_tags <- do.call(tagList, list(
+    description_meta,
     links,
     HTML(''),
     article_meta,
@@ -234,8 +240,7 @@ open_graph_metadata <- function(site_config, metadata) {
   # core descriptors
   open_graph_meta <- list(
     HTML("<!--  https://developers.facebook.com/docs/sharing/webmasters#markup -->"),
-    tags$meta(property = "og:type", content = "article"),
-    tags$meta(property = "og:description", content = metadata$description)
+    tags$meta(property = "og:type", content = "article")
   )
 
   # add a property
@@ -243,6 +248,10 @@ open_graph_metadata <- function(site_config, metadata) {
     open_graph_meta[[length(open_graph_meta)+1]] <<-
       tags$meta(property = property, content = content)
   }
+
+  # description
+  if (!is.null(metadata$description))
+    add_open_graph_meta("og:description", metadata$description)
 
   # cannonical url
   if (!is.null(metadata$url))
@@ -292,7 +301,8 @@ twitter_card_metadata <- function(site_config, metadata) {
 
   # title and description
   add_twitter_card_meta("twitter:title", metadata$title)
-  add_twitter_card_meta("twitter:description", metadata$description)
+  if (!is.null(metadata$description))
+    add_twitter_card_meta("twitter:description", metadata$description)
 
   # cannonical url
   if (!is.null(metadata$url))
@@ -344,6 +354,7 @@ front_matter_from_metadata <- function(metadata) {
   front_matter <- list()
   front_matter$title <- metadata$title
   front_matter$description <- metadata$description
+  front_matter$doi <- metadata$doi
   front_matter$authors <- lapply(metadata$author, function(author) {
     list(
       author = author$name,

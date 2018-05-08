@@ -26,8 +26,7 @@ bibliography: biblio.bib
     - Note to Distill team
 
 
-- validate that title and description are provided
-- Remove Published and DOI when not available
+- validate that title is provided
 
 - larger scale visualization layouts
     - iframe with npr library (pym.js) for sizing (generic) (check with shinyapps.io)
@@ -38,7 +37,7 @@ bibliography: biblio.bib
     - crosstalk compatibility?
         - distillRow/distillCol
         
-- alternative to DOI is citation (which just needs a URL)
+- alternative to DOI is citation (which just needs a URL) or source
 
 - Google Scholar data will require us to have programmatic access to all citations
   use pandoc-citeproc to convert bibliogrpahy to json?
@@ -59,8 +58,6 @@ bibliography: biblio.bib
 
 - consdier using figure tag? (css advantages?)
 - use pandoc filters more?
-
-- jquery based menu that uses alternate theming
 
 - index pages (consider using iframes for federated content authoring)
 - site generation
