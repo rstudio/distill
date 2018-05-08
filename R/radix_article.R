@@ -409,17 +409,21 @@ block_class = function(x){
   paste0('{', .classes, '}')
 }
 
+with_tz <- function(x, tzone = "") {
+  as.POSIXct(as.POSIXlt(x, tz = tzone))
+}
+
 parse_date <- function(date) {
   if (!is.null(date)) {
-    parsed_date <- lubridate::mdy(date, tz = Sys.timezone(), quiet = TRUE)
-    if (lubridate::is.POSIXct(parsed_date))
+    parsed_date <- parsedate::parse_date(date)
+    if (!is.na(parsed_date))
       date <- parsed_date
   }
   date
 }
 
 date_as_iso_8601 <- function(date) {
-  format.Date(date, "%Y-%m-%dT00:00:00.000%z")
+  parsedate::format_iso_8601(date)
 }
 
 is_file_type <- function(file, type) {

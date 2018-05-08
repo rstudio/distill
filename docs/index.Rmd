@@ -21,12 +21,6 @@ bibliography: biblio.bib
 
 <!---
 
-- name change:
-    - Move to RStudio domain
-    - Note to Distill team
-
-
-- validate that title is provided
 
 - larger scale visualization layouts
     - iframe with npr library (pym.js) for sizing (generic) (check with shinyapps.io)
@@ -56,7 +50,9 @@ bibliography: biblio.bib
 - article metadata (DOI, citation, etc.)
 - https://github.com/distillpub/template/blob/master/src/transforms/meta.js
 
-- consdier using figure tag? (css advantages?)
+- work out TZ display issues with date
+
+- consider using figure tag? (css advantages?)
 - use pandoc filters more?
 
 - index pages (consider using iframes for federated content authoring)

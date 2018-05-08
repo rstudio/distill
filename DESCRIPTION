@@ -16,7 +16,7 @@ BugReports: https://github.com/jjallaire/radix/issues
 Encoding: UTF-8
 LazyData: true
 RoxygenNote: 6.0.1
-Imports: tools, rmarkdown (>= 1.9.10), htmltools, jsonlite, lubridate, png
+Imports: tools, rmarkdown (>= 1.9.10), htmltools, jsonlite, parsedate, png
 Remotes:
   rstudio/rmarkdown
 Suggests:
