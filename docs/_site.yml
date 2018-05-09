@@ -1,5 +1,7 @@
 name: "rmarkdown-radix"
 title: "Radix for R Markdown"
+repository_url: https://github.com/jjallaire/radix
+creative_commons: CC-BY
 output_dir: "."
 output:
   radix::radix_article:

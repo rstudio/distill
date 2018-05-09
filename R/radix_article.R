@@ -496,6 +496,11 @@ front_matter_from_metadata <- function(metadata) {
   })
   if (!is.null(metadata$date))
     front_matter$publishedDate <- date_as_iso_8601(metadata$date)
+  if (!is.null(metadata$concatenated_authors) && !is.null(metadata$published_year)) {
+    front_matter$citationText <- sprintf("%s, %s",
+                                          metadata$concatenated_authors,
+                                          metadata$published_year)
+  }
   jsonlite::toJSON(front_matter, auto_unbox = TRUE)
 }
 
@@ -548,7 +553,7 @@ appendix_creative_commons <- function(site_config, metadata) {
 
     reuse_note <- sprintf(
       paste0(
-        'Diagrams and text are licensed under Creative Commons Attribution ',
+        'Text and figures are licensed under Creative Commons Attribution ',
         '<a rel="license" href="%s">%s 4.0</a>. %sThe figures that have been reused from ',
         'other sources don’t fall under this license and can be ',
         'recognized by a note in their caption: “Figure from …”.'
