@@ -151,9 +151,33 @@ html_dependency_distill <- function() {
 
 transform_metadata <- function(input_dir, site_config, metadata) {
 
+  # validate title
+  if (is.null(metadata$title))
+    stop("You must provide a title for Radix articles", call. = FALSE)
+
   # parse dates
   metadata$date <- parse_date(metadata$date)
   metadata$updated <- parse_date(metadata$updated)
+
+  if (!is.null(metadata$date)) {
+
+    # derived date fields (used for citations)
+    rfc_date <- function(date) {
+      format.POSIXct(date, "%a, %d %b %Y %H:%M:%OS %z")
+    }
+
+    metadata$published_year <- format(metadata$date, "%Y")
+    months <- c('Jan.', 'Feb.', 'March', 'April', 'May', 'June',
+                'July', 'Aug.', 'Sept.', 'Oct.', 'Nov.', 'Dec.')
+    metadata$published_month <- months[[as.integer(format(metadata$date, "%m"))]]
+    metadata$published_day <- as.integer(format(metadata$date, "%d"))
+    metadata$published_month_padded <- format(metadata$date, "%m")
+    metadata$published_day_padded <- format(metadata$date, "%d")
+    metadata$published_date_rfc <- rfc_date(metadata$date)
+    if (!is.null(metadata$updated))
+      metadata$updated_date_rfc <- rfc_date(metadata$updated)
+    metadata$published_iso_date_only <- date_as_iso_8601(metadata$date, date_only = TRUE)
+  }
 
   # resolve creative commons license
   if (!is.null(metadata$creative_commons)) {
@@ -177,9 +201,49 @@ transform_metadata <- function(input_dir, site_config, metadata) {
   }
 
   # look for preview
-  preview <- list.files(input_dir, pattern = "preview\\.[png|jpg|jpeg]")
-  if (length(preview) > 0)
-    metadata$preview <- preview
+  if (is.null(metadata$preview)) {
+    preview <- list.files(input_dir, pattern = "preview\\.[png|jpg|jpeg]")
+    if (length(preview) > 0)
+      metadata$preview <- preview
+  }
+
+  # authors
+  if (!is.null(metadata$author)) {
+
+    # compute first and last name
+    metadata$author <- lapply(metadata$author, function(author) {
+      names <- strsplit(author$name, '\\s+')[[1]]
+      author$first_name <- paste(utils::head(names, -1))
+      author$last_name <- utils::tail(names, 1)
+      author
+    })
+
+    # compute concatenated authors
+    metadata$concatenated_authors <-
+      if (length(metadata$author) > 2)
+        paste0(metadata$author[[1]]$last_name, ', et al.')
+      else if (length(metadata$author) == 2)
+        paste(metadata$author[[1]]$last_name, '&', metadata$author[[2]]$last_name)
+      else if (length(metadata$author) == 1)
+        metadata$author[[1]]$last_name
+
+    # compute bibtex authors
+    metadata$bibtex_authors <-
+      paste(collapse = " and ", sapply(metadata$author, function(author) {
+        paste0(author$last_name, ', ', author$first_name)
+      }))
+
+    # slug
+    if (is.null(metadata$slug) && !is.null(metadata$date)) {
+      metadata$slug <- paste0(tolower(metadata$author[[1]]$last_name),
+                              metadata$published_year,
+                              tolower(strsplit(metadata$title, ' ')[[1]][[1]]))
+    }
+  }
+
+  # failsafe for slug
+  if (is.null(metadata$slug))
+    metadata$slug <- "Untitled"
 
   metadata
 }
@@ -382,11 +446,13 @@ after_body_includes <- function(site_config, metadata) {
   # write appendixes
   updates_and_corrections <- appendix_updates_and_corrections(site_config, metadata)
   creative_commons <- appendix_creative_commons(site_config, metadata)
+  citation <- appendix_citation(site_config, metadata)
   appendix <- tags$div(class = "appendix-bottom",
     updates_and_corrections,
-    creative_commons
+    creative_commons,
+    citation
   )
-  appendix_html <- as.character(appendix)
+  appendix_html <- renderTags(appendix, indent = FALSE)$html
   appendix_file <- tempfile(fileext = "html")
   writeLines(appendix_html, appendix_file)
   after_body <- c(after_body, appendix_file)
@@ -492,6 +558,64 @@ appendix_creative_commons <- function(site_config, metadata) {
   } else {
     NULL
   }
+}
+
+appendix_citation <- function(site_config, metadata) {
+
+  if (!is.null(metadata$date) && !is.null(metadata$author)) {
+
+    # determine url
+    article_url <- if (!is.null(metadata$url))
+      metadata$url
+    else
+      "http://radix-dynamic-citation-url"
+
+    # TODO: journal citations
+
+    short_citation <- function(metadata) {
+      sprintf('%s (%s, %s %d). %s. Retrieved from %s',
+              metadata$concatenated_authors,
+              metadata$published_year,
+              metadata$published_month,
+              metadata$published_day,
+              metadata$title,
+              article_url)
+    }
+
+
+    long_citation <- function(metadata) {
+
+      sprintf(paste(
+        '@misc(%s,',
+        '  author = {%s},',
+        '  title = {%s},',
+        '  url = {%s},',
+        '  year = {%s}',
+        '}',
+        sep = '\n'
+      ), metadata$slug,
+         metadata$bibtex_authors,
+         metadata$title,
+         article_url,
+         metadata$published_year
+      )
+
+      # TODO: Journal, see:
+      # https://github.com/distillpub/template/blob/a6df55253793f5fa5189afc00edad4a22209c15e/src/helpers/bibtex.js#L39
+  }
+
+    list(
+      tags$h3(id = "citation", "Citation"),
+      tags$p("For attribution, please cite this work as"),
+      tags$pre(class = "citation-appendix short", short_citation(metadata)),
+      tags$p("BibTeX citation"),
+      tags$pre(class = "citation-appendix long", long_citation(metadata))
+    )
+
+  } else {
+    NULL
+  }
+
 }
 
 knitr_source_hook <- function(x, options) {

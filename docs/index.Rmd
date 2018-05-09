@@ -44,16 +44,17 @@ creative_commons: CC-BY
   
 
 - alternative to DOI is citation (which just needs a URL) or source
+   if no DOI and citation then updated header   
+
 - may need separate metadata section in the docs
-- web page metadata generation/redaction (see expandData)
 - article metadata (DOI, citation, etc.)
 - https://github.com/distillpub/template/blob/master/src/transforms/meta.js
 
 - work out TZ display issues with date
-- use pandoc filters more?
+- use pandoc filters more? (RawHtml)
 
 - index pages (consider using iframes for federated content authoring)
-- site generation
+- site generation / menuing
 
 --->
 

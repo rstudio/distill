@@ -51,21 +51,21 @@
 
 <body>
 
-      <div class="distill-header">
-    <div class="content">
-      <a href="index.html" class="logo">
-        Radix
-      </a>
-      <div class="nav">
-        <a href="index.html">Basics</a>
-        <a href="figures.html">Figures</a>
-        <a href="tables.html">Tables</a>
-        <a href="diagrams.html">Diagrams</a>
-        <a href="interactivity.html">Interactivity</a>
-      </div>
-    </div>
-    </div>
-  
+<div class="distill-header">
+<div class="content">
+  <a href="index.html" class="logo">
+    Radix
+  </a>
+  <div class="nav">
+    <a href="index.html">Basics</a>
+    <a href="figures.html">Figures</a>
+    <a href="tables.html">Tables</a>
+    <a href="diagrams.html">Diagrams</a>
+    <a href="interactivity.html">Interactivity</a>
+  </div>
+</div>
+</div>
+
 <d-title>
 <h1>Radix for R Markdown</h1>
 <p>Scientific and technical writing, native to the web</p>
@@ -117,15 +117,14 @@
 
 - alternative to DOI is citation (which just needs a URL) or source
 - may need separate metadata section in the docs
-- web page metadata generation/redaction (see expandData)
 - article metadata (DOI, citation, etc.)
 - https://github.com/distillpub/template/blob/master/src/transforms/meta.js
 
 - work out TZ display issues with date
-- use pandoc filters more?
+- use pandoc filters more? (RawHtml)
 
 - index pages (consider using iframes for federated content authoring)
-- site generation
+- site generation / menuing
 
 --->
 <p>Radix is an online publication format designed for scientific and technical communication. Radix articles include:</p>
@@ -296,69 +295,79 @@ describing what each author did.</code></pre>
 <d-appendix>
 </d-appendix>
 
-  <div class="distill-footer">
-  <div class="l-page">
-    <div class="description">
-    Created using <a href="index.html">Radix for R Markdown</a>
-    </div>
-    <div class="nav">
-      <a href="index.html">Basics</a>
-      <a href="figures.html">Figures</a>
-      <a href="tables.html">Tables</a>
-      <a href="diagrams.html">Diagrams</a>
-      <a href="interactivity.html">Interactivity</a>
-      <a href="https://github.com/jjallaire/radix">GitHub</a>
-    </div>
-    <p>
-    © Copyright 2018 The Distill Template Authors and RStudio, Inc.
-    </p>
-    <p>
-    Software licensed under the <a href="https://www.apache.org/licenses/LICENSE-2.0">Apache License, v2.0</a>.<br/>
-    Docs licensed under <a href="https://creativecommons.org/licenses/by/3.0/us/">Creative Commons Attribution License, v3.0</a>
-    </p>
+<div class="distill-footer">
+<div class="l-page">
+  <div class="description">
+  Created using <a href="index.html">Radix for R Markdown</a>
   </div>
+  <div class="nav">
+    <a href="index.html">Basics</a>
+    <a href="figures.html">Figures</a>
+    <a href="tables.html">Tables</a>
+    <a href="diagrams.html">Diagrams</a>
+    <a href="interactivity.html">Interactivity</a>
+    <a href="https://github.com/jjallaire/radix">GitHub</a>
   </div>
-  <div class="appendix-bottom">
-    <h3 id="updates-and-corrections">Updates and Corrections</h3>
-    <p>If you see mistakes or want to suggest changes, please <a href="https://github.com/jjallaire/radix/issues/new">create an issue</a> on the source repository.</p>
-    <h3 id="reuse">Reuse</h3>
-    <p>Diagrams and text are licensed under Creative Commons Attribution <a rel="license" href="https://creativecommons.org/licenses/by/4.0/">CC-BY 4.0</a>. Source code is available at <a rel="license" href="https://github.com/jjallaire/radix">https://github.com/jjallaire/radix</a>, unless otherwise noted. The figures that have been reused from other sources don’t fall under this license and can be recognized by a note in their caption: “Figure from …”.</p>
-  </div>
-  <d-bibliography>
-  <script type="text/bibtex">
-  @misc{distill,
-    author = {Shan Carter and Chirs Olah and Arvind Satyanarayan},
-    doi = {10.23915/distill},
-    url = {https://doi.org/10.23915/distill},
-    publisher = {Distill Working Group},
-    title = {Distill},
-    year = {2016}
-  }
-  @article{knuth1984,
-    title={Literate programming},
-    author={Knuth, Donald E.},
-    journal={The Computer Journal},
-    volume={27},
-    number={2},
-    pages={97--111},
-    year={1984},
-    publisher={British Computer Society}
-  }
-  @Book{xie2015,
-    title = {Dynamic Documents with R and knitr},
-    author = {Yihui Xie},
-    publisher = {Chapman and Hall/CRC},
-    address = {Boca Raton, Florida},
-    year = {2015},
-    edition = {2nd},
-    note = {ISBN 978-1498716963},
-    url = {http://yihui.name/knitr/},
-  }
-  
-  
-  
-  </script>
-  </d-bibliography>
+  <p>
+  © Copyright 2018 The Distill Template Authors and RStudio, Inc.
+  </p>
+  <p>
+  Software licensed under the <a href="https://www.apache.org/licenses/LICENSE-2.0">Apache License, v2.0</a>.<br/>
+  Docs licensed under <a href="https://creativecommons.org/licenses/by/3.0/us/">Creative Commons Attribution License, v3.0</a>
+  </p>
+</div>
+</div>
+<div class="appendix-bottom">
+<h3 id="updates-and-corrections">Updates and Corrections</h3>
+<p>If you see mistakes or want to suggest changes, please <a href="https://github.com/jjallaire/radix/issues/new">create an issue</a> on the source repository.</p>
+<h3 id="reuse">Reuse</h3>
+<p>Diagrams and text are licensed under Creative Commons Attribution <a rel="license" href="https://creativecommons.org/licenses/by/4.0/">CC-BY 4.0</a>. Source code is available at <a rel="license" href="https://github.com/jjallaire/radix">https://github.com/jjallaire/radix</a>, unless otherwise noted. The figures that have been reused from other sources don’t fall under this license and can be recognized by a note in their caption: “Figure from …”.</p>
+<h3 id="citation">Citation</h3>
+<p>For attribution, please cite this work as</p>
+<pre class="citation-appendix short">Allaire, et al. (2018, May 3). Radix for R Markdown. Retrieved from http://radix-dynamic-citation-url</pre>
+<p>BibTeX citation</p>
+<pre class="citation-appendix long">@misc(allaire2018radix,
+  author = {Allaire, JJ and Iannone, Rich and Xie, Yihui},
+  title = {Radix for R Markdown},
+  url = {http://radix-dynamic-citation-url},
+  year = {2018}
+}</pre>
+</div>
+<d-bibliography>
+<script type="text/bibtex">
+@misc{distill,
+  author = {Shan Carter and Chirs Olah and Arvind Satyanarayan},
+  doi = {10.23915/distill},
+  url = {https://doi.org/10.23915/distill},
+  publisher = {Distill Working Group},
+  title = {Distill},
+  year = {2016}
+}
+@article{knuth1984,
+  title={Literate programming},
+  author={Knuth, Donald E.},
+  journal={The Computer Journal},
+  volume={27},
+  number={2},
+  pages={97--111},
+  year={1984},
+  publisher={British Computer Society}
+}
+@Book{xie2015,
+  title = {Dynamic Documents with R and knitr},
+  author = {Yihui Xie},
+  publisher = {Chapman and Hall/CRC},
+  address = {Boca Raton, Florida},
+  year = {2015},
+  edition = {2nd},
+  note = {ISBN 978-1498716963},
+  url = {http://yihui.name/knitr/},
+}
+
+
+
+</script>
+</d-bibliography>
 
 <!-- dynamically load mathjax for compatibility with self-contained -->
 <script>

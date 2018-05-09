@@ -30,9 +30,9 @@ $endfor$
 <body>
 
 $if(include-before)$
-  $for(include-before)$
-    $include-before$
-  $endfor$
+$for(include-before)$
+$include-before$
+$endfor$
 $endif$
 
 <d-title>
@@ -71,7 +71,7 @@ $body$
 </d-appendix>
 
 $for(include-after)$
-  $include-after$
+$include-after$
 $endfor$
 
 $if(mathjax-url)$

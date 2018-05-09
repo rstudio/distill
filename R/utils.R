@@ -42,8 +42,11 @@ parse_date <- function(date) {
   date
 }
 
-date_as_iso_8601 <- function(date) {
-  parsedate::format_iso_8601(date)
+date_as_iso_8601 <- function(date, date_only = FALSE) {
+  date <- parsedate::format_iso_8601(date)
+  if (date_only)
+    date <- strsplit(date, "T")[[1]][[1]]
+  date
 }
 
 is_file_type <- function(file, type) {
