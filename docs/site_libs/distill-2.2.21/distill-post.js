@@ -23,7 +23,7 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
       var doi = $('d-byline').find('h3:contains("DOI")');
       doi.html('Citation');
       var p = doi.next().empty();
-      var a = $('<a class="byline-citation" href="#citation"></a>');
+      var a = $('<a class="byline-citation-link" href="#citation"></a>');
       a.text(front_matter.citationText);
       p.append(a);
     } else {

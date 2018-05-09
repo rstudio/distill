@@ -36,8 +36,8 @@ body {
   line-height: 1em;
 }
 
-.byline-citation {
-
+.byline-citation-link {
+  color: #668;
 }
 
 .hidden {
