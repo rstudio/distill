@@ -259,11 +259,13 @@ in_header_includes <- function(site_config, metadata) {
 
   # write front-matter into script tag
   front_matter_tag <- c(
+    '',
     '<d-front-matter>',
     '<script id="distill-front-matter" type="text/json">',
     front_matter_from_metadata(metadata),
     '</script>',
-    '</d-front-matter>'
+    '</d-front-matter>',
+    '\n'
   )
   front_matter_file <- tempfile(fileext = "html")
   writeLines(front_matter_tag, front_matter_file)
