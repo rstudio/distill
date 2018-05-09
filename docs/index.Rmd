@@ -47,9 +47,6 @@ creative_commons: CC-BY
 
 - work out TZ display issues with date
 - use pandoc filters more?
-- cc search engine compatibility
-
-- dublin core metadata including cc license
 
 - index pages (consider using iframes for federated content authoring)
 - site generation
