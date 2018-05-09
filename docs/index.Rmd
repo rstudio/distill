@@ -39,6 +39,10 @@ creative_commons: CC-BY
 
 - https://github.com/distillpub/template/blob/a6df55253793f5fa5189afc00edad4a22209c15e/src/distill-components/distill-appendix.js
 
+- front matter parse: 
+  https://github.com/distillpub/template/blob/a6df55253793f5fa5189afc00edad4a22209c15e/src/front-matter.js#L274
+  
+
 - alternative to DOI is citation (which just needs a URL) or source
 - may need separate metadata section in the docs
 - web page metadata generation/redaction (see expandData)

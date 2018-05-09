@@ -50,3 +50,29 @@ is_file_type <- function(file, type) {
   identical(tolower(tools::file_ext(file)), type)
 }
 
+dir_exists <- function(x) {
+  utils::file_test('-d', x)
+}
+
+file_with_ext <- function(file, ext) {
+  paste(tools::file_path_sans_ext(file), ".", ext, sep = "")
+}
+
+
+input_as_dir <- function(input) {
+
+  # ensure the input dir exists
+  if (!file.exists(input)) {
+    stop("The specified directory '", normalize_path(input, mustWork = FALSE),
+         "' does not exist.", call. = FALSE)
+  }
+
+  # convert from file to directory if necessary
+  if (!dir_exists(input))
+    input <- dirname(input)
+
+  # return it
+  input
+}
+
+

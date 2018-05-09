@@ -96,7 +96,7 @@ radix_article <- function(fig_width = 6,
       site_config <- list()
 
     # transform metadata values (e.g. date)
-    metadata <- transform_metadata(site_config, metadata)
+    metadata <- transform_metadata(input_as_dir(input_file), site_config, metadata)
 
     # metadata
     args <- c(args, pandoc_include_args(
@@ -149,7 +149,7 @@ html_dependency_distill <- function() {
   )
 }
 
-transform_metadata <- function(site_config, metadata) {
+transform_metadata <- function(input_dir, site_config, metadata) {
 
   # parse dates
   metadata$date <- parse_date(metadata$date)
@@ -175,6 +175,11 @@ transform_metadata <- function(site_config, metadata) {
         )
     }
   }
+
+  # look for preview
+  preview <- list.files(input_dir, pattern = "preview\\.[png|jpg|jpeg]")
+  if (length(preview) > 0)
+    metadata$preview <- preview
 
   metadata
 }
@@ -265,7 +270,7 @@ in_header_includes <- function(site_config, metadata) {
     front_matter_from_metadata(metadata),
     '</script>',
     '</d-front-matter>',
-    '\n'
+    ''
   )
   front_matter_file <- tempfile(fileext = "html")
   writeLines(front_matter_tag, front_matter_file)
