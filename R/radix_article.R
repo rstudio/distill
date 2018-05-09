@@ -106,10 +106,6 @@ radix_article <- function(fig_width = 6,
       metadata$qualified_title <- metadata$title
     }
 
-    # forward bibliography on command line
-    if (!is.null(metadata$bibliography))
-      args <- c(args, "--bibliography", metadata$bibliography)
-
     # metadata
     args <- c(args, pandoc_include_args(
       in_header = in_header_includes(site_config, metadata),
@@ -162,9 +158,8 @@ transform_metadata <- function(input_dir, site_config, metadata) {
     stop("You must provide a title for Radix articles", call. = FALSE)
 
   # allow site level metadata to propagate
-  site_metadata <- c("author", "date", "updated", "bibliography", "repository_url",
-                     "compare_updates_url", "creative_commons", "license_url",
-                     "preview", "slug", "url", "journal")
+  site_metadata <- c("repository_url", "compare_updates_url", "creative_commons",
+                     "license_url", "preview", "slug", "url", "journal")
   for (name in site_metadata)
     metadata[[name]] <- merge_lists(site_config[[name]], metadata[[name]])
 
