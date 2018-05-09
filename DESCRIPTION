@@ -4,7 +4,7 @@ Title: 'R Markdown' Format for Scientific and Technical Writing
 Version: 0.1.0
 Authors@R: c(
   person("JJ", "Allaire", role = c("aut", "cre"), email = "jj@rstudio.com"),
-  person("Rich", " Iannone", role = c("aut"),
+  person("Rich", " Iannone", role = c("aut")),
   person("Yihui", "Xie", role = c("aut")),
   person(family = "RStudio, Inc.", role = "cph"),
   person(family = "Google LLC", role = c("ctb", "cph"), comment = "https://distill.pub/guide/")
