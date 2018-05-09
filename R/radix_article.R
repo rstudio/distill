@@ -92,10 +92,11 @@ radix_article <- function(fig_width = 6,
 
     # get site config
     site_config <- site_config(input_file, encoding)
+    if (is.null(site_config))
+      site_config <- list()
 
     # transform metadata values (e.g. date)
-    metadata$date <- parse_date(metadata$date)
-    metadata$updated <- parse_date(metadata$updated)
+    metadata <- transform_metadata(site_config, metadata)
 
     # metadata
     args <- c(args, pandoc_include_args(
@@ -148,6 +149,36 @@ html_dependency_distill <- function() {
   )
 }
 
+transform_metadata <- function(site_config, metadata) {
+
+  # parse dates
+  metadata$date <- parse_date(metadata$date)
+  metadata$updated <- parse_date(metadata$updated)
+
+  # resolve creative commons license
+  if (!is.null(metadata$creative_commons)) {
+
+    # validate
+    valid_licenses <- c("CC-BY", "CC-BY-SA", "CC-BY-ND", "CC-BY-NC",
+                        "CC-BY-NC-SA", "CC-BY-NC-ND")
+    if (!metadata$creative_commons %in% valid_licenses) {
+      stop("creative_commonds license must be one of ",
+           paste(valid_licenses, collapse = ", "))
+    }
+
+    # compute license url
+    if (is.null(metadata$license_url)) {
+      metadata$license_url <-
+        paste0(
+          "https://creativecommons.org/licenses/",
+          tolower(sub("^CC-", "", metadata$creative_commons)), "/4.0/"
+        )
+    }
+  }
+
+  metadata
+}
+
 in_header_includes <- function(site_config, metadata) {
 
   in_header <- c()
@@ -164,8 +195,14 @@ in_header_includes <- function(site_config, metadata) {
   links <- list()
   if (!is.null(metadata$url)) {
     links[[1]] <- tags$link(
-      rel="cannonical",
+      rel = "cannonical",
       href = metadata$url
+    )
+  }
+  if (!is.null(metadata$license_url)) {
+    links[[length(links) + 1]] <- tags$link(
+      rel = "license",
+      href = metadata$license_url
     )
   }
 
@@ -204,6 +241,7 @@ in_header_includes <- function(site_config, metadata) {
   # render head tags
   meta_tags <- do.call(tagList, list(
     description_meta,
+    HTML(''),
     links,
     HTML(''),
     article_meta,
@@ -415,20 +453,8 @@ appendix_updates_and_corrections <- function(site_config, metadata) {
 }
 
 appendix_creative_commons <- function(site_config, metadata) {
+
   if (!is.null(metadata$creative_commons)) {
-
-    # validate
-    cc <- metadata$creative_commons
-    valid_licenses <- c("CC-BY", "CC-BY-SA", "CC-BY-ND", "CC-BY-NC",
-                        "CC-BY-NC-SA", "CC-BY-NC-ND")
-    if (!cc %in% valid_licenses) {
-      stop("creative_commonds license must be one of ",
-           paste(valid_licenses, collapse = ", "))
-    }
-
-    # compute url
-    cc_url <- paste0("https://creativecommons.org/licenses/",
-                     tolower(sub("^CC-", "", cc)), "/4.0/")
 
     source_note <- if (!is.null(metadata$repository_url)) {
       sprintf(paste0('Source code is available at <a rel="license" href="%s">%s</a>, ',
@@ -440,12 +466,17 @@ appendix_creative_commons <- function(site_config, metadata) {
       ""
     }
 
-    reuse_note <- sprintf(paste0(
-      'Diagrams and text are licensed under Creative Commons Attribution ',
-      '<a rel="license" href="%s">%s 4.0</a>. %sThe figures that have been reused from ',
-      'other sources don’t fall under this license and can be ',
-      'recognized by a note in their caption: “Figure from …”.'
-    ), htmlEscape(cc_url, TRUE), htmlEscape(cc), source_note)
+    reuse_note <- sprintf(
+      paste0(
+        'Diagrams and text are licensed under Creative Commons Attribution ',
+        '<a rel="license" href="%s">%s 4.0</a>. %sThe figures that have been reused from ',
+        'other sources don’t fall under this license and can be ',
+        'recognized by a note in their caption: “Figure from …”.'
+      ),
+      htmlEscape(metadata$license_url, TRUE),
+      htmlEscape(metadata$creative_commons),
+      source_note
+    )
 
     list(
       tags$h3(id = "reuse", "Reuse"),
