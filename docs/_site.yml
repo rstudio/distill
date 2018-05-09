@@ -1,5 +1,6 @@
 name: "rmarkdown-radix"
 title: "Radix"
+bibliography: biblio.bib
 output_dir: "."
 output:
   radix::radix_article:
@@ -7,4 +8,5 @@ output:
     include:
       before_body: header.html
       after_body: footer.html
+
 

@@ -11,6 +11,7 @@
   <meta property="description" itemprop="description" content="Illustrate concepts with diagrams"/>
   
   
+  
   <!--  https://developers.facebook.com/docs/sharing/webmasters#markup -->
   <meta property="og:type" content="article"/>
   <meta property="og:description" content="Illustrate concepts with diagrams"/>
@@ -21,6 +22,7 @@
   <meta property="twitter:card" content="summary"/>
   <meta property="twitter:title" content="Diagrams"/>
   <meta property="twitter:description" content="Illustrate concepts with diagrams"/>
+  
   <d-front-matter>
   <script id="distill-front-matter" type="text/json">
   {"title":"Diagrams","description":"Illustrate concepts with diagrams","authors":[]}
@@ -58,21 +60,21 @@
 
 <body>
 
-      <div class="distill-header">
-    <div class="content">
-      <a href="index.html" class="logo">
-        Radix
-      </a>
-      <div class="nav">
-        <a href="index.html">Basics</a>
-        <a href="figures.html">Figures</a>
-        <a href="tables.html">Tables</a>
-        <a href="diagrams.html">Diagrams</a>
-        <a href="interactivity.html">Interactivity</a>
-      </div>
-    </div>
-    </div>
-  
+<div class="distill-header">
+<div class="content">
+  <a href="index.html" class="logo">
+    Radix
+  </a>
+  <div class="nav">
+    <a href="index.html">Basics</a>
+    <a href="figures.html">Figures</a>
+    <a href="tables.html">Tables</a>
+    <a href="diagrams.html">Diagrams</a>
+    <a href="interactivity.html">Interactivity</a>
+  </div>
+</div>
+</div>
+
 <d-title>
 <h1>Diagrams</h1>
 <p>Illustrate concepts with diagrams</p>
@@ -150,29 +152,64 @@ include_graphics(&quot;images/flowchart.svg&quot;)
 <d-appendix>
 </d-appendix>
 
-  <div class="distill-footer">
-  <div class="l-page">
-    <div class="description">
-    Created using <a href="index.html">Radix for R Markdown</a>
-    </div>
-    <div class="nav">
-      <a href="index.html">Basics</a>
-      <a href="figures.html">Figures</a>
-      <a href="tables.html">Tables</a>
-      <a href="diagrams.html">Diagrams</a>
-      <a href="interactivity.html">Interactivity</a>
-      <a href="https://github.com/jjallaire/radix">GitHub</a>
-    </div>
-    <p>
-    © Copyright 2018 The Distill Template Authors and RStudio, Inc.
-    </p>
-    <p>
-    Software licensed under the <a href="https://www.apache.org/licenses/LICENSE-2.0">Apache License, v2.0</a>.<br/>
-    Docs licensed under <a href="https://creativecommons.org/licenses/by/3.0/us/">Creative Commons Attribution License, v3.0</a>
-    </p>
+<div class="distill-footer">
+<div class="l-page">
+  <div class="description">
+  Created using <a href="index.html">Radix for R Markdown</a>
   </div>
+  <div class="nav">
+    <a href="index.html">Basics</a>
+    <a href="figures.html">Figures</a>
+    <a href="tables.html">Tables</a>
+    <a href="diagrams.html">Diagrams</a>
+    <a href="interactivity.html">Interactivity</a>
+    <a href="https://github.com/jjallaire/radix">GitHub</a>
   </div>
-  <div class="appendix-bottom"></div>
+  <p>
+  © Copyright 2018 The Distill Template Authors and RStudio, Inc.
+  </p>
+  <p>
+  Software licensed under the <a href="https://www.apache.org/licenses/LICENSE-2.0">Apache License, v2.0</a>.<br/>
+  Docs licensed under <a href="https://creativecommons.org/licenses/by/3.0/us/">Creative Commons Attribution License, v3.0</a>
+  </p>
+</div>
+</div>
+<div class="appendix-bottom"></div>
+<d-bibliography>
+<script type="text/bibtex">
+@misc{distill,
+  author = {Shan Carter and Chirs Olah and Arvind Satyanarayan},
+  doi = {10.23915/distill},
+  url = {https://doi.org/10.23915/distill},
+  publisher = {Distill Working Group},
+  title = {Distill},
+  year = {2016}
+}
+@article{knuth1984,
+  title={Literate programming},
+  author={Knuth, Donald E.},
+  journal={The Computer Journal},
+  volume={27},
+  number={2},
+  pages={97--111},
+  year={1984},
+  publisher={British Computer Society}
+}
+@Book{xie2015,
+  title = {Dynamic Documents with R and knitr},
+  author = {Yihui Xie},
+  publisher = {Chapman and Hall/CRC},
+  address = {Boca Raton, Florida},
+  year = {2015},
+  edition = {2nd},
+  note = {ISBN 978-1498716963},
+  url = {http://yihui.name/knitr/},
+}
+
+
+
+</script>
+</d-bibliography>
 
 <!-- dynamically load mathjax for compatibility with self-contained -->
 <script>

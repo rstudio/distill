@@ -95,8 +95,12 @@ radix_article <- function(fig_width = 6,
     if (is.null(site_config))
       site_config <- list()
 
-    # transform metadata values (e.g. date)
+    # transform metadata values
     metadata <- transform_metadata(input_as_dir(input_file), site_config, metadata)
+
+    # forward bibliography on command line
+    if (!is.null(metadata$bibliography))
+      args <- c(args, "--bibliography", metadata$bibliography)
 
     # metadata
     args <- c(args, pandoc_include_args(
@@ -108,11 +112,6 @@ radix_article <- function(fig_width = 6,
     args
   }
 
-  # preprocessor
-  pre_processor <- function (metadata, input_file, runtime, knit_meta,
-                             files_dir, output_dir) {
-    c()
-  }
 
   # return format
   output_format(
@@ -123,7 +122,6 @@ radix_article <- function(fig_width = 6,
     keep_md = keep_md,
     clean_supporting = self_contained,
     post_knit = post_knit,
-    pre_processor = pre_processor,
     base_format = html_document_base(
       smart = smart,
       self_contained = self_contained,
@@ -154,6 +152,13 @@ transform_metadata <- function(input_dir, site_config, metadata) {
   # validate title
   if (is.null(metadata$title))
     stop("You must provide a title for Radix articles", call. = FALSE)
+
+  # allow site level metadata to propagate
+  site_metadata <- c("author", "date", "updated", "bibliography", "repository_url",
+                     "compare_updates_url", "creative_commons", "license_url",
+                     "preview", "slug", "url")
+  for (name in site_metadata)
+    metadata[[name]] <- merge_lists(site_config[[name]], metadata[[name]])
 
   # parse dates
   metadata$date <- parse_date(metadata$date)

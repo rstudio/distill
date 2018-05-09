@@ -16,7 +16,6 @@ author:
     affiliation: RStudio
     affiliation_url: https://www.rstudio.com
 date: May 4, 2018
-bibliography: biblio.bib
 repository_url: https://github.com/jjallaire/radix
 creative_commons: CC-BY
 ---
