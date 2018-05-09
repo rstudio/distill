@@ -30,6 +30,7 @@ url: https://jjallaire.github.io/radix/
     "full bleed"
     - crosstalk compatibility?
         - distillRow/distillCol
+    - publishing/previewing workflow?
         
 - Google Scholar data will require us to have programmatic access to all citations
   use pandoc-citeproc to convert bibliogrpahy to json?
