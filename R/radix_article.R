@@ -442,7 +442,7 @@ appendix_creative_commons <- function(site_config, metadata) {
 
     reuse_note <- sprintf(paste0(
       'Diagrams and text are licensed under Creative Commons Attribution ',
-      '<a href="%s">%s 4.0</a>. %sThe figures that have been reused from ',
+      '<a rel="license" href="%s">%s 4.0</a>. %sThe figures that have been reused from ',
       'other sources don’t fall under this license and can be ',
       'recognized by a note in their caption: “Figure from …”.'
     ), htmlEscape(cc_url, TRUE), htmlEscape(cc), source_note)
