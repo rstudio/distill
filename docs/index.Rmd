@@ -16,7 +16,7 @@ author:
     affiliation: RStudio
     affiliation_url: https://www.rstudio.com
 date: May 4, 2018
-url: https://jjallaire.github.io/radix/
+url: https://rstudio.github.io/radix
 ---
 
 <!---
@@ -67,7 +67,7 @@ Radix is based on the [Distill web framework](https://github.com/distillpub/temp
 To create an [R Markdown](https://rmarkdown.rstudio.com) document that uses the Radix format, first install the **radix** R package:
 
 ```r
-devtools::install_github("jjallaire/radix")
+devtools::install_github("rstudio/radix")
 ```
 
 Then, use the **New R Markdown** dialog within RStudio to create a new Radix article:

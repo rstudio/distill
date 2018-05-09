@@ -122,7 +122,7 @@ output$eruptions <- renderPlot({
 ````
 
 
-You can see the full source code for this example at [radix-interactive-document.Rmd](https://github.com/jjallaire/distill/blob/master/inst/examples/radix-interactive-document.Rmd). 
+You can see the full source code for this example at [radix-interactive-document.Rmd](https://github.com/rstudio/radix/blob/master/inst/examples/radix-interactive-document.Rmd). 
 
 Learn more about [interactive documents](https://rmarkdown.rstudio.com/authoring_shiny_prerendered.html) on the R Markdown website.
 
