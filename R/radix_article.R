@@ -334,82 +334,18 @@ after_body_includes <- function(site_config, metadata) {
 
   after_body <- c()
 
-  # write appendix
+  # write appendixes
+  updates_and_corrections <- appendix_updates_and_corrections(site_config, metadata)
+  creative_commons <- appendix_creative_commons(site_config, metadata)
+  appendix <- tags$div(class = "appendix-bottom",
+    updates_and_corrections,
+    creative_commons
+  )
+  appendix_html <- as.character(appendix)
+  appendix_file <- tempfile(fileext = "html")
+  writeLines(appendix_html, appendix_file)
+  after_body <- c(after_body, appendix_file)
 
-  # updates and corrections
-  updates_and_corrections <- list()
-  if (!is.null(metadata$repository_url)) {
-
-    updates_and_corrections <- list(
-      tags$h3(id = "updates-and-corrections", "Updates and Corrections")
-    )
-
-    if (!is.null(metadata$compare_updates_url)) {
-      updates_and_corrections[[length(updates_and_corrections) + 1]] <-
-        tags$p(
-          tags$a(href = metadata$compare_updates_url, "View all changes"),
-          " to this article since it was first published."
-        )
-    }
-
-    issues_url <- metadata$repository_url
-    if (grepl("github.com", issues_url, fixed = TRUE)) {
-      issues_url <- sub("/$", "", issues_url)
-      issues_url <- paste0(issues_url, "/issues/new")
-    }
-    updates_and_corrections[[length(updates_and_corrections) + 1]] <-
-      tags$p(HTML(sprintf(paste0(
-        'If you see mistakes or want to suggest changes, please <a href="%s">create an issue</a> ',
-        'on the source repository.'
-      ), htmlEscape(issues_url, attribute = TRUE))))
-  }
-
-  # creative commons re-use
-  creative_commons <- list()
-  if (!is.null(metadata$creative_commons)) {
-
-    # validate
-    cc <- metadata$creative_commons
-    valid_licenses <- c("CC-BY", "CC-BY-SA", "CC-BY-ND", "CC-BY-NC", "CC-BY-NC-SA", "CC-BY-NC-ND")
-    if (!cc %in% valid_licenses)
-      stop("creative_commonds license must be one of ", paste(valid_licenses, collapse = ", "))
-
-    # compute url
-    cc_url <- paste0("https://creativecommons.org/licenses/", tolower(sub("^CC-", "", cc)), "/4.0/")
-
-    source_note <- if (!is.null(metadata$repository_url)) {
-      sprintf('Source code is available at <a rel="license" href="%s">%s</a>, unless otherwise noted. ',
-                   htmlEscape(metadata$repository_url, attribute = TRUE),
-                   htmlEscape(metadata$repository_url)
-      )
-    } else {
-      ""
-    }
-
-    reuse_note <- sprintf(paste0('Diagrams and text are licensed under Creative Commons Attribution ',
-                                 '<a href="%s">%s 4.0</a>. %sThe figures that have been reused from ',
-                                 'other sources don’t fall under this license and can be ',
-                                 'recognized by a note in their caption: “Figure from …”.'),
-                          htmlEscape(cc_url, TRUE), htmlEscape(cc), source_note)
-
-    creative_commons <- list(
-      tags$h3(id = "reuse", "Reuse"),
-      tags$p(HTML(reuse_note))
-    )
-  }
-
-  # write bottom entries for appendix
-  if(length(updates_and_corrections) > 0 ||
-     length(creative_commons) > 0) {
-    appendix <- tags$div(class = "appendix-bottom",
-      updates_and_corrections,
-      creative_commons
-    )
-    appendix_html <- as.character(appendix)
-    appendix_file <- tempfile(fileext = "html")
-    writeLines(appendix_html, appendix_file)
-    after_body <- c(after_body, appendix_file)
-  }
 
   # write bibliography after body
   if (!is.null(metadata$bibliography)) {
@@ -443,6 +379,81 @@ front_matter_from_metadata <- function(metadata) {
   if (!is.null(metadata$date))
     front_matter$publishedDate <- date_as_iso_8601(metadata$date)
   jsonlite::toJSON(front_matter, auto_unbox = TRUE)
+}
+
+appendix_updates_and_corrections <- function(site_config, metadata) {
+
+  if (!is.null(metadata$repository_url)) {
+
+    updates_and_corrections <- list(
+      tags$h3(id = "updates-and-corrections", "Updates and Corrections")
+    )
+
+    if (!is.null(metadata$compare_updates_url)) {
+      updates_and_corrections[[length(updates_and_corrections) + 1]] <-
+        tags$p(
+          tags$a(href = metadata$compare_updates_url, "View all changes"),
+          " to this article since it was first published."
+        )
+    }
+
+    issues_url <- metadata$repository_url
+    if (grepl("github.com", issues_url, fixed = TRUE)) {
+      issues_url <- sub("/$", "", issues_url)
+      issues_url <- paste0(issues_url, "/issues/new")
+    }
+    updates_and_corrections[[length(updates_and_corrections) + 1]] <-
+      tags$p(HTML(sprintf(paste0(
+        'If you see mistakes or want to suggest changes, please ',
+        '<a href="%s">create an issue</a> on the source repository.'
+      ), htmlEscape(issues_url, attribute = TRUE))))
+
+    updates_and_corrections
+  } else {
+    NULL
+  }
+}
+
+appendix_creative_commons <- function(site_config, metadata) {
+  if (!is.null(metadata$creative_commons)) {
+
+    # validate
+    cc <- metadata$creative_commons
+    valid_licenses <- c("CC-BY", "CC-BY-SA", "CC-BY-ND", "CC-BY-NC",
+                        "CC-BY-NC-SA", "CC-BY-NC-ND")
+    if (!cc %in% valid_licenses) {
+      stop("creative_commonds license must be one of ",
+           paste(valid_licenses, collapse = ", "))
+    }
+
+    # compute url
+    cc_url <- paste0("https://creativecommons.org/licenses/",
+                     tolower(sub("^CC-", "", cc)), "/4.0/")
+
+    source_note <- if (!is.null(metadata$repository_url)) {
+      sprintf(paste0('Source code is available at <a rel="license" href="%s">%s</a>, ',
+                     'unless otherwise noted. '),
+              htmlEscape(metadata$repository_url, attribute = TRUE),
+              htmlEscape(metadata$repository_url)
+      )
+    } else {
+      ""
+    }
+
+    reuse_note <- sprintf(paste0(
+      'Diagrams and text are licensed under Creative Commons Attribution ',
+      '<a href="%s">%s 4.0</a>. %sThe figures that have been reused from ',
+      'other sources don’t fall under this license and can be ',
+      'recognized by a note in their caption: “Figure from …”.'
+    ), htmlEscape(cc_url, TRUE), htmlEscape(cc), source_note)
+
+    list(
+      tags$h3(id = "reuse", "Reuse"),
+      tags$p(HTML(reuse_note))
+    )
+  } else {
+    NULL
+  }
 }
 
 knitr_source_hook <- function(x, options) {
@@ -479,33 +490,6 @@ knitr_chunk_hook <- function(x, options) {
   )
 }
 
-block_class = function(x){
-  if (length(x) == 0) return()
-  classes = unlist(strsplit(x, '\\s+'))
-  .classes = paste0('.', classes, collapse = ' ')
-  paste0('{', .classes, '}')
-}
-
-with_tz <- function(x, tzone = "") {
-  as.POSIXct(as.POSIXlt(x, tz = tzone))
-}
-
-parse_date <- function(date) {
-  if (!is.null(date)) {
-    parsed_date <- parsedate::parse_date(date)
-    if (!is.na(parsed_date))
-      date <- parsed_date
-  }
-  date
-}
-
-date_as_iso_8601 <- function(date) {
-  parsedate::format_iso_8601(date)
-}
-
-is_file_type <- function(file, type) {
-  identical(tolower(tools::file_ext(file)), type)
-}
 
 
 

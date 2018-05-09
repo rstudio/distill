@@ -17,7 +17,7 @@
 window.document.addEventListener("DOMContentLoaded", function (event) {
 
   // flag indicating that we have appendix items
-  var appendix = $('.appendix-bottom').length > 0;
+  var appendix = $('.appendix-bottom').children('h3').length > 0;
 
   // replace citations with <d-cite>
   $('.citation').each(function(i, val) {
