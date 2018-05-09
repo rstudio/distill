@@ -16,6 +16,7 @@ author:
     affiliation: RStudio
     affiliation_url: https://www.rstudio.com
 date: May 4, 2018
+url: https://jjallaire.github.io/radix/
 ---
 
 <!---

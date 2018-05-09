@@ -63,18 +63,6 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
     $(this).nextUntil($('h1, h2, h3')).addBack().appendTo($('d-appendix'));
   });
 
-  // replace dynamic urls in citation
-  $('.citation-appendix').each(function(i, val) {
-    var html = $(this).html();
-    var href = window.location.href;
-    if (href.lastIndexOf("http://127.0.0.1",0) === 0)
-      href = "http://127.0.0.1";
-    if (href.lastIndexOf("http://localhost",0) === 0)
-      href = "http://localhost";
-    html = html.replace('http://radix-dynamic-citation-url', href);
-    $(this).html(html);
-  });
-
   // show d-appendix if we have appendix content
   $("d-appendix").css('display', appendix ? 'grid' : 'none');
 

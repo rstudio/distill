@@ -582,13 +582,8 @@ appendix_creative_commons <- function(site_config, metadata) {
 
 appendix_citation <- function(site_config, metadata) {
 
-  if (!is.null(metadata$date) && !is.null(metadata$author)) {
-
-    # determine url
-    article_url <- if (!is.null(metadata$url))
-      metadata$url
-    else
-      "http://radix-dynamic-citation-url"
+  if (!is.null(metadata$date) && !is.null(metadata$author) &&
+      (!is.null(metadata$url) || !is.null(metadata$journal$title))) {
 
     short_citation <- function() {
       if (!is.null(metadata$journal$title)) {
@@ -604,29 +599,31 @@ appendix_citation <- function(site_config, metadata) {
                 metadata$published_month,
                 metadata$published_day,
                 metadata$qualified_title,
-                article_url)
+                metadata$url)
       }
     }
 
     long_citation <- function() {
       if (!is.null(metadata$journal$title)) {
-        suffix <- if(!is.null(metadata$doi))
-          sprintf(',\n  doi = {%s}\n}', metadata$doi)
-        else
-          '\n}'
+
+        suffix <- c()
+        sep <- ifelse(!is.null(metadata$url) && !is.null(metadata$doi), ",", "")
+        if (!is.null(metadata$url))
+          suffix <- c(suffix, sprintf(',\n  note = {%s}', metadata$url))
+        if (!is.null(metadata$doi))
+          suffix <- c(suffix, sprintf(',\n  doi = {%s}', metadata$doi))
+        suffix <- paste0(c(suffix, '\n}'), collapse = '')
         sprintf(paste('@article(%s,',
                       '  author = {%s},',
                       '  title = {%s},',
                       '  journal = {%s},',
-                      '  year = {%s},',
-                      '  note = {%s}%s',
+                      '  year = {%s}%s',
                       sep = '\n'),
                 metadata$slug,
                 metadata$bibtex_authors,
                 metadata$qualified_title,
                 metadata$journal$title,
                 metadata$published_year,
-                article_url,
                 suffix
         )
       } else {
@@ -640,7 +637,7 @@ appendix_citation <- function(site_config, metadata) {
                 metadata$slug,
                 metadata$bibtex_authors,
                 metadata$qualified_title,
-                article_url,
+                metadata$url,
                 metadata$published_year
         )
       }
