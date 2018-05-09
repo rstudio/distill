@@ -36,8 +36,6 @@ date: May 4, 2018
 
 - metadata docs
 
-- Figure caption treatment
-
 - work out TZ display issues with date
 - use pandoc filters more? (RawHtml)
 
