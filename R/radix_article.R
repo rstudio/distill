@@ -164,7 +164,7 @@ transform_metadata <- function(input_dir, site_config, metadata) {
   # allow site level metadata to propagate
   site_metadata <- c("author", "date", "updated", "bibliography", "repository_url",
                      "compare_updates_url", "creative_commons", "license_url",
-                     "preview", "slug", "url")
+                     "preview", "slug", "url", "journal")
   for (name in site_metadata)
     metadata[[name]] <- merge_lists(site_config[[name]], metadata[[name]])
 
@@ -190,6 +190,14 @@ transform_metadata <- function(input_dir, site_config, metadata) {
     if (!is.null(metadata$updated))
       metadata$updated_date_rfc <- rfc_date(metadata$updated)
     metadata$published_iso_date_only <- date_as_iso_8601(metadata$date, date_only = TRUE)
+  }
+
+  # normalize journal (for citations)
+  if (!is.null(metadata$journal)) {
+    if (is.character(metadata$journal))
+      metadata$journal <- list(title = metadata$journal)
+  } else {
+    metadata$journal <- list()
   }
 
   # resolve creative commons license
@@ -582,46 +590,68 @@ appendix_citation <- function(site_config, metadata) {
     else
       "http://radix-dynamic-citation-url"
 
-    # TODO: journal citations
-
-    short_citation <- function(metadata) {
-      sprintf('%s (%s, %s %d). %s. Retrieved from %s',
-              metadata$concatenated_authors,
-              metadata$published_year,
-              metadata$published_month,
-              metadata$published_day,
-              metadata$qualified_title,
-              article_url)
+    short_citation <- function() {
+      if (!is.null(metadata$journal$title)) {
+        sprintf('%s, "%s", %s, %s',
+                metadata$concatenated_authors,
+                metadata$qualified_title,
+                metadata$journal$title,
+                metadata$published_year)
+      } else {
+        sprintf('%s (%s, %s %d). %s. Retrieved from %s',
+                metadata$concatenated_authors,
+                metadata$published_year,
+                metadata$published_month,
+                metadata$published_day,
+                metadata$qualified_title,
+                article_url)
+      }
     }
 
-
-    long_citation <- function(metadata) {
-
-      sprintf(paste(
-        '@misc(%s,',
-        '  author = {%s},',
-        '  title = {%s},',
-        '  url = {%s},',
-        '  year = {%s}',
-        '}',
-        sep = '\n'
-      ), metadata$slug,
-         metadata$bibtex_authors,
-         metadata$qualified_title,
-         article_url,
-         metadata$published_year
-      )
-
-      # TODO: Journal, see:
-      # https://github.com/distillpub/template/blob/a6df55253793f5fa5189afc00edad4a22209c15e/src/helpers/bibtex.js#L39
+    long_citation <- function() {
+      if (!is.null(metadata$journal$title)) {
+        suffix <- if(!is.null(metadata$doi))
+          sprintf(',\n  doi = {%s}\n}', metadata$doi)
+        else
+          '\n}'
+        sprintf(paste('@article(%s,',
+                      '  author = {%s},',
+                      '  title = {%s},',
+                      '  journal = {%s},',
+                      '  year = {%s},',
+                      '  note = {%s}%s',
+                      sep = '\n'),
+                metadata$slug,
+                metadata$bibtex_authors,
+                metadata$qualified_title,
+                metadata$journal$title,
+                metadata$published_year,
+                article_url,
+                suffix
+        )
+      } else {
+        sprintf(paste('@misc(%s,',
+                      '  author = {%s},',
+                      '  title = {%s},',
+                      '  url = {%s},',
+                      '  year = {%s}',
+                      '}',
+                      sep = '\n'),
+                metadata$slug,
+                metadata$bibtex_authors,
+                metadata$qualified_title,
+                article_url,
+                metadata$published_year
+        )
+      }
   }
 
     list(
       tags$h3(id = "citation", "Citation"),
       tags$p("For attribution, please cite this work as"),
-      tags$pre(class = "citation-appendix short", short_citation(metadata)),
+      tags$pre(class = "citation-appendix short", short_citation()),
       tags$p("BibTeX citation"),
-      tags$pre(class = "citation-appendix long", long_citation(metadata))
+      tags$pre(class = "citation-appendix long", long_citation())
     )
 
   } else {

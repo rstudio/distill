@@ -34,18 +34,9 @@ date: May 4, 2018
   use pandoc-citeproc to convert bibliogrpahy to json?
   https://github.com/jgm/pandoc-citeproc/blob/master/man/pandoc-citeproc.1.md
 
-- https://github.com/distillpub/template/blob/a6df55253793f5fa5189afc00edad4a22209c15e/src/distill-components/distill-appendix.js
+- DOI not showing up 
 
-- front matter parse: 
-  https://github.com/distillpub/template/blob/a6df55253793f5fa5189afc00edad4a22209c15e/src/front-matter.js#L274
-  
-
-- alternative to DOI is citation (which just needs a URL) or source
-   if no DOI and citation then updated header   
-
-- may need separate metadata section in the docs
-- article metadata (DOI, citation, etc.)
-- https://github.com/distillpub/template/blob/master/src/transforms/meta.js
+- metadata docs
 
 - Figure caption treatment
 
