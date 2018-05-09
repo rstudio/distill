@@ -98,6 +98,14 @@ radix_article <- function(fig_width = 6,
     # transform metadata values
     metadata <- transform_metadata(input_as_dir(input_file), site_config, metadata)
 
+    # provide title-prefix  and qualified title if specified in site and different from title
+    if (!is.null(site_config$title) && !identical(site_config$title, metadata$title)) {
+      args <- c(args, "--title-prefix", site_config$title)
+      metadata$qualified_title <- sprintf("%s: %s", site_config$title, metadata$title)
+    } else {
+      metadata$qualified_title <- metadata$title
+    }
+
     # forward bibliography on command line
     if (!is.null(metadata$bibliography))
       args <- c(args, "--bibliography", metadata$bibliography)
@@ -385,14 +393,8 @@ open_graph_metadata <- function(site_config, metadata) {
   add_open_graph_meta("og:locale", locale)
 
   # site name
-  site_name <- if (!is.null(site_config$title))
-    site_config$title
-  else if (!is.null(site_config$navbar) && !is.null(site_config$navbar$title))
-    site_config$navbar$title
-  else
-    NULL
-  if (!is.null(site_name))
-    add_open_graph_meta("og:site_name", site_name)
+  if (!is.null(site_config$title))
+    add_open_graph_meta("og:site_name", site_config$title)
 
   open_graph_meta
 }
@@ -414,7 +416,7 @@ twitter_card_metadata <- function(site_config, metadata) {
   add_twitter_card_meta("twitter:card", card_type)
 
   # title and description
-  add_twitter_card_meta("twitter:title", metadata$title)
+  add_twitter_card_meta("twitter:title", metadata$qualified_title)
   if (!is.null(metadata$description))
     add_twitter_card_meta("twitter:description", metadata$description)
 
@@ -583,7 +585,7 @@ appendix_citation <- function(site_config, metadata) {
               metadata$published_year,
               metadata$published_month,
               metadata$published_day,
-              metadata$title,
+              metadata$qualified_title,
               article_url)
     }
 
@@ -600,7 +602,7 @@ appendix_citation <- function(site_config, metadata) {
         sep = '\n'
       ), metadata$slug,
          metadata$bibtex_authors,
-         metadata$title,
+         metadata$qualified_title,
          article_url,
          metadata$published_year
       )

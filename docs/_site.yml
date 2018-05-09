@@ -1,6 +1,5 @@
 name: "rmarkdown-radix"
-title: "Radix"
-bibliography: biblio.bib
+title: "Radix for R Markdown"
 output_dir: "."
 output:
   radix::radix_article:

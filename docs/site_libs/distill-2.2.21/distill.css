@@ -36,6 +36,10 @@ body {
   line-height: 1em;
 }
 
+.hidden {
+  display: none;
+}
+
 /* Add an additional media break (since the text column was a bit narrow at 1100px) */
 
 @media(min-width: 1100px) {
