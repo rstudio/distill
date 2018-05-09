@@ -34,8 +34,6 @@ date: May 4, 2018
   use pandoc-citeproc to convert bibliogrpahy to json?
   https://github.com/jgm/pandoc-citeproc/blob/master/man/pandoc-citeproc.1.md
 
-- DOI not showing up 
-
 - metadata docs
 
 - Figure caption treatment

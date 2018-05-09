@@ -50,6 +50,16 @@ $for(author)$
   $endif$
 $endfor$
 </div>
+<div>
+  <h3>Published</h3>
+  <p>$if(date)$$date$$else$<em>Not published yet.</em>$endif$</p>
+</div>
+<div>
+  <h3>DOI</h3>
+  <p>$if(doi)$<a href="https://doi.org/$doi$">$doi$</a></p>$else$em>No DOI yet.</em>$endif$
+</div>
+<div>
+</div>
 </div>
 </d-byline>
 $endif$

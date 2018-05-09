@@ -17,18 +17,23 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
     hide_byline_column("Published");
 
   // document object identifier
+  var doi = $('d-byline').find('h3:contains("DOI")');
+  var doi_p = doi.next().empty();
   if (!front_matter.doi) {
     // if we have a citation and valid citationText then link to that
     if ($('#citation').length > 0 && front_matter.citationText) {
-      var doi = $('d-byline').find('h3:contains("DOI")');
       doi.html('Citation');
-      var p = doi.next().empty();
-      var a = $('<a class="byline-citation-link" href="#citation"></a>');
-      a.text(front_matter.citationText);
-      p.append(a);
+      $('<a href="#citation"></a>')
+        .text(front_matter.citationText)
+        .appendTo(doi_p);
     } else {
       hide_byline_column("DOI");
     }
+  } else {
+    $('<a></a>')
+       .attr('href', "https://doi.org/" + front_matter.doi)
+       .html(front_matter.doi)
+       .appendTo(doi_p);
   }
 
   // move appendix-bottom entries to the bottom
