@@ -41,19 +41,12 @@ bibliography: biblio.bib
     - https://github.com/wikiti/jquery-paginate
 - site generation / menuing
 
-- https://www.w3schools.com/howto/howto_js_topnav_responsive.asp
-- https://www.w3schools.com/howto/howto_js_navbar_hide_scroll.asp
-- https://www.w3schools.com/howto/howto_js_responsive_navbar_dropdown.asp
-
-
-
 - distill.pub
     - Use GitHub organizations/repos for URL namespace
     - Commit hook based publishing
     - Provide frame with social, GA, discourse, etc.
     - RSC for internal version of same
     
-
 --->
 
 ```{r setup, include=FALSE}
