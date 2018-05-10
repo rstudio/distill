@@ -50,20 +50,31 @@
 
 <body>
 
-<div class="distill-header">
-<div class="content">
-  <a href="index.html" class="logo">
-    Radix for R Markdown
-  </a>
-  <div class="nav">
+
+<nav class="topnav" id="topnav">
+  <div class="nav-left">
+    <span class="title">Radix for R Markdown</span>
+  </div>
+  <div class="nav-right">
     <a href="index.html">Basics</a>
     <a href="figures.html">Figures</a>
     <a href="tables.html">Tables</a>
     <a href="diagrams.html">Diagrams</a>
-    <a href="interactivity.html">Interactivity</a>
+    <a href="interactivity">Interactivity</a>
+    <!--
+    <div class="nav-dropdown">
+      <button class="nav-dropbtn">Dropdown <span class="down-arrow">&#x25BE;</span>
+      </button>
+      <div class="nav-dropdown-content">
+        <a href="#">Link 1</a>
+        <a href="#">Link 2</a>
+        <a href="#">Link 3</a>
+      </div>
+    </div>
+    -->
+    <a href="javascript:void(0);" class="nav-icon" onclick="$('#topnav').toggleClass('responsive')">&#9776;</a>
   </div>
-</div>
-</div>
+</nav>
 
 <d-title>
 <h1>Figures</h1>
@@ -145,11 +156,10 @@ leaflet() %&gt;%
 <d-appendix>
 </d-appendix>
 
-<div class="distill-footer">
-<div class="l-page">
-  <div class="description">
+<div class="footer">
+  <p class="description">
   Created using <a href="index.html">Radix for R Markdown</a>
-  </div>
+  </p>
   <div class="nav">
     <a href="index.html">Basics</a>
     <a href="figures.html">Figures</a>
@@ -164,7 +174,6 @@ leaflet() %&gt;%
   <p>
   Software licensed under the <a href="https://www.apache.org/licenses/LICENSE-2.0">Apache License, v2.0</a>
   </p>
-</div>
 </div>
 <div class="appendix-bottom">
 <h3 id="updates-and-corrections">Updates and Corrections</h3>
