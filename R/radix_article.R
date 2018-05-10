@@ -368,7 +368,7 @@ in_header_includes <- function(site_config, metadata) {
   # if we have a site navbar then add our site css
   if (!is.null(site_config[["navbar"]])) {
     in_header <- c(in_header,
-        system.file("rmarkdown/templates/radix_article/resources/navbar-styles.html",
+        system.file("rmarkdown/templates/radix_article/resources/navbar.html",
                     package = "radix")
     )
   }

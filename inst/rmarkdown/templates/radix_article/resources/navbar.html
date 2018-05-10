@@ -1,4 +1,17 @@
 
+
+<script type="application/javascript">
+  window.document.addEventListener("DOMContentLoaded", function (event) {
+    $('.radix-topnav').each(function(i, val) {
+      var topnav = $(this);
+      var toggle = topnav.find('.nav-toggle');
+      toggle.on('click', function() {
+        topnav.toggleClass('responsive');
+      });
+    });
+  });
+</script>
+
 <style type="text/css">
 
 .radix-topnav {
@@ -46,7 +59,7 @@
 }
 
 
-.radix-topnav .nav-icon {
+.radix-topnav .nav-toggle {
   display: none;
 }
 
@@ -103,7 +116,7 @@
 
 @media screen and (max-width: 768px) {
   .radix-topnav a, .radix-topnav .nav-dropdown  {display: none;}
-  .radix-topnav a.nav-icon {
+  .radix-topnav a.nav-toggle {
     float: right;
     display: block;
   }
@@ -118,7 +131,7 @@
 
 @media screen and (max-width: 768px) {
   .radix-topnav.responsive {position: relative;}
-  .radix-topnav.responsive a.nav-icon {
+  .radix-topnav.responsive a.nav-toggle {
     position: absolute;
     right: 0;
     top: 0;

@@ -40,8 +40,6 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
   $('.appendix-bottom').appendTo('d-appendix').children().unwrap();
   $('.appendix-bottom').remove();
 
-  console.log('moved bottom appendix entries');
-
   $('body').css('display', 'initial');
 });
 
