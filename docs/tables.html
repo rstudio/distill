@@ -46,40 +46,26 @@
 
 
 <nav class="topnav" id="topnav">
-  <span class="title">Radix for R Markdown</span>
   <div class="nav-left">
+    <span class="title">Radix for R Markdown</span>
   </div>
   <div class="nav-right">
-  <a href="#home">Home</a>
-  <a href="#news">News</a>
-  <a href="#contact">Contact</a>
-  <div class="nav-dropdown">
-    <button class="nav-dropbtn">Dropdown <span class="down-arrow">&#x25BE;</span>
-    </button>
-    <div class="nav-dropdown-content">
-      <a href="#">Link 1</a>
-      <a href="#">Link 2</a>
-      <a href="#">Link 3</a>
+    <a href="#home">Home</a>
+    <a href="#news">News</a>
+    <a href="#contact">Contact</a>
+    <div class="nav-dropdown">
+      <button class="nav-dropbtn">Dropdown <span class="down-arrow">&#x25BE;</span>
+      </button>
+      <div class="nav-dropdown-content">
+        <a href="#">Link 1</a>
+        <a href="#">Link 2</a>
+        <a href="#">Link 3</a>
+      </div>
     </div>
-  </div>
-  <a href="#about">About</a>
-  <a href="javascript:void(0);" class="nav-icon" onclick="myFunction()">&#9776;</a>
+    <a href="#about">About</a>
+    <a href="javascript:void(0);" class="nav-icon" onclick="$('#topnav').toggleClass('responsive')">&#9776;</a>
   </div>
 </nav>
-
-
-
-<script type="text/javascript">
-/* Toggle between adding and removing the "responsive" class to topnav when the user clicks on the icon */
-function myFunction() {
-    var x = document.getElementById("topnav");
-    if (x.className === "topnav") {
-        x.className += " responsive";
-    } else {
-        x.className = "topnav";
-    }
-}
-</script>
 
 <d-title>
 <h1>Tables</h1>
