@@ -58,7 +58,7 @@ radix_article <- function(fig_width = 6,
   # lua filter
   if (pandoc_version() >= "2.0") {
     args <- c(args, "--lua-filter",
-              pandoc_path_arg(resource("distill-2.0/distill.lua")))
+              pandoc_path_arg(resource("distill/distill.lua")))
   }
 
   # use link citations (so we can do citation conversion)
@@ -144,7 +144,7 @@ html_dependency_distill <- function() {
   htmltools::htmlDependency(
     name = "distill",
     version = "2.2.21",
-    src = system.file("rmarkdown/templates/radix_article/resources/distill-2.0",
+    src = system.file("rmarkdown/templates/radix_article/resources/distill",
                       package = "radix"),
     script = c("distill.js", "template.v2.js", "distill-post.js"),
     stylesheet = "distill.css"
