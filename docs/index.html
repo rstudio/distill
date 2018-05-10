@@ -69,20 +69,43 @@
 
 <body>
 
-<div class="distill-header">
-<div class="content">
-  <a href="index.html" class="logo">
-    Radix for R Markdown
-  </a>
-  <div class="nav">
-    <a href="index.html">Basics</a>
-    <a href="figures.html">Figures</a>
-    <a href="tables.html">Tables</a>
-    <a href="diagrams.html">Diagrams</a>
-    <a href="interactivity.html">Interactivity</a>
+
+<div class="topnav" id="myTopnav">
+  <div class="nav-left">
+  <a href="#home">Radix for R Markdown</a>
+  </div>
+  <div class="nav-right">
+  <a href="#home">Home</a>
+  <a href="#news">News</a>
+  <a href="#contact">Contact</a>
+  <div class="dropdown">
+    <button class="dropbtn">Dropdown <span class="down-arrow">&#x25BE;</span>
+      <i class="fa fa-caret-down"></i>
+    </button>
+    <div class="dropdown-content">
+      <a href="#">Link 1</a>
+      <a href="#">Link 2</a>
+      <a href="#">Link 3</a>
+    </div>
+  </div>
+  <a href="#about">About</a>
+  <a href="javascript:void(0);" class="icon" onclick="myFunction()">&#9776;</a>
   </div>
 </div>
-</div>
+
+
+
+<script type="text/javascript">
+/* Toggle between adding and removing the "responsive" class to topnav when the user clicks on the icon */
+function myFunction() {
+    var x = document.getElementById("myTopnav");
+    if (x.className === "topnav") {
+        x.className += " responsive";
+    } else {
+        x.className = "topnav";
+    }
+}
+</script>
 
 <d-title>
 <h1>Radix for R Markdown</h1>
@@ -128,14 +151,11 @@
     - distillVisualization() top level shinyApp equivalent with distill bootstrap theme 
        - use the less compiler for this
     "full bleed"
+    - ggplot2 theme for distill
     - crosstalk compatibility?
         - distillRow/distillCol
     - publishing/previewing workflow?
     - app.R or ui.R / server.R in the same directory; automagic local run
-
-- ggplot2 theme for distill
-        
-- linked images have underline
 
 - metadata docs
     - reference citr package
@@ -145,11 +165,18 @@
     - https://github.com/wikiti/jquery-paginate
 - site generation / menuing
 
+- https://www.w3schools.com/howto/howto_js_topnav_responsive.asp
+- https://www.w3schools.com/howto/howto_js_navbar_hide_scroll.asp
+- https://www.w3schools.com/howto/howto_js_responsive_navbar_dropdown.asp
+
+
+
 - distill.pub
     - Use GitHub organizations/repos for URL namespace
     - Commit hook based publishing
     - Provide frame with social, GA, discourse, etc.
     - RSC for internal version of same
+    
 
 --->
 <p>Radix is an online publication format designed for scientific and technical communication. Radix articles include:</p>

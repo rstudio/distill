@@ -1,5 +1,4 @@
 
-/* Add a black background color to the top navigation */
 .topnav {
     overflow: hidden;
     background-color: #455a64;
@@ -13,8 +12,17 @@
     box-shadow: 0 1px 6px rgba(0, 0, 0, 0.05);
 }
 
+.nav-left {
+  float: left;
+}
+
+.nav-right {
+  float: right;
+}
+
 /* Style the links inside the navigation bar */
-.topnav a {
+.topnav a,
+.topnav .title {
     float: left;
     display: block;
     color: rgba(255, 255, 255, 0.8);
@@ -22,6 +30,10 @@
     padding: 14px 16px;
     text-decoration: none;
     font-size: 16px;
+}
+
+.topnav .nav-title {
+  font-size: 20px;
 }
 
 /* Hide the link that should open and close the topnav on small screens */
@@ -108,6 +120,10 @@
     float: none;
     display: block;
     text-align: left;
+  }
+  .topnav.responsive .nav-left,
+  .topnav.responsive .nav-right {
+    width: 100%;
   }
   .topnav.responsive .dropdown {float: none;}
   .topnav.responsive .dropdown-content {position: relative;}
