@@ -95,6 +95,10 @@ radix_article <- function(fig_width = 6,
     if (is.null(site_config))
       site_config <- list()
 
+    # propagate navbar$title to global title
+    if (is.null(site_config$title) && !is.null(site_config$navbar))
+      site_config$title <- site_config$navbar$title
+
     # transform metadata values
     metadata <- transform_metadata(input_as_dir(input_file), site_config, metadata)
 
