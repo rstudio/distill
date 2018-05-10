@@ -1,5 +1,5 @@
 
-.topnav {
+.radix-topnav {
   overflow: hidden;
   background-color: #455a64;
   width: 100%;
@@ -13,22 +13,22 @@
 }
 
 @media print {
-  .topnav {
+  .radix-topnav {
     display: none;
   }
 }
 
-.topnav .nav-left {
+.radix-topnav .nav-left {
   float: left;
 }
 
-.topnav .nav-right {
+.radix-topnav .nav-right {
   float: right;
   margin-right: 25px;
 }
 
-.topnav a,
-.topnav .title {
+.radix-topnav a,
+.radix-topnav .title {
   float: left;
   display: block;
   color: rgba(255, 255, 255, 0.8);
@@ -38,13 +38,13 @@
   font-size: 16px;
 }
 
-.topnav .title {
+.radix-topnav .title {
   margin-left: 25px;
   font-size: 20px;
 }
 
 
-.topnav .nav-icon {
+.radix-topnav .nav-icon {
   display: none;
 }
 
@@ -86,7 +86,7 @@
   text-align: left;
 }
 
-.topnav a:hover, .nav-dropdown:hover .nav-dropbtn {
+.radix-topnav a:hover, .nav-dropdown:hover .nav-dropbtn {
   color: white;
 }
 
@@ -100,40 +100,40 @@
 }
 
 @media screen and (max-width: 768px) {
-  .topnav a, .topnav .nav-dropdown  {display: none;}
-  .topnav a.nav-icon {
+  .radix-topnav a, .radix-topnav .nav-dropdown  {display: none;}
+  .radix-topnav a.nav-icon {
     float: right;
     display: block;
   }
-  .topnav .title {
+  .radix-topnav .title {
     margin-left: 0;
   }
-  .topnav .nav-right {
+  .radix-topnav .nav-right {
     margin-right: 0;
   }
 }
 
 
 @media screen and (max-width: 768px) {
-  .topnav.responsive {position: relative;}
-  .topnav.responsive a.nav-icon {
+  .radix-topnav.responsive {position: relative;}
+  .radix-topnav.responsive a.nav-icon {
     position: absolute;
     right: 0;
     top: 0;
   }
-  .topnav.responsive a,
-  .topnav.responsive .nav-dropdown {
+  .radix-topnav.responsive a,
+  .radix-topnav.responsive .nav-dropdown {
     float: none;
     display: block;
     text-align: left;
   }
-  .topnav.responsive .nav-left,
-  .topnav.responsive .nav-right {
+  .radix-topnav.responsive .nav-left,
+  .radix-topnav.responsive .nav-right {
     width: 100%;
   }
-  .topnav.responsive .nav-dropdown {float: none;}
-  .topnav.responsive .nav-dropdown-content {position: relative;}
-  .topnav.responsive .nav-dropdown .nav-dropbtn {
+  .radix-topnav.responsive .nav-dropdown {float: none;}
+  .radix-topnav.responsive .nav-dropdown-content {position: relative;}
+  .radix-topnav.responsive .nav-dropdown .nav-dropbtn {
     display: block;
     width: 100%;
     text-align: left;
