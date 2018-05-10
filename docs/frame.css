@@ -84,7 +84,7 @@
 
 /* When the screen is less than 600 pixels wide, hide all links, except for the first one ("Home"). Show the link that contains should open and close the topnav (.icon) */
 @media screen and (max-width: 600px) {
-  .topnav a:not(:first-child) {display: none;}
+  .topnav a, .topnav .dropdown  {display: none;}
   .topnav a.icon {
     float: right;
     display: block;
@@ -99,7 +99,8 @@
     right: 0;
     top: 0;
   }
-  .topnav.responsive a {
+  .topnav.responsive a,
+  .topnav.responsive .dropdown {
     float: none;
     display: block;
     text-align: left;
