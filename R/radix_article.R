@@ -323,6 +323,9 @@ in_header_includes <- function(site_config, metadata) {
   # twitter card (https://dev.twitter.com/cards/types/summary)
   twitter_card_meta <- twitter_card_metadata(site_config, metadata)
 
+  # google scholar (https://scholar.google.com/intl/en/scholar/inclusion.html)
+  google_scholar_meta <- google_scholar_metadata(site_config, metadata)
+
   # render head tags
   meta_tags <- do.call(tagList, list(
     description_meta,
@@ -335,7 +338,9 @@ in_header_includes <- function(site_config, metadata) {
     HTML(''),
     open_graph_meta,
     HTML(''),
-    twitter_card_meta
+    twitter_card_meta,
+    HTML(''),
+    google_scholar_meta
   ))
   meta_html <- as.character(meta_tags)
   meta_file <- tempfile(fileext = "html")
@@ -438,6 +443,103 @@ twitter_card_metadata <- function(site_config, metadata) {
   }
 
   twitter_card_meta
+}
+
+# see https://github.com/scieloorg/opac/files/1136749/Metatags.for.Bibliographic.Metadata.Google.Scholar.-.COMPLETE.pdf
+
+google_scholar_metadata <- function(site_config, metadata) {
+
+  # empty if not citable
+  if (!is_citeable(metadata))
+    return(list())
+
+  google_scholar_meta <- list(
+    HTML("<!--  https://scholar.google.com/intl/en/scholar/inclusion.html#indexing -->"),
+    tags$meta(name = "citation_title", content = metadata$qualified_title)
+  )
+
+  # helper to add properties
+  add_meta <- function(property, content) {
+    if (!is.null(content)) {
+      google_scholar_meta[[length(google_scholar_meta)+1]] <<-
+        tags$meta(name = property, content = content)
+    }
+  }
+
+  add_meta("citation_fulltext_html_url", metadata$url)
+  add_meta("citation_volume", metadata$volume)
+  add_meta("citation_issue", metadata$issue)
+  add_meta("citation_doi", metadata$doi)
+  journal <- metadata$journal
+  journal_title <- if (!is.null(journal$full_title) )
+    journal$full_title
+  else
+    journal$title
+  add_meta("citation_journal_title", journal$title)
+  add_meta("citation_journal_abbrev", journal$abbrev_title)
+  add_meta("citation_issn", journal$issn)
+  add_meta("citation_publisher", journal$publisher)
+  if (!is.null(metadata$creative_commons))
+    add_meta("citation_fulltext_world_readable", "")
+  citation_date <- sprintf("%s/%s/%s",
+    metadata$published_year,
+    metadata$published_month_padded,
+    metadata$published_day_padded
+  )
+  add_meta("citation_online_date", citation_date);
+  add_meta("citation_publication_date", citation_date);
+  for (author in metadata$author) {
+    add_meta("citation_author", author$name)
+    add_meta("citation_author_institution", author$affiliation)
+  }
+
+  # references
+  if (!is.null(metadata$bibliography)) {
+    references <- pandoc_citeproc_convert(metadata$bibliography)
+    for (ref in references)
+      add_meta("citation_reference", citation_reference(ref))
+  }
+
+  google_scholar_meta
+}
+
+citation_reference <- function(ref) {
+
+  # collect fields
+  names <- c()
+  values <- c()
+  add_field <- function(name, value)  {
+    if (!is.null(value)) {
+      names <<- c(names, name)
+      values <<- c(values, value)
+    }
+  }
+  add_ref_field <- function(name) {
+    add_field(name, ref[[name]])
+  }
+  add_ref_field("title")
+  if (!is.null(ref$issued))
+    add_field("publication_date", ref[["issued"]][["date-parts"]][[1]][[1]])
+  add_ref_field("publisher")
+
+  # TODO: arxiv test  here
+  add_field("journal_title", ref[["journal"]])
+  add_ref_field("volume")
+  add_ref_field("number")
+
+  add_field("doi", ref[["DOI"]])
+  add_field("issn", ref[["ISSN"]])
+  if (!is.null(ref[["author"]])) {
+    for (author in ref$author)
+      add_field("author", paste(author[["given"]], author[["family"]]))
+  }
+
+  # prepend 'citation'
+  names <- paste0("citation_", names)
+
+  # combine name & value
+  fields <- paste(names, values, sep = "=")
+  paste(fields, collapse = ";")
 }
 
 
@@ -577,8 +679,7 @@ appendix_creative_commons <- function(site_config, metadata) {
 
 appendix_citation <- function(site_config, metadata) {
 
-  if (!is.null(metadata$date) && !is.null(metadata$author) &&
-      (!is.null(metadata$url) || !is.null(metadata$journal$title))) {
+  if (is_citeable(metadata)) {
 
     short_citation <- function() {
       if (!is.null(metadata$journal$title)) {
@@ -650,6 +751,12 @@ appendix_citation <- function(site_config, metadata) {
     NULL
   }
 
+}
+
+is_citeable <- function(metadata) {
+  !is.null(metadata$date) &&
+    !is.null(metadata$author) &&
+    (!is.null(metadata$url) || !is.null(metadata$journal$title))
 }
 
 knitr_source_hook <- function(x, options) {
