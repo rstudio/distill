@@ -54,6 +54,184 @@
   {"title":"Radix for R Markdown","description":"Scientific and technical writing, native to the web\n","authors":[{"author":"JJ Allaire","authorURL":"https://github.com/jjallaire","affiliation":"RStudio","affiliationURL":"https://www.rstudio.com"},{"author":"Rich Iannone","authorURL":"https://github.com/rich-iannone","affiliation":"RStudio","affiliationURL":"https://www.rstudio.com"},{"author":"Yihui Xie","authorURL":"https://github.com/yihui","affiliation":"RStudio","affiliationURL":"https://www.rstudio.com"}],"publishedDate":"2018-05-04T00:00:00.000-0400","citationText":"Allaire, et al., 2018"}
   </script>
   </d-front-matter>
+  
+  <style type="text/css">
+  
+  .radix-topnav {
+    overflow: hidden;
+    background-color: #455a64;
+    width: 100%;
+    box-sizing: border-box;
+    z-index: 3;
+    color: rgba(255, 255, 255, 0.8);
+    font-size: 16px;
+    font-weight: 300;
+    border-bottom: 1px solid rgba(0, 0, 0, 0.08);
+    box-shadow: 0 1px 6px rgba(0, 0, 0, 0.05);
+  }
+  
+  @media print {
+    .radix-topnav {
+      display: none;
+    }
+  }
+  
+  .radix-topnav .nav-left {
+    float: left;
+  }
+  
+  .radix-topnav .nav-right {
+    float: right;
+    margin-right: 25px;
+  }
+  
+  .radix-topnav a,
+  .radix-topnav .title {
+    float: left;
+    display: block;
+    color: rgba(255, 255, 255, 0.8);
+    text-align: center;
+    padding: 14px 16px;
+    text-decoration: none;
+    font-size: 16px;
+  }
+  
+  .radix-topnav .title {
+    margin-left: 25px;
+    font-size: 20px;
+  }
+  
+  
+  .radix-topnav .nav-icon {
+    display: none;
+  }
+  
+  .nav-dropdown {
+    float: left;
+    overflow: hidden;
+  }
+  
+  .nav-dropdown .nav-dropbtn {
+    font-size: 16px;
+    border: none;
+    outline: none;
+    color: rgba(255, 255, 255, 0.8);
+    padding: 16px 16px;
+    background-color: inherit;
+    font-family: inherit;
+    font-weight: 300;
+    margin: 0;
+    margin-top: 1px;
+    z-index: 2;
+  }
+  
+  .nav-dropdown-content {
+    display: none;
+    position: absolute;
+    background-color: #f9f9f9;
+    min-width: 160px;
+    box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+    z-index: 1;
+    margin-top: 2px;
+  }
+  
+  .nav-dropdown-content a {
+    float: none;
+    color: black;
+    padding: 12px 16px;
+    text-decoration: none;
+    display: block;
+    text-align: left;
+  }
+  
+  .radix-topnav a:hover, .nav-dropdown:hover .nav-dropbtn {
+    color: white;
+  }
+  
+  .nav-dropdown-content a:hover {
+    background-color: #ddd;
+    color: black;
+  }
+  
+  .nav-dropdown:hover .nav-dropdown-content {
+    display: block;
+  }
+  
+  @media screen and (max-width: 768px) {
+    .radix-topnav a, .radix-topnav .nav-dropdown  {display: none;}
+    .radix-topnav a.nav-icon {
+      float: right;
+      display: block;
+    }
+    .radix-topnav .title {
+      margin-left: 0;
+    }
+    .radix-topnav .nav-right {
+      margin-right: 0;
+    }
+  }
+  
+  
+  @media screen and (max-width: 768px) {
+    .radix-topnav.responsive {position: relative;}
+    .radix-topnav.responsive a.nav-icon {
+      position: absolute;
+      right: 0;
+      top: 0;
+    }
+    .radix-topnav.responsive a,
+    .radix-topnav.responsive .nav-dropdown {
+      float: none;
+      display: block;
+      text-align: left;
+    }
+    .radix-topnav.responsive .nav-left,
+    .radix-topnav.responsive .nav-right {
+      width: 100%;
+    }
+    .radix-topnav.responsive .nav-dropdown {float: none;}
+    .radix-topnav.responsive .nav-dropdown-content {position: relative;}
+    .radix-topnav.responsive .nav-dropdown .nav-dropbtn {
+      display: block;
+      width: 100%;
+      text-align: left;
+    }
+  }
+  
+  .radix-site-footer {
+    overflow: hidden;
+    background-color: #455a64;
+    width: 100%;
+    box-sizing: border-box;
+    z-index: 3;
+    color: rgba(255, 255, 255, 0.5);
+    font-size: 16px;
+    font-weight: 300;
+    border-top: 1px solid rgba(0, 0, 0, 0.08);
+    box-shadow: 0 1px 6px rgba(0, 0, 0, 0.05);
+    margin-top: 30px;
+    padding-top: 30px;
+    padding-bottom: 30px;
+    text-align: center;
+  }
+  
+  .radix-site-footer a {
+    color: rgba(255, 255, 255, 0.5);
+    text-decoration: none;
+  }
+  
+  .radix-site-footer a:hover {
+    text-decoration: underline;
+    color: rgba(255, 255, 255, 0.8);
+  }
+  
+  @media print {
+    .radix-site-footer {
+      display: none!important;
+    }
+  }
+  
+  </style>
   <script src="site_libs/jquery-1.11.3/jquery.min.js"></script>
   <link href="site_libs/distill-2.2.21/distill.css" rel="stylesheet" />
   <script src="site_libs/distill-2.2.21/distill.js"></script>
@@ -62,7 +240,6 @@
   <link href="site_libs/pagedtable-1.1/css/pagedtable.css" rel="stylesheet" />
   <script src="site_libs/pagedtable-1.1/js/pagedtable.js"></script>
 
-  <link rel="stylesheet" href="frame.css" type="text/css" />
   <link rel="stylesheet" href="styles.css" type="text/css" />
 
 </head>
@@ -145,13 +322,15 @@
     - publishing/previewing workflow?
     - app.R or ui.R / server.R in the same directory; automagic local run
 
+- smaller code blocks on mobile
+
 - metadata docs
     - reference citr package
 - use pandoc filters more? (RawHtml)
 
+- site generation / menuing
 - index pages (consider using iframes for federated content authoring)
     - https://github.com/wikiti/jquery-paginate
-- site generation / menuing
 
 - distill.pub
     - Use GitHub organizations/repos for URL namespace
