@@ -45,10 +45,9 @@
 <body>
 
 
-<div class="topnav" id="myTopnav">
+<nav class="topnav" id="topnav">
   <span class="title">Radix for R Markdown</span>
   <div class="nav-left">
-   <a href="#news">News</a>
   </div>
   <div class="nav-right">
   <a href="#home">Home</a>
@@ -67,14 +66,14 @@
   <a href="#about">About</a>
   <a href="javascript:void(0);" class="icon" onclick="myFunction()">&#9776;</a>
   </div>
-</div>
+</nav>
 
 
 
 <script type="text/javascript">
 /* Toggle between adding and removing the "responsive" class to topnav when the user clicks on the icon */
 function myFunction() {
-    var x = document.getElementById("myTopnav");
+    var x = document.getElementById("topnav");
     if (x.className === "topnav") {
         x.className += " responsive";
     } else {

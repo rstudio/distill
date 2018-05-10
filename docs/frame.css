@@ -1,38 +1,43 @@
 
 .topnav {
-    overflow: hidden;
-    background-color: #455a64;
-    width: 100%;
-    box-sizing: border-box;
-    z-index: 3;
-    color: rgba(255, 255, 255, 0.8);
-    font-size: 16px;
-    font-weight: 300;
-    border-bottom: 1px solid rgba(0, 0, 0, 0.08);
-    box-shadow: 0 1px 6px rgba(0, 0, 0, 0.05);
+  overflow: hidden;
+  background-color: #455a64;
+  width: 100%;
+  box-sizing: border-box;
+  z-index: 3;
+  color: rgba(255, 255, 255, 0.8);
+  font-size: 16px;
+  font-weight: 300;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.08);
+  box-shadow: 0 1px 6px rgba(0, 0, 0, 0.05);
 }
 
-.nav-left {
+.topnav .title {
+  float: left;
+  margin-left: 25px;
+}
+
+.topnav .nav-left {
   float: left;
 }
 
-.nav-right {
+.topnav .nav-right {
   float: right;
+  margin-right: 25px;
 }
 
-/* Style the links inside the navigation bar */
 .topnav a,
 .topnav .title {
-    float: left;
-    display: block;
-    color: rgba(255, 255, 255, 0.8);
-    text-align: center;
-    padding: 14px 16px;
-    text-decoration: none;
-    font-size: 16px;
+  float: left;
+  display: block;
+  color: rgba(255, 255, 255, 0.8);
+  text-align: center;
+  padding: 14px 16px;
+  text-decoration: none;
+  font-size: 16px;
 }
 
-.topnav .nav-title {
+.topnav .title {
   font-size: 20px;
 }
 
@@ -104,6 +109,12 @@
   .topnav a.icon {
     float: right;
     display: block;
+  }
+  .topnav .title {
+    margin-left: 0;
+  }
+  .topnav .nav-right {
+    margin-right: 0;
   }
 }
 
