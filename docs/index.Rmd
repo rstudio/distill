@@ -27,14 +27,11 @@ bibliography: biblio.bib
     - distillVisualization() top level shinyApp equivalent with distill bootstrap theme 
        - use the less compiler for this
     "full bleed"
+    - ggplot2 theme for distill
     - crosstalk compatibility?
         - distillRow/distillCol
     - publishing/previewing workflow?
     - app.R or ui.R / server.R in the same directory; automagic local run
-
-- ggplot2 theme for distill
-        
-- linked images have underline
 
 - metadata docs
     - reference citr package

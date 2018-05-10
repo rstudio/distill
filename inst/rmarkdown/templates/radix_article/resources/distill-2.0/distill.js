@@ -89,6 +89,9 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
     }
   });
 
+  // prevent underline for linked images
+  $('a > img').parent().css({'border-bottom' : 'none'});
+
   // mark child figures created by R chunks 100% width
   $('.layout-chunk').each(function(i, val) {
     $(this).children('img, .html-widget').css('width', '100%');

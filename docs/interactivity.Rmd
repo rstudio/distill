@@ -88,7 +88,7 @@ This turns your Radix article into an [interactive document](https://rmarkdown.r
 
 Here's an example of a Radix article with interactive Shiny components (<https://jjallaire.shinyapps.io/radix-interactive-document/>):
 
-![](images/shiny.png){width=100% .screenshot}
+[![](images/shiny.png){width=100% .screenshot}](https://jjallaire.shinyapps.io/radix-interactive-document/)
 
 Here's the R code used to create the interactive Shiny components. First the UI (inputs and plot output) are specified in an R code chunk:
 
