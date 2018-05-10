@@ -39,9 +39,9 @@ bibliography: biblio.bib
     - reference citr package
 - use pandoc filters more? (RawHtml)
 
+- site generation / menuing
 - index pages (consider using iframes for federated content authoring)
     - https://github.com/wikiti/jquery-paginate
-- site generation / menuing
 
 - distill.pub
     - Use GitHub organizations/repos for URL namespace
