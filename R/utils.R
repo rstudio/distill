@@ -35,18 +35,18 @@ with_tz <- function(x, tzone = "") {
 
 parse_date <- function(date) {
   if (!is.null(date)) {
-    parsed_date <- parsedate::parse_date(date)
-    if (!is.na(parsed_date))
+    parsed_date <- lubridate::mdy(date, tz = Sys.timezone(), quiet = TRUE)
+    if (lubridate::is.POSIXct(parsed_date))
       date <- parsed_date
   }
   date
 }
 
 date_as_iso_8601 <- function(date, date_only = FALSE) {
-  date <- parsedate::format_iso_8601(date)
   if (date_only)
-    date <- strsplit(date, "T")[[1]][[1]]
-  date
+    format.Date(date, "%Y-%m-%d")
+  else
+    format.Date(date, "%Y-%m-%dT00:00:00.000%z")
 }
 
 is_file_type <- function(file, type) {

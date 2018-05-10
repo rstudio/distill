@@ -38,8 +38,6 @@ bibliography: biblio.bib
   https://github.com/jgm/pandoc-citeproc/blob/master/man/pandoc-citeproc.1.md
 
 - metadata docs
-
-- work out TZ display issues with date
 - use pandoc filters more? (RawHtml)
 
 - index pages (consider using iframes for federated content authoring)
