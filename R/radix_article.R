@@ -672,14 +672,14 @@ after_body_includes <- function(input_dir, site_config, metadata) {
   }
 
   # footer if there is a footer.md
-  footer_md <- file.path(input_dir, "footer.md")
-  if (file.exists(footer_md)) {
+  footer <- file.path(input_dir, "footer.html")
+  if (file.exists(footer)) {
     footer_template <- system.file("rmarkdown/templates/radix_article/resources/footer.html",
                                    package = "radix")
     footer_html <- tempfile(fileext = "html")
     pandoc_convert(
-      input = footer_md,
-      from = "markdown",
+      input = footer,
+      from = "markdown_strict",
       to = "html",
       output = footer_html,
       options = list("--template", pandoc_path_arg(footer_template),

@@ -33,7 +33,7 @@
   
   <script type="application/javascript">
     window.document.addEventListener("DOMContentLoaded", function (event) {
-      $('.radix-site-nav').each(function(i, val) {
+      $('.radix-site-header').each(function(i, val) {
         var topnav = $(this);
         var toggle = topnav.find('.nav-toggle');
         toggle.on('click', function() {
@@ -45,17 +45,22 @@
   
   <style type="text/css">
   
+  /* Theme (user-documented overrideables for nav appearance) */
+  
   .radix-site-nav {
-    overflow: hidden;
-    background-color: #455a64;
-    width: 100%;
-    box-sizing: border-box;
-    z-index: 3;
     color: rgba(255, 255, 255, 0.8);
+    background-color: #455a64;
     font-size: 16px;
     font-weight: 300;
-    border-bottom: 1px solid rgba(0, 0, 0, 0.08);
-    box-shadow: 0 1px 6px rgba(0, 0, 0, 0.05);
+  }
+  
+  .radix-site-nav a {
+    color: inherit;
+    text-decoration: none;
+  }
+  
+  .radix-site-nav a:hover {
+    color: white;
   }
   
   @media print {
@@ -64,33 +69,49 @@
     }
   }
   
-  .radix-site-nav .nav-left {
+  .radix-site-header {
+  
+  }
+  
+  .radix-site-footer {
+  
+  }
+  
+  
+  /* Site Header */
+  
+  .radix-site-header {
+    width: 100%;
+    overflow: hidden;
+    box-sizing: border-box;
+    z-index: 3;
+  }
+  
+  .radix-site-header .nav-left {
     float: left;
   }
   
-  .radix-site-nav .nav-right {
+  .radix-site-header .nav-right {
     float: right;
     margin-right: 25px;
   }
   
-  .radix-site-nav a,
-  .radix-site-nav .title {
+  .radix-site-header a,
+  .radix-site-header .title {
     float: left;
     display: block;
-    color: rgba(255, 255, 255, 0.8);
     text-align: center;
     padding: 14px 16px;
-    text-decoration: none;
     font-size: 16px;
   }
   
-  .radix-site-nav .title {
+  .radix-site-header .title {
     margin-left: 25px;
     font-size: 20px;
   }
   
   
-  .radix-site-nav .nav-toggle {
+  .radix-site-header .nav-toggle {
     display: none;
   }
   
@@ -132,7 +153,7 @@
     text-align: left;
   }
   
-  .radix-site-nav a:hover, .nav-dropdown:hover .nav-dropbtn {
+  .nav-dropdown:hover .nav-dropbtn {
     color: white;
   }
   
@@ -146,75 +167,57 @@
   }
   
   @media screen and (max-width: 768px) {
-    .radix-site-nav a, .radix-site-nav .nav-dropdown  {display: none;}
-    .radix-site-nav a.nav-toggle {
+    .radix-site-header a, .radix-site-header .nav-dropdown  {display: none;}
+    .radix-site-header a.nav-toggle {
       float: right;
       display: block;
     }
-    .radix-site-nav .title {
+    .radix-site-header .title {
       margin-left: 0;
     }
-    .radix-site-nav .nav-right {
+    .radix-site-header .nav-right {
       margin-right: 0;
     }
   }
   
   
   @media screen and (max-width: 768px) {
-    .radix-site-nav.responsive {position: relative;}
-    .radix-site-nav.responsive a.nav-toggle {
+    .radix-site-header.responsive {position: relative;}
+    .radix-site-header.responsive a.nav-toggle {
       position: absolute;
       right: 0;
       top: 0;
     }
-    .radix-site-nav.responsive a,
-    .radix-site-nav.responsive .nav-dropdown {
+    .radix-site-header.responsive a,
+    .radix-site-header.responsive .nav-dropdown {
       float: none;
       display: block;
       text-align: left;
     }
-    .radix-site-nav.responsive .nav-left,
-    .radix-site-nav.responsive .nav-right {
+    .radix-site-header.responsive .nav-left,
+    .radix-site-header.responsive .nav-right {
       width: 100%;
     }
-    .radix-site-nav.responsive .nav-dropdown {float: none;}
-    .radix-site-nav.responsive .nav-dropdown-content {position: relative;}
-    .radix-site-nav.responsive .nav-dropdown .nav-dropbtn {
+    .radix-site-header.responsive .nav-dropdown {float: none;}
+    .radix-site-header.responsive .nav-dropdown-content {position: relative;}
+    .radix-site-header.responsive .nav-dropdown .nav-dropbtn {
       display: block;
       width: 100%;
       text-align: left;
     }
   }
   
+  /* Site Footer */
+  
   .radix-site-footer {
-    overflow: hidden;
-    background-color: #455a64;
     width: 100%;
+    overflow: hidden;
     box-sizing: border-box;
     z-index: 3;
-    color: rgba(255, 255, 255, 0.5);
-    font-size: 16px;
-    font-weight: 300;
     margin-top: 30px;
     padding-top: 30px;
     padding-bottom: 30px;
     text-align: center;
-  }
-  
-  .radix-site-footer a {
-    color: rgba(255, 255, 255, 0.5);
-    text-decoration: none;
-  }
-  
-  .radix-site-footer a:hover {
-    text-decoration: underline;
-    color: rgba(255, 255, 255, 0.8);
-  }
-  
-  @media print {
-    .radix-site-footer {
-      display: none!important;
-    }
   }
   
   </style>
@@ -247,7 +250,7 @@
 
 <body>
 
-<nav class="radix-site-nav">
+<nav class="radix-site-nav radix-site-header">
 <div class="nav-left">
 <span class="title">Radix for R Markdown</span>
 </div>
@@ -361,13 +364,9 @@ output$eruptions &lt;- renderPlot({
 <h3 id="reuse">Reuse</h3>
 <p>Text and figures are licensed under Creative Commons Attribution <a rel="license" href="https://creativecommons.org/licenses/by/4.0/">CC-BY 4.0</a>. Source code is available at <a rel="license" href="https://github.com/rstudio/radix">https://github.com/rstudio/radix</a>, unless otherwise noted. The figures that have been reused from other sources don’t fall under this license and can be recognized by a note in their caption: "Figure from ...".</p>
 </div>
-<div class="radix-site-footer">
-  <p>
-  © Copyright 2018 <a href="https://github.com/distillpub/template/blob/master/AUTHORS">The Distill Template Authors</a> and <a href="https://www.rstudio.com">RStudio, Inc.</a>
-  </p>
-  <p>
-  Software licensed under the <a href="https://www.apache.org/licenses/LICENSE-2.0">Apache License, v2.0</a>
-  </p>
+<div class="radix-site-nav radix-site-footer">
+<p>© Copyright 2018 <a href="https://github.com/distillpub/template/blob/master/AUTHORS">The Distill Template Authors</a> and <a href="https://www.rstudio.com">RStudio, Inc.</a>.</p>
+<p>Software licensed under the <a href="https://www.apache.org/licenses/LICENSE-2.0">Apache License, v2.0</a>.</p>
 </div>
 
 <!-- dynamically load mathjax for compatibility with self-contained -->
