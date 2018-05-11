@@ -71,7 +71,6 @@
   <style type="text/css">
   
   .radix-topnav {
-    overflow: hidden;
     background-color: #455a64;
     width: 100%;
     box-sizing: border-box;
@@ -90,18 +89,17 @@
   }
   
   .radix-topnav .nav-left {
-    float: left;
+    display: inline-block;
   }
   
   .radix-topnav .nav-right {
-    float: right;
     margin-right: 25px;
+    float: right;
   }
   
   .radix-topnav a,
   .radix-topnav .title {
-    float: left;
-    display: block;
+    display: inline-block;
     color: rgba(255, 255, 255, 0.8);
     text-align: center;
     padding: 14px 16px;
@@ -120,8 +118,8 @@
   }
   
   .nav-dropdown {
-    float: left;
-    overflow: hidden;
+    display: inline-block;
+    position: relative;
   }
   
   .nav-dropdown .nav-dropbtn {
@@ -149,7 +147,6 @@
   }
   
   .nav-dropdown-content a {
-    float: none;
     color: black;
     padding: 12px 16px;
     text-decoration: none;
@@ -168,6 +165,10 @@
   
   .nav-dropdown:hover .nav-dropdown-content {
     display: block;
+  }
+  
+  .nav-right .nav-dropdown-content {
+    margin-left: -35%;
   }
   
   @media screen and (max-width: 768px) {
@@ -194,7 +195,6 @@
     }
     .radix-topnav.responsive a,
     .radix-topnav.responsive .nav-dropdown {
-      float: none;
       display: block;
       text-align: left;
     }
