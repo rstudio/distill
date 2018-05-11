@@ -51,13 +51,12 @@
 
 .radix-site-header {
   width: 100%;
-  overflow: hidden;
   box-sizing: border-box;
   z-index: 3;
 }
 
 .radix-site-header .nav-left {
-  float: left;
+  display: inline-block;
 }
 
 .radix-site-header .nav-right {
@@ -67,7 +66,7 @@
 
 .radix-site-header a,
 .radix-site-header .title {
-  float: left;
+  display: inline-block;
   display: block;
   text-align: center;
   padding: 14px 16px;
@@ -85,8 +84,8 @@
 }
 
 .nav-dropdown {
-  float: left;
-  overflow: hidden;
+  display: inline-block;
+  position: relative;
 }
 
 .nav-dropdown .nav-dropbtn {
@@ -114,7 +113,6 @@
 }
 
 .nav-dropdown-content a {
-  float: none;
   color: black;
   padding: 12px 16px;
   text-decoration: none;
@@ -135,6 +133,10 @@
   display: block;
 }
 
+.nav-right .nav-dropdown-content {
+  margin-left: -40%;
+}
+
 @media screen and (max-width: 768px) {
   .radix-site-header a, .radix-site-header .nav-dropdown  {display: none;}
   .radix-site-header a.nav-toggle {
@@ -146,6 +148,12 @@
   }
   .radix-site-header .nav-right {
     margin-right: 0;
+  }
+  .radix-site-header {
+    overflow: hidden;
+  }
+  .nav-right .nav-dropdown-content {
+    margin-left: 0;
   }
 }
 
@@ -159,7 +167,6 @@
   }
   .radix-site-header.responsive a,
   .radix-site-header.responsive .nav-dropdown {
-    float: none;
     display: block;
     text-align: left;
   }
