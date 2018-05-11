@@ -33,7 +33,7 @@ bibliography: biblio.bib
     - publishing/previewing workflow?
     - app.R or ui.R / server.R in the same directory; automagic local run
 
-- fix dropdown menu alignment
+
 - favicon / icon in navbar
 
 - smaller code blocks on mobile
