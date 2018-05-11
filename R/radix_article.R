@@ -671,9 +671,9 @@ after_body_includes <- function(input_dir, site_config, metadata) {
     after_body <- c(after_body, bibliography_file)
   }
 
-  # footer if there is a footer.md
+  # footer if we have a site navbar there is a footer.html
   footer <- file.path(input_dir, "footer.html")
-  if (file.exists(footer)) {
+  if (!is.null(site_config$navbar) && file.exists(footer)) {
     footer_template <- system.file("rmarkdown/templates/radix_article/resources/footer.html",
                                    package = "radix")
     footer_html <- tempfile(fileext = "html")

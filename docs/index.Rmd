@@ -35,12 +35,12 @@ bibliography: biblio.bib
 
 - fix dropdown menu alignment
 - favicon / icon in navbar
-- footer with markdown (and auto-enclose when navbar)
 
 - smaller code blocks on mobile
 
 - metadata docs
     - reference citr package
+- site docs
 - use pandoc filters more? (RawHtml)
 
 - index pages
