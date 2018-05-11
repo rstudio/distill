@@ -18,7 +18,5 @@ navbar:
 output:
   radix::radix_article:
     css: styles.css
-    include:
-      after_body: footer.html
 
 

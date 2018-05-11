@@ -1,0 +1,7 @@
+
+© Copyright 2018 [The Distill Template Authors](https://github.com/distillpub/template/blob/master/AUTHORS) and [RStudio, Inc.](https://www.rstudio.com).
+
+Software licensed under the [Apache License, v2.0](https://www.apache.org/licenses/LICENSE-2.0).
+
+
+

@@ -93,8 +93,9 @@ radix_article <- function(fig_width = 6,
       site_config <- list()
 
     # transform site_config and metadata values
-    site_config <- transform_site_config(input_as_dir(input_file), site_config)
-    metadata <- transform_metadata(input_as_dir(input_file), site_config, metadata)
+    input_dir <- input_as_dir(input_file)
+    site_config <- transform_site_config(input_dir, site_config)
+    metadata <- transform_metadata(input_dir, site_config, metadata)
 
     # provide title-prefix  and qualified title if specified in site and different from title
     if (!is.null(site_config$title) && !identical(site_config$title, metadata$title)) {
@@ -104,15 +105,26 @@ radix_article <- function(fig_width = 6,
       metadata$qualified_title <- metadata$title
     }
 
-    # metadata
-    args <- c(args, pandoc_include_args(
-      in_header = in_header_includes(site_config, metadata),
-      before_body = before_body_includes(site_config, metadata),
-      after_body = after_body_includes(site_config, metadata)
-    ))
+    # includes
 
-    # user includes after our includes
-    args <- c(args, includes_to_pandoc_args(includes))
+    # header includes: radix then user
+    in_header <- c(in_header_includes(input_dir, site_config, metadata),
+                   includes$in_header)
+
+    # before body includes: radix then user
+    before_body <- c(before_body_includes(input_dir, site_config, metadata),
+                     includes$before_body)
+
+    # after body includes: user then radix
+    after_body <- c(includes$after_body,
+                    after_body_includes(input_dir, site_config, metadata))
+
+    # args for includes
+    args <- c(args, pandoc_include_args(
+      in_header = in_header,
+      before_body = before_body,
+      after_body = after_body
+    ))
 
     # return args
     args
@@ -289,7 +301,7 @@ transform_metadata <- function(input_dir, site_config, metadata) {
   metadata
 }
 
-in_header_includes <- function(site_config, metadata) {
+in_header_includes <- function(input_dir, site_config, metadata) {
 
   in_header <- c()
 
@@ -576,7 +588,7 @@ citation_reference <- function(ref) {
 }
 
 
-before_body_includes <- function(site_config, metadata) {
+before_body_includes <- function(input_dir, site_config, metadata) {
 
   before_body <- c()
 
@@ -627,7 +639,7 @@ before_body_includes <- function(site_config, metadata) {
   before_body
 }
 
-after_body_includes <- function(site_config, metadata) {
+after_body_includes <- function(input_dir, site_config, metadata) {
 
   after_body <- c()
 
@@ -657,6 +669,23 @@ after_body_includes <- function(site_config, metadata) {
       '</d-bibliography>'
     ), con = bibliography_file)
     after_body <- c(after_body, bibliography_file)
+  }
+
+  # footer if there is a footer.md
+  footer_md <- file.path(input_dir, "footer.md")
+  if (file.exists(footer_md)) {
+    footer_template <- system.file("rmarkdown/templates/radix_article/resources/footer.html",
+                                   package = "radix")
+    footer_html <- tempfile(fileext = "html")
+    pandoc_convert(
+      input = footer_md,
+      from = "markdown",
+      to = "html",
+      output = footer_html,
+      options = list("--template", pandoc_path_arg(footer_template),
+                     "--metadata", "pagetitle:footer")
+    )
+    after_body <- c(after_body, footer_html)
   }
 
   after_body

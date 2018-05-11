@@ -34,8 +34,7 @@ bibliography: biblio.bib
     - app.R or ui.R / server.R in the same directory; automagic local run
 
 - fix dropdown menu alignment
-- css theming for navbar
-- icon in navbar
+- favicon / icon in navbar
 - footer with markdown (and auto-enclose when navbar)
 
 - smaller code blocks on mobile
