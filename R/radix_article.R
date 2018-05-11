@@ -612,7 +612,7 @@ before_body_includes <- function(site_config, metadata) {
       a(href = "javascript:void(0);", class = "nav-toggle", HTML("&#9776;"))
     )
 
-    navbar <- tag("nav", list(class = "radix-site-nav",
+    navbar <- tag("nav", list(class = "radix-site-nav radix-site-header",
       left_nav,
       right_nav
     ))
