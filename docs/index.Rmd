@@ -33,7 +33,10 @@ bibliography: biblio.bib
     - publishing/previewing workflow?
     - app.R or ui.R / server.R in the same directory; automagic local run
 
-- site generation / menuing
+- fix dropdown menu alignment
+- css theming for navbar
+- icon in navbar
+- footer with markdown (and auto-enclose when navbar)
 
 - smaller code blocks on mobile
 

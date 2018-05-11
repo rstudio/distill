@@ -33,7 +33,7 @@
   
   <script type="application/javascript">
     window.document.addEventListener("DOMContentLoaded", function (event) {
-      $('.radix-topnav').each(function(i, val) {
+      $('.radix-site-nav').each(function(i, val) {
         var topnav = $(this);
         var toggle = topnav.find('.nav-toggle');
         toggle.on('click', function() {
@@ -45,7 +45,7 @@
   
   <style type="text/css">
   
-  .radix-topnav {
+  .radix-site-nav {
     overflow: hidden;
     background-color: #455a64;
     width: 100%;
@@ -59,22 +59,22 @@
   }
   
   @media print {
-    .radix-topnav {
+    .radix-site-nav {
       display: none;
     }
   }
   
-  .radix-topnav .nav-left {
+  .radix-site-nav .nav-left {
     float: left;
   }
   
-  .radix-topnav .nav-right {
+  .radix-site-nav .nav-right {
     float: right;
     margin-right: 25px;
   }
   
-  .radix-topnav a,
-  .radix-topnav .title {
+  .radix-site-nav a,
+  .radix-site-nav .title {
     float: left;
     display: block;
     color: rgba(255, 255, 255, 0.8);
@@ -84,13 +84,13 @@
     font-size: 16px;
   }
   
-  .radix-topnav .title {
+  .radix-site-nav .title {
     margin-left: 25px;
     font-size: 20px;
   }
   
   
-  .radix-topnav .nav-toggle {
+  .radix-site-nav .nav-toggle {
     display: none;
   }
   
@@ -132,7 +132,7 @@
     text-align: left;
   }
   
-  .radix-topnav a:hover, .nav-dropdown:hover .nav-dropbtn {
+  .radix-site-nav a:hover, .nav-dropdown:hover .nav-dropbtn {
     color: white;
   }
   
@@ -146,40 +146,40 @@
   }
   
   @media screen and (max-width: 768px) {
-    .radix-topnav a, .radix-topnav .nav-dropdown  {display: none;}
-    .radix-topnav a.nav-toggle {
+    .radix-site-nav a, .radix-site-nav .nav-dropdown  {display: none;}
+    .radix-site-nav a.nav-toggle {
       float: right;
       display: block;
     }
-    .radix-topnav .title {
+    .radix-site-nav .title {
       margin-left: 0;
     }
-    .radix-topnav .nav-right {
+    .radix-site-nav .nav-right {
       margin-right: 0;
     }
   }
   
   
   @media screen and (max-width: 768px) {
-    .radix-topnav.responsive {position: relative;}
-    .radix-topnav.responsive a.nav-toggle {
+    .radix-site-nav.responsive {position: relative;}
+    .radix-site-nav.responsive a.nav-toggle {
       position: absolute;
       right: 0;
       top: 0;
     }
-    .radix-topnav.responsive a,
-    .radix-topnav.responsive .nav-dropdown {
+    .radix-site-nav.responsive a,
+    .radix-site-nav.responsive .nav-dropdown {
       float: none;
       display: block;
       text-align: left;
     }
-    .radix-topnav.responsive .nav-left,
-    .radix-topnav.responsive .nav-right {
+    .radix-site-nav.responsive .nav-left,
+    .radix-site-nav.responsive .nav-right {
       width: 100%;
     }
-    .radix-topnav.responsive .nav-dropdown {float: none;}
-    .radix-topnav.responsive .nav-dropdown-content {position: relative;}
-    .radix-topnav.responsive .nav-dropdown .nav-dropbtn {
+    .radix-site-nav.responsive .nav-dropdown {float: none;}
+    .radix-site-nav.responsive .nav-dropdown-content {position: relative;}
+    .radix-site-nav.responsive .nav-dropdown .nav-dropbtn {
       display: block;
       width: 100%;
       text-align: left;
@@ -195,8 +195,6 @@
     color: rgba(255, 255, 255, 0.5);
     font-size: 16px;
     font-weight: 300;
-    border-top: 1px solid rgba(0, 0, 0, 0.08);
-    box-shadow: 0 1px 6px rgba(0, 0, 0, 0.05);
     margin-top: 30px;
     padding-top: 30px;
     padding-bottom: 30px;
@@ -240,30 +238,18 @@
 
 <body>
 
-
-<nav class="radix-topnav">
-  <div class="nav-left">
-    <span class="title">Radix for R Markdown</span>
-  </div>
-  <div class="nav-right">
-    <a href="index.html">Basics</a>
-    <a href="figures.html">Figures</a>
-    <a href="tables.html">Tables</a>
-    <a href="diagrams.html">Diagrams</a>
-    <a href="interactivity.html">Interactivity</a>
-    <!--
-    <div class="nav-dropdown">
-      <button class="nav-dropbtn">Dropdown <span class="down-arrow">&#x25BE;</span>
-      </button>
-      <div class="nav-dropdown-content">
-        <a href="#">Link 1</a>
-        <a href="#">Link 2</a>
-        <a href="#">Link 3</a>
-      </div>
-    </div>
-    -->
-    <a href="javascript:void(0);" class="nav-toggle">&#9776;</a>
-  </div>
+<nav class="radix-site-nav">
+<div class="nav-left">
+<span class="title">Radix for R Markdown</span>
+</div>
+<div class="nav-right">
+<a href="index.html">Basics</a>
+<a href="figures.html">Figures</a>
+<a href="tables.html">Tables</a>
+<a href="diagrams.html">Diagrams</a>
+<a href="interactivity.html">Interactivity</a>
+<a href="javascript:void(0);" class="nav-toggle">&#9776;</a>
+</div>
 </nav>
 
 <d-title>
@@ -346,6 +332,12 @@ leaflet() %&gt;%
 <d-appendix>
 </d-appendix>
 
+<div class="appendix-bottom">
+<h3 id="updates-and-corrections">Updates and Corrections</h3>
+<p>If you see mistakes or want to suggest changes, please <a href="https://github.com/rstudio/radix/issues/new">create an issue</a> on the source repository.</p>
+<h3 id="reuse">Reuse</h3>
+<p>Text and figures are licensed under Creative Commons Attribution <a rel="license" href="https://creativecommons.org/licenses/by/4.0/">CC-BY 4.0</a>. Source code is available at <a rel="license" href="https://github.com/rstudio/radix">https://github.com/rstudio/radix</a>, unless otherwise noted. The figures that have been reused from other sources don’t fall under this license and can be recognized by a note in their caption: "Figure from ...".</p>
+</div>
 <div class="radix-site-footer">
   <p>
   © Copyright 2018 <a href="https://github.com/distillpub/template/blob/master/AUTHORS">The Distill Template Authors</a> and <a href="https://www.rstudio.com">RStudio, Inc.</a>
@@ -353,12 +345,6 @@ leaflet() %&gt;%
   <p>
   Software licensed under the <a href="https://www.apache.org/licenses/LICENSE-2.0">Apache License, v2.0</a>
   </p>
-</div>
-<div class="appendix-bottom">
-<h3 id="updates-and-corrections">Updates and Corrections</h3>
-<p>If you see mistakes or want to suggest changes, please <a href="https://github.com/rstudio/radix/issues/new">create an issue</a> on the source repository.</p>
-<h3 id="reuse">Reuse</h3>
-<p>Text and figures are licensed under Creative Commons Attribution <a rel="license" href="https://creativecommons.org/licenses/by/4.0/">CC-BY 4.0</a>. Source code is available at <a rel="license" href="https://github.com/rstudio/radix">https://github.com/rstudio/radix</a>, unless otherwise noted. The figures that have been reused from other sources don’t fall under this license and can be recognized by a note in their caption: "Figure from ...".</p>
 </div>
 
 <!-- dynamically load mathjax for compatibility with self-contained -->

@@ -48,9 +48,6 @@ radix_article <- function(fig_width = 6,
   for (css_file in css)
     args <- c(args, "--css", pandoc_path_arg(css_file))
 
-  # content includes
-  args <- c(args, includes_to_pandoc_args(includes))
-
   # add template
   args <- c(args, "--template",
             pandoc_path_arg(resource("default.html")))
@@ -95,11 +92,8 @@ radix_article <- function(fig_width = 6,
     if (is.null(site_config))
       site_config <- list()
 
-    # propagate navbar$title to global title
-    if (is.null(site_config$title) && !is.null(site_config$navbar))
-      site_config$title <- site_config$navbar$title
-
-    # transform metadata values
+    # transform site_config and metadata values
+    site_config <- transform_site_config(input_as_dir(input_file), site_config)
     metadata <- transform_metadata(input_as_dir(input_file), site_config, metadata)
 
     # provide title-prefix  and qualified title if specified in site and different from title
@@ -117,6 +111,10 @@ radix_article <- function(fig_width = 6,
       after_body = after_body_includes(site_config, metadata)
     ))
 
+    # user includes after our includes
+    args <- c(args, includes_to_pandoc_args(includes))
+
+    # return args
     args
   }
 
@@ -153,6 +151,25 @@ html_dependency_distill <- function() {
     script = c("distill.js", "template.v2.js", "distill-post.js"),
     stylesheet = "distill.css"
   )
+}
+
+transform_site_config <- function(input_dir, site_config) {
+
+  # propagate navbar title to main title
+  if (is.null(site_config$title) && !is.null(site_config$navbar))
+    site_config$title <- site_config$navbar$title
+
+  # propagate main title to navbar title
+  if (!is.null(site_config$title) && !is.null(site_config$navbar)
+      && is.null(site_config$navbar$title)) {
+    site_config$navbar$title <- site_config$title
+  }
+
+  # validate that we have a title
+  if (is.null(site_config$title))
+    stop("_site.yml must include a title field", call. = FALSE)
+
+  site_config
 }
 
 transform_metadata <- function(input_dir, site_config, metadata) {
@@ -563,9 +580,52 @@ before_body_includes <- function(site_config, metadata) {
 
   before_body <- c()
 
+  # if we have a navbar then generate it
+  if (!is.null(site_config[["navbar"]])) {
+
+    build_menu <- function(menu) {
+      item_to_menu <- function(item) a(href = item[["href"]], item[["text"]])
+      lapply(menu, function(item) {
+        if (is.null(item[["menu"]])) {
+          item_to_menu(item)
+        } else {
+          menu <- item[["menu"]]
+          div(class = "nav-dropdown",
+            htmltools::tags$button(class = "nav-dropbtn",
+              item[["text"]],
+              " ",
+              span(class = "down-arrow", HTML("&#x25BE;"))
+            ),
+            div(class = "nav-dropdown-content", lapply(menu, item_to_menu))
+          )
+        }
+      })
+    }
+
+    left_nav <- div(class = "nav-left",
+      span(class = "title", site_config$title),
+      build_menu(site_config[["navbar"]][["left"]])
+    )
+
+    right_nav <- div(class = "nav-right",
+      build_menu(site_config[["navbar"]][["right"]]),
+      a(href = "javascript:void(0);", class = "nav-toggle", HTML("&#9776;"))
+    )
+
+    navbar <- tag("nav", list(class = "radix-site-nav",
+      left_nav,
+      right_nav
+    ))
+
+    navbar_html <- renderTags(navbar, indent = FALSE)$html
+    navbar_file <- tempfile(fileext = "html")
+    writeLines(navbar_html, navbar_file)
+    before_body <- c(before_body, navbar_file)
+
+  }
+
   before_body
 }
-
 
 after_body_includes <- function(site_config, metadata) {
 

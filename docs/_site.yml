@@ -1,14 +1,24 @@
 name: "rmarkdown-radix"
-navbar:
-  title: "Radix for R Markdown"
 repository_url: https://github.com/rstudio/radix
 creative_commons: CC-BY
 output_dir: "."
+navbar:
+  title: "Radix for R Markdown"
+  right:
+    - text: "Basics"
+      href: index.html
+    - text: "Figures"
+      href: figures.html
+    - text: "Tables"
+      href: tables.html
+    - text: "Diagrams"
+      href: diagrams.html
+    - text: "Interactivity"
+      href: interactivity.html
 output:
   radix::radix_article:
     css: styles.css
     include:
-      before_body: header.html
       after_body: footer.html
 
 
