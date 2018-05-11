@@ -16,7 +16,7 @@ author:
     affiliation: RStudio
     affiliation_url: https://www.rstudio.com
 date: May 4, 2018
-url: https://rstudio.github.io/radix
+citation_url: https://rstudio.github.io/radix
 bibliography: biblio.bib
 ---
 
@@ -33,14 +33,15 @@ bibliography: biblio.bib
     - publishing/previewing workflow?
     - app.R or ui.R / server.R in the same directory; automagic local run
 
+- site generation / menuing
+
 - smaller code blocks on mobile
 
 - metadata docs
     - reference citr package
 - use pandoc filters more? (RawHtml)
 
-- site generation / menuing
-- index pages (consider using iframes for federated content authoring)
+- index pages
     - https://github.com/wikiti/jquery-paginate
 
 - distill.pub

@@ -163,9 +163,13 @@ transform_metadata <- function(input_dir, site_config, metadata) {
 
   # allow site level metadata to propagate
   site_metadata <- c("repository_url", "compare_updates_url", "creative_commons",
-                     "license_url", "preview", "slug", "url", "journal")
+                     "license_url", "preview", "slug", "citation_url", "journal")
   for (name in site_metadata)
     metadata[[name]] <- merge_lists(site_config[[name]], metadata[[name]])
+
+  # propagate citation_url to canonical_url
+  if (!is.null(metadata[["citation_url"]]) && is.null(metadata[["canonical_url"]]))
+    metadata$canonical_url <- metadata$citation_url
 
   # parse dates
   metadata$date <- parse_date(metadata$date)
@@ -282,10 +286,10 @@ in_header_includes <- function(site_config, metadata) {
 
   # links
   links <- list()
-  if (!is.null(metadata$url)) {
+  if (!is.null(metadata$canonical_url)) {
     links[[1]] <- tags$link(
-      rel = "cannonical",
-      href = metadata$url
+      rel = "canonical",
+      href = metadata$canonical_url
     )
   }
   if (!is.null(metadata$license_url)) {
@@ -396,8 +400,8 @@ open_graph_metadata <- function(site_config, metadata) {
     add_open_graph_meta("og:description", metadata$description)
 
   # cannonical url
-  if (!is.null(metadata$url))
-    add_open_graph_meta("og:url", metadata$url)
+  if (!is.null(metadata$canonical_url))
+    add_open_graph_meta("og:url", metadata$canonical_url)
 
   # preivew/thumbnail url
   if (!is.null(metadata$preview))
@@ -441,8 +445,8 @@ twitter_card_metadata <- function(site_config, metadata) {
     add_twitter_card_meta("twitter:description", metadata$description)
 
   # cannonical url
-  if (!is.null(metadata$url))
-    add_twitter_card_meta("twitter:url", metadata$url)
+  if (!is.null(metadata$canonical_url))
+    add_twitter_card_meta("twitter:url", metadata$canonical_url)
 
   # preview image
   if (!is.null(metadata$preview)) {
@@ -478,7 +482,7 @@ google_scholar_metadata <- function(site_config, metadata) {
     }
   }
 
-  add_meta("citation_fulltext_html_url", metadata$url)
+  add_meta("citation_fulltext_html_url", metadata$citation_url)
   add_meta("citation_volume", metadata$volume)
   add_meta("citation_issue", metadata$issue)
   add_meta("citation_doi", metadata$doi)
@@ -707,7 +711,7 @@ appendix_citation <- function(site_config, metadata) {
                 metadata$published_month,
                 metadata$published_day,
                 metadata$qualified_title,
-                metadata$url)
+                metadata$citation_url)
       }
     }
 
@@ -715,9 +719,9 @@ appendix_citation <- function(site_config, metadata) {
       if (!is.null(metadata$journal$title)) {
 
         suffix <- c()
-        sep <- ifelse(!is.null(metadata$url) && !is.null(metadata$doi), ",", "")
-        if (!is.null(metadata$url))
-          suffix <- c(suffix, sprintf(',\n  note = {%s}', metadata$url))
+        sep <- ifelse(!is.null(metadata$citation_url) && !is.null(metadata$doi), ",", "")
+        if (!is.null(metadata$citation_url))
+          suffix <- c(suffix, sprintf(',\n  note = {%s}', metadata$citation_url))
         if (!is.null(metadata$doi))
           suffix <- c(suffix, sprintf(',\n  doi = {%s}', metadata$doi))
         suffix <- paste0(c(suffix, '\n}'), collapse = '')
@@ -745,7 +749,7 @@ appendix_citation <- function(site_config, metadata) {
                 metadata$slug,
                 metadata$bibtex_authors,
                 metadata$qualified_title,
-                metadata$url,
+                metadata$citation_url,
                 metadata$published_year
         )
       }
@@ -768,7 +772,7 @@ appendix_citation <- function(site_config, metadata) {
 is_citeable <- function(metadata) {
   !is.null(metadata$date) &&
     !is.null(metadata$author) &&
-    (!is.null(metadata$url) || !is.null(metadata$journal$title))
+    (!is.null(metadata$citation_url) || !is.null(metadata$journal$title))
 }
 
 knitr_source_hook <- function(x, options) {
