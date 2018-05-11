@@ -4,26 +4,13 @@ creative_commons: CC-BY
 output_dir: "."
 navbar:
   title: "Radix for R Markdown"
-  left:
+  right:
     - text: "Basics"
       href: index.html
-    - text: "Dropdown"
-      menu:
-        - text: Link1
-          href: link1.html
-        - text: Link2
-          href: link2.html
     - text: "Figures"
       href: figures.html
-  right:
     - text: "Tables"
       href: tables.html
-    - text: "Dropdown"
-      menu:
-        - text: Link1
-          href: link1.html
-        - text: Link2
-          href: link2.html
     - text: "Diagrams"
       href: diagrams.html
     - text: "Interactivity"
