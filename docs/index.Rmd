@@ -36,15 +36,26 @@ bibliography: biblio.bib
 
 - favicon / icon in navbar
 
+- try out table of contents
+
 - smaller code blocks on mobile
+
+- use pandoc filters more? (RawHtml)
 
 - metadata docs
     - reference citr package
 - site docs
-- use pandoc filters more? (RawHtml)
 
-- index pages
+
+Home Figures Tables Citations Shiny Examples Publish \/  <ghicon>
+                                              Publishing an Article
+                                              Publishing a Website
+
+
+- articles/index pages
     - https://github.com/wikiti/jquery-paginate
+
+
 
 - distill.pub
     - Use GitHub organizations/repos for URL namespace
