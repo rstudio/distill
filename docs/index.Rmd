@@ -50,6 +50,7 @@ bibliography: biblio.bib
 Home Figures Tables Citations Shiny Examples Publish \/  <ghicon>
                                               Publishing an Article
                                               Publishing a Website
+                                              Blogs and Journals
 
 
 - articles/index pages
