@@ -84,6 +84,13 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
       } else {
         pre.replaceWith(dt_code);
       }
+
+      // inject styles (can't do this with a global stylesheet b/c a shadow root is used)
+      var style = document.createElement('style');
+      style.innerHTML = 'pre code { padding-left: 0; font-size: 12px; border-left: none; } ' +
+                         '@media(min-width: 768px) { pre code { padding-left: 18px; border-left: 2px solid rgba(0,0,0,0.1); font-size: 14px; } }';
+      dt_code.get(0).shadowRoot.appendChild( style );
+
     } else {
       code.addClass('text-output').unwrap().changeElementType('pre');
     }
