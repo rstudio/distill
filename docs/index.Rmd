@@ -34,9 +34,6 @@ bibliography: biblio.bib
     - app.R or ui.R / server.R in the same directory; automagic local run
 
 
-
-- links for logo and title
-
 - try out table of contents
 
 - use pandoc filters more? (RawHtml)

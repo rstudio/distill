@@ -5,7 +5,9 @@ repository_url: https://github.com/rstudio/radix
 creative_commons: CC-BY
 output_dir: "."
 navbar:
-  logo: images/logo.png
+  logo:
+    image: images/logo.png
+    href: https://www.rstudio.com
   right:
     - text: "Basics"
       href: index.html

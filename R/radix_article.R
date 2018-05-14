@@ -644,12 +644,17 @@ before_body_includes <- function(input_dir, site_config, metadata) {
     }
 
     logo <- site_config[["navbar"]][["logo"]]
-    if (!is.null(logo))
-      logo <- span(class = "logo", img(src = logo))
+    if (!is.null(logo)) {
+      if (is.character(logo)) {
+        logo <- span(class = "logo", img(src = logo))
+      } else if (is.list(logo)) {
+        logo <- a(class = "logo", href = logo$href, img(src=logo$image))
+      }
+    }
 
     left_nav <- div(class = "nav-left",
       logo,
-      span(class = "title", site_config$title),
+      a(href = "index.html", class = "title", site_config$title),
       build_menu(site_config[["navbar"]][["left"]])
     )
 

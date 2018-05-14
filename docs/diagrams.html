@@ -135,6 +135,10 @@
     font-size: 20px;
   }
   
+  .radix-site-header .logo {
+    padding: 0;
+  }
+  
   .radix-site-header .logo img {
     display: none;
     max-height: 20px;
@@ -274,6 +278,12 @@
     padding-top: 6rem;
   }
   
+  @media print {
+    d-title {
+      padding-top: 4rem;
+    }
+  }
+  
   .headroom {
     position: fixed;
     top: 0;
@@ -321,10 +331,10 @@
 <header class="header header--fixed" role="banner">
 <nav class="radix-site-nav radix-site-header">
 <div class="nav-left">
-<span class="logo">
+<a class="logo" href="https://www.rstudio.com">
 <img src="images/logo.png"/>
-</span>
-<span class="title">Radix for R Markdown</span>
+</a>
+<a href="index.html" class="title">Radix for R Markdown</a>
 </div>
 <div class="nav-right">
 <a href="index.html">Basics</a>
