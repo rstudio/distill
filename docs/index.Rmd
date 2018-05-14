@@ -33,8 +33,6 @@ bibliography: biblio.bib
     - publishing/previewing workflow?
     - app.R or ui.R / server.R in the same directory; automagic local run
 
-- use pandoc filters more? (RawHtml)
-
 - metadata docs
     - reference citr package
 - site docs
