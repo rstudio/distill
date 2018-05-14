@@ -70,11 +70,19 @@
 
 .radix-site-header .nav-left {
   display: inline-block;
+  margin-left: 20px;
 }
+
+@media screen and (max-width: 768px) {
+  .radix-site-header .nav-left {
+    margin-left: 0;
+  }
+}
+
 
 .radix-site-header .nav-right {
   float: right;
-  margin-right: 25px;
+  margin-right: 20px;
 }
 
 .radix-site-header a,
@@ -86,8 +94,20 @@
 }
 
 .radix-site-header .title {
-  margin-left: 25px;
   font-size: 20px;
+}
+
+.radix-site-header .logo img {
+  display: none;
+  max-height: 20px;
+  width: auto;
+  margin-bottom: -3px;
+}
+
+@media screen and (min-width: 1000px) {
+  .radix-site-header .logo img {
+    display: inline-block;
+  }
 }
 
 

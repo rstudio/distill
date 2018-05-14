@@ -1,9 +1,11 @@
 name: "rmarkdown-radix"
+title: "Radix for R Markdown"
+favicon: images/favicon.png
 repository_url: https://github.com/rstudio/radix
 creative_commons: CC-BY
 output_dir: "."
 navbar:
-  title: "Radix for R Markdown"
+  logo: images/logo.png
   right:
     - text: "Basics"
       href: index.html

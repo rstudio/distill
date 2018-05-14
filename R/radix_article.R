@@ -327,6 +327,14 @@ in_header_includes <- function(input_dir, site_config, metadata) {
       href = metadata$license_url
     )
   }
+  if (!is.null(site_config$favicon)) {
+    links[[length(links) + 1]] <- tags$link(
+      rel = "icon",
+      type = mime::guess_type(site_config$favicon),
+      href = site_config$favicon
+    )
+  }
+
 
   # authors meta tags
   author_meta <- lapply(metadata$author, function(author) {
@@ -621,7 +629,12 @@ before_body_includes <- function(input_dir, site_config, metadata) {
       })
     }
 
+    logo <- site_config[["navbar"]][["logo"]]
+    if (!is.null(logo))
+      logo <- span(class = "logo", img(src = logo))
+
     left_nav <- div(class = "nav-left",
+      logo,
       span(class = "title", site_config$title),
       build_menu(site_config[["navbar"]][["left"]])
     )

@@ -11,6 +11,7 @@
   <meta property="description" itemprop="description" content="Illustrate concepts with diagrams"/>
   
   <link rel="license" href="https://creativecommons.org/licenses/by/4.0/"/>
+  <link rel="icon" type="image/png" href="images/favicon.png"/>
   
   
   <!--  https://developers.facebook.com/docs/sharing/webmasters#markup -->
@@ -101,11 +102,19 @@
   
   .radix-site-header .nav-left {
     display: inline-block;
+    margin-left: 20px;
   }
+  
+  @media screen and (max-width: 768px) {
+    .radix-site-header .nav-left {
+      margin-left: 0;
+    }
+  }
+  
   
   .radix-site-header .nav-right {
     float: right;
-    margin-right: 25px;
+    margin-right: 20px;
   }
   
   .radix-site-header a,
@@ -117,8 +126,20 @@
   }
   
   .radix-site-header .title {
-    margin-left: 25px;
     font-size: 20px;
+  }
+  
+  .radix-site-header .logo img {
+    display: none;
+    max-height: 20px;
+    width: auto;
+    margin-bottom: -3px;
+  }
+  
+  @media screen and (min-width: 1000px) {
+    .radix-site-header .logo img {
+      display: inline-block;
+    }
   }
   
   
@@ -270,6 +291,9 @@
 
 <nav class="radix-site-nav radix-site-header">
 <div class="nav-left">
+<span class="logo">
+<img src="images/logo.png"/>
+</span>
 <span class="title">Radix for R Markdown</span>
 </div>
 <div class="nav-right">

@@ -33,7 +33,9 @@ bibliography: biblio.bib
     - publishing/previewing workflow?
     - app.R or ui.R / server.R in the same directory; automagic local run
 
-- icon in navbar
+
+
+- links for logo and title
 
 - try out table of contents
 
@@ -44,10 +46,10 @@ bibliography: biblio.bib
 - site docs
 
 
-Home Figures Tables Citations Shiny Examples Publish \/  <ghicon>
-                                              Publishing an Article
-                                              Publishing a Website
-                                              Blogs and Journals
+Figures Tables Citations Shiny Publish \/  <ghicon>
+                                Publishing an Article
+                                Publishing a Website
+                                Blogs and Journals
 
 
 - articles/index pages
