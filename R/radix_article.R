@@ -165,6 +165,15 @@ html_dependency_distill <- function() {
   )
 }
 
+html_dependency_headroom <- function() {
+  htmltools::htmlDependency(
+    name = "headroom",
+    version = "0.9.4",
+    src = system.file("www/headroom", package = "radix"),
+    script = "headroom.min.js"
+  )
+}
+
 transform_site_config <- function(input_dir, site_config) {
 
   # propagate navbar title to main title
@@ -406,8 +415,13 @@ in_header_includes <- function(input_dir, site_config, metadata) {
   writeLines(front_matter_tag, front_matter_file)
   in_header <- c(in_header, front_matter_file)
 
-  # if we have a site navbar then add our site css
+  # if we have a site navbar
   if (!is.null(site_config[["navbar"]])) {
+
+    # dependency on headroom.js for auto-hide navbar
+    knitr::knit_meta_add(list(html_dependency_headroom()))
+
+    # add our site css
     in_header <- c(in_header,
         system.file("rmarkdown/templates/radix_article/resources/navbar.html",
                     package = "radix")
@@ -649,7 +663,11 @@ before_body_includes <- function(input_dir, site_config, metadata) {
       right_nav
     ))
 
-    navbar_html <- renderTags(navbar, indent = FALSE)$html
+    header <- tag("header", list(class = "header header--fixed", role = "banner",
+      navbar
+    ))
+
+    navbar_html <- renderTags(header, indent = FALSE)$html
     navbar_file <- tempfile(fileext = "html")
     writeLines(navbar_html, navbar_file)
     before_body <- c(before_body, navbar_file)

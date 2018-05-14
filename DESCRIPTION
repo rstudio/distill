@@ -7,7 +7,8 @@ Authors@R: c(
   person("Rich", " Iannone", role = c("aut")),
   person("Yihui", "Xie", role = c("aut")),
   person(family = "RStudio, Inc.", role = "cph"),
-  person(family = "Google LLC", role = c("ctb", "cph"), comment = "https://distill.pub/guide/")
+  person(family = "Google LLC", role = c("ctb", "cph"), comment = "https://distill.pub/guide/"),
+  person("Nick", "Williams", role = c("ctb", "cph"), comment = "https://wicky.nillia.ms/headroom.js/")
   )
 Description: Scientific and technical article format for the web. 'Radix' articles 
     feature attractive, reader-friendly typography, flexible layout options

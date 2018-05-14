@@ -35,6 +35,12 @@
   <script type="application/javascript">
     window.document.addEventListener("DOMContentLoaded", function (event) {
   
+      // initialize headroom for banner
+      $('header').each(function(i, val) {
+          var headroom = new Headroom(this);
+          headroom.init();
+      });
+  
       // responsive menu
       $('.radix-site-header').each(function(i, val) {
         var topnav = $(this);
@@ -262,6 +268,28 @@
     text-align: center;
   }
   
+  /* Headroom */
+  
+  d-title {
+    padding-top: 6rem;
+  }
+  
+  .headroom {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    transition: all .4s ease-in-out;
+  }
+  
+  .headroom--unpinned {
+    top: -100px;
+  }
+  
+  .headroom--pinned {
+    top: 0;
+  }
+  
   </style>
   <script src="site_libs/jquery-1.12.4/jquery.min.js"></script>
   <link href="site_libs/distill-2.2.21/distill.css" rel="stylesheet" />
@@ -285,6 +313,7 @@
   <script src="site_libs/r2d3-render-0.1.0/r2d3-render.js"></script>
   <script src="site_libs/r2d3-binding-0.2/r2d3.js"></script>
   <script src="site_libs/d3v5-5.0.0/d3.js"></script>
+  <script src="site_libs/headroom-0.9.4/headroom.min.js"></script>
   <link href="site_libs/font-awesome-4.5.0/css/font-awesome.min.css" rel="stylesheet" />
 
   <link rel="stylesheet" href="styles.css" type="text/css" />
@@ -293,6 +322,7 @@
 
 <body>
 
+<header class="header header--fixed" role="banner">
 <nav class="radix-site-nav radix-site-header">
 <div class="nav-left">
 <span class="logo">
@@ -312,6 +342,7 @@
 <a href="javascript:void(0);" class="nav-toggle">&#9776;</a>
 </div>
 </nav>
+</header>
 
 <d-title>
 <h1>Interactivity</h1>

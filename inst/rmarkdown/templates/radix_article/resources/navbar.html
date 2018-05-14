@@ -3,6 +3,12 @@
 <script type="application/javascript">
   window.document.addEventListener("DOMContentLoaded", function (event) {
 
+    // initialize headroom for banner
+    $('header').each(function(i, val) {
+        var headroom = new Headroom(this);
+        headroom.init();
+    });
+
     // responsive menu
     $('.radix-site-header').each(function(i, val) {
       var topnav = $(this);
@@ -228,6 +234,34 @@
   padding-top: 30px;
   padding-bottom: 30px;
   text-align: center;
+}
+
+/* Headroom */
+
+d-title {
+  padding-top: 6rem;
+}
+
+@media print {
+  d-title {
+    padding-top: 4rem;
+  }
+}
+
+.headroom {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  transition: all .4s ease-in-out;
+}
+
+.headroom--unpinned {
+  top: -100px;
+}
+
+.headroom--pinned {
+  top: 0;
 }
 
 </style>
