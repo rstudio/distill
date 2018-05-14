@@ -1,5 +1,5 @@
 ---
-title: "Figures"
+title: "Figure Layout"
 description: Amplify figures by customizing layout
 ---
 

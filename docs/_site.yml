@@ -9,16 +9,16 @@ navbar:
     image: images/logo.png
     href: https://www.rstudio.com
   right:
-    - text: "Basics"
-      href: index.html
     - text: "Figures"
-      href: figures.html
+      menu:
+        - text: Figure Layout
+          href: figures.html
+        - text: Diagrams
+          href: diagrams.html
+        - text: JavaScript & D3
+          href: interactivity.html
     - text: "Tables"
       href: tables.html
-    - text: "Diagrams"
-      href: diagrams.html
-    - text: "Interactivity"
-      href: interactivity.html
     - icon: fa fa-github
       href: https://github.com/rstudio/radix
 output:

@@ -352,11 +352,19 @@
 <a href="index.html" class="title">Radix for R Markdown</a>
 </div>
 <div class="nav-right">
-<a href="index.html">Basics</a>
-<a href="figures.html">Figures</a>
-<a href="tables.html">Tables</a>
+<div class="nav-dropdown">
+<button class="nav-dropbtn">
+Figures
+ 
+<span class="down-arrow">&#x25BE;</span>
+</button>
+<div class="nav-dropdown-content">
+<a href="figures.html">Figure Layout</a>
 <a href="diagrams.html">Diagrams</a>
-<a href="interactivity.html">Interactivity</a>
+<a href="interactivity.html">JavaScript &amp; D3</a>
+</div>
+</div>
+<a href="tables.html">Tables</a>
 <a href="https://github.com/rstudio/radix">
 <i class="fa fa-github"></i>
 </a>
@@ -445,7 +453,7 @@ Figures Tables Citations Shiny Publish \/  <ghicon>
 <li>Flexible <a href="figures.html">figure layout</a> options (e.g. displaying figures at a larger width than the article text).</li>
 <li>Attractively rendered <a href="tables.html">tables</a> with optional support for pagination.</li>
 <li>Support for a wide variety of <a href="diagrams.html">diagramming tools</a> for illustrating concepts.</li>
-<li>A variety of ways to enhance articles with <a href="interactivity.html">interactive visualizations</a>.</li>
+<li>A variety of ways to enhance articles with JavaScript and D3-based <a href="interactivity.html">interactive visualizations</a>.</li>
 </ul>
 <p>Radix is based on the <a href="https://github.com/distillpub/template">Distill web framework</a>, which was originally created for use in the Distill Machine Learning Journal <span class="citation">(Carter, Olah, and Satyanarayan <a href="#ref-distill">2016</a>)</span>. Radix combines the technical authoring features of Distill with <a href="https://rmarkdown.rstudio.com/">R Markdown</a>, enabling a fully reproducible workflow based on literate programming <span class="citation">(Knuth <a href="#ref-knuth1984">1984</a>)</span>.</p>
 <h2 id="getting-started">Getting Started</h2>
