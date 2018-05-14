@@ -33,7 +33,7 @@ bibliography: biblio.bib
     - publishing/previewing workflow?
     - app.R or ui.R / server.R in the same directory; automagic local run
 
-- favicon / icon in navbar
+- icon in navbar
 
 - try out table of contents
 
