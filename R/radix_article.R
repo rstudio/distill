@@ -594,9 +594,16 @@ before_body_includes <- function(input_dir, site_config, metadata) {
 
   # if we have a navbar then generate it
   if (!is.null(site_config[["navbar"]])) {
-
     build_menu <- function(menu) {
-      item_to_menu <- function(item) a(href = item[["href"]], item[["text"]])
+      item_to_menu <- function(item) {
+        if (!is.null(item[["icon"]])) {
+          knitr::knit_meta_add(list(html_dependency_font_awesome()))
+          icon <- tag("i", list(class = item[["icon"]]))
+        } else {
+          icon <- NULL
+        }
+        a(href = item[["href"]], icon, item[["text"]])
+      }
       lapply(menu, function(item) {
         if (is.null(item[["menu"]])) {
           item_to_menu(item)

@@ -15,6 +15,8 @@ navbar:
       href: diagrams.html
     - text: "Interactivity"
       href: interactivity.html
+    - icon: fa fa-github
+      href: https://github.com/rstudio/radix
 output:
   radix::radix_article:
     css: styles.css
