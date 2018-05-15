@@ -76,7 +76,7 @@
 
 .radix-site-header .nav-left {
   display: inline-block;
-  margin-left: 20px;
+  margin-left: 8px;
 }
 
 @media screen and (max-width: 768px) {
@@ -88,15 +88,19 @@
 
 .radix-site-header .nav-right {
   float: right;
-  margin-right: 20px;
+  margin-right: 8px;
 }
 
 .radix-site-header a,
 .radix-site-header .title {
   display: inline-block;
   text-align: center;
-  padding: 14px 12px 14px 12px;
+  padding: 14px 10px 14px 10px;
   font-size: 16px;
+}
+
+.radix-site-header .title {
+  padding-left: 4px;
 }
 
 .radix-site-header .title {
@@ -118,6 +122,15 @@
   .radix-site-header .logo img {
     display: inline-block;
   }
+  .radix-site-header .nav-left {
+    margin-left: 20px;
+  }
+  .radix-site-header .nav-right {
+    margin-right: 20px;
+  }
+  .radix-site-header .title {
+    padding-left: 12px;
+  }
 }
 
 
@@ -135,7 +148,7 @@
   border: none;
   outline: none;
   color: rgba(255, 255, 255, 0.8);
-  padding: 16px 16px;
+  padding: 16px 10px;
   background-color: inherit;
   font-family: inherit;
   font-weight: 300;
