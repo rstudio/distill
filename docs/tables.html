@@ -196,6 +196,13 @@
     margin-top: 2px;
   }
   
+  .nav-dropdown-content hr {
+    margin-top: 0;
+    margin-bottom: 0;
+    border: none;
+    border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+  }
+  
   .nav-dropdown-active {
     display: block;
   }
@@ -348,7 +355,23 @@ Figures
 </div>
 </div>
 <a href="tables.html">Tables</a>
-<a href="citations.html">Citations</a>
+<a href="citations.html">
+<i class="fa fa-github"></i>
+Citations
+</a>
+<div class="nav-dropdown">
+<button class="nav-dropbtn">
+Publish
+ 
+<span class="down-arrow">&#x25BE;</span>
+</button>
+<div class="nav-dropdown-content">
+<a href="publish_article.html">Publishing Articles</a>
+<a href="publish_website.html">Publishing a Website</a>
+<hr/>
+<a href="metadata.html">Article Metadata</a>
+</div>
+</div>
 <a href="https://github.com/rstudio/radix">
 <i class="fa fa-github"></i>
 </a>

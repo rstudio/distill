@@ -6,9 +6,9 @@
   <meta http-equiv="X-UA-Compatible" content="IE=Edge,chrome=1">
   <meta name="generator" content="radix" />
 
-  <title>Radix for R Markdown: Figure Layout</title>
+  <title>Radix for R Markdown: Publishing a Website</title>
 
-  <meta property="description" itemprop="description" content="Amplify figures by customizing layout"/>
+  <meta property="description" itemprop="description" content="Sharing collections of Radix articles as a website"/>
   
   <link rel="license" href="https://creativecommons.org/licenses/by/4.0/"/>
   <link rel="icon" type="image/png" href="images/favicon.png"/>
@@ -16,18 +16,18 @@
   
   <!--  https://developers.facebook.com/docs/sharing/webmasters#markup -->
   <meta property="og:type" content="article"/>
-  <meta property="og:description" content="Amplify figures by customizing layout"/>
+  <meta property="og:description" content="Sharing collections of Radix articles as a website"/>
   <meta property="og:locale" content="en_US"/>
   <meta property="og:site_name" content="Radix for R Markdown"/>
   
   <!--  https://dev.twitter.com/cards/types/summary -->
   <meta property="twitter:card" content="summary"/>
-  <meta property="twitter:title" content="Radix for R Markdown: Figure Layout"/>
-  <meta property="twitter:description" content="Amplify figures by customizing layout"/>
+  <meta property="twitter:title" content="Radix for R Markdown: Publishing a Website"/>
+  <meta property="twitter:description" content="Sharing collections of Radix articles as a website"/>
   
   <d-front-matter>
   <script id="distill-front-matter" type="text/json">
-  {"title":"Figure Layout","description":"Amplify figures by customizing layout","authors":[]}
+  {"title":"Publishing a Website","description":"Sharing collections of Radix articles as a website","authors":[]}
   </script>
   </d-front-matter>
   
@@ -310,19 +310,11 @@
   }
   
   </style>
-  <script src="site_libs/jquery-1.12.4/jquery.min.js"></script>
+  <script src="site_libs/jquery-1.11.3/jquery.min.js"></script>
   <link href="site_libs/distill-2.2.21/distill.css" rel="stylesheet" />
   <script src="site_libs/distill-2.2.21/distill.js"></script>
   <script src="site_libs/distill-2.2.21/template.v2.js"></script>
   <script src="site_libs/distill-2.2.21/distill-post.js"></script>
-  <script src="site_libs/htmlwidgets-1.2/htmlwidgets.js"></script>
-  <link href="site_libs/leaflet-1.3.1/leaflet.css" rel="stylesheet" />
-  <script src="site_libs/leaflet-1.3.1/leaflet.js"></script>
-  <link href="site_libs/leafletfix-1.0.0/leafletfix.css" rel="stylesheet" />
-  <script src="site_libs/Proj4Leaflet-1.0.1/proj4-compressed.js"></script>
-  <script src="site_libs/Proj4Leaflet-1.0.1/proj4leaflet.js"></script>
-  <link href="site_libs/rstudio_leaflet-1.3.1/rstudio_leaflet.css" rel="stylesheet" />
-  <script src="site_libs/leaflet-binding-2.0.0/leaflet.js"></script>
   <script src="site_libs/headroom-0.9.4/headroom.min.js"></script>
   <link href="site_libs/font-awesome-4.5.0/css/font-awesome.min.css" rel="stylesheet" />
 
@@ -376,80 +368,13 @@ Publish
 </header>
 
 <d-title>
-<h1>Figure Layout</h1>
-<p>Amplify figures by customizing layout</p>
+<h1>Publishing a Website</h1>
+<p>Sharing collections of Radix articles as a website</p>
 </d-title>
 
 
 <d-article>
-<p>There are a variety of ways to layout figures included within Radix articles. This layout is controlled by a set of layout classes, which are in turn applied to R Markdown chunks using the <code>layout</code> chunk option.</p>
-<p>The default layout if <code>layout</code> is not specified is <code>l-body</code>, which will cause content to span the width of the main article body:</p>
-<div class="fake-img l-body">
-<p>
-l-body
-</p>
-</div>
-<p>For example, a plot with the default <code>l-body</code> layout would look like this:</p>
-<div class="layout-chunk l-body">
-<img src="images/l-body-figure.png" width="576" />
-</div>
-<p>For elements you want to display a little larger, try <code>l-body-outset</code> or <code>l-page</code>:</p>
-<div class="fake-img l-body-outset">
-<p>
-l-body-outset
-</p>
-</div>
-<div class="fake-img l-page">
-<p>
-l-page
-</p>
-</div>
-<p>For example, here the <code>l-body-outset</code> layout is selected using the <code>layout</code> chunk option:</p>
-<pre class="clike"><code>
-```{r, layout=&quot;l-body-outset&quot;, fig.width=6, fig.height=1.5}
-library(ggplot2)
-ggplot(diamonds, aes(carat, price)) + geom_smooth() +
-  facet_grid(~ cut)
-```</code></pre>
-<div class="layout-chunk l-body-outset">
-<img src="images/l-middle-figure.png" width="576" />
-</div>
-<p>Note that when specifying an alternate <code>layout</code> you should also specify an appropriate <code>fig.width</code> and <code>fig.height</code> for that layout.</p>
-<p>Occasionally you’ll want to use the full browser width. For this, use <code>l-screen</code>:</p>
-<div class="fake-img l-screen">
-<p>
-l-screen
-</p>
-</div>
-<p>If you want a bit space at the edges then you can use the <code>l-screen-inset</code> layout, which adds 15 pixels of padding to each side. Here we use <code>l-screen-inset</code> to display a Leaflet map:</p>
-<pre class="clike"><code>
-```{r, layout=&quot;l-screen-inset&quot;}
-library(leaflet)
-leaflet() %&gt;%
-  addTiles() %&gt;%  # Add default OpenStreetMap map tiles
-  addMarkers(lng=174.768, lat=-36.852, popup=&quot;The birthplace of R&quot;)
-```</code></pre>
-<div class="layout-chunk l-screen-inset">
-<div id="htmlwidget-7ded59f4b1e32ea1fd21" style="width:576px;height:384px;" class="leaflet html-widget"></div>
-<script type="application/json" data-for="htmlwidget-7ded59f4b1e32ea1fd21">{"x":{"options":{"crs":{"crsClass":"L.CRS.EPSG3857","code":null,"proj4def":null,"projectedBounds":null,"options":{}}},"calls":[{"method":"addTiles","args":["//{s}.tile.openstreetmap.org/{z}/{x}/{y}.png",null,null,{"minZoom":0,"maxZoom":18,"tileSize":256,"subdomains":"abc","errorTileUrl":"","tms":false,"noWrap":false,"zoomOffset":0,"zoomReverse":false,"opacity":1,"zIndex":1,"detectRetina":false,"attribution":"&copy; <a href=\"http://openstreetmap.org\">OpenStreetMap<\/a> contributors, <a href=\"http://creativecommons.org/licenses/by-sa/2.0/\">CC-BY-SA<\/a>"}]},{"method":"addMarkers","args":[-36.852,174.768,null,null,null,{"interactive":true,"draggable":false,"keyboard":true,"title":"","alt":"","zIndexOffset":0,"opacity":1,"riseOnHover":false,"riseOffset":250},"The birthplace of R",null,null,null,null,{"interactive":false,"permanent":false,"direction":"auto","opacity":1,"offset":[0,0],"textsize":"10px","textOnly":false,"className":"","sticky":true},null]}],"limits":{"lat":[-36.852,-36.852],"lng":[174.768,174.768]}},"evals":[],"jsHooks":[]}</script>
-</div>
-<h3 id="static-images">Static images</h3>
-<p>To include static images that occupy the full width of the article text, be sure to add the <code>width=100%</code> attribute. For example:</p>
-<pre class="markdown"><code>
-![](images/figure.png){width=100%}    </code></pre>
-<p>To include a static images that adheres to a Radix layout, wrap it in a <code>&lt;div&gt;</code> tag with the appropriate <code>class</code>. For example:</p>
-<pre class="markdown"><code>
-&lt;div class=&quot;l-body-outset&quot;&gt;
-![](images/figure.png){width=100%}  
-&lt;/div&gt;</code></pre>
-<p>If you are including a figure from an external source, it’s good practice to delinate this by applying the <code>.external</code> class and adding a caption indicating where it is from. For example:</p>
-<pre class="markup"><code>
-![Figure from https://example.com](heatmap.png){.external width=100%}    </code></pre>
-<p>Using the <code>.external</code> class and providing a “Figure from” link makes it clear that the figure originated elsewhere (and is therefore not covered by any of your article’s copyright or creative commonds license grants). For example, here’s how a figure taken from a Stack Overflow post might appear:</p>
-<div class="figure">
-<img src="images/heatmap.png" alt="Figure from https://stackoverflow.com/questions/12196756/" class="external" style="width:100.0%" />
-<p class="caption">Figure from <a href="https://stackoverflow.com/questions/12196756/" class="uri">https://stackoverflow.com/questions/12196756/</a></p>
-</div>
+
 </d-article>
 
 <d-appendix>

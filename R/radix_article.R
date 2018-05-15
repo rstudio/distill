@@ -245,8 +245,8 @@ transform_metadata <- function(input_dir, site_config, metadata) {
   if (!is.null(metadata$creative_commons)) {
 
     # validate
-    valid_licenses <- c("CC-BY", "CC-BY-SA", "CC-BY-ND", "CC-BY-NC",
-                        "CC-BY-NC-SA", "CC-BY-NC-ND")
+    valid_licenses <- c("CC BY", "CC BY-SA", "CC BY-ND", "CC BY-NC",
+                        "CC BY-NC-SA", "CC BY-NC-ND")
     if (!metadata$creative_commons %in% valid_licenses) {
       stop("creative_commonds license must be one of ",
            paste(valid_licenses, collapse = ", "))
@@ -257,7 +257,7 @@ transform_metadata <- function(input_dir, site_config, metadata) {
       metadata$license_url <-
         paste0(
           "https://creativecommons.org/licenses/",
-          tolower(sub("^CC-", "", metadata$creative_commons)), "/4.0/"
+          tolower(sub("^CC ", "", metadata$creative_commons)), "/4.0/"
         )
     }
   }
@@ -774,15 +774,12 @@ appendix_updates_and_corrections <- function(site_config, metadata) {
 
   if (!is.null(metadata$repository_url)) {
 
-    updates_and_corrections <- list(
-      tags$h3(id = "updates-and-corrections", "Updates and Corrections")
-    )
-
+    updates_and_corrections <- list()
     if (!is.null(metadata$compare_updates_url)) {
       updates_and_corrections[[length(updates_and_corrections) + 1]] <-
-        tags$p(
+        tags$span(
           tags$a(href = metadata$compare_updates_url, "View all changes"),
-          " to this article since it was first published."
+          " to this article since it was first published. "
         )
     }
 
@@ -792,12 +789,19 @@ appendix_updates_and_corrections <- function(site_config, metadata) {
       issues_url <- paste0(issues_url, "/issues/new")
     }
     updates_and_corrections[[length(updates_and_corrections) + 1]] <-
-      tags$p(HTML(sprintf(paste0(
+      HTML(sprintf(paste0(
         'If you see mistakes or want to suggest changes, please ',
         '<a href="%s">create an issue</a> on the source repository.'
-      ), htmlEscape(issues_url, attribute = TRUE))))
+      ), htmlEscape(issues_url, attribute = TRUE)))
 
-    updates_and_corrections
+    tagList(
+      tags$h3(id = "updates-and-corrections", "Updates and Corrections"),
+      tags$p(
+        updates_and_corrections
+      )
+    )
+
+
   } else {
     NULL
   }
@@ -808,7 +812,7 @@ appendix_creative_commons <- function(site_config, metadata) {
   if (!is.null(metadata$creative_commons)) {
 
     source_note <- if (!is.null(metadata$repository_url)) {
-      sprintf(paste0('Source code is available at <a rel="license" href="%s">%s</a>, ',
+      sprintf(paste0('Source code is available at <a href="%s">%s</a>, ',
                      'unless otherwise noted. '),
               htmlEscape(metadata$repository_url, attribute = TRUE),
               htmlEscape(metadata$repository_url)

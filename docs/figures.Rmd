@@ -89,7 +89,7 @@ If you are including a figure from an external source, it's good practice to del
 ![Figure from https://example.com](heatmap.png){.external width=100%}    
 ```
 
-Using the `.external` class and providing a "Figure from" link makes it clear that the figure originated elsewhere (and is therefore not covered by any of your article's copyright or creative commonds license grants). For example, here's how a figure taken from a Stack Overflow post might appear:
+Using the `.external` class and providing a "Figure from" link makes it clear that the figure originated elsewhere (and is therefore not covered by any of your article's copyright or creative commons license grants). For example, here's how a figure taken from a Stack Overflow post might appear:
 
 ![Figure from <https://stackoverflow.com/questions/12196756/>](images/heatmap.png){.external width=100%}   
 
