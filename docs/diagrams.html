@@ -196,6 +196,13 @@
     margin-top: 2px;
   }
   
+  .nav-dropdown-content hr {
+    margin-top: 0;
+    margin-bottom: 0;
+    border: none;
+    border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+  }
+  
   .nav-dropdown-active {
     display: block;
   }
@@ -329,7 +336,9 @@
   <script src="site_libs/r2d3-binding-0.2/r2d3.js"></script>
   <script src="site_libs/d3v5-5.0.0/d3.js"></script>
   <script src="site_libs/headroom-0.9.4/headroom.min.js"></script>
-  <link href="site_libs/font-awesome-4.5.0/css/font-awesome.min.css" rel="stylesheet" />
+  <link href="site_libs/font-awesome-5.0.13/css/fa-svg-with-js.css" rel="stylesheet" />
+  <script src="site_libs/font-awesome-5.0.13/js/fontawesome-all.min.js"></script>
+  <script src="site_libs/font-awesome-5.0.13/js/fa-v4-shims.min.js"></script>
 
   <link rel="stylesheet" href="styles.css" type="text/css" />
 
@@ -360,18 +369,6 @@ Figures
 </div>
 <a href="tables.html">Tables</a>
 <a href="citations.html">Citations</a>
-<div class="nav-dropdown">
-<button class="nav-dropbtn">
-Publish
- 
-<span class="down-arrow">&#x25BE;</span>
-</button>
-<div class="nav-dropdown-content">
-<a href="publish_article.html">Publishing an Article</a>
-<a href="publish_website.html">Publishing a Website</a>
-<a href="metadata.html">Article Metadata</a>
-</div>
-</div>
 <a href="https://github.com/rstudio/radix">
 <i class="fa fa-github"></i>
 </a>
@@ -461,7 +458,7 @@ include_graphics(&quot;images/flowchart.svg&quot;)
 <h3 id="updates-and-corrections">Updates and Corrections</h3>
 <p>If you see mistakes or want to suggest changes, please <a href="https://github.com/rstudio/radix/issues/new">create an issue</a> on the source repository.</p>
 <h3 id="reuse">Reuse</h3>
-<p>Text and figures are licensed under Creative Commons Attribution <a rel="license" href="https://creativecommons.org/licenses/by/4.0/">CC-BY 4.0</a>. Source code is available at <a rel="license" href="https://github.com/rstudio/radix">https://github.com/rstudio/radix</a>, unless otherwise noted. The figures that have been reused from other sources don’t fall under this license and can be recognized by a note in their caption: "Figure from ...".</p>
+<p>Text and figures are licensed under Creative Commons Attribution <a rel="license" href="https://creativecommons.org/licenses/by/4.0/">CC BY 4.0</a>. Source code is available at <a href="https://github.com/rstudio/radix">https://github.com/rstudio/radix</a>, unless otherwise noted. The figures that have been reused from other sources don’t fall under this license and can be recognized by a note in their caption: "Figure from ...".</p>
 </div>
 <div class="radix-site-nav radix-site-footer">
 <p>© Copyright 2018 <a href="https://github.com/distillpub/template/blob/master/AUTHORS">The Distill Template Authors</a> and <a href="https://www.rstudio.com">RStudio, Inc.</a>.</p>
