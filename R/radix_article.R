@@ -201,7 +201,8 @@ transform_metadata <- function(input_dir, site_config, metadata) {
 
   # allow site level metadata to propagate
   site_metadata <- c("repository_url", "compare_updates_url", "creative_commons",
-                     "license_url", "preview", "slug", "citation_url", "journal")
+                     "license_url", "publish_url", "preview", "slug", "citation_url",
+                     "journal")
   for (name in site_metadata)
     metadata[[name]] <- merge_lists(site_config[[name]], metadata[[name]])
 
@@ -262,11 +263,35 @@ transform_metadata <- function(input_dir, site_config, metadata) {
     }
   }
 
-  # look for preview
-  if (is.null(metadata$preview)) {
-    preview <- list.files(input_dir, pattern = "preview\\.[png|jpg|jpeg]")
-    if (length(preview) > 0)
-      metadata$preview <- preview
+  # publish_url (strip trailing slashes)
+  if (!is.null(metadata$publish_url))
+    metadata$publish_url <- sub("/+$", "", metadata$publish_url)
+
+  # preview image
+  if (!is.null(metadata$preview)) {
+
+    # validate that the file exists
+    if (!file.exists(metadata$preview)) {
+      stop("Specified preview file '", metadata$preview, "' does not exist",
+           call. = FALSE)
+    }
+
+    # validate that we have a publish_url
+    if (is.null(metadata$publish_url)) {
+      stop("You must specify a root publish_url to resolve relative image paths against ",
+           "when specifying a preview image ",
+          "(Open Graph and Twitter preview images must use absolute URLs", call. = FALSE)
+    }
+
+    # if it's a png then determine it's dimensions
+    if (is_file_type(metadata$preview, "png")) {
+      png <- png::readPNG(metadata$preview)
+      metadata$preview_width <- ncol(png)
+      metadata$preview_height <- nrow(png)
+    }
+
+    # resolve preview url
+    metadata$preview <- file.path(metadata$publish_url, metadata$preview)
   }
 
   # authors
@@ -437,26 +462,28 @@ open_graph_metadata <- function(site_config, metadata) {
   # core descriptors
   open_graph_meta <- list(
     HTML("<!--  https://developers.facebook.com/docs/sharing/webmasters#markup -->"),
+    tags$meta(property = "og:title", content = metadata$qualified_title),
     tags$meta(property = "og:type", content = "article")
   )
 
   # add a property
   add_open_graph_meta <- function(property, content) {
-    open_graph_meta[[length(open_graph_meta)+1]] <<-
-      tags$meta(property = property, content = content)
+    if (!is.null(content)) {
+      open_graph_meta[[length(open_graph_meta)+1]] <<-
+        tags$meta(property = property, content = content)
+    }
   }
 
   # description
-  if (!is.null(metadata$description))
-    add_open_graph_meta("og:description", metadata$description)
+  add_open_graph_meta("og:description", metadata$description)
 
   # cannonical url
-  if (!is.null(metadata$canonical_url))
-    add_open_graph_meta("og:url", metadata$canonical_url)
+  add_open_graph_meta("og:url", metadata$canonical_url)
 
   # preivew/thumbnail url
-  if (!is.null(metadata$preview))
-    add_open_graph_meta("og:image", metadata$preview)
+  add_open_graph_meta("og:image", metadata$preview)
+  add_open_graph_meta("og:image:width", metadata$preview_width)
+  add_open_graph_meta("og:image:height", metadata$preview_height)
 
   # locale
   locale <- if (!is.null(metadata$lang))
@@ -468,8 +495,7 @@ open_graph_metadata <- function(site_config, metadata) {
   add_open_graph_meta("og:locale", locale)
 
   # site name
-  if (!is.null(site_config$title))
-    add_open_graph_meta("og:site_name", site_config$title)
+  add_open_graph_meta("og:site_name", site_config$title)
 
   open_graph_meta
 }
@@ -482,8 +508,10 @@ twitter_card_metadata <- function(site_config, metadata) {
 
   # add a property
   add_twitter_card_meta <- function(property, content) {
-    twitter_card_meta[[length(twitter_card_meta)+1]] <<-
-      tags$meta(property = property, content = content)
+    if (!is.null(content)) {
+      twitter_card_meta[[length(twitter_card_meta)+1]] <<-
+        tags$meta(property = property, content = content)
+    }
   }
 
   # card type
@@ -492,22 +520,15 @@ twitter_card_metadata <- function(site_config, metadata) {
 
   # title and description
   add_twitter_card_meta("twitter:title", metadata$qualified_title)
-  if (!is.null(metadata$description))
-    add_twitter_card_meta("twitter:description", metadata$description)
+  add_twitter_card_meta("twitter:description", metadata$description)
 
   # cannonical url
-  if (!is.null(metadata$canonical_url))
-    add_twitter_card_meta("twitter:url", metadata$canonical_url)
+  add_twitter_card_meta("twitter:url", metadata$canonical_url)
 
   # preview image
-  if (!is.null(metadata$preview)) {
-    add_twitter_card_meta("twitter:image", metadata$preview)
-    if (file.exists(metadata$preview) && is_file_type(metadata$preview, "png")) {
-      png <- png::readPNG(metadata$preview)
-      add_twitter_card_meta("twitter:image:width", ncol(png))
-      add_twitter_card_meta("twitter:image:height", nrow(png))
-    }
-  }
+  add_twitter_card_meta("twitter:image", metadata$preview)
+  add_twitter_card_meta("twitter:image:width", metadata$preview_width)
+  add_twitter_card_meta("twitter:image:height", metadata$preview_height)
 
   twitter_card_meta
 }
