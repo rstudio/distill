@@ -2,9 +2,6 @@
 title: "JavaScript & D3"
 description: Enhance communication with interactive visualizations 
 preview: images/javascript-d3-preview.png
-twitter:
-  site: "@rstudio"
-  creator: "@fly_upside_down"
 ---
 
 There are a variety of ways to add interactive JavaScript and D3 visualizations to your Radix articles, including:
