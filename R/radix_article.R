@@ -624,21 +624,26 @@ before_body_includes <- function(input_dir, site_config, metadata) {
         } else {
           icon <- NULL
         }
-        a(href = item[["href"]], icon, item[["text"]])
+        if (!is.null(item[["text"]]) &&
+            grepl("^\\s*-{3,}\\s*$", item[["text"]])) {
+          tags$hr()
+        } else {
+          a(href = item[["href"]], icon, item[["text"]])
+        }
       }
       lapply(menu, function(item) {
-        if (is.null(item[["menu"]])) {
-          item_to_menu(item)
-        } else {
+        if (!is.null(item[["menu"]])) {
           menu <- item[["menu"]]
           div(class = "nav-dropdown",
-            htmltools::tags$button(class = "nav-dropbtn",
-              item[["text"]],
-              " ",
-              span(class = "down-arrow", HTML("&#x25BE;"))
-            ),
-            div(class = "nav-dropdown-content", lapply(menu, item_to_menu))
+              htmltools::tags$button(class = "nav-dropbtn",
+                                     item[["text"]],
+                                     " ",
+                                     span(class = "down-arrow", HTML("&#x25BE;"))
+              ),
+              div(class = "nav-dropdown-content", lapply(menu, item_to_menu))
           )
+        } else {
+          item_to_menu(item)
         }
       })
     }
