@@ -614,13 +614,21 @@ before_body_includes <- function(input_dir, site_config, metadata) {
 
   before_body <- c()
 
+  # helper to yield icon class
+  icon_class <- function(icon) {
+    if (grepl("^fa[a-z]? ", icon))
+      icon
+    else
+      paste("fa", icon)
+  }
+
   # if we have a navbar then generate it
   if (!is.null(site_config[["navbar"]])) {
     build_menu <- function(menu) {
       item_to_menu <- function(item) {
         if (!is.null(item[["icon"]])) {
           knitr::knit_meta_add(list(html_dependency_font_awesome()))
-          icon <- tag("i", list(class = item[["icon"]]))
+          icon <- tag("i", list(class = icon_class(item[["icon"]])))
         } else {
           icon <- NULL
         }
