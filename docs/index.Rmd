@@ -38,6 +38,8 @@ bibliography: biblio.bib
 - site docs
 
 - safari shows author section
+- safari errors on shadowDOM
+- safari seems to load polyfills from the web
 
 
 Figures Tables Citations Shiny Publish \/  <ghicon>
