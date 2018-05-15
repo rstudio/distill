@@ -41,6 +41,8 @@ bibliography: biblio.bib
 - safari errors on shadowDOM
 - safari seems to load polyfills from the web
 
+- firefox completely borked. we might need polyfills for custom tags
+  (or find a way to remove the custom tags)
 
 Figures Tables Citations Shiny Publish \/  <ghicon>
                                 Publishing an Article
