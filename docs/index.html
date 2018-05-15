@@ -365,6 +365,7 @@ Figures
 </div>
 </div>
 <a href="tables.html">Tables</a>
+<a href="citations.html">Citations</a>
 <a href="https://github.com/rstudio/radix">
 <i class="fa fa-github"></i>
 </a>
@@ -431,7 +432,13 @@ Figures
 Figures Tables Citations Shiny Publish \/  <ghicon>
                                 Publishing an Article
                                 Publishing a Website
-                                Blogs and Journals
+                                -----
+                                Creating a Blog or Journal
+                                -----
+                                Open Graph & Twitter 
+                                
+
+Need to incorporate source and licensing
 
 
 - articles/index pages
@@ -511,6 +518,7 @@ ggplot(diamonds, aes(carat, price)) + geom_smooth() +
 </div>
 <p>Note that when specifying an alternate <code>layout</code> you should also specify an appropriate <code>fig.width</code> and <code>fig.height</code> for that layout. These values don’t determine the absolute size of the figure (that’s dynamic based on the layout) but they do determine the aspect ratio of the figure.</p>
 <p>See the documentation on <a href="figures.html">figure layout</a> for details on additional layout options.</p>
+<p>The examples above are based on conventional R plots. Radix articles can also incorporate <a href="diagrams.html">diagrams</a> and <a href="interactivity.html">interactive visualizations</a> based on JavaScript and D3.</p>
 <h2 id="tables">Tables</h2>
 <p>There are a number of options available for HTML display of data frames within Radix articles. Here, we use the <code>paged_table()</code> function to display a page-able view of the <code>mtcars</code> dataset built in to R:</p>
 <pre class="clike"><code>
@@ -551,13 +559,12 @@ $$</code></pre>
   note = {ISBN 978-1498716963},
   url = {http://yihui.name/knitr/},
 }</code></pre>
-<p>You are strongly encouraged you to populate the <code>url</code> bibtex field where possible so that links can be provided for citations.</p>
-<p>Citations are then used in the article body with standard Pandoc markdown notation, for example: <code>[@xie2015]</code> (which references an id provided in the bibliography). Note that multiple ids (separated by semicolons) can be provided.</p>
+<p>Citations are then used in the article body with standard R Markdown notation, for example: <code>[@xie2015]</code> (which references an id provided in the bibliography). Note that multiple ids (separated by semicolons) can be provided.</p>
 <p>The citation is presented inline like this: <span class="citation">(Xie <a href="#ref-xie2015">2015</a>)</span> (a number that displays more information on hover). If you have an appendix, a bibliography is automatically created and populated in it.</p>
-<p>Radix chose a numerical inline citation style to improve readability of citation dense articles and because many of the benefits of longer citations are obviated by displaying more information on hover. However, we consider it good style to mention author last names if you discuss something at length and it fits into the flow well—the authors are human and it’s nice for them to have the community associate them with their work.</p>
+<p>See the article on <a href="citations.html">citations</a> for additional details on using citations, including how to provide the metadata required to make your article more easily citable for others.</p>
 <h2 id="footnotes">Footnotes</h2>
 <p>Footnotes use standard Pandoc markdown notation, for example <code>^[This will become a hover-able footnote]</code>. The number of the footnote will be automatically generated.<a href="#fn1" class="footnote-ref" id="fnref1"><sup>1</sup></a></p>
-<p>You can also optionally include note in the gutter of the article (immediately to the right of the article text). To do this use the <code>&lt;aside&gt;</code> tag.</p>
+<p>You can also optionally include notes in the gutter of the article (immediately to the right of the article text). To do this use the <code>&lt;aside&gt;</code> tag.</p>
 <aside>
 This content will appear in the gutter of the article.
 </aside>

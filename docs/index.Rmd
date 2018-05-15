@@ -41,7 +41,13 @@ bibliography: biblio.bib
 Figures Tables Citations Shiny Publish \/  <ghicon>
                                 Publishing an Article
                                 Publishing a Website
-                                Blogs and Journals
+                                -----
+                                Creating a Blog or Journal
+                                -----
+                                Open Graph & Twitter 
+                                
+
+Need to incorporate source and licensing
 
 
 - articles/index pages
@@ -153,6 +159,8 @@ Note that when specifying an alternate `layout` you should also specify an appro
 
 See the documentation on [figure layout](figures.html) for details on additional layout options.
 
+The examples above are based on conventional R plots. Radix articles can also incorporate [diagrams](diagrams.html) and [interactive visualizations](interactivity.html) based on JavaScript and D3.
+
 ## Tables
 
 There are a number of options available for HTML display of data frames within Radix articles. Here, we use the `paged_table()` function to display a page-able view of the `mtcars` dataset built in to R:
@@ -208,19 +216,17 @@ For example, your bibliography file might contain:
 }
 ```
 
-You are strongly encouraged you to populate the `url` bibtex field where possible so that links can be provided for citations.
-
-Citations are then used in the article body with standard Pandoc markdown notation, for example: `[@xie2015]` (which references an id provided in the bibliography). Note that multiple ids (separated by semicolons) can be provided.
+Citations are then used in the article body with standard R Markdown notation, for example: `[@xie2015]` (which references an id provided in the bibliography). Note that multiple ids (separated by semicolons) can be provided.
 
 The citation is presented inline like this: [@xie2015] (a number that displays more information on hover). If you have an appendix, a bibliography is automatically created and populated in it.
 
-Radix chose a numerical inline citation style to improve readability of citation dense articles and because many of the benefits of longer citations are obviated by displaying more information on hover. However, we consider it good style to mention author last names if you discuss something at length and it fits into the flow well---the authors are human and it’s nice for them to have the community associate them with their work.
+See the article on [citations](citations.html) for additional details on using citations, including how to provide the metadata required to make your article more easily citable for others.
 
 ## Footnotes
 
 Footnotes use standard Pandoc markdown notation, for example `^[This will become a hover-able footnote]`. The number of the footnote will be automatically generated. ^[This will become a hover-able footnote]
 
-You can also optionally include note in the gutter of the article (immediately to the right of the article text). To do this use the `<aside>` tag.
+You can also optionally include notes in the gutter of the article (immediately to the right of the article text). To do this use the `<aside>` tag.
 
 <aside>
 This content will appear in the gutter of the article.

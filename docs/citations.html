@@ -1,0 +1,571 @@
+<!doctype html>
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1" >
+  <meta http-equiv="X-UA-Compatible" content="IE=Edge,chrome=1">
+  <meta name="generator" content="radix" />
+
+  <title>Radix for R Markdown: Citations</title>
+
+  <meta property="description" itemprop="description" content="Referencing other works and creating citeable articles"/>
+  
+  <link rel="license" href="https://creativecommons.org/licenses/by/4.0/"/>
+  <link rel="icon" type="image/png" href="images/favicon.png"/>
+  
+  
+  <!--  https://developers.facebook.com/docs/sharing/webmasters#markup -->
+  <meta property="og:type" content="article"/>
+  <meta property="og:description" content="Referencing other works and creating citeable articles"/>
+  <meta property="og:locale" content="en_US"/>
+  <meta property="og:site_name" content="Radix for R Markdown"/>
+  
+  <!--  https://dev.twitter.com/cards/types/summary -->
+  <meta property="twitter:card" content="summary"/>
+  <meta property="twitter:title" content="Radix for R Markdown: Citations"/>
+  <meta property="twitter:description" content="Referencing other works and creating citeable articles"/>
+  
+  <d-front-matter>
+  <script id="distill-front-matter" type="text/json">
+  {"title":"Citations","description":"Referencing other works and creating citeable articles","authors":[]}
+  </script>
+  </d-front-matter>
+  
+  
+  <script type="application/javascript">
+    window.document.addEventListener("DOMContentLoaded", function (event) {
+  
+      // initialize headroom for banner
+      $('header').each(function(i, val) {
+          var headroom = new Headroom(this);
+          headroom.init();
+      });
+  
+      // responsive menu
+      $('.radix-site-header').each(function(i, val) {
+        var topnav = $(this);
+        var toggle = topnav.find('.nav-toggle');
+        toggle.on('click', function() {
+          topnav.toggleClass('responsive');
+        });
+      });
+  
+      // nav dropdowns
+      $('.nav-dropbtn').click(function(e) {
+        $(this).next('.nav-dropdown-content').toggleClass('nav-dropdown-active');
+      });
+      $("body").click(function(e){
+        $('.nav-dropdown-content').removeClass('nav-dropdown-active');
+      });
+      $(".nav-dropdown").click(function(e){
+        e.stopPropagation();
+      });
+    });
+  </script>
+  
+  <style type="text/css">
+  
+  /* Theme (user-documented overrideables for nav appearance) */
+  
+  .radix-site-nav {
+    color: rgba(255, 255, 255, 0.8);
+    background-color: #455a64;
+    font-size: 16px;
+    font-weight: 300;
+  }
+  
+  .radix-site-nav a {
+    color: inherit;
+    text-decoration: none;
+  }
+  
+  .radix-site-nav a:hover {
+    color: white;
+  }
+  
+  @media print {
+    .radix-site-nav {
+      display: none;
+    }
+  }
+  
+  .radix-site-header {
+  
+  }
+  
+  .radix-site-footer {
+  
+  }
+  
+  
+  /* Site Header */
+  
+  .radix-site-header {
+    width: 100%;
+    box-sizing: border-box;
+    z-index: 3;
+  }
+  
+  .radix-site-header .nav-left {
+    display: inline-block;
+    margin-left: 20px;
+  }
+  
+  @media screen and (max-width: 768px) {
+    .radix-site-header .nav-left {
+      margin-left: 0;
+    }
+  }
+  
+  
+  .radix-site-header .nav-right {
+    float: right;
+    margin-right: 20px;
+  }
+  
+  .radix-site-header a,
+  .radix-site-header .title {
+    display: inline-block;
+    text-align: center;
+    padding: 14px 12px 14px 12px;
+    font-size: 16px;
+  }
+  
+  .radix-site-header .title {
+    font-size: 20px;
+  }
+  
+  .radix-site-header .logo {
+    padding: 0;
+  }
+  
+  .radix-site-header .logo img {
+    display: none;
+    max-height: 20px;
+    width: auto;
+    margin-bottom: -3px;
+  }
+  
+  @media screen and (min-width: 1000px) {
+    .radix-site-header .logo img {
+      display: inline-block;
+    }
+  }
+  
+  
+  .radix-site-header .nav-toggle {
+    display: none;
+  }
+  
+  .nav-dropdown {
+    display: inline-block;
+    position: relative;
+  }
+  
+  .nav-dropdown .nav-dropbtn {
+    font-size: 16px;
+    border: none;
+    outline: none;
+    color: rgba(255, 255, 255, 0.8);
+    padding: 16px 16px;
+    background-color: inherit;
+    font-family: inherit;
+    font-weight: 300;
+    margin: 0;
+    margin-top: 1px;
+    z-index: 2;
+  }
+  
+  .nav-dropdown-content {
+    display: none;
+    position: absolute;
+    background-color: white;
+    min-width: 160px;
+    border: 1px solid rgba(0,0,0,0.15);
+    border-radius: 4px;
+    box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.1);
+    z-index: 1;
+    margin-top: 2px;
+  }
+  
+  .nav-dropdown-active {
+    display: block;
+  }
+  
+  .nav-dropdown-content a {
+    color: black;
+    padding: 8px 16px;
+    text-decoration: none;
+    display: block;
+    text-align: left;
+  }
+  
+  .nav-dropdown:hover .nav-dropbtn {
+    color: white;
+  }
+  
+  .nav-dropdown-content a:hover {
+    background-color: #ddd;
+    color: black;
+  }
+  
+  .nav-right .nav-dropdown-content {
+    margin-left: -40%;
+  }
+  
+  @media screen and (max-width: 768px) {
+    .radix-site-header a, .radix-site-header .nav-dropdown  {display: none;}
+    .radix-site-header a.nav-toggle {
+      float: right;
+      display: block;
+    }
+    .radix-site-header .title {
+      margin-left: 0;
+    }
+    .radix-site-header .nav-right {
+      margin-right: 0;
+    }
+    .radix-site-header {
+      overflow: hidden;
+    }
+    .nav-right .nav-dropdown-content {
+      margin-left: 0;
+    }
+  }
+  
+  
+  @media screen and (max-width: 768px) {
+    .radix-site-header.responsive {position: relative;}
+    .radix-site-header.responsive a.nav-toggle {
+      position: absolute;
+      right: 0;
+      top: 0;
+    }
+    .radix-site-header.responsive a,
+    .radix-site-header.responsive .nav-dropdown {
+      display: block;
+      text-align: left;
+    }
+    .radix-site-header.responsive .nav-left,
+    .radix-site-header.responsive .nav-right {
+      width: 100%;
+    }
+    .radix-site-header.responsive .nav-dropdown {float: none;}
+    .radix-site-header.responsive .nav-dropdown-content {position: relative;}
+    .radix-site-header.responsive .nav-dropdown .nav-dropbtn {
+      display: block;
+      width: 100%;
+      text-align: left;
+    }
+  }
+  
+  /* Site Footer */
+  
+  .radix-site-footer {
+    width: 100%;
+    overflow: hidden;
+    box-sizing: border-box;
+    z-index: 3;
+    margin-top: 30px;
+    padding-top: 30px;
+    padding-bottom: 30px;
+    text-align: center;
+  }
+  
+  /* Headroom */
+  
+  d-title {
+    padding-top: 6rem;
+  }
+  
+  @media print {
+    d-title {
+      padding-top: 4rem;
+    }
+  }
+  
+  .headroom {
+    z-index: 1000;
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    transition: all .4s ease-in-out;
+  }
+  
+  .headroom--unpinned {
+    top: -100px;
+  }
+  
+  .headroom--pinned {
+    top: 0;
+  }
+  
+  </style>
+  <script src="site_libs/jquery-1.11.3/jquery.min.js"></script>
+  <link href="site_libs/distill-2.2.21/distill.css" rel="stylesheet" />
+  <script src="site_libs/distill-2.2.21/distill.js"></script>
+  <script src="site_libs/distill-2.2.21/template.v2.js"></script>
+  <script src="site_libs/distill-2.2.21/distill-post.js"></script>
+  <script src="site_libs/headroom-0.9.4/headroom.min.js"></script>
+  <link href="site_libs/font-awesome-4.5.0/css/font-awesome.min.css" rel="stylesheet" />
+
+  <link rel="stylesheet" href="styles.css" type="text/css" />
+
+</head>
+
+<body>
+
+<header class="header header--fixed" role="banner">
+<nav class="radix-site-nav radix-site-header">
+<div class="nav-left">
+<a class="logo" href="https://www.rstudio.com">
+<img src="images/logo.png"/>
+</a>
+<a href="index.html" class="title">Radix for R Markdown</a>
+</div>
+<div class="nav-right">
+<div class="nav-dropdown">
+<button class="nav-dropbtn">
+Figures
+ 
+<span class="down-arrow">&#x25BE;</span>
+</button>
+<div class="nav-dropdown-content">
+<a href="figures.html">Figure Layout</a>
+<a href="diagrams.html">Diagrams</a>
+<a href="interactivity.html">JavaScript &amp; D3</a>
+</div>
+</div>
+<a href="tables.html">Tables</a>
+<a href="citations.html">Citations</a>
+<a href="https://github.com/rstudio/radix">
+<i class="fa fa-github"></i>
+</a>
+<a href="javascript:void(0);" class="nav-toggle">&#9776;</a>
+</div>
+</nav>
+</header>
+
+<d-title>
+<h1>Citations</h1>
+<p>Referencing other works and creating citeable articles</p>
+</d-title>
+
+
+<d-article>
+<p>Radix articles support including citations and a corresponding bibliography using standard R Markdown citation syntax. Radix also provides tools for making your articles more <a href="#creating-citeable-articles">easily citeable</a>, as well as for generating <a href="#google-scholar-metadata">Google Scholar</a> compatible citation metadata.</p>
+<h2 id="citing-other-works">Citing other works</h2>
+<p><a href="http://www.bibtex.org/">BibTeX</a> is the supported way of making academic citations. To include citations, first create a BibTeX file and refer to it from the <code>bibliography</code> field of the YAML front-matter. For example:</p>
+<pre class="markup"><code>
+---
+title: &quot;Radix for R Markdown&quot;
+description: | 
+  Scientific and technical writing, native to the web
+output: radix::radix_article
+date: May 4, 2018
+author:
+  - name: Nora Jones 
+    url: https://example.com/norajones
+    affiliation: Spacely Sprockets
+    affiliation_url: https://example.com/spacelysprokets
+bibliography: biblio.bib
+---</code></pre>
+<p>Here’s an example of what one of the entries in your BibTeX file might look like:</p>
+<pre class="markup"><code>
+@Book{xie2015,
+  title = {Dynamic Documents with R and knitr},
+  author = {Yihui Xie},
+  publisher = {Chapman and Hall/CRC},
+  address = {Boca Raton, Florida},
+  year = {2015},
+  edition = {2nd},
+  note = {ISBN 978-1498716963},
+  url = {http://yihui.name/knitr/},
+}</code></pre>
+<p>To cite this within your article, use standard R Markdown notation, for example: <code>[@xie2015]</code> (referencing an id provided in the bibliography). Note that multiple ids (separated by semicolons) can be provided.</p>
+<p>The citation is presented inline like this: <span class="citation">(Xie <a href="#ref-xie2015">2015</a>)</span> (a number that displays more information on hover). If you have an appendix, a bibliography is automatically created and populated within it.</p>
+<p>Radix chose a numerical inline citation style to improve readability of citation dense articles and because many of the benefits of longer citations are obviated by displaying more information on hover. However, we consider it good style to mention author last names if you discuss something at length and it fits into the flow well—the authors are human and it’s nice for them to have the community associate them with their work.</p>
+<p>Also note that you are strongly encouraged you to populate the <code>url</code> BibTeX field where possible so that links can be provided for citations.</p>
+<h2 id="creating-citeable-articles">Creating citeable articles</h2>
+<p>You can make it easier for others to cite your work by providing additional metadata with the YAML front-matter of your article. Citations can be provided for both articles published to the web or for articles published in journals (with or without a <a href="https://www.doi.org/">DOI</a>).</p>
+<h3 id="web-articles">Web articles</h3>
+<p>To provide a citation for an article published to the web, include <code>author</code> and <code>data</code> metadata as well as a <code>citation_url</code>. For example:</p>
+<pre class="markup"><code>
+---
+title: &quot;Radix for R Markdown&quot;
+description: | 
+  Scientific and technical writing, native to the web
+date: May 4, 2018
+author:
+  - name: Nora Jones 
+    url: https://example.com/norajones
+    affiliation: Spacely Sprockets
+    affiliation_url: https://example.com/spacelysprokets
+citation_url: https://rstudio.github.io/radix
+slug: jones2018radix
+bibliography: biblio.bib
+---</code></pre>
+<p>When this metadata is available, a citation appendix is automatically added to the article which looks like this:</p>
+<p><img src="images/citation.png" class="screenshot" style="width:95.0%" /></p>
+<p>Note that we also included a <code>slug</code> field (in this case <code>jones2018radix</code>) which affects the abbreviated version of the citation included in the BibTeX entry. If you don’t provide a <code>slug</code> then one will be automatically generated.</p>
+<h3 id="journal-articles">Journal articles</h3>
+<p>If your article is published within a Journal, you can add the following the additional fields to generate the appropriate citation entry:</p>
+<table>
+<thead>
+<tr class="header">
+<th>Metadata</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><code>journal</code></td>
+<td>Name of Journal published within</td>
+</tr>
+<tr class="even">
+<td><code>doi</code></td>
+<td>Digital Object Identifier (<a href="https://www.doi.org/">DOI</a>)</td>
+</tr>
+</tbody>
+</table>
+<p>Here’s our previous examples amended with these fields:</p>
+<pre class="markup"><code>
+---
+title: &quot;Radix for R Markdown&quot;
+description: | 
+  Scientific and technical writing, native to the web
+date: May 4, 2018
+author:
+  - name: Nora Jones 
+    url: https://example.com/norajones
+    affiliation: Spacely Sprockets
+    affiliation_url: https://example.com/spacelysprokets
+journal: &quot;Journal of Data Science Software&quot;
+doi: &quot;10.23915/distill.00010&quot;
+slug: jones2018radix
+citation_url: https://rstudio.github.io/radix
+bibliography: biblio.bib
+---</code></pre>
+<p>This is how the citation is presented in the appendix:</p>
+<p><img src="images/citation-journal.png" class="screenshot" style="width:95.0%" /></p>
+<p>For Journal articles, the <code>citation_url</code> is included in the BibTeX entry within the <code>note</code> field.</p>
+<h2 id="google-scholar-metadata">Google Scholar metadata</h2>
+<p>Radix articles automatically include metadata compatible with the format indexed by <a href="https://scholar.google.com/intl/en/scholar/inclusion.html#indexing">Google Scholar</a>. This makes it easy for indexing engines (Google Scholar or otherwise) to extract not only a citation for your article but also information on other sources which you cited.</p>
+<p>For example, here is the Google Scholar metadata automatically included for the home page of the Radix website:</p>
+<pre class="html"><code>
+&lt;!--  https://scholar.google.com/intl/en/scholar/inclusion.html#indexing --&gt;
+&lt;meta name=&quot;citation_title&quot; content=&quot;Radix for R Markdown&quot;/&gt;
+&lt;meta name=&quot;citation_fulltext_html_url&quot; content=&quot;https://rstudio.github.io/radix&quot;/&gt;
+&lt;meta name=&quot;citation_fulltext_world_readable&quot; content=&quot;&quot;/&gt;
+&lt;meta name=&quot;citation_online_date&quot; content=&quot;2018/05/04&quot;/&gt;
+&lt;meta name=&quot;citation_publication_date&quot; content=&quot;2018/05/04&quot;/&gt;
+&lt;meta name=&quot;citation_author&quot; content=&quot;JJ Allaire&quot;/&gt;
+&lt;meta name=&quot;citation_author_institution&quot; content=&quot;RStudio&quot;/&gt;
+&lt;meta name=&quot;citation_author&quot; content=&quot;Rich Iannone&quot;/&gt;
+&lt;meta name=&quot;citation_author_institution&quot; content=&quot;RStudio&quot;/&gt;
+&lt;meta name=&quot;citation_author&quot; content=&quot;Yihui Xie&quot;/&gt;
+&lt;meta name=&quot;citation_author_institution&quot; content=&quot;RStudio&quot;/&gt;
+&lt;meta name=&quot;citation_reference&quot; content=&quot;citation_title=Distill;
+citation_publication_date=2016;citation_publisher=Distill Working
+Group;citation_doi=10.23915/distill;citation_author=Shan Carter;
+citation_author=Chirs Olah;citation_author=Arvind Satyanarayan&quot;/&gt;
+&lt;meta name=&quot;citation_reference&quot; content=&quot;citation_title=Literate
+programming;citation_publication_date=1984;
+citation_publisher=British Computer Society;citation_volume=27;
+citation_author=Donald E. Knuth&quot;/&gt;
+&lt;meta name=&quot;citation_reference&quot; content=&quot;citation_title=Dynamic
+documents with r and knitr;citation_publication_date=2015;
+citation_publisher=Chapman; Hall/CRC;citation_author=Yihui Xie&quot;/&gt;</code></pre>
+<p>Note that the <code>citation_reference</code> fields provide information on which works your article cited.</p>
+<p>The code above is HTML so don’t worry if you aren’t familiar with the syntax. The important thing to know is that citation data is provided in a way that machines can easily read and index.</p>
+<p>If you are publishing a Journal article, there are some additional metadata fields you can provide to enhance the Google Scholar metadata generated by Radix. These include additional fields describing the Journal (<code>title</code>, <code>issn</code>, and <code>publisher</code>) as well fields describing the <code>volume</code> and <code>issue</code> in which your article was published. For example:</p>
+<pre class="markup"><code>
+---
+title: &quot;Radix for R Markdown&quot;
+description: | 
+  Scientific and technical writing, native to the web
+date: May 4, 2018
+author:
+  - name: Nora Jones 
+    url: https://example.com/norajones
+    affiliation: Spacely Sprockets
+    affiliation_url: https://example.com/spacelysprokets
+journal: 
+  title: &quot;Journal of Data Science Software&quot;
+  issn: 2490-1752
+  publisher: Data Science Press
+volume: 10
+issue: 4
+doi: &quot;10.23915/distill.00010&quot;
+slug: jones2018radix
+citation_url: https://rstudio.github.io/radix
+bibliography: biblio.bib
+---</code></pre>
+<div id="refs" class="references">
+<div id="ref-xie2015">
+<p>Xie, Yihui. 2015. <em>Dynamic Documents with R and Knitr</em>. 2nd ed. Boca Raton, Florida: Chapman; Hall/CRC. <a href="http://yihui.name/knitr/" class="uri">http://yihui.name/knitr/</a>.</p>
+</div>
+</div>
+</d-article>
+
+<d-appendix>
+</d-appendix>
+
+<div class="appendix-bottom">
+<h3 id="updates-and-corrections">Updates and Corrections</h3>
+<p>If you see mistakes or want to suggest changes, please <a href="https://github.com/rstudio/radix/issues/new">create an issue</a> on the source repository.</p>
+<h3 id="reuse">Reuse</h3>
+<p>Text and figures are licensed under Creative Commons Attribution <a rel="license" href="https://creativecommons.org/licenses/by/4.0/">CC-BY 4.0</a>. Source code is available at <a rel="license" href="https://github.com/rstudio/radix">https://github.com/rstudio/radix</a>, unless otherwise noted. The figures that have been reused from other sources don’t fall under this license and can be recognized by a note in their caption: "Figure from ...".</p>
+</div>
+<d-bibliography>
+<script type="text/bibtex">
+@misc{distill,
+  author = {Shan Carter and Chirs Olah and Arvind Satyanarayan},
+  doi = {10.23915/distill},
+  url = {https://doi.org/10.23915/distill},
+  publisher = {Distill Working Group},
+  title = {Distill},
+  year = {2016}
+}
+@article{knuth1984,
+  title={Literate programming},
+  author={Knuth, Donald E.},
+  journal={The Computer Journal},
+  volume={27},
+  number={2},
+  pages={97--111},
+  year={1984},
+  publisher={British Computer Society}
+}
+@Book{xie2015,
+  title = {Dynamic Documents with R and knitr},
+  author = {Yihui Xie},
+  publisher = {Chapman and Hall/CRC},
+  address = {Boca Raton, Florida},
+  year = {2015},
+  edition = {2nd},
+  note = {ISBN 978-1498716963},
+  url = {http://yihui.name/knitr/},
+}
+
+
+
+</script>
+</d-bibliography>
+<div class="radix-site-nav radix-site-footer">
+<p>© Copyright 2018 <a href="https://github.com/distillpub/template/blob/master/AUTHORS">The Distill Template Authors</a> and <a href="https://www.rstudio.com">RStudio, Inc.</a>.</p>
+<p>Software licensed under the <a href="https://www.apache.org/licenses/LICENSE-2.0">Apache License, v2.0</a>.</p>
+</div>
+
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    script.src  = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML";
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script>
+
+</body>
