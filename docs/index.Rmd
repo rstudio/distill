@@ -34,11 +34,8 @@ bibliography: biblio.bib
     - publishing/previewing workflow?
     - app.R or ui.R / server.R in the same directory; automagic local run
 
-- metadata docs
-    - reference citr package
-- site docs
 
-- apply jonathan patch
+- site docs
 
 - safari shows author section
 
@@ -51,10 +48,6 @@ Figures Tables Citations Shiny Publish \/  <ghicon>
                                 -----
                                 Article Metadata 
                                 
-
-Metadata
-
-
 - articles/index pages
     - https://github.com/wikiti/jquery-paginate
     - iframe based inclusion

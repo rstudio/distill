@@ -154,7 +154,7 @@ twitter:
 Be sure to enclose the Twitter account names in quotes (this is required because they start with `@`).
 
 
-```{r, child="_google_scholar.Rmd"}
+```{r, child="_common/google_scholar.Rmd"}
 ```
 
 

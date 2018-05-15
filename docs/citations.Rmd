@@ -121,7 +121,7 @@ This is how the citation is presented in the appendix:
 
 For Journal articles, the `citation_url` is included in the BibTeX entry within the `note` field.
 
-```{r, child="_google_scholar.Rmd"}
+```{r, child="_common/google_scholar.Rmd"}
 ```
 
 
