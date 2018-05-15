@@ -44,14 +44,15 @@ Figures Tables Citations Shiny Publish \/  <ghicon>
                                 -----
                                 Creating a Blog or Journal
                                 -----
-                                Open Graph & Twitter 
+                                Article Metadata 
                                 
 
-Need to incorporate source and licensing
+Metadata
 
 
 - articles/index pages
     - https://github.com/wikiti/jquery-paginate
+    - iframe based inclusion
 
 
 
