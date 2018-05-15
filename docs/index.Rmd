@@ -38,6 +38,10 @@ bibliography: biblio.bib
     - reference citr package
 - site docs
 
+- apply jonathan patch
+
+- safari shows author section
+
 
 Figures Tables Citations Shiny Publish \/  <ghicon>
                                 Publishing an Article
