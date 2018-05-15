@@ -2,7 +2,7 @@
 /* Hide doc at startup (prevent jankiness while JS renders/transforms) */
 
 body {
-  display: none;
+  opacity: 0;
 }
 
 /* Hide pandoc bibliography and footnotes  */
