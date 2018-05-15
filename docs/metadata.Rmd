@@ -7,7 +7,7 @@ description: Enhance published articles by providing metadata
 library(knitr)
 ```
 
-You can enhance Radix articles by providing metadata in a variety of ways, including:
+You can enhance Radix articles by providing various types of metadata, including:
 
 1) Links to the article's source code repository.
 
