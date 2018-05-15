@@ -202,7 +202,7 @@ transform_metadata <- function(input_dir, site_config, metadata) {
   # allow site level metadata to propagate
   site_metadata <- c("repository_url", "compare_updates_url", "creative_commons",
                      "license_url", "publish_url", "preview", "slug", "citation_url",
-                     "journal")
+                     "journal", "twitter")
   for (name in site_metadata)
     metadata[[name]] <- merge_lists(site_config[[name]], metadata[[name]])
 
@@ -529,6 +529,12 @@ twitter_card_metadata <- function(site_config, metadata) {
   add_twitter_card_meta("twitter:image", metadata$preview)
   add_twitter_card_meta("twitter:image:width", metadata$preview_width)
   add_twitter_card_meta("twitter:image:height", metadata$preview_height)
+
+  # twitter attribution
+  if (!is.null(metadata$twitter)) {
+    add_twitter_card_meta("twitter:site", metadata$twitter$site)
+    add_twitter_card_meta("twitter:creator", metadata$twitter$creator)
+  }
 
   twitter_card_meta
 }

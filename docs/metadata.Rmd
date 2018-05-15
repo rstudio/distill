@@ -92,8 +92,66 @@ Using the `.external` class and providing a "Figure from" link makes it clear th
 
 ## Open Graph
 
+The [Open Graph protocol](http://ogp.me/) is a specification that enables richer sharing of links to aricles on the web. Open Graph metadata is automatically generated for Radix articles. For example, here's what you see in Slack when pasting in a link to the article on using [JavaScript and D3](interactivity.html) within Radix articles:
+
+![](images/open-graph-screenshot.png){width=95% .screenshot}
+
+Slack uses Open Graph to extract and display the title, description, and a preview image for the link.
+
+### Preview images
+
+Most Open Graph metadata is created automatically from standard article metadata that you already provide (e.g. `title` and `description`). However, if you want to include a preview image for your article, you need to provide the `preview` field. For example:
+
+```markup
+---
+title: "JavaScript & D3"
+description: Enhance communication with interactive visualizations 
+preview: https://rstudio.github.io/radix/images/javascript-d3-preview.png
+---
+```
+
+Note that the preview image is specified with a full absolute URL. This is a requirement of Open Graph (relative image references are not supported). If you are publishing a standalone self-contained HTML version of your article then you'll need to upload the preview image to another location on the web in order to reference it.
+
+If however your article is not self-contained (it's part of a website or is generated with  `self_contained: false`) then you can include the preview image alongside your document. In this case you still need to specify the root URL where your image will be published to using the `publish_url` field:
+
+```markup
+---
+title: "JavaScript & D3"
+description: Enhance communication with interactive visualizations 
+publish_url: https://rstudio.github.io/radix
+preview: images/javascript-d3-preview.png
+---
+```
+
+This technique is generally preferable to including the full URL since it allows Radix to inspect the image file directly and emit additional information about it's size as part of the Open Graph metadata. 
 
 ## Twitter Card
+
+[Twitter Cards](https://developer.twitter.com/en/docs/tweets/optimize-with-cards/overview/abouts-cards) are a way of enhancing the appearance of links to your article on Twitter. When a link to your article is included in a Tweet, Twitter automatically crawls your site to fetch any available Twitter Card metadata.
+
+For example, here's what happens when you include a link to <https://rstudio.github.io/radix/interactivity.html> within a tweet:
+
+![](images/twitter-card-screenshot.png){width=95%}
+
+Note that as with [Open Graph], in order to have a preview image displayed on Twitter you need to include a `preview` field in your metadata. See the section on [preview images] for additional details.
+
+There are two additional fields you can include that include attribution of your link to the Twitter account of a website and/or creator of the article. This attribution is provided via the `twitter:site` and `twitter:creator` fields. 
+
+Here's a complete example that includes the attribution fields as well as a preview image:
+
+```markup
+---
+title: "JavaScript & D3"
+description: Enhance communication with interactive visualizations 
+publish_url: https://rstudio.github.io/radix
+preview: images/javascript-d3-preview.png
+twitter:
+  site: "@rstudio"
+  creator: "@fly_upside_down"
+---
+```
+
+Be sure to enclose the Twitter account names in quotes (this is required because they start with `@`).
 
 
 ## Google Scholar
