@@ -13,7 +13,6 @@
 
 - site docs
 
-- RStudio < v1.2 error message
 - IE 10/11 default styles (note that we don't need responsiveness here)
 
 Figures Tables Citations Shiny Publish \/  <ghicon>
