@@ -347,13 +347,6 @@
   <script src="site_libs/font-awesome-5.0.13/js/fontawesome-all.min.js"></script>
   <script src="site_libs/font-awesome-5.0.13/js/fa-v4-shims.min.js"></script>
   
-  <!----
-  
-  - test on IE 11
-  - test on iOS
-  
-  --->
-  
   <!-- distill custom css for radix -->
   
   <style type="text/css">
@@ -426,7 +419,6 @@
   /* Tweak code blocks (note that this CSS is repeated above in an injection
      into the d-code shadow dom) */
   
-  
   pre.d-code code.d-code {
     padding-left: 0;
     font-size: 12px;
@@ -484,6 +476,25 @@
     margin-top: -12px;
     white-space: pre-wrap;
     word-wrap: break-word;
+  }
+  
+  /* Improve display for browsers without grid (IE 10/11, Edge <= 15) */
+  
+  @supports not (display: grid) {
+    .base-grid,
+    distill-header,
+    d-title,
+    d-abstract,
+    d-article,
+    d-appendix,
+    distill-appendix,
+    d-byline,
+    d-footnote-list,
+    d-citation-list,
+    distill-footer {
+      padding-left: 20px;
+      padding-right: 20px;
+    }
   }
   
   </style>
