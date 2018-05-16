@@ -454,20 +454,6 @@ in_header_includes <- function(input_dir, site_config, metadata) {
   writeLines(meta_html, meta_file)
   in_header <- c(in_header, meta_file)
 
-  # write front-matter into script tag
-  front_matter_tag <- c(
-    '',
-    '<d-front-matter>',
-    '<script id="distill-front-matter" type="text/json">',
-    front_matter_from_metadata(metadata),
-    '</script>',
-    '</d-front-matter>',
-    ''
-  )
-  front_matter_file <- tempfile(fileext = "html")
-  writeLines(front_matter_tag, front_matter_file)
-  in_header <- c(in_header, front_matter_file)
-
   # if we have a site navbar
   if (!is.null(site_config[["navbar"]])) {
 
@@ -669,6 +655,20 @@ before_body_includes <- function(input_dir, site_config, metadata) {
 
   before_body <- c()
 
+  # write front-matter into script tag
+  front_matter_tag <- c(
+    '',
+    '<d-front-matter>',
+    '<script id="distill-front-matter" type="text/json">',
+    front_matter_from_metadata(metadata),
+    '</script>',
+    '</d-front-matter>',
+    ''
+  )
+  front_matter_file <- tempfile(fileext = "html")
+  writeLines(front_matter_tag, front_matter_file)
+  before_body <- c(before_body, front_matter_file)
+  
   # helper to yield icon class
   icon_class <- function(icon) {
     if (grepl("^fa[a-z]? ", icon))

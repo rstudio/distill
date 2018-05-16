@@ -1,9 +1,11 @@
-<!doctype html>
+<!DOCTYPE html>
+
+<html xmlns="http://www.w3.org/1999/xhtml" lang="$lang$" xml:lang="$lang$"$if(dir)$ dir="$dir$"$endif$>
 
 <head>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1" >
-  <meta http-equiv="X-UA-Compatible" content="IE=Edge,chrome=1">
+  <meta charset="utf-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta http-equiv="X-UA-Compatible" content="IE=Edge,chrome=1"/>
   <meta name="generator" content="radix" />
 
   <title>$if(title-prefix)$$title-prefix$: $endif$$pagetitle$</title>
@@ -20,7 +22,7 @@ $for(header-includes)$
 $endfor$
 
 $for(css)$
-  <link rel="stylesheet" href="$css$" $if(html5)$$else$type="text/css" $endif$/>
+  <link rel="stylesheet" href="$css$" type="text/css"/>
 $endfor$
 
 </head>
@@ -100,3 +102,4 @@ $endif$
 
 </body>
 
+</html>
