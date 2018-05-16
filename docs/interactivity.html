@@ -648,12 +648,13 @@
       load_distill_framework();
     } catch(e) {
       on_load_complete();
+      return;
     }
   
     // wait for window.distillRunlevel == 4 to do post processing
     function distill_post_process() {
   
-      if (window.distillRunlevel < 4)
+      if (!window.distillRunlevel || window.distillRunlevel < 4)
         return;
   
       // hide author/affiliations entirely if we have no authors
@@ -711,10 +712,8 @@
       on_load_complete();
     }
   
-    if (window.distillRunlevel) {
-      var tid = setInterval(distill_post_process, 50);
-      distill_post_process();
-    }
+    var tid = setInterval(distill_post_process, 50);
+    distill_post_process();
   
   });
   </script>
