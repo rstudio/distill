@@ -37,8 +37,7 @@ bibliography: biblio.bib
 
 - site docs
 
-- IE 10/11 message
-- RStudio v1.1 message
+- IE 10/11
 
 Figures Tables Citations Shiny Publish \/  <ghicon>
                                 Publishing an Article
