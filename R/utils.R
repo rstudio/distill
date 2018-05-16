@@ -45,8 +45,11 @@ parse_date <- function(date) {
 date_as_iso_8601 <- function(date, date_only = FALSE) {
   if (date_only)
     format.Date(date, "%Y-%m-%d")
-  else
-    format.Date(date, "%Y-%m-%dT00:00:00.000%z")
+  else {
+    date_text <- format.Date(date, "%Y-%m-%dT00:00:00.000%z")
+    date_text <- sub("(\\d{2})(\\d{2})$", "\\1:\\2", date_text)
+    date_text
+  }
 }
 
 is_file_type <- function(file, type) {
