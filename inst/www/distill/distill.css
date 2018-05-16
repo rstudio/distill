@@ -1,0 +1,145 @@
+/* Hide pandoc bibliography and footnotes  */
+
+#refs, .footnotes {
+  display: none;
+}
+
+.pandoc-table {
+  width: 100%;
+}
+
+.pandoc-table th:not([align]) {
+  text-align: left;
+}
+
+.pagedtable-footer {
+  font-size: 15px;
+}
+
+.html-widget {
+  margin-bottom: 2.0em;
+}
+
+.l-screen-inset {
+  padding-right: 16px;
+}
+
+.text-output {
+  margin-top: 0;
+  line-height: 1em;
+}
+
+.hidden {
+  display: none;
+}
+
+.figure .caption {
+  color: rgba(0,0,0,0.6);
+  font-size: 12px;
+  line-height: 1.5em;
+}
+
+.figure .caption a {
+  color: rgba(0,0,0,0.6);
+}
+
+.figure .caption b,
+.figure .caption strong {
+  font-weight: 600;
+  color: rgba(0, 0, 0, 1);
+}
+
+@media(min-width: 1024px) {
+  .figure .caption {
+    font-size: 13px;
+  }
+}
+
+.figure img.external {
+  background: white;
+  border: 1px solid rgba(0, 0, 0, 0.1);
+  box-shadow: 0 1px 8px rgba(0, 0, 0, 0.1);
+  padding: 18px;
+  box-sizing: border-box;
+}
+
+/* Tweak code blocks (note that this CSS is repeated above in an injection
+   into the d-code shadow dom) */
+
+pre.d-code code.d-code {
+  padding-left: 0;
+  font-size: 12px;
+  border-left: none;
+}
+
+@media(min-width: 768px) {
+pre.d-code code.d-code  {
+    padding-left: 18px;
+    border-left: 2px
+    solid rgba(0,0,0,0.1);
+    font-size: 14px;
+}
+}
+
+
+
+/* Add an additional media break (since the text column was a bit narrow at 1100px) */
+
+@media(min-width: 1100px) {
+  .base-grid,
+  distill-header,
+  d-title,
+  d-abstract,
+  d-article,
+  d-appendix,
+  distill-appendix,
+  d-byline,
+  d-footnote-list,
+  d-citation-list,
+  distill-footer {
+    grid-template-columns: [screen-start] 1fr [page-start kicker-start] 55px [middle-start] 55px [text-start kicker-end] 55px 55px 55px 55px 55px 55px 55px 55px [text-end gutter-start] 55px [middle-end] 55px [page-end gutter-end] 1fr [screen-end];
+    grid-column-gap: 32px;
+  }
+
+  .grid {
+    grid-column-gap: 32px;
+  }
+}
+
+/* Get the citation styles for the appendix (not auto-injected on render since
+   we do our own rendering of the citation appendix) */
+
+d-appendix .citation-appendix {
+  font-size: 11px;
+  line-height: 15px;
+  border-left: 1px solid rgba(0, 0, 0, 0.1);
+  padding-left: 18px;
+  border: 1px solid rgba(0,0,0,0.1);
+  background: rgba(0, 0, 0, 0.02);
+  padding: 10px 18px;
+  border-radius: 3px;
+  color: rgba(150, 150, 150, 1);
+  overflow: hidden;
+  margin-top: -12px;
+  white-space: pre-wrap;
+  word-wrap: break-word;
+}
+
+/* Improve display for browsers without grid (IE 10/11, Edge <= 15) */
+
+@supports not (display: grid) {
+  .base-grid,
+  distill-header,
+  d-title,
+  d-abstract,
+  d-article,
+  d-appendix,
+  distill-appendix,
+  d-byline,
+  d-footnote-list,
+  d-citation-list,
+  distill-footer {
+    padding-left: 20px;
+    padding-right: 20px;
+  }
+}

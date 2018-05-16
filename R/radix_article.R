@@ -137,10 +137,11 @@ radix_article <- function(fig_width = 6,
     args <- c()
 
     # distill framework include
-    distill_header_includes <- system.file(
-      "rmarkdown/templates/radix_article/resources/distill.html",
-      package = "radix"
-    )
+    # distill_header_includes <- system.file(
+    #   "rmarkdown/templates/radix_article/resources/distill.html",
+    #   package = "radix"
+    # )
+    distill_header_includes <- c()
 
     # includes are ordered distill then user includes
     args <- c(args, pandoc_include_args(
@@ -178,9 +179,10 @@ radix_article <- function(fig_width = 6,
 html_dependency_distill <- function() {
   htmltools::htmlDependency(
     name = "distill",
-    version = "2.0.0",
+    version = "2.2.21",
     src = system.file("www/distill", package = "radix"),
-    script = c("template.v2.js")
+    script = c("template.v2.js", "distill.js"),
+    stylesheet = c("distill.css")
   )
 }
 
