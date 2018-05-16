@@ -516,6 +516,28 @@
   
   window.addEventListener('WebComponentsReady', function() {
   
+    // create front matter
+    var front_matter = $('<d-front-matter></d-front-matter>');
+    $('#distill-front-matter').wrap(front_matter);
+  
+    // create d-title
+    $('.d-title').changeElementType('d-title');
+  
+    // create d-byline
+    var byline = $('<d-byline></d-byline>');
+    $('.d-byline').replaceWith(byline);
+  
+    // create d-article
+    var article = $('<d-article></d-article>');
+    $('.d-article').wrap(article);
+  
+    // create d-appendix
+    $('.d-appendix').changeElementType('d-appendix');
+  
+    // create d-bibliography
+    var bibliography = $('<d-bibliography></d-bibliography>');
+    $('#distill-bibliography').wrap(bibliography);
+  
     // flag indicating that we have appendix items
     var appendix = $('.appendix-bottom').children('h3').length > 0;
   
@@ -689,11 +711,9 @@
 <body>
 
 
-<d-front-matter>
 <script id="distill-front-matter" type="text/json">
 {"title":"Figure Layout","description":"Amplify figures by customizing layout","authors":[]}
 </script>
-</d-front-matter>
 <header class="header header--fixed" role="banner">
 <nav class="radix-site-nav radix-site-header">
 <div class="nav-left">
@@ -725,13 +745,13 @@ Figures
 </nav>
 </header>
 
-<d-title>
+<div class="d-title">
 <h1>Figure Layout</h1>
 <p>Amplify figures by customizing layout</p>
-</d-title>
+</div>
 
 
-<d-article>
+<div class="d-article">
 <p>There are a variety of ways to layout figures included within Radix articles. This layout is controlled by a set of layout classes, which are in turn applied to R Markdown chunks using the <code>layout</code> chunk option.</p>
 <p>The default layout if <code>layout</code> is not specified is <code>l-body</code>, which will cause content to span the width of the main article body:</p>
 <div class="fake-img l-body">
@@ -800,10 +820,10 @@ leaflet() %&gt;%
 <img src="images/heatmap.png" alt="Figure from https://stackoverflow.com/questions/12196756/" class="external" style="width:100.0%" />
 <p class="caption">Figure from <a href="https://stackoverflow.com/questions/12196756/" class="uri">https://stackoverflow.com/questions/12196756/</a></p>
 </div>
-</d-article>
+</div>
 
-<d-appendix>
-</d-appendix>
+<div class="d-appendix">
+</div>
 
 <div class="appendix-bottom">
 <h3 id="updates-and-corrections">Updates and Corrections</h3>

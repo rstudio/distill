@@ -535,6 +535,28 @@
   
   window.addEventListener('WebComponentsReady', function() {
   
+    // create front matter
+    var front_matter = $('<d-front-matter></d-front-matter>');
+    $('#distill-front-matter').wrap(front_matter);
+  
+    // create d-title
+    $('.d-title').changeElementType('d-title');
+  
+    // create d-byline
+    var byline = $('<d-byline></d-byline>');
+    $('.d-byline').replaceWith(byline);
+  
+    // create d-article
+    var article = $('<d-article></d-article>');
+    $('.d-article').wrap(article);
+  
+    // create d-appendix
+    $('.d-appendix').changeElementType('d-appendix');
+  
+    // create d-bibliography
+    var bibliography = $('<d-bibliography></d-bibliography>');
+    $('#distill-bibliography').wrap(bibliography);
+  
     // flag indicating that we have appendix items
     var appendix = $('.appendix-bottom').children('h3').length > 0;
   
@@ -708,11 +730,9 @@
 <body>
 
 
-<d-front-matter>
 <script id="distill-front-matter" type="text/json">
 {"title":"Radix for R Markdown","description":"Scientific and technical writing, native to the web\n","authors":[{"author":"JJ Allaire","authorURL":"https://github.com/jjallaire","affiliation":"RStudio","affiliationURL":"https://www.rstudio.com"},{"author":"Rich Iannone","authorURL":"https://github.com/rich-iannone","affiliation":"RStudio","affiliationURL":"https://www.rstudio.com"},{"author":"Yihui Xie","authorURL":"https://github.com/yihui","affiliation":"RStudio","affiliationURL":"https://www.rstudio.com"}],"publishedDate":"2018-05-04T00:00:00.000-04:00","citationText":"Allaire, et al., 2018"}
 </script>
-</d-front-matter>
 <header class="header header--fixed" role="banner">
 <nav class="radix-site-nav radix-site-header">
 <div class="nav-left">
@@ -744,55 +764,33 @@ Figures
 </nav>
 </header>
 
-<d-title>
+<div class="d-title">
 <h1>Radix for R Markdown</h1>
 <p>Scientific and technical writing, native to the web</p>
-</d-title>
+</div>
 
-<d-byline>
-<div class="byline grid">
-<div class="authors-affiliations grid">
+<div class="d-byline">
 <h3>Authors</h3>
-<h3>Affiliations</h3>
     <p class="author">
-      <a class="name">JJ Allaire</a>
-      <a href="https://github.com/jjallaire" class="uri">https://github.com/jjallaire</a>
+      JJ Allaire <a href="https://github.com/jjallaire" class="uri">https://github.com/jjallaire</a>
+      <br/>
+      RStudio <a href="https://www.rstudio.com" class="uri">https://www.rstudio.com</a>
   </p>
-  <p class="affiliation">
-      <a class="affiliation">RStudio</a>
-      <a href="https://www.rstudio.com" class="uri">https://www.rstudio.com</a>
-    </p>
       <p class="author">
-      <a class="name">Rich Iannone</a>
-      <a href="https://github.com/rich-iannone" class="uri">https://github.com/rich-iannone</a>
+      Rich Iannone <a href="https://github.com/rich-iannone" class="uri">https://github.com/rich-iannone</a>
+      <br/>
+      RStudio <a href="https://www.rstudio.com" class="uri">https://www.rstudio.com</a>
   </p>
-  <p class="affiliation">
-      <a class="affiliation">RStudio</a>
-      <a href="https://www.rstudio.com" class="uri">https://www.rstudio.com</a>
-    </p>
       <p class="author">
-      <a class="name">Yihui Xie</a>
-      <a href="https://github.com/yihui" class="uri">https://github.com/yihui</a>
+      Yihui Xie <a href="https://github.com/yihui" class="uri">https://github.com/yihui</a>
+      <br/>
+      RStudio <a href="https://www.rstudio.com" class="uri">https://www.rstudio.com</a>
   </p>
-  <p class="affiliation">
-      <a class="affiliation">RStudio</a>
-      <a href="https://www.rstudio.com" class="uri">https://www.rstudio.com</a>
-    </p>
-  </div>
-<div>
   <h3>Published</h3>
-  <p>May 4, 2018</p>
+<p>May 4, 2018</p>
 </div>
-<div>
-  <h3>DOI</h3>
-  <p><em>No DOI yet.</em>
-</div>
-<div>
-</div>
-</div>
-</d-byline>
 
-<d-article>
+<div class="d-article">
 <p>Radix is an online publication format designed for scientific and technical communication. Radix articles include:</p>
 <ul>
 <li>Reader-friendly typography that adapts well to mobile devices.</li>
@@ -956,10 +954,10 @@ describing what each author did.</code></pre>
 <li id="fn1"><p>This will become a hover-able footnote<a href="#fnref1" class="footnote-back">↩</a></p></li>
 </ol>
 </div>
-</d-article>
+</div>
 
-<d-appendix>
-</d-appendix>
+<div class="d-appendix">
+</div>
 
 <div class="appendix-bottom">
 <h3 id="updates-and-corrections">Updates and Corrections</h3>
@@ -983,8 +981,7 @@ If you see mistakes or want to suggest changes, please <a href="https://github.c
   year = {2018}
 }</pre>
 </div>
-<d-bibliography>
-<script type="text/bibtex">
+<script id="distill-bibliography" type="text/bibtex">
 @misc{distill,
   author = {Shan Carter and Chirs Olah and Arvind Satyanarayan},
   doi = {10.23915/distill},
@@ -1017,7 +1014,6 @@ If you see mistakes or want to suggest changes, please <a href="https://github.c
 
 
 </script>
-</d-bibliography>
 <div class="radix-site-nav radix-site-footer">
 <p>© Copyright 2018 <a href="https://github.com/distillpub/template/blob/master/AUTHORS">The Distill Template Authors</a> and <a href="https://www.rstudio.com">RStudio, Inc</a>.</p>
 <p>Software licensed under the <a href="https://www.apache.org/licenses/LICENSE-2.0">Apache License, v2.0</a>.</p>

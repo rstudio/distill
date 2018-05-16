@@ -35,54 +35,38 @@ $include-before$
 $endfor$
 $endif$
 
-<d-title>
+<div class="d-title">
 <h1>$pagetitle$</h1>
 $if(description)$<p>$description$</p>$endif$
-</d-title>
+</div>
 
 $if(author)$
-<d-byline>
-<div class="byline grid">
-<div class="authors-affiliations grid">
+<div class="d-byline">
 <h3>Authors</h3>
-<h3>Affiliations</h3>
 $for(author)$
   $if(author.name)$
   <p class="author">
-      <a class="name">$author.name$</a>
-      $author.url$
+      $author.name$ $author.url$
+      <br/>
+      $author.affiliation$ $author.affiliation_url$
   </p>
-  <p class="affiliation">
-      <a class="affiliation">$author.affiliation$</a>
-      $author.affiliation_url$
-    </p>
   $else$
   <p class="author">
       $author$
   </p>
   $endif$
 $endfor$
+<h3>Published</h3>
+<p>$if(date)$$date$$else$<em>Not published yet.</em>$endif$</p>
 </div>
-<div>
-  <h3>Published</h3>
-  <p>$if(date)$$date$$else$<em>Not published yet.</em>$endif$</p>
-</div>
-<div>
-  <h3>DOI</h3>
-  <p>$if(doi)$<a href="https://doi.org/$doi$">$doi$</a></p>$else$<em>No DOI yet.</em>$endif$
-</div>
-<div>
-</div>
-</div>
-</d-byline>
 $endif$
 
-<d-article>
+<div class="d-article">
 $body$
-</d-article>
+</div>
 
-<d-appendix>
-</d-appendix>
+<div class="d-appendix">
+</div>
 
 $for(include-after)$
 $include-after$

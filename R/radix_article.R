@@ -658,17 +658,15 @@ before_body_includes <- function(input_dir, site_config, metadata) {
   # write front-matter into script tag
   front_matter_tag <- c(
     '',
-    '<d-front-matter>',
     '<script id="distill-front-matter" type="text/json">',
     front_matter_from_metadata(metadata),
     '</script>',
-    '</d-front-matter>',
     ''
   )
   front_matter_file <- tempfile(fileext = "html")
   writeLines(front_matter_tag, front_matter_file)
   before_body <- c(before_body, front_matter_file)
-  
+
   # helper to yield icon class
   icon_class <- function(icon) {
     if (grepl("^fa[a-z]? ", icon))
@@ -773,11 +771,9 @@ after_body_includes <- function(input_dir, site_config, metadata) {
   if (!is.null(metadata$bibliography)) {
     bibliography_file <-  tempfile(fileext = "html")
     writeLines(c(
-      '<d-bibliography>',
-      '<script type="text/bibtex">',
+      '<script id="distill-bibliography" type="text/bibtex">',
       readLines(metadata$bibliography, warn = FALSE),
-      '</script>',
-      '</d-bibliography>'
+      '</script>'
     ), con = bibliography_file)
     after_body <- c(after_body, bibliography_file)
   }

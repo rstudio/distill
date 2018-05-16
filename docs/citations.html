@@ -508,6 +508,28 @@
   
   window.addEventListener('WebComponentsReady', function() {
   
+    // create front matter
+    var front_matter = $('<d-front-matter></d-front-matter>');
+    $('#distill-front-matter').wrap(front_matter);
+  
+    // create d-title
+    $('.d-title').changeElementType('d-title');
+  
+    // create d-byline
+    var byline = $('<d-byline></d-byline>');
+    $('.d-byline').replaceWith(byline);
+  
+    // create d-article
+    var article = $('<d-article></d-article>');
+    $('.d-article').wrap(article);
+  
+    // create d-appendix
+    $('.d-appendix').changeElementType('d-appendix');
+  
+    // create d-bibliography
+    var bibliography = $('<d-bibliography></d-bibliography>');
+    $('#distill-bibliography').wrap(bibliography);
+  
     // flag indicating that we have appendix items
     var appendix = $('.appendix-bottom').children('h3').length > 0;
   
@@ -681,11 +703,9 @@
 <body>
 
 
-<d-front-matter>
 <script id="distill-front-matter" type="text/json">
 {"title":"Citations","description":"Referencing other works and creating citeable articles","authors":[]}
 </script>
-</d-front-matter>
 <header class="header header--fixed" role="banner">
 <nav class="radix-site-nav radix-site-header">
 <div class="nav-left">
@@ -717,13 +737,13 @@ Figures
 </nav>
 </header>
 
-<d-title>
+<div class="d-title">
 <h1>Citations</h1>
 <p>Referencing other works and creating citeable articles</p>
-</d-title>
+</div>
 
 
-<d-article>
+<div class="d-article">
 <p>Radix articles support including citations and a corresponding bibliography using standard R Markdown citation syntax. Radix also provides tools for making your articles more <a href="#creating-citeable-articles">easily citeable</a>, as well as for generating <a href="#google-scholar">Google Scholar</a> compatible citation metadata.</p>
 <h2 id="citing-other-works">Citing other works</h2>
 <p><a href="http://www.bibtex.org/">BibTeX</a> is the supported way of making academic citations. To include citations, first create a BibTeX file and refer to it from the <code>bibliography</code> field of the YAML front-matter. For example:</p>
@@ -877,10 +897,10 @@ bibliography: biblio.bib
 <p>Xie, Yihui. 2015. <em>Dynamic Documents with R and Knitr</em>. 2nd ed. Boca Raton, Florida: Chapman; Hall/CRC. <a href="http://yihui.name/knitr/" class="uri">http://yihui.name/knitr/</a>.</p>
 </div>
 </div>
-</d-article>
+</div>
 
-<d-appendix>
-</d-appendix>
+<div class="d-appendix">
+</div>
 
 <div class="appendix-bottom">
 <h3 id="updates-and-corrections">Updates and Corrections</h3>
@@ -888,8 +908,7 @@ bibliography: biblio.bib
 <h3 id="reuse">Reuse</h3>
 <p>Text and figures are licensed under Creative Commons Attribution <a rel="license" href="https://creativecommons.org/licenses/by/4.0/">CC BY 4.0</a>. Source code is available at <a href="https://github.com/rstudio/radix">https://github.com/rstudio/radix</a>, unless otherwise noted. The figures that have been reused from other sources don't fall under this license and can be recognized by a note in their caption: "Figure from ...".</p>
 </div>
-<d-bibliography>
-<script type="text/bibtex">
+<script id="distill-bibliography" type="text/bibtex">
 @misc{distill,
   author = {Shan Carter and Chirs Olah and Arvind Satyanarayan},
   doi = {10.23915/distill},
@@ -922,7 +941,6 @@ bibliography: biblio.bib
 
 
 </script>
-</d-bibliography>
 <div class="radix-site-nav radix-site-footer">
 <p>© Copyright 2018 <a href="https://github.com/distillpub/template/blob/master/AUTHORS">The Distill Template Authors</a> and <a href="https://www.rstudio.com">RStudio, Inc</a>.</p>
 <p>Software licensed under the <a href="https://www.apache.org/licenses/LICENSE-2.0">Apache License, v2.0</a>.</p>

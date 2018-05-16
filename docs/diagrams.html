@@ -521,6 +521,28 @@
   
   window.addEventListener('WebComponentsReady', function() {
   
+    // create front matter
+    var front_matter = $('<d-front-matter></d-front-matter>');
+    $('#distill-front-matter').wrap(front_matter);
+  
+    // create d-title
+    $('.d-title').changeElementType('d-title');
+  
+    // create d-byline
+    var byline = $('<d-byline></d-byline>');
+    $('.d-byline').replaceWith(byline);
+  
+    // create d-article
+    var article = $('<d-article></d-article>');
+    $('.d-article').wrap(article);
+  
+    // create d-appendix
+    $('.d-appendix').changeElementType('d-appendix');
+  
+    // create d-bibliography
+    var bibliography = $('<d-bibliography></d-bibliography>');
+    $('#distill-bibliography').wrap(bibliography);
+  
     // flag indicating that we have appendix items
     var appendix = $('.appendix-bottom').children('h3').length > 0;
   
@@ -694,11 +716,9 @@
 <body>
 
 
-<d-front-matter>
 <script id="distill-front-matter" type="text/json">
 {"title":"Diagrams","description":"Illustrate concepts with diagrams","authors":[]}
 </script>
-</d-front-matter>
 <header class="header header--fixed" role="banner">
 <nav class="radix-site-nav radix-site-header">
 <div class="nav-left">
@@ -730,13 +750,13 @@ Figures
 </nav>
 </header>
 
-<d-title>
+<div class="d-title">
 <h1>Diagrams</h1>
 <p>Illustrate concepts with diagrams</p>
-</d-title>
+</div>
 
 
-<d-article>
+<div class="d-article">
 <p>There are a number of ways to create diagrams for use in Radix articles, a few worth considering are:</p>
 <ul>
 <li><p>The <a href="http://rich-iannone.github.io/DiagrammeR/">DiagrammerR</a> package, which enables you to generate graph diagrams using text (both <a href="https://www.graphviz.org/">GraphViz</a> and <a href="https://mermaidjs.github.io/">Mermaid</a> are supported).</p></li>
@@ -802,10 +822,10 @@ include_graphics(&quot;images/flowchart.svg&quot;)
 <img src="images/flowchart.svg" /><!-- -->
 </div>
 <p>This particular illustration uses the default layout (occupying the full width of the article text). Note though that you can use the various <a href="figures.html">figure layout</a> options to control the size and placement of SVG files included from illustration programs.</p>
-</d-article>
+</div>
 
-<d-appendix>
-</d-appendix>
+<div class="d-appendix">
+</div>
 
 <div class="appendix-bottom">
 <h3 id="updates-and-corrections">Updates and Corrections</h3>

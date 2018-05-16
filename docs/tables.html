@@ -510,6 +510,28 @@
   
   window.addEventListener('WebComponentsReady', function() {
   
+    // create front matter
+    var front_matter = $('<d-front-matter></d-front-matter>');
+    $('#distill-front-matter').wrap(front_matter);
+  
+    // create d-title
+    $('.d-title').changeElementType('d-title');
+  
+    // create d-byline
+    var byline = $('<d-byline></d-byline>');
+    $('.d-byline').replaceWith(byline);
+  
+    // create d-article
+    var article = $('<d-article></d-article>');
+    $('.d-article').wrap(article);
+  
+    // create d-appendix
+    $('.d-appendix').changeElementType('d-appendix');
+  
+    // create d-bibliography
+    var bibliography = $('<d-bibliography></d-bibliography>');
+    $('#distill-bibliography').wrap(bibliography);
+  
     // flag indicating that we have appendix items
     var appendix = $('.appendix-bottom').children('h3').length > 0;
   
@@ -683,11 +705,9 @@
 <body>
 
 
-<d-front-matter>
 <script id="distill-front-matter" type="text/json">
 {"title":"Tables","description":"Display data in attractive, compact formats","authors":[]}
 </script>
-</d-front-matter>
 <header class="header header--fixed" role="banner">
 <nav class="radix-site-nav radix-site-header">
 <div class="nav-left">
@@ -719,13 +739,13 @@ Figures
 </nav>
 </header>
 
-<d-title>
+<div class="d-title">
 <h1>Tables</h1>
 <p>Display data in attractive, compact formats</p>
-</d-title>
+</div>
 
 
-<d-article>
+<div class="d-article">
 <p>There are a number of options available for displaying tables within Radix articles, including:</p>
 <ul>
 <li><p>Using the <code>knitr::kable()</code> function to render a data frame as HTML.</p></li>
@@ -919,10 +939,10 @@ paged_table(mtcars, options = list(rows.print = 15))
 | `cols.print`     | Maximum columns in the table (defaults to 10). |
 | `rownames.print` | Print row names as part of the table.          |
 &lt;div&gt;</code></pre>
-</d-article>
+</div>
 
-<d-appendix>
-</d-appendix>
+<div class="d-appendix">
+</div>
 
 <div class="appendix-bottom">
 <h3 id="updates-and-corrections">Updates and Corrections</h3>
