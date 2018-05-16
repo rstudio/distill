@@ -104,4 +104,8 @@ merge_lists <- function(base_list, overlay_list, recursive = TRUE) {
   }
 }
 
+is_osx <- function() {
+  Sys.info()["sysname"] == "Darwin"
+}
+
 
