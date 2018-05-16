@@ -64,7 +64,8 @@ radix_article <- function(fig_width = 6,
   # html dependencies
   extra_dependencies <- append(extra_dependencies,
                                list(html_dependency_jquery(),
-                                    html_dependency_webcomponents()))
+                                    html_dependency_webcomponents(),
+                                    html_dependency_distill()))
 
   # determine knitr options
   knitr_options <- knitr_options_html(fig_width = fig_width,
@@ -171,6 +172,15 @@ radix_article <- function(fig_width = 6,
       extra_dependencies = extra_dependencies,
       ...
     )
+  )
+}
+
+html_dependency_distill <- function() {
+  htmltools::htmlDependency(
+    name = "distill",
+    version = "2.0.0",
+    src = system.file("www/distill", package = "radix"),
+    script = c("template.v2.js")
   )
 }
 
