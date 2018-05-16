@@ -108,8 +108,9 @@ radix_article <- function(fig_width = 6,
 
     # includes
 
-    # header includes: radix only (user is done below in pre_processor)
-    in_header <- in_header_includes(input_dir, site_config, metadata)
+    # header includes: radix then user
+    in_header <- c(in_header_includes(input_dir, site_config, metadata),
+                   includes$in_header)
 
     # before body includes: radix then user
     before_body <- c(before_body_includes(input_dir, site_config, metadata),
@@ -130,28 +131,6 @@ radix_article <- function(fig_width = 6,
     args
   }
 
-  # preprocessor
-  pre_processor <- function (metadata, input_file, runtime, knit_meta,
-                             files_dir, output_dir) {
-
-    args <- c()
-
-    # distill framework include
-    # distill_header_includes <- system.file(
-    #   "rmarkdown/templates/radix_article/resources/distill.html",
-    #   package = "radix"
-    # )
-    distill_header_includes <- c()
-
-    # includes are ordered distill then user includes
-    args <- c(args, pandoc_include_args(
-      in_header = c(distill_header_includes, includes$in_header)
-    ))
-
-    args
-  }
-
-
   # return format
   output_format(
     knitr = knitr_options,
@@ -161,7 +140,6 @@ radix_article <- function(fig_width = 6,
     keep_md = keep_md,
     clean_supporting = self_contained,
     post_knit = post_knit,
-    pre_processor = pre_processor,
     base_format = html_document_base(
       smart = smart,
       self_contained = self_contained,
