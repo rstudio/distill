@@ -47,9 +47,13 @@ $if(author)$
 $for(author)$
   $if(author.name)$
   <p class="author">
-      <a class="name" href="$author.url$">$author.name$</a>
+      <a class="name">$author.name$</a>
+      $author.url$
   </p>
-  <p class="affiliation"><a class="affiliation" href="$author.affiliation_url$">$author.affiliation$</a></p>
+  <p class="affiliation">
+      <a class="affiliation">$author.affiliation$</a>
+      $author.affiliation_url$
+    </p>
   $else$
   <p class="author">
       $author$
