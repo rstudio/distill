@@ -880,7 +880,7 @@ appendix_creative_commons <- function(site_config, metadata) {
       paste0(
         'Text and figures are licensed under Creative Commons Attribution ',
         '<a rel="license" href="%s">%s 4.0</a>. %sThe figures that have been reused from ',
-        'other sources don’t fall under this license and can be ',
+        'other sources don\'t fall under this license and can be ',
         'recognized by a note in their caption: "Figure from ...".'
       ),
       htmlEscape(metadata$license_url, TRUE),
