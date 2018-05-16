@@ -1,9 +1,11 @@
-<!doctype html>
+<!DOCTYPE html>
+
+<html xmlns="http://www.w3.org/1999/xhtml" lang="" xml:lang="">
 
 <head>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1" >
-  <meta http-equiv="X-UA-Compatible" content="IE=Edge,chrome=1">
+  <meta charset="utf-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta http-equiv="X-UA-Compatible" content="IE=Edge,chrome=1"/>
   <meta name="generator" content="radix" />
 
   <title>Radix for R Markdown</title>
@@ -57,12 +59,6 @@
   <meta name="citation_reference" content="citation_title=Distill;citation_publication_date=2016;citation_publisher=Distill Working Group;citation_doi=10.23915/distill;citation_author=Shan Carter;citation_author=Chirs Olah;citation_author=Arvind Satyanarayan"/>
   <meta name="citation_reference" content="citation_title=Literate programming;citation_publication_date=1984;citation_publisher=British Computer Society;citation_volume=27;citation_author=Donald E. Knuth"/>
   <meta name="citation_reference" content="citation_title=Dynamic documents with r and knitr;citation_publication_date=2015;citation_publisher=Chapman; Hall/CRC;citation_author=Yihui Xie"/>
-  
-  <d-front-matter>
-  <script id="distill-front-matter" type="text/json">
-  {"title":"Radix for R Markdown","description":"Scientific and technical writing, native to the web\n","authors":[{"author":"JJ Allaire","authorURL":"https://github.com/jjallaire","affiliation":"RStudio","affiliationURL":"https://www.rstudio.com"},{"author":"Rich Iannone","authorURL":"https://github.com/rich-iannone","affiliation":"RStudio","affiliationURL":"https://www.rstudio.com"},{"author":"Yihui Xie","authorURL":"https://github.com/yihui","affiliation":"RStudio","affiliationURL":"https://www.rstudio.com"}],"publishedDate":"2018-05-04T00:00:00.000-04:00","citationText":"Allaire, et al., 2018"}
-  </script>
-  </d-front-matter>
   
   
   <script type="application/javascript">
@@ -208,7 +204,7 @@
     outline: none;
     color: rgba(255, 255, 255, 0.8);
     padding: 16px 10px;
-    background-color: inherit;
+    background-color: transparent;
     font-family: inherit;
     font-size: inherit;
     font-weight: inherit;
@@ -361,6 +357,7 @@
   <link href="site_libs/font-awesome-5.0.13/css/fa-svg-with-js.css" rel="stylesheet" />
   <script src="site_libs/font-awesome-5.0.13/js/fontawesome-all.min.js"></script>
   <script src="site_libs/font-awesome-5.0.13/js/fa-v4-shims.min.js"></script>
+  
   
   <!-- distill custom css for radix -->
   
@@ -623,8 +620,17 @@
     $('tr.header').parent('thead').parent('table').addClass('pandoc-table');
     $('.kable-table').children('table').addClass('pandoc-table');
   
-    // distill framework
-    load_distill_framework();
+    // show body when load is complete
+    function on_load_complete() {
+      document.body.style.visibility = 'visible';
+    }
+  
+    // load distill framework
+    try {
+      load_distill_framework();
+    } catch(e) {
+      on_load_complete();
+    }
   
     // wait for window.distillRunlevel == 4 to do post processing
     function distill_post_process() {
@@ -684,21 +690,29 @@
       clearInterval(tid);
   
       // show body now that everything is ready
-      document.body.style.visibility = 'visible';
+      on_load_complete();
     }
   
-    var tid = setInterval(distill_post_process, 50);
-    distill_post_process();
+    if (window.distillRunlevel) {
+      var tid = setInterval(distill_post_process, 50);
+      distill_post_process();
+    }
   
   });
   </script>
 
-  <link rel="stylesheet" href="styles.css" type="text/css" />
+  <link rel="stylesheet" href="styles.css" type="text/css"/>
 
 </head>
 
 <body>
 
+
+<d-front-matter>
+<script id="distill-front-matter" type="text/json">
+{"title":"Radix for R Markdown","description":"Scientific and technical writing, native to the web\n","authors":[{"author":"JJ Allaire","authorURL":"https://github.com/jjallaire","affiliation":"RStudio","affiliationURL":"https://www.rstudio.com"},{"author":"Rich Iannone","authorURL":"https://github.com/rich-iannone","affiliation":"RStudio","affiliationURL":"https://www.rstudio.com"},{"author":"Yihui Xie","authorURL":"https://github.com/yihui","affiliation":"RStudio","affiliationURL":"https://www.rstudio.com"}],"publishedDate":"2018-05-04T00:00:00.000-04:00","citationText":"Allaire, et al., 2018"}
+</script>
+</d-front-matter>
 <header class="header header--fixed" role="banner">
 <nav class="radix-site-nav radix-site-header">
 <div class="nav-left">
@@ -771,7 +785,7 @@ Figures
 </div>
 <div>
   <h3>DOI</h3>
-  <p>em>No DOI yet.</em>
+  <p><em>No DOI yet.</em>
 </div>
 <div>
 </div>
@@ -779,43 +793,6 @@ Figures
 </d-byline>
 
 <d-article>
-<!---
-
-- larger scale visualization layouts
-    - iframe with npr library (pym.js) for sizing (generic) (check with shinyapps.io)
-    - distillVisualization() top level shinyApp equivalent with distill bootstrap theme 
-       - use the less compiler for this
-    "full bleed"
-    - ggplot2 theme for distill
-    - crosstalk compatibility?
-        - distillRow/distillCol
-    - publishing/previewing workflow?
-    - app.R or ui.R / server.R in the same directory; automagic local run
-
-
-- site docs
-
-- IE 10/11
-
-Figures Tables Citations Shiny Publish \/  <ghicon>
-                                Publishing an Article
-                                Publishing a Website
-                                Creating a Blog or Journal
-                                Article Metadata 
-                                
-- articles/index pages
-    - https://github.com/wikiti/jquery-paginate
-    - iframe based inclusion
-
-
-
-- distill.pub
-    - Use GitHub organizations/repos for URL namespace
-    - Commit hook based publishing
-    - Provide frame with social, GA, discourse, etc.
-    - RSC for internal version of same
-    
---->
 <p>Radix is an online publication format designed for scientific and technical communication. Radix articles include:</p>
 <ul>
 <li>Reader-friendly typography that adapts well to mobile devices.</li>
@@ -994,7 +971,7 @@ describing what each author did.</code></pre>
 If you see mistakes or want to suggest changes, please <a href="https://github.com/rstudio/radix/issues/new">create an issue</a> on the source repository.
 </p>
 <h3 id="reuse">Reuse</h3>
-<p>Text and figures are licensed under Creative Commons Attribution <a rel="license" href="https://creativecommons.org/licenses/by/4.0/">CC BY 4.0</a>. Source code is available at <a href="https://github.com/rstudio/radix">https://github.com/rstudio/radix</a>, unless otherwise noted. The figures that have been reused from other sources don’t fall under this license and can be recognized by a note in their caption: "Figure from ...".</p>
+<p>Text and figures are licensed under Creative Commons Attribution <a rel="license" href="https://creativecommons.org/licenses/by/4.0/">CC BY 4.0</a>. Source code is available at <a href="https://github.com/rstudio/radix">https://github.com/rstudio/radix</a>, unless otherwise noted. The figures that have been reused from other sources don't fall under this license and can be recognized by a note in their caption: "Figure from ...".</p>
 <h3 id="citation">Citation</h3>
 <p>For attribution, please cite this work as</p>
 <pre class="citation-appendix short">Allaire, et al. (2018, May 4). Radix for R Markdown. Retrieved from https://rstudio.github.io/radix</pre>
@@ -1057,3 +1034,5 @@ If you see mistakes or want to suggest changes, please <a href="https://github.c
 </script>
 
 </body>
+
+</html>
