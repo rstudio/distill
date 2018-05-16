@@ -85,7 +85,7 @@ You can also define [tables using markdown](https://pandoc.org/MANUAL.html#table
 You can use Radix [figure layout](figures.html) classes with markdown tables by enclosing them in a `<div>` with the appropriate class, for example:
 
 ```markdown
-<div class="l-middle">
+<div class="l-body-outset">
 | Option           | Description                                    |
 |------------------|------------------------------------------------|
 | `rows.print`     | Maximum rows to print per page.                |

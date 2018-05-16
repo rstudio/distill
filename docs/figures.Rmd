@@ -83,7 +83,7 @@ To include a static images that adheres to a Radix layout, wrap it in a `<div>` 
 </div>
 ```
 
-If you are including a figure from an external source, it's good practice to delinate this by applying the `.external` class and adding a caption indicating where it is from. For example:
+If you are including a figure from an external source, it's good practice to delineate this by applying the `.external` class and adding a caption indicating where it is from. For example:
 
 ```markup
 ![Figure from https://example.com](heatmap.png){.external width=100%}    
