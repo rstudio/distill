@@ -55,16 +55,16 @@ radix_article <- function(fig_width = 6,
   # lua filter
   if (pandoc_version() >= "2.0") {
     args <- c(args, "--lua-filter",
-              pandoc_path_arg(resource("distill/distill.lua")))
+              pandoc_path_arg(resource("distill.lua")))
   }
 
   # use link citations (so we can do citation conversion)
   args <- c(args, "--metadata=link-citations:true")
 
-  # html dependency for distill
+  # html dependencies
   extra_dependencies <- append(extra_dependencies,
                                list(html_dependency_jquery(),
-                                    html_dependency_distill()))
+                                    html_dependency_webcomponents()))
 
   # determine knitr options
   knitr_options <- knitr_options_html(fig_width = fig_width,
@@ -107,9 +107,8 @@ radix_article <- function(fig_width = 6,
 
     # includes
 
-    # header includes: radix then user
-    in_header <- c(in_header_includes(input_dir, site_config, metadata),
-                   includes$in_header)
+    # header includes: radix only (user is done below in pre_processor)
+    in_header <- in_header_includes(input_dir, site_config, metadata)
 
     # before body includes: radix then user
     before_body <- c(before_body_includes(input_dir, site_config, metadata),
@@ -130,6 +129,26 @@ radix_article <- function(fig_width = 6,
     args
   }
 
+  # preprocessor
+  pre_processor <- function (metadata, input_file, runtime, knit_meta,
+                             files_dir, output_dir) {
+
+    args <- c()
+
+    # distill framework include
+    distill_header_includes <- system.file(
+      "rmarkdown/templates/radix_article/resources/distill.html",
+      package = "radix"
+    )
+
+    # includes are ordered distill then user includes
+    args <- c(args, pandoc_include_args(
+      in_header = c(distill_header_includes, includes$in_header)
+    ))
+
+    args
+  }
+
 
   # return format
   output_format(
@@ -140,6 +159,7 @@ radix_article <- function(fig_width = 6,
     keep_md = keep_md,
     clean_supporting = self_contained,
     post_knit = post_knit,
+    pre_processor = pre_processor,
     base_format = html_document_base(
       smart = smart,
       self_contained = self_contained,
@@ -154,14 +174,12 @@ radix_article <- function(fig_width = 6,
   )
 }
 
-html_dependency_distill <- function() {
+html_dependency_webcomponents <- function() {
   htmltools::htmlDependency(
-    name = "distill",
-    version = "2.2.21",
-    src = system.file("rmarkdown/templates/radix_article/resources/distill",
-                      package = "radix"),
-    script = c("distill.js", "template.v2.js", "distill-post.js"),
-    stylesheet = "distill.css"
+    name = "webcomponents",
+    version = "2.0.0",
+    src = system.file("www/webcomponents", package = "radix"),
+    script = c("webcomponents-bundle.js")
   )
 }
 
