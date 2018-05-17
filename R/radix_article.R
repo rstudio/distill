@@ -64,6 +64,7 @@ radix_article <- function(fig_width = 6,
   # html dependencies
   extra_dependencies <- append(extra_dependencies,
                                list(html_dependency_jquery(),
+                                    html_dependency_bowser(),
                                     html_dependency_webcomponents(),
                                     html_dependency_distill()))
 
@@ -212,6 +213,15 @@ html_dependency_distill <- function() {
     src = system.file("www/distill", package = "radix"),
     script = c("template.v2.js", "distill.js"),
     stylesheet = c("distill.css")
+  )
+}
+
+html_dependency_bowser <- function() {
+  htmltools::htmlDependency(
+    name = "bowser",
+    version = "1.9.3",
+    src = system.file("www/bowser", package = "radix"),
+    script = c("bowser.min.js")
   )
 }
 
