@@ -26,7 +26,12 @@ function is_downlevel_browser() {
 
 // show body when load is complete
 function on_load_complete() {
+
+  // set body to visible
   document.body.style.visibility = 'visible';
+
+  // trigger 'shown' so htmlwidgets resize
+  $('d-article').trigger('shown');
 }
 
 if (is_downlevel_browser()) {
