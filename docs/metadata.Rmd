@@ -112,13 +112,13 @@ preview: https://rstudio.github.io/radix/images/javascript-d3-preview.png
 
 Note that the preview image is specified with a full absolute URL. This is a requirement of Open Graph (relative image references are not supported). If you are publishing a standalone self-contained HTML version of your article then you'll need to upload the preview image to another location on the web in order to reference it.
 
-If however your article is not self-contained (it's part of a website or is generated with  `self_contained: false`) then you can include the preview image alongside your document. In this case you still need to specify the root URL where your image will be published to using the `publish_url` field:
+If however your article is not self-contained (it's part of a website or is generated with  `self_contained: false`) then you can include the preview image alongside your document. In this case you still need to specify the root URL where your image will be published to using the `base_url` field:
 
 ```markup
 ---
 title: "JavaScript & D3"
 description: Enhance communication with interactive visualizations 
-publish_url: https://rstudio.github.io/radix
+base_url: https://rstudio.github.io/radix
 preview: images/javascript-d3-preview.png
 ---
 ```
@@ -143,7 +143,7 @@ Here's a complete example that includes the attribution fields as well as a prev
 ---
 title: "JavaScript & D3"
 description: Enhance communication with interactive visualizations 
-publish_url: https://rstudio.github.io/radix
+base_url: https://rstudio.github.io/radix
 preview: images/javascript-d3-preview.png
 twitter:
   site: "@rstudio"

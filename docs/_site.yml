@@ -2,7 +2,7 @@ name: "radix"
 title: "Radix for R Markdown"
 favicon: images/favicon.png
 repository_url: https://github.com/rstudio/radix
-publish_url: https://rstudio.github.io/radix
+base_url: https://rstudio.github.io/radix
 creative_commons: CC BY
 output_dir: "."
 navbar:

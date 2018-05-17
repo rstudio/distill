@@ -10,9 +10,7 @@
     - publishing/previewing workflow?
     - app.R or ui.R / server.R in the same directory; automagic local run
 
-- downlevel if no distill template
 - consoliate some include files
-- rename publish_url to base_url
 
 - site docs
 

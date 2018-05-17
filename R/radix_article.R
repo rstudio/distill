@@ -270,7 +270,7 @@ transform_metadata <- function(input_dir, site_config, metadata) {
 
   # allow site level metadata to propagate
   site_metadata <- c("repository_url", "compare_updates_url", "creative_commons",
-                     "license_url", "publish_url", "preview", "slug", "citation_url",
+                     "license_url", "base_url", "preview", "slug", "citation_url",
                      "journal", "twitter")
   for (name in site_metadata)
     metadata[[name]] <- merge_lists(site_config[[name]], metadata[[name]])
@@ -332,9 +332,9 @@ transform_metadata <- function(input_dir, site_config, metadata) {
     }
   }
 
-  # publish_url (strip trailing slashes)
-  if (!is.null(metadata$publish_url))
-    metadata$publish_url <- sub("/+$", "", metadata$publish_url)
+  # base_url (strip trailing slashes)
+  if (!is.null(metadata$base_url))
+    metadata$base_url <- sub("/+$", "", metadata$base_url)
 
   # preview image
   if (!is.null(metadata$preview)) {
@@ -345,9 +345,9 @@ transform_metadata <- function(input_dir, site_config, metadata) {
            call. = FALSE)
     }
 
-    # validate that we have a publish_url
-    if (is.null(metadata$publish_url)) {
-      stop("You must specify a root publish_url to resolve relative image paths against ",
+    # validate that we have a base_url
+    if (is.null(metadata$base_url)) {
+      stop("You must specify a base_url to resolve relative image paths against ",
            "when specifying a preview image ",
           "(Open Graph and Twitter preview images must use absolute URLs", call. = FALSE)
     }
@@ -360,7 +360,7 @@ transform_metadata <- function(input_dir, site_config, metadata) {
     }
 
     # resolve preview url
-    metadata$preview <- file.path(metadata$publish_url, metadata$preview)
+    metadata$preview <- file.path(metadata$base_url, metadata$preview)
   }
 
   # authors
