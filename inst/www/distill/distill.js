@@ -51,8 +51,8 @@ function init_distill() {
 
   // create d-article
   var article = $('<d-article></d-article>');
-  $('.d-article').wrap(article);
-
+  $('.d-article').wrap(article).children().unwrap();
+  
   // create d-appendix
   $('.d-appendix').changeElementType('d-appendix');
 
