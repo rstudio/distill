@@ -215,8 +215,21 @@ function init_downlevel() {
 
   init_common();
 
-  var appendix = false;
+  // TODO: author formatting
 
+   // insert hr after d-title
+  $('.d-title').after($('<hr class="section-separator"/>'));
+
+  // check if we have authors
+  var front_matter = JSON.parse($("#distill-front-matter").html());
+  var have_authors = front_matter.authors && front_matter.authors.length > 0;
+  
+  // manage byline/border
+  if (!have_authors)
+    $('.d-byline').remove();
+  $('.d-byline').after($('<hr class="section-separator"/>'));
+
+  // move appendix elements
   $('h1.appendix, h2.appendix').each(function(i, val) {
     $(this).changeElementType('h3');
   });
@@ -224,7 +237,8 @@ function init_downlevel() {
     $(this).nextUntil($('h1, h2, h3')).addBack().appendTo($('.d-appendix'));
   });
 
-  // inject headers into referennces and footnotes
+
+  // inject headers into references and footnotes
   var refs_header = $('<h3></h3>');
   refs_header.text('References');
   $('#refs').prepend(refs_header);
@@ -237,8 +251,12 @@ function init_downlevel() {
   $('.appendix-bottom').appendTo('.d-appendix').children().unwrap();
   $('.appendix-bottom').remove();
 
-  // wrap appendix
-  $('.d-appendix').wrap($('<div class = "d-appendix-wrapper"></div>'));
+  // remove appendix if it's empty
+  if ($('.d-appendix').children().length == 0)
+    $('.d-appendix').remove();
+
+  // prepend separator above appendix
+  $('.d-appendix').before($('<hr class="section-separator"/>'));
 
   // trim code
   $('pre>code').each(function(i, val) {

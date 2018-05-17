@@ -130,10 +130,9 @@ d-appendix .citation-appendix,
   margin-left: 0;
 }
 
-
-
 .downlevel .d-title {
   padding-top: 6rem;
+  padding-bottom: 1.5rem;
 }
 
 .downlevel .d-title h1 {
@@ -149,23 +148,33 @@ d-appendix .citation-appendix,
   line-height: 1.55em;
 }
 
+.downlevel .d-byline {
+  padding-top: 1.5em;
+  padding-bottom: 1.5em;
+}
+
+.downlevel .section-separator {
+  border: none;
+  border-top: 1px solid rgba(0, 0, 0, 0.1);
+}
+
 .downlevel .d-article {
   font-size: 1.06rem;
   line-height: 1.7em;
+  padding-top: 1rem;
+  padding-bottom: 2rem;
 }
 
 
-.downlevel .d-appendix-wrapper {
+.downlevel .d-appendix {
   padding-left: 0;
   padding-right: 0;
   max-width: none;
   font-size: 0.8em;
   line-height: 1.7em;
-  margin-top: 60px;
   margin-bottom: 0;
-  border-top: 1px solid rgba(0, 0, 0, 0.1);
   color: rgba(0,0,0,0.5);
-  padding-top: 60px;
+  padding-top: 40px;
   padding-bottom: 48px;
 }
 
@@ -185,9 +194,27 @@ d-appendix .citation-appendix,
 .downlevel .d-citation-list,
 .downlevel .distill-footer,
 .downlevel .appendix-bottom {
+  padding-left: 40px;
+  padding-right: 40px;
+}
+
+@media(min-width: 768px) {
+  .downlevel .base-grid,
+  .downlevel .distill-header,
+  .downlevel .d-title,
+  .downlevel .d-abstract,
+  .downlevel .d-article,
+  .downlevel .d-appendix,
+  .downlevel .distill-appendix,
+  .downlevel .d-byline,
+  .downlevel .d-footnote-list,
+  .downlevel .d-citation-list,
+  .downlevel .distill-footer,
+  .downlevel .appendix-bottom {
   padding-left: 150px;
   padding-right: 150px;
-  max-width: 750px;
+  max-width: 700px;
+}
 }
 
 .downlevel pre code {
