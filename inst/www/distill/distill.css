@@ -126,8 +126,7 @@ d-appendix .citation-appendix,
 .downlevel {
   line-height: 1.6em;
   font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen, Ubuntu, Cantarell, "Fira Sans", "Droid Sans", "Helvetica Neue", Arial, sans-serif;
-  margin-right: 0;
-  margin-left: 0;
+  margin: 0;
 }
 
 .downlevel .d-title {
@@ -146,6 +145,7 @@ d-appendix .citation-appendix,
   font-weight: 300;
   font-size: 1.2rem;
   line-height: 1.55em;
+  margin-top: 0;
 }
 
 .downlevel .d-byline {
