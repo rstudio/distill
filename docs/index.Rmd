@@ -202,10 +202,7 @@ You can also include figures in the gutter. Just enclose the code chunk which ge
 ````clike
 <aside>
 ```{r}`r ''`
-mtcars$am <- factor(mtcars$am, labels = c('automatic', 'manual'))
-ggplot(mtcars, aes(hp, mpg, color = am)) +
-  geom_point() + geom_smooth() +
-  theme(legend.position = 'bottom')
+ggplot(mtcars, aes(hp, mpg)) + geom_point() + geom_smooth()
 ```
 </aside>
 ````

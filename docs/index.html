@@ -542,10 +542,7 @@ This content will appear in the gutter of the article.
 <pre class="clike"><code>
 &lt;aside&gt;
 ```{r}
-mtcars$am &lt;- factor(mtcars$am, labels = c(&#39;automatic&#39;, &#39;manual&#39;))
-ggplot(mtcars, aes(hp, mpg, color = am)) +
-  geom_point() + geom_smooth() +
-  theme(legend.position = &#39;bottom&#39;)
+ggplot(mtcars, aes(hp, mpg)) + geom_point() + geom_smooth()
 ```
 &lt;/aside&gt;</code></pre>
 <aside>
