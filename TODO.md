@@ -10,8 +10,6 @@
     - publishing/previewing workflow?
     - app.R or ui.R / server.R in the same directory; automagic local run
 
-- consoliate some include files
-
 - site docs
 
 Figures Tables Citations Shiny Publish \/  <ghicon>

@@ -694,19 +694,15 @@ citation_reference <- function(ref) {
 
 before_body_includes <- function(input_dir, site_config, metadata) {
 
-  before_body <- c()
-
-  # write front-matter into script tag
-  front_matter_tag <- c(
+  # front matter script
+  front_matter_script <- HTML(paste(c(
     '',
     '<script id="distill-front-matter" type="text/json">',
     front_matter_from_metadata(metadata),
     '</script>',
-    ''
+    '') ,collapse = "\n")
   )
-  front_matter_file <- tempfile(fileext = "html")
-  writeLines(front_matter_tag, front_matter_file)
-  before_body <- c(before_body, front_matter_file)
+
 
   # helper to yield icon class
   icon_class <- function(icon) {
@@ -716,7 +712,8 @@ before_body_includes <- function(input_dir, site_config, metadata) {
       paste("fa", icon)
   }
 
-  # if we have a navbar then generate it
+  # if we have a navbar/header then generate it
+  header <- c()
   if (!is.null(site_config[["navbar"]])) {
     build_menu <- function(menu) {
       item_to_menu <- function(item) {
@@ -778,20 +775,20 @@ before_body_includes <- function(input_dir, site_config, metadata) {
     header <- tag("header", list(class = "header header--fixed", role = "banner",
       navbar
     ))
-
-    navbar_html <- renderTags(header, indent = FALSE)$html
-    navbar_file <- tempfile(fileext = "html")
-    writeLines(navbar_html, navbar_file)
-    before_body <- c(before_body, navbar_file)
-
   }
 
+  before_body_html <- renderTags(tagList(
+    front_matter_script,
+    header
+  ), indent = FALSE)$html
+
+  # write and return file
+  before_body <- tempfile(fileext = "html")
+  writeLines(before_body_html, before_body)
   before_body
 }
 
 after_body_includes <- function(input_dir, site_config, metadata) {
-
-  after_body <- c()
 
   # write appendixes
   updates_and_corrections <- appendix_updates_and_corrections(site_config, metadata)
@@ -802,22 +799,25 @@ after_body_includes <- function(input_dir, site_config, metadata) {
     creative_commons,
     citation
   )
-  appendix_html <- renderTags(appendix, indent = FALSE)$html
-  appendix_file <- tempfile(fileext = "html")
-  writeLines(appendix_html, appendix_file)
-  after_body <- c(after_body, appendix_file)
 
-
-  # write bibliography after body
+  # write bibliography
+  bibliography <- c()
   if (!is.null(metadata$bibliography)) {
-    bibliography_file <-  tempfile(fileext = "html")
-    writeLines(c(
+    bibliography <- HTML(paste(c(
       '<script id="distill-bibliography" type="text/bibtex">',
       readLines(metadata$bibliography, warn = FALSE),
       '</script>'
-    ), con = bibliography_file)
-    after_body <- c(after_body, bibliography_file)
+    ), collapse = "\n"))
   }
+
+  after_body_html <- renderTags(tagList(
+    appendix,
+    bibliography
+  ), indent = FALSE)$html
+
+  # write file
+  after_body <- tempfile(fileext = "html")
+  writeLines(after_body_html, after_body)
 
   # footer if we have a site navbar there is a footer.html
   footer <- file.path(input_dir, "footer.html")
