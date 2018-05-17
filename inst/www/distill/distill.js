@@ -17,8 +17,8 @@
 
 function is_downlevel_browser() {
   return bowser.isUnsupportedBrowser(
-    { msie: "12", 
-      msedge: "16"}, 
+    { msie: "12",
+      msedge: "16"},
     window.navigator.userAgent
   );
 }
@@ -133,17 +133,7 @@ function init_distill() {
     }
   });
 
-  // prevent underline for linked images
-  $('a > img').parent().css({'border-bottom' : 'none'});
-
-  // mark child figures created by R chunks 100% width
-  $('.layout-chunk').each(function(i, val) {
-    $(this).children('img, .html-widget').css('width', '100%');
-  });
-
-  // add class to pandoc style tables
-  $('tr.header').parent('thead').parent('table').addClass('pandoc-table');
-  $('.kable-table').children('table').addClass('pandoc-table');
+  init_common();
 
   // load distill framework
   try {
@@ -222,15 +212,57 @@ function init_distill() {
 
 
 function init_downlevel() {
-  
+
   init_common();
-  
+
+  var appendix = false;
+
+  $('h1.appendix, h2.appendix').each(function(i, val) {
+    $(this).changeElementType('h3');
+  });
+  $('h3.appendix').each(function(i, val) {
+    $(this).nextUntil($('h1, h2, h3')).addBack().appendTo($('.d-appendix'));
+  });
+
+  // inject headers into referennces and footnotes
+  var refs_header = $('<h3></h3>');
+  refs_header.text('References');
+  $('#refs').prepend(refs_header);
+
+  var footnotes_header = $('<h3></h3');
+  footnotes_header.text('Footnotes');
+  $('.footnotes').children('hr').first().replaceWith(footnotes_header);
+
+  // move appendix-bottom entries to the bottom
+  $('.appendix-bottom').appendTo('.d-appendix').children().unwrap();
+  $('.appendix-bottom').remove();
+
+  // wrap appendix
+  $('.d-appendix').wrap($('<div class = "d-appendix-wrapper"></div>'));
+
+  // trim code
+  $('pre>code').each(function(i, val) {
+    $(this).html($.trim($(this).html()));
+  });
+
   $('body').addClass('downlevel');
-  
+
   on_load_complete();
 }
 
 function init_common() {
-  
+
+   // prevent underline for linked images
+  $('a > img').parent().css({'border-bottom' : 'none'});
+
+  // mark child figures created by R chunks 100% width
+  $('.layout-chunk').each(function(i, val) {
+    $(this).children('img, .html-widget').css('width', '100%');
+  });
+
+  // add class to pandoc style tables
+  $('tr.header').parent('thead').parent('table').addClass('pandoc-table');
+  $('.kable-table').children('table').addClass('pandoc-table');
+
 }
 

@@ -1,8 +1,3 @@
-/* Hide pandoc bibliography and footnotes  */
-
-#refs, .footnotes {
-  display: none;
-}
 
 .pandoc-table {
   width: 100%;
@@ -109,7 +104,8 @@ pre.d-code code.d-code  {
 /* Get the citation styles for the appendix (not auto-injected on render since
    we do our own rendering of the citation appendix) */
 
-d-appendix .citation-appendix {
+d-appendix .citation-appendix,
+.d-appendix .citation-appendix {
   font-size: 11px;
   line-height: 15px;
   border-left: 1px solid rgba(0, 0, 0, 0.1);
@@ -127,19 +123,97 @@ d-appendix .citation-appendix {
 
 /* Improve display for browsers without grid (IE/Edge <= 15) */
 
-.downlevel .base-grid,
-.downlevel distill-header,
-.downlevel d-title,
-.downlevel d-abstract,
-.downlevel d-article,
-.downlevel d-appendix,
-.downlevel distill-appendix,
-.downlevel d-byline,
-.downlevel d-footnote-list,
-.downlevel d-citation-list,
-.downlevel distill-footer {
-  padding-left: 150px;
-  padding-right: 150px;
-  max-width: 650px;
+.downlevel {
+  line-height: 1.6em;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen, Ubuntu, Cantarell, "Fira Sans", "Droid Sans", "Helvetica Neue", Arial, sans-serif;
+  margin-right: 0;
+  margin-left: 0;
 }
 
+
+
+.downlevel .d-title {
+  padding-top: 6rem;
+}
+
+.downlevel .d-title h1 {
+  font-size: 50px;
+  font-weight: 700;
+  line-height: 1.1em;
+  margin: 0 0 0.5rem;
+}
+
+.downlevel .d-title p {
+  font-weight: 300;
+  font-size: 1.2rem;
+  line-height: 1.55em;
+}
+
+.downlevel .d-article {
+  font-size: 1.06rem;
+  line-height: 1.7em;
+}
+
+
+.downlevel .d-appendix-wrapper {
+  padding-left: 0;
+  padding-right: 0;
+  max-width: none;
+  font-size: 0.8em;
+  line-height: 1.7em;
+  margin-top: 60px;
+  margin-bottom: 0;
+  border-top: 1px solid rgba(0, 0, 0, 0.1);
+  color: rgba(0,0,0,0.5);
+  padding-top: 60px;
+  padding-bottom: 48px;
+}
+
+.downlevel .footnotes ol {
+  padding-left: 13px;
+}
+
+.downlevel .base-grid,
+.downlevel .distill-header,
+.downlevel .d-title,
+.downlevel .d-abstract,
+.downlevel .d-article,
+.downlevel .d-appendix,
+.downlevel .distill-appendix,
+.downlevel .d-byline,
+.downlevel .d-footnote-list,
+.downlevel .d-citation-list,
+.downlevel .distill-footer,
+.downlevel .appendix-bottom {
+  padding-left: 150px;
+  padding-right: 150px;
+  max-width: 750px;
+}
+
+.downlevel pre code {
+  display: block;
+  border-left: 2px solid rgba(0, 0, 0, .1);
+  padding: 0 0 0 20px;
+  font-size: 14px;
+}
+
+.downlevel code, pre {
+  color: black;
+  background: none;
+  font-family: Consolas, Monaco, 'Andale Mono', 'Ubuntu Mono', monospace;
+  text-align: left;
+  white-space: pre;
+  word-spacing: normal;
+  word-break: normal;
+  word-wrap: normal;
+  line-height: 1.5;
+
+  -moz-tab-size: 4;
+  -o-tab-size: 4;
+  tab-size: 4;
+
+  -webkit-hyphens: none;
+  -moz-hyphens: none;
+  -ms-hyphens: none;
+  hyphens: none;
+}
