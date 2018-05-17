@@ -125,21 +125,21 @@ d-appendix .citation-appendix {
   word-wrap: break-word;
 }
 
-/* Improve display for browsers without grid (IE 10/11, Edge <= 15) */
+/* Improve display for browsers without grid (IE/Edge <= 15) */
 
-@supports not (display: grid) {
-  .base-grid,
-  distill-header,
-  d-title,
-  d-abstract,
-  d-article,
-  d-appendix,
-  distill-appendix,
-  d-byline,
-  d-footnote-list,
-  d-citation-list,
-  distill-footer {
-    padding-left: 20px;
-    padding-right: 20px;
-  }
+.downlevel .base-grid,
+.downlevel distill-header,
+.downlevel d-title,
+.downlevel d-abstract,
+.downlevel d-article,
+.downlevel d-appendix,
+.downlevel distill-appendix,
+.downlevel d-byline,
+.downlevel d-footnote-list,
+.downlevel d-citation-list,
+.downlevel distill-footer {
+  padding-left: 150px;
+  padding-right: 150px;
+  max-width: 650px;
 }
+

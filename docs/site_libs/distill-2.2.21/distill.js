@@ -14,7 +14,29 @@
   };
 })(jQuery);
 
-window.addEventListener('WebComponentsReady', function() {
+
+function is_downlevel_browser() {
+  return bowser.isUnsupportedBrowser(
+    { msie: "12", 
+      msedge: "16"}, 
+    window.navigator.userAgent
+  );
+}
+
+// show body when load is complete
+function on_load_complete() {
+  document.body.style.visibility = 'visible';
+}
+
+if (is_downlevel_browser()) {
+  document.addEventListener('DOMContentLoaded', init_downlevel);
+} else {
+  window.addEventListener('WebComponentsReady', init_distill);
+}
+
+function init_distill() {
+
+  init_common();
 
   // create front matter
   var front_matter = $('<d-front-matter></d-front-matter>');
@@ -123,15 +145,11 @@ window.addEventListener('WebComponentsReady', function() {
   $('tr.header').parent('thead').parent('table').addClass('pandoc-table');
   $('.kable-table').children('table').addClass('pandoc-table');
 
-  // show body when load is complete
-  function on_load_complete() {
-    document.body.style.visibility = 'visible';
-  }
-
   // load distill framework
   try {
     load_distill_framework();
   } catch(e) {
+    console.log('Error loading distill: ' + e.message);
     on_load_complete();
     return;
   }
@@ -200,4 +218,19 @@ window.addEventListener('WebComponentsReady', function() {
   var tid = setInterval(distill_post_process, 50);
   distill_post_process();
 
-});
+}
+
+
+function init_downlevel() {
+  
+  init_common();
+  
+  $('body').addClass('downlevel');
+  
+  on_load_complete();
+}
+
+function init_common() {
+  
+}
+
