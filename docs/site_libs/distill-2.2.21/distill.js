@@ -17,8 +17,8 @@
 
 function is_downlevel_browser() {
   return bowser.isUnsupportedBrowser(
-    { msie: "12", 
-      msedge: "16"}, 
+    { msie: "12",
+      msedge: "16"},
     window.navigator.userAgent
   );
 }
@@ -51,7 +51,7 @@ function init_distill() {
 
   // create d-article
   var article = $('<d-article></d-article>');
-  $('.d-article').wrap(article);
+  $('.d-article').wrap(article).children().unwrap();
 
   // create d-appendix
   $('.d-appendix').changeElementType('d-appendix');
@@ -133,17 +133,7 @@ function init_distill() {
     }
   });
 
-  // prevent underline for linked images
-  $('a > img').parent().css({'border-bottom' : 'none'});
-
-  // mark child figures created by R chunks 100% width
-  $('.layout-chunk').each(function(i, val) {
-    $(this).children('img, .html-widget').css('width', '100%');
-  });
-
-  // add class to pandoc style tables
-  $('tr.header').parent('thead').parent('table').addClass('pandoc-table');
-  $('.kable-table').children('table').addClass('pandoc-table');
+  init_common();
 
   // load distill framework
   try {
@@ -222,15 +212,74 @@ function init_distill() {
 
 
 function init_downlevel() {
-  
+
   init_common();
-  
+
+   // insert hr after d-title
+  $('.d-title').after($('<hr class="section-separator"/>'));
+
+  // check if we have authors
+  var front_matter = JSON.parse($("#distill-front-matter").html());
+  var have_authors = front_matter.authors && front_matter.authors.length > 0;
+
+  // manage byline/border
+  if (!have_authors)
+    $('.d-byline').remove();
+  $('.d-byline').after($('<hr class="section-separator"/>'));
+  $('.d-byline a').remove();
+
+  // move appendix elements
+  $('h1.appendix, h2.appendix').each(function(i, val) {
+    $(this).changeElementType('h3');
+  });
+  $('h3.appendix').each(function(i, val) {
+    $(this).nextUntil($('h1, h2, h3')).addBack().appendTo($('.d-appendix'));
+  });
+
+
+  // inject headers into references and footnotes
+  var refs_header = $('<h3></h3>');
+  refs_header.text('References');
+  $('#refs').prepend(refs_header);
+
+  var footnotes_header = $('<h3></h3');
+  footnotes_header.text('Footnotes');
+  $('.footnotes').children('hr').first().replaceWith(footnotes_header);
+
+  // move appendix-bottom entries to the bottom
+  $('.appendix-bottom').appendTo('.d-appendix').children().unwrap();
+  $('.appendix-bottom').remove();
+
+  // remove appendix if it's empty
+  if ($('.d-appendix').children().length === 0)
+    $('.d-appendix').remove();
+
+  // prepend separator above appendix
+  $('.d-appendix').before($('<hr class="section-separator"/>'));
+
+  // trim code
+  $('pre>code').each(function(i, val) {
+    $(this).html($.trim($(this).html()));
+  });
+
   $('body').addClass('downlevel');
-  
+
   on_load_complete();
 }
 
 function init_common() {
-  
+
+   // prevent underline for linked images
+  $('a > img').parent().css({'border-bottom' : 'none'});
+
+  // mark child figures created by R chunks 100% width
+  $('.layout-chunk').each(function(i, val) {
+    $(this).children('img, .html-widget').css('width', '100%');
+  });
+
+  // add class to pandoc style tables
+  $('tr.header').parent('thead').parent('table').addClass('pandoc-table');
+  $('.kable-table').children('table').addClass('pandoc-table');
+
 }
 

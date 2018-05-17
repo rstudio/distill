@@ -149,8 +149,10 @@ d-appendix .citation-appendix,
 }
 
 .downlevel .d-byline {
-  padding-top: 1.5em;
-  padding-bottom: 1.5em;
+  padding-top: 0.8em;
+  padding-bottom: 0.8em;
+  font-size: 0.8rem;
+  line-height: 1.8em;
 }
 
 .downlevel .section-separator {

@@ -10,11 +10,11 @@
     - publishing/previewing workflow?
     - app.R or ui.R / server.R in the same directory; automagic local run
 
+- downlevel if no distill template
+- consoliate some include files
 - rename publish_url to base_url
 
 - site docs
-
-- IE 10/11 default styles (note that we don't need responsiveness here)
 
 Figures Tables Citations Shiny Publish \/  <ghicon>
                                 Publishing an Article

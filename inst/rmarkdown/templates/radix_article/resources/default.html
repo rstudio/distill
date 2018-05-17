@@ -42,22 +42,13 @@ $if(description)$<p>$description$</p>$endif$
 
 $if(author)$
 <div class="d-byline">
-<h3>Authors</h3>
 $for(author)$
-  $if(author.name)$
-  <p class="author">
-      $author.name$ $author.url$
-      <br/>
-      $author.affiliation$ $author.affiliation_url$
-  </p>
+  $if(author.name)$$author.name$ $author.url$ $if(author.affiliation)$($author.affiliation$)$author.affiliation_url$$endif$
   $else$
-  <p class="author">
-      $author$
-  </p>
+  $author$
   $endif$
-$endfor$
-<h3>Published</h3>
-<p>$if(date)$$date$$else$<em>Not published yet.</em>$endif$</p>
+$sep$, $endfor$
+$if(date)$<br/>$date$$endif$
 </div>
 $endif$
 

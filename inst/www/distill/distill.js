@@ -52,7 +52,7 @@ function init_distill() {
   // create d-article
   var article = $('<d-article></d-article>');
   $('.d-article').wrap(article).children().unwrap();
-  
+
   // create d-appendix
   $('.d-appendix').changeElementType('d-appendix');
 
@@ -215,19 +215,18 @@ function init_downlevel() {
 
   init_common();
 
-  // TODO: author formatting
-
    // insert hr after d-title
   $('.d-title').after($('<hr class="section-separator"/>'));
 
   // check if we have authors
   var front_matter = JSON.parse($("#distill-front-matter").html());
   var have_authors = front_matter.authors && front_matter.authors.length > 0;
-  
+
   // manage byline/border
   if (!have_authors)
     $('.d-byline').remove();
   $('.d-byline').after($('<hr class="section-separator"/>'));
+  $('.d-byline a').remove();
 
   // move appendix elements
   $('h1.appendix, h2.appendix').each(function(i, val) {
@@ -252,7 +251,7 @@ function init_downlevel() {
   $('.appendix-bottom').remove();
 
   // remove appendix if it's empty
-  if ($('.d-appendix').children().length == 0)
+  if ($('.d-appendix').children().length === 0)
     $('.d-appendix').remove();
 
   // prepend separator above appendix
