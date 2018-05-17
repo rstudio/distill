@@ -12,6 +12,10 @@
 
 - site docs
 
+- figures within asides
+- dygraphs not sizing on show
+- r2d3 plot in diagrams off center
+
 Figures Tables Citations Shiny Publish \/  <ghicon>
                                 Publishing an Article
                                 Publishing a Website
