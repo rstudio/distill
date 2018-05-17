@@ -16,11 +16,12 @@
 
 
 function is_downlevel_browser() {
-  return bowser.isUnsupportedBrowser(
-    { msie: "12",
-      msedge: "16"},
-    window.navigator.userAgent
-  );
+  if (bowser.isUnsupportedBrowser({ msie: "12", msedge: "16"},
+                                 window.navigator.userAgent)) {
+    return true;
+  } else {
+    return window.load_distill_framework === undefined;
+  }
 }
 
 // show body when load is complete
@@ -136,14 +137,8 @@ function init_distill() {
   init_common();
 
   // load distill framework
-  try {
-    load_distill_framework();
-  } catch(e) {
-    console.log('Error loading distill: ' + e.message);
-    on_load_complete();
-    return;
-  }
-
+  load_distill_framework();
+  
   // wait for window.distillRunlevel == 4 to do post processing
   function distill_post_process() {
 
