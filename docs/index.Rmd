@@ -181,21 +181,38 @@ The citation is presented inline like this: [@xie2015] (a number that displays m
 
 See the article on [citations](citations.html) for additional details on using citations, including how to provide the metadata required to make your article more easily citable for others.
 
-## Footnotes
+## Footnotes & Asides
 
 Footnotes use standard Pandoc markdown notation, for example `^[This will become a hover-able footnote]`. The number of the footnote will be automatically generated. ^[This will become a hover-able footnote]
 
 You can also optionally include notes in the gutter of the article (immediately to the right of the article text). To do this use the `<aside>` tag.
-
-<aside>
-This content will appear in the gutter of the article.
-</aside>
 
 ```html
 <aside>
 This content will appear in the gutter of the article.
 </aside>
 ```
+
+<aside>
+This content will appear in the gutter of the article.
+</aside>
+
+You can also include figures in the gutter. Just enclose the code chunk which generates the figure in an `<aside>` tag:
+
+````clike
+<aside>
+```{r}`r ''`
+mtcars$am <- factor(mtcars$am, labels = c('automatic', 'manual'))
+ggplot(mtcars, aes(hp, mpg, color = am)) +
+  geom_point() + geom_smooth() +
+  theme(legend.position = 'bottom')
+```
+</aside>
+````
+
+<aside>
+![](images/figure-aside.png){width=100%}
+</aside>
 
 ## Code Blocks
 
