@@ -22,13 +22,30 @@ Figures Tables Citations Shiny Publish \/  <ghicon>
     - https://github.com/wikiti/jquery-paginate
     - iframe based inclusion
 
+- Download supplemetary figures
+- Abbreviations and supplementary figures
+- "articles" that are presentations or other content (e.g. PDF!?!?!?!?)
+- Article indexes include repository URLs, source code, etc.
+- Copy BibTeX on citation hover
+
+- Citables figures/images
+
+- eLife
+- 
+
+- GH PullReview inline in IDE
+
+- Check out https://publons.com/home/, F1000
+
+- Figshare
 
 
-- distill.pub
+- radix.pub
     - Use GitHub organizations/repos for URL namespace
     - Commit hook based publishing
     - Provide frame with social, GA, discourse, etc.
     - RSC for internal version of same
+    - Highlighting and commenting
     
     
     
