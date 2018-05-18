@@ -245,19 +245,22 @@ html_dependency_headroom <- function() {
 
 transform_site_config <- function(input_dir, site_config) {
 
-  # propagate navbar title to main title
-  if (is.null(site_config$title) && !is.null(site_config$navbar))
-    site_config$title <- site_config$navbar$title
+  if (!is.null(site_config) && length(site_config) > 0) {
 
-  # propagate main title to navbar title
-  if (!is.null(site_config$title) && !is.null(site_config$navbar)
-      && is.null(site_config$navbar$title)) {
-    site_config$navbar$title <- site_config$title
+    # propagate navbar title to main title
+    if (is.null(site_config$title) && !is.null(site_config$navbar))
+      site_config$title <- site_config$navbar$title
+
+    # propagate main title to navbar title
+    if (!is.null(site_config$title) && !is.null(site_config$navbar)
+        && is.null(site_config$navbar$title)) {
+      site_config$navbar$title <- site_config$title
+    }
+
+    # validate that we have a title
+    if (is.null(site_config$title))
+      stop("_site.yml must include a title field", call. = FALSE)
   }
-
-  # validate that we have a title
-  if (is.null(site_config$title))
-    stop("_site.yml must include a title field", call. = FALSE)
 
   site_config
 }
