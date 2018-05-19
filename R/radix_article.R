@@ -1054,17 +1054,23 @@ knitr_chunk_hook <- function() {
 
   # hook
   function(x, options) {
-    if (options$eval) {
-      if (is.null(options$layout))
-        options$layout <- "l-body"
-      paste0(
-        '<div class="layout-chunk ', options$layout, '">',
-        x,
-        '</div>'
-      )
-    } else {
-      default_chunk_hook(x, options)
-    }
+
+    # apply default layout
+    if (is.null(options$layout))
+      options$layout <- "l-body"
+
+    # apply default hook and determine padding
+    output <- default_chunk_hook(x, options)
+    pad_chars <- nchar(output) - nchar(sub("^ +", "", output))
+    padding <- paste(rep(' ', pad_chars), collapse = '')
+
+    # enclose default output in div (with appropriate padding)
+    paste0(
+      padding, '<div class="layout-chunk ', options$layout, '">',
+      default_chunk_hook(x, options),
+      padding, '\n',
+      padding, '</div>\n'
+    )
   }
 }
 
