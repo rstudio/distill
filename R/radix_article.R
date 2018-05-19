@@ -82,7 +82,7 @@ radix_article <- function(fig_width = 6,
   # hook to ensure newline at the beginning of chunks
   knitr_options$knit_hooks <- list()
   knitr_options$knit_hooks$source <- knitr_source_hook
-  knitr_options$knit_hooks$chunk <- knitr_chunk_hook
+  knitr_options$knit_hooks$chunk <- knitr_chunk_hook()
 
   # post-knit
   post_knit <- function(metadata, input_file, runtime, encoding, ...) {
@@ -1044,14 +1044,28 @@ knitr_source_hook <- function(x, options) {
   )
 }
 
-knitr_chunk_hook <- function(x, options) {
-  if (is.null(options$layout))
-    options$layout <- "l-body"
-  paste0(
-    '<div class="layout-chunk ', options$layout, '">',
-    x,
-    '</div>'
-  )
+knitr_chunk_hook <- function() {
+
+  # capture the default chunk hook
+  previous_hooks <- knitr::knit_hooks$get()
+  on.exit(knitr::knit_hooks$restore(previous_hooks), add = TRUE)
+  knitr::render_markdown()
+  default_chunk_hook <- knitr::knit_hooks$get("chunk")
+
+  # hook
+  function(x, options) {
+    if (options$eval) {
+      if (is.null(options$layout))
+        options$layout <- "l-body"
+      paste0(
+        '<div class="layout-chunk ', options$layout, '">',
+        x,
+        '</div>'
+      )
+    } else {
+      default_chunk_hook(x, options)
+    }
+  }
 }
 
 
