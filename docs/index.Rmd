@@ -251,7 +251,7 @@ Footnotes and references will be included in the same section, immediately benea
 
 ## Why Radix?
 
-Why the name Radix? The most common [definition of radix](https://en.oxforddictionaries.com/definition/radix) in the English language comes from Mathmatics, where it is used to describe the base of a system of numeration. It is also used to describe the source or origin of something. Both of these usages derive from the Latin meaning of the radix, which is literally *root*.
+Why the name Radix? The most common [definition of radix](https://en.oxforddictionaries.com/definition/radix) in the English language comes from Mathmatics, where it is used to describe the base of a system of numeration. It is also used to describe the source or origin of something. Both of these usages derive from the Latin meaning of radix, which is literally *root*.
 
 The purpose of scientific communication is to help get to the root of things! Radix provides a set of tools to facilitate clear scientific communication that links richly with other sources of knowledge and insight.
 

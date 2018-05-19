@@ -396,9 +396,11 @@ Publish
 
 
 <div class="d-article">
-<p>This article describes how to publish several Radix articles together as a website. Radix websites include a common navigation bar that enables readers to discover and browse collections of articles. For example, the documentation pages you are reading now are a Radix website.</p>
-<h2 id="simple-example">Simple Example</h2>
-<p>To start with let’s walk through a very simple example, a website that includes two pages (Home and About) and a navigation bar to switch between them:</p>
+<p>This article describes how to create a website that contains a collection of Radix articles. Radix websites include a top level navigation bar that enables readers to discover and browse articles. For example, the documentation pages you are reading now are a Radix website.</p>
+<p>Once you’ve created your website locally, the are a variety of ways available to <a href="#publishing">publish your site to the web</a>.</p>
+<h2 id="getting-started">Getting Started</h2>
+<p>The minimum requirement for a Radix website is that it have an <code>index.Rmd</code> file as well as a <code>_site.yml</code> file (this is where site related options and configuration are specified).</p>
+<p>Let’s walk through a very simple example, a website that includes two pages (Home and About) and a navigation bar to switch between them:</p>
 <p><strong>_site.yml</strong></p>
 <pre class="markup"><code>
 ---
@@ -432,18 +434,115 @@ description: |
 ---
 
 More about Radix</code></pre>
-<p>Note that the minimum requirement for any website is that it have an <code>index.Rmd</code> file as well as a <code>_site.yml</code> file. Note also that the <code>output</code> options are not specified within the Rmd documents but rather in the <code>_site.yml</code> configuration file (this allows output options to be shared by all articles).</p>
-<p>If you execute the <code>rmarkdown::render_site</code> function from within the directory containing the website the following will occur:</p>
+<p>Note that the <code>output</code> options are not specified within the Rmd documents but rather in the <code>_site.yml</code> configuration file (this allows output options to be shared by all articles).</p>
+<h2 id="authoring-and-previewing">Authoring and Previewing</h2>
+<p>To build the website, use the <code>rmarkdown::render_site()</code> function:</p>
+<pre class="r"><code>
+library(rmarkdown)
+render_site()</code></pre>
+<p>When you execute this function from within the directory containing the website, the following occurs:</p>
 <ol style="list-style-type: decimal">
 <li><p>All of the Rmd and md files in the root website directory will be rendered into HTML. Note however that markdown files beginning with &quot;_&quot; are not rendered (this is a convention to designate files that are included by top level documents).</p></li>
 <li><p>The generated HTML files and any supporting files (e.g. CSS and JavaScript) are copied into an output directory (<code>_site</code> by default).</p></li>
 </ol>
 <p>The HTML files within the <code>_site</code> directory are now ready to deploy as a standalone static website.</p>
-<p>If you are using RStudio you can also use the <em>Build Website</em> command available in the Build pane:</p>
+<p>If your Radix website is contained within an RStudio project you can also use the <strong>Build Website</strong> command available in the Build pane:</p>
 <p><img src="images/build-website.png" class="screenshot" style="width:95.0%" /></p>
-<h2 id="navigation-bar">Navigation Bar</h2>
-<h3 id="themes">Themes</h3>
-<h2 id="shared-metadata">Shared Metadata</h2>
+<p>You can also preview a single article from within the website by passing the name of the article’s Rmd file to <code>render_site()</code>:</p>
+<pre class="r"><code>
+render_site(&quot;about.Rmd&quot;)</code></pre>
+<p>This will build only the specified article (as opposed to all of the articles in the site). If you use the <strong>Knit</strong> command from within RStudio on a Radix article within a website it will also render and preview just that article.</p>
+<p>The R Markdown documentation on <a href="https://rmarkdown.rstudio.com/rmarkdown_websites.html">creating websites</a> has additional documentation on additional available features and configuration options. The remainder of this article describes features that are specific to Radix websites.</p>
+<h2 id="site-navigation">Site Navigation</h2>
+<p>Site navigation bars include the site’s title, an optional logo, top-level links to articles, and if need be drop-down menus that include links to several articles. For example:</p>
+<p><img src="images/navigation-bar.png" class="screenshot" style="width:95.0%" /></p>
+<p>Elements of the site navigation bar are specified within the <code>navbar</code> section of the <code>_site.yml</code> file. For example, here is the YAML that was used to create the navigation bar displayed above:</p>
+<pre class="markup"><code>
+---
+name: &quot;radix&quot;
+title: &quot;Radix for R Markdown&quot;
+navbar:
+  logo:
+    image: images/logo.png
+    href: https://www.rstudio.com
+  right:
+    - text: &quot;Figures&quot;
+      href: figures.html
+    - text: &quot;Tables&quot;
+      href: tables.html
+    - text: &quot;Citations&quot;
+      href: citations.html
+    - text: &quot;Publish&quot;
+      menu:
+        - text: &quot;Publishing Articles&quot;
+          href: publish_article.html
+        - text: &quot;Publishing a Website&quot;
+          href: publish_website.html
+        - text: &quot;---&quot;
+        - text: &quot;Article Metadata&quot;
+          href: metadata.html
+    - icon: fa-github
+      href: https://github.com/rstudio/radix
+output: distill::distill_article
+---</code></pre>
+<p>Note that we specify that the menu items appear on the <code>right</code> side of the navigation bar. We could have also used <code>left</code>, or chosen to put some items on the <code>left</code> and some on the <code>right</code>.</p>
+<p>Note also that we used an <code>icon</code> for one of the menus, specifying the <a href="https://fontawesome.com/v4.7.0/">Font Awesome</a> <code>fa-github</code> identifer for the GitHub icon (you can use any Font Awesome 4.0 icon).</p>
+<h3 id="site-footer">Site Footer</h3>
+<p>When you use a navigation bar, you can optionally also include a site footer which uses the same theme (background and foreground colors). For example:</p>
+<p><img src="images/footer-bar.png" class="screenshot" style="width:95.0%" /></p>
+<p>To add a footer, simply include a file named <code>footer.html</code> within your main site directory. For example:</p>
+<p><strong>footer.html</strong></p>
+<pre class="markup"><code>
+© Copyright 2018 [The Distill Template Authors]
+(https://github.com/distillpub/template/blob/master/AUTHORS) 
+and [RStudio, Inc](https://www.rstudio.com).
+
+Software licensed under the [Apache License, v2.0]
+(https://www.apache.org/licenses/LICENSE-2.0).</code></pre>
+<h3 id="theming">Theming</h3>
+<p>You can use CSS to create an alternate theme for your navigation bar and site footer. Here is the CSS used for the default appearance:</p>
+<pre class="css"><code>
+.radix-site-nav {
+  color: rgba(255, 255, 255, 0.8);
+  background-color: #455a64;
+  font-size: 15px;
+  font-weight: 300;
+}
+
+.radix-site-nav a {
+  color: inherit;
+  text-decoration: none;
+}
+
+.radix-site-nav a:hover {
+  color: white;
+}
+
+.radix-site-header {
+}
+
+.radix-site-footer {
+}
+
+@media print {
+  .radix-site-nav {
+    display: none;
+  }
+}</code></pre>
+<p>The <code>radix-site-nav</code> class addresses both the header and footer, whereas the <code>radix-site-header</code> and <code>radix-site-footer</code> apply (respectively) to just the header and footer.</p>
+<p>To override all or part of this CSS, simply include a <code>styles.css</code> file in the main site directory and add a reference to it within your site output options. For example:</p>
+<p><strong>_site.yml</strong></p>
+<pre class="markup"><code>
+name: &quot;radix&quot;
+title: &quot;Radix for R Markdown&quot;
+navbar:
+  # (navbar definition here)
+output:
+  radix::radix_article:
+    css: styles.css</code></pre>
+<h2 id="site-metadata">Site Metadata</h2>
+<p>Radix articles can include various types of <a href="metadata.html">metadata</a> to make them easier to index, cite, and share. Metadata included within your <code>_site.yml</code> file is conveniently shared across all articles on your site (individual articles can always override any value within their own metadata).</p>
+<p>Several metadata values which you might find useful to define in <code>_site.yml</code> are:</p>
 <h2 id="publishing">Publishing</h2>
 <ol start="4" style="list-style-type: decimal">
 <li><p>GitHub Pages</p></li>
