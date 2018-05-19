@@ -55,8 +55,20 @@ Here are the steps required to publish a Radix article to GitHub Pages:
     file.create(".nojekyll")
     ```
 
+4) Create a Radix article named `index.Rmd` within the repository (using this name will allow your article to be served as the default web page for the repository). 
 
-4) Create a Radix article named `index.Rmd` within the repository (using this name will allow your article to be served as the default web page for the repository).
+5) Add appropriate metadata to the article. The article should at a minimum include `title` and `description` fields, and should also specify `self_contained: false` (this will make the article load faster and will enable you to add a [preview image](metadata.html#preview-images) for sharing the article on Slack, Twitter, etc.):
+
+   ```markup
+   ---
+   title: "Radix for R Markdown"
+   description: |
+     Scientific and technical writing, native to the web
+   output:
+     radix::radix_article:
+       self_contained: false
+   ---
+   ```
 
 5) Write and render your article using R Markdown.
 
