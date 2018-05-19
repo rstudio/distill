@@ -396,7 +396,62 @@ Publish
 
 
 <div class="d-article">
+<p>This article describes how to publish several Radix articles together as a website. Radix websites include a common navigation bar that enables readers to discover and browse collections of articles. For example, the documentation pages you are reading now are a Radix website.</p>
+<h2 id="simple-example">Simple Example</h2>
+<p>To start with let’s walk through a very simple example, a website that includes two pages (Home and About) and a navigation bar to switch between them:</p>
+<p><strong>_site.yml</strong></p>
+<pre class="markup"><code>
+---
+name: &quot;radix-rmarkdown&quot;
+title: &quot;Radix for R Markdown&quot;
+navbar:
+  right:
+    - text: &quot;Home&quot;
+      href: index.html
+    - text: &quot;About&quot;
+      href: about.html
+    - icon: fa-github
+      href: https://github.com/rstudio/radix
+output: radix::radix_article
+---</code></pre>
+<p><strong>index.Rmd</strong></p>
+<pre class="markup"><code>
+---
+title: &quot;Radix for R Markdown&quot;
+description: | 
+  Scientific and technical writing, native to the web
+---
 
+Hello, Radix!</code></pre>
+<p><strong>about.Rmd</strong></p>
+<pre class="markup"><code>
+---
+title: &quot;About Radix&quot;
+description: |
+  Some additional details about the Radix project
+---
+
+More about Radix</code></pre>
+<p>Note that the minimum requirement for any website is that it have an <code>index.Rmd</code> file as well as a <code>_site.yml</code> file. Note also that the <code>output</code> options are not specified within the Rmd documents but rather in the <code>_site.yml</code> configuration file (this allows output options to be shared by all articles).</p>
+<p>If you execute the <code>rmarkdown::render_site</code> function from within the directory containing the website the following will occur:</p>
+<ol style="list-style-type: decimal">
+<li><p>All of the Rmd and md files in the root website directory will be rendered into HTML. Note however that markdown files beginning with &quot;_&quot; are not rendered (this is a convention to designate files that are included by top level documents).</p></li>
+<li><p>The generated HTML files and any supporting files (e.g. CSS and JavaScript) are copied into an output directory (<code>_site</code> by default).</p></li>
+</ol>
+<p>The HTML files within the <code>_site</code> directory are now ready to deploy as a standalone static website.</p>
+<p>If you are using RStudio you can also use the <em>Build Website</em> command available in the Build pane:</p>
+<p><img src="images/build-website.png" class="screenshot" style="width:95.0%" /></p>
+<h2 id="navigation-bar">Navigation Bar</h2>
+<h3 id="themes">Themes</h3>
+<h2 id="shared-metadata">Shared Metadata</h2>
+<h2 id="publishing">Publishing</h2>
+<ol start="4" style="list-style-type: decimal">
+<li><p>GitHub Pages</p></li>
+<li><p>Netlify</p></li>
+<li><p>Firebase hosting: <a href="https://firebase.google.com/docs/hosting/quickstart" class="uri">https://firebase.google.com/docs/hosting/quickstart</a></p></li>
+<li><p>Amazon S3</p></li>
+<li><p>Site 44 (Dropbox)</p></li>
+</ol>
 </div>
 
 <div class="d-appendix">

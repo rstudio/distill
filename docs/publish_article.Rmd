@@ -49,7 +49,12 @@ Here are the steps required to publish a Radix article to GitHub Pages:
 
     ![](images/gh-pages-settings.png){width=90% .screenshot}
 
-3) Create a file named `.nojekyll` in your repository (this is required to disable some processing of HTML files that GitHub does by default). You can do this with the following code: `file.create(".nojekyll")`.
+3) Create a file named `.nojekyll` in your repository (this is required to disable some processing of HTML files that GitHub does by default). You can do this with the following code:
+    
+    ```{r, eval=FALSE, echo=TRUE}
+    file.create(".nojekyll")
+    ```
+
 
 4) Create a Radix article named `index.Rmd` within the repository (using this name will allow your article to be served as the default web page for the repository).
 
@@ -62,16 +67,3 @@ GitHub Pages are served on the `github.io` domain (with your GitHub account as a
 ## Other Services
 
 Note that any web server or web host capable of hosting a static website can equally well host a single Radix article. See the article on publishing Radix websites for details on publishing articles on a variety of other services including Netlify, Firebase, Amazon S3, and Site 44.
-
-
-
-
-
-
-
-
-
-
-
-
-
