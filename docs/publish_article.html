@@ -420,15 +420,9 @@ Publish
 <li><p>Create a new Git repository that will be used to host your article.</p></li>
 <li><p>Configure your repository to publish the contents of the <code>master</code> branch (you can do from the <em>Settings</em> page for the repository):</p>
 <p><img src="images/gh-pages-settings.png" class="screenshot" style="width:90.0%" /></p></li>
-<li><p>Create a file named <code>.nojekyll</code> in your repository (this is required to disable some processing of HTML files that GitHub does by default). You can do this with the following code:</p></li>
-</ol>
-<div class="layout-chunk l-body">
+<li><p>Create a file named <code>.nojekyll</code> in your repository (this is required to disable some processing of HTML files that GitHub does by default). You can do this with the following code:</p>
 <pre class="r"><code>
-file.create(&quot;.nojekyll&quot;)</code></pre>
-<pre><code>
-[1] TRUE</code></pre>
-</div>
-<ol start="4" style="list-style-type: decimal">
+file.create(&quot;.nojekyll&quot;)</code></pre></li>
 <li><p>Create a Radix article named <code>index.Rmd</code> within the repository (using this name will allow your article to be served as the default web page for the repository).</p></li>
 <li><p>Write and render your article using R Markdown.</p></li>
 <li><p>Push the article (including the HTML file generated when you rendered it) to GitHub. Your article is now published!</p></li>
