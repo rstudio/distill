@@ -22,15 +22,15 @@ navbar:
       href: tables.html
     - text: "Citations"
       href: citations.html
-#    - text: "Publish"
-#      menu:
-#        - text: "Publishing Articles"
-#          href: publish_article.html
-#        - text: "Publishing a Website"
-#          href: publish_website.html
-#        - text: "---"
-#        - text: "Article Metadata"
-#          href: metadata.html
+    - text: "Publish"
+      menu:
+        - text: "Publishing Articles"
+          href: publish_article.html
+        - text: "Publishing a Website"
+          href: publish_website.html
+        - text: "---"
+        - text: "Article Metadata"
+          href: metadata.html
     - icon: fa-github
       href: https://github.com/rstudio/radix
 output:

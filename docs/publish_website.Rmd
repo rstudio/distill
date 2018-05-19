@@ -8,3 +8,13 @@ library(knitr)
 ```
 
 
+
+4) GitHub Pages
+
+5) Netlify
+
+5) Firebase hosting: https://firebase.google.com/docs/hosting/quickstart
+
+6) Amazon S3
+
+7) Site 44 (Dropbox)
