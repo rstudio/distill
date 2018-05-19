@@ -249,6 +249,12 @@ describing what each author did.
 
 Footnotes and references will be included in the same section, immediately beneath any custom appendices.
 
+## Why Radix?
+
+Why the name Radix? The most common [definition of radix](https://en.oxforddictionaries.com/definition/radix) in the English language comes from Mathmatics, where it is used to describe the base of a system of numeration. It is also used to describe the source or origin of something. Both of these usages derive from the Latin meaning of the radix, which is literally *root*.
+
+The purpose of scientific communication is to help get to the root of things! Radix provides a set of tools to facilitate clear scientific communication that links richly with other sources of knowledge and insight.
+
 ## Acknowledgments {.appendix}
 
 Radix builds on the work of many individuals and projects. [Shan Carter](https://github.com/shancarter), [Ludwig Schubert](https://github.com/ludwigschubert), and [Christopher Olah](https://github.com/colah) created the Distill web framework. [John MacFarlane](https://github.com/jgm) created the Pandoc universal markup converter. [Davide Cervone](https://github.com/dpvc) and [Volker Sorge](https://github.com/zorkow) created the MathJax library for rendering mathmatical notation on the web. [Mike Bostock](https://github.com/mbostock) created the D3 library for producing dynamic, interactive data visualizations for the web. We are grateful for the spirit of generousity that moved these individuals to create high-quality open source software for the benefit of all.
