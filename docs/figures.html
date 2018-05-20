@@ -43,6 +43,9 @@
       $('header').each(function(i, val) {
           var headroom = new Headroom(this);
           headroom.init();
+          if(window.location.hash)
+            headroom.unpin();
+          $(this).addClass('headroom--transition');
       });
   
       // responsive menu
@@ -311,6 +314,9 @@
     top: 0;
     left: 0;
     right: 0;
+  }
+  
+  .headroom--transition {
     transition: all .4s ease-in-out;
   }
   
