@@ -79,7 +79,7 @@ If you include this field then a *Reuse* appendix is automatically generated. Fo
 
 ### External figures
 
-Note that figures from external sources are explicitly carved out of the license. If you are including a figure from an external source, it's good practice to delinate this by applying the `.external` class and adding a caption indicating where it is from. For example:
+Note that figures from external sources are explicitly carved out of the license. If you are including a figure from an external source, it's good practice to delineate this by applying the `.external` class and adding a caption indicating where it is from. For example:
 
 ```markup
 ![Figure from https://example.com](heatmap.png){.external width=100%}    
@@ -92,7 +92,7 @@ Using the `.external` class and providing a "Figure from" link makes it clear th
 
 ## Open Graph
 
-The [Open Graph protocol](http://ogp.me/) is a specification that enables richer sharing of links to aricles on the web. Open Graph metadata is automatically generated for Radix articles. For example, here's what you see in Slack when pasting in a link to the article on using [JavaScript and D3](interactivity.html) within Radix articles:
+The [Open Graph protocol](http://ogp.me/) is a specification that enables richer sharing of links to articles on the web. Open Graph metadata is automatically generated for Radix articles. For example, here's what you see in Slack when pasting in a link to the article on using [JavaScript and D3](interactivity.html) within Radix articles:
 
 ![](images/open-graph-screenshot.png){width=95% .screenshot}
 

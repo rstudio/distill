@@ -30,11 +30,12 @@ library(knitr)
 Radix is an online publication format designed for scientific and technical communication. Radix articles include:
 
 - Reader-friendly typography that adapts well to mobile devices.
-- Features essential to technical writing like [LaTeX math](#equations), [citations], and [footnotes].
+- Features essential to technical writing like [LaTeX math](#equations), [citations], and [footnotes](#footnotes-and-asides).
 - Flexible [figure layout](figures.html) options (e.g. displaying figures at a larger width than the article text).
 - Attractively rendered [tables](tables.html) with optional support for pagination.
 - Support for a wide variety of [diagramming tools](diagrams.html) for illustrating concepts.
-- A variety of ways to enhance articles with JavaScript and D3-based [interactive visualizations](interactivity.html).
+- The ability to incorporate JavaScript and D3-based [interactive visualizations](interactivity.html).
+- A variety of ways to [publish articles](publish_article.html), including support for publishing collections or articles as a [Radix website](publish_website.html).
 
 Radix is based on the [Distill web framework](https://github.com/distillpub/template), which was originally created for use in the Distill Machine Learning Journal [@distill]. Radix combines the technical authoring features of Distill with [R Markdown](https://rmarkdown.rstudio.com/), enabling a fully reproducible workflow based on literate programming [@knuth1984].
 
@@ -181,7 +182,7 @@ The citation is presented inline like this: [@xie2015] (a number that displays m
 
 See the article on [citations](citations.html) for additional details on using citations, including how to provide the metadata required to make your article more easily citable for others.
 
-## Footnotes & Asides
+## Footnotes and Asides
 
 Footnotes use standard Pandoc markdown notation, for example `^[This will become a hover-able footnote]`. The number of the footnote will be automatically generated. ^[This will become a hover-able footnote]
 

@@ -9,7 +9,7 @@ library(knitr)
 
 This article describes how to create a website that contains a collection of Radix articles. Radix websites include a top level navigation bar that enables readers to discover and browse articles. For example, the documentation pages you are reading now are a Radix website. 
 
-Once you've created your website locally, the are a variety of ways available to [publish your site to the web](#publishing).  
+Once you've created your website locally, there are a variety of ways available to publish your site to the web. We cover several options below including [GitHub Pages], [Netlify], [Firebase], [Site44], and [Amazon S3]. 
 
 ## Getting Started
 
@@ -82,7 +82,7 @@ library(rmarkdown)
 render_site()
 ```
 
-### Single Article 
+### Single Article Preview
 
 When you use the RStudio **Knit** command on a Radix article within a website, only that article will be rendered and previewed.
 
@@ -167,7 +167,7 @@ output: distill::distill_article
 
 Note that we specify that the menu items appear on the `right` side of the navigation bar. We could have also used `left`, or chosen to put some items on the `left` and some on the `right`. 
 
-Note also that we used an `icon` for one of the menus, specifying the [Font Awesome](https://fontawesome.com/v4.7.0/) `fa-github` identifer for the GitHub icon (you can use any Font Awesome 4.0 icon).
+Note also that we used an `icon` for one of the menus, specifying the [Font Awesome](https://fontawesome.com/v4.7.0/) `fa-github` identifier for the GitHub icon (you can use any Font Awesome 4.0 icon).
 
 ### Site Footer
 
@@ -248,7 +248,7 @@ Several metadata values which you might find useful to define in `_site.yml` are
 |------------------|------------------------------------------------|
 | `base_url` |  Base (root) URL for the location where the website will be deployed (used for providing [preview imaages](metadata.html#preview-images) for Open Graph and Twitter Card). |
 | `repository_url`     |   URL for the source code of your website (note that individual articles will often want to override this value). Used to automatically create an *Updates and Corrections* appendix. |
-| `creative_commons`      |  [Creative Commons](metadata.html#creative-commons) license terms for website content. |
+| `creative_commons`      |  [Creative Commons](metadata.html#creative-commons) license terms for website content. Used to automatically generate a *Reuse* appendix. |
 | `license_url`     | Alternate licensing terms for website content if not using a Creative Commons license. |
 | `journal` | Title, publisher, ISSN, etc. for Journal websites.  |
 
@@ -276,7 +276,7 @@ output: radix::radix_article
 
 There are a wide variety of ways to publish Radix websites. Website content is by default written to the `_site` sub-directory (you can customize this using the `output_dir` metadata field). Publishing is simply a matter of copying the output directory to a web server or web hosting service.
 
-Below we describe several convenient options for Radix website deployment. We'll mostly defer to the documentation provided by the various services, but will note any Radix website specific configuration required.
+Below we describe several convenient options for Radix website deployment including [GitHub Pages], [Netlify], [Firebase], [Site44], and [Amazon S3]. We'll mostly defer to the documentation provided by the various services, but will note any Radix website specific configuration required.
 
 ### GitHub Pages
 
@@ -288,7 +288,11 @@ Below we describe several convenient options for Radix website deployment. We'll
     file.create(".nojekyll")
     ```
 
-2. Set the `output_dir` within `_site.yml` to match the repository directory your site is served from. You can configure GitHub Pages to publish from the root of your master branch or the `docs` subdirectory. Depending on your configuration you should set the `output_dir` as follows:
+2. Set the `output_dir` within `_site.yml` to match the repository directory your site is served from. You can configure GitHub Pages to publish from the root of your master branch or the `docs` sub-directory:
+
+    ![](images/github-pages-directory.png){width=95%}    
+
+    Depending on your configuration you should set the `output_dir` as follows:
 
     ```markup
     output_dir: "."     # root of master branch
@@ -299,11 +303,35 @@ See the [GitHub Pages](https://pages.github.com/) documentation for additional d
 
 ### Netlify
 
+[Netlify](https://www.netlify.com/) is a popular website hosting service that allows for both direct upload of website files or integrated publishing from Git repositories (GitHub, GitLab, or Bitbucket) via commit-hooks.
+
+If you are using Netlify Git integration, be sure to set the publish directory to the output directory of your website (`_site` by default but modifiable via the `output_dir` metadata value). For example:
+
+![](images/netlify-publish-dir.png){width=95% .screenshot}
+
+### Firebase
+
+Google Firebase has a [web hosting service](https://firebase.google.com/docs/hosting/quickstart) that enables easy deployment of websites using a set of command line tools.
+
+Firebase websites by default deploy content from the `public` directory of the Firebase project directory. This means that you should set the `output_dir` to `"public"`  within `_site.yml`:
+
+```markup
+---
+name: "radix"
+title: "Radix for R Markdown"
+output_dir: "public"
+---
+```
+
+### Site44
+
+[Site44](https://www.site44.com/) is a service that allows you to publish websites from within Dropbox folders. Site44 creates a `Dropbox/Apps/site44` directory, and any folders within that directory are published as websites.
+
+The recommended workflow for deploying Radix websites to Site44 is to develop your website in a separate project directory, and then, when it's ready for final publishing, copy the contents of the `_site` directory to the folder for your website.
 
 ### Amazon S3
 
-
-### Site 44
+If you are a user of Amazon Web Services you can serve your website directly from Amazon S3. Note however that this option is a bit more technically involved than GitHub Pages, Netlify, or Site 44. See the article on [Hosting a Static Website on Amazon S3](https://docs.aws.amazon.com/AmazonS3/latest/dev/WebsiteHosting.html) for additional details.
 
 
 ### Other Services

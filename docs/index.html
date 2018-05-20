@@ -435,11 +435,12 @@ Publish
 <p>Radix is an online publication format designed for scientific and technical communication. Radix articles include:</p>
 <ul>
 <li>Reader-friendly typography that adapts well to mobile devices.</li>
-<li>Features essential to technical writing like <a href="#equations">LaTeX math</a>, <a href="#citations">citations</a>, and [footnotes].</li>
+<li>Features essential to technical writing like <a href="#equations">LaTeX math</a>, <a href="#citations">citations</a>, and <a href="#footnotes-and-asides">footnotes</a>.</li>
 <li>Flexible <a href="figures.html">figure layout</a> options (e.g. displaying figures at a larger width than the article text).</li>
 <li>Attractively rendered <a href="tables.html">tables</a> with optional support for pagination.</li>
 <li>Support for a wide variety of <a href="diagrams.html">diagramming tools</a> for illustrating concepts.</li>
-<li>A variety of ways to enhance articles with JavaScript and D3-based <a href="interactivity.html">interactive visualizations</a>.</li>
+<li>The ability to incorporate JavaScript and D3-based <a href="interactivity.html">interactive visualizations</a>.</li>
+<li>A variety of ways to <a href="publish_article.html">publish articles</a>, including support for publishing collections or articles as a <a href="publish_website.html">Radix website</a>.</li>
 </ul>
 <p>Radix is based on the <a href="https://github.com/distillpub/template">Distill web framework</a>, which was originally created for use in the Distill Machine Learning Journal <span class="citation">(Carter, Olah, and Satyanarayan <a href="#ref-distill">2016</a>)</span>. Radix combines the technical authoring features of Distill with <a href="https://rmarkdown.rstudio.com/">R Markdown</a>, enabling a fully reproducible workflow based on literate programming <span class="citation">(Knuth <a href="#ref-knuth1984">1984</a>)</span>.</p>
 <h2 id="getting-started">Getting Started</h2>
@@ -541,7 +542,7 @@ $$</code></pre>
 <p>Citations are then used in the article body with standard R Markdown notation, for example: <code>[@xie2015]</code> (which references an id provided in the bibliography). Note that multiple ids (separated by semicolons) can be provided.</p>
 <p>The citation is presented inline like this: <span class="citation">(Xie <a href="#ref-xie2015">2015</a>)</span> (a number that displays more information on hover). If you have an appendix, a bibliography is automatically created and populated in it.</p>
 <p>See the article on <a href="citations.html">citations</a> for additional details on using citations, including how to provide the metadata required to make your article more easily citable for others.</p>
-<h2 id="footnotes-asides">Footnotes &amp; Asides</h2>
+<h2 id="footnotes-and-asides">Footnotes and Asides</h2>
 <p>Footnotes use standard Pandoc markdown notation, for example <code>^[This will become a hover-able footnote]</code>. The number of the footnote will be automatically generated.<a href="#fn1" class="footnote-ref" id="fnref1"><sup>1</sup></a></p>
 <p>You can also optionally include notes in the gutter of the article (immediately to the right of the article text). To do this use the <code>&lt;aside&gt;</code> tag.</p>
 <pre class="html"><code>
@@ -587,7 +588,7 @@ We strongly encourage you to include an author contributions statement briefly
 describing what each author did.</code></pre>
 <p>Footnotes and references will be included in the same section, immediately beneath any custom appendices.</p>
 <h2 id="why-radix">Why Radix?</h2>
-<p>Why the name Radix? The most common <a href="https://en.oxforddictionaries.com/definition/radix">definition of radix</a> in the English language comes from Mathmatics, where it is used to describe the the base of a system of numeration. It is also used to describe the source or origin of something. Both of these usages derive from the Latin meaning of the radix, which is literally <em>root</em>.</p>
+<p>Why the name Radix? The most common <a href="https://en.oxforddictionaries.com/definition/radix">definition of radix</a> in the English language comes from Mathmatics, where it is used to describe the base of a system of numeration. It is also used to describe the source or origin of something. Both of these usages derive from the Latin meaning of radix, which is literally <em>root</em>.</p>
 <p>The purpose of scientific communication is to help get to the root of things! Radix provides a set of tools to facilitate clear scientific communication that links richly with other sources of knowledge and insight.</p>
 <h2 id="acknowledgments" class="appendix">Acknowledgments</h2>
 <p>Radix builds on the work of many individuals and projects. <a href="https://github.com/shancarter">Shan Carter</a>, <a href="https://github.com/ludwigschubert">Ludwig Schubert</a>, and <a href="https://github.com/colah">Christopher Olah</a> created the Distill web framework. <a href="https://github.com/jgm">John MacFarlane</a> created the Pandoc universal markup converter. <a href="https://github.com/dpvc">Davide Cervone</a> and <a href="https://github.com/zorkow">Volker Sorge</a> created the MathJax library for rendering mathmatical notation on the web. <a href="https://github.com/mbostock">Mike Bostock</a> created the D3 library for producing dynamic, interactive data visualizations for the web. We are grateful for the spirit of generousity that moved these individuals to create high-quality open source software for the benefit of all.</p>

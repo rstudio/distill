@@ -397,7 +397,7 @@ Publish
 
 <div class="d-article">
 <p>This article describes how to create a website that contains a collection of Radix articles. Radix websites include a top level navigation bar that enables readers to discover and browse articles. For example, the documentation pages you are reading now are a Radix website.</p>
-<p>Once you’ve created your website locally, the are a variety of ways available to <a href="#publishing">publish your site to the web</a>.</p>
+<p>Once you’ve created your website locally, there are a variety of ways available to publish your site to the web. We cover several options below including <a href="#github-pages">GitHub Pages</a>, <a href="#netlify">Netlify</a>, <a href="#firebase">Firebase</a>, <a href="#site44">Site44</a>, and <a href="#amazon-s3">Amazon S3</a>.</p>
 <h2 id="getting-started">Getting Started</h2>
 <p>The minimum requirement for a Radix website is that it have an <code>index.Rmd</code> file as well as a <code>_site.yml</code> file (this is where site related options and configuration are specified).</p>
 <p>Let’s walk through a very simple example, a website that includes two pages (Home and About) and a navigation bar to switch between them:</p>
@@ -448,7 +448,7 @@ More about Radix</code></pre>
 <pre class="r"><code>
 library(rmarkdown)
 render_site()</code></pre>
-<h3 id="single-article">Single Article</h3>
+<h3 id="single-article-preview">Single Article Preview</h3>
 <p>When you use the RStudio <strong>Knit</strong> command on a Radix article within a website, only that article will be rendered and previewed.</p>
 <p>You can also preview a single article from within a website by passing the name of the article’s Rmd file to <code>render_site()</code>:</p>
 <pre class="r"><code>
@@ -507,7 +507,7 @@ navbar:
 output: distill::distill_article
 ---</code></pre>
 <p>Note that we specify that the menu items appear on the <code>right</code> side of the navigation bar. We could have also used <code>left</code>, or chosen to put some items on the <code>left</code> and some on the <code>right</code>.</p>
-<p>Note also that we used an <code>icon</code> for one of the menus, specifying the <a href="https://fontawesome.com/v4.7.0/">Font Awesome</a> <code>fa-github</code> identifer for the GitHub icon (you can use any Font Awesome 4.0 icon).</p>
+<p>Note also that we used an <code>icon</code> for one of the menus, specifying the <a href="https://fontawesome.com/v4.7.0/">Font Awesome</a> <code>fa-github</code> identifier for the GitHub icon (you can use any Font Awesome 4.0 icon).</p>
 <h3 id="site-footer">Site Footer</h3>
 <p>When you use a navigation bar, you can optionally also include a site footer which uses the same theme (background and foreground colors). For example:</p>
 <p><img src="images/footer-bar.png" class="screenshot" style="width:95.0%" /></p>
@@ -586,7 +586,7 @@ output:
 </tr>
 <tr class="odd">
 <td><code>creative_commons</code></td>
-<td><a href="metadata.html#creative-commons">Creative Commons</a> license terms for website content.</td>
+<td><a href="metadata.html#creative-commons">Creative Commons</a> license terms for website content. Used to automatically generate a <em>Reuse</em> appendix.</td>
 </tr>
 <tr class="even">
 <td><code>license_url</code></td>
@@ -616,22 +616,39 @@ navbar:
 output: radix::radix_article</code></pre>
 <h2 id="publishing">Publishing</h2>
 <p>There are a wide variety of ways to publish Radix websites. Website content is by default written to the <code>_site</code> sub-directory (you can customize this using the <code>output_dir</code> metadata field). Publishing is simply a matter of copying the output directory to a web server or web hosting service.</p>
-<p>Below we describe several convenient options for Radix website deployment. We’ll mostly defer to the documentation provided by the various services, but will note any Radix website specific configuration required.</p>
+<p>Below we describe several convenient options for Radix website deployment including <a href="#github-pages">GitHub Pages</a>, <a href="#netlify">Netlify</a>, <a href="#firebase">Firebase</a>, <a href="#site44">Site44</a>, and <a href="#amazon-s3">Amazon S3</a>. We’ll mostly defer to the documentation provided by the various services, but will note any Radix website specific configuration required.</p>
 <h3 id="github-pages">GitHub Pages</h3>
 <p><a href="https://pages.github.com/">GitHub Pages</a> is a service that lets you publish a website from any GitHub repository. There are two additional configuration steps required to host a Radix website using GitHub Pages:</p>
 <ol style="list-style-type: decimal">
 <li><p>Create a file named <code>.nojekyll</code> in your repository (this is required to disable some processing of HTML files that GitHub does by default). You can do this with the following code:</p>
 <pre class="r"><code>
 file.create(&quot;.nojekyll&quot;)</code></pre></li>
-<li><p>Set the <code>output_dir</code> within <code>_site.yml</code> to match the repository directory your site is served from. You can configure GitHub Pages to publish from the root of your master branch or the <code>docs</code> subdirectory. Depending on your configuration you should set the <code>output_dir</code> as follows:</p>
+<li><p>Set the <code>output_dir</code> within <code>_site.yml</code> to match the repository directory your site is served from. You can configure GitHub Pages to publish from the root of your master branch or the <code>docs</code> sub-directory:</p>
+<p><img src="images/github-pages-directory.png" style="width:95.0%" /></p>
+<p>Depending on your configuration you should set the <code>output_dir</code> as follows:</p>
 <pre class="markup"><code>
 output_dir: &quot;.&quot;     # root of master branch
 output_dir: &quot;docs&quot;  # docs directory of master branch</code></pre></li>
 </ol>
 <p>See the <a href="https://pages.github.com/">GitHub Pages</a> documentation for additional details on creating and deploying websites with GitHub.</p>
 <h3 id="netlify">Netlify</h3>
+<p><a href="https://www.netlify.com/">Netlify</a> is a popular website hosting service that allows for both direct upload of website files or integrated publishing from Git repositories (GitHub, GitLab, or Bitbucket) via commit-hooks.</p>
+<p>If you are using Netlify Git integration, be sure to set the publish directory to the output directory of your website (<code>_site</code> by default but modifiable via the <code>output_dir</code> metadata value). For example:</p>
+<p><img src="images/netlify-publish-dir.png" class="screenshot" style="width:95.0%" /></p>
+<h3 id="firebase">Firebase</h3>
+<p>Google Firebase has a <a href="https://firebase.google.com/docs/hosting/quickstart">web hosting service</a> that enables easy deployment of websites using a set of command line tools.</p>
+<p>Firebase websites by default deploy content from the <code>public</code> directory of the Firebase project directory. This means that you should set the <code>output_dir</code> to <code>&quot;public&quot;</code> within <code>_site.yml</code>:</p>
+<pre class="markup"><code>
+---
+name: &quot;radix&quot;
+title: &quot;Radix for R Markdown&quot;
+output_dir: &quot;public&quot;
+---</code></pre>
+<h3 id="site44">Site44</h3>
+<p><a href="https://www.site44.com/">Site44</a> is a service that allows you to publish websites from within Dropbox folders. Site44 creates a <code>Dropbox/Apps/site44</code> directory, and any folders within that directory are published as websites.</p>
+<p>The recommended workflow for deploying Radix websites to Site44 is to develop your website in a separate project directory, and then, when it’s ready for final publishing, copy the contents of the <code>_site</code> directory to the folder for your website.</p>
 <h3 id="amazon-s3">Amazon S3</h3>
-<h3 id="site-44">Site 44</h3>
+<p>If you are a user of Amazon Web Services you can serve your website directly from Amazon S3. Note however that this option is a bit more technically involved than GitHub Pages, Netlify, or Site 44. See the article on <a href="https://docs.aws.amazon.com/AmazonS3/latest/dev/WebsiteHosting.html">Hosting a Static Website on Amazon S3</a> for additional details.</p>
 <h3 id="other-services">Other Services</h3>
 <p>Any web server or web host can be used to deploy a Radix website. Here’s a recent <a href="https://www.cnet.com/web-hosting/">CNET roundup</a> of other web hosts you could consider. You can also deploy a Radix website on any internal (intranet) web server.</p>
 </div>
