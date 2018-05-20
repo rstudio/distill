@@ -63,14 +63,11 @@ Note that the `output` options are not specified within the Rmd documents but ra
 
 ## Authoring and Previewing
 
-To build the website, use the `rmarkdown::render_site()` function:
+If your Radix website is contained within an RStudio project you can use the **Build Website** command available in the Build pane to generate the site:
 
-```r
-library(rmarkdown)
-render_site()
-```
+![](images/build-website.png){width=95% .screenshot}
 
-When you execute this function from within the directory containing the website, the following occurs:
+When you build a website, the following things occur:
 
 1. All of the Rmd and md files in the root website directory will be rendered into HTML. Note however that markdown files beginning with "_" are not rendered (this is a convention to designate files that are included by top level documents).
 
@@ -78,17 +75,55 @@ When you execute this function from within the directory containing the website,
 
 The HTML files within the `_site` directory are now ready to deploy as a standalone static website. 
 
-If your Radix website is contained within an RStudio project you can also use the **Build Website** command available in the Build pane:
+To build a website from the command line, use the `rmarkdown::render_site()` function:
 
-![](images/build-website.png){width=95% .screenshot}
+```r
+library(rmarkdown)
+render_site()
+```
 
-You can also preview a single article from within the website by passing the name of the article's Rmd file to `render_site()`:
+### Single Article 
+
+When you use the RStudio **Knit** command on a Radix article within a website, only that article will be rendered and previewed.
+
+You can also preview a single article from within a website by passing the name of the article's Rmd file to `render_site()`:
 
 ```r
 render_site("about.Rmd")
 ```
 
-This will build only the specified article (as opposed to all of the articles in the site). If you use the **Knit** command from within RStudio on a Radix article within a website it will also render and preview just that article.
+This will build only the specified article (as opposed to all articles in the site). 
+
+## Site Configuration
+
+The **\_site.yml** file has a number of options that affect site output including where it is written and what files are included and excluded from the site. Here's an example that makes use of a few of these options:
+
+**\_site.yml**
+
+```markup
+name: "my-website"
+output_dir: "_site"
+include: ["import.R"]
+exclude: ["docs.txt", "*.csv"]
+```
+
+The `name` field provides a suggested URL path for your website when it is published (by default this is just the name of the directory containing the site). 
+
+The `output_dir` field indicates which directory to copy site content into ("_site" is the default if none is specified). Note that this can be "." to keep all content within the root website directory alongside the source code.
+
+### Included Files
+
+The `include` and `exclude` fields enable you to override the default behavior visa-vi what files are copied into the output directory. By default, all files within the website directory are copied into the output directory (e.g. "_site") save for the following:
+
+1. Files beginning with "." (hidden files).
+
+2. Files beginning with "_"
+
+3. Files known to contain R source code (e.g. ".R", ".s", ".Rmd"), R data (e.g. ".RData", ".rds"), or configuration data (e.g. ".Rproj", "rsconnect")).
+
+The `include` and `exclude` fields of **\_site.yml** can be used to override this default behavior (wildcards can be used to specify groups of files to be included or excluded).
+
+Note that `include` and `exclude` are *not* used to determine which Rmd files are rendered (all of them in the root directory save for those named with the `_` prefix will be rendered).
 
 The R Markdown documentation on [creating websites](https://rmarkdown.rstudio.com/rmarkdown_websites.html) has additional documentation on additional available features and configuration options. The remainder of this article describes features that are specific to Radix websites.
 
@@ -209,8 +244,33 @@ Radix articles can include various types of [metadata](metadata.html) to make th
 
 Several metadata values which you might find useful to define in `_site.yml` are:
 
+| Metadata           | Description                                    |
+|------------------|------------------------------------------------|
+| `base_url` |  Base (root) URL for the location where the website will be deployed (used for providing [preview imaages](metadata.html#preview-images) for Open Graph and Twitter Card). |
+| `repository_url`     |   URL for the source code of your website (note that individual articles will often want to override this value). Used to automatically create an *Updates and Corrections* appendix. |
+| `creative_commons`      |  [Creative Commons](metadata.html#creative-commons) license terms for website content. |
+| `license_url`     | Alternate licensing terms for website content if not using a Creative Commons license. |
+| `journal` | Title, publisher, ISSN, etc. for Journal websites.  |
 
+Here's a `_site.yml` file that uses all of these fields (save for `license_url` since the license is already specified via `creative_commons`):
 
+**\_site.yml**
+
+```markup
+name: "radix"
+title: "Radix for R Markdown"
+base_url: https://rstudio.github.io/radix
+repository_url: https://github.com/rstudio/radix
+creative_commons: CC BY
+journal:
+  title: "Journal of Radix Articles"
+  abbrev_title: "Radix Art."
+  publisher: "Radix Labs"
+  issn: 0317-8471
+navbar:
+  # (navbar definition here)
+output: radix::radix_article
+```
 
 ## Publishing
 
