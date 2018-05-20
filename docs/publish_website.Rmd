@@ -274,18 +274,40 @@ output: radix::radix_article
 
 ## Publishing
 
+There are a wide variety of ways to publish Radix websites. Website content is by default written to the `_site` sub-directory (you can customize this using the `output_dir` metadata field). Publishing is simply a matter of copying the output directory to a web server or web hosting service.
+
+Below we describe several convenient options for Radix website deployment. We'll mostly defer to the documentation provided by the various services, but will note any Radix website specific configuration required.
+
+### GitHub Pages
+
+[GitHub Pages](https://pages.github.com/) is a service that lets you publish a website from any GitHub repository. There are two additional configuration steps required to host a Radix website using GitHub Pages:
+
+1. Create a file named `.nojekyll` in your repository (this is required to disable some processing of HTML files that GitHub does by default). You can do this with the following code:
+    
+    ```r
+    file.create(".nojekyll")
+    ```
+
+2. Set the `output_dir` within `_site.yml` to match the repository directory your site is served from. You can configure GitHub Pages to publish from the root of your master branch or the `docs` subdirectory. Depending on your configuration you should set the `output_dir` as follows:
+
+    ```markup
+    output_dir: "."     # root of master branch
+    output_dir: "docs"  # docs directory of master branch
+    ```
+
+See the [GitHub Pages](https://pages.github.com/) documentation for additional details on creating and deploying websites with GitHub.
+
+### Netlify
 
 
+### Amazon S3
 
 
+### Site 44
 
 
-4) GitHub Pages
+### Other Services
 
-5) Netlify
+Any web server or web host can be used to deploy a Radix website. Here's a recent [CNET roundup](https://www.cnet.com/web-hosting/) of other web hosts you could consider. You can also deploy a Radix website on any internal (intranet) web server.
 
-5) Firebase hosting: https://firebase.google.com/docs/hosting/quickstart
 
-6) Amazon S3
-
-7) Site 44 (Dropbox)

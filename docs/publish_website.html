@@ -615,13 +615,25 @@ navbar:
   # (navbar definition here)
 output: radix::radix_article</code></pre>
 <h2 id="publishing">Publishing</h2>
-<ol start="4" style="list-style-type: decimal">
-<li><p>GitHub Pages</p></li>
-<li><p>Netlify</p></li>
-<li><p>Firebase hosting: <a href="https://firebase.google.com/docs/hosting/quickstart" class="uri">https://firebase.google.com/docs/hosting/quickstart</a></p></li>
-<li><p>Amazon S3</p></li>
-<li><p>Site 44 (Dropbox)</p></li>
+<p>There are a wide variety of ways to publish Radix websites. Website content is by default written to the <code>_site</code> sub-directory (you can customize this using the <code>output_dir</code> metadata field). Publishing is simply a matter of copying the output directory to a web server or web hosting service.</p>
+<p>Below we describe several convenient options for Radix website deployment. We’ll mostly defer to the documentation provided by the various services, but will note any Radix website specific configuration required.</p>
+<h3 id="github-pages">GitHub Pages</h3>
+<p><a href="https://pages.github.com/">GitHub Pages</a> is a service that lets you publish a website from any GitHub repository. There are two additional configuration steps required to host a Radix website using GitHub Pages:</p>
+<ol style="list-style-type: decimal">
+<li><p>Create a file named <code>.nojekyll</code> in your repository (this is required to disable some processing of HTML files that GitHub does by default). You can do this with the following code:</p>
+<pre class="r"><code>
+file.create(&quot;.nojekyll&quot;)</code></pre></li>
+<li><p>Set the <code>output_dir</code> within <code>_site.yml</code> to match the repository directory your site is served from. You can configure GitHub Pages to publish from the root of your master branch or the <code>docs</code> subdirectory. Depending on your configuration you should set the <code>output_dir</code> as follows:</p>
+<pre class="markup"><code>
+output_dir: &quot;.&quot;     # root of master branch
+output_dir: &quot;docs&quot;  # docs directory of master branch</code></pre></li>
 </ol>
+<p>See the <a href="https://pages.github.com/">GitHub Pages</a> documentation for additional details on creating and deploying websites with GitHub.</p>
+<h3 id="netlify">Netlify</h3>
+<h3 id="amazon-s3">Amazon S3</h3>
+<h3 id="site-44">Site 44</h3>
+<h3 id="other-services">Other Services</h3>
+<p>Any web server or web host can be used to deploy a Radix website. Here’s a recent <a href="https://www.cnet.com/web-hosting/">CNET roundup</a> of other web hosts you could consider. You can also deploy a Radix website on any internal (intranet) web server.</p>
 </div>
 
 <div class="d-appendix">
