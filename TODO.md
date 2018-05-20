@@ -10,13 +10,10 @@
     - publishing/previewing workflow?
     - app.R or ui.R / server.R in the same directory; automagic local run
 
-- site docs
 
-Figures Tables Citations Shiny Publish \/  <ghicon>
-                                Publishing an Article
-                                Publishing a Website
-                                Creating a Blog or Journal
-                                Article Metadata 
+- Output change broke l-body-outset
+- Output change broke kable
+
                                 
 - articles/index pages
     - https://github.com/wikiti/jquery-paginate
