@@ -13,7 +13,7 @@ There are a number of ways to create diagrams for use in Radix articles, a few w
 
 ## DiagrammeR
 
-You can use the [DiagrammerR](http://rich-iannone.github.io/DiagrammeR/) package to include [GraphViz](https://www.graphviz.org/) visualizations within a Radix article. For example, if you have a GraphViz file [graph.gv](https://github.com/rstudio/radix/blob/master/docs/images/graph.gv), you can include it with the following code:
+You can use the [DiagrammerR](http://rich-iannone.github.io/DiagrammeR/) package to include [GraphViz](https://www.graphviz.org/) visualizations within a Radix article. For example, if you have a GraphViz file [graph.gv](https://github.com/radixpub/radix-r/blob/master/docs/images/graph.gv), you can include it with the following code:
 
 ````clike
 ```{r, layout="l-page", fig.height=2}`r ''`
@@ -69,7 +69,7 @@ sequenceDiagram
 
 ## r2d3
 
-The [r2d3](https://rstudio.github.io/r2d3) package enables you to include illustrations created using [D3.js](https://d3js.org/). For example, the following code renders [flare.json](https://github.com/rstudio/radix/blob/master/docs/d3/circlepacking/flare.json) using the [circlepacking.js](https://github.com/rstudio/radix/blob/master/docs/d3/circlepacking/circlepacking.js) script:
+The [r2d3](https://rstudio.github.io/r2d3) package enables you to include illustrations created using [D3.js](https://d3js.org/). For example, the following code renders [flare.json](https://github.com/radixpub/radix-r/blob/master/docs/d3/circlepacking/flare.json) using the [circlepacking.js](https://github.com/radixpub/radix-r/blob/master/docs/d3/circlepacking/circlepacking.js) script:
 
 ````clike
 ```{r, layout="l-screen-inset", fig.height=8}`r ''`

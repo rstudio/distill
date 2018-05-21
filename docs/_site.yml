@@ -1,8 +1,8 @@
 name: "radix"
 title: "Radix for R Markdown"
 favicon: images/favicon.png
-repository_url: https://github.com/rstudio/radix
-base_url: https://rstudio.github.io/radix
+repository_url: https://github.com/radixpub/radix-r
+base_url: https://radixpub.github.io/radix-r
 creative_commons: CC BY
 output_dir: "."
 navbar:
@@ -32,7 +32,7 @@ navbar:
         - text: "Article Metadata"
           href: metadata.html
     - icon: fa-github
-      href: https://github.com/rstudio/radix
+      href: https://github.com/radixpub/radix-r
 output:
   radix::radix_article:
     css: styles.css

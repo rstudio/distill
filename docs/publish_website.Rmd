@@ -30,7 +30,7 @@ navbar:
     - text: "About"
       href: about.html
     - icon: fa-github
-      href: https://github.com/rstudio/radix
+      href: https://github.com/radixpub/radix-r
 output: radix::radix_article
 ---
 ```
@@ -160,7 +160,7 @@ navbar:
         - text: "Article Metadata"
           href: metadata.html
     - icon: fa-github
-      href: https://github.com/rstudio/radix
+      href: https://github.com/radixpub/radix-r
 output: distill::distill_article
 ---
 ```
@@ -259,8 +259,8 @@ Here's a `_site.yml` file that uses all of these fields (save for `license_url` 
 ```markup
 name: "radix"
 title: "Radix for R Markdown"
-base_url: https://rstudio.github.io/radix
-repository_url: https://github.com/rstudio/radix
+base_url: https://radixpub.github.io/radix-r
+repository_url: https://github.com/radixpub/radix-r
 creative_commons: CC BY
 journal:
   title: "Journal of Radix Articles"

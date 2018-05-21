@@ -16,8 +16,8 @@ author:
     affiliation: RStudio
     affiliation_url: https://www.rstudio.com
 date: May 4, 2018
-citation_url: https://rstudio.github.io/radix
-compare_updates_url: https://github.com/rstudio/radix/compare/pubv1...master
+citation_url: https://radixpub.github.io/radix-r
+compare_updates_url: https://github.com/radixpub/radix-r/compare/pubv1...master
 bibliography: biblio.bib
 ---
 

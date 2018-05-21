@@ -400,7 +400,7 @@ Publish
 <a href="metadata.html">Article Metadata</a>
 </div>
 </div>
-<a href="https://github.com/rstudio/radix">
+<a href="https://github.com/radixpub/radix-r">
 <i class="fa fa-github"></i>
 </a>
 <a href="javascript:void(0);" class="nav-toggle">&#9776;</a>
@@ -422,7 +422,7 @@ Publish
 <li><p>For more highly customized static diagrams you can use a variety of vector graphics tools (e.g. <a href="https://inkscape.org/en/">Inkscape</a>) to create SVG files that can be included within your article.</p></li>
 </ul>
 <h2 id="diagrammer">DiagrammeR</h2>
-<p>You can use the <a href="http://rich-iannone.github.io/DiagrammeR/">DiagrammerR</a> package to include <a href="https://www.graphviz.org/">GraphViz</a> visualizations within a Radix article. For example, if you have a GraphViz file <a href="https://github.com/rstudio/radix/blob/master/docs/images/graph.gv">graph.gv</a>, you can include it with the following code:</p>
+<p>You can use the <a href="http://rich-iannone.github.io/DiagrammeR/">DiagrammerR</a> package to include <a href="https://www.graphviz.org/">GraphViz</a> visualizations within a Radix article. For example, if you have a GraphViz file <a href="https://github.com/radixpub/radix-r/blob/master/docs/images/graph.gv">graph.gv</a>, you can include it with the following code:</p>
 <pre class="clike"><code>
 ```{r, layout=&quot;l-page&quot;, fig.height=2}
 library(DiagrammeR)
@@ -456,7 +456,7 @@ sequenceDiagram
 <script type="application/json" data-for="htmlwidget-9fe14766c3ab345b5cb0">{"x":{"diagram":"\nsequenceDiagram\n  participant Alice\n  participant Bob\n  Alice->>John: Hello John, how are you?\n  loop Healthcheck\n      John->>John: Fight against hypochondria\n  end\n  Note right of John: Rational thoughts<br/>prevail...\n  John-->>Alice: Great!\n  John->>Bob: How about you?\n  Bob-->>John: Jolly good!\n"},"evals":[],"jsHooks":[]}</script>
 </div>
 <h2 id="r2d3">r2d3</h2>
-<p>The <a href="https://rstudio.github.io/r2d3">r2d3</a> package enables you to include illustrations created using <a href="https://d3js.org/">D3.js</a>. For example, the following code renders <a href="https://github.com/rstudio/radix/blob/master/docs/d3/circlepacking/flare.json">flare.json</a> using the <a href="https://github.com/rstudio/radix/blob/master/docs/d3/circlepacking/circlepacking.js">circlepacking.js</a> script:</p>
+<p>The <a href="https://rstudio.github.io/r2d3">r2d3</a> package enables you to include illustrations created using <a href="https://d3js.org/">D3.js</a>. For example, the following code renders <a href="https://github.com/radixpub/radix-r/blob/master/docs/d3/circlepacking/flare.json">flare.json</a> using the <a href="https://github.com/radixpub/radix-r/blob/master/docs/d3/circlepacking/circlepacking.js">circlepacking.js</a> script:</p>
 <pre class="clike"><code>
 ```{r, layout=&quot;l-screen-inset&quot;, fig.height=8}
 library(r2d3)
@@ -487,9 +487,9 @@ include_graphics(&quot;images/flowchart.svg&quot;)
 
 <div class="appendix-bottom">
 <h3 id="updates-and-corrections">Updates and Corrections</h3>
-<p>If you see mistakes or want to suggest changes, please <a href="https://github.com/rstudio/radix/issues/new">create an issue</a> on the source repository.</p>
+<p>If you see mistakes or want to suggest changes, please <a href="https://github.com/radixpub/radix-r/issues/new">create an issue</a> on the source repository.</p>
 <h3 id="reuse">Reuse</h3>
-<p>Text and figures are licensed under Creative Commons Attribution <a rel="license" href="https://creativecommons.org/licenses/by/4.0/">CC BY 4.0</a>. Source code is available at <a href="https://github.com/rstudio/radix">https://github.com/rstudio/radix</a>, unless otherwise noted. The figures that have been reused from other sources don't fall under this license and can be recognized by a note in their caption: "Figure from ...".</p>
+<p>Text and figures are licensed under Creative Commons Attribution <a rel="license" href="https://creativecommons.org/licenses/by/4.0/">CC BY 4.0</a>. Source code is available at <a href="https://github.com/radixpub/radix-r">https://github.com/radixpub/radix-r</a>, unless otherwise noted. The figures that have been reused from other sources don't fall under this license and can be recognized by a note in their caption: "Figure from ...".</p>
 </div>
 <div class="radix-site-nav radix-site-footer">
 <p>© Copyright 2018 <a href="https://github.com/distillpub/template/blob/master/AUTHORS">The Distill Template Authors</a> and <a href="https://www.rstudio.com">RStudio, Inc</a>.</p>

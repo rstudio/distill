@@ -55,7 +55,7 @@ volume: 10
 issue: 4
 doi: "10.23915/distill.00010"
 slug: jones2018radix
-citation_url: https://rstudio.github.io/radix
+citation_url: https://radixpub.github.io/radix-r
 bibliography: biblio.bib
 ---
 ```

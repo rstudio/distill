@@ -387,7 +387,7 @@ Publish
 <a href="metadata.html">Article Metadata</a>
 </div>
 </div>
-<a href="https://github.com/rstudio/radix">
+<a href="https://github.com/radixpub/radix-r">
 <i class="fa fa-github"></i>
 </a>
 <a href="javascript:void(0);" class="nav-toggle">&#9776;</a>
@@ -417,7 +417,7 @@ title: &quot;Radix for R Markdown&quot;
 description: | 
   Scientific and technical writing, native to the web
 output: radix::radix_article
-repository_url: https://github.com/rstudio/radix
+repository_url: https://github.com/radixpub/radix-r
 ---</code></pre>
 <p>You can optionally also include a <code>compare_updates_url</code> to provide a URL that will show the differences between the article’s current version and the version that was initially published. For example:</p>
 <pre class="markup"><code>
@@ -427,7 +427,7 @@ description: |
   Scientific and technical writing, native to the web
 output: radix::radix_article
 repository_url: https://github.com/rstudio/radix
-compare_updates_url: https://github.com/rstudio/radix/compare/pubv1...master
+compare_updates_url: https://github.com/radixpub/radix-r/compare/pubv1...master
 ---</code></pre>
 <p>If you include one or both of these fields, then an <em>Updates and Corrections</em> appendix is automatically generated. For example:</p>
 <p><img src="images/repository-appendix.png" class="screenshot" style="width:95.0%" /></p>
@@ -500,7 +500,7 @@ creative_commons: CC BY
 ---
 title: &quot;JavaScript &amp; D3&quot;
 description: Enhance communication with interactive visualizations 
-preview: https://rstudio.github.io/radix/images/javascript-d3-preview.png
+preview: https://radixpub.github.io/radix-r/images/javascript-d3-preview.png
 ---</code></pre>
 <p>Note that the preview image is specified with a full absolute URL. This is a requirement of Open Graph (relative image references are not supported). If you are publishing a standalone self-contained HTML version of your article then you’ll need to upload the preview image to another location on the web in order to reference it.</p>
 <p>If however your article is not self-contained (it’s part of a <a href="publish_website.html">Radix website</a> or is generated with <code>self_contained: false</code>) then you can include the preview image alongside your document. In this case you still need to specify the root URL where your image will be published to using the <code>base_url</code> field:</p>
@@ -508,13 +508,13 @@ preview: https://rstudio.github.io/radix/images/javascript-d3-preview.png
 ---
 title: &quot;JavaScript &amp; D3&quot;
 description: Enhance communication with interactive visualizations 
-base_url: https://rstudio.github.io/radix
+base_url: https://radixpub.github.io/radix-r
 preview: images/javascript-d3-preview.png
 ---</code></pre>
 <p>This technique is generally preferable to including the full URL since it allows Radix to inspect the image file directly and emit additional information about it’s size as part of the Open Graph metadata.</p>
 <h2 id="twitter-card">Twitter Card</h2>
 <p><a href="https://developer.twitter.com/en/docs/tweets/optimize-with-cards/overview/abouts-cards">Twitter Cards</a> are a way of enhancing the appearance of links to your article on Twitter. When a link to your article is included in a Tweet, Twitter automatically crawls your site to fetch any available Twitter Card metadata.</p>
-<p>For example, here’s what happens when you include a link to <a href="https://rstudio.github.io/radix/interactivity.html" class="uri">https://rstudio.github.io/radix/interactivity.html</a> within a tweet:</p>
+<p>For example, here’s what happens when you include a link to <a href="https://radixpub.github.io/radix-r/interactivity.html" class="uri">https://radixpub.github.io/radix-r/interactivity.html</a> within a tweet:</p>
 <p><img src="images/twitter-card-screenshot.png" style="width:95.0%" /></p>
 <p>Note that as with <a href="#open-graph">Open Graph</a>, in order to have a preview image displayed on Twitter you need to include a <code>preview</code> field in your metadata. See the section on <a href="#preview-images">preview images</a> for additional details.</p>
 <p>There are two additional fields you can include that include attribution of your link to the Twitter account of a website and/or creator of the article. This attribution is provided via the <code>twitter:site</code> and <code>twitter:creator</code> fields.</p>
@@ -579,7 +579,7 @@ volume: 10
 issue: 4
 doi: &quot;10.23915/distill.00010&quot;
 slug: jones2018radix
-citation_url: https://rstudio.github.io/radix
+citation_url: https://radixpub.github.io/radix-r
 bibliography: biblio.bib
 ---</code></pre>
 </div>
@@ -589,9 +589,9 @@ bibliography: biblio.bib
 
 <div class="appendix-bottom">
 <h3 id="updates-and-corrections">Updates and Corrections</h3>
-<p>If you see mistakes or want to suggest changes, please <a href="https://github.com/rstudio/radix/issues/new">create an issue</a> on the source repository.</p>
+<p>If you see mistakes or want to suggest changes, please <a href="https://github.com/radixpub/radix-r/issues/new">create an issue</a> on the source repository.</p>
 <h3 id="reuse">Reuse</h3>
-<p>Text and figures are licensed under Creative Commons Attribution <a rel="license" href="https://creativecommons.org/licenses/by/4.0/">CC BY 4.0</a>. Source code is available at <a href="https://github.com/rstudio/radix">https://github.com/rstudio/radix</a>, unless otherwise noted. The figures that have been reused from other sources don't fall under this license and can be recognized by a note in their caption: "Figure from ...".</p>
+<p>Text and figures are licensed under Creative Commons Attribution <a rel="license" href="https://creativecommons.org/licenses/by/4.0/">CC BY 4.0</a>. Source code is available at <a href="https://github.com/radixpub/radix-r">https://github.com/radixpub/radix-r</a>, unless otherwise noted. The figures that have been reused from other sources don't fall under this license and can be recognized by a note in their caption: "Figure from ...".</p>
 </div>
 <div class="radix-site-nav radix-site-footer">
 <p>© Copyright 2018 <a href="https://github.com/distillpub/template/blob/master/AUTHORS">The Distill Template Authors</a> and <a href="https://www.rstudio.com">RStudio, Inc</a>.</p>

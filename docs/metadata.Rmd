@@ -27,7 +27,7 @@ title: "Radix for R Markdown"
 description: | 
   Scientific and technical writing, native to the web
 output: radix::radix_article
-repository_url: https://github.com/rstudio/radix
+repository_url: https://github.com/radixpub/radix-r
 ---
 ```
 
@@ -40,7 +40,7 @@ description: |
   Scientific and technical writing, native to the web
 output: radix::radix_article
 repository_url: https://github.com/rstudio/radix
-compare_updates_url: https://github.com/rstudio/radix/compare/pubv1...master
+compare_updates_url: https://github.com/radixpub/radix-r/compare/pubv1...master
 ---
 ```
 
@@ -106,7 +106,7 @@ Most Open Graph metadata is created automatically from standard article metadata
 ---
 title: "JavaScript & D3"
 description: Enhance communication with interactive visualizations 
-preview: https://rstudio.github.io/radix/images/javascript-d3-preview.png
+preview: https://radixpub.github.io/radix-r/images/javascript-d3-preview.png
 ---
 ```
 
@@ -118,7 +118,7 @@ If however your article is not self-contained (it's part of a [Radix website](pu
 ---
 title: "JavaScript & D3"
 description: Enhance communication with interactive visualizations 
-base_url: https://rstudio.github.io/radix
+base_url: https://radixpub.github.io/radix-r
 preview: images/javascript-d3-preview.png
 ---
 ```
@@ -129,7 +129,7 @@ This technique is generally preferable to including the full URL since it allows
 
 [Twitter Cards](https://developer.twitter.com/en/docs/tweets/optimize-with-cards/overview/abouts-cards) are a way of enhancing the appearance of links to your article on Twitter. When a link to your article is included in a Tweet, Twitter automatically crawls your site to fetch any available Twitter Card metadata.
 
-For example, here's what happens when you include a link to <https://rstudio.github.io/radix/interactivity.html> within a tweet:
+For example, here's what happens when you include a link to <https://radixpub.github.io/radix-r/interactivity.html> within a tweet:
 
 ![](images/twitter-card-screenshot.png){width=95%}
 
