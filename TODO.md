@@ -25,6 +25,7 @@ Embedded articles:
     - http://davidjbradshaw.github.io/iframe-resizer/
     - pym.js
 
+
 - Download supplemetary figures
 - Abbreviations and supplementary figures
 - "articles" that are presentations or other content (e.g. PDF!?!?!?!?)
@@ -36,6 +37,10 @@ Embedded articles:
 
 - eLife
 - 
+
+- JOSS (Journal of Open Source Scientific Software)
+- JSS (Journal of Statistical Software)
+
 
 - GH PullReview inline in IDE
 
