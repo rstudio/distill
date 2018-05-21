@@ -11,7 +11,12 @@
     - app.R or ui.R / server.R in the same directory; automagic local run
 
 
+Embedded articles:
 
+- forward metadata from embedded article to enclosing frame
+  (propagate citation_url/canonical_url)
+- automatically hide chrome for embedded=1
+- hosts metadata parameter to control embedding
 
 - articles/index pages
     - https://github.com/wikiti/jquery-paginate
