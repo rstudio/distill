@@ -10,9 +10,14 @@
     - publishing/previewing workflow?
     - app.R or ui.R / server.R in the same directory; automagic local run
 
+
+
+
 - articles/index pages
     - https://github.com/wikiti/jquery-paginate
     - iframe based inclusion
+    - http://davidjbradshaw.github.io/iframe-resizer/
+    - pym.js
 
 - Download supplemetary figures
 - Abbreviations and supplementary figures
