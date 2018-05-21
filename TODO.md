@@ -20,7 +20,8 @@ Embedded articles:
 - hosts metadata parameter to control embedding
 
 - for each dir in _articles
-   - render Rmd in a separate process (callr::r_safe) if the .html file is out of date
+   - find html output for article (no re-render). Or, perhaps just re-render
+     when .html is older than .Rmd? (allows site build to work for incremental)
    - use resource_files metadata in Rmd for include/exclude?
    - find_external_resources (see shiny_prerendered for last-modified check)
    - create articles/dir/article
@@ -28,6 +29,8 @@ Embedded articles:
        - copy _files directory
        - copy copyable_site_resources
    - create articles/dir/index.html which embeds article/foo.html
+   - can have _articles/dir/article.yml for external articles
+   - import_article() function for automatically creating article.yml
    
 
 
