@@ -10,11 +10,6 @@
     - publishing/previewing workflow?
     - app.R or ui.R / server.R in the same directory; automagic local run
 
-
-- Output change broke l-body-outset
-- Output change broke kable
-
-                                
 - articles/index pages
     - https://github.com/wikiti/jquery-paginate
     - iframe based inclusion

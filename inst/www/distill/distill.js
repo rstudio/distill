@@ -269,12 +269,12 @@ function init_downlevel() {
 
 function init_common() {
 
-   // prevent underline for linked images
+  // prevent underline for linked images
   $('a > img').parent().css({'border-bottom' : 'none'});
 
-  // mark child figures created by R chunks 100% width
+  // mark figures created by knitr chunks as 100% width
   $('.layout-chunk').each(function(i, val) {
-    $(this).children('img, .html-widget').css('width', '100%');
+    $(this).find('img, .html-widget').css('width', '100%');
   });
 
   // add class to pandoc style tables

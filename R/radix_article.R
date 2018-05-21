@@ -1066,8 +1066,8 @@ knitr_chunk_hook <- function() {
 
     # enclose default output in div (with appropriate padding)
     paste0(
-      padding, '<div class="layout-chunk ', options$layout, '">',
-      default_chunk_hook(x, options),
+      padding, '<div class="layout-chunk ', options$layout, '">\n',
+      output, '\n',
       padding, '\n',
       padding, '</div>\n'
     )
