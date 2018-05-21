@@ -13,6 +13,7 @@
 
 Embedded articles:
 
+- custom site engine that handles _articles
 - forward metadata from embedded article to enclosing frame
   (propagate citation_url/canonical_url)
 - automatically hide chrome for embedded=1
