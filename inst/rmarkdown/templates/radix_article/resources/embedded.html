@@ -1,0 +1,73 @@
+
+
+<!DOCTYPE html>
+
+<html xmlns="http://www.w3.org/1999/xhtml" lang="$lang$" xml:lang="$lang$"$if(dir)$ dir="$dir$"$endif$>
+
+<head>
+  <meta charset="utf-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta http-equiv="X-UA-Compatible" content="IE=Edge,chrome=1"/>
+  <meta name="generator" content="radix" />
+
+  <title>$if(title-prefix)$$title-prefix$: $endif$$pagetitle$</title>
+
+$for(header-includes)$
+  $header-includes$
+$endfor$
+
+
+$for(css)$
+  <link rel="stylesheet" href="$css$" type="text/css"/>
+$endfor$
+
+</head>
+
+<body>
+
+$if(include-before)$
+$for(include-before)$
+$include-before$
+$endfor$
+$endif$
+
+<style type="text/css">
+ body {
+   line-height: 1.6em;
+   font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen, Ubuntu, Cantarell, "Fira Sans", "Droid Sans", "Helvetica Neue", Arial, sans-serif;
+   margin: 0;
+   opacity: 0;
+ }
+ .radix-embedded-article  {
+    width: 100%;
+    border: 0;
+    padding-top: 2rem;
+ }
+
+ @media print {
+    .radix-embedded-article  {
+      padding-top: 0;
+    }
+  }
+</style>
+
+<iframe src="$embedded-article-src$" class = "radix-embedded-article"
+        scrolling="no"></iframe>
+
+<script>
+iFrameResize({
+    resizedCallback: function(iframe,height,width,type) {
+      $$('body').css('opacity', 1);
+    }
+  },
+  ".radix-embedded-article"
+);
+</script>
+
+$for(include-after)$
+$include-after$
+$endfor$
+
+</body>
+
+</html>

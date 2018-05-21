@@ -32,12 +32,6 @@ radix_article <- function(fig_width = 6,
                           ...) {
 
 
-  # function for resolving resources
-  resource <- function(name) {
-    system.file("rmarkdown/templates/radix_article/resources", name,
-                package = "radix")
-  }
-
   # build pandoc args
   args <- c("--standalone")
 
@@ -47,26 +41,6 @@ radix_article <- function(fig_width = 6,
   # additional css
   for (css_file in css)
     args <- c(args, "--css", pandoc_path_arg(css_file))
-
-  # add template
-  args <- c(args, "--template",
-            pandoc_path_arg(resource("default.html")))
-
-  # lua filter
-  if (pandoc_version() >= "2.0") {
-    args <- c(args, "--lua-filter",
-              pandoc_path_arg(resource("distill.lua")))
-  }
-
-  # use link citations (so we can do citation conversion)
-  args <- c(args, "--metadata=link-citations:true")
-
-  # html dependencies
-  extra_dependencies <- append(extra_dependencies,
-                               list(html_dependency_jquery(),
-                                    html_dependency_bowser(),
-                                    html_dependency_webcomponents(),
-                                    html_dependency_distill()))
 
   # determine knitr options
   knitr_options <- knitr_options_html(fig_width = fig_width,
@@ -86,50 +60,13 @@ radix_article <- function(fig_width = 6,
 
   # post-knit
   post_knit <- function(metadata, input_file, runtime, encoding, ...) {
-
-    args <- c()
-
-    # get site config
-    site_config <- site_config(input_file, encoding)
-    if (is.null(site_config))
-      site_config <- list()
-
-    # transform site_config and metadata values
-    input_dir <- input_as_dir(input_file)
-    site_config <- transform_site_config(input_dir, site_config)
-    metadata <- transform_metadata(input_dir, site_config, metadata)
-
-    # provide title-prefix  and qualified title if specified in site and different from title
-    if (!is.null(site_config$title) && !identical(site_config$title, metadata$title)) {
-      args <- c(args, "--title-prefix", site_config$title)
-      metadata$qualified_title <- sprintf("%s: %s", site_config$title, metadata$title)
+    # special handling if this is an embedded article
+    if (!is.null(metadata$article)) {
+      post_knit_article_embedded(metadata, input_file, runtime, encoding, includes, ...)
+    # standard article rendering
     } else {
-      metadata$qualified_title <- metadata$title
+      post_knit_article(metadata, input_file, runtime, encoding, includes, ...)
     }
-
-    # includes
-
-    # header includes: radix then user
-    in_header <- c(in_header_includes(input_dir, site_config, metadata),
-                   includes$in_header)
-
-    # before body includes: radix then user
-    before_body <- c(before_body_includes(input_dir, site_config, metadata),
-                     includes$before_body)
-
-    # after body includes: user then radix
-    after_body <- c(includes$after_body,
-                    after_body_includes(input_dir, site_config, metadata))
-
-    # args for includes
-    args <- c(args, pandoc_include_args(
-      in_header = in_header,
-      before_body = before_body,
-      after_body = after_body
-    ))
-
-    # return args
-    args
   }
 
   # return format
@@ -156,55 +93,140 @@ radix_article <- function(fig_width = 6,
   )
 }
 
-# detect if we are running in a Knit child process (i.e. destined
-# for the internal R Markdown preview window)
-validate_rstudio_version <- function() {
+post_knit_article <- function(metadata, input_file, runtime, encoding, includes, ...) {
 
-  # get the current rstudio version and mode (desktop vs. server)
-  rstudio_version <- function() {
+  args <- c()
 
-    # Running at the RStudio console
-    if (rstudioapi::isAvailable()) {
+  # add template
+  args <- c(args, "--template",
+            pandoc_path_arg(radix_resource("default.html")))
 
-      rstudioapi::versionInfo()
-
-    # Running in a child process
-    } else if (!is.na(Sys.getenv("RSTUDIO", unset = NA))) {
-
-      # detect desktop vs. server using server-only environment variable
-      mode <- ifelse(is.na(Sys.getenv("RSTUDIO_HTTP_REFERER", unset = NA)),
-                     "desktop", "server")
-
-      # detect version using Rmd new env var added in 1.2.638
-      version <- Sys.getenv("RSTUDIO_VERSION", unset = "1.1")
-
-      # return version info
-      list(
-        mode = mode,
-        version = version
-      )
-
-    # Not running in RStudio
-    } else {
-      NULL
-    }
+  # lua filter
+  if (pandoc_version() >= "2.0") {
+    args <- c(args, "--lua-filter",
+              pandoc_path_arg(radix_resource("distill.lua")))
   }
 
-  # if we are running under rstudio then check whether this version
-  # can render radix articles (since they use webcomponents polyfill)
-  rstudio <- rstudio_version()
-  if (!is.null(rstudio)) {
+  # use link citations (so we can do citation conversion)
+  args <- c(args, "--metadata=link-citations:true")
 
-    # check for desktop mode on windows and linux (other modes are fine)
-    if (!is_osx() && (rstudio$mode == "desktop")) {
+  # html dependencies
+  html_dependencies <- list(
+    html_dependency_jquery(),
+    html_dependency_bowser(),
+    html_dependency_webcomponents(),
+    html_dependency_distill()
+  )
 
-      if (rstudio$version < "1.2.637")
-        stop("Radix articles cannot be previewed in this version of RStudio.\n",
-             "Please update to version 1.2.637 or higher at:\n",
-             "https://www.rstudio.com/rstudio/download/preview/\n",
-             call. = FALSE)
-    }
+  # get site config
+  site_config <- site_config(input_file, encoding)
+  if (is.null(site_config)) {
+
+    # no site config
+    site_config <- list()
+
+    # make article embedable in a site via iframe-resizer
+    html_dependencies[[length(html_dependencies) + 1]] <-
+      html_dependency_iframe_resizer("content")
   }
+
+  # add html dependencies
+  knitr::knit_meta_add(html_dependencies)
+
+  # merge common args
+  args <- c(args, include_args(input_file, site_config, metadata, includes,
+                               embedded_article = FALSE))
+
+  # return args
+  args
+}
+
+
+post_knit_article_embedded <- function(metadata, input_file, runtime, encoding, includes, ...) {
+
+  args <- c()
+
+  # add template
+  args <- c(args, "--template",
+            pandoc_path_arg(radix_resource("embedded.html")))
+
+  # html dependencies
+  knitr::knit_meta_add(list(
+    html_dependency_jquery(),
+    html_dependency_iframe_resizer("host")
+  ))
+
+  # get site config
+  site_config <- site_config(input_file, encoding)
+  if (is.null(site_config))
+    stop("Embedded articles can only be included in Radix websites", call. = FALSE)
+
+  # get referenced article and create pandoc variable for it
+  article <- metadata$article
+  article_src <- file.path(article, "index.html")
+  args <- c(args, pandoc_variable_arg("embedded-article-src", article_src))
+
+
+  # derive metadata from article
+  metadata$title <- "Embedded Article"
+
+  # TODO: derive metadata
+
+
+  # standard include_args
+  args <- c(args, include_args(input_file, site_config, metadata, includes,
+                               embedded_article = TRUE))
+
+  # return args
+  args
+}
+
+
+include_args <- function(input_file, site_config, metadata, includes, embedded_article) {
+
+  # args
+  args <- c()
+
+  # transform site_config and metadata values
+  input_dir <- input_as_dir(input_file)
+  site_config <- transform_site_config(input_dir, site_config)
+  metadata <- transform_metadata(input_dir, site_config, metadata)
+
+  # provide title-prefix  and qualified title if specified in site and different from title
+  if (!is.null(site_config$title) && !identical(site_config$title, metadata$title)) {
+    args <- c(args, "--title-prefix", site_config$title)
+    metadata$qualified_title <- sprintf("%s: %s", site_config$title, metadata$title)
+  } else {
+    metadata$qualified_title <- metadata$title
+  }
+
+  # includes
+
+  # header includes: radix then user
+  in_header <- c(in_header_includes(input_dir, site_config, metadata),
+                 includes$in_header)
+
+  # before body includes: radix then user
+  before_body <- c(before_body_includes(input_dir, site_config, metadata),
+                   includes$before_body)
+
+  # after body includes: user then radix
+  after_body <- c(includes$after_body,
+                  after_body_includes(input_dir, site_config, metadata, embedded_article))
+
+  # args for includes
+  c(args, pandoc_include_args(
+    in_header = in_header,
+    before_body = before_body,
+    after_body = after_body
+  ))
+}
+
+
+# function for resolving resources
+radix_resource <- function(name) {
+  system.file("rmarkdown/templates/radix_article/resources", name,
+              package = "radix")
 }
 
 html_dependency_distill <- function() {
@@ -231,7 +253,7 @@ html_dependency_webcomponents <- function() {
     name = "webcomponents",
     version = "2.0.0",
     src = system.file("www/webcomponents", package = "radix"),
-    script = c("webcomponents-bundle.js")
+    script = c("webcomponents.js")
   )
 }
 
@@ -241,6 +263,18 @@ html_dependency_headroom <- function() {
     version = "0.9.4",
     src = system.file("www/headroom", package = "radix"),
     script = "headroom.min.js"
+  )
+}
+
+html_dependency_iframe_resizer <- function(context = c("host", "content")) {
+  context <- match.arg(context)
+  js_suffix <- if (context == "content") ".contentWindow"
+  htmltools::htmlDependency(
+    name = paste0("iframe_resizer_", context),
+    version = "3.6.1",
+    src = system.file("www/iframe-resizer", package = "radix"),
+    script = paste0("iframeResizer", js_suffix, ".min.js"),
+    all_files = FALSE
   )
 }
 
@@ -792,38 +826,51 @@ before_body_includes <- function(input_dir, site_config, metadata) {
   before_body
 }
 
-after_body_includes <- function(input_dir, site_config, metadata) {
+after_body_includes <- function(input_dir, site_config, metadata, embedded_article) {
+
+  after_body <- c()
 
   # write appendixes
-  updates_and_corrections <- appendix_updates_and_corrections(site_config, metadata)
-  creative_commons <- appendix_creative_commons(site_config, metadata)
-  citation <- appendix_citation(site_config, metadata)
-  appendix <- tags$div(class = "appendix-bottom",
-    updates_and_corrections,
-    creative_commons,
-    citation
-  )
+  if (!embedded_article) {
+    updates_and_corrections <- appendix_updates_and_corrections(site_config, metadata)
+    creative_commons <- appendix_creative_commons(site_config, metadata)
+    citation <- appendix_citation(site_config, metadata)
+    appendix <- tags$div(class = "appendix-bottom",
+      updates_and_corrections,
+      creative_commons,
+      citation
+    )
 
-  # write bibliography
-  bibliography <- c()
-  if (!is.null(metadata$bibliography)) {
-    bibliography <- HTML(paste(c(
-      '<script id="distill-bibliography" type="text/bibtex">',
-      readLines(metadata$bibliography, warn = FALSE),
-      '</script>'
-    ), collapse = "\n"))
+    # write bibliography
+    bibliography <- c()
+    if (!is.null(metadata$bibliography)) {
+      bibliography <- HTML(paste(c(
+        '<script id="distill-bibliography" type="text/bibtex">',
+        readLines(metadata$bibliography, warn = FALSE),
+        '</script>'
+      ), collapse = "\n"))
+    }
+
+    appendixes_html <- renderTags(tagList(
+      appendix,
+      bibliography
+    ), indent = FALSE)$html
+
+    # write file
+    appendixes_file <- tempfile(fileext = "html")
+    writeLines(appendixes_html, appendixes_file)
+    after_body <- c(after_body, appendixes_file)
   }
 
-  after_body_html <- renderTags(tagList(
-    appendix,
-    bibliography
-  ), indent = FALSE)$html
-
-  # write file
-  after_body <- tempfile(fileext = "html")
-  writeLines(after_body_html, after_body)
-
   # footer if we have a site navbar there is a footer.html
+  after_body <- c(after_body, footer_html(input_dir, site_config, metadata))
+
+  # return after_body
+  after_body
+}
+
+
+footer_html <- function(input_dir, site_config, metadata) {
   footer <- file.path(input_dir, "footer.html")
   if (!is.null(site_config$navbar) && file.exists(footer)) {
     footer_template <- system.file("rmarkdown/templates/radix_article/resources/footer.html",
@@ -837,11 +884,12 @@ after_body_includes <- function(input_dir, site_config, metadata) {
       options = list("--template", pandoc_path_arg(footer_template),
                      "--metadata", "pagetitle:footer")
     )
-    after_body <- c(after_body, footer_html)
+    footer_html
+  } else {
+    NULL
   }
-
-  after_body
 }
+
 
 front_matter_from_metadata <- function(metadata) {
   front_matter <- list()
@@ -1071,6 +1119,58 @@ knitr_chunk_hook <- function() {
       padding, '\n',
       padding, '</div>\n'
     )
+  }
+}
+
+
+# detect if we are running in a Knit child process (i.e. destined
+# for the internal R Markdown preview window)
+validate_rstudio_version <- function() {
+
+  # get the current rstudio version and mode (desktop vs. server)
+  rstudio_version <- function() {
+
+    # Running at the RStudio console
+    if (rstudioapi::isAvailable()) {
+
+      rstudioapi::versionInfo()
+
+      # Running in a child process
+    } else if (!is.na(Sys.getenv("RSTUDIO", unset = NA))) {
+
+      # detect desktop vs. server using server-only environment variable
+      mode <- ifelse(is.na(Sys.getenv("RSTUDIO_HTTP_REFERER", unset = NA)),
+                     "desktop", "server")
+
+      # detect version using Rmd new env var added in 1.2.638
+      version <- Sys.getenv("RSTUDIO_VERSION", unset = "1.1")
+
+      # return version info
+      list(
+        mode = mode,
+        version = version
+      )
+
+      # Not running in RStudio
+    } else {
+      NULL
+    }
+  }
+
+  # if we are running under rstudio then check whether this version
+  # can render radix articles (since they use webcomponents polyfill)
+  rstudio <- rstudio_version()
+  if (!is.null(rstudio)) {
+
+    # check for desktop mode on windows and linux (other modes are fine)
+    if (!is_osx() && (rstudio$mode == "desktop")) {
+
+      if (rstudio$version < "1.2.637")
+        stop("Radix articles cannot be previewed in this version of RStudio.\n",
+             "Please update to version 1.2.637 or higher at:\n",
+             "https://www.rstudio.com/rstudio/download/preview/\n",
+             call. = FALSE)
+    }
   }
 }
 

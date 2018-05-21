@@ -15,6 +15,7 @@ function R2D3(el, width, height) {
   self.captureErrors = null;
   self.theme = {};
   self.style = null;
+  self.useShadow = true;
   
   self.setX = function(newX) {
     x = newX;
@@ -29,6 +30,10 @@ function R2D3(el, width, height) {
     }
     
     self.options = x.options;
+    
+    if (!x.useShadow) {
+      self.useShadow = false;
+    }
   };
   
   self.setContainer = function(container) {
@@ -39,11 +44,23 @@ function R2D3(el, width, height) {
     self.root = self.svg = self.canvas = root;
   };
   
+  var createContainer = function() {
+    if (self.container == "svg")
+      return document.createElementNS("http://www.w3.org/2000/svg", "svg");
+    else
+      return document.createElement(self.container);
+  };
+  
   self.createRoot = function() {
     if (self.shadow === null) {
-      self.shadow = el.attachShadow({
-        mode: "open"
-      });
+      if (self.useShadow && el.attachShadow) {
+        self.shadow = el.attachShadow({
+          mode: "open"
+        });
+      }
+      else {
+        self.shadow = el;
+      }
     }
     
     if (self.root !== null) {
@@ -51,7 +68,9 @@ function R2D3(el, width, height) {
       self.setRoot(null);
     }
     
-    var root = self.d3().select(self.shadow).append(self.container)
+    var container = createContainer();
+    self.shadow.appendChild(container);
+    var root = self.d3().select(container)
       .attr("width", self.width)
       .attr("height", self.height);
       
@@ -159,11 +178,11 @@ function R2D3(el, width, height) {
   self.d3 = function() {
     switch(version) {
       case 3:
-        return d3;
+        return window.d3;
       case 4:
-        return d3v4;
+        return window.d3v4;
       case 5:
-        return d3v5;
+        return window.d3v5;
     }
   };
   
@@ -183,7 +202,7 @@ function R2D3(el, width, height) {
       entry.style.position = "absolute";
       entry.style.fontFamily = "'Lucida Sans', 'DejaVu Sans', 'Lucida Grande', 'Segoe UI', Verdana, Helvetica, sans-serif, serif";
       entry.style.fontSize = "9pt";
-      el.appendChild(entry);
+      self.shadow.appendChild(entry);
       
       entry.style.transform = "translateY(40px)";
       entry.style.opacity = "0";
@@ -497,7 +516,7 @@ function R2D3(el, width, height) {
     var container = document.getElementById("r2d3-error-container");
     if (!container) {
       container = document.createElement("div");
-      el.appendChild(container);
+      self.shadow.appendChild(container);
     }
     else {
       container.innerHTML = "";
