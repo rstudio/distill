@@ -17,6 +17,7 @@
 - Download supplemetary figures
 - Abbreviations and supplementary figures
 - "articles" that are presentations or other content (e.g. PDF!?!?!?!?)
+    - http://viewerjs.org/
 - Article indexes include repository URLs, source code, etc.
 - Copy BibTeX on citation hover
 
