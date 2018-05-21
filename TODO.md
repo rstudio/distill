@@ -19,6 +19,19 @@ Embedded articles:
 - automatically hide chrome for embedded=1
 - hosts metadata parameter to control embedding
 
+- for each dir in _articles
+   - render Rmd in a separate process (callr::r_safe) if the .html file is out of date
+   - use resources metadata in Rmd for include/exclude
+   - find_external_resources (see shiny_prerendered for last-modified check)
+   - create articles/dir/article
+       - copy .html file
+       - copy _files directory
+       - copy copyable_site_resources
+   - create articles/dir/index.html which embeds article/foo.html
+   
+
+
+
 - articles/index pages
     - https://github.com/wikiti/jquery-paginate
     - iframe based inclusion
