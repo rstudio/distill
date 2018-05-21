@@ -21,7 +21,7 @@ Embedded articles:
 
 - for each dir in _articles
    - render Rmd in a separate process (callr::r_safe) if the .html file is out of date
-   - use resources metadata in Rmd for include/exclude
+   - use resource_iles metadata in Rmd for include/exclude
    - find_external_resources (see shiny_prerendered for last-modified check)
    - create articles/dir/article
        - copy .html file
