@@ -9,7 +9,7 @@ library(knitr)
 
 This article describes how to create a website that contains a collection of Radix articles. Radix websites include a top level navigation bar that enables readers to discover and browse articles. For example, the documentation pages you are reading now are a Radix website. 
 
-Once you've created your website locally, there are a variety of ways available to publish your site to the web. We cover several options below including [GitHub Pages], [Netlify], [Firebase], [Site44], and [Amazon S3]. 
+Once you've created your website locally, there are a variety of ways available to publish your site to the web. We cover several options below including [RStudio Connect], [GitHub Pages], [Netlify], [Firebase], [Site44], and [Amazon S3]. 
 
 ## Getting Started
 
@@ -276,7 +276,19 @@ output: radix::radix_article
 
 There are a wide variety of ways to publish Radix websites. Website content is by default written to the `_site` sub-directory (you can customize this using the `output_dir` metadata field). Publishing is simply a matter of copying the output directory to a web server or web hosting service.
 
-Below we describe several convenient options for Radix website deployment including [GitHub Pages], [Netlify], [Firebase], [Site44], and [Amazon S3]. We'll mostly defer to the documentation provided by the various services, but will note any Radix website specific configuration required.
+Below we describe several convenient options for Radix website deployment including [RStudio Connect], [GitHub Pages], [Netlify], [Firebase], [Site44], and [Amazon S3]. We'll mostly defer to the documentation provided by the various services, but will note any Radix website specific configuration required.
+
+### RStudio Connect
+
+[RStudio Connect](https://www.rstudio.com/products/connect/) is a server product from RStudio for secure sharing of websites, applications, reports, and plots. 
+
+You can publish a Radix website directly to an RStudio Connect server from within the website  preview window by clicking the **Publish** button:
+
+![](images/rstudio-connect.png){width=95% .screenshot} 
+
+Note that you can either publish your website with the source code (so it can be regenerated on a scheduled basis) or publish a copy of the website you built locally. Generally publishing a copy is more straightforward so that's the recommended option unless you have specialized requirements.
+
+Unlike the other website publishing options described below, [RStudio Connect](https://www.rstudio.com/products/connect/)is server that you run inside an organization, so is suitable for publishing content that you only want visible within your organization's network as opposed to visible to the entire internet.
 
 ### GitHub Pages
 
