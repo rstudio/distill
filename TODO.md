@@ -14,6 +14,8 @@
 
 Embedded articles:
 
+- custom site engine (rendering posts and clean_site)
+
 - consider use mustache for producing iframe page (faster?)
 
 - preview images may not work

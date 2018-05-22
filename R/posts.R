@@ -65,6 +65,7 @@ render_post <- function(site_dir, post_dir, encoding = getOption("encoding")) {
   c(site_config, metadata) %<-% transform_configuration(site_config, front_matter)
 
   # convert path references
+  output_dir <- site_config$output_dir
   site_config <- transform_site_paths(site_config, site_dir, "../..")
 
   # build pandoc args
@@ -81,8 +82,10 @@ render_post <- function(site_dir, post_dir, encoding = getOption("encoding")) {
   jquery <- html_dependency_jquery()
   headroom <- html_dependency_headroom()
   iframe_resizer <- html_dependency_iframe_resizer()
-  lapply(list(jquery, headroom, iframe_resizer), function (dep) {
-    htmltools::copyDependencyToDir(dep, file.path(file.path(site_dir, "site_libs")))
+  lapply(list(jquery, headroom, iframe_resizer), function (dependency) {
+    htmltools::copyDependencyToDir(
+      dependency,
+      file.path(file.path(output_dir, "site_libs")))
   })
   args <- c(args,
     pandoc_variable_arg("jquery-version", jquery$version),
