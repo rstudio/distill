@@ -33,7 +33,7 @@ ellipses.}
 dependencies, using data: URIs to incorporate the contents of linked
 scripts, stylesheets, images, and videos. Note that even for self contained
 documents MathJax is still loaded externally (this is necessary because of
-it's size).}
+its size).}
 
 \item{mathjax}{Include mathjax. The "default" option uses an https URL from a
 MathJax CDN. The "local" option uses a local version of MathJax (which is

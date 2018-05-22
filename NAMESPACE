@@ -3,3 +3,4 @@
 export(radix_article)
 import(htmltools)
 import(rmarkdown)
+importFrom(zeallot,"%<-%")
