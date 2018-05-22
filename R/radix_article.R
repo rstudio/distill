@@ -119,7 +119,7 @@ radix_article <- function(fig_width = 6,
   # return format
   output_format(
     knitr = knitr_options,
-    pandoc = pandoc_options(to = "html",
+    pandoc = pandoc_options(to = "html5",
                             from = rmarkdown_format(md_extensions),
                             args = args),
     keep_md = keep_md,

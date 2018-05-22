@@ -447,7 +447,7 @@ More about Radix</code></pre>
 <p>If your Radix website is contained within an RStudio project you can use the <strong>Build Website</strong> command available in the Build pane to generate the site:</p>
 <p><img src="images/build-website.png" class="screenshot" style="width:95.0%" /></p>
 <p>When you build a website, the following things occur:</p>
-<ol style="list-style-type: decimal">
+<ol type="1">
 <li><p>All of the Rmd and md files in the root website directory will be rendered into HTML. Note however that markdown files beginning with &quot;_&quot; are not rendered (this is a convention to designate files that are included by top level documents).</p></li>
 <li><p>The generated HTML files and any supporting files (e.g. CSS and JavaScript) are copied into an output directory (<code>_site</code> by default).</p></li>
 </ol>
@@ -474,7 +474,7 @@ exclude: [&quot;docs.txt&quot;, &quot;*.csv&quot;]</code></pre>
 <p>The <code>output_dir</code> field indicates which directory to copy site content into (&quot;_site&quot; is the default if none is specified). Note that this can be “.” to keep all content within the root website directory alongside the source code.</p>
 <h3 id="included-files">Included Files</h3>
 <p>The <code>include</code> and <code>exclude</code> fields enable you to override the default behavior visa-vi what files are copied into the output directory. By default, all files within the website directory are copied into the output directory (e.g. &quot;_site&quot;) save for the following:</p>
-<ol style="list-style-type: decimal">
+<ol type="1">
 <li><p>Files beginning with “.” (hidden files).</p></li>
 <li><p>Files beginning with &quot;_&quot;</p></li>
 <li><p>Files known to contain R source code (e.g. “.R”, “.s”, “.Rmd”), R data (e.g. “.RData”, “.rds”), or configuration data (e.g. “.Rproj”, “rsconnect”)).</p></li>
@@ -574,8 +574,8 @@ output:
 <p>Several metadata values which you might find useful to define in <code>_site.yml</code> are:</p>
 <table>
 <colgroup>
-<col width="27%" />
-<col width="72%" />
+<col style="width: 27%" />
+<col style="width: 72%" />
 </colgroup>
 <thead>
 <tr class="header">
@@ -627,7 +627,7 @@ output: radix::radix_article</code></pre>
 <p>Below we describe several convenient options for Radix website deployment including <a href="#github-pages">GitHub Pages</a>, <a href="#netlify">Netlify</a>, <a href="#firebase">Firebase</a>, <a href="#site44">Site44</a>, and <a href="#amazon-s3">Amazon S3</a>. We’ll mostly defer to the documentation provided by the various services, but will note any Radix website specific configuration required.</p>
 <h3 id="github-pages">GitHub Pages</h3>
 <p><a href="https://pages.github.com/">GitHub Pages</a> is a service that lets you publish a website from any GitHub repository. There are two additional configuration steps required to host a Radix website using GitHub Pages:</p>
-<ol style="list-style-type: decimal">
+<ol type="1">
 <li><p>Create a file named <code>.nojekyll</code> in your repository (this is required to disable some processing of HTML files that GitHub does by default). You can do this with the following code:</p>
 <pre class="r"><code>
 file.create(&quot;.nojekyll&quot;)</code></pre></li>

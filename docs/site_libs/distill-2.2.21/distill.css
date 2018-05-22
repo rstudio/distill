@@ -1,4 +1,8 @@
 
+body {
+  background-color: white;
+}
+
 .pandoc-table {
   width: 100%;
 }
@@ -28,29 +32,13 @@
   display: none;
 }
 
-.figure .caption {
-  color: rgba(0,0,0,0.6);
-  font-size: 12px;
-  line-height: 1.5em;
-}
-
-.figure .caption a {
-  color: rgba(0,0,0,0.6);
-}
-
-.figure .caption b,
-.figure .caption strong {
-  font-weight: 600;
-  color: rgba(0, 0, 0, 1);
-}
-
 @media(min-width: 1024px) {
-  .figure .caption {
+  figure .caption {
     font-size: 13px;
   }
 }
 
-.figure img.external {
+figure img.external {
   background: white;
   border: 1px solid rgba(0, 0, 0, 0.1);
   box-shadow: 0 1px 8px rgba(0, 0, 0, 0.1);

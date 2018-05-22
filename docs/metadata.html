@@ -405,7 +405,7 @@ Publish
 
 <div class="d-article">
 <p>You can enhance Radix articles by providing various types of metadata, including:</p>
-<ol style="list-style-type: decimal">
+<ol type="1">
 <li><p>Links to the article’s source code repository.</p></li>
 <li><p><a href="#creative-commons">Creative Commons</a> licensing terms.</p></li>
 <li><p><a href="#open-graph">Open Graph</a> and <a href="#twitter-card">Twitter Card</a> metadata that is automatically included when the article is shared (e.g. on Twitter or within Slack).</p></li>
@@ -438,9 +438,9 @@ compare_updates_url: https://github.com/radixpub/radix-r/compare/pubv1...master
 <p>Here are some of the common forms of Creative Commons content license:</p>
 <table>
 <colgroup>
-<col width="18%" />
-<col width="18%" />
-<col width="62%" />
+<col style="width: 18%" />
+<col style="width: 18%" />
+<col style="width: 62%" />
 </colgroup>
 <thead>
 <tr class="header">
@@ -488,10 +488,9 @@ creative_commons: CC BY
 <pre class="markup"><code>
 ![Figure from https://example.com](heatmap.png){.external width=100%}    </code></pre>
 <p>Using the <code>.external</code> class and providing a “Figure from” link makes it clear that the figure originated elsewhere (and is therefore not covered by any of your article’s copyright or creative commons license grants). For example, here’s how a figure taken from a Stack Overflow post might appear:</p>
-<div class="figure">
-<img src="images/heatmap.png" alt="Figure from https://stackoverflow.com/questions/12196756/" class="external" style="width:100.0%" />
-<p class="caption">Figure from <a href="https://stackoverflow.com/questions/12196756/" class="uri">https://stackoverflow.com/questions/12196756/</a></p>
-</div>
+<figure>
+<img src="images/heatmap.png" alt="Figure from https://stackoverflow.com/questions/12196756/" class="external" style="width:100.0%" /><figcaption>Figure from <a href="https://stackoverflow.com/questions/12196756/" class="uri">https://stackoverflow.com/questions/12196756/</a></figcaption>
+</figure>
 <h2 id="open-graph">Open Graph</h2>
 <p>The <a href="http://ogp.me/">Open Graph protocol</a> is a specification that enables richer sharing of links to articles on the web. Open Graph metadata is automatically generated for Radix articles. For example, here’s what you see in Slack when pasting in a link to the article on using <a href="interactivity.html">JavaScript and D3</a> within Radix articles:</p>
 <p><img src="images/open-graph-screenshot.png" class="screenshot" style="width:95.0%" /></p>

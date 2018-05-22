@@ -54,7 +54,7 @@ radix_embedded_article <- function(self_contained = FALSE, lib_dir = NULL) {
   # return format
   output_format(
     knitr = knitr_options(),
-    pandoc = pandoc_options(to = "html", args = args),
+    pandoc = pandoc_options(to = "html5", args = args),
     post_knit = post_knit,
     base_format = html_document_base(
       self_contained = self_contained,

@@ -450,7 +450,7 @@ Publish
 <li>The ability to incorporate JavaScript and D3-based <a href="interactivity.html">interactive visualizations</a>.</li>
 <li>A variety of ways to <a href="publish_article.html">publish articles</a>, including support for publishing collections or articles as a <a href="publish_website.html">Radix website</a>.</li>
 </ul>
-<p>Radix is based on the <a href="https://github.com/distillpub/template">Distill web framework</a>, which was originally created for use in the Distill Machine Learning Journal <span class="citation">(Carter, Olah, and Satyanarayan <a href="#ref-distill">2016</a>)</span>. Radix combines the technical authoring features of Distill with <a href="https://rmarkdown.rstudio.com/">R Markdown</a>, enabling a fully reproducible workflow based on literate programming <span class="citation">(Knuth <a href="#ref-knuth1984">1984</a>)</span>.</p>
+<p>Radix is based on the <a href="https://github.com/distillpub/template">Distill web framework</a>, which was originally created for use in the Distill Machine Learning Journal <span class="citation" data-cites="distill">(Carter, Olah, and Satyanarayan <a href="#ref-distill">2016</a>)</span>. Radix combines the technical authoring features of Distill with <a href="https://rmarkdown.rstudio.com/">R Markdown</a>, enabling a fully reproducible workflow based on literate programming <span class="citation" data-cites="knuth1984">(Knuth <a href="#ref-knuth1984">1984</a>)</span>.</p>
 <h2 id="getting-started">Getting Started</h2>
 <p>To create an <a href="https://rmarkdown.rstudio.com">R Markdown</a> document that uses the Radix format, first install the <strong>radix</strong> R package:</p>
 <pre class="r"><code>
@@ -548,7 +548,7 @@ $$</code></pre>
   url = {http://yihui.name/knitr/},
 }</code></pre>
 <p>Citations are then used in the article body with standard R Markdown notation, for example: <code>[@xie2015]</code> (which references an id provided in the bibliography). Note that multiple ids (separated by semicolons) can be provided.</p>
-<p>The citation is presented inline like this: <span class="citation">(Xie <a href="#ref-xie2015">2015</a>)</span> (a number that displays more information on hover). If you have an appendix, a bibliography is automatically created and populated in it.</p>
+<p>The citation is presented inline like this: <span class="citation" data-cites="xie2015">(Xie <a href="#ref-xie2015">2015</a>)</span> (a number that displays more information on hover). If you have an appendix, a bibliography is automatically created and populated in it.</p>
 <p>See the article on <a href="citations.html">citations</a> for additional details on using citations, including how to provide the metadata required to make your article more easily citable for others.</p>
 <h2 id="footnotes-and-asides">Footnotes and Asides</h2>
 <p>Footnotes use standard Pandoc markdown notation, for example <code>^[This will become a hover-able footnote]</code>. The number of the footnote will be automatically generated.<a href="#fn1" class="footnote-ref" id="fnref1"><sup>1</sup></a></p>
@@ -611,12 +611,12 @@ describing what each author did.</code></pre>
 <p>Xie, Yihui. 2015. <em>Dynamic Documents with R and Knitr</em>. 2nd ed. Boca Raton, Florida: Chapman; Hall/CRC. <a href="http://yihui.name/knitr/" class="uri">http://yihui.name/knitr/</a>.</p>
 </div>
 </div>
-<div class="footnotes">
+<section class="footnotes">
 <hr />
 <ol>
 <li id="fn1"><p>This will become a hover-able footnote<a href="#fnref1" class="footnote-back">↩</a></p></li>
 </ol>
-</div>
+</section>
 </div>
 
 <div class="d-appendix">

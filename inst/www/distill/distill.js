@@ -72,16 +72,7 @@ function init_distill() {
   // replace citations with <d-cite>
   $('.citation').each(function(i, val) {
     appendix = true;
-    // pull out all unique citation references
-    var anchors = $(this).children('a');
-    var cites = [];
-    anchors.each(function(i, val) {
-      var href = $(val).attr('href');
-      var cite = href.replace('#ref-', '');
-      if ($.inArray(cite, cites) === -1)
-        cites.push(cite);
-    });
-    // create dt-site
+    var cites = $(this).attr('data-cites').split(" ");
     var dt_cite = $('<d-cite></d-cite>');
     dt_cite.attr('key', cites.join());
     $(this).replaceWith(dt_cite);
@@ -143,7 +134,7 @@ function init_distill() {
 
   // load distill framework
   load_distill_framework();
-  
+
   // wait for window.distillRunlevel == 4 to do post processing
   function distill_post_process() {
 
