@@ -71,13 +71,21 @@ radix_article <- function(fig_width = 6,
   # post-knit
   post_knit <- function(metadata, input_file, runtime, encoding, ...) {
 
+    # pandoc args
+    args <- c()
+
     # get site config
     site_config <- site_config(input_file, encoding)
     if (is.null(site_config))
       site_config <- list()
 
     # transform configuration
-    c(site_config, metadata, args) %<-% transform_configuration(site_config, metadata)
+    c(site_config, metadata) %<-% transform_configuration(site_config, metadata)
+
+    # add title-prefix if necessary
+    if (!is.null(metadata$title_prefix))
+      args <- c(args, "--title-prefix", metadata$title_prefix)
+
 
     # add html dependencies
     knitr::knit_meta_add(list(

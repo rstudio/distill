@@ -1,6 +1,6 @@
 
 
-transform_configuration <- function(site_config, metadata, args = c()) {
+transform_configuration <- function(site_config, metadata) {
 
   # transform site_config and metadata values
   site_config <- transform_site_config(site_config)
@@ -8,7 +8,7 @@ transform_configuration <- function(site_config, metadata, args = c()) {
 
   # provide title-prefix  and qualified title if specified in site and different from title
   if (!is.null(site_config$title) && !identical(site_config$title, metadata$title)) {
-    args <- c(args, "--title-prefix", site_config$title)
+    metadata$title_prefix <- site_config$title
     metadata$qualified_title <- sprintf("%s: %s", site_config$title, metadata$title)
   } else {
     metadata$qualified_title <- metadata$title
@@ -16,8 +16,7 @@ transform_configuration <- function(site_config, metadata, args = c()) {
 
   list(
     site_config = site_config,
-    metadata = metadata,
-    args = args
+    metadata = metadata
   )
 }
 
