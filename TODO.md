@@ -10,6 +10,7 @@
     - publishing/previewing workflow?
     - app.R or ui.R / server.R in the same directory; automagic local run
 
+    - Full bleed media objects (videos, docs (http://viewerjs.org/), etc.)
 
 Embedded articles:
 
@@ -32,6 +33,13 @@ Embedded articles:
    - can have _articles/dir/article.yml for external articles
    - import_article() function for automatically creating article.yml
    
+Refactor into more files   
+   
+Refactor to split article iframe page into it's own format
+
+Post processor could call find_external_resources on the html file and copy
+files out of _articles into articles (and even create the iframe stub)
+
 
 
 
