@@ -14,6 +14,12 @@
 
 Embedded articles:
 
+- Site publishing on RStudio Connect
+
+- Shared content/code and shared dependency copying for posts
+
+- Use top level posts .html with subdirs (no src)
+
 - custom site engine (rendering posts and clean_site)
 
 - consider use mustache for producing iframe page (faster?)
