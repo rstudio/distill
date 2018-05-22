@@ -84,7 +84,7 @@ radix_article <- function(fig_width = 6,
       html_dependency_jquery(),
       html_dependency_bowser(),
       html_dependency_webcomponents(),
-      html_dependency_iframe_resizer("content"),
+      html_dependency_iframe_resizer(),
       html_dependency_distill()
     ))
 

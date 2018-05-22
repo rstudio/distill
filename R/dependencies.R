@@ -35,14 +35,11 @@ html_dependency_headroom <- function() {
   )
 }
 
-html_dependency_iframe_resizer <- function(context = c("host", "content")) {
-  context <- match.arg(context)
-  js_suffix <- if (context == "content") ".contentWindow"
+html_dependency_iframe_resizer <- function() {
   htmltools::htmlDependency(
-    name = paste0("iframe_resizer_", context),
+    name = "iframe-resizer",
     version = "3.6.1",
     src = system.file("www/iframe-resizer", package = "radix"),
-    script = paste0("iframeResizer", js_suffix, ".min.js"),
-    all_files = FALSE
+    script = c("iframeResizer.min.js", "iframeResizer.contentWindow.min.js")
   )
 }

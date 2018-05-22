@@ -35,7 +35,7 @@ radix_embedded_article <- function(self_contained = FALSE, lib_dir = NULL) {
     # html dependencies
     knitr::knit_meta_add(list(
       html_dependency_jquery(),
-      html_dependency_iframe_resizer("host")
+      html_dependency_iframe_resizer()
     ))
 
     # navigation includes
