@@ -1,6 +1,6 @@
 
 
-appendices_after_body <- function(input_dir, site_config, metadata) {
+appendices_after_body <- function(site_config, metadata) {
 
   # write appendixes
   updates_and_corrections <- appendix_updates_and_corrections(site_config, metadata)

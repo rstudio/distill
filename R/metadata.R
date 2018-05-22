@@ -1,11 +1,10 @@
 
 
-transform_configuration <- function(input_file, site_config, metadata, args = c()) {
+transform_configuration <- function(site_config, metadata, args = c()) {
 
   # transform site_config and metadata values
-  input_dir <- input_as_dir(input_file)
-  site_config <- transform_site_config(input_dir, site_config)
-  metadata <- transform_metadata(input_dir, site_config, metadata)
+  site_config <- transform_site_config(site_config)
+  metadata <- transform_metadata(site_config, metadata)
 
   # provide title-prefix  and qualified title if specified in site and different from title
   if (!is.null(site_config$title) && !identical(site_config$title, metadata$title)) {
@@ -16,14 +15,13 @@ transform_configuration <- function(input_file, site_config, metadata, args = c(
   }
 
   list(
-    input_dir = input_dir,
     site_config = site_config,
     metadata = metadata,
     args = args
   )
 }
 
-transform_site_config <- function(input_dir, site_config) {
+transform_site_config <- function(site_config) {
 
   if (!is.null(site_config) && length(site_config) > 0) {
 
@@ -45,7 +43,7 @@ transform_site_config <- function(input_dir, site_config) {
   site_config
 }
 
-transform_metadata <- function(input_dir, site_config, metadata) {
+transform_metadata <- function(site_config, metadata) {
 
   # validate title
   if (is.null(metadata$title))
@@ -188,7 +186,7 @@ transform_metadata <- function(input_dir, site_config, metadata) {
 }
 
 
-metadata_in_header <- function(input_dir, site_config, metadata) {
+metadata_in_header <- function(site_config, metadata) {
 
   # description
   description_meta <- list()
@@ -488,7 +486,7 @@ front_matter_from_metadata <- function(metadata) {
   jsonlite::toJSON(front_matter, auto_unbox = TRUE)
 }
 
-front_matter_before_body <- function(input_dir, site_config, metadata) {
+front_matter_before_body <- function(site_config, metadata) {
 
   front_matter_script <- HTML(paste(c(
     '',

@@ -30,8 +30,7 @@ radix_embedded_article <- function(self_contained = FALSE, lib_dir = NULL) {
       site_config <- list()
 
     # transform configuration
-    c(input_dir, site_config, metadata, args) %<-%
-      transform_configuration(input_file, site_config, metadata, args)
+    c(site_config, metadata, args) %<-% transform_configuration(site_config, metadata, args)
 
     # html dependencies
     knitr::knit_meta_add(list(

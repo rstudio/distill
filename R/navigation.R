@@ -1,6 +1,6 @@
 
 
-navigation_in_header <- function(input_dir, site_config, metadata) {
+navigation_in_header <- function(site_config, metadata) {
 
   # if we have a site navbar
   if (!is.null(site_config[["navbar"]])) {
@@ -18,7 +18,7 @@ navigation_in_header <- function(input_dir, site_config, metadata) {
 }
 
 
-navigation_before_body <- function(input_dir, site_config, metadata) {
+navigation_before_body <- function(site_config, metadata) {
 
   # helper to yield icon class
   icon_class <- function(icon) {
@@ -101,14 +101,15 @@ navigation_before_body <- function(input_dir, site_config, metadata) {
 }
 
 
-navigation_after_body <- function(input_dir, site_config, metadata) {
-  footer <- file.path(input_dir, "footer.html")
+navigation_after_body <- function(input_file, site_config, metadata) {
+  site_dir <- input_as_dir(input_file)
+  footer <- file.path(site_dir, "footer.html")
   if (!is.null(site_config$navbar) && file.exists(footer)) {
     footer_template <- system.file("rmarkdown/templates/radix_article/resources/footer.html",
                                    package = "radix")
     footer_html <- tempfile(fileext = "html")
     pandoc_convert(
-      input = footer,
+      input = normalize_path(footer),
       from = "markdown_strict",
       to = "html",
       output = footer_html,

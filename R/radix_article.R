@@ -77,8 +77,7 @@ radix_article <- function(fig_width = 6,
       site_config <- list()
 
     # transform configuration
-    c(input_dir, site_config, metadata, args) %<-%
-        transform_configuration(input_file, site_config, metadata)
+    c(site_config, metadata, args) %<-% transform_configuration(site_config, metadata)
 
     # add html dependencies
     knitr::knit_meta_add(list(
@@ -90,19 +89,19 @@ radix_article <- function(fig_width = 6,
     ))
 
     # header includes: radix then user
-    in_header <- c(metadata_in_header(input_dir, site_config, metadata),
-                   navigation_in_header(input_dir, site_config, metadata),
+    in_header <- c(metadata_in_header(site_config, metadata),
+                   navigation_in_header(site_config, metadata),
                    includes$in_header)
 
     # before body includes: radix then user
-    before_body <- c(front_matter_before_body(input_dir, site_config, metadata),
-                     navigation_before_body(input_dir, site_config, metadata),
+    before_body <- c(front_matter_before_body(site_config, metadata),
+                     navigation_before_body(site_config, metadata),
                      includes$before_body)
 
     # after body includes: user then radix
     after_body <- c(includes$after_body,
-                    appendices_after_body(input_dir, site_config, metadata),
-                    navigation_after_body(input_dir, site_config, metadata))
+                    appendices_after_body(site_config, metadata),
+                    navigation_after_body(input_file, site_config, metadata))
 
     # populate args
     args <- c(args,  pandoc_include_args(
