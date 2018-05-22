@@ -14,6 +14,11 @@
 
 Embedded articles:
 
+- consider use mustache for producing iframe page (faster?)
+
+- preview images may not work
+- preview images with absolute files may not work
+
 - custom site engine that handles _articles
 - forward metadata from embedded article to enclosing frame
   (propagate citation_url/canonical_url)
@@ -33,13 +38,6 @@ Embedded articles:
    - can have _articles/dir/article.yml for external articles
    - import_article() function for automatically creating article.yml
    
-Refactor into more files   
-   
-Refactor to split article iframe page into it's own format
-
-Post processor could call find_external_resources on the html file and copy
-files out of _articles into articles (and even create the iframe stub)
-
 
 
 
