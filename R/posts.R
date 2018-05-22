@@ -31,17 +31,16 @@ render_post <- function(site_dir, post_dir, encoding = getOption("encoding")) {
   # determine location of target output dir
   posts_output_dir <- file.path(site_config$output_dir, posts_name)
   post_output_dir <- file.path(posts_output_dir, basename(post_dir))
-  post_output_src_dir <- file.path(post_output_dir, "src")
-  post_output_src_html <- file.path(post_output_src_dir, basename(post_html))
+  post_output_html <- file.path(post_output_dir, basename(post_html))
 
   # see if we need to update the post content
-  if (!file.exists(post_output_src_html) ||
-      file.info(post_output_src_html)$mtime != file.info(post_html)$mtime) {
+  if (!file.exists(post_output_html) ||
+      file.info(post_output_html)$mtime != file.info(post_html)$mtime) {
 
     # remove and recreate the post directory
-    if (dir_exists(post_output_src_dir))
-      unlink(post_output_src_dir, recursive = TRUE)
-    dir.create(post_output_src_dir, recursive = TRUE)
+    if (dir_exists(post_output_dir))
+      unlink(post_output_dir, recursive = TRUE)
+    dir.create(post_output_dir, recursive = TRUE)
 
     # copy appropriate files into the post directory
     resources <- front_matter$resources
@@ -56,7 +55,7 @@ render_post <- function(site_dir, post_dir, encoding = getOption("encoding")) {
       encoding = encoding
     )
     file.copy(from = file.path(post_dir, post_resources),
-              to = post_output_src_dir,
+              to = post_output_dir,
               recursive = TRUE,
               copy.date = TRUE)
   }
@@ -66,7 +65,7 @@ render_post <- function(site_dir, post_dir, encoding = getOption("encoding")) {
 
   # convert path references
   output_dir <- site_config$output_dir
-  site_config <- transform_site_paths(site_config, site_dir, "../..")
+  site_config <- transform_site_paths(site_config, site_dir, "..")
 
   # build pandoc args
   args <- c("--standalone")
@@ -95,7 +94,8 @@ render_post <- function(site_dir, post_dir, encoding = getOption("encoding")) {
 
   # embedded article
   args <- c(args,
-    pandoc_variable_arg("embedded-article-src", file.path("src", basename(post_html)))
+    pandoc_variable_arg("embedded-article-src",
+                        file.path(basename(post_dir), basename(post_html)))
   )
 
   # includes
@@ -127,10 +127,14 @@ render_post <- function(site_dir, post_dir, encoding = getOption("encoding")) {
   )
 
   # copy to destination
-  file.copy(output_tmp, file.path(post_output_dir, "index.html"))
+  published_post_html <- file.path(posts_output_dir, paste0(basename(post_dir), ".html"))
+  file.copy(
+    from = output_tmp,
+    to = published_post_html
+  )
 
-  # write front-matter to src dir
-  yaml::write_yaml(front_matter, file.path(post_output_src_dir, "metadata.yml"))
+  # return invisibly
+  invisible(published_post_html)
 }
 
 
