@@ -1,10 +1,12 @@
 
 
 
-render_posts <- function(posts_dir, encoding = getOption("encoding")) {
+render_posts <- function(posts_dir = "_posts", encoding = getOption("encoding")) {
 
+  lapply(list.dirs(posts_dir, full.names = TRUE, recursive = FALSE),
+         function(post_dir) render_post(post_dir, encoding))
 
-
+  invisible(NULL)
 }
 
 
@@ -13,6 +15,10 @@ render_post <- function(post_dir, encoding = getOption("encoding")) {
   # get the site config
   site_config <- site_config(encoding = encoding)
 
+  # get the parent post dir
+  posts_dir <- dirname(post_dir)
+  posts_name <- sub("^_", "", basename(posts_dir))
+
   # get the target Rmd and html
   post_rmd <- discover_post_rmd(post_dir, encoding)
   if (is.null(post_rmd))
@@ -20,7 +26,7 @@ render_post <- function(post_dir, encoding = getOption("encoding")) {
   post_html <- file_with_ext(post_rmd, "html")
 
   # determine location of target output dir
-  posts_output_dir <- file.path(site_config$output_dir, "posts")
+  posts_output_dir <- file.path(site_config$output_dir, posts_name)
   post_output_dir <- file.path(posts_output_dir, basename(post_dir))
   post_output_src_dir <- file.path(post_output_dir, "src")
   post_output_src_html <- file.path(post_output_src_dir, basename(post_html))
