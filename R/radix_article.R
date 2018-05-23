@@ -50,23 +50,59 @@ radix_article <- function(fig_width = 6,
   # use link citations (so we can do citation conversion)
   args <- c(args, "--metadata=link-citations:true")
 
-  # additional css
-  for (css_file in css)
-    args <- c(args, "--css", pandoc_path_arg(css_file))
+  # shared site config variable (will be set by pre_knit)
+  site_config <- NULL
 
-  # determine knitr options
-  knitr_options <- knitr_options_html(fig_width = fig_width,
-                                      fig_height = fig_height,
-                                      fig_retina = fig_retina,
-                                      keep_md = keep_md,
-                                      dev = dev)
-  knitr_options$opts_chunk$echo = FALSE
-  knitr_options$opts_chunk$warning = FALSE
-  knitr_options$opts_chunk$message = FALSE
-  knitr_options$opts_chunk$comment = NA
-  knitr_options$knit_hooks <- list()
-  knitr_options$knit_hooks$source <- knitr_source_hook
-  knitr_options$knit_hooks$chunk <- knitr_chunk_hook()
+  # pre-knit
+  pre_knit <- function(input, encoding, ...) {
+
+    # get site config
+    site_config <<- find_site_config(input, encoding)
+    if (is.null(site_config))
+      site_config <<- list()
+
+    # merge selected options from config if we are a collection
+    if (!is.null(site_config[["collection"]]) && !is.null(site_config[["output"]])) {
+
+      site_options <- site_config[["output"]][["radix::radix_article"]]
+
+      # establish mergeable options
+      user_options <- list()
+      user_options$fig_width <- fig_width
+      user_options$fig_height <- fig_height
+      user_options$fig_retina <- fig_retina
+      user_options$dev <- dev
+      user_options$css <- css
+      user_options$includes <- includes
+
+      # do the merge
+      format_options <- merge_output_options(site_options, user_options)
+
+      # assign back to options
+      fig_width <<- format_options$fig_width
+      fig_height <<- format_options$fig_height
+      fig_retina <<- format_options$fig_retina
+      dev <<- format_options$dev
+      css <<- format_options$css
+      includes <<- format_options$includes
+    }
+
+    # establish knitr options
+    knitr_options <- knitr_options_html(fig_width = fig_width,
+                                        fig_height = fig_height,
+                                        fig_retina = fig_retina,
+                                        keep_md = keep_md,
+                                        dev = dev)
+    knitr_options$opts_chunk$echo <- FALSE
+    knitr_options$opts_chunk$warning <- FALSE
+    knitr_options$opts_chunk$message <- FALSE
+    knitr_options$opts_chunk$comment <= NA
+    knitr_options$knit_hooks <- list()
+    knitr_options$knit_hooks$source <- knitr_source_hook
+    knitr_options$knit_hooks$chunk <- knitr_chunk_hook()
+
+    structure(knitr_options, class = "knitr_options")
+  }
 
   # post-knit
   post_knit <- function(metadata, input_file, runtime, encoding, ...) {
@@ -74,10 +110,9 @@ radix_article <- function(fig_width = 6,
     # pandoc args
     args <- c()
 
-    # get site config
-    site_config <- site_config(input_file, encoding)
-    if (is.null(site_config))
-      site_config <- list()
+    # additional css
+    for (css_file in css)
+      args <- c(args, "--css", pandoc_path_arg(css_file))
 
     # transform configuration
     c(site_config, metadata) %<-% transform_configuration(site_config, metadata)
@@ -123,15 +158,52 @@ radix_article <- function(fig_width = 6,
 
   }
 
+  # post-processor
+  post_processor <- function(metadata, input_file, output_file, clean, verbose , ...) {
+
+    # if this is a collection then move output to the output dir
+    if (!is.null(site_config[["collection"]])) {
+
+      # determine outputs we need to move
+      outputs <- c()
+
+      # main output file
+      outputs <- c(outputs, output_file)
+
+      # sidecar files dir (if no _cache dir)
+      files_dir <- knitr_files_dir(output_file)
+      cache_dir <- gsub("_files$", "_cache", files_dir)
+      if (dir_exists(files_dir) & !dir_exists(cache_dir))
+        outputs <- c(outputs, files_dir)
+
+      # determine the final output directory
+      input_dir <- dirname(normalize_path(input_file))
+      output_dir <- file.path(site_config[["collection"]]$output_dir,
+                              basename(input_dir))
+
+      # remove and re-create the output directory
+      if (dir_exists(output_dir))
+        unlink(output_dir, recursive = TRUE)
+      dir.create(output_dir)
+
+
+    }
+
+
+    output_file
+  }
+
   # return format
   output_format(
-    knitr = knitr_options,
+    knitr = knitr_options(),
     pandoc = pandoc_options(to = "html5",
-                            from = rmarkdown_format(md_extensions),
+                            from = from_rmarkdown(fig_caption, md_extensions),
                             args = args),
     keep_md = keep_md,
     clean_supporting = self_contained,
+    pre_knit = pre_knit,
     post_knit = post_knit,
+    post_processor = post_processor,
     on_exit = validate_rstudio_version,
     base_format = html_document_base(
       smart = smart,
@@ -146,6 +218,48 @@ radix_article <- function(fig_width = 6,
     )
   )
 }
+
+
+# find the site config for an input file (recognize sites for Rmds in collections)
+find_site_config <- function(input_file, encoding) {
+
+  # look for the default based on an Rmd at the top level
+  config <- site_config(input_file, encoding)
+  if (is.null(config)) {
+
+    # see if we are an Rmd in a collection
+    parent_dir <- dirname(normalize_path(input_file))
+    grandparent_dir <- dirname(parent_dir)
+    if (grepl("^_", basename(grandparent_dir))) {
+
+      # check for config file
+      config <- site_config(dirname(grandparent_dir), encoding)
+
+      # if we got one then transform paths in it
+      if (!is.null(config)) {
+        config <- rapply(config, how = "replace", classes = c("character"),
+          function(x) {
+            if (file.exists(file.path("../..", x))) {
+              file.path("../..", x)
+            } else {
+              x
+            }
+          }
+        )
+
+        # provide collection configuration
+        collection_dir <- sub("^_", "", basename(grandparent_dir))
+        config$collection <- list(
+          output_dir = file.path(config$output_dir, collection_dir)
+        )
+      }
+    }
+  }
+
+  # return config
+  config
+}
+
 
 # hook to ensure newline at the beginning of chunks (workaround distill.js bug)
 knitr_source_hook <- function(x, options) {

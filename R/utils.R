@@ -82,6 +82,23 @@ input_as_dir <- function(input) {
 }
 
 
+merge_output_options <- function(base_options,
+                                 overlay_options) {
+
+  # if either one of these is a character vector then normalize to a named list
+  normalize_list <- function(target) {
+    if (is.null(target)) {
+      list()
+    } else if (is.character(target)) {
+      setNames(lapply(target, function(x) list()), target)
+    } else {
+      target[names(target) != "..."]  # remove symbols (...) from list
+    }
+  }
+
+  merge_lists(normalize_list(base_options), normalize_list(overlay_options))
+}
+
 merge_lists <- function(base_list, overlay_list, recursive = TRUE) {
   if (length(base_list) == 0)
     overlay_list
@@ -114,5 +131,13 @@ radix_resource <- function(name) {
               package = "radix")
 }
 
+knitr_files_dir <- function(file) {
+  paste(tools::file_path_sans_ext(file), "_files", sep = "")
+}
+
+
+knitr_cache_dir <- function(file, pandoc_to) {
+  paste(tools::file_path_sans_ext(file), "_cache/", pandoc_to, "/", sep = "")
+}
 
 
