@@ -50,11 +50,17 @@ radix_article <- function(fig_width = 6,
   # use link citations (so we can do citation conversion)
   args <- c(args, "--metadata=link-citations:true")
 
+  # shared encoding variable
+  encoding <- NULL
+
   # shared site config variable (will be set by pre_knit)
   site_config <- NULL
 
   # pre-knit
   pre_knit <- function(input, encoding, ...) {
+
+    # update encoding
+    encoding <<- encoding
 
     # get site config
     site_config <<- find_site_config(input, encoding)
@@ -167,9 +173,6 @@ radix_article <- function(fig_width = 6,
       # determine outputs we need to move
       outputs <- c()
 
-      # main output file
-      outputs <- c(outputs, output_file)
-
       # sidecar files dir (if no _cache dir)
       files_dir <- knitr_files_dir(output_file)
       cache_dir <- gsub("_files$", "_cache", files_dir)
@@ -186,9 +189,36 @@ radix_article <- function(fig_width = 6,
         unlink(output_dir, recursive = TRUE)
       dir.create(output_dir)
 
+      # move the html file to the output directory
+      target_output_file <- file.path(output_dir, "index.html")
+      file.rename(output_file, target_output_file)
 
+      # rename output_file so that is where the preview goes
+      output_file <- target_output_file
+
+      # move other outputs
+      for (output in outputs) {
+        output_dest <- file.path(output_dir, basename(output))
+        file.rename(output, output_dest)
+      }
+
+      # copy additional supporting resources
+      resources <- metadata$resources
+      if (!is.null(resources))
+        c(include, exclude) %<-% list(resources$include, resources$exclude)
+      else
+        c(include, exclude) %<-% list(NULL, NULL)
+      article_resources <- site_resources(
+        site_dir = input_dir,
+        include = include,
+        exclude = exclude,
+        encoding = encoding
+      )
+      file.copy(from = file.path(input_dir, post_resources),
+                to = output_dir,
+                recursive = TRUE,
+                copy.date = TRUE)
     }
-
 
     output_file
   }
