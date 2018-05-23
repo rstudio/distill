@@ -267,6 +267,11 @@ find_site_config <- function(input_file, encoding) {
 
       # if we got one then transform paths in it
       if (!is.null(config)) {
+
+        # capture original output dir
+        output_dir <- config$output_dir
+
+        # update file references
         config <- rapply(config, how = "replace", classes = c("character"),
           function(x) {
             if (file.exists(file.path("../..", x))) {
@@ -276,6 +281,9 @@ find_site_config <- function(input_file, encoding) {
             }
           }
         )
+
+        # always update output dir
+        config$output_dir <- file.path("../..", output_dir)
 
         # provide collection configuration
         collection_dir <- sub("^_", "", basename(grandparent_dir))
