@@ -63,6 +63,7 @@
   <meta name="citation_reference" content="citation_title=Dynamic documents with r and knitr;citation_publication_date=2015;citation_publisher=Chapman; Hall/CRC;citation_author=Yihui Xie"/>
   
   
+  <!--radix_navigation_in_header-->
   <script type="application/javascript">
     window.document.addEventListener("DOMContentLoaded", function (event) {
   
@@ -356,6 +357,7 @@
   }
   
   </style>
+  <!--/radix_navigation_in_header-->
   <link href="site_libs/pagedtable-1.1/css/pagedtable.css" rel="stylesheet" />
   <script src="site_libs/pagedtable-1.1/js/pagedtable.js"></script>
   <script src="site_libs/jquery-1.11.3/jquery.min.js"></script>
@@ -381,6 +383,7 @@
 <script id="distill-front-matter" type="text/json">
 {"title":"Radix for R Markdown","description":"Scientific and technical writing, native to the web\n","authors":[{"author":"JJ Allaire","authorURL":"https://github.com/jjallaire","affiliation":"RStudio","affiliationURL":"https://www.rstudio.com"},{"author":"Rich Iannone","authorURL":"https://github.com/rich-iannone","affiliation":"RStudio","affiliationURL":"https://www.rstudio.com"},{"author":"Yihui Xie","authorURL":"https://github.com/yihui","affiliation":"RStudio","affiliationURL":"https://www.rstudio.com"}],"publishedDate":"2018-05-04T00:00:00.000-04:00","citationText":"Allaire, et al., 2018"}
 </script>
+<!--radix_navigation_before_body-->
 <header class="header header--fixed" role="banner">
 <nav class="radix-site-nav radix-site-header">
 <div class="nav-left">
@@ -424,6 +427,7 @@ Publish
 </div>
 </nav>
 </header>
+<!--/radix_navigation_before_body-->
 
 <div class="d-title">
 <h1>Radix for R Markdown</h1>
@@ -623,6 +627,16 @@ describing what each author did.</code></pre>
 <div class="d-appendix">
 </div>
 
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    script.src  = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML";
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script>
+
 <div class="appendix-bottom">
 <h3 id="updates-and-corrections">Updates and Corrections</h3>
 <p>
@@ -678,20 +692,12 @@ If you see mistakes or want to suggest changes, please <a href="https://github.c
 
 
 </script>
+<!--radix_navigation_after_body-->
 <div class="radix-site-nav radix-site-footer">
 <p>© Copyright 2018 <a href="https://github.com/distillpub/template/blob/master/AUTHORS">The Distill Template Authors</a> and <a href="https://www.rstudio.com">RStudio, Inc</a>.</p>
 <p>Software licensed under the <a href="https://www.apache.org/licenses/LICENSE-2.0">Apache License, v2.0</a>.</p>
 </div>
-
-<!-- dynamically load mathjax for compatibility with self-contained -->
-<script>
-  (function () {
-    var script = document.createElement("script");
-    script.type = "text/javascript";
-    script.src  = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML";
-    document.getElementsByTagName("head")[0].appendChild(script);
-  })();
-</script>
+<!--/radix_navigation_after_body-->
 
 </body>
 

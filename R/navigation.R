@@ -13,7 +13,7 @@ navigation_in_header <- function(site_config, metadata) {
                  package = "radix")
 
   } else {
-    NULL
+    navigation_placeholder("in_header")
   }
 }
 
@@ -94,7 +94,11 @@ navigation_before_body <- function(site_config, metadata) {
   }
 
   # write and return file
-  header_html <- renderTags(header, indent = FALSE)$html
+  header_html <- renderTags(tagList(
+    HTML(navigation_begin('before_body')),
+    header,
+    HTML(navigation_end('before_body'))
+  ), indent = FALSE)$html
   header_file <- tempfile(fileext = "html")
   writeLines(header_html, header_file)
   header_file
@@ -118,8 +122,27 @@ navigation_after_body <- function(input_file, site_config, metadata) {
     )
     footer_html
   } else {
-    NULL
+    navigation_placeholder("after_body")
   }
+}
+
+
+navigation_placeholder <- function(context) {
+  placeholder <- tempfile(fileext = "html")
+  writeLines(c(
+    navigation_begin(context),
+    navigation_end(context)
+  ), con = placeholder)
+  placeholder
+}
+
+
+navigation_begin <- function(context) {
+  paste0('<!--radix_navigation_', context ,'-->')
+}
+
+navigation_end <- function(context) {
+  paste0('<!--/radix_navigation_', context, '-->')
 }
 
 
