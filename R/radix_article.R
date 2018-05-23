@@ -187,14 +187,14 @@ radix_article <- function(fig_width = 6,
       # remove and re-create the output directory
       if (dir_exists(output_dir))
         unlink(output_dir, recursive = TRUE)
-      dir.create(output_dir)
+      dir.create(output_dir, recursive = TRUE)
 
       # move the html file to the output directory
       target_output_file <- file.path(output_dir, "index.html")
       file.rename(output_file, target_output_file)
 
       # rename output_file so that is where the preview goes
-      output_file <- target_output_file
+      output_file <- normalize_path(target_output_file)
 
       # move other outputs
       for (output in outputs) {
@@ -214,7 +214,7 @@ radix_article <- function(fig_width = 6,
         exclude = exclude,
         encoding = encoding
       )
-      file.copy(from = file.path(input_dir, post_resources),
+      file.copy(from = file.path(input_dir, article_resources),
                 to = output_dir,
                 recursive = TRUE,
                 copy.date = TRUE)
