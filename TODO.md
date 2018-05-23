@@ -14,23 +14,14 @@
 
 Embedded articles:
 
-
-
-
-- Shared content/code and shared dependency copying for posts
+- can we force self_contained: false (error condition?)
 
 - custom site engine (rendering posts and clean_site)
-
-- consider use mustache for producing iframe page (faster?)
 
 - preview images may not work
 - preview images with absolute files may not work
 
-- custom site engine that handles _articles
-- forward metadata from embedded article to enclosing frame
-  (propagate citation_url/canonical_url)
-- automatically hide chrome for embedded=1
-- hosts metadata parameter to control embedding
+- custom site engine that handles _articles / collections
 
 - for each dir in _articles
    - find html output for article (no re-render). Or, perhaps just re-render
