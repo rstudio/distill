@@ -14,8 +14,6 @@
 
 Embedded articles:
 
-- can we force self_contained: false (error condition?)
-
 - custom site engine (rendering posts and clean_site)
 
 - preview images may not work
@@ -44,6 +42,9 @@ Embedded articles:
     - iframe based inclusion
     - http://davidjbradshaw.github.io/iframe-resizer/
     - pym.js
+
+
+- website path issues: interact more intelligently with s_renderOutputs
 
 
 - Download supplemetary figures
