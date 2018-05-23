@@ -15,6 +15,8 @@
 Embedded articles:
 
 
+
+
 - Shared content/code and shared dependency copying for posts
 
 - custom site engine (rendering posts and clean_site)
@@ -44,7 +46,7 @@ Embedded articles:
    - import_article() function for automatically creating article.yml
    
 
-
+- reference citation metadata should throttle on actual inclusion
 
 - articles/index pages
     - https://github.com/wikiti/jquery-paginate
@@ -82,6 +84,9 @@ Embedded articles:
     - Provide frame with social, GA, discourse, etc.
     - RSC for internal version of same
     - Highlighting and commenting
+    
+    - Embed page content with <noscript></noscript> ?
+    - Noframes: https://www.w3.org/TR/REC-html40/present/frames.html#h-16.4.1
     
     
     
