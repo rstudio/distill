@@ -50,66 +50,19 @@ radix_article <- function(fig_width = 6,
   # use link citations (so we can do citation conversion)
   args <- c(args, "--metadata=link-citations:true")
 
-  # shared encoding variable
-  encoding <- NULL
-
-  # shared site config variable (will be set by pre_knit)
-  site_config <- NULL
-
-  # pre-knit
-  pre_knit <- function(input, encoding, ...) {
-
-    # update encoding
-    encoding <<- encoding
-
-    # get site config
-    site_config <<- find_site_config(input, encoding)
-    if (is.null(site_config))
-      site_config <<- list()
-
-    # merge selected options from site config (as in the case where we
-    # are in a collection rmarkdown wouldn't have picked up _site options)
-    if (!is.null(site_config[["output"]])) {
-
-      site_options <- site_config[["output"]][["radix::radix_article"]]
-
-      # establish mergeable options
-      user_options <- list()
-      user_options$fig_width <- fig_width
-      user_options$fig_height <- fig_height
-      user_options$fig_retina <- fig_retina
-      user_options$dev <- dev
-      user_options$css <- css
-      user_options$includes <- includes
-
-      # do the merge
-      format_options <- merge_output_options(site_options, user_options)
-
-      # assign back to options
-      fig_width <<- format_options$fig_width
-      fig_height <<- format_options$fig_height
-      fig_retina <<- format_options$fig_retina
-      dev <<- format_options$dev
-      css <<- format_options$css
-      includes <<- format_options$includes
-    }
-
-    # establish knitr options
-    knitr_options <- knitr_options_html(fig_width = fig_width,
-                                        fig_height = fig_height,
-                                        fig_retina = fig_retina,
-                                        keep_md = keep_md,
-                                        dev = dev)
-    knitr_options$opts_chunk$echo <- FALSE
-    knitr_options$opts_chunk$warning <- FALSE
-    knitr_options$opts_chunk$message <- FALSE
-    knitr_options$opts_chunk$comment <= NA
-    knitr_options$knit_hooks <- list()
-    knitr_options$knit_hooks$source <- knitr_source_hook
-    knitr_options$knit_hooks$chunk <- knitr_chunk_hook()
-
-    structure(knitr_options, class = "knitr_options")
-  }
+  # establish knitr options
+  knitr_options <- knitr_options_html(fig_width = fig_width,
+                                      fig_height = fig_height,
+                                      fig_retina = fig_retina,
+                                      keep_md = keep_md,
+                                      dev = dev)
+  knitr_options$opts_chunk$echo <- FALSE
+  knitr_options$opts_chunk$warning <- FALSE
+  knitr_options$opts_chunk$message <- FALSE
+  knitr_options$opts_chunk$comment <= NA
+  knitr_options$knit_hooks <- list()
+  knitr_options$knit_hooks$source <- knitr_source_hook
+  knitr_options$knit_hooks$chunk <- knitr_chunk_hook()
 
   # post-knit
   post_knit <- function(metadata, input_file, runtime, encoding, ...) {
@@ -121,13 +74,17 @@ radix_article <- function(fig_width = 6,
     for (css_file in css)
       args <- c(args, "--css", pandoc_path_arg(css_file))
 
+    # get site config
+    site_config <- find_site_config(input_file, encoding)
+    if (is.null(site_config))
+      site_config <- list()
+
     # transform configuration
     c(site_config, metadata) %<-% transform_configuration(site_config, metadata)
 
     # add title-prefix if necessary
     if (!is.null(metadata$title_prefix))
       args <- c(args, "--title-prefix", metadata$title_prefix)
-
 
     # add html dependencies
     knitr::knit_meta_add(list(
@@ -167,13 +124,12 @@ radix_article <- function(fig_width = 6,
 
   # return format
   output_format(
-    knitr = knitr_options(),
+    knitr = knitr_options,
     pandoc = pandoc_options(to = "html5",
                             from = from_rmarkdown(fig_caption, md_extensions),
                             args = args),
     keep_md = keep_md,
     clean_supporting = self_contained,
-    pre_knit = pre_knit,
     post_knit = post_knit,
     on_exit = validate_rstudio_version,
     base_format = html_document_base(
