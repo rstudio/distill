@@ -1,18 +1,30 @@
 
 
-navigation_in_header <- function(site_config, metadata) {
-  render_navigation_html(navigation_in_header_html(site_config, metadata))
+navigation_in_header <- function(site_config) {
+  render_navigation_html(navigation_in_header_html(site_config))
 }
 
-navigation_before_body <- function(site_config, metadata) {
-  render_navigation_html(navigation_before_body_html(site_config, metadata))
+navigation_before_body <- function(site_config) {
+  render_navigation_html(navigation_before_body_html(site_config))
 }
 
-navigation_after_body <- function(input_file, site_config, metadata) {
-  render_navigation_html(navigation_after_body_html(input_file, site_config, metadata))
+navigation_after_body <- function(site_dir, site_config) {
+  render_navigation_html(navigation_after_body_html(site_dir, site_config))
 }
 
-navigation_in_header_html <- function(site_config, metadata) {
+navigation_in_header_file <- function(site_config) {
+  render_navigation_html_file(navigation_in_header_html(site_config))
+}
+
+navigation_before_body_file <- function(site_config) {
+  render_navigation_html_file(navigation_before_body_html(site_config))
+}
+
+navigation_after_body_file <- function(site_dir, site_config) {
+  render_navigation_html_file(navigation_after_body_html(site_dir, site_config))
+}
+
+navigation_in_header_html <- function(site_config) {
 
   if (!is.null(site_config[["navbar"]])) {
 
@@ -29,7 +41,7 @@ navigation_in_header_html <- function(site_config, metadata) {
 
 }
 
-navigation_before_body_html <- function(site_config, metadata) {
+navigation_before_body_html <- function(site_config) {
 
   # helper to yield icon class
   icon_class <- function(icon) {
@@ -107,8 +119,7 @@ navigation_before_body_html <- function(site_config, metadata) {
   )
 }
 
-navigation_after_body_html <- function(input_file, site_config, metadata) {
-  site_dir <- input_as_dir(input_file)
+navigation_after_body_html <- function(site_dir, site_config) {
   footer <- file.path(site_dir, "footer.html")
   if (!is.null(site_config$navbar) && file.exists(footer)) {
     footer_template <- system.file("rmarkdown/templates/radix_article/resources/footer.html",
@@ -129,10 +140,31 @@ navigation_after_body_html <- function(input_file, site_config, metadata) {
 }
 
 
-navigation_placeholder <- function(context) {
-  placeholder <- tempfile(fileext = "html")
-  writeLines(renderTags(navigation_placeholder(context))$html, placeholder)
-  placeholder
+
+navigation_html_generator <- function() {
+
+  cache <- new.env(parent = emptyenv())
+
+  function(site_dir, site_config, offset) {
+
+    # populate cache if we need to
+    if (!exists(offset, envir = cache)) {
+
+      # offset the config
+      site_config <- offset_site_config(site_dir, site_config, offset)
+
+      # generate html and assign into cache
+      assign(offset, envir = cache, list(
+        in_header = navigation_in_header(site_config),
+        before_body = navigation_before_body(site_config),
+        after_body = navigation_after_body(input_file, site_config)
+      ))
+    }
+
+    # return html
+    get(offset, envir = cache)
+
+  }
 }
 
 navigation_placeholder_html <- function(context) {
@@ -158,7 +190,15 @@ html_from_file <- function(file) {
 render_navigation_html <- function(navigation_html) {
   rendered <- renderTags(navigation_html, indent = FALSE)
   knitr::knit_meta_add(rendered$dependencies)
+  rendered$html
+}
+
+render_navigation_html_file <- function(navigation_html) {
+  html <- render_navigation_html(navigation_html)
   file <- tempfile(fileext = "html")
-  writeLines(rendered$html, file)
+  writeLines(html, file)
   file
 }
+
+
+

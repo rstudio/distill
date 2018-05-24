@@ -140,18 +140,18 @@ radix_article <- function(fig_width = 6,
 
     # header includes: radix then user
     in_header <- c(metadata_in_header(site_config, metadata),
-                   navigation_in_header(site_config, metadata),
+                   navigation_in_header_file(site_config),
                    includes$in_header)
 
     # before body includes: radix then user
     before_body <- c(front_matter_before_body(site_config, metadata),
-                     navigation_before_body(site_config, metadata),
+                     navigation_before_body_file(site_config),
                      includes$before_body)
 
     # after body includes: user then radix
     after_body <- c(includes$after_body,
-                    appendices_after_body(site_config, metadata),
-                    navigation_after_body(input_file, site_config, metadata))
+                    appendices_after_body(input_file, metadata),
+                    navigation_after_body_file(find_site_dir(input_file), site_config))
 
     # populate args
     args <- c(args,  pandoc_include_args(
@@ -198,34 +198,31 @@ find_site_config <- function(input_file, encoding) {
   config <- site_config(input_file, encoding)
   if (is.null(config)) {
 
-    # see if we are an Rmd in a collection
-    parent_dir <- dirname(normalize_path(input_file))
-    grandparent_dir <- dirname(parent_dir)
-    if (grepl("^_", basename(grandparent_dir))) {
+    # look for a site dir in a parent
+    site_dir <- find_site_dir(input_file)
 
-      # check for config file
-      config <- site_config(dirname(grandparent_dir), encoding)
+    if(!is.null(site_dir)) {
 
-      # if we got one then transform paths in it
-      if (!is.null(config)) {
+      # get the site config
+      config <- site_config(site_dir, encoding)
 
-        # capture original output dir
-        output_dir <- config$output_dir
+      # check for collections
+      collections <- site_collections(site_dir, config)
 
-        # update file references
-        config <- rapply(config, how = "replace", classes = c("character"),
-          function(x) {
-            if (file.exists(file.path("../..", x))) {
-              file.path("../..", x)
-            } else {
-              x
-            }
-          }
-        )
+      # compute relative path
+      input_file_relative <- rmarkdown::relative_to(
+        normalize_path(site_dir),
+        normalize_path(input_file)
+      )
 
-        # always update output dir (it may not yet exist so the
-        # file.exists test above might fail)
-        config$output_dir <- file.path("../..", output_dir)
+      # is this file within one of our collections?
+      in_collection <- any(startsWith(input_file_relative, paste0(collections, "/")))
+      if (in_collection) {
+        # offset config
+        offset <- collection_file_offset(input_file_relative)
+        config <- offset_site_config(site_dir, config, offset)
+      } else {
+        config <- NULL
       }
     }
   }
@@ -233,6 +230,42 @@ find_site_config <- function(input_file, encoding) {
   # return config
   config
 }
+
+site_criterion <- rprojroot::has_file("_site.yml")
+
+find_site_dir <- function(input_file) {
+  tryCatch(
+    rprojroot::find_root(
+      criterion = site_criterion,
+      path = dirname(input_file)
+    ),
+    error = function(e) NULL
+  )
+}
+
+offset_site_config <- function(site_dir, config, offset) {
+
+  # capture original output dir
+  output_dir <- config$output_dir
+
+  # update file references
+  config <- rapply(config, how = "replace", classes = c("character"),
+                   function(x) {
+                     if (file.exists(file.path(site_dir, x))) {
+                       file.path(offset, x)
+                     } else {
+                       x
+                     }
+                   }
+  )
+
+  # always update output dir (it may not yet exist so the
+  # file.exists test above might fail)
+  config$output_dir <- file.path(offset, output_dir)
+
+  config
+}
+
 
 
 # hook to ensure newline at the beginning of chunks (workaround distill.js bug)
