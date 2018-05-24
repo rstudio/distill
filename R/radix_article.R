@@ -133,6 +133,7 @@ radix_article <- function(fig_width = 6,
     knitr::knit_meta_add(list(
       html_dependency_jquery(),
       html_dependency_bowser(),
+      html_dependency_headroom(),
       html_dependency_webcomponents(),
       html_dependency_distill()
     ))

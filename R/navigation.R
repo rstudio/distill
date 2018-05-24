@@ -21,9 +21,6 @@ navigation_in_header_html <- function(site_config, metadata) {
                   package = "radix")
     )
 
-    in_header_html <- attachDependencies(in_header_html, list(html_dependency_headroom()))
-
-
   } else {
     in_header_html <- navigation_placeholder_html("in_header")
   }
@@ -47,17 +44,13 @@ navigation_before_body_html <- function(site_config, metadata) {
   if (!is.null(site_config[["navbar"]])) {
     build_menu <- function(menu) {
       item_to_menu <- function(item) {
-        if (!is.null(item[["icon"]])) {
-          icon <- tag("i", list(class = icon_class(item[["icon"]])))
-          icon <- attachDependencies(icon, html_dependency_font_awesome())
-        } else {
-          icon <- NULL
-        }
-        if (!is.null(item[["text"]]) &&
+        if (!is.null(item[["image"]])) {
+          a(href = item[["href"]], class="nav-image", img(src = item[["image"]]))
+        } else if (!is.null(item[["text"]]) &&
             grepl("^\\s*-{3,}\\s*$", item[["text"]])) {
           tags$hr()
         } else {
-          a(href = item[["href"]], icon, item[["text"]])
+          a(href = item[["href"]], item[["text"]])
         }
       }
       lapply(menu, function(item) {

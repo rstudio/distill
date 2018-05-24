@@ -29,7 +29,7 @@ navbar:
       href: index.html
     - text: "About"
       href: about.html
-    - icon: fa-github
+    - image: images/github.png
       href: https://github.com/radixpub/radix-r
 output: radix::radix_article
 ---
@@ -167,7 +167,7 @@ output: distill::distill_article
 
 Note that we specify that the menu items appear on the `right` side of the navigation bar. We could have also used `left`, or chosen to put some items on the `left` and some on the `right`. 
 
-Note also that we used an `icon` for one of the menus, specifying the [Font Awesome](https://fontawesome.com/v4.7.0/) `fa-github` identifier for the GitHub icon (you can use any Font Awesome 4.0 icon).
+Note also that we used an `image` for one of the menus (the GitHub logo for our link to the source code).
 
 ### Site Footer
 

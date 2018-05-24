@@ -155,6 +155,15 @@
     margin-bottom: -4px;
   }
   
+  .radix-site-header .nav-image img {
+    max-height: 18px;
+    width: auto;
+    display: inline-block;
+    margin-bottom: -3px;
+  }
+  
+  
+  
   @media screen and (min-width: 1000px) {
     .radix-site-header .logo img {
       display: inline-block;
@@ -335,14 +344,11 @@
   <!--/radix_navigation_in_header-->
   <script src="site_libs/jquery-1.11.3/jquery.min.js"></script>
   <script src="site_libs/bowser-1.9.3/bowser.min.js"></script>
+  <script src="site_libs/headroom-0.9.4/headroom.min.js"></script>
   <script src="site_libs/webcomponents-2.0.0/webcomponents.js"></script>
   <link href="site_libs/distill-2.2.21/distill.css" rel="stylesheet" />
   <script src="site_libs/distill-2.2.21/template.v2.js"></script>
   <script src="site_libs/distill-2.2.21/distill.js"></script>
-  <script src="site_libs/headroom-0.9.4/headroom.min.js"></script>
-  <link href="site_libs/font-awesome-5.0.13/css/fa-svg-with-js.css" rel="stylesheet" />
-  <script src="site_libs/font-awesome-5.0.13/js/fontawesome-all.min.js"></script>
-  <script src="site_libs/font-awesome-5.0.13/js/fa-v4-shims.min.js"></script>
 
   <link rel="stylesheet" href="styles.css" type="text/css"/>
 
@@ -391,8 +397,8 @@ Publish
 <a href="metadata.html">Article Metadata</a>
 </div>
 </div>
-<a href="https://github.com/radixpub/radix-r">
-<i class="fa fa-github"></i>
+<a href="https://github.com/radixpub/radix-r" class="nav-image">
+<img src="images/github.png"/>
 </a>
 <a href="javascript:void(0);" class="nav-toggle">&#9776;</a>
 </div>
@@ -423,7 +429,7 @@ navbar:
       href: index.html
     - text: &quot;About&quot;
       href: about.html
-    - icon: fa-github
+    - image: images/github.png
       href: https://github.com/radixpub/radix-r
 output: radix::radix_article
 ---</code></pre>
@@ -518,7 +524,7 @@ navbar:
 output: distill::distill_article
 ---</code></pre>
 <p>Note that we specify that the menu items appear on the <code>right</code> side of the navigation bar. We could have also used <code>left</code>, or chosen to put some items on the <code>left</code> and some on the <code>right</code>.</p>
-<p>Note also that we used an <code>icon</code> for one of the menus, specifying the <a href="https://fontawesome.com/v4.7.0/">Font Awesome</a> <code>fa-github</code> identifier for the GitHub icon (you can use any Font Awesome 4.0 icon).</p>
+<p>Note also that we used an <code>image</code> for one of the menus (the GitHub logo for our link to the source code).</p>
 <h3 id="site-footer">Site Footer</h3>
 <p>When you use a navigation bar, you can optionally also include a site footer which uses the same theme (background and foreground colors). For example:</p>
 <p><img src="images/footer-bar.png" class="screenshot" style="width:95.0%" /></p>

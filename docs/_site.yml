@@ -31,7 +31,7 @@ navbar:
         - text: "---"
         - text: "Article Metadata"
           href: metadata.html
-    - icon: fa-github
+    - image: images/github.png
       href: https://github.com/radixpub/radix-r
 output:
   radix::radix_article:
