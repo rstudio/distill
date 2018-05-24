@@ -133,7 +133,11 @@ navigation_after_body_html <- function(site_dir, site_config) {
       options = list("--template", pandoc_path_arg(footer_template),
                      "--metadata", "pagetitle:footer")
     )
+
+    footer_html <- fixup_navigation_paths(footer_html, site_dir, site_config)
+
     html_from_file(footer_html)
+
   } else {
     navigation_placeholder_html("after_body")
   }
@@ -157,7 +161,7 @@ navigation_html_generator <- function() {
       assign(offset, envir = cache, list(
         in_header = navigation_in_header(site_config),
         before_body = navigation_before_body(site_config),
-        after_body = navigation_after_body(input_file, site_config)
+        after_body = navigation_after_body(site_dir, site_config)
       ))
     }
 
@@ -165,6 +169,37 @@ navigation_html_generator <- function() {
     get(offset, envir = cache)
 
   }
+}
+
+
+fixup_navigation_paths <- function(file, site_dir, site_config) {
+
+  # check for offset
+  offset <- attr(site_config, "offset")
+
+  # function to fixup an element type
+  fixup_element_paths <- function(html, tag, attrib) {
+    tags <- xml2::xml_find_all(html, paste0(".//", tag))
+    for (tag in tags) {
+      path <- xml2::xml_attr(tag, attrib)
+      if (!is.na(path)) {
+        if (file.exists(file.path(site_dir, site_config$output_dir, path)))
+          xml2::xml_attr(tag, attrib) <- file.path(offset, path)
+      }
+    }
+  }
+
+  # process if necessary
+  if (!is.null(offset)) {
+    html <- xml2::read_xml(file)
+    fixup_element_paths(html, "a", "href")
+    fixup_element_paths(html, "img", "src")
+    tmp <- tempfile(fileext = ".html")
+    xml2::write_xml(html, tmp, options = c("format", "no_declaration"))
+    file <- tmp
+  }
+
+  file
 }
 
 navigation_placeholder_html <- function(context) {

@@ -215,9 +215,11 @@ offset_site_config <- function(site_dir, config, offset) {
                    }
   )
 
-  # always update output dir (it may not yet exist so the
-  # file.exists test above might fail)
-  config$output_dir <- file.path(offset, output_dir)
+  # preserve output_dir
+  config$output_dir <- output_dir
+
+  # provide offset as attribute
+  attr(config, "offset") <- offset
 
   config
 }
