@@ -211,11 +211,11 @@ navigation_placeholder_html <- function(context) {
 }
 
 navigation_begin <- function(context) {
-  paste0('<!--radix_navigation_', context ,'-->')
+  placeholder_begin(paste0("navigation_", context))
 }
 
 navigation_end <- function(context) {
-  paste0('<!--/radix_navigation_', context, '-->')
+  placeholder_end(paste0("navigation_", context))
 }
 
 html_from_file <- function(file) {

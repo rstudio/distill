@@ -7,31 +7,13 @@ enumerate_collections <- function(site_dir, encoding = getOption("encoding")) {
   # read site config
   config <- site_config(site_dir, encoding)
 
-
-
-
-
-}
-
-
-
-render_collections <- function(site_dir, encoding = getOption("encoding"), quiet = FALSE) {
-
-  # read site config
-  config <- site_config(site_dir, encoding)
-
-  # caching html generator
-  navigation_html <- navigation_html_generator()
+  # list of collections to return
+  collections <- list()
 
   for (collection in site_collections(site_dir, config)) {
 
-    if (!quiet)
-      cat(paste0("Rendering ", collection, ":\n"))
-
-    # remove existing output dir if it exists
-    collection_output <- file.path(site_dir, config$output_dir, sub("^_", "", collection))
-    if (dir_exists(collection_output))
-      unlink(collection_output, recursive = TRUE)
+    # build a list of articles in the collection
+    articles <- list()
 
     # find all html files within the collection
     html_files <- file.path(site_dir,
@@ -40,12 +22,11 @@ render_collections <- function(site_dir, encoding = getOption("encoding"), quiet
                               file.path(site_dir, collection),
                               pattern = "^[^_].*\\.html$",
                               recursive = TRUE
-                           ))
+                            ))
 
     # find unique directories from files (only one article per directory)
     article_dirs <- unique(dirname(html_files))
 
-    # render each html file
     for (article_dir in article_dirs) {
 
       # resolve to radix article
@@ -58,6 +39,48 @@ render_collections <- function(site_dir, encoding = getOption("encoding"), quiet
       # bail if this is a draft
       if (isTRUE(article$metadata$draft))
         next
+
+      # add to list of articles
+      articles[[length(articles) + 1]] <- article
+    }
+
+    # add collection
+    collections[[collection]] <- list(
+      name = collection,
+      articles = articles
+    )
+  }
+
+  collections
+}
+
+
+
+render_collections <- function(site_dir, encoding = getOption("encoding"), quiet = FALSE) {
+
+  # read site config
+  config <- site_config(site_dir, encoding)
+
+  # enumerate collections
+  collections <- enumerate_collections(site_dir, encoding)
+
+  # caching html generator
+  navigation_html <- navigation_html_generator()
+
+  for (collection in collections) {
+
+    if (!quiet)
+      cat(paste0("Rendering ", collection$name, ":\n"))
+
+    # remove existing output dir if it exists
+    collection_output <- file.path(site_dir,
+                                   config$output_dir,
+                                   sub("^_", "", collection$name))
+    if (dir_exists(collection_output))
+      unlink(collection_output, recursive = TRUE)
+
+    # process articles in collection
+    for (article in collection$articles) {
 
       # strip site_dir prefix
       article$path <- sub(paste0("^", site_dir, "/"), "", article$path)
@@ -84,12 +107,12 @@ render_collections <- function(site_dir, encoding = getOption("encoding"), quiet
       else
         c(include, exclude) %<-% list(NULL, NULL)
       rmd_resources <- site_resources(
-        site_dir = article_dir,
+        site_dir = article$dir,
         include = include,
         exclude = exclude,
         encoding = encoding
       )
-      file.copy(from = file.path(article_dir, rmd_resources),
+      file.copy(from = file.path(article$dir, rmd_resources),
                 to = output_dir,
                 recursive = TRUE,
                 copy.date = TRUE)
@@ -103,9 +126,7 @@ render_collections <- function(site_dir, encoding = getOption("encoding"), quiet
       # substitute navigation html
       navigation <- navigation_html(site_dir, config, offset)
       apply_navigation <- function(content, context) {
-        begin_context <- paste0("<!--radix_navigation_", context, "-->")
-        end_context <- paste0("<!--/radix_navigation_", context, "-->")
-        pattern <- paste0(begin_context, ".*", end_context)
+        pattern <- paste0(navigation_begin(context), ".*", navigation_end(context))
         sub(pattern, navigation[[context]], content, useBytes = TRUE)
       }
       index_content <- paste(readLines(index_html, encoding = "UTF-8"), collapse = "\n")
@@ -162,6 +183,7 @@ discover_article <- function(article_dir) {
     if (!is.null(article_metadata)) {
       list(
         path = article_html,
+        dir = article_dir,
         metadata = article_metadata
       )
     } else {
