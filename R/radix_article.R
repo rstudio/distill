@@ -79,6 +79,9 @@ radix_article <- function(fig_width = 6,
     if (is.null(site_config))
       site_config <- list()
 
+    # metadata to json (do this before transforming)
+    metadata_json <- embedded_json(metadata, "radix-rmarkdown-metadata")
+
     # transform configuration
     c(site_config, metadata) %<-% transform_configuration(site_config, metadata)
 
@@ -97,6 +100,7 @@ radix_article <- function(fig_width = 6,
 
     # header includes: radix then user
     in_header <- c(metadata_in_header(site_config, metadata),
+                   metadata_json,
                    navigation_in_header_file(site_config),
                    includes$in_header)
 

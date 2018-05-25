@@ -502,3 +502,56 @@ front_matter_before_body <- function(site_config, metadata) {
 
 }
 
+embedded_json <- function(x, id, file = tempfile(fileext = "html")) {
+
+  # generate json
+  json <- jsonlite::serializeJSON(x)
+  lines <- c('',
+             paste0('<script type="text/json" ', 'id="', id ,'">'),
+             # escape json, see https://github.com/rstudio/rmarkdown/issues/943
+             gsub("</", "<\\u002f", json, fixed = TRUE),
+             '</script>')
+
+  # append to the file (guaranteed to be UTF-8)
+  con <- file(file, open = "at", encoding = "UTF-8")
+  on.exit(close(con), add = TRUE)
+  writeLines(lines, con = con)
+
+  # return the file name
+  file
+}
+
+extract_embedded_json <- function(file, id) {
+
+  # look for lines that start the context
+  lines <- readLines(file, encoding = "UTF-8", warn = FALSE)
+  pattern <- paste0('<script type="text/json" id="', id, '">')
+  matches <- regmatches(lines, regexec(pattern, lines, fixed = TRUE))
+
+  # extract the json within the contexts
+  in_json <- FALSE
+  json_lines <- character()
+  for (i in 1:length(matches)) {
+    if (length(matches[[i]]) > 0) {
+      in_json <- TRUE
+      next
+    }
+    else if (in_json && identical(html_lines[[i]], "</script>")) {
+      in_json <- FALSE
+    }
+    if (in_json)
+      json_lines <- c(json_lines, html_lines[[i]])
+  }
+
+  # extract and return
+  unserialize_embedded_json(json_lines)
+}
+
+unserialize_embedded_json <- function(lines) {
+  # unescape code, see https://github.com/rstudio/rmarkdown/issues/943
+  json <- gsub("<\\u002f", "</", lines, fixed = TRUE)
+  jsonlite::unserializeJSON(json)
+}
+
+
+
