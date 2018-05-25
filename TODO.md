@@ -14,7 +14,14 @@
 
 Embedded articles:
 
+
 - custom site engine (rendering posts and clean_site)
+
+- list dirs not Rmds
+
+- Re-render metadata
+- Render site styles (otherwise navigation elements don't contribute)
+- Include metadata in html
 
 - preview images may not work
 - preview images with absolute files may not work
