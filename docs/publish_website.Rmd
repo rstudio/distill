@@ -13,7 +13,11 @@ Once you've created your website locally, there are a variety of ways available 
 
 ## Getting Started
 
-The minimum requirement for a Radix website is that it have an `index.Rmd` file as well as a `_site.yml` file (this is where site related options and configuration are specified).
+The minimum requirement for a Radix website is that it have:
+
+1) An `index.Rmd` file configured to use the Radix website generator (`site: radix::radix_website`).
+
+2) A `_site.yml` file (this is where site related options and configuration are specified).
 
 Let's walk through a very simple example, a website that includes two pages (Home and About) and a navigation bar to switch between them:
 
@@ -42,6 +46,7 @@ output: radix::radix_article
 title: "Radix for R Markdown"
 description: | 
   Scientific and technical writing, native to the web
+site: radix::radix_website
 ---
 
 Hello, Radix!

@@ -14,6 +14,7 @@
 
 Embedded articles:
 
+- pandoc attempts to download creative commons license
 
 - custom site engine (rendering posts and clean_site)
       - handles _articles / collections

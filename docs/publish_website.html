@@ -420,7 +420,11 @@ Publish
 <p>This article describes how to create a website that contains a collection of Radix articles. Radix websites include a top level navigation bar that enables readers to discover and browse articles. For example, the documentation pages you are reading now are a Radix website.</p>
 <p>Once you’ve created your website locally, there are a variety of ways available to publish your site to the web. We cover several options below including <a href="#rstudio-connect">RStudio Connect</a>, <a href="#github-pages">GitHub Pages</a>, <a href="#netlify">Netlify</a>, <a href="#firebase">Firebase</a>, <a href="#site44">Site44</a>, and <a href="#amazon-s3">Amazon S3</a>.</p>
 <h2 id="getting-started">Getting Started</h2>
-<p>The minimum requirement for a Radix website is that it have an <code>index.Rmd</code> file as well as a <code>_site.yml</code> file (this is where site related options and configuration are specified).</p>
+<p>The minimum requirement for a Radix website is that it have:</p>
+<ol type="1">
+<li><p>An <code>index.Rmd</code> file configured to use the Radix website generator (<code>site: radix::radix_website</code>).</p></li>
+<li><p>A <code>_site.yml</code> file (this is where site related options and configuration are specified).</p></li>
+</ol>
 <p>Let’s walk through a very simple example, a website that includes two pages (Home and About) and a navigation bar to switch between them:</p>
 <p><strong>_site.yml</strong></p>
 <pre class="markup"><code>
@@ -443,6 +447,7 @@ output: radix::radix_article
 title: &quot;Radix for R Markdown&quot;
 description: | 
   Scientific and technical writing, native to the web
+site: radix::radix_website
 ---
 
 Hello, Radix!</code></pre>

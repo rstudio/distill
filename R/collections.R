@@ -134,6 +134,9 @@ render_collections <- function(site_dir, encoding = getOption("encoding"), quiet
       index_content <- apply_navigation(index_content, "after_body")
       writeLines(index_content, index_html, useBytes = TRUE)
     }
+
+    if (!quiet)
+      cat("\n")
   }
 }
 
