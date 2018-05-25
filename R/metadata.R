@@ -502,6 +502,14 @@ front_matter_before_body <- function(site_config, metadata) {
 
 }
 
+embedded_metadata <- function(metadata) {
+  embedded_json(metadata, "radix-rmarkdown-metadata")
+}
+
+extract_embedded_metadata <- function(file) {
+  extract_embedded_json(file, "radix-rmarkdown-metadata")
+}
+
 embedded_json <- function(x, id, file = tempfile(fileext = "html")) {
 
   # generate json
@@ -528,29 +536,36 @@ extract_embedded_json <- function(file, id) {
   on.exit(close(con), add = TRUE)
 
   # loop through the lines in the file
-  begin_json <- paste0('  <script type="text/json" id="', id, '">')
-  end_json <- "  </script>"
+  begin_json <- paste0('<script type="text/json" id="', id, '">')
+  end_json <- "</script>"
   in_json <- FALSE
   json_lines <- character()
-  while (TRUE) {
+  completed <- FALSE
+  while (!completed) {
 
-    line <- readLines(con, n = 1, encoding = "UTF-8")
+    # read next 100 lines
+    lines <- readLines(con, n = 100, encoding = "UTF-8")
+    if (length(lines) == 0)
+      break
 
-    if (length(line) == 0) {
-      break
-    } else if (in_json && identical(line, end_json)) {
-      break
-    } else if (identical(line, begin_json)) {
-      in_json <- TRUE
-      next
+    # iterate through lines
+    for (line in lines) {
+      if (in_json && grepl(end_json, line, fixed = TRUE)) {
+        completed <- TRUE
+        break
+      } else if (grepl(begin_json, line)) {
+        in_json <- TRUE
+        next
+      }
+      if (in_json)
+        json_lines <- c(json_lines, line)
     }
-
-    if (in_json)
-      json_lines <- c(json_lines, line)
   }
 
-  # extract and return
-  unserialize_embedded_json(json_lines)
+  if (length(json_lines) > 0)
+    unserialize_embedded_json(json_lines)
+  else
+    NULL
 }
 
 unserialize_embedded_json <- function(lines) {

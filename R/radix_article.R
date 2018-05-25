@@ -80,7 +80,7 @@ radix_article <- function(fig_width = 6,
       site_config <- list()
 
     # metadata to json (do this before transforming)
-    metadata_json <- embedded_json(metadata, "radix-rmarkdown-metadata")
+    metadata_json <- embedded_metadata(metadata)
 
     # transform configuration
     c(site_config, metadata) %<-% transform_configuration(site_config, metadata)

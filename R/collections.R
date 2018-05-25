@@ -2,6 +2,17 @@
 
 
 
+enumerate_collections <- function(site_dir, encoding = getOption("encoding")) {
+
+  # read site config
+  config <- site_config(site_dir, encoding)
+
+
+
+
+
+}
+
 
 
 render_collections <- function(site_dir, encoding = getOption("encoding"), quiet = FALSE) {
@@ -22,74 +33,72 @@ render_collections <- function(site_dir, encoding = getOption("encoding"), quiet
     if (dir_exists(collection_output))
       unlink(collection_output, recursive = TRUE)
 
-    # enumerate all directories within the collection
-    collection_dirs <- list.files(file.path(site_dir, collection))
-
-    # find all Rmd files (not beginning with _) within the collection
-    rmd_files <- file.path(site_dir,
-                           collection,
-                           list.files(
+    # find all html files within the collection
+    html_files <- file.path(site_dir,
+                            collection,
+                            list.files(
                               file.path(site_dir, collection),
-                              pattern = "^[^_].*\\.[Rr]md$",
+                              pattern = "^[^_].*\\.html$",
                               recursive = TRUE
                            ))
 
-    # render each rmd file
-    for (rmd in rmd_files) {
+    # find unique directories from files (only one article per directory)
+    article_dirs <- unique(dirname(html_files))
 
-      # resolve to radix article rmd (there can only be one per directory)
-      rmd_directory <- dirname(rmd)
-      rmd <- discover_collection_rmd(rmd_directory, encoding)
+    # render each html file
+    for (article_dir in article_dirs) {
 
-      # read metadata from rmd
-      metadata <- yaml_front_matter(rmd, encoding)
+      # resolve to radix article
+      article <- discover_article(article_dir)
 
-      # bail if this is a draft
-      if (isTRUE(metadata$draft))
+      # bail if there was none found
+      if (is.null(article))
         next
 
-      # bail if the rmd is unrendered
-      if (!file.exists(file_with_ext(rmd, "html")))
+      # bail if this is a draft
+      if (isTRUE(article$metadata$draft))
         next
 
       # strip site_dir prefix
-      rmd <- sub(paste0("^", site_dir, "/"), "", rmd)
+      article$path <- sub(paste0("^", site_dir, "/"), "", article$path)
 
       # compute offset
-      offset <- collection_file_offset(rmd)
+      offset <- collection_file_offset(article$path)
 
       # determine the target output dir
-      output_dir <- file.path(site_dir, config$output_dir, sub("^_", "", dirname(rmd)))
+      output_dir <- file.path(site_dir,
+                              config$output_dir,
+                              sub("^_", "", dirname(article$path)))
 
       # progress
       if (!quiet)
-        cat(" ", rmd, "\n")
+        cat(" ", dirname(article$path), "\n")
 
       # create the output directory
       dir.create(output_dir, recursive = TRUE)
 
       # copy files to output directory
-      resources <- metadata$resources
+      resources <- article$metadata$resources
       if (!is.null(resources))
         c(include, exclude) %<-% list(resources$include, resources$exclude)
       else
         c(include, exclude) %<-% list(NULL, NULL)
       rmd_resources <- site_resources(
-        site_dir = rmd_directory,
+        site_dir = article_dir,
         include = include,
         exclude = exclude,
         encoding = encoding
       )
-      file.copy(from = file.path(rmd_directory, rmd_resources),
+      file.copy(from = file.path(article_dir, rmd_resources),
                 to = output_dir,
                 recursive = TRUE,
                 copy.date = TRUE)
 
-      # rename rmd.html to index.html
-      rmd_html <- file.path(output_dir, file_with_ext(basename(rmd), "html"))
+      # rename article to index.html
+      article_html <- file.path(output_dir, basename(article$path))
       index_html <- file.path(output_dir, "index.html")
-      if (rmd_html != index_html)
-        file.rename(rmd_html, index_html)
+      if (article_html != index_html)
+        file.rename(article_html, index_html)
 
       # substitute navigation html
       navigation <- navigation_html(site_dir, config, offset)
@@ -109,41 +118,58 @@ render_collections <- function(site_dir, encoding = getOption("encoding"), quiet
 }
 
 
-discover_collection_rmd <- function(collection_dir, encoding = getOption("encoding")) {
+discover_article <- function(article_dir) {
 
-  collection_rmd <- NULL
+  article_html <- NULL
+  article_metadata <- NULL
 
-  all_rmds <- list.files(path = collection_dir,
-                         pattern = "^[^_].*\\.[Rr][Mm][Dd]$",
-                         full.names = FALSE)
+  html_files <- list.files(path = article_dir,
+                           pattern = "^[^_].*\\.html$",
+                           full.names = TRUE)
 
-  if (length(all_rmds) == 1) {
+  if (length(html_files) == 1) {
 
-    # just one R Markdown document
-    collection_rmd <- all_rmds
+    # just one html file
+    article_html <- html_files[[1]]
 
   } else {
 
     # more than one: look for an index
-    index <- which(tolower(all_rmds) == "index.rmd")
+    index <- which(tolower(basename(html_files)) == "index.html")
     if (length(index) > 0) {
-      collection_rmd <- all_rmds[index[1]]
+      article_html <- html_files[[index[1]]]
     }
 
-    # look for first one that has radix_article as a default format
+    # look for first one that has radix metadata in it
     else {
-      for (rmd in all_rmds) {
-        format <- rmarkdown::default_output_format(file.path(collection_dir, rmd), encoding)
-        if (format$name == "radix::radix_article") {
-          collection_rmd <- rmd
+      for (html_file in html_files) {
+        article_metadata <- extract_embedded_metadata(html_file)
+        if (!is.null(article_metadata)) {
+          article_html <- html_file
           break
         }
       }
     }
   }
 
-  file.path(collection_dir, collection_rmd)
+  if (!is.null(article_html)) {
 
+    # complete metadata
+    if (is.null(article_metadata))
+      article_metadata <- extract_embedded_metadata(article_html)
+
+    # return if we have metadata
+    if (!is.null(article_metadata)) {
+      list(
+        path = article_html,
+        metadata = article_metadata
+      )
+    } else {
+      NULL
+    }
+  } else {
+    NULL
+  }
 }
 
 
