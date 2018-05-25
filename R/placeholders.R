@@ -1,5 +1,13 @@
 
 
+placeholder_html <- function(context, ...) {
+  tagList(
+    HTML(placeholder_begin(context)),
+    list(...),
+    HTML(placeholder_end(context))
+  )
+}
+
 placeholder_begin <- function(context) {
   paste0('<!--radix_placeholder_', context ,'-->')
 }

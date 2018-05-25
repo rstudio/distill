@@ -112,11 +112,7 @@ navigation_before_body_html <- function(site_config) {
     ))
   }
 
-  tagList(
-    HTML(navigation_begin('before_body')),
-    header,
-    HTML(navigation_end('before_body'))
-  )
+  placeholder_html("navigation_before_body", header)
 }
 
 navigation_after_body_html <- function(site_dir, site_config) {
