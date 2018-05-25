@@ -16,42 +16,20 @@ Embedded articles:
 
 
 - custom site engine (rendering posts and clean_site)
+      - handles _articles / collections
 
-- list dirs not Rmds
 
-- Re-render metadata
-- Render site styles (otherwise navigation elements don't contribute)
-- Include metadata in html
+- Re-render metadata in collections
+- Render site styles (otherwise navigational elements don't contribute)
 
 - preview images may not work
 - preview images with absolute files may not work
 
-- custom site engine that handles _articles / collections
-
-- for each dir in _articles
-   - find html output for article (no re-render). Or, perhaps just re-render
-     when .html is older than .Rmd? (allows site build to work for incremental)
-   - use resource_files metadata in Rmd for include/exclude?
-   - find_external_resources (see shiny_prerendered for last-modified check)
-   - create articles/dir/article
-       - copy .html file
-       - copy _files directory
-       - copy copyable_site_resources
-   - create articles/dir/index.html which embeds article/foo.html
-   - can have _articles/dir/article.yml for external articles
-   - import_article() function for automatically creating article.yml
-   
-
 - reference citation metadata should throttle on actual inclusion
 
-- articles/index pages
-    - https://github.com/wikiti/jquery-paginate
-    - iframe based inclusion
-    - http://davidjbradshaw.github.io/iframe-resizer/
-    - pym.js
-
-
-- website path issues: interact more intelligently with s_renderOutputs
+- document cannonical url
+- attribution metadata for inclusion when importing/syndicating (do during import)
+- embed files manifest
 
 
 - Download supplemetary figures
