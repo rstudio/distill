@@ -523,26 +523,30 @@ embedded_json <- function(x, id, file = tempfile(fileext = "html")) {
 
 extract_embedded_json <- function(file, id) {
 
-  # see https://stackoverflow.com/questions/12626637/reading-a-text-file-in-r-line-by-line
+  # open connection to file
+  con <- file(file, open = "r", encoding = "UTF-8")
+  on.exit(close(con), add = TRUE)
 
-  # look for lines that start the context
-  lines <- readLines(file, encoding = "UTF-8", warn = FALSE)
-  pattern <- paste0('<script type="text/json" id="', id, '">')
-  matches <- regmatches(lines, regexec(pattern, lines, fixed = TRUE))
-
-  # extract the json within the contexts
+  # loop through the lines in the file
+  begin_json <- paste0('  <script type="text/json" id="', id, '">')
+  end_json <- "  </script>"
   in_json <- FALSE
   json_lines <- character()
-  for (i in 1:length(matches)) {
-    if (length(matches[[i]]) > 0) {
+  while (TRUE) {
+
+    line <- readLines(con, n = 1, encoding = "UTF-8")
+
+    if (length(line) == 0) {
+      break
+    } else if (in_json && identical(line, end_json)) {
+      break
+    } else if (identical(line, begin_json)) {
       in_json <- TRUE
       next
     }
-    else if (in_json && identical(lines[[i]], "  </script>")) {
-      in_json <- FALSE
-    }
+
     if (in_json)
-      json_lines <- c(json_lines, lines[[i]])
+      json_lines <- c(json_lines, line)
   }
 
   # extract and return
