@@ -126,8 +126,7 @@ render_collections <- function(site_dir, encoding = getOption("encoding"), quiet
       # substitute navigation html
       navigation <- navigation_html(site_dir, config, offset)
       apply_navigation <- function(content, context) {
-        pattern <- paste0(navigation_begin(context), ".*", navigation_end(context))
-        sub(pattern, navigation[[context]], content, useBytes = TRUE)
+        fill_placeholder(content, paste0("navigation_", context), navigation[[context]])
       }
       index_content <- paste(readLines(index_html, encoding = "UTF-8"), collapse = "\n")
       index_content <- apply_navigation(index_content, "in_header")
