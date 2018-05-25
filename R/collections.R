@@ -44,6 +44,10 @@ render_collections <- function(site_dir, encoding = getOption("encoding"), quiet
       # read metadata from rmd
       metadata <- yaml_front_matter(rmd, encoding)
 
+      # bail if this is a draft
+      if (isTRUE(metadata$draft))
+        next
+
       # bail if the rmd is unrendered
       if (!file.exists(file_with_ext(rmd, "html")))
         next
@@ -56,10 +60,6 @@ render_collections <- function(site_dir, encoding = getOption("encoding"), quiet
 
       # determine the target output dir
       output_dir <- file.path(site_dir, config$output_dir, sub("^_", "", dirname(rmd)))
-
-      # bail if this is a draft
-      if (isTRUE(metadata$draft))
-        next
 
       # progress
       if (!quiet)
