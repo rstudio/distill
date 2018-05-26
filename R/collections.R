@@ -203,6 +203,12 @@ write_collection_metadata <- function(site_dir, collection, articles) {
 
   # write each article
   articles <- lapply(articles, function(article) {
+
+    # strip some inside-baseball metadata
+    article$metadata$output <- NULL
+    article$metadata$resources <- NULL
+
+    # write the article
     article_yaml <- list()
     article_yaml[[basename(article$dir)]] <-  article$metadata
     cat("\n", file = con)
