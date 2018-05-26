@@ -521,7 +521,7 @@ embedded_json <- function(x, id, file = tempfile(fileext = "html")) {
              '</script>')
 
   # append to the file (guaranteed to be UTF-8)
-  con <- file(file, open = "at", encoding = "UTF-8")
+  con <- file(file, open = "w", encoding = "UTF-8")
   on.exit(close(con), add = TRUE)
   writeLines(lines, con = con)
 
