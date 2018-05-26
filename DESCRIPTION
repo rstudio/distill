@@ -24,7 +24,7 @@ RoxygenNote: 6.0.1
 Imports: 
   utils, 
   tools, 
-  rmarkdown (>= 1.9.15), 
+  rmarkdown (>= 1.9.16), 
   htmltools, 
   jsonlite, 
   lubridate, 

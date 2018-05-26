@@ -2,10 +2,7 @@
 
 
 
-enumerate_collections <- function(site_dir, encoding = getOption("encoding")) {
-
-  # read site config
-  config <- site_config(site_dir, encoding)
+enumerate_collections <- function(site_dir, config, encoding = getOption("encoding")) {
 
   # list of collections to return
   collections <- list()
@@ -55,14 +52,7 @@ enumerate_collections <- function(site_dir, encoding = getOption("encoding")) {
 }
 
 
-
-render_collections <- function(site_dir, encoding = getOption("encoding"), quiet = FALSE) {
-
-  # read site config
-  config <- site_config(site_dir, encoding)
-
-  # enumerate collections
-  collections <- enumerate_collections(site_dir, encoding)
+render_collections <- function(site_dir, config, collections, quiet = FALSE) {
 
   # caching html generator
   navigation_html <- navigation_html_generator()
@@ -109,8 +99,7 @@ render_collections <- function(site_dir, encoding = getOption("encoding"), quiet
       rmd_resources <- site_resources(
         site_dir = article$dir,
         include = include,
-        exclude = exclude,
-        encoding = encoding
+        exclude = exclude
       )
       file.copy(from = file.path(article$dir, rmd_resources),
                 to = output_dir,

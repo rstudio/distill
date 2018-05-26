@@ -23,7 +23,15 @@ radix_website <- function(input, encoding = getOption("encoding"), ...) {
 
       # if it's a full render then render collections
       if (!incremental) {
-        render_collections(site_dir = input, encoding = encoding, quiet = quiet)
+
+        # get the site config
+        config <- site_config(input, encoding)
+
+        # enumerate collections
+        collections <- enumerate_collections(input, config, encoding)
+
+        # render collections
+        render_collections(input, config, collections, quiet)
       }
 
       # delegate to default site generator
