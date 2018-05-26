@@ -189,20 +189,7 @@ discover_article <- function(article_dir) {
 }
 
 write_collection_metadata <- function(site_dir, collection, articles) {
-
-  # transform articles into format for writing
-  names <- character()
-  articles <- lapply(articles, function(article) {
-    names <<- c(names, basename(article$dir))
-    article$metadata
-  })
-  names(articles) <- names
-
-
-  # generate yaml
-  yaml <- yaml::as.yaml(articles, indent.mapping.sequence = TRUE)
-
-  # write yaml with header comment
+  # articles.yml file
   articles_yaml <- file.path(
     site_dir,
     collection,
@@ -210,9 +197,17 @@ write_collection_metadata <- function(site_dir, collection, articles) {
   )
   con <- file(articles_yaml, "w", encoding = "UTF-8")
   on.exit(close(con), add = TRUE)
-  cat("# Created by Radix website generator (do not edit or remove)\n\n", file = con)
-  cat(yaml, file = con)
-  cat("\n", file = con)
+
+  # header
+  cat("# Created by Radix website generator (do not edit or remove)\n", file = con)
+
+  # write each article
+  articles <- lapply(articles, function(article) {
+    article_yaml <- list()
+    article_yaml[[basename(article$dir)]] <-  article$metadata
+    cat("\n", file = con)
+    yaml::write_yaml(article_yaml, file = con)
+  })
 }
 
 
