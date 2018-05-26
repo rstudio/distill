@@ -66,6 +66,8 @@ More about Radix
  
 Note that the `output` options are not specified within the Rmd documents but rather in the `_site.yml` configuration file (this allows output options to be shared by all articles).
 
+Also note that the `index.Rmd` file specifies the Radix website generator (`site::radix_website`).
+
 ## Authoring and Previewing
 
 If your Radix website is contained within an RStudio project you can use the **Build Website** command available in the Build pane to generate the site:
