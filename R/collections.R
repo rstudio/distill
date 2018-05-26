@@ -46,6 +46,9 @@ enumerate_collections <- function(site_dir, config, encoding = getOption("encodi
       name = collection,
       articles = articles
     )
+
+    # cache articles metadata
+    write_collection_metadata(site_dir, collection, articles)
   }
 
   collections
@@ -183,6 +186,33 @@ discover_article <- function(article_dir) {
   } else {
     NULL
   }
+}
+
+write_collection_metadata <- function(site_dir, collection, articles) {
+
+  # transform articles into format for writing
+  names <- character()
+  articles <- lapply(articles, function(article) {
+    names <<- c(names, basename(article$dir))
+    article$metadata
+  })
+  names(articles) <- names
+
+
+  # generate yaml
+  yaml <- yaml::as.yaml(articles, indent.mapping.sequence = TRUE)
+
+  # write yaml with header comment
+  articles_yaml <- file.path(
+    site_dir,
+    collection,
+    file_with_ext(sub("^_", "", collection), ext = "yml")
+  )
+  con <- file(articles_yaml, "w", encoding = "UTF-8")
+  on.exit(close(con), add = TRUE)
+  cat("# Created by Radix website generator (do not edit or remove)\n\n", file = con)
+  cat(yaml, file = con)
+  cat("\n", file = con)
 }
 
 
