@@ -124,6 +124,11 @@ render_collections <- function(site_dir, config, collections, quiet = FALSE) {
       index_content <- apply_navigation(index_content, "in_header")
       index_content <- apply_navigation(index_content, "before_body")
       index_content <- apply_navigation(index_content, "after_body")
+
+      # substitute site styles
+      index_content <- fill_placeholder(index_content, "site_styles", "")
+
+      # write content
       writeLines(index_content, index_html, useBytes = TRUE)
     }
 

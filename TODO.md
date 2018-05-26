@@ -14,14 +14,9 @@
 
 Embedded articles:
 
-- pandoc attempts to download creative commons license
-
-- custom site engine (rendering posts and clean_site)
-      - handles _articles / collections
-
-
 - Re-render metadata in collections
 - Render site styles (otherwise navigational elements don't contribute)
+- Do we need a special navbar.css? (so we can always render it on preview)
 
 - preview images may not work
 - preview images with absolute files may not work
