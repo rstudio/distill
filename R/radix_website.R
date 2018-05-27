@@ -30,6 +30,9 @@ radix_website <- function(input, encoding = getOption("encoding"), ...) {
         # enumerate collections
         collections <- enumerate_collections(input, config, encoding)
 
+        # write metadata
+        write_collections_metadata(input, collections)
+
         # render collections
         render_collections(input, config, collections, quiet)
       }

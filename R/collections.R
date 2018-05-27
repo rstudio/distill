@@ -46,14 +46,10 @@ enumerate_collections <- function(site_dir, config, encoding = getOption("encodi
       name = collection,
       articles = articles
     )
-
-    # cache articles metadata
-    write_collection_metadata(site_dir, collection, articles)
   }
 
   collections
 }
-
 
 render_collections <- function(site_dir, config, collections, quiet = FALSE) {
 
@@ -193,12 +189,21 @@ discover_article <- function(article_dir) {
   }
 }
 
-write_collection_metadata <- function(site_dir, collection, articles) {
+
+
+write_collections_metadata <- function(site_dir, collections) {
+  for (collection in collections)
+    write_collection_metadata(site_dir, collection)
+}
+
+write_collection_metadata <- function(site_dir, collection) {
+
   # articles.yml file
+  name <- collection[["name"]]
   articles_yaml <- file.path(
     site_dir,
-    collection,
-    file_with_ext(sub("^_", "", collection), ext = "yml")
+    name,
+    file_with_ext(sub("^_", "", name), ext = "yml")
   )
   con <- file(articles_yaml, "w", encoding = "UTF-8")
   on.exit(close(con), add = TRUE)
@@ -207,7 +212,7 @@ write_collection_metadata <- function(site_dir, collection, articles) {
   cat("# Created by Radix website generator (do not edit or remove)\n", file = con)
 
   # write each article
-  articles <- lapply(articles, function(article) {
+  articles <- lapply(collection[["articles"]], function(article) {
 
     # strip some inside-baseball metadata
     article$metadata$output <- NULL
@@ -215,7 +220,7 @@ write_collection_metadata <- function(site_dir, collection, articles) {
 
     # write the article
     article_yaml <- list()
-    article_yaml[[basename(article$dir)]] <-  article$metadata
+    article_yaml[[basename(article$dir)]] <-article$metadata
     cat("\n", file = con)
     yaml::write_yaml(article_yaml, file = con)
   })
