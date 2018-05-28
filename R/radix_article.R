@@ -50,19 +50,60 @@ radix_article <- function(fig_width = 6,
   # use link citations (so we can do citation conversion)
   args <- c(args, "--metadata=link-citations:true")
 
-  # establish knitr options
-  knitr_options <- knitr_options_html(fig_width = fig_width,
-                                      fig_height = fig_height,
-                                      fig_retina = fig_retina,
-                                      keep_md = keep_md,
-                                      dev = dev)
-  knitr_options$opts_chunk$echo <- FALSE
-  knitr_options$opts_chunk$warning <- FALSE
-  knitr_options$opts_chunk$message <- FALSE
-  knitr_options$opts_chunk$comment <= NA
-  knitr_options$knit_hooks <- list()
-  knitr_options$knit_hooks$source <- knitr_source_hook
-  knitr_options$knit_hooks$chunk <- knitr_chunk_hook()
+  # shared variables (will be set by pre_knit)
+  encoding <- NULL
+  site_config <- NULL
+
+  # pre-knit
+  pre_knit <- function(input, encoding, ...) {
+
+    # update encoding
+    encoding <<- encoding
+
+    # get site config
+    site_config <<- find_site_config(input, encoding)
+    if (is.null(site_config))
+      site_config <<- list()
+
+    # merge selected options from site config (as in the case where we
+    # are in a collection rmarkdown wouldn't have picked up _site options)
+    if (!is.null(site_config[["output"]])) {
+
+      site_options <- site_config[["output"]][["radix::radix_article"]]
+
+      # establish mergeable options
+      user_options <- list()
+      user_options$fig_width <- fig_width
+      user_options$fig_height <- fig_height
+      user_options$fig_retina <- fig_retina
+      user_options$dev <- dev
+
+      # do the merge
+      format_options <- merge_output_options(site_options, user_options)
+
+      # assign back to options
+      fig_width <<- format_options$fig_width
+      fig_height <<- format_options$fig_height
+      fig_retina <<- format_options$fig_retina
+      dev <<- format_options$dev
+    }
+
+    # establish knitr options
+    knitr_options <- knitr_options_html(fig_width = fig_width,
+                                        fig_height = fig_height,
+                                        fig_retina = fig_retina,
+                                        keep_md = keep_md,
+                                        dev = dev)
+    knitr_options$opts_chunk$echo <- FALSE
+    knitr_options$opts_chunk$warning <- FALSE
+    knitr_options$opts_chunk$message <- FALSE
+    knitr_options$opts_chunk$comment <= NA
+    knitr_options$knit_hooks <- list()
+    knitr_options$knit_hooks$source <- knitr_source_hook
+    knitr_options$knit_hooks$chunk <- knitr_chunk_hook()
+
+    structure(knitr_options, class = "knitr_options")
+  }
 
   # post-knit
   post_knit <- function(metadata, input_file, runtime, encoding, ...) {
@@ -73,11 +114,6 @@ radix_article <- function(fig_width = 6,
     # additional css
     for (css_file in css)
       args <- c(args, "--css", pandoc_path_arg(css_file))
-
-    # get site config
-    site_config <- find_site_config(input_file, encoding)
-    if (is.null(site_config))
-      site_config <- list()
 
     # metadata to json (do this before transforming)
     metadata_json <- embedded_metadata(metadata)
@@ -128,12 +164,13 @@ radix_article <- function(fig_width = 6,
 
   # return format
   output_format(
-    knitr = knitr_options,
+    knitr = knitr_options(),
     pandoc = pandoc_options(to = "html5",
                             from = from_rmarkdown(fig_caption, md_extensions),
                             args = args),
     keep_md = keep_md,
     clean_supporting = self_contained,
+    pre_knit = pre_knit,
     post_knit = post_knit,
     on_exit = validate_rstudio_version,
     base_format = html_document_base(
