@@ -14,8 +14,6 @@
 
 Embedded articles:
 
-- Should collections be named with "_" prefix?
-
 - Fully re-render metadata in collections
 - Render site styles (otherwise navigational elements don't contribute)
 - Do we need a special navbar.css? (so we can always render it on preview)

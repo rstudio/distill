@@ -235,7 +235,10 @@ site_collections <- function(site_dir, site_config) {
     collections <- names(collections)
 
   # combine with built-in collections
-  collections <- unique(c("_posts", "_articles", collections))
+  collections <- unique(c("posts", "articles", collections))
+
+  # add _ prefix
+  collections <- paste0("_", collections)
 
   # filter on directory existence
   collections[dir_exists(file.path(site_dir, collections))]
