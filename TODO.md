@@ -14,14 +14,16 @@
 
 Embedded articles:
 
-- Re-render metadata in collections
+- Should collections be named with "_" prefix?
+
+- Fully re-render metadata in collections
 - Render site styles (otherwise navigational elements don't contribute)
 - Do we need a special navbar.css? (so we can always render it on preview)
 
 - preview images may not work
 - preview images with absolute files may not work
 
-- reference citation metadata should throttle on actual inclusion
+- reference citation metadata should throttle on actual inclusion in document
 
 - document cannonical url
 - attribution metadata for inclusion when importing/syndicating (do during import)

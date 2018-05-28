@@ -111,7 +111,10 @@ radix_article <- function(fig_width = 6,
     # pandoc args
     args <- c()
 
-    # additional css
+    # site level css
+    args <- c(args, site_css_as_placeholder(site_config))
+
+    # additional user css
     for (css_file in css)
       args <- c(args, "--css", pandoc_path_arg(css_file))
 
@@ -325,7 +328,9 @@ knitr_chunk_hook <- function() {
 }
 
 
-
+site_css_as_placeholder <- function(site_config) {
+  c()
+}
 
 
 
