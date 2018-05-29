@@ -44,19 +44,20 @@ transform_site_config <- function(site_config) {
 
 transform_metadata <- function(site_config, collection_config,  metadata) {
 
-  # are we in a collection?
-  in_collection <- length(collection_config) > 0
-
   # validate title
   if (is.null(metadata$title))
     stop("You must provide a title for Radix articles", call. = FALSE)
 
-  # allow site level metadata to propagate
-  site_metadata <- c("repository_url", "compare_updates_url", "creative_commons",
-                     "license_url", "base_url", "preview", "slug", "citation_url",
-                     "journal", "twitter")
-  for (name in site_metadata)
-    metadata[[name]] <- merge_lists(site_config[[name]], metadata[[name]])
+  # mergable metadata
+  mergeable_metadata <- c("base_url", "repository_url",
+                          "creative_commons", "license_url",
+                          "journal", "twitter")
+
+  # merge collection level config into site config
+  base_config <- merge_lists(site_config[mergeable_metadata], collection_config)
+
+  # merge article level metadata
+  metadata <- merge_lists(base_config, metadata)
 
   # propagate citation_url to canonical_url
   if (!is.null(metadata[["citation_url"]]) && is.null(metadata[["canonical_url"]]))

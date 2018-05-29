@@ -258,6 +258,7 @@ Several metadata values which you might find useful to define in `_site.yml` are
 | `creative_commons`      |  [Creative Commons](metadata.html#creative-commons) license terms for website content. Used to automatically generate a *Reuse* appendix. |
 | `license_url`     | Alternate licensing terms for website content if not using a Creative Commons license. |
 | `journal` | Title, publisher, ISSN, etc. for Journal websites.  |
+| `twitter` | Site handle for Twitter Card metadata |
 
 Here's a `_site.yml` file that uses all of these fields (save for `license_url` since the license is already specified via `creative_commons`):
 
@@ -274,10 +275,14 @@ journal:
   abbrev_title: "Radix Art."
   publisher: "Radix Labs"
   issn: 0317-8471
+twitter:
+  site: "@radixjournal"
 navbar:
   # (navbar definition here)
 output: radix::radix_article
 ```
+
+Be sure to enclose Twitter account names in quotes (this is required because they start with `@`).
 
 ## Publishing
 

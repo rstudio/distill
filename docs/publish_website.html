@@ -626,6 +626,10 @@ output:
 <td><code>journal</code></td>
 <td>Title, publisher, ISSN, etc. for Journal websites.</td>
 </tr>
+<tr class="even">
+<td><code>twitter</code></td>
+<td>Site handle for Twitter Card metadata</td>
+</tr>
 </tbody>
 </table>
 <p>Here’s a <code>_site.yml</code> file that uses all of these fields (save for <code>license_url</code> since the license is already specified via <code>creative_commons</code>):</p>
@@ -641,9 +645,12 @@ journal:
   abbrev_title: &quot;Radix Art.&quot;
   publisher: &quot;Radix Labs&quot;
   issn: 0317-8471
+twitter:
+  site: &quot;@radixjournal&quot;
 navbar:
   # (navbar definition here)
 output: radix::radix_article</code></pre>
+<p>Be sure to enclose Twitter account names in quotes (this is required because they start with <code>@</code>).</p>
 <h2 id="publishing">Publishing</h2>
 <p>There are a wide variety of ways to publish Radix websites. Website content is by default written to the <code>_site</code> sub-directory (you can customize this using the <code>output_dir</code> metadata field). Publishing is simply a matter of copying the output directory to a web server or web hosting service.</p>
 <p>Below we describe several convenient options for Radix website deployment including <a href="#rstudio-connect">RStudio Connect</a>, <a href="#github-pages">GitHub Pages</a>, <a href="#netlify">Netlify</a>, <a href="#firebase">Firebase</a>, <a href="#site44">Site44</a>, and <a href="#amazon-s3">Amazon S3</a>. We’ll mostly defer to the documentation provided by the various services, but will note any Radix website specific configuration required.</p>

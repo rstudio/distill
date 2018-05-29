@@ -14,7 +14,7 @@
 
 Embedded articles:
 
-- Evaluate metadata propagation
+- Journal should only apply at the collection level
 
 - preview images may not work
 - preview images with absolute files may not work
