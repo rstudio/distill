@@ -1,0 +1,29 @@
+# Created by Radix website generator (do not edit or remove)
+
+test:
+  title: My Article
+  description: |
+    A new article created using the Radix format.
+  author:
+  - name: Joe Smith
+    url: https://example.com/joesmith
+    affiliation: Whoville College
+    affiliation_url: https://example.com/whoville
+  - name: Nora Jones
+    url: https://example.com/norajones
+    affiliation: Spacely Sprockets
+    affiliation_url: https://example.com/spacelysprokets
+
+test2:
+  title: My Article
+  description: |
+    A new article created using the Radix format.
+  author:
+  - name: Joe Smith
+    url: https://example.com/joesmith
+    affiliation: Whoville College
+    affiliation_url: https://example.com/whoville
+  - name: Nora Jones
+    url: https://example.com/norajones
+    affiliation: Spacely Sprockets
+    affiliation_url: https://example.com/spacelysprokets
