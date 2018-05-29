@@ -19,14 +19,12 @@ Embedded articles:
 - preview images may not work
 - preview images with absolute files may not work
 
+- embed files manifest when rendering (then can be used for remote import)
+
 - reference citation metadata should throttle on actual inclusion in document
 
 - document cannonical url
 - attribution metadata for inclusion when importing/syndicating (do during import)
-
-- embed files manifest?
-- alternatively, force self_contained = TRUE for standalone articles? (then 
-  won't need to do the copy of resources files). preview images for standalone?
 
 - docs: emphasize incremental rendering
 
