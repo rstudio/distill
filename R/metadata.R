@@ -187,6 +187,11 @@ transform_metadata <- function(site_config, metadata) {
 
 metadata_in_header <- function(site_config, metadata) {
 
+  # title
+  title <- list()
+  if (!is.null(metadata$qualified_title))
+    title <- tags$title(metadata$qualified_title)
+
   # description
   description_meta <- list()
   if (!is.null(metadata$description)) {
@@ -255,6 +260,8 @@ metadata_in_header <- function(site_config, metadata) {
 
   # render head tags
   meta_tags <- do.call(tagList, list(
+    title,
+    HTML(''),
     description_meta,
     HTML(''),
     links,
