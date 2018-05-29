@@ -276,6 +276,7 @@ metadata_in_header <- function(site_config, metadata) {
     HTML(''),
     google_scholar_meta
   ))
+  meta_tags <- placeholder_html("meta_tags", meta_tags)
   meta_html <- as.character(meta_tags)
   meta_file <- tempfile(fileext = "html")
   writeLines(meta_html, meta_file)
