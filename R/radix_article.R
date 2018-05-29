@@ -53,6 +53,7 @@ radix_article <- function(fig_width = 6,
   # shared variables (will be set by pre_knit)
   encoding <- NULL
   site_config <- NULL
+  collection_config <- NULL
 
   # pre-knit
   pre_knit <- function(input, encoding, ...) {
@@ -60,10 +61,10 @@ radix_article <- function(fig_width = 6,
     # update encoding
     encoding <<- encoding
 
-    # get site config
-    site_config <<- find_site_config(input, encoding)
-    if (is.null(site_config))
-      site_config <<- list()
+    # get input file config and propagate to shared variables
+    config <- find_config(input, encoding)
+    site_config <<- config$site_config
+    collection_config <<- config$collection_config
 
     # merge selected options from site config (as in the case where we
     # are in a collection rmarkdown wouldn't have picked up _site options)
@@ -119,7 +120,11 @@ radix_article <- function(fig_width = 6,
     metadata_json <- embedded_metadata(metadata)
 
     # transform configuration
-    c(site_config, metadata) %<-% transform_configuration(site_config, metadata)
+    c(site_config, metadata) %<-% transform_configuration(
+      site_config = site_config,
+      collection_config = collection_config,
+      metadata = metadata
+    )
 
     # add title-prefix if necessary
     if (!is.null(metadata$title_prefix))
@@ -196,12 +201,13 @@ radix_article <- function(fig_width = 6,
 }
 
 
-# find the site config for an input file (recognize sites for Rmds in collections)
-find_site_config <- function(input_file, encoding) {
+# find the site and collection config for an input file (recognize sites for Rmds in collections)
+find_config <- function(input_file, encoding) {
 
   # look for the default based on an Rmd at the top level
-  config <- site_config(input_file, encoding)
-  if (is.null(config)) {
+  site_config <- site_config(input_file, encoding)
+  collection_config <- list()
+  if (is.null(site_config)) {
 
     # look for a site dir in a parent
     site_dir <- find_site_dir(input_file)
@@ -209,10 +215,10 @@ find_site_config <- function(input_file, encoding) {
     if(!is.null(site_dir)) {
 
       # get the site config
-      config <- site_config(site_dir, encoding)
+      site_config <- site_config(site_dir, encoding)
 
       # check for collections
-      collections <- site_collections(site_dir, config)
+      collections <- site_collections(site_dir, site_config)
 
       # compute relative path
       input_file_relative <- rmarkdown::relative_to(
@@ -225,15 +231,22 @@ find_site_config <- function(input_file, encoding) {
       if (in_collection) {
         # offset config
         offset <- collection_file_offset(input_file_relative)
-        config <- offset_site_config(site_dir, config, offset)
+        site_config <- offset_site_config(site_dir, site_config, offset)
+        # collection config
+        collection_config <- list(
+          name = sub("^_", "", strsplit(input_file_relative, split = "/")[[1]][[1]])
+        )
       } else {
-        config <- NULL
+        site_config <- list()
       }
     }
   }
 
   # return config
-  config
+  list(
+    site_config = site_config,
+    collection_config = collection_config
+  )
 }
 
 site_criterion <- rprojroot::has_file("_site.yml")
