@@ -56,6 +56,9 @@ render_collections <- function(site_dir, config, collections, quiet = FALSE) {
   # caching html generator
   navigation_html <- navigation_html_generator()
 
+  # site includes
+  site_includes <- site_includes(site_dir, config)
+
   for (collection in collections) {
 
     if (!quiet)
@@ -121,8 +124,13 @@ render_collections <- function(site_dir, config, collections, quiet = FALSE) {
       index_content <- apply_navigation(index_content, "before_body")
       index_content <- apply_navigation(index_content, "after_body")
 
-      # substitute site styles
-      index_content <- fill_placeholder(index_content, "site_styles", "")
+      # substitute site includes
+      apply_site_include <- function(content, context) {
+        fill_placeholder(content, paste0("site_", context), site_includes[[context]])
+      }
+      index_content <- apply_site_include(index_content, "in_header")
+      index_content <- apply_site_include(index_content, "before_body")
+      index_content <- apply_site_include(index_content, "after_body")
 
       # write content
       writeLines(index_content, index_html, useBytes = TRUE)
@@ -132,7 +140,6 @@ render_collections <- function(site_dir, config, collections, quiet = FALSE) {
       cat("\n")
   }
 }
-
 
 discover_article <- function(article_dir) {
 

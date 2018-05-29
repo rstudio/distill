@@ -111,9 +111,6 @@ radix_article <- function(fig_width = 6,
     # pandoc args
     args <- c()
 
-    # site level css
-    args <- c(args, site_css_as_placeholder(site_config, encoding))
-
     # additional user css
     for (css_file in css)
       args <- c(args, "--css", pandoc_path_arg(css_file))
@@ -140,16 +137,17 @@ radix_article <- function(fig_width = 6,
     # header includes: radix then user
     in_header <- c(metadata_in_header(site_config, metadata),
                    metadata_json,
-                   navigation_in_header_file(site_config),
-                   includes$in_header)
+                   navigation_in_header_file(site_config))
 
     # before body includes: radix then user
     before_body <- c(front_matter_before_body(site_config, metadata),
                      navigation_before_body_file(site_config),
+                     render_site_before_body_as_placeholder(site_config),
                      includes$before_body)
 
     # after body includes: user then radix
     after_body <- c(includes$after_body,
+                    render_site_after_body_as_placeholder(site_config),
                     appendices_after_body(input_file, metadata),
                     navigation_after_body_file(find_site_dir(input_file), site_config))
 
@@ -165,6 +163,12 @@ radix_article <- function(fig_width = 6,
 
   }
 
+  pre_processor <- function(yaml_front_matter, utf8_input, runtime, knit_meta,
+                            files_dir, output_dir, ...) {
+    pandoc_include_args(in_header = c(render_site_in_header_as_placeholder(site_config),
+                                      includes$in_header))
+  }
+
   # return format
   output_format(
     knitr = knitr_options(),
@@ -175,6 +179,7 @@ radix_article <- function(fig_width = 6,
     clean_supporting = self_contained,
     pre_knit = pre_knit,
     post_knit = post_knit,
+    pre_processor = pre_processor,
     on_exit = validate_rstudio_version,
     base_format = html_document_base(
       smart = smart,
@@ -326,29 +331,6 @@ knitr_chunk_hook <- function() {
     )
   }
 }
-
-# TODO: convert --css args into html args
-
-site_css_as_placeholder <- function(site_config, encoding) {
-
-  css <- c()
-
-  site_css <- tryCatch(site_config[["output"]][["radix::radix_article"]][["css"]],
-                       error = function(e) NULL)
-
-  if (!is.null(site_css)) {
-
-
-
-
-  }
-
-  css
-}
-
-
-
-
 
 
 

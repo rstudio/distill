@@ -81,6 +81,26 @@ input_as_dir <- function(input) {
   input
 }
 
+html_from_file <- function(file) {
+  HTML(readChar(file, nchars = file.info(file)$size, useBytes = TRUE))
+}
+
+html_as_file <- function(html) {
+  html_content <- renderTags(html, indent = FALSE)$html
+  html_file <- tempfile(fileext = "html")
+  writeLines(html_content, html_file, useBytes = TRUE)
+  html_file
+}
+
+files_to_lines <- function(files) {
+  if (length(files) > 0) {
+    paste(collapse = "\n", sapply(files, function(file) {
+      readChar(file, nchars = file.info(file)$size, useBytes = TRUE)
+    }))
+  } else {
+    c()
+  }
+}
 
 merge_output_options <- function(base_options,
                                  overlay_options) {

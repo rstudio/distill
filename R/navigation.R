@@ -167,7 +167,6 @@ navigation_html_generator <- function() {
   }
 }
 
-
 fixup_navigation_paths <- function(file, site_dir, site_config) {
 
   # check for offset
@@ -212,10 +211,6 @@ navigation_begin <- function(context) {
 
 navigation_end <- function(context) {
   placeholder_end(paste0("navigation_", context))
-}
-
-html_from_file <- function(file) {
-  HTML(paste(readLines(file), collapse = "\n"))
 }
 
 render_navigation_html <- function(navigation_html) {
