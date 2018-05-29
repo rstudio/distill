@@ -44,6 +44,9 @@ appendix_updates_and_corrections <- function(site_config, metadata) {
           tags$a(href = metadata$compare_updates_url, "View all changes"),
           " to this article since it was first published. "
         )
+      title <- "Updates and Corrections"
+    } else {
+      title <- "Corrections"
     }
 
     issues_url <- metadata$repository_url
@@ -58,13 +61,11 @@ appendix_updates_and_corrections <- function(site_config, metadata) {
       ), htmlEscape(issues_url, attribute = TRUE)))
 
     tagList(
-      tags$h3(id = "updates-and-corrections", "Updates and Corrections"),
+      tags$h3(id = "updates-and-corrections", title),
       tags$p(
         updates_and_corrections
       )
     )
-
-
   } else {
     NULL
   }
