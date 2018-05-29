@@ -51,13 +51,13 @@ enumerate_collections <- function(site_dir, config, encoding = getOption("encodi
   collections
 }
 
-render_collections <- function(site_dir, config, collections, quiet = FALSE) {
+render_collections <- function(site_dir, site_config, collections, quiet = FALSE) {
 
   # caching html generator
   navigation_html <- navigation_html_generator()
 
   # site includes
-  site_includes <- site_includes(site_dir, config)
+  site_includes <- site_includes(site_dir, site_config)
 
   for (collection in collections) {
 
@@ -66,7 +66,7 @@ render_collections <- function(site_dir, config, collections, quiet = FALSE) {
 
     # remove existing output dir if it exists
     collection_output <- file.path(site_dir,
-                                   config$output_dir,
+                                   site_config$output_dir,
                                    sub("^_", "", collection$name))
     if (dir_exists(collection_output))
       unlink(collection_output, recursive = TRUE)
@@ -82,7 +82,7 @@ render_collections <- function(site_dir, config, collections, quiet = FALSE) {
 
       # determine the target output dir
       output_dir <- file.path(site_dir,
-                              config$output_dir,
+                              site_config$output_dir,
                               sub("^_", "", dirname(article$path)))
 
       # progress
@@ -114,12 +114,28 @@ render_collections <- function(site_dir, config, collections, quiet = FALSE) {
       if (article_html != index_html)
         file.rename(article_html, index_html)
 
+      # extract embedded metadata
+      metadata <- extract_embedded_metadata(index_html)
+
+      # transform configuration
+      c(site_config, metadata) %<-% transform_configuration(site_config, metadata)
+
+      # read index content
+      index_content <- readChar(index_html,
+                                nchars = file.info(index_html)$size,
+                                useBytes = TRUE)
+
+      # substitute metadata
+      metadata_html <- metadata_html(site_config, metadata)
+      index_content <- fill_placeholder(index_content,
+                                        "meta_tags",
+                                        as.character(metadata_html))
+
       # substitute navigation html
-      navigation <- navigation_html(site_dir, config, offset)
+      navigation <- navigation_html(site_dir, site_config, offset)
       apply_navigation <- function(content, context) {
         fill_placeholder(content, paste0("navigation_", context), navigation[[context]])
       }
-      index_content <- paste(readLines(index_html, encoding = "UTF-8"), collapse = "\n")
       index_content <- apply_navigation(index_content, "in_header")
       index_content <- apply_navigation(index_content, "before_body")
       index_content <- apply_navigation(index_content, "after_body")

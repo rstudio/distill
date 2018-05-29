@@ -14,7 +14,7 @@
 
 Embedded articles:
 
-- Fully re-render metadata in collections
+- Evaluate metadata propagation
 
 - preview images may not work
 - preview images with absolute files may not work
@@ -23,7 +23,10 @@ Embedded articles:
 
 - document cannonical url
 - attribution metadata for inclusion when importing/syndicating (do during import)
+
 - embed files manifest?
+- alternatively, force self_contained = TRUE for standalone articles? (then 
+  won't need to do the copy of resources files). preview images for standalone?
 
 - docs: emphasize incremental rendering
 

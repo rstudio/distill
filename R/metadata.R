@@ -185,7 +185,7 @@ transform_metadata <- function(site_config, metadata) {
 }
 
 
-metadata_in_header <- function(site_config, metadata) {
+metadata_html <- function(site_config, metadata) {
 
   # title
   title <- list()
@@ -276,11 +276,14 @@ metadata_in_header <- function(site_config, metadata) {
     HTML(''),
     google_scholar_meta
   ))
-  meta_tags <- placeholder_html("meta_tags", meta_tags)
+  placeholder_html("meta_tags", meta_tags)
+}
+
+metadata_in_header <- function(site_config, metadata) {
+  meta_tags <- metadata_html(site_config, metadata)
   meta_html <- as.character(meta_tags)
   meta_file <- tempfile(fileext = "html")
-  writeLines(meta_html, meta_file)
-
+  writeLines(meta_html, meta_file, useBytes = TRUE)
   meta_file
 }
 
