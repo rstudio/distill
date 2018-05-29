@@ -48,10 +48,13 @@ transform_metadata <- function(site_config, collection_config,  metadata) {
   if (is.null(metadata$title))
     stop("You must provide a title for Radix articles", call. = FALSE)
 
+  # provide site title
+  metadata$site_title <- site_config$title
+
   # mergable metadata
   mergeable_metadata <- c("base_url", "repository_url",
                           "creative_commons", "license_url",
-                          "journal", "twitter")
+                          "twitter", "favicon")
 
   # merge collection level config into site config
   base_config <- merge_lists(site_config[mergeable_metadata], collection_config)
@@ -181,6 +184,10 @@ transform_metadata <- function(site_config, collection_config,  metadata) {
     }
   }
 
+  # default lang
+  if (is.null(metadata$lang))
+    metadata$lang <- "en_US"
+
   # failsafe for slug
   if (is.null(metadata$slug))
     metadata$slug <- "Untitled"
@@ -189,7 +196,7 @@ transform_metadata <- function(site_config, collection_config,  metadata) {
 }
 
 
-metadata_html <- function(site_config, metadata) {
+metadata_html <- function(metadata) {
 
   # title
   title <- list()
@@ -218,11 +225,11 @@ metadata_html <- function(site_config, metadata) {
       href = metadata$license_url
     )
   }
-  if (!is.null(site_config$favicon)) {
+  if (!is.null(metadata$favicon)) {
     links[[length(links) + 1]] <- tags$link(
       rel = "icon",
-      type = mime::guess_type(site_config$favicon),
-      href = site_config$favicon
+      type = mime::guess_type(metadata$favicon),
+      href = metadata$favicon
     )
   }
 
@@ -254,13 +261,13 @@ metadata_html <- function(site_config, metadata) {
   }
 
   # open graph (https://developers.facebook.com/docs/sharing/webmasters#markup)
-  open_graph_meta <- open_graph_metadata(site_config, metadata)
+  open_graph_meta <- open_graph_metadata(metadata)
 
   # twitter card (https://dev.twitter.com/cards/types/summary)
-  twitter_card_meta <- twitter_card_metadata(site_config, metadata)
+  twitter_card_meta <- twitter_card_metadata(metadata)
 
   # google scholar (https://scholar.google.com/intl/en/scholar/inclusion.html)
-  google_scholar_meta <- google_scholar_metadata(site_config, metadata)
+  google_scholar_meta <- google_scholar_metadata(metadata)
 
   # render head tags
   meta_tags <- do.call(tagList, list(
@@ -283,8 +290,8 @@ metadata_html <- function(site_config, metadata) {
   placeholder_html("meta_tags", meta_tags)
 }
 
-metadata_in_header <- function(site_config, metadata) {
-  meta_tags <- metadata_html(site_config, metadata)
+metadata_in_header <- function(metadata) {
+  meta_tags <- metadata_html(metadata)
   meta_html <- as.character(meta_tags)
   meta_file <- tempfile(fileext = "html")
   writeLines(meta_html, meta_file, useBytes = TRUE)
@@ -292,7 +299,7 @@ metadata_in_header <- function(site_config, metadata) {
 }
 
 
-open_graph_metadata <- function(site_config, metadata) {
+open_graph_metadata <- function(metadata) {
 
   # core descriptors
   open_graph_meta <- list(
@@ -321,21 +328,15 @@ open_graph_metadata <- function(site_config, metadata) {
   add_open_graph_meta("og:image:height", metadata$preview_height)
 
   # locale
-  locale <- if (!is.null(metadata$lang))
-    metadata$lang
-  else if (!is.null(site_config$lang))
-    site_config$lang
-  else
-    "en_US"
-  add_open_graph_meta("og:locale", locale)
+  add_open_graph_meta("og:locale", metadata$lang)
 
   # site name
-  add_open_graph_meta("og:site_name", site_config$title)
+  add_open_graph_meta("og:site_name", metadata$site_title)
 
   open_graph_meta
 }
 
-twitter_card_metadata <- function(site_config, metadata) {
+twitter_card_metadata <- function(metadata) {
 
   twitter_card_meta <- list(
     HTML("<!--  https://dev.twitter.com/cards/types/summary -->")
@@ -376,7 +377,7 @@ twitter_card_metadata <- function(site_config, metadata) {
 
 # see https://github.com/scieloorg/opac/files/1136749/Metatags.for.Bibliographic.Metadata.Google.Scholar.-.COMPLETE.pdf
 
-google_scholar_metadata <- function(site_config, metadata) {
+google_scholar_metadata <- function(metadata) {
 
   # empty if not citable
   if (!is_citeable(metadata))
@@ -500,7 +501,7 @@ front_matter_from_metadata <- function(metadata) {
   jsonlite::toJSON(front_matter, auto_unbox = TRUE)
 }
 
-front_matter_before_body <- function(site_config, metadata) {
+front_matter_before_body <- function(metadata) {
 
   front_matter_script <- HTML(paste(c(
     '',

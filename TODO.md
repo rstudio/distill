@@ -14,8 +14,6 @@
 
 Embedded articles:
 
-- Journal should only apply at the collection level
-
 - preview images may not work
 - preview images with absolute files may not work
 
@@ -23,10 +21,12 @@ Embedded articles:
 
 - reference citation metadata should throttle on actual inclusion in document
 
+- docs: emphasize incremental rendering
+
+
+
 - document cannonical url
 - attribution metadata for inclusion when importing/syndicating (do during import)
-
-- docs: emphasize incremental rendering
 
 - Download supplemetary figures
 - Abbreviations and supplementary figures

@@ -140,12 +140,12 @@ radix_article <- function(fig_width = 6,
     ))
 
     # header includes: radix then user
-    in_header <- c(metadata_in_header(site_config, metadata),
+    in_header <- c(metadata_in_header(metadata),
                    metadata_json,
                    navigation_in_header_file(site_config))
 
     # before body includes: radix then user
-    before_body <- c(front_matter_before_body(site_config, metadata),
+    before_body <- c(front_matter_before_body(metadata),
                      navigation_before_body_file(site_config),
                      render_site_before_body_as_placeholder(site_config),
                      includes$before_body)
@@ -153,7 +153,7 @@ radix_article <- function(fig_width = 6,
     # after body includes: user then radix
     after_body <- c(includes$after_body,
                     render_site_after_body_as_placeholder(site_config),
-                    appendices_after_body(input_file, metadata),
+                    appendices_after_body(metadata),
                     navigation_after_body_file(find_site_dir(input_file), site_config))
 
     # populate args

@@ -130,7 +130,7 @@ render_collections <- function(site_dir, site_config, collections, quiet = FALSE
                                 useBytes = TRUE)
 
       # substitute metadata
-      metadata_html <- metadata_html(site_config, metadata)
+      metadata_html <- metadata_html(metadata)
       index_content <- fill_placeholder(index_content,
                                         "meta_tags",
                                         as.character(metadata_html))

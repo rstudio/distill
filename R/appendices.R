@@ -1,11 +1,11 @@
 
 
-appendices_after_body <- function(site_config, metadata) {
+appendices_after_body <- function(metadata) {
 
   # write appendixes
-  updates_and_corrections <- appendix_updates_and_corrections(site_config, metadata)
-  creative_commons <- appendix_creative_commons(site_config, metadata)
-  citation <- appendix_citation(site_config, metadata)
+  updates_and_corrections <- appendix_updates_and_corrections(metadata)
+  creative_commons <- appendix_creative_commons(metadata)
+  citation <- appendix_citation(metadata)
   appendix <- tags$div(class = "appendix-bottom",
                        updates_and_corrections,
                        creative_commons,
@@ -33,7 +33,7 @@ appendices_after_body <- function(site_config, metadata) {
   appendices_file
 }
 
-appendix_updates_and_corrections <- function(site_config, metadata) {
+appendix_updates_and_corrections <- function(metadata) {
 
   if (!is.null(metadata$repository_url)) {
 
@@ -71,7 +71,7 @@ appendix_updates_and_corrections <- function(site_config, metadata) {
   }
 }
 
-appendix_creative_commons <- function(site_config, metadata) {
+appendix_creative_commons <- function(metadata) {
 
   if (!is.null(metadata$creative_commons)) {
 
@@ -106,7 +106,7 @@ appendix_creative_commons <- function(site_config, metadata) {
   }
 }
 
-appendix_citation <- function(site_config, metadata) {
+appendix_citation <- function(metadata) {
 
   if (is_citeable(metadata)) {
 
