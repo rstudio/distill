@@ -227,15 +227,16 @@ find_config <- function(input_file, encoding) {
       )
 
       # is this file within one of our collections?
-      in_collection <- any(startsWith(input_file_relative, paste0(collections, "/")))
+      in_collection <- any(startsWith(input_file_relative, paste0("_", names(collections), "/")))
       if (in_collection) {
+
         # offset config
         offset <- collection_file_offset(input_file_relative)
         site_config <- offset_site_config(site_dir, site_config, offset)
+
         # collection config
-        collection_config <- list(
-          name = sub("^_", "", strsplit(input_file_relative, split = "/")[[1]][[1]])
-        )
+        collection_config <-
+          collections[[sub("^_", "", strsplit(input_file_relative, "/")[[1]][[1]])]]
       } else {
         site_config <- list()
       }

@@ -50,11 +50,10 @@ radix_website <- function(input, encoding = getOption("encoding"), ...) {
       config <- site_config(input, encoding)
       if (config$output_dir == ".") {
         collections <- site_collections(input, config)
-        for (collection in collections) {
-          collection_name <- sub("^_", "", collection)
+        for (collection in names(collections)) {
           generated <- c(generated,
-            file.path(collection, paste0(collection_name, ".yml")),
-            paste0(sub("^_", "", collection), "/")
+            file.path(paste0("_", collection), paste0(collection, ".yml")),
+            paste0(collection, "/")
           )
         }
       }

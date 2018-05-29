@@ -7,18 +7,21 @@ enumerate_collections <- function(site_dir, config, encoding = getOption("encodi
   # list of collections to return
   collections <- list()
 
-  for (collection in site_collections(site_dir, config)) {
+  site_collections <- site_collections(site_dir, config)
+  for (collection in names(site_collections)) {
+
+    # collection_dir
+    collection_dir <- file.path(site_dir, paste0("_", collection))
 
     # build a list of articles in the collection
     articles <- list()
 
     # find all html files within the collection
-    html_files <- file.path(site_dir,
-                            collection,
-                            list.files(
-                              file.path(site_dir, collection),
+    html_files <- file.path(list.files(
+                              collection_dir,
                               pattern = "^[^_].*\\.html$",
-                              recursive = TRUE
+                              recursive = TRUE,
+                              full.names = TRUE
                             ))
 
     # find unique directories from files (only one article per directory)
@@ -44,6 +47,7 @@ enumerate_collections <- function(site_dir, config, encoding = getOption("encodi
     # add collection
     collections[[collection]] <- list(
       name = collection,
+      config = site_collections[[collection]],
       articles = articles
     )
   }
@@ -252,19 +256,32 @@ write_collection_metadata <- function(site_dir, collection) {
 
 site_collections <- function(site_dir, site_config) {
 
-  # base collections
+  # collections defined in file
   collections <- site_config[["collections"]]
-  if (is.list(collections))
-    collections <- names(collections)
+  if (is.null(collections))
+    collections <- list()
+  else if (is.character(collections)) {
+    collection_names <- names(collections)
+    collections <- lapply(collections, function(collection) {
+      list()
+    })
+    names(collections) <- collection_names
+  }
+  else if (is.list(collections)) {
+    if (is.null(names(collections)))
+      stop('Site collections must be specified as a named list', call. = FALSE)
+  }
 
-  # combine with built-in collections
-  collections <- unique(c("posts", "articles", collections))
-
-  # add _ prefix
-  collections <- paste0("_", collections)
+  # automatically include posts and articles
+  ensure_collection <- function(name) {
+    if (!name %in% names(collections))
+      collections[[name]] <<- list()
+  }
+  ensure_collection("posts")
+  ensure_collection("articles")
 
   # filter on directory existence
-  collections[dir_exists(file.path(site_dir, collections))]
+  collections[file.exists(file.path(site_dir, paste0("_", names(collections))))]
 }
 
 collection_file_offset <- function(file) {
