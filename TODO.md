@@ -27,6 +27,7 @@ Embedded articles:
 - attribution metadata for inclusion when importing/syndicating (do during import)
 - embed files manifest
 
+- docs: emphasize incremental rendering
 
 - Download supplemetary figures
 - Abbreviations and supplementary figures

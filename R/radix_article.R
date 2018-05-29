@@ -112,7 +112,7 @@ radix_article <- function(fig_width = 6,
     args <- c()
 
     # site level css
-    args <- c(args, site_css_as_placeholder(site_config))
+    args <- c(args, site_css_as_placeholder(site_config, encoding))
 
     # additional user css
     for (css_file in css)
@@ -327,9 +327,23 @@ knitr_chunk_hook <- function() {
   }
 }
 
+# TODO: convert --css args into html args
 
-site_css_as_placeholder <- function(site_config) {
-  c()
+site_css_as_placeholder <- function(site_config, encoding) {
+
+  css <- c()
+
+  site_css <- tryCatch(site_config[["output"]][["radix::radix_article"]][["css"]],
+                       error = function(e) NULL)
+
+  if (!is.null(site_css)) {
+
+
+
+
+  }
+
+  css
 }
 
 
