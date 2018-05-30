@@ -4,7 +4,7 @@
 - google analytics and discourse commenting
 - search
 
-- R highlighting treatment (at a minimum handle comments)
+- R highlighting treatment (for now we just patched clike to handle comments)
 
 - Warn users on code width > 70 characters
 
