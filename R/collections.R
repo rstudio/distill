@@ -232,9 +232,11 @@ write_collection_metadata <- function(site_dir, collection) {
 
   # articles.yml file
   name <- collection[["name"]]
+  articles_dir <- file.path(site_dir, name)
+  if (!dir_exists(articles_dir))
+    dir.create(articles_dir, recursive = TRUE)
   articles_yaml <- file.path(
-    site_dir,
-    name,
+    articles_dir,
     file_with_ext(sub("^_", "", name), ext = "yml")
   )
   con <- file(articles_yaml, "w", encoding = "UTF-8")
