@@ -19,7 +19,7 @@ site_includes <- function(site_dir, site_config) {
 
 
 render_site_in_header_as_placeholder <- function(site_config) {
-  if (requires_site_placeholders(site_config))
+  if (is_standalone_article(site_config))
     html_as_file(site_in_header_as_placeholder(site_config))
   else
     c()
@@ -36,14 +36,14 @@ site_in_header_as_placeholder <- function(site_config) {
 }
 
 render_site_before_body_as_placeholder <- function(site_config) {
-  if (requires_site_placeholders(site_config))
+  if (is_standalone_article(site_config))
     html_as_file(site_includes_as_placeholder(site_config, "before_body"))
   else
     c()
 }
 
 render_site_after_body_as_placeholder <- function(site_config) {
-  if (requires_site_placeholders(site_config))
+  if (is_standalone_article(site_config))
     html_as_file(site_includes_as_placeholder(site_config, "after_body"))
   else
     c()
@@ -56,19 +56,6 @@ site_includes_as_placeholder <- function(site_config, context) {
   placeholder_html(paste0("site_", context), includes_html)
 }
 
-
-requires_site_placeholders <- function(site_config) {
-  # no site config requires placeholders
-  if (length(site_config) == 0)
-    TRUE
-  # offset site config requires placeholders
-  else if (!is.null(attr(site_config, "offset")))
-    TRUE
-  # otherwise this is a top level site file so already has the site
-  # level output options merged in
-  else
-    FALSE
-}
 
 with_radix_output_options <- function(site_config, f) {
   site_config_output <- site_config[["output"]]
@@ -110,4 +97,16 @@ includes_as_html <- function(output_options, context) {
     c()
   }
 
+}
+
+is_standalone_article <- function(site_config) {
+  # no site config is standalone
+  if (length(site_config) == 0)
+    TRUE
+  # offset site is in a collection (so standalone)
+  else if (!is.null(attr(site_config, "offset")))
+    TRUE
+  # otherwise this is a top level site file so is not standalone
+  else
+    FALSE
 }

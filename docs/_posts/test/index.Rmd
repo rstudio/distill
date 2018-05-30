@@ -19,7 +19,6 @@ resources:
     foo.csv
 base_url: https://radixpub.github.io/radix-r/images/
 preview: images/preview.png
-#preview: https://radixpub.github.io/radix-r/images/javascript-d3-preview.png
 ---
 
 
