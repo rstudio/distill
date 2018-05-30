@@ -9,6 +9,7 @@
 - index/category/archive pages
 - google analytics and discourse commenting
 - search
+- built-in social buttons
 
 - R highlighting treatment (for now we just patched clike to handle comments)
 
