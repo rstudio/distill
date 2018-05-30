@@ -2,6 +2,7 @@ name: "reproducible-finance-with-r"
 title: "Reproducible Finance with R"
 output_dir: "."
 navbar:
+  logo: images/rstudio.png
   right:
     - text: "Home"
       href: index.html
