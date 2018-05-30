@@ -82,12 +82,12 @@ If you include this field then a *Reuse* appendix is automatically generated. Fo
 Note that figures from external sources are explicitly carved out of the license. If you are including a figure from an external source, it's good practice to delineate this by applying the `.external` class and adding a caption indicating where it is from. For example:
 
 ```markup
-![Figure from https://example.com](heatmap.png){.external width=100%}    
+![Figure from https://example.com](heatmap.png){width=100% .external}    
 ```
 
 Using the `.external` class and providing a "Figure from" link makes it clear that the figure originated elsewhere (and is therefore not covered by any of your article's copyright or creative commons license grants). For example, here's how a figure taken from a Stack Overflow post might appear:
 
-![Figure from <https://stackoverflow.com/questions/12196756/>](images/heatmap.png){.external width=100%}   
+![Figure from <https://stackoverflow.com/questions/12196756/>](images/heatmap.png){width=100% .external}   
 
 
 ## Open Graph
