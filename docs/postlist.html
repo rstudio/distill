@@ -1,0 +1,547 @@
+<!DOCTYPE html>
+
+<html xmlns="http://www.w3.org/1999/xhtml" lang="" xml:lang="">
+
+<head>
+  <meta charset="utf-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta http-equiv="X-UA-Compatible" content="IE=Edge,chrome=1"/>
+  <meta name="generator" content="radix" />
+
+  <style type="text/css">
+  /* Hide doc at startup (prevent jankiness while JS renders/transforms) */
+  body {
+    visibility: hidden;
+  }
+  </style>
+
+  <!--radix_placeholder_meta_tags-->
+  <title>Radix for R Markdown: Article Index</title>
+  
+  
+  <link rel="license" href="https://creativecommons.org/licenses/by/4.0/"/>
+  <link rel="icon" type="image/png" href="images/favicon.png"/>
+  
+  
+  <!--  https://developers.facebook.com/docs/sharing/webmasters#markup -->
+  <meta property="og:title" content="Radix for R Markdown: Article Index"/>
+  <meta property="og:type" content="article"/>
+  <meta property="og:locale" content="en_US"/>
+  <meta property="og:site_name" content="Radix for R Markdown"/>
+  
+  <!--  https://dev.twitter.com/cards/types/summary -->
+  <meta property="twitter:card" content="summary"/>
+  <meta property="twitter:title" content="Radix for R Markdown: Article Index"/>
+  
+  <!--/radix_placeholder_meta_tags-->
+  
+  <script type="text/json" id="radix-rmarkdown-metadata">
+  {"type":"list","attributes":{"names":{"type":"character","attributes":{},"value":["title","layout"]}},"value":[{"type":"character","attributes":{},"value":["Article Index"]},{"type":"character","attributes":{},"value":["index"]}]}
+  </script>
+  
+  
+  <!--radix_placeholder_navigation_in_header-->
+  <script type="application/javascript">
+    window.document.addEventListener("DOMContentLoaded", function (event) {
+  
+      // initialize headroom for banner
+      $('header').each(function(i, val) {
+          var headroom = new Headroom(this);
+          headroom.init();
+          if(window.location.hash)
+            headroom.unpin();
+          $(this).addClass('headroom--transition');
+      });
+  
+      // responsive menu
+      $('.radix-site-header').each(function(i, val) {
+        var topnav = $(this);
+        var toggle = topnav.find('.nav-toggle');
+        toggle.on('click', function() {
+          topnav.toggleClass('responsive');
+        });
+      });
+  
+      // nav dropdowns
+      $('.nav-dropbtn').click(function(e) {
+        $(this).next('.nav-dropdown-content').toggleClass('nav-dropdown-active');
+      });
+      $("body").click(function(e){
+        $('.nav-dropdown-content').removeClass('nav-dropdown-active');
+      });
+      $(".nav-dropdown").click(function(e){
+        e.stopPropagation();
+      });
+    });
+  </script>
+  
+  <style type="text/css">
+  
+  /* Theme (user-documented overrideables for nav appearance) */
+  
+  .radix-site-nav {
+    color: rgba(255, 255, 255, 0.8);
+    background-color: #455a64;
+    font-size: 15px;
+    font-weight: 300;
+  }
+  
+  .radix-site-nav a {
+    color: inherit;
+    text-decoration: none;
+  }
+  
+  .radix-site-nav a:hover {
+    color: white;
+  }
+  
+  @media print {
+    .radix-site-nav {
+      display: none;
+    }
+  }
+  
+  .radix-site-header {
+  
+  }
+  
+  .radix-site-footer {
+  
+  }
+  
+  
+  /* Site Header */
+  
+  .radix-site-header {
+    width: 100%;
+    box-sizing: border-box;
+    z-index: 3;
+  }
+  
+  .radix-site-header .nav-left {
+    display: inline-block;
+    margin-left: 8px;
+  }
+  
+  @media screen and (max-width: 768px) {
+    .radix-site-header .nav-left {
+      margin-left: 0;
+    }
+  }
+  
+  
+  .radix-site-header .nav-right {
+    float: right;
+    margin-right: 8px;
+  }
+  
+  .radix-site-header a,
+  .radix-site-header .title {
+    display: inline-block;
+    text-align: center;
+    padding: 14px 10px 14px 10px;
+  }
+  
+  .radix-site-header .title {
+    font-size: 18px;
+  }
+  
+  .radix-site-header .logo {
+    padding: 0;
+  }
+  
+  .radix-site-header .logo img {
+    display: none;
+    max-height: 20px;
+    width: auto;
+    margin-bottom: -4px;
+  }
+  
+  .radix-site-header .nav-image img {
+    max-height: 18px;
+    width: auto;
+    display: inline-block;
+    margin-bottom: -3px;
+  }
+  
+  
+  
+  @media screen and (min-width: 1000px) {
+    .radix-site-header .logo img {
+      display: inline-block;
+    }
+    .radix-site-header .nav-left {
+      margin-left: 20px;
+    }
+    .radix-site-header .nav-right {
+      margin-right: 20px;
+    }
+    .radix-site-header .title {
+      padding-left: 12px;
+    }
+  }
+  
+  
+  .radix-site-header .nav-toggle {
+    display: none;
+  }
+  
+  .nav-dropdown {
+    display: inline-block;
+    position: relative;
+  }
+  
+  .nav-dropdown .nav-dropbtn {
+    border: none;
+    outline: none;
+    color: rgba(255, 255, 255, 0.8);
+    padding: 16px 10px;
+    background-color: transparent;
+    font-family: inherit;
+    font-size: inherit;
+    font-weight: inherit;
+    margin: 0;
+    margin-top: 1px;
+    z-index: 2;
+  }
+  
+  .nav-dropdown-content {
+    display: none;
+    position: absolute;
+    background-color: white;
+    min-width: 160px;
+    border: 1px solid rgba(0,0,0,0.15);
+    border-radius: 4px;
+    box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.1);
+    z-index: 1;
+    margin-top: 2px;
+    white-space: nowrap;
+  }
+  
+  .nav-dropdown-content hr {
+    margin-top: 0;
+    margin-bottom: 0;
+    border: none;
+    border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+  }
+  
+  .nav-dropdown-active {
+    display: block;
+  }
+  
+  .nav-dropdown-content a {
+    color: black;
+    padding: 8px 16px;
+    text-decoration: none;
+    display: block;
+    text-align: left;
+  }
+  
+  .nav-dropdown:hover .nav-dropbtn {
+    color: white;
+  }
+  
+  .nav-dropdown-content a:hover {
+    background-color: #ddd;
+    color: black;
+  }
+  
+  .nav-right .nav-dropdown-content {
+    margin-left: -45%;
+    right: 0;
+  }
+  
+  @media screen and (max-width: 768px) {
+    .radix-site-header a, .radix-site-header .nav-dropdown  {display: none;}
+    .radix-site-header a.nav-toggle {
+      float: right;
+      display: block;
+    }
+    .radix-site-header .title {
+      margin-left: 0;
+    }
+    .radix-site-header .nav-right {
+      margin-right: 0;
+    }
+    .radix-site-header {
+      overflow: hidden;
+    }
+    .nav-right .nav-dropdown-content {
+      margin-left: 0;
+    }
+  }
+  
+  
+  @media screen and (max-width: 768px) {
+    .radix-site-header.responsive {position: relative;}
+    .radix-site-header.responsive a.nav-toggle {
+      position: absolute;
+      right: 0;
+      top: 0;
+    }
+    .radix-site-header.responsive a,
+    .radix-site-header.responsive .nav-dropdown {
+      display: block;
+      text-align: left;
+    }
+    .radix-site-header.responsive .nav-left,
+    .radix-site-header.responsive .nav-right {
+      width: 100%;
+    }
+    .radix-site-header.responsive .nav-dropdown {float: none;}
+    .radix-site-header.responsive .nav-dropdown-content {position: relative;}
+    .radix-site-header.responsive .nav-dropdown .nav-dropbtn {
+      display: block;
+      width: 100%;
+      text-align: left;
+    }
+  }
+  
+  /* Site Footer */
+  
+  .radix-site-footer {
+    width: 100%;
+    overflow: hidden;
+    box-sizing: border-box;
+    z-index: 3;
+    margin-top: 30px;
+    padding-top: 30px;
+    padding-bottom: 30px;
+    text-align: center;
+  }
+  
+  /* Headroom */
+  
+  d-title {
+    padding-top: 6rem;
+  }
+  
+  @media print {
+    d-title {
+      padding-top: 4rem;
+    }
+  }
+  
+  .headroom {
+    z-index: 1000;
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+  }
+  
+  .headroom--transition {
+    transition: all .4s ease-in-out;
+  }
+  
+  .headroom--unpinned {
+    top: -100px;
+  }
+  
+  .headroom--pinned {
+    top: 0;
+  }
+  
+  </style>
+  <!--/radix_placeholder_navigation_in_header-->
+  <script src="site_libs/jquery-1.11.3/jquery.min.js"></script>
+  <script src="site_libs/bowser-1.9.3/bowser.min.js"></script>
+  <script src="site_libs/headroom-0.9.4/headroom.min.js"></script>
+  <script src="site_libs/webcomponents-2.0.0/webcomponents.js"></script>
+  <link href="site_libs/distill-2.2.21/distill.css" rel="stylesheet" />
+  <script src="site_libs/distill-2.2.21/template.v2.js"></script>
+  <script src="site_libs/distill-2.2.21/distill.js"></script>
+
+  <link rel="stylesheet" href="styles.css" type="text/css"/>
+
+</head>
+
+<body class="layout-index">
+
+
+<script id="distill-front-matter" type="text/json">
+{"title":"Article Index","authors":[]}
+</script>
+<!--radix_placeholder_navigation_before_body-->
+<header class="header header--fixed" role="banner">
+<nav class="radix-site-nav radix-site-header">
+<div class="nav-left">
+<a class="logo" href="https://www.rstudio.com">
+<img src="images/logo.png"/>
+</a>
+<a href="index.html" class="title">Radix for R Markdown</a>
+</div>
+<div class="nav-right">
+<div class="nav-dropdown">
+<button class="nav-dropbtn">
+Figures
+ 
+<span class="down-arrow">&#x25BE;</span>
+</button>
+<div class="nav-dropdown-content">
+<a href="figures.html">Figure Layout</a>
+<a href="diagrams.html">Diagrams</a>
+<a href="interactivity.html">JavaScript &amp; D3</a>
+</div>
+</div>
+<a href="tables.html">Tables</a>
+<a href="citations.html">Citations</a>
+<div class="nav-dropdown">
+<button class="nav-dropbtn">
+Publish
+ 
+<span class="down-arrow">&#x25BE;</span>
+</button>
+<div class="nav-dropdown-content">
+<a href="publish_article.html">Publishing Articles</a>
+<a href="publish_website.html">Publishing a Website</a>
+<hr/>
+<a href="metadata.html">Article Metadata</a>
+</div>
+</div>
+<a href="https://github.com/radixpub/radix-r" class="nav-image">
+<img src="images/github.png"/>
+</a>
+<a href="javascript:void(0);" class="nav-toggle">&#9776;</a>
+</div>
+</nav>
+</header>
+<!--/radix_placeholder_navigation_before_body-->
+
+<div class="d-title">
+<h1>Article Index</h1>
+
+</div>
+
+
+<div class="d-article">
+
+
+<div class="posts-list l-page">
+  <a href="2018/building-blocks" class="post-preview">
+    <div class="metadata">
+      <div class="publishedDate">March 6, 2018</div>
+    </div>
+    <div class="thumbnail"><img src="images/postlist/building-blocks.jpg"></div>
+    <div class="description">
+      <h2>The Building Blocks of Interpretability</h2>
+      <p>Interpretability techniques are normally studied in isolation. We explore the powerful interfaces that arise when you combine them — and the rich structure of this combinatorial space.</p>
+    </div>
+  </a>
+  <a href="2017/aia" class="post-preview">
+    <div class="metadata">
+      <div class="publishedDate">Dec. 4, 2017</div>
+      <div class="tags"><span class="tag">commentary</span></div>
+    </div>
+    <div class="thumbnail"><img src="images/postlist/aia.jpg"></div>
+    <div class="description">
+      <h2>Using Artificial Intelligence to Augment Human Intelligence</h2>
+      <p>By creating user interfaces which let us work with the representations inside machine learning models, we can give people new tools for reasoning.</p>
+    </div>
+  </a>
+  <a href="2017/ctc" class="post-preview">
+    <div class="metadata">
+      <div class="publishedDate">Nov. 27, 2017</div>
+    </div>
+    <div class="thumbnail"><img src="images/postlist/ctc.jpg"></div>
+    <div class="description">
+      <h2>Sequence Modeling with CTC</h2>
+      <p>A visual guide to Connectionist Temporal Classification, an algorithm used to train deep neural networks in speech recognition, handwriting recognition and other sequence problems.</p>
+    </div>
+  </a>
+  <a href="2017/feature-visualization" class="post-preview">
+    <div class="metadata">
+      <div class="publishedDate">Nov. 7, 2017</div>
+    </div>
+    <div class="thumbnail"><img src="images/postlist/feature-visualization.jpg"></div>
+    <div class="description">
+      <h2>Feature Visualization</h2>
+      <p>How neural networks build up their understanding of images</p>
+    </div>
+  </a>
+  <a href="2017/momentum" class="post-preview">
+    <div class="metadata">
+      <div class="publishedDate">April 4, 2017</div>
+    </div>
+    <div class="thumbnail"><img src="images/postlist/momentum.jpg"></div>
+    <div class="description">
+      <h2>Why Momentum Really Works</h2>
+      <p>We often think of optimization with momentum as a ball rolling down a hill. This isn’t wrong, but there is much more to the story.</p>
+    </div>
+  </a>
+  <a href="2017/research-debt" class="post-preview">
+    <div class="metadata">
+      <div class="publishedDate">March 22, 2017</div>
+      <div class="tags"><span class="tag">commentary</span></div>
+    </div>
+    <div class="thumbnail"><img src="images/postlist/research-debt.jpg"></div>
+    <div class="description">
+      <h2>Research Debt</h2>
+      <p>Science is a human activity. When we fail to distill and explain research, we accumulate a kind of debt...</p>
+    </div>
+  </a>
+  <a href="2016/handwriting" class="post-preview">
+    <div class="metadata">
+      <div class="publishedDate">Dec 6, 2016</div>
+    </div>
+    <div class="thumbnail"><img src="images/postlist/handwriting.jpg"></div>
+    <div class="description">
+      <h2>Experiments in Handwriting with a Neural Network</h2>
+      <p>Several interactive visualizations of a generative model of handwriting. Some are fun, some are serious.</p>
+    </div>
+  </a>
+  <a href="2016/deconv-checkerboard" class="post-preview">
+    <div class="metadata">
+      <div class="publishedDate">Oct 17, 2016</div>
+    </div>
+    <div class="thumbnail"><img src="images/postlist/deconv-checkerboard.jpg"></div>
+    <div class="description">
+      <h2>Deconvolution and Checkerboard Artifacts</h2>
+      <p>When we look very closely at images generated by neural networks, we often see a strange checkerboard pattern of artifacts.</p>
+    </div>
+  </a>
+  <a href="2016/misread-tsne" class="post-preview">
+    <div class="metadata">
+      <div class="publishedDate">Oct 13, 2016</div>
+    </div>
+    <div class="thumbnail"><img src="images/postlist/misread-tsne.jpg"></div>
+    <div class="description">
+      <h2>How to Use t-SNE Effectively</h2>
+      <p>Although extremely useful for visualizing high-dimensional data, t-SNE plots can sometimes be mysterious or misleading.</p>
+    </div>
+  </a>
+  <a href="2016/augmented-rnns" class="post-preview">
+    <div class="metadata">
+      <div class="publishedDate">Sept 8, 2016</div>
+    </div>
+    <div class="thumbnail"><img src="images/postlist/augmented-rnns.jpg"></div>
+    <div class="description">
+      <h2>Attention and Augmented Recurrent Neural Networks</h2>
+      <p>A visual overview of neural attention, and the powerful extensions of neural networks being built on top of it.</p>
+    </div>
+  </a>
+</div>
+
+
+</div>
+
+<div class="d-appendix">
+</div>
+
+
+<div class="appendix-bottom">
+<h3 id="updates-and-corrections">Corrections</h3>
+<p>If you see mistakes or want to suggest changes, please <a href="https://github.com/radixpub/radix-r/issues/new">create an issue</a> on the source repository.</p>
+<h3 id="reuse">Reuse</h3>
+<p>Text and figures are licensed under Creative Commons Attribution <a rel="license" href="https://creativecommons.org/licenses/by/4.0/">CC BY 4.0</a>. Source code is available at <a href="https://github.com/radixpub/radix-r">https://github.com/radixpub/radix-r</a>, unless otherwise noted. The figures that have been reused from other sources don't fall under this license and can be recognized by a note in their caption: "Figure from ...".</p>
+</div>
+<!--radix_placeholder_navigation_after_body-->
+<div class="radix-site-nav radix-site-footer">
+<p>© Copyright 2018 <a href="https://github.com/distillpub/template/blob/master/AUTHORS">The Distill Template Authors</a> and <a href="https://www.rstudio.com">RStudio, Inc</a>.</p>
+<p>Software licensed under the <a href="https://www.apache.org/licenses/LICENSE-2.0">Apache License, v2.0</a>.</p>
+</div>
+<!--/radix_placeholder_navigation_after_body-->
+
+</body>
+
+</html>
