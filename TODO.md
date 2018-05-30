@@ -1,4 +1,9 @@
 
+
+- index/category/archive pages
+- google analytics and discourse commenting
+- search
+
 - larger scale visualization layouts
     - iframe with npr library (pym.js) for sizing (generic) (check with shinyapps.io)
     - distillVisualization() top level shinyApp equivalent with distill bootstrap theme 
@@ -12,15 +17,12 @@
 
     - Full bleed media objects (videos, docs (http://viewerjs.org/), etc.)
 
+- Embedded articles:
 
-- index/category/archive pages
-- google analytics and discourse commenting
-- search
+   - document cannonical url
+   - attribution metadata for inclusion when importing/syndicating (do during import)
+   - import article function(s)
 
-Embedded articles:
-
-- document cannonical url
-- attribution metadata for inclusion when importing/syndicating (do during import)
 
 - Download supplemetary figures
 - Abbreviations and supplementary figures
