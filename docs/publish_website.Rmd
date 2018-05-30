@@ -68,7 +68,23 @@ Note that the `output` options are not specified within the Rmd documents but ra
 
 Also note that the `index.Rmd` file specifies the Radix website generator (`site::radix_website`).
 
-## Authoring and Previewing
+## Authoring Articles
+
+When you use the RStudio **Knit** command on a Radix article within a website, only that article will be rendered and previewed:
+
+![](images/knit-site-article.png){width=95% .screenshot}
+
+You can also preview a single article from within a website by passing the name of the article's Rmd file to `render_site()`:
+
+```r
+render_site("about.Rmd")
+```
+
+This will build only the specified article (as opposed to all articles in the site). This the recommended workflow for authoring articles since it offers the fastest turnaround time for previews (since only the article you are working on is rendered).
+
+## Building the Site
+
+After you've authored the various articles contained within the website you will want to build the entire site before deploying it. 
 
 If your Radix website is contained within an RStudio project you can use the **Build Website** command available in the Build pane to generate the site:
 
@@ -88,18 +104,6 @@ To build a website from the command line, use the `rmarkdown::render_site()` fun
 library(rmarkdown)
 render_site()
 ```
-
-### Single Article Preview
-
-When you use the RStudio **Knit** command on a Radix article within a website, only that article will be rendered and previewed.
-
-You can also preview a single article from within a website by passing the name of the article's Rmd file to `render_site()`:
-
-```r
-render_site("about.Rmd")
-```
-
-This will build only the specified article (as opposed to all articles in the site). 
 
 ## Site Configuration
 
@@ -122,17 +126,17 @@ The `output_dir` field indicates which directory to copy site content into ("_si
 
 The `include` and `exclude` fields enable you to override the default behavior visa-vi what files are copied into the output directory. By default, all files within the website directory are copied into the output directory (e.g. "_site") save for the following:
 
-1. Files beginning with "." (hidden files).
+1. Files beginning with `"."` (hidden files).
 
-2. Files beginning with "_"
+2. Files beginning with `"_"`
 
-3. Files known to contain R source code (e.g. ".R", ".s", ".Rmd"), R data (e.g. ".RData", ".rds"), or configuration data (e.g. ".Rproj", "rsconnect")).
+3. Files known to contain R source code (e.g. `".R"`, `".s"`, `".Rmd"`), R data (e.g. `".RData"`, `".rds"`), or configuration data (e.g. `"rsconnect"` ,`"packrat"`)).
 
 The `include` and `exclude` fields of **\_site.yml** can be used to override this default behavior (wildcards can be used to specify groups of files to be included or excluded).
 
 Note that `include` and `exclude` are *not* used to determine which Rmd files are rendered (all of them in the root directory save for those named with the `_` prefix will be rendered).
 
-The R Markdown documentation on [creating websites](https://rmarkdown.rstudio.com/rmarkdown_websites.html) has additional documentation on additional available features and configuration options. The remainder of this article describes features that are specific to Radix websites.
+The R Markdown documentation on [creating websites](https://rmarkdown.rstudio.com/rmarkdown_websites.html) has documentation on  additional available features and configuration options. The remainder of this article describes features that are specific to Radix websites.
 
 ## Site Navigation
 

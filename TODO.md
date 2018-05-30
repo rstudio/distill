@@ -19,8 +19,6 @@
 
 Embedded articles:
 
-- docs: emphasize incremental rendering
-
 - document cannonical url
 - attribution metadata for inclusion when importing/syndicating (do during import)
 

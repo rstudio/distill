@@ -463,7 +463,15 @@ description: |
 More about Radix</code></pre>
 <p>Note that the <code>output</code> options are not specified within the Rmd documents but rather in the <code>_site.yml</code> configuration file (this allows output options to be shared by all articles).</p>
 <p>Also note that the <code>index.Rmd</code> file specifies the Radix website generator (<code>site::radix_website</code>).</p>
-<h2 id="authoring-and-previewing">Authoring and Previewing</h2>
+<h2 id="authoring-articles">Authoring Articles</h2>
+<p>When you use the RStudio <strong>Knit</strong> command on a Radix article within a website, only that article will be rendered and previewed:</p>
+<p><img src="images/knit-site-article.png" class="screenshot" style="width:95.0%" /></p>
+<p>You can also preview a single article from within a website by passing the name of the article’s Rmd file to <code>render_site()</code>:</p>
+<pre class="r"><code>
+render_site(&quot;about.Rmd&quot;)</code></pre>
+<p>This will build only the specified article (as opposed to all articles in the site). This the recommended workflow for authoring articles since it offers the fastest turnaround time for previews (since only the article you are working on is rendered).</p>
+<h2 id="building-the-site">Building the Site</h2>
+<p>After you’ve authored the various articles contained within the website you will want to build the entire site before deploying it.</p>
 <p>If your Radix website is contained within an RStudio project you can use the <strong>Build Website</strong> command available in the Build pane to generate the site:</p>
 <p><img src="images/build-website.png" class="screenshot" style="width:95.0%" /></p>
 <p>When you build a website, the following things occur:</p>
@@ -476,12 +484,6 @@ More about Radix</code></pre>
 <pre class="r"><code>
 library(rmarkdown)
 render_site()</code></pre>
-<h3 id="single-article-preview">Single Article Preview</h3>
-<p>When you use the RStudio <strong>Knit</strong> command on a Radix article within a website, only that article will be rendered and previewed.</p>
-<p>You can also preview a single article from within a website by passing the name of the article’s Rmd file to <code>render_site()</code>:</p>
-<pre class="r"><code>
-render_site(&quot;about.Rmd&quot;)</code></pre>
-<p>This will build only the specified article (as opposed to all articles in the site).</p>
 <h2 id="site-configuration">Site Configuration</h2>
 <p>The <strong>_site.yml</strong> file has a number of options that affect site output including where it is written and what files are included and excluded from the site. Here’s an example that makes use of a few of these options:</p>
 <p><strong>_site.yml</strong></p>
@@ -495,13 +497,13 @@ exclude: [&quot;docs.txt&quot;, &quot;*.csv&quot;]</code></pre>
 <h3 id="included-files">Included Files</h3>
 <p>The <code>include</code> and <code>exclude</code> fields enable you to override the default behavior visa-vi what files are copied into the output directory. By default, all files within the website directory are copied into the output directory (e.g. &quot;_site&quot;) save for the following:</p>
 <ol type="1">
-<li><p>Files beginning with “.” (hidden files).</p></li>
-<li><p>Files beginning with &quot;_&quot;</p></li>
-<li><p>Files known to contain R source code (e.g. “.R”, “.s”, “.Rmd”), R data (e.g. “.RData”, “.rds”), or configuration data (e.g. “.Rproj”, “rsconnect”)).</p></li>
+<li><p>Files beginning with <code>&quot;.&quot;</code> (hidden files).</p></li>
+<li><p>Files beginning with <code>&quot;_&quot;</code></p></li>
+<li><p>Files known to contain R source code (e.g. <code>&quot;.R&quot;</code>, <code>&quot;.s&quot;</code>, <code>&quot;.Rmd&quot;</code>), R data (e.g. <code>&quot;.RData&quot;</code>, <code>&quot;.rds&quot;</code>), or configuration data (e.g. <code>&quot;rsconnect&quot;</code> ,<code>&quot;packrat&quot;</code>)).</p></li>
 </ol>
 <p>The <code>include</code> and <code>exclude</code> fields of <strong>_site.yml</strong> can be used to override this default behavior (wildcards can be used to specify groups of files to be included or excluded).</p>
 <p>Note that <code>include</code> and <code>exclude</code> are <em>not</em> used to determine which Rmd files are rendered (all of them in the root directory save for those named with the <code>_</code> prefix will be rendered).</p>
-<p>The R Markdown documentation on <a href="https://rmarkdown.rstudio.com/rmarkdown_websites.html">creating websites</a> has additional documentation on additional available features and configuration options. The remainder of this article describes features that are specific to Radix websites.</p>
+<p>The R Markdown documentation on <a href="https://rmarkdown.rstudio.com/rmarkdown_websites.html">creating websites</a> has documentation on additional available features and configuration options. The remainder of this article describes features that are specific to Radix websites.</p>
 <h2 id="site-navigation">Site Navigation</h2>
 <p>Site navigation bars include the site’s title, an optional logo, top-level links to articles, and if need be drop-down menus that include links to several articles. For example:</p>
 <p><img src="images/navigation-bar.png" class="screenshot" style="width:95.0%" /></p>
