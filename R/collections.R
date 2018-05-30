@@ -122,7 +122,12 @@ render_collections <- function(site_dir, site_config, collections, quiet = FALSE
       metadata <- extract_embedded_metadata(index_html)
 
       # transform configuration
-      c(site_config, metadata) %<-% transform_configuration(site_config, collection$config, metadata)
+      c(site_config, metadata) %<-% transform_configuration(
+        input_file = index_html,
+        site_config = site_config,
+        collection_config = collection$config,
+        metadata = metadata
+      )
 
       # read index content
       index_content <- readChar(index_html,

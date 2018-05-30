@@ -14,14 +14,14 @@
 
 Embedded articles:
 
-- preview images may not work
-
 - embed files manifest when rendering (then can be used for remote import)
 
 - reference citation metadata should throttle on actual inclusion in document
 
 - docs: emphasize incremental rendering
 
+- index/category/archive pages
+- google analytics and discourse commenting
 
 
 - document cannonical url

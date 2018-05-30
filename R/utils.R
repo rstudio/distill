@@ -64,6 +64,10 @@ file_with_ext <- function(file, ext) {
   paste(tools::file_path_sans_ext(file), ".", ext, sep = "")
 }
 
+normalize_base_url <- function(url) {
+  sub("/+$", "", url)
+}
+
 
 input_as_dir <- function(input) {
 

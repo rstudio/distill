@@ -1,10 +1,10 @@
 
 
-transform_configuration <- function(site_config, collection_config, metadata) {
+transform_configuration <- function(input_file, site_config, collection_config, metadata) {
 
   # transform site_config and metadata values
   site_config <- transform_site_config(site_config)
-  metadata <- transform_metadata(site_config, collection_config, metadata)
+  metadata <- transform_metadata(input_file, site_config, collection_config, metadata)
 
   # provide title-prefix  and qualified title if specified in site and different from title
   if (!is.null(site_config$title) && !identical(site_config$title, metadata$title)) {
@@ -42,7 +42,7 @@ transform_site_config <- function(site_config) {
   site_config
 }
 
-transform_metadata <- function(site_config, collection_config,  metadata) {
+transform_metadata <- function(input_file, site_config, collection_config, metadata) {
 
   # validate title
   if (is.null(metadata$title))
@@ -50,6 +50,18 @@ transform_metadata <- function(site_config, collection_config,  metadata) {
 
   # provide site title
   metadata$site_title <- site_config$title
+
+  # if the site has a base_url then we need to tweak the base url of the
+  # input document to use the site
+  if (!is.null(site_config[["base_url"]])) {
+    base_url <- normalize_base_url(site_config$base_url)
+    site_dir <- find_site_dir(input_file)
+    input_file_relative <- rmarkdown::relative_to(
+      normalize_path(site_dir),
+      normalize_path(input_file)
+    )
+    metadata$base_url <- file.path(base_url, dirname(input_file_relative))
+  }
 
   # mergable metadata
   mergeable_metadata <- c("base_url", "repository_url",
@@ -121,13 +133,16 @@ transform_metadata <- function(site_config, collection_config,  metadata) {
 
   # base_url (strip trailing slashes)
   if (!is.null(metadata$base_url))
-    metadata$base_url <- sub("/+$", "", metadata$base_url)
+    metadata$base_url <- normalize_base_url(metadata$base_url)
 
   # file based preview image
   if (!is.null(metadata$preview) && !grepl("^https?://", metadata$preview)) {
 
+    # compute the path on disk
+    metadata_path <- file.path(dirname(input_file), metadata$preview)
+
     # validate that the file exists
-    if (!file.exists(metadata$preview)) {
+    if (!file.exists(metadata_path)) {
       stop("Specified preview file '", metadata$preview, "' does not exist",
            call. = FALSE)
     }
@@ -140,8 +155,8 @@ transform_metadata <- function(site_config, collection_config,  metadata) {
     }
 
     # if it's a png then determine it's dimensions
-    if (is_file_type(metadata$preview, "png")) {
-      png <- png::readPNG(metadata$preview)
+    if (is_file_type(metadata_path, "png")) {
+      png <- png::readPNG(metadata_path)
       metadata$preview_width <- ncol(png)
       metadata$preview_height <- nrow(png)
     }

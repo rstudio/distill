@@ -121,6 +121,7 @@ radix_article <- function(fig_width = 6,
 
     # transform configuration
     c(site_config, metadata) %<-% transform_configuration(
+      input_file = input_file,
       site_config = site_config,
       collection_config = collection_config,
       metadata = metadata
