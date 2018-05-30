@@ -4,6 +4,9 @@
 - google analytics and discourse commenting
 - search
 
+
+- base_dir + author should yield a citation url
+
 - larger scale visualization layouts
     - iframe with npr library (pym.js) for sizing (generic) (check with shinyapps.io)
     - distillVisualization() top level shinyApp equivalent with distill bootstrap theme 
@@ -14,7 +17,6 @@
         - distillRow/distillCol
     - publishing/previewing workflow?
     - app.R or ui.R / server.R in the same directory; automagic local run
-
     - Full bleed media objects (videos, docs (http://viewerjs.org/), etc.)
 
 - Embedded articles:
