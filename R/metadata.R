@@ -438,14 +438,43 @@ google_scholar_metadata <- function(metadata) {
     add_meta("citation_author_institution", author$affiliation)
   }
 
-  # references
-  if (!is.null(metadata$bibliography)) {
-    references <- pandoc_citeproc_convert(metadata$bibliography)
-    for (ref in references)
-      add_meta("citation_reference", citation_reference(ref))
+  google_scholar_meta
+}
+
+citation_references_in_header <- function(input_file, bibliography) {
+
+  if (!is.null(bibliography)) {
+
+    # pandoc friendly bibliography path
+    bibliography <- pandoc_path_arg(bibliography)
+
+    # first generate html with all of the citations
+    biblio_html <- tempfile(fileext = "html")
+    pandoc_convert(input_file, to = "html5", from = "markdown-tex_math_dollars", output = biblio_html,
+                   citeproc = TRUE, options = list(
+                     "--bibliography", bibliography,
+                     "--template", pandoc_path_arg(radix_resource("biblio.html"))
+                   ))
+
+    # parse the html for citations
+    biblio <- xml2::read_html(
+      readChar(biblio_html, nchars = file.info(biblio_html)$size, useBytes = TRUE)
+    )
+    citations <- xml2::xml_find_all(biblio, "//span[@data-cites]")
+    citations <- unique(xml2::xml_attr(citations, "data-cites"))
+
+    # generate meta tags
+    references <- tagList(HTML(''), lapply(pandoc_citeproc_convert(bibliography), function(ref) {
+      if (ref$id %in% citations)
+        tags$meta(name = "citation_reference", content = citation_reference(ref))
+    }))
+
+    html_as_file(references)
+
+  } else {
+    c()
   }
 
-  google_scholar_meta
 }
 
 citation_reference <- function(ref) {

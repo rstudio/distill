@@ -19,8 +19,6 @@
 
 Embedded articles:
 
-- reference citation metadata should throttle on actual inclusion in document
-
 - docs: emphasize incremental rendering
 
 - document cannonical url
