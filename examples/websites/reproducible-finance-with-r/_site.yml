@@ -1,5 +1,5 @@
-name: "rviews"
-title: "R Views"
+name: "reproducible-finance-with-r"
+title: "Reproducible Finance with R"
 output_dir: "."
 navbar:
   right:

@@ -1,5 +1,5 @@
 ---
-title: "Reproducible Finance with R: The Sharpe Ratio"
+title: "The Sharpe Ratio"
 description: |
   In this post we present a classic finance use case using the PerformanceAnalytics, quantmod, and dygraphs packages. We'll demonstrate importing stock data, building a portfolio, and then calculating the Sharpe Ratio. 
 author: 
@@ -22,9 +22,9 @@ for (pkg in c('PerformanceAnalytics', 'quantmod', 'dygraphs', 'RColorBrewer')) {
 
 ## Overview
 
-Financial applications were an early driving force behind the adoption of the R language, but as data science becomes increasingly critical to banks, hedge funds, investment managers, data providers, exchanges, etc., R is becoming even more important to Finance. We are excited and inspired by what the future holds in the brave new world of data-driven financial institutions. In this first post of what we hope will be a regular series about Finance, R and RStudio, we present a classic use case: import stock data, build a portfolio, and calculate the Sharpe Ratio. 
+In this post we will demonstrate the calculation of a Sharpe Ratio for a stock portfolio. We'll start with a function that grabs monthly stock returns and saves those monthly returns as an xts object in the global environment. With that function, we will create three xts objects of monthly returns, and merge those three xts objects into one object, before passing that merged object to dygraphs to peek at the individual stocks. 
 
-By way of a brief roadmap, we'll start with a function that grabs monthly stock returns and saves those monthly returns as an xts object in the global environment. With that function, we will create three xts objects of monthly returns, and merge those three xts objects into one object, before passing that merged object to dygraphs to peek at the individual stocks. Then, we move on to build a portfolio by selecting asset weights and calculating the portfolio monthly returns. Next, we will calculate the growth of a dollar invested in that portfolio (which is what matters to us) over time, and save the results to an xts object. Dygraphs will come in handy again for the portfolio visualizations. Finally, we will calculate the Sharpe Ratio.
+Then, we'll move on to build a portfolio by selecting asset weights and calculating the portfolio monthly returns. Next, we will calculate the growth of a dollar invested in that portfolio (which is what matters to us) over time, and save the results to an xts object. Dygraphs will come in handy again for the portfolio visualizations. Finally, we will calculate the Sharpe Ratio.
 
 ## Setting up
 
