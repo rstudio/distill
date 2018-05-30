@@ -33,7 +33,10 @@ Embedded articles:
 - Article indexes include repository URLs, source code, etc.
 - Copy BibTeX on citation hover
 
+- test for arxiv as distill does when generating citations
+
 - Citables figures/images
+
 
 - eLife
 - 
