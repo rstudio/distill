@@ -1,0 +1,14 @@
+name: "rviews"
+title: "R Views"
+output_dir: "."
+navbar:
+  right:
+    - text: "Home"
+      href: index.html
+    - text: "About"
+      href: about.html
+    - text: "Contributors"
+      href: contributors.html
+output: radix::radix_article
+    
+

@@ -3,6 +3,7 @@
 ^scratch$
 LICENSE
 ^docs$
+^examples$
 README.md
 TODO.md
 rsconnect

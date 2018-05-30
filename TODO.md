@@ -4,6 +4,9 @@
 - google analytics and discourse commenting
 - search
 
+- R highlighting treatment (at a minimum handle comments)
+
+- Warn users on code width > 70 characters
 
 - base_dir + author should yield a citation url
 
