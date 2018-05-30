@@ -1,5 +1,11 @@
 
 
+- RStudio post preview isn't quite right for inline collection preview
+    - relative references won't be correct when output_dir is defined
+    - we either need:to:
+        - copy the post to output_dir during preview (maybe smart copy?); or
+        - don't attempt to show site navigational elements for single post preview
+
 - index/category/archive pages
 - google analytics and discourse commenting
 - search
