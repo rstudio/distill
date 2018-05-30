@@ -12,15 +12,16 @@
 
     - Full bleed media objects (videos, docs (http://viewerjs.org/), etc.)
 
+
+- index/category/archive pages
+- google analytics and discourse commenting
+- search
+
 Embedded articles:
 
 - reference citation metadata should throttle on actual inclusion in document
 
 - docs: emphasize incremental rendering
-
-- index/category/archive pages
-- google analytics and discourse commenting
-
 
 - document cannonical url
 - attribution metadata for inclusion when importing/syndicating (do during import)
