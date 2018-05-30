@@ -7,6 +7,13 @@
 - R highlighting treatment (for now we just patched clike to handle comments)
 
 - Warn users on code width > 70 characters
+- Set output width to 70 characters
+- Document 70 characters
+
+- Improved error messages for incomplete author field
+
+- Add thumbnails to sample posts
+- Add some citations to sample posts
 
 - base_dir + author should yield a citation url
 
