@@ -15,7 +15,6 @@
 Embedded articles:
 
 - preview images may not work
-- preview images with absolute files may not work
 
 - embed files manifest when rendering (then can be used for remote import)
 

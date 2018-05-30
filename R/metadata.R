@@ -123,8 +123,8 @@ transform_metadata <- function(site_config, collection_config,  metadata) {
   if (!is.null(metadata$base_url))
     metadata$base_url <- sub("/+$", "", metadata$base_url)
 
-  # preview image
-  if (!is.null(metadata$preview)) {
+  # file based preview image
+  if (!is.null(metadata$preview) && !grepl("^https?://", metadata$preview)) {
 
     # validate that the file exists
     if (!file.exists(metadata$preview)) {
