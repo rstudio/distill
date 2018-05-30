@@ -61,7 +61,7 @@ with_radix_output_options <- function(site_config, f) {
   site_config_output <- site_config[["output"]]
   if (!is.null(site_config_output)) {
     radix_article_options <- site_config_output[["radix::radix_article"]]
-    if (!is.null(radix_article_options))
+    if (is.list(radix_article_options))
       f(radix_article_options)
     else
       c()

@@ -68,7 +68,7 @@ radix_article <- function(fig_width = 6,
 
     # merge selected options from site config (as in the case where we
     # are in a collection rmarkdown wouldn't have picked up _site options)
-    if (!is.null(site_config[["output"]])) {
+    if (is.list(site_config[["output"]])) {
 
       site_options <- site_config[["output"]][["radix::radix_article"]]
 
