@@ -434,7 +434,7 @@ l-body
 </p>
 </div>
 <p>For example, a plot with the default <code>l-body</code> layout would look like this:</p>
-<div class="layout-chunk l-body">
+<div class="layout-chunk" data-layout="l-body">
 <p><img src="images/l-body-figure.png" width="576" /></p>
 </div>
 <p>For elements you want to display a little larger, try <code>l-body-outset</code> or <code>l-page</code>:</p>
@@ -455,7 +455,7 @@ library(ggplot2)
 ggplot(diamonds, aes(carat, price)) + geom_smooth() +
   facet_grid(~ cut)
 ```</code></pre>
-<div class="layout-chunk l-body-outset">
+<div class="layout-chunk" data-layout="l-body-outset">
 <p><img src="images/l-middle-figure.png" width="576" /></p>
 </div>
 <p>Note that when specifying an alternate <code>layout</code> you should also specify an appropriate <code>fig.width</code> and <code>fig.height</code> for that layout.</p>
@@ -473,7 +473,7 @@ leaflet() %&gt;%
   addTiles() %&gt;%  # Add default OpenStreetMap map tiles
   addMarkers(lng=174.768, lat=-36.852, popup=&quot;The birthplace of R&quot;)
 ```</code></pre>
-<div class="layout-chunk l-screen-inset">
+<div class="layout-chunk" data-layout="l-screen-inset">
 <div id="htmlwidget-7ded59f4b1e32ea1fd21" style="width:576px;height:384px;" class="leaflet html-widget"></div>
 <script type="application/json" data-for="htmlwidget-7ded59f4b1e32ea1fd21">{"x":{"options":{"crs":{"crsClass":"L.CRS.EPSG3857","code":null,"proj4def":null,"projectedBounds":null,"options":{}}},"calls":[{"method":"addTiles","args":["//{s}.tile.openstreetmap.org/{z}/{x}/{y}.png",null,null,{"minZoom":0,"maxZoom":18,"tileSize":256,"subdomains":"abc","errorTileUrl":"","tms":false,"noWrap":false,"zoomOffset":0,"zoomReverse":false,"opacity":1,"zIndex":1,"detectRetina":false,"attribution":"&copy; <a href=\"http://openstreetmap.org\">OpenStreetMap<\/a> contributors, <a href=\"http://creativecommons.org/licenses/by-sa/2.0/\">CC-BY-SA<\/a>"}]},{"method":"addMarkers","args":[-36.852,174.768,null,null,null,{"interactive":true,"draggable":false,"keyboard":true,"title":"","alt":"","zIndexOffset":0,"opacity":1,"riseOnHover":false,"riseOffset":250},"The birthplace of R",null,null,null,null,{"interactive":false,"permanent":false,"direction":"auto","opacity":1,"offset":[0,0],"textsize":"10px","textOnly":false,"className":"","sticky":true},null]}],"limits":{"lat":[-36.852,-36.852],"lng":[174.768,174.768]}},"evals":[],"jsHooks":[]}</script>
 </div>

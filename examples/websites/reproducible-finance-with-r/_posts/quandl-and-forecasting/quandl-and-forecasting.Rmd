@@ -98,7 +98,7 @@ The mean forecast is right around \$54. It looks like the 95% confidence level h
 
 Let's move on to visualizing the results of the forecast along with the historical data. The base `plot()` function does a decent job here.
 
-```{r, layout="l-page"}
+```{r}
 plot(oil_6month, main = "Oil Forecast")
 ```
 

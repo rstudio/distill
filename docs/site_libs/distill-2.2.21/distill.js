@@ -119,16 +119,30 @@ function init_distill() {
       language = ' language="' + language + '"';
       var dt_code = $('<d-code block' + language + clz + '></d-code>');
       dt_code.text(code.text());
-      if (pre.parent().is('.layout-chunk')) {
-        dt_code.insertBefore(pre.parent());
-        pre.remove();
-      } else {
-        pre.replaceWith(dt_code);
-      }
+      pre.replaceWith(dt_code);
     } else {
       code.addClass('text-output').unwrap().changeElementType('pre');
     }
   });
+
+  // localize layout chunks to just output
+  $('.layout-chunk').each(function(i, val) {
+
+    // capture layout
+    var layout = $(this).attr('data-layout');
+
+    // apply layout to markdown level block elements
+    $(this).children().not('d-code, pre.text-output').addClass(layout);
+
+    // paged tables need to be wrapped (they overwrite their class)
+    $(this).children('div[data-pagedtable]')
+      .wrap($('<div class="' + layout + '"></div>'));
+
+    // unwrap the layout-chunk div
+    $(this).children().unwrap();
+  });
+
+
 
   init_common();
 
@@ -179,8 +193,8 @@ function init_distill() {
     // inject pre code styles (can't do this with a global stylesheet b/c a shadow root is used)
     $('d-code').each(function(i, val) {
       var style = document.createElement('style');
-      style.innerHTML = 'pre code { padding-left: 0; font-size: 12px; border-left: none; } ' +
-                        '@media(min-width: 768px) { pre code { padding-left: 18px; border-left: 2px solid rgba(0,0,0,0.1); font-size: 14px; } }';
+      style.innerHTML = 'pre code { padding-left: 10px; font-size: 12px; border-left: 2px solid rgba(0,0,0,0.1); } ' +
+                        '@media(min-width: 768px) { pre code { padding-left: 18px; font-size: 14px; } }';
       if (this.shadowRoot)
         this.shadowRoot.appendChild(style);
     });
