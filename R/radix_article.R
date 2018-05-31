@@ -98,7 +98,7 @@ radix_article <- function(fig_width = 6,
     knitr_options$opts_chunk$echo <- FALSE
     knitr_options$opts_chunk$warning <- FALSE
     knitr_options$opts_chunk$message <- FALSE
-    knitr_options$opts_chunk$comment <= NA
+    knitr_options$opts_chunk$comment <- NA
     knitr_options$knit_hooks <- list()
     knitr_options$knit_hooks$source <- knitr_source_hook
     knitr_options$knit_hooks$chunk <- knitr_chunk_hook()
