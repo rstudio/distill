@@ -125,6 +125,25 @@ function init_distill() {
     }
   });
 
+  // localize layout chunks to just output
+  $('.layout-chunk').each(function(i, val) {
+
+    // capture layout
+    var layout = $(this).attr('data-layout');
+
+    // apply layout to markdown level block elements
+    $(this).children().not('d-code, pre.text-output').addClass(layout);
+
+    // paged tables need to be wrapped (they overwrite their class)
+    $(this).children('div[data-pagedtable]')
+      .wrap($('<div class="' + layout + '"></div>'));
+
+    // unwrap the layout-chunk div
+    $(this).children().unwrap();
+  });
+
+
+
   init_common();
 
   // load distill framework

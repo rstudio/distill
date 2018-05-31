@@ -1,0 +1,161 @@
+---
+title: 'Quandl and Forecasting'
+description: |
+  In this post, we will explore commodity prices using data from [Quandl](https://www.quandl.com/), a repository for both free and paid data sources. We will also get into the forecasting game a bit and think about how best to use dygraphs when visualizing predicted time series as an extension of historical data.
+author: 
+  - name: "Jonathan Regenstein"
+    url: https://www.linkedin.com/in/jkregenstein/
+    affiliation: RStudio
+    affiliation_url: https://www.rstudio.com
+date: 03-07-2017
+output: 
+  radix::radix_article:
+    keep_md: true
+---
+
+```{r setup, include=FALSE}
+# packages required for this post
+for (pkg in c('Quandl', 'dplyr', 'xts', 'lubridate', 'forecast', 'dygraphs')) 
+  if (!requireNamespace(pkg)) install.packages(pkg)
+
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+## Overview
+
+Welcome to another installment of Reproducible Finance with R. Today we are going to shift focus in recognition of the fact that there's more to Finance than stock prices, and there's more to data download than quantmod/getSymbols. We are not going to do anything too complex, but we will expand our toolkit by getting familiar with Quandl, commodity prices, the forecast() function, and some advanced dygraph work. 
+
+Before we dive in, a few thoughts to frame the notebook underlying this post.      
+
+*   We are using oil data from Quandl, but the original data is from [FRED](https://fred.stlouisfed.org/).  There's nothing wrong with grabbing the data directly from FRED, of course, and I browse FRED frequently to check out economic data, but I tend to download the data into my RStudio environment using Quandl.  I wanted to introduce Quandl today because it's a nice resource that will be involved in the next few posts in this series. Plus, it's gaining in popularity, and if you work in the financial industry, you might start to encounter it in your work. 
+
+*   This post marks our first foray into the world of predictive modeling, albeit in a very simple way. But the complexity and accuracy of the forecasting methodology we use here is almost irrelevant since I expect that most R coders, whether in industry or otherwise, will have their own proprietary models. Rather, what I want to accomplish here is a framework where models can be inserted, visualized, and scrutinized in the future.  I harp on reproducible workflows a lot, and that's not going to change today because one goal of this Notebook is to house a forecast that can be reproduced in the future (at which point, we will know if the forecast was accurate or not), and then tweaked/criticized/updated/heralded. 
+
+*   This post walks through a detailed example of importing, forecasting, and visualizing oil prices. In the near future, I will repeat those steps for gold and copper, and we will examine the relationship between the copper/gold price ratio and interest rates. We are starting simple, but stay tuned.
+
+Let's start by loading the packages we'll need for this post:
+
+```{r, message=FALSE, warning=FALSE}
+library(Quandl)
+library(dplyr)
+library(xts)
+library(lubridate)
+library(forecast)
+library(dygraphs)
+```
+
+## Downloading the data
+
+Now, let's get to the data download! In the chunk below, as we import WTI oil prices, notice that Quanld makes it easy to choose types of objects (raw/dataframe, xts, or zoo), periods (daily, weekly, or monthly) and start/end dates.   
+
+```{r, cache=TRUE}
+# Start with daily data. Note that "type = raw" will download a data frame.
+oil_daily <- Quandl("FRED/DCOILWTICO", type = "raw", collapse = "daily",  
+                    start_date="2006-01-01", end_date="2017-02-28")
+# Now weekely and let's use xts as the type.
+oil_weekly <- Quandl("FRED/DCOILWTICO", type = "xts", collapse = "weekly",  
+                     start_date="2006-01-01", end_date="2017-02-28")
+# And monthly using xts as the type.
+oil_monthly <- Quandl("FRED/DCOILWTICO", type = "xts", collapse = "monthly",  
+                      start_date="2006-01-01", end_date="2017-02-28")
+
+# Have a quick look at our three  objects. 
+str(oil_daily)
+str(oil_weekly)
+str(oil_monthly)
+```
+
+Also note that I specified the end date of February 2017. This indicates that the Notebook houses a model that was built and run using data as of February 2017. Without the end date, this Notebook would house a model that was built and run using data as of time `t`. Which you choose depends how you want the Notebook to function for your team.
+
+Looking back at those oil price objects, each would work well for the rest of this project, but let's stick with the monthly data.  We will be dealing with the date index quite a bit below, so let's use the `seq()` function and `mdy()` from the lubridate package to put the date into a nicer format.
+
+```{r}
+index(oil_monthly) <- seq(mdy('01/01/2006'), mdy('02/01/2017'), by = 'months')
+head(index(oil_monthly))
+```
+
+Now we have a cleaner date format. Our base data object is in good shape. As always, we like to have a look at the data in graphical format, so let's fire up dygraphs. Since we imported an xts object directly from Quandl, we can just plug it straight into the `dygraph()` function.
+
+```{r, layout="l-page"}
+dygraph(oil_monthly, main = "Monthly oil Prices")
+```
+
+Alright, nothing too shocking here. We see a peak in mid-2008, followed by a precipitous decline through the beginning of 2009.
+
+## Forecasting
+
+Now we'll make things a bit more interesting and try to extract some meaning from that data. Let's use the `forecast()` function to predict what oil prices will look like over the next six months. This is the part of the code where you might want to insert whatever model your team has built or wish to test. We can think of it as a placeholder for any proprietary model or models that could be dropped into this Notebook. For our purposes, we will simply pass in the monthly oil prices object and supply a `lookahead` parameter of 6. The `forecast()` function will then supply some interesting numbers about the next six months of oil prices.
+
+```{r}
+oil_6month <- forecast(oil_monthly, h = 6)
+
+# Let's have a quick look at the 6-month forecast and the 80%/95% confidence levels. 
+oil_6month
+
+```
+
+The mean forecast is right around \$54. It looks like the 95% confidence level has a high of \$78 in August and a low of \$29 in March. We won't dwell on these numbers because I imagine you will want to use your own model here - this Notebook is more of a skeleton where those models can be inserted and then tested or evaluated at a later date.
+
+Let's move on to visualizing the results of the forecast along with the historical data. The base `plot()` function does a decent job here.
+
+```{r, layout="l-page"}
+plot(oil_6month, main = "Oil Forecast")
+```
+
+That plot looks OK, but it's not great. We can see that the mean forecast is to stay around \$50, with the 95% bands stretching all the way to around \$80 and \$30, but honestly, I have to squint to really see those 95% intervals. We don't like squinting, so let's put in some extra work to make use of dygraphs, which will have the benefit of allowing a reader to zoom on the predicted portion of the graph. 
+
+This is where things require a bit more thought. We want one xts object to hold both the historical data and the forecasted prices.
+
+We already have our monthly prices in the xts object we imported from Quandl, but the forecasted prices are currently in a list with a different date convention than we would like. 
+
+First, let's move the mean forecast and 95% confidence bands to a dataframe, along with a date column. We predicted oil out six months, so we will need a date column for the six months after February.
+
+
+```{r}
+oil_forecast_data <- data.frame(date = seq(mdy('03/01/2017'), 
+                                           by = 'months', length.out = 6),
+                                Forecast = oil_6month$mean,
+                                Hi_95 = oil_6month$upper[,2],
+                                Lo_95 = oil_6month$lower[,2])
+
+head(oil_forecast_data)
+```
+
+The data we want is now housed in its own dataframe. Let's convert that to an xts object.
+
+```{r}
+
+oil_forecast_xts <- xts(oil_forecast_data[,-1], order.by = oil_forecast_data[,1])
+```
+
+Now we can combine the historical xts object with the forecasted xts object using `cbind()`.
+
+```{r}
+# Combine the xts objects with cbind.
+
+oil_combined_xts <- cbind(oil_monthly, oil_forecast_xts)
+
+# Add a nicer name for the first column.
+
+colnames(oil_combined_xts)[1] <- "Actual"
+
+# Have a look at both the head and the tail of our new xts object. Make sure the
+# NAs are correct.
+head(oil_combined_xts)
+tail(oil_combined_xts)
+```
+
+It looks as it should. From January 2006 to February 2017 we have our actual data and NAs for the forecasted data. From March 2017 to August  2017, we have our mean forecast and 95% confidence levels and NAs for actual data. Said another way, we have four time series with observations at different dates, some of which are in the future. Most fortunately, dygraph provides a nice way to plot our actual time series versus our three forecasted time series because it simply does not plot the NAs.
+
+```{r}
+
+dygraph(oil_combined_xts, main = "Oil Prices: Historical and Forecast") %>%
+  # Add the actual series
+  dySeries("Actual", label = "Actual") %>%
+  # Add the three forecasted series
+  dySeries(c("Lo_95", "Forecast", "Hi_95"))
+```
+
+Take a quick look back at our previous graph using the `plot()` function.  At first glance, the dygraph might not seem so different. But, we can now make use of hovering/tooltips and, more importantly, we can zoom in on the forecasted numbers see them much more clearly. Plus, the whole world of dygraph functionality is now available to us! 
+
+That's all for today. We have gotten some familiarity with Quandl, used `forecast()` to predict the next six months of oil prices, and done some data wrangling so we can use our old friend dygraphs. Next time, we will wrap this into a Shiny app so that users can choose their own parameters, and maybe even choose different commodities. See you then!

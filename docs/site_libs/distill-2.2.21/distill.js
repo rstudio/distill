@@ -119,7 +119,12 @@ function init_distill() {
       language = ' language="' + language + '"';
       var dt_code = $('<d-code block' + language + clz + '></d-code>');
       dt_code.text(code.text());
-      pre.replaceWith(dt_code);
+      if (pre.parent().is('.layout-chunk')) {
+        dt_code.insertBefore(pre.parent());
+        pre.remove();
+      } else {
+        pre.replaceWith(dt_code);
+      }
     } else {
       code.addClass('text-output').unwrap().changeElementType('pre');
     }
