@@ -25,7 +25,7 @@ body {
 
 .text-output {
   margin-top: 0;
-  line-height: 1em;
+  line-height: 1.5em;
 }
 
 .hidden {
@@ -58,17 +58,22 @@ figure img.external {
    into the d-code shadow dom) */
 
 pre.d-code code.d-code {
-  padding-left: 0;
+  padding-left: 10px;
   font-size: 12px;
-  border-left: none;
+  border-left: 2px solid rgba(0,0,0,0.1);
+}
+
+pre.text-output {
+  font-size: 12px;
 }
 
 @media(min-width: 768px) {
 pre.d-code code.d-code  {
     padding-left: 18px;
-    border-left: 2px
-    solid rgba(0,0,0,0.1);
     font-size: 14px;
+}
+pre.text-output {
+  font-size: 14px;
 }
 }
 
