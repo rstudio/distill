@@ -5,6 +5,7 @@
     - we either need:to:
         - copy the post to output_dir during preview (maybe smart copy?); or
         - don't attempt to show site navigational elements for single post preview
+    - Currently no footer in preview
 
 - Saving Rmd file in website project re-knits
 
@@ -49,6 +50,10 @@
    - attribution metadata for inclusion when importing/syndicating (do during import)
    - import article function(s)
 
+
+- Document prism changes somewhere:
+    - Added comment pattern: {pattern:/(^|[^\\])#.*/,lookbehind:!0}
+    - Allow . in function names: function:/[a-z\.0-9_]
 
 - Download supplemetary figures
 - Abbreviations and supplementary figures
