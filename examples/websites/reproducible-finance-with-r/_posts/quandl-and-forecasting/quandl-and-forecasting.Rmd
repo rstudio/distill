@@ -8,9 +8,7 @@ author:
     affiliation: RStudio
     affiliation_url: https://www.rstudio.com
 date: 03-07-2017
-output: 
-  radix::radix_article:
-    keep_md: true
+output: radix::radix_article
 ---
 
 ```{r setup, include=FALSE}
@@ -89,16 +87,17 @@ Now we'll make things a bit more interesting and try to extract some meaning fro
 ```{r}
 oil_6month <- forecast(oil_monthly, h = 6)
 
-# Let's have a quick look at the 6-month forecast and the 80%/95% confidence levels. 
+# Let's have a look at the forecast and the 80%/95% confidence levels. 
 oil_6month
-
 ```
 
 The mean forecast is right around \$54. It looks like the 95% confidence level has a high of \$78 in August and a low of \$29 in March. We won't dwell on these numbers because I imagine you will want to use your own model here - this Notebook is more of a skeleton where those models can be inserted and then tested or evaluated at a later date.
 
+## Visualizing the results
+
 Let's move on to visualizing the results of the forecast along with the historical data. The base `plot()` function does a decent job here.
 
-```{r}
+```{r, layout="l-page", fig.height=3}
 plot(oil_6month, main = "Oil Forecast")
 ```
 
@@ -147,8 +146,7 @@ tail(oil_combined_xts)
 
 It looks as it should. From January 2006 to February 2017 we have our actual data and NAs for the forecasted data. From March 2017 to August  2017, we have our mean forecast and 95% confidence levels and NAs for actual data. Said another way, we have four time series with observations at different dates, some of which are in the future. Most fortunately, dygraph provides a nice way to plot our actual time series versus our three forecasted time series because it simply does not plot the NAs.
 
-```{r}
-
+```{r, layout="l-page"}
 dygraph(oil_combined_xts, main = "Oil Prices: Historical and Forecast") %>%
   # Add the actual series
   dySeries("Actual", label = "Actual") %>%
