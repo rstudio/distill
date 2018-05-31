@@ -8,6 +8,7 @@
 
 - Saving Rmd file in website project re-knits
 
+
 - index/category/archive pages
 - google analytics and discourse commenting
 - search
@@ -17,6 +18,8 @@
 
 - R highlighting treatment (for now we just patched clike to handle comments)
 
+
+- Docs: note that echo = FALSE by default and explain 70 character constraint
 - Warn users on code width > 70 characters
 - Set output width to 70 characters
 - Document 70 characters
