@@ -9,6 +9,7 @@
 
 - Saving Rmd file in website project re-knits
 
+- consider forcing self_contained to FALSE for collections ("auto")
 
 - index/category/archive pages
 - google analytics and discourse commenting
@@ -23,6 +24,10 @@
 - Improved error messages for incomplete author field
 
 - Add thumbnails to sample posts
+- 560x295
+- 1200 pixels wide by 675 pixels tall 
+l-body-outset, fig.height=4.5
+
 - Add some citations to sample posts
 
 - base_dir + author should yield a citation url

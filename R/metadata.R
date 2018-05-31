@@ -147,22 +147,19 @@ transform_metadata <- function(input_file, site_config, collection_config, metad
            call. = FALSE)
     }
 
-    # validate that we have a base_url
-    if (is.null(metadata$base_url)) {
-      stop("You must specify a base_url to resolve relative image paths against ",
-           "when specifying a preview image ",
-           "(Open Graph and Twitter preview images must use absolute URLs", call. = FALSE)
-    }
+    # synthesize preview_url if we can
+    if (!is.null(metadata$base_url)) {
 
-    # if it's a png then determine it's dimensions
-    if (is_file_type(metadata_path, "png")) {
-      png <- png::readPNG(metadata_path)
-      metadata$preview_width <- ncol(png)
-      metadata$preview_height <- nrow(png)
-    }
+      # if it's a png then determine it's dimensions
+      if (is_file_type(metadata_path, "png")) {
+        png <- png::readPNG(metadata_path)
+        metadata$preview_width <- ncol(png)
+        metadata$preview_height <- nrow(png)
+      }
 
-    # resolve preview url
-    metadata$preview <- file.path(metadata$base_url, metadata$preview)
+      # resolve preview url
+      metadata$preview_url <- file.path(metadata$base_url, metadata$preview)
+    }
   }
 
   # authors
@@ -338,7 +335,7 @@ open_graph_metadata <- function(metadata) {
   add_open_graph_meta("og:url", metadata$canonical_url)
 
   # preivew/thumbnail url
-  add_open_graph_meta("og:image", metadata$preview)
+  add_open_graph_meta("og:image", metadata$preview_url)
   add_open_graph_meta("og:image:width", metadata$preview_width)
   add_open_graph_meta("og:image:height", metadata$preview_height)
 
@@ -377,7 +374,7 @@ twitter_card_metadata <- function(metadata) {
   add_twitter_card_meta("twitter:url", metadata$canonical_url)
 
   # preview image
-  add_twitter_card_meta("twitter:image", metadata$preview)
+  add_twitter_card_meta("twitter:image", metadata$preview_url)
   add_twitter_card_meta("twitter:image:width", metadata$preview_width)
   add_twitter_card_meta("twitter:image:height", metadata$preview_height)
 
