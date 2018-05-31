@@ -6,10 +6,14 @@
         - copy the post to output_dir during preview (maybe smart copy?); or
         - don't attempt to show site navigational elements for single post preview
 
+- Saving Rmd file in website project re-knits
+
 - index/category/archive pages
 - google analytics and discourse commenting
 - search
 - built-in social buttons
+
+- Clike should allow dots in name
 
 - R highlighting treatment (for now we just patched clike to handle comments)
 
