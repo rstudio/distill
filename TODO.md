@@ -12,6 +12,8 @@
 - consider forcing self_contained to FALSE for collections ("auto")
 
 ---------------------------------------------------------
+- license link in head is actually downloaded by pandoc!!!
+
 - directory links don't work in rstudio preview
 
 - No markdown in description (or render w/ commonmark?)
@@ -24,7 +26,7 @@
   (perhaps don't emit default l-body and apply 100% to top level of d-article)
 ---------------------------------------------------------
 
-- index/category/archive pages
+- index/category/archive pages (categories should be inline)
 - email subscription
 - google analytics and discourse commenting
 - search
