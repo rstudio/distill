@@ -1,6 +1,7 @@
 # Created by Radix website generator (do not edit or remove)
 
-asset-contribution-to-portfolio-volatility:
+- path: asset-contribution-to-portfolio-volatility
+  creative_commons: CC BY
   title: Asset Contribution to Portfolio Volatility
   description: |
     In this post we explore breaking total portfolio volatility into its constituent parts and investigate how each asset contributes to the volatility.
@@ -10,9 +11,26 @@ asset-contribution-to-portfolio-volatility:
     url: https://www.linkedin.com/in/jkregenstein/
     affiliation: RStudio
     affiliation_url: https://www.rstudio.com
-  date: 09-13-2017
+    first_name: Jonathan
+    last_name: Regenstein
+  date: 1.5052788e+09
+  site_title: Reproducible Finance with R
+  published_year: '2017'
+  published_month: Sept.
+  published_day: 13
+  published_month_padded: 09
+  published_day_padded: '13'
+  published_date_rfc: Wed, 13 Sep 2017 00:00:00 -0500
+  published_iso_date_only: '2017-09-13'
+  journal: []
+  license_url: https://creativecommons.org/licenses/by/4.0/
+  concatenated_authors: Regenstein
+  bibtex_authors: Regenstein, Jonathan
+  slug: regenstein2017asset
+  lang: en_US
 
-quandl-and-forecasting:
+- path: quandl-and-forecasting
+  creative_commons: CC BY
   title: Quandl and Forecasting
   description: |
     In this post, we will explore commodity prices using data from [Quandl](https://www.quandl.com/), a repository for both free and paid data sources. We will also get into the forecasting game a bit and think about how best to use dygraphs when visualizing predicted time series as an extension of historical data.
@@ -22,9 +40,26 @@ quandl-and-forecasting:
     url: https://www.linkedin.com/in/jkregenstein/
     affiliation: RStudio
     affiliation_url: https://www.rstudio.com
-  date: 03-07-2017
+    first_name: Jonathan
+    last_name: Regenstein
+  date: 1.4888664e+09
+  site_title: Reproducible Finance with R
+  published_year: '2017'
+  published_month: March
+  published_day: 7
+  published_month_padded: '03'
+  published_day_padded: '07'
+  published_date_rfc: Tue, 07 Mar 2017 00:00:00 -0600
+  published_iso_date_only: '2017-03-07'
+  journal: []
+  license_url: https://creativecommons.org/licenses/by/4.0/
+  concatenated_authors: Regenstein
+  bibtex_authors: Regenstein, Jonathan
+  slug: regenstein2017quandl
+  lang: en_US
 
-sharpe-ratio:
+- path: sharpe-ratio
+  creative_commons: CC BY
   title: The Sharpe Ratio
   description: "In this post we present a classic finance use case using the PerformanceAnalytics,
     quantmod, and dygraphs packages. We'll demonstrate importing stock data, building
@@ -35,16 +70,51 @@ sharpe-ratio:
     url: https://www.linkedin.com/in/jkregenstein/
     affiliation: RStudio
     affiliation_url: https://www.rstudio.com
-  date: 11-09-2016
+    first_name: Jonathan
+    last_name: Regenstein
+  date: 1.4786712e+09
+  site_title: Reproducible Finance with R
+  published_year: '2016'
+  published_month: Nov.
+  published_day: 9
+  published_month_padded: '11'
+  published_day_padded: 09
+  published_date_rfc: Wed, 09 Nov 2016 00:00:00 -0600
+  published_iso_date_only: '2016-11-09'
+  journal: []
+  license_url: https://creativecommons.org/licenses/by/4.0/
+  concatenated_authors: Regenstein
+  bibtex_authors: Regenstein, Jonathan
+  slug: regenstein2016the
+  lang: en_US
 
-visualizing-asset-returns:
+- path: visualizing-asset-returns
+  creative_commons: CC BY
   title: Visualizing Asset Returns
-  description: "In this post we demonstrate visualizing the returns of the individual
-    assets within a portfolio. \n"
+  description: "In this post we take a closer look at the individual assets which
+    compose a portfolio. The motivation is to make sure we have scrutinized our assets
+    before they get into our portfolio, as once the portfolio has been constructed,
+    it is tempting to keep the analysis at the portfolio level \n"
   preview: preview.png
   author:
   - name: Jonathan Regenstein
     url: https://www.linkedin.com/in/jkregenstein/
     affiliation: RStudio
     affiliation_url: https://www.rstudio.com
-  date: 11-09-2017
+    first_name: Jonathan
+    last_name: Regenstein
+  date: 1.5102072e+09
+  site_title: Reproducible Finance with R
+  published_year: '2017'
+  published_month: Nov.
+  published_day: 9
+  published_month_padded: '11'
+  published_day_padded: 09
+  published_date_rfc: Thu, 09 Nov 2017 00:00:00 -0600
+  published_iso_date_only: '2017-11-09'
+  journal: []
+  license_url: https://creativecommons.org/licenses/by/4.0/
+  concatenated_authors: Regenstein
+  bibtex_authors: Regenstein, Jonathan
+  slug: regenstein2017visualizing
+  lang: en_US

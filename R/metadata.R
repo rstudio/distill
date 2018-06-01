@@ -69,7 +69,10 @@ transform_metadata <- function(input_file, site_config, collection_config, metad
                           "twitter", "favicon")
 
   # merge collection level config into site config
-  base_config <- merge_lists(site_config[mergeable_metadata], collection_config)
+  base_config <- list()
+  for (name in mergeable_metadata)
+    base_config[[name]] <- site_config[[name]]
+  base_config <- merge_lists(base_config, collection_config)
 
   # merge article level metadata
   metadata <- merge_lists(base_config, metadata)

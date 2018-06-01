@@ -40,6 +40,14 @@ enumerate_collections <- function(site_dir, config, encoding = getOption("encodi
       if (isTRUE(article$metadata$draft))
         next
 
+      # transform metadata
+      article$metadata <- transform_metadata(
+        article$path,
+        config,
+        site_collections[[collection]],
+        article$metadata
+      )
+
       # add to list of articles
       articles[[length(articles) + 1]] <- article
     }
@@ -256,10 +264,10 @@ write_collection_metadata <- function(site_dir, collection) {
     article$metadata$resources <- NULL
 
     # write the article
-    article_yaml <- list()
-    article_yaml[[basename(article$dir)]] <-article$metadata
+    article_yaml <- append(list(path = basename(article$dir)),
+                                article$metadata)
     cat("\n", file = con)
-    yaml::write_yaml(article_yaml, file = con)
+    yaml::write_yaml(list(article_yaml), file = con)
   })
 }
 

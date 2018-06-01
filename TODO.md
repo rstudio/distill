@@ -11,7 +11,21 @@
 
 - consider forcing self_contained to FALSE for collections ("auto")
 
+---------------------------------------------------------
+- directory links don't work in rstudio preview
+
+- No markdown in description (or render w/ commonmark?)
+
+- automatically add index.html when on file:// protocol
+
+- Handle no preview available
+
+- Messiness around l-body being applied by default
+  (perhaps don't emit default l-body and apply 100% to top level of d-article)
+---------------------------------------------------------
+
 - index/category/archive pages
+- email subscription
 - google analytics and discourse commenting
 - search
 - built-in social buttons
