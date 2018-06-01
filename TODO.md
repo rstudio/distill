@@ -11,8 +11,10 @@
 
 - consider forcing self_contained to FALSE for collections ("auto")
 
----------------------------------------------------------
+- title link reloads current page
 - license link in head is actually downloaded by pandoc!!!
+
+---------------------------------------------------------
 
 - directory links don't work in rstudio preview
 
