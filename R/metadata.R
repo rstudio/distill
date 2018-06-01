@@ -136,30 +136,39 @@ transform_metadata <- function(input_file, site_config, collection_config, metad
     metadata$base_url <- normalize_base_url(metadata$base_url)
 
   # file based preview image
-  if (!is.null(metadata$preview) && !grepl("^https?://", metadata$preview)) {
+  if (!is.null(metadata$preview)) {
 
-    # compute the path on disk
-    metadata_path <- file.path(dirname(input_file), metadata$preview)
+    if (grepl("^https?://", metadata$preview)) {
 
-    # validate that the file exists
-    if (!file.exists(metadata_path)) {
-      stop("Specified preview file '", metadata$preview, "' does not exist",
-           call. = FALSE)
-    }
+      metadata$preview_url <- metadata$preview
 
-    # synthesize preview_url if we can
-    if (!is.null(metadata$base_url)) {
+    } else {
 
-      # if it's a png then determine it's dimensions
-      if (is_file_type(metadata_path, "png")) {
-        png <- png::readPNG(metadata_path)
-        metadata$preview_width <- ncol(png)
-        metadata$preview_height <- nrow(png)
+      # compute the path on disk
+      metadata_path <- file.path(dirname(input_file), metadata$preview)
+
+      # validate that the file exists
+      if (!file.exists(metadata_path)) {
+        stop("Specified preview file '", metadata$preview, "' does not exist",
+             call. = FALSE)
       }
 
-      # resolve preview url
-      metadata$preview_url <- file.path(metadata$base_url, metadata$preview)
+      # synthesize preview_url if we can
+      if (!is.null(metadata$base_url)) {
+
+        # if it's a png then determine it's dimensions
+        if (is_file_type(metadata_path, "png")) {
+          png <- png::readPNG(metadata_path)
+          metadata$preview_width <- ncol(png)
+          metadata$preview_height <- nrow(png)
+        }
+
+        # resolve preview url
+        metadata$preview_url <- file.path(metadata$base_url, metadata$preview)
+      }
+
     }
+
   }
 
   # authors
@@ -363,7 +372,7 @@ twitter_card_metadata <- function(metadata) {
   }
 
   # card type
-  card_type <- if(!is.null(metadata$preview)) "summary_large_image" else "summary"
+  card_type <- if(!is.null(metadata$preview_url)) "summary_large_image" else "summary"
   add_twitter_card_meta("twitter:card", card_type)
 
   # title and description

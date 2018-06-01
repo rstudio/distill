@@ -1,0 +1,50 @@
+# Created by Radix website generator (do not edit or remove)
+
+asset-contribution-to-portfolio-volatility:
+  title: Asset Contribution to Portfolio Volatility
+  description: |
+    In this post we explore breaking total portfolio volatility into its constituent parts and investigate how each asset contributes to the volatility.
+  preview: preview.png
+  author:
+  - name: Jonathan Regenstein
+    url: https://www.linkedin.com/in/jkregenstein/
+    affiliation: RStudio
+    affiliation_url: https://www.rstudio.com
+  date: 09-13-2017
+
+quandl-and-forecasting:
+  title: Quandl and Forecasting
+  description: |
+    In this post, we will explore commodity prices using data from [Quandl](https://www.quandl.com/), a repository for both free and paid data sources. We will also get into the forecasting game a bit and think about how best to use dygraphs when visualizing predicted time series as an extension of historical data.
+  preview: preview.png
+  author:
+  - name: Jonathan Regenstein
+    url: https://www.linkedin.com/in/jkregenstein/
+    affiliation: RStudio
+    affiliation_url: https://www.rstudio.com
+  date: 03-07-2017
+
+sharpe-ratio:
+  title: The Sharpe Ratio
+  description: "In this post we present a classic finance use case using the PerformanceAnalytics,
+    quantmod, and dygraphs packages. We'll demonstrate importing stock data, building
+    a portfolio, and then calculating the Sharpe Ratio. \n"
+  preview: preview.png
+  author:
+  - name: Jonathan Regenstein
+    url: https://www.linkedin.com/in/jkregenstein/
+    affiliation: RStudio
+    affiliation_url: https://www.rstudio.com
+  date: 11-09-2016
+
+visualizing-asset-returns:
+  title: Visualizing Asset Returns
+  description: "In this post we demonstrate visualizing the returns of the individual
+    assets within a portfolio. \n"
+  preview: preview.png
+  author:
+  - name: Jonathan Regenstein
+    url: https://www.linkedin.com/in/jkregenstein/
+    affiliation: RStudio
+    affiliation_url: https://www.rstudio.com
+  date: 11-09-2017

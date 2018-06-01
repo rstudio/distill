@@ -2,6 +2,7 @@
 title: 'Quandl and Forecasting'
 description: |
   In this post, we will explore commodity prices using data from [Quandl](https://www.quandl.com/), a repository for both free and paid data sources. We will also get into the forecasting game a bit and think about how best to use dygraphs when visualizing predicted time series as an extension of historical data.
+preview: preview.png
 author: 
   - name: "Jonathan Regenstein"
     url: https://www.linkedin.com/in/jkregenstein/

@@ -2,6 +2,7 @@
 title: Visualizing Asset Returns
 description: |
   In this post we demonstrate visualizing the returns of the individual assets within a portfolio. 
+preview: preview.png
 author: 
   - name: "Jonathan Regenstein"
     url: https://www.linkedin.com/in/jkregenstein/

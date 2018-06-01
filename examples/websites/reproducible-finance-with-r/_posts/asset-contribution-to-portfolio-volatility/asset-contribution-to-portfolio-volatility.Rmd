@@ -2,6 +2,7 @@
 title: "Asset Contribution to Portfolio Volatility"
 description: |
   In this post we explore breaking total portfolio volatility into its constituent parts and investigate how each asset contributes to the volatility.
+preview: preview.png
 author: 
   - name: "Jonathan Regenstein"
     url: https://www.linkedin.com/in/jkregenstein/
