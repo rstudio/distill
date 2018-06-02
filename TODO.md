@@ -13,13 +13,12 @@
 - or pick out knitr images (use hook to mark?)
 
 
-- http://bwlewis.github.io/cassini/
-
 - index/category/archive pages (categories should be inline)
 - email subscription
 - google analytics and discourse commenting
 - search
 - built-in social buttons
+- rstudio addins/templates/projects for article creation
 
 - Docs: note that echo = FALSE by default and explain 70 character constraint
 - Warn users on code width > 70 characters
@@ -29,6 +28,7 @@
 - Improved error messages for incomplete author field
 
 - Add some citations to sample posts
+
 
 - larger scale visualization layouts
     - iframe with npr library (pym.js) for sizing (generic) (check with shinyapps.io)
@@ -52,6 +52,8 @@
 - Document prism changes somewhere:
     - Added comment pattern: {pattern:/(^|[^\\])#.*/,lookbehind:!0}
     - Allow . in function names: function:/[a-z\.0-9_]
+
+- http://bwlewis.github.io/cassini/
 
 - Download supplemetary figures
 - Abbreviations and supplementary figures
