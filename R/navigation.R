@@ -43,14 +43,6 @@ navigation_in_header_html <- function(site_config) {
 
 navigation_before_body_html <- function(site_config) {
 
-  # helper to yield icon class
-  icon_class <- function(icon) {
-    if (grepl("^fa[a-z]? ", icon))
-      icon
-    else
-      paste("fa", icon)
-  }
-
   # if we have a navbar/header then generate it
   header <- c()
   if (!is.null(site_config[["navbar"]])) {
