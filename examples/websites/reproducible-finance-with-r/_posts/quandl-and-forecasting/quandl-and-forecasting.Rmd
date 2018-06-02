@@ -1,7 +1,7 @@
 ---
 title: 'Quandl and Forecasting'
 description: |
-  In this post, we will explore commodity prices using data from [Quandl](https://www.quandl.com/), a repository for both free and paid data sources. We will also get into the forecasting game a bit and think about how best to use dygraphs when visualizing predicted time series as an extension of historical data.
+  In this post, we will explore commodity prices using data from Quandl, a repository for both free and paid data sources. We will also get into the forecasting game a bit and think about how best to use dygraphs when visualizing predicted time series as an extension of historical data.
 preview: preview.png
 author: 
   - name: "Jonathan Regenstein"
@@ -22,7 +22,7 @@ knitr::opts_chunk$set(echo = TRUE)
 
 ## Overview
 
-Welcome to another installment of Reproducible Finance with R. Today we are going to shift focus in recognition of the fact that there's more to Finance than stock prices, and there's more to data download than quantmod/getSymbols. We are not going to do anything too complex, but we will expand our toolkit by getting familiar with Quandl, commodity prices, the forecast() function, and some advanced dygraph work. 
+Welcome to another installment of Reproducible Finance with R. Today we are going to shift focus in recognition of the fact that there's more to Finance than stock prices, and there's more to data download than quantmod/getSymbols. We are not going to do anything too complex, but we will expand our toolkit by getting familiar with [Quandl](https://www.quandl.com/), commodity prices, the forecast() function, and some advanced dygraph work. 
 
 Before we dive in, a few thoughts to frame the notebook underlying this post.      
 

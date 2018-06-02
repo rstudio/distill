@@ -18,16 +18,11 @@
 
 ---------------------------------------------------------
 
-- directory links don't work in rstudio preview
-
-- No markdown in description (or render w/ commonmark?)
-
-- automatically add index.html when on file:// protocol
-
 - Handle no preview available
 
 - Messiness around l-body being applied by default
   (perhaps don't emit default l-body and apply 100% to top level of d-article)
+  or maybe just use top level metadata
 ---------------------------------------------------------
 
 - index/category/archive pages (categories should be inline)
