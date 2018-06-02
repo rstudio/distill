@@ -6661,6 +6661,9 @@ function init_distill() {
   var article = $('<d-article></d-article>');
   $('.d-article').wrap(article).children().unwrap();
 
+  // move post list into article
+  $('.posts-list').appendTo($('d-article'));
+
   // create d-appendix
   $('.d-appendix').changeElementType('d-appendix');
 
@@ -6743,10 +6746,6 @@ function init_distill() {
     // unwrap the layout-chunk div
     $(this).children().unwrap();
   });
-
-
-
-  init_common();
 
   // load distill framework
   load_distill_framework();
@@ -6874,6 +6873,7 @@ function init_downlevel() {
   on_load_complete();
 }
 
+
 function init_common() {
 
   // prevent underline for linked images
@@ -6882,6 +6882,13 @@ function init_common() {
   // mark figures created by knitr chunks as 100% width
   $('.layout-chunk').each(function(i, val) {
     $(this).find('img, .html-widget').css('width', '100%');
+  });
+
+  // auto-append index.html to post-preview links in file: protocol
+  // and in rstudio ide preview
+  $('.post-preview').each(function(i, val) {
+    if (window.location.protocol === "file:")
+      $(this).attr('href', $(this).attr('href') + "index.html");
   });
 
   // add class to pandoc style tables
@@ -6901,7 +6908,7 @@ function init_common() {
 
 
 <script id="distill-front-matter" type="text/json">
-{"title":"Visualizing Asset Returns","description":"In this post we take a closer look at the individual assets which compose a portfolio. The motivation is to make sure we have scrutinized our assets before they get into our portfolio, as once the portfolio has been constructed, it is tempting to keep the analysis at the portfolio level \n","authors":[{"author":"Jonathan Regenstein","authorURL":"https://www.linkedin.com/in/jkregenstein/","affiliation":"RStudio","affiliationURL":"https://www.rstudio.com"}],"publishedDate":"2017-11-09T00:00:00.000-06:00","citationText":"Regenstein, 2017"}
+{"title":"Visualizing Asset Returns","description":"In this post we take a closer look at the individual assets which compose a portfolio. The motivation is to make sure we have scrutinized our assets before they get into our portfolio, as once the portfolio has been constructed, it is tempting to keep the analysis at the portfolio level \n","authors":[{"author":"Jonathan Regenstein","authorURL":"https://www.linkedin.com/in/jkregenstein/","affiliation":"RStudio","affiliationURL":"https://www.rstudio.com"}],"publishedDate":"2017-11-09T00:00:00.000-05:00","citationText":"Regenstein, 2017"}
 </script>
 <!--radix_placeholder_navigation_before_body-->
 <header class="header header--fixed" role="banner">

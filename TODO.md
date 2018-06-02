@@ -11,8 +11,6 @@
 - consider forcing self_contained to FALSE for collections ("auto")
 - self-contained preview image?
 
-- license link in head is actually downloaded by pandoc!!!
-
 - http://bwlewis.github.io/cassini/
 
 - index/category/archive pages (categories should be inline)

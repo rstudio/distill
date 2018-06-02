@@ -59,6 +59,9 @@ function init_distill() {
   var article = $('<d-article></d-article>');
   $('.d-article').wrap(article).children().unwrap();
 
+  // move post list into article
+  $('.posts-list').appendTo($('d-article'));
+
   // create d-appendix
   $('.d-appendix').changeElementType('d-appendix');
 
@@ -141,10 +144,6 @@ function init_distill() {
     // unwrap the layout-chunk div
     $(this).children().unwrap();
   });
-
-
-
-  init_common();
 
   // load distill framework
   load_distill_framework();
@@ -272,6 +271,7 @@ function init_downlevel() {
   on_load_complete();
 }
 
+
 function init_common() {
 
   // prevent underline for linked images
@@ -280,6 +280,13 @@ function init_common() {
   // mark figures created by knitr chunks as 100% width
   $('.layout-chunk').each(function(i, val) {
     $(this).find('img, .html-widget').css('width', '100%');
+  });
+
+  // auto-append index.html to post-preview links in file: protocol
+  // and in rstudio ide preview
+  $('.post-preview').each(function(i, val) {
+    if (window.location.protocol === "file:")
+      $(this).attr('href', $(this).attr('href') + "index.html");
   });
 
   // add class to pandoc style tables

@@ -5633,7 +5633,7 @@ white-space: pre-wrap;
 word-wrap: break-word;
 }
 
-.layout-index d-title, .layout-index .d-title {
+.layout-listing d-title, .layout-listing .d-title {
 display: none;
 }
 
@@ -6661,6 +6661,9 @@ function init_distill() {
   var article = $('<d-article></d-article>');
   $('.d-article').wrap(article).children().unwrap();
 
+  // move post list into article
+  $('.posts-list').appendTo($('d-article'));
+
   // create d-appendix
   $('.d-appendix').changeElementType('d-appendix');
 
@@ -6743,10 +6746,6 @@ function init_distill() {
     // unwrap the layout-chunk div
     $(this).children().unwrap();
   });
-
-
-
-  init_common();
 
   // load distill framework
   load_distill_framework();
@@ -6874,6 +6873,7 @@ function init_downlevel() {
   on_load_complete();
 }
 
+
 function init_common() {
 
   // prevent underline for linked images
@@ -6882,6 +6882,13 @@ function init_common() {
   // mark figures created by knitr chunks as 100% width
   $('.layout-chunk').each(function(i, val) {
     $(this).find('img, .html-widget').css('width', '100%');
+  });
+
+  // auto-append index.html to post-preview links in file: protocol
+  // and in rstudio ide preview
+  $('.post-preview').each(function(i, val) {
+    if (window.location.protocol === "file:")
+      $(this).attr('href', $(this).attr('href') + "index.html");
   });
 
   // add class to pandoc style tables
@@ -6901,7 +6908,7 @@ function init_common() {
 
 
 <script id="distill-front-matter" type="text/json">
-{"title":"Asset Contribution to Portfolio Volatility","description":"In this post we explore breaking total portfolio volatility into its constituent parts and investigate how each asset contributes to the volatility.\n","authors":[{"author":"Jonathan Regenstein","authorURL":"https://www.linkedin.com/in/jkregenstein/","affiliation":"RStudio","affiliationURL":"https://www.rstudio.com"}],"publishedDate":"2017-09-13T00:00:00.000-05:00","citationText":"Regenstein, 2017"}
+{"title":"Asset Contribution to Portfolio Volatility","description":"In this post we explore breaking total portfolio volatility into its constituent parts and investigate how each asset contributes to the volatility.\n","authors":[{"author":"Jonathan Regenstein","authorURL":"https://www.linkedin.com/in/jkregenstein/","affiliation":"RStudio","affiliationURL":"https://www.rstudio.com"}],"publishedDate":"2017-09-13T00:00:00.000-04:00","citationText":"Regenstein, 2017"}
 </script>
 <!--radix_placeholder_navigation_before_body-->
 <header class="header header--fixed" role="banner">
@@ -7151,7 +7158,10 @@ highchart(type = &quot;stock&quot;) %&gt;%
 
 <!--radix_placeholder_site_after_body-->
 <!--/radix_placeholder_site_after_body-->
-<div class="appendix-bottom"></div>
+<div class="appendix-bottom">
+<h3 id="reuse">Reuse</h3>
+<p>Text and figures are licensed under Creative Commons Attribution <a rel="license" href="https://creativecommons.org/licenses/by/4.0/">CC BY 4.0</a>. The figures that have been reused from other sources don't fall under this license and can be recognized by a note in their caption: &quot;Figure from ...&quot;.</p>
+</div>
 <!--radix_placeholder_navigation_after_body-->
 <!--/radix_placeholder_navigation_after_body-->
 

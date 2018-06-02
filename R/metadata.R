@@ -65,8 +65,7 @@ transform_metadata <- function(input_file, site_config, collection_config, metad
 
   # mergable metadata
   mergeable_metadata <- c("base_url", "repository_url",
-                          "creative_commons", "license_url",
-                          "twitter", "favicon")
+                          "creative_commons", "twitter", "favicon")
 
   # merge collection level config into site config
   base_config <- list()
@@ -125,13 +124,11 @@ transform_metadata <- function(input_file, site_config, collection_config, metad
     }
 
     # compute license url
-    if (is.null(metadata$license_url)) {
-      metadata$license_url <-
-        paste0(
-          "https://creativecommons.org/licenses/",
-          tolower(sub("^CC ", "", metadata$creative_commons)), "/4.0/"
-        )
-    }
+    metadata$license_url <-
+      paste0(
+        "https://creativecommons.org/licenses/",
+        tolower(sub("^CC ", "", metadata$creative_commons)), "/4.0/"
+      )
   }
 
   # base_url (strip trailing slashes)
@@ -220,7 +217,7 @@ transform_metadata <- function(input_file, site_config, collection_config, metad
 }
 
 
-metadata_html <- function(metadata) {
+metadata_html <- function(metadata, self_contained) {
 
   # title
   title <- list()
@@ -243,11 +240,13 @@ metadata_html <- function(metadata) {
       href = metadata$canonical_url
     )
   }
-  if (!is.null(metadata$license_url)) {
-    links[[length(links) + 1]] <- tags$link(
-      rel = "license",
-      href = metadata$license_url
-    )
+  if (!self_contained) {
+    if (!is.null(metadata$license_url)) {
+      links[[length(links) + 1]] <- tags$link(
+        rel = "license",
+        href = metadata$license_url
+      )
+    }
   }
   if (!is.null(metadata$favicon)) {
     links[[length(links) + 1]] <- tags$link(
@@ -314,8 +313,8 @@ metadata_html <- function(metadata) {
   placeholder_html("meta_tags", meta_tags)
 }
 
-metadata_in_header <- function(metadata) {
-  meta_tags <- metadata_html(metadata)
+metadata_in_header <- function(metadata, self_contained) {
+  meta_tags <- metadata_html(metadata, self_contained)
   meta_html <- as.character(meta_tags)
   meta_file <- tempfile(fileext = "html")
   writeLines(meta_html, meta_file, useBytes = TRUE)

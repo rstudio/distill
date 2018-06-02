@@ -141,8 +141,8 @@ d-appendix .citation-appendix,
   word-wrap: break-word;
 }
 
-/* Styles for index layout (hide title) */
-.layout-index d-title, .layout-index .d-title {
+/* Styles for listing layout (hide title) */
+.layout-listing d-title, .layout-listing .d-title {
   display: none;
 }
 
