@@ -1,13 +1,9 @@
 ---
 title: "Reproducible Finance with R"
 site: radix::radix_website
-layout: listing
+listing:
+  collection: posts
 ---
-
-```{r}
-library(radix)
-article_listing("posts")
-```
 
 
 

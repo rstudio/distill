@@ -1,11 +1,28 @@
 
 
-#' Render a listing of Radix articles
-#'
-#' @param collection Collection name
-#'
-#' @export
-article_listing <- function(collection) {
+listing_before_body <- function(metadata) {
+
+  if(!is.null(metadata$listing)) {
+
+    # determine/validate collection
+    collection <- metadata$listing$collection
+    if (is.null(collection))
+      stop("You must specify a collection for listing pages", call. = FALSE)
+
+    # generate html
+    listing_html <- article_listing_html(collection)
+
+    # return as file
+    html_as_file(listing_html)
+
+
+  } else {
+    NULL
+  }
+}
+
+
+article_listing_html <- function(collection) {
 
   # collection dir
   collection_dir <- paste0("_", collection)
@@ -32,8 +49,15 @@ article_listing <- function(collection) {
           article$published_year))
     )
 
+    preview <- article$preview_url
+    if (is.null(preview)) {
+      if (!is.null(article$preview))
+        preview <- file.path(path, article$preview)
+    }
+    if (!is.null(preview))
+      preview <- img(src = preview)
     thumbnail <- div(class = "thumbnail",
-      img(src = file.path(path, article$preview))
+      preview
     )
 
     description <- div(class = "description",

@@ -7,23 +7,14 @@
         - don't attempt to show site navigational elements for single post preview
     - Currently no footer in preview
 
-- Saving Rmd file in website project re-knits
 
 - consider forcing self_contained to FALSE for collections ("auto")
+- self-contained preview image?
 
 - title link reloads current page
 - license link in head is actually downloaded by pandoc!!!
 
 - http://bwlewis.github.io/cassini/
-
----------------------------------------------------------
-
-- Handle no preview available
-
-- Messiness around l-body being applied by default
-  (perhaps don't emit default l-body and apply 100% to top level of d-article)
-  or maybe just use top level metadata
----------------------------------------------------------
 
 - index/category/archive pages (categories should be inline)
 - email subscription

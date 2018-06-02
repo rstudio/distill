@@ -59,6 +59,9 @@ function init_distill() {
   var article = $('<d-article></d-article>');
   $('.d-article').wrap(article).children().unwrap();
 
+  // move post list into article
+  $('.posts-list').appendTo($('d-article'));
+
   // create d-appendix
   $('.d-appendix').changeElementType('d-appendix');
 

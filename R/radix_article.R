@@ -131,6 +131,10 @@ radix_article <- function(fig_width = 6,
     if (!is.null(metadata$title_prefix))
       args <- c(args, "--title-prefix", metadata$title_prefix)
 
+    # if this is a listing then set the layout variable
+    if (!is.null(metadata$listing))
+      args <- c(args, pandoc_variable_arg("layout", "listing"))
+
     # add html dependencies
     knitr::knit_meta_add(list(
       html_dependency_jquery(),
@@ -151,7 +155,8 @@ radix_article <- function(fig_width = 6,
     before_body <- c(front_matter_before_body(metadata),
                      navigation_before_body_file(site_config),
                      render_site_before_body_as_placeholder(site_config),
-                     includes$before_body)
+                     includes$before_body,
+                     listing_before_body(metadata))
 
     # after body includes: user then radix
     after_body <- c(includes$after_body,

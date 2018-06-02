@@ -13,14 +13,14 @@
     affiliation_url: https://www.rstudio.com
     first_name: Jonathan
     last_name: Regenstein
-  date: 1.5052788e+09
+  date: 1.5052752e+09
   site_title: Reproducible Finance with R
   published_year: '2017'
   published_month: Sept.
   published_day: 13
   published_month_padded: 09
   published_day_padded: '13'
-  published_date_rfc: Wed, 13 Sep 2017 00:00:00 -0500
+  published_date_rfc: Wed, 13 Sep 2017 00:00:00 -0400
   published_iso_date_only: '2017-09-13'
   journal: []
   license_url: https://creativecommons.org/licenses/by/4.0/
@@ -42,14 +42,14 @@
     affiliation_url: https://www.rstudio.com
     first_name: Jonathan
     last_name: Regenstein
-  date: 1.4888664e+09
+  date: 1.4888628e+09
   site_title: Reproducible Finance with R
   published_year: '2017'
   published_month: March
   published_day: 7
   published_month_padded: '03'
   published_day_padded: '07'
-  published_date_rfc: Tue, 07 Mar 2017 00:00:00 -0600
+  published_date_rfc: Tue, 07 Mar 2017 00:00:00 -0500
   published_iso_date_only: '2017-03-07'
   journal: []
   license_url: https://creativecommons.org/licenses/by/4.0/
@@ -72,14 +72,14 @@
     affiliation_url: https://www.rstudio.com
     first_name: Jonathan
     last_name: Regenstein
-  date: 1.4786712e+09
+  date: 1.4786676e+09
   site_title: Reproducible Finance with R
   published_year: '2016'
   published_month: Nov.
   published_day: 9
   published_month_padded: '11'
   published_day_padded: 09
-  published_date_rfc: Wed, 09 Nov 2016 00:00:00 -0600
+  published_date_rfc: Wed, 09 Nov 2016 00:00:00 -0500
   published_iso_date_only: '2016-11-09'
   journal: []
   license_url: https://creativecommons.org/licenses/by/4.0/
@@ -103,14 +103,14 @@
     affiliation_url: https://www.rstudio.com
     first_name: Jonathan
     last_name: Regenstein
-  date: 1.5102072e+09
+  date: 1.5102036e+09
   site_title: Reproducible Finance with R
   published_year: '2017'
   published_month: Nov.
   published_day: 9
   published_month_padded: '11'
   published_day_padded: 09
-  published_date_rfc: Thu, 09 Nov 2017 00:00:00 -0600
+  published_date_rfc: Thu, 09 Nov 2017 00:00:00 -0500
   published_iso_date_only: '2017-11-09'
   journal: []
   license_url: https://creativecommons.org/licenses/by/4.0/
