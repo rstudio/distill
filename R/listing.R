@@ -41,7 +41,7 @@ article_listing <- function(collection) {
       p(article$description)
     )
 
-    a(href = paste0(path, "/index.html"), class = "post-preview",
+    a(href = paste0(path, "/"), class = "post-preview",
       metadata,
       thumbnail,
       description
