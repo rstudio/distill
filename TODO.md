@@ -14,6 +14,8 @@
 - title link reloads current page
 - license link in head is actually downloaded by pandoc!!!
 
+- http://bwlewis.github.io/cassini/
+
 ---------------------------------------------------------
 
 - directory links don't work in rstudio preview
