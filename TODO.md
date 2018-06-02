@@ -10,6 +10,8 @@
 
 - self-contained preview image?
 - or maybe allow marking an image as the preview (.article-preview, data-article-preview)
+- or pick out knitr images (use hook to mark?)
+
 
 - http://bwlewis.github.io/cassini/
 
