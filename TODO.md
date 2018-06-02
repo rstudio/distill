@@ -8,8 +8,8 @@
     - Currently no footer in preview
 
 
-- consider forcing self_contained to FALSE for collections ("auto")
 - self-contained preview image?
+- or maybe allow marking an image as the preview (.article-preview, data-article-preview)
 
 - http://bwlewis.github.io/cassini/
 
@@ -26,14 +26,7 @@
 
 - Improved error messages for incomplete author field
 
-- Add thumbnails to sample posts
-- 560x295
-- 1200 pixels wide by 675 pixels tall 
-l-body-outset, fig.height=4.5
-
 - Add some citations to sample posts
-
-- base_dir + author should yield a citation url
 
 - larger scale visualization layouts
     - iframe with npr library (pym.js) for sizing (generic) (check with shinyapps.io)
