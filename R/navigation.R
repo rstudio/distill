@@ -85,7 +85,7 @@ navigation_before_body_html <- function(site_config) {
 
     left_nav <- div(class = "nav-left",
                     logo,
-                    a(href = "index.html", class = "title", site_config$title),
+                    span(class = "title", site_config$title),
                     build_menu(site_config[["navbar"]][["left"]])
     )
 
