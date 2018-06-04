@@ -1,11 +1,11 @@
 
 
-appendices_after_body_html <- function(metadata) {
+appendices_after_body_html <- function(site_config, metadata) {
 
   # write appendixes
   updates_and_corrections <- appendix_updates_and_corrections(metadata)
   creative_commons <- appendix_creative_commons(metadata)
-  citation <- appendix_citation(metadata)
+  citation <- appendix_citation(site_config, metadata)
   appendix <- tags$div(class = "appendix-bottom",
                        updates_and_corrections,
                        creative_commons,
@@ -28,8 +28,8 @@ appendices_after_body_html <- function(metadata) {
   ))
 }
 
-appendices_after_body_file <- function(metadata) {
-  html_file(appendices_after_body_html(metadata))
+appendices_after_body_file <- function(site_config, metadata) {
+  html_file(appendices_after_body_html(site_config, metadata))
 }
 
 appendix_updates_and_corrections <- function(metadata) {
@@ -105,7 +105,7 @@ appendix_creative_commons <- function(metadata) {
   }
 }
 
-appendix_citation <- function(metadata) {
+appendix_citation <- function(site_config, metadata) {
 
   if (is_citeable(metadata)) {
 
@@ -113,7 +113,7 @@ appendix_citation <- function(metadata) {
       if (!is.null(metadata$journal$title)) {
         sprintf('%s, "%s", %s, %s',
                 metadata$concatenated_authors,
-                metadata$qualified_title,
+                qualified_title(site_config, metadata),
                 metadata$journal$title,
                 metadata$published_year)
       } else {
@@ -122,7 +122,7 @@ appendix_citation <- function(metadata) {
                 metadata$published_year,
                 metadata$published_month,
                 metadata$published_day,
-                metadata$qualified_title,
+                qualified_title(site_config, metadata),
                 metadata$citation_url)
       }
     }
@@ -145,7 +145,7 @@ appendix_citation <- function(metadata) {
                       sep = '\n'),
                 metadata$slug,
                 metadata$bibtex_authors,
-                metadata$qualified_title,
+                qualified_title(site_config, metadata),
                 metadata$journal$title,
                 metadata$published_year,
                 suffix
@@ -160,7 +160,7 @@ appendix_citation <- function(metadata) {
                       sep = '\n'),
                 metadata$slug,
                 metadata$bibtex_authors,
-                metadata$qualified_title,
+                qualified_title(site_config, metadata),
                 metadata$citation_url,
                 metadata$published_year
         )

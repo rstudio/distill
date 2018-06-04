@@ -6,14 +6,6 @@ transform_configuration <- function(file, site_config, collection_config, metada
   site_config <- transform_site_config(site_config)
   metadata <- transform_metadata(file, site_config, collection_config, metadata, auto_preview)
 
-  # provide title-prefix  and qualified title if specified in site and different from title
-  if (!is.null(site_config$title) && !identical(site_config$title, metadata$title)) {
-    metadata$title_prefix <- site_config$title
-    metadata$qualified_title <- sprintf("%s: %s", site_config$title, metadata$title)
-  } else {
-    metadata$qualified_title <- metadata$title
-  }
-
   list(
     site_config = site_config,
     metadata = metadata
@@ -47,9 +39,6 @@ transform_metadata <- function(file, site_config, collection_config, metadata, a
   # validate title
   if (is.null(metadata$title))
     stop("You must provide a title for Radix articles", call. = FALSE)
-
-  # provide site title
-  metadata$site_title <- site_config$title
 
   # if the site has a base_url then we need to tweak the base url of the
   # input document to use the site
@@ -221,12 +210,13 @@ transform_metadata <- function(file, site_config, collection_config, metadata, a
   metadata
 }
 
-metadata_html <- function(metadata, self_contained) {
+metadata_html <- function(site_config, metadata, self_contained) {
 
   # title
   title <- list()
-  if (!is.null(metadata$qualified_title))
-    title <- tags$title(metadata$qualified_title)
+  qualified_title <- qualified_title(site_config, metadata)
+  if (!is.null(qualified_title))
+    title <- tags$title(qualified_title)
 
   # description
   description_meta <- list()
@@ -288,13 +278,13 @@ metadata_html <- function(metadata, self_contained) {
   }
 
   # open graph (https://developers.facebook.com/docs/sharing/webmasters#markup)
-  open_graph_meta <- open_graph_metadata(metadata)
+  open_graph_meta <- open_graph_metadata(site_config, metadata)
 
   # twitter card (https://dev.twitter.com/cards/types/summary)
-  twitter_card_meta <- twitter_card_metadata(metadata)
+  twitter_card_meta <- twitter_card_metadata(site_config, metadata)
 
   # google scholar (https://scholar.google.com/intl/en/scholar/inclusion.html)
-  google_scholar_meta <- google_scholar_metadata(metadata)
+  google_scholar_meta <- google_scholar_metadata(site_config, metadata)
 
   # render head tags
   meta_tags <- do.call(tagList, list(
@@ -317,8 +307,8 @@ metadata_html <- function(metadata, self_contained) {
   placeholder_html("meta_tags", meta_tags)
 }
 
-metadata_in_header <- function(metadata, self_contained) {
-  meta_tags <- metadata_html(metadata, self_contained)
+metadata_in_header <- function(site_config, metadata, self_contained) {
+  meta_tags <- metadata_html(site_config, metadata, self_contained)
   meta_html <- as.character(meta_tags)
   meta_file <- tempfile(fileext = "html")
   writeLines(meta_html, meta_file, useBytes = TRUE)
@@ -326,12 +316,12 @@ metadata_in_header <- function(metadata, self_contained) {
 }
 
 
-open_graph_metadata <- function(metadata) {
+open_graph_metadata <- function(site_config, metadata) {
 
   # core descriptors
   open_graph_meta <- list(
     HTML("<!--  https://developers.facebook.com/docs/sharing/webmasters#markup -->"),
-    tags$meta(property = "og:title", content = metadata$qualified_title),
+    tags$meta(property = "og:title", content = qualified_title(site_config, metadata)),
     tags$meta(property = "og:type", content = "article")
   )
 
@@ -358,12 +348,12 @@ open_graph_metadata <- function(metadata) {
   add_open_graph_meta("og:locale", metadata$lang)
 
   # site name
-  add_open_graph_meta("og:site_name", metadata$site_title)
+  add_open_graph_meta("og:site_name", site_config$title)
 
   open_graph_meta
 }
 
-twitter_card_metadata <- function(metadata) {
+twitter_card_metadata <- function(site_config, metadata) {
 
   twitter_card_meta <- list(
     HTML("<!--  https://dev.twitter.com/cards/types/summary -->")
@@ -382,7 +372,7 @@ twitter_card_metadata <- function(metadata) {
   add_twitter_card_meta("twitter:card", card_type)
 
   # title and description
-  add_twitter_card_meta("twitter:title", metadata$qualified_title)
+  add_twitter_card_meta("twitter:title", qualified_title(site_config, metadata))
   add_twitter_card_meta("twitter:description", metadata$description)
 
   # cannonical url
@@ -404,7 +394,7 @@ twitter_card_metadata <- function(metadata) {
 
 # see https://github.com/scieloorg/opac/files/1136749/Metatags.for.Bibliographic.Metadata.Google.Scholar.-.COMPLETE.pdf
 
-google_scholar_metadata <- function(metadata) {
+google_scholar_metadata <- function(site_config, metadata) {
 
   # empty if not citable
   if (!is_citeable(metadata))
@@ -412,7 +402,7 @@ google_scholar_metadata <- function(metadata) {
 
   google_scholar_meta <- list(
     HTML("<!--  https://scholar.google.com/intl/en/scholar/inclusion.html#indexing -->"),
-    tags$meta(name = "citation_title", content = metadata$qualified_title)
+    tags$meta(name = "citation_title", content = qualified_title(site_config, metadata))
   )
 
   # helper to add properties
@@ -725,4 +715,15 @@ resolve_preview <- function(file) {
   }
 
 }
+
+
+# provide qualified title if specified in site and different from title
+qualified_title <- function(site_config, metadata) {
+  if (!is.null(site_config$title) && !identical(site_config$title, metadata$title)) {
+    sprintf("%s: %s", site_config$title, metadata$title)
+  } else {
+    metadata$title
+  }
+}
+
 

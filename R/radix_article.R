@@ -98,10 +98,6 @@ radix_article <- function(fig_width = 6,
       auto_preview = !self_contained
     )
 
-    # add title-prefix if necessary
-    if (!is.null(metadata$title_prefix))
-      args <- c(args, "--title-prefix", metadata$title_prefix)
-
     # if this is a listing then set the layout variable
     if (!is.null(metadata$listing))
       args <- c(args, pandoc_variable_arg("layout", "listing"))
@@ -116,7 +112,7 @@ radix_article <- function(fig_width = 6,
     ))
 
     # header includes: radix then user
-    in_header <- c(metadata_in_header(metadata, self_contained),
+    in_header <- c(metadata_in_header(site_config, metadata, self_contained),
                    citation_references_in_header(input_file, metadata$bibliography),
                    metadata_json,
                    manifest_in_header(site_config, input_file, metadata),
@@ -132,7 +128,7 @@ radix_article <- function(fig_width = 6,
     # after body includes: user then radix
     after_body <- c(includes$after_body,
                     site_after_body_file(site_config),
-                    appendices_after_body_file(metadata),
+                    appendices_after_body_file(site_config, metadata),
                     navigation_after_body_file(dirname(input_file), site_config))
 
     # populate args
