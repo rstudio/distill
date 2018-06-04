@@ -8,8 +8,8 @@ navigation_before_body <- function(site_config) {
   render_navigation_html(navigation_before_body_html(site_config))
 }
 
-navigation_after_body <- function(site_dir, site_config) {
-  render_navigation_html(navigation_after_body_html(site_dir, site_config))
+navigation_after_body <- function(site_dir, site_config, offset) {
+  render_navigation_html(navigation_after_body_html(site_dir, site_config, offset))
 }
 
 navigation_in_header_file <- function(site_config) {
@@ -20,8 +20,34 @@ navigation_before_body_file <- function(site_config) {
   render_navigation_html_file(navigation_before_body_html(site_config))
 }
 
-navigation_after_body_file <- function(site_dir, site_config) {
-  render_navigation_html_file(navigation_after_body_html(site_dir, site_config))
+navigation_after_body_file <- function(site_dir, site_config, offset = NULL) {
+  render_navigation_html_file(navigation_after_body_html(site_dir, site_config, offset))
+}
+
+navigation_html_generator <- function() {
+
+  cache <- new.env(parent = emptyenv())
+
+  function(site_dir, site_config, offset) {
+
+    # populate cache if we need to
+    if (!exists(offset, envir = cache)) {
+
+      # offset the config
+      site_config <- offset_site_config(site_dir, site_config, offset)
+
+      # generate html and assign into cache
+      assign(offset, envir = cache, list(
+        in_header = navigation_in_header(site_config),
+        before_body = navigation_before_body(site_config),
+        after_body = navigation_after_body(site_dir, site_config, offset)
+      ))
+    }
+
+    # return html
+    get(offset, envir = cache)
+
+  }
 }
 
 navigation_in_header_html <- function(site_config) {
@@ -107,7 +133,7 @@ navigation_before_body_html <- function(site_config) {
   placeholder_html("navigation_before_body", header)
 }
 
-navigation_after_body_html <- function(site_dir, site_config) {
+navigation_after_body_html <- function(site_dir, site_config, offset) {
   footer <- file.path(site_dir, "footer.html")
   if (!is.null(site_config$navbar) && file.exists(footer)) {
     footer_template <- system.file("rmarkdown/templates/radix_article/resources/footer.html",
@@ -122,7 +148,7 @@ navigation_after_body_html <- function(site_dir, site_config) {
                      "--metadata", "pagetitle:footer")
     )
 
-    footer_html <- fixup_navigation_paths(footer_html, site_dir, site_config)
+    footer_html <- fixup_navigation_paths(footer_html, site_dir, site_config, offset)
 
     html_from_file(footer_html)
 
@@ -132,37 +158,7 @@ navigation_after_body_html <- function(site_dir, site_config) {
 }
 
 
-
-navigation_html_generator <- function() {
-
-  cache <- new.env(parent = emptyenv())
-
-  function(site_dir, site_config, offset) {
-
-    # populate cache if we need to
-    if (!exists(offset, envir = cache)) {
-
-      # offset the config
-      site_config <- offset_site_config(site_dir, site_config, offset)
-
-      # generate html and assign into cache
-      assign(offset, envir = cache, list(
-        in_header = navigation_in_header(site_config),
-        before_body = navigation_before_body(site_config),
-        after_body = navigation_after_body(site_dir, site_config)
-      ))
-    }
-
-    # return html
-    get(offset, envir = cache)
-
-  }
-}
-
-fixup_navigation_paths <- function(file, site_dir, site_config) {
-
-  # check for offset
-  offset <- attr(site_config, "offset")
+fixup_navigation_paths <- function(file, site_dir, site_config, offset) {
 
   # function to fixup an element type
   fixup_element_paths <- function(html, tag, attrib) {
@@ -216,6 +212,40 @@ render_navigation_html_file <- function(navigation_html) {
   file <- tempfile(fileext = "html")
   writeLines(html, file)
   file
+}
+
+
+find_site_dir <- function(input_file) {
+  tryCatch(
+    rprojroot::find_root(
+      criterion =  rprojroot::has_file("_site.yml"),
+      path = dirname(input_file)
+    ),
+    error = function(e) NULL
+  )
+}
+
+
+offset_site_config <- function(site_dir, config, offset) {
+
+  # capture original output dir
+  output_dir <- config$output_dir
+
+  # update file references
+  config <- rapply(config, how = "replace", classes = c("character"),
+                   function(x) {
+                     if (file.exists(file.path(site_dir, x))) {
+                       file.path(offset, x)
+                     } else {
+                       x
+                     }
+                   }
+  )
+
+  # preserve output_dir
+  config$output_dir <- output_dir
+
+  config
 }
 
 

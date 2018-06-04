@@ -1,12 +1,5 @@
 
 
-- RStudio post preview isn't quite right for inline collection preview
-    - relative references won't be correct when output_dir is defined
-    - we either need:to:
-        - copy the post to output_dir during preview (maybe smart copy?); or
-        - don't attempt to show site navigational elements for single post preview
-    - Currently no footer in preview
-
 
 - self-contained preview image?
 - or maybe allow marking an image as the preview (.article-preview, data-article-preview)

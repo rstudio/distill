@@ -16,7 +16,7 @@
   </style>
 
   <!--radix_placeholder_meta_tags-->
-  <title>Reproducible Finance with R: Quandl and Forecasting</title>
+  <title>Quandl and Forecasting</title>
   
   <meta property="description" itemprop="description" content="In this post, we will explore commodity prices using data from Quandl, a repository for both free and paid data sources. We will also get into the forecasting game a bit and think about how best to use dygraphs when visualizing predicted time series as an extension of historical data.
 " />
@@ -28,16 +28,15 @@
   <meta name="article:author" content="Jonathan Regenstein" />
   
   <!--  https://developers.facebook.com/docs/sharing/webmasters#markup -->
-  <meta property="og:title" content="Reproducible Finance with R: Quandl and Forecasting" />
+  <meta property="og:title" content="Quandl and Forecasting" />
   <meta property="og:type" content="article" />
   <meta property="og:description" content="In this post, we will explore commodity prices using data from Quandl, a repository for both free and paid data sources. We will also get into the forecasting game a bit and think about how best to use dygraphs when visualizing predicted time series as an extension of historical data.
 " />
   <meta property="og:locale" content="en_US" />
-  <meta property="og:site_name" content="Reproducible Finance with R" />
   
   <!--  https://dev.twitter.com/cards/types/summary -->
   <meta property="twitter:card" content="summary" />
-  <meta property="twitter:title" content="Reproducible Finance with R: Quandl and Forecasting" />
+  <meta property="twitter:title" content="Quandl and Forecasting" />
   <meta property="twitter:description" content="In this post, we will explore commodity prices using data from Quandl, a repository for both free and paid data sources. We will also get into the forecasting game a bit and think about how best to use dygraphs when visualizing predicted time series as an extension of historical data.
 " />
   
@@ -50,311 +49,7 @@
   <script type="text/json" id="radix-resource-manifest">
   {"type":"character","attributes":{},"value":["preview.png","quandl-and-forecasting_files/figure-html/unnamed-chunk-6-1.png","quandl-and-forecasting_files/figure-html5/unnamed-chunk-5-1.png","quandl-and-forecasting_files/figure-html5/unnamed-chunk-6-1.png","quandl-and-forecasting.html"]}
   </script>
-  
-  
   <!--radix_placeholder_navigation_in_header-->
-  <script type="application/javascript">
-    window.document.addEventListener("DOMContentLoaded", function (event) {
-  
-      // initialize headroom for banner
-      $('header').each(function(i, val) {
-          var headroom = new Headroom(this);
-          headroom.init();
-          if(window.location.hash)
-            headroom.unpin();
-          $(this).addClass('headroom--transition');
-      });
-  
-      // responsive menu
-      $('.radix-site-header').each(function(i, val) {
-        var topnav = $(this);
-        var toggle = topnav.find('.nav-toggle');
-        toggle.on('click', function() {
-          topnav.toggleClass('responsive');
-        });
-      });
-  
-      // nav dropdowns
-      $('.nav-dropbtn').click(function(e) {
-        $(this).next('.nav-dropdown-content').toggleClass('nav-dropdown-active');
-      });
-      $("body").click(function(e){
-        $('.nav-dropdown-content').removeClass('nav-dropdown-active');
-      });
-      $(".nav-dropdown").click(function(e){
-        e.stopPropagation();
-      });
-    });
-  </script>
-  
-  <style type="text/css">
-  
-  /* Theme (user-documented overrideables for nav appearance) */
-  
-  .radix-site-nav {
-    color: rgba(255, 255, 255, 0.8);
-    background-color: #455a64;
-    font-size: 15px;
-    font-weight: 300;
-  }
-  
-  .radix-site-nav a {
-    color: inherit;
-    text-decoration: none;
-  }
-  
-  .radix-site-nav a:hover {
-    color: white;
-  }
-  
-  @media print {
-    .radix-site-nav {
-      display: none;
-    }
-  }
-  
-  .radix-site-header {
-  
-  }
-  
-  .radix-site-footer {
-  
-  }
-  
-  
-  /* Site Header */
-  
-  .radix-site-header {
-    width: 100%;
-    box-sizing: border-box;
-    z-index: 3;
-  }
-  
-  .radix-site-header .nav-left {
-    display: inline-block;
-    margin-left: 8px;
-  }
-  
-  @media screen and (max-width: 768px) {
-    .radix-site-header .nav-left {
-      margin-left: 0;
-    }
-  }
-  
-  
-  .radix-site-header .nav-right {
-    float: right;
-    margin-right: 8px;
-  }
-  
-  .radix-site-header a,
-  .radix-site-header .title {
-    display: inline-block;
-    text-align: center;
-    padding: 14px 10px 14px 10px;
-  }
-  
-  .radix-site-header .title {
-    font-size: 18px;
-  }
-  
-  .radix-site-header .logo {
-    padding: 0;
-  }
-  
-  .radix-site-header .logo img {
-    display: none;
-    max-height: 20px;
-    width: auto;
-    margin-bottom: -4px;
-  }
-  
-  .radix-site-header .nav-image img {
-    max-height: 18px;
-    width: auto;
-    display: inline-block;
-    margin-bottom: -3px;
-  }
-  
-  
-  
-  @media screen and (min-width: 1000px) {
-    .radix-site-header .logo img {
-      display: inline-block;
-    }
-    .radix-site-header .nav-left {
-      margin-left: 20px;
-    }
-    .radix-site-header .nav-right {
-      margin-right: 20px;
-    }
-    .radix-site-header .title {
-      padding-left: 12px;
-    }
-  }
-  
-  
-  .radix-site-header .nav-toggle {
-    display: none;
-  }
-  
-  .nav-dropdown {
-    display: inline-block;
-    position: relative;
-  }
-  
-  .nav-dropdown .nav-dropbtn {
-    border: none;
-    outline: none;
-    color: rgba(255, 255, 255, 0.8);
-    padding: 16px 10px;
-    background-color: transparent;
-    font-family: inherit;
-    font-size: inherit;
-    font-weight: inherit;
-    margin: 0;
-    margin-top: 1px;
-    z-index: 2;
-  }
-  
-  .nav-dropdown-content {
-    display: none;
-    position: absolute;
-    background-color: white;
-    min-width: 160px;
-    border: 1px solid rgba(0,0,0,0.15);
-    border-radius: 4px;
-    box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.1);
-    z-index: 1;
-    margin-top: 2px;
-    white-space: nowrap;
-  }
-  
-  .nav-dropdown-content hr {
-    margin-top: 0;
-    margin-bottom: 0;
-    border: none;
-    border-bottom: 1px solid rgba(0, 0, 0, 0.1);
-  }
-  
-  .nav-dropdown-active {
-    display: block;
-  }
-  
-  .nav-dropdown-content a {
-    color: black;
-    padding: 8px 16px;
-    text-decoration: none;
-    display: block;
-    text-align: left;
-  }
-  
-  .nav-dropdown:hover .nav-dropbtn {
-    color: white;
-  }
-  
-  .nav-dropdown-content a:hover {
-    background-color: #ddd;
-    color: black;
-  }
-  
-  .nav-right .nav-dropdown-content {
-    margin-left: -45%;
-    right: 0;
-  }
-  
-  @media screen and (max-width: 768px) {
-    .radix-site-header a, .radix-site-header .nav-dropdown  {display: none;}
-    .radix-site-header a.nav-toggle {
-      float: right;
-      display: block;
-    }
-    .radix-site-header .title {
-      margin-left: 0;
-    }
-    .radix-site-header .nav-right {
-      margin-right: 0;
-    }
-    .radix-site-header {
-      overflow: hidden;
-    }
-    .nav-right .nav-dropdown-content {
-      margin-left: 0;
-    }
-  }
-  
-  
-  @media screen and (max-width: 768px) {
-    .radix-site-header.responsive {position: relative;}
-    .radix-site-header.responsive a.nav-toggle {
-      position: absolute;
-      right: 0;
-      top: 0;
-    }
-    .radix-site-header.responsive a,
-    .radix-site-header.responsive .nav-dropdown {
-      display: block;
-      text-align: left;
-    }
-    .radix-site-header.responsive .nav-left,
-    .radix-site-header.responsive .nav-right {
-      width: 100%;
-    }
-    .radix-site-header.responsive .nav-dropdown {float: none;}
-    .radix-site-header.responsive .nav-dropdown-content {position: relative;}
-    .radix-site-header.responsive .nav-dropdown .nav-dropbtn {
-      display: block;
-      width: 100%;
-      text-align: left;
-    }
-  }
-  
-  /* Site Footer */
-  
-  .radix-site-footer {
-    width: 100%;
-    overflow: hidden;
-    box-sizing: border-box;
-    z-index: 3;
-    margin-top: 30px;
-    padding-top: 30px;
-    padding-bottom: 30px;
-    text-align: center;
-  }
-  
-  /* Headroom */
-  
-  d-title {
-    padding-top: 6rem;
-  }
-  
-  @media print {
-    d-title {
-      padding-top: 4rem;
-    }
-  }
-  
-  .headroom {
-    z-index: 1000;
-    position: fixed;
-    top: 0;
-    left: 0;
-    right: 0;
-  }
-  
-  .headroom--transition {
-    transition: all .4s ease-in-out;
-  }
-  
-  .headroom--unpinned {
-    top: -100px;
-  }
-  
-  .headroom--pinned {
-    top: 0;
-  }
-  
-  </style>
   <!--/radix_placeholder_navigation_in_header-->
   <script>(function() {
   // If window.HTMLWidgets is already defined, then use it; otherwise create a
@@ -7553,22 +7248,6 @@ function init_common() {
 {"title":"Quandl and Forecasting","description":"In this post, we will explore commodity prices using data from Quandl, a repository for both free and paid data sources. We will also get into the forecasting game a bit and think about how best to use dygraphs when visualizing predicted time series as an extension of historical data.\n","authors":[{"author":"Jonathan Regenstein","authorURL":"https://www.linkedin.com/in/jkregenstein/","affiliation":"RStudio","affiliationURL":"https://www.rstudio.com"}],"publishedDate":"2017-03-07T00:00:00.000-05:00","citationText":"Regenstein, 2017"}
 </script>
 <!--radix_placeholder_navigation_before_body-->
-<header class="header header--fixed" role="banner">
-<nav class="radix-site-nav radix-site-header">
-<div class="nav-left">
-<span class="logo">
-<img src="data:image/png;base64,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" />
-</span>
-<span class="title">Reproducible Finance with R</span>
-</div>
-<div class="nav-right">
-<a href="../../index.html">Home</a>
-<a href="../../about.html">About</a>
-<a href="../../contributors.html">Contributors</a>
-<a href="javascript:void(0);" class="nav-toggle">☰</a>
-</div>
-</nav>
-</header>
 <!--/radix_placeholder_navigation_before_body-->
 <!--radix_placeholder_site_before_body-->
 <!--/radix_placeholder_site_before_body-->
@@ -7655,8 +7334,8 @@ head(index(oil_monthly))</code></pre>
 <div class="layout-chunk" data-layout="l-page">
 <pre class="r"><code>
 dygraph(oil_monthly, main = &quot;Monthly oil Prices&quot;)</code></pre>
-<div id="htmlwidget-f68ea4f6ed3fef8c8362" style="width:576px;height:384px;" class="dygraphs html-widget"></div>
-<script type="application/json" data-for="htmlwidget-f68ea4f6ed3fef8c8362">{"x":{"attrs":{"title":"Monthly oil Prices","labels":["month","V1"],"legend":"auto","retainDateWindow":false,"axes":{"x":{"pixelsPerLabel":60}}},"scale":"monthly","annotations":[],"shadings":[],"events":[],"format":"date","data":[["2006-01-01T00:00:00.000Z","2006-02-01T00:00:00.000Z","2006-03-01T00:00:00.000Z","2006-04-01T00:00:00.000Z","2006-05-01T00:00:00.000Z","2006-06-01T00:00:00.000Z","2006-07-01T00:00:00.000Z","2006-08-01T00:00:00.000Z","2006-09-01T00:00:00.000Z","2006-10-01T00:00:00.000Z","2006-11-01T00:00:00.000Z","2006-12-01T00:00:00.000Z","2007-01-01T00:00:00.000Z","2007-02-01T00:00:00.000Z","2007-03-01T00:00:00.000Z","2007-04-01T00:00:00.000Z","2007-05-01T00:00:00.000Z","2007-06-01T00:00:00.000Z","2007-07-01T00:00:00.000Z","2007-08-01T00:00:00.000Z","2007-09-01T00:00:00.000Z","2007-10-01T00:00:00.000Z","2007-11-01T00:00:00.000Z","2007-12-01T00:00:00.000Z","2008-01-01T00:00:00.000Z","2008-02-01T00:00:00.000Z","2008-03-01T00:00:00.000Z","2008-04-01T00:00:00.000Z","2008-05-01T00:00:00.000Z","2008-06-01T00:00:00.000Z","2008-07-01T00:00:00.000Z","2008-08-01T00:00:00.000Z","2008-09-01T00:00:00.000Z","2008-10-01T00:00:00.000Z","2008-11-01T00:00:00.000Z","2008-12-01T00:00:00.000Z","2009-01-01T00:00:00.000Z","2009-02-01T00:00:00.000Z","2009-03-01T00:00:00.000Z","2009-04-01T00:00:00.000Z","2009-05-01T00:00:00.000Z","2009-06-01T00:00:00.000Z","2009-07-01T00:00:00.000Z","2009-08-01T00:00:00.000Z","2009-09-01T00:00:00.000Z","2009-10-01T00:00:00.000Z","2009-11-01T00:00:00.000Z","2009-12-01T00:00:00.000Z","2010-01-01T00:00:00.000Z","2010-02-01T00:00:00.000Z","2010-03-01T00:00:00.000Z","2010-04-01T00:00:00.000Z","2010-05-01T00:00:00.000Z","2010-06-01T00:00:00.000Z","2010-07-01T00:00:00.000Z","2010-08-01T00:00:00.000Z","2010-09-01T00:00:00.000Z","2010-10-01T00:00:00.000Z","2010-11-01T00:00:00.000Z","2010-12-01T00:00:00.000Z","2011-01-01T00:00:00.000Z","2011-02-01T00:00:00.000Z","2011-03-01T00:00:00.000Z","2011-04-01T00:00:00.000Z","2011-05-01T00:00:00.000Z","2011-06-01T00:00:00.000Z","2011-07-01T00:00:00.000Z","2011-08-01T00:00:00.000Z","2011-09-01T00:00:00.000Z","2011-10-01T00:00:00.000Z","2011-11-01T00:00:00.000Z","2011-12-01T00:00:00.000Z","2012-01-01T00:00:00.000Z","2012-02-01T00:00:00.000Z","2012-03-01T00:00:00.000Z","2012-04-01T00:00:00.000Z","2012-05-01T00:00:00.000Z","2012-06-01T00:00:00.000Z","2012-07-01T00:00:00.000Z","2012-08-01T00:00:00.000Z","2012-09-01T00:00:00.000Z","2012-10-01T00:00:00.000Z","2012-11-01T00:00:00.000Z","2012-12-01T00:00:00.000Z","2013-01-01T00:00:00.000Z","2013-02-01T00:00:00.000Z","2013-03-01T00:00:00.000Z","2013-04-01T00:00:00.000Z","2013-05-01T00:00:00.000Z","2013-06-01T00:00:00.000Z","2013-07-01T00:00:00.000Z","2013-08-01T00:00:00.000Z","2013-09-01T00:00:00.000Z","2013-10-01T00:00:00.000Z","2013-11-01T00:00:00.000Z","2013-12-01T00:00:00.000Z","2014-01-01T00:00:00.000Z","2014-02-01T00:00:00.000Z","2014-03-01T00:00:00.000Z","2014-04-01T00:00:00.000Z","2014-05-01T00:00:00.000Z","2014-06-01T00:00:00.000Z","2014-07-01T00:00:00.000Z","2014-08-01T00:00:00.000Z","2014-09-01T00:00:00.000Z","2014-10-01T00:00:00.000Z","2014-11-01T00:00:00.000Z","2014-12-01T00:00:00.000Z","2015-01-01T00:00:00.000Z","2015-02-01T00:00:00.000Z","2015-03-01T00:00:00.000Z","2015-04-01T00:00:00.000Z","2015-05-01T00:00:00.000Z","2015-06-01T00:00:00.000Z","2015-07-01T00:00:00.000Z","2015-08-01T00:00:00.000Z","2015-09-01T00:00:00.000Z","2015-10-01T00:00:00.000Z","2015-11-01T00:00:00.000Z","2015-12-01T00:00:00.000Z","2016-01-01T00:00:00.000Z","2016-02-01T00:00:00.000Z","2016-03-01T00:00:00.000Z","2016-04-01T00:00:00.000Z","2016-05-01T00:00:00.000Z","2016-06-01T00:00:00.000Z","2016-07-01T00:00:00.000Z","2016-08-01T00:00:00.000Z","2016-09-01T00:00:00.000Z","2016-10-01T00:00:00.000Z","2016-11-01T00:00:00.000Z","2016-12-01T00:00:00.000Z","2017-01-01T00:00:00.000Z","2017-02-01T00:00:00.000Z"],[67.86,61.37,66.25,71.8,71.42,73.94,74.56,70.38,62.9,58.72,62.97,60.85,58.17,61.78,65.94,65.78,64.02,70.47,78.2,73.98,81.64,94.16,88.6,95.95,91.67,101.78,101.54,113.7,127.35,139.96,124.17,115.55,100.7,68.1,55.21,44.6,41.73,44.15,49.64,50.35,66.31,69.82,69.26,69.97,70.46,77.04,77.19,79.39,72.85,79.72,83.45,86.07,74,75.59,78.85,71.93,79.95,81.45,84.12,91.38,90.99,97.1,106.19,113.39,102.7,95.3,95.68,88.81,78.93,93.19,100.36,98.83,98.46,107.08,103.03,104.89,86.52,85.04,88.08,96.47,92.18,86.23,88.54,91.83,97.65,92.03,97.24,93.22,91.93,96.36,105.1,107.98,102.36,96.29,92.55,98.17,97.55,102.88,101.57,100.07,103.4,106.07,98.23,97.86,91.17,80.53,65.94,53.45,47.79,49.84,47.72,59.62,60.25,59.48,47.11,49.2,45.06,46.6,40.43,37.13,33.66,32.74,36.94,45.98,49.1,48.27,41.54,44.68,47.72,46.83,49.41,53.75,52.75,54]]},"evals":[],"jsHooks":[]}</script>
+<div id="htmlwidget-91b1fc3bfca0110b9445" style="width:576px;height:384px;" class="dygraphs html-widget"></div>
+<script type="application/json" data-for="htmlwidget-91b1fc3bfca0110b9445">{"x":{"attrs":{"title":"Monthly oil Prices","labels":["month","V1"],"legend":"auto","retainDateWindow":false,"axes":{"x":{"pixelsPerLabel":60}}},"scale":"monthly","annotations":[],"shadings":[],"events":[],"format":"date","data":[["2006-01-01T00:00:00.000Z","2006-02-01T00:00:00.000Z","2006-03-01T00:00:00.000Z","2006-04-01T00:00:00.000Z","2006-05-01T00:00:00.000Z","2006-06-01T00:00:00.000Z","2006-07-01T00:00:00.000Z","2006-08-01T00:00:00.000Z","2006-09-01T00:00:00.000Z","2006-10-01T00:00:00.000Z","2006-11-01T00:00:00.000Z","2006-12-01T00:00:00.000Z","2007-01-01T00:00:00.000Z","2007-02-01T00:00:00.000Z","2007-03-01T00:00:00.000Z","2007-04-01T00:00:00.000Z","2007-05-01T00:00:00.000Z","2007-06-01T00:00:00.000Z","2007-07-01T00:00:00.000Z","2007-08-01T00:00:00.000Z","2007-09-01T00:00:00.000Z","2007-10-01T00:00:00.000Z","2007-11-01T00:00:00.000Z","2007-12-01T00:00:00.000Z","2008-01-01T00:00:00.000Z","2008-02-01T00:00:00.000Z","2008-03-01T00:00:00.000Z","2008-04-01T00:00:00.000Z","2008-05-01T00:00:00.000Z","2008-06-01T00:00:00.000Z","2008-07-01T00:00:00.000Z","2008-08-01T00:00:00.000Z","2008-09-01T00:00:00.000Z","2008-10-01T00:00:00.000Z","2008-11-01T00:00:00.000Z","2008-12-01T00:00:00.000Z","2009-01-01T00:00:00.000Z","2009-02-01T00:00:00.000Z","2009-03-01T00:00:00.000Z","2009-04-01T00:00:00.000Z","2009-05-01T00:00:00.000Z","2009-06-01T00:00:00.000Z","2009-07-01T00:00:00.000Z","2009-08-01T00:00:00.000Z","2009-09-01T00:00:00.000Z","2009-10-01T00:00:00.000Z","2009-11-01T00:00:00.000Z","2009-12-01T00:00:00.000Z","2010-01-01T00:00:00.000Z","2010-02-01T00:00:00.000Z","2010-03-01T00:00:00.000Z","2010-04-01T00:00:00.000Z","2010-05-01T00:00:00.000Z","2010-06-01T00:00:00.000Z","2010-07-01T00:00:00.000Z","2010-08-01T00:00:00.000Z","2010-09-01T00:00:00.000Z","2010-10-01T00:00:00.000Z","2010-11-01T00:00:00.000Z","2010-12-01T00:00:00.000Z","2011-01-01T00:00:00.000Z","2011-02-01T00:00:00.000Z","2011-03-01T00:00:00.000Z","2011-04-01T00:00:00.000Z","2011-05-01T00:00:00.000Z","2011-06-01T00:00:00.000Z","2011-07-01T00:00:00.000Z","2011-08-01T00:00:00.000Z","2011-09-01T00:00:00.000Z","2011-10-01T00:00:00.000Z","2011-11-01T00:00:00.000Z","2011-12-01T00:00:00.000Z","2012-01-01T00:00:00.000Z","2012-02-01T00:00:00.000Z","2012-03-01T00:00:00.000Z","2012-04-01T00:00:00.000Z","2012-05-01T00:00:00.000Z","2012-06-01T00:00:00.000Z","2012-07-01T00:00:00.000Z","2012-08-01T00:00:00.000Z","2012-09-01T00:00:00.000Z","2012-10-01T00:00:00.000Z","2012-11-01T00:00:00.000Z","2012-12-01T00:00:00.000Z","2013-01-01T00:00:00.000Z","2013-02-01T00:00:00.000Z","2013-03-01T00:00:00.000Z","2013-04-01T00:00:00.000Z","2013-05-01T00:00:00.000Z","2013-06-01T00:00:00.000Z","2013-07-01T00:00:00.000Z","2013-08-01T00:00:00.000Z","2013-09-01T00:00:00.000Z","2013-10-01T00:00:00.000Z","2013-11-01T00:00:00.000Z","2013-12-01T00:00:00.000Z","2014-01-01T00:00:00.000Z","2014-02-01T00:00:00.000Z","2014-03-01T00:00:00.000Z","2014-04-01T00:00:00.000Z","2014-05-01T00:00:00.000Z","2014-06-01T00:00:00.000Z","2014-07-01T00:00:00.000Z","2014-08-01T00:00:00.000Z","2014-09-01T00:00:00.000Z","2014-10-01T00:00:00.000Z","2014-11-01T00:00:00.000Z","2014-12-01T00:00:00.000Z","2015-01-01T00:00:00.000Z","2015-02-01T00:00:00.000Z","2015-03-01T00:00:00.000Z","2015-04-01T00:00:00.000Z","2015-05-01T00:00:00.000Z","2015-06-01T00:00:00.000Z","2015-07-01T00:00:00.000Z","2015-08-01T00:00:00.000Z","2015-09-01T00:00:00.000Z","2015-10-01T00:00:00.000Z","2015-11-01T00:00:00.000Z","2015-12-01T00:00:00.000Z","2016-01-01T00:00:00.000Z","2016-02-01T00:00:00.000Z","2016-03-01T00:00:00.000Z","2016-04-01T00:00:00.000Z","2016-05-01T00:00:00.000Z","2016-06-01T00:00:00.000Z","2016-07-01T00:00:00.000Z","2016-08-01T00:00:00.000Z","2016-09-01T00:00:00.000Z","2016-10-01T00:00:00.000Z","2016-11-01T00:00:00.000Z","2016-12-01T00:00:00.000Z","2017-01-01T00:00:00.000Z","2017-02-01T00:00:00.000Z"],[67.86,61.37,66.25,71.8,71.42,73.94,74.56,70.38,62.9,58.72,62.97,60.85,58.17,61.78,65.94,65.78,64.02,70.47,78.2,73.98,81.64,94.16,88.6,95.95,91.67,101.78,101.54,113.7,127.35,139.96,124.17,115.55,100.7,68.1,55.21,44.6,41.73,44.15,49.64,50.35,66.31,69.82,69.26,69.97,70.46,77.04,77.19,79.39,72.85,79.72,83.45,86.07,74,75.59,78.85,71.93,79.95,81.45,84.12,91.38,90.99,97.1,106.19,113.39,102.7,95.3,95.68,88.81,78.93,93.19,100.36,98.83,98.46,107.08,103.03,104.89,86.52,85.04,88.08,96.47,92.18,86.23,88.54,91.83,97.65,92.03,97.24,93.22,91.93,96.36,105.1,107.98,102.36,96.29,92.55,98.17,97.55,102.88,101.57,100.07,103.4,106.07,98.23,97.86,91.17,80.53,65.94,53.45,47.79,49.84,47.72,59.62,60.25,59.48,47.11,49.2,45.06,46.6,40.43,37.13,33.66,32.74,36.94,45.98,49.1,48.27,41.54,44.68,47.72,46.83,49.41,53.75,52.75,54]]},"evals":[],"jsHooks":[]}</script>
 </div>
 <p>Alright, nothing too shocking here. We see a peak in mid-2008, followed by a precipitous decline through the beginning of 2009.</p>
 <h2 id="forecasting">Forecasting</h2>
@@ -7752,8 +7431,8 @@ dygraph(oil_combined_xts, main = &quot;Oil Prices: Historical and Forecast&quot;
   dySeries(&quot;Actual&quot;, label = &quot;Actual&quot;) %&gt;%
   # Add the three forecasted series
   dySeries(c(&quot;Lo_95&quot;, &quot;Forecast&quot;, &quot;Hi_95&quot;))</code></pre>
-<div id="htmlwidget-ab58ec4f106c3dd74179" style="width:576px;height:384px;" class="dygraphs html-widget"></div>
-<script type="application/json" data-for="htmlwidget-ab58ec4f106c3dd74179">{"x":{"attrs":{"title":"Oil Prices: Historical and Forecast","labels":["month","Actual","Forecast"],"legend":"auto","retainDateWindow":false,"axes":{"x":{"pixelsPerLabel":60}},"series":{"Actual":{"axis":"y"},"Forecast":{"axis":"y"}},"customBars":true},"scale":"monthly","annotations":[],"shadings":[],"events":[],"format":"date","data":[["2006-01-01T00:00:00.000Z","2006-02-01T00:00:00.000Z","2006-03-01T00:00:00.000Z","2006-04-01T00:00:00.000Z","2006-05-01T00:00:00.000Z","2006-06-01T00:00:00.000Z","2006-07-01T00:00:00.000Z","2006-08-01T00:00:00.000Z","2006-09-01T00:00:00.000Z","2006-10-01T00:00:00.000Z","2006-11-01T00:00:00.000Z","2006-12-01T00:00:00.000Z","2007-01-01T00:00:00.000Z","2007-02-01T00:00:00.000Z","2007-03-01T00:00:00.000Z","2007-04-01T00:00:00.000Z","2007-05-01T00:00:00.000Z","2007-06-01T00:00:00.000Z","2007-07-01T00:00:00.000Z","2007-08-01T00:00:00.000Z","2007-09-01T00:00:00.000Z","2007-10-01T00:00:00.000Z","2007-11-01T00:00:00.000Z","2007-12-01T00:00:00.000Z","2008-01-01T00:00:00.000Z","2008-02-01T00:00:00.000Z","2008-03-01T00:00:00.000Z","2008-04-01T00:00:00.000Z","2008-05-01T00:00:00.000Z","2008-06-01T00:00:00.000Z","2008-07-01T00:00:00.000Z","2008-08-01T00:00:00.000Z","2008-09-01T00:00:00.000Z","2008-10-01T00:00:00.000Z","2008-11-01T00:00:00.000Z","2008-12-01T00:00:00.000Z","2009-01-01T00:00:00.000Z","2009-02-01T00:00:00.000Z","2009-03-01T00:00:00.000Z","2009-04-01T00:00:00.000Z","2009-05-01T00:00:00.000Z","2009-06-01T00:00:00.000Z","2009-07-01T00:00:00.000Z","2009-08-01T00:00:00.000Z","2009-09-01T00:00:00.000Z","2009-10-01T00:00:00.000Z","2009-11-01T00:00:00.000Z","2009-12-01T00:00:00.000Z","2010-01-01T00:00:00.000Z","2010-02-01T00:00:00.000Z","2010-03-01T00:00:00.000Z","2010-04-01T00:00:00.000Z","2010-05-01T00:00:00.000Z","2010-06-01T00:00:00.000Z","2010-07-01T00:00:00.000Z","2010-08-01T00:00:00.000Z","2010-09-01T00:00:00.000Z","2010-10-01T00:00:00.000Z","2010-11-01T00:00:00.000Z","2010-12-01T00:00:00.000Z","2011-01-01T00:00:00.000Z","2011-02-01T00:00:00.000Z","2011-03-01T00:00:00.000Z","2011-04-01T00:00:00.000Z","2011-05-01T00:00:00.000Z","2011-06-01T00:00:00.000Z","2011-07-01T00:00:00.000Z","2011-08-01T00:00:00.000Z","2011-09-01T00:00:00.000Z","2011-10-01T00:00:00.000Z","2011-11-01T00:00:00.000Z","2011-12-01T00:00:00.000Z","2012-01-01T00:00:00.000Z","2012-02-01T00:00:00.000Z","2012-03-01T00:00:00.000Z","2012-04-01T00:00:00.000Z","2012-05-01T00:00:00.000Z","2012-06-01T00:00:00.000Z","2012-07-01T00:00:00.000Z","2012-08-01T00:00:00.000Z","2012-09-01T00:00:00.000Z","2012-10-01T00:00:00.000Z","2012-11-01T00:00:00.000Z","2012-12-01T00:00:00.000Z","2013-01-01T00:00:00.000Z","2013-02-01T00:00:00.000Z","2013-03-01T00:00:00.000Z","2013-04-01T00:00:00.000Z","2013-05-01T00:00:00.000Z","2013-06-01T00:00:00.000Z","2013-07-01T00:00:00.000Z","2013-08-01T00:00:00.000Z","2013-09-01T00:00:00.000Z","2013-10-01T00:00:00.000Z","2013-11-01T00:00:00.000Z","2013-12-01T00:00:00.000Z","2014-01-01T00:00:00.000Z","2014-02-01T00:00:00.000Z","2014-03-01T00:00:00.000Z","2014-04-01T00:00:00.000Z","2014-05-01T00:00:00.000Z","2014-06-01T00:00:00.000Z","2014-07-01T00:00:00.000Z","2014-08-01T00:00:00.000Z","2014-09-01T00:00:00.000Z","2014-10-01T00:00:00.000Z","2014-11-01T00:00:00.000Z","2014-12-01T00:00:00.000Z","2015-01-01T00:00:00.000Z","2015-02-01T00:00:00.000Z","2015-03-01T00:00:00.000Z","2015-04-01T00:00:00.000Z","2015-05-01T00:00:00.000Z","2015-06-01T00:00:00.000Z","2015-07-01T00:00:00.000Z","2015-08-01T00:00:00.000Z","2015-09-01T00:00:00.000Z","2015-10-01T00:00:00.000Z","2015-11-01T00:00:00.000Z","2015-12-01T00:00:00.000Z","2016-01-01T00:00:00.000Z","2016-02-01T00:00:00.000Z","2016-03-01T00:00:00.000Z","2016-04-01T00:00:00.000Z","2016-05-01T00:00:00.000Z","2016-06-01T00:00:00.000Z","2016-07-01T00:00:00.000Z","2016-08-01T00:00:00.000Z","2016-09-01T00:00:00.000Z","2016-10-01T00:00:00.000Z","2016-11-01T00:00:00.000Z","2016-12-01T00:00:00.000Z","2017-01-01T00:00:00.000Z","2017-02-01T00:00:00.000Z","2017-03-01T00:00:00.000Z","2017-04-01T00:00:00.000Z","2017-05-01T00:00:00.000Z","2017-06-01T00:00:00.000Z","2017-07-01T00:00:00.000Z","2017-08-01T00:00:00.000Z"],[[67.86,67.86,67.86],[61.37,61.37,61.37],[66.25,66.25,66.25],[71.8,71.8,71.8],[71.42,71.42,71.42],[73.94,73.94,73.94],[74.56,74.56,74.56],[70.38,70.38,70.38],[62.9,62.9,62.9],[58.72,58.72,58.72],[62.97,62.97,62.97],[60.85,60.85,60.85],[58.17,58.17,58.17],[61.78,61.78,61.78],[65.94,65.94,65.94],[65.78,65.78,65.78],[64.02,64.02,64.02],[70.47,70.47,70.47],[78.2,78.2,78.2],[73.98,73.98,73.98],[81.64,81.64,81.64],[94.16,94.16,94.16],[88.6,88.6,88.6],[95.95,95.95,95.95],[91.67,91.67,91.67],[101.78,101.78,101.78],[101.54,101.54,101.54],[113.7,113.7,113.7],[127.35,127.35,127.35],[139.96,139.96,139.96],[124.17,124.17,124.17],[115.55,115.55,115.55],[100.7,100.7,100.7],[68.1,68.1,68.1],[55.21,55.21,55.21],[44.6,44.6,44.6],[41.73,41.73,41.73],[44.15,44.15,44.15],[49.64,49.64,49.64],[50.35,50.35,50.35],[66.31,66.31,66.31],[69.82,69.82,69.82],[69.26,69.26,69.26],[69.97,69.97,69.97],[70.46,70.46,70.46],[77.04,77.04,77.04],[77.19,77.19,77.19],[79.39,79.39,79.39],[72.85,72.85,72.85],[79.72,79.72,79.72],[83.45,83.45,83.45],[86.07,86.07,86.07],[74,74,74],[75.59,75.59,75.59],[78.85,78.85,78.85],[71.93,71.93,71.93],[79.95,79.95,79.95],[81.45,81.45,81.45],[84.12,84.12,84.12],[91.38,91.38,91.38],[90.99,90.99,90.99],[97.1,97.1,97.1],[106.19,106.19,106.19],[113.39,113.39,113.39],[102.7,102.7,102.7],[95.3,95.3,95.3],[95.68,95.68,95.68],[88.81,88.81,88.81],[78.93,78.93,78.93],[93.19,93.19,93.19],[100.36,100.36,100.36],[98.83,98.83,98.83],[98.46,98.46,98.46],[107.08,107.08,107.08],[103.03,103.03,103.03],[104.89,104.89,104.89],[86.52,86.52,86.52],[85.04,85.04,85.04],[88.08,88.08,88.08],[96.47,96.47,96.47],[92.18,92.18,92.18],[86.23,86.23,86.23],[88.54,88.54,88.54],[91.83,91.83,91.83],[97.65,97.65,97.65],[92.03,92.03,92.03],[97.24,97.24,97.24],[93.22,93.22,93.22],[91.93,91.93,91.93],[96.36,96.36,96.36],[105.1,105.1,105.1],[107.98,107.98,107.98],[102.36,102.36,102.36],[96.29,96.29,96.29],[92.55,92.55,92.55],[98.17,98.17,98.17],[97.55,97.55,97.55],[102.88,102.88,102.88],[101.57,101.57,101.57],[100.07,100.07,100.07],[103.4,103.4,103.4],[106.07,106.07,106.07],[98.23,98.23,98.23],[97.86,97.86,97.86],[91.17,91.17,91.17],[80.53,80.53,80.53],[65.94,65.94,65.94],[53.45,53.45,53.45],[47.79,47.79,47.79],[49.84,49.84,49.84],[47.72,47.72,47.72],[59.62,59.62,59.62],[60.25,60.25,60.25],[59.48,59.48,59.48],[47.11,47.11,47.11],[49.2,49.2,49.2],[45.06,45.06,45.06],[46.6,46.6,46.6],[40.43,40.43,40.43],[37.13,37.13,37.13],[33.66,33.66,33.66],[32.74,32.74,32.74],[36.94,36.94,36.94],[45.98,45.98,45.98],[49.1,49.1,49.1],[48.27,48.27,48.27],[41.54,41.54,41.54],[44.68,44.68,44.68],[47.72,47.72,47.72],[46.83,46.83,46.83],[49.41,49.41,49.41],[53.75,53.75,53.75],[52.75,52.75,52.75],[54,54,54],[null,null,null],[null,null,null],[null,null,null],[null,null,null],[null,null,null],[null,null,null]],[[null,null,null],[null,null,null],[null,null,null],[null,null,null],[null,null,null],[null,null,null],[null,null,null],[null,null,null],[null,null,null],[null,null,null],[null,null,null],[null,null,null],[null,null,null],[null,null,null],[null,null,null],[null,null,null],[null,null,null],[null,null,null],[null,null,null],[null,null,null],[null,null,null],[null,null,null],[null,null,null],[null,null,null],[null,null,null],[null,null,null],[null,null,null],[null,null,null],[null,null,null],[null,null,null],[null,null,null],[null,null,null],[null,null,null],[null,null,null],[null,null,null],[null,null,null],[null,null,null],[null,null,null],[null,null,null],[null,null,null],[null,null,null],[null,null,null],[null,null,null],[null,null,null],[null,null,null],[null,null,null],[null,null,null],[null,null,null],[null,null,null],[null,null,null],[null,null,null],[null,null,null],[null,null,null],[null,null,null],[null,null,null],[null,null,null],[null,null,null],[null,null,null],[null,null,null],[null,null,null],[null,null,null],[null,null,null],[null,null,null],[null,null,null],[null,null,null],[null,null,null],[null,null,null],[null,null,null],[null,null,null],[null,null,null],[null,null,null],[null,null,null],[null,null,null],[null,null,null],[null,null,null],[null,null,null],[null,null,null],[null,null,null],[null,null,null],[null,null,null],[null,null,null],[null,null,null],[null,null,null],[null,null,null],[null,null,null],[null,null,null],[null,null,null],[null,null,null],[null,null,null],[null,null,null],[null,null,null],[null,null,null],[null,null,null],[null,null,null],[null,null,null],[null,null,null],[null,null,null],[null,null,null],[null,null,null],[null,null,null],[null,null,null],[null,null,null],[null,null,null],[null,null,null],[null,null,null],[null,null,null],[null,null,null],[null,null,null],[null,null,null],[null,null,null],[null,null,null],[null,null,null],[null,null,null],[null,null,null],[null,null,null],[null,null,null],[null,null,null],[null,null,null],[null,null,null],[null,null,null],[null,null,null],[null,null,null],[null,null,null],[null,null,null],[null,null,null],[null,null,null],[null,null,null],[null,null,null],[null,null,null],[null,null,null],[null,null,null],[null,null,null],[null,null,null],[null,null,null],[44.1189444260667,53.999874832939,63.8808052398114],[39.9964178033862,53.999874832939,68.0033318624919],[36.8121214596734,53.999874832939,71.1876282062046],[34.1100172541902,53.999874832939,73.8897324116879],[31.7138465538637,53.999874832939,76.2859031120144],[29.5334010405799,53.999874832939,78.4663486252982]]]},"evals":[],"jsHooks":[]}</script>
+<div id="htmlwidget-0431c31dbb3cda3c15e9" style="width:576px;height:384px;" class="dygraphs html-widget"></div>
+<script type="application/json" data-for="htmlwidget-0431c31dbb3cda3c15e9">{"x":{"attrs":{"title":"Oil Prices: Historical and Forecast","labels":["month","Actual","Forecast"],"legend":"auto","retainDateWindow":false,"axes":{"x":{"pixelsPerLabel":60}},"series":{"Actual":{"axis":"y"},"Forecast":{"axis":"y"}},"customBars":true},"scale":"monthly","annotations":[],"shadings":[],"events":[],"format":"date","data":[["2006-01-01T00:00:00.000Z","2006-02-01T00:00:00.000Z","2006-03-01T00:00:00.000Z","2006-04-01T00:00:00.000Z","2006-05-01T00:00:00.000Z","2006-06-01T00:00:00.000Z","2006-07-01T00:00:00.000Z","2006-08-01T00:00:00.000Z","2006-09-01T00:00:00.000Z","2006-10-01T00:00:00.000Z","2006-11-01T00:00:00.000Z","2006-12-01T00:00:00.000Z","2007-01-01T00:00:00.000Z","2007-02-01T00:00:00.000Z","2007-03-01T00:00:00.000Z","2007-04-01T00:00:00.000Z","2007-05-01T00:00:00.000Z","2007-06-01T00:00:00.000Z","2007-07-01T00:00:00.000Z","2007-08-01T00:00:00.000Z","2007-09-01T00:00:00.000Z","2007-10-01T00:00:00.000Z","2007-11-01T00:00:00.000Z","2007-12-01T00:00:00.000Z","2008-01-01T00:00:00.000Z","2008-02-01T00:00:00.000Z","2008-03-01T00:00:00.000Z","2008-04-01T00:00:00.000Z","2008-05-01T00:00:00.000Z","2008-06-01T00:00:00.000Z","2008-07-01T00:00:00.000Z","2008-08-01T00:00:00.000Z","2008-09-01T00:00:00.000Z","2008-10-01T00:00:00.000Z","2008-11-01T00:00:00.000Z","2008-12-01T00:00:00.000Z","2009-01-01T00:00:00.000Z","2009-02-01T00:00:00.000Z","2009-03-01T00:00:00.000Z","2009-04-01T00:00:00.000Z","2009-05-01T00:00:00.000Z","2009-06-01T00:00:00.000Z","2009-07-01T00:00:00.000Z","2009-08-01T00:00:00.000Z","2009-09-01T00:00:00.000Z","2009-10-01T00:00:00.000Z","2009-11-01T00:00:00.000Z","2009-12-01T00:00:00.000Z","2010-01-01T00:00:00.000Z","2010-02-01T00:00:00.000Z","2010-03-01T00:00:00.000Z","2010-04-01T00:00:00.000Z","2010-05-01T00:00:00.000Z","2010-06-01T00:00:00.000Z","2010-07-01T00:00:00.000Z","2010-08-01T00:00:00.000Z","2010-09-01T00:00:00.000Z","2010-10-01T00:00:00.000Z","2010-11-01T00:00:00.000Z","2010-12-01T00:00:00.000Z","2011-01-01T00:00:00.000Z","2011-02-01T00:00:00.000Z","2011-03-01T00:00:00.000Z","2011-04-01T00:00:00.000Z","2011-05-01T00:00:00.000Z","2011-06-01T00:00:00.000Z","2011-07-01T00:00:00.000Z","2011-08-01T00:00:00.000Z","2011-09-01T00:00:00.000Z","2011-10-01T00:00:00.000Z","2011-11-01T00:00:00.000Z","2011-12-01T00:00:00.000Z","2012-01-01T00:00:00.000Z","2012-02-01T00:00:00.000Z","2012-03-01T00:00:00.000Z","2012-04-01T00:00:00.000Z","2012-05-01T00:00:00.000Z","2012-06-01T00:00:00.000Z","2012-07-01T00:00:00.000Z","2012-08-01T00:00:00.000Z","2012-09-01T00:00:00.000Z","2012-10-01T00:00:00.000Z","2012-11-01T00:00:00.000Z","2012-12-01T00:00:00.000Z","2013-01-01T00:00:00.000Z","2013-02-01T00:00:00.000Z","2013-03-01T00:00:00.000Z","2013-04-01T00:00:00.000Z","2013-05-01T00:00:00.000Z","2013-06-01T00:00:00.000Z","2013-07-01T00:00:00.000Z","2013-08-01T00:00:00.000Z","2013-09-01T00:00:00.000Z","2013-10-01T00:00:00.000Z","2013-11-01T00:00:00.000Z","2013-12-01T00:00:00.000Z","2014-01-01T00:00:00.000Z","2014-02-01T00:00:00.000Z","2014-03-01T00:00:00.000Z","2014-04-01T00:00:00.000Z","2014-05-01T00:00:00.000Z","2014-06-01T00:00:00.000Z","2014-07-01T00:00:00.000Z","2014-08-01T00:00:00.000Z","2014-09-01T00:00:00.000Z","2014-10-01T00:00:00.000Z","2014-11-01T00:00:00.000Z","2014-12-01T00:00:00.000Z","2015-01-01T00:00:00.000Z","2015-02-01T00:00:00.000Z","2015-03-01T00:00:00.000Z","2015-04-01T00:00:00.000Z","2015-05-01T00:00:00.000Z","2015-06-01T00:00:00.000Z","2015-07-01T00:00:00.000Z","2015-08-01T00:00:00.000Z","2015-09-01T00:00:00.000Z","2015-10-01T00:00:00.000Z","2015-11-01T00:00:00.000Z","2015-12-01T00:00:00.000Z","2016-01-01T00:00:00.000Z","2016-02-01T00:00:00.000Z","2016-03-01T00:00:00.000Z","2016-04-01T00:00:00.000Z","2016-05-01T00:00:00.000Z","2016-06-01T00:00:00.000Z","2016-07-01T00:00:00.000Z","2016-08-01T00:00:00.000Z","2016-09-01T00:00:00.000Z","2016-10-01T00:00:00.000Z","2016-11-01T00:00:00.000Z","2016-12-01T00:00:00.000Z","2017-01-01T00:00:00.000Z","2017-02-01T00:00:00.000Z","2017-03-01T00:00:00.000Z","2017-04-01T00:00:00.000Z","2017-05-01T00:00:00.000Z","2017-06-01T00:00:00.000Z","2017-07-01T00:00:00.000Z","2017-08-01T00:00:00.000Z"],[[67.86,67.86,67.86],[61.37,61.37,61.37],[66.25,66.25,66.25],[71.8,71.8,71.8],[71.42,71.42,71.42],[73.94,73.94,73.94],[74.56,74.56,74.56],[70.38,70.38,70.38],[62.9,62.9,62.9],[58.72,58.72,58.72],[62.97,62.97,62.97],[60.85,60.85,60.85],[58.17,58.17,58.17],[61.78,61.78,61.78],[65.94,65.94,65.94],[65.78,65.78,65.78],[64.02,64.02,64.02],[70.47,70.47,70.47],[78.2,78.2,78.2],[73.98,73.98,73.98],[81.64,81.64,81.64],[94.16,94.16,94.16],[88.6,88.6,88.6],[95.95,95.95,95.95],[91.67,91.67,91.67],[101.78,101.78,101.78],[101.54,101.54,101.54],[113.7,113.7,113.7],[127.35,127.35,127.35],[139.96,139.96,139.96],[124.17,124.17,124.17],[115.55,115.55,115.55],[100.7,100.7,100.7],[68.1,68.1,68.1],[55.21,55.21,55.21],[44.6,44.6,44.6],[41.73,41.73,41.73],[44.15,44.15,44.15],[49.64,49.64,49.64],[50.35,50.35,50.35],[66.31,66.31,66.31],[69.82,69.82,69.82],[69.26,69.26,69.26],[69.97,69.97,69.97],[70.46,70.46,70.46],[77.04,77.04,77.04],[77.19,77.19,77.19],[79.39,79.39,79.39],[72.85,72.85,72.85],[79.72,79.72,79.72],[83.45,83.45,83.45],[86.07,86.07,86.07],[74,74,74],[75.59,75.59,75.59],[78.85,78.85,78.85],[71.93,71.93,71.93],[79.95,79.95,79.95],[81.45,81.45,81.45],[84.12,84.12,84.12],[91.38,91.38,91.38],[90.99,90.99,90.99],[97.1,97.1,97.1],[106.19,106.19,106.19],[113.39,113.39,113.39],[102.7,102.7,102.7],[95.3,95.3,95.3],[95.68,95.68,95.68],[88.81,88.81,88.81],[78.93,78.93,78.93],[93.19,93.19,93.19],[100.36,100.36,100.36],[98.83,98.83,98.83],[98.46,98.46,98.46],[107.08,107.08,107.08],[103.03,103.03,103.03],[104.89,104.89,104.89],[86.52,86.52,86.52],[85.04,85.04,85.04],[88.08,88.08,88.08],[96.47,96.47,96.47],[92.18,92.18,92.18],[86.23,86.23,86.23],[88.54,88.54,88.54],[91.83,91.83,91.83],[97.65,97.65,97.65],[92.03,92.03,92.03],[97.24,97.24,97.24],[93.22,93.22,93.22],[91.93,91.93,91.93],[96.36,96.36,96.36],[105.1,105.1,105.1],[107.98,107.98,107.98],[102.36,102.36,102.36],[96.29,96.29,96.29],[92.55,92.55,92.55],[98.17,98.17,98.17],[97.55,97.55,97.55],[102.88,102.88,102.88],[101.57,101.57,101.57],[100.07,100.07,100.07],[103.4,103.4,103.4],[106.07,106.07,106.07],[98.23,98.23,98.23],[97.86,97.86,97.86],[91.17,91.17,91.17],[80.53,80.53,80.53],[65.94,65.94,65.94],[53.45,53.45,53.45],[47.79,47.79,47.79],[49.84,49.84,49.84],[47.72,47.72,47.72],[59.62,59.62,59.62],[60.25,60.25,60.25],[59.48,59.48,59.48],[47.11,47.11,47.11],[49.2,49.2,49.2],[45.06,45.06,45.06],[46.6,46.6,46.6],[40.43,40.43,40.43],[37.13,37.13,37.13],[33.66,33.66,33.66],[32.74,32.74,32.74],[36.94,36.94,36.94],[45.98,45.98,45.98],[49.1,49.1,49.1],[48.27,48.27,48.27],[41.54,41.54,41.54],[44.68,44.68,44.68],[47.72,47.72,47.72],[46.83,46.83,46.83],[49.41,49.41,49.41],[53.75,53.75,53.75],[52.75,52.75,52.75],[54,54,54],[null,null,null],[null,null,null],[null,null,null],[null,null,null],[null,null,null],[null,null,null]],[[null,null,null],[null,null,null],[null,null,null],[null,null,null],[null,null,null],[null,null,null],[null,null,null],[null,null,null],[null,null,null],[null,null,null],[null,null,null],[null,null,null],[null,null,null],[null,null,null],[null,null,null],[null,null,null],[null,null,null],[null,null,null],[null,null,null],[null,null,null],[null,null,null],[null,null,null],[null,null,null],[null,null,null],[null,null,null],[null,null,null],[null,null,null],[null,null,null],[null,null,null],[null,null,null],[null,null,null],[null,null,null],[null,null,null],[null,null,null],[null,null,null],[null,null,null],[null,null,null],[null,null,null],[null,null,null],[null,null,null],[null,null,null],[null,null,null],[null,null,null],[null,null,null],[null,null,null],[null,null,null],[null,null,null],[null,null,null],[null,null,null],[null,null,null],[null,null,null],[null,null,null],[null,null,null],[null,null,null],[null,null,null],[null,null,null],[null,null,null],[null,null,null],[null,null,null],[null,null,null],[null,null,null],[null,null,null],[null,null,null],[null,null,null],[null,null,null],[null,null,null],[null,null,null],[null,null,null],[null,null,null],[null,null,null],[null,null,null],[null,null,null],[null,null,null],[null,null,null],[null,null,null],[null,null,null],[null,null,null],[null,null,null],[null,null,null],[null,null,null],[null,null,null],[null,null,null],[null,null,null],[null,null,null],[null,null,null],[null,null,null],[null,null,null],[null,null,null],[null,null,null],[null,null,null],[null,null,null],[null,null,null],[null,null,null],[null,null,null],[null,null,null],[null,null,null],[null,null,null],[null,null,null],[null,null,null],[null,null,null],[null,null,null],[null,null,null],[null,null,null],[null,null,null],[null,null,null],[null,null,null],[null,null,null],[null,null,null],[null,null,null],[null,null,null],[null,null,null],[null,null,null],[null,null,null],[null,null,null],[null,null,null],[null,null,null],[null,null,null],[null,null,null],[null,null,null],[null,null,null],[null,null,null],[null,null,null],[null,null,null],[null,null,null],[null,null,null],[null,null,null],[null,null,null],[null,null,null],[null,null,null],[null,null,null],[null,null,null],[null,null,null],[null,null,null],[null,null,null],[44.1189444260667,53.999874832939,63.8808052398114],[39.9964178033862,53.999874832939,68.0033318624919],[36.8121214596734,53.999874832939,71.1876282062046],[34.1100172541902,53.999874832939,73.8897324116879],[31.7138465538637,53.999874832939,76.2859031120144],[29.5334010405799,53.999874832939,78.4663486252982]]]},"evals":[],"jsHooks":[]}</script>
 </div>
 <p>Take a quick look back at our previous graph using the <code>plot()</code> function. At first glance, the dygraph might not seem so different. But, we can now make use of hovering/tooltips and, more importantly, we can zoom in on the forecasted numbers see them much more clearly. Plus, the whole world of dygraph functionality is now available to us!</p>
 <p>That’s all for today. We have gotten some familiarity with Quandl, used <code>forecast()</code> to predict the next six months of oil prices, and done some data wrangling so we can use our old friend dygraphs. Next time, we will wrap this into a Shiny app so that users can choose their own parameters, and maybe even choose different commodities. See you then!</p>
@@ -7765,10 +7444,9 @@ dygraph(oil_combined_xts, main = &quot;Oil Prices: Historical and Forecast&quot;
 
 <!--radix_placeholder_site_after_body-->
 <!--/radix_placeholder_site_after_body-->
-<div class="appendix-bottom">
-<h3 id="reuse">Reuse</h3>
-<p>Text and figures are licensed under Creative Commons Attribution <a rel="license" href="https://creativecommons.org/licenses/by/4.0/">CC BY 4.0</a>. The figures that have been reused from other sources don't fall under this license and can be recognized by a note in their caption: &quot;Figure from ...&quot;.</p>
-</div>
+<!--radix_placeholder_appendices-->
+<div class="appendix-bottom"></div>
+<!--/radix_placeholder_appendices-->
 <!--radix_placeholder_navigation_after_body-->
 <!--/radix_placeholder_navigation_after_body-->
 

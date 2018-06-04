@@ -1,6 +1,6 @@
 
 
-appendices_after_body <- function(metadata) {
+appendices_after_body_html <- function(metadata) {
 
   # write appendixes
   updates_and_corrections <- appendix_updates_and_corrections(metadata)
@@ -21,16 +21,15 @@ appendices_after_body <- function(metadata) {
     ), collapse = "\n"))
   }
 
-  appendices_html <- renderTags(tagList(
+  # wrap in placeholder
+  placeholder_html("appendices", tagList(
     appendix,
     bibliography
-  ), indent = FALSE)$html
+  ))
+}
 
-  # write file
-  appendices_file <- tempfile(fileext = "html")
-  writeLines(appendices_html, appendices_file)
-
-  appendices_file
+appendices_after_body_file <- function(metadata) {
+  html_file(appendices_after_body_html(metadata))
 }
 
 appendix_updates_and_corrections <- function(metadata) {

@@ -59,6 +59,9 @@ function init_distill() {
   var article = $('<d-article></d-article>');
   $('.d-article').wrap(article).children().unwrap();
 
+  // move post list into article
+  $('.posts-list').appendTo($('d-article'));
+
   // create d-appendix
   $('.d-appendix').changeElementType('d-appendix');
 
@@ -125,7 +128,22 @@ function init_distill() {
     }
   });
 
-  init_common();
+  // localize layout chunks to just output
+  $('.layout-chunk').each(function(i, val) {
+
+    // capture layout
+    var layout = $(this).attr('data-layout');
+
+    // apply layout to markdown level block elements
+    $(this).children().not('d-code, pre.text-output').addClass(layout);
+
+    // paged tables need to be wrapped (they overwrite their class)
+    $(this).children('div[data-pagedtable]')
+      .wrap($('<div class="' + layout + '"></div>'));
+
+    // unwrap the layout-chunk div
+    $(this).children().unwrap();
+  });
 
   // load distill framework
   load_distill_framework();
@@ -174,8 +192,8 @@ function init_distill() {
     // inject pre code styles (can't do this with a global stylesheet b/c a shadow root is used)
     $('d-code').each(function(i, val) {
       var style = document.createElement('style');
-      style.innerHTML = 'pre code { padding-left: 0; font-size: 12px; border-left: none; } ' +
-                        '@media(min-width: 768px) { pre code { padding-left: 18px; border-left: 2px solid rgba(0,0,0,0.1); font-size: 14px; } }';
+      style.innerHTML = 'pre code { padding-left: 10px; font-size: 12px; border-left: 2px solid rgba(0,0,0,0.1); } ' +
+                        '@media(min-width: 768px) { pre code { padding-left: 18px; font-size: 14px; } }';
       if (this.shadowRoot)
         this.shadowRoot.appendChild(style);
     });
@@ -253,6 +271,7 @@ function init_downlevel() {
   on_load_complete();
 }
 
+
 function init_common() {
 
   // prevent underline for linked images
@@ -261,6 +280,13 @@ function init_common() {
   // mark figures created by knitr chunks as 100% width
   $('.layout-chunk').each(function(i, val) {
     $(this).find('img, .html-widget').css('width', '100%');
+  });
+
+  // auto-append index.html to post-preview links in file: protocol
+  // and in rstudio ide preview
+  $('.post-preview').each(function(i, val) {
+    if (window.location.protocol === "file:")
+      $(this).attr('href', $(this).attr('href') + "index.html");
   });
 
   // add class to pandoc style tables

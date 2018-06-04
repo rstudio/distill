@@ -31,3 +31,7 @@ manifest_in_header <- function(site_config, input_file, metadata) {
 extract_manifest <- function(input_file) {
   extract_embedded_json(input_file, "radix-resource-manifest")
 }
+
+is_standalone_article <- function(site_config) {
+  length(site_config) == 0
+}

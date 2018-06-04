@@ -13,7 +13,7 @@ listing_before_body <- function(metadata) {
     listing_html <- article_listing_html(collection)
 
     # return as file
-    html_as_file(listing_html)
+    html_file(listing_html)
 
 
   } else {

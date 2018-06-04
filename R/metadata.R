@@ -477,7 +477,7 @@ citation_references_in_header <- function(input_file, bibliography) {
         tags$meta(name = "citation_reference", content = citation_reference(ref))
     }))
 
-    html_as_file(references)
+    html_file(references)
 
   } else {
     c()

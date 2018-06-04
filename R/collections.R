@@ -148,6 +148,12 @@ render_collections <- function(site_dir, site_config, collections, quiet = FALSE
                                         "meta_tags",
                                         as.character(metadata_html))
 
+      # substitue appendices
+      appendices_html <- appendices_after_body_html(metadata)
+      index_content <- fill_placeholder(index_content,
+                                        "appendices",
+                                        as.character(appendices_html))
+
       # substitute navigation html
       navigation <- navigation_html(site_dir, site_config, offset)
       apply_navigation <- function(content, context) {

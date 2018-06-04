@@ -6,9 +6,9 @@ site_includes <- function(site_dir, site_config) {
   oldwd <- setwd(site_dir)
   on.exit(setwd(oldwd), add = TRUE)
 
-  in_header <- site_in_header_as_placeholder(site_config)
-  before_body <- site_includes_as_placeholder(site_config, "before_body")
-  after_body <- site_includes_as_placeholder(site_config, "after_body")
+  in_header <- site_includes_html(site_config, "in_header")
+  before_body <- site_includes_html(site_config, "before_body")
+  after_body <- site_includes_html(site_config, "after_body")
 
   list(
     in_header = renderTags(in_header, indent = 0)$html,
@@ -18,42 +18,33 @@ site_includes <- function(site_dir, site_config) {
 }
 
 
-render_site_in_header_as_placeholder <- function(site_config) {
-  if (is_standalone_article(site_config))
-    html_as_file(site_in_header_as_placeholder(site_config))
-  else
-    c()
+site_in_header_file <- function(site_config) {
+  html_file(site_includes_html(site_config, "in_header"))
 }
 
-site_in_header_as_placeholder <- function(site_config) {
-  header_html <- c()
-  css_html <- c()
-  with_radix_output_options(site_config, function(output_options) {
-    header_html <<- includes_as_html(output_options, "in_header")
-    css_html <<- css_as_html(output_options)
-  })
-  placeholder_html("site_in_header", header_html, css_html)
+site_before_body_file <- function(site_config) {
+  html_file(site_includes_html(site_config, "before_body"))
 }
 
-render_site_before_body_as_placeholder <- function(site_config) {
-  if (is_standalone_article(site_config))
-    html_as_file(site_includes_as_placeholder(site_config, "before_body"))
-  else
-    c()
+site_after_body_file <- function(site_config) {
+  html_file(site_includes_html(site_config, "after_body"))
 }
 
-render_site_after_body_as_placeholder <- function(site_config) {
-  if (is_standalone_article(site_config))
-    html_as_file(site_includes_as_placeholder(site_config, "after_body"))
-  else
-    c()
-}
-
-site_includes_as_placeholder <- function(site_config, context) {
-  includes_html <- with_radix_output_options(site_config, function(output_options) {
-    includes_as_html(output_options, context)
-  })
-  placeholder_html(paste0("site_", context), includes_html)
+site_includes_html<- function(site_config, context) {
+  if (context == "in_header") {
+    header_html <- c()
+    css_html <- c()
+    with_radix_output_options(site_config, function(output_options) {
+      header_html <<- includes_as_html(output_options, "in_header")
+      css_html <<- css_as_html(output_options)
+    })
+    placeholder_html("site_in_header", header_html, css_html)
+  } else {
+    includes_html <- with_radix_output_options(site_config, function(output_options) {
+      includes_as_html(output_options, context)
+    })
+    placeholder_html(paste0("site_", context), includes_html)
+  }
 }
 
 
@@ -97,16 +88,4 @@ includes_as_html <- function(output_options, context) {
     c()
   }
 
-}
-
-is_standalone_article <- function(site_config) {
-  # no site config is standalone
-  if (length(site_config) == 0)
-    TRUE
-  # offset site is in a collection (so standalone)
-  else if (!is.null(attr(site_config, "offset")))
-    TRUE
-  # otherwise this is a top level site file so is not standalone
-  else
-    FALSE
 }

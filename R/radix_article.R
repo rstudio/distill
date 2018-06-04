@@ -50,61 +50,22 @@ radix_article <- function(fig_width = 6,
   # use link citations (so we can do citation conversion)
   args <- c(args, "--metadata=link-citations:true")
 
-  # shared variables (will be set by pre_knit)
-  encoding <- NULL
+  # establish knitr options
+  knitr_options <- knitr_options_html(fig_width = fig_width,
+                                      fig_height = fig_height,
+                                      fig_retina = fig_retina,
+                                      keep_md = keep_md,
+                                      dev = dev)
+  knitr_options$opts_chunk$echo <- FALSE
+  knitr_options$opts_chunk$warning <- FALSE
+  knitr_options$opts_chunk$message <- FALSE
+  knitr_options$opts_chunk$comment <- NA
+  knitr_options$knit_hooks <- list()
+  knitr_options$knit_hooks$source <- knitr_source_hook
+  knitr_options$knit_hooks$chunk <- knitr_chunk_hook()
+
+  # shared site_config
   site_config <- NULL
-  collection_config <- NULL
-
-  # pre-knit
-  pre_knit <- function(input, encoding, ...) {
-
-    # update encoding
-    encoding <<- encoding
-
-    # get input file config and propagate to shared variables
-    config <- find_config(input, encoding)
-    site_config <<- config$site_config
-    collection_config <<- config$collection_config
-
-    # merge selected options from site config (as in the case where we
-    # are in a collection rmarkdown wouldn't have picked up _site options)
-    if (is.list(site_config[["output"]])) {
-
-      site_options <- site_config[["output"]][["radix::radix_article"]]
-
-      # establish mergeable options
-      user_options <- list()
-      user_options$fig_width <- fig_width
-      user_options$fig_height <- fig_height
-      user_options$fig_retina <- fig_retina
-      user_options$dev <- dev
-
-      # do the merge
-      format_options <- merge_output_options(site_options, user_options)
-
-      # assign back to options
-      fig_width <<- format_options$fig_width
-      fig_height <<- format_options$fig_height
-      fig_retina <<- format_options$fig_retina
-      dev <<- format_options$dev
-    }
-
-    # establish knitr options
-    knitr_options <- knitr_options_html(fig_width = fig_width,
-                                        fig_height = fig_height,
-                                        fig_retina = fig_retina,
-                                        keep_md = keep_md,
-                                        dev = dev)
-    knitr_options$opts_chunk$echo <- FALSE
-    knitr_options$opts_chunk$warning <- FALSE
-    knitr_options$opts_chunk$message <- FALSE
-    knitr_options$opts_chunk$comment <- NA
-    knitr_options$knit_hooks <- list()
-    knitr_options$knit_hooks$source <- knitr_source_hook
-    knitr_options$knit_hooks$chunk <- knitr_chunk_hook()
-
-    structure(knitr_options, class = "knitr_options")
-  }
 
   # post-knit
   post_knit <- function(metadata, input_file, runtime, encoding, ...) {
@@ -119,11 +80,15 @@ radix_article <- function(fig_width = 6,
     # metadata to json (do this before transforming)
     metadata_json <- embedded_metadata(metadata)
 
+    site_config <<- site_config(input_file, encoding)
+    if (is.null(site_config))
+      site_config <<- list()
+
     # transform configuration
     c(site_config, metadata) %<-% transform_configuration(
       input_file = input_file,
       site_config = site_config,
-      collection_config = collection_config,
+      collection_config = list(),
       metadata = metadata
     )
 
@@ -154,15 +119,15 @@ radix_article <- function(fig_width = 6,
     # before body includes: radix then user
     before_body <- c(front_matter_before_body(metadata),
                      navigation_before_body_file(site_config),
-                     render_site_before_body_as_placeholder(site_config),
+                     site_before_body_file(site_config),
                      includes$before_body,
                      listing_before_body(metadata))
 
     # after body includes: user then radix
     after_body <- c(includes$after_body,
-                    render_site_after_body_as_placeholder(site_config),
-                    appendices_after_body(metadata),
-                    navigation_after_body_file(find_site_dir(input_file), site_config))
+                    site_after_body_file(site_config),
+                    appendices_after_body_file(metadata),
+                    navigation_after_body_file(dirname(input_file), site_config))
 
     # populate args
     args <- c(args,  pandoc_include_args(
@@ -178,19 +143,18 @@ radix_article <- function(fig_width = 6,
 
   pre_processor <- function(yaml_front_matter, utf8_input, runtime, knit_meta,
                             files_dir, output_dir, ...) {
-    pandoc_include_args(in_header = c(render_site_in_header_as_placeholder(site_config),
+    pandoc_include_args(in_header = c(site_in_header_file(site_config),
                                       includes$in_header))
   }
 
   # return format
   output_format(
-    knitr = knitr_options(),
+    knitr = knitr_options,
     pandoc = pandoc_options(to = "html5",
                             from = from_rmarkdown(fig_caption, md_extensions),
                             args = args),
     keep_md = keep_md,
     clean_supporting = self_contained,
-    pre_knit = pre_knit,
     post_knit = post_knit,
     pre_processor = pre_processor,
     on_exit = validate_rstudio_version,
@@ -207,95 +171,6 @@ radix_article <- function(fig_width = 6,
     )
   )
 }
-
-
-# find the site and collection config for an input file (recognize sites for Rmds in collections)
-find_config <- function(input_file, encoding) {
-
-  # look for the default based on an Rmd at the top level
-  site_config <- site_config(input_file, encoding)
-  collection_config <- list()
-  if (is.null(site_config)) {
-
-    # look for a site dir in a parent
-    site_dir <- find_site_dir(input_file)
-
-    if(!is.null(site_dir)) {
-
-      # get the site config
-      site_config <- site_config(site_dir, encoding)
-
-      # check for collections
-      collections <- site_collections(site_dir, site_config)
-
-      # compute relative path
-      input_file_relative <- rmarkdown::relative_to(
-        normalize_path(site_dir),
-        normalize_path(input_file)
-      )
-
-      # is this file within one of our collections?
-      in_collection <- any(startsWith(input_file_relative, paste0("_", names(collections), "/")))
-      if (in_collection) {
-
-        # offset config
-        offset <- collection_file_offset(input_file_relative)
-        site_config <- offset_site_config(site_dir, site_config, offset)
-
-        # collection config
-        collection_config <-
-          collections[[sub("^_", "", strsplit(input_file_relative, "/")[[1]][[1]])]]
-      } else {
-        site_config <- list()
-      }
-    }
-  }
-
-  # return config
-  list(
-    site_config = site_config,
-    collection_config = collection_config
-  )
-}
-
-site_criterion <- rprojroot::has_file("_site.yml")
-
-find_site_dir <- function(input_file) {
-  tryCatch(
-    rprojroot::find_root(
-      criterion = site_criterion,
-      path = dirname(input_file)
-    ),
-    error = function(e) NULL
-  )
-}
-
-offset_site_config <- function(site_dir, config, offset) {
-
-  # capture original output dir
-  output_dir <- config$output_dir
-
-  # update file references
-  config <- rapply(config, how = "replace", classes = c("character"),
-                   function(x) {
-                     if (file.exists(file.path(site_dir, x))) {
-                       file.path(offset, x)
-                     } else {
-                       x
-                     }
-                   }
-  )
-
-  # preserve output_dir
-  config$output_dir <- output_dir
-
-  # provide offset as attribute
-  attr(config, "offset") <- offset
-
-  config
-}
-
-
 
 # hook to ensure newline at the beginning of chunks (workaround distill.js bug)
 knitr_source_hook <- function(x, options) {

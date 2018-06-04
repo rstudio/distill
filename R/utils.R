@@ -89,7 +89,7 @@ html_from_file <- function(file) {
   HTML(readChar(file, nchars = file.info(file)$size, useBytes = TRUE))
 }
 
-html_as_file <- function(html) {
+html_file <- function(html) {
   html_content <- renderTags(html, indent = FALSE)$html
   html_file <- tempfile(fileext = "html")
   writeLines(html_content, html_file, useBytes = TRUE)
