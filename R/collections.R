@@ -136,7 +136,7 @@ render_collections <- function(site_dir, site_config, collections, quiet = FALSE
         site_config = site_config,
         collection_config = collection$config,
         metadata = metadata,
-        auto_preview = TRUE
+        auto_preview = FALSE
       )
 
       # read index content
