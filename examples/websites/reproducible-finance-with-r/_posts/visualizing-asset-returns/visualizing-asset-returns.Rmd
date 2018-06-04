@@ -2,7 +2,6 @@
 title: Visualizing Asset Returns
 description: |
   In this post we take a closer look at the individual assets which compose a portfolio. The motivation is to make sure we have scrutinized our assets before they get into our portfolio, as once the portfolio has been constructed, it is tempting to keep the analysis at the portfolio level 
-preview: preview.png
 author: 
   - name: "Jonathan Regenstein"
     url: https://www.linkedin.com/in/jkregenstein/
@@ -152,7 +151,7 @@ Now we can combine all of our ggplots into one nice, faceted plot.
 At the same time, to add to the aesthetic toolkit a bit, we will do some editing to the label colors. First off, let's choose a different color besides black to be the theme. I will go with cornflower blue, because it's a nice shade and I don't see it used very frequently elsewhere. Once we have a color, we can choose the different elements of the chart to change in the the `theme` function. I make a lot of changes here by way of example but feel free to comment out a few of those lines and see the different options.
 
 
-```{r}
+```{r, preview=TRUE}
 asset_returns_long %>% 
   ggplot(aes(x = returns, colour = asset, fill = asset)) +
   stat_density(geom = "line", alpha = 1) +

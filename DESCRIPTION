@@ -33,7 +33,8 @@ Imports:
   rstudioapi, 
   zeallot, 
   rprojroot,
-  xml2
+  xml2,
+  base64enc
 Remotes:
   rstudio/rmarkdown
 Suggests:

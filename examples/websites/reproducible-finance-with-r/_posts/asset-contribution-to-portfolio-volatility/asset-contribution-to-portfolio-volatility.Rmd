@@ -2,7 +2,6 @@
 title: "Asset Contribution to Portfolio Volatility"
 description: |
   In this post we explore breaking total portfolio volatility into its constituent parts and investigate how each asset contributes to the volatility.
-preview: preview.png
 author: 
   - name: "Jonathan Regenstein"
     url: https://www.linkedin.com/in/jkregenstein/
@@ -187,7 +186,7 @@ component_percent_plot
 
 How about a chart that compares weights to risk contribution? First we'll need to gather our tibble to long format, then call `ggplot`.
 
-```{r, layout="l-body-outset", fig.height=3}
+```{r, layout="l-body-outset", fig.height=3, preview=TRUE}
 # gather
 percentage_tibble_by_hand_gather <-
   percentage_tibble_by_hand %>% 

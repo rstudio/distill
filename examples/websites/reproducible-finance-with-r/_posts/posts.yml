@@ -5,7 +5,6 @@
   title: Asset Contribution to Portfolio Volatility
   description: |
     In this post we explore breaking total portfolio volatility into its constituent parts and investigate how each asset contributes to the volatility.
-  preview: preview.png
   author:
   - name: Jonathan Regenstein
     url: https://www.linkedin.com/in/jkregenstein/
@@ -24,6 +23,7 @@
   published_iso_date_only: '2017-09-13'
   journal: []
   license_url: https://creativecommons.org/licenses/by/4.0/
+  preview: radix-preview.png
   concatenated_authors: Regenstein
   bibtex_authors: Regenstein, Jonathan
   slug: regenstein2017asset
@@ -95,7 +95,6 @@
     compose a portfolio. The motivation is to make sure we have scrutinized our assets
     before they get into our portfolio, as once the portfolio has been constructed,
     it is tempting to keep the analysis at the portfolio level \n"
-  preview: preview.png
   author:
   - name: Jonathan Regenstein
     url: https://www.linkedin.com/in/jkregenstein/
@@ -114,6 +113,7 @@
   published_iso_date_only: '2017-11-09'
   journal: []
   license_url: https://creativecommons.org/licenses/by/4.0/
+  preview: radix-preview.png
   concatenated_authors: Regenstein
   bibtex_authors: Regenstein, Jonathan
   slug: regenstein2017visualizing

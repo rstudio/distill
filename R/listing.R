@@ -49,8 +49,9 @@ article_listing_html <- function(collection) {
           article$published_year))
     )
 
+    # make the preview_url relative if possible
     preview <- article$preview_url
-    if (is.null(preview)) {
+    if (is.null(preview) || startsWith(preview, article$base_url)) {
       if (!is.null(article$preview))
         preview <- file.path(path, article$preview)
     }

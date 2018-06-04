@@ -1,10 +1,10 @@
 
 
-transform_configuration <- function(input_file, site_config, collection_config, metadata) {
+transform_configuration <- function(file, site_config, collection_config, metadata, auto_preview) {
 
   # transform site_config and metadata values
   site_config <- transform_site_config(site_config)
-  metadata <- transform_metadata(input_file, site_config, collection_config, metadata)
+  metadata <- transform_metadata(file, site_config, collection_config, metadata, auto_preview)
 
   # provide title-prefix  and qualified title if specified in site and different from title
   if (!is.null(site_config$title) && !identical(site_config$title, metadata$title)) {
@@ -42,7 +42,7 @@ transform_site_config <- function(site_config) {
   site_config
 }
 
-transform_metadata <- function(input_file, site_config, collection_config, metadata) {
+transform_metadata <- function(file, site_config, collection_config, metadata, auto_preview) {
 
   # validate title
   if (is.null(metadata$title))
@@ -55,12 +55,13 @@ transform_metadata <- function(input_file, site_config, collection_config, metad
   # input document to use the site
   if (!is.null(site_config[["base_url"]])) {
     base_url <- normalize_base_url(site_config$base_url)
-    site_dir <- find_site_dir(input_file)
-    input_file_relative <- rmarkdown::relative_to(
+    site_dir <- find_site_dir(file)
+    file_relative <- rmarkdown::relative_to(
       normalize_path(site_dir),
-      normalize_path(input_file)
+      normalize_path(file)
     )
-    metadata$base_url <- file.path(base_url, dirname(input_file_relative))
+    file_relative <- sub("^_", "", file_relative)
+    metadata$base_url <- file.path(base_url, dirname(file_relative))
   }
 
   # mergable metadata
@@ -135,6 +136,10 @@ transform_metadata <- function(input_file, site_config, collection_config, metad
   if (!is.null(metadata$base_url))
     metadata$base_url <- normalize_base_url(metadata$base_url)
 
+  # if there is no preview see if we can impute one from preview=TRUE on a chunk
+  if (is.null(metadata$preview) && auto_preview)
+    metadata$preview <- resolve_preview(file)
+
   # file based preview image
   if (!is.null(metadata$preview)) {
 
@@ -145,7 +150,7 @@ transform_metadata <- function(input_file, site_config, collection_config, metad
     } else {
 
       # compute the path on disk
-      metadata_path <- file.path(dirname(input_file), metadata$preview)
+      metadata_path <- file.path(dirname(file), metadata$preview)
 
       # validate that the file exists
       if (!file.exists(metadata_path)) {
@@ -215,7 +220,6 @@ transform_metadata <- function(input_file, site_config, collection_config, metad
 
   metadata
 }
-
 
 metadata_html <- function(metadata, self_contained) {
 
@@ -449,7 +453,7 @@ google_scholar_metadata <- function(metadata) {
   google_scholar_meta
 }
 
-citation_references_in_header <- function(input_file, bibliography) {
+citation_references_in_header <- function(file, bibliography) {
 
   if (!is.null(bibliography)) {
 
@@ -458,7 +462,7 @@ citation_references_in_header <- function(input_file, bibliography) {
 
     # first generate html with all of the citations
     biblio_html <- tempfile(fileext = "html")
-    pandoc_convert(input_file, to = "html5", from = "markdown-tex_math_dollars", output = biblio_html,
+    pandoc_convert(file, to = "html5", from = "markdown-tex_math_dollars", output = biblio_html,
                    citeproc = TRUE, options = list(
                      "--bibliography", bibliography,
                      "--template", pandoc_path_arg(radix_resource("biblio.html"))
@@ -642,5 +646,83 @@ unserialize_embedded_json <- function(lines) {
   jsonlite::unserializeJSON(json)
 }
 
+resolve_preview <- function(file) {
 
+  # if file is as the top-level of a site then bail
+  if (file.exists(file.path(dirname(file), "_site.yml")))
+    return(NULL)
+
+  # open connection to file
+  con <- file(file, open = "r", encoding = "UTF-8")
+  on.exit(close(con), add = TRUE)
+
+  # loop through the lines in the file looking for images
+  image_line <- NULL
+  completed <- FALSE
+  while (!completed) {
+
+    # read next 500 lines
+    lines <- readLines(con, n = 500, encoding = "UTF-8")
+    if (length(lines) == 0)
+      break
+
+    # look for a knitr image line
+    image_line_indexes <- grep("^\\s*(?:<p>)?<img src=.*width=", lines)
+    for (line_index in image_line_indexes) {
+
+      # index line
+      line <- lines[[line_index]]
+
+      # record image_line if we don't already have one (this will result in
+      # using the first image in the file if there is no data-radix-preview)
+      if (is.null(image_line))
+        image_line <- line
+
+      # if it's marked with data-radix-preview we are done
+      if (grepl('data-radix-preview=', line, fixed = TRUE)) {
+        image_line <- line
+        completed <- TRUE
+        break
+      }
+
+    }
+  }
+
+  # if we have an image_line then use that
+  if (!is.null(image_line)) {
+
+    # extract img_src
+    matches <- regmatches(image_line,  regexec('^\\s*(?:<p>)?<img src="([^"]+)"', image_line))
+    img_src <- matches[[1]][[2]]
+
+    # if it's a url then use it
+    if (grepl("^https?://", img_src)) {
+      img_src
+    }
+
+    # if we are in a collection then we copy it to the collection root
+    else if (startsWith(img_src, "data:image/")) {
+      preview <- "radix-preview.png"
+      preview_path <- file.path(dirname(file), preview)
+      img_base64 <- sub("^data:image/.*,", "", img_src)
+      img_bytes <- base64enc::base64decode(img_base64)
+      writeBin(img_bytes, preview_path)
+      preview
+    }
+
+    # otherwise in-place referece to files that exist
+    else if (file.exists(file.path(dirname(file), img_src))) {
+      img_src
+    }
+
+    # otherwise NULL
+    else {
+      NULL
+    }
+
+  } else {
+    NULL
+  }
+
+}
 

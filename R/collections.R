@@ -45,7 +45,8 @@ enumerate_collections <- function(site_dir, config, encoding = getOption("encodi
         article$path,
         config,
         site_collections[[collection]],
-        article$metadata
+        article$metadata,
+        auto_preview = TRUE
       )
 
       # add to list of articles
@@ -131,10 +132,11 @@ render_collections <- function(site_dir, site_config, collections, quiet = FALSE
 
       # transform configuration
       c(site_config, metadata) %<-% transform_configuration(
-        input_file = index_html,
+        file = index_html,
         site_config = site_config,
         collection_config = collection$config,
-        metadata = metadata
+        metadata = metadata,
+        auto_preview = TRUE
       )
 
       # read index content

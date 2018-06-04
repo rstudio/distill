@@ -60,6 +60,8 @@ radix_article <- function(fig_width = 6,
   knitr_options$opts_chunk$warning <- FALSE
   knitr_options$opts_chunk$message <- FALSE
   knitr_options$opts_chunk$comment <- NA
+  knitr_options$opts_hooks <- list()
+  knitr_options$opts_hooks$preview <- knitr_preview_hook
   knitr_options$knit_hooks <- list()
   knitr_options$knit_hooks$source <- knitr_source_hook
   knitr_options$knit_hooks$chunk <- knitr_chunk_hook()
@@ -77,6 +79,9 @@ radix_article <- function(fig_width = 6,
     for (css_file in css)
       args <- c(args, "--css", pandoc_path_arg(css_file))
 
+    # compute knitr output file
+    output_file <- file_with_meta_ext(input_file, "knit", "md")
+
     # metadata to json (do this before transforming)
     metadata_json <- embedded_metadata(metadata)
 
@@ -86,10 +91,11 @@ radix_article <- function(fig_width = 6,
 
     # transform configuration
     c(site_config, metadata) %<-% transform_configuration(
-      input_file = input_file,
+      file = output_file,
       site_config = site_config,
-      collection_config = list(),
-      metadata = metadata
+      collection_config = NULL,
+      metadata = metadata,
+      auto_preview = !self_contained
     )
 
     # add title-prefix if necessary
@@ -197,6 +203,12 @@ knitr_source_hook <- function(x, options) {
   )
 }
 
+
+knitr_preview_hook <- function(options) {
+  if (isTRUE(options$preview))
+    options$out.extra <- c(options$out.extra, "data-radix-preview=1")
+  options
+}
 
 # hook to enclose output in div with layout class
 knitr_chunk_hook <- function() {
