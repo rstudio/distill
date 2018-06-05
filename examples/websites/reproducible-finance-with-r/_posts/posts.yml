@@ -13,6 +13,7 @@
     first_name: Jonathan
     last_name: Regenstein
   date: 1.5052752e+09
+  base_url: https://beta.rstudioconnect.com/content/3776/posts/asset-volatility
   published_year: '2017'
   published_month: Sept.
   published_day: 13
@@ -23,6 +24,9 @@
   journal: []
   license_url: https://creativecommons.org/licenses/by/4.0/
   preview: radix-preview.png
+  preview_width: 1152
+  preview_height: 576
+  preview_url: https://beta.rstudioconnect.com/content/3776/posts/asset-volatility/radix-preview.png
   concatenated_authors: Regenstein
   bibtex_authors: Regenstein, Jonathan
   slug: regenstein2017asset
@@ -42,6 +46,7 @@
     first_name: Jonathan
     last_name: Regenstein
   date: 1.4888628e+09
+  base_url: https://beta.rstudioconnect.com/content/3776/posts/quandl-and-forecasting
   published_year: '2017'
   published_month: March
   published_day: 7
@@ -51,6 +56,9 @@
   published_iso_date_only: '2017-03-07'
   journal: []
   license_url: https://creativecommons.org/licenses/by/4.0/
+  preview_width: 1656
+  preview_height: 927
+  preview_url: https://beta.rstudioconnect.com/content/3776/posts/quandl-and-forecasting/preview.png
   concatenated_authors: Regenstein
   bibtex_authors: Regenstein, Jonathan
   slug: regenstein2017quandl
@@ -71,6 +79,7 @@
     first_name: Jonathan
     last_name: Regenstein
   date: 1.4786676e+09
+  base_url: https://beta.rstudioconnect.com/content/3776/posts/sharpe-ratio
   published_year: '2016'
   published_month: Nov.
   published_day: 9
@@ -80,6 +89,9 @@
   published_iso_date_only: '2016-11-09'
   journal: []
   license_url: https://creativecommons.org/licenses/by/4.0/
+  preview_width: 1644
+  preview_height: 1014
+  preview_url: https://beta.rstudioconnect.com/content/3776/posts/sharpe-ratio/preview.png
   concatenated_authors: Regenstein
   bibtex_authors: Regenstein, Jonathan
   slug: regenstein2016the
@@ -100,6 +112,7 @@
     first_name: Jonathan
     last_name: Regenstein
   date: 1.5102036e+09
+  base_url: https://beta.rstudioconnect.com/content/3776/posts/visualizing-asset-returns
   published_year: '2017'
   published_month: Nov.
   published_day: 9
@@ -110,6 +123,9 @@
   journal: []
   license_url: https://creativecommons.org/licenses/by/4.0/
   preview: radix-preview.png
+  preview_width: 1152
+  preview_height: 576
+  preview_url: https://beta.rstudioconnect.com/content/3776/posts/visualizing-asset-returns/radix-preview.png
   concatenated_authors: Regenstein
   bibtex_authors: Regenstein, Jonathan
   slug: regenstein2017visualizing

@@ -1,6 +1,7 @@
 name: "reproducible-finance-with-r"
 title: "Reproducible Finance with R"
 creative_commons: CC BY
+base_url: https://beta.rstudioconnect.com/content/3776/
 navbar:
   logo: images/rstudio.png
   right:
