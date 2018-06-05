@@ -106,10 +106,12 @@ radix_article <- function(fig_width = 6,
     knitr::knit_meta_add(list(
       html_dependency_jquery(),
       html_dependency_bowser(),
-      html_dependency_headroom(),
       html_dependency_webcomponents(),
       html_dependency_distill()
     ))
+
+    # add navbar related dependencies
+    ensure_navbar_dependencies(site_config, dirname(input_file))
 
     # header includes: radix then user
     in_header <- c(metadata_in_header(site_config, metadata, self_contained),

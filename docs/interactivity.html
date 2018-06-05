@@ -47,9 +47,8 @@
   <script type="text/json" id="radix-rmarkdown-metadata">
   {"type":"list","attributes":{"names":{"type":"character","attributes":{},"value":["title","description","preview"]}},"value":[{"type":"character","attributes":{},"value":["JavaScript & D3"]},{"type":"character","attributes":{},"value":["Enhance communication with interactive visualizations"]},{"type":"character","attributes":{},"value":["images/javascript-d3-preview.png"]}]}
   </script>
-  
-  
   <!--radix_placeholder_navigation_in_header-->
+  
   <script type="application/javascript">
   
     window.document.addEventListener("DOMContentLoaded", function (event) {
@@ -66,7 +65,6 @@
       // offset scroll location for banner on hash change
       // (see: https://github.com/WickyNilliams/headroom.js/issues/38)
       window.addEventListener("hashchange", function(event) {
-        console.log(headerHeight);
         window.scrollTo(0, window.pageYOffset - (headerHeight + 25));
       });
   
@@ -360,6 +358,11 @@
   }
   
   </style>
+  
+  <link href="site_libs/font-awesome-5.0.13/css/fa-svg-with-js.css" rel="stylesheet"/>
+  <script src="site_libs/font-awesome-5.0.13/js/fontawesome-all.min.js"></script>
+  <script src="site_libs/font-awesome-5.0.13/js/fa-v4-shims.min.js"></script>
+  <script src="site_libs/headroom-0.9.4/headroom.min.js"></script>
   <!--/radix_placeholder_navigation_in_header-->
   <script src="site_libs/htmlwidgets-1.2/htmlwidgets.js"></script>
   <script src="site_libs/jquery-1.12.4/jquery.min.js"></script>
@@ -381,7 +384,6 @@
   <script src="site_libs/r2d3-binding-0.2.0/r2d3.js"></script>
   <script src="site_libs/d3v5-5.0.0/d3.js"></script>
   <script src="site_libs/bowser-1.9.3/bowser.min.js"></script>
-  <script src="site_libs/headroom-0.9.4/headroom.min.js"></script>
   <link href="site_libs/distill-2.2.21/distill.css" rel="stylesheet" />
   <script src="site_libs/distill-2.2.21/template.v2.js"></script>
   <script src="site_libs/distill-2.2.21/distill.js"></script>
@@ -456,8 +458,8 @@ Publish
 <a href="metadata.html">Article Metadata</a>
 </div>
 </div>
-<a href="https://github.com/radixpub/radix-r" class="nav-image">
-<img src="images/github.png"/>
+<a href="https://github.com/radixpub/radix-r">
+<i class="fab fa-github"></i>
 </a>
 <a href="javascript:void(0);" class="nav-toggle">&#9776;</a>
 </div>

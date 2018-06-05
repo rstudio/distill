@@ -1,7 +1,7 @@
 
 
-navigation_in_header <- function(site_config) {
-  render_navigation_html(navigation_in_header_html(site_config))
+navigation_in_header <- function(site_config, offset) {
+  render_navigation_html(navigation_in_header_html(site_config, offset))
 }
 
 navigation_before_body <- function(site_config) {
@@ -12,8 +12,8 @@ navigation_after_body <- function(site_dir, site_config, offset) {
   render_navigation_html(navigation_after_body_html(site_dir, site_config, offset))
 }
 
-navigation_in_header_file <- function(site_config) {
-  render_navigation_html_file(navigation_in_header_html(site_config))
+navigation_in_header_file <- function(site_config, offset = NULL) {
+  render_navigation_html_file(navigation_in_header_html(site_config, offset))
 }
 
 navigation_before_body_file <- function(site_config) {
@@ -38,7 +38,7 @@ navigation_html_generator <- function() {
 
       # generate html and assign into cache
       assign(offset, envir = cache, list(
-        in_header = navigation_in_header(site_config),
+        in_header = navigation_in_header(site_config, offset),
         before_body = navigation_before_body(site_config),
         after_body = navigation_after_body(site_dir, site_config, offset)
       ))
@@ -50,13 +50,27 @@ navigation_html_generator <- function() {
   }
 }
 
-navigation_in_header_html <- function(site_config) {
+navigation_in_header_html <- function(site_config, offset) {
 
   if (!is.null(site_config[["navbar"]])) {
 
     in_header_html <- html_from_file(
       system.file("rmarkdown/templates/radix_article/resources/navbar.html",
                   package = "radix")
+    )
+
+    in_header_html <- tagList(
+      HTML("<!--radix_placeholder_navigation_in_header-->"),
+      in_header_html,
+      lapply(navbar_dependencies(), function(lib) {
+        if (!is.null(offset))
+          lib$path <- file.path(offset, lib$path)
+        list(
+          lapply(lib$dep$stylesheet, function(css) { tags$link(href = file.path(lib$path, css), rel = "stylesheet") }),
+          lapply(lib$dep$script, function(script) { tags$script(src = file.path(lib$path, script)) } )
+        )
+      }),
+      HTML("<!--/radix_placeholder_navigation_in_header-->")
     )
 
   } else {
@@ -69,15 +83,26 @@ navigation_in_header_html <- function(site_config) {
 
 navigation_before_body_html <- function(site_config) {
 
+  # helper to yield icon class
+  icon_class <- function(icon) {
+    if (grepl("^fa[a-z]? ", icon))
+      icon
+    else
+      paste("fa", icon)
+  }
+
   # if we have a navbar/header then generate it
   header <- c()
   if (!is.null(site_config[["navbar"]])) {
     build_menu <- function(menu) {
       item_to_menu <- function(item) {
-        if (!is.null(item[["image"]])) {
+        if (!is.null(item[["icon"]])) {
+          icon <- tag("i", list(class = icon_class(item[["icon"]])))
+          a(href = item[["href"]], icon)
+        } else if (!is.null(item[["image"]])) {
           a(href = item[["href"]], class="nav-image", img(src = item[["image"]]))
         } else if (!is.null(item[["text"]]) &&
-            grepl("^\\s*-{3,}\\s*$", item[["text"]])) {
+                    grepl("^\\s*-{3,}\\s*$", item[["text"]])) {
           tags$hr()
         } else {
           a(href = item[["href"]], item[["text"]])
@@ -247,6 +272,43 @@ offset_site_config <- function(site_dir, config, offset) {
 
   config
 }
+
+
+ensure_navbar_dependencies <- function(site_config, site_dir) {
+
+  if (!is.null(site_config[["navbar"]])) {
+
+    for (lib in navbar_dependencies()) {
+      lib_path <- file.path(site_dir, lib$path)
+      if (!dir_exists(lib_path))
+        copyDependencyToDir(lib$dep, file.path(site_dir, dirname(lib$path)))
+    }
+
+  }
+
+
+}
+
+
+navbar_dependencies <- function() {
+
+  navbar_dependency <- function(dep) {
+    ver <- paste(dep$name, dep$version, sep = "-")
+    path <- file.path("site_libs", ver)
+    list(
+      dep = dep,
+      ver = ver,
+      path = path
+    )
+  }
+
+  list(
+    navbar_dependency(html_dependency_font_awesome()),
+    navbar_dependency(html_dependency_headroom())
+  )
+}
+
+
 
 
 

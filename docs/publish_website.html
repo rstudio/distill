@@ -41,9 +41,8 @@
   <script type="text/json" id="radix-rmarkdown-metadata">
   {"type":"list","attributes":{"names":{"type":"character","attributes":{},"value":["title","description"]}},"value":[{"type":"character","attributes":{},"value":["Publishing a Website"]},{"type":"character","attributes":{},"value":["Sharing collections of Radix articles as a website"]}]}
   </script>
-  
-  
   <!--radix_placeholder_navigation_in_header-->
+  
   <script type="application/javascript">
   
     window.document.addEventListener("DOMContentLoaded", function (event) {
@@ -60,7 +59,6 @@
       // offset scroll location for banner on hash change
       // (see: https://github.com/WickyNilliams/headroom.js/issues/38)
       window.addEventListener("hashchange", function(event) {
-        console.log(headerHeight);
         window.scrollTo(0, window.pageYOffset - (headerHeight + 25));
       });
   
@@ -354,10 +352,14 @@
   }
   
   </style>
+  
+  <link href="site_libs/font-awesome-5.0.13/css/fa-svg-with-js.css" rel="stylesheet"/>
+  <script src="site_libs/font-awesome-5.0.13/js/fontawesome-all.min.js"></script>
+  <script src="site_libs/font-awesome-5.0.13/js/fa-v4-shims.min.js"></script>
+  <script src="site_libs/headroom-0.9.4/headroom.min.js"></script>
   <!--/radix_placeholder_navigation_in_header-->
   <script src="site_libs/jquery-1.11.3/jquery.min.js"></script>
   <script src="site_libs/bowser-1.9.3/bowser.min.js"></script>
-  <script src="site_libs/headroom-0.9.4/headroom.min.js"></script>
   <script src="site_libs/webcomponents-2.0.0/webcomponents.js"></script>
   <link href="site_libs/distill-2.2.21/distill.css" rel="stylesheet" />
   <script src="site_libs/distill-2.2.21/template.v2.js"></script>
@@ -433,8 +435,8 @@ Publish
 <a href="metadata.html">Article Metadata</a>
 </div>
 </div>
-<a href="https://github.com/radixpub/radix-r" class="nav-image">
-<img src="images/github.png"/>
+<a href="https://github.com/radixpub/radix-r">
+<i class="fab fa-github"></i>
 </a>
 <a href="javascript:void(0);" class="nav-toggle">&#9776;</a>
 </div>
@@ -565,12 +567,12 @@ navbar:
         - text: &quot;---&quot;
         - text: &quot;Article Metadata&quot;
           href: metadata.html
-    - icon: fa-github
+    - icon: fab fa-github
       href: https://github.com/radixpub/radix-r
 output: distill::distill_article
 ---</code></pre>
 <p>Note that we specify that the menu items appear on the <code>right</code> side of the navigation bar. We could have also used <code>left</code>, or chosen to put some items on the <code>left</code> and some on the <code>right</code>.</p>
-<p>Note also that we used an <code>image</code> for one of the menus (the GitHub logo for our link to the source code).</p>
+<p>Note also that we used an <code>icon</code> for one of the menus, specifying the <a href="https://fontawesome.com/">Font Awesome</a> <code>fab fa-github</code> identifier for the GitHub icon (you can use any Font Awesome icon). If there isn’t a Font Awesome icon that matches the image you want, you can also specify a custom <code>image</code> rather than an <code>icon</code>.</p>
 <h3 id="site-footer">Site Footer</h3>
 <p>When you use a navigation bar, you can optionally also include a site footer which uses the same theme (background and foreground colors). For example:</p>
 <p><img src="images/footer-bar.png" class="screenshot" style="width:95.0%" /></p>
@@ -652,10 +654,14 @@ output:
 <td><a href="metadata.html#creative-commons">Creative Commons</a> license terms for website content. Used to automatically generate a <em>Reuse</em> appendix.</td>
 </tr>
 <tr class="even">
+<td><code>license_url</code></td>
+<td>Alternate licensing terms for website content if not using a Creative Commons license.</td>
+</tr>
+<tr class="odd">
 <td><code>favicon</code></td>
 <td>Favicon (image file) to use for browser tabs/bookmarks</td>
 </tr>
-<tr class="odd">
+<tr class="even">
 <td><code>twitter</code></td>
 <td>Site handle for Twitter Card metadata</td>
 </tr>
