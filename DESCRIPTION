@@ -1,17 +1,17 @@
-Package: radix
 Type: Package
+Package: radix
 Title: 'R Markdown' Format for Scientific and Technical Writing
 Version: 0.1.0
 Authors@R: c(
-  person("JJ", "Allaire", role = c("aut", "cre"), email = "jj@rstudio.com"),
-  person("Rich", " Iannone", role = c("aut")),
-  person("Yihui", "Xie", role = c("aut")),
-  person(family = "RStudio, Inc.", role = "cph"),
-  person(family = "Google LLC", role = c("ctb", "cph"), comment = "https://distill.pub/guide/"),
-  person("Nick", "Williams", role = c("ctb", "cph"), comment = "https://wicky.nillia.ms/headroom.js/"),
-  person("Denis", "Demchenko", role = c("ctb", "cph"), comment = "https://github.com/lancedikson/bowser"),
-  person(family = "The Polymer Authors", role = c("ctb", "cph"), comment = "https://www.webcomponents.org/polyfills/")
-  )
+    person("JJ", "Allaire", role = c("aut", "cre"), email = "jj@rstudio.com"),
+    person("Rich", "Iannone", role = c("aut")),
+    person("Yihui", "Xie", role = c("aut")),
+    person(family = "RStudio, Inc.", role = "cph"),
+    person(family = "Google LLC", role = c("ctb", "cph"), comment = "https://distill.pub/guide/"),
+    person("Nick", "Williams", role = c("ctb", "cph"), comment = "https://wicky.nillia.ms/headroom.js/"),
+    person("Denis", "Demchenko", role = c("ctb", "cph"), comment = "https://github.com/lancedikson/bowser"),
+    person(family = "The Polymer Authors", role = c("ctb", "cph"), comment = "https://www.webcomponents.org/polyfills/")
+    )
 Description: Scientific and technical article format for the web. 'Radix' articles 
     feature attractive, reader-friendly typography, flexible layout options
     for visualizations, and full support for footnotes and citations.
@@ -22,24 +22,26 @@ Encoding: UTF-8
 LazyData: true
 RoxygenNote: 6.0.1
 Imports: 
-  utils, 
-  tools, 
-  rmarkdown (>= 1.9.17), 
-  htmltools, 
-  jsonlite, 
-  lubridate, 
-  png, 
-  mime, 
-  rstudioapi, 
-  zeallot, 
-  rprojroot,
-  xml2,
-  base64enc
+    utils, 
+    tools, 
+    rmarkdown (>= 1.9.17), 
+    htmltools, 
+    jsonlite, 
+    lubridate, 
+    png, 
+    mime, 
+    rstudioapi, 
+    zeallot, 
+    rprojroot,
+    xml2,
+    base64enc
 Remotes:
-  rstudio/rmarkdown
+    rstudio/rmarkdown
 Suggests:
-  knitr (>= 1.15.6),
-  htmlwidgets,
-  r2d3,
-  DiagrammeR,
-  shiny
+    knitr (>= 1.15.6),
+    htmlwidgets,
+    r2d3,
+    DiagrammeR,
+    shiny,
+    spelling
+Language: en-US
