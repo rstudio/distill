@@ -216,7 +216,7 @@ ggplot(mtcars, aes(hp, mpg)) + geom_point() + geom_smooth()
 
 Syntax highlighting is provided for knitr code chunks. Note that by default the Radix format does not display the code for chunks that are evaluated to produce output (knitr option `echo = FALSE`). 
 
-To display the code that was evaluated to produce output you can set the `echo` chunk option to `TRUE`:
+The `echo = FALSE` default reflects the fact that Radix articles are often used to present the results of analyses rather than the underlying code. To display the code that was evaluated to produce output you can set the `echo` chunk option to `TRUE`:
 
 ````clike
 ```{r, echo=TRUE}`r ''`
@@ -231,6 +231,35 @@ To include code that is only displayed and not evaluated specify the `eval=FALSE
 1 + 1
 ```
 ````
+
+There are a number of default values that Radix establishes for knitr chunk options (these defaults also reflect the use case of presenting results/output rather than underlying code):
+
+| Option           |  Value           | Comment                                    |
+|------------------|------------------|------------------------------------------------|
+| `echo`     | `FALSE` | Don't print code by default. |
+| `warning`   | `FALSE`   | Don't print warnings by default.  |
+| `message`    | `FALSE` | Don't print R messages by default. |
+| `comment`  | `NA` | Don't preface R output with a comment. |
+| `R.options` | `list(width = 70)` | 70 character wide console output. |
+
+Keeping R code and output at 70 characters wide (or less) is recommended for readablity on a variety of devices and screen sizes.
+
+As illustrated above, all of these defaults can be overriden on a chunk-by-chunk basis by specifying chunk options.
+
+You can also change the global defaults using a setup chunk. For example:
+
+````clike
+```{r setup, include=FALSE}`r ''`
+knitr::opts_chunk$set(
+  echo = TRUE,
+  warning = TRUE,
+  message = TRUE,
+  comment = "##",
+  R.options = list(width = 60)
+)
+```
+````
+
 
 ## Appendices
 

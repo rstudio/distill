@@ -6,21 +6,17 @@
 - google analytics and discourse commenting
 - search
 - built-in social buttons
+- RSS feed for collection
+   (support images: https://stackoverflow.com/questions/483675/images-in-rss-feed)
 - rstudio addins/templates/projects for article creation
 
 - re-organize docs into "Authoring", etc.
-
-- Docs: note that echo = FALSE by default and explain 70 character constraint
-- Warn users on code width > 70 characters
-- Set output width to 70 characters
-- Document 70 characters
 
 - Improved error messages for incomplete author field
 
 - Add some citations to sample posts
 
-- RSS feed for collection
-   (support images: https://stackoverflow.com/questions/483675/images-in-rss-feed)
+
 
 - larger scale visualization layouts
     - iframe with npr library (pym.js) for sizing (generic) (check with shinyapps.io)
