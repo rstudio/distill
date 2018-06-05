@@ -75,7 +75,7 @@ render_collections <- function(site_dir, site_config, collections, quiet = FALSE
   for (collection in collections) {
 
     if (!quiet)
-      cat(paste0("Rendering ", collection$name, ":\n"))
+      cat(paste0("\nRendering ", collection$name, ":\n"))
 
     # remove existing output dir if it exists
     collection_output <- file.path(site_dir,
