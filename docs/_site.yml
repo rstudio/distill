@@ -27,6 +27,12 @@ navbar:
           href: citations.html
         - text: "Ariticle Metadata"
           href: metadata.html
+    - text: "Websites"
+      menu:
+        - text: "Website Basics"
+          href: create_website.html
+        - text: "Publishing a Website"
+          href: publish_website.html
     - text: "Publishing"
       menu:
         - text: "Publishing Articles"

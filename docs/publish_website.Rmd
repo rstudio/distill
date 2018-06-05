@@ -1,296 +1,17 @@
 ---
 title: "Publishing a Website"
-description: Sharing collections of Radix articles as a website
+description: Publish your website using a variety of services
 ---
 
 ```{r setup, include=FALSE}
 library(knitr)
 ```
 
-This article describes how to create a website that contains a collection of Radix articles. Radix websites include a top level navigation bar that enables readers to discover and browse articles. For example, the documentation pages you are reading now are a Radix website. 
-
-Once you've created your website locally, there are a variety of ways available to publish your site to the web. We cover several options below including [RStudio Connect], [GitHub Pages], [Netlify], [Firebase], [Site44], and [Amazon S3]. 
-
-## Getting Started
-
-The minimum requirement for a Radix website is that it have:
-
-1) An `index.Rmd` file configured to use the Radix website generator (`site: radix::radix_website`).
-
-2) A `_site.yml` file (this is where site related options and configuration are specified).
-
-Let's walk through a very simple example, a website that includes two pages (Home and About) and a navigation bar to switch between them:
-
-**\_site.yml**
-
-```markup
----
-name: "radix-rmarkdown"
-title: "Radix for R Markdown"
-navbar:
-  right:
-    - text: "Home"
-      href: index.html
-    - text: "About"
-      href: about.html
-    - image: images/github.png
-      href: https://github.com/radixpub/radix-r
-output: radix::radix_article
----
-```
-
-**index.Rmd**
-
-```markup
----
-title: "Radix for R Markdown"
-description: | 
-  Scientific and technical writing, native to the web
-site: radix::radix_website
----
-
-Hello, Radix!
-```
-
-**about.Rmd**
-
-```markup
----
-title: "About Radix"
-description: |
-  Some additional details about the Radix project
----
-
-More about Radix
-```
- 
-Note that the `output` options are not specified within the Rmd documents but rather in the `_site.yml` configuration file (this allows output options to be shared by all articles).
-
-Also note that the `index.Rmd` file specifies the Radix website generator (`site::radix_website`).
-
-## Authoring Articles
-
-When you use the RStudio **Knit** command on a Radix article within a website, only that article will be rendered and previewed:
-
-![](images/knit-site-article.png){width=95% .screenshot}
-
-You can also preview a single article from within a website by passing the name of the article's Rmd file to `render_site()`:
-
-```r
-render_site("about.Rmd")
-```
-
-This will build only the specified article (as opposed to all articles in the site). This the recommended workflow for authoring articles since it offers the fastest turnaround time for previews (since only the article you are working on is rendered).
-
-## Building the Site
-
-After you've authored the various articles contained within the website you will want to build the entire site before deploying it. 
-
-If your Radix website is contained within an RStudio project you can use the **Build Website** command available in the Build pane to generate the site:
-
-![](images/build-website.png){width=95% .screenshot}
-
-When you build a website, the following things occur:
-
-1. All of the Rmd and md files in the root website directory will be rendered into HTML. Note however that markdown files beginning with "_" are not rendered (this is a convention to designate files that are included by top level documents).
-
-2. The generated HTML files and any supporting files (e.g. CSS and JavaScript) are copied into an output directory (`_site` by default).
-
-The HTML files within the `_site` directory are now ready to deploy as a standalone static website. 
-
-To build a website from the command line, use the `rmarkdown::render_site()` function:
-
-```r
-library(rmarkdown)
-render_site()
-```
-
-## Site Configuration
-
-The **\_site.yml** file has a number of options that affect site output including where it is written and what files are included and excluded from the site. Here's an example that makes use of a few of these options:
-
-**\_site.yml**
-
-```markup
-name: "my-website"
-output_dir: "_site"
-include: ["import.R"]
-exclude: ["docs.txt", "*.csv"]
-```
-
-The `name` field provides a suggested URL path for your website when it is published (by default this is just the name of the directory containing the site). 
-
-The `output_dir` field indicates which directory to copy site content into ("_site" is the default if none is specified). Note that this can be "." to keep all content within the root website directory alongside the source code.
-
-### Included Files
-
-The `include` and `exclude` fields enable you to override the default behavior visa-vi what files are copied into the output directory. By default, all files within the website directory are copied into the output directory (e.g. "_site") save for the following:
-
-1. Files beginning with `"."` (hidden files).
-
-2. Files beginning with `"_"`
-
-3. Files known to contain R source code (e.g. `".R"`, `".s"`, `".Rmd"`), R data (e.g. `".RData"`, `".rds"`), or configuration data (e.g. `"rsconnect"` ,`"packrat"`)).
-
-The `include` and `exclude` fields of **\_site.yml** can be used to override this default behavior (wildcards can be used to specify groups of files to be included or excluded).
-
-Note that `include` and `exclude` are *not* used to determine which Rmd files are rendered (all of them in the root directory save for those named with the `_` prefix will be rendered).
-
-The R Markdown documentation on [creating websites](https://rmarkdown.rstudio.com/rmarkdown_websites.html) has documentation on  additional available features and configuration options. The remainder of this article describes features that are specific to Radix websites.
-
-## Site Navigation
-
-Site navigation bars include the site's title, an optional logo, top-level links to articles, and if need be drop-down menus that include links to several articles. For example:
-
-![](images/navigation-bar.png){width=95% .screenshot}
-
-Elements of the site navigation bar are specified within the `navbar` section of the `_site.yml` file. For example, here is the YAML that was used to create the navigation bar displayed above:
-
-```markup
----
-name: "radix"
-title: "Radix for R Markdown"
-navbar:
-  logo:
-    image: images/logo.png
-    href: https://www.rstudio.com
-  right:
-    - text: "Figures"
-      href: figures.html
-    - text: "Tables"
-      href: tables.html
-    - text: "Citations"
-      href: citations.html
-    - text: "Publish"
-      menu:
-        - text: "Publishing Articles"
-          href: publish_article.html
-        - text: "Publishing a Website"
-          href: publish_website.html
-        - text: "---"
-        - text: "Article Metadata"
-          href: metadata.html
-    - icon: fab fa-github
-      href: https://github.com/radixpub/radix-r
-output: distill::distill_article
----
-```
-
-Note that we specify that the menu items appear on the `right` side of the navigation bar. We could have also used `left`, or chosen to put some items on the `left` and some on the `right`. 
-
-Note also that we used an `icon` for one of the menus, specifying the [Font Awesome](https://fontawesome.com/) `fab fa-github` identifier for the GitHub icon (you can use any Font Awesome icon). If there isn't a Font Awesome icon that matches the image you want, you can also specify a custom `image` rather than an `icon`.
-
-### Site Footer
-
-When you use a navigation bar, you can optionally also include a site footer which uses the same theme (background and foreground colors). For example:
-
-![](images/footer-bar.png){width=95% .screenshot}
-
-To add a footer, simply include a file named `footer.html` within your main site directory. For example:
-
-**footer.html**
-
-```markup
-© Copyright 2018 [The Distill Template Authors]
-(https://github.com/distillpub/template/blob/master/AUTHORS) 
-and [RStudio, Inc](https://www.rstudio.com).
-
-Software licensed under the [Apache License, v2.0]
-(https://www.apache.org/licenses/LICENSE-2.0).
-```
-
-### Theming
-
-You can use CSS to create an alternate theme for your navigation bar and site footer. Here is the CSS used for the default appearance:
-
-```css
-.radix-site-nav {
-  color: rgba(255, 255, 255, 0.8);
-  background-color: #455a64;
-  font-size: 15px;
-  font-weight: 300;
-}
-
-.radix-site-nav a {
-  color: inherit;
-  text-decoration: none;
-}
-
-.radix-site-nav a:hover {
-  color: white;
-}
-
-.radix-site-header {
-}
-
-.radix-site-footer {
-}
-
-@media print {
-  .radix-site-nav {
-    display: none;
-  }
-}
-```
-
-The `radix-site-nav` class addresses both the header and footer, whereas the `radix-site-header` and `radix-site-footer` apply (respectively) to just the header and footer.
-
-To override all or part of this CSS, simply include a `styles.css` file in the main site directory and add a reference to it within your site output options. For example: 
-
-**\_site.yml**
-
-```markup
-name: "radix"
-title: "Radix for R Markdown"
-navbar:
-  # (navbar definition here)
-output:
-  radix::radix_article:
-    css: styles.css
-```
-
-## Site Metadata
-
-Radix articles can include various types of [metadata](metadata.html) to make them easier to index, cite, and share. Metadata included within your `_site.yml` file is conveniently shared across all articles on your site (individual articles can always override any value within their own metadata). 
-
-Several metadata values which you might find useful to define in `_site.yml` are:
-
-| Metadata           | Description                                    |
-|------------------|------------------------------------------------|
-| `base_url` |  Base (root) URL for the location where the website will be deployed (used for providing [preview imaages](metadata.html#preview-images) for Open Graph and Twitter Card). |
-| `repository_url`     |   URL for the source code of your website (note that individual articles will often want to override this value). Used to automatically create a *Corrections* appendix. |
-| `creative_commons`      |  [Creative Commons](metadata.html#creative-commons) license terms for website content. Used to automatically generate a *Reuse* appendix. |
-| `license_url`     | Alternate licensing terms for website content if not using a Creative Commons license. |
-| `favicon` | Favicon (image file) to use for browser tabs/bookmarks |
-| `twitter` | Site handle for Twitter Card metadata |
-
-Here's a `_site.yml` file that uses all of these fields (save for `license_url` since the license is already specified via `creative_commons`):
-
-**\_site.yml**
-
-```markup
-name: "radix"
-title: "Radix for R Markdown"
-favicon: images/favicon.png
-base_url: https://radixpub.github.io/radix-r
-repository_url: https://github.com/radixpub/radix-r
-creative_commons: CC BY
-twitter:
-  site: "@radixjournal"
-navbar:
-  # (navbar definition here)
-output: radix::radix_article
-```
-
-Be sure to enclose Twitter account names in quotes (this is required because they start with `@`).
-
-## Publishing
-
 There are a wide variety of ways to publish Radix websites. Website content is by default written to the `_site` sub-directory (you can customize this using the `output_dir` metadata field). Publishing is simply a matter of copying the output directory to a web server or web hosting service.
 
 Below we describe several convenient options for Radix website deployment including [RStudio Connect], [GitHub Pages], [Netlify], [Firebase], [Site44], and [Amazon S3]. We'll mostly defer to the documentation provided by the various services, but will note any Radix website specific configuration required.
 
-### RStudio Connect
+## RStudio Connect
 
 [RStudio Connect](https://www.rstudio.com/products/connect/) is a server product from RStudio for secure sharing of websites, applications, reports, and plots. 
 
@@ -302,7 +23,7 @@ Note that you can either publish your website with the source code (so it can be
 
 Unlike the other website publishing options described below, [RStudio Connect](https://www.rstudio.com/products/connect/)is server that you run inside an organization, so is suitable for publishing content that you only want visible within your organization's network as opposed to visible to the entire internet.
 
-### GitHub Pages
+## GitHub Pages
 
 [GitHub Pages](https://pages.github.com/) is a service that lets you publish a website from any GitHub repository. There are two additional configuration steps required to host a Radix website using GitHub Pages:
 
@@ -325,7 +46,7 @@ Unlike the other website publishing options described below, [RStudio Connect](h
 
 See the [GitHub Pages](https://pages.github.com/) documentation for additional details on creating and deploying websites with GitHub.
 
-### Netlify
+## Netlify
 
 [Netlify](https://www.netlify.com/) is a popular website hosting service that allows for both direct upload of website files or integrated publishing from Git repositories (GitHub, GitLab, or Bitbucket) via commit-hooks.
 
@@ -333,7 +54,7 @@ If you are using Netlify Git integration, be sure to set the publish directory t
 
 ![](images/netlify-publish-dir.png){width=95% .screenshot}
 
-### Firebase
+## Firebase
 
 Google Firebase has a [web hosting service](https://firebase.google.com/docs/hosting/quickstart) that enables easy deployment of websites using a set of command line tools.
 
@@ -347,18 +68,18 @@ output_dir: "public"
 ---
 ```
 
-### Site44
+## Site44
 
 [Site44](https://www.site44.com/) is a service that allows you to publish websites from within Dropbox folders. Site44 creates a `Dropbox/Apps/site44` directory, and any folders within that directory are published as websites.
 
 The recommended workflow for deploying Radix websites to Site44 is to develop your website in a separate project directory, and then, when it's ready for final publishing, copy the contents of the `_site` directory to the folder for your website.
 
-### Amazon S3
+## Amazon S3
 
 If you are a user of Amazon Web Services you can serve your website directly from Amazon S3. Note however that this option is a bit more technically involved than GitHub Pages, Netlify, or Site 44. See the article on [Hosting a Static Website on Amazon S3](https://docs.aws.amazon.com/AmazonS3/latest/dev/WebsiteHosting.html) for additional details.
 
 
-### Other Services
+## Other Services
 
 Any web server or web host can be used to deploy a Radix website. Here's a recent [CNET roundup](https://www.cnet.com/web-hosting/) of other web hosts you could consider. You can also deploy a Radix website on any internal (intranet) web server.
 

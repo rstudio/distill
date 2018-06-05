@@ -1,0 +1,729 @@
+<!DOCTYPE html>
+
+<html xmlns="http://www.w3.org/1999/xhtml" lang="" xml:lang="">
+
+<head>
+  <meta charset="utf-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta http-equiv="X-UA-Compatible" content="IE=Edge,chrome=1"/>
+  <meta name="generator" content="radix" />
+
+  <style type="text/css">
+  /* Hide doc at startup (prevent jankiness while JS renders/transforms) */
+  body {
+    visibility: hidden;
+  }
+  </style>
+
+  <!--radix_placeholder_meta_tags-->
+  <title>Radix for R Markdown: Creating a Website</title>
+  
+  <meta property="description" itemprop="description" content="Sharing collections of Radix articles as a website"/>
+  
+  <link rel="license" href="https://creativecommons.org/licenses/by/4.0/"/>
+  <link rel="icon" type="image/png" href="images/favicon.png"/>
+  
+  
+  <!--  https://developers.facebook.com/docs/sharing/webmasters#markup -->
+  <meta property="og:title" content="Radix for R Markdown: Creating a Website"/>
+  <meta property="og:type" content="article"/>
+  <meta property="og:description" content="Sharing collections of Radix articles as a website"/>
+  <meta property="og:locale" content="en_US"/>
+  <meta property="og:site_name" content="Radix for R Markdown"/>
+  
+  <!--  https://dev.twitter.com/cards/types/summary -->
+  <meta property="twitter:card" content="summary"/>
+  <meta property="twitter:title" content="Radix for R Markdown: Creating a Website"/>
+  <meta property="twitter:description" content="Sharing collections of Radix articles as a website"/>
+  
+  <!--/radix_placeholder_meta_tags-->
+  
+  <script type="text/json" id="radix-rmarkdown-metadata">
+  {"type":"list","attributes":{"names":{"type":"character","attributes":{},"value":["title","description"]}},"value":[{"type":"character","attributes":{},"value":["Creating a Website"]},{"type":"character","attributes":{},"value":["Sharing collections of Radix articles as a website"]}]}
+  </script>
+  <!--radix_placeholder_navigation_in_header-->
+  
+  <script type="application/javascript">
+  
+    window.document.addEventListener("DOMContentLoaded", function (event) {
+  
+      // initialize headroom for banner
+      var header = $('header').get(0);
+      var headerHeight = header.offsetHeight;
+      var headroom = new Headroom(header);
+      headroom.init();
+      if(window.location.hash)
+        headroom.unpin();
+      $(header).addClass('headroom--transition');
+  
+      // offset scroll location for banner on hash change
+      // (see: https://github.com/WickyNilliams/headroom.js/issues/38)
+      window.addEventListener("hashchange", function(event) {
+        window.scrollTo(0, window.pageYOffset - (headerHeight + 25));
+      });
+  
+      // responsive menu
+      $('.radix-site-header').each(function(i, val) {
+        var topnav = $(this);
+        var toggle = topnav.find('.nav-toggle');
+        toggle.on('click', function() {
+          topnav.toggleClass('responsive');
+        });
+      });
+  
+      // nav dropdowns
+      $('.nav-dropbtn').click(function(e) {
+        $(this).next('.nav-dropdown-content').toggleClass('nav-dropdown-active');
+        $(this).parent().siblings('.nav-dropdown')
+           .children('.nav-dropdown-content').removeClass('nav-dropdown-active');
+      });
+      $("body").click(function(e){
+        $('.nav-dropdown-content').removeClass('nav-dropdown-active');
+      });
+      $(".nav-dropdown").click(function(e){
+        e.stopPropagation();
+      });
+    });
+  </script>
+  
+  <style type="text/css">
+  
+  /* Theme (user-documented overrideables for nav appearance) */
+  
+  .radix-site-nav {
+    color: rgba(255, 255, 255, 0.8);
+    background-color: #455a64;
+    font-size: 15px;
+    font-weight: 300;
+  }
+  
+  .radix-site-nav a {
+    color: inherit;
+    text-decoration: none;
+  }
+  
+  .radix-site-nav a:hover {
+    color: white;
+  }
+  
+  @media print {
+    .radix-site-nav {
+      display: none;
+    }
+  }
+  
+  .radix-site-header {
+  
+  }
+  
+  .radix-site-footer {
+  
+  }
+  
+  
+  /* Site Header */
+  
+  .radix-site-header {
+    width: 100%;
+    box-sizing: border-box;
+    z-index: 3;
+  }
+  
+  .radix-site-header .nav-left {
+    display: inline-block;
+    margin-left: 8px;
+  }
+  
+  @media screen and (max-width: 768px) {
+    .radix-site-header .nav-left {
+      margin-left: 0;
+    }
+  }
+  
+  
+  .radix-site-header .nav-right {
+    float: right;
+    margin-right: 8px;
+  }
+  
+  .radix-site-header a,
+  .radix-site-header .title {
+    display: inline-block;
+    text-align: center;
+    padding: 14px 10px 14px 10px;
+  }
+  
+  .radix-site-header .title {
+    font-size: 18px;
+  }
+  
+  .radix-site-header .logo {
+    padding: 0;
+  }
+  
+  .radix-site-header .logo img {
+    display: none;
+    max-height: 20px;
+    width: auto;
+    margin-bottom: -4px;
+  }
+  
+  .radix-site-header .nav-image img {
+    max-height: 18px;
+    width: auto;
+    display: inline-block;
+    margin-bottom: -3px;
+  }
+  
+  
+  
+  @media screen and (min-width: 1000px) {
+    .radix-site-header .logo img {
+      display: inline-block;
+    }
+    .radix-site-header .nav-left {
+      margin-left: 20px;
+    }
+    .radix-site-header .nav-right {
+      margin-right: 20px;
+    }
+    .radix-site-header .title {
+      padding-left: 12px;
+    }
+  }
+  
+  
+  .radix-site-header .nav-toggle {
+    display: none;
+  }
+  
+  .nav-dropdown {
+    display: inline-block;
+    position: relative;
+  }
+  
+  .nav-dropdown .nav-dropbtn {
+    border: none;
+    outline: none;
+    color: rgba(255, 255, 255, 0.8);
+    padding: 16px 10px;
+    background-color: transparent;
+    font-family: inherit;
+    font-size: inherit;
+    font-weight: inherit;
+    margin: 0;
+    margin-top: 1px;
+    z-index: 2;
+  }
+  
+  .nav-dropdown-content {
+    display: none;
+    position: absolute;
+    background-color: white;
+    min-width: 200px;
+    border: 1px solid rgba(0,0,0,0.15);
+    border-radius: 4px;
+    box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.1);
+    z-index: 1;
+    margin-top: 2px;
+    white-space: nowrap;
+    padding-top: 4px;
+    padding-bottom: 4px;
+  }
+  
+  .nav-dropdown-content hr {
+    margin-top: 0;
+    margin-bottom: 0;
+    border: none;
+    border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+  }
+  
+  .nav-dropdown-active {
+    display: block;
+  }
+  
+  .nav-dropdown-content a {
+    color: black;
+    padding: 6px 24px;
+    text-decoration: none;
+    display: block;
+    text-align: left;
+  }
+  
+  .nav-dropdown:hover .nav-dropbtn {
+    color: white;
+  }
+  
+  .nav-dropdown-content a:hover {
+    background-color: #ddd;
+    color: black;
+  }
+  
+  .nav-right .nav-dropdown-content {
+    margin-left: -45%;
+    right: 0;
+  }
+  
+  @media screen and (max-width: 768px) {
+    .radix-site-header a, .radix-site-header .nav-dropdown  {display: none;}
+    .radix-site-header a.nav-toggle {
+      float: right;
+      display: block;
+    }
+    .radix-site-header .title {
+      margin-left: 0;
+    }
+    .radix-site-header .nav-right {
+      margin-right: 0;
+    }
+    .radix-site-header {
+      overflow: hidden;
+    }
+    .nav-right .nav-dropdown-content {
+      margin-left: 0;
+    }
+  }
+  
+  
+  @media screen and (max-width: 768px) {
+    .radix-site-header.responsive {position: relative;}
+    .radix-site-header.responsive a.nav-toggle {
+      position: absolute;
+      right: 0;
+      top: 0;
+    }
+    .radix-site-header.responsive a,
+    .radix-site-header.responsive .nav-dropdown {
+      display: block;
+      text-align: left;
+    }
+    .radix-site-header.responsive .nav-left,
+    .radix-site-header.responsive .nav-right {
+      width: 100%;
+    }
+    .radix-site-header.responsive .nav-dropdown {float: none;}
+    .radix-site-header.responsive .nav-dropdown-content {position: relative;}
+    .radix-site-header.responsive .nav-dropdown .nav-dropbtn {
+      display: block;
+      width: 100%;
+      text-align: left;
+    }
+  }
+  
+  /* Site Footer */
+  
+  .radix-site-footer {
+    width: 100%;
+    overflow: hidden;
+    box-sizing: border-box;
+    z-index: 3;
+    margin-top: 30px;
+    padding-top: 30px;
+    padding-bottom: 30px;
+    text-align: center;
+  }
+  
+  /* Headroom */
+  
+  d-title {
+    padding-top: 6rem;
+  }
+  
+  @media print {
+    d-title {
+      padding-top: 4rem;
+    }
+  }
+  
+  .headroom {
+    z-index: 1000;
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+  }
+  
+  .headroom--transition {
+    transition: all .4s ease-in-out;
+  }
+  
+  .headroom--unpinned {
+    top: -100px;
+  }
+  
+  .headroom--pinned {
+    top: 0;
+  }
+  
+  </style>
+  
+  <link href="site_libs/font-awesome-5.0.13/css/fa-svg-with-js.css" rel="stylesheet"/>
+  <script src="site_libs/font-awesome-5.0.13/js/fontawesome-all.min.js"></script>
+  <script src="site_libs/font-awesome-5.0.13/js/fa-v4-shims.min.js"></script>
+  <script src="site_libs/headroom-0.9.4/headroom.min.js"></script>
+  <!--/radix_placeholder_navigation_in_header-->
+  <script src="site_libs/jquery-1.11.3/jquery.min.js"></script>
+  <script src="site_libs/bowser-1.9.3/bowser.min.js"></script>
+  <script src="site_libs/webcomponents-2.0.0/webcomponents.js"></script>
+  <link href="site_libs/distill-2.2.21/distill.css" rel="stylesheet" />
+  <script src="site_libs/distill-2.2.21/template.v2.js"></script>
+  <script src="site_libs/distill-2.2.21/distill.js"></script>
+  <!--radix_placeholder_site_in_header-->
+  <style type="text/css">
+  .screenshot {
+    border: 1px solid rgba(0, 0, 0, 0.2);
+  }
+  
+  .fake-img {
+    background: #bbb;
+    border: 1px solid rgba(0, 0, 0, 0.1);
+    box-shadow: 0 0px 4px rgba(0, 0, 0, 0.1);
+    margin-bottom: 12px;
+  }
+  .fake-img p {
+    font-family: monospace;
+    color: white;
+    text-align: left;
+    margin: 12px 0;
+    text-align: center;
+    font-size: 16px;
+  }
+  
+  </style>
+  <!--/radix_placeholder_site_in_header-->
+
+  <link rel="stylesheet" href="styles.css" type="text/css"/>
+
+</head>
+
+<body>
+
+
+<script id="distill-front-matter" type="text/json">
+{"title":"Creating a Website","description":"Sharing collections of Radix articles as a website","authors":[]}
+</script>
+<!--radix_placeholder_navigation_before_body-->
+<header class="header header--fixed" role="banner">
+<nav class="radix-site-nav radix-site-header">
+<div class="nav-left">
+<a class="logo" href="https://www.rstudio.com">
+<img src="images/logo.png"/>
+</a>
+<span class="title">Radix for R Markdown</span>
+</div>
+<div class="nav-right">
+<a href="index.html">Home</a>
+<div class="nav-dropdown">
+<button class="nav-dropbtn">
+Authoring
+ 
+<span class="down-arrow">&#x25BE;</span>
+</button>
+<div class="nav-dropdown-content">
+<a href="figures.html">Figure Layout</a>
+<a href="tables.html">Tables</a>
+<a href="diagrams.html">Diagrams</a>
+<a href="interactivity.html">JavaScript &amp; D3</a>
+<hr/>
+<a href="citations.html">Citations</a>
+<a href="metadata.html">Ariticle Metadata</a>
+</div>
+</div>
+<div class="nav-dropdown">
+<button class="nav-dropbtn">
+Websites
+ 
+<span class="down-arrow">&#x25BE;</span>
+</button>
+<div class="nav-dropdown-content">
+<a href="create_website.html">Website Basics</a>
+<a href="publish_website.html">Publishing a Website</a>
+</div>
+</div>
+<div class="nav-dropdown">
+<button class="nav-dropbtn">
+Publishing
+ 
+<span class="down-arrow">&#x25BE;</span>
+</button>
+<div class="nav-dropdown-content">
+<a href="publish_article.html">Publishing Articles</a>
+<a href="publish_website.html">Publishing a Website</a>
+</div>
+</div>
+<a href="https://github.com/radixpub/radix-r">
+<i class="fab fa-github"></i>
+</a>
+<a href="javascript:void(0);" class="nav-toggle">&#9776;</a>
+</div>
+</nav>
+</header>
+<!--/radix_placeholder_navigation_before_body-->
+<!--radix_placeholder_site_before_body-->
+<!--/radix_placeholder_site_before_body-->
+
+<div class="d-title">
+<h1>Creating a Website</h1>
+<p>Sharing collections of Radix articles as a website</p>
+</div>
+
+
+<div class="d-article">
+<p>This article describes how to create a website that contains a collection of Radix articles. Radix websites include a top level navigation bar that enables readers to discover and browse articles. For example, the documentation pages you are reading now are a Radix website.</p>
+<p>Once you’ve created your website locally, there are a variety of ways available to <a href="publish_website.html">publish your site</a> to the web.</p>
+<h2 id="getting-started">Getting Started</h2>
+<p>The minimum requirement for a Radix website is that it have:</p>
+<ol type="1">
+<li><p>An <code>index.Rmd</code> file configured to use the Radix website generator (<code>site: radix::radix_website</code>).</p></li>
+<li><p>A <code>_site.yml</code> file (this is where site related options and configuration are specified).</p></li>
+</ol>
+<p>Let’s walk through a very simple example, a website that includes two pages (Home and About) and a navigation bar to switch between them:</p>
+<p><strong>_site.yml</strong></p>
+<pre class="markup"><code>
+---
+name: &quot;radix-rmarkdown&quot;
+title: &quot;Radix for R Markdown&quot;
+navbar:
+  right:
+    - text: &quot;Home&quot;
+      href: index.html
+    - text: &quot;About&quot;
+      href: about.html
+    - image: images/github.png
+      href: https://github.com/radixpub/radix-r
+output: radix::radix_article
+---</code></pre>
+<p><strong>index.Rmd</strong></p>
+<pre class="markup"><code>
+---
+title: &quot;Radix for R Markdown&quot;
+description: | 
+  Scientific and technical writing, native to the web
+site: radix::radix_website
+---
+
+Hello, Radix!</code></pre>
+<p><strong>about.Rmd</strong></p>
+<pre class="markup"><code>
+---
+title: &quot;About Radix&quot;
+description: |
+  Some additional details about the Radix project
+---
+
+More about Radix</code></pre>
+<p>Note that the <code>output</code> options are not specified within the Rmd documents but rather in the <code>_site.yml</code> configuration file (this allows output options to be shared by all articles).</p>
+<p>Also note that the <code>index.Rmd</code> file specifies the Radix website generator (<code>site::radix_website</code>).</p>
+<h2 id="authoring-articles">Authoring Articles</h2>
+<p>When you use the RStudio <strong>Knit</strong> command on a Radix article within a website, only that article will be rendered and previewed:</p>
+<p><img src="images/knit-site-article.png" class="screenshot" style="width:95.0%" /></p>
+<p>You can also preview a single article from within a website by passing the name of the article’s Rmd file to <code>render_site()</code>:</p>
+<pre class="r"><code>
+render_site(&quot;about.Rmd&quot;)</code></pre>
+<p>This will build only the specified article (as opposed to all articles in the site). This the recommended workflow for authoring articles since it offers the fastest turnaround time for previews (since only the article you are working on is rendered).</p>
+<h2 id="building-the-site">Building the Site</h2>
+<p>After you’ve authored the various articles contained within the website you will want to build the entire site before deploying it.</p>
+<p>If your Radix website is contained within an RStudio project you can use the <strong>Build Website</strong> command available in the Build pane to generate the site:</p>
+<p><img src="images/build-website.png" class="screenshot" style="width:95.0%" /></p>
+<p>When you build a website, the following things occur:</p>
+<ol type="1">
+<li><p>All of the Rmd and md files in the root website directory will be rendered into HTML. Note however that markdown files beginning with &quot;_&quot; are not rendered (this is a convention to designate files that are included by top level documents).</p></li>
+<li><p>The generated HTML files and any supporting files (e.g. CSS and JavaScript) are copied into an output directory (<code>_site</code> by default).</p></li>
+</ol>
+<p>The HTML files within the <code>_site</code> directory are now ready to deploy as a standalone static website.</p>
+<p>To build a website from the command line, use the <code>rmarkdown::render_site()</code> function:</p>
+<pre class="r"><code>
+library(rmarkdown)
+render_site()</code></pre>
+<h2 id="site-configuration">Site Configuration</h2>
+<p>The <strong>_site.yml</strong> file has a number of options that affect site output including where it is written and what files are included and excluded from the site. Here’s an example that makes use of a few of these options:</p>
+<p><strong>_site.yml</strong></p>
+<pre class="markup"><code>
+name: &quot;my-website&quot;
+output_dir: &quot;_site&quot;
+include: [&quot;import.R&quot;]
+exclude: [&quot;docs.txt&quot;, &quot;*.csv&quot;]</code></pre>
+<p>The <code>name</code> field provides a suggested URL path for your website when it is published (by default this is just the name of the directory containing the site).</p>
+<p>The <code>output_dir</code> field indicates which directory to copy site content into (&quot;_site&quot; is the default if none is specified). Note that this can be “.” to keep all content within the root website directory alongside the source code.</p>
+<h3 id="included-files">Included Files</h3>
+<p>The <code>include</code> and <code>exclude</code> fields enable you to override the default behavior visa-vi what files are copied into the output directory. By default, all files within the website directory are copied into the output directory (e.g. &quot;_site&quot;) save for the following:</p>
+<ol type="1">
+<li><p>Files beginning with <code>&quot;.&quot;</code> (hidden files).</p></li>
+<li><p>Files beginning with <code>&quot;_&quot;</code></p></li>
+<li><p>Files known to contain R source code (e.g. <code>&quot;.R&quot;</code>, <code>&quot;.s&quot;</code>, <code>&quot;.Rmd&quot;</code>), R data (e.g. <code>&quot;.RData&quot;</code>, <code>&quot;.rds&quot;</code>), or configuration data (e.g. <code>&quot;rsconnect&quot;</code> ,<code>&quot;packrat&quot;</code>)).</p></li>
+</ol>
+<p>The <code>include</code> and <code>exclude</code> fields of <strong>_site.yml</strong> can be used to override this default behavior (wildcards can be used to specify groups of files to be included or excluded).</p>
+<p>Note that <code>include</code> and <code>exclude</code> are <em>not</em> used to determine which Rmd files are rendered (all of them in the root directory save for those named with the <code>_</code> prefix will be rendered).</p>
+<p>The R Markdown documentation on <a href="https://rmarkdown.rstudio.com/rmarkdown_websites.html">creating websites</a> has documentation on additional available features and configuration options. The remainder of this article describes features that are specific to Radix websites.</p>
+<h2 id="site-navigation">Site Navigation</h2>
+<p>Site navigation bars include the site’s title, an optional logo, top-level links to articles, and if need be drop-down menus that include links to several articles. For example:</p>
+<p><img src="images/navigation-bar.png" class="screenshot" style="width:95.0%" /></p>
+<p>Elements of the site navigation bar are specified within the <code>navbar</code> section of the <code>_site.yml</code> file. For example, here is the YAML that was used to create the navigation bar displayed above:</p>
+<pre class="markup"><code>
+---
+name: &quot;radix&quot;
+title: &quot;Radix for R Markdown&quot;
+navbar:
+  logo:
+    image: images/logo.png
+    href: https://www.rstudio.com
+  right:
+    - text: &quot;Figures&quot;
+      href: figures.html
+    - text: &quot;Tables&quot;
+      href: tables.html
+    - text: &quot;Citations&quot;
+      href: citations.html
+    - text: &quot;Publish&quot;
+      menu:
+        - text: &quot;Publishing Articles&quot;
+          href: publish_article.html
+        - text: &quot;Publishing a Website&quot;
+          href: publish_website.html
+        - text: &quot;---&quot;
+        - text: &quot;Article Metadata&quot;
+          href: metadata.html
+    - icon: fab fa-github
+      href: https://github.com/radixpub/radix-r
+output: distill::distill_article
+---</code></pre>
+<p>Note that we specify that the menu items appear on the <code>right</code> side of the navigation bar. We could have also used <code>left</code>, or chosen to put some items on the <code>left</code> and some on the <code>right</code>.</p>
+<p>Note also that we used an <code>icon</code> for one of the menus, specifying the <a href="https://fontawesome.com/">Font Awesome</a> <code>fab fa-github</code> identifier for the GitHub icon (you can use any Font Awesome icon). If there isn’t a Font Awesome icon that matches the image you want, you can also specify a custom <code>image</code> rather than an <code>icon</code>.</p>
+<h3 id="site-footer">Site Footer</h3>
+<p>When you use a navigation bar, you can optionally also include a site footer which uses the same theme (background and foreground colors). For example:</p>
+<p><img src="images/footer-bar.png" class="screenshot" style="width:95.0%" /></p>
+<p>To add a footer, simply include a file named <code>footer.html</code> within your main site directory. For example:</p>
+<p><strong>footer.html</strong></p>
+<pre class="markup"><code>
+© Copyright 2018 [The Distill Template Authors]
+(https://github.com/distillpub/template/blob/master/AUTHORS) 
+and [RStudio, Inc](https://www.rstudio.com).
+
+Software licensed under the [Apache License, v2.0]
+(https://www.apache.org/licenses/LICENSE-2.0).</code></pre>
+<h3 id="theming">Theming</h3>
+<p>You can use CSS to create an alternate theme for your navigation bar and site footer. Here is the CSS used for the default appearance:</p>
+<pre class="css"><code>
+.radix-site-nav {
+  color: rgba(255, 255, 255, 0.8);
+  background-color: #455a64;
+  font-size: 15px;
+  font-weight: 300;
+}
+
+.radix-site-nav a {
+  color: inherit;
+  text-decoration: none;
+}
+
+.radix-site-nav a:hover {
+  color: white;
+}
+
+.radix-site-header {
+}
+
+.radix-site-footer {
+}
+
+@media print {
+  .radix-site-nav {
+    display: none;
+  }
+}</code></pre>
+<p>The <code>radix-site-nav</code> class addresses both the header and footer, whereas the <code>radix-site-header</code> and <code>radix-site-footer</code> apply (respectively) to just the header and footer.</p>
+<p>To override all or part of this CSS, simply include a <code>styles.css</code> file in the main site directory and add a reference to it within your site output options. For example:</p>
+<p><strong>_site.yml</strong></p>
+<pre class="markup"><code>
+name: &quot;radix&quot;
+title: &quot;Radix for R Markdown&quot;
+navbar:
+  # (navbar definition here)
+output:
+  radix::radix_article:
+    css: styles.css</code></pre>
+<h2 id="site-metadata">Site Metadata</h2>
+<p>Radix articles can include various types of <a href="metadata.html">metadata</a> to make them easier to index, cite, and share. Metadata included within your <code>_site.yml</code> file is conveniently shared across all articles on your site (individual articles can always override any value within their own metadata).</p>
+<p>Several metadata values which you might find useful to define in <code>_site.yml</code> are:</p>
+<table>
+<colgroup>
+<col style="width: 27%" />
+<col style="width: 72%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th>Metadata</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><code>base_url</code></td>
+<td>Base (root) URL for the location where the website will be deployed (used for providing <a href="metadata.html#preview-images">preview imaages</a> for Open Graph and Twitter Card).</td>
+</tr>
+<tr class="even">
+<td><code>repository_url</code></td>
+<td>URL for the source code of your website (note that individual articles will often want to override this value). Used to automatically create a <em>Corrections</em> appendix.</td>
+</tr>
+<tr class="odd">
+<td><code>creative_commons</code></td>
+<td><a href="metadata.html#creative-commons">Creative Commons</a> license terms for website content. Used to automatically generate a <em>Reuse</em> appendix.</td>
+</tr>
+<tr class="even">
+<td><code>license_url</code></td>
+<td>Alternate licensing terms for website content if not using a Creative Commons license.</td>
+</tr>
+<tr class="odd">
+<td><code>favicon</code></td>
+<td>Favicon (image file) to use for browser tabs/bookmarks</td>
+</tr>
+<tr class="even">
+<td><code>twitter</code></td>
+<td>Site handle for Twitter Card metadata</td>
+</tr>
+</tbody>
+</table>
+<p>Here’s a <code>_site.yml</code> file that uses all of these fields (save for <code>license_url</code> since the license is already specified via <code>creative_commons</code>):</p>
+<p><strong>_site.yml</strong></p>
+<pre class="markup"><code>
+name: &quot;radix&quot;
+title: &quot;Radix for R Markdown&quot;
+favicon: images/favicon.png
+base_url: https://radixpub.github.io/radix-r
+repository_url: https://github.com/radixpub/radix-r
+creative_commons: CC BY
+twitter:
+  site: &quot;@radixjournal&quot;
+navbar:
+  # (navbar definition here)
+output: radix::radix_article</code></pre>
+<p>Be sure to enclose Twitter account names in quotes (this is required because they start with <code>@</code>).</p>
+<h2 id="publishing">Publishing</h2>
+<p>Website content is by default written to the <code>_site</code> sub-directory (you can customize this using the <code>output_dir</code> metadata field). Publishing is simply a matter of copying the output directory to a web server or web hosting service.</p>
+<p>See the article on <a href="publish_website.html">publising websites</a> for additional details on publishing sites using a variety of available hosting services.</p>
+</div>
+
+<div class="d-appendix">
+</div>
+
+
+<!--radix_placeholder_site_after_body-->
+<!--/radix_placeholder_site_after_body-->
+<!--radix_placeholder_appendices-->
+<div class="appendix-bottom">
+<h3 id="updates-and-corrections">Corrections</h3>
+<p>If you see mistakes or want to suggest changes, please <a href="https://github.com/radixpub/radix-r/issues/new">create an issue</a> on the source repository.</p>
+<h3 id="reuse">Reuse</h3>
+<p>Text and figures are licensed under Creative Commons Attribution <a rel="license" href="https://creativecommons.org/licenses/by/4.0/">CC BY 4.0</a>. Source code is available at <a href="https://github.com/radixpub/radix-r">https://github.com/radixpub/radix-r</a>, unless otherwise noted. The figures that have been reused from other sources don't fall under this license and can be recognized by a note in their caption: "Figure from ...".</p>
+</div>
+<!--/radix_placeholder_appendices-->
+<!--radix_placeholder_navigation_after_body-->
+<div class="radix-site-nav radix-site-footer">
+<p>© Copyright 2018 <a href="https://github.com/distillpub/template/blob/master/AUTHORS">The Distill Template Authors</a> and <a href="https://www.rstudio.com">RStudio, Inc</a>.</p>
+<p>Software licensed under the <a href="https://www.apache.org/licenses/LICENSE-2.0">Apache License, v2.0</a>.</p>
+</div>
+<!--/radix_placeholder_navigation_after_body-->
+
+</body>
+
+</html>
