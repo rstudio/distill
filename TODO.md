@@ -18,6 +18,8 @@
 
 - Add some citations to sample posts
 
+- RSS feed for collection
+   (support images: https://stackoverflow.com/questions/483675/images-in-rss-feed)
 
 - larger scale visualization layouts
     - iframe with npr library (pym.js) for sizing (generic) (check with shinyapps.io)
