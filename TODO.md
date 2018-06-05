@@ -10,7 +10,6 @@
    (support images: https://stackoverflow.com/questions/483675/images-in-rss-feed)
 - rstudio addins/templates/projects for article creation
 
-- re-organize docs into "Authoring", etc.
 
 - Add some citations to sample posts
 
