@@ -70,15 +70,23 @@
   
   <!--radix_placeholder_navigation_in_header-->
   <script type="application/javascript">
+  
     window.document.addEventListener("DOMContentLoaded", function (event) {
   
       // initialize headroom for banner
-      $('header').each(function(i, val) {
-          var headroom = new Headroom(this);
-          headroom.init();
-          if(window.location.hash)
-            headroom.unpin();
-          $(this).addClass('headroom--transition');
+      var header = $('header').get(0);
+      var headerHeight = header.offsetHeight;
+      var headroom = new Headroom(header);
+      headroom.init();
+      if(window.location.hash)
+        headroom.unpin();
+      $(header).addClass('headroom--transition');
+  
+      // offset scroll location for banner on hash change
+      // (see: https://github.com/WickyNilliams/headroom.js/issues/38)
+      window.addEventListener("hashchange", function(event) {
+        console.log(headerHeight);
+        window.scrollTo(0, window.pageYOffset - (headerHeight + 25));
       });
   
       // responsive menu

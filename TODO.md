@@ -1,6 +1,5 @@
 
 
-- Header drops down on internal links
 
 - index/category/archive pages (categories should be inline)
 - email subscription
