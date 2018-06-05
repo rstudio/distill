@@ -29,5 +29,5 @@ fully reproducible workflow based on literate programming
 You can install the development version of radix from **GitHub** with:
 
 ``` r
-devtools::install_github("rstudio/radix")
+devtools::install_github("radixpub/radix-r")
 ```

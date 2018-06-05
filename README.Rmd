@@ -32,5 +32,5 @@ Radix is based on the Distill web framework, which was originally created for us
 You can install the development version of radix from **GitHub** with:
 
 ``` r
-devtools::install_github("rstudio/radix")
+devtools::install_github("radixpub/radix-r")
 ```
