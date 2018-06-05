@@ -10,27 +10,29 @@ navbar:
     image: images/logo.png
     href: https://www.rstudio.com
   right:
-    - text: "Figures"
+    - text: "Home"
+      href: index.html
+    - text: "Authoring"
       menu:
         - text: Figure Layout
           href: figures.html
+        - text: "Tables"  
+          href: tables.html
         - text: Diagrams
           href: diagrams.html
         - text: JavaScript & D3
           href: interactivity.html
-    - text: "Tables"
-      href: tables.html
-    - text: "Citations"
-      href: citations.html
-    - text: "Publish"
+        - text: "---"
+        - text: "Citations"
+          href: citations.html
+        - text: "Ariticle Metadata"
+          href: metadata.html
+    - text: "Publishing"
       menu:
         - text: "Publishing Articles"
           href: publish_article.html
         - text: "Publishing a Website"
           href: publish_website.html
-        - text: "---"
-        - text: "Article Metadata"
-          href: metadata.html
     - icon: fab fa-github
       href: https://github.com/radixpub/radix-r
 output:
