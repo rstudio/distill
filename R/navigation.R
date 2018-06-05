@@ -259,7 +259,7 @@ offset_site_config <- function(site_dir, config, offset) {
   # update file references
   config <- rapply(config, how = "replace", classes = c("character"),
                    function(x) {
-                     if (file.exists(file.path(site_dir, x))) {
+                     if (file.exists(file.path(site_dir, config$output_dir, x))) {
                        file.path(offset, x)
                      } else {
                        x
