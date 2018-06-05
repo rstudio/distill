@@ -60,6 +60,7 @@ radix_article <- function(fig_width = 6,
   knitr_options$opts_chunk$warning <- FALSE
   knitr_options$opts_chunk$message <- FALSE
   knitr_options$opts_chunk$comment <- NA
+  knitr_options$opts_chunk$R.options <- list(width = 70)
   knitr_options$opts_hooks <- list()
   knitr_options$opts_hooks$preview <- knitr_preview_hook
   knitr_options$knit_hooks <- list()
