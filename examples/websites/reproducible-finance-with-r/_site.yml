@@ -1,6 +1,5 @@
 name: "reproducible-finance-with-r"
 title: "Reproducible Finance with R"
-output_dir: "."
 creative_commons: CC BY
 navbar:
   logo: images/rstudio.png

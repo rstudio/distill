@@ -30,15 +30,21 @@ radix_website <- function(input, encoding = getOption("encoding"), ...) {
         # enumerate collections
         collections <- enumerate_collections(input, config, encoding)
 
-        # write metadata
+        # write metadata (do this now so that pages have access to the
+        # the collection metadata)
         write_collections_metadata(input, collections)
-
-        # render collections
-        render_collections(input, config, collections, quiet)
       }
 
       # delegate to default site generator
-      default$render(input_file, output_format, envir, quiet, encoding, ...)
+      result <- default$render(input_file, output_format, envir, quiet, encoding, ...)
+
+      # render collections if not incremental
+      if (!incremental)
+        render_collections(input, config, collections, quiet)
+
+      # return result
+      result
+
     },
 
     clean = function() {

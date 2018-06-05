@@ -238,13 +238,8 @@ write_collections_metadata <- function(site_dir, collections) {
 
 write_collection_metadata <- function(site_dir, collection) {
 
-  # target articles dir
-  name <- collection[["name"]]
-  articles_dir <- file.path(site_dir, name)
-  if (!dir_exists(articles_dir))
-    dir.create(articles_dir, recursive = TRUE)
-
   # articles yaml
+  name <- collection[["name"]]
   articles_yaml <- file.path(
     site_dir,
     paste0("_", name),
