@@ -15,13 +15,29 @@ Below we describe several convenient options for Radix website deployment includ
 
 [RStudio Connect](https://www.rstudio.com/products/connect/) is a server product from RStudio for secure sharing of websites, applications, reports, and plots. 
 
-You can publish a Radix website directly to an RStudio Connect server from within the website  preview window by clicking the **Publish** button:
+You can publish a Radix website directly to an RStudio Connect server from within the website preview window by clicking the **Publish** button:
 
 ![](images/rstudio-connect.png){width=95% .screenshot} 
 
 Note that you can either publish your website with the source code (so it can be regenerated on a scheduled basis) or publish a copy of the website you built locally. Generally publishing a copy is more straightforward so that's the recommended option unless you have specialized requirements.
 
-Unlike the other website publishing options described below, [RStudio Connect](https://www.rstudio.com/products/connect/)is server that you run inside an organization, so is suitable for publishing content that you only want visible within your organization's network as opposed to visible to the entire internet.
+You can also deploy a Radix website to RStudio Connect from the command line using the `rsconnect::deploySite()` function. For example:
+
+```r
+library(rsconnect)
+deploySite()
+```
+
+This example assumes you want to publish the site as it currently exists and publish to the default RStudio Connect account you've setup on your workstation. 
+
+You can customize the deployment target using the `account` option and force a re-render of the site before publishing using the `render` option. For example:
+
+```r
+library(rsconnect)
+deploySite(account = "dsmith", render = "local")
+```
+
+Unlike the other website publishing options described below, [RStudio Connect](https://www.rstudio.com/products/connect/) is a server that you run inside an organization, so is suitable for publishing content that you only want visible within your organization's network as opposed to visible to the entire internet.
 
 ## GitHub Pages
 
