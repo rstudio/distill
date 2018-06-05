@@ -30,6 +30,8 @@
     // nav dropdowns
     $('.nav-dropbtn').click(function(e) {
       $(this).next('.nav-dropdown-content').toggleClass('nav-dropdown-active');
+      $(this).parent().siblings('.nav-dropdown')
+         .children('.nav-dropdown-content').removeClass('nav-dropdown-active');
     });
     $("body").click(function(e){
       $('.nav-dropdown-content').removeClass('nav-dropdown-active');
