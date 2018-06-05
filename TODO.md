@@ -12,10 +12,7 @@
 
 - re-organize docs into "Authoring", etc.
 
-- Improved error messages for incomplete author field
-
 - Add some citations to sample posts
-
 
 
 - larger scale visualization layouts

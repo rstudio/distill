@@ -168,6 +168,10 @@ transform_metadata <- function(file, site_config, collection_config, metadata, a
   # authors
   if (!is.null(metadata$author)) {
 
+    # convert to list if necessary
+    if (!is.list(metadata$author))
+      metadata$author <- lapply(metadata$author, function(x) list(name = x))
+
     # compute first and last name
     metadata$author <- lapply(metadata$author, function(author) {
       names <- strsplit(author$name, '\\s+')[[1]]
@@ -253,8 +257,6 @@ metadata_html <- function(site_config, metadata, self_contained) {
 
   # authors meta tags
   author_meta <- lapply(metadata$author, function(author) {
-    if (!is.list(author) || is.null(author$name) || is.null(author$url))
-      stop("author metadata must include name and url fields", call. = FALSE)
     tags$meta(name="article:author", content=author$name)
   })
 
@@ -532,7 +534,7 @@ front_matter_from_metadata <- function(metadata) {
   front_matter$authors <- lapply(metadata$author, function(author) {
     list(
       author = author$name,
-      authorURL = author$url,
+      authorURL = not_null(author$url, "#"),
       affiliation = not_null(author$affiliation, "&nbsp;"),
       affiliationURL = not_null(author$affiliation_url, "#")
     )

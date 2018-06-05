@@ -160,10 +160,25 @@ function init_distill() {
     if (!have_authors)
       $('d-byline').addClass('hidden');
 
+    // strip links that point to #
+    $('.authors-affiliations').find('a[href="#"]').removeAttr('href');
+
     // hide elements of author/affiliations grid that have no value
     function hide_byline_column(caption) {
       $('d-byline').find('h3:contains("' + caption + '")').parent().css('visibility', 'hidden');
     }
+
+    // affiliations
+    var have_affiliations = false;
+    for (var i = 0; i<front_matter.authors.length; ++i) {
+      var author = front_matter.authors[i];
+      if (author.affiliation !== "&nbsp;") {
+        have_affiliations = true;
+        break;
+      }
+    }
+    if (!have_affiliations)
+      $('d-byline').find('h3:contains("Affiliations")').css('visibility', 'hidden');
 
     // published date
     if (!front_matter.publishedDate)
@@ -187,6 +202,13 @@ function init_distill() {
          .attr('href', "https://doi.org/" + front_matter.doi)
          .html(front_matter.doi)
          .appendTo(doi_p);
+    }
+
+     // change plural form of authors/affiliations
+    if (front_matter.authors.length === 1) {
+      var grid = $('.authors-affiliations');
+      grid.children('h3:contains("Authors")').text('Author');
+      grid.children('h3:contains("Affiliations")').text('Affiliation');
     }
 
     // inject pre code styles (can't do this with a global stylesheet b/c a shadow root is used)
