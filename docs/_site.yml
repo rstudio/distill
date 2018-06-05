@@ -30,7 +30,7 @@ navbar:
     - text: "Websites"
       menu:
         - text: "Website Basics"
-          href: create_website.html
+          href: website_basics.html
         - text: "Publishing a Website"
           href: publish_website.html
     - text: "Publishing"

@@ -33,7 +33,7 @@ navbar:
       href: index.html
     - text: "About"
       href: about.html
-    - image: images/github.png
+    - icon: fab fa-github
       href: https://github.com/radixpub/radix-r
 output: radix::radix_article
 ---
