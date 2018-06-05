@@ -530,20 +530,18 @@ creative_commons: CC BY
 <figure>
 <img src="images/heatmap.png" alt="Figure from https://stackoverflow.com/questions/12196756/" class="external" style="width:100.0%" /><figcaption>Figure from <a href="https://stackoverflow.com/questions/12196756/" class="uri">https://stackoverflow.com/questions/12196756/</a></figcaption>
 </figure>
-<h2 id="open-graph">Open Graph</h2>
-<p>The <a href="http://ogp.me/">Open Graph protocol</a> is a specification that enables richer sharing of links to articles on the web. Open Graph metadata is automatically generated for Radix articles. For example, here’s what you see in Slack when pasting in a link to the article on using <a href="interactivity.html">JavaScript and D3</a> within Radix articles:</p>
-<p><img src="images/open-graph-screenshot.png" class="screenshot" style="width:95.0%" /></p>
-<p>Slack uses Open Graph to extract and display the title, description, and a preview image for the link.</p>
-<h3 id="preview-images">Preview images</h3>
-<p>Most Open Graph metadata is created automatically from standard article metadata that you already provide (e.g. <code>title</code> and <code>description</code>). However, if you want to include a preview image for your article, you need to provide the <code>preview</code> field. For example:</p>
+<h2 id="preview-images">Preview images</h2>
+<p>You can specify a preview image for your article (for sharing on Slack, Twitter, etc.) in a number of different ways:</p>
+<ol type="1">
+<li><p>You can explicitly provide the full URL of the preview image via the <code>preview</code> field in the article’s metadata. For example:</p>
 <pre class="markup"><code>
 ---
 title: &quot;JavaScript &amp; D3&quot;
 description: Enhance communication with interactive visualizations 
 preview: https://radixpub.github.io/radix-r/images/javascript-d3-preview.png
 ---</code></pre>
-<p>Note that the preview image is specified with a full absolute URL. This is a requirement of Open Graph (relative image references are not supported). If you are publishing a standalone self-contained HTML version of your article then you’ll need to upload the preview image to another location on the web in order to reference it.</p>
-<p>If however your article is not self-contained (it’s part of a <a href="publish_website.html">Radix website</a> or is generated with <code>self_contained: false</code>) then you can include the preview image alongside your document. In this case you still need to specify the root URL where your image will be published to using the <code>base_url</code> field:</p>
+<p>Note that the preview image is specified with a full absolute URL. This is a requirement of both Open Graph and Twitter (relative image references are not supported). If you are publishing a standalone self-contained HTML version of your article then you’ll need to upload the preview image to another location on the web in order to reference it.</p></li>
+<li><p>If your article is not self-contained (it’s part of a <a href="publish_website.html">Radix website</a> or is generated with <code>self_contained: false</code>) then you can include the preview image alongside your document. In this case you still need to specify the root URL where your image will be published to using the <code>base_url</code> field:</p>
 <pre class="markup"><code>
 ---
 title: &quot;JavaScript &amp; D3&quot;
@@ -551,13 +549,32 @@ description: Enhance communication with interactive visualizations
 base_url: https://radixpub.github.io/radix-r
 preview: images/javascript-d3-preview.png
 ---</code></pre>
-<p>This technique is generally preferable to including the full URL since it allows Radix to inspect the image file directly and emit additional information about it’s size as part of the Open Graph metadata.</p>
+<p>This technique is generally preferable to including the full URL since it allows Radix to inspect the image file directly and provide additional information about it’s size.</p></li>
+<li><p>You can also specify that a specific figure within your article should be used as the preview image. To do this, just add the <code>preview = TRUE</code> chunk option to the chunk which creates the figure. For example:</p>
+<pre class="markup"><code>
+---
+title: &quot;JavaScript &amp; D3&quot;
+description: Enhance communication with interactive visualizations 
+base_url: https://radixpub.github.io/radix-r
+---</code></pre>
+<pre class="clike"><code>
+```{r, layout=&quot;l-body-outset&quot;, preview=TRUE}
+library(ggplot2)
+ggplot(diamonds, aes(carat, price)) + geom_smooth() +
+  facet_grid(~ cut)
+```</code></pre>
+<p>As with using the <code>preview</code> metadata field, this method requires that your Radix article is not a single standalone HTML file (<code>self_contained: false</code>) and also requires that you specify a <code>base_url</code> field indicating the domain and path where the article will be published.</p></li>
+</ol>
+<h2 id="open-graph">Open Graph</h2>
+<p>The <a href="http://ogp.me/">Open Graph protocol</a> is a specification that enables richer sharing of links to articles on the web. Open Graph metadata is automatically generated for Radix articles. For example, here’s what you see in Slack when pasting in a link to the article on using <a href="interactivity.html">JavaScript and D3</a> within Radix articles:</p>
+<p><img src="images/open-graph-screenshot.png" class="screenshot" style="width:95.0%" /></p>
+<p>Slack uses Open Graph to extract and display the title, description, and a <a href="#preview-images">preview image</a> (if specified) for the link.</p>
 <h2 id="twitter-card">Twitter Card</h2>
 <p><a href="https://developer.twitter.com/en/docs/tweets/optimize-with-cards/overview/abouts-cards">Twitter Cards</a> are a way of enhancing the appearance of links to your article on Twitter. When a link to your article is included in a Tweet, Twitter automatically crawls your site to fetch any available Twitter Card metadata.</p>
 <p>For example, here’s what happens when you include a link to <a href="https://radixpub.github.io/radix-r/interactivity.html" class="uri">https://radixpub.github.io/radix-r/interactivity.html</a> within a tweet:</p>
 <p><img src="images/twitter-card-screenshot.png" style="width:95.0%" /></p>
-<p>Note that as with <a href="#open-graph">Open Graph</a>, in order to have a preview image displayed on Twitter you need to include a <code>preview</code> field in your metadata. See the section on <a href="#preview-images">preview images</a> for additional details.</p>
-<p>There are two additional fields you can include that include attribution of your link to the Twitter account of a website and/or creator of the article. This attribution is provided via the <code>twitter:site</code> and <code>twitter:creator</code> fields.</p>
+<p>See the section on <a href="#preview-images">preview images</a> for additional details on providing an image for your article that will be included on Twitter Cards.</p>
+<p>There are two additional fields you can include that provide attribution for your link to the Twitter account of a website and/or creator of the article. This attribution is specified via the <code>twitter:site</code> and <code>twitter:creator</code> fields.</p>
 <p>Here’s a complete example that includes the attribution fields as well as a preview image:</p>
 <pre class="markup"><code>
 ---

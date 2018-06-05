@@ -90,40 +90,63 @@ Using the `.external` class and providing a "Figure from" link makes it clear th
 ![Figure from <https://stackoverflow.com/questions/12196756/>](images/heatmap.png){width=100% .external}   
 
 
+## Preview images
+
+You can specify a preview image for your article (for sharing on Slack, Twitter, etc.) in a number of different ways:
+
+1. You can explicitly provide the full URL of the preview image via the `preview` field in the article's metadata. For example:
+
+    ```markup
+    ---
+    title: "JavaScript & D3"
+    description: Enhance communication with interactive visualizations 
+    preview: https://radixpub.github.io/radix-r/images/javascript-d3-preview.png
+    ---
+    ```
+
+    Note that the preview image is specified with a full absolute URL. This is a requirement of both Open Graph and Twitter (relative image references are not supported). If you are publishing a standalone self-contained HTML version of your article then you'll need to upload the preview image to another location on the web in order to reference it.
+
+2. If your article is not self-contained (it's part of a [Radix website](publish_website.html) or is generated with  `self_contained: false`) then you can include the preview image alongside your document. In this case you still need to specify the root URL where your image will be published to using the `base_url` field:
+
+    ```markup
+    ---
+    title: "JavaScript & D3"
+    description: Enhance communication with interactive visualizations 
+    base_url: https://radixpub.github.io/radix-r
+    preview: images/javascript-d3-preview.png
+    ---
+    ```
+
+    This technique is generally preferable to including the full URL since it allows Radix to inspect the image file directly and provide additional information about it's size.
+
+3. You can also specify that a specific figure within your article should be used as the preview image. To do this, just add the `preview = TRUE` chunk option to the chunk which creates the figure. For example:
+
+    ```markup
+    ---
+    title: "JavaScript & D3"
+    description: Enhance communication with interactive visualizations 
+    base_url: https://radixpub.github.io/radix-r
+    ---
+    ```
+
+    ````clike
+    ```{r, layout="l-body-outset", preview=TRUE}`r ''`
+    library(ggplot2)
+    ggplot(diamonds, aes(carat, price)) + geom_smooth() +
+      facet_grid(~ cut)
+    ```
+    ````
+
+    As with using the `preview` metadata field, this method requires that your Radix article is not a single standalone HTML file (`self_contained: false`) and also requires that you specify a `base_url` field indicating the domain and path where the article will be published.
+
 ## Open Graph
 
 The [Open Graph protocol](http://ogp.me/) is a specification that enables richer sharing of links to articles on the web. Open Graph metadata is automatically generated for Radix articles. For example, here's what you see in Slack when pasting in a link to the article on using [JavaScript and D3](interactivity.html) within Radix articles:
 
 ![](images/open-graph-screenshot.png){width=95% .screenshot}
 
-Slack uses Open Graph to extract and display the title, description, and a preview image for the link.
+Slack uses Open Graph to extract and display the title, description, and a [preview image](#preview-images) (if specified) for the link.
 
-### Preview images
-
-Most Open Graph metadata is created automatically from standard article metadata that you already provide (e.g. `title` and `description`). However, if you want to include a preview image for your article, you need to provide the `preview` field. For example:
-
-```markup
----
-title: "JavaScript & D3"
-description: Enhance communication with interactive visualizations 
-preview: https://radixpub.github.io/radix-r/images/javascript-d3-preview.png
----
-```
-
-Note that the preview image is specified with a full absolute URL. This is a requirement of Open Graph (relative image references are not supported). If you are publishing a standalone self-contained HTML version of your article then you'll need to upload the preview image to another location on the web in order to reference it.
-
-If however your article is not self-contained (it's part of a [Radix website](publish_website.html) or is generated with  `self_contained: false`) then you can include the preview image alongside your document. In this case you still need to specify the root URL where your image will be published to using the `base_url` field:
-
-```markup
----
-title: "JavaScript & D3"
-description: Enhance communication with interactive visualizations 
-base_url: https://radixpub.github.io/radix-r
-preview: images/javascript-d3-preview.png
----
-```
-
-This technique is generally preferable to including the full URL since it allows Radix to inspect the image file directly and emit additional information about it's size as part of the Open Graph metadata. 
 
 ## Twitter Card
 
@@ -133,9 +156,9 @@ For example, here's what happens when you include a link to <https://radixpub.gi
 
 ![](images/twitter-card-screenshot.png){width=95%}
 
-Note that as with [Open Graph], in order to have a preview image displayed on Twitter you need to include a `preview` field in your metadata. See the section on [preview images] for additional details.
+See the section on [preview images] for additional details on providing an image for your article that will be included on Twitter Cards.
 
-There are two additional fields you can include that include attribution of your link to the Twitter account of a website and/or creator of the article. This attribution is provided via the `twitter:site` and `twitter:creator` fields. 
+There are two additional fields you can include that provide attribution for your link to the Twitter account of a website and/or creator of the article. This attribution is specified via the `twitter:site` and `twitter:creator` fields. 
 
 Here's a complete example that includes the attribution fields as well as a preview image:
 
