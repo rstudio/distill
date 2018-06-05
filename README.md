@@ -1,7 +1,7 @@
+Radix
+================
 
 <!-- README.md is generated from README.Rmd. Please edit that file -->
-
-# Radix
 
 Radix is an online publication format designed for scientific and
 technical communication. Radix articles include:
@@ -24,10 +24,12 @@ created for use in the Distill Machine Learning Journal. Radix combines
 the technical authoring features of Distill with R Markdown, enabling a
 fully reproducible workflow based on literate programming
 
-## Installation
+### Getting Started
 
 You can install the development version of radix from **GitHub** with:
 
 ``` r
 devtools::install_github("radixpub/radix-r")
 ```
+
+Learn more about using Radix at <https://radixpub.github.io/radix-r>.

@@ -1,4 +1,5 @@
 ---
+title: Radix
 output: github_document
 ---
 
@@ -13,8 +14,6 @@ knitr::opts_chunk$set(
 )
 ```
 
-# Radix
-
 Radix is an online publication format designed for scientific and technical communication. Radix articles include:
 
 - Reader-friendly typography that adapts well to mobile devices.
@@ -27,10 +26,16 @@ Radix is an online publication format designed for scientific and technical comm
 
 Radix is based on the Distill web framework, which was originally created for use in the Distill Machine Learning Journal. Radix combines the technical authoring features of Distill with R Markdown, enabling a fully reproducible workflow based on literate programming
 
-## Installation
+### Getting Started
 
 You can install the development version of radix from **GitHub** with:
 
 ``` r
 devtools::install_github("radixpub/radix-r")
 ```
+
+Learn more about using Radix at <https://radixpub.github.io/radix-r>.
+
+
+
+
