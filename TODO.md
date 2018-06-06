@@ -1,6 +1,5 @@
 
 
-- Blog docs on not re-rendered with site (and why)
 
 - Sorts posts by reverse-chron
 

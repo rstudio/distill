@@ -53,7 +53,9 @@ output:
 
 Note that we set `self_contained` to `false` since this article will be published as part of a website.
 
-You can work on the post independent of the containing website (use **Knit** to preview the post just like any R Markdown document). In the next section will describe how to create a listing page for all of your posts.
+You work on blog posts independent of the enclosing website (use **Knit** to render preview the post just like any R Markdown document). This is in fact the only way to update post content --- posts are considered standalone documents that are not re-rendered when the site is built. This is because posts are often expensive to render and have R package dependencies that may be difficult to satisfy as time goes on.
+
+In the next section will describe how to create a listing page for all of your posts.
 
 ## Listing pages
 

@@ -502,7 +502,8 @@ output:
     self_contained: false
 ---</code></pre>
 <p>Note that we set <code>self_contained</code> to <code>false</code> since this article will be published as part of a website.</p>
-<p>You can work on the post independent of the containing website (use <strong>Knit</strong> to preview the post just like any R Markdown document). In the next section will describe how to create a listing page for all of your posts.</p>
+<p>You work on blog posts independent of the enclosing website (use <strong>Knit</strong> to render preview the post just like any R Markdown document). This is in fact the only way to update post content — posts are considered standalone documents that are not re-rendered when the site is built. This is because posts are often expensive to render and have R package dependencies that may be difficult to satisfy as time goes on.</p>
+<p>In the next section will describe how to create a listing page for all of your posts.</p>
 <h2 id="listing-pages">Listing pages</h2>
 <p>Once you have authored one or more posts you’ll want to create a listing page. You can do this by adding a <code>listing</code> metadata entry to the page you to include the listing on. This is often the main page for the website (index.Rmd). For example:</p>
 <p><strong>index.Rmd</strong></p>
