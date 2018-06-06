@@ -67,12 +67,35 @@ article_listing_html <- function(collection, articles) {
 }
 
 
-article_listing_xml <- function(collection, articles) {
+article_listing_xml <- function(collection, articles = article_listing(collection)) {
+
+  # create document root
+  rss <- xml2::xml_new_root("rss",
+    version = "2.0",
+    "xmlns:atom" = "http://www.w3.org/2005/Atom",
+    "xmlns:media" = "http://search.yahoo.com/mrss/"
+  )
+
+  # helper to add a child element
+  add_child <- function(node, tag, attribs = c(), text = NULL) {
+    child <- xml2::xml_add_child(node, tag)
+    xml2::xml_set_attrs(child, attribs)
+    if (!is.null(text))
+      xml2::xml_text(child) <- text
+    child
+  }
+
+  # create channel
+  channel <- xml2::xml_add_child(rss, "channel")
+  add_child(channel, "title", text = "My Title")
+
+  item <- add_child(channel, "item")
 
 
+  # return xml document
+  rss
 
 }
-
 
 article_listing <- function(collection) {
   collection_dir <- as_collection_dir(collection)
