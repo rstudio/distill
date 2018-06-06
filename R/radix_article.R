@@ -31,6 +31,9 @@ radix_article <- function(fig_width = 6,
                           pandoc_args = NULL,
                           ...) {
 
+  # validate that we have pandoc 2
+  validate_pandoc_version()
+
   # build pandoc args
   args <- c("--standalone")
 
@@ -42,10 +45,8 @@ radix_article <- function(fig_width = 6,
             pandoc_path_arg(radix_resource("default.html")))
 
   # lua filter
-  if (pandoc_version() >= "2.0") {
-    args <- c(args, "--lua-filter",
-              pandoc_path_arg(radix_resource("distill.lua")))
-  }
+  args <- c(args, "--lua-filter",
+            pandoc_path_arg(radix_resource("distill.lua")))
 
   # use link citations (so we can do citation conversion)
   args <- c(args, "--metadata=link-citations:true")
@@ -64,7 +65,6 @@ radix_article <- function(fig_width = 6,
   knitr_options$opts_hooks <- list()
   knitr_options$opts_hooks$preview <- knitr_preview_hook
   knitr_options$knit_hooks <- list()
-  knitr_options$knit_hooks$source <- knitr_source_hook
   knitr_options$knit_hooks$chunk <- knitr_chunk_hook()
 
   # shared site_config
@@ -177,31 +177,6 @@ radix_article <- function(fig_width = 6,
   )
 }
 
-# hook to ensure newline at the beginning of chunks (workaround distill.js bug)
-knitr_source_hook <- function(x, options) {
-
-  # determine language/class
-  language <- tolower(options$engine)
-  if (language == 'node') language <- 'javascript'
-  if (!is.null(options$class.source))
-    language <- block_class(c(language, options$class.source))
-
-  # pad newline if necessary
-  if (length(x) > 0 && !nzchar(x[[1]]))
-    x <- c("", x)
-
-  # form output
-  paste(
-    '',
-    sprintf('```%s', language),
-    '',
-    paste0(x, collapse = '\n'),
-    '```',
-    '',
-    sep = '\n'
-  )
-}
-
 
 knitr_preview_hook <- function(options) {
   if (isTRUE(options$preview))
@@ -237,6 +212,23 @@ knitr_chunk_hook <- function() {
       padding, '\n',
       padding, '</div>\n'
     )
+  }
+}
+
+
+validate_pandoc_version <- function() {
+  if (!pandoc_available("2.0")) {
+    msg <-
+      if (!is.null(rstudio_version())) {
+        msg <- paste("Radix requires RStudio v1.2 or greater.",
+                     "Please update at:",
+                     "https://www.rstudio.com/rstudio/download/preview/")
+      } else {
+        msg <- paste("Radix requires Pandoc v2.0 or greator.",
+                     "Please update at:",
+                      "https://github.com/jgm/pandoc/releases/latest")
+      }
+    stop(msg, call. = FALSE)
   }
 }
 

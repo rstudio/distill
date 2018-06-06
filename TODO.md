@@ -3,8 +3,6 @@
 
 - Sorts posts by reverse-chron
 
-- Consider requiring pandoc 2
-
 - index/category/archive pages (categories should be inline)
 - email subscription (http://www.wpbeginner.com/opinion/stop-using-feedburner-move-to-feedburner-alternatives/)
 - google analytics 

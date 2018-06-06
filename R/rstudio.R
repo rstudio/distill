@@ -3,36 +3,6 @@
 # for the internal R Markdown preview window)
 validate_rstudio_version <- function() {
 
-  # get the current rstudio version and mode (desktop vs. server)
-  rstudio_version <- function() {
-
-    # Running at the RStudio console
-    if (rstudioapi::isAvailable()) {
-
-      rstudioapi::versionInfo()
-
-      # Running in a child process
-    } else if (!is.na(Sys.getenv("RSTUDIO", unset = NA))) {
-
-      # detect desktop vs. server using server-only environment variable
-      mode <- ifelse(is.na(Sys.getenv("RSTUDIO_HTTP_REFERER", unset = NA)),
-                     "desktop", "server")
-
-      # detect version using Rmd new env var added in 1.2.638
-      version <- Sys.getenv("RSTUDIO_VERSION", unset = "1.1")
-
-      # return version info
-      list(
-        mode = mode,
-        version = version
-      )
-
-      # Not running in RStudio
-    } else {
-      NULL
-    }
-  }
-
   # if we are running under rstudio then check whether this version
   # can render radix articles (since they use webcomponents polyfill)
   rstudio <- rstudio_version()
@@ -47,5 +17,35 @@ validate_rstudio_version <- function() {
              "https://www.rstudio.com/rstudio/download/preview/\n",
              call. = FALSE)
     }
+  }
+}
+
+# get the current rstudio version and mode (desktop vs. server)
+rstudio_version <- function() {
+
+  # Running at the RStudio console
+  if (rstudioapi::isAvailable()) {
+
+    rstudioapi::versionInfo()
+
+    # Running in a child process
+  } else if (!is.na(Sys.getenv("RSTUDIO", unset = NA))) {
+
+    # detect desktop vs. server using server-only environment variable
+    mode <- ifelse(is.na(Sys.getenv("RSTUDIO_HTTP_REFERER", unset = NA)),
+                   "desktop", "server")
+
+    # detect version using Rmd new env var added in 1.2.638
+    version <- Sys.getenv("RSTUDIO_VERSION", unset = "1.1")
+
+    # return version info
+    list(
+      mode = mode,
+      version = version
+    )
+
+    # Not running in RStudio
+  } else {
+    NULL
   }
 }
