@@ -2,20 +2,25 @@
 
 - Screen inset layout not working correctly
 
+- Restore home link in menubar
+
 - Sorts posts by reverse-chron
 - Listing page forces indexing of collection
 
 - index/category/archive pages (categories should be inline)
 - email subscription
-- google analytics and discourse commenting
+- google analytics 
+- discourse commenting
 - search
-- built-in social buttons
 - RSS feed for collection
    (support images: https://stackoverflow.com/questions/483675/images-in-rss-feed)
 - rstudio addins/templates/projects for article creation
+   - Created with link in footer
 
+- built-in social buttons
 
 - Add some citations to sample posts
+
 
 
 - larger scale visualization layouts
@@ -30,7 +35,7 @@
     - app.R or ui.R / server.R in the same directory; automagic local run
     - Full bleed media objects (videos, docs (http://viewerjs.org/), etc.)
 
-- Embedded articles:
+- Embedded article workflow:
 
    - document cannonical url
    - attribution metadata for inclusion when importing/syndicating (do during import)
