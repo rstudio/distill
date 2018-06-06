@@ -2,8 +2,6 @@
 
 - Screen inset layout not working correctly
 
-- Restore home link in menubar
-
 - Sorts posts by reverse-chron
 - Listing page forces indexing of collection
 

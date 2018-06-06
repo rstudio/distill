@@ -4,8 +4,8 @@ navigation_in_header <- function(site_config, offset) {
   render_navigation_html(navigation_in_header_html(site_config, offset))
 }
 
-navigation_before_body <- function(site_config) {
-  render_navigation_html(navigation_before_body_html(site_config))
+navigation_before_body <- function(site_config, offset) {
+  render_navigation_html(navigation_before_body_html(site_config, offset))
 }
 
 navigation_after_body <- function(site_dir, site_config, offset) {
@@ -16,8 +16,8 @@ navigation_in_header_file <- function(site_config, offset = NULL) {
   render_navigation_html_file(navigation_in_header_html(site_config, offset))
 }
 
-navigation_before_body_file <- function(site_config) {
-  render_navigation_html_file(navigation_before_body_html(site_config))
+navigation_before_body_file <- function(site_config, offset = NULL) {
+  render_navigation_html_file(navigation_before_body_html(site_config, offset))
 }
 
 navigation_after_body_file <- function(site_dir, site_config, offset = NULL) {
@@ -33,13 +33,10 @@ navigation_html_generator <- function() {
     # populate cache if we need to
     if (!exists(offset, envir = cache)) {
 
-      # offset the config
-      site_config <- offset_site_config(site_dir, site_config, offset)
-
       # generate html and assign into cache
       assign(offset, envir = cache, list(
         in_header = navigation_in_header(site_config, offset),
-        before_body = navigation_before_body(site_config),
+        before_body = navigation_before_body(site_config, offset),
         after_body = navigation_after_body(site_dir, site_config, offset)
       ))
     }
@@ -81,7 +78,17 @@ navigation_in_header_html <- function(site_config, offset) {
 
 }
 
-navigation_before_body_html <- function(site_config) {
+navigation_before_body_html <- function(site_config, offset) {
+
+  # helper to apply offset (if any)
+  offset_href <- function(href) {
+    if (is.null(href))
+      NULL
+    else if (!is.null(offset) && !grepl("^https?://", href))
+      file.path(offset, href)
+    else
+      href
+  }
 
   # helper to yield icon class
   icon_class <- function(icon) {
@@ -96,6 +103,8 @@ navigation_before_body_html <- function(site_config) {
   if (!is.null(site_config[["navbar"]])) {
     build_menu <- function(menu) {
       item_to_menu <- function(item) {
+        item$href <- offset_href(item$href)
+        item$image <- offset_href(item$image)
         if (!is.null(item[["icon"]])) {
           icon <- tag("i", list(class = icon_class(item[["icon"]])))
           a(href = item[["href"]], icon)
@@ -128,15 +137,17 @@ navigation_before_body_html <- function(site_config) {
     logo <- site_config[["navbar"]][["logo"]]
     if (!is.null(logo)) {
       if (is.character(logo)) {
-        logo <- span(class = "logo", img(src = logo))
+        logo <- span(class = "logo", img(src = offset_href(logo)))
       } else if (is.list(logo)) {
-        logo <- a(class = "logo", href = logo$href, img(src=logo$image))
+        logo <- a(class = "logo",
+                  href = offset_href(logo$href),
+                  img(src= offset_href(logo$image)))
       }
     }
 
     left_nav <- div(class = "nav-left",
                     logo,
-                    span(class = "title", site_config$title),
+                    a(href = offset_href("index.html"), class = "title", site_config$title),
                     build_menu(site_config[["navbar"]][["left"]])
     )
 
@@ -249,30 +260,6 @@ find_site_dir <- function(input_file) {
     error = function(e) NULL
   )
 }
-
-
-offset_site_config <- function(site_dir, config, offset) {
-
-  # capture original output dir
-  output_dir <- config$output_dir
-
-  # update file references
-  config <- rapply(config, how = "replace", classes = c("character"),
-                   function(x) {
-                     if (file.exists(file.path(site_dir, config$output_dir, x))) {
-                       file.path(offset, x)
-                     } else {
-                       x
-                     }
-                   }
-  )
-
-  # preserve output_dir
-  config$output_dir <- output_dir
-
-  config
-}
-
 
 ensure_navbar_dependencies <- function(site_config, site_dir) {
 

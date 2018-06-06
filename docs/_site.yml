@@ -10,17 +10,17 @@ navbar:
     image: images/logo.png
     href: https://www.rstudio.com
   right:
-    - text: "Home"
-      href: index.html
     - text: "Authoring"
       menu:
-        - text: Figure Layout
+        - text: "Getting Started"
+          href: index.html
+        - text: "Figure Layout"
           href: figures.html
-        - text: "Tables"  
+        - text: "Tables"
           href: tables.html
-        - text: Diagrams
+        - text: "Diagrams"
           href: diagrams.html
-        - text: JavaScript & D3
+        - text: "JavaScript & D3"
           href: interactivity.html
         - text: "---"
         - text: "Citations"
