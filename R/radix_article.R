@@ -126,7 +126,7 @@ radix_article <- function(fig_width = 6,
                      navigation_before_body_file(site_config),
                      site_before_body_file(site_config),
                      includes$before_body,
-                     listing_before_body(metadata))
+                     listing_before_body(dirname(input_file), metadata))
 
     # after body includes: user then radix
     after_body <- c(includes$after_body,

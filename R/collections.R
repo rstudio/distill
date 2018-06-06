@@ -314,8 +314,25 @@ site_collections <- function(site_dir, site_config) {
   ensure_collection("articles")
 
   # filter on directory existence
-  collections[file.exists(file.path(site_dir, paste0("_", names(collections))))]
+  collections <- collections[file.exists(file.path(site_dir, paste0("_", names(collections))))]
+
+  # add name field
+  for (name in names(collections))
+    collections[[name]][["name"]] <- name
+
+  # inherit some properties from the site
+  lapply(collections, function(collection) {
+    inherit_prop <- function(name) {
+      if (is.null(collection[[name]]))
+        collection[[name]] <<- site_config[[name]]
+    }
+    inherit_prop("title")
+    inherit_prop("description")
+    collection
+  })
+
 }
+
 
 collection_file_offset <- function(file) {
   offset_dirs <- length(strsplit(file, "/")[[1]]) - 1
