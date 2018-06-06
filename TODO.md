@@ -1,8 +1,5 @@
 
 
-
-- Sorts posts by reverse-chron
-
 - index/category/archive pages (categories should be inline)
 - email subscription (http://www.wpbeginner.com/opinion/stop-using-feedburner-move-to-feedburner-alternatives/)
 - google analytics 

@@ -56,6 +56,10 @@ enumerate_collections <- function(site_dir,
       articles[[length(articles) + 1]] <- article
     }
 
+    # sort the articles in reverse-chronological order
+    indexes <- order(sapply(articles, function(x) x$metadata$date), decreasing = TRUE)
+    articles <- articles[indexes]
+
     # add collection
     collections[[collection]] <- list(
       name = collection,
