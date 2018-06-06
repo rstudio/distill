@@ -135,10 +135,7 @@ function init_distill() {
     var layout = $(this).attr('data-layout');
 
     // apply layout to markdown level block elements
-    $(this).children().not('d-code, pre.text-output').addClass(layout);
-
-    // paged tables need to be wrapped (they overwrite their class)
-    $(this).children('div[data-pagedtable]')
+    $(this).children().not('d-code, pre.text-output')
       .wrap($('<div class="' + layout + '"></div>'));
 
     // unwrap the layout-chunk div
