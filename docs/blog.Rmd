@@ -1,0 +1,189 @@
+---
+title: "Creating a Blog"
+description: Create a blog to publish a collection of Radix articles
+---
+
+```{r setup, include=FALSE}
+library(knitr)
+```
+
+Radix websites include integrated support for blogging. To create a blog you author a collection of posts (located in the `_posts` subdirectory of your website) and then dedicate a page (usually the website homepage) to a listing of all of your posts.
+
+## Getting started
+
+First, create the basic scaffolding for a Radix website as described in the article on [creating websites](website.html).
+
+Then, from the main directory of your website, create a `_posts` subdirectory:
+
+```r
+dir.create("_posts")
+```
+
+To add a post, simply create a sub-directory of the `_posts` directory and save a Radix article there. For example:
+
+```r
+dir.create("_posts/sharpe-ratio")
+```
+
+Here's what `sharpe_ratio.Rmd` might look like to start with:
+
+**\_posts/sharpe-ratio/sharpe-ratio.Rmd**
+
+```markup
+---
+title: "The Sharpe Ratio"
+description: |
+  In this post we present a classic finance use case using the
+  PerformanceAnalytics, quantmod, and dygraphs packages. 
+  We'll demonstrate importing stock data, building a portfolio,
+  and then calculating the Sharpe Ratio. 
+author: 
+  - name: "Jonathan Regenstein"
+    url: https://www.linkedin.com/in/jkregenstein/
+    affiliation: RStudio
+    affiliation_url: https://www.rstudio.com
+date: 11-09-2016
+output: 
+  radix::radix_article:
+    self_contained: false
+---
+```
+
+Note that we set `self_contained` to `false` since this article will be published as part of a website.
+
+You can work on the post independent of the containing website (use **Knit** to preview the post just like any R Markdown document). In the next section will describe how to create a listing page for all of your posts.
+
+## Listing pages
+
+Once you have authored one or more posts you'll want to create a listing page. You can do this by adding a `listing` metadata entry to the page you to include the listing on. This is often the main page for the website (index.Rmd). For example:
+
+**index.Rmd**
+
+```markup
+---
+title: "Reproducible Finance with R"
+site: radix::radix_website
+listing:
+  collection: posts
+---
+```
+
+In our [example blog](https://beta.rstudioconnect.com/content/3776/) (which will be described in more detail below) this results in the following listing:
+
+![](images/site-listing.png){width=95% .screenshot}
+
+### Post drafts
+
+If you want to work on a post for a period of time without having it be added to the listing page, add `draft: true` to the post's metadata. For example:
+
+```markup
+---
+title: "The Sharpe Ratio"
+description: |
+  In this post we present a classic finance use case using the
+  PerformanceAnalytics, quantmod, and dygraphs packages. 
+  We'll demonstrate importing stock data, building a portfolio,
+  and then calculating the Sharpe Ratio. 
+draft: true
+---
+```
+
+When you are ready to publish the post, either remove the `draft` option or set it to `false`, then build the website.
+
+
+## Post preview
+
+Note that the listing for our example above includes a preview image for each post. Preview images are generated automatically based on the first plot encountered within your post. You can specify that a specific plot should be used as the preview image using the `preview` chunk option. For example:
+
+````clike
+```{r, layout="l-body-outset", preview=TRUE}`r ''`
+library(ggplot2)
+ggplot(diamonds, aes(carat, price)) + geom_smooth() +
+  facet_grid(~ cut)
+```
+````
+
+If you want to use another image entirely as a post preview you add a `preview` field to the post's metadata. For example, here we add a `preview` field to the example metadata from above (some fields excluded for brevity):
+
+```markup
+---
+title: "The Sharpe Ratio"
+description: |
+  In this post we present a classic finance use case using the
+  PerformanceAnalytics, quantmod, and dygraphs packages. 
+  We'll demonstrate importing stock data, building a portfolio,
+  and then calculating the Sharpe Ratio. 
+preview: images/sharpe-ratio.png
+---
+```
+
+Preview images are also used for generating [Open Graph](metadata.html#open-graph) and [Twitter Card](metadata.html#twitter-card) metadata. However, since those systems require that preview images be specified as absolute URLs, you  need to add a `base_url` field to your `_site.yml` to indicate where your site will be deployed. For example:
+
+**\_site.yml**
+
+```markup
+name: "reproducible-finance-with-r"
+title: "Reproducible Finance with R"
+base_url: https://beta.rstudioconnect.com/content/3776/
+navbar:
+  logo: images/rstudio.png
+  right:
+    - text: "Home"
+      href: index.html
+    - text: "About"
+      href: about.html
+    - text: "Contributors"
+      href: contributors.html
+output: radix::radix_article
+```
+
+
+## Building the site
+
+After you've authored one or more posts you will want to build the entire site before deploying it. 
+
+If your Radix website is contained within an RStudio project you can use the **Build Website** command available in the Build pane to generate the site:
+
+![](images/build-website.png){width=95% .screenshot}
+
+To build a website from the command line, use the `rmarkdown::render_site()` function:
+
+```r
+library(rmarkdown)
+render_site()
+```
+
+There are a variety of options available for making your site available to others, see the article on [website publishing](publish_website.html) for details. 
+
+## Example
+
+There is a complete example of a blog built with Radix available at <https://beta.rstudioconnect.com/content/3776/>.
+
+The example reproduces several posts from the [Reproducible Finance with R](https://rviews.rstudio.com/categories/reproducible-finance-with-r/) series on the R Views blog.
+
+The source code for the example can be found here: <https://github.com/radixpub/radix-r/tree/master/examples/websites/reproducible-finance-with-r>.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

@@ -18,7 +18,7 @@
   <!--radix_placeholder_meta_tags-->
   <title>Radix for R Markdown: Creating a Website</title>
   
-  <meta property="description" itemprop="description" content="Sharing collections of Radix articles as a website"/>
+  <meta property="description" itemprop="description" content="Share a set of Radix articles as a website"/>
   
   <link rel="license" href="https://creativecommons.org/licenses/by/4.0/"/>
   <link rel="icon" type="image/png" href="images/favicon.png"/>
@@ -27,19 +27,19 @@
   <!--  https://developers.facebook.com/docs/sharing/webmasters#markup -->
   <meta property="og:title" content="Radix for R Markdown: Creating a Website"/>
   <meta property="og:type" content="article"/>
-  <meta property="og:description" content="Sharing collections of Radix articles as a website"/>
+  <meta property="og:description" content="Share a set of Radix articles as a website"/>
   <meta property="og:locale" content="en_US"/>
   <meta property="og:site_name" content="Radix for R Markdown"/>
   
   <!--  https://dev.twitter.com/cards/types/summary -->
   <meta property="twitter:card" content="summary"/>
   <meta property="twitter:title" content="Radix for R Markdown: Creating a Website"/>
-  <meta property="twitter:description" content="Sharing collections of Radix articles as a website"/>
+  <meta property="twitter:description" content="Share a set of Radix articles as a website"/>
   
   <!--/radix_placeholder_meta_tags-->
   
   <script type="text/json" id="radix-rmarkdown-metadata">
-  {"type":"list","attributes":{"names":{"type":"character","attributes":{},"value":["title","description"]}},"value":[{"type":"character","attributes":{},"value":["Creating a Website"]},{"type":"character","attributes":{},"value":["Sharing collections of Radix articles as a website"]}]}
+  {"type":"list","attributes":{"names":{"type":"character","attributes":{},"value":["title","description"]}},"value":[{"type":"character","attributes":{},"value":["Creating a Website"]},{"type":"character","attributes":{},"value":["Share a set of Radix articles as a website"]}]}
   </script>
   <!--radix_placeholder_navigation_in_header-->
   
@@ -400,7 +400,7 @@
 
 
 <script id="distill-front-matter" type="text/json">
-{"title":"Creating a Website","description":"Sharing collections of Radix articles as a website","authors":[]}
+{"title":"Creating a Website","description":"Share a set of Radix articles as a website","authors":[]}
 </script>
 <!--radix_placeholder_navigation_before_body-->
 <header class="header header--fixed" role="banner">
@@ -436,8 +436,10 @@ Websites
 <span class="down-arrow">&#x25BE;</span>
 </button>
 <div class="nav-dropdown-content">
-<a href="website_basics.html">Website Basics</a>
-<a href="publish_website.html">Publishing a Website</a>
+<a href="website.html">Creating a Website</a>
+<a href="blog.html">Creating a Blog</a>
+<hr/>
+<a href="publish_website.html">Publishing Websites</a>
 </div>
 </div>
 <div class="nav-dropdown">
@@ -448,7 +450,7 @@ Publishing
 </button>
 <div class="nav-dropdown-content">
 <a href="publish_article.html">Publishing Articles</a>
-<a href="publish_website.html">Publishing a Website</a>
+<a href="publish_website.html">Publishing Websites</a>
 </div>
 </div>
 <a href="https://github.com/radixpub/radix-r">
@@ -464,14 +466,14 @@ Publishing
 
 <div class="d-title">
 <h1>Creating a Website</h1>
-<p>Sharing collections of Radix articles as a website</p>
+<p>Share a set of Radix articles as a website</p>
 </div>
 
 
 <div class="d-article">
 <p>This article describes how to create a website that contains a collection of Radix articles. Radix websites include a top level navigation bar that enables readers to discover and browse articles. For example, the documentation pages you are reading now are a Radix website.</p>
 <p>Once you’ve created your website locally, there are a variety of ways available to <a href="publish_website.html">publish your site</a> to the web.</p>
-<h2 id="getting-started">Getting Started</h2>
+<h2 id="getting-started">Getting started</h2>
 <p>The minimum requirement for a Radix website is that it have:</p>
 <ol type="1">
 <li><p>An <code>index.Rmd</code> file configured to use the Radix website generator (<code>site: radix::radix_website</code>).</p></li>
@@ -514,20 +516,21 @@ description: |
 More about Radix</code></pre>
 <p>Note that the <code>output</code> options are not specified within the Rmd documents but rather in the <code>_site.yml</code> configuration file (this allows output options to be shared by all articles).</p>
 <p>Also note that the <code>index.Rmd</code> file specifies the Radix website generator (<code>site::radix_website</code>).</p>
-<h2 id="authoring-articles">Authoring Articles</h2>
+<h2 id="authoring-articles">Authoring articles</h2>
 <p>When you use the RStudio <strong>Knit</strong> command on a Radix article within a website, only that article will be rendered and previewed:</p>
 <p><img src="images/knit-site-article.png" class="screenshot" style="width:95.0%" /></p>
 <p>You can also preview a single article from within a website by passing the name of the article’s Rmd file to <code>render_site()</code>:</p>
 <pre class="r"><code>
 render_site(&quot;about.Rmd&quot;)</code></pre>
 <p>This will build only the specified article (as opposed to all articles in the site). This the recommended workflow for authoring articles since it offers the fastest turnaround time for previews (since only the article you are working on is rendered).</p>
-<h2 id="building-the-site">Building the Site</h2>
+<h2 id="building-the-site">Building the site</h2>
 <p>After you’ve authored the various articles contained within the website you will want to build the entire site before deploying it.</p>
 <p>If your Radix website is contained within an RStudio project you can use the <strong>Build Website</strong> command available in the Build pane to generate the site:</p>
 <p><img src="images/build-website.png" class="screenshot" style="width:95.0%" /></p>
 <p>When you build a website, the following things occur:</p>
 <ol type="1">
 <li><p>All of the Rmd and md files in the root website directory will be rendered into HTML. Note however that markdown files beginning with &quot;_&quot; are not rendered (this is a convention to designate files that are included by top level documents).</p></li>
+<li><p>Blog posts will be copied into the <code>posts</code> sub-directory of the output directory and blog <a href="blog.html#listing-pages">listing pages</a> will be re-generated.</p></li>
 <li><p>The generated HTML files and any supporting files (e.g. CSS and JavaScript) are copied into an output directory (<code>_site</code> by default).</p></li>
 </ol>
 <p>The HTML files within the <code>_site</code> directory are now ready to deploy as a standalone static website.</p>
@@ -535,7 +538,7 @@ render_site(&quot;about.Rmd&quot;)</code></pre>
 <pre class="r"><code>
 library(rmarkdown)
 render_site()</code></pre>
-<h2 id="site-configuration">Site Configuration</h2>
+<h2 id="site-configuration">Site configuration</h2>
 <p>The <strong>_site.yml</strong> file has a number of options that affect site output including where it is written and what files are included and excluded from the site. Here’s an example that makes use of a few of these options:</p>
 <p><strong>_site.yml</strong></p>
 <pre class="markup"><code>
@@ -545,7 +548,7 @@ include: [&quot;import.R&quot;]
 exclude: [&quot;docs.txt&quot;, &quot;*.csv&quot;]</code></pre>
 <p>The <code>name</code> field provides a suggested URL path for your website when it is published (by default this is just the name of the directory containing the site).</p>
 <p>The <code>output_dir</code> field indicates which directory to copy site content into (&quot;_site&quot; is the default if none is specified). Note that this can be “.” to keep all content within the root website directory alongside the source code.</p>
-<h3 id="included-files">Included Files</h3>
+<h3 id="included-files">Included files</h3>
 <p>The <code>include</code> and <code>exclude</code> fields enable you to override the default behavior visa-vi what files are copied into the output directory. By default, all files within the website directory are copied into the output directory (e.g. &quot;_site&quot;) save for the following:</p>
 <ol type="1">
 <li><p>Files beginning with <code>&quot;.&quot;</code> (hidden files).</p></li>
@@ -555,7 +558,7 @@ exclude: [&quot;docs.txt&quot;, &quot;*.csv&quot;]</code></pre>
 <p>The <code>include</code> and <code>exclude</code> fields of <strong>_site.yml</strong> can be used to override this default behavior (wildcards can be used to specify groups of files to be included or excluded).</p>
 <p>Note that <code>include</code> and <code>exclude</code> are <em>not</em> used to determine which Rmd files are rendered (all of them in the root directory save for those named with the <code>_</code> prefix will be rendered).</p>
 <p>The R Markdown documentation on <a href="https://rmarkdown.rstudio.com/rmarkdown_websites.html">creating websites</a> has documentation on additional available features and configuration options. The remainder of this article describes features that are specific to Radix websites.</p>
-<h2 id="site-navigation">Site Navigation</h2>
+<h2 id="site-navigation">Site navigation</h2>
 <p>Site navigation bars include the site’s title, an optional logo, top-level links to articles, and if need be drop-down menus that include links to several articles. For example:</p>
 <p><img src="images/navigation-bar.png" class="screenshot" style="width:95.0%" /></p>
 <p>Elements of the site navigation bar are specified within the <code>navbar</code> section of the <code>_site.yml</code> file. For example, here is the YAML that was used to create the navigation bar displayed above:</p>
@@ -589,7 +592,7 @@ output: distill::distill_article
 ---</code></pre>
 <p>Note that we specify that the menu items appear on the <code>right</code> side of the navigation bar. We could have also used <code>left</code>, or chosen to put some items on the <code>left</code> and some on the <code>right</code>.</p>
 <p>Note also that we used an <code>icon</code> for one of the menus, specifying the <a href="https://fontawesome.com/">Font Awesome</a> <code>fab fa-github</code> identifier for the GitHub icon (you can use any Font Awesome icon). If there isn’t a Font Awesome icon that matches the image you want, you can also specify a custom <code>image</code> rather than an <code>icon</code>.</p>
-<h3 id="site-footer">Site Footer</h3>
+<h3 id="site-footer">Site footer</h3>
 <p>When you use a navigation bar, you can optionally also include a site footer which uses the same theme (background and foreground colors). For example:</p>
 <p><img src="images/footer-bar.png" class="screenshot" style="width:95.0%" /></p>
 <p>To add a footer, simply include a file named <code>footer.html</code> within your main site directory. For example:</p>
@@ -642,7 +645,7 @@ navbar:
 output:
   radix::radix_article:
     css: styles.css</code></pre>
-<h2 id="site-metadata">Site Metadata</h2>
+<h2 id="site-metadata">Site metadata</h2>
 <p>Radix articles can include various types of <a href="metadata.html">metadata</a> to make them easier to index, cite, and share. Metadata included within your <code>_site.yml</code> file is conveniently shared across all articles on your site (individual articles can always override any value within their own metadata).</p>
 <p>Several metadata values which you might find useful to define in <code>_site.yml</code> are:</p>
 <table>

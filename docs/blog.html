@@ -16,30 +16,30 @@
   </style>
 
   <!--radix_placeholder_meta_tags-->
-  <title>Radix for R Markdown: Publishing Websites</title>
+  <title>Radix for R Markdown: Creating a Blog</title>
   
-  <meta property="description" itemprop="description" content="Publish your website using a variety of services"/>
+  <meta property="description" itemprop="description" content="Create a blog to publish a collection of Radix articles"/>
   
   <link rel="license" href="https://creativecommons.org/licenses/by/4.0/"/>
   <link rel="icon" type="image/png" href="images/favicon.png"/>
   
   
   <!--  https://developers.facebook.com/docs/sharing/webmasters#markup -->
-  <meta property="og:title" content="Radix for R Markdown: Publishing Websites"/>
+  <meta property="og:title" content="Radix for R Markdown: Creating a Blog"/>
   <meta property="og:type" content="article"/>
-  <meta property="og:description" content="Publish your website using a variety of services"/>
+  <meta property="og:description" content="Create a blog to publish a collection of Radix articles"/>
   <meta property="og:locale" content="en_US"/>
   <meta property="og:site_name" content="Radix for R Markdown"/>
   
   <!--  https://dev.twitter.com/cards/types/summary -->
   <meta property="twitter:card" content="summary"/>
-  <meta property="twitter:title" content="Radix for R Markdown: Publishing Websites"/>
-  <meta property="twitter:description" content="Publish your website using a variety of services"/>
+  <meta property="twitter:title" content="Radix for R Markdown: Creating a Blog"/>
+  <meta property="twitter:description" content="Create a blog to publish a collection of Radix articles"/>
   
   <!--/radix_placeholder_meta_tags-->
   
   <script type="text/json" id="radix-rmarkdown-metadata">
-  {"type":"list","attributes":{"names":{"type":"character","attributes":{},"value":["title","description"]}},"value":[{"type":"character","attributes":{},"value":["Publishing Websites"]},{"type":"character","attributes":{},"value":["Publish your website using a variety of services"]}]}
+  {"type":"list","attributes":{"names":{"type":"character","attributes":{},"value":["title","description"]}},"value":[{"type":"character","attributes":{},"value":["Creating a Blog"]},{"type":"character","attributes":{},"value":["Create a blog to publish a collection of Radix articles"]}]}
   </script>
   <!--radix_placeholder_navigation_in_header-->
   
@@ -400,7 +400,7 @@
 
 
 <script id="distill-front-matter" type="text/json">
-{"title":"Publishing Websites","description":"Publish your website using a variety of services","authors":[]}
+{"title":"Creating a Blog","description":"Create a blog to publish a collection of Radix articles","authors":[]}
 </script>
 <!--radix_placeholder_navigation_before_body-->
 <header class="header header--fixed" role="banner">
@@ -465,63 +465,116 @@ Publishing
 <!--/radix_placeholder_site_before_body-->
 
 <div class="d-title">
-<h1>Publishing Websites</h1>
-<p>Publish your website using a variety of services</p>
+<h1>Creating a Blog</h1>
+<p>Create a blog to publish a collection of Radix articles</p>
 </div>
 
 
 <div class="d-article">
-<p>There are a wide variety of ways to publish Radix websites. Website content is by default written to the <code>_site</code> sub-directory (you can customize this using the <code>output_dir</code> metadata field). Publishing is simply a matter of copying the output directory to a web server or web hosting service.</p>
-<p>Below we describe several convenient options for Radix website deployment including <a href="#rstudio-connect">RStudio Connect</a>, <a href="#github-pages">GitHub Pages</a>, <a href="#netlify">Netlify</a>, <a href="#firebase">Firebase</a>, <a href="#site44">Site44</a>, and <a href="#amazon-s3">Amazon S3</a>. We’ll mostly defer to the documentation provided by the various services, but will note any Radix website specific configuration required.</p>
-<h2 id="rstudio-connect">RStudio Connect</h2>
-<p><a href="https://www.rstudio.com/products/connect/">RStudio Connect</a> is a server product from RStudio for secure sharing of websites, applications, reports, and plots.</p>
-<p>You can publish a Radix website directly to an RStudio Connect server from within the website preview window by clicking the <strong>Publish</strong> button:</p>
-<p><img src="images/rstudio-connect.png" class="screenshot" style="width:95.0%" /></p>
-<p>Note that you can either publish your website with the source code (so it can be regenerated on a scheduled basis) or publish a copy of the website you built locally. Generally publishing a copy is more straightforward so that’s the recommended option unless you have specialized requirements.</p>
-<p>You can also deploy a Radix website to RStudio Connect from the command line using the <code>rsconnect::deploySite()</code> function. For example:</p>
+<p>Radix websites include integrated support for blogging. To create a blog you author a collection of posts (located in the <code>_posts</code> subdirectory of your website) and then dedicate a page (usually the website homepage) to a listing of all of your posts.</p>
+<h2 id="getting-started">Getting started</h2>
+<p>First, create the basic scaffolding for a Radix website as described in the article on <a href="website.html">creating websites</a>.</p>
+<p>Then, from the main directory of your website, create a <code>_posts</code> subdirectory:</p>
 <pre class="r"><code>
-library(rsconnect)
-deploySite()</code></pre>
-<p>This example assumes you want to publish the site as it currently exists and publish to the default RStudio Connect account you’ve setup on your workstation.</p>
-<p>You can customize the deployment target using the <code>account</code> option and force a re-render of the site before publishing using the <code>render</code> option. For example:</p>
+dir.create(&quot;_posts&quot;)</code></pre>
+<p>To add a post, simply create a sub-directory of the <code>_posts</code> directory and save a Radix article there. For example:</p>
 <pre class="r"><code>
-library(rsconnect)
-deploySite(account = &quot;dsmith&quot;, render = &quot;local&quot;)</code></pre>
-<p>Unlike the other website publishing options described below, <a href="https://www.rstudio.com/products/connect/">RStudio Connect</a> is a server that you run inside an organization, so is suitable for publishing content that you only want visible within your organization’s network as opposed to visible to the entire internet.</p>
-<h2 id="github-pages">GitHub Pages</h2>
-<p><a href="https://pages.github.com/">GitHub Pages</a> is a service that lets you publish a website from any GitHub repository. There are two additional configuration steps required to host a Radix website using GitHub Pages:</p>
-<ol type="1">
-<li><p>Create a file named <code>.nojekyll</code> in your repository (this is required to disable some processing of HTML files that GitHub does by default). You can do this with the following code:</p>
-<pre class="r"><code>
-file.create(&quot;.nojekyll&quot;)</code></pre></li>
-<li><p>Set the <code>output_dir</code> within <code>_site.yml</code> to match the repository directory your site is served from. You can configure GitHub Pages to publish from the root of your master branch or the <code>docs</code> sub-directory:</p>
-<p><img src="images/github-pages-directory.png" style="width:95.0%" /></p>
-<p>Depending on your configuration you should set the <code>output_dir</code> as follows:</p>
-<pre class="markup"><code>
-output_dir: &quot;.&quot;     # root of master branch
-output_dir: &quot;docs&quot;  # docs directory of master branch</code></pre></li>
-</ol>
-<p>See the <a href="https://pages.github.com/">GitHub Pages</a> documentation for additional details on creating and deploying websites with GitHub.</p>
-<h2 id="netlify">Netlify</h2>
-<p><a href="https://www.netlify.com/">Netlify</a> is a popular website hosting service that allows for both direct upload of website files or integrated publishing from Git repositories (GitHub, GitLab, or Bitbucket) via commit-hooks.</p>
-<p>If you are using Netlify Git integration, be sure to set the publish directory to the output directory of your website (<code>_site</code> by default but modifiable via the <code>output_dir</code> metadata value). For example:</p>
-<p><img src="images/netlify-publish-dir.png" class="screenshot" style="width:95.0%" /></p>
-<h2 id="firebase">Firebase</h2>
-<p>Google Firebase has a <a href="https://firebase.google.com/docs/hosting/quickstart">web hosting service</a> that enables easy deployment of websites using a set of command line tools.</p>
-<p>Firebase websites by default deploy content from the <code>public</code> directory of the Firebase project directory. This means that you should set the <code>output_dir</code> to <code>&quot;public&quot;</code> within <code>_site.yml</code>:</p>
+dir.create(&quot;_posts/sharpe-ratio&quot;)</code></pre>
+<p>Here’s what <code>sharpe_ratio.Rmd</code> might look like to start with:</p>
+<p><strong>_posts/sharpe-ratio/sharpe-ratio.Rmd</strong></p>
 <pre class="markup"><code>
 ---
-name: &quot;radix&quot;
-title: &quot;Radix for R Markdown&quot;
-output_dir: &quot;public&quot;
+title: &quot;The Sharpe Ratio&quot;
+description: |
+  In this post we present a classic finance use case using the
+  PerformanceAnalytics, quantmod, and dygraphs packages. 
+  We&#39;ll demonstrate importing stock data, building a portfolio,
+  and then calculating the Sharpe Ratio. 
+author: 
+  - name: &quot;Jonathan Regenstein&quot;
+    url: https://www.linkedin.com/in/jkregenstein/
+    affiliation: RStudio
+    affiliation_url: https://www.rstudio.com
+date: 11-09-2016
+output: 
+  radix::radix_article:
+    self_contained: false
 ---</code></pre>
-<h2 id="site44">Site44</h2>
-<p><a href="https://www.site44.com/">Site44</a> is a service that allows you to publish websites from within Dropbox folders. Site44 creates a <code>Dropbox/Apps/site44</code> directory, and any folders within that directory are published as websites.</p>
-<p>The recommended workflow for deploying Radix websites to Site44 is to develop your website in a separate project directory, and then, when it’s ready for final publishing, copy the contents of the <code>_site</code> directory to the folder for your website.</p>
-<h2 id="amazon-s3">Amazon S3</h2>
-<p>If you are a user of Amazon Web Services you can serve your website directly from Amazon S3. Note however that this option is a bit more technically involved than GitHub Pages, Netlify, or Site 44. See the article on <a href="https://docs.aws.amazon.com/AmazonS3/latest/dev/WebsiteHosting.html">Hosting a Static Website on Amazon S3</a> for additional details.</p>
-<h2 id="other-services">Other Services</h2>
-<p>Any web server or web host can be used to deploy a Radix website. Here’s a recent <a href="https://www.cnet.com/web-hosting/">CNET roundup</a> of other web hosts you could consider. You can also deploy a Radix website on any internal (intranet) web server.</p>
+<p>Note that we set <code>self_contained</code> to <code>false</code> since this article will be published as part of a website.</p>
+<p>You can work on the post independent of the containing website (use <strong>Knit</strong> to preview the post just like any R Markdown document). In the next section will describe how to create a listing page for all of your posts.</p>
+<h2 id="listing-pages">Listing pages</h2>
+<p>Once you have authored one or more posts you’ll want to create a listing page. You can do this by adding a <code>listing</code> metadata entry to the page you to include the listing on. This is often the main page for the website (index.Rmd). For example:</p>
+<p><strong>index.Rmd</strong></p>
+<pre class="markup"><code>
+---
+title: &quot;Reproducible Finance with R&quot;
+site: radix::radix_website
+listing:
+  collection: posts
+---</code></pre>
+<p>In our <a href="https://beta.rstudioconnect.com/content/3776/">example blog</a> (which will be described in more detail below) this results in the following listing:</p>
+<p><img src="images/site-listing.png" class="screenshot" style="width:95.0%" /></p>
+<h3 id="post-drafts">Post drafts</h3>
+<p>If you want to work on a post for a period of time without having it be added to the listing page, add <code>draft: true</code> to the post’s metadata. For example:</p>
+<pre class="markup"><code>
+---
+title: &quot;The Sharpe Ratio&quot;
+description: |
+  In this post we present a classic finance use case using the
+  PerformanceAnalytics, quantmod, and dygraphs packages. 
+  We&#39;ll demonstrate importing stock data, building a portfolio,
+  and then calculating the Sharpe Ratio. 
+draft: true
+---</code></pre>
+<p>When you are ready to publish the post, either remove the <code>draft</code> option or set it to <code>false</code>, then build the website.</p>
+<h2 id="post-preview">Post preview</h2>
+<p>Note that the listing for our example above includes a preview image for each post. Preview images are generated automatically based on the first plot encountered within your post. You can specify that a specific plot should be used as the preview image using the <code>preview</code> chunk option. For example:</p>
+<pre class="clike"><code>
+```{r, layout=&quot;l-body-outset&quot;, preview=TRUE}
+library(ggplot2)
+ggplot(diamonds, aes(carat, price)) + geom_smooth() +
+  facet_grid(~ cut)
+```</code></pre>
+<p>If you want to use another image entirely as a post preview you add a <code>preview</code> field to the post’s metadata. For example, here we add a <code>preview</code> field to the example metadata from above (some fields excluded for brevity):</p>
+<pre class="markup"><code>
+---
+title: &quot;The Sharpe Ratio&quot;
+description: |
+  In this post we present a classic finance use case using the
+  PerformanceAnalytics, quantmod, and dygraphs packages. 
+  We&#39;ll demonstrate importing stock data, building a portfolio,
+  and then calculating the Sharpe Ratio. 
+preview: images/sharpe-ratio.png
+---</code></pre>
+<p>Preview images are also used for generating <a href="metadata.html#open-graph">Open Graph</a> and <a href="metadata.html#twitter-card">Twitter Card</a> metadata. However, since those systems require that preview images be specified as absolute URLs, you need to add a <code>base_url</code> field to your <code>_site.yml</code> to indicate where your site will be deployed. For example:</p>
+<p><strong>_site.yml</strong></p>
+<pre class="markup"><code>
+name: &quot;reproducible-finance-with-r&quot;
+title: &quot;Reproducible Finance with R&quot;
+base_url: https://beta.rstudioconnect.com/content/3776/
+navbar:
+  logo: images/rstudio.png
+  right:
+    - text: &quot;Home&quot;
+      href: index.html
+    - text: &quot;About&quot;
+      href: about.html
+    - text: &quot;Contributors&quot;
+      href: contributors.html
+output: radix::radix_article</code></pre>
+<h2 id="building-the-site">Building the site</h2>
+<p>After you’ve authored one or more posts you will want to build the entire site before deploying it.</p>
+<p>If your Radix website is contained within an RStudio project you can use the <strong>Build Website</strong> command available in the Build pane to generate the site:</p>
+<p><img src="images/build-website.png" class="screenshot" style="width:95.0%" /></p>
+<p>To build a website from the command line, use the <code>rmarkdown::render_site()</code> function:</p>
+<pre class="r"><code>
+library(rmarkdown)
+render_site()</code></pre>
+<p>There are a variety of options available for making your site available to others, see the article on <a href="publish_website.html">website publishing</a> for details.</p>
+<h2 id="example">Example</h2>
+<p>There is a complete example of a blog built with Radix available at <a href="https://beta.rstudioconnect.com/content/3776/" class="uri">https://beta.rstudioconnect.com/content/3776/</a>.</p>
+<p>The example reproduces several posts from the <a href="https://rviews.rstudio.com/categories/reproducible-finance-with-r/">Reproducible Finance with R</a> series on the R Views blog.</p>
+<p>The source code for the example can be found here: <a href="https://github.com/radixpub/radix-r/tree/master/examples/websites/reproducible-finance-with-r" class="uri">https://github.com/radixpub/radix-r/tree/master/examples/websites/reproducible-finance-with-r</a>.</p>
 </div>
 
 <div class="d-appendix">

@@ -1,6 +1,6 @@
 ---
 title: "Creating a Website"
-description: Sharing collections of Radix articles as a website
+description: Share a set of Radix articles as a website
 ---
 
 ```{r setup, include=FALSE}
@@ -11,7 +11,7 @@ This article describes how to create a website that contains a collection of Rad
 
 Once you've created your website locally, there are a variety of ways available to [publish your site](publish_website.html) to the web. 
 
-## Getting Started
+## Getting started
 
 The minimum requirement for a Radix website is that it have:
 
@@ -68,7 +68,7 @@ Note that the `output` options are not specified within the Rmd documents but ra
 
 Also note that the `index.Rmd` file specifies the Radix website generator (`site::radix_website`).
 
-## Authoring Articles
+## Authoring articles
 
 When you use the RStudio **Knit** command on a Radix article within a website, only that article will be rendered and previewed:
 
@@ -82,7 +82,7 @@ render_site("about.Rmd")
 
 This will build only the specified article (as opposed to all articles in the site). This the recommended workflow for authoring articles since it offers the fastest turnaround time for previews (since only the article you are working on is rendered).
 
-## Building the Site
+## Building the site
 
 After you've authored the various articles contained within the website you will want to build the entire site before deploying it. 
 
@@ -94,7 +94,9 @@ When you build a website, the following things occur:
 
 1. All of the Rmd and md files in the root website directory will be rendered into HTML. Note however that markdown files beginning with "_" are not rendered (this is a convention to designate files that are included by top level documents).
 
-2. The generated HTML files and any supporting files (e.g. CSS and JavaScript) are copied into an output directory (`_site` by default).
+2. Blog posts will be copied into the `posts` sub-directory of the output directory and blog [listing pages](blog.html#listing-pages) will be re-generated.
+
+3. The generated HTML files and any supporting files (e.g. CSS and JavaScript) are copied into an output directory (`_site` by default).
 
 The HTML files within the `_site` directory are now ready to deploy as a standalone static website. 
 
@@ -105,7 +107,7 @@ library(rmarkdown)
 render_site()
 ```
 
-## Site Configuration
+## Site configuration
 
 The **\_site.yml** file has a number of options that affect site output including where it is written and what files are included and excluded from the site. Here's an example that makes use of a few of these options:
 
@@ -122,7 +124,7 @@ The `name` field provides a suggested URL path for your website when it is publi
 
 The `output_dir` field indicates which directory to copy site content into ("_site" is the default if none is specified). Note that this can be "." to keep all content within the root website directory alongside the source code.
 
-### Included Files
+### Included files
 
 The `include` and `exclude` fields enable you to override the default behavior visa-vi what files are copied into the output directory. By default, all files within the website directory are copied into the output directory (e.g. "_site") save for the following:
 
@@ -138,7 +140,7 @@ Note that `include` and `exclude` are *not* used to determine which Rmd files ar
 
 The R Markdown documentation on [creating websites](https://rmarkdown.rstudio.com/rmarkdown_websites.html) has documentation on  additional available features and configuration options. The remainder of this article describes features that are specific to Radix websites.
 
-## Site Navigation
+## Site navigation
 
 Site navigation bars include the site's title, an optional logo, top-level links to articles, and if need be drop-down menus that include links to several articles. For example:
 
@@ -180,7 +182,7 @@ Note that we specify that the menu items appear on the `right` side of the navig
 
 Note also that we used an `icon` for one of the menus, specifying the [Font Awesome](https://fontawesome.com/) `fab fa-github` identifier for the GitHub icon (you can use any Font Awesome icon). If there isn't a Font Awesome icon that matches the image you want, you can also specify a custom `image` rather than an `icon`.
 
-### Site Footer
+### Site footer
 
 When you use a navigation bar, you can optionally also include a site footer which uses the same theme (background and foreground colors). For example:
 
@@ -249,7 +251,7 @@ output:
     css: styles.css
 ```
 
-## Site Metadata
+## Site metadata
 
 Radix articles can include various types of [metadata](metadata.html) to make them easier to index, cite, and share. Metadata included within your `_site.yml` file is conveniently shared across all articles on your site (individual articles can always override any value within their own metadata). 
 

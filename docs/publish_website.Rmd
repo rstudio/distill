@@ -1,5 +1,5 @@
 ---
-title: "Publishing a Website"
+title: "Publishing Websites"
 description: Publish your website using a variety of services
 ---
 

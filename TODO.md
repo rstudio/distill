@@ -1,5 +1,7 @@
 
 
+- Sorts posts by reverse-chron
+- Listing page forces indexing of collection
 
 - index/category/archive pages (categories should be inline)
 - email subscription

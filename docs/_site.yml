@@ -29,15 +29,18 @@ navbar:
           href: metadata.html
     - text: "Websites"
       menu:
-        - text: "Website Basics"
-          href: website_basics.html
-        - text: "Publishing a Website"
+        - text: "Creating a Website"
+          href: website.html
+        - text: "Creating a Blog"
+          href: blog.html
+        - text: "---"
+        - text: "Publishing Websites"
           href: publish_website.html
     - text: "Publishing"
       menu:
         - text: "Publishing Articles"
           href: publish_article.html
-        - text: "Publishing a Website"
+        - text: "Publishing Websites"
           href: publish_website.html
     - icon: fab fa-github
       href: https://github.com/radixpub/radix-r
