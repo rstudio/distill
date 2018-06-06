@@ -33,20 +33,18 @@ leaflet() %>%
 You can also use [figure layout](figures.html) options with htmlwidgets. For example, here we set `layout="l-page"` to specify that we want the widget to span the width of the page:
 
 ````clike
-```{r, layout="l-page", fig.height=2}`r ''`
+```{r, layout="l-page", fig.height=3}`r ''`
 library(dygraphs)
-dygraph(ldeaths) %>% 
-  dyRangeSelector()
+dygraph(ldeaths)
 ```
 ````
 
-```{r, layout="l-page", fig.height=2}
+```{r, layout="l-page", fig.height=3}
 library(dygraphs)
-dygraph(ldeaths) %>% 
-  dyRangeSelector()
+dygraph(ldeaths)
 ```
 
-Note that we specify `fig.height=2` to provide a more natural height for a widget that spans the entire width of the page.
+Note that we specify `fig.height=3` to provide a more natural height for a widget that spans the entire width of the page.
 
 To learn about available htmlwidgets see the [showcase page](http://www.htmlwidgets.org/showcase_leaflet.html) and the [htmlwidget gallery](http://gallery.htmlwidgets.org/).
 
