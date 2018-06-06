@@ -48,6 +48,10 @@ radix_website <- function(input, encoding = getOption("encoding"), ...) {
       # render collections to the output directory
       render_collections(input, config, collections, quiet)
 
+      # remove any feed xml if output_dir isn't "."
+      # TODO
+
+
       # return result
       result
     },

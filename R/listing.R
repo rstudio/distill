@@ -1,6 +1,6 @@
 
 
-listing_before_body <- function(site_dir, metadata) {
+resolve_listing <- function(input_file, site_config, metadata) {
 
   if(!is.null(metadata$listing)) {
 
@@ -9,11 +9,20 @@ listing_before_body <- function(site_dir, metadata) {
     if (is.null(collection))
       stop("You must specify a collection for listing pages", call. = FALSE)
 
-    # generate html
-    articles <- article_listing(site_dir, collection)
-    listing_html <- article_listing_html(collection, articles)
+    # validate that the collection exists
+    site_dir <- dirname(input_file)
+    as_collection_dir(site_dir, collection)
 
-    # return as file
+    # get the collection and article metadata
+    collection <- site_collections(site_dir, site_config)[[collection]]
+    articles <- article_listing(site_dir, collection)
+
+    # generate feed and write it
+    write_rss_feed(input_file, site_config, collection, articles)
+
+    # generate html and return it
+    articles <- article_listing(input_as_dir(input_file), collection)
+    listing_html <- article_listing_html(collection, articles)
     html_file(listing_html)
 
 
@@ -28,7 +37,7 @@ article_listing_html <- function(collection, articles) {
   # generate html
   articles_html <- lapply(articles, function(article) {
 
-    path <- file.path(collection, article$path)
+    path <- file.path(collection$name, article$path)
 
     metadata <- div(class = "metadata",
       div(class = "publishedDate",
@@ -66,9 +75,46 @@ article_listing_html <- function(collection, articles) {
   div(class = "posts-list l-page", articles_html)
 }
 
+write_rss_feed <- function(input_file, site_config, collection, articles) {
+
+  # create document root
+  rss <- xml2::xml_new_root("rss",
+    version = "2.0",
+    "xmlns:atom" = "http://www.w3.org/2005/Atom",
+    "xmlns:media" = "http://search.yahoo.com/mrss/"
+  )
+
+  # helper to add a child element
+  add_child <- function(node, tag, attribs = c(), text = NULL, optional = FALSE) {
+    child <- xml2::xml_add_child(node, tag)
+    xml2::xml_set_attrs(child, attribs)
+    if (!is.null(text))
+      xml2::xml_text(child) <- text
+    child
+  }
+
+  # create channel
+  channel <- xml2::xml_add_child(rss, "channel")
+  add_channel_attribute <- function(name) {
+    if (!is.null(collection[[name]]))
+      add_child(channel, name, text = collection[[name]])
+  }
+  add_channel_attribute("title")
+  add_channel_attribute("description")
+
+
+  item <- add_child(channel, "item")
+
+  # write the rss file
+  rss_path <- file.path(dirname(input_file), file_with_ext(input_file, "xml"))
+  xml2::write_xml(rss, rss_path)
+
+}
+
 
 article_listing <- function(site_dir, collection) {
-  collection_dir <- as_collection_dir(collection)
+  collection <- collection$name
+  collection_dir <- as_collection_dir(site_dir, collection)
   articles_yaml <- file.path(site_dir, collection_dir, file_with_ext(collection, "yml"))
   if (!file.exists(articles_yaml))
     stop("The collection '", collection, "' does not have an article listing.\n",
@@ -76,9 +122,9 @@ article_listing <- function(site_dir, collection) {
   yaml::yaml.load_file(articles_yaml)
 }
 
-as_collection_dir <- function(collection) {
+as_collection_dir <- function(site_dir, collection) {
   collection_dir <- paste0("_", collection)
-  if (!dir_exists(collection_dir))
+  if (!dir_exists(file.path(site_dir, collection_dir)))
     stop("The collection '", collection, "' does not exist", call. = FALSE)
   collection_dir
 }

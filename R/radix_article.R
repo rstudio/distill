@@ -114,6 +114,9 @@ radix_article <- function(fig_width = 6,
     # add navbar related dependencies
     ensure_navbar_dependencies(site_config, dirname(input_file))
 
+    # resolve any article listing (produces rss feed and returns listing content)
+    listing_html <- resolve_listing(input_file, site_config, metadata)
+
     # header includes: radix then user
     in_header <- c(metadata_in_header(site_config, metadata, self_contained),
                    citation_references_in_header(input_file, metadata$bibliography),
@@ -126,7 +129,7 @@ radix_article <- function(fig_width = 6,
                      navigation_before_body_file(site_config),
                      site_before_body_file(site_config),
                      includes$before_body,
-                     listing_before_body(dirname(input_file), metadata))
+                     listing_html)
 
     # after body includes: user then radix
     after_body <- c(includes$after_body,
