@@ -39,7 +39,7 @@ title: "Radix for R Markdown"
 description: | 
   Scientific and technical writing, native to the web
 output: radix::radix_article
-repository_url: https://github.com/rstudio/radix
+repository_url: https://github.com/radixpub/radix-r
 compare_updates_url: https://github.com/radixpub/radix-r/compare/pubv1...master
 ---
 ```
