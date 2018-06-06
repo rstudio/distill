@@ -18,33 +18,38 @@ radix_website <- function(input, encoding = getOption("encoding"), ...) {
 
     render = function(input_file, output_format, envir, quiet, encoding, ...) {
 
+      # get the site config and collections
+      config <- site_config(input, encoding)
+      site_collections <- site_collections(input, config)
+
       # check if this is an incremental render
       incremental <- !is.null(input_file)
 
-      # if it's a full render then render collections
-      if (!incremental) {
-
-        # get the site config
-        config <- site_config(input, encoding)
-
-        # enumerate collections
-        collections <- enumerate_collections(input, config, encoding)
-
-        # write metadata (do this now so that pages have access to the
-        # the collection metadata)
-        write_collections_metadata(input, collections)
+      # if it's incremental then only render collection specified in 'listing'
+      if (incremental) {
+        metadata <- yaml_front_matter(input_file, encoding)
+        if (!is.null(metadata$listing) && is.character(metadata$listing$collection)) {
+          site_collections <- site_collections[metadata$listing$collection]
+        } else {
+          site_collections <- list()
+        }
       }
+
+      # enumerate collections
+      collections <- enumerate_collections(input, config, site_collections, encoding)
+
+      # write metadata (do this now so that pages have access to collection metadata)
+      write_collections_metadata(input, collections)
+      on.exit(remove_collections_metadata(input, collections), add = TRUE)
 
       # delegate to default site generator
       result <- default$render(input_file, output_format, envir, quiet, encoding, ...)
 
-      # render collections if not incremental
-      if (!incremental)
-        render_collections(input, config, collections, quiet)
+      # render collections to the output directory
+      render_collections(input, config, collections, quiet)
 
       # return result
       result
-
     },
 
     clean = function() {

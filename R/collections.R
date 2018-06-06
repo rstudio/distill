@@ -2,12 +2,15 @@
 
 
 
-enumerate_collections <- function(site_dir, config, encoding = getOption("encoding")) {
+enumerate_collections <- function(site_dir,
+                                  config,
+                                  site_collections,
+                                  encoding = getOption("encoding")) {
 
   # list of collections to return
   collections <- list()
 
-  site_collections <- site_collections(site_dir, config)
+  # iterate over collections
   for (collection in names(site_collections)) {
 
     # collection_dir
@@ -80,7 +83,7 @@ render_collections <- function(site_dir, site_config, collections, quiet = FALSE
     # remove existing output dir if it exists
     collection_output <- file.path(site_dir,
                                    site_config$output_dir,
-                                   sub("^_", "", collection$name))
+                                   collection$name)
     if (dir_exists(collection_output))
       unlink(collection_output, recursive = TRUE)
 
@@ -239,13 +242,8 @@ write_collections_metadata <- function(site_dir, collections) {
 write_collection_metadata <- function(site_dir, collection) {
 
   # articles yaml
-  name <- collection[["name"]]
-  articles_yaml <- file.path(
-    site_dir,
-    paste0("_", name),
-    file_with_ext(name, ext = "yml")
-  )
-  con <- file(articles_yaml, "w", encoding = "UTF-8")
+  collection_yaml <- collection_yaml_path(site_dir, collection)
+  con <- file(collection_yaml, "w", encoding = "UTF-8")
   on.exit(close(con), add = TRUE)
 
   # header
@@ -264,6 +262,24 @@ write_collection_metadata <- function(site_dir, collection) {
     cat("\n", file = con)
     yaml::write_yaml(list(article_yaml), file = con)
   })
+}
+
+remove_collections_metadata <- function(site_dir, collections) {
+  for (collection in collections)
+    remove_collection_metadata(site_dir, collection)
+}
+
+remove_collection_metadata <- function(site_dir, collection) {
+  file.remove(collection_yaml_path(site_dir, collection))
+}
+
+collection_yaml_path <- function(site_dir, collection) {
+  name <- collection[["name"]]
+  file.path(
+    site_dir,
+    paste0("_", name),
+    file_with_ext(name, ext = "yml")
+  )
 }
 
 

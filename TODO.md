@@ -1,12 +1,13 @@
 
 
-- Screen inset layout not working correctly
+- Blog docs on not re-rendered with site (and why)
 
 - Sorts posts by reverse-chron
-- Listing page forces indexing of collection
+
+- Consider requiring pandoc 2
 
 - index/category/archive pages (categories should be inline)
-- email subscription
+- email subscription (http://www.wpbeginner.com/opinion/stop-using-feedburner-move-to-feedburner-alternatives/)
 - google analytics 
 - discourse commenting
 - search
