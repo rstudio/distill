@@ -76,7 +76,7 @@ Here are the steps required to publish a Radix article to GitHub Pages:
 
 GitHub Pages are served on the `github.io` domain (with your GitHub account as a sub-domain). For example, if your GitHub username is `jsmith` and your repository is named `radix-article` then the article will be available at <https://jsmith.github.io/radix-article>.
 
-## Other Services
+## Other services
 
 Note that any web server or web host capable of hosting a static website can equally well host a single Radix article. See the article on publishing Radix websites for details on publishing articles on a variety of other services including [Netlify](publish_website.html#netlify), [Firebase](publish_website.html#firebase), [Site44](publish_website.html#site44), and [Amazon S3](publish_website.html#amazon-s3).
 

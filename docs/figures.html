@@ -479,6 +479,7 @@ Publishing
 
 
 <div class="d-article">
+<h2 id="default-layout">Default layout</h2>
 <p>There are a variety of ways to layout figures included within Radix articles. This layout is controlled by a set of layout classes, which are in turn applied to R Markdown chunks using the <code>layout</code> chunk option.</p>
 <p>The default layout if <code>layout</code> is not specified is <code>l-body</code>, which will cause content to span the width of the main article body:</p>
 <div class="fake-img l-body">
@@ -490,6 +491,7 @@ l-body
 <div class="layout-chunk" data-layout="l-body">
 <p><img src="images/l-body-figure.png" width="576" /></p>
 </div>
+<h2 id="wider-layout">Wider layout</h2>
 <p>For elements you want to display a little larger, try <code>l-body-outset</code> or <code>l-page</code>:</p>
 <div class="fake-img l-body-outset">
 <p>
@@ -512,6 +514,7 @@ ggplot(diamonds, aes(carat, price)) + geom_smooth() +
 <p><img src="images/l-middle-figure.png" width="576" /></p>
 </div>
 <p>Note that when specifying an alternate <code>layout</code> you should also specify an appropriate <code>fig.width</code> and <code>fig.height</code> for that layout.</p>
+<h2 id="full-screen-layout">Full screen layout</h2>
 <p>Occasionally you’ll want to use the full browser width. For this, use <code>l-screen</code>:</p>
 <div class="fake-img l-screen">
 <p>
@@ -530,7 +533,7 @@ leaflet() %&gt;%
 <div id="htmlwidget-7ded59f4b1e32ea1fd21" style="width:576px;height:384px;" class="leaflet html-widget"></div>
 <script type="application/json" data-for="htmlwidget-7ded59f4b1e32ea1fd21">{"x":{"options":{"crs":{"crsClass":"L.CRS.EPSG3857","code":null,"proj4def":null,"projectedBounds":null,"options":{}}},"calls":[{"method":"addTiles","args":["//{s}.tile.openstreetmap.org/{z}/{x}/{y}.png",null,null,{"minZoom":0,"maxZoom":18,"tileSize":256,"subdomains":"abc","errorTileUrl":"","tms":false,"noWrap":false,"zoomOffset":0,"zoomReverse":false,"opacity":1,"zIndex":1,"detectRetina":false,"attribution":"&copy; <a href=\"http://openstreetmap.org\">OpenStreetMap<\/a> contributors, <a href=\"http://creativecommons.org/licenses/by-sa/2.0/\">CC-BY-SA<\/a>"}]},{"method":"addMarkers","args":[-36.852,174.768,null,null,null,{"interactive":true,"draggable":false,"keyboard":true,"title":"","alt":"","zIndexOffset":0,"opacity":1,"riseOnHover":false,"riseOffset":250},"The birthplace of R",null,null,null,null,{"interactive":false,"permanent":false,"direction":"auto","opacity":1,"offset":[0,0],"textsize":"10px","textOnly":false,"className":"","sticky":true},null]}],"limits":{"lat":[-36.852,-36.852],"lng":[174.768,174.768]}},"evals":[],"jsHooks":[]}</script>
 </div>
-<h3 id="static-images">Static images</h3>
+<h2 id="static-images">Static images</h2>
 <p>To include static images that occupy the full width of the article text, be sure to add the <code>width=100%</code> attribute. For example:</p>
 <pre class="markdown"><code>
 ![](images/figure.png){width=100%}    </code></pre>

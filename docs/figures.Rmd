@@ -7,6 +7,7 @@ description: Amplify figures by customizing layout
 library(knitr)
 ```
 
+## Default layout
 
 There are a variety of ways to layout figures included within Radix articles. This layout is controlled by a set of layout classes, which are in turn applied to R Markdown chunks using the `layout` chunk option.
 
@@ -20,6 +21,7 @@ For example, a plot with the default `l-body` layout would look like this:
 include_graphics("images/l-body-figure.png")
 ```
 
+## Wider layout
 
 For elements you want to display a little larger, try `l-body-outset` or `l-page`:
 
@@ -42,6 +44,8 @@ include_graphics("images/l-middle-figure.png")
 ```
 
 Note that when specifying an alternate `layout` you should also specify an appropriate `fig.width` and `fig.height` for that layout.
+
+## Full screen layout
 
 Occasionally you’ll want to use the full browser width. For this, use `l-screen`:
 
@@ -66,8 +70,7 @@ leaflet() %>%
 ```
 
 
-
-### Static images
+## Static images
 
 To include static images that occupy the full width of the article text, be sure to add the `width=100%` attribute. For example:
 

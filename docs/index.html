@@ -617,7 +617,7 @@ $$</code></pre>
 <p>Citations are then used in the article body with standard R Markdown notation, for example: <code>[@xie2015]</code> (which references an id provided in the bibliography). Note that multiple ids (separated by semicolons) can be provided.</p>
 <p>The citation is presented inline like this: <span class="citation" data-cites="xie2015">(Xie <a href="#ref-xie2015">2015</a>)</span> (a number that displays more information on hover). If you have an appendix, a bibliography is automatically created and populated in it.</p>
 <p>See the article on <a href="citations.html">citations</a> for additional details on using citations, including how to provide the metadata required to make your article more easily citable for others.</p>
-<h2 id="footnotes-and-asides">Footnotes and Asides</h2>
+<h2 id="footnotes-and-asides">Footnotes and asides</h2>
 <p>Footnotes use standard Pandoc markdown notation, for example <code>^[This will become a hover-able footnote]</code>. The number of the footnote will be automatically generated.<a href="#fn1" class="footnote-ref" id="fnref1"><sup>1</sup></a></p>
 <p>You can also optionally include notes in the gutter of the article (immediately to the right of the article text). To do this use the <code>&lt;aside&gt;</code> tag.</p>
 <pre class="html"><code>
@@ -637,7 +637,7 @@ ggplot(mtcars, aes(hp, mpg)) + geom_point() + geom_smooth()
 <aside>
 <img src="images/figure-aside.png" style="width:100.0%" />
 </aside>
-<h2 id="code-blocks">Code Blocks</h2>
+<h2 id="code-blocks">Code blocks</h2>
 <p>Syntax highlighting is provided for knitr code chunks. Note that by default the Radix format does not display the code for chunks that are evaluated to produce output (knitr option <code>echo = FALSE</code>).</p>
 <p>The <code>echo = FALSE</code> default reflects the fact that Radix articles are often used to present the results of analyses rather than the underlying code. To display the code that was evaluated to produce output you can set the <code>echo</code> chunk option to <code>TRUE</code>:</p>
 <pre class="clike"><code>

@@ -182,7 +182,7 @@ The citation is presented inline like this: [@xie2015] (a number that displays m
 
 See the article on [citations](citations.html) for additional details on using citations, including how to provide the metadata required to make your article more easily citable for others.
 
-## Footnotes and Asides
+## Footnotes and asides
 
 Footnotes use standard Pandoc markdown notation, for example `^[This will become a hover-able footnote]`. The number of the footnote will be automatically generated. ^[This will become a hover-able footnote]
 
@@ -212,7 +212,7 @@ ggplot(mtcars, aes(hp, mpg)) + geom_point() + geom_smooth()
 ![](images/figure-aside.png){width=100%}
 </aside>
 
-## Code Blocks
+## Code blocks
 
 Syntax highlighting is provided for knitr code chunks. Note that by default the Radix format does not display the code for chunks that are evaluated to produce output (knitr option `echo = FALSE`). 
 
