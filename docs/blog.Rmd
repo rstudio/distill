@@ -19,7 +19,9 @@ Then, from the main directory of your website, create a `_posts` subdirectory:
 dir.create("_posts")
 ```
 
-To add a post, simply create a sub-directory of the `_posts` directory and save a Radix article there. For example:
+## Creating a post
+
+To create a post, simply create a sub-directory of the `_posts` directory and save a Radix article there. For example:
 
 ```r
 dir.create("_posts/sharpe-ratio")
@@ -91,9 +93,9 @@ draft: true
 When you are ready to publish the post, either remove the `draft` option or set it to `false`, then build the website.
 
 
-## Post preview
+## Preview thumbnail
 
-Note that the listing for our example above includes a preview image for each post. Preview images are generated automatically based on the first plot encountered within your post. You can specify that a specific plot should be used as the preview image using the `preview` chunk option. For example:
+Note that the listing for our example above includes a preview image for each post. Preview thumbnail images are generated automatically based on the first plot encountered within your post. You can specify that a specific plot should be used as the preview image using the `preview` chunk option. For example:
 
 ````clike
 ```{r, layout="l-body-outset", preview=TRUE}`r ''`

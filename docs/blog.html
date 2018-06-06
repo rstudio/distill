@@ -477,7 +477,8 @@ Publishing
 <p>Then, from the main directory of your website, create a <code>_posts</code> subdirectory:</p>
 <pre class="r"><code>
 dir.create(&quot;_posts&quot;)</code></pre>
-<p>To add a post, simply create a sub-directory of the <code>_posts</code> directory and save a Radix article there. For example:</p>
+<h2 id="creating-a-post">Creating a post</h2>
+<p>To create a post, simply create a sub-directory of the <code>_posts</code> directory and save a Radix article there. For example:</p>
 <pre class="r"><code>
 dir.create(&quot;_posts/sharpe-ratio&quot;)</code></pre>
 <p>Here’s what <code>sharpe_ratio.Rmd</code> might look like to start with:</p>
@@ -527,8 +528,8 @@ description: |
 draft: true
 ---</code></pre>
 <p>When you are ready to publish the post, either remove the <code>draft</code> option or set it to <code>false</code>, then build the website.</p>
-<h2 id="post-preview">Post preview</h2>
-<p>Note that the listing for our example above includes a preview image for each post. Preview images are generated automatically based on the first plot encountered within your post. You can specify that a specific plot should be used as the preview image using the <code>preview</code> chunk option. For example:</p>
+<h2 id="preview-thumbnail">Preview thumbnail</h2>
+<p>Note that the listing for our example above includes a preview image for each post. Preview thumbnail images are generated automatically based on the first plot encountered within your post. You can specify that a specific plot should be used as the preview image using the <code>preview</code> chunk option. For example:</p>
 <pre class="clike"><code>
 ```{r, layout=&quot;l-body-outset&quot;, preview=TRUE}
 library(ggplot2)
