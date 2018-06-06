@@ -10,7 +10,8 @@ listing_before_body <- function(metadata) {
       stop("You must specify a collection for listing pages", call. = FALSE)
 
     # generate html
-    listing_html <- article_listing_html(collection)
+    articles <- article_listing(collection)
+    listing_html <- article_listing_html(collection, articles)
 
     # return as file
     html_file(listing_html)
@@ -22,19 +23,7 @@ listing_before_body <- function(metadata) {
 }
 
 
-article_listing_html <- function(collection) {
-
-  # collection dir
-  collection_dir <- paste0("_", collection)
-  if (!dir_exists(collection_dir))
-    stop("The collection '", collection, "' does not exist")
-
-  # article listing
-  articles_yaml <- file.path(collection_dir, file_with_ext(collection, "yml"))
-  if (!file.exists(articles_yaml))
-    stop("The collection '", collection, "' does not have an article listing.\n",
-         "(try running render_site() to generate the listing)")
-  articles <- yaml::yaml.load_file(articles_yaml)
+article_listing_html <- function(collection, articles) {
 
   # generate html
   articles_html <- lapply(articles, function(article) {
@@ -76,4 +65,29 @@ article_listing_html <- function(collection) {
   # wrap in a div
   div(class = "posts-list l-page", articles_html)
 }
+
+
+article_listing_xml <- function(collection, articles) {
+
+
+
+}
+
+
+article_listing <- function(collection) {
+  collection_dir <- as_collection_dir(collection)
+  articles_yaml <- file.path(collection_dir, file_with_ext(collection, "yml"))
+  if (!file.exists(articles_yaml))
+    stop("The collection '", collection, "' does not have an article listing.\n",
+         "(try running render_site() to generate the listing)", call. = FALSE)
+  yaml::yaml.load_file(articles_yaml)
+}
+
+as_collection_dir <- function(collection) {
+  collection_dir <- paste0("_", collection)
+  if (!dir_exists(collection_dir))
+    stop("The collection '", collection, "' does not exist", call. = FALSE)
+  collection_dir
+}
+
 
