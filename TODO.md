@@ -1,5 +1,7 @@
 
 
+- Screen inset layout not working correctly
+
 - Sorts posts by reverse-chron
 - Listing page forces indexing of collection
 
