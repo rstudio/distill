@@ -474,13 +474,37 @@ Publishing
 <p>Radix websites include integrated support for blogging. To create a blog you author a collection of posts (located in the <code>_posts</code> subdirectory of your website) and then dedicate a page (usually the website homepage) to a listing of all of your posts.</p>
 <h2 id="getting-started">Getting started</h2>
 <p>First, create the basic scaffolding for a Radix website as described in the article on <a href="website.html">creating websites</a>.</p>
-<p>Then, from the main directory of your website, create a <code>_posts</code> subdirectory:</p>
-<pre class="r"><code>
-dir.create(&quot;_posts&quot;)</code></pre>
+<p>For a blog, there are a couple of additional metadata items you’ll want to add to your <code>_site.yml</code> so that it’s easier to share the content on the blog via RSS and social networks like Twitter:</p>
+<ul>
+<li><p>A short <code>description</code> of the site. This field is used for the channel description of your RSS feed.</p></li>
+<li><p>A <code>base_url</code> for the site (the URL where it will be published to). This is used both for RSS feed items and for sharing posts via <a href="metadata.html#open-graph">Open Graph</a> and <a href="metadata.html#twitter-card">Twitter Card</a>.</p></li>
+</ul>
+<p>For example:</p>
+<p><strong>_site.yml</strong></p>
+<pre class="markup"><code>
+name: &quot;reproducible-finance-with-r&quot;
+title: &quot;Reproducible Finance with R&quot;
+description: |
+  Exploring reproducible finance with the R statistical 
+  computing environment.
+base_url: https://beta.rstudioconnect.com/content/3776/
+navbar:
+  logo: images/rstudio.png
+  right:
+    - text: &quot;Home&quot;
+      href: index.html
+    - text: &quot;About&quot;
+      href: about.html
+    - text: &quot;Contributors&quot;
+      href: contributors.html
+    - icon: fa fa-rss
+      href: index.xml
+output: radix::radix_article</code></pre>
+<p>Note that we’ve also added a feed icon to the right side of the menu bar which makes it easy to discover and browse the RSS feed for the blog.</p>
 <h2 id="creating-a-post">Creating a post</h2>
 <p>To create a post, simply create a sub-directory of the <code>_posts</code> directory and save a Radix article there. For example:</p>
 <pre class="r"><code>
-dir.create(&quot;_posts/sharpe-ratio&quot;)</code></pre>
+dir.create(&quot;_posts/sharpe-ratio&quot;, recursive = TRUE)</code></pre>
 <p>Here’s what <code>sharpe_ratio.Rmd</code> might look like to start with:</p>
 <p><strong>_posts/sharpe-ratio/sharpe-ratio.Rmd</strong></p>
 <pre class="markup"><code>
@@ -548,22 +572,7 @@ description: |
   and then calculating the Sharpe Ratio. 
 preview: images/sharpe-ratio.png
 ---</code></pre>
-<p>Preview images are also used for generating <a href="metadata.html#open-graph">Open Graph</a> and <a href="metadata.html#twitter-card">Twitter Card</a> metadata. However, since those systems require that preview images be specified as absolute URLs, you need to add a <code>base_url</code> field to your <code>_site.yml</code> to indicate where your site will be deployed. For example:</p>
-<p><strong>_site.yml</strong></p>
-<pre class="markup"><code>
-name: &quot;reproducible-finance-with-r&quot;
-title: &quot;Reproducible Finance with R&quot;
-base_url: https://beta.rstudioconnect.com/content/3776/
-navbar:
-  logo: images/rstudio.png
-  right:
-    - text: &quot;Home&quot;
-      href: index.html
-    - text: &quot;About&quot;
-      href: about.html
-    - text: &quot;Contributors&quot;
-      href: contributors.html
-output: radix::radix_article</code></pre>
+<p>Preview images are also used for generating <a href="metadata.html#open-graph">Open Graph</a> and <a href="metadata.html#twitter-card">Twitter Card</a> metadata. However, since those systems require that preview images be specified as absolute URLs, you also need to add a <code>base_url</code> field to your <code>_site.yml</code> file as describe above in <a href="#getting-started">Getting Started</a>.</p>
 <h2 id="building-the-site">Building the site</h2>
 <p>After you’ve authored one or more posts you will want to build the entire site before deploying it.</p>
 <p>If your Radix website is contained within an RStudio project you can use the <strong>Build Website</strong> command available in the Build pane to generate the site:</p>

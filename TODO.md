@@ -1,5 +1,4 @@
 
-- Document feed generation
 
 - Document include/exclude resources for posts
 
@@ -14,8 +13,6 @@
 - google analytics 
 - discourse commenting
 - search
-- RSS feed for collection
-   (support images: https://stackoverflow.com/questions/483675/images-in-rss-feed)
 - rstudio addins/templates/projects for article creation
    - Created with link in footer
 

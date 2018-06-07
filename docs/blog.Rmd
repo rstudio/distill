@@ -13,18 +13,45 @@ Radix websites include integrated support for blogging. To create a blog you aut
 
 First, create the basic scaffolding for a Radix website as described in the article on [creating websites](website.html).
 
-Then, from the main directory of your website, create a `_posts` subdirectory:
+For a blog, there are a couple of additional metadata items you'll want to add to your `_site.yml` so that it's easier to share the content on the blog via RSS and social networks like Twitter:
 
-```r
-dir.create("_posts")
+- A short `description` of the site. This field is used for the channel description of your RSS feed.
+
+- A `base_url` for the site (the URL where it will be published to). This is used both for RSS feed items and for sharing posts via [Open Graph](metadata.html#open-graph) and [Twitter Card](metadata.html#twitter-card).
+
+For example:
+
+**\_site.yml**
+
+```markup
+name: "reproducible-finance-with-r"
+title: "Reproducible Finance with R"
+description: |
+  Exploring reproducible finance with the R statistical 
+  computing environment.
+base_url: https://beta.rstudioconnect.com/content/3776/
+navbar:
+  logo: images/rstudio.png
+  right:
+    - text: "Home"
+      href: index.html
+    - text: "About"
+      href: about.html
+    - text: "Contributors"
+      href: contributors.html
+    - icon: fa fa-rss
+      href: index.xml
+output: radix::radix_article
 ```
+
+Note that we've also added a feed icon to the right side of the menu bar which makes it easy to discover and browse the RSS feed for the blog.
 
 ## Creating a post
 
 To create a post, simply create a sub-directory of the `_posts` directory and save a Radix article there. For example:
 
 ```r
-dir.create("_posts/sharpe-ratio")
+dir.create("_posts/sharpe-ratio", recursive = TRUE)
 ```
 
 Here's what `sharpe_ratio.Rmd` might look like to start with:
@@ -121,25 +148,7 @@ preview: images/sharpe-ratio.png
 ---
 ```
 
-Preview images are also used for generating [Open Graph](metadata.html#open-graph) and [Twitter Card](metadata.html#twitter-card) metadata. However, since those systems require that preview images be specified as absolute URLs, you  need to add a `base_url` field to your `_site.yml` to indicate where your site will be deployed. For example:
-
-**\_site.yml**
-
-```markup
-name: "reproducible-finance-with-r"
-title: "Reproducible Finance with R"
-base_url: https://beta.rstudioconnect.com/content/3776/
-navbar:
-  logo: images/rstudio.png
-  right:
-    - text: "Home"
-      href: index.html
-    - text: "About"
-      href: about.html
-    - text: "Contributors"
-      href: contributors.html
-output: radix::radix_article
-```
+Preview images are also used for generating [Open Graph](metadata.html#open-graph) and [Twitter Card](metadata.html#twitter-card) metadata. However, since those systems require that preview images be specified as absolute URLs, you also need to add a `base_url` field to your `_site.yml` file as describe above in [Getting Started].
 
 
 ## Building the site
