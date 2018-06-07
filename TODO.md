@@ -1,8 +1,10 @@
 
 
-- Document include/exclude resources for posts
+- Add content:encoded tag with description + image (test with feedly)
+- Add author tag?
+- Add categories tag?
 
-- deploySite(render = "local") removes feed xml file
+- Document include/exclude resources for posts
 
 - URLs generated from directories with spaces in them
 
