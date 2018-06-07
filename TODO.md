@@ -1,12 +1,5 @@
 
 
-- Add content:encoded tag with description + image (test with feedly)
-- Add author tag?
-- Add categories tag?
-
-- Document include/exclude resources for posts
-
-- URLs generated from directories with spaces in them
 
 - Implement dependency sharing
 

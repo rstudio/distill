@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<rss xmlns:atom="http://www.w3.org/2005/Atom" xmlns:media="http://search.yahoo.com/mrss/" version="2.0">
+<rss xmlns:atom="http://www.w3.org/2005/Atom" xmlns:media="http://search.yahoo.com/mrss/" xmlns:content="http://purl.org/rss/1.0/modules/content/" xmlns:dc="http://purl.org/dc/elements/1.1/" version="2.0">
   <channel>
     <title>Reproducible Finance with R</title>
     <link>https://beta.rstudioconnect.com/content/3776/</link>
@@ -12,43 +12,67 @@
       <link>https://beta.rstudioconnect.com/content/3776/</link>
     </image>
     <generator>Radix</generator>
-    <lastBuildDate>Thu, 07 Jun 2018 12:38:57 -0400</lastBuildDate>
+    <lastBuildDate>Thu, 07 Jun 2018 13:22:05 -0400</lastBuildDate>
     <ttl>60</ttl>
     <item>
       <title>Visualizing Asset Returns</title>
+      <dc:creator>Jonathan Regenstein</dc:creator>
       <link>https://beta.rstudioconnect.com/content/3776/posts/visualizing-asset-returns</link>
       <description>In this post we take a closer look at the individual assets which compose a portfolio. The motivation is to make sure we have scrutinized our assets before they get into our portfolio, as once the portfolio has been constructed, it is tempting to keep the analysis at the portfolio level 
 </description>
       <guid>https://beta.rstudioconnect.com/content/3776/posts/visualizing-asset-returns</guid>
       <pubDate>Thu, 09 Nov 2017 00:00:00 -0500</pubDate>
       <media:content url="https://beta.rstudioconnect.com/content/3776/posts/visualizing-asset-returns/radix-preview.png" medium="image" type="image/png" width="1152" height="576"/>
+      <content:encoded><![CDATA[<p>In this post we take a closer look at the individual assets which compose a portfolio. The motivation is to make sure we have scrutinized our assets before they get into our portfolio, as once the portfolio has been constructed, it is tempting to keep the analysis at the portfolio level 
+</p>
+<p>
+  <img src="https://beta.rstudioconnect.com/content/3776/posts/visualizing-asset-returns/radix-preview.png" width="576"/>
+</p>]]></content:encoded>
     </item>
     <item>
       <title>Asset Contribution to Portfolio Volatility</title>
+      <dc:creator>Jonathan Regenstein</dc:creator>
       <link>https://beta.rstudioconnect.com/content/3776/posts/asset-volatility</link>
       <description>In this post we explore breaking total portfolio volatility into its constituent parts and investigate how each asset contributes to the volatility.
 </description>
       <guid>https://beta.rstudioconnect.com/content/3776/posts/asset-volatility</guid>
       <pubDate>Wed, 13 Sep 2017 00:00:00 -0400</pubDate>
       <media:content url="https://beta.rstudioconnect.com/content/3776/posts/asset-volatility/radix-preview.png" medium="image" type="image/png" width="1152" height="576"/>
+      <content:encoded><![CDATA[<p>In this post we explore breaking total portfolio volatility into its constituent parts and investigate how each asset contributes to the volatility.
+</p>
+<p>
+  <img src="https://beta.rstudioconnect.com/content/3776/posts/asset-volatility/radix-preview.png" width="576"/>
+</p>]]></content:encoded>
     </item>
     <item>
       <title>Quandl and Forecasting</title>
+      <dc:creator>Jonathan Regenstein</dc:creator>
       <link>https://beta.rstudioconnect.com/content/3776/posts/quandl-and-forecasting</link>
       <description>In this post, we will explore commodity prices using data from Quandl, a repository for both free and paid data sources. We will also get into the forecasting game a bit and think about how best to use dygraphs when visualizing predicted time series as an extension of historical data.
 </description>
       <guid>https://beta.rstudioconnect.com/content/3776/posts/quandl-and-forecasting</guid>
       <pubDate>Tue, 07 Mar 2017 00:00:00 -0500</pubDate>
       <media:content url="https://beta.rstudioconnect.com/content/3776/posts/quandl-and-forecasting/preview.png" medium="image" type="image/png" width="1656" height="927"/>
+      <content:encoded><![CDATA[<p>In this post, we will explore commodity prices using data from Quandl, a repository for both free and paid data sources. We will also get into the forecasting game a bit and think about how best to use dygraphs when visualizing predicted time series as an extension of historical data.
+</p>
+<p>
+  <img src="https://beta.rstudioconnect.com/content/3776/posts/quandl-and-forecasting/preview.png" width="576"/>
+</p>]]></content:encoded>
     </item>
     <item>
       <title>The Sharpe Ratio</title>
+      <dc:creator>Jonathan Regenstein</dc:creator>
       <link>https://beta.rstudioconnect.com/content/3776/posts/sharpe-ratio</link>
       <description>In this post we present a classic finance use case using the PerformanceAnalytics, quantmod, and dygraphs packages. We'll demonstrate importing stock data, building a portfolio, and then calculating the Sharpe Ratio. 
 </description>
       <guid>https://beta.rstudioconnect.com/content/3776/posts/sharpe-ratio</guid>
       <pubDate>Wed, 09 Nov 2016 00:00:00 -0500</pubDate>
       <media:content url="https://beta.rstudioconnect.com/content/3776/posts/sharpe-ratio/preview.png" medium="image" type="image/png" width="1644" height="1014"/>
+      <content:encoded><![CDATA[<p>In this post we present a classic finance use case using the PerformanceAnalytics, quantmod, and dygraphs packages. We'll demonstrate importing stock data, building a portfolio, and then calculating the Sharpe Ratio. 
+</p>
+<p>
+  <img src="https://beta.rstudioconnect.com/content/3776/posts/sharpe-ratio/preview.png" width="576"/>
+</p>]]></content:encoded>
     </item>
   </channel>
 </rss>

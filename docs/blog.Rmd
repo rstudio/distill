@@ -122,6 +122,32 @@ draft: true
 When you are ready to publish the post, either remove the `draft` option or set it to `false`, then build the website.
 
 
+## File resources
+
+When a blog post is published, resource files located alongside the post in it's directory are also published. The following files are *not* published by default:
+
+1. Files beginning with `"."` (hidden files).
+
+2. Files beginning with `"_"`
+
+3. Files known to contain R source code (e.g. `".R"`, `".s"`, `".Rmd"`), R data (e.g. `".RData"`, `".rds"`), or configuration data (e.g. `"rsconnect"` ,`"packrat"`)).
+
+You can override this behavior using a `resources` metadata entry for your post, which can specify explicit files to `include` or `exclude`. For example (some fields excluded for brevity):
+
+```markup
+---
+title: "The Sharpe Ratio"
+description: |
+  In this post we present a classic finance use case using the
+  PerformanceAnalytics, quantmod, and dygraphs packages. 
+  We'll demonstrate importing stock data, building a portfolio,
+  and then calculating the Sharpe Ratio. 
+resources:
+  exclude:
+    *.csv    
+---
+```
+
 ## Preview thumbnail
 
 Note that the listing for our example above includes a preview image for each post. Preview thumbnail images are generated automatically based on the first plot encountered within your post. You can specify that a specific plot should be used as the preview image using the `preview` chunk option. For example:

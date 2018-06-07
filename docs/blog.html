@@ -553,6 +553,26 @@ description: |
 draft: true
 ---</code></pre>
 <p>When you are ready to publish the post, either remove the <code>draft</code> option or set it to <code>false</code>, then build the website.</p>
+<h2 id="file-resources">File resources</h2>
+<p>When a blog post is published, resource files located alongside the post in it’s directory are also published. The following files are <em>not</em> published by default:</p>
+<ol type="1">
+<li><p>Files beginning with <code>&quot;.&quot;</code> (hidden files).</p></li>
+<li><p>Files beginning with <code>&quot;_&quot;</code></p></li>
+<li><p>Files known to contain R source code (e.g. <code>&quot;.R&quot;</code>, <code>&quot;.s&quot;</code>, <code>&quot;.Rmd&quot;</code>), R data (e.g. <code>&quot;.RData&quot;</code>, <code>&quot;.rds&quot;</code>), or configuration data (e.g. <code>&quot;rsconnect&quot;</code> ,<code>&quot;packrat&quot;</code>)).</p></li>
+</ol>
+<p>You can override this behavior using a <code>resources</code> metadata entry for your post, which can specify explicit files to <code>include</code> or <code>exclude</code>. For example (some fields excluded for brevity):</p>
+<pre class="markup"><code>
+---
+title: &quot;The Sharpe Ratio&quot;
+description: |
+  In this post we present a classic finance use case using the
+  PerformanceAnalytics, quantmod, and dygraphs packages. 
+  We&#39;ll demonstrate importing stock data, building a portfolio,
+  and then calculating the Sharpe Ratio. 
+resources:
+  exclude:
+    *.csv    
+---</code></pre>
 <h2 id="preview-thumbnail">Preview thumbnail</h2>
 <p>Note that the listing for our example above includes a preview image for each post. Preview thumbnail images are generated automatically based on the first plot encountered within your post. You can specify that a specific plot should be used as the preview image using the <code>preview</code> chunk option. For example:</p>
 <pre class="clike"><code>

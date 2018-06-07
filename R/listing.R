@@ -95,6 +95,8 @@ write_feed_xml <- function(feed_xml, site_config, collection, articles) {
   feed <- xml2::xml_new_root("rss",
     "xmlns:atom" = "http://www.w3.org/2005/Atom",
     "xmlns:media" = "http://search.yahoo.com/mrss/",
+    "xmlns:content" = "http://purl.org/rss/1.0/modules/content/",
+    "xmlns:dc" = "http://purl.org/dc/elements/1.1/",
     version = "2.0"
   )
 
@@ -134,26 +136,43 @@ write_feed_xml <- function(feed_xml, site_config, collection, articles) {
 
   # add entries to channel
   for (article in articles) {
+
     # core fields
     item <- add_child(channel, "item")
     add_child(item, "title", text = article$title)
+    for (author in article$author)
+      add_child(item, "dc:creator", text = author$name)
     add_child(item, "link", text = article$base_url)
     add_child(item, "description", text = not_null(article$description, default = article$title))
     add_child(item, "guid", text = article$base_url)
     add_child(item, "pubDate", text = date_as_rfc_2822(article$published_date_rfc))
 
     # preview image
+    preview_img <- NULL
     if (!is.null(article$preview_url)) {
-      preview <- add_child(item, "media:content", attr = c(
+      # rss tag
+      media_content <- add_child(item, "media:content", attr = c(
         url = article$preview_url,
         medium = "image",
         type = mime::guess_type(article$preview_url)
       ))
       if (!is.null(article$preview_width)) {
-        xml2::xml_set_attr(preview, "width", article$preview_width)
-        xml2::xml_set_attr(preview, "height", article$preview_height)
+        xml2::xml_set_attr(media_content, "width", article$preview_width)
+        xml2::xml_set_attr(media_content, "height", article$preview_height)
       }
+
+      # html tag
+      preview_img <- img(src = article$preview_url,
+                         width = knitr::opts_chunk$get("fig.width") * 96)
     }
+
+    # content:encoded
+    content_encoded <- add_child(item, "content:encoded")
+    xml2::xml_add_child(content_encoded, xml2::xml_cdata(as.character(tagList(
+      p(article$description),
+      p(preview_img)
+    ))))
+
   }
 
   # write the feed file
