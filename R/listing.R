@@ -137,7 +137,7 @@ write_feed_xml <- function(feed_xml, site_config, collection, articles) {
     # core fields
     item <- add_child(channel, "item")
     add_child(item, "title", text = article$title)
-    add_child(item, "link", attr = c(href = article$base_url))
+    add_child(item, "link", text = article$base_url)
     add_child(item, "description", text = not_null(article$description, default = article$title))
     add_child(item, "guid", text = article$base_url)
     add_child(item, "pubDate", text = date_as_rfc_2822(article$published_date_rfc))
