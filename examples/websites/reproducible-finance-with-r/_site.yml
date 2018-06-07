@@ -14,6 +14,8 @@ navbar:
       href: about.html
     - text: "Contributors"
       href: contributors.html
+    - icon: fa fa-rss
+      href: index.xml
 output: radix::radix_article
 
 

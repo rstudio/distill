@@ -99,9 +99,22 @@ radix_article <- function(fig_width = 6,
       auto_preview = !self_contained
     )
 
-    # if this is a listing then set the layout variable
-    if (!is.null(metadata$listing))
+    # special handling for listing pages
+    listing <- list()
+    if (!is.null(metadata$listing)) {
+
+      # resolving listing feed and html
+      listing <- resolve_listing(input_file, site_config, metadata)
+
+      # indicate we are are using a listing layout
       args <- c(args, pandoc_variable_arg("layout", "listing"))
+
+      # forward feed_url if we generated a feed
+      if (!is.null(listing$feed))
+        args <- c(args,
+          pandoc_variable_arg("feed", url_path(site_config$base_url, listing$feed))
+      )
+    }
 
     # add html dependencies
     knitr::knit_meta_add(list(
@@ -113,9 +126,6 @@ radix_article <- function(fig_width = 6,
 
     # add navbar related dependencies
     ensure_navbar_dependencies(site_config, dirname(input_file))
-
-    # resolve any article listing (produces rss feed and returns listing content)
-    listing_html <- resolve_listing(input_file, site_config, metadata)
 
     # header includes: radix then user
     in_header <- c(metadata_in_header(site_config, metadata, self_contained),
@@ -129,7 +139,7 @@ radix_article <- function(fig_width = 6,
                      navigation_before_body_file(site_config),
                      site_before_body_file(site_config),
                      includes$before_body,
-                     listing_html)
+                     listing$html)
 
     # after body includes: user then radix
     after_body <- c(includes$after_body,

@@ -1,34 +1,33 @@
 
 
 resolve_listing <- function(input_file, site_config, metadata) {
+  # determine/validate collection
+  collection <- metadata$listing$collection
+  if (is.null(collection))
+    stop("You must specify a collection for listing pages", call. = FALSE)
 
-  if(!is.null(metadata$listing)) {
+  # validate that the collection exists
+  site_dir <- dirname(input_file)
+  as_collection_dir(site_dir, collection)
 
-    # determine/validate collection
-    collection <- metadata$listing$collection
-    if (is.null(collection))
-      stop("You must specify a collection for listing pages", call. = FALSE)
+  # get the collection and article metadata
+  collection <- site_collections(site_dir, site_config)[[collection]]
+  articles <- article_listing(site_dir, collection)
 
-    # validate that the collection exists
-    site_dir <- dirname(input_file)
-    as_collection_dir(site_dir, collection)
+  # generate feed and write it
+  feed_xml <- file_with_ext(input_file, "xml")
+  feed_xml <- write_feed_xml(feed_xml, site_config, collection, articles)
 
-    # get the collection and article metadata
-    collection <- site_collections(site_dir, site_config)[[collection]]
-    articles <- article_listing(site_dir, collection)
+  # generate html
+  articles <- article_listing(input_as_dir(input_file), collection)
+  listing_html <- article_listing_html(collection, articles)
+  html <- html_file(listing_html)
 
-    # generate feed and write it
-    write_feed_xml(input_file, site_config, collection, articles)
-
-    # generate html and return it
-    articles <- article_listing(input_as_dir(input_file), collection)
-    listing_html <- article_listing_html(collection, articles)
-    html_file(listing_html)
-
-
-  } else {
-    NULL
-  }
+  # return feed and listing html
+  list(
+    feed = feed_xml,
+    html = html
+  )
 }
 
 
@@ -76,24 +75,21 @@ article_listing_html <- function(collection, articles) {
 }
 
 
-write_feed_xml <- function(input_file, site_config, collection, articles) {
+write_feed_xml <- function(feed_xml, site_config, collection, articles) {
 
   # we can't write an rss feed if there is no base_url
   if (is.null(site_config$base_url)) {
     rendering_note("Not creating feed for", collection$name,
                    "(no base_url defined for site)")
-    return()
+    return(NULL)
   }
 
   # we can't write an rss feed if there is no description
   if (is.null(collection$description)) {
     rendering_note("Not creating feed for", collection$name,
                    "(no description provided)")
-    return()
+    return(NULL)
   }
-
-  # compute feed xml filename
-  feed_xml <- file_with_ext(input_file, "xml")
 
   # create document root
   feed <- xml2::xml_new_root("rss",
@@ -160,14 +156,11 @@ write_feed_xml <- function(input_file, site_config, collection, articles) {
     }
   }
 
-
-
   # write the feed file
-  feed_path <- file.path(dirname(input_file), feed_xml)
-  xml2::write_xml(feed, feed_path)
+  xml2::write_xml(feed, feed_xml)
 
   # track the output (for moving to the _site directory later)
-  add_site_output(feed_path)
+  add_site_output(feed_xml)
 
 }
 

@@ -7,6 +7,9 @@
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <meta http-equiv="X-UA-Compatible" content="IE=Edge,chrome=1"/>
   <meta name="generator" content="radix" />
+$if(feed)$
+  <link rel="alternate" type="application/rss+xml" href="$feed$" />
+$endif$
 
   <style type="text/css">
   /* Hide doc at startup (prevent jankiness while JS renders/transforms) */
