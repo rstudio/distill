@@ -18,7 +18,7 @@ resolve_listing <- function(input_file, site_config, metadata) {
     articles <- article_listing(site_dir, collection)
 
     # generate feed and write it
-    write_feed_feed(input_file, site_config, collection, articles)
+    write_feed_xml(input_file, site_config, collection, articles)
 
     # generate html and return it
     articles <- article_listing(input_as_dir(input_file), collection)
@@ -75,20 +75,31 @@ article_listing_html <- function(collection, articles) {
   div(class = "posts-list l-page", articles_html)
 }
 
-write_feed_feed <- function(input_file, site_config, collection, articles) {
 
-  # we can't write an feed feed if there is no base_url
+write_feed_xml <- function(input_file, site_config, collection, articles) {
+
+  # we can't write an rss feed if there is no base_url
   if (is.null(site_config$base_url)) {
     rendering_note("Not creating feed for", collection$name,
                    "(no base_url defined for site)")
     return()
   }
 
+  # we can't write an rss feed if there is no description
+  if (is.null(collection$description)) {
+    rendering_note("Not creating feed for", collection$name,
+                   "(no description provided)")
+    return()
+  }
+
+  # compute feed xml filename
+  feed_xml <- file_with_ext(input_file, "xml")
+
   # create document root
-  feed <- xml2::xml_new_root("feed",
-    version = "2.0",
+  feed <- xml2::xml_new_root("rss",
     "xmlns:atom" = "http://www.w3.org/2005/Atom",
-    "xmlns:media" = "http://search.yahoo.com/mrss/"
+    "xmlns:media" = "http://search.yahoo.com/mrss/",
+    version = "2.0"
   )
 
   # helper to add a child element
@@ -107,24 +118,52 @@ write_feed_feed <- function(input_file, site_config, collection, articles) {
       add_child(channel, name, text = collection[[name]])
   }
   add_channel_attribute("title")
+  add_child(channel, "link", text = site_config$base_url)
+  add_child(channel, "atom:link", attr = c(
+    href = url_path(site_config$base_url, feed_xml),
+    rel = "self",
+    type = "application/rss+xml")
+  )
   add_channel_attribute("description")
-
-
+  if (!is.null(site_config$favicon)) {
+    image <- add_child(channel, "image")
+    add_child(image, "title", text = site_config$title)
+    add_child(image, "url", text = url_path(site_config$base_url, site_config$favicon))
+    add_child(image, "link", text = site_config$base_url)
+  }
+  add_channel_attribute("copyright")
+  add_child(channel, "generator", text = "Radix")
+  add_child(channel, "lastBuildDate", text = date_as_rfc_2822(Sys.time()))
+  add_child(channel, "ttl", text = not_null(collection$ttl, "60"))
 
   # add entries to channel
   for (article in articles) {
+    # core fields
+    item <- add_child(channel, "item")
+    add_child(item, "title", text = article$title)
+    add_child(item, "link", attr = c(href = article$base_url))
+    add_child(item, "description", text = not_null(article$description, default = article$title))
+    add_child(item, "guid", text = article$base_url)
+    add_child(item, "pubDate", text = date_as_rfc_2822(article$published_date_rfc))
 
-    entry <- add_child(channel, "entry")
-    add_child(entry, "title", text = article$title)
-    add_child(entry, "summary", text = article$description)
-    add_child(entry, "link", attr = c(href = article$base_url))
-    add_child(entry, "id", text = article$base_url)
+    # preview image
+    if (!is.null(article$preview_url)) {
+      preview <- add_child(item, "media:content", attr = c(
+        url = article$preview_url,
+        medium = "image",
+        type = mime::guess_type(article$preview_url)
+      ))
+      if (!is.null(article$preview_width)) {
+        xml2::xml_set_attr(preview, "width", article$preview_width)
+        xml2::xml_set_attr(preview, "height", article$preview_height)
+      }
+    }
   }
 
 
 
   # write the feed file
-  feed_path <- file.path(dirname(input_file), file_with_ext(input_file, "xml"))
+  feed_path <- file.path(dirname(input_file), feed_xml)
   xml2::write_xml(feed, feed_path)
 
   # track the output (for moving to the _site directory later)

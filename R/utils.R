@@ -52,6 +52,10 @@ date_as_iso_8601 <- function(date, date_only = FALSE) {
   }
 }
 
+date_as_rfc_2822 <- function(date) {
+  as.character(date, format = "%a, %d %b %Y %H:%M:%S %z")
+}
+
 is_file_type <- function(file, type) {
   identical(tolower(tools::file_ext(file)), type)
 }
@@ -71,6 +75,14 @@ file_with_meta_ext <- function(file, meta_ext, ext = tools::file_ext(file)) {
 
 normalize_base_url <- function(url) {
   sub("/+$", "", url)
+}
+
+url_path <- function(base_url, ...) {
+  file.path(normalize_base_url(base_url), ..., fsep = "/")
+}
+
+is_url <- function(x) {
+  grepl("^https?://", x)
 }
 
 

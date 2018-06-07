@@ -3,6 +3,8 @@
 
 - URLs generated from directories with spaces in them
 
+- Implement dependency sharing
+
 - index/category/archive pages (categories should be inline)
 - email subscription (http://www.wpbeginner.com/opinion/stop-using-feedburner-move-to-feedburner-alternatives/)
 - google analytics 
@@ -17,7 +19,7 @@
 
 - Add some citations to sample posts
 
-
+- Light box figures
 
 - larger scale visualization layouts
     - iframe with npr library (pym.js) for sizing (generic) (check with shinyapps.io)

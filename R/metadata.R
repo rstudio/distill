@@ -50,7 +50,7 @@ transform_metadata <- function(file, site_config, collection_config, metadata, a
       normalize_path(file)
     )
     file_relative <- sub("^_", "", file_relative)
-    metadata$base_url <- file.path(base_url, dirname(file_relative))
+    metadata$base_url <- url_path(base_url, dirname(file_relative))
   }
 
   # mergable metadata
@@ -76,11 +76,6 @@ transform_metadata <- function(file, site_config, collection_config, metadata, a
 
   if (!is.null(metadata$date)) {
 
-    # derived date fields (used for citations)
-    rfc_date <- function(date) {
-      format.POSIXct(date, "%a, %d %b %Y %H:%M:%OS %z")
-    }
-
     metadata$published_year <- format(metadata$date, "%Y")
     months <- c('Jan.', 'Feb.', 'March', 'April', 'May', 'June',
                 'July', 'Aug.', 'Sept.', 'Oct.', 'Nov.', 'Dec.')
@@ -88,9 +83,9 @@ transform_metadata <- function(file, site_config, collection_config, metadata, a
     metadata$published_day <- as.integer(format(metadata$date, "%d"))
     metadata$published_month_padded <- format(metadata$date, "%m")
     metadata$published_day_padded <- format(metadata$date, "%d")
-    metadata$published_date_rfc <- rfc_date(metadata$date)
+    metadata$published_date_rfc <- date_as_rfc_2822(metadata$date)
     if (!is.null(metadata$updated))
-      metadata$updated_date_rfc <- rfc_date(metadata$updated)
+      metadata$updated_date_rfc <- date_as_rfc_2822(metadata$updated)
     metadata$published_iso_date_only <- date_as_iso_8601(metadata$date, date_only = TRUE)
   }
 
@@ -132,7 +127,7 @@ transform_metadata <- function(file, site_config, collection_config, metadata, a
   # file based preview image
   if (!is.null(metadata$preview)) {
 
-    if (grepl("^https?://", metadata$preview)) {
+    if (is_url(metadata$preview)) {
 
       metadata$preview_url <- metadata$preview
 
@@ -158,7 +153,7 @@ transform_metadata <- function(file, site_config, collection_config, metadata, a
         }
 
         # resolve preview url
-        metadata$preview_url <- file.path(metadata$base_url, metadata$preview)
+        metadata$preview_url <- url_path(metadata$base_url, metadata$preview)
       }
 
     }
@@ -688,7 +683,7 @@ resolve_preview <- function(file) {
     img_src <- matches[[1]][[2]]
 
     # if it's a url then use it
-    if (grepl("^https?://", img_src)) {
+    if (is_url(img_src)) {
       img_src
     }
 

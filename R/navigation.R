@@ -84,7 +84,7 @@ navigation_before_body_html <- function(site_config, offset) {
   offset_href <- function(href) {
     if (is.null(href))
       NULL
-    else if (!is.null(offset) && !grepl("^https?://", href))
+    else if (!is.null(offset) && !is_url(href))
       file.path(offset, href)
     else
       href

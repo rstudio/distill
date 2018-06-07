@@ -328,6 +328,7 @@ site_collections <- function(site_dir, site_config) {
     }
     inherit_prop("title")
     inherit_prop("description")
+    inherit_prop("copyright")
     collection
   })
 
