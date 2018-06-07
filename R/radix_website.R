@@ -101,7 +101,7 @@ remove_site_outputs <- function() {
   }, add = TRUE)
 
   if (.site_outputs$output_dir != ".")
-    file.remove(.site_outputs$files)
+    lapply(.site_outputs$files, file.remove)
 }
 
 

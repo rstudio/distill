@@ -18,7 +18,7 @@ resolve_listing <- function(input_file, site_config, metadata) {
     articles <- article_listing(site_dir, collection)
 
     # generate feed and write it
-    write_rss_feed(input_file, site_config, collection, articles)
+    write_feed_feed(input_file, site_config, collection, articles)
 
     # generate html and return it
     articles <- article_listing(input_as_dir(input_file), collection)
@@ -75,26 +75,33 @@ article_listing_html <- function(collection, articles) {
   div(class = "posts-list l-page", articles_html)
 }
 
-write_rss_feed <- function(input_file, site_config, collection, articles) {
+write_feed_feed <- function(input_file, site_config, collection, articles) {
+
+  # we can't write an feed feed if there is no base_url
+  if (is.null(site_config$base_url)) {
+    rendering_note("Not creating feed for", collection$name,
+                   "(no base_url defined for site)")
+    return()
+  }
 
   # create document root
-  rss <- xml2::xml_new_root("rss",
+  feed <- xml2::xml_new_root("feed",
     version = "2.0",
     "xmlns:atom" = "http://www.w3.org/2005/Atom",
     "xmlns:media" = "http://search.yahoo.com/mrss/"
   )
 
   # helper to add a child element
-  add_child <- function(node, tag, attribs = c(), text = NULL, optional = FALSE) {
+  add_child <- function(node, tag, attr = c(), text = NULL, optional = FALSE) {
     child <- xml2::xml_add_child(node, tag)
-    xml2::xml_set_attrs(child, attribs)
+    xml2::xml_set_attrs(child, attr)
     if (!is.null(text))
       xml2::xml_text(child) <- text
     child
   }
 
   # create channel
-  channel <- xml2::xml_add_child(rss, "channel")
+  channel <- xml2::xml_add_child(feed, "channel")
   add_channel_attribute <- function(name) {
     if (!is.null(collection[[name]]))
       add_child(channel, name, text = collection[[name]])
@@ -103,14 +110,25 @@ write_rss_feed <- function(input_file, site_config, collection, articles) {
   add_channel_attribute("description")
 
 
-  item <- add_child(channel, "item")
 
-  # write the rss file
-  rss_path <- file.path(dirname(input_file), file_with_ext(input_file, "xml"))
-  xml2::write_xml(rss, rss_path)
+  # add entries to channel
+  for (article in articles) {
+
+    entry <- add_child(channel, "entry")
+    add_child(entry, "title", text = article$title)
+    add_child(entry, "summary", text = article$description)
+    add_child(entry, "link", attr = c(href = article$base_url))
+    add_child(entry, "id", text = article$base_url)
+  }
+
+
+
+  # write the feed file
+  feed_path <- file.path(dirname(input_file), file_with_ext(input_file, "xml"))
+  xml2::write_xml(feed, feed_path)
 
   # track the output (for moving to the _site directory later)
-  add_site_output(rss_path)
+  add_site_output(feed_path)
 
 }
 

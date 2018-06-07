@@ -1,9 +1,36 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<rss xmlns:atom="http://www.w3.org/2005/Atom" xmlns:media="http://search.yahoo.com/mrss/" version="2.0">
+<feed xmlns:atom="http://www.w3.org/2005/Atom" xmlns:media="http://search.yahoo.com/mrss/" version="2.0">
   <channel>
     <title>Reproducible Finance with R</title>
     <description>Exploring reproducible finance with the R statistical computing environment.
 </description>
-    <item/>
+    <entry>
+      <title>Visualizing Asset Returns</title>
+      <summary>In this post we take a closer look at the individual assets which compose a portfolio. The motivation is to make sure we have scrutinized our assets before they get into our portfolio, as once the portfolio has been constructed, it is tempting to keep the analysis at the portfolio level 
+</summary>
+      <link href="https://beta.rstudioconnect.com/content/3776/posts/visualizing-asset-returns"/>
+      <id>https://beta.rstudioconnect.com/content/3776/posts/visualizing-asset-returns</id>
+    </entry>
+    <entry>
+      <title>Asset Contribution to Portfolio Volatility</title>
+      <summary>In this post we explore breaking total portfolio volatility into its constituent parts and investigate how each asset contributes to the volatility.
+</summary>
+      <link href="https://beta.rstudioconnect.com/content/3776/posts/asset-volatility"/>
+      <id>https://beta.rstudioconnect.com/content/3776/posts/asset-volatility</id>
+    </entry>
+    <entry>
+      <title>Quandl and Forecasting</title>
+      <summary>In this post, we will explore commodity prices using data from Quandl, a repository for both free and paid data sources. We will also get into the forecasting game a bit and think about how best to use dygraphs when visualizing predicted time series as an extension of historical data.
+</summary>
+      <link href="https://beta.rstudioconnect.com/content/3776/posts/quandl-and-forecasting"/>
+      <id>https://beta.rstudioconnect.com/content/3776/posts/quandl-and-forecasting</id>
+    </entry>
+    <entry>
+      <title>The Sharpe Ratio</title>
+      <summary>In this post we present a classic finance use case using the PerformanceAnalytics, quantmod, and dygraphs packages. We'll demonstrate importing stock data, building a portfolio, and then calculating the Sharpe Ratio. 
+</summary>
+      <link href="https://beta.rstudioconnect.com/content/3776/posts/sharpe-ratio"/>
+      <id>https://beta.rstudioconnect.com/content/3776/posts/sharpe-ratio</id>
+    </entry>
   </channel>
-</rss>
+</feed>

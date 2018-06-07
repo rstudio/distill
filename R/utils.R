@@ -170,3 +170,7 @@ knitr_cache_dir <- function(file, pandoc_to) {
 }
 
 
+rendering_note <- function(...) {
+  cat("NOTE:", paste(..., collapse = " "), "\n\n", file = stderr())
+}
+

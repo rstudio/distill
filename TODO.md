@@ -1,6 +1,8 @@
 
 - Document include/exclude resources for posts
 
+- URLs generated from directories with spaces in them
+
 - index/category/archive pages (categories should be inline)
 - email subscription (http://www.wpbeginner.com/opinion/stop-using-feedburner-move-to-feedburner-alternatives/)
 - google analytics 
