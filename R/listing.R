@@ -166,12 +166,13 @@ write_feed_xml <- function(feed_xml, site_config, collection, articles) {
                          width = knitr::opts_chunk$get("fig.width") * 96)
     }
 
-    # content:encoded
-    content_encoded <- add_child(item, "content:encoded")
-    xml2::xml_add_child(content_encoded, xml2::xml_cdata(as.character(tagList(
-      p(article$description),
-      p(preview_img)
-    ))))
+    # content:encoded (commented out b/c most feed readers seem to more or less
+    # synthesize this from description + media:content)
+    # content_encoded <- add_child(item, "content:encoded")
+    # xml2::xml_add_child(content_encoded, xml2::xml_cdata(as.character(tagList(
+    #   p(article$description),
+    #   p(preview_img)
+    # ))))
 
   }
 
