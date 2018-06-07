@@ -42,15 +42,15 @@ radix_website <- function(input, encoding = getOption("encoding"), ...) {
       write_collections_metadata(input, collections)
       on.exit(remove_collections_metadata(input, collections), add = TRUE)
 
+      # track site outputs (for moving to the output_dir)
+      track_site_outputs(config$output_dir)
+      on.exit(remove_site_outputs(), add = TRUE)
+
       # delegate to default site generator
       result <- default$render(input_file, output_format, envir, quiet, encoding, ...)
 
       # render collections to the output directory
       render_collections(input, config, collections, quiet)
-
-      # remove any feed xml if output_dir isn't "."
-      # TODO
-
 
       # return result
       result
@@ -78,3 +78,32 @@ radix_website <- function(input, encoding = getOption("encoding"), ...) {
     }
   )
 }
+
+
+.site_outputs <- new.env(parent = emptyenv())
+.site_outputs$files <- c()
+.site_outputs$output_dir <- NULL
+
+track_site_outputs <- function(output_dir) {
+  .site_outputs$files <- c()
+  .site_outputs$output_dir <- output_dir
+}
+
+add_site_output <- function(file) {
+  .site_outputs$files <- c(.site_outputs$files, file)
+}
+
+remove_site_outputs <- function() {
+
+  on.exit({
+    .site_outputs$files <- c()
+    .site_outputs$output_dir <- NULL
+  }, add = TRUE)
+
+  if (.site_outputs$output_dir != ".")
+    file.remove(.site_outputs$files)
+}
+
+
+
+

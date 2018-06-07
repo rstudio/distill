@@ -1,4 +1,5 @@
 
+- Document include/exclude resources for posts
 
 - index/category/archive pages (categories should be inline)
 - email subscription (http://www.wpbeginner.com/opinion/stop-using-feedburner-move-to-feedburner-alternatives/)

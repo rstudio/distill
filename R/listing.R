@@ -109,6 +109,9 @@ write_rss_feed <- function(input_file, site_config, collection, articles) {
   rss_path <- file.path(dirname(input_file), file_with_ext(input_file, "xml"))
   xml2::write_xml(rss, rss_path)
 
+  # track the output (for moving to the _site directory later)
+  add_site_output(rss_path)
+
 }
 
 
