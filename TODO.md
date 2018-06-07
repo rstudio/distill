@@ -1,5 +1,9 @@
 
+- Document feed generation
+
 - Document include/exclude resources for posts
+
+- deploySite(render = "local") removes feed xml file
 
 - URLs generated from directories with spaces in them
 
