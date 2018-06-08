@@ -67,11 +67,15 @@ radix_article <- function(fig_width = 6,
   knitr_options$knit_hooks <- list()
   knitr_options$knit_hooks$chunk <- knitr_chunk_hook()
 
-  # shared site_config
+  # shared site_config and encoding
   site_config <- NULL
+  encoding <- NULL
 
   # post-knit
   post_knit <- function(metadata, input_file, runtime, encoding, ...) {
+
+    # save encoding
+    encoding <<- encoding
 
     # pandoc args
     args <- c()
@@ -175,6 +179,7 @@ radix_article <- function(fig_width = 6,
     clean_supporting = self_contained,
     post_knit = post_knit,
     pre_processor = pre_processor,
+    post_processor = render_collection_article_post_processor(function() encoding),
     on_exit = validate_rstudio_version,
     base_format = html_document_base(
       smart = smart,

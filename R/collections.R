@@ -126,6 +126,49 @@ render_collection <- function(site_dir, site_config, collection,
 }
 
 
+render_collection_article_post_processor <- function(encoding_fn) {
+
+  function(metadata, input_file, output_file, clean, verbose) {
+
+    # resolve encoding
+    encoding <- encoding_fn()
+
+    # is the input file at the top level of a site? if it is then no post processing
+    site_config <- site_config(input_file, encoding)
+    if (!is.null(site_config))
+      return(output_file)
+
+    # is the input file in a site? if not then no post processing
+    site_dir <- find_site_dir(input_file)
+    if (is.null(site_dir))
+      return(output_file)
+
+    # get the site config
+    site_config <- site_config(site_dir, encoding)
+
+    # is this file in a collection? if not then no post processing
+    collections <- site_collections(site_dir, site_config)
+    input_file_relative <- rmarkdown::relative_to(
+      normalize_path(site_dir),
+      normalize_path(input_file)
+    )
+    in_collection <- any(startsWith(input_file_relative, paste0("_", names(collections), "/")))
+    if (!in_collection)
+      return(ouput_file)
+
+    # TODO: render the article into the collection
+
+    #  - need to transform_metadata first
+    #  - then call render_collection_article
+    #  - then update indexes (perhaps w/ callr?)
+
+    output_file
+
+
+  }
+}
+
+
 render_collection_article <- function(site_dir, site_config, article,
                                       navigation_html = navigation_html_generator(),
                                       site_includes = site_includes(site_dir, site_config),
@@ -216,6 +259,8 @@ render_collection_article <- function(site_dir, site_config, article,
   # write content
   writeLines(index_content, index_html, useBytes = TRUE)
 
+  # return path to rendered article
+  index_html
 }
 
 apply_site_libs <- function(index_content, article_path, site_libs, offset) {
