@@ -1,11 +1,15 @@
 
 
+- file.path (sep = "/")
 
-- Implement dependency sharing (just grep for _files dirs that aren't figures and copy)
+- why are there 2 font awesomes in site libs?
 
 - Consider incremental rendering (callr for index page?)
 
 - No manifest for self_contained
+- Force self_contained for collections?
+
+- Encourage/document date prefix for post names
 
 - index/category/archive pages (categories should be inline)
 - email subscription (http://www.wpbeginner.com/opinion/stop-using-feedburner-move-to-feedburner-alternatives/)
@@ -14,6 +18,8 @@
 - search
 - rstudio addins/templates/projects for article creation
    - Created with link in footer
+
+- lang in RSS feed
 
 - built-in social buttons
 

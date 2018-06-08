@@ -172,6 +172,10 @@ render_collections <- function(site_dir, site_config, collections, quiet = FALSE
       index_content <- apply_site_include(index_content, "before_body")
       index_content <- apply_site_include(index_content, "after_body")
 
+      # resolve site_libs
+      site_libs <- file.path(site_dir, site_config$output_dir, "site_libs")
+      index_content <- apply_site_libs(index_content, article_html, site_libs, offset)
+
       # write content
       writeLines(index_content, index_html, useBytes = TRUE)
     }
@@ -180,6 +184,33 @@ render_collections <- function(site_dir, site_config, collections, quiet = FALSE
       cat("\n")
   }
 }
+
+apply_site_libs <- function(index_content, article_path, site_libs, offset) {
+
+  # find _files directories referenced from script and link tags
+  files_dir <- knitr_files_dir(basename(article_path))
+  pattern <- sprintf('((?:<script src=|<link href=)")(%s)(/[^/]+/)', files_dir)
+  match <- gregexpr(pattern, index_content, useBytes = TRUE)
+  dirs <- sapply(strsplit(regmatches(index_content, match)[[1]], split = "/"), `[[`, 2)
+  dirs <- unique(dirs)
+
+  # move the directories to site_libs as necessary
+  for (dir in dirs) {
+    article_lib_dir <- file.path(dirname(article_path), files_dir, dir)
+    site_lib_dir <- file.path(site_libs, dir)
+    if (!dir_exists(site_lib_dir))
+      file.rename(article_lib_dir, site_lib_dir)
+    else
+      unlink(article_lib_dir, recursive = TRUE)
+  }
+
+  # fixup html
+  gsub(pattern,
+       sprintf("\\1%s/%s\\3", offset, basename(site_libs)),
+       index_content,
+       useBytes = TRUE)
+}
+
 
 discover_article <- function(article_dir) {
 
