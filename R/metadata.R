@@ -43,7 +43,7 @@ transform_metadata <- function(file, site_config, collection_config, metadata, a
   # if the site has a base_url then we need to tweak the base url of the
   # input document to use the site
   if (!is.null(site_config[["base_url"]])) {
-    base_url <- normalize_base_url(site_config$base_url)
+    base_url <- strip_trailing_slash(site_config$base_url)
     site_dir <- find_site_dir(file)
     file_relative <- rmarkdown::relative_to(
       normalize_path(site_dir),
@@ -122,7 +122,7 @@ transform_metadata <- function(file, site_config, collection_config, metadata, a
 
   # base_url (strip trailing slashes)
   if (!is.null(metadata$base_url))
-    metadata$base_url <- normalize_base_url(metadata$base_url)
+    metadata$base_url <- strip_trailing_slash(metadata$base_url)
 
   # if there is no preview see if we can impute one from preview=TRUE on a chunk
   if (is.null(metadata$preview) && auto_preview)

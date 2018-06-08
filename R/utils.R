@@ -73,12 +73,14 @@ file_with_meta_ext <- function(file, meta_ext, ext = tools::file_ext(file)) {
         ".", meta_ext, ".", ext, sep = "")
 }
 
-normalize_base_url <- function(url) {
+strip_trailing_slash <- function(url) {
   sub("/+$", "", url)
 }
 
-url_path <- function(base_url, ...) {
-  file.path(normalize_base_url(base_url), ..., fsep = "/")
+url_path <- function(...) {
+  args <- lapply(list(...), strip_trailing_slash)
+  args$fsep <- "/"
+  do.call(file.path, args)
 }
 
 is_url <- function(x) {

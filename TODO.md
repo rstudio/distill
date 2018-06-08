@@ -1,6 +1,5 @@
 
 
-- file.path (sep = "/")
 
 - why are there 2 font awesomes in site libs?
 
@@ -8,6 +7,7 @@
 
 - No manifest for self_contained
 - Force self_contained for collections?
+- Shared site_libs break resource manifest? (unless we deploy them as well)
 
 - Encourage/document date prefix for post names
 
