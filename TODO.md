@@ -1,7 +1,11 @@
 
 
 
-- Implement dependency sharing
+- Implement dependency sharing (just grep for _files dirs that aren't figures and copy)
+
+- Consider incremental rendering (callr for index page?)
+
+- No manifest for self_contained
 
 - index/category/archive pages (categories should be inline)
 - email subscription (http://www.wpbeginner.com/opinion/stop-using-feedburner-move-to-feedburner-alternatives/)
