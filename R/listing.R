@@ -131,8 +131,15 @@ write_feed_xml <- function(feed_xml, site_config, collection, articles) {
   }
   add_channel_attribute("copyright")
   add_child(channel, "generator", text = "Radix")
-  add_child(channel, "lastBuildDate", text = date_as_rfc_2822(Sys.time()))
-  add_child(channel, "ttl", text = not_null(collection$ttl, "60"))
+
+  # last build date is date of most recent article (or now if no articles)
+  last_build_date <- NULL
+  if (length(articles) > 0)
+    last_build_date <- articles[[1]]$published_date_rfc
+  if (is.null(last_build_date))
+    last_build_date <- date_as_rfc_2822(Sys.time())
+  add_child(channel, "lastBuildDate", text = last_build_date)
+
 
   # add entries to channel
   for (article in articles) {
@@ -145,7 +152,7 @@ write_feed_xml <- function(feed_xml, site_config, collection, articles) {
     add_child(item, "link", text = article$base_url)
     add_child(item, "description", text = not_null(article$description, default = article$title))
     add_child(item, "guid", text = article$base_url)
-    add_child(item, "pubDate", text = date_as_rfc_2822(article$published_date_rfc))
+    add_child(item, "pubDate", text = article$published_date_rfc)
 
     # preview image
     preview_img <- NULL
