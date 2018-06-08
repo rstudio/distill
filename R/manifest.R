@@ -1,9 +1,9 @@
 
 
 
-manifest_in_header <- function(site_config, input_file, metadata) {
+manifest_in_header <- function(site_config, input_file, metadata, self_contained) {
 
-  if (is_standalone_article(site_config)) {
+  if (is_standalone_article(site_config) && !self_contained) {
 
     # get optional lists of includes/excludes
     resources <- metadata$resources

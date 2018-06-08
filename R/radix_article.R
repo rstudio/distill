@@ -131,7 +131,7 @@ radix_article <- function(fig_width = 6,
     in_header <- c(metadata_in_header(site_config, metadata, self_contained),
                    citation_references_in_header(input_file, metadata$bibliography),
                    metadata_json,
-                   manifest_in_header(site_config, input_file, metadata),
+                   manifest_in_header(site_config, input_file, metadata, self_contained),
                    navigation_in_header_file(site_config))
 
     # before body includes: radix then user
