@@ -53,15 +53,15 @@ transform_metadata <- function(file, site_config, collection_config, metadata, a
     metadata$base_url <- url_path(base_url, dirname(file_relative))
   }
 
-  # mergable metadata
-  mergeable_metadata <- c("base_url", "repository_url",
-                          "creative_commons", "twitter", "favicon")
+  # helper to extract mergable metadata
+  mergeable <- function(config) {
+    config <- config[c("base_url", "repository_url",
+                       "creative_commons", "twitter", "favicon")]
+    config[!is.na(names(config))]
+  }
 
   # merge collection level config into site config
-  base_config <- list()
-  for (name in mergeable_metadata)
-    base_config[[name]] <- site_config[[name]]
-  base_config <- merge_lists(base_config, collection_config)
+  base_config <- merge_lists(mergeable(site_config), mergeable(collection_config))
 
   # merge article level metadata
   metadata <- merge_lists(base_config, metadata)
