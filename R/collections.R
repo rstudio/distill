@@ -79,110 +79,126 @@ render_collections <- function(site_dir, site_config, collections, quiet = FALSE
   # site includes
   site_includes <- site_includes(site_dir, site_config)
 
-  for (collection in collections) {
+  # render all collections
+  lapply(collections, function(collection) {
+    render_collection(
+      site_dir = site_dir,
+      site_config = site_config,
+      collection = collection,
+      navigation_html = navigation_html,
+      site_includes = site_includes
+    )
+  })
 
+}
+
+render_collection <- function(site_dir, site_config, collection,
+                              navigation_html = navigation_html_generator(),
+                              site_includes = site_includes(site_dir, site_config),
+                              quiet = FALSE) {
+
+  if (!quiet)
+    cat(paste0("\nProcessing ", collection$name, ":\n"))
+
+  # remove existing output dir if it exists
+  collection_output <- file.path(site_dir,
+                                 site_config$output_dir,
+                                 collection$name)
+  if (dir_exists(collection_output))
+    unlink(collection_output, recursive = TRUE)
+
+  # process articles in collection
+  for (article in collection$articles) {
+
+    # strip site_dir prefix
+    article$path <- sub(paste0("^", site_dir, "/"), "", article$path)
+
+    # compute offset
+    offset <- collection_file_offset(article$path)
+
+    # determine the target output dir
+    output_dir <- file.path(site_dir,
+                            site_config$output_dir,
+                            sub("^_", "", dirname(article$path)))
+
+    # progress
     if (!quiet)
-      cat(paste0("\nProcessing ", collection$name, ":\n"))
+      cat(" ", dirname(article$path), "\n")
 
-    # remove existing output dir if it exists
-    collection_output <- file.path(site_dir,
-                                   site_config$output_dir,
-                                   collection$name)
-    if (dir_exists(collection_output))
-      unlink(collection_output, recursive = TRUE)
+    # create the output directory
+    dir.create(output_dir, recursive = TRUE)
 
-    # process articles in collection
-    for (article in collection$articles) {
+    # copy files to output directory
+    resources <- article$metadata$resources
+    if (!is.null(resources))
+      c(include, exclude) %<-% list(resources$include, resources$exclude)
+    else
+      c(include, exclude) %<-% list(NULL, NULL)
+    rmd_resources <- site_resources(
+      site_dir = article$dir,
+      include = include,
+      exclude = exclude
+    )
+    file.copy(from = file.path(article$dir, rmd_resources),
+              to = output_dir,
+              recursive = TRUE,
+              copy.date = TRUE)
 
-      # strip site_dir prefix
-      article$path <- sub(paste0("^", site_dir, "/"), "", article$path)
+    # rename article to index.html
+    article_html <- file.path(output_dir, basename(article$path))
+    index_html <- file.path(output_dir, "index.html")
+    if (article_html != index_html)
+      file.rename(article_html, index_html)
 
-      # compute offset
-      offset <- collection_file_offset(article$path)
+    # transform site_config and get metadata from article
+    site_config <- transform_site_config(site_config)
+    metadata <- article$metadata
 
-      # determine the target output dir
-      output_dir <- file.path(site_dir,
-                              site_config$output_dir,
-                              sub("^_", "", dirname(article$path)))
+    # read index content
+    index_content <- readChar(index_html,
+                              nchars = file.info(index_html)$size,
+                              useBytes = TRUE)
 
-      # progress
-      if (!quiet)
-        cat(" ", dirname(article$path), "\n")
+    # substitute metadata
+    metadata_html <- metadata_html(site_config, metadata, self_contained = FALSE)
+    index_content <- fill_placeholder(index_content,
+                                      "meta_tags",
+                                      as.character(metadata_html))
 
-      # create the output directory
-      dir.create(output_dir, recursive = TRUE)
+    # substitue appendices
+    appendices_html <- appendices_after_body_html(site_config, metadata)
+    index_content <- fill_placeholder(index_content,
+                                      "appendices",
+                                      as.character(appendices_html))
 
-      # copy files to output directory
-      resources <- article$metadata$resources
-      if (!is.null(resources))
-        c(include, exclude) %<-% list(resources$include, resources$exclude)
-      else
-        c(include, exclude) %<-% list(NULL, NULL)
-      rmd_resources <- site_resources(
-        site_dir = article$dir,
-        include = include,
-        exclude = exclude
-      )
-      file.copy(from = file.path(article$dir, rmd_resources),
-                to = output_dir,
-                recursive = TRUE,
-                copy.date = TRUE)
-
-      # rename article to index.html
-      article_html <- file.path(output_dir, basename(article$path))
-      index_html <- file.path(output_dir, "index.html")
-      if (article_html != index_html)
-        file.rename(article_html, index_html)
-
-      # transform site_config and get metadata from article
-      site_config <- transform_site_config(site_config)
-      metadata <- article$metadata
-
-      # read index content
-      index_content <- readChar(index_html,
-                                nchars = file.info(index_html)$size,
-                                useBytes = TRUE)
-
-      # substitute metadata
-      metadata_html <- metadata_html(site_config, metadata, self_contained = FALSE)
-      index_content <- fill_placeholder(index_content,
-                                        "meta_tags",
-                                        as.character(metadata_html))
-
-      # substitue appendices
-      appendices_html <- appendices_after_body_html(site_config, metadata)
-      index_content <- fill_placeholder(index_content,
-                                        "appendices",
-                                        as.character(appendices_html))
-
-      # substitute navigation html
-      navigation <- navigation_html(site_dir, site_config, offset)
-      apply_navigation <- function(content, context) {
-        fill_placeholder(content, paste0("navigation_", context), navigation[[context]])
-      }
-      index_content <- apply_navigation(index_content, "in_header")
-      index_content <- apply_navigation(index_content, "before_body")
-      index_content <- apply_navigation(index_content, "after_body")
-
-      # substitute site includes
-      apply_site_include <- function(content, context) {
-        fill_placeholder(content, paste0("site_", context), site_includes[[context]])
-      }
-      index_content <- apply_site_include(index_content, "in_header")
-      index_content <- apply_site_include(index_content, "before_body")
-      index_content <- apply_site_include(index_content, "after_body")
-
-      # resolve site_libs
-      site_libs <- file.path(site_dir, site_config$output_dir, "site_libs")
-      index_content <- apply_site_libs(index_content, article_html, site_libs, offset)
-
-      # write content
-      writeLines(index_content, index_html, useBytes = TRUE)
+    # substitute navigation html
+    navigation <- navigation_html(site_dir, site_config, offset)
+    apply_navigation <- function(content, context) {
+      fill_placeholder(content, paste0("navigation_", context), navigation[[context]])
     }
+    index_content <- apply_navigation(index_content, "in_header")
+    index_content <- apply_navigation(index_content, "before_body")
+    index_content <- apply_navigation(index_content, "after_body")
 
-    if (!quiet)
-      cat("\n")
+    # substitute site includes
+    apply_site_include <- function(content, context) {
+      fill_placeholder(content, paste0("site_", context), site_includes[[context]])
+    }
+    index_content <- apply_site_include(index_content, "in_header")
+    index_content <- apply_site_include(index_content, "before_body")
+    index_content <- apply_site_include(index_content, "after_body")
+
+    # resolve site_libs
+    site_libs <- file.path(site_dir, site_config$output_dir, "site_libs")
+    index_content <- apply_site_libs(index_content, article_html, site_libs, offset)
+
+    # write content
+    writeLines(index_content, index_html, useBytes = TRUE)
   }
+
+  if (!quiet)
+    cat("\n")
+
 }
 
 apply_site_libs <- function(index_content, article_path, site_libs, offset) {
