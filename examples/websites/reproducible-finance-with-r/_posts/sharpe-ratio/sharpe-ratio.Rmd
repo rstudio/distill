@@ -9,7 +9,9 @@ author:
     affiliation: RStudio
     affiliation_url: https://www.rstudio.com
 date: 11-09-2016
-output: radix::radix_article
+output: 
+  radix::radix_article:
+    self_contained: false
 ---
 
 ```{r setup, include=FALSE}

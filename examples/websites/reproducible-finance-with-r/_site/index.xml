@@ -12,7 +12,7 @@
       <link>https://beta.rstudioconnect.com/content/3776/</link>
     </image>
     <generator>Radix</generator>
-    <lastBuildDate>Thu, 07 Jun 2018 13:29:43 -0400</lastBuildDate>
+    <lastBuildDate>Fri, 08 Jun 2018 11:44:37 -0400</lastBuildDate>
     <ttl>60</ttl>
     <item>
       <title>Visualizing Asset Returns</title>
@@ -22,7 +22,7 @@
 </description>
       <guid>https://beta.rstudioconnect.com/content/3776/posts/visualizing-asset-returns</guid>
       <pubDate>Thu, 09 Nov 2017 00:00:00 -0500</pubDate>
-      <media:content url="https://beta.rstudioconnect.com/content/3776/posts/visualizing-asset-returns/radix-preview.png" medium="image" type="image/png" width="1152" height="576"/>
+      <media:content url="https://beta.rstudioconnect.com/content/3776/posts/visualizing-asset-returns/visualizing-asset-returns_files/figure-html5/unnamed-chunk-9-1.png" medium="image" type="image/png" width="1152" height="576"/>
     </item>
     <item>
       <title>Asset Contribution to Portfolio Volatility</title>
@@ -32,7 +32,7 @@
 </description>
       <guid>https://beta.rstudioconnect.com/content/3776/posts/asset-volatility</guid>
       <pubDate>Wed, 13 Sep 2017 00:00:00 -0400</pubDate>
-      <media:content url="https://beta.rstudioconnect.com/content/3776/posts/asset-volatility/radix-preview.png" medium="image" type="image/png" width="1152" height="576"/>
+      <media:content url="https://beta.rstudioconnect.com/content/3776/posts/asset-volatility/asset-volatility_files/figure-html5/unnamed-chunk-13-1.png" medium="image" type="image/png" width="1152" height="576"/>
     </item>
     <item>
       <title>Quandl and Forecasting</title>
