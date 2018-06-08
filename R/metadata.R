@@ -55,7 +55,7 @@ transform_metadata <- function(file, site_config, collection_config, metadata, a
 
   # helper to extract mergable metadata
   mergeable <- function(config) {
-    if (!is.null(config)) {
+    if (!is.null(config) && !is.null(names(config))) {
       config <- config[c("base_url", "repository_url",
                          "creative_commons", "twitter", "favicon")]
       config[!is.na(names(config))]
