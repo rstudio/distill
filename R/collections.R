@@ -160,44 +160,58 @@ render_collection_article_post_processor <- function(encoding_fn) {
     collection <- collections[[which(in_collection)]]
 
     # compute the article path
-    article_path <- file.path(site_dir, dirname(input_file_relative), output_file)
+    article_site_path <- file.path(dirname(input_file_relative), output_file)
+    article_path <- file.path(site_dir, article_site_path)
 
-    # transform metadata for site
-    metadata <- transform_metadata(
-      article_path,
-      site_config,
-      collection,
-      metadata,
-      auto_preview = TRUE
-    )
+    # if this is a draft then remove any existing output folder,
+    # otherwise proceed with rendering
+    if (isTRUE(metadata$draft)) {
 
-    # form an article object
-    article <- list(
-      path = article_path,
-      metadata = metadata
-    )
+      output_dir <- collection_article_output_dir(site_dir, site_config, article_site_path)
+      if (dir_exists(output_dir))
+        unlink(output_dir, recursive = TRUE)
 
-    # render the article
-    output_file <- render_collection_article(
-      site_dir = site_dir,
-      site_config = site_config,
-      article = article,
-      navigation_html = navigation_html_generator(),
-      site_includes = site_includes(site_dir, site_config),
-      quiet = TRUE
-    )
+      output_file
 
-    # TODO: one line difference btw incremental and site render
-    # TODO: rstudio ide change + throttle preview on that
-    # TODO: write index as json and have index page read the json
-    # TODO: update feed
-    # TODO: drafts: don't post-process for draft and remove from _site for draft
+    } else {
 
+      # transform metadata for site
+      metadata <- transform_metadata(
+        article_path,
+        site_config,
+        collection,
+        metadata,
+        auto_preview = TRUE
+      )
 
-    # return the output_file w/ an attribute indicating that
-    # base post processing should be done on both the new
-    # and original output file
-    structure(output_file, post_process_original = TRUE)
+      # form an article object
+      article <- list(
+        path = article_path,
+        metadata = metadata
+      )
+
+      # render the article
+      output_file <- render_collection_article(
+        site_dir = site_dir,
+        site_config = site_config,
+        article = article,
+        navigation_html = navigation_html_generator(),
+        site_includes = site_includes(site_dir, site_config),
+        quiet = TRUE
+      )
+
+      # TODO: one line difference btw incremental and site render
+      # TODO: rstudio ide change + throttle preview on that
+      # TODO: write index as json and have index page read the json
+      # TODO: update feed
+
+      # return the output_file w/ an attribute indicating that
+      # base post processing should be done on both the new
+      # and original output file
+      structure(output_file, post_process_original = TRUE)
+
+    }
+
   }
 }
 
@@ -207,15 +221,14 @@ render_collection_article <- function(site_dir, site_config, article,
                                       quiet = FALSE) {
 
   # strip site_dir prefix
-  article_site_path <- sub(paste0("^", site_dir, "/"), "", article$path)
+  article_site_path <- collection_article_site_path(site_dir, article$path)
+
+  # determine the target output dir
+  output_dir <- collection_article_output_dir(site_dir, site_config, article_site_path)
 
   # compute offset
   offset <- collection_file_offset(article_site_path)
 
-  # determine the target output dir
-  output_dir <- file.path(site_dir,
-                          site_config$output_dir,
-                          sub("^_", "", dirname(article_site_path)))
 
   # progress
   if (!quiet)
@@ -294,6 +307,16 @@ render_collection_article <- function(site_dir, site_config, article,
 
   # return path to rendered article
   index_html
+}
+
+collection_article_site_path <- function(site_dir, article_path) {
+  sub(paste0("^", site_dir, "/"), "", article_path)
+}
+
+collection_article_output_dir <- function(site_dir, site_config, article_site_path) {
+  file.path(site_dir,
+            site_config$output_dir,
+            sub("^_", "", dirname(article_site_path)))
 }
 
 apply_site_libs <- function(index_content, article_path, site_libs, offset) {
