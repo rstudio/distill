@@ -188,7 +188,10 @@ render_collection_article_post_processor <- function(encoding_fn) {
     )
 
     # TODO: rstudio ide change + throttle preview on that
-    # TODO: async update indexes (perhaps w/ callr?)
+    # TODO: write index as json and have index page read the json
+    # TODO: update feed
+    # TODO: drafts: don't post-process for draft and remove from _site for draft
+
 
     # return the output_file w/ an attribute indicating that
     # base post processing should be done on both the new
