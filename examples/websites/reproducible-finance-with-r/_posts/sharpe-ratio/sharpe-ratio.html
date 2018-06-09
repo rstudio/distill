@@ -91,7 +91,7 @@
 
 <div class="d-article">
 <h2 id="overview">Overview</h2>
-<p>In this post we will demonstrate the calculation of a Sharpe Ratio for a stock portfolio. We’ll start with a function that grabs monthly stock returns and saves those monthly returns as an xts object in the global environment. With that function, we will create three xts objects of monthly returns, and merge those three xts objects into one object, before passing that merged object to dygraphs to peek at the individual stocks.</p>
+<p>In this post we’ll demonstrate the calculation of a Sharpe Ratio for a stock portfolio. We’ll start with a function that grabs monthly stock returns and saves those monthly returns as an xts object in the global environment. With that function, we will create three xts objects of monthly returns, and merge those three xts objects into one object, before passing that merged object to dygraphs to peek at the individual stocks.</p>
 <p>Then, we’ll move on to build a portfolio by selecting asset weights and calculating the portfolio monthly returns. Next, we will calculate the growth of a dollar invested in that portfolio (which is what matters to us) over time, and save the results to an xts object. Dygraphs will come in handy again for the portfolio visualizations. Finally, we will calculate the Sharpe Ratio.</p>
 <h2 id="setting-up">Setting up</h2>
 <p>We start by loading three packages: quantmod to download the data, PerformanceAnalytics to run portfolio calculations, and dygraphs to graph time series objects. We will also create a function to import stock data.</p>

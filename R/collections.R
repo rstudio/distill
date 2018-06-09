@@ -152,42 +152,70 @@ render_collection_article_post_processor <- function(encoding_fn) {
       normalize_path(site_dir),
       normalize_path(input_file)
     )
-    in_collection <- any(startsWith(input_file_relative, paste0("_", names(collections), "/")))
-    if (!in_collection)
+    in_collection <- startsWith(input_file_relative, paste0("_", names(collections), "/"))
+    if (!any(in_collection))
       return(ouput_file)
 
-    # TODO: render the article into the collection
+    # get the collection
+    collection <- collections[[which(in_collection)]]
 
-    #  - need to transform_metadata first
-    #  - then call render_collection_article
-    #  - then update indexes (perhaps w/ callr?)
+    # compute the article path
+    article_path <- file.path(site_dir, dirname(input_file_relative), output_file)
 
-    output_file
+    # transform metadata for site
+    metadata <- transform_metadata(
+      article_path,
+      site_config,
+      collection,
+      metadata,
+      auto_preview = TRUE
+    )
 
+    # form an article object
+    article <- list(
+      path = article_path,
+      metadata = metadata
+    )
 
+    # render the article
+    output_file <- render_collection_article(
+      site_dir = site_dir,
+      site_config = site_config,
+      article = article,
+      navigation_html = navigation_html_generator(),
+      site_includes = site_includes(site_dir, site_config),
+      quiet = TRUE
+    )
+
+    # TODO: rstudio ide change + throttle preview on that
+    # TODO: async update indexes (perhaps w/ callr?)
+
+    # return the output_file w/ an attribute indicating that
+    # base post processing should be done on both the new
+    # and original output file
+    structure(output_file, post_process_original = TRUE)
   }
 }
 
 
 render_collection_article <- function(site_dir, site_config, article,
-                                      navigation_html = navigation_html_generator(),
-                                      site_includes = site_includes(site_dir, site_config),
+                                      navigation_html, site_includes,
                                       quiet = FALSE) {
 
   # strip site_dir prefix
-  article$path <- sub(paste0("^", site_dir, "/"), "", article$path)
+  article_site_path <- sub(paste0("^", site_dir, "/"), "", article$path)
 
   # compute offset
-  offset <- collection_file_offset(article$path)
+  offset <- collection_file_offset(article_site_path)
 
   # determine the target output dir
   output_dir <- file.path(site_dir,
                           site_config$output_dir,
-                          sub("^_", "", dirname(article$path)))
+                          sub("^_", "", dirname(article_site_path)))
 
   # progress
   if (!quiet)
-    cat(" ", dirname(article$path), "\n")
+    cat(" ", dirname(article_site_path), "\n")
 
   # create the output directory
   if (!dir_exists(output_dir))
@@ -210,7 +238,7 @@ render_collection_article <- function(site_dir, site_config, article,
             copy.date = TRUE)
 
   # rename article to index.html
-  article_html <- file.path(output_dir, basename(article$path))
+  article_html <- file.path(output_dir, basename(article_site_path))
   index_html <- file.path(output_dir, "index.html")
   if (article_html != index_html)
     file.rename(article_html, index_html)
