@@ -3,6 +3,7 @@
 - Consider incremental rendering (callr for index page?)
 
 - publish_website function
+- ide publish button for collections should publish website
 
 - Encourage/document date prefix for post names
 - Ensure that collection articles have a date
