@@ -203,6 +203,9 @@ render_collection_article_post_processor <- function(encoding_fn) {
       )
 
       # TODO: write index as json and have index page read the json
+      # TODO: <noscript> or some equivalent for seo. or just
+      #       show the top 10 most recent pre-rendered and use
+      #       js for the rest
       # TODO: update feed
 
       # return the output_file w/ an attribute indicating that

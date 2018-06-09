@@ -8,6 +8,8 @@
 - Encourage/document date prefix for post names
 - Ensure that collection articles have a date
 
+- generate sitemap
+
 - index/category/archive pages (categories should be inline)
 - email subscription (http://www.wpbeginner.com/opinion/stop-using-feedburner-move-to-feedburner-alternatives/)
 - google analytics 
