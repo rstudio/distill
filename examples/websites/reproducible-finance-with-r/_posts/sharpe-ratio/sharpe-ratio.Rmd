@@ -20,6 +20,7 @@ knitr::opts_chunk$set(echo = TRUE)
 for (pkg in c('PerformanceAnalytics', 'quantmod', 'dygraphs', 'RColorBrewer')) {
   if (!requireNamespace(pkg, quietly = TRUE)) install.packages(pkg)
 }
+set.seed(42)
 ```
 
 ## Overview
