@@ -11,10 +11,10 @@ validate_rstudio_version <- function() {
     # check for desktop mode on windows and linux (other modes are fine)
     if (!is_osx() && (rstudio$mode == "desktop")) {
 
-      if (rstudio$version < "1.2.637")
+      if (rstudio$version < "1.2.718")
         stop("Radix articles cannot be previewed in this version of RStudio.\n",
-             "Please update to version 1.2.637 or higher at:\n",
-             "https://www.rstudio.com/rstudio/download/preview/\n",
+             "Please update to version 1.2.718 or higher at ",
+             "https://dailies.rstudio.com/\n",
              call. = FALSE)
     }
   }

@@ -201,7 +201,6 @@ render_collection_article_post_processor <- function(encoding_fn) {
       )
 
       # TODO: one line difference btw incremental and site render
-      # TODO: rstudio ide change + throttle preview on that
       # TODO: write index as json and have index page read the json
       # TODO: update feed
 
