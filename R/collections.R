@@ -117,6 +117,7 @@ render_collection <- function(site_dir, site_config, collection,
       article = article,
       navigation_html = navigation_html,
       site_includes = site_includes,
+      strip_trailing_newline = TRUE,
       quiet = quiet
     )
   })
@@ -197,10 +198,10 @@ render_collection_article_post_processor <- function(encoding_fn) {
         article = article,
         navigation_html = navigation_html_generator(),
         site_includes = site_includes(site_dir, site_config),
+        strip_trailing_newline = FALSE,
         quiet = TRUE
       )
 
-      # TODO: one line difference btw incremental and site render
       # TODO: write index as json and have index page read the json
       # TODO: update feed
 
@@ -217,6 +218,7 @@ render_collection_article_post_processor <- function(encoding_fn) {
 
 render_collection_article <- function(site_dir, site_config, article,
                                       navigation_html, site_includes,
+                                      strip_trailing_newline = FALSE,
                                       quiet = FALSE) {
 
   # strip site_dir prefix
@@ -301,7 +303,13 @@ render_collection_article <- function(site_dir, site_config, article,
   site_libs <- file.path(site_dir, site_config$output_dir, "site_libs")
   index_content <- apply_site_libs(index_content, article_html, site_libs, offset)
 
-  # write content
+  # strip trailing newline if requested (this is necessary so that we can ensure
+  # that incremental vs. render_site output is identical so as to not generate
+  # spurious diffs)
+  if (strip_trailing_newline && grepl("\n$", index_content))
+    index_content <- substring(index_content, 1, nchar(index_content) - 1)
+
+  # write the contet
   writeLines(index_content, index_html, useBytes = TRUE)
 
   # return path to rendered article
