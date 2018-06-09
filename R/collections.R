@@ -190,7 +190,8 @@ render_collection_article <- function(site_dir, site_config, article,
     cat(" ", dirname(article$path), "\n")
 
   # create the output directory
-  dir.create(output_dir, recursive = TRUE)
+  if (!dir_exists(output_dir))
+    dir.create(output_dir, recursive = TRUE)
 
   # copy files to output directory
   resources <- article$metadata$resources
@@ -199,11 +200,11 @@ render_collection_article <- function(site_dir, site_config, article,
   else
     c(include, exclude) %<-% list(NULL, NULL)
   rmd_resources <- site_resources(
-    site_dir = article$dir,
+    site_dir = dirname(article$path),
     include = include,
     exclude = exclude
   )
-  file.copy(from = file.path(article$dir, rmd_resources),
+  file.copy(from = file.path(dirname(article$path), rmd_resources),
             to = output_dir,
             recursive = TRUE,
             copy.date = TRUE)
@@ -334,7 +335,6 @@ discover_article <- function(article_dir) {
     if (!is.null(article_metadata)) {
       list(
         path = article_html,
-        dir = article_dir,
         metadata = article_metadata
       )
     } else {
@@ -370,7 +370,7 @@ write_collection_metadata <- function(site_dir, collection) {
     article$metadata$resources <- NULL
 
     # write the article
-    article_yaml <- append(list(path = basename(article$dir)),
+    article_yaml <- append(list(path = basename(dirname(article$path))),
                                 article$metadata)
     cat("\n", file = con)
     yaml::write_yaml(list(article_yaml), file = con)
