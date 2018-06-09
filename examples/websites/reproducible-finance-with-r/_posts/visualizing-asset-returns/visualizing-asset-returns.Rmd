@@ -23,6 +23,7 @@ knitr::opts_chunk$set(message=FALSE, warning=FALSE, echo=TRUE)
 
 # wider look for figures
 knitr::opts_chunk$set(fig.height = 3, layout="l-body-outset")
+set.seed(42)
 ```
 
 Here's the portfolio we'll be visualizing the assets of:

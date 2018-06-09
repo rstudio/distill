@@ -19,6 +19,8 @@ for (pkg in c('tidyverse', 'tidyquant', 'highcharter', 'timetk'))
   if (!requireNamespace(pkg)) install.packages(pkg)
 
 knitr::opts_chunk$set(echo = TRUE)
+
+set.seed(42)
 ```
 
 ## Overview

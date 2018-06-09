@@ -20,6 +20,7 @@ for (pkg in c('Quandl', 'dplyr', 'xts', 'lubridate', 'forecast', 'dygraphs'))
   if (!requireNamespace(pkg)) install.packages(pkg)
 
 knitr::opts_chunk$set(echo = TRUE)
+set.seed(42)
 ```
 
 ## Overview
