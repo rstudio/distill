@@ -1,6 +1,7 @@
 
 
 resolve_listing <- function(input_file, site_config, metadata) {
+
   # determine/validate collection
   collection <- metadata$listing$collection
   if (is.null(collection))
