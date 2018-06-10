@@ -45,11 +45,15 @@ article_listing_html <- function(collection, articles) {
 
     article <- article_listing_info(collection, article)
 
+    preview <- article$preview
+    if (!is.null(preview))
+      preview <- img(src = preview)
+
     a(href = paste0(article$path, "/"), class = "post-preview",
       div(class = "metadata",
         div(class = "publishedDate", article$date)
       ),
-      div(class = "thumbnail", article$preview),
+      div(class = "thumbnail", preview),
       div(class = "description",
         h2(article$title),
         p(article$description)
@@ -75,10 +79,8 @@ article_listing_info <- function(collection, article) {
   preview <- article$preview_url
   if (is.null(preview) || startsWith(preview, article$base_url)) {
     if (!is.null(article$preview))
-      preview <- file.path(path, article$preview)
+      preview <- url_path(path, article$preview)
   }
-  if (!is.null(preview))
-    preview <- img(src = preview)
 
   # return info
   list(

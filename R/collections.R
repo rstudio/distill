@@ -102,12 +102,16 @@ render_collection <- function(site_dir, site_config, collection,
   if (!quiet)
     cat(paste0("\nProcessing ", collection$name, ":\n"))
 
-  # remove existing output dir if it exists
+  # remove and re-create output dir
   collection_output <- file.path(site_dir,
                                  site_config$output_dir,
                                  collection$name)
   if (dir_exists(collection_output))
     unlink(collection_output, recursive = TRUE)
+  dir.create(collection_output, recursive = TRUE)
+
+  # write json index (used by listing page)
+  write_articles_json(site_dir, collection_output, collection)
 
   # process articles in collection
   lapply(collection$articles, function(article) {
@@ -126,6 +130,35 @@ render_collection <- function(site_dir, site_config, collection,
     cat("\n")
 }
 
+
+write_articles_json <- function(site_dir, collection_output, collection) {
+
+  # transform articles to format required for listing pages
+  articles <- lapply(collection$articles, function(article) {
+
+    # form path to article
+    article_site_path <- collection_article_site_path(
+      normalize_path(site_dir),
+      normalize_path(article$path)
+    )
+    path <- paste0(dirname(sub("^_[^/]+/", "", article_site_path)), "/")
+
+    # form article object
+    article <- append(
+      list(path = path),
+      article$metadata
+    )
+
+    # return listing info
+    article_listing_info(collection, article)
+  })
+
+  jsonlite::write_json(
+    articles,
+    file.path(collection_output, paste0(collection$name, ".json")),
+    pretty = TRUE
+  )
+}
 
 render_collection_article_post_processor <- function(encoding_fn) {
 
