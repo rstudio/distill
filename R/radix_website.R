@@ -36,7 +36,7 @@ radix_website <- function(input, encoding = getOption("encoding"), ...) {
       }
 
       # enumerate collections
-      collections <- enumerate_collections(input, config, site_collections, encoding)
+      collections <- enumerate_collections(input, config, site_collections)
 
       # write metadata (do this now so that pages have access to collection metadata)
       write_collections_metadata(input, collections)

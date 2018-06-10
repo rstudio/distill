@@ -1,74 +1,74 @@
 
 
 
+enumerate_collections <- function(site_dir, site_config, site_collections) {
+  lapply(site_collections, function(collection) {
+    enumerate_collection(site_dir, site_config, collection)
+  })
+}
 
-enumerate_collections <- function(site_dir,
-                                  config,
-                                  site_collections,
-                                  encoding = getOption("encoding")) {
+enumerate_collection <- function(site_dir, site_config, collection) {
 
-  # list of collections to return
-  collections <- list()
+  # collection_dir
+  collection_dir <- file.path(site_dir, paste0("_", collection$name))
 
-  # iterate over collections
-  for (collection in names(site_collections)) {
+  # build a list of articles in the collection
+  articles <- list()
 
-    # collection_dir
-    collection_dir <- file.path(site_dir, paste0("_", collection))
+  # find all html files within the collection
+  html_files <- file.path(list.files(
+    collection_dir,
+    pattern = "^[^_].*\\.html$",
+    recursive = TRUE,
+    full.names = TRUE
+  ))
 
-    # build a list of articles in the collection
-    articles <- list()
+  # find unique directories from files (only one article per directory)
+  article_dirs <- unique(dirname(html_files))
 
-    # find all html files within the collection
-    html_files <- file.path(list.files(
-                              collection_dir,
-                              pattern = "^[^_].*\\.html$",
-                              recursive = TRUE,
-                              full.names = TRUE
-                            ))
-
-    # find unique directories from files (only one article per directory)
-    article_dirs <- unique(dirname(html_files))
-
-    for (article_dir in article_dirs) {
-
-      # resolve to radix article
-      article <- discover_article(article_dir)
-
-      # bail if there was none found
-      if (is.null(article))
-        next
-
-      # bail if this is a draft
-      if (isTRUE(article$metadata$draft))
-        next
-
-      # transform metadata
-      article$metadata <- transform_metadata(
-        article$path,
-        config,
-        site_collections[[collection]],
-        article$metadata,
-        auto_preview = TRUE
-      )
-
-      # add to list of articles
+  for (article_dir in article_dirs) {
+    article <- published_article_from_dir(site_config, collection, article_dir)
+    if (!is.null(article))
       articles[[length(articles) + 1]] <- article
-    }
-
-    # sort the articles in reverse-chronological order
-    indexes <- order(sapply(articles, function(x) x$metadata$date), decreasing = TRUE)
-    articles <- articles[indexes]
-
-    # add collection
-    collections[[collection]] <- list(
-      name = collection,
-      config = site_collections[[collection]],
-      articles = articles
-    )
   }
 
-  collections
+  # sort the articles in reverse-chronological order
+  indexes <- order(sapply(articles, function(x) x$metadata$date), decreasing = TRUE)
+  articles <- articles[indexes]
+
+  # return collection
+  list(
+    name = collection$name,
+    config = collection,
+    articles = articles
+  )
+}
+
+
+published_article_from_dir <- function(site_config, collection, article_dir) {
+
+  # resolve to radix article
+  article <- discover_article(article_dir)
+
+  # bail if there was none found
+  if (is.null(article))
+    return(NULL)
+
+  # bail if this is a draft
+  if (isTRUE(article$metadata$draft))
+    return(NULL)
+
+  # transform metadata
+  article$metadata <- transform_metadata(
+    article$path,
+    site_config,
+    collection,
+    article$metadata,
+    auto_preview = TRUE
+  )
+
+  # return article
+  article
 }
 
 render_collections <- function(site_dir, site_config, collections, quiet = FALSE) {
