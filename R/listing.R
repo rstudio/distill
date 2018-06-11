@@ -7,17 +7,25 @@ resolve_listing <- function(input_file, site_config, metadata) {
   if (is.null(collection))
     stop("You must specify a collection for listing pages", call. = FALSE)
 
+  generate_listing(input_file, site_config, collection, metadata$listing)
+}
+
+generate_listing <- function(input_file,
+                             site_config,
+                             collection,
+                             options = list()) {
+
   # validate that the collection exists
   site_dir <- dirname(input_file)
   as_collection_dir(site_dir, collection)
 
   # get the collection and article metadata
-  collection <- site_collections(site_dir, site_config)[[collection]]
+  collection <- site_collections(site_dir, site_config)[[as_collection_name(collection)]]
   articles <- article_listing(site_dir, collection)
 
   # check for and enforce a limit on feed items (defaults to 20)
   feed_articles <- articles
-  feed_items_max <- not_null(metadata$listing[["feed_items_max"]], 20)
+  feed_items_max <- not_null(options[["feed_items_max"]], 20)
   if (is.integer(feed_items_max) && (length(articles) > feed_items_max)) {
     feed_articles <- feed_articles[1:feed_items_max]
   }
@@ -36,6 +44,7 @@ resolve_listing <- function(input_file, site_config, metadata) {
     html = html
   )
 }
+
 
 article_listing_html <- function(collection, articles) {
 
@@ -198,10 +207,18 @@ article_listing <- function(site_dir, collection) {
 }
 
 as_collection_dir <- function(site_dir, collection) {
+  collection <- as_collection_name(collection)
   collection_dir <- paste0("_", collection)
   if (!dir_exists(file.path(site_dir, collection_dir)))
     stop("The collection '", collection, "' does not exist", call. = FALSE)
   collection_dir
+}
+
+as_collection_name <- function(collection) {
+  if (is.list(collection))
+    collection$name
+  else
+    collection
 }
 
 resolve_preview_url <- function(preview, path, base_url = NULL) {
