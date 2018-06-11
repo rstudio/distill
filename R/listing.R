@@ -16,17 +16,17 @@ resolve_listing <- function(input_file, site_config, metadata) {
   articles <- article_listing(site_dir, collection)
 
   # check for and enforce a limit on feed items (defaults to 20)
+  feed_articles <- articles
   feed_items_max <- not_null(metadata$listing[["feed_items_max"]], 20)
   if (is.integer(feed_items_max) && (length(articles) > feed_items_max)) {
-    articles <- articles[1:feed_items_max]
+    feed_articles <- feed_articles[1:feed_items_max]
   }
 
   # generate feed and write it
   feed_xml <- file_with_ext(input_file, "xml")
-  feed_xml <- write_feed_xml(feed_xml, site_config, collection, articles)
+  feed_xml <- write_feed_xml(feed_xml, site_config, collection, feed_articles)
 
   # generate html
-  articles <- article_listing(input_as_dir(input_file), collection)
   listing_html <- article_listing_html(collection, articles)
   html <- html_file(listing_html)
 
