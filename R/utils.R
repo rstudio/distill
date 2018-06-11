@@ -53,7 +53,7 @@ date_as_iso_8601 <- function(date, date_only = FALSE) {
 }
 
 date_as_rfc_2822 <- function(date) {
-  as.character(date, format = "%a, %d %b %Y %H:%M:%S %z")
+  as.character(date, format = "%a, %d %b %Y %H:%M:%S %z", tz = "UTC")
 }
 
 is_file_type <- function(file, type) {
