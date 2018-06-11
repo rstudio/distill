@@ -110,6 +110,10 @@ render_collection <- function(site_dir, site_config, collection,
     unlink(collection_output, recursive = TRUE)
   dir.create(collection_output, recursive = TRUE)
 
+  # copy json output file
+  file.copy(from = collection_json_path(site_dir, collection),
+            to = collection_output)
+
   # process articles in collection
   lapply(collection$articles, function(article) {
     render_collection_article(
