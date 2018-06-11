@@ -42,20 +42,13 @@ article_listing_html <- function(collection, articles) {
   # generate html
   articles_html <- lapply(articles, function(article) {
 
-    # path
-    path <- file.path(collection$name, article$path)
-
     # preview
-    preview <- article$preview_url
-    if (is.null(preview) || startsWith(preview, article$base_url)) {
-      if (!is.null(article$preview))
-        preview <- url_path(path, article$preview)
-    }
+    preview <- resolve_preview_url(article$preview, article$path)
 
     if (!is.null(preview))
       preview <- img(src = preview)
 
-    a(href = paste0(path, "/"), class = "post-preview",
+    a(href = paste0(article$path, "/"), class = "post-preview",
       div(class = "metadata",
         div(class = "publishedDate", article$date)
       ),
@@ -140,6 +133,9 @@ write_feed_xml <- function(feed_xml, site_config, collection, articles) {
   # add entries to channel
   for (article in articles) {
 
+    # calculate base url
+    article$base_url <- url_path(site_config$base_url, article$path)
+
     # core fields
     item <- add_child(channel, "item")
     add_child(item, "title", text = article$title)
@@ -152,12 +148,15 @@ write_feed_xml <- function(feed_xml, site_config, collection, articles) {
 
     # preview image
     preview_img <- NULL
-    if (!is.null(article$preview_url)) {
+    if (!is.null(article$preview)) {
+      article$preview <- resolve_preview_url(article$preview,
+                                             article$path,
+                                             base_url = site_config$base_url)
       # rss tag
       media_content <- add_child(item, "media:content", attr = c(
-        url = article$preview_url,
+        url = article$preview,
         medium = "image",
-        type = mime::guess_type(article$preview_url)
+        type = mime::guess_type(article$preview)
       ))
       if (!is.null(article$preview_width)) {
         xml2::xml_set_attr(media_content, "width", article$preview_width)
@@ -165,7 +164,7 @@ write_feed_xml <- function(feed_xml, site_config, collection, articles) {
       }
 
       # html tag
-      preview_img <- img(src = article$preview_url,
+      preview_img <- img(src = article$preview,
                          width = knitr::opts_chunk$get("fig.width") * 96)
     }
 
@@ -205,4 +204,13 @@ as_collection_dir <- function(site_dir, collection) {
   collection_dir
 }
 
+resolve_preview_url <- function(preview, path, base_url = NULL) {
+  if (!is.null(preview) && !is_url(preview)) {
+    if (!is.null(base_url))
+      preview <- url_path(base_url, path, preview)
+    else
+      preview <- url_path(path, preview)
+  }
+  preview
+}
 

@@ -424,8 +424,7 @@ write_collection_metadata <- function(site_dir, collection) {
   articles <- lapply(collection[["articles"]], function(article) {
 
     list(
-      path = basename(dirname(article$path)),
-      base_url = article$metadata$base_url,
+      path = url_path(collection$name, basename(dirname(article$path))),
       title = article$metadata$title,
       description = article$metadata$description,
       author = lapply(article$metadata$author, function(author) {
@@ -441,7 +440,6 @@ write_collection_metadata <- function(site_dir, collection) {
       ),
       date_rfc = article$metadata$published_date_rfc,
       preview = article$metadata$preview,
-      preview_url = article$metadata$preview_url,
       preview_width = article$metadata$preview_width,
       preview_height = article$metadata$preview_height
     )

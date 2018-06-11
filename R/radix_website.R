@@ -40,7 +40,7 @@ radix_website <- function(input, encoding = getOption("encoding"), ...) {
 
       # write metadata (do this now so that pages have access to collection metadata)
       write_collections_metadata(input, collections)
-      on.exit(remove_collections_metadata(input, collections), add = TRUE)
+      #on.exit(remove_collections_metadata(input, collections), add = TRUE)
 
       # track site outputs (for moving to the output_dir)
       track_site_outputs(config$output_dir)

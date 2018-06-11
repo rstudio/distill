@@ -126,42 +126,30 @@ transform_metadata <- function(file, site_config, collection_config, metadata, a
 
   # if there is no preview see if we can impute one from preview=TRUE on a chunk
   if (is.null(metadata$preview) && auto_preview)
-    metadata$preview <- resolve_preview(file)
+    metadata$preview <- discover_preview(file)
 
   # file based preview image
-  if (!is.null(metadata$preview)) {
+  if (!is.null(metadata$preview) && !is_url(metadata$preview)) {
 
-    if (is_url(metadata$preview)) {
+    # compute the path on disk
+    metadata_path <- file.path(dirname(file), metadata$preview)
 
-      metadata$preview_url <- metadata$preview
-
-    } else {
-
-      # compute the path on disk
-      metadata_path <- file.path(dirname(file), metadata$preview)
-
-      # validate that the file exists
-      if (!file.exists(metadata_path)) {
-        stop("Specified preview file '", metadata$preview, "' does not exist",
-             call. = FALSE)
-      }
-
-      # synthesize preview_url if we can
-      if (!is.null(metadata$base_url)) {
-
-        # if it's a png then determine it's dimensions
-        if (is_file_type(metadata_path, "png")) {
-          png <- png::readPNG(metadata_path)
-          metadata$preview_width <- ncol(png)
-          metadata$preview_height <- nrow(png)
-        }
-
-        # resolve preview url
-        metadata$preview_url <- url_path(metadata$base_url, metadata$preview)
-      }
-
+    # validate that the file exists
+    if (!file.exists(metadata_path)) {
+      stop("Specified preview file '", metadata$preview, "' does not exist",
+           call. = FALSE)
     }
 
+    # resolve preview url
+    if (!is.null(metadata$base_url))
+     metadata$preview_url <- url_path(metadata$base_url, metadata$preview)
+
+    # if it's a png then determine it's dimensions
+    if (is_file_type(metadata_path, "png")) {
+      png <- png::readPNG(metadata_path)
+      metadata$preview_width <- ncol(png)
+      metadata$preview_height <- nrow(png)
+    }
   }
 
   # authors
@@ -637,7 +625,7 @@ unserialize_embedded_json <- function(lines) {
   jsonlite::unserializeJSON(json)
 }
 
-resolve_preview <- function(file) {
+discover_preview <- function(file) {
 
   # if file is as the top-level of a site then bail
   if (file.exists(file.path(dirname(file), "_site.yml")))
