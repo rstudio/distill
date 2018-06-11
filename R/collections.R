@@ -156,7 +156,8 @@ write_articles_json <- function(site_dir, collection_output, collection) {
   jsonlite::write_json(
     articles,
     file.path(collection_output, paste0(collection$name, ".json")),
-    pretty = TRUE
+    pretty = TRUE,
+    auto_unbox = TRUE
   )
 }
 
