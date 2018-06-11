@@ -1,12 +1,15 @@
 
 
-- Consider incremental rendering (callr for index page?)
+- Consider incremental rendering 
 
 - publish_website function
 - ide publish button for collections should publish website
 
 - Encourage/document date prefix for post names
 - Ensure that collection articles have a date
+
+- Test multi-level collection documents
+- Test external preview urls
 
 - generate sitemap
 

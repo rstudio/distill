@@ -37,7 +37,6 @@ resolve_listing <- function(input_file, site_config, metadata) {
   )
 }
 
-
 article_listing_html <- function(collection, articles) {
 
   # generate html
@@ -67,13 +66,6 @@ article_listing_html <- function(collection, articles) {
 
 article_listing_info <- function(collection, article) {
 
-  # published date
-  date <- sprintf("%s %d, %s",
-    article$published_month,
-    article$published_day,
-    article$published_year
-  )
-
   # preview
   path <- file.path(collection$name, article$path)
   preview <- article$preview_url
@@ -86,7 +78,7 @@ article_listing_info <- function(collection, article) {
   list(
     title = article$title,
     description = article$description,
-    date = date,
+    date = article$date,
     path = path,
     preview = preview
   )
@@ -153,11 +145,10 @@ write_feed_xml <- function(feed_xml, site_config, collection, articles) {
   # last build date is date of most recent article (or now if no articles)
   last_build_date <- NULL
   if (length(articles) > 0)
-    last_build_date <- articles[[1]]$published_date_rfc
+    last_build_date <- articles[[1]]$date_rfc
   if (is.null(last_build_date))
     last_build_date <- date_as_rfc_2822(Sys.time())
   add_child(channel, "lastBuildDate", text = last_build_date)
-
 
   # add entries to channel
   for (article in articles) {
@@ -170,7 +161,7 @@ write_feed_xml <- function(feed_xml, site_config, collection, articles) {
     add_child(item, "link", text = article$base_url)
     add_child(item, "description", text = not_null(article$description, default = article$title))
     add_child(item, "guid", text = article$base_url)
-    add_child(item, "pubDate", text = article$published_date_rfc)
+    add_child(item, "pubDate", text = article$date_rfc)
 
     # preview image
     preview_img <- NULL
@@ -213,11 +204,11 @@ write_feed_xml <- function(feed_xml, site_config, collection, articles) {
 article_listing <- function(site_dir, collection) {
   collection <- collection$name
   collection_dir <- as_collection_dir(site_dir, collection)
-  articles_yaml <- file.path(site_dir, collection_dir, file_with_ext(collection, "yml"))
-  if (!file.exists(articles_yaml))
+  articles_json <- file.path(site_dir, collection_dir, file_with_ext(collection, "json"))
+  if (!file.exists(articles_json))
     stop("The collection '", collection, "' does not have an article listing.\n",
          "(try running render_site() to generate the listing)", call. = FALSE)
-  yaml::yaml.load_file(articles_yaml)
+  jsonlite::read_json(articles_json)
 }
 
 as_collection_dir <- function(site_dir, collection) {

@@ -110,9 +110,6 @@ render_collection <- function(site_dir, site_config, collection,
     unlink(collection_output, recursive = TRUE)
   dir.create(collection_output, recursive = TRUE)
 
-  # write json index (used by listing page)
-  write_articles_json(site_dir, collection_output, collection)
-
   # process articles in collection
   lapply(collection$articles, function(article) {
     render_collection_article(
@@ -131,35 +128,6 @@ render_collection <- function(site_dir, site_config, collection,
 }
 
 
-write_articles_json <- function(site_dir, collection_output, collection) {
-
-  # transform articles to format required for listing pages
-  articles <- lapply(collection$articles, function(article) {
-
-    # form path to article
-    article_site_path <- collection_article_site_path(
-      normalize_path(site_dir),
-      normalize_path(article$path)
-    )
-    path <- paste0(dirname(sub("^_[^/]+/", "", article_site_path)), "/")
-
-    # form article object
-    article <- append(
-      list(path = path),
-      article$metadata
-    )
-
-    # return listing info
-    article_listing_info(collection, article)
-  })
-
-  jsonlite::write_json(
-    articles,
-    file.path(collection_output, paste0(collection$name, ".json")),
-    pretty = TRUE,
-    auto_unbox = TRUE
-  )
-}
 
 render_collection_article_post_processor <- function(encoding_fn) {
 
@@ -449,29 +417,45 @@ write_collections_metadata <- function(site_dir, collections) {
     write_collection_metadata(site_dir, collection)
 }
 
+
 write_collection_metadata <- function(site_dir, collection) {
-
-  # articles yaml
-  collection_yaml <- collection_yaml_path(site_dir, collection)
-  con <- file(collection_yaml, "w", encoding = "UTF-8")
-  on.exit(close(con), add = TRUE)
-
-  # header
-  cat("# Created by Radix website generator (do not edit or remove)\n", file = con)
 
   # write each article
   articles <- lapply(collection[["articles"]], function(article) {
 
-    # strip some inside-baseball metadata
-    article$metadata$output <- NULL
-    article$metadata$resources <- NULL
-
-    # write the article
-    article_yaml <- append(list(path = basename(dirname(article$path))),
-                                article$metadata)
-    cat("\n", file = con)
-    yaml::write_yaml(list(article_yaml), file = con)
+    list(
+      path = basename(dirname(article$path)),
+      base_url = article$metadata$base_url,
+      title = article$metadata$title,
+      description = article$metadata$description,
+      author = lapply(article$metadata$author, function(author) {
+        list(
+          name = author$name,
+          url = author$url
+        )
+      }),
+      date =  sprintf("%s %d, %s",
+        article$metadata$published_month,
+        article$metadata$published_day,
+        article$metadata$published_year
+      ),
+      date_rfc = article$metadata$published_date_rfc,
+      preview = article$metadata$preview,
+      preview_url = article$metadata$preview_url,
+      preview_width = article$metadata$preview_width,
+      preview_height = article$metadata$preview_height
+    )
   })
+
+  jsonlite::write_json(
+    articles,
+    collection_json_path(site_dir, collection),
+    pretty = TRUE,
+    auto_unbox = TRUE
+  )
+
+
+
 }
 
 remove_collections_metadata <- function(site_dir, collections) {
@@ -480,15 +464,15 @@ remove_collections_metadata <- function(site_dir, collections) {
 }
 
 remove_collection_metadata <- function(site_dir, collection) {
-  file.remove(collection_yaml_path(site_dir, collection))
+  file.remove(collection_json_path(site_dir, collection))
 }
 
-collection_yaml_path <- function(site_dir, collection) {
+collection_json_path <- function(site_dir, collection) {
   name <- collection[["name"]]
   file.path(
     site_dir,
     paste0("_", name),
-    file_with_ext(name, ext = "yml")
+    file_with_ext(name, ext = "json")
   )
 }
 
