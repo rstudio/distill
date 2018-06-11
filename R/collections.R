@@ -235,11 +235,9 @@ render_collection_article_post_processor <- function(encoding_fn) {
         quiet = TRUE
       )
 
-      # TODO: write index as json and have index page read the json
-      # TODO: <noscript> or some equivalent for seo. or just
-      #       show the top 10 most recent pre-rendered and use
-      #       js for the rest
-      # TODO: update feed
+      # TODO: write index as json and have index page / feed read the json
+      #       (but still write the main index as static html for search engines)
+      # TODO: incremental update feed
 
       # return the output_file w/ an attribute indicating that
       # base post processing should be done on both the new
