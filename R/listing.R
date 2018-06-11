@@ -69,7 +69,7 @@ article_listing_html <- function(collection, articles) {
 
     a(href = article$path, class = "post-preview",
       div(class = "metadata",
-        div(class = "publishedDate", article$date)
+        div(class = "publishedDate", date_as_abbrev(article$date))
       ),
       div(class = "thumbnail", preview),
       div(class = "description",
@@ -146,10 +146,10 @@ write_feed_xml <- function(feed_xml, site_config, collection, articles) {
   # last build date is date of most recent article (or now if no articles)
   last_build_date <- NULL
   if (length(articles) > 0)
-    last_build_date <- articles[[1]]$date_rfc
+    last_build_date <- articles[[1]]$date
   if (is.null(last_build_date))
-    last_build_date <- date_as_rfc_2822(Sys.time())
-  add_child(channel, "lastBuildDate", text = last_build_date)
+    last_build_date <- Sys.Date()
+  add_child(channel, "lastBuildDate", text = date_as_rfc_2822(last_build_date))
 
   # add entries to channel
   for (article in articles) {
@@ -165,7 +165,7 @@ write_feed_xml <- function(feed_xml, site_config, collection, articles) {
     add_child(item, "link", text = article$base_url)
     add_child(item, "description", text = not_null(article$description, default = article$title))
     add_child(item, "guid", text = article$base_url)
-    add_child(item, "pubDate", text = article$date_rfc)
+    add_child(item, "pubDate", text = date_as_rfc_2822(article$date))
 
     # preview image
     preview_img <- NULL

@@ -481,12 +481,7 @@ article_info <- function(collection, article) {
         url = author$url
       )
     }),
-    date =  sprintf("%s %d, %s",
-                    article$metadata$published_month,
-                    article$metadata$published_day,
-                    article$metadata$published_year
-    ),
-    date_rfc = article$metadata$published_date_rfc,
+    date = article$metadata$date,
     preview = article$metadata$preview,
     preview_width = article$metadata$preview_width,
     preview_height = article$metadata$preview_height

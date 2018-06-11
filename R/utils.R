@@ -53,7 +53,19 @@ date_as_iso_8601 <- function(date, date_only = FALSE) {
 }
 
 date_as_rfc_2822 <- function(date) {
-  as.character(date, format = "%a, %d %b %Y %H:%M:%S %z", tz = "UTC")
+  date <- as.Date(date, tz = "UTC")
+  as.character(date, format = "%a, %d %b %Y", tz = "UTC")
+}
+
+date_as_abbrev <- function(date) {
+  date <- as.Date(date, tz = "UTC")
+  year <- format(date, "%Y")
+  months <- c('Jan.', 'Feb.', 'March', 'April', 'May', 'June',
+              'July', 'Aug.', 'Sept.', 'Oct.', 'Nov.', 'Dec.')
+  month <- months[[as.integer(format(date, "%m"))]]
+  day <- as.integer(format(date, "%d"))
+
+  sprintf("%s %d, %s", month, day, year)
 }
 
 is_file_type <- function(file, type) {
