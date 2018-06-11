@@ -1,0 +1,66 @@
+[
+  {
+    "path": "posts/visualizing-asset-returns/",
+    "title": "Visualizing Asset Returns",
+    "description": "In this post we take a closer look at the individual assets which compose a portfolio. The motivation is to make sure we have scrutinized our assets before they get into our portfolio, as once the portfolio has been constructed, it is tempting to keep the analysis at the portfolio level \n",
+    "author": [
+      {
+        "name": "Jonathan Regenstein",
+        "url": "https://www.linkedin.com/in/jkregenstein/"
+      }
+    ],
+    "date": "Nov. 9, 2017",
+    "date_rfc": "Thu, 09 Nov 2017 00:00:00 -0500",
+    "preview": "visualizing-asset-returns_files/figure-html5/unnamed-chunk-9-1.png",
+    "preview_width": 1152,
+    "preview_height": 576
+  },
+  {
+    "path": "posts/asset-volatility/",
+    "title": "Asset Contribution to Portfolio Volatility",
+    "description": "In this post we explore breaking total portfolio volatility into its constituent parts and investigate how each asset contributes to the volatility.\n",
+    "author": [
+      {
+        "name": "Jonathan Regenstein",
+        "url": "https://www.linkedin.com/in/jkregenstein/"
+      }
+    ],
+    "date": "Sept. 13, 2017",
+    "date_rfc": "Wed, 13 Sep 2017 00:00:00 -0400",
+    "preview": "asset-volatility_files/figure-html5/unnamed-chunk-13-1.png",
+    "preview_width": 1152,
+    "preview_height": 576
+  },
+  {
+    "path": "posts/quandl-and-forecasting/",
+    "title": "Quandl and Forecasting",
+    "description": "In this post, we will explore commodity prices using data from Quandl, a repository for both free and paid data sources. We will also get into the forecasting game a bit and think about how best to use dygraphs when visualizing predicted time series as an extension of historical data.\n",
+    "author": [
+      {
+        "name": "Jonathan Regenstein",
+        "url": "https://www.linkedin.com/in/jkregenstein/"
+      }
+    ],
+    "date": "March 7, 2017",
+    "date_rfc": "Tue, 07 Mar 2017 00:00:00 -0500",
+    "preview": "preview.png",
+    "preview_width": 1656,
+    "preview_height": 927
+  },
+  {
+    "path": "posts/sharpe-ratio/",
+    "title": "The Sharpe Ratio",
+    "description": "In this post we present a classic finance use case using the PerformanceAnalytics, quantmod, and dygraphs packages. We'll demonstrate importing stock data, building a portfolio, and then calculating the Sharpe Ratio. \n",
+    "author": [
+      {
+        "name": "Jonathan Regenstein",
+        "url": "https://www.linkedin.com/in/jkregenstein/"
+      }
+    ],
+    "date": "Nov. 9, 2016",
+    "date_rfc": "Wed, 09 Nov 2016 00:00:00 -0500",
+    "preview": "preview.png",
+    "preview_width": 1644,
+    "preview_height": 1014
+  }
+]

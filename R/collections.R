@@ -424,7 +424,7 @@ write_collection_metadata <- function(site_dir, collection) {
   articles <- lapply(collection[["articles"]], function(article) {
 
     list(
-      path = url_path(collection$name, basename(dirname(article$path))),
+      path = paste0(url_path(collection$name, basename(dirname(article$path))), "/"),
       title = article$metadata$title,
       description = article$metadata$description,
       author = lapply(article$metadata$author, function(author) {

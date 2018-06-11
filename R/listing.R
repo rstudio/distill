@@ -48,7 +48,7 @@ article_listing_html <- function(collection, articles) {
     if (!is.null(preview))
       preview <- img(src = preview)
 
-    a(href = paste0(article$path, "/"), class = "post-preview",
+    a(href = article$path, class = "post-preview",
       div(class = "metadata",
         div(class = "publishedDate", article$date)
       ),
