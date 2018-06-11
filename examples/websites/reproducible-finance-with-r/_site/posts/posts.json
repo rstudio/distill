@@ -30,21 +30,6 @@
     "preview_height": 576
   },
   {
-    "path": "posts/quandl-and-forecasting/",
-    "title": "Quandl and Forecasting",
-    "description": "In this post, we will explore commodity prices using data from Quandl, a repository for both free and paid data sources. We will also get into the forecasting game a bit and think about how best to use dygraphs when visualizing predicted time series as an extension of historical data.\n",
-    "author": [
-      {
-        "name": "Jonathan Regenstein",
-        "url": "https://www.linkedin.com/in/jkregenstein/"
-      }
-    ],
-    "date": "2017-03-07",
-    "preview": "preview.png",
-    "preview_width": 1656,
-    "preview_height": 927
-  },
-  {
     "path": "posts/sharpe-ratio/",
     "title": "The Sharpe Ratio",
     "description": "In this post we present a classic finance use case using the PerformanceAnalytics, quantmod, and dygraphs packages. We'll demonstrate importing stock data, building a portfolio, and then calculating the Sharpe Ratio. \n",
@@ -58,5 +43,20 @@
     "preview": "preview.png",
     "preview_width": 1644,
     "preview_height": 1014
+  },
+  {
+    "path": "posts/quandl-and-forecasting/",
+    "title": "Quandl and Forecasting",
+    "description": "In this post, we will explore commodity prices using data from Quandl, a repository for both free and paid data sources. We will also get into the forecasting game a bit and think about how best to use dygraphs when visualizing predicted time series as an extension of historical data.\n",
+    "author": [
+      {
+        "name": "Jonathan Regenstein",
+        "url": "https://www.linkedin.com/in/jkregenstein/"
+      }
+    ],
+    "date": "2017-03-07",
+    "preview": "preview.png",
+    "preview_width": 1656,
+    "preview_height": 927
   }
 ]
