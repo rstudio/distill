@@ -8,7 +8,7 @@ author:
     url: https://www.linkedin.com/in/jkregenstein/
     affiliation: RStudio
     affiliation_url: https://www.rstudio.com
-date: 11-09-2016
+date: 11-08-2016
 output: 
   radix::radix_article:
     self_contained: false
