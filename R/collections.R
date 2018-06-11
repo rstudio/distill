@@ -240,11 +240,21 @@ update_collection_listing <- function(site_dir, site_config, collection, article
   if (!is.na(idx)) {
     articles[[idx]] <- article_info
   } else {
-
+    articles[[length(articles) + 1]] <- article_info
   }
+
+  # sort the articles in reverse-chronological order
+  indexes <- order(sapply(articles, function(x) x$date), decreasing = TRUE)
+  articles <- articles[indexes]
+
+  # filter articles on path existing (in case of a rename)
+  articles <- Filter(function(x) dir_exists(file.path(site_dir, paste0("_", x$path))),
+                     articles)
 
   # re-write the index
   write_articles_info(articles, collection_index)
+
+  #
 
 }
 
