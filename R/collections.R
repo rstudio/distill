@@ -208,9 +208,8 @@ render_collection_article_post_processor <- function(encoding_fn) {
         quiet = TRUE
       )
 
-      # TODO: write index as json and have index page / feed read the json
-      #       (but still write the main index as static html for search engines)
-      # TODO: incremental update feed
+      # update the article index and regenerate listing
+      update_collection_listing(site_dir, site_config, collection, article)
 
       # return the output_file w/ an attribute indicating that
       # base post processing should be done on both the new
@@ -220,6 +219,33 @@ render_collection_article_post_processor <- function(encoding_fn) {
     }
 
   }
+}
+
+update_collection_listing <- function(site_dir, site_config, collection, article) {
+
+  # path to collection index
+  collection_index <- file.path(site_dir, site_config$output_dir, collection$name,
+                                paste0(collection$name, ".json"))
+
+  # bail if there is no collection index
+  if (!file.exists(collection_index))
+    return()
+
+  # read the index
+  articles <- jsonlite::read_json(collection_index)
+
+  # either edit the index or add a new entry at the appropriate place
+  article_info <- article_info(collection, article)
+  idx <- Position(function(x) identical(x$path, article_info$path), articles)
+  if (!is.na(idx)) {
+    articles[[idx]] <- article_info
+  } else {
+
+  }
+
+  # re-write the index
+  write_articles_info(articles, collection_index)
+
 }
 
 
@@ -424,41 +450,49 @@ write_collections_metadata <- function(site_dir, collections) {
 
 write_collection_metadata <- function(site_dir, collection) {
 
-  # write each article
+  # tranform to article info
   articles <- lapply(collection[["articles"]], function(article) {
-
-    list(
-      path = paste0(url_path(collection$name, basename(dirname(article$path))), "/"),
-      title = article$metadata$title,
-      description = article$metadata$description,
-      author = lapply(article$metadata$author, function(author) {
-        list(
-          name = author$name,
-          url = author$url
-        )
-      }),
-      date =  sprintf("%s %d, %s",
-        article$metadata$published_month,
-        article$metadata$published_day,
-        article$metadata$published_year
-      ),
-      date_rfc = article$metadata$published_date_rfc,
-      preview = article$metadata$preview,
-      preview_width = article$metadata$preview_width,
-      preview_height = article$metadata$preview_height
-    )
+    article_info(collection, article)
   })
 
+  write_articles_info(articles, collection_json_path(site_dir, collection))
+
+}
+
+write_articles_info <- function(articles, path) {
   jsonlite::write_json(
     articles,
-    collection_json_path(site_dir, collection),
+    path,
     pretty = TRUE,
     auto_unbox = TRUE
   )
-
-
-
 }
+
+article_info <- function(collection, article) {
+
+  list(
+    path = paste0(url_path(as_collection_name(collection),
+                           basename(dirname(article$path))), "/"),
+    title = article$metadata$title,
+    description = article$metadata$description,
+    author = lapply(article$metadata$author, function(author) {
+      list(
+        name = author$name,
+        url = author$url
+      )
+    }),
+    date =  sprintf("%s %d, %s",
+                    article$metadata$published_month,
+                    article$metadata$published_day,
+                    article$metadata$published_year
+    ),
+    date_rfc = article$metadata$published_date_rfc,
+    preview = article$metadata$preview,
+    preview_width = article$metadata$preview_width,
+    preview_height = article$metadata$preview_height
+  )
+}
+
 
 remove_collections_metadata <- function(site_dir, collections) {
   for (collection in collections)

@@ -141,14 +141,17 @@ transform_metadata <- function(file, site_config, collection_config, metadata, a
     }
 
     # resolve preview url
-    if (!is.null(metadata$base_url))
-     metadata$preview_url <- url_path(metadata$base_url, metadata$preview)
+    if (!is.null(metadata$base_url)) {
 
-    # if it's a png then determine it's dimensions
-    if (is_file_type(metadata_path, "png")) {
-      png <- png::readPNG(metadata_path)
-      metadata$preview_width <- ncol(png)
-      metadata$preview_height <- nrow(png)
+      # compute preview url
+      metadata$preview_url <- url_path(metadata$base_url, metadata$preview)
+
+      # if it's a png then determine it's dimensions
+      if (is_file_type(metadata_path, "png")) {
+        png <- png::readPNG(metadata_path)
+        metadata$preview_width <- ncol(png)
+        metadata$preview_height <- nrow(png)
+      }
     }
   }
 
