@@ -91,6 +91,7 @@ track_site_outputs <- function(output_dir) {
 
 add_site_output <- function(file) {
   .site_outputs$files <- c(.site_outputs$files, file)
+  file
 }
 
 remove_site_outputs <- function() {

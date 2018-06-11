@@ -209,7 +209,7 @@ render_collection_article_post_processor <- function(encoding_fn) {
       )
 
       # update the article index and regenerate listing
-      update_collection_listing(site_dir, site_config, collection, article)
+      update_collection_listing(site_dir, site_config, collection, article, encoding)
 
       # return the output_file w/ an attribute indicating that
       # base post processing should be done on both the new
@@ -221,7 +221,7 @@ render_collection_article_post_processor <- function(encoding_fn) {
   }
 }
 
-update_collection_listing <- function(site_dir, site_config, collection, article) {
+update_collection_listing <- function(site_dir, site_config, collection, article, encoding) {
 
   # path to collection index
   collection_index <- file.path(site_dir, site_config$output_dir, collection$name,
@@ -244,7 +244,7 @@ update_collection_listing <- function(site_dir, site_config, collection, article
   }
 
   # sort the articles in reverse-chronological order
-  indexes <- order(sapply(articles, function(x) x$date), decreasing = TRUE)
+  indexes <- order(sapply(articles, function(x) as.Date(x$date)), decreasing = TRUE)
   articles <- articles[indexes]
 
   # filter articles on path existing (in case of a rename)
@@ -254,7 +254,53 @@ update_collection_listing <- function(site_dir, site_config, collection, article
   # re-write the index
   write_articles_info(articles, collection_index)
 
-  #
+  # see if we need to re-write a listing (look an index.Rmd first then <collection>.Rmd)
+  input_files <- list.files(site_dir, pattern = "^[^_].*\\.[Rr]?md$")
+  input_files <- unique(c("index.Rmd", file_with_ext(collection$name, "Rmd"), input_files))
+  input_files <- input_files[file.exists(file.path(site_dir, input_files))]
+
+  # check for listings
+  old_wd <- setwd(site_dir)
+  on.exit(setwd(old_wd), add = TRUE)
+  for (input_file in input_files) {
+
+    # does this Rmd include a listing for this collection?
+    metadata <- yaml_front_matter(input_file, encoding)
+    if (!is.null(metadata$listing) &&
+        identical(metadata$listing$collection, collection$name)) {
+
+      # update it
+      listing <- generate_listing(
+        input_file,
+        site_config,
+        collection,
+        articles,
+        options = metadata$listing
+      )
+
+      # move feed
+      if (site_config$output_dir != ".") {
+        file.rename(listing$feed,
+                    file.path(site_config$output_dir, basename(listing$feed)))
+      }
+
+      # replace listing html
+      html_file <- file_with_ext(file.path(site_config$output_dir, input_file), "html")
+      if (file.exists(html_file)) {
+        html_content <- readChar(html_file,
+                                 nchars = file.info(html_file)$size,
+                                 useBytes = TRUE)
+        listing_html <- strip_trailing_newline(
+          readChar(listing$html,
+                   nchars = file.info(listing$html)$size,
+                   useBytes = TRUE)
+        )
+        html_content <- fill_placeholder(html_content, "article_listing", listing_html)
+        writeChar(html_content, html_file, eos = NULL, useBytes = TRUE)
+      }
+    }
+
+  }
 
 }
 
@@ -349,14 +395,21 @@ render_collection_article <- function(site_dir, site_config, article,
   # strip trailing newline if requested (this is necessary so that we can ensure
   # that incremental vs. render_site output is identical so as to not generate
   # spurious diffs)
-  if (strip_trailing_newline && grepl("\n$", index_content))
-    index_content <- substring(index_content, 1, nchar(index_content) - 1)
+  if (strip_trailing_newline)
+    index_content <- strip_trailing_newline(x)
 
   # write the contet
   writeLines(index_content, index_html, useBytes = TRUE)
 
   # return path to rendered article
   index_html
+}
+
+strip_trailing_newline <- function(x) {
+  if (grepl("\n$", x))
+    substring(x, 1, nchar(x) - 1)
+  else
+    x
 }
 
 collection_article_site_path <- function(site_dir, article_path) {
