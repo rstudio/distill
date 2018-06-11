@@ -7,21 +7,31 @@ resolve_listing <- function(input_file, site_config, metadata) {
   if (is.null(collection))
     stop("You must specify a collection for listing pages", call. = FALSE)
 
-  generate_listing(input_file, site_config, collection, metadata$listing)
+  # get articles
+  articles <- articles_info(dirname(input_file), collection)
+
+  # generate listing
+  generate_listing(
+    input_file,
+    site_config,
+    collection,
+    articles,
+    metadata$listing
+  )
 }
 
 generate_listing <- function(input_file,
                              site_config,
                              collection,
+                             articles,
                              options = list()) {
 
   # validate that the collection exists
   site_dir <- dirname(input_file)
   as_collection_dir(site_dir, collection)
 
-  # get the collection and article metadata
+  # get the collection metadata
   collection <- site_collections(site_dir, site_config)[[as_collection_name(collection)]]
-  articles <- article_listing(site_dir, collection)
 
   # check for and enforce a limit on feed items (defaults to 20)
   feed_articles <- articles
@@ -195,9 +205,8 @@ write_feed_xml <- function(feed_xml, site_config, collection, articles) {
 
 }
 
-
-article_listing <- function(site_dir, collection) {
-  collection <- collection$name
+articles_info <- function(site_dir, collection) {
+  collection <- as_collection_name(collection)
   collection_dir <- as_collection_dir(site_dir, collection)
   articles_json <- file.path(site_dir, collection_dir, file_with_ext(collection, "json"))
   if (!file.exists(articles_json))
