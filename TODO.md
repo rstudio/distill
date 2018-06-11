@@ -1,6 +1,7 @@
 
 
-- Consider incremental rendering 
+- Test multi-level collection documents
+- Test external preview urls
 
 - publish_website function
 - ide publish button for collections should publish website
@@ -8,10 +9,7 @@
 - Encourage/document date prefix for post names
 - Ensure that collection articles have a date
 
-- Test multi-level collection documents
-- Test external preview urls
-
-- generate sitemap
+- generate sitemap (incremental, may want to use nested sitemaps)
 
 - packrat ignore Rmds in collection subfolders
 
