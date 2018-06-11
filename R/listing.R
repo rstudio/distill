@@ -80,7 +80,9 @@ article_listing_html <- function(collection, articles) {
   })
 
   # wrap in a div
-  div(class = "posts-list l-page", articles_html)
+  placeholder_html("article_listing",
+    div(class = "posts-list l-page", articles_html)
+  )
 }
 
 
