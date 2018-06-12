@@ -548,7 +548,8 @@ article_info <- function(site_dir, collection, article) {
       )
     }),
     date = article$metadata$date,
-    preview = article$metadata$preview
+    preview = article$metadata$preview,
+    last_modified = time_as_iso_8601(file.info(article$path)$mtime)
   )
 
   info$preview_width <- article$metadata$preview_width

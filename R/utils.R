@@ -56,14 +56,23 @@ parse_date <- function(date) {
   date
 }
 
+time_as_iso_8601 <- function(time) {
+  time <- format.Date(time, "%Y-%m-%dT%H:%M:%S%z")
+  fixup_iso_timezone(time)
+}
+
 date_as_iso_8601 <- function(date, date_only = FALSE) {
   if (date_only)
     format.Date(date, "%Y-%m-%d")
   else {
     date_text <- format.Date(date, "%Y-%m-%dT00:00:00.000%z")
-    date_text <- sub("(\\d{2})(\\d{2})$", "\\1:\\2", date_text)
+    date_text <- fixup_iso_timezone(date_text)
     date_text
   }
+}
+
+fixup_iso_timezone <- function(time) {
+  sub("(\\d{2})(\\d{2})$", "\\1:\\2", time)
 }
 
 date_today <- function() {
