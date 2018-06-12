@@ -114,6 +114,11 @@ render_collection <- function(site_dir, site_config, collection,
   file.copy(from = collection_json_path(site_dir, collection),
             to = collection_output)
 
+  # write sitemap
+  sitemap_xml <- file.path(collection_output, "sitemap.xml")
+  articles <- to_article_info(site_dir, collection[["articles"]])
+  write_sitemap_xml(sitemap_xml, site_dir, site_config, articles)
+
   # process articles in collection
   lapply(collection$articles, function(article) {
     render_collection_article(
@@ -239,7 +244,7 @@ update_collection_listing <- function(site_dir, site_config, collection, article
   articles <- jsonlite::read_json(collection_index)
 
   # either edit the index or add a new entry at the appropriate place
-  article_info <- article_info(site_dir, collection, article)
+  article_info <- article_info(site_dir, article)
   idx <- Position(function(x) identical(x$path, article_info$path), articles)
   if (!is.na(idx)) {
     articles[[idx]] <- article_info
@@ -257,6 +262,10 @@ update_collection_listing <- function(site_dir, site_config, collection, article
 
   # re-write the index
   write_articles_info(articles, collection_index)
+
+  # re-write the sitemap
+  sitemap_xml <- file.path(dirname(collection_index), "sitemap.xml")
+  write_sitemap_xml(sitemap_xml, site_dir, site_config, articles)
 
   # see if we need to re-write a listing (look an index.Rmd first then <collection>.Rmd)
   input_files <- list.files(site_dir, pattern = "^[^_].*\\.[Rr]?md$")
@@ -518,15 +527,22 @@ write_collections_metadata <- function(site_dir, collections) {
 write_collection_metadata <- function(site_dir, collection) {
 
   # tranform to article info
-  articles <- lapply(collection[["articles"]], function(article) {
-    article_info(site_dir, collection, article)
-  })
+  articles <- to_article_info(site_dir, collection[["articles"]])
 
+  # write
   write_articles_info(articles, collection_json_path(site_dir, collection))
 
 }
 
+to_article_info <- function(site_dir, articles) {
+  lapply(articles, function(article) {
+    article_info(site_dir, article)
+  })
+}
+
 write_articles_info <- function(articles, path) {
+
+  # write json
   jsonlite::write_json(
     articles,
     path,
@@ -535,7 +551,7 @@ write_articles_info <- function(articles, path) {
   )
 }
 
-article_info <- function(site_dir, collection, article) {
+article_info <- function(site_dir, article) {
 
   info <- list(
     path = paste0(url_path(article_site_path(site_dir, article$path)), "/"),

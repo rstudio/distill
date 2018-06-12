@@ -85,6 +85,52 @@ article_listing_html <- function(collection, articles) {
   )
 }
 
+# <?xml version="1.0" encoding="utf-8"?>
+# <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
+#         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+#         xsi:schemaLocation="http://www.sitemaps.org/schemas/sitemap/0.9 http://www.sitemaps.org/schemas/sitemap/0.9/sitemap.xsd">
+#   <url>
+#     <loc>http://example.com/</loc>
+#     <lastmod>2006-11-18</lastmod>
+#     <changefreq>daily</changefreq>
+#     <priority>0.8</priority>
+#   </url>
+# </urlset>
+
+
+write_sitemap_xml <- function(sitemap_xml, site_dir, site_config, articles) {
+
+  # don't write sitemap unless we have a base_url
+  if (is.null(site_config$base_url))
+    return()
+
+  # create document root
+  urlset <- xml2::xml_new_root(
+    "urlset",
+    "xmlns" = "http://www.sitemaps.org/schemas/sitemap/0.9",
+    "xmlns:xsi" = "http://www.w3.org/2001/XMLSchema-instance",
+    "xsi:schemaLocation" = "http://www.sitemaps.org/schemas/sitemap/0.9 http://www.sitemaps.org/schemas/sitemap/0.9/sitemap.xsd",
+    version = "1.0"
+  )
+
+  for(article in articles) {
+
+    # url
+    url <- xml2::xml_add_child(urlset, "url")
+
+    # loc
+    loc <- xml2::xml_add_child(url, "loc")
+    xml2::xml_set_text(loc, paste0(url_path(site_config$base_url, article$path), "/"))
+
+    # lastmod
+    lastmod <- xml2::xml_add_child(url, "lastmod")
+    xml2::xml_set_text(lastmod, article$last_modified)
+  }
+
+  # write the feed file
+  xml2::write_xml(urlset, sitemap_xml)
+
+}
 
 write_feed_xml <- function(feed_xml, site_config, collection, articles) {
 
