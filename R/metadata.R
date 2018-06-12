@@ -45,12 +45,8 @@ transform_metadata <- function(file, site_config, collection_config, metadata, a
   if (!is.null(site_config[["base_url"]])) {
     base_url <- strip_trailing_slash(site_config$base_url)
     site_dir <- find_site_dir(file)
-    file_relative <- rmarkdown::relative_to(
-      normalize_path(site_dir),
-      normalize_path(file)
-    )
-    file_relative <- sub("^_", "", file_relative)
-    metadata$base_url <- url_path(base_url, dirname(file_relative))
+    article_path <- article_site_path(site_dir, file)
+    metadata$base_url <- url_path(base_url, article_path)
   }
 
   # helper to extract mergable metadata

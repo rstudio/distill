@@ -1,8 +1,5 @@
 
 
-- Test multi-level collection documents
-- Test external preview urls
-
 - publish_website function
 - ide publish button for collections should publish website
 

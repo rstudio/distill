@@ -235,7 +235,7 @@ update_collection_listing <- function(site_dir, site_config, collection, article
   articles <- jsonlite::read_json(collection_index)
 
   # either edit the index or add a new entry at the appropriate place
-  article_info <- article_info(collection, article)
+  article_info <- article_info(site_dir, collection, article)
   idx <- Position(function(x) identical(x$path, article_info$path), articles)
   if (!is.na(idx)) {
     articles[[idx]] <- article_info
@@ -396,7 +396,7 @@ render_collection_article <- function(site_dir, site_config, article,
   # that incremental vs. render_site output is identical so as to not generate
   # spurious diffs)
   if (strip_trailing_newline)
-    index_content <- strip_trailing_newline(x)
+    index_content <- strip_trailing_newline(index_content)
 
   # write the contet
   writeLines(index_content, index_html, useBytes = TRUE)
@@ -515,7 +515,7 @@ write_collection_metadata <- function(site_dir, collection) {
 
   # tranform to article info
   articles <- lapply(collection[["articles"]], function(article) {
-    article_info(collection, article)
+    article_info(site_dir, collection, article)
   })
 
   write_articles_info(articles, collection_json_path(site_dir, collection))
@@ -531,11 +531,10 @@ write_articles_info <- function(articles, path) {
   )
 }
 
-article_info <- function(collection, article) {
+article_info <- function(site_dir, collection, article) {
 
-  list(
-    path = paste0(url_path(as_collection_name(collection),
-                           basename(dirname(article$path))), "/"),
+  info <- list(
+    path = paste0(url_path(article_site_path(site_dir, article$path)), "/"),
     title = article$metadata$title,
     description = article$metadata$description,
     author = lapply(article$metadata$author, function(author) {
@@ -545,10 +544,13 @@ article_info <- function(collection, article) {
       )
     }),
     date = article$metadata$date,
-    preview = article$metadata$preview,
-    preview_width = article$metadata$preview_width,
-    preview_height = article$metadata$preview_height
+    preview = article$metadata$preview
   )
+
+  info$preview_width <- article$metadata$preview_width
+  info$preview_height <- article$metadata$preview_height
+
+  info
 }
 
 
@@ -622,6 +624,16 @@ site_collections <- function(site_dir, site_config) {
 collection_file_offset <- function(file) {
   offset_dirs <- length(strsplit(file, "/")[[1]]) - 1
   paste(rep_len("..", offset_dirs), collapse = "/")
+}
+
+
+article_site_path <- function(site_dir, article) {
+  article_relative <- rmarkdown::relative_to(
+    normalize_path(site_dir),
+    normalize_path(article)
+  )
+  article_relative <- sub("^_", "", article_relative)
+  dirname(article_relative)
 }
 
 
