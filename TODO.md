@@ -5,8 +5,6 @@
 - ide publish button for collections should publish website
 - ide publish button for pages should publish/re-publish website
 
-- Ensure that collection articles have a date
-
 - generate sitemap (incremental, may want to use nested sitemaps)
 
 - packrat ignore Rmds in collection subfolders

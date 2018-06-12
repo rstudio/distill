@@ -66,6 +66,10 @@ date_as_iso_8601 <- function(date, date_only = FALSE) {
   }
 }
 
+date_today <- function() {
+  as.character(Sys.Date(), format = "%m-%d-%Y")
+}
+
 date_as_rfc_2822 <- function(date) {
   date <- as.Date(date, tz = "UTC")
   as.character(date, format = "%a, %d %b %Y %H:%M:%S %z", tz = "UTC")

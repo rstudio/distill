@@ -182,6 +182,10 @@ render_collection_article_post_processor <- function(encoding_fn) {
 
     } else {
 
+      # provide default date if we need to
+      if (is.null(metadata[["date"]]))
+        metadata$date <- date_today()
+
       # transform metadata for site
       metadata <- transform_metadata(
         article_path,

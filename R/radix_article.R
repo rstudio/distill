@@ -87,12 +87,26 @@ radix_article <- function(fig_width = 6,
     # compute knitr output file
     output_file <- file_with_meta_ext(input_file, "knit", "md")
 
+    # normalize site config and see if we are in a collection
+    in_collection <- FALSE
+    site_config <<- site_config(input_file, encoding)
+    if (is.null(site_config)) {
+
+      # default site_config to empty
+      site_config <<- list()
+
+      # set in_collection flag
+      in_collection <- !is.null(find_site_dir(input_file))
+    }
+
+    # provide a default date of today for in_collection
+    if (is.null(metadata[["date"]]) && in_collection) {
+      metadata$date <- date_today()
+      args <- c(args, pandoc_variable_arg("date", metadata$date))
+    }
+
     # metadata to json (do this before transforming)
     metadata_json <- embedded_metadata(metadata)
-
-    site_config <<- site_config(input_file, encoding)
-    if (is.null(site_config))
-      site_config <<- list()
 
     # transform configuration
     c(site_config, metadata) %<-% transform_configuration(
@@ -102,13 +116,6 @@ radix_article <- function(fig_width = 6,
       metadata = metadata,
       auto_preview = !self_contained
     )
-
-    # forward the date
-    if (!is.null(metadata$date)) {
-      args <- c(args,
-        pandoc_variable_arg("date", format.Date(metadata$date, "%m-%d-%Y"))
-      )
-    }
 
     # special handling for listing pages
     listing <- list()
