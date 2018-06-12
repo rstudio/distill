@@ -71,7 +71,8 @@ transform_metadata <- function(file, site_config, collection_config, metadata, a
     metadata$canonical_url <- metadata$citation_url
 
   # parse dates
-  metadata$date <- parse_date(metadata$date)
+  article_dir <- basename(normalize_path(dirname(file)))
+  metadata$date <- resolve_date(article_dir, metadata$date)
   metadata$updated <- parse_date(metadata$updated)
 
   if (!is.null(metadata$date)) {

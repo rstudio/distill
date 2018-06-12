@@ -33,9 +33,23 @@ with_tz <- function(x, tzone = "") {
   as.POSIXct(as.POSIXlt(x, tz = tzone))
 }
 
+resolve_date <- function(article_dir, date) {
+
+  # if the date is null then see if the input_file has a date embedded in it's prefix
+  if (is.null(date)) {
+    if (grepl("^\\d{4}-\\d\\d?-\\d\\d?-", article_dir))
+      date <- paste(strsplit(article_dir, "-")[[1]][1:3], collapse = "-")
+  }
+
+  # parse date
+  parse_date(date)
+}
+
 parse_date <- function(date) {
   if (!is.null(date)) {
     parsed_date <- lubridate::mdy(date, tz = Sys.timezone(), quiet = TRUE)
+    if (is.na(parsed_date))
+      parsed_date <- lubridate::ymd(date, tz = Sys.timezone(), quiet = TRUE)
     if (lubridate::is.POSIXct(parsed_date))
       date <- parsed_date
   }

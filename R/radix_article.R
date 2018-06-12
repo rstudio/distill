@@ -103,6 +103,13 @@ radix_article <- function(fig_width = 6,
       auto_preview = !self_contained
     )
 
+    # forward the date
+    if (!is.null(metadata$date)) {
+      args <- c(args,
+        pandoc_variable_arg("date", format.Date(metadata$date, "%m-%d-%Y"))
+      )
+    }
+
     # special handling for listing pages
     listing <- list()
     if (!is.null(metadata$listing)) {

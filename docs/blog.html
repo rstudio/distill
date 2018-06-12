@@ -566,6 +566,17 @@ listing:
   feed_items_max: 50
 ---</code></pre>
 <p>Specify <code>feed_items_max: false</code> to have no limit on the number of items included in the feed.</p>
+<h2 id="organizing-posts">Organizing posts</h2>
+<p>You can use whatever scheme you like to organize the <code>_posts</code> directory. You can have all posts at the top level or you can create subdirectories to create groupings of posts.</p>
+<p>One popular scheme for organizing blog posts is to use a date prefix for the post directory names. For example:</p>
+<pre class="markup"><code>
+_posts/
+  2017-11-09-visualizing-asset-returns/
+  2017-09-13-asset-volatility/
+  2017-03-07-quandl-and-forecasting/
+  2016-11-08-sharpe_ratio/</code></pre>
+<p>The benefits of this scheme are that post names are given additional uniqueness (to guard against colliding names over the long term) and are also automatically listed in order when browsing the <code>_posts</code> directory.</p>
+<p>Note that if you use a date-prefixed post directory you are not required to specify an explicit <code>date</code> field within your post’s metadata.</p>
 <h2 id="post-drafts">Post drafts</h2>
 <p>If you want to work on a post for a period of time without having it be added to the listing page, add <code>draft: true</code> to the post’s metadata. For example:</p>
 <pre class="markup"><code>
