@@ -475,18 +475,16 @@ Publishing
 <p>Below we describe several convenient options for Radix website deployment including <a href="#rstudio-connect">RStudio Connect</a>, <a href="#github-pages">GitHub Pages</a>, <a href="#netlify">Netlify</a>, <a href="#firebase">Firebase</a>, <a href="#site44">Site44</a>, and <a href="#amazon-s3">Amazon S3</a>. We’ll mostly defer to the documentation provided by the various services, but will note any Radix website specific configuration required.</p>
 <h2 id="rstudio-connect">RStudio Connect</h2>
 <p><a href="https://www.rstudio.com/products/connect/">RStudio Connect</a> is a server product from RStudio for secure sharing of websites, applications, reports, and plots.</p>
-<p>You can publish a Radix website directly to an RStudio Connect server from within the website preview window by clicking the <strong>Publish</strong> button:</p>
+<p>You can deploy a Radix website to RStudio Connect from the command line using the <code>radix::publish_website()</code> function. For example:</p>
+<pre class="r"><code>
+library(radix)
+publish_website(server = &quot;https://rsc.example.com&quot;)</code></pre>
+<p>Note that once you’ve published your site for the first time you can omit the <code>server</code> argument:</p>
+<pre class="r"><code>
+publish_website()</code></pre>
+<p>You can also publish a Radix website directly to an RStudio Connect server from within the website preview window by clicking the <strong>Publish</strong> button:</p>
 <p><img src="images/rstudio-connect.png" class="screenshot" style="width:95.0%" /></p>
 <p>Note that you can either publish your website with the source code (so it can be regenerated on a scheduled basis) or publish a copy of the website you built locally. Generally publishing a copy is more straightforward so that’s the recommended option unless you have specialized requirements.</p>
-<p>You can also deploy a Radix website to RStudio Connect from the command line using the <code>rsconnect::deploySite()</code> function. For example:</p>
-<pre class="r"><code>
-library(rsconnect)
-deploySite()</code></pre>
-<p>This example assumes you want to publish the site as it currently exists and publish to the default RStudio Connect account you’ve setup on your workstation.</p>
-<p>You can customize the deployment target using the <code>account</code> option and force a re-render of the site before publishing using the <code>render</code> option. For example:</p>
-<pre class="r"><code>
-library(rsconnect)
-deploySite(account = &quot;dsmith&quot;, render = &quot;local&quot;)</code></pre>
 <p>Unlike the other website publishing options described below, <a href="https://www.rstudio.com/products/connect/">RStudio Connect</a> is a server that you run inside an organization, so is suitable for publishing content that you only want visible within your organization’s network as opposed to visible to the entire internet.</p>
 <h2 id="github-pages">GitHub Pages</h2>
 <p><a href="https://pages.github.com/">GitHub Pages</a> is a service that lets you publish a website from any GitHub repository. There are two additional configuration steps required to host a Radix website using GitHub Pages:</p>
