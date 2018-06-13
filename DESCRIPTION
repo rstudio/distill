@@ -43,5 +43,6 @@ Suggests:
     r2d3,
     DiagrammeR,
     shiny,
-    spelling
+    spelling,
+    rsconnect
 Language: en-US

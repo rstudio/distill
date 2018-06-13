@@ -26,7 +26,10 @@ publish_website <- function(site_dir = ".", site_name = NULL,
   if (identical(method, "rsconnect")) {
 
     # confirm that we have rsconnect
-    if (!requireNamespace("rsconnect"))
+    if (!requireNamespace("rsconnect", quietly = FALSE)) {
+      stop("The rsconnect package is required to publish websites. ",
+           "Please install rsconnect with install.packages(\"rsconnect\")")
+    }
 
     # check for non shinyapps.io accounts
     accounts <- rsconnect::accounts()
@@ -95,7 +98,7 @@ publish_website <- function(site_dir = ".", site_name = NULL,
     # deploy site
     rsconnect::deploySite(
       siteDir = site_dir,
-      siteName = name,
+      siteName = site_name,
       account = account,
       server = server,
       render = if (render) "local" else "none",

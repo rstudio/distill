@@ -1,6 +1,5 @@
 
 
-- publish_website function
 
 - ide publish button for collections should publish website
 - ide publish button for pages should publish/re-publish website
@@ -34,6 +33,8 @@
     - publishing/previewing workflow?
     - app.R or ui.R / server.R in the same directory; automagic local run
     - Full bleed media objects (videos, docs (http://viewerjs.org/), etc.)
+
+- embed observable notebook cells
 
 - Embedded article workflow:
 
