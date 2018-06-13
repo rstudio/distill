@@ -38,6 +38,7 @@ site_includes_html<- function(site_config, context) {
       header_html <<- includes_as_html(output_options, "in_header")
       css_html <<- css_as_html(output_options)
     })
+    header_html <- tagList(header_html, site_header_extras(site_config))
     placeholder_html("site_in_header", header_html, css_html)
   } else {
     includes_html <- with_radix_output_options(site_config, function(output_options) {
@@ -45,6 +46,31 @@ site_includes_html<- function(site_config, context) {
     })
     placeholder_html(paste0("site_", context), includes_html)
   }
+}
+
+site_header_extras <- function(site_config) {
+
+  # google analytics
+  google_analytics <- NULL
+  if (!is.null(site_config$google_analytics)) {
+    google_analytics <- tagList(
+      tags$script(async = NA,
+                  src = sprintf("https://www.googletagmanager.com/gtag/js?id=%s",
+                                site_config$google_analytics)),
+      tags$script(HTML(paste(sep = "\n",
+        "\nwindow.dataLayer = window.dataLayer || [];",
+        "function gtag(){dataLayer.push(arguments);}",
+        "gtag('js', new Date());",
+        sprintf("gtag('config', '%s');\n", site_config$google_analytics)
+      )))
+    )
+  }
+
+  # return extras
+  tagList(
+    google_analytics
+  )
+
 }
 
 

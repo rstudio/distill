@@ -645,6 +645,18 @@ navbar:
 output:
   radix::radix_article:
     css: styles.css</code></pre>
+<h2 id="google-analytics">Google analytics</h2>
+<p>You can add <a href="https://analytics.google.com/">Google Analytics</a> to your website by adding a <code>google_analytics</code> tracking ID to your <code>_site.yml</code> file. For example:</p>
+<p><strong>_site.yml</strong></p>
+<pre class="markup"><code>
+name: &quot;radix&quot;
+title: &quot;Radix for R Markdown&quot;
+base_url: https://radixpub.github.io/radix-r
+google_analytics: &quot;UA-77306155-2&quot;
+navbar:
+  # (navbar definition here)
+output: radix::radix_article</code></pre>
+<p>The Google Analytics tracking code will be automatically included on all pages of your website.</p>
 <h2 id="site-metadata">Site metadata</h2>
 <p>Radix articles can include various types of <a href="metadata.html">metadata</a> to make them easier to index, cite, and share. Metadata included within your <code>_site.yml</code> file is conveniently shared across all articles on your site (individual articles can always override any value within their own metadata).</p>
 <p>Several metadata values which you might find useful to define in <code>_site.yml</code> are:</p>

@@ -251,6 +251,24 @@ output:
     css: styles.css
 ```
 
+## Google analytics
+
+You can add [Google Analytics](https://analytics.google.com/) to your website by adding a `google_analytics` tracking ID to your `_site.yml` file. For example:
+
+**\_site.yml**
+
+```markup
+name: "radix"
+title: "Radix for R Markdown"
+base_url: https://radixpub.github.io/radix-r
+google_analytics: "UA-77306155-2"
+navbar:
+  # (navbar definition here)
+output: radix::radix_article
+```
+
+The Google Analytics tracking code will be automatically included on all pages of your website.
+
 ## Site metadata
 
 Radix articles can include various types of [metadata](metadata.html) to make them easier to index, cite, and share. Metadata included within your `_site.yml` file is conveniently shared across all articles on your site (individual articles can always override any value within their own metadata). 
@@ -285,6 +303,7 @@ output: radix::radix_article
 ```
 
 Be sure to enclose Twitter account names in quotes (this is required because they start with `@`).
+
 
 ## Publishing
 

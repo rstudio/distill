@@ -5,6 +5,7 @@ description: |
 creative_commons: CC BY
 base_url: https://beta.rstudioconnect.com/content/3776/
 favicon: images/favicon.png
+google_analytics: "UA-77306155-2"
 navbar:
   logo: images/rstudio.png
   right:
