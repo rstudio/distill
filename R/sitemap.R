@@ -24,7 +24,8 @@ write_sitemap_xml <- function(site_dir, site_config) {
 
     # loc
     loc <- xml2::xml_add_child(url, "loc")
-    xml2::xml_set_text(loc, paste0(site_config$base_url, article$path))
+    xml2::xml_set_text(loc, paste0(ensure_trailing_slash(site_config$base_url),
+                                   article$path))
 
     # lastmod
     lastmod <- xml2::xml_add_child(url, "lastmod")

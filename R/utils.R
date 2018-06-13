@@ -116,6 +116,12 @@ strip_trailing_slash <- function(url) {
   sub("/+$", "", url)
 }
 
+ensure_trailing_slash <- function(url) {
+  if (!endsWith(url, "/"))
+    url <- paste0(url, "/")
+  url
+}
+
 url_path <- function(...) {
   args <- lapply(list(...), strip_trailing_slash)
   args$fsep <- "/"
