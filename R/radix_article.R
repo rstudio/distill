@@ -109,13 +109,15 @@ radix_article <- function(fig_width = 6,
     metadata_json <- embedded_metadata(metadata)
 
     # transform configuration
-    c(site_config, metadata) %<-% transform_configuration(
+    transformed <-  transform_configuration(
       file = output_file,
       site_config = site_config,
       collection_config = NULL,
       metadata = metadata,
       auto_preview = !self_contained
     )
+    site_config <- transformed$site_config
+    metadata <- transformed$metadata
 
     # special handling for listing pages
     listing <- list()

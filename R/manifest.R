@@ -7,10 +7,13 @@ manifest_in_header <- function(site_config, input_file, metadata, self_contained
 
     # get optional lists of includes/excludes
     resources <- metadata$resources
-    if (!is.null(resources))
-      c(include, exclude) %<-% list(resources$include, resources$exclude)
-    else
-      c(include, exclude) %<-% list(NULL, NULL)
+    if (!is.null(resources)) {
+      include <- resources$include
+      exclude <- resources$exclude
+    } else {
+      include <- NULL
+      exclude <- NULL
+    }
 
     # enumerate resources
     resources <- site_resources(

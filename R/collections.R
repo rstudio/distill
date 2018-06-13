@@ -161,7 +161,7 @@ render_collection_article_post_processor <- function(encoding_fn) {
     )
     in_collection <- startsWith(input_file_relative, paste0("_", names(collections), "/"))
     if (!any(in_collection))
-      return(ouput_file)
+      return(output_file)
 
     # get the collection
     collection <- collections[[which(in_collection)]]
@@ -337,10 +337,13 @@ render_collection_article <- function(site_dir, site_config, article,
 
   # copy files to output directory
   resources <- article$metadata$resources
-  if (!is.null(resources))
-    c(include, exclude) %<-% list(resources$include, resources$exclude)
-  else
-    c(include, exclude) %<-% list(NULL, NULL)
+  if (!is.null(resources)) {
+    include <- resources$include
+    exclude <- resources$exclude
+  } else {
+    include <- NULL
+    exclude <- NULL
+  }
   rmd_resources <- site_resources(
     site_dir = dirname(article$path),
     include = include,

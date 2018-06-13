@@ -178,7 +178,7 @@ merge_output_options <- function(base_options,
     if (is.null(target)) {
       list()
     } else if (is.character(target)) {
-      setNames(lapply(target, function(x) list()), target)
+      stats::setNames(lapply(target, function(x) list()), target)
     } else {
       target[names(target) != "..."]  # remove symbols (...) from list
     }

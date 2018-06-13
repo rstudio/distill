@@ -9,6 +9,9 @@
 #' @param site_name Name for the site (names must be unique within an account). Defaults
 #'   to the `name` provided in `_site.yml` (or to the name of the site_dir if there is no
 #'   `name` specified).
+#' @param account Account to deploy application to. This parameter is only required for
+#'   the initial deployment of an application when there are multiple accounts configured
+#'   on the system.
 #' @param method Publishing method (currently only "rsconnect" is available)
 #' @param render `TRUE` to render the site locally before publishing.
 #' @param launch_browser If `TRUE`, the system's default web browser will be launched
@@ -74,7 +77,7 @@ publish_website <- function(site_dir = ".", site_name = NULL,
 
         # create server if we need to
         servers <- rsconnect::servers()
-        if (nrow(subset(servers, name == server)) == 0) {
+        if (nrow(subset(servers, servers$name == server)) == 0) {
 
           rsconnect::addServer(sprintf("%s/__api__", server_with_protocol), server)
         }

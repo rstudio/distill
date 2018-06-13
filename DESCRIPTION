@@ -23,6 +23,7 @@ LazyData: true
 RoxygenNote: 6.0.1
 Imports: 
     utils, 
+    stats,
     tools, 
     rmarkdown (>= 1.9.18), 
     htmltools, 
@@ -31,7 +32,6 @@ Imports:
     png, 
     mime, 
     rstudioapi, 
-    zeallot, 
     rprojroot,
     xml2,
     base64enc
@@ -43,6 +43,5 @@ Suggests:
     r2d3,
     DiagrammeR,
     shiny,
-    spelling,
     rsconnect
 Language: en-US

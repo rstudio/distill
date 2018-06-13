@@ -20,9 +20,9 @@ to the `name` provided in `_site.yml` (or to the name of the site_dir if there i
 \item{server}{Server name. Required only if you use the same account name on
 multiple servers.}
 
-\item{account}{Account to deploy application to. This parameter is only
-required for the initial deployment of an application when there are
-multiple accounts configured on the system (see \link{accounts}).}
+\item{account}{Account to deploy application to. This parameter is only required for
+the initial deployment of an application when there are multiple accounts configured
+on the system.}
 
 \item{render}{`TRUE` to render the site locally before publishing.}
 
