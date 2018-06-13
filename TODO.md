@@ -1,8 +1,13 @@
 
 
+- table of contents
+
+- disqus commenting (conditional loading based on localhost/file)
+- built-in social buttons (in footer alongside comments? perhaps use fontawesome pkg)
+
 - index/category/archive pages (categories should be inline)
 - email subscription (http://www.wpbeginner.com/opinion/stop-using-feedburner-move-to-feedburner-alternatives/)
-- disqus commenting (conditional loading based on localhost/file)
+
 - search
 - rstudio addins/templates/projects for article creation
    - Created with link in footer
@@ -11,8 +16,6 @@
 - ide publish button for pages should publish/re-publish website
 
 - packrat ignore Rmds in collection subfolders
-
-- built-in social buttons (in footer alongside comments? perhaps use fontawesome pkg)
 
 - Add some citations to sample posts
 

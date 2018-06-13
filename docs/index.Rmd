@@ -35,7 +35,9 @@ Radix is an online publication format designed for scientific and technical comm
 - Attractively rendered [tables](tables.html) with optional support for pagination.
 - Support for a wide variety of [diagramming tools](diagrams.html) for illustrating concepts.
 - The ability to incorporate JavaScript and D3-based [interactive visualizations](interactivity.html).
-- A variety of ways to [publish articles](publish_article.html), including support for publishing collections or articles as a [Radix website](publish_website.html).
+- A variety of ways to [publish articles](publish_article.html), including support for publishing sets of articles as a [Radix website](website.html).
+- The ability to [create a blog](blog.html) composed of a collection of Radix articles.
+
 
 Radix is based on the [Distill web framework](https://github.com/distillpub/template), which was originally created for use in the Distill Machine Learning Journal [@distill]. Radix combines the technical authoring features of Distill with [R Markdown](https://rmarkdown.rstudio.com/), enabling a fully reproducible workflow based on literate programming [@knuth1984].
 
