@@ -1,9 +1,13 @@
 
-write_sitemap_xml <- function(sitemap_xml, site_dir, site_config, articles) {
+write_sitemap_xml <- function(site_dir, site_config) {
 
   # don't write sitemap unless we have a base_url
   if (is.null(site_config$base_url))
     return()
+
+  # path to sitemap
+  site_output_dir <- file.path(site_dir, site_config$output_dir)
+  sitemap_xml <- file.path(site_output_dir, "sitemap.xml")
 
   # create document root
   urlset <- xml2::xml_new_root(
@@ -13,19 +17,43 @@ write_sitemap_xml <- function(sitemap_xml, site_dir, site_config, articles) {
     "xsi:schemaLocation" = "http://www.sitemaps.org/schemas/sitemap/0.9 http://www.sitemaps.org/schemas/sitemap/0.9/sitemap.xsd",
     version = "1.0"
   )
-
-  for(article in articles) {
-
+  # add an article to the urlset
+  add_article <- function(article) {
     # url
     url <- xml2::xml_add_child(urlset, "url")
 
     # loc
     loc <- xml2::xml_add_child(url, "loc")
-    xml2::xml_set_text(loc, paste0(url_path(site_config$base_url, article$path), "/"))
+    xml2::xml_set_text(loc, paste0(site_config$base_url, article$path))
 
     # lastmod
     lastmod <- xml2::xml_add_child(url, "lastmod")
     xml2::xml_set_text(lastmod, article$last_modified)
+  }
+
+  # enumerate articles at the top level
+  input_files <- list.files(site_dir, pattern = "^[^_].*\\.[Rr]?md$")
+  html_files <- lapply(input_files, function(file) {
+    list(
+      path = file_with_ext(file, "html"),
+      last_modified = time_as_iso_8601(file.info(file.path(site_dir, file))$mtime)
+    )
+  })
+  # filter on existence
+  html_files <- Filter(function(x) file.exists(file.path(site_output_dir, x$path)),
+                       html_files)
+
+  # add articles
+  lapply(html_files, add_article)
+
+  # enumerate collections
+  collections <- site_collections(site_dir, site_config)
+  for (collection in collections) {
+    articles_json <- file.path(site_output_dir,
+                               collection$name,
+                               file_with_ext(collection$name, "json"))
+    if (file.exists(articles_json))
+      lapply(jsonlite::read_json(articles_json), add_article)
   }
 
   # write the feed file

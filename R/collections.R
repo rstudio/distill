@@ -114,11 +114,6 @@ render_collection <- function(site_dir, site_config, collection,
   file.copy(from = collection_json_path(site_dir, collection),
             to = collection_output)
 
-  # write sitemap
-  sitemap_xml <- file.path(collection_output, "sitemap.xml")
-  articles <- to_article_info(site_dir, collection[["articles"]])
-  write_sitemap_xml(sitemap_xml, site_dir, site_config, articles)
-
   # process articles in collection
   lapply(collection$articles, function(article) {
     render_collection_article(
@@ -264,8 +259,7 @@ update_collection_listing <- function(site_dir, site_config, collection, article
   write_articles_info(articles, collection_index)
 
   # re-write the sitemap
-  sitemap_xml <- file.path(dirname(collection_index), "sitemap.xml")
-  write_sitemap_xml(sitemap_xml, site_dir, site_config, articles)
+  write_sitemap_xml(site_dir, site_config)
 
   # see if we need to re-write a listing (look an index.Rmd first then <collection>.Rmd)
   input_files <- list.files(site_dir, pattern = "^[^_].*\\.[Rr]?md$")

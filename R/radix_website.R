@@ -52,6 +52,9 @@ radix_website <- function(input, encoding = getOption("encoding"), ...) {
       # render collections to the output directory
       render_collections(input, config, collections, quiet)
 
+      # write sitemap
+      write_sitemap_xml(input, config)
+
       # return result
       result
     },

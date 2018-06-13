@@ -1,6 +1,18 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.sitemaps.org/schemas/sitemap/0.9 http://www.sitemaps.org/schemas/sitemap/0.9/sitemap.xsd" version="1.0">
   <url>
+    <loc>https://beta.rstudioconnect.com/content/3776/about.html</loc>
+    <lastmod>2018-05-30T16:14:52-05:00</lastmod>
+  </url>
+  <url>
+    <loc>https://beta.rstudioconnect.com/content/3776/contributors.html</loc>
+    <lastmod>2018-05-31T13:48:17-05:00</lastmod>
+  </url>
+  <url>
+    <loc>https://beta.rstudioconnect.com/content/3776/index.html</loc>
+    <lastmod>2018-06-10T06:41:13-05:00</lastmod>
+  </url>
+  <url>
     <loc>https://beta.rstudioconnect.com/content/3776/posts/visualizing-asset-returns/</loc>
     <lastmod>2018-06-11T14:43:05-05:00</lastmod>
   </url>
@@ -10,7 +22,7 @@
   </url>
   <url>
     <loc>https://beta.rstudioconnect.com/content/3776/posts/quandl-and-forecasting/</loc>
-    <lastmod>2018-06-12T17:27:49-05:00</lastmod>
+    <lastmod>2018-06-13T08:20:35-05:00</lastmod>
   </url>
   <url>
     <loc>https://beta.rstudioconnect.com/content/3776/posts/sharpe-ratio/</loc>
