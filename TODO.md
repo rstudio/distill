@@ -1,5 +1,7 @@
 
 
+- distill.js and distill.css don't get updated in site_libs in incremental render
+
 - disqus commenting 
      - or other: https://gohugo.io/content-management/comments/#comments-alternatives
      - (conditional loading based on localhost/file)

@@ -323,5 +323,9 @@ function init_common() {
   $('tr.header').parent('thead').parent('table').addClass('pandoc-table');
   $('.kable-table').children('table').addClass('pandoc-table');
 
+  // implmement disqus comment link
+  $('.disqus-comment-count').click(function() {
+    $('#disqus_thread').toggleClass('hidden');
+  });
 }
 

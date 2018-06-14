@@ -430,19 +430,25 @@ article_footer_html <- function(site_config, collection, article) {
   if (!is.null(site_config$base_url) && !is.null(disqus_site_name)) {
 
     disqus_url <- ensure_trailing_slash(article$metadata$base_url)
+    disqus_id <- sub(paste0("^", ensure_trailing_slash(site_config$base_url)), "", disqus_url)
 
     disqus <- tagList(
+
+      tags$span(class = "disqus-comment-count", `data-disqus-identifier` = disqus_id,
+                  "Comments"),
+
       tags$script(id = "dsq-count-scr",
                   src = sprintf("https://%s.disqus.com/count.js", disqus_site_name),
                   async = NA),
 
-      tags$span(class = "disqus-comment-count", `data-disqus-url` = disqus_url,
-                "Comments"),
-
-      tags$div(id = "disqus_thread"),
+      tags$div(id = "disqus_thread", class = "hidden"),
 
       tags$script(HTML(paste(sep = "\n",
-          sprintf("\nvar disqus_config = function () { this.page.url = '%s'};", disqus_url),
+          sprintf(paste(sep = "\n",
+              "\nvar disqus_config = function () {",
+              "  this.page.url = '%s';",
+              "  this.page.identifier = '%s';",
+              "};"), disqus_url, disqus_id),
           "(function() {",
           "  var d = document, s = d.createElement('script');",
           sprintf("  s.src = 'https://%s.disqus.com/embed.js';", disqus_site_name),
