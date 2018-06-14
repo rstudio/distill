@@ -1,6 +1,10 @@
 
 
-- disqus commenting (conditional loading based on localhost/file)
+- disqus commenting 
+     - (conditional loading based on localhost/file)
+     - https://help.disqus.com/developer/adding-comment-count-links-to-your-home-page
+     
+     
 - built-in social buttons (in footer alongside comments? perhaps use fontawesome pkg)
 
 - index/category/archive pages (categories should be inline)
