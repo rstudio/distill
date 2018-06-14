@@ -119,6 +119,7 @@ render_collection <- function(site_dir, site_config, collection,
     render_collection_article(
       site_dir = site_dir,
       site_config = site_config,
+      collection = collection$config,
       article = article,
       navigation_html = navigation_html,
       site_includes = site_includes,
@@ -205,6 +206,7 @@ render_collection_article_post_processor <- function(encoding_fn) {
       output_file <- render_collection_article(
         site_dir = site_dir,
         site_config = site_config,
+        collection = collection,
         article = article,
         navigation_html = navigation_html_generator(),
         site_includes = site_includes(site_dir, site_config),
@@ -312,7 +314,7 @@ update_collection_listing <- function(site_dir, site_config, collection, article
 }
 
 
-render_collection_article <- function(site_dir, site_config, article,
+render_collection_article <- function(site_dir, site_config, collection, article,
                                       navigation_html, site_includes,
                                       strip_trailing_newline = FALSE,
                                       quiet = FALSE) {
@@ -398,6 +400,11 @@ render_collection_article <- function(site_dir, site_config, article,
   index_content <- apply_site_include(index_content, "before_body")
   index_content <- apply_site_include(index_content, "after_body")
 
+  # article footer
+  index_content <- fill_placeholder(index_content, "article_footer", placeholder_html(
+    "article_footer", article_footer_html(site_config, collection, article)
+  ))
+
   # resolve site_libs
   site_libs <- file.path(site_dir, site_config$output_dir, "site_libs")
   index_content <- apply_site_libs(index_content, article_html, site_libs, offset)
@@ -413,6 +420,42 @@ render_collection_article <- function(site_dir, site_config, article,
 
   # return path to rendered article
   index_html
+}
+
+article_footer_html <- function(site_config, collection, article) {
+
+  # disqus
+  disqus <- NULL
+  disqus_site_name <- collection[["disqus"]]
+  if (!is.null(site_config$base_url) && !is.null(disqus_site_name)) {
+
+    disqus_url <- ensure_trailing_slash(article$metadata$base_url)
+
+    disqus <- tagList(
+      tags$script(id = "dsq-count-scr",
+                  src = sprintf("https://%s.disqus.com/count.js", disqus_site_name),
+                  async = NA),
+
+      tags$span(class = "disqus-comment-count", `data-disqus-url` = disqus_url,
+                "Comments"),
+
+      tags$div(id = "disqus_thread"),
+
+      tags$script(HTML(paste(sep = "\n",
+          sprintf("\nvar disqus_config = function () { this.page.url = '%s'};", disqus_url),
+          "(function() {",
+          "  var d = document, s = d.createElement('script');",
+          sprintf("  s.src = 'https://%s.disqus.com/embed.js';", disqus_site_name),
+          "  s.setAttribute('data-timestamp', +new Date());",
+          "  (d.head || d.body).appendChild(s);",
+          "})();\n"
+      )))
+    )
+  }
+
+  doRenderTags(tagList(
+     disqus
+  ))
 }
 
 strip_trailing_newline <- function(x) {
