@@ -4,13 +4,17 @@
 \alias{radix_article}
 \title{R Markdown format for Radix articles}
 \usage{
-radix_article(fig_width = 6, fig_height = 4, fig_retina = 2,
-  fig_caption = TRUE, dev = "png", smart = TRUE, self_contained = TRUE,
-  mathjax = "default", extra_dependencies = NULL, css = NULL,
-  includes = NULL, keep_md = FALSE, lib_dir = NULL,
+radix_article(toc = FALSE, toc_depth = 3, fig_width = 6, fig_height = 4,
+  fig_retina = 2, fig_caption = TRUE, dev = "png", smart = TRUE,
+  self_contained = TRUE, mathjax = "default", extra_dependencies = NULL,
+  css = NULL, includes = NULL, keep_md = FALSE, lib_dir = NULL,
   md_extensions = NULL, pandoc_args = NULL, ...)
 }
 \arguments{
+\item{toc}{\code{TRUE} to include a table of contents in the output}
+
+\item{toc_depth}{Depth of headers to include in table of contents}
+
 \item{fig_width}{Default width (in inches) for figures}
 
 \item{fig_height}{Default width (in inches) for figures}

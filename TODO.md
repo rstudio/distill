@@ -1,7 +1,5 @@
 
 
-- table of contents
-
 - disqus commenting (conditional loading based on localhost/file)
 - built-in social buttons (in footer alongside comments? perhaps use fontawesome pkg)
 

@@ -14,7 +14,9 @@
 #' @import htmltools
 #'
 #' @export
-radix_article <- function(fig_width = 6,
+radix_article <- function(toc = FALSE,
+                          toc_depth = 3,
+                          fig_width = 6,
                           fig_height = 4,
                           fig_retina = 2,
                           fig_caption = TRUE,
@@ -36,6 +38,9 @@ radix_article <- function(fig_width = 6,
 
   # build pandoc args
   args <- c("--standalone")
+
+  # table of contents
+  args <- c(args, pandoc_toc_args(toc, toc_depth))
 
   # prevent highlighting
   args <- c(args, "--no-highlight")

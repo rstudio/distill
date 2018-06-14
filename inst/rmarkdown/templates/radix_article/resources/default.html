@@ -54,6 +54,13 @@ $if(date)$<br/>$date$$endif$
 $endif$
 
 <div class="d-article">
+$if(toc)$
+<h3 class="d-toc-header">Table of Contents</h3>
+<nav class="d-toc" id="$idprefix$TOC">
+$table-of-contents$
+</nav>
+<hr class="d-toc-separator"/>
+$endif$
 $body$
 </div>
 

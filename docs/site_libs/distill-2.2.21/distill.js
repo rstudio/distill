@@ -103,6 +103,8 @@ function init_distill() {
     $(this).changeElementType('h3');
   });
   $('h3.appendix').each(function(i, val) {
+    var id = $(this).attr('id');
+    $('.d-toc a[href="#' + id + '"]').parent().remove();
     appendix = true;
     $(this).nextUntil($('h1, h2, h3')).addBack().appendTo($('d-appendix'));
   });
@@ -156,6 +158,10 @@ function init_distill() {
     var have_authors = front_matter.authors && front_matter.authors.length > 0;
     if (!have_authors)
       $('d-byline').addClass('hidden');
+
+    // table of contents
+    if (have_authors) // adjust border if we are in authors
+      $('.d-toc').parent().addClass('d-article-with-toc');
 
     // strip links that point to #
     $('.authors-affiliations').find('a[href="#"]').removeAttr('href');
@@ -250,6 +256,11 @@ function init_downlevel() {
     $('.d-byline').remove();
   $('.d-byline').after($('<hr class="section-separator"/>'));
   $('.d-byline a').remove();
+
+  // remove toc
+  $('.d-toc-header').remove();
+  $('.d-toc').remove();
+  $('.d-toc-separator').remove();
 
   // move appendix elements
   $('h1.appendix, h2.appendix').each(function(i, val) {
