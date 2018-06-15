@@ -128,6 +128,8 @@ Note that the `description` and `base_url` fields are both required to generate 
 
 By default the most recent 20 articles will be included in the RSS feed. You can change this by specifing `feed_items_max` within the `listing`:
 
+**\_index.Rmd**
+
 ```markup
 ---
 title: "Reproducible Finance with R"
@@ -139,6 +141,35 @@ listing:
 ```
 
 Specify `feed_items_max: false` to have no limit on the number of items included in the feed.
+
+## Comments and sharing
+
+Readers will likely want to comment on and share articles they read on your blog. You can enable support for [Disqus comments](https://disqus.com/) and sharing links for Twitter, LinkedIn, and other services by adding options to the `collection:posts` section of `_site.yml`.
+
+For example, the following options provide the [Disqus shortname](https://help.disqus.com/installation/whats-a-shortname) for a site and specify that we want sharing buttons for Twitter and LinkedIn. 
+
+**\_site.yml**
+
+```markup
+---
+name: "reproducible-finance-with-r"
+title: "Reproducible Finance with R"
+description: |
+  Exploring reproducible finance with the R statistical 
+  computing environment.
+collections:
+  posts:
+    disqus: reproducible-finance-with-r
+    share: [twitter, linkedin]
+---
+```
+
+The following footer is then automatically included at the end of each post:
+
+![](images/social-footer.png){width=80% .screenshot}
+
+Valid values for the `share` option are `twitter`, `linkedin`, `facebook`, `google-plus`, and `pintrest`.
+
 
 ## Organizing posts
 

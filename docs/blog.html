@@ -557,6 +557,7 @@ navbar:
 output: radix::radix_article</code></pre>
 <p>Note that the <code>description</code> and <code>base_url</code> fields are both required to generate an RSS feed.</p>
 <p>By default the most recent 20 articles will be included in the RSS feed. You can change this by specifing <code>feed_items_max</code> within the <code>listing</code>:</p>
+<p><strong>_index.Rmd</strong></p>
 <pre class="markup"><code>
 ---
 title: &quot;Reproducible Finance with R&quot;
@@ -566,6 +567,24 @@ listing:
   feed_items_max: 50
 ---</code></pre>
 <p>Specify <code>feed_items_max: false</code> to have no limit on the number of items included in the feed.</p>
+<h2 id="comments-and-sharing">Comments and sharing</h2>
+<p>Readers will likely want to comment on and share articles they read on your blog. You can enable support for Disqus comments and sharing links for Twitter, LinkedIn, and other services by adding options to the <code>collection:posts</code> section of <code>_site.yml</code>.</p>
+<p>For example, the following options provide the Disqus shortname for a site and specify that we want sharing buttons for Twitter and LinkedIn.</p>
+<p><strong>_site.yml</strong></p>
+<pre class="markup"><code>
+---
+name: &quot;reproducible-finance-with-r&quot;
+title: &quot;Reproducible Finance with R&quot;
+description: |
+  Exploring reproducible finance with the R statistical 
+  computing environment.
+collections:
+  posts:
+    disqus: reproducible-finance-with-r
+    share: [twitter, linkedin]
+---</code></pre>
+<p>The following footer is then automatically included at the end of each post:</p>
+<p><img src="images/social-footer.png" class="screenshot" style="width:80.0%" /></p>
 <h2 id="organizing-posts">Organizing posts</h2>
 <p>You can use whatever scheme you like to organize the <code>_posts</code> directory. You can have all posts at the top level or you can create subdirectories to create groupings of posts.</p>
 <p>One popular scheme for organizing blog posts is to use a date prefix for the post directory names. For example:</p>
@@ -643,6 +662,8 @@ render_site()</code></pre>
 <p>There is a complete example of a blog built with Radix available at <a href="https://beta.rstudioconnect.com/content/3776/" class="uri">https://beta.rstudioconnect.com/content/3776/</a>.</p>
 <p>The example reproduces several posts from the <a href="https://rviews.rstudio.com/categories/reproducible-finance-with-r/">Reproducible Finance with R</a> series on the R Views blog.</p>
 <p>The source code for the example can be found here: <a href="https://github.com/radixpub/radix-r/tree/master/examples/websites/reproducible-finance-with-r" class="uri">https://github.com/radixpub/radix-r/tree/master/examples/websites/reproducible-finance-with-r</a>.</p>
+<!--radix_placeholder_article_footer-->
+<!--/radix_placeholder_article_footer-->
 </div>
 
 <div class="d-appendix">

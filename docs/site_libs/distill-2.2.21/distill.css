@@ -104,12 +104,6 @@ figure img.external {
   padding-top: 0;
 }
 
-/* Make disqus comment count behave like a clickable link */
-
-.disqus-comment-count:hover {
-  border-bottom: 1px solid rgba(0, 0, 0, 0.4);
-  cursor: pointer;
-}
 
 
 /* Tweak code blocks (note that this CSS is repeated above in an injection
@@ -318,7 +312,31 @@ d-appendix .citation-appendix,
   }
 }
 
+/* Social footer */
 
+.social_footer {
+  margin-top: 30px;
+  margin-bottom: 0;
+  color: rgba(0,0,0,0.67);
+}
+
+.disqus-comments {
+  margin-right: 30px;
+}
+
+.disqus-comment-count {
+  border-bottom: 1px solid rgba(0, 0, 0, 0.4);
+  cursor: pointer;
+}
+
+.article-sharing a {
+  border-bottom: none;
+  margin-right: 8px;
+}
+
+.article-sharing a:hover {
+  border-bottom: none;
+}
 
 /* Improve display for browsers without grid (IE/Edge <= 15) */
 
