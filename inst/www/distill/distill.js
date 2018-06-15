@@ -325,7 +325,14 @@ function init_common() {
 
   // implmement disqus comment link
   $('.disqus-comment-count').click(function() {
+    window.headroom_prevent_pin = true;
     $('#disqus_thread').toggleClass('hidden');
+    if (!$('#disqus_thread').hasClass('hidden')) {
+      var offset = $(this).offset();
+      $('html, body').animate({
+        scrollTop: offset.top - 35
+      });
+    }
   });
 }
 
