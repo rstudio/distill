@@ -317,9 +317,16 @@ d-appendix .citation-appendix,
 .disqus-comment-count {
   border-bottom: 1px solid rgba(0, 0, 0, 0.4);
   cursor: pointer;
-  margin-bottom: 15px;
 }
 
+.disqus-comments {
+   margin-top: 15px;
+   margin-bottom: 15px;
+}
+
+.article-sharing a {
+  border-bottom: none;
+}
 
 
 /* Improve display for browsers without grid (IE/Edge <= 15) */

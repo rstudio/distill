@@ -312,18 +312,31 @@ d-appendix .citation-appendix,
   }
 }
 
-/* Make disqus comment count behave like a clickable link */
+/* Social footer */
+
+.social_footer {
+  margin-top: 30px;
+  margin-bottom: 0;
+  color: rgba(0,0,0,0.67);
+}
+
+.disqus-comments {
+  margin-right: 30px;
+}
 
 .disqus-comment-count {
   border-bottom: 1px solid rgba(0, 0, 0, 0.4);
   cursor: pointer;
 }
 
-.disqus-comments {
-   margin-top: 15px;
-   margin-bottom: 15px;
+.article-sharing a {
+  border-bottom: none;
+  margin-right: 8px;
 }
 
+.article-sharing a:hover {
+  border-bottom: none;
+}
 
 /* Improve display for browsers without grid (IE/Edge <= 15) */
 

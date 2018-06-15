@@ -424,25 +424,73 @@ render_collection_article <- function(site_dir, site_config, collection, article
 
 article_footer_html <- function(site_config, collection, article) {
 
+  # bail if we don't have a site base url
+  if (is.null(site_config[["base_url"]]))
+    return(NULL)
+
+  # article info
+  article_title <- article$metadata$title
+  encoded_article_title <- utils::URLencode(article_title, reserved = TRUE)
+  article_url <- ensure_trailing_slash(article$metadata$base_url)
+  encoded_article_url <- utils::URLencode(article_url, reserved = TRUE)
+  article_id <- sub(paste0("^", ensure_trailing_slash(site_config$base_url)), "",
+                    article_url)
+
+  # function to create a sharing link for a service
+  sharing_link <- function(service) {
+    switch(service,
+      twitter = sprintf("https://twitter.com/share?text=%s&url=%s",
+                        encoded_article_title, encoded_article_url) ,
+      facebook = sprintf("https://www.facebook.com/sharer/sharer.php?s=100&p[url]=%s",
+                         encoded_article_url),
+      `google-plus` = sprintf("https://plus.google.com/share?url=%s",
+                              encoded_article_url),
+      linkedin = sprintf("https://www.linkedin.com/shareArticle?mini=true&url=%s&title=%s",
+                         encoded_article_url, encoded_article_title),
+      pintrest = sprintf("https://pinterest.com/pin/create/link/?url=%s&description=%s",
+                         encoded_article_url, encoded_article_title)
+    )
+  }
+
+
+  # share
+  share <- NULL
+  share_services <- collection[["share"]]
+  if (!is.null(share_services)) {
+
+    # filter out invalid sites
+    share_services <- match.arg(share_services,
+                                c("twitter", "facebook", "google-plus",
+                                  "linkedin", "pintrest"),
+                                several.ok = TRUE)
+
+    share <- tags$span(class = "article-sharing",
+      HTML("Share: &nbsp;"),
+      tagList(lapply(share_services, function(service) {
+        tags$a(href = sharing_link(service),
+          tag("i", list(class = sprintf("fab fa-%s", service)))
+        )
+      }))
+    )
+  }
+
   # disqus
   disqus <- NULL
-  disqus_site_name <- collection[["disqus"]]
-  if (!is.null(site_config$base_url) && !is.null(disqus_site_name)) {
+  disqus_script <- NULL
+  discuss_shortname <- collection[["disqus"]]
+  if (!is.null(discuss_shortname)) {
 
-    disqus_url <- ensure_trailing_slash(article$metadata$base_url)
-    disqus_id <- sub(paste0("^", ensure_trailing_slash(site_config$base_url)), "", disqus_url)
+    disqus <- tags$span(class = "disqus-comments",
+      tag("i", list(class = "fas fa-comments")),
+      HTML("&nbsp;"),
+      tags$span(class = "disqus-comment-count", `data-disqus-identifier` = article_id,
+              "Comment on this article")
+    )
 
-    disqus <- tagList(
-
-      tags$p(class = "disqus-comments",
-        tag("i", list(class = "far fa-comments")),
-        HTML("&nbsp;"),
-        tags$span(class = "disqus-comment-count", `data-disqus-identifier` = disqus_id,
-                "Comment on this article")
-      ),
+    disqus_script <- tagList(
 
       tags$script(id = "dsq-count-scr",
-                  src = sprintf("https://%s.disqus.com/count.js", disqus_site_name),
+                  src = sprintf("https://%s.disqus.com/count.js", discuss_shortname),
                   async = NA),
 
       tags$div(id = "disqus_thread", class = "hidden"),
@@ -452,10 +500,10 @@ article_footer_html <- function(site_config, collection, article) {
               "\nvar disqus_config = function () {",
               "  this.page.url = '%s';",
               "  this.page.identifier = '%s';",
-              "};"), disqus_url, disqus_id),
+              "};"), article_url, article_id),
           "(function() {",
           "  var d = document, s = d.createElement('script');",
-          sprintf("  s.src = 'https://%s.disqus.com/embed.js';", disqus_site_name),
+          sprintf("  s.src = 'https://%s.disqus.com/embed.js';", discuss_shortname),
           "  s.setAttribute('data-timestamp', +new Date());",
           "  (d.head || d.body).appendChild(s);",
           "})();\n"
@@ -463,9 +511,14 @@ article_footer_html <- function(site_config, collection, article) {
     )
   }
 
-  doRenderTags(tagList(
-     disqus
-  ))
+  if (!is.null(disqus) || !is.null(share)) {
+    doRenderTags(tagList(
+       tags$p(class = "social_footer", disqus, share),
+       disqus_script
+    ))
+  } else {
+    NULL
+  }
 }
 
 strip_trailing_newline <- function(x) {
