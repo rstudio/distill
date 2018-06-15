@@ -6,7 +6,11 @@
 
 - search
 - rstudio addins/templates/projects for article creation
-   - Created with link in footer
+   - Main Rmd template
+   - Project:
+      - Website using Radix
+      - Blog using Radix
+   - Addin: New blog post
 
 - ide still shows disqus in external window
 - ide publish button for collections should publish website
