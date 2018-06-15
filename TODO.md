@@ -1,9 +1,7 @@
 
 
-- test social links
+- ensure most up to date distill.css and distill.js
 
-- test comment reveal with more comments occupying vertical space
-- more testing of comment reveal
 
 - index/category/archive pages (categories should be inline)
 - email subscription (http://www.wpbeginner.com/opinion/stop-using-feedburner-move-to-feedburner-alternatives/)

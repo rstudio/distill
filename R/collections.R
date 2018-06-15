@@ -447,7 +447,7 @@ article_footer_html <- function(site_config, collection, article) {
                               encoded_article_url),
       linkedin = sprintf("https://www.linkedin.com/shareArticle?mini=true&url=%s&title=%s",
                          encoded_article_url, encoded_article_title),
-      pintrest = sprintf("https://pinterest.com/pin/create/link/?url=%s&description=%s",
+      pinterest = sprintf("https://pinterest.com/pin/create/link/?url=%s&description=%s",
                          encoded_article_url, encoded_article_title)
     )
   }
@@ -461,7 +461,7 @@ article_footer_html <- function(site_config, collection, article) {
     # filter out invalid sites
     share_services <- match.arg(share_services,
                                 c("twitter", "facebook", "google-plus",
-                                  "linkedin", "pintrest"),
+                                  "linkedin", "pinterest"),
                                 several.ok = TRUE)
 
     share <- tags$span(class = "article-sharing",
