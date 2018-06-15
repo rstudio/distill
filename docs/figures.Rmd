@@ -21,7 +21,7 @@ For example, a plot with the default `l-body` layout would look like this:
 include_graphics("images/l-body-figure.png")
 ```
 
-## Wider layout
+## Wider layouts
 
 For elements you want to display a little larger, try `l-body-outset` or `l-page`:
 
@@ -70,7 +70,7 @@ leaflet() %>%
 ```
 
 
-## Static images
+## Layout for images
 
 To include static images that occupy the full width of the article text, be sure to add the `width=100%` attribute. For example:
 
@@ -78,13 +78,14 @@ To include static images that occupy the full width of the article text, be sure
 ![](images/figure.png){width=100%}    
 ```
 
-To include a static images that adheres to a Radix layout, wrap it in a `<div>` tag with the appropriate `class`. For example:
+To include a static images that adheres to a Radix layout, wrap it in a markdown div (`:::`) named with the appropriate `class`. For example:
 
-```markdown
-<div class="l-body-outset">
+```markup
+::: l-body-outset
 ![](images/figure.png){width=100%}  
-</div>
+:::
 ```
+
 
 If you are including a figure from an external source, it's good practice to delineate this by applying the `.external` class and adding a caption indicating where it is from. For example:
 

@@ -67,7 +67,7 @@ sequenceDiagram
 ')
 ```
 
-## r2d3
+## D3 diagrams
 
 The [r2d3](https://rstudio.github.io/r2d3) package enables you to include illustrations created using [D3.js](https://d3js.org/). For example, the following code renders [flare.json](https://github.com/radixpub/radix-r/blob/master/docs/d3/circlepacking/flare.json) using the [circlepacking.js](https://github.com/radixpub/radix-r/blob/master/docs/d3/circlepacking/circlepacking.js) script:
 

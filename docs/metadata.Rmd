@@ -17,7 +17,7 @@ You can enhance Radix articles by providing various types of metadata, including
 
 4) [Google Scholar] compatible citation metadata for your article as well as other works cited by your article.
 
-## Source code repository
+## Code repository
 
 You can include the `repository_url` field to indicate where the source code for your article can be found. For example:
 

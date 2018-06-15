@@ -11,7 +11,7 @@ There are a number of options available for displaying tables within Radix artic
 
 - Using standard [markdown table syntax](https://pandoc.org/MANUAL.html#tables) to create a custom table.
 
-## kable
+## Knitr kable
 
 The `knitr::kable()` function will render an R data frame as an HTML table. For example:
 
@@ -82,18 +82,19 @@ You can also define [tables using markdown](https://pandoc.org/MANUAL.html#table
 | `rownames.print` | Print row names as part of the table.          |
 ```
 
-You can use Radix [figure layout](figures.html) classes with markdown tables by enclosing them in a `<div>` with the appropriate class, for example:
+You can use Radix [figure layout](figures.html) classes with markdown tables by enclosing them in markdown div (`:::`) named with the appropriate class, for example:
 
 ```markdown
-<div class="l-body-outset">
+::: l-body-outset
 | Option           | Description                                    |
 |------------------|------------------------------------------------|
 | `rows.print`     | Maximum rows to print per page.                |
 | `max.print`      | Maximum rows in the table (defaults to 1000).  |
 | `cols.print`     | Maximum columns in the table (defaults to 10). |
 | `rownames.print` | Print row names as part of the table.          |
-<div>
+:::
 ```
+
 
 
 

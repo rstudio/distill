@@ -1303,13 +1303,22 @@ Publishing
 
 
 <div class="d-article">
+<h3 class="d-toc-header">Table of Contents</h3>
+<nav class="d-toc" id="TOC">
+<ul>
+<li><a href="#knitr-kable">Knitr kable</a></li>
+<li><a href="#paged-tables">Paged tables</a></li>
+<li><a href="#markdown-tables">Markdown tables</a></li>
+</ul>
+</nav>
+<hr class="d-toc-separator"/>
 <p>There are a number of options available for displaying tables within Radix articles, including:</p>
 <ul>
 <li><p>Using the <code>knitr::kable()</code> function to render a data frame as HTML.</p></li>
 <li><p>Using the <code>rmarkdown::paged_table()</code> function to create a page-able version of a data frame.</p></li>
 <li><p>Using standard <a href="https://pandoc.org/MANUAL.html#tables">markdown table syntax</a> to create a custom table.</p></li>
 </ul>
-<h2 id="kable">kable</h2>
+<h2 id="knitr-kable">Knitr kable</h2>
 <p>The <code>knitr::kable()</code> function will render an R data frame as an HTML table. For example:</p>
 <pre class="clike"><code>
 ```{r, layout=&quot;l-body-outset&quot;}
@@ -1486,16 +1495,16 @@ paged_table(mtcars, options = list(rows.print = 15))
 | `max.print`      | Maximum rows in the table (defaults to 1000).  |
 | `cols.print`     | Maximum columns in the table (defaults to 10). |
 | `rownames.print` | Print row names as part of the table.          |</code></pre>
-<p>You can use Radix <a href="figures.html">figure layout</a> classes with markdown tables by enclosing them in a <code>&lt;div&gt;</code> with the appropriate class, for example:</p>
+<p>You can use Radix <a href="figures.html">figure layout</a> classes with markdown tables by enclosing them in markdown div (<code>:::</code>) named with the appropriate class, for example:</p>
 <pre class="markdown"><code>
-&lt;div class=&quot;l-body-outset&quot;&gt;
+::: l-body-outset
 | Option           | Description                                    |
 |------------------|------------------------------------------------|
 | `rows.print`     | Maximum rows to print per page.                |
 | `max.print`      | Maximum rows in the table (defaults to 1000).  |
 | `cols.print`     | Maximum columns in the table (defaults to 10). |
 | `rownames.print` | Print row names as part of the table.          |
-&lt;div&gt;</code></pre>
+:::</code></pre>
 <!--radix_placeholder_article_footer-->
 <!--/radix_placeholder_article_footer-->
 </div>

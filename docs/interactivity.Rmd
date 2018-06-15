@@ -49,7 +49,7 @@ Note that we specify `fig.height=3` to provide a more natural height for a widge
 To learn about available htmlwidgets see the [showcase page](http://www.htmlwidgets.org/showcase_leaflet.html) and the [htmlwidget gallery](http://gallery.htmlwidgets.org/).
 
 
-## r2d3
+## D3 visualizations
 
 The [r2d3](https://rstudio.github.io/r2d3/) package enables you to easily incorporate interactive graphics created using [D3.js](https://d3js.org/) in your Distill articles.
 

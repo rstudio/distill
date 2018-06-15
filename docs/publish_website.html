@@ -1301,8 +1301,21 @@ Publishing
 
 
 <div class="d-article">
+<h3 class="d-toc-header">Table of Contents</h3>
+<nav class="d-toc" id="TOC">
+<ul>
+<li><a href="#rstudio-connect">RStudio Connect</a></li>
+<li><a href="#github-pages">GitHub Pages</a></li>
+<li><a href="#netlify">Netlify</a></li>
+<li><a href="#google-firebase">Google Firebase</a></li>
+<li><a href="#site44-dropbox">Site44 (Dropbox)</a></li>
+<li><a href="#amazon-s3">Amazon S3</a></li>
+<li><a href="#other-services">Other services</a></li>
+</ul>
+</nav>
+<hr class="d-toc-separator"/>
 <p>There are a wide variety of ways to publish Radix websites. Website content is by default written to the <code>_site</code> sub-directory (you can customize this using the <code>output_dir</code> metadata field). Publishing is simply a matter of copying the output directory to a web server or web hosting service.</p>
-<p>Below we describe several convenient options for Radix website deployment including <a href="#rstudio-connect">RStudio Connect</a>, <a href="#github-pages">GitHub Pages</a>, <a href="#netlify">Netlify</a>, <a href="#firebase">Firebase</a>, <a href="#site44">Site44</a>, and <a href="#amazon-s3">Amazon S3</a>. We’ll mostly defer to the documentation provided by the various services, but will note any Radix website specific configuration required.</p>
+<p>Below we describe several convenient options for Radix website deployment including <a href="#rstudio-connect">RStudio Connect</a>, <a href="#github-pages">GitHub Pages</a>, <a href="#netlify">Netlify</a>, [Firebase], [Site44], and <a href="#amazon-s3">Amazon S3</a>. We’ll mostly defer to the documentation provided by the various services, but will note any Radix website specific configuration required.</p>
 <h2 id="rstudio-connect">RStudio Connect</h2>
 <p><a href="https://www.rstudio.com/products/connect/">RStudio Connect</a> is a server product from RStudio for secure sharing of websites, applications, reports, and plots.</p>
 <p>You can deploy a Radix website to RStudio Connect from the command line using the <code>radix::publish_website()</code> function. For example:</p>
@@ -1334,7 +1347,7 @@ output_dir: &quot;docs&quot;  # docs directory of master branch</code></pre></li
 <p><a href="https://www.netlify.com/">Netlify</a> is a popular website hosting service that allows for both direct upload of website files or integrated publishing from Git repositories (GitHub, GitLab, or Bitbucket) via commit-hooks.</p>
 <p>If you are using Netlify Git integration, be sure to set the publish directory to the output directory of your website (<code>_site</code> by default but modifiable via the <code>output_dir</code> metadata value). For example:</p>
 <p><img src="images/netlify-publish-dir.png" class="screenshot" style="width:95.0%" /></p>
-<h2 id="firebase">Firebase</h2>
+<h2 id="google-firebase">Google Firebase</h2>
 <p>Google Firebase has a <a href="https://firebase.google.com/docs/hosting/quickstart">web hosting service</a> that enables easy deployment of websites using a set of command line tools.</p>
 <p>Firebase websites by default deploy content from the <code>public</code> directory of the Firebase project directory. This means that you should set the <code>output_dir</code> to <code>&quot;public&quot;</code> within <code>_site.yml</code>:</p>
 <pre class="markup"><code>
@@ -1343,7 +1356,7 @@ name: &quot;radix&quot;
 title: &quot;Radix for R Markdown&quot;
 output_dir: &quot;public&quot;
 ---</code></pre>
-<h2 id="site44">Site44</h2>
+<h2 id="site44-dropbox">Site44 (Dropbox)</h2>
 <p><a href="https://www.site44.com/">Site44</a> is a service that allows you to publish websites from within Dropbox folders. Site44 creates a <code>Dropbox/Apps/site44</code> directory, and any folders within that directory are published as websites.</p>
 <p>The recommended workflow for deploying Radix websites to Site44 is to develop your website in a separate project directory, and then, when it’s ready for final publishing, copy the contents of the <code>_site</code> directory to the folder for your website.</p>
 <h2 id="amazon-s3">Amazon S3</h2>

@@ -46,7 +46,7 @@ output: radix::radix_article
 
 Note that we've also added a feed icon to the right side of the menu bar which makes it easy to discover and browse the RSS feed for the blog.
 
-## Creating a post
+### Creating a post
 
 To create a post, simply create a sub-directory of the `_posts` directory and save a Radix article there. For example:
 
@@ -85,7 +85,7 @@ You work on blog posts independent of the enclosing website (use **Knit** to ren
 In the next section will describe how to create a listing page for all of your posts.
 
 
-## Listing pages
+### Post listing pages
 
 Once you have authored one or more posts you'll want to create a listing page. You can do this by adding a `listing` metadata entry to the page you to include the listing on. This is often the main page for the website (index.Rmd). For example:
 
@@ -142,54 +142,7 @@ listing:
 
 Specify `feed_items_max: false` to have no limit on the number of items included in the feed.
 
-## Comments and sharing
-
-Readers will likely want to comment on and share articles they read on your blog. You can enable support for [Disqus comments](https://disqus.com/) and sharing links for Twitter, LinkedIn, and other services by adding options to the `collection:posts` section of `_site.yml`.
-
-For example, the following options provide the [Disqus shortname](https://help.disqus.com/installation/whats-a-shortname) for a site and specify that we want sharing buttons for Twitter and LinkedIn. 
-
-**\_site.yml**
-
-```markup
----
-name: "reproducible-finance-with-r"
-title: "Reproducible Finance with R"
-description: |
-  Exploring reproducible finance with the R statistical 
-  computing environment.
-collections:
-  posts:
-    disqus: reproducible-finance-with-r
-    share: [twitter, linkedin]
----
-```
-
-The following footer is then automatically included at the end of each post:
-
-![](images/social-footer.png){width=80% .screenshot}
-
-Valid values for the `share` option are `twitter`, `linkedin`, `facebook`, `google-plus`, and `pintrest`.
-
-
-## Organizing posts
-
-You can use whatever scheme you like to organize the `_posts` directory. You can have all posts at the top level or you can create subdirectories to create groupings of posts.
-
-One popular scheme for organizing blog posts is to use a date prefix for the post directory names. For example:
-
-```markup
-_posts/
-  2017-11-09-visualizing-asset-returns/
-  2017-09-13-asset-volatility/
-  2017-03-07-quandl-and-forecasting/
-  2016-11-08-sharpe_ratio/
-```
-
-The benefits of this scheme are that post names are given additional uniqueness (to guard against colliding names over the long term) and are also automatically listed in order when browsing the `_posts` directory.
-
-Note that if you use a date-prefixed post directory you are not required to specify an explicit `date` field within your post's metadata.
-
-## Post drafts
+### Post drafts
 
 If you want to work on a post for a period of time without having it be added to the listing page, add `draft: true` to the post's metadata. For example:
 
@@ -207,34 +160,59 @@ draft: true
 
 When you are ready to publish the post, either remove the `draft` option or set it to `false`, then build the website.
 
+## Next steps
 
-## File resources
+### Comments and sharing
 
-When a blog post is published, resource files located alongside the post in it's directory are also published. The following files are *not* published by default:
+Readers will likely want to comment on and share articles they read on your blog. You can enable support for [Disqus comments](https://disqus.com/) and sharing links for Twitter, LinkedIn, and other services by adding options to the `collection:posts` section of `_site.yml`.
 
-1. Files beginning with `"."` (hidden files).
+For example, the following options provide the [Disqus shortname](https://help.disqus.com/installation/whats-a-shortname) for a site and specify that we want sharing buttons for Twitter and LinkedIn. 
 
-2. Files beginning with `"_"`
-
-3. Files known to contain R source code (e.g. `".R"`, `".s"`, `".Rmd"`), R data (e.g. `".RData"`, `".rds"`), or configuration data (e.g. `"rsconnect"` ,`"packrat"`)).
-
-You can override this behavior using a `resources` metadata entry for your post, which can specify explicit files to `include` or `exclude`. For example (some fields excluded for brevity):
+**\_site.yml**
 
 ```markup
 ---
-title: "The Sharpe Ratio"
+name: "reproducible-finance-with-r"
+title: "Reproducible Finance with R"
 description: |
-  In this post we present a classic finance use case using the
-  PerformanceAnalytics, quantmod, and dygraphs packages. 
-  We'll demonstrate importing stock data, building a portfolio,
-  and then calculating the Sharpe Ratio. 
-resources:
-  exclude:
-    *.csv    
+  Exploring reproducible finance with the R statistical 
+  computing environment.
+base_url: https://beta.rstudioconnect.com/content/3776/
+collections:
+  posts:
+    disqus: reproducible-finance-with-r
+    share: [twitter, linkedin]
 ---
 ```
 
-## Preview thumbnail
+The following footer is then automatically included at the end of each post:
+
+![](images/social-footer.png){width=80% .screenshot}
+
+Note that the `base_url` field is required in order to use Disqus and sharing links.
+
+Valid values for the `share` option are `twitter`, `linkedin`, `facebook`, `google-plus`, and `pintrest`.
+
+
+### Organizing posts
+
+You can use whatever scheme you like to organize the `_posts` directory. You can have all posts at the top level or you can create subdirectories to create groupings of posts.
+
+One popular scheme for organizing blog posts is to use a date prefix for the post directory names. For example:
+
+```markup
+_posts/
+  2017-11-09-visualizing-asset-returns/
+  2017-09-13-asset-volatility/
+  2017-03-07-quandl-and-forecasting/
+  2016-11-08-sharpe_ratio/
+```
+
+The benefits of this scheme are that post names are given additional uniqueness (to guard against colliding names over the long term) and are also automatically listed in order when browsing the `_posts` directory.
+
+Note that if you use a date-prefixed post directory you are not required to specify an explicit `date` field within your post's metadata.
+
+### Preview images
 
 Note that the listing for our example above includes a preview image for each post. Preview thumbnail images are generated automatically based on the first plot encountered within your post. You can specify that a specific plot should be used as the preview image using the `preview` chunk option. For example:
 
@@ -263,9 +241,36 @@ preview: images/sharpe-ratio.png
 Preview images are also used for generating [Open Graph](metadata.html#open-graph) and [Twitter Card](metadata.html#twitter-card) metadata. However, since those systems require that preview images be specified as absolute URLs, you also need to add a `base_url` field to your `_site.yml` file as describe above in [Getting Started].
 
 
-## Building the site
+### Supporting files
 
-After you've authored one or more posts you will want to build the entire site before deploying it. 
+When a blog post is published, resource files located alongside the post in it's directory are also published. The following files are *not* published by default:
+
+1. Files beginning with `"."` (hidden files).
+
+2. Files beginning with `"_"`
+
+3. Files known to contain R source code (e.g. `".R"`, `".s"`, `".Rmd"`), R data (e.g. `".RData"`, `".rds"`), or configuration data (e.g. `"rsconnect"` ,`"packrat"`)).
+
+You can override this behavior using a `resources` metadata entry for your post, which can specify explicit files to `include` or `exclude`. For example (some fields excluded for brevity):
+
+```markup
+---
+title: "The Sharpe Ratio"
+description: |
+  In this post we present a classic finance use case using the
+  PerformanceAnalytics, quantmod, and dygraphs packages. 
+  We'll demonstrate importing stock data, building a portfolio,
+  and then calculating the Sharpe Ratio. 
+resources:
+  exclude:
+    *.csv    
+---
+```
+
+
+## Publishing a blog
+
+After you've authored one or more posts you will want to build the entire site before publshing it. 
 
 If your Radix website is contained within an RStudio project you can use the **Build Website** command available in the Build pane to generate the site:
 
@@ -280,7 +285,8 @@ render_site()
 
 There are a variety of options available for making your site available to others, see the article on [website publishing](publish_website.html) for details. 
 
-## Example
+
+## Examples
 
 There is a complete example of a blog built with Radix available at <https://beta.rstudioconnect.com/content/3776/>.
 

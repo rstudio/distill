@@ -18,6 +18,9 @@ author:
 date: May 4, 2018
 citation_url: https://radixpub.github.io/radix-r
 bibliography: biblio.bib
+output:
+  radix::radix_article:
+    toc: false
 site: radix::radix_website
 ---
 

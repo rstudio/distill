@@ -67,7 +67,7 @@ If you are using Netlify Git integration, be sure to set the publish directory t
 
 ![](images/netlify-publish-dir.png){width=95% .screenshot}
 
-## Firebase
+## Google Firebase
 
 Google Firebase has a [web hosting service](https://firebase.google.com/docs/hosting/quickstart) that enables easy deployment of websites using a set of command line tools.
 
@@ -81,7 +81,7 @@ output_dir: "public"
 ---
 ```
 
-## Site44
+## Site44 (Dropbox)
 
 [Site44](https://www.site44.com/) is a service that allows you to publish websites from within Dropbox folders. Site44 creates a `Dropbox/Apps/site44` directory, and any folders within that directory are published as websites.
 

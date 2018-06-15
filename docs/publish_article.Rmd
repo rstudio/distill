@@ -25,7 +25,7 @@ Often the simplest way to share a Radix article is to share this HTML file using
 
 This type of sharing is suitable for private communications to small groups. If you want to make your article available more broadly the following sections cover various ways to do that.
 
-## RPubs and RStudio Connect
+## RPubs & RStudio Connect
 
 [RPubs](https://rpubs.com) is a free service from RStudio for sharing documents on the web. [RStudio Connect](https://www.rstudio.com/products/connect/) is a server product from RStudio for secure sharing of applications, reports, and plots.
 

@@ -626,7 +626,7 @@
     box-sizing: border-box;
     margin-bottom: 24px;
     position: relative;
-    max-width: 500px;
+    max-width: 400px;
   }
   .posts-list .post-preview img {
     width: 100%;
@@ -1303,6 +1303,18 @@ Publishing
 
 
 <div class="d-article">
+<h3 class="d-toc-header">Table of Contents</h3>
+<nav class="d-toc" id="TOC">
+<ul>
+<li><a href="#citing-other-works">Citing other works</a></li>
+<li><a href="#creating-citeable-articles">Creating citeable articles</a><ul>
+<li><a href="#web-articles">Web articles</a></li>
+<li><a href="#journal-articles">Journal articles</a></li>
+</ul></li>
+<li><a href="#google-scholar">Google Scholar</a></li>
+</ul>
+</nav>
+<hr class="d-toc-separator"/>
 <p>Radix articles support including citations and a corresponding bibliography using standard R Markdown citation syntax. Radix also provides tools for making your articles more <a href="#creating-citeable-articles">easily citeable</a>, as well as for generating <a href="#google-scholar">Google Scholar</a> compatible citation metadata.</p>
 <h2 id="citing-other-works">Citing other works</h2>
 <p><a href="http://www.bibtex.org/">BibTeX</a> is the supported way of making academic citations. To include citations, first create a BibTeX file and refer to it from the <code>bibliography</code> field of the YAML front-matter. For example:</p>

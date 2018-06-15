@@ -1309,6 +1309,16 @@ Publishing
 
 
 <div class="d-article">
+<h3 class="d-toc-header">Table of Contents</h3>
+<nav class="d-toc" id="TOC">
+<ul>
+<li><a href="#default-layout">Default layout</a></li>
+<li><a href="#wider-layouts">Wider layouts</a></li>
+<li><a href="#full-screen-layout">Full screen layout</a></li>
+<li><a href="#layout-for-images">Layout for images</a></li>
+</ul>
+</nav>
+<hr class="d-toc-separator"/>
 <h2 id="default-layout">Default layout</h2>
 <p>There are a variety of ways to layout figures included within Radix articles. This layout is controlled by a set of layout classes, which are in turn applied to R Markdown chunks using the <code>layout</code> chunk option.</p>
 <p>The default layout if <code>layout</code> is not specified is <code>l-body</code>, which will cause content to span the width of the main article body:</p>
@@ -1321,7 +1331,7 @@ l-body
 <div class="layout-chunk" data-layout="l-body">
 <p><img src="images/l-body-figure.png" width="576" /></p>
 </div>
-<h2 id="wider-layout">Wider layout</h2>
+<h2 id="wider-layouts">Wider layouts</h2>
 <p>For elements you want to display a little larger, try <code>l-body-outset</code> or <code>l-page</code>:</p>
 <div class="fake-img l-body-outset">
 <p>
@@ -1360,18 +1370,18 @@ leaflet() %&gt;%
   addMarkers(lng=174.768, lat=-36.852, popup=&quot;The birthplace of R&quot;)
 ```</code></pre>
 <div class="layout-chunk" data-layout="l-screen-inset">
-<div id="htmlwidget-b80260830094285ba5c6" style="width:576px;height:384px;" class="leaflet html-widget"></div>
-<script type="application/json" data-for="htmlwidget-b80260830094285ba5c6">{"x":{"options":{"crs":{"crsClass":"L.CRS.EPSG3857","code":null,"proj4def":null,"projectedBounds":null,"options":{}}},"calls":[{"method":"addTiles","args":["//{s}.tile.openstreetmap.org/{z}/{x}/{y}.png",null,null,{"minZoom":0,"maxZoom":18,"tileSize":256,"subdomains":"abc","errorTileUrl":"","tms":false,"noWrap":false,"zoomOffset":0,"zoomReverse":false,"opacity":1,"zIndex":1,"detectRetina":false,"attribution":"&copy; <a href=\"http://openstreetmap.org\">OpenStreetMap<\/a> contributors, <a href=\"http://creativecommons.org/licenses/by-sa/2.0/\">CC-BY-SA<\/a>"}]},{"method":"addMarkers","args":[-36.852,174.768,null,null,null,{"interactive":true,"draggable":false,"keyboard":true,"title":"","alt":"","zIndexOffset":0,"opacity":1,"riseOnHover":false,"riseOffset":250},"The birthplace of R",null,null,null,null,{"interactive":false,"permanent":false,"direction":"auto","opacity":1,"offset":[0,0],"textsize":"10px","textOnly":false,"className":"","sticky":true},null]}],"limits":{"lat":[-36.852,-36.852],"lng":[174.768,174.768]}},"evals":[],"jsHooks":[]}</script>
+<div id="htmlwidget-7ded59f4b1e32ea1fd21" style="width:576px;height:384px;" class="leaflet html-widget"></div>
+<script type="application/json" data-for="htmlwidget-7ded59f4b1e32ea1fd21">{"x":{"options":{"crs":{"crsClass":"L.CRS.EPSG3857","code":null,"proj4def":null,"projectedBounds":null,"options":{}}},"calls":[{"method":"addTiles","args":["//{s}.tile.openstreetmap.org/{z}/{x}/{y}.png",null,null,{"minZoom":0,"maxZoom":18,"tileSize":256,"subdomains":"abc","errorTileUrl":"","tms":false,"noWrap":false,"zoomOffset":0,"zoomReverse":false,"opacity":1,"zIndex":1,"detectRetina":false,"attribution":"&copy; <a href=\"http://openstreetmap.org\">OpenStreetMap<\/a> contributors, <a href=\"http://creativecommons.org/licenses/by-sa/2.0/\">CC-BY-SA<\/a>"}]},{"method":"addMarkers","args":[-36.852,174.768,null,null,null,{"interactive":true,"draggable":false,"keyboard":true,"title":"","alt":"","zIndexOffset":0,"opacity":1,"riseOnHover":false,"riseOffset":250},"The birthplace of R",null,null,null,null,{"interactive":false,"permanent":false,"direction":"auto","opacity":1,"offset":[0,0],"textsize":"10px","textOnly":false,"className":"","sticky":true},null]}],"limits":{"lat":[-36.852,-36.852],"lng":[174.768,174.768]}},"evals":[],"jsHooks":[]}</script>
 </div>
-<h2 id="static-images">Static images</h2>
+<h2 id="layout-for-images">Layout for images</h2>
 <p>To include static images that occupy the full width of the article text, be sure to add the <code>width=100%</code> attribute. For example:</p>
 <pre class="markdown"><code>
 ![](images/figure.png){width=100%}    </code></pre>
-<p>To include a static images that adheres to a Radix layout, wrap it in a <code>&lt;div&gt;</code> tag with the appropriate <code>class</code>. For example:</p>
-<pre class="markdown"><code>
-&lt;div class=&quot;l-body-outset&quot;&gt;
+<p>To include a static images that adheres to a Radix layout, wrap it in a markdown div (<code>:::</code>) named with the appropriate <code>class</code>. For example:</p>
+<pre class="markup"><code>
+::: l-body-outset
 ![](images/figure.png){width=100%}  
-&lt;/div&gt;</code></pre>
+:::</code></pre>
 <p>If you are including a figure from an external source, it’s good practice to delineate this by applying the <code>.external</code> class and adding a caption indicating where it is from. For example:</p>
 <pre class="markup"><code>
 ![Figure from https://example.com](heatmap.png){.external width=100%}    </code></pre>

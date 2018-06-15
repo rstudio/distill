@@ -13,6 +13,8 @@ Once you've created your website locally, there are a variety of ways available 
 
 ## Getting started
 
+### Website basics
+
 The minimum requirement for a Radix website is that it have:
 
 1) An `index.Rmd` file configured to use the Radix website generator (`site: radix::radix_website`).
@@ -68,7 +70,7 @@ Note that the `output` options are not specified within the Rmd documents but ra
 
 Also note that the `index.Rmd` file specifies the Radix website generator (`site::radix_website`).
 
-## Authoring articles
+### Authoring articles
 
 When you use the RStudio **Knit** command on a Radix article within a website, only that article will be rendered and previewed:
 
@@ -82,7 +84,7 @@ render_site("about.Rmd")
 
 This will build only the specified article (as opposed to all articles in the site). This the recommended workflow for authoring articles since it offers the fastest turnaround time for previews (since only the article you are working on is rendered).
 
-## Building the site
+### Building the site
 
 After you've authored the various articles contained within the website you will want to build the entire site before deploying it. 
 
@@ -107,7 +109,7 @@ library(rmarkdown)
 render_site()
 ```
 
-## Site configuration
+## Site output
 
 The **\_site.yml** file has a number of options that affect site output including where it is written and what files are included and excluded from the site. Here's an example that makes use of a few of these options:
 
@@ -123,8 +125,6 @@ exclude: ["docs.txt", "*.csv"]
 The `name` field provides a suggested URL path for your website when it is published (by default this is just the name of the directory containing the site). 
 
 The `output_dir` field indicates which directory to copy site content into ("_site" is the default if none is specified). Note that this can be "." to keep all content within the root website directory alongside the source code.
-
-### Included files
 
 The `include` and `exclude` fields enable you to override the default behavior visa-vi what files are copied into the output directory. By default, all files within the website directory are copied into the output directory (e.g. "_site") save for the following:
 
@@ -305,7 +305,7 @@ output: radix::radix_article
 Be sure to enclose Twitter account names in quotes (this is required because they start with `@`).
 
 
-## Publishing
+## Publishing a website
 
 Website content is by default written to the `_site` sub-directory (you can customize this using the `output_dir` metadata field). Publishing is simply a matter of copying the output directory to a web server or web hosting service.
 

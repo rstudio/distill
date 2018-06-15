@@ -1301,9 +1301,29 @@ Publishing
 
 
 <div class="d-article">
+<h3 class="d-toc-header">Table of Contents</h3>
+<nav class="d-toc" id="TOC">
+<ul>
+<li><a href="#getting-started">Getting started</a><ul>
+<li><a href="#website-basics">Website basics</a></li>
+<li><a href="#authoring-articles">Authoring articles</a></li>
+<li><a href="#building-the-site">Building the site</a></li>
+</ul></li>
+<li><a href="#site-output">Site output</a></li>
+<li><a href="#site-navigation">Site navigation</a><ul>
+<li><a href="#site-footer">Site footer</a></li>
+<li><a href="#theming">Theming</a></li>
+</ul></li>
+<li><a href="#google-analytics">Google analytics</a></li>
+<li><a href="#site-metadata">Site metadata</a></li>
+<li><a href="#publishing-a-website">Publishing a website</a></li>
+</ul>
+</nav>
+<hr class="d-toc-separator"/>
 <p>This article describes how to create a website that contains a collection of Radix articles. Radix websites include a top level navigation bar that enables readers to discover and browse articles. For example, the documentation pages you are reading now are a Radix website.</p>
 <p>Once you’ve created your website locally, there are a variety of ways available to <a href="publish_website.html">publish your site</a> to the web.</p>
 <h2 id="getting-started">Getting started</h2>
+<h3 id="website-basics">Website basics</h3>
 <p>The minimum requirement for a Radix website is that it have:</p>
 <ol type="1">
 <li><p>An <code>index.Rmd</code> file configured to use the Radix website generator (<code>site: radix::radix_website</code>).</p></li>
@@ -1346,14 +1366,14 @@ description: |
 More about Radix</code></pre>
 <p>Note that the <code>output</code> options are not specified within the Rmd documents but rather in the <code>_site.yml</code> configuration file (this allows output options to be shared by all articles).</p>
 <p>Also note that the <code>index.Rmd</code> file specifies the Radix website generator (<code>site::radix_website</code>).</p>
-<h2 id="authoring-articles">Authoring articles</h2>
+<h3 id="authoring-articles">Authoring articles</h3>
 <p>When you use the RStudio <strong>Knit</strong> command on a Radix article within a website, only that article will be rendered and previewed:</p>
 <p><img src="images/knit-site-article.png" class="screenshot" style="width:95.0%" /></p>
 <p>You can also preview a single article from within a website by passing the name of the article’s Rmd file to <code>render_site()</code>:</p>
 <pre class="r"><code>
 render_site(&quot;about.Rmd&quot;)</code></pre>
 <p>This will build only the specified article (as opposed to all articles in the site). This the recommended workflow for authoring articles since it offers the fastest turnaround time for previews (since only the article you are working on is rendered).</p>
-<h2 id="building-the-site">Building the site</h2>
+<h3 id="building-the-site">Building the site</h3>
 <p>After you’ve authored the various articles contained within the website you will want to build the entire site before deploying it.</p>
 <p>If your Radix website is contained within an RStudio project you can use the <strong>Build Website</strong> command available in the Build pane to generate the site:</p>
 <p><img src="images/build-website.png" class="screenshot" style="width:95.0%" /></p>
@@ -1368,7 +1388,7 @@ render_site(&quot;about.Rmd&quot;)</code></pre>
 <pre class="r"><code>
 library(rmarkdown)
 render_site()</code></pre>
-<h2 id="site-configuration">Site configuration</h2>
+<h2 id="site-output">Site output</h2>
 <p>The <strong>_site.yml</strong> file has a number of options that affect site output including where it is written and what files are included and excluded from the site. Here’s an example that makes use of a few of these options:</p>
 <p><strong>_site.yml</strong></p>
 <pre class="markup"><code>
@@ -1378,7 +1398,6 @@ include: [&quot;import.R&quot;]
 exclude: [&quot;docs.txt&quot;, &quot;*.csv&quot;]</code></pre>
 <p>The <code>name</code> field provides a suggested URL path for your website when it is published (by default this is just the name of the directory containing the site).</p>
 <p>The <code>output_dir</code> field indicates which directory to copy site content into (&quot;_site&quot; is the default if none is specified). Note that this can be “.” to keep all content within the root website directory alongside the source code.</p>
-<h3 id="included-files">Included files</h3>
 <p>The <code>include</code> and <code>exclude</code> fields enable you to override the default behavior visa-vi what files are copied into the output directory. By default, all files within the website directory are copied into the output directory (e.g. &quot;_site&quot;) save for the following:</p>
 <ol type="1">
 <li><p>Files beginning with <code>&quot;.&quot;</code> (hidden files).</p></li>
@@ -1543,7 +1562,7 @@ navbar:
   # (navbar definition here)
 output: radix::radix_article</code></pre>
 <p>Be sure to enclose Twitter account names in quotes (this is required because they start with <code>@</code>).</p>
-<h2 id="publishing">Publishing</h2>
+<h2 id="publishing-a-website">Publishing a website</h2>
 <p>Website content is by default written to the <code>_site</code> sub-directory (you can customize this using the <code>output_dir</code> metadata field). Publishing is simply a matter of copying the output directory to a web server or web hosting service.</p>
 <p>See the article on <a href="publish_website.html">publising websites</a> for additional details on publishing sites using a variety of available hosting services.</p>
 <!--radix_placeholder_article_footer-->
