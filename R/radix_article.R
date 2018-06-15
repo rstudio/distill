@@ -157,7 +157,8 @@ radix_article <- function(toc = FALSE,
                    citation_references_in_header(input_file, metadata$bibliography),
                    metadata_json,
                    manifest_in_header(site_config, input_file, metadata, self_contained),
-                   navigation_in_header_file(site_config))
+                   navigation_in_header_file(site_config),
+                   distill_in_header_file())
 
     # before body includes: radix then user
     before_body <- c(front_matter_before_body(metadata),
@@ -269,6 +270,23 @@ validate_pandoc_version <- function() {
       }
     stop(msg, call. = FALSE)
   }
+}
+
+
+distill_in_header <- function() {
+  doRenderTags(distill_in_header_html())
+}
+
+distill_in_header_file <- function() {
+  html_file(distill_in_header_html())
+}
+
+distill_in_header_html <- function() {
+  distill_html <- html_from_file(
+    system.file("rmarkdown/templates/radix_article/resources/distill.html",
+                package = "radix")
+  )
+  placeholder_html("distill", distill_html)
 }
 
 

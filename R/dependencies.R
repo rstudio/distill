@@ -3,8 +3,7 @@ html_dependency_distill <- function() {
     name = "distill",
     version = "2.2.21",
     src = system.file("www/distill", package = "radix"),
-    script = c("template.v2.js", "distill.js"),
-    stylesheet = c("distill.css")
+    script = c("template.v2.js")
   )
 }
 

@@ -1,7 +1,6 @@
 
 
-- ensure most up to date distill.css and distill.js
-
+- ide still shows disqus in external window
 
 - index/category/archive pages (categories should be inline)
 - email subscription (http://www.wpbeginner.com/opinion/stop-using-feedburner-move-to-feedburner-alternatives/)

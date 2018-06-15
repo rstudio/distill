@@ -76,6 +76,9 @@ render_collections <- function(site_dir, site_config, collections, quiet = FALSE
   # caching html generator
   navigation_html <- navigation_html_generator()
 
+  # distill html
+  distill_html <- distill_in_header()
+
   # site includes
   site_includes <- site_includes(site_dir, site_config)
 
@@ -86,6 +89,7 @@ render_collections <- function(site_dir, site_config, collections, quiet = FALSE
       site_config = site_config,
       collection = collection,
       navigation_html = navigation_html,
+      distill_html = distill_html,
       site_includes = site_includes,
       quiet = quiet
     )
@@ -96,6 +100,7 @@ render_collections <- function(site_dir, site_config, collections, quiet = FALSE
 
 render_collection <- function(site_dir, site_config, collection,
                               navigation_html = navigation_html_generator(),
+                              distill_html = distill_in_header(),
                               site_includes = site_includes(site_dir, site_config),
                               quiet = FALSE) {
 
@@ -122,6 +127,7 @@ render_collection <- function(site_dir, site_config, collection,
       collection = collection$config,
       article = article,
       navigation_html = navigation_html,
+      distill_html = distill_html,
       site_includes = site_includes,
       strip_trailing_newline = TRUE,
       quiet = quiet
@@ -209,6 +215,7 @@ render_collection_article_post_processor <- function(encoding_fn) {
         collection = collection,
         article = article,
         navigation_html = navigation_html_generator(),
+        distill_html = distill_in_header(),
         site_includes = site_includes(site_dir, site_config),
         strip_trailing_newline = FALSE,
         quiet = TRUE
@@ -315,7 +322,7 @@ update_collection_listing <- function(site_dir, site_config, collection, article
 
 
 render_collection_article <- function(site_dir, site_config, collection, article,
-                                      navigation_html, site_includes,
+                                      navigation_html, distill_html, site_includes,
                                       strip_trailing_newline = FALSE,
                                       quiet = FALSE) {
 
@@ -391,6 +398,9 @@ render_collection_article <- function(site_dir, site_config, collection, article
   index_content <- apply_navigation(index_content, "in_header")
   index_content <- apply_navigation(index_content, "before_body")
   index_content <- apply_navigation(index_content, "after_body")
+
+  # substitute distill_html
+  index_content <- fill_placeholder(index_content, "distill", distill_html)
 
   # substitute site includes
   apply_site_include <- function(content, context) {
