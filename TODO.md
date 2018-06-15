@@ -34,7 +34,6 @@
     - app.R or ui.R / server.R in the same directory; automagic local run
     - Full bleed media objects (videos, docs (http://viewerjs.org/), etc.)
 
-- embed observable notebook cells
 
 - Embedded article workflow:
 
