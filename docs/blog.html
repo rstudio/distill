@@ -556,7 +556,7 @@ navbar:
       href: index.xml
 output: radix::radix_article</code></pre>
 <p>Note that the <code>description</code> and <code>base_url</code> fields are both required to generate an RSS feed.</p>
-<p>By default the most recent 20 articles will be included in the RSS feed. You can change this by specifing <code>feed_items_max</code> within the <code>listing</code>:</p>
+<p>By default the most recent 20 articles will be included in the RSS feed. You can change this by specifying <code>feed_items_max</code> within the <code>listing</code>:</p>
 <p><strong>_index.Rmd</strong></p>
 <pre class="markup"><code>
 ---
@@ -568,8 +568,8 @@ listing:
 ---</code></pre>
 <p>Specify <code>feed_items_max: false</code> to have no limit on the number of items included in the feed.</p>
 <h2 id="comments-and-sharing">Comments and sharing</h2>
-<p>Readers will likely want to comment on and share articles they read on your blog. You can enable support for Disqus comments and sharing links for Twitter, LinkedIn, and other services by adding options to the <code>collection:posts</code> section of <code>_site.yml</code>.</p>
-<p>For example, the following options provide the Disqus shortname for a site and specify that we want sharing buttons for Twitter and LinkedIn.</p>
+<p>Readers will likely want to comment on and share articles they read on your blog. You can enable support for <a href="https://disqus.com/">Disqus comments</a> and sharing links for Twitter, LinkedIn, and other services by adding options to the <code>collection:posts</code> section of <code>_site.yml</code>.</p>
+<p>For example, the following options provide the <a href="https://help.disqus.com/installation/whats-a-shortname">Disqus shortname</a> for a site and specify that we want sharing buttons for Twitter and LinkedIn.</p>
 <p><strong>_site.yml</strong></p>
 <pre class="markup"><code>
 ---
@@ -585,6 +585,7 @@ collections:
 ---</code></pre>
 <p>The following footer is then automatically included at the end of each post:</p>
 <p><img src="images/social-footer.png" class="screenshot" style="width:80.0%" /></p>
+<p>Valid values for the <code>share</code> option are <code>twitter</code>, <code>linkedin</code>, <code>facebook</code>, <code>google-plus</code>, and <code>pintrest</code>.</p>
 <h2 id="organizing-posts">Organizing posts</h2>
 <p>You can use whatever scheme you like to organize the <code>_posts</code> directory. You can have all posts at the top level or you can create subdirectories to create groupings of posts.</p>
 <p>One popular scheme for organizing blog posts is to use a date prefix for the post directory names. For example:</p>

@@ -126,7 +126,7 @@ output: radix::radix_article
 
 Note that the `description` and `base_url` fields are both required to generate an RSS feed.
 
-By default the most recent 20 articles will be included in the RSS feed. You can change this by specifing `feed_items_max` within the `listing`:
+By default the most recent 20 articles will be included in the RSS feed. You can change this by specifying `feed_items_max` within the `listing`:
 
 **\_index.Rmd**
 
