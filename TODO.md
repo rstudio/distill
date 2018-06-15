@@ -1,6 +1,5 @@
 
 
-- ide still shows disqus in external window
 
 - index/category/archive pages (categories should be inline)
 - email subscription (http://www.wpbeginner.com/opinion/stop-using-feedburner-move-to-feedburner-alternatives/)
@@ -9,6 +8,7 @@
 - rstudio addins/templates/projects for article creation
    - Created with link in footer
 
+- ide still shows disqus in external window
 - ide publish button for collections should publish website
 - ide publish button for pages should publish/re-publish website
 
