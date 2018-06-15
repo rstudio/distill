@@ -104,6 +104,12 @@ figure img.external {
   padding-top: 0;
 }
 
+/* Make disqus comment count behave like a clickable link */
+
+.disqus-comment-count:hover {
+  border-bottom: 1px solid rgba(0, 0, 0, 0.4);
+  cursor: pointer;
+}
 
 
 /* Tweak code blocks (note that this CSS is repeated above in an injection

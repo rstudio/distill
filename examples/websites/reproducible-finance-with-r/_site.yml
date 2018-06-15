@@ -5,7 +5,7 @@ description: |
 collections:
   posts:
     disqus: reproducible-finance-with-r
-    social: [twitter, linkedin]
+    share: [twitter, linkedin]
 creative_commons: CC BY
 base_url: https://beta.rstudioconnect.com/content/3776/
 favicon: images/favicon.png

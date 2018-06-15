@@ -312,6 +312,14 @@ d-appendix .citation-appendix,
   }
 }
 
+/* Make disqus comment count behave like a clickable link */
+
+.disqus-comment-count {
+  border-bottom: 1px solid rgba(0, 0, 0, 0.4);
+  cursor: pointer;
+  margin-bottom: 15px;
+}
+
 
 
 /* Improve display for browsers without grid (IE/Edge <= 15) */
