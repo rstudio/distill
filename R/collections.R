@@ -434,8 +434,12 @@ article_footer_html <- function(site_config, collection, article) {
 
     disqus <- tagList(
 
-      tags$span(class = "disqus-comment-count", `data-disqus-identifier` = disqus_id,
-                  "Comments"),
+      tags$p(class = "disqus-comments",
+        tag("i", list(class = "far fa-comments")),
+        HTML("&nbsp;"),
+        tags$span(class = "disqus-comment-count", `data-disqus-identifier` = disqus_id,
+                "Comment on this article")
+      ),
 
       tags$script(id = "dsq-count-scr",
                   src = sprintf("https://%s.disqus.com/count.js", disqus_site_name),

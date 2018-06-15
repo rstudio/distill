@@ -149,8 +149,8 @@ radix_article <- function(toc = FALSE,
       html_dependency_distill()
     ))
 
-    # add navbar related dependencies
-    ensure_navbar_dependencies(site_config, dirname(input_file))
+    # add site related dependencies
+    ensure_site_dependencies(site_config, dirname(input_file))
 
     # header includes: radix then user
     in_header <- c(metadata_in_header(site_config, metadata, self_contained),

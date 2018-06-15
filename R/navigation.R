@@ -59,7 +59,7 @@ navigation_in_header_html <- function(site_config, offset) {
     in_header_html <- tagList(
       HTML("<!--radix_placeholder_navigation_in_header-->"),
       in_header_html,
-      lapply(navbar_dependencies(), function(lib) {
+      lapply(site_dependencies(site_config), function(lib) {
         if (!is.null(offset))
           lib$path <- file.path(offset, lib$path)
         list(
@@ -261,25 +261,18 @@ find_site_dir <- function(input_file) {
   )
 }
 
-ensure_navbar_dependencies <- function(site_config, site_dir) {
-
-  if (!is.null(site_config[["navbar"]])) {
-
-    for (lib in navbar_dependencies()) {
-      lib_path <- file.path(site_dir, lib$path)
-      if (!dir_exists(lib_path))
-        copyDependencyToDir(lib$dep, file.path(site_dir, dirname(lib$path)))
-    }
-
+ensure_site_dependencies <- function(site_config, site_dir) {
+  for (lib in site_dependencies(site_config)) {
+    lib_path <- file.path(site_dir, lib$path)
+    if (!dir_exists(lib_path))
+      copyDependencyToDir(lib$dep, file.path(site_dir, dirname(lib$path)))
   }
-
-
 }
 
 
-navbar_dependencies <- function() {
+site_dependencies <- function(site_config) {
 
-  navbar_dependency <- function(dep) {
+  site_dependency <- function(dep) {
     ver <- paste(dep$name, dep$version, sep = "-")
     path <- file.path("site_libs", ver)
     list(
@@ -289,10 +282,14 @@ navbar_dependencies <- function() {
     )
   }
 
-  list(
-    navbar_dependency(html_dependency_font_awesome()),
-    navbar_dependency(html_dependency_headroom())
-  )
+  if (length(site_config) > 0) {
+    list(
+      site_dependency(html_dependency_font_awesome()),
+      site_dependency(html_dependency_headroom())
+    )
+  } else {
+    list()
+  }
 }
 
 
