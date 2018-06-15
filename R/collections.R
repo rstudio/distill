@@ -551,10 +551,9 @@ apply_site_libs <- function(index_content, article_path, site_libs, offset) {
   for (dir in dirs) {
     article_lib_dir <- file.path(dirname(article_path), files_dir, dir)
     site_lib_dir <- file.path(site_libs, dir)
-    if (!dir_exists(site_lib_dir))
-      file.rename(article_lib_dir, site_lib_dir)
-    else
-      unlink(article_lib_dir, recursive = TRUE)
+    if (dir_exists(site_lib_dir))
+      unlink(site_lib_dir, recursive = TRUE)
+    file.rename(article_lib_dir, site_lib_dir)
   }
 
   # fixup html

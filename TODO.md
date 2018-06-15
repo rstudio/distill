@@ -1,12 +1,9 @@
 
 
-- distill.js and distill.css don't get updated in site_libs in incremental render
-  (should probably inline them the way we do navbar)
-
 - test social links
-- is there a twitter link target that uses cards?
 
 - test comment reveal with more comments occupying vertical space
+- more testing of comment reveal
 
 - index/category/archive pages (categories should be inline)
 - email subscription (http://www.wpbeginner.com/opinion/stop-using-feedburner-move-to-feedburner-alternatives/)
