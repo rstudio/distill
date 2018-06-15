@@ -434,17 +434,28 @@ render_collection_article <- function(site_dir, site_config, collection, article
 
 article_footer_html <- function(site_config, collection, article) {
 
-  # bail if we don't have a site base url
-  if (is.null(site_config[["base_url"]]))
+  # get disqus and share
+  base_url <- site_config[["base_url"]]
+  discuss_shortname <- collection[["disqus"]]
+  share_services <- collection[["share"]]
+
+  # validate base_url if needed
+  if (!is.null(discuss_shortname) && is.null(base_url))
+    stop("You must specify a base_url when including disqus comments.", call. = FALSE)
+  if (!is.null(share_services) && is.null(base_url))
+    stop("You must specify a base_url when including sharing links", call. = FALSE)
+
+  # bail if there is no base_url
+  if (is.null(base_url))
     return(NULL)
+
 
   # article info
   article_title <- article$metadata$title
   encoded_article_title <- utils::URLencode(article_title, reserved = TRUE)
   article_url <- ensure_trailing_slash(article$metadata$base_url)
   encoded_article_url <- utils::URLencode(article_url, reserved = TRUE)
-  article_id <- sub(paste0("^", ensure_trailing_slash(site_config$base_url)), "",
-                    article_url)
+  article_id <- sub(paste0("^", ensure_trailing_slash(base_url)), "", article_url)
 
   # function to create a sharing link for a service
   sharing_link <- function(service) {
@@ -465,7 +476,6 @@ article_footer_html <- function(site_config, collection, article) {
 
   # share
   share <- NULL
-  share_services <- collection[["share"]]
   if (!is.null(share_services)) {
 
     # filter out invalid sites
@@ -487,7 +497,6 @@ article_footer_html <- function(site_config, collection, article) {
   # disqus
   disqus <- NULL
   disqus_script <- NULL
-  discuss_shortname <- collection[["disqus"]]
   if (!is.null(discuss_shortname)) {
 
     disqus <- tags$span(class = "disqus-comments",
