@@ -1,10 +1,14 @@
 
-
+- Compare typography/layout to medium and distill
+    - Lightbox for asides?
 
 - index/category/archive pages (categories should be inline)
-- email subscription (http://www.wpbeginner.com/opinion/stop-using-feedburner-move-to-feedburner-alternatives/)
 
-- search
+- MailChimp: 
+    - https://mailchimp.com/help/share-your-blog-posts-with-mailchimp/
+    - https://mailchimp.com/help/add-a-signup-form-to-your-website/
+    - https://mailchimp.com/help/add-a-pop-up-signup-form-to-your-website/
+    
 - rstudio addins/templates/projects for article creation
    - Main Rmd template
    - Project:
@@ -12,7 +16,10 @@
       - Blog using Radix
    - Addin: New blog post
 
-- ide still shows disqus in external window
+- search:
+    - Algolia (https://www.algolia.com/). See also docsearch
+    - https://sitesearch360.com/
+
 - ide publish button for collections should publish website
 - ide publish button for pages should publish/re-publish website
 
