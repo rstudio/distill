@@ -25,7 +25,7 @@ Imports:
     utils, 
     stats,
     tools, 
-    rmarkdown (>= 1.9.18), 
+    rmarkdown (>= 1.10), 
     htmltools, 
     jsonlite, 
     lubridate, 
@@ -35,8 +35,6 @@ Imports:
     rprojroot,
     xml2,
     base64enc
-Remotes:
-    rstudio/rmarkdown
 Suggests:
     knitr (>= 1.15.6),
     htmlwidgets,
