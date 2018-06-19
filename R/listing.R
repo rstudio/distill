@@ -79,10 +79,24 @@ article_listing_html <- function(collection, articles) {
     )
   })
 
+  # do we have a sidebar
+  sidebar <- FALSE
+
   # wrap in a div
-  placeholder_html("article_listing",
-    div(class = "posts-list l-page", articles_html)
-  )
+  if (sidebar) {
+    placeholder_html("article_listing",
+      div(class = "posts-container posts-with-sidebar l-screen-inset",
+        div(class = "posts-list", articles_html),
+        div(class = "posts-sidebar", "Sidebar")
+      )
+    )
+  } else {
+    placeholder_html("article_listing",
+      div(class = "posts-container l-page",
+        div(class = "posts-list", articles_html)
+      )
+    )
+  }
 }
 
 articles_info <- function(site_dir, collection) {

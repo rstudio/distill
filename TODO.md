@@ -1,5 +1,7 @@
 
 
+- Location of appendix in downlevel category pages (also check regular pages)
+
 - index/category/archive pages (categories should be inline)
 
 - FeedOtter:

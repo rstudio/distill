@@ -203,6 +203,12 @@ d-appendix .citation-appendix,
 
 /* Styles for posts lists (not auto-injected) */
 
+
+.posts-with-sidebar {
+  padding-left: 45px;
+  padding-right: 45px;
+}
+
 .posts-list .description h2,
 .posts-list .description p {
   font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen, Ubuntu, Cantarell, "Fira Sans", "Droid Sans", "Helvetica Neue", Arial, sans-serif;
@@ -287,6 +293,8 @@ d-appendix .citation-appendix,
   font-weight: 500;
 }
 
+
+
 @media(min-width: 768px) {
   .posts-list .post-preview h2 {
     font-size: 26px;
@@ -301,7 +309,7 @@ d-appendix .citation-appendix,
   }
   .posts-list .post-preview .description {
     float: left;
-    width: 40%;
+    width: 45%;
   }
   .posts-list .post-preview .metadata {
     float: left;
@@ -312,6 +320,17 @@ d-appendix .citation-appendix,
     margin: 0 0 12px 0;
     line-height: 1.5em;
     font-size: 16px;
+  }
+  .posts-with-sidebar .posts-list {
+    float: left;
+    width: 75%;
+  }
+  .posts-with-sidebar .posts-sidebar {
+    float: right;
+    width: 20%;
+    margin-top: 60px;
+    padding-top: 24px;
+    padding-bottom: 24px;
   }
 }
 
@@ -425,7 +444,8 @@ d-appendix .citation-appendix,
 .downlevel .d-footnote-list,
 .downlevel .d-citation-list,
 .downlevel .distill-footer,
-.downlevel .appendix-bottom {
+.downlevel .appendix-bottom,
+.downlevel .posts-container {
   padding-left: 40px;
   padding-right: 40px;
 }
@@ -442,10 +462,11 @@ d-appendix .citation-appendix,
   .downlevel .d-footnote-list,
   .downlevel .d-citation-list,
   .downlevel .distill-footer,
-  .downlevel .appendix-bottom {
+  .downlevel .appendix-bottom,
+  .downlevel .posts-container {
   padding-left: 150px;
   padding-right: 150px;
-  max-width: 700px;
+  max-width: 900px;
 }
 }
 
@@ -482,7 +503,6 @@ d-appendix .citation-appendix,
 <script type="application/javascript">
 
 function is_downlevel_browser() {
-
   if (bowser.isUnsupportedBrowser({ msie: "12", msedge: "16"},
                                  window.navigator.userAgent)) {
     return true;
@@ -520,8 +540,8 @@ function init_distill() {
   var article = $('<d-article></d-article>');
   $('.d-article').wrap(article).children().unwrap();
 
-  // move post list into article
-  $('.posts-list').appendTo($('d-article'));
+  // move posts container into article
+  $('.posts-container').appendTo($('d-article'));
 
   // create d-appendix
   $('.d-appendix').changeElementType('d-appendix');
@@ -755,6 +775,9 @@ function init_downlevel() {
   $('pre>code').each(function(i, val) {
     $(this).html($.trim($(this).html()));
   });
+
+  // move posts-container right before article
+  $('.posts-container').insertBefore($('.d-article'));
 
   $('body').addClass('downlevel');
 
