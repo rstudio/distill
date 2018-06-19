@@ -1,6 +1,4 @@
 
-- Compare typography/layout to medium and distill
-    - Lightbox for asides?
 
 - index/category/archive pages (categories should be inline)
 
@@ -18,6 +16,18 @@
       - Website using Radix
       - Blog using Radix
    - Addin: New blog post
+
+
+- Lightbox for asides?
+
+- Collapsable code regions
+- Code highlighting
+
+- Mini-embedded slide show
+
+- Optional sections for tangents
+
+- Remove shinyapps.io
 
 - search:
     - Algolia (https://www.algolia.com/). See also docsearch

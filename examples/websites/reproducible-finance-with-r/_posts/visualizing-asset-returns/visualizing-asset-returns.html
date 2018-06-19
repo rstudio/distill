@@ -93,12 +93,6 @@
     padding-top: 30px;
   }
   
-  @media(min-width: 1024px) {
-    figure .caption {
-      font-size: 13px;
-    }
-  }
-  
   figure img.external {
     background: white;
     border: 1px solid rgba(0, 0, 0, 0.1);
@@ -201,11 +195,9 @@
   }
   }
   
+  /* Tweak 1000px media break to show more text */
   
-  
-  /* Add an additional media break (since the text column was a bit narrow at 1100px) */
-  
-  @media(min-width: 1100px) {
+  @media(min-width: 1000px) {
     .base-grid,
     distill-header,
     d-title,
@@ -217,14 +209,23 @@
     d-footnote-list,
     d-citation-list,
     distill-footer {
-      grid-template-columns: [screen-start] 1fr [page-start kicker-start] 55px [middle-start] 55px [text-start kicker-end] 55px 55px 55px 55px 55px 55px 55px 55px [text-end gutter-start] 55px [middle-end] 55px [page-end gutter-end] 1fr [screen-end];
-      grid-column-gap: 32px;
+      grid-template-columns: [screen-start] 0.3fr [page-start kicker-start] 50px [middle-start] 50px [text-start kicker-end] 65px 65px 65px 65px 65px 65px 65px 65px [text-end gutter-start] 65px [middle-end] 65px [page-end gutter-end] 1fr [screen-end];
+      grid-column-gap: 16px;
     }
   
     .grid {
-      grid-column-gap: 32px;
+      grid-column-gap: 16px;
+    }
+  
+    d-article {
+      font-size: 1.06rem;
+      line-height: 1.7em;
+    }
+    figure .caption {
+      font-size: 13px;
     }
   }
+  
   
   /* Get the citation styles for the appendix (not auto-injected on render since
      we do our own rendering of the citation appendix) */

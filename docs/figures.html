@@ -416,12 +416,6 @@
     padding-top: 30px;
   }
   
-  @media(min-width: 1024px) {
-    figure .caption {
-      font-size: 13px;
-    }
-  }
-  
   figure img.external {
     background: white;
     border: 1px solid rgba(0, 0, 0, 0.1);
@@ -524,11 +518,9 @@
   }
   }
   
+  /* Tweak 1000px media break to show more text */
   
-  
-  /* Add an additional media break (since the text column was a bit narrow at 1100px) */
-  
-  @media(min-width: 1100px) {
+  @media(min-width: 1000px) {
     .base-grid,
     distill-header,
     d-title,
@@ -540,14 +532,23 @@
     d-footnote-list,
     d-citation-list,
     distill-footer {
-      grid-template-columns: [screen-start] 1fr [page-start kicker-start] 55px [middle-start] 55px [text-start kicker-end] 55px 55px 55px 55px 55px 55px 55px 55px [text-end gutter-start] 55px [middle-end] 55px [page-end gutter-end] 1fr [screen-end];
-      grid-column-gap: 32px;
+      grid-template-columns: [screen-start] 0.3fr [page-start kicker-start] 50px [middle-start] 50px [text-start kicker-end] 65px 65px 65px 65px 65px 65px 65px 65px [text-end gutter-start] 65px [middle-end] 65px [page-end gutter-end] 1fr [screen-end];
+      grid-column-gap: 16px;
     }
   
     .grid {
-      grid-column-gap: 32px;
+      grid-column-gap: 16px;
+    }
+  
+    d-article {
+      font-size: 1.06rem;
+      line-height: 1.7em;
+    }
+    figure .caption {
+      font-size: 13px;
     }
   }
+  
   
   /* Get the citation styles for the appendix (not auto-injected on render since
      we do our own rendering of the citation appendix) */
@@ -1370,8 +1371,8 @@ leaflet() %&gt;%
   addMarkers(lng=174.768, lat=-36.852, popup=&quot;The birthplace of R&quot;)
 ```</code></pre>
 <div class="layout-chunk" data-layout="l-screen-inset">
-<div id="htmlwidget-7ded59f4b1e32ea1fd21" style="width:576px;height:384px;" class="leaflet html-widget"></div>
-<script type="application/json" data-for="htmlwidget-7ded59f4b1e32ea1fd21">{"x":{"options":{"crs":{"crsClass":"L.CRS.EPSG3857","code":null,"proj4def":null,"projectedBounds":null,"options":{}}},"calls":[{"method":"addTiles","args":["//{s}.tile.openstreetmap.org/{z}/{x}/{y}.png",null,null,{"minZoom":0,"maxZoom":18,"tileSize":256,"subdomains":"abc","errorTileUrl":"","tms":false,"noWrap":false,"zoomOffset":0,"zoomReverse":false,"opacity":1,"zIndex":1,"detectRetina":false,"attribution":"&copy; <a href=\"http://openstreetmap.org\">OpenStreetMap<\/a> contributors, <a href=\"http://creativecommons.org/licenses/by-sa/2.0/\">CC-BY-SA<\/a>"}]},{"method":"addMarkers","args":[-36.852,174.768,null,null,null,{"interactive":true,"draggable":false,"keyboard":true,"title":"","alt":"","zIndexOffset":0,"opacity":1,"riseOnHover":false,"riseOffset":250},"The birthplace of R",null,null,null,null,{"interactive":false,"permanent":false,"direction":"auto","opacity":1,"offset":[0,0],"textsize":"10px","textOnly":false,"className":"","sticky":true},null]}],"limits":{"lat":[-36.852,-36.852],"lng":[174.768,174.768]}},"evals":[],"jsHooks":[]}</script>
+<div id="htmlwidget-b7209d99ac98aafd36b6" style="width:576px;height:384px;" class="leaflet html-widget"></div>
+<script type="application/json" data-for="htmlwidget-b7209d99ac98aafd36b6">{"x":{"options":{"crs":{"crsClass":"L.CRS.EPSG3857","code":null,"proj4def":null,"projectedBounds":null,"options":{}}},"calls":[{"method":"addTiles","args":["//{s}.tile.openstreetmap.org/{z}/{x}/{y}.png",null,null,{"minZoom":0,"maxZoom":18,"tileSize":256,"subdomains":"abc","errorTileUrl":"","tms":false,"noWrap":false,"zoomOffset":0,"zoomReverse":false,"opacity":1,"zIndex":1,"detectRetina":false,"attribution":"&copy; <a href=\"http://openstreetmap.org\">OpenStreetMap<\/a> contributors, <a href=\"http://creativecommons.org/licenses/by-sa/2.0/\">CC-BY-SA<\/a>"}]},{"method":"addMarkers","args":[-36.852,174.768,null,null,null,{"interactive":true,"draggable":false,"keyboard":true,"title":"","alt":"","zIndexOffset":0,"opacity":1,"riseOnHover":false,"riseOffset":250},"The birthplace of R",null,null,null,null,{"interactive":false,"permanent":false,"direction":"auto","opacity":1,"offset":[0,0],"textsize":"10px","textOnly":false,"className":"","sticky":true},null]}],"limits":{"lat":[-36.852,-36.852],"lng":[174.768,174.768]}},"evals":[],"jsHooks":[]}</script>
 </div>
 <h2 id="layout-for-images">Layout for images</h2>
 <p>To include static images that occupy the full width of the article text, be sure to add the <code>width=100%</code> attribute. For example:</p>
