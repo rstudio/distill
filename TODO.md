@@ -4,6 +4,9 @@
 
 - index/category/archive pages (categories should be inline)
 
+- FeedOtter:
+    - https://www.feedotter.com/
+
 - MailChimp: 
     - https://mailchimp.com/help/share-your-blog-posts-with-mailchimp/
     - https://mailchimp.com/help/add-a-signup-form-to-your-website/
