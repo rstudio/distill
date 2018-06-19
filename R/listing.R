@@ -45,7 +45,7 @@ generate_listing <- function(input_file,
   feed_xml <- write_feed_xml(feed_xml, site_config, collection, feed_articles)
 
   # generate html
-  listing_html <- article_listing_html(collection, articles)
+  listing_html <- article_listing_html(collection, articles, options)
   html <- html_file(listing_html)
 
   # return feed and listing html
@@ -56,7 +56,15 @@ generate_listing <- function(input_file,
 }
 
 
-article_listing_html <- function(collection, articles) {
+article_listing_html <- function(collection, articles, options) {
+
+  # detect whether we are showing categories in the sidebar
+  categories <- options[["categories"]]
+  if (is.null(categories))
+    categories <- TRUE
+
+  # if we are displaying categories then verify that articles have categories
+  categories <- categories && have_categories(articles)
 
   # generate html
   articles_html <- lapply(articles, function(article) {
@@ -80,14 +88,14 @@ article_listing_html <- function(collection, articles) {
   })
 
   # do we have a sidebar
-  sidebar <- FALSE
+  sidebar <- categories
 
   # wrap in a div
   if (sidebar) {
     placeholder_html("article_listing",
       div(class = "posts-container posts-with-sidebar l-screen-inset",
         div(class = "posts-list", articles_html),
-        div(class = "posts-sidebar", "Sidebar")
+        div(class = "posts-sidebar", HTML("&nbsp;"))
       )
     )
   } else {
@@ -97,6 +105,10 @@ article_listing_html <- function(collection, articles) {
       )
     )
   }
+}
+
+have_categories <- function(articles) {
+  length(Filter(function(x) { length(x[["categories"]]) > 0 }, articles)) > 0
 }
 
 articles_info <- function(site_dir, collection) {

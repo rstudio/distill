@@ -686,6 +686,7 @@ article_info <- function(site_dir, article) {
       )
     }),
     date = article$metadata$date,
+    categories = as.list(article$metadata$categories),
     preview = article$metadata$preview,
     last_modified = time_as_iso_8601(file.info(article$path)$mtime)
   )
