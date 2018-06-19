@@ -59,7 +59,7 @@ You can make it easier for others to cite your work by providing additional meta
 
 ### Web articles
 
-To provide a citation for an article published to the web, include `author` and `data` metadata as well as a  `citation_url`. For example:
+To provide a citation for an article published to the web, include `author` and `date` metadata as well as a  `citation_url`. For example:
 
 ```markup
 ---
