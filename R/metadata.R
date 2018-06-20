@@ -162,7 +162,7 @@ transform_metadata <- function(file, site_config, collection_config, metadata, a
     # compute first and last name
     metadata$author <- lapply(metadata$author, function(author) {
       names <- strsplit(author$name, '\\s+')[[1]]
-      author$first_name <- paste(utils::head(names, -1))
+      author$first_name <- paste(utils::head(names, -1), collapse = " ")
       author$last_name <- utils::tail(names, 1)
       author
     })
