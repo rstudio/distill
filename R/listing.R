@@ -74,7 +74,7 @@ article_listing_html <- function(collection, articles) {
       tags$script(class = "post-metadata", type = "text/json",
                   HTML(jsonlite::toJSON(metadata))),
       div(class = "metadata",
-        div(class = "publishedDate", article$date_abbrev)
+        div(class = "publishedDate", date_as_abbrev(article$date))
       ),
       div(class = "thumbnail", preview),
       div(class = "description",

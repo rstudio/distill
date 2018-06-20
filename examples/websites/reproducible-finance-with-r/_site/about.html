@@ -402,7 +402,7 @@
   }
   
   .hidden {
-    display: none;
+    display: none !important;
   }
   
   d-article {
@@ -1197,6 +1197,59 @@
     on_load_complete();
   }
   
+  function init_posts_list() {
+  
+    // only do this for post listings
+    if (!$('body').hasClass('layout-listing'))
+      return;
+  
+    function load_image(img) {
+      var src = $(img).attr('data-src');
+      if (src) {
+        $(img).attr('src', src);
+        $(img).load(function() {
+          img.removeAttribute('data-src');
+        });
+      }
+    }
+  
+    function apply_hash_filter() {
+  
+      if (window.location.hash) {
+        var page_category = window.location.hash.replace("#", "");
+        $('.post-metadata').each(function(i, script) {
+          var metadata = $.parseJSON($(script).html());
+          var categories = metadata.categories;
+          var matched = false;
+          $.each(metadata.categories, function(idx, category) {
+            category = category.replace(/ /g,"_");
+            if (category == page_category) {
+              matched = true;
+              return false;
+            }
+            return true;
+          });
+          if (matched) {
+            $(this).parent().removeClass('hidden');
+            $(this).parent().find('img[data-src]').each(function(i, img) { load_image(img); });
+          } else {
+            $(this).parent().addClass('hidden');
+          }
+        });
+      } else {
+        $('.posts-list').children().removeClass('hidden');
+        $('.posts-list img[data-src]').each(function(idx, img) {
+          load_image(img);
+        });
+      }
+    }
+  
+    apply_hash_filter();
+    $(window).on('hashchange',function(){
+      apply_hash_filter();
+    });
+  
+  }
   
   function init_common() {
   
@@ -1230,17 +1283,13 @@
         $(this).attr('href', $(this).attr('href') + "index.html");
     });
   
-    // load images in post list
-    $('.posts-list img[data-src]').each(function(idx, img) {
-      $(img).attr('src', $(img).attr('data-src'));
-      $(img).load(function() {
-        img.removeAttribute('data-src');
-      });
-    });
-  
     // add class to pandoc style tables
     $('tr.header').parent('thead').parent('table').addClass('pandoc-table');
     $('.kable-table').children('table').addClass('pandoc-table');
+  
+  
+    // initialize posts list
+    init_posts_list();
   
     // implmement disqus comment link
     $('.disqus-comment-count').click(function() {
