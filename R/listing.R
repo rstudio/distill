@@ -63,15 +63,12 @@ article_listing_html <- function(collection, articles) {
   # generate html
   articles_html <- lapply(articles, function(article) {
 
-    # preview
-    preview <- resolve_preview_url(article$preview, article$path)
-
-    if (!is.null(preview))
-      preview <- img(src = preview)
+    if (!is.null(article$preview))
+      preview <- img(src = article$preview)
 
     a(href = article$path, class = "post-preview",
       div(class = "metadata",
-        div(class = "publishedDate", date_as_abbrev(article$date))
+        div(class = "publishedDate", article$date_abbrev)
       ),
       div(class = "thumbnail", preview),
       div(class = "description",
@@ -162,13 +159,16 @@ as_collection_name <- function(collection) {
     collection
 }
 
-resolve_preview_url <- function(preview, path, base_url = NULL) {
-  if (!is.null(preview) && !is_url(preview)) {
-    if (!is.null(base_url))
-      preview <- url_path(base_url, path, preview)
-    else
-      preview <- url_path(path, preview)
-  }
+resolve_preview_url <- function(preview, path) {
+  if (!is.null(preview) && !is_url(preview))
+    preview <- url_path(path, preview)
   preview
+}
+
+absolute_preview_url <- function(preview_url, base_url) {
+  if (!is.null(preview_url) && !is_url(preview_url))
+    url_path(base_url, preview_url)
+  else
+    preview_url
 }
 

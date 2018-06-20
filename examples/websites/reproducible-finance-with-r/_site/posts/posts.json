@@ -10,11 +10,12 @@
       }
     ],
     "date": "2017-11-09",
+    "date_abbrev": "Nov. 9, 2017",
     "categories": [
       "portfolios",
       "highcharts"
     ],
-    "preview": "visualizing-asset-returns_files/figure-html5/unnamed-chunk-9-1.png",
+    "preview": "posts/visualizing-asset-returns/visualizing-asset-returns_files/figure-html5/unnamed-chunk-9-1.png",
     "last_modified": "2018-06-20T08:58:50-04:00",
     "preview_width": 1152,
     "preview_height": 576
@@ -30,11 +31,12 @@
       }
     ],
     "date": "2017-09-13",
+    "date_abbrev": "Sept. 13, 2017",
     "categories": [
       "portfolios",
       "highcharts"
     ],
-    "preview": "asset-volatility_files/figure-html5/unnamed-chunk-13-1.png",
+    "preview": "posts/asset-volatility/asset-volatility_files/figure-html5/unnamed-chunk-13-1.png",
     "last_modified": "2018-06-20T08:58:01-04:00",
     "preview_width": 1152,
     "preview_height": 576
@@ -50,11 +52,12 @@
       }
     ],
     "date": "2017-03-07",
+    "date_abbrev": "March 7, 2017",
     "categories": [
       "forecasting",
       "dygraphs"
     ],
-    "preview": "preview.png",
+    "preview": "posts/quandl-and-forecasting/preview.png",
     "last_modified": "2018-06-20T08:58:13-04:00",
     "preview_width": 1656,
     "preview_height": 927
@@ -70,11 +73,12 @@
       }
     ],
     "date": "2016-11-08",
+    "date_abbrev": "Nov. 8, 2016",
     "categories": [
       "portfolios",
       "dygraphs"
     ],
-    "preview": "preview.png",
+    "preview": "posts/sharpe-ratio/preview.png",
     "last_modified": "2018-06-20T08:58:27-04:00",
     "preview_width": 1644,
     "preview_height": 1014

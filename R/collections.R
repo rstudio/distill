@@ -673,8 +673,9 @@ write_articles_info <- function(articles, path) {
 
 article_info <- function(site_dir, article) {
 
+  path <- paste0(url_path(article_site_path(site_dir, article$path)), "/")
   info <- list(
-    path = paste0(url_path(article_site_path(site_dir, article$path)), "/"),
+    path = path,
     title = article$metadata$title,
     description = article$metadata$description,
     author = lapply(article$metadata$author, function(author) {
@@ -684,8 +685,9 @@ article_info <- function(site_dir, article) {
       )
     }),
     date = article$metadata$date,
+    date_abbrev = date_as_abbrev(article$metadata$date),
     categories = as.list(article$metadata$categories),
-    preview = article$metadata$preview,
+    preview = resolve_preview_url(article$metadata$preview, path),
     last_modified = time_as_iso_8601(file.info(article$path)$mtime)
   )
 
