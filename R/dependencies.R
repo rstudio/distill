@@ -34,6 +34,15 @@ html_dependency_headroom <- function() {
   )
 }
 
+html_dependency_mustache <- function() {
+  htmltools::htmlDependency(
+    name = "mustache",
+    version = "2.3.0",
+    src = system.file("www/mustache", package = "radix"),
+    script = "mustache.min.js"
+  )
+}
+
 html_dependency_iframe_resizer <- function() {
   htmltools::htmlDependency(
     name = "iframe-resizer",

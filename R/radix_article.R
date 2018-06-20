@@ -124,6 +124,14 @@ radix_article <- function(toc = FALSE,
     site_config <- transformed$site_config
     metadata <- transformed$metadata
 
+    # list of html dependencies
+    html_deps <- list(
+      html_dependency_jquery(),
+      html_dependency_bowser(),
+      html_dependency_webcomponents(),
+      html_dependency_distill()
+    )
+
     # special handling for listing pages
     listing <- list()
     if (!is.null(metadata$listing)) {
@@ -139,15 +147,13 @@ radix_article <- function(toc = FALSE,
         args <- c(args,
           pandoc_variable_arg("feed", url_path(site_config$base_url, listing$feed))
       )
+
+      # add mustache dependency
+      html_deps[[length(html_deps) + 1]] <- html_dependency_mustache()
     }
 
     # add html dependencies
-    knitr::knit_meta_add(list(
-      html_dependency_jquery(),
-      html_dependency_bowser(),
-      html_dependency_webcomponents(),
-      html_dependency_distill()
-    ))
+    knitr::knit_meta_add(html_deps)
 
     # add site related dependencies
     ensure_site_dependencies(site_config, dirname(input_file))

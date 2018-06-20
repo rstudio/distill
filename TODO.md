@@ -1,6 +1,8 @@
 
 
 - index/category/archive pages (categories should be inline)
+   (https://github.com/janl/mustache.js)
+
 
 - FeedOtter:
     - https://www.feedotter.com/
@@ -16,6 +18,19 @@
       - Website using Radix
       - Blog using Radix
    - Addin: New blog post
+
+- Embedded article workflow:
+
+   - document cannonical url
+   - attribution metadata for inclusion when importing/syndicating (do during import)
+   - import article function(s)
+
+
+
+- ide publish button for collections should publish website
+- ide publish button for pages should publish/re-publish website
+
+- packrat ignore Rmds in collection subfolders (site engine?)
 
 
 - Lightbox for asides?
@@ -33,10 +48,6 @@
     - Algolia (https://www.algolia.com/). See also docsearch
     - https://sitesearch360.com/
 
-- ide publish button for collections should publish website
-- ide publish button for pages should publish/re-publish website
-
-- packrat ignore Rmds in collection subfolders
 
 - Add some citations to sample posts
 
@@ -52,12 +63,6 @@
     - app.R or ui.R / server.R in the same directory; automagic local run
     - Full bleed media objects (videos, docs (http://viewerjs.org/), etc.)
 
-
-- Embedded article workflow:
-
-   - document cannonical url
-   - attribution metadata for inclusion when importing/syndicating (do during import)
-   - import article function(s)
 
 
 - Document prism changes somewhere:
