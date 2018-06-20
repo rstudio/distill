@@ -125,7 +125,7 @@ categories_listing_html <- function(articles) {
       tags$ul(
         lapply(names(categories), function(name) {
           tags$li(
-            tags$a(href = "#", name),
+            tags$a(href = paste0("#",gsub(" ", "_", name)), name),
             tags$span(class = "category-count",
                       sprintf("(%d)", categories[[name]]))
           )
