@@ -63,10 +63,16 @@ article_listing_html <- function(collection, articles) {
   # generate html
   articles_html <- lapply(articles, function(article) {
 
+    # metadata
+    metadata <- list()
+    metadata$categories <- as.character(article[["categories"]])
+
     if (!is.null(article$preview))
       preview <- img(`data-src` = article$preview)
 
     a(href = article$path, class = "post-preview",
+      tags$script(class = "post-metadata", type = "text/json",
+                  HTML(jsonlite::toJSON(metadata))),
       div(class = "metadata",
         div(class = "publishedDate", article$date_abbrev)
       ),
