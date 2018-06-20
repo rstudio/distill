@@ -31,7 +31,7 @@ body {
 }
 
 .hidden {
-  display: none;
+  display: none !important;
 }
 
 d-article {
@@ -859,14 +859,14 @@ function init_posts_list() {
           return true;
         });
         if (matched) {
-          $(this).parent().css('display', '');
+          $(this).parent().removeClass('hidden');
           $(this).parent().find('img[data-src]').each(function(i, img) { load_image(img); });
         } else {
-          $(this).parent().css('display', 'none');
+          $(this).parent().addClass('hidden');
         }
       });
     } else {
-      $('.posts-list').children().css('display', '');
+      $('.posts-list').children().removeClass('hidden');
       $('.posts-list img[data-src]').each(function(idx, img) {
         load_image(img);
       });
