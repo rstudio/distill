@@ -88,7 +88,8 @@ article_listing_html <- function(collection, articles, options) {
   })
 
   # do we have a sidebar
-  sidebar <- categories
+  #sidebar <- categories
+  sidebar <- FALSE
 
   # wrap in a div
   if (sidebar) {

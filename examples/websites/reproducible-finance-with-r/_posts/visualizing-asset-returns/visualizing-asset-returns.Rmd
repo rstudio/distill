@@ -8,6 +8,9 @@ author:
     affiliation: RStudio
     affiliation_url: https://www.rstudio.com
 date: 11-09-2017
+categories: 
+  - portfolios
+  - highcharts
 output: 
   radix::radix_article:
     self_contained: false

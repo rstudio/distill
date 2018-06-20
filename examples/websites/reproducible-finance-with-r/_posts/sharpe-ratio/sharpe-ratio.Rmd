@@ -9,6 +9,9 @@ author:
     affiliation: RStudio
     affiliation_url: https://www.rstudio.com
 date: 11-08-2016
+categories:
+  - portfolios
+  - dygraphs
 output: 
   radix::radix_article:
     self_contained: false

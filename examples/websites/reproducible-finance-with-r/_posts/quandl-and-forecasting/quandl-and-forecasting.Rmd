@@ -9,6 +9,9 @@ author:
     affiliation: RStudio
     affiliation_url: https://www.rstudio.com
 date: 03-07-2017
+categories:
+  - forecasting
+  - dygraphs
 output: 
   radix::radix_article:
     self_contained: false
