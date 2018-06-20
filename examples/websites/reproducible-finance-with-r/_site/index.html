@@ -665,6 +665,14 @@
     font-weight: 500;
   }
   
+  .posts-list img {
+    opacity: 1;
+  }
+  
+  .posts-list img[data-src] {
+    opacity: 0;
+  }
+  
   
   .categories {
     font-size: 16px;
@@ -1223,6 +1231,14 @@
         $(this).attr('href', $(this).attr('href') + "index.html");
     });
   
+    // load images in post list
+    $('.posts-list img[data-src]').each(function(idx, img) {
+      $(img).attr('src', $(img).attr('data-src'));
+      $(img).load(function() {
+        img.removeAttribute('data-src');
+      });
+    });
+  
     // add class to pandoc style tables
     $('tr.header').parent('thead').parent('table').addClass('pandoc-table');
     $('.kable-table').children('table').addClass('pandoc-table');
@@ -1305,7 +1321,7 @@
 <div class="publishedDate">Nov. 9, 2017</div>
 </div>
 <div class="thumbnail">
-<img src="posts/visualizing-asset-returns/visualizing-asset-returns_files/figure-html5/unnamed-chunk-9-1.png"/>
+<img data-src="posts/visualizing-asset-returns/visualizing-asset-returns_files/figure-html5/unnamed-chunk-9-1.png"/>
 </div>
 <div class="description">
 <h2>Visualizing Asset Returns</h2>
@@ -1318,7 +1334,7 @@
 <div class="publishedDate">Sept. 13, 2017</div>
 </div>
 <div class="thumbnail">
-<img src="posts/asset-volatility/asset-volatility_files/figure-html5/unnamed-chunk-13-1.png"/>
+<img data-src="posts/asset-volatility/asset-volatility_files/figure-html5/unnamed-chunk-13-1.png"/>
 </div>
 <div class="description">
 <h2>Asset Contribution to Portfolio Volatility</h2>
@@ -1331,7 +1347,7 @@
 <div class="publishedDate">March 7, 2017</div>
 </div>
 <div class="thumbnail">
-<img src="posts/quandl-and-forecasting/preview.png"/>
+<img data-src="posts/quandl-and-forecasting/preview.png"/>
 </div>
 <div class="description">
 <h2>Quandl and Forecasting</h2>
@@ -1344,7 +1360,7 @@
 <div class="publishedDate">Nov. 8, 2016</div>
 </div>
 <div class="thumbnail">
-<img src="posts/sharpe-ratio/preview.png"/>
+<img data-src="posts/sharpe-ratio/preview.png"/>
 </div>
 <div class="description">
 <h2>The Sharpe Ratio</h2>

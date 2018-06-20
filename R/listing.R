@@ -64,7 +64,7 @@ article_listing_html <- function(collection, articles) {
   articles_html <- lapply(articles, function(article) {
 
     if (!is.null(article$preview))
-      preview <- img(src = article$preview)
+      preview <- img(`data-src` = article$preview)
 
     a(href = article$path, class = "post-preview",
       div(class = "metadata",

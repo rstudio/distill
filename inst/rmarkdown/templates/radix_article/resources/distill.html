@@ -293,6 +293,14 @@ d-appendix .citation-appendix,
   font-weight: 500;
 }
 
+.posts-list img {
+  opacity: 1;
+}
+
+.posts-list img[data-src] {
+  opacity: 0;
+}
+
 
 .categories {
   font-size: 16px;
@@ -849,6 +857,14 @@ function init_common() {
   $('.post-preview').each(function(i, val) {
     if (window.location.protocol === "file:")
       $(this).attr('href', $(this).attr('href') + "index.html");
+  });
+
+  // load images in post list
+  $('.posts-list img[data-src]').each(function(idx, img) {
+    $(img).attr('src', $(img).attr('data-src'));
+    $(img).load(function() {
+      img.removeAttribute('data-src');
+    });
   });
 
   // add class to pandoc style tables
