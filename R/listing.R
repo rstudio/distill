@@ -55,12 +55,10 @@ generate_listing <- function(input_file,
 article_listing_html <- function(collection, articles) {
 
   # detect whether we are showing categories in the sidebar
-  categories <- collection[["categories"]]
-  if (is.null(categories))
-    categories <- TRUE
+  categories <- not_null(collection[["categories"]], TRUE)
 
-  # if we are displaying categories then verify that articles have categories
-  categories <- categories && have_categories(articles)
+  # generate categories listing
+  categories_html <- if (categories) categories_listing_html(articles)
 
   # generate html
   articles_html <- lapply(articles, function(article) {
@@ -83,15 +81,16 @@ article_listing_html <- function(collection, articles) {
     )
   })
 
+
   # do we have a sidebar
-  sidebar <- categories
+  sidebar <- !is.null(categories_html)
 
   # wrap in a div
   if (sidebar) {
     placeholder_html("article_listing",
       div(class = "posts-container posts-with-sidebar l-screen-inset",
         div(class = "posts-list", articles_html),
-        div(class = "posts-sidebar", HTML("&nbsp;"))
+        div(class = "posts-sidebar", categories_html)
       )
     )
   } else {
@@ -103,9 +102,40 @@ article_listing_html <- function(collection, articles) {
   }
 }
 
-have_categories <- function(articles) {
-  length(Filter(function(x) { length(x[["categories"]]) > 0 }, articles)) > 0
+categories_listing_html <- function(articles) {
+
+  # count categories
+  categories <- list()
+  for (article in articles) {
+    for (category in article[["categories"]])
+      categories[[category]] <- not_null(categories[[category]], 0) + 1
+  }
+
+  # sort alphabetically
+  indexes <- order(names(categories))
+  categories <- categories[indexes]
+
+  # generate html
+  if (length(categories) > 0) {
+    tags$div(class = "categories",
+      tags$h3("Categories"),
+      tags$ul(
+        lapply(names(categories), function(name) {
+          tags$li(
+            tags$a(href = "#", name),
+            tags$span(class = "category-count",
+                      sprintf("(%d)", categories[[name]]))
+          )
+        })
+      )
+    )
+
+  } else {
+    NULL
+  }
 }
+
+
 
 articles_info <- function(site_dir, collection) {
   collection <- as_collection_name(collection)

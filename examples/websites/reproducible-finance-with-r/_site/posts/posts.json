@@ -11,11 +11,11 @@
     ],
     "date": "2017-11-09",
     "categories": [
-      "Visualization",
-      "Portfolios"
+      "portfolios",
+      "highcharts"
     ],
     "preview": "visualizing-asset-returns_files/figure-html5/unnamed-chunk-9-1.png",
-    "last_modified": "2018-06-20T08:02:40-04:00",
+    "last_modified": "2018-06-20T08:58:50-04:00",
     "preview_width": 1152,
     "preview_height": 576
   },
@@ -35,7 +35,7 @@
       "highcharts"
     ],
     "preview": "asset-volatility_files/figure-html5/unnamed-chunk-13-1.png",
-    "last_modified": "2018-06-20T08:06:40-04:00",
+    "last_modified": "2018-06-20T08:58:01-04:00",
     "preview_width": 1152,
     "preview_height": 576
   },
@@ -50,9 +50,12 @@
       }
     ],
     "date": "2017-03-07",
-    "categories": [],
+    "categories": [
+      "forecasting",
+      "dygraphs"
+    ],
     "preview": "preview.png",
-    "last_modified": "2018-06-15T09:53:47-04:00",
+    "last_modified": "2018-06-20T08:58:13-04:00",
     "preview_width": 1656,
     "preview_height": 927
   },
@@ -67,9 +70,12 @@
       }
     ],
     "date": "2016-11-08",
-    "categories": [],
+    "categories": [
+      "portfolios",
+      "dygraphs"
+    ],
     "preview": "preview.png",
-    "last_modified": "2018-06-15T09:44:43-04:00",
+    "last_modified": "2018-06-20T08:58:27-04:00",
     "preview_width": 1644,
     "preview_height": 1014
   }
