@@ -1,5 +1,7 @@
 
 
+- Resolve multiple spots for collection configuration
+
 - index/category/archive pages (categories should be inline)
 
 - FeedOtter:
