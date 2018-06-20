@@ -33,7 +33,7 @@ Imports:
     tools, 
     rmarkdown (>= 1.10), 
     htmltools, 
-    jsonlite, 
+    jsonlite (>= 1.3), 
     lubridate, 
     png, 
     mime, 
