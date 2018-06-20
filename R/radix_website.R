@@ -28,8 +28,8 @@ radix_website <- function(input, encoding = getOption("encoding"), ...) {
       # if it's incremental then only render collection specified in 'listing'
       if (incremental) {
         metadata <- yaml_front_matter(input_file, encoding)
-        if (!is.null(metadata$listing) && is.character(metadata$listing$collection)) {
-          site_collections <- site_collections[metadata$listing$collection]
+        if (!is.null(metadata$listing)) {
+          site_collections <- site_collections[metadata$listing]
         } else {
           site_collections <- list()
         }

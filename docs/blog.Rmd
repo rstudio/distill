@@ -95,8 +95,7 @@ Once you have authored one or more posts you'll want to create a listing page. Y
 ---
 title: "Reproducible Finance with R"
 site: radix::radix_website
-listing:
-  collection: posts
+listing: posts
 ---
 ```
 

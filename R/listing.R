@@ -2,10 +2,8 @@
 
 resolve_listing <- function(input_file, site_config, metadata) {
 
-  # determine/validate collection
-  collection <- metadata$listing$collection
-  if (is.null(collection))
-    stop("You must specify a collection for listing pages", call. = FALSE)
+  # alias collection
+  collection <- metadata$listing
 
   # get articles
   articles <- articles_info(dirname(input_file), collection)
@@ -15,16 +13,14 @@ resolve_listing <- function(input_file, site_config, metadata) {
     input_file,
     site_config,
     collection,
-    articles,
-    metadata$listing
+    articles
   )
 }
 
 generate_listing <- function(input_file,
                              site_config,
                              collection,
-                             articles,
-                             options = list()) {
+                             articles) {
 
   # validate that the collection exists
   site_dir <- dirname(input_file)
@@ -45,7 +41,7 @@ generate_listing <- function(input_file,
   feed_xml <- write_feed_xml(feed_xml, site_config, collection, feed_articles)
 
   # generate html
-  listing_html <- article_listing_html(collection, articles, options)
+  listing_html <- article_listing_html(collection, articles)
   html <- html_file(listing_html)
 
   # return feed and listing html
@@ -56,10 +52,10 @@ generate_listing <- function(input_file,
 }
 
 
-article_listing_html <- function(collection, articles, options) {
+article_listing_html <- function(collection, articles) {
 
   # detect whether we are showing categories in the sidebar
-  categories <- options[["categories"]]
+  categories <- collection[["categories"]]
   if (is.null(categories))
     categories <- TRUE
 
@@ -88,8 +84,7 @@ article_listing_html <- function(collection, articles, options) {
   })
 
   # do we have a sidebar
-  #sidebar <- categories
-  sidebar <- FALSE
+  sidebar <- categories
 
   # wrap in a div
   if (sidebar) {

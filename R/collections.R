@@ -282,16 +282,14 @@ update_collection_listing <- function(site_dir, site_config, collection, article
 
     # does this Rmd include a listing for this collection?
     metadata <- yaml_front_matter(input_file, encoding)
-    if (!is.null(metadata$listing) &&
-        identical(metadata$listing$collection, collection$name)) {
+    if (!is.null(metadata$listing) && identical(metadata$listing, collection$name)) {
 
       # update it
       listing <- generate_listing(
         input_file,
         site_config,
         collection,
-        articles,
-        options = metadata$listing
+        articles
       )
 
       # move feed
