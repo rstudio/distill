@@ -31,7 +31,7 @@ generate_listing <- function(input_file,
 
   # check for and enforce a limit on feed items (defaults to 20)
   feed_articles <- articles
-  feed_items_max <- not_null(options[["feed_items_max"]], 20)
+  feed_items_max <- not_null(collection[["feed_items_max"]], 20)
   if (is.integer(feed_items_max) && (length(articles) > feed_items_max)) {
     feed_articles <- feed_articles[1:feed_items_max]
   }

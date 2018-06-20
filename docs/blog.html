@@ -1429,16 +1429,18 @@ navbar:
       href: index.xml
 output: radix::radix_article</code></pre>
 <p>Note that the <code>description</code> and <code>base_url</code> fields are both required to generate an RSS feed.</p>
-<p>By default the most recent 20 articles will be included in the RSS feed. You can change this by specifying <code>feed_items_max</code> within the <code>listing</code>:</p>
-<p><strong>_index.Rmd</strong></p>
+<p>By default the most recent 20 articles will be included in the RSS feed. You can change this by specifying <code>feed_items_max</code> within the collection configuration in <code>_site.yml</code> (navbar and output format fields omitted for brevity):</p>
+<p><strong>_site.yml</strong></p>
 <pre class="markup"><code>
----
+name: &quot;reproducible-finance-with-r&quot;
 title: &quot;Reproducible Finance with R&quot;
-site: radix::radix_website
-listing:
-  collection: posts
-  feed_items_max: 50
----</code></pre>
+description: |
+  Exploring reproducible finance with the R statistical 
+  computing environment.
+base_url: https://beta.rstudioconnect.com/content/3776/
+collections:
+  posts:
+    feed_items_max: 50</code></pre>
 <p>Specify <code>feed_items_max: false</code> to have no limit on the number of items included in the feed.</p>
 <h3 id="post-drafts">Post drafts</h3>
 <p>If you want to work on a post for a period of time without having it be added to the listing page, add <code>draft: true</code> to the post’s metadata. For example:</p>

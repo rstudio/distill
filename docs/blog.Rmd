@@ -125,18 +125,20 @@ output: radix::radix_article
 
 Note that the `description` and `base_url` fields are both required to generate an RSS feed.
 
-By default the most recent 20 articles will be included in the RSS feed. You can change this by specifying `feed_items_max` within the `listing`:
+By default the most recent 20 articles will be included in the RSS feed. You can change this by specifying `feed_items_max` within the collection configuration in `_site.yml` (navbar and output format fields omitted for brevity):
 
-**\_index.Rmd**
+**\_site.yml**
 
 ```markup
----
+name: "reproducible-finance-with-r"
 title: "Reproducible Finance with R"
-site: radix::radix_website
-listing:
-  collection: posts
-  feed_items_max: 50
----
+description: |
+  Exploring reproducible finance with the R statistical 
+  computing environment.
+base_url: https://beta.rstudioconnect.com/content/3776/
+collections:
+  posts:
+    feed_items_max: 50
 ```
 
 Specify `feed_items_max: false` to have no limit on the number of items included in the feed.
