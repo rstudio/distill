@@ -1334,6 +1334,15 @@ function init_posts_list() {
     }
   }
 
+  function set_posts_visible(posts, visible) {
+    if (visible) {
+      $(posts).removeClass('hidden');
+      $(posts).find('img[data-src]').each(function(i, img) { load_image(img); });
+    } else {
+      $(posts).addClass('hidden');
+    }
+  }
+
   function apply_hash_filter() {
 
     if (window.location.hash) {
@@ -1350,18 +1359,10 @@ function init_posts_list() {
           }
           return true;
         });
-        if (matched) {
-          $(this).parent().removeClass('hidden');
-          $(this).parent().find('img[data-src]').each(function(i, img) { load_image(img); });
-        } else {
-          $(this).parent().addClass('hidden');
-        }
+        set_posts_visible($(this).parent(), matched);
       });
     } else {
-      $('.posts-list').children().removeClass('hidden');
-      $('.posts-list img[data-src]').each(function(idx, img) {
-        load_image(img);
-      });
+      set_posts_visible($('.posts-list').children(), true);
     }
   }
 

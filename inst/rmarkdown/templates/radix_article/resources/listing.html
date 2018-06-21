@@ -205,9 +205,23 @@ function init_posts_list() {
     }
   }
 
+  function set_posts_visible(posts, visible) {
+    if (visible) {
+      $(posts).removeClass('hidden');
+      $(posts).find('img[data-src]').each(function(i, img) {
+        load_image(img);
+      });
+    } else {
+      $(posts).addClass('hidden');
+    }
+  }
+
   function apply_hash_filter() {
 
+    // if we have a hash filter
     if (window.location.hash) {
+
+      // look for posts that match the category
       var page_category = window.location.hash.replace("#", "");
       $('.post-metadata').each(function(i, script) {
         var metadata = $.parseJSON($(script).html());
@@ -221,18 +235,14 @@ function init_posts_list() {
           }
           return true;
         });
-        if (matched) {
-          $(this).parent().removeClass('hidden');
-          $(this).parent().find('img[data-src]').each(function(i, img) { load_image(img); });
-        } else {
-          $(this).parent().addClass('hidden');
-        }
+
+        // marks posts visible as required
+        set_posts_visible($(this).parent(), matched);
       });
+
+    // no hash filter, make all posts visible
     } else {
-      $('.posts-list').children().removeClass('hidden');
-      $('.posts-list img[data-src]').each(function(idx, img) {
-        load_image(img);
-      });
+      set_posts_visible($('.posts-list').children(), true);
     }
   }
 
