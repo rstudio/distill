@@ -3,8 +3,8 @@
 - index/category/archive pages (categories should be inline)
    
     - category banner
-    - test w/ spaces
-
+    
+    
 - FeedOtter:
     - https://www.feedotter.com/
 
