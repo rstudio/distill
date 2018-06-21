@@ -205,10 +205,6 @@
 
 function init_posts_list() {
 
-  // only do this for post listings
-  if (!$('body').hasClass('layout-listing'))
-    return;
-
   function load_image(img) {
     var src = $(img).attr('data-src');
     if (src) {
@@ -301,6 +297,15 @@ function init_posts_list() {
     apply_post_limits(true);
     apply_hash_filter();
   });
+
+  // sidebar
+  $('.sidebar').children('h1,h2,h3,h4').each(function(i, val) {
+    var sidebar_section = $('<div class="sidebar-section"></div>');
+    $(this).nextUntil($('h1,h2,h3,h4')).addBack().appendTo(sidebar_section);
+    sidebar_section.appendTo($('.posts-sidebar'));
+  });
+  $('.sidebar-section.categories').appendTo($('.posts-sidebar'));
+  $('.sidebar').remove();
 
   // more articles link
   $('.posts-more a').click(function(e) {

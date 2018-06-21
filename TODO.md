@@ -1,14 +1,5 @@
 
 
-    
-- FeedOtter:
-    - https://www.feedotter.com/
-
-- MailChimp: 
-    - https://mailchimp.com/help/share-your-blog-posts-with-mailchimp/
-    - https://mailchimp.com/help/add-a-signup-form-to-your-website/
-    - https://mailchimp.com/help/add-a-pop-up-signup-form-to-your-website/
-    
 - rstudio addins/templates/projects for article creation
    - Main Rmd template
    - Project:

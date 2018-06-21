@@ -1334,10 +1334,6 @@
 
 function init_posts_list() {
 
-  // only do this for post listings
-  if (!$('body').hasClass('layout-listing'))
-    return;
-
   function load_image(img) {
     var src = $(img).attr('data-src');
     if (src) {
@@ -1431,6 +1427,15 @@ function init_posts_list() {
     apply_hash_filter();
   });
 
+  // sidebar
+  $('.sidebar').children('h1,h2,h3,h4').each(function(i, val) {
+    var sidebar_section = $('<div class="sidebar-section"></div>');
+    $(this).nextUntil($('h1,h2,h3,h4')).addBack().appendTo(sidebar_section);
+    sidebar_section.appendTo($('.posts-sidebar'));
+  });
+  $('.sidebar-section.categories').appendTo($('.posts-sidebar'));
+  $('.sidebar').remove();
+
   // more articles link
   $('.posts-more a').click(function(e) {
     e.preventDefault();
@@ -1506,37 +1511,6 @@ function init_posts_list() {
 </a>
 </div>
 <div class="posts-sidebar">
-<div class="sidebar-section subscribe">
-<h3>Subscribe</h3>
-
-<script src="https://app-ab02.marketo.com/js/forms2/js/forms2.min.js"></script>
-<form class="mtktoBlogEmailForm" id="mktoForm_2224"></form>
-<script>
-MktoForms2.loadForm("https://app-ab02.marketo.com", "709-NXN-706", 2224, function(form) {
-  // get jquery reference to form
-  form = $(form.getFormElem().get(0));
-
-  $(form).css('width', '190px');
-  $(form).find('.mktoOffset').remove();
-  $(form).find('.mktoGutter').remove();
-  $(form).find('.mktoEmailField').css('width', '167px');
-  $(form).find('.mktoLabel').children().attr('style', 'font-weight: 400');
-  $(form).find('.mktoLabel')
-      .css('width', '150px')
-      .css('font-size', '11px');
-  $(form).find('.mktoButtonRow')
-      .css('width', '167px')
-      .css('text-align', 'center');
-  $(form).find('.mktoButtonWrap').attr('style', '');
-  $(form).find('.mktoButton')
-      .css('padding-left', '30px')
-      .css('padding-right', '30px');
-
-});
-
-</script>
-
-</div>
 <div class="sidebar-section categories">
 <h3>Categories</h3>
 <ul>
@@ -1572,7 +1546,34 @@ MktoForms2.loadForm("https://app-ab02.marketo.com", "709-NXN-706", 2224, functio
 
 
 <div class="d-article">
+<div class="sidebar">
+<h3 id="subscribe">Subscribe</h3>
+<script src="https://app-ab02.marketo.com/js/forms2/js/forms2.min.js"></script>
+<form class="mtktoBlogEmailForm" id="mktoForm_2224">
+</form>
+<script>
+MktoForms2.loadForm("https://app-ab02.marketo.com", "709-NXN-706", 2224, function(form) {
+  // get jquery reference to form
+  form = $(form.getFormElem().get(0));
 
+  $(form).css('width', '190px');
+  $(form).find('.mktoOffset').remove();
+  $(form).find('.mktoGutter').remove();
+  $(form).find('.mktoEmailField').css('width', '167px');
+  $(form).find('.mktoLabel').children().attr('style', 'font-weight: 400');
+  $(form).find('.mktoLabel')
+      .css('width', '150px')
+      .css('font-size', '11px');
+  $(form).find('.mktoButtonRow')
+      .css('width', '167px')
+      .css('text-align', 'center');
+  $(form).find('.mktoButtonWrap').attr('style', '');
+  $(form).find('.mktoButton')
+      .css('padding-left', '30px')
+      .css('padding-right', '30px');
+});
+</script>
+</div>
 <!--radix_placeholder_article_footer-->
 <!--/radix_placeholder_article_footer-->
 </div>
