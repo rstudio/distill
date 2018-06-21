@@ -1272,9 +1272,14 @@
   border-bottom: 1px solid rgba(0, 0, 0, 0.4);
 }
 
+.categories .active {
+  font-weight: 600;
+}
+
 .categories .category-count {
   color: rgba(0, 0, 0, 0.4);
 }
+
 
 @media(min-width: 768px) {
   .posts-list .post-preview h2 {
@@ -1346,7 +1351,7 @@ function init_posts_list() {
       $(posts).removeClass('post-preview-last');
 
       // apply limits if need be
-      var max_posts = 2;
+      var max_posts = 25;
       var apply_limits = $('.posts-container').hasClass('posts-apply-limit');
       if (apply_limits && posts.length > max_posts) {
         posts = $(posts).slice(0, max_posts);
@@ -1368,11 +1373,14 @@ function init_posts_list() {
 
   function apply_hash_filter() {
 
+    // clear active state
+    $('.categories .active').removeClass('active');
+
+    // mark all posts invisible to start
+    set_posts_visible($('.posts-list').children(), false);
+
     // if we have a hash filter
     if (window.location.hash) {
-
-      // mark all posts invisible to start
-      set_posts_visible($('.posts-list').children(), false);
 
       // mark posts that match the category visible
       var page_category = window.location.hash.replace("#", "");
@@ -1390,11 +1398,12 @@ function init_posts_list() {
       });
       set_posts_visible(posts, true);
 
+      // mark the hash active
+      $('.categories li>a[href="' + window.location.hash + '"]').addClass('active');
+
     } else {
 
-      // no hash filter, make all posts invisible then visible
-      // (so that limits are applied)
-      set_posts_visible($('.posts-list').children(), false);
+      // no hash filter, make all posts visible (subject to max display)
       set_posts_visible($('.posts-list').children(), true);
 
     }

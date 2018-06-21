@@ -1,9 +1,5 @@
 
 
-- index/category/archive pages (categories should be inline)
-   
-    - category banner
-    
     
 - FeedOtter:
     - https://www.feedotter.com/
