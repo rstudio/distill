@@ -7,8 +7,6 @@
     - category banner
     - test w/ spaces
     - footer line still shows at the bottom
-    - posts_list code only in index pages
-
 
 - FeedOtter:
     - https://www.feedotter.com/

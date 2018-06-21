@@ -41,7 +41,11 @@ generate_listing <- function(input_file,
   feed_xml <- write_feed_xml(feed_xml, site_config, collection, feed_articles)
 
   # generate html
-  listing_html <- article_listing_html(collection, articles)
+  listing_html <- tagList(
+    html_from_file(system.file("rmarkdown/templates/radix_article/resources/listing.html",
+                               package = "radix")),
+    article_listing_html(collection, articles)
+  )
   html <- html_file(listing_html)
 
   # return feed and listing html
