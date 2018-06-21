@@ -1337,7 +1337,9 @@ function init_posts_list() {
   function set_posts_visible(posts, visible) {
     if (visible) {
       $(posts).removeClass('hidden');
-      $(posts).find('img[data-src]').each(function(i, img) { load_image(img); });
+      $(posts).find('img[data-src]').each(function(i, img) {
+        load_image(img);
+      });
     } else {
       $(posts).addClass('hidden');
     }
@@ -1345,24 +1347,33 @@ function init_posts_list() {
 
   function apply_hash_filter() {
 
+    // if we have a hash filter
     if (window.location.hash) {
+
+      // mark all posts invisible to start
+      set_posts_visible($('.posts-list').children(), false);
+
+      // mark posts that match the category visible
       var page_category = window.location.hash.replace("#", "");
-      $('.post-metadata').each(function(i, script) {
+      var posts = $('.post-metadata').map(function(idx, script) {
         var metadata = $.parseJSON($(script).html());
-        var categories = metadata.categories;
-        var matched = false;
+        var post = null;
         $.each(metadata.categories, function(idx, category) {
           category = category.replace(/ /g,"_");
           if (category == page_category) {
-            matched = true;
+            post = $(script).parent().get();
             return false;
           }
-          return true;
         });
-        set_posts_visible($(this).parent(), matched);
+        return post;
       });
+      set_posts_visible(posts, true);
+
     } else {
+
+      // no hash filter, make all posts visible
       set_posts_visible($('.posts-list').children(), true);
+
     }
   }
 
