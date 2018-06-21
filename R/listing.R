@@ -44,7 +44,7 @@ generate_listing <- function(input_file,
   listing_html <- tagList(
     html_from_file(system.file("rmarkdown/templates/radix_article/resources/listing.html",
                                package = "radix")),
-    article_listing_html(collection, articles)
+    article_listing_html(site_dir, collection, articles)
   )
   html <- html_file(listing_html)
 
@@ -56,10 +56,13 @@ generate_listing <- function(input_file,
 }
 
 
-article_listing_html <- function(collection, articles) {
+article_listing_html <- function(site_dir, collection, articles) {
 
   # detect whether we are showing categories in the sidebar
   categories <- not_null(collection[["categories"]], TRUE)
+
+  # check for subscription
+  subscription_html <- subscription_html(site_dir, collection)
 
   # generate categories listing
   categories_html <- if (categories) categories_listing_html(articles)
@@ -94,14 +97,14 @@ article_listing_html <- function(collection, articles) {
   )
 
   # do we have a sidebar
-  sidebar <- !is.null(categories_html)
+  sidebar <- !is.null(subscription_html) || !is.null(categories_html)
 
   # wrap in a div
   if (sidebar) {
     placeholder_html("article_listing",
       div(class = "posts-container posts-with-sidebar posts-apply-limit l-screen-inset",
         div(class = "posts-list", articles_html),
-        div(class = "posts-sidebar", categories_html),
+        div(class = "posts-sidebar", subscription_html, categories_html),
         more_posts
 
       )
@@ -109,11 +112,30 @@ article_listing_html <- function(collection, articles) {
   } else {
     placeholder_html("article_listing",
       div(class = "posts-container posts-apply-limit l-page",
-        div(class = "posts-list", articles_html),
+        div(class = "posts-list", subscription_html, articles_html),
         more_posts
       )
     )
   }
+}
+
+subscription_html <- function(site_dir, collection) {
+
+  # check for subscribe.html
+  subscribe <- file.path(site_dir, file_with_ext(paste0("subscribe_", collection$name), "html"))
+  if (identical(collection$name, "posts"))
+    subscribe <- c(subscribe,  file.path(site_dir, "subscribe.html"))
+  subscribe <- subscribe[file.exists(subscribe)]
+
+  if (length(subscribe) > 0) {
+    tags$div(class = "sidebar-section subscribe",
+      tags$h3("Subscribe"),
+      html_from_file(subscribe)
+    )
+  } else {
+    NULL
+  }
+
 }
 
 categories_listing_html <- function(articles) {
@@ -131,7 +153,7 @@ categories_listing_html <- function(articles) {
 
   # generate html
   if (length(categories) > 0) {
-    tags$div(class = "categories",
+    tags$div(class = "sidebar-section categories",
       tags$h3("Categories"),
       tags$ul(
         lapply(names(categories), function(name) {

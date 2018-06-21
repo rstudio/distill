@@ -1241,16 +1241,20 @@
 }
 
 
-.categories {
+.posts-sidebar {
   font-size: 16px;
 }
 
-.categories h3 {
+.posts-sidebar h3 {
   font-size: 16px;
   margin-top: 0;
   margin-bottom: 0.5em;
   font-weight: 400;
   text-transform: uppercase;
+}
+
+.sidebar-section {
+  margin-bottom: 30px;
 }
 
 .categories ul {
@@ -1502,7 +1506,38 @@ function init_posts_list() {
 </a>
 </div>
 <div class="posts-sidebar">
-<div class="categories">
+<div class="sidebar-section subscribe">
+<h3>Subscribe</h3>
+
+<script src="https://app-ab02.marketo.com/js/forms2/js/forms2.min.js"></script>
+<form class="mtktoBlogEmailForm" id="mktoForm_2224"></form>
+<script>
+MktoForms2.loadForm("https://app-ab02.marketo.com", "709-NXN-706", 2224, function(form) {
+  // get jquery reference to form
+  form = $(form.getFormElem().get(0));
+
+  $(form).css('width', '190px');
+  $(form).find('.mktoOffset').remove();
+  $(form).find('.mktoGutter').remove();
+  $(form).find('.mktoEmailField').css('width', '167px');
+  $(form).find('.mktoLabel').children().attr('style', 'font-weight: 400');
+  $(form).find('.mktoLabel')
+      .css('width', '150px')
+      .css('font-size', '11px');
+  $(form).find('.mktoButtonRow')
+      .css('width', '167px')
+      .css('text-align', 'center');
+  $(form).find('.mktoButtonWrap').attr('style', '');
+  $(form).find('.mktoButton')
+      .css('padding-left', '30px')
+      .css('padding-right', '30px');
+
+});
+
+</script>
+
+</div>
+<div class="sidebar-section categories">
 <h3>Categories</h3>
 <ul>
 <li>
