@@ -2,10 +2,8 @@
 
 - index/category/archive pages (categories should be inline)
    
-    - pagination (limit articles to 10 or 20 w/ more)
     - category banner
     - test w/ spaces
-    - footer line still shows at the bottom
 
 - FeedOtter:
     - https://www.feedotter.com/
@@ -27,6 +25,19 @@
    - document cannonical url
    - attribution metadata for inclusion when importing/syndicating (do during import)
    - import article function(s)
+
+
+- larger scale visualization layouts
+    - iframe with npr library (pym.js or iframeresizer.js) for sizing (generic) (check with shinyapps.io)
+    - distillVisualization() top level shinyApp equivalent with distill bootstrap theme 
+       - use the less compiler for this
+    "full bleed"
+    - ggplot2 theme for distill
+    - crosstalk compatibility?
+        - distillRow/distillCol
+    - publishing/previewing workflow?
+    - app.R or ui.R / server.R in the same directory; automagic local run
+    - Full bleed media objects (videos, docs (http://viewerjs.org/), etc.)
 
 
 
@@ -54,17 +65,6 @@
 
 - Add some citations to sample posts
 
-- larger scale visualization layouts
-    - iframe with npr library (pym.js or iframeresizer.js) for sizing (generic) (check with shinyapps.io)
-    - distillVisualization() top level shinyApp equivalent with distill bootstrap theme 
-       - use the less compiler for this
-    "full bleed"
-    - ggplot2 theme for distill
-    - crosstalk compatibility?
-        - distillRow/distillCol
-    - publishing/previewing workflow?
-    - app.R or ui.R / server.R in the same directory; automagic local run
-    - Full bleed media objects (videos, docs (http://viewerjs.org/), etc.)
 
 
 

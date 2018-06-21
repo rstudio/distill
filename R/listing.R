@@ -88,6 +88,10 @@ article_listing_html <- function(collection, articles) {
     )
   })
 
+  # more posts link
+  more_posts <- div(class = "posts-more",
+    tags$a(href = "#", HTML("More articles &raquo;"))
+  )
 
   # do we have a sidebar
   sidebar <- !is.null(categories_html)
@@ -95,15 +99,18 @@ article_listing_html <- function(collection, articles) {
   # wrap in a div
   if (sidebar) {
     placeholder_html("article_listing",
-      div(class = "posts-container posts-with-sidebar l-screen-inset",
+      div(class = "posts-container posts-with-sidebar posts-apply-limit l-screen-inset",
         div(class = "posts-list", articles_html),
-        div(class = "posts-sidebar", categories_html)
+        div(class = "posts-sidebar", categories_html),
+        more_posts
+
       )
     )
   } else {
     placeholder_html("article_listing",
-      div(class = "posts-container l-page",
-        div(class = "posts-list", articles_html)
+      div(class = "posts-container posts-apply-limit l-page",
+        div(class = "posts-list", articles_html),
+        more_posts
       )
     )
   }

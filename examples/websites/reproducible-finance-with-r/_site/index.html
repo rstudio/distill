@@ -1170,8 +1170,9 @@
   border-bottom: 1px solid rgba(0, 0, 0, 0.1);
   padding: 24px 0;
 }
-.posts-list .post-preview:last-of-type {
-  border-bottom: none;
+
+.post-preview-last {
+  border-bottom: none !important;
 }
 
 .posts-list .post-preview h2 {
@@ -1233,6 +1234,10 @@
 
 .posts-list img[data-src] {
   opacity: 0;
+}
+
+.posts-more {
+  clear: both;
 }
 
 
@@ -1336,6 +1341,22 @@ function init_posts_list() {
 
   function set_posts_visible(posts, visible) {
     if (visible) {
+
+      // show bottom border by default
+      $(posts).removeClass('post-preview-last');
+
+      // apply limits if need be
+      var max_posts = 2;
+      var apply_limits = $('.posts-container').hasClass('posts-apply-limit');
+      if (apply_limits && posts.length > max_posts) {
+        posts = $(posts).slice(0, max_posts);
+      } else {
+        $('.posts-more a').addClass('hidden');
+      }
+
+      // apply last style
+      $(posts.slice(-1)[0]).addClass('post-preview-last');
+
       $(posts).removeClass('hidden');
       $(posts).find('img[data-src]').each(function(i, img) {
         load_image(img);
@@ -1371,15 +1392,38 @@ function init_posts_list() {
 
     } else {
 
-      // no hash filter, make all posts visible
+      // no hash filter, make all posts invisible then visible
+      // (so that limits are applied)
+      set_posts_visible($('.posts-list').children(), false);
       set_posts_visible($('.posts-list').children(), true);
 
     }
   }
 
+  // more articles
+  function apply_post_limits(apply) {
+    if (apply) {
+      $('.posts-container').addClass('posts-apply-limit');
+      $('.posts-more a').removeClass('hidden');
+    } else {
+      $('.posts-container').removeClass('posts-apply-limit');
+      $('.posts-more a').addClass('hidden');
+    }
+  }
+
+  // hash filter handling
   apply_hash_filter();
-  $(window).on('hashchange',function(){
+  $(window).on('hashchange',function() {
+    apply_post_limits(true);
     apply_hash_filter();
+  });
+
+  // more articles link
+  $('.posts-more a').click(function(e) {
+    e.preventDefault();
+    apply_post_limits(false);
+    apply_hash_filter();
+    return false;
   });
 
 }
@@ -1389,7 +1433,7 @@ function init_posts_list() {
 
 
 <!--radix_placeholder_article_listing-->
-<div class="posts-container posts-with-sidebar l-screen-inset">
+<div class="posts-container posts-with-sidebar posts-apply-limit l-screen-inset">
 <div class="posts-list">
 <a href="posts/visualizing-asset-returns/" class="post-preview">
 <script class="post-metadata" type="text/json">{"categories":["portfolios","highcharts"]}</script>
@@ -1470,6 +1514,9 @@ function init_posts_list() {
 </li>
 </ul>
 </div>
+</div>
+<div class="posts-more">
+<a href="#">More articles &raquo;</a>
 </div>
 </div>
 <!--/radix_placeholder_article_listing-->
