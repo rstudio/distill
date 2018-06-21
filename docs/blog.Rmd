@@ -85,7 +85,7 @@ You work on blog posts independent of the enclosing website (use **Knit** to ren
 In the next section will describe how to create a listing page for all of your posts.
 
 
-### Post listing pages
+### Listing pages
 
 Once you have authored one or more posts you'll want to create a listing page. You can do this by adding a `listing` metadata entry to the page you to include the listing on. This is often the main page for the website (index.Rmd). For example:
 
@@ -102,6 +102,21 @@ listing: posts
 In our [example blog](https://beta.rstudioconnect.com/content/3776/) (which will be described in more detail below) this results in the following listing:
 
 ![](images/site-listing.png){width=95% .screenshot}
+
+If your posts include `categories` metadata, then the page will also include category links to the right of the article listing. For example, here is some post metadata that includes categories:
+
+```markup
+---
+title: "The Sharpe Ratio"
+# (additional metadata e.g. description and date, excluded for brevity)
+categories:
+  - portfolios
+  - dygraphs
+```
+
+As a result of including `categories`, the listing page now looks like this:
+
+![](images/site-listing-categories.png){width=95% .screenshot}
 
 ### RSS feeds
 
