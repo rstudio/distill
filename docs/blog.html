@@ -1277,6 +1277,7 @@ listing: posts
 ---</code></pre>
 <p>In our <a href="https://beta.rstudioconnect.com/content/3776/">example blog</a> (which will be described in more detail below) this results in the following listing:</p>
 <p><img src="images/site-listing.png" class="screenshot" style="width:95.0%" /></p>
+<h4 id="categories">Categories</h4>
 <p>If your posts include <code>categories</code> metadata, then the page will also include category links to the right of the article listing. For example, here is some post metadata that includes categories:</p>
 <pre class="markup"><code>
 ---
@@ -1287,6 +1288,23 @@ categories:
   - dygraphs</code></pre>
 <p>As a result of including <code>categories</code>, the listing page now looks like this:</p>
 <p><img src="images/site-listing-categories.png" class="screenshot" style="width:95.0%" /></p>
+<h4 id="sidebar">Sidebar</h4>
+<p>You can add additional content to the sidebar area where categories are located by including a <code>:::: sidebar</code> markup section within your listing page. For example:</p>
+<pre class="markup"><code>
+---
+title: &quot;Reproducible Finance with R&quot;
+site: radix::radix_website
+listing: posts
+---
+
+:::: sidebar 
+
+### Subscribe
+
+Subscribe to this blog at &lt;https://example.com/subscribe&gt;.
+
+::::</code></pre>
+<p>As demonstrated above, you should use level 3 headings (<code>###</code>) to delinate the various sections of sidebar content you add.</p>
 <h3 id="rss-feeds">RSS feeds</h3>
 <p>When you create a listing page an <a href="https://en.wikipedia.org/wiki/RSS">RSS feed</a> is created automatically for the page (using the name of the listing page with a <code>.xml</code> file extension). You can link to the RSS feed within your site’s navigation bar as follows (some navbar entries excluded for brevity):</p>
 <p><strong>_site.yml</strong></p>

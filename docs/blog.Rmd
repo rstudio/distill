@@ -103,6 +103,8 @@ In our [example blog](https://beta.rstudioconnect.com/content/3776/) (which will
 
 ![](images/site-listing.png){width=95% .screenshot}
 
+#### Categories
+
 If your posts include `categories` metadata, then the page will also include category links to the right of the article listing. For example, here is some post metadata that includes categories:
 
 ```markup
@@ -117,6 +119,28 @@ categories:
 As a result of including `categories`, the listing page now looks like this:
 
 ![](images/site-listing-categories.png){width=95% .screenshot}
+
+#### Sidebar
+
+You can add additional content to the sidebar area where categories are located by including a `:::: sidebar` markup section within your listing page. For example:
+
+```markup
+---
+title: "Reproducible Finance with R"
+site: radix::radix_website
+listing: posts
+---
+
+:::: sidebar 
+
+### Subscribe
+
+Subscribe to this blog at <https://example.com/subscribe>.
+
+::::
+```
+
+As demonstrated above, you should use level 3 headings (`###`) to delinate the various sections of sidebar content you add.
 
 ### RSS feeds
 
