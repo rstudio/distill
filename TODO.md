@@ -2,7 +2,6 @@
 
 - index/category/archive pages (categories should be inline)
    
-    - test output_dir: "." for blog
     - refactor into helpers
     - pagination (limit articles to 10 or 20 w/ more)
     - category banner

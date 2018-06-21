@@ -67,6 +67,7 @@ radix_website <- function(input, encoding = getOption("encoding"), ...) {
       # if we are generating in-place then add collection metadata and dirs
       config <- site_config(input, encoding)
       if (config$output_dir == ".") {
+        # collection output directories
         collections <- site_collections(input, config)
         for (collection in names(collections)) {
           generated <- c(generated,
@@ -74,6 +75,8 @@ radix_website <- function(input, encoding = getOption("encoding"), ...) {
             paste0(collection, "/")
           )
         }
+        # sitemap
+        generated <- c(generated, "sitemap.xml")
       }
 
       # filter out by existence
