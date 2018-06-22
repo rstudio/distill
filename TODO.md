@@ -1,9 +1,11 @@
 
 
 - follow treatment in header
-- dynamic float of index based on header size
+
 
 - move sidebar docs to an advanced section
+
+- follow/subscribe popup: http://dev.vast.com/jquery-popup-overlay/
 
 - rstudio addins/templates/projects for article creation
    - Main Rmd template
