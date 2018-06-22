@@ -6,6 +6,15 @@
 - move sidebar docs to an advanced section
 
 - follow/subscribe popup: http://dev.vast.com/jquery-popup-overlay/
+    font-size: 11px;
+    border: 1px solid;
+    padding-left: 4px;
+    padding-right: 4px;
+    color: rgba(255,255,255,0.7);
+    vertical-align: middle;
+    margin-left: 6px;
+
+
 
 - rstudio addins/templates/projects for article creation
    - Main Rmd template
