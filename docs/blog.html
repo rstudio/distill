@@ -601,6 +601,13 @@
     border-bottom: none;
   }
   
+  .sidebar-section .subscribe {
+    font-size: 12px;
+  }
+  
+  .article-footer .subscribe {
+    font-size: 15px;
+  }
   
   
   /* Improve display for browsers without grid (IE/Edge <= 15) */
@@ -1202,6 +1209,7 @@ Publishing
 <li><a href="#comments-and-sharing">Comments and sharing</a></li>
 <li><a href="#organizing-posts">Organizing posts</a></li>
 <li><a href="#preview-images">Preview images</a></li>
+<li><a href="#subscription-links">Subscription links</a></li>
 <li><a href="#supporting-files">Supporting files</a></li>
 </ul></li>
 <li><a href="#publishing-a-blog">Publishing a blog</a></li>
@@ -1383,6 +1391,28 @@ description: |
 preview: images/sharpe-ratio.png
 ---</code></pre>
 <p>Preview images are also used for generating <a href="metadata.html#open-graph">Open Graph</a> and <a href="metadata.html#twitter-card">Twitter Card</a> metadata. However, since those systems require that preview images be specified as absolute URLs, you also need to add a <code>base_url</code> field to your <code>_site.yml</code> file as describe above in <a href="#getting-started">Getting Started</a>.</p>
+<h3 id="subscription-links">Subscription links</h3>
+<p>You can add links that enable readers to subscribe to your blog by including the <code>collections:posts:subscribe</code> option within <code>_site.yml</code>. The <code>subscribe</code> option in turn points to an HTML file that describes and links to subscription options (e.g. <a href="#rss-feeds">RSS feed</a> or email). For example:</p>
+<p><strong>_site.yml</strong></p>
+<pre class="markup"><code>
+---
+name: &quot;reproducible-finance-with-r&quot;
+title: &quot;Reproducible Finance with R&quot;
+description: |
+  Exploring reproducible finance with the R statistical 
+  computing environment.
+base_url: https://beta.rstudioconnect.com/content/3776/
+collections:
+  posts:
+    disqus: reproducible-finance-with-r
+    share: [twitter, linkedin]
+    subscribe: _subscribe.html
+---</code></pre>
+<p><strong>_subscribe.html</strong></p>
+<pre class="html"><code>
+Enjoy this blog? Get notified of new posts using the 
+&lt;a href=&quot;https://beta.rstudioconnect.com/content/3776/index.xml&quot;&gt;RSS feed&lt;/a&gt;.</code></pre>
+<p>The contents of <code>_subscribe.html</code> will be included in both the sidebar of the main listing page as well as in the footer of articles. Note that relative URLs won’t work in subscription HTML since the content appears at differnet levels of the site (thus we include the full URL to the RSS feed in the example above).</p>
 <h3 id="supporting-files">Supporting files</h3>
 <p>When a blog post is published, resource files located alongside the post in it’s directory are also published. The following files are <em>not</em> published by default:</p>
 <ol type="1">

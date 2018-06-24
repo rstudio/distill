@@ -260,6 +260,38 @@ preview: images/sharpe-ratio.png
 Preview images are also used for generating [Open Graph](metadata.html#open-graph) and [Twitter Card](metadata.html#twitter-card) metadata. However, since those systems require that preview images be specified as absolute URLs, you also need to add a `base_url` field to your `_site.yml` file as describe above in [Getting Started].
 
 
+### Subscription links
+
+You can add links that enable readers to subscribe to your blog by including the `collections:posts:subscribe` option within `_site.yml`. The `subscribe` option in turn points to an HTML file that describes and links to subscription options (e.g. [RSS feed](#rss-feeds) or email). For example:
+
+**\_site.yml**
+
+```markup
+---
+name: "reproducible-finance-with-r"
+title: "Reproducible Finance with R"
+description: |
+  Exploring reproducible finance with the R statistical 
+  computing environment.
+base_url: https://beta.rstudioconnect.com/content/3776/
+collections:
+  posts:
+    disqus: reproducible-finance-with-r
+    share: [twitter, linkedin]
+    subscribe: _subscribe.html
+---
+```
+
+**\_subscribe.html**
+
+```html
+Enjoy this blog? Get notified of new posts using the 
+<a href="https://beta.rstudioconnect.com/content/3776/index.xml">RSS feed</a>.
+```
+
+The contents of `_subscribe.html` will be included in both the sidebar of the main listing page as well as in the footer of articles. Note that relative URLs won't work in subscription HTML since the content appears at differnet levels of the site (thus we include the full URL to the RSS feed in the example above).
+
+
 ### Supporting files
 
 When a blog post is published, resource files located alongside the post in it's directory are also published. The following files are *not* published by default:
