@@ -1,11 +1,14 @@
 
 
+- MailChimp: 
+    - https://mailchimp.com/help/share-your-blog-posts-with-mailchimp/
+    - https://mailchimp.com/help/add-a-signup-form-to-your-website/
+    - https://mailchimp.com/help/add-a-pop-up-signup-form-to-your-website/
+   
+- Email Octopus:
+    - https://emailoctopus.com/features
+
 - follow treatment in header
-
-
-- move sidebar docs to an advanced section
-
-- follow/subscribe popup: http://dev.vast.com/jquery-popup-overlay/
     font-size: 11px;
     border: 1px solid;
     padding-left: 4px;
@@ -14,6 +17,11 @@
     vertical-align: middle;
     margin-left: 6px;
 
+- follow/subscribe popup: http://dev.vast.com/jquery-popup-overlay/
+- subscribe at bottom of post?
+- replace default marketo form entirely?
+
+- docs / mailchimp example
 
 
 - rstudio addins/templates/projects for article creation
