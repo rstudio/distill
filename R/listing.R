@@ -63,6 +63,12 @@ article_listing_html <- function(site_dir, collection, articles) {
 
   # check for subscription
   subscription_html <- subscription_html(site_dir, collection)
+  if (!is.null(subscription_html)) {
+    subscription_html <- tags$div(class = "sidebar-section subscribe",
+      tags$h3("Subscribe"),
+      subscription_html
+    )
+  }
 
   # generate categories listing
   categories_html <- if (categories) categories_listing_html(articles)
@@ -121,17 +127,13 @@ article_listing_html <- function(site_dir, collection, articles) {
 
 subscription_html <- function(site_dir, collection) {
 
-  # check for subscribe.html
-  subscribe <- file.path(site_dir, file_with_ext(paste0("subscribe_", collection$name), "html"))
-  if (identical(collection$name, "posts"))
-    subscribe <- c(subscribe,  file.path(site_dir, "subscribe.html"))
-  subscribe <- subscribe[file.exists(subscribe)]
-
-  if (length(subscribe) > 0) {
-    tags$div(class = "sidebar-section subscribe",
-      tags$h3("Subscribe"),
-      html_from_file(subscribe)
-    )
+  # check for subscribe entry
+  subscribe <- collection[["subscribe"]]
+  if (!is.null(subscribe)) {
+    subscribe <- file.path(site_dir, subscribe)
+    if (!file.exists(subscribe))
+      stop("Specified subscribe file '", subscribe, "' does not exist", call. = FALSE)
+    html_from_file(subscribe)
   } else {
     NULL
   }

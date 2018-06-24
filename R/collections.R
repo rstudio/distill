@@ -410,7 +410,7 @@ render_collection_article <- function(site_dir, site_config, collection, article
 
   # article footer
   index_content <- fill_placeholder(index_content, "article_footer", placeholder_html(
-    "article_footer", article_footer_html(site_config, collection, article)
+    "article_footer", article_footer_html(site_dir, site_config, collection, article)
   ))
 
   # resolve site_libs
@@ -430,7 +430,7 @@ render_collection_article <- function(site_dir, site_config, collection, article
   index_html
 }
 
-article_footer_html <- function(site_config, collection, article) {
+article_footer_html <- function(site_dir, site_config, collection, article) {
 
   # get disqus and share
   base_url <- site_config[["base_url"]]
@@ -528,11 +528,24 @@ article_footer_html <- function(site_config, collection, article) {
     )
   }
 
+  # aggregate social
+  social <- NULL
   if (!is.null(disqus) || !is.null(share)) {
-    doRenderTags(tagList(
-       tags$p(class = "social_footer", disqus, share),
-       disqus_script
-    ))
+    social <- tagList(
+      tags$p(class = "social_footer", disqus, share),
+      disqus_script
+    )
+  }
+
+  # look for subscription html
+  subscription <- subscription_html(site_dir, collection)
+  if (!is.null(subscription)) {
+    subscription <- tags$p(tags$div(class = "subscribe", subscription))
+  }
+
+  # render html
+  if (!is.null(disqus) || !is.null(share) || !is.null(subscription)) {
+    doRenderTags(div(class = "article-footer", social, subscription))
   } else {
     NULL
   }
