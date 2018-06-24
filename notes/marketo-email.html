@@ -8,7 +8,6 @@
 // establish metrics based on where the form is located
 var in_sidebar = $('#subscribe-caption').parents('.sidebar-section').length;
 if (in_sidebar) {
-  var margin_top = '';
   var form_width = 190;
   var base_width = form_width - 23;
   var email_width = base_width + 'px';
@@ -18,7 +17,6 @@ if (in_sidebar) {
   var button_margin = '';
   var font_size = '12px';
 } else {
-  var margin_top = '45px';
   var form_width = 400;
   var base_width = form_width - 23;
   var email_width = base_width + 'px';
@@ -31,8 +29,7 @@ if (in_sidebar) {
 
 $('#subscribe-caption')
   .css('width', base_width)
-  .css('font-size', font_size)
-  .css('margin-top', margin_top);
+  .css('font-size', font_size);
 
 
 MktoForms2.loadForm("https://app-ab02.marketo.com", "709-NXN-706", 2224, function(form) {
