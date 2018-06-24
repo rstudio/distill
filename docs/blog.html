@@ -1203,7 +1203,6 @@ Publishing
 <li><a href="#organizing-posts">Organizing posts</a></li>
 <li><a href="#preview-images">Preview images</a></li>
 <li><a href="#supporting-files">Supporting files</a></li>
-<li><a href="#sidebar-content">Sidebar content</a></li>
 </ul></li>
 <li><a href="#publishing-a-blog">Publishing a blog</a></li>
 <li><a href="#examples">Examples</a></li>
@@ -1404,23 +1403,6 @@ resources:
   exclude:
     *.csv    
 ---</code></pre>
-<h3 id="sidebar-content">Sidebar content</h3>
-<p>You can add additional content to the sidebar area where <a href="#categories">categories</a> are located by including a <code>:::: sidebar</code> markup section within your listing page. For example:</p>
-<pre class="markup"><code>
----
-title: &quot;Reproducible Finance with R&quot;
-site: radix::radix_website
-listing: posts
----
-
-:::: sidebar 
-
-### Subscribe
-
-Subscribe to this blog at &lt;https://example.com/subscribe&gt;.
-
-::::</code></pre>
-<p>As demonstrated above, you should use level 3 headings (<code>###</code>) to delinate the various sections of sidebar content you add.</p>
 <h2 id="publishing-a-blog">Publishing a blog</h2>
 <p>After you’ve authored one or more posts you will want to build the entire site before publshing it.</p>
 <p>If your Radix website is contained within an RStudio project you can use the <strong>Build Website</strong> command available in the Build pane to generate the site:</p>

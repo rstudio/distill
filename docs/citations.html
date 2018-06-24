@@ -407,7 +407,7 @@
   }
   
   .hidden {
-    display: none;
+    display: none !important;
   }
   
   d-article {
@@ -534,7 +534,7 @@
     d-footnote-list,
     d-citation-list,
     distill-footer {
-      grid-template-columns: [screen-start] 0.3fr [page-start kicker-start] 50px [middle-start] 50px [text-start kicker-end] 65px 65px 65px 65px 65px 65px 65px 65px [text-end gutter-start] 65px [middle-end] 65px [page-end gutter-end] 1fr [screen-end];
+      grid-template-columns: [screen-start] 1fr [page-start kicker-start] 50px [middle-start] 50px [text-start kicker-end] 65px 65px 65px 65px 65px 65px 65px 65px [text-end gutter-start] 65px [middle-end] 65px [page-end gutter-end] 1fr [screen-end];
       grid-column-gap: 16px;
     }
   
@@ -572,124 +572,6 @@
     word-wrap: break-word;
   }
   
-  /* Styles for listing layout (hide title) */
-  .layout-listing d-title, .layout-listing .d-title {
-    display: none;
-  }
-  
-  /* Styles for posts lists (not auto-injected) */
-  
-  .posts-list .description h2,
-  .posts-list .description p {
-    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen, Ubuntu, Cantarell, "Fira Sans", "Droid Sans", "Helvetica Neue", Arial, sans-serif;
-  }
-  
-  .posts-list .description h2 {
-    font-weight: 700;
-    border-bottom: none;
-    padding-bottom: 0;
-  }
-  
-  .posts-list h2.post-tag {
-    border-bottom: 1px solid rgba(0, 0, 0, 0.2);
-    padding-bottom: 12px;
-  }
-  .posts-list {
-    margin-top: 24px;
-    margin-bottom: 24px;
-  }
-  
-  .posts-list .post-preview {
-    text-decoration: none;
-    overflow: hidden;
-    display: block;
-    border-bottom: 1px solid rgba(0, 0, 0, 0.1);
-    padding: 24px 0;
-  }
-  .posts-list .post-preview:last-of-type {
-    border-bottom: none;
-  }
-  
-  .posts-list .post-preview h2 {
-    margin: 0 0 6px 0;
-    line-height: 1.2em;
-    font-style: normal;
-    font-size: 24px;
-  }
-  
-  .posts-list .post-preview p {
-    margin: 0 0 12px 0;
-    line-height: 1.4em;
-    font-size: 16px;
-  }
-  
-  .posts-list .post-preview .thumbnail {
-    box-sizing: border-box;
-    margin-bottom: 24px;
-    position: relative;
-    max-width: 500px;
-  }
-  .posts-list .post-preview img {
-    width: 100%;
-    display: block;
-  }
-  
-  .posts-list .metadata {
-    font-size: 12px;
-    line-height: 1.4em;
-    margin-bottom: 18px;
-  }
-  
-  .posts-list .metadata > * {
-    display: inline-block;
-  }
-  
-  .posts-list .metadata .publishedDate {
-    margin-right: 1em;
-  }
-  
-  .posts-list .metadata .tags {
-    margin-top: 1em;
-  }
-  
-  .posts-list .tags .tag {
-    color: rgba(0,0,0,0.67);
-    padding: 0.3em 0.5em;
-    margin: 0;
-    font-size: 80%;
-    border: 1px solid rgba(0,0,0,0.4);
-    border-radius: 3px;
-    text-transform: uppercase;
-    font-weight: 500;
-  }
-  
-  @media(min-width: 768px) {
-    .posts-list .post-preview h2 {
-      font-size: 26px;
-    }
-    .posts-list {
-      margin-top: 60px;
-    }
-    .posts-list .post-preview .thumbnail {
-      float: right;
-      width: 35%;
-      margin-bottom: 0;
-    }
-    .posts-list .post-preview .description {
-      float: left;
-      width: 40%;
-    }
-    .posts-list .post-preview .metadata {
-      float: left;
-      width: 15%;
-      margin-top: 8px;
-    }
-    .posts-list .post-preview p {
-      margin: 0 0 12px 0;
-      line-height: 1.5em;
-      font-size: 16px;
-    }
-  }
   
   /* Social footer */
   
@@ -729,10 +611,6 @@
     line-height: 1.6em;
     font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen, Ubuntu, Cantarell, "Fira Sans", "Droid Sans", "Helvetica Neue", Arial, sans-serif;
     margin: 0;
-  }
-  
-  .downlevel .posts-list .post-preview {
-    color: inherit;
   }
   
   .downlevel .d-title {
@@ -801,7 +679,8 @@
   .downlevel .d-footnote-list,
   .downlevel .d-citation-list,
   .downlevel .distill-footer,
-  .downlevel .appendix-bottom {
+  .downlevel .appendix-bottom,
+  .downlevel .posts-container {
     padding-left: 40px;
     padding-right: 40px;
   }
@@ -818,10 +697,11 @@
     .downlevel .d-footnote-list,
     .downlevel .d-citation-list,
     .downlevel .distill-footer,
-    .downlevel .appendix-bottom {
+    .downlevel .appendix-bottom,
+    .downlevel .posts-container {
     padding-left: 150px;
     padding-right: 150px;
-    max-width: 700px;
+    max-width: 900px;
   }
   }
   
@@ -858,7 +738,6 @@
   <script type="application/javascript">
   
   function is_downlevel_browser() {
-  
     if (bowser.isUnsupportedBrowser({ msie: "12", msedge: "16"},
                                    window.navigator.userAgent)) {
       return true;
@@ -896,8 +775,8 @@
     var article = $('<d-article></d-article>');
     $('.d-article').wrap(article).children().unwrap();
   
-    // move post list into article
-    $('.posts-list').appendTo($('d-article'));
+    // move posts container into article
+    $('.posts-container').appendTo($('d-article'));
   
     // create d-appendix
     $('.d-appendix').changeElementType('d-appendix');
@@ -1125,12 +1004,15 @@
       $('.d-appendix').remove();
   
     // prepend separator above appendix
-    $('.d-appendix').before($('<hr class="section-separator"/>'));
+    $('.d-appendix').before($('<hr class="section-separator" style="clear: both"/>'));
   
     // trim code
     $('pre>code').each(function(i, val) {
       $(this).html($.trim($(this).html()));
     });
+  
+    // move posts-container right before article
+    $('.posts-container').insertBefore($('.d-article'));
   
     $('body').addClass('downlevel');
   
@@ -1173,6 +1055,11 @@
     // add class to pandoc style tables
     $('tr.header').parent('thead').parent('table').addClass('pandoc-table');
     $('.kable-table').children('table').addClass('pandoc-table');
+  
+  
+    // initialize posts list
+    if (window.init_posts_list)
+      window.init_posts_list();
   
     // implmement disqus comment link
     $('.disqus-comment-count').click(function() {
@@ -1352,7 +1239,7 @@ bibliography: biblio.bib
 <h2 id="creating-citeable-articles">Creating citeable articles</h2>
 <p>You can make it easier for others to cite your work by providing additional metadata with the YAML front-matter of your article. Citations can be provided for both articles published to the web or for articles published in journals (with or without a <a href="https://www.doi.org/">DOI</a>).</p>
 <h3 id="web-articles">Web articles</h3>
-<p>To provide a citation for an article published to the web, include <code>author</code> and <code>data</code> metadata as well as a <code>citation_url</code>. For example:</p>
+<p>To provide a citation for an article published to the web, include <code>author</code> and <code>date</code> metadata as well as a <code>citation_url</code>. For example:</p>
 <pre class="markup"><code>
 ---
 title: &quot;Radix for R Markdown&quot;
