@@ -286,28 +286,6 @@ resources:
 ---
 ```
 
-### Sidebar content
-
-You can add additional content to the sidebar area where [categories] are located by including a `:::: sidebar` markup section within your listing page. For example:
-
-```markup
----
-title: "Reproducible Finance with R"
-site: radix::radix_website
-listing: posts
----
-
-:::: sidebar 
-
-### Subscribe
-
-Subscribe to this blog at <https://example.com/subscribe>.
-
-::::
-```
-
-As demonstrated above, you should use level 3 headings (`###`) to delinate the various sections of sidebar content you add.
-
 ## Publishing a blog
 
 After you've authored one or more posts you will want to build the entire site before publshing it. 
