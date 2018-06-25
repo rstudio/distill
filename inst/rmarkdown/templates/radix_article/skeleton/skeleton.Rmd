@@ -3,10 +3,6 @@ title: "Untitled"
 description: |
   A new article created using the Radix format.
 author:
-  - name: Joe Smith
-    url: https://example.com/joesmith
-    affiliation: Whoville College
-    affiliation_url: https://example.com/whoville
   - name: Nora Jones 
     url: https://example.com/norajones
     affiliation: Spacely Sprockets
@@ -14,13 +10,13 @@ author:
 output: radix::radix_article
 ---
 
-
 ```{r setup, include=FALSE}
-library(radix)
 knitr::opts_chunk$set(echo = FALSE)
 ```
 
 Radix is a publication format for scientific and technical writing, native to the web. Learn more about using Radix at <https://radixpub.github.io/radix-r>.
+
+
 
 
 
