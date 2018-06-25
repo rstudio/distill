@@ -16,7 +16,7 @@ create_blog(dir, title, gh_pages = FALSE, edit = interactive())
 
 \item{gh_pages}{Configure the site for publishing using \href{https://pages.github.com/}{GitHubPages}}
 
-\item{edit}{Open site index file or welcome post in an interactive editor.}
+\item{edit}{Open site index file or welcome post in an editor.}
 }
 \description{
 Create a basic skeleton for a Radix website or blog. Use the \code{create_website()}

@@ -9,6 +9,7 @@
    - import article function(s)
 
 - larger scale visualization layouts
+    - embed_*() family of functions
     - iframe with npr library (pym.js or iframeresizer.js) for sizing (generic) (check with shinyapps.io)
     - distillVisualization() top level shinyApp equivalent with distill bootstrap theme 
        - use the less compiler for this

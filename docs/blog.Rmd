@@ -250,7 +250,7 @@ _posts/
   2017-11-09-visualizing-asset-returns/
   2017-09-13-asset-volatility/
   2017-03-07-quandl-and-forecasting/
-  2016-11-08-sharpe_ratio/
+  2016-11-08-sharpe-ratio/
 ```
 
 The benefits of this scheme are that post names are given additional uniqueness (to guard against colliding names over the long term) and are also automatically listed in order when browsing the `_posts` directory.
