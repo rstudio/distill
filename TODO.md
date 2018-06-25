@@ -1,5 +1,4 @@
 
-- acknowledgements in appendix overlaps text
 
 - Document create_website() and create_blog()
 - Addin or function: New blog post
