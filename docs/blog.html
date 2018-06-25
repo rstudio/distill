@@ -1207,6 +1207,8 @@ Publishing
 <nav class="d-toc" id="TOC">
 <ul>
 <li><a href="#getting-started">Getting started</a><ul>
+<li><a href="#creating-a-blog">Creating a blog</a></li>
+<li><a href="#configuration">Configuration</a></li>
 <li><a href="#creating-a-post">Creating a post</a></li>
 <li><a href="#listing-pages">Listing pages</a></li>
 <li><a href="#rss-feeds">RSS feeds</a></li>
@@ -1226,8 +1228,44 @@ Publishing
 <hr class="d-toc-separator"/>
 <p>Radix websites include integrated support for blogging. To create a blog you author a collection of posts (located in the <code>_posts</code> subdirectory of your website) and then dedicate a page (usually the website homepage) to a listing of all of your posts.</p>
 <h2 id="getting-started">Getting started</h2>
-<p>First, create the basic scaffolding for a Radix website as described in the article on <a href="website.html">creating websites</a>.</p>
-<p>For a blog, there are a couple of additional metadata items you’ll want to add to your <code>_site.yml</code> so that it’s easier to share the content on the blog via RSS and social networks like Twitter:</p>
+<h3 id="creating-a-blog">Creating a blog</h3>
+<p>The easist way to get started with a blog is to call the Radix <code>create_blog()</code> function, which creates the basic scaffolding for a blog (2 pages, Home and About, as well as a simple welcome post).</p>
+<pre class="r"><code>
+library(radix)
+create_blog(dir = &quot;my-blog&quot;, title = &quot;My Blog&quot;)</code></pre>
+<p>The blog will be created within the <code>my-blog</code> sub-directory of the current working directory and will include the following files:</p>
+<table>
+<thead>
+<tr class="header">
+<th>Option</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><code>_site.yml</code></td>
+<td>Website configuration file.</td>
+</tr>
+<tr class="even">
+<td><code>index.Rmd</code></td>
+<td>Blog home page.</td>
+</tr>
+<tr class="odd">
+<td><code>about.Rmd</code></td>
+<td>Blog about page.</td>
+</tr>
+<tr class="even">
+<td><code>_posts/welcome/welcome.Rmd</code></td>
+<td>Welcome post for the blog.</td>
+</tr>
+</tbody>
+</table>
+<p>Note that the <code>welcome</code> post is just there to provide some skeletal content for the blog – feel free to delete it and add your own initial post to the blog as described in <a href="#creating-a-post">creating a post</a>.</p>
+<p>If you are using RStudio, you can also create a website using the Radix Blog option in the <strong>New Project</strong> dialog:</p>
+<p><img src="images/create-blog.png" class="screenshot" style="width:95.0%" /></p>
+<p>A new <a href="https://support.rstudio.com/hc/en-us/articles/200526207-Using-Projects">RStudio Project</a> for the blog will be created and opened.</p>
+<h3 id="configuration">Configuration</h3>
+<p>After you’ve created the blog scafoolding, there are a couple of additional configuration items you’ll want to add to your <code>_site.yml</code> so that it’s easier to share content on the blog via RSS and social networks like Twitter:</p>
 <ul>
 <li><p>A short <code>description</code> of the site. This field is used for the channel description of your RSS feed.</p></li>
 <li><p>A <code>base_url</code> for the site (the URL where it will be published to). This is used both for RSS feed items and for sharing posts via <a href="metadata.html#open-graph">Open Graph</a> and <a href="metadata.html#twitter-card">Twitter Card</a>.</p></li>

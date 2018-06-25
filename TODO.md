@@ -1,6 +1,5 @@
 
 
-- Document create_website() and create_blog()
 - Addin or function: New blog post
 
 - Embedded article workflow:

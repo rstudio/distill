@@ -11,9 +11,37 @@ Radix websites include integrated support for blogging. To create a blog you aut
 
 ## Getting started
 
-First, create the basic scaffolding for a Radix website as described in the article on [creating websites](website.html).
+### Creating a blog
 
-For a blog, there are a couple of additional metadata items you'll want to add to your `_site.yml` so that it's easier to share the content on the blog via RSS and social networks like Twitter:
+The easist way to get started with a blog is to call the Radix `create_blog()` function, which creates the basic scaffolding for a blog (2 pages, Home and About, as well as a simple welcome post).
+
+```r
+library(radix)
+create_blog(dir = "my-blog", title = "My Blog")
+```
+
+The blog will be created within the `my-blog` sub-directory of the current working directory and will include the following files:
+
+| Option           | Description                                    |
+|------------------|------------------------------------------------|
+| `_site.yml`     | Website configuration file.             |
+| `index.Rmd`      | Blog home page.  |
+| `about.Rmd`     | Blog about page. |
+| `_posts/welcome/welcome.Rmd` | Welcome post for the blog. |
+
+Note that the `welcome` post is just there to provide some skeletal content for the blog -- feel free to delete it and add your own initial post to the blog as described in [creating a post].
+
+
+If you are using RStudio, you can also create a website using the Radix Blog option in the **New Project** dialog:
+
+![](images/create-blog.png){width=95% .screenshot}
+
+A new [RStudio Project](https://support.rstudio.com/hc/en-us/articles/200526207-Using-Projects) for the blog will be created and opened.
+
+
+### Configuration
+
+After you've created the blog scafoolding, there are a couple of additional configuration items you'll want to add to your `_site.yml` so that it's easier to share content on the blog via RSS and social networks like Twitter:
 
 - A short `description` of the site. This field is used for the channel description of your RSS feed.
 

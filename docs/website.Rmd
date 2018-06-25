@@ -13,60 +13,29 @@ Once you've created your website locally, there are a variety of ways available 
 
 ## Getting started
 
-### Website basics
+### Creating a website
 
-The minimum requirement for a Radix website is that it have:
+The easist way to get started with a website is to call the Radix `create_website()` function, which creates the basic scaffolding for a site with 2 pages (Home and About). For example:
 
-1) An `index.Rmd` file configured to use the Radix website generator (`site: radix::radix_website`).
-
-2) A `_site.yml` file (this is where site related options and configuration are specified).
-
-Let's walk through a very simple example, a website that includes two pages (Home and About) and a navigation bar to switch between them:
-
-**\_site.yml**
-
-```markup
-name: "radix-rmarkdown"
-title: "Radix for R Markdown"
-navbar:
-  right:
-    - text: "Home"
-      href: index.html
-    - text: "About"
-      href: about.html
-    - icon: fab fa-github
-      href: https://github.com/radixpub/radix-r
-output: radix::radix_article
+```r
+library(radix)
+create_website(dir = "my-website", title = "My Website")
 ```
 
-**index.Rmd**
+The website will be created within the `my-website` sub-directory of the current working directory and will include the following files:
 
-```markup
----
-title: "Radix for R Markdown"
-description: | 
-  Scientific and technical writing, native to the web
-site: radix::radix_website
----
+| Option           | Description                                    |
+|------------------|------------------------------------------------|
+| `_site.yml`     | Website configuration file.             |
+| `index.Rmd`      | Website home page.  |
+| `about.Rmd`     | Website about page. |
 
-Hello, Radix!
-```
 
-**about.Rmd**
+If you are using RStudio, you can also create a website using the Radix Website option in the **New Project** dialog:
 
-```markup
----
-title: "About Radix"
-description: |
-  Some additional details about the Radix project
----
+![](images/create-website.png){width=95% .screenshot}
 
-More about Radix
-```
- 
-Note that the `output` options are not specified within the Rmd documents but rather in the `_site.yml` configuration file (this allows output options to be shared by all articles).
-
-Also note that the `index.Rmd` file specifies the Radix website generator (`site::radix_website`).
+A new [RStudio Project](https://support.rstudio.com/hc/en-us/articles/200526207-Using-Projects) for the website will be created and opened.
 
 ### Authoring articles
 

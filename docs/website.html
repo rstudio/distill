@@ -1207,7 +1207,7 @@ Publishing
 <nav class="d-toc" id="TOC">
 <ul>
 <li><a href="#getting-started">Getting started</a><ul>
-<li><a href="#website-basics">Website basics</a></li>
+<li><a href="#creating-a-website">Creating a website</a></li>
 <li><a href="#authoring-articles">Authoring articles</a></li>
 <li><a href="#building-the-site">Building the site</a></li>
 </ul></li>
@@ -1225,47 +1225,36 @@ Publishing
 <p>This article describes how to create a website that contains a collection of Radix articles. Radix websites include a top level navigation bar that enables readers to discover and browse articles. For example, the documentation pages you are reading now are a Radix website.</p>
 <p>Once you’ve created your website locally, there are a variety of ways available to <a href="publish_website.html">publish your site</a> to the web.</p>
 <h2 id="getting-started">Getting started</h2>
-<h3 id="website-basics">Website basics</h3>
-<p>The minimum requirement for a Radix website is that it have:</p>
-<ol type="1">
-<li><p>An <code>index.Rmd</code> file configured to use the Radix website generator (<code>site: radix::radix_website</code>).</p></li>
-<li><p>A <code>_site.yml</code> file (this is where site related options and configuration are specified).</p></li>
-</ol>
-<p>Let’s walk through a very simple example, a website that includes two pages (Home and About) and a navigation bar to switch between them:</p>
-<p><strong>_site.yml</strong></p>
-<pre class="markup"><code>
-name: &quot;radix-rmarkdown&quot;
-title: &quot;Radix for R Markdown&quot;
-navbar:
-  right:
-    - text: &quot;Home&quot;
-      href: index.html
-    - text: &quot;About&quot;
-      href: about.html
-    - icon: fab fa-github
-      href: https://github.com/radixpub/radix-r
-output: radix::radix_article</code></pre>
-<p><strong>index.Rmd</strong></p>
-<pre class="markup"><code>
----
-title: &quot;Radix for R Markdown&quot;
-description: | 
-  Scientific and technical writing, native to the web
-site: radix::radix_website
----
-
-Hello, Radix!</code></pre>
-<p><strong>about.Rmd</strong></p>
-<pre class="markup"><code>
----
-title: &quot;About Radix&quot;
-description: |
-  Some additional details about the Radix project
----
-
-More about Radix</code></pre>
-<p>Note that the <code>output</code> options are not specified within the Rmd documents but rather in the <code>_site.yml</code> configuration file (this allows output options to be shared by all articles).</p>
-<p>Also note that the <code>index.Rmd</code> file specifies the Radix website generator (<code>site::radix_website</code>).</p>
+<h3 id="creating-a-website">Creating a website</h3>
+<p>The easist way to get started with a website is to call the Radix <code>create_website()</code> function, which creates the basic scaffolding for a site with 2 pages (Home and About). For example:</p>
+<pre class="r"><code>
+library(radix)
+create_website(dir = &quot;my-website&quot;, title = &quot;My Website&quot;)</code></pre>
+<p>The website will be created within the <code>my-website</code> sub-directory of the current working directory and will include the following files:</p>
+<table>
+<thead>
+<tr class="header">
+<th>Option</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><code>_site.yml</code></td>
+<td>Website configuration file.</td>
+</tr>
+<tr class="even">
+<td><code>index.Rmd</code></td>
+<td>Website home page.</td>
+</tr>
+<tr class="odd">
+<td><code>about.Rmd</code></td>
+<td>Website about page.</td>
+</tr>
+</tbody>
+</table>
+<p>If you are using RStudio, you can also create a website using the Radix Website option in the <strong>New Project</strong> dialog:</p>
+<p><img src="images/create-website.png" class="screenshot" style="width:95.0%" /></p>
 <h3 id="authoring-articles">Authoring articles</h3>
 <p>When you use the RStudio <strong>Knit</strong> command on a Radix article within a website, only that article will be rendered and previewed:</p>
 <p><img src="images/knit-site-article.png" class="screenshot" style="width:95.0%" /></p>
