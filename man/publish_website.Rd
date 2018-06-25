@@ -12,8 +12,8 @@ publish_website(site_dir = ".", site_name = NULL, method = c("rsconnect"),
 \item{site_dir}{Directory containing website. Defaults to current working directory.}
 
 \item{site_name}{Name for the site (names must be unique within an account). Defaults
-to the `name` provided in `_site.yml` (or to the name of the site_dir if there is no
-`name` specified).}
+to the \code{name} provided in \code{_site.yml} (or to the name of the site_dir if there is no
+\code{name} specified).}
 
 \item{method}{Publishing method (currently only "rsconnect" is available)}
 
@@ -24,10 +24,10 @@ multiple servers.}
 the initial deployment of an application when there are multiple accounts configured
 on the system.}
 
-\item{render}{`TRUE` to render the site locally before publishing.}
+\item{render}{\code{TRUE} to render the site locally before publishing.}
 
-\item{launch_browser}{If `TRUE`, the system's default web browser will be launched
-automatically after the site is deployed. Defaults to `TRUE` in interactive sessions
+\item{launch_browser}{If \code{TRUE}, the system's default web browser will be launched
+automatically after the site is deployed. Defaults to \code{TRUE} in interactive sessions
 only.}
 }
 \description{

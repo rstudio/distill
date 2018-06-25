@@ -1,6 +1,20 @@
 
 
 
+#' Create a Radix website
+#'
+#' Create a basic skeleton for a Radix website or blog. Use the `create_website()`
+#' function for a website and the `create_blog()` function for a blog.
+#'
+#' @param dir Directory for website
+#' @param title Title of website
+#' @param gh_pages Configure the site for publishing using [GitHub
+#'   Pages](https://pages.github.com/)
+#' @param edit Open site index file or welcome post in an interactive editor.
+#'
+#' @note The `dir` and `title` parameters are required (they will be prompted for
+#'   interatively if they are not specified).
+#'
 #' @export
 create_website <- function(dir, title, gh_pages = FALSE, edit = interactive()) {
   do_create_website(dir, title, gh_pages, edit, "website")
@@ -8,6 +22,8 @@ create_website <- function(dir, title, gh_pages = FALSE, edit = interactive()) {
   invisible(NULL)
 }
 
+
+#' @rdname create_website
 #' @export
 create_blog <- function(dir, title, gh_pages = FALSE, edit = interactive()) {
 
