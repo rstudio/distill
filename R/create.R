@@ -8,12 +8,6 @@ create_website <- function(dir, title, gh_pages = FALSE, edit = interactive()) {
   invisible(NULL)
 }
 
-new_project_create_website <- function(dir, ...) {
-  params <- list(...)
-  create_website(dir, params$title, params$gh_pages, edit = FALSE)
-}
-
-
 #' @export
 create_blog <- function(dir, title, gh_pages = FALSE, edit = interactive()) {
 
@@ -41,6 +35,11 @@ create_blog <- function(dir, title, gh_pages = FALSE, edit = interactive()) {
     edit_file(file.path(target_path, welcome))
 
   invisible(NULL)
+}
+
+new_project_create_website <- function(dir, ...) {
+  params <- list(...)
+  create_website(dir, params$title, params$gh_pages, edit = FALSE)
 }
 
 new_project_create_blog <- function(dir, ...) {
