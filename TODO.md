@@ -1,11 +1,14 @@
 
 
+- remove mustache dependency
+
+- acknowledgements in appendix overlaps text
+
 - rstudio addins/templates/projects for article creation
-   - Main Rmd template
    - Project:
       - Website using Radix
       - Blog using Radix
-   - Addin: New blog post
+   - Addin or function: New blog post
 
 - Embedded article workflow:
 

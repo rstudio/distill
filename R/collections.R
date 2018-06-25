@@ -293,7 +293,7 @@ update_collection_listing <- function(site_dir, site_config, collection, article
       )
 
       # move feed
-      if (site_config$output_dir != ".") {
+      if (site_config$output_dir != "." && !is.null(listing$feed)) {
         file.rename(listing$feed,
                     file.path(site_config$output_dir, basename(listing$feed)))
       }

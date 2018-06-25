@@ -1,0 +1,16 @@
+Binding: new_project_create_website
+Title: Radix Website
+OpenFiles: index.Rmd, about.Rmd, _site.yml
+
+Parameter: title
+Default: My Website
+Widget: TextInput
+Label: Title
+Position: left
+
+Parameter: gh_pages
+Widget: CheckboxInput
+Label: Configure for GitHub Pages
+Position: right
+
+

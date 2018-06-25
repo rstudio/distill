@@ -82,6 +82,8 @@ article_listing_html <- function(site_dir, collection, articles) {
 
     if (!is.null(article$preview))
       preview <- img(`data-src` = article$preview)
+    else
+      preview <- NULL
 
     a(href = article$path, class = "post-preview",
       tags$script(class = "post-metadata", type = "text/json",
@@ -149,20 +151,20 @@ categories_listing_html <- function(articles) {
       categories[[category]] <- not_null(categories[[category]], 0) + 1
   }
 
-  # sort alphabetically
-  indexes <- order(names(categories))
-  categories <- categories[indexes]
-
-  # generate html
   if (length(categories) > 0) {
+
+    # sort alphabetically
+    indexes <- order(names(categories))
+    categories <- categories[indexes]
+
+    # generate html
     tags$div(class = "sidebar-section categories",
       tags$h3("Categories"),
       tags$ul(
         lapply(names(categories), function(name) {
           tags$li(
             tags$a(href = paste0("#",gsub(" ", "_", name)), name),
-            tags$span(class = "category-count",
-                      sprintf("(%d)", categories[[name]]))
+            tags$span(class = "category-count", sprintf("(%d)", categories[[name]]))
           )
         })
       )

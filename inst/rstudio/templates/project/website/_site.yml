@@ -1,0 +1,10 @@
+name: "{{name}}"
+title: "{{title}}"
+output_dir: "{{output_dir}}"
+navbar:
+  right:
+    - text: "Home"
+      href: index.html
+    - text: "About"
+      href: about.html
+output: radix::radix_article

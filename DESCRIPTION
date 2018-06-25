@@ -40,7 +40,8 @@ Imports:
     rstudioapi, 
     rprojroot,
     xml2,
-    base64enc
+    base64enc,
+    whisker
 Suggests:
     knitr (>= 1.15.6),
     htmlwidgets,

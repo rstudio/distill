@@ -190,7 +190,6 @@ For example, the following options provide the [Disqus shortname](https://help.d
 **\_site.yml**
 
 ```markup
----
 name: "reproducible-finance-with-r"
 title: "Reproducible Finance with R"
 description: |
@@ -201,7 +200,6 @@ collections:
   posts:
     disqus: reproducible-finance-with-r
     share: [twitter, linkedin]
----
 ```
 
 The following footer is then automatically included at the end of each post:
@@ -267,7 +265,6 @@ You can add hTML that enable readers to subscribe to your blog by including the 
 **\_site.yml**
 
 ```markup
----
 name: "reproducible-finance-with-r"
 title: "Reproducible Finance with R"
 description: |
@@ -279,7 +276,6 @@ collections:
     disqus: reproducible-finance-with-r
     share: [twitter, linkedin]
     subscribe: _subscribe.html
----
 ```
 
 **\_subscribe.html**

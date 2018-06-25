@@ -1,0 +1,31 @@
+---
+title: "Welcome to {{title}}"
+description: |
+  Welcome to our new blog, {{title}}. We hope you enjoy 
+  reading what we have to say!
+author:
+  - name: Nora Jones 
+    url: https://example.com/norajones
+    affiliation: Spacely Sprockets
+    affiliation_url: https://example.com/spacelysprokets
+date: {{date}}
+output:
+  radix::radix_article:
+    self_contained: false
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = FALSE)
+
+# Learn more about creating blogs with Radix at:
+# https://radixpub.github.io/radix-r/blog.html
+
+{{#gh_pages}}
+# Learn more about publishing to GitHub Pages at:
+# https://radixpub.github.io/radix-r/publish_website.html#github-pages
+
+{{/gh_pages}}
+```
+
+
+

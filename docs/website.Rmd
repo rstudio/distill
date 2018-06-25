@@ -26,7 +26,6 @@ Let's walk through a very simple example, a website that includes two pages (Hom
 **\_site.yml**
 
 ```markup
----
 name: "radix-rmarkdown"
 title: "Radix for R Markdown"
 navbar:
@@ -38,7 +37,6 @@ navbar:
     - icon: fab fa-github
       href: https://github.com/radixpub/radix-r
 output: radix::radix_article
----
 ```
 
 **index.Rmd**

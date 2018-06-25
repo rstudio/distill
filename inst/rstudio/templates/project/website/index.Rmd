@@ -1,0 +1,20 @@
+---
+title: "{{title}}"
+description: |
+  Welcome to the website. I hope you enjoy it!
+site: radix::radix_website
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = FALSE)
+
+# Learn more about creating websites with Radix at:
+# https://radixpub.github.io/radix-r/website.html
+
+{{#gh_pages}}
+# Learn more about publishing to GitHub Pages at:
+# https://radixpub.github.io/radix-r/publish_website.html#github-pages
+
+{{/gh_pages}}
+```
+
