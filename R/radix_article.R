@@ -147,9 +147,6 @@ radix_article <- function(toc = FALSE,
         args <- c(args,
           pandoc_variable_arg("feed", url_path(site_config$base_url, listing$feed))
       )
-
-      # add mustache dependency
-      html_deps[[length(html_deps) + 1]] <- html_dependency_mustache()
     }
 
     # add html dependencies

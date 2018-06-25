@@ -1,21 +1,14 @@
 
-
-- remove mustache dependency
-
 - acknowledgements in appendix overlaps text
 
-- rstudio addins/templates/projects for article creation
-   - Project:
-      - Website using Radix
-      - Blog using Radix
-   - Addin or function: New blog post
+- Document create_website() and create_blog()
+- Addin or function: New blog post
 
 - Embedded article workflow:
 
    - document cannonical url
    - attribution metadata for inclusion when importing/syndicating (do during import)
    - import article function(s)
-
 
 - larger scale visualization layouts
     - iframe with npr library (pym.js or iframeresizer.js) for sizing (generic) (check with shinyapps.io)
