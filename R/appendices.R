@@ -137,7 +137,7 @@ appendix_citation <- function(site_config, metadata) {
         if (!is.null(metadata$doi))
           suffix <- c(suffix, sprintf(',\n  doi = {%s}', metadata$doi))
         suffix <- paste0(c(suffix, '\n}'), collapse = '')
-        sprintf(paste('@article(%s,',
+        sprintf(paste('@article{%s,',
                       '  author = {%s},',
                       '  title = {%s},',
                       '  journal = {%s},',
@@ -151,7 +151,7 @@ appendix_citation <- function(site_config, metadata) {
                 suffix
         )
       } else {
-        sprintf(paste('@misc(%s,',
+        sprintf(paste('@misc{%s,',
                       '  author = {%s},',
                       '  title = {%s},',
                       '  url = {%s},',
