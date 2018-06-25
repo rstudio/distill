@@ -601,12 +601,19 @@
     border-bottom: none;
   }
   
-  .sidebar-section .subscribe {
+  .sidebar-section.subscribe {
     font-size: 12px;
+    line-height: 1.6em;
   }
+  
+  .subscribe p {
+    margin-bottom: 0.5em;
+  }
+  
   
   .article-footer .subscribe {
     font-size: 15px;
+    margin-top: 45px;
   }
   
   
@@ -1209,7 +1216,7 @@ Publishing
 <li><a href="#comments-and-sharing">Comments and sharing</a></li>
 <li><a href="#organizing-posts">Organizing posts</a></li>
 <li><a href="#preview-images">Preview images</a></li>
-<li><a href="#subscription-links">Subscription links</a></li>
+<li><a href="#subscriptions">Subscriptions</a></li>
 <li><a href="#supporting-files">Supporting files</a></li>
 </ul></li>
 <li><a href="#publishing-a-blog">Publishing a blog</a></li>
@@ -1344,7 +1351,6 @@ draft: true
 <p>For example, the following options provide the <a href="https://help.disqus.com/installation/whats-a-shortname">Disqus shortname</a> for a site and specify that we want sharing buttons for Twitter and LinkedIn.</p>
 <p><strong>_site.yml</strong></p>
 <pre class="markup"><code>
----
 name: &quot;reproducible-finance-with-r&quot;
 title: &quot;Reproducible Finance with R&quot;
 description: |
@@ -1354,8 +1360,7 @@ base_url: https://beta.rstudioconnect.com/content/3776/
 collections:
   posts:
     disqus: reproducible-finance-with-r
-    share: [twitter, linkedin]
----</code></pre>
+    share: [twitter, linkedin]</code></pre>
 <p>The following footer is then automatically included at the end of each post:</p>
 <p><img src="images/social-footer.png" class="screenshot" style="width:80.0%" /></p>
 <p>Note that the <code>base_url</code> field is required in order to use Disqus and sharing links.</p>
@@ -1391,11 +1396,10 @@ description: |
 preview: images/sharpe-ratio.png
 ---</code></pre>
 <p>Preview images are also used for generating <a href="metadata.html#open-graph">Open Graph</a> and <a href="metadata.html#twitter-card">Twitter Card</a> metadata. However, since those systems require that preview images be specified as absolute URLs, you also need to add a <code>base_url</code> field to your <code>_site.yml</code> file as describe above in <a href="#getting-started">Getting Started</a>.</p>
-<h3 id="subscription-links">Subscription links</h3>
-<p>You can add links that enable readers to subscribe to your blog by including the <code>collections:posts:subscribe</code> option within <code>_site.yml</code>. The <code>subscribe</code> option in turn points to an HTML file that describes and links to subscription options (e.g. <a href="#rss-feeds">RSS feed</a> or email). For example:</p>
+<h3 id="subscriptions">Subscriptions</h3>
+<p>You can add hTML that enable readers to subscribe to your blog by including the <code>collections:posts:subscribe</code> option within <code>_site.yml</code>. The <code>subscribe</code> option in turn points to an HTML file that provides the ability to subscribe to your blog. For example:</p>
 <p><strong>_site.yml</strong></p>
 <pre class="markup"><code>
----
 name: &quot;reproducible-finance-with-r&quot;
 title: &quot;Reproducible Finance with R&quot;
 description: |
@@ -1406,13 +1410,19 @@ collections:
   posts:
     disqus: reproducible-finance-with-r
     share: [twitter, linkedin]
-    subscribe: _subscribe.html
----</code></pre>
+    subscribe: _subscribe.html</code></pre>
 <p><strong>_subscribe.html</strong></p>
 <pre class="html"><code>
-Enjoy this blog? Get notified of new posts using the 
-&lt;a href=&quot;https://beta.rstudioconnect.com/content/3776/index.xml&quot;&gt;RSS feed&lt;/a&gt;.</code></pre>
-<p>The contents of <code>_subscribe.html</code> will be included in both the sidebar of the main listing page as well as in the footer of articles. Note that relative URLs won’t work in subscription HTML since the content appears at differnet levels of the site (thus we include the full URL to the RSS feed in the example above).</p>
+&lt;form method=&#39;post&#39; action=&#39;https://blogtrottr.com&#39;&gt;
+  &lt;p&gt;Enjoy this blog? Get notified of new posts via email:&lt;/p&gt;
+  &lt;input type=&#39;text&#39; name=&#39;btr_email&#39; /&gt;
+  &lt;input type=&#39;hidden&#39; name=&#39;btr_url&#39;
+         value=&#39;https://beta.rstudioconnect.com/content/3776/index.xml&#39;/&gt;
+  &lt;input type=&#39;hidden&#39; name=&#39;schedule_type&#39; value=&#39;0&#39; /&gt;
+  &lt;input type=&#39;submit&#39; value=&#39;Subscribe&#39; /&gt;
+&lt;/form&gt;</code></pre>
+<p>This example uses the <a href="https://blogtrottr.com/">Blogtrottr</a> service to provide an email subscription. You could also use another service or simply include a link to your RSS feed.</p>
+<p>The contents of <code>_subscribe.html</code> will be included in both the sidebar of the main listing page as well as in the footer of articles. Note that relative URLs won’t work in subscription HTML since the content appears at different levels of the site (thus we include the full URL to the RSS feed in the example above).</p>
 <h3 id="supporting-files">Supporting files</h3>
 <p>When a blog post is published, resource files located alongside the post in it’s directory are also published. The following files are <em>not</em> published by default:</p>
 <ol type="1">

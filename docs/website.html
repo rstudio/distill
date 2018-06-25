@@ -601,6 +601,20 @@
     border-bottom: none;
   }
   
+  .sidebar-section.subscribe {
+    font-size: 12px;
+    line-height: 1.6em;
+  }
+  
+  .subscribe p {
+    margin-bottom: 0.5em;
+  }
+  
+  
+  .article-footer .subscribe {
+    font-size: 15px;
+    margin-top: 45px;
+  }
   
   
   /* Improve display for browsers without grid (IE/Edge <= 15) */
@@ -1220,7 +1234,6 @@ Publishing
 <p>Let’s walk through a very simple example, a website that includes two pages (Home and About) and a navigation bar to switch between them:</p>
 <p><strong>_site.yml</strong></p>
 <pre class="markup"><code>
----
 name: &quot;radix-rmarkdown&quot;
 title: &quot;Radix for R Markdown&quot;
 navbar:
@@ -1231,8 +1244,7 @@ navbar:
       href: about.html
     - icon: fab fa-github
       href: https://github.com/radixpub/radix-r
-output: radix::radix_article
----</code></pre>
+output: radix::radix_article</code></pre>
 <p><strong>index.Rmd</strong></p>
 <pre class="markup"><code>
 ---
