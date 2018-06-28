@@ -14,7 +14,8 @@ Authors@R: c(
     person("Denis", "Demchenko", role = c("ctb", "cph"), 
            comment = "https://github.com/lancedikson/bowser"),
     person(family = "The Polymer Authors", role = c("ctb", "cph"), 
-           comment = "https://www.webcomponents.org/polyfills/")
+           comment = "https://www.webcomponents.org/polyfills/"),
+    person("Gábor", "Csárdi", role = c("ctb", "cph"), comment = "whoami")
     )
 Description: Scientific and technical article format for the web. 'Radix' articles 
     feature attractive, reader-friendly typography, flexible layout options

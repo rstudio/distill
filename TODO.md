@@ -1,5 +1,9 @@
 
 
+- comment and share on new article (no icons)
+- bias to RStudio New Project
+- change subscription example?
+
 - Addin or function: New blog post
 
 - Embedded article workflow:
@@ -27,6 +31,8 @@
 - ide publish button for pages should publish/re-publish website
 
 - packrat ignore Rmds in collection subfolders (site engine?)
+
+- Well documented MailChimp workflow
 
 
 - Lightbox for asides?

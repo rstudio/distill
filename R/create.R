@@ -77,6 +77,11 @@ create_post <- function(title, author = "auto", slug = "auto", date_prefix = TRU
   if (is.null(site_dir))
     stop("You must call create_post from within a Radix website")
 
+  # more discovvery
+  site_config <- site_config(site_dir)
+  posts_dir <- file.path(site_dir, "_posts")
+  posts_index <- file.path(site_dir, site_config$output_dir, "posts", "posts.json")
+
   # auto-slug
   if (identical(slug, "auto")) {
     slug <- tolower(title)
@@ -88,8 +93,10 @@ create_post <- function(title, author = "auto", slug = "auto", date_prefix = TRU
   } else {
     slug <- gsub("\\s+", "-", title)             # replace spaces with -
   }
+  post_dir <- file.path(posts_dir, slug)
 
   # add date prefix
+  post_date <- Sys.Date()
   if (!identical(date_prefix, FALSE)) {
     if (isTRUE(date_prefix))
       date_prefix <- Sys.Date()
@@ -97,51 +104,87 @@ create_post <- function(title, author = "auto", slug = "auto", date_prefix = TRU
       date_prefix <- parse_date(date_prefix)
     if (lubridate::is.Date(date_prefix) ||
         lubridate::is.POSIXct(date_prefix) ||
-        lubridate::is.POSIXlt(date_prefix))
+        lubridate::is.POSIXlt(date_prefix)) {
+      post_date <- date_prefix
       date_prefix <- as.character(date_prefix, format = "%Y-%m-%d")
-    else
+    } else {
       stop("You must specify either TRUE/FALSE or a date for date_prefix")
-    slug <- paste(date_prefix, slug, sep = "-")
+    }
+    post_dir <- file.path(posts_dir, paste(date_prefix, slug, sep = "-"))
   }
 
   # determine author
   if (identical(author, "auto")) {
 
-    # look for previous posts
-    site_config <- site_config(site_dir)
-    posts_index <- file.path(site_dir, site_config$output_dir, "posts", "posts.json")
+    # default to NULL
+    author <- NULL
+
+    # look author of most recent post
     if (file.exists(posts_index))
       posts <- jsonlite::read_json(posts_index)
     else
       posts <- list()
-
-
+    if (length(posts) > 0)
+      author <- list(author = posts[[1]]$author)
   }
+  # if we still don't have an author then auto-detect
+  if (is.null(author))
+    author <- list(author = list(list(name = fullname(fallback = "Unknown"))))
+  # author to yaml
+  author <- yaml::as.yaml(author, indent.mapping.sequence = TRUE)
 
-  slug
+  # add draft
+  if (draft)
+    draft <- '\ndraft: true'
+  else
+    draft <- ''
 
+  # create yaml
+  yaml <- sprintf(
+'---
+title: "%s"
+description: |
+  A short description of the post.
+%sdate: %s
+output:
+  radix::radix_article:
+    self_contained: false%s
+---', title, author, format.Date(post_date, "%m-%d-%Y"), draft)
+
+
+  # body
+  body <-
+'
+
+```{r setup, include=FALSE}
+  knitr::opts_chunk$set(echo = FALSE)
+```
+
+Radix is a publication format for scientific and technical writing, native to the web.
+
+Learn more about using Radix at <https://radixpub.github.io/radix-r>.
+
+'
+
+  # create the post directory
+  if (dir_exists(post_dir))
+    stop("Post directory '", post_dir, "' already exists.", call. = FALSE)
+  dir.create(post_dir, recursive = TRUE)
+
+  # create the post file
+  post_file <- file.path(post_dir, file_with_ext(slug, "Rmd"))
+  con <- file(post_file, open = "w", encoding = "UTF-8")
+  on.exit(close(con), add = TRUE)
+  writeChar(yaml, con, eos = NULL, useBytes = TRUE)
+  writeChar(body, con, eos = NULL, useBytes = TRUE)
+
+  # edit if requested
+  if (edit)
+    edit_file(post_file)
+
+  # return path to post (invisibly)
+  invisible(post_file)
 }
-
-
-# ---
-# title: "The Sharpe Ratio"
-# description: |
-#   In this post we present a classic finance use case using the
-# PerformanceAnalytics, quantmod, and dygraphs packages.
-# We'll demonstrate importing stock data, building a portfolio,
-#   and then calculating the Sharpe Ratio.
-# author:
-#   - name: "Jonathan Regenstein"
-#     url: https://www.linkedin.com/in/jkregenstein/
-#     affiliation: RStudio
-#     affiliation_url: https://www.rstudio.com
-# date: 11-09-2016
-# output:
-#   radix::radix_article:
-#     self_contained: false
-# ---
-
-
 
 
 
