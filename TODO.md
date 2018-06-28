@@ -1,8 +1,6 @@
 
 
-- change subscription example?
-
-- Addin or function: New blog post
+- Addin or function: New blog post (document)
 
 - Embedded article workflow:
 
