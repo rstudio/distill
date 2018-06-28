@@ -287,7 +287,7 @@ Preview images are also used for generating [Open Graph](metadata.html#open-grap
 
 ### Subscriptions
 
-You can add hTML that enable readers to subscribe to your blog by including the `collections:posts:subscribe` option within `_site.yml`. The `subscribe` option in turn points to an HTML file that provides the ability to subscribe to your blog. For example:
+You can add HTML that enable readers to subscribe to your blog by including the `collections:posts:subscribe` option within `_site.yml`. The `subscribe` option in turn points to an HTML file that provides the ability to subscribe to your blog. For example:
 
 **\_site.yml**
 
