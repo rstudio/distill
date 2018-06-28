@@ -1,6 +1,5 @@
 
 
-- bias to RStudio New Project
 - change subscription example?
 
 - Addin or function: New blog post
