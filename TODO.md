@@ -1,6 +1,5 @@
 
 
-- comment and share on new article (no icons)
 - bias to RStudio New Project
 - change subscription example?
 
