@@ -13,14 +13,11 @@ Radix websites include integrated support for blogging. To create a blog you aut
 
 ### Creating a blog
 
-The easist way to get started with a blog is to call the Radix `create_blog()` function, which creates the basic scaffolding for a blog (2 pages, Home and About, as well as a simple welcome post).
+If you are using RStudio, the easiest way to get started is to use the  Radix Blog option in the RStudio **New Project** dialog:
 
-```r
-library(radix)
-create_blog(dir = "my-blog", title = "My Blog")
-```
+![](images/create-blog.png){width=95% .screenshot}
 
-The blog will be created within the `my-blog` sub-directory of the current working directory and will include the following files:
+A new [RStudio Project](https://support.rstudio.com/hc/en-us/articles/200526207-Using-Projects) for the blog will be created and opened. The blog will include the following files:
 
 | Option           | Description                                    |
 |------------------|------------------------------------------------|
@@ -32,12 +29,14 @@ The blog will be created within the `my-blog` sub-directory of the current worki
 Note that the `welcome` post is just there to provide some skeletal content for the blog -- feel free to delete it and add your own initial post to the blog as described in [creating a post].
 
 
-If you are using RStudio, you can also create a website using the Radix Blog option in the **New Project** dialog:
+If you are not using RStudio you can also call the Radix `create_blog()` function:
 
-![](images/create-blog.png){width=95% .screenshot}
+```r
+library(radix)
+create_blog(dir = "my-blog", title = "My Blog")
+```
 
-A new [RStudio Project](https://support.rstudio.com/hc/en-us/articles/200526207-Using-Projects) for the blog will be created and opened.
-
+The basic scaffolding for a blog and an initial welcome post will be created within the `my-blog` sub-directory.
 
 ### Configuration
 

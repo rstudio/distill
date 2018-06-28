@@ -15,14 +15,11 @@ Once you've created your website locally, there are a variety of ways available 
 
 ### Creating a website
 
-The easist way to get started with a website is to call the Radix `create_website()` function, which creates the basic scaffolding for a site with 2 pages (Home and About). For example:
+If you are using RStudio, the easist way to get started is to use the Radix Website option in the RStudio **New Project** dialog:
 
-```r
-library(radix)
-create_website(dir = "my-website", title = "My Website")
-```
+![](images/create-website.png){width=95% .screenshot}
 
-The website will be created within the `my-website` sub-directory of the current working directory and will include the following files:
+A new [RStudio Project](https://support.rstudio.com/hc/en-us/articles/200526207-Using-Projects) for the website will be created and opened. The website will include the following files:
 
 | Option           | Description                                    |
 |------------------|------------------------------------------------|
@@ -30,12 +27,15 @@ The website will be created within the `my-website` sub-directory of the current
 | `index.Rmd`      | Website home page.  |
 | `about.Rmd`     | Website about page. |
 
+If you are not using RStudio you can also call the Radix `create_website()` function:
 
-If you are using RStudio, you can also create a website using the Radix Website option in the **New Project** dialog:
+```r
+library(radix)
+create_website(dir = "my-website", title = "My Website")
+```
 
-![](images/create-website.png){width=95% .screenshot}
+A new website containing Home and About pages will be created within the `my-website` directory.
 
-A new [RStudio Project](https://support.rstudio.com/hc/en-us/articles/200526207-Using-Projects) for the website will be created and opened.
 
 ### Authoring articles
 

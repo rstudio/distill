@@ -366,9 +366,8 @@
   
   </style>
   
-  <link href="site_libs/font-awesome-5.0.13/css/fa-svg-with-js.css" rel="stylesheet"/>
-  <script src="site_libs/font-awesome-5.0.13/js/fontawesome-all.min.js"></script>
-  <script src="site_libs/font-awesome-5.0.13/js/fa-v4-shims.min.js"></script>
+  <link href="site_libs/font-awesome-5.1.0/css/all.css" rel="stylesheet"/>
+  <link href="site_libs/font-awesome-5.1.0/css/v4-shims.css" rel="stylesheet"/>
   <script src="site_libs/headroom-0.9.4/headroom.min.js"></script>
   <!--/radix_placeholder_navigation_in_header-->
   <!--radix_placeholder_distill-->
@@ -1229,11 +1228,9 @@ Publishing
 <p>Radix websites include integrated support for blogging. To create a blog you author a collection of posts (located in the <code>_posts</code> subdirectory of your website) and then dedicate a page (usually the website homepage) to a listing of all of your posts.</p>
 <h2 id="getting-started">Getting started</h2>
 <h3 id="creating-a-blog">Creating a blog</h3>
-<p>The easist way to get started with a blog is to call the Radix <code>create_blog()</code> function, which creates the basic scaffolding for a blog (2 pages, Home and About, as well as a simple welcome post).</p>
-<pre class="r"><code>
-library(radix)
-create_blog(dir = &quot;my-blog&quot;, title = &quot;My Blog&quot;)</code></pre>
-<p>The blog will be created within the <code>my-blog</code> sub-directory of the current working directory and will include the following files:</p>
+<p>If you are using RStudio, the easiest way to get started is to use the Radix Blog option in the RStudio <strong>New Project</strong> dialog:</p>
+<p><img src="images/create-blog.png" class="screenshot" style="width:95.0%" /></p>
+<p>A new <a href="https://support.rstudio.com/hc/en-us/articles/200526207-Using-Projects">RStudio Project</a> for the blog will be created and opened. The blog will include the following files:</p>
 <table>
 <thead>
 <tr class="header">
@@ -1261,9 +1258,11 @@ create_blog(dir = &quot;my-blog&quot;, title = &quot;My Blog&quot;)</code></pre>
 </tbody>
 </table>
 <p>Note that the <code>welcome</code> post is just there to provide some skeletal content for the blog – feel free to delete it and add your own initial post to the blog as described in <a href="#creating-a-post">creating a post</a>.</p>
-<p>If you are using RStudio, you can also create a website using the Radix Blog option in the <strong>New Project</strong> dialog:</p>
-<p><img src="images/create-blog.png" class="screenshot" style="width:95.0%" /></p>
-<p>A new <a href="https://support.rstudio.com/hc/en-us/articles/200526207-Using-Projects">RStudio Project</a> for the blog will be created and opened.</p>
+<p>If you are not using RStudio you can also call the Radix <code>create_blog()</code> function:</p>
+<pre class="r"><code>
+library(radix)
+create_blog(dir = &quot;my-blog&quot;, title = &quot;My Blog&quot;)</code></pre>
+<p>The basic scaffolding for a blog and an initial welcome post will be created within the <code>my-blog</code> sub-directory.</p>
 <h3 id="configuration">Configuration</h3>
 <p>After you’ve created the blog scafoolding, there are a couple of additional configuration items you’ll want to add to your <code>_site.yml</code> so that it’s easier to share content on the blog via RSS and social networks like Twitter:</p>
 <ul>
@@ -1411,7 +1410,7 @@ _posts/
   2017-11-09-visualizing-asset-returns/
   2017-09-13-asset-volatility/
   2017-03-07-quandl-and-forecasting/
-  2016-11-08-sharpe_ratio/</code></pre>
+  2016-11-08-sharpe-ratio/</code></pre>
 <p>The benefits of this scheme are that post names are given additional uniqueness (to guard against colliding names over the long term) and are also automatically listed in order when browsing the <code>_posts</code> directory.</p>
 <p>Note that if you use a date-prefixed post directory you are not required to specify an explicit <code>date</code> field within your post’s metadata.</p>
 <h3 id="preview-images">Preview images</h3>

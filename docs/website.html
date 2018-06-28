@@ -366,9 +366,8 @@
   
   </style>
   
-  <link href="site_libs/font-awesome-5.0.13/css/fa-svg-with-js.css" rel="stylesheet"/>
-  <script src="site_libs/font-awesome-5.0.13/js/fontawesome-all.min.js"></script>
-  <script src="site_libs/font-awesome-5.0.13/js/fa-v4-shims.min.js"></script>
+  <link href="site_libs/font-awesome-5.1.0/css/all.css" rel="stylesheet"/>
+  <link href="site_libs/font-awesome-5.1.0/css/v4-shims.css" rel="stylesheet"/>
   <script src="site_libs/headroom-0.9.4/headroom.min.js"></script>
   <!--/radix_placeholder_navigation_in_header-->
   <!--radix_placeholder_distill-->
@@ -1226,11 +1225,9 @@ Publishing
 <p>Once you’ve created your website locally, there are a variety of ways available to <a href="publish_website.html">publish your site</a> to the web.</p>
 <h2 id="getting-started">Getting started</h2>
 <h3 id="creating-a-website">Creating a website</h3>
-<p>The easist way to get started with a website is to call the Radix <code>create_website()</code> function, which creates the basic scaffolding for a site with 2 pages (Home and About). For example:</p>
-<pre class="r"><code>
-library(radix)
-create_website(dir = &quot;my-website&quot;, title = &quot;My Website&quot;)</code></pre>
-<p>The website will be created within the <code>my-website</code> sub-directory of the current working directory and will include the following files:</p>
+<p>If you are using RStudio, the easist way to get started is to use the Radix Website option in the RStudio <strong>New Project</strong> dialog:</p>
+<p><img src="images/create-website.png" class="screenshot" style="width:95.0%" /></p>
+<p>A new <a href="https://support.rstudio.com/hc/en-us/articles/200526207-Using-Projects">RStudio Project</a> for the website will be created and opened. The website will include the following files:</p>
 <table>
 <thead>
 <tr class="header">
@@ -1253,8 +1250,11 @@ create_website(dir = &quot;my-website&quot;, title = &quot;My Website&quot;)</co
 </tr>
 </tbody>
 </table>
-<p>If you are using RStudio, you can also create a website using the Radix Website option in the <strong>New Project</strong> dialog:</p>
-<p><img src="images/create-website.png" class="screenshot" style="width:95.0%" /></p>
+<p>If you are not using RStudio you can also call the Radix <code>create_website()</code> function:</p>
+<pre class="r"><code>
+library(radix)
+create_website(dir = &quot;my-website&quot;, title = &quot;My Website&quot;)</code></pre>
+<p>A new website containing Home and About pages will be created within the <code>my-website</code> directory.</p>
 <h3 id="authoring-articles">Authoring articles</h3>
 <p>When you use the RStudio <strong>Knit</strong> command on a Radix article within a website, only that article will be rendered and previewed:</p>
 <p><img src="images/knit-site-article.png" class="screenshot" style="width:95.0%" /></p>
