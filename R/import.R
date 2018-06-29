@@ -79,12 +79,66 @@ import_article <- function(url, collection, slug = "auto", date_prefix = FALSE,
   # create the article dir
   dir.create(article_dir, recursive = TRUE)
 
-  # save the article into it
-  file.copy(
-    article_tmp,
-    file.path(article_dir, "index.html")
-  )
+  # compute the base url path for downloads
+  base_url <- url
+  if (grepl("\\.html?$", url, ignore.case = TRUE))
+    base_url <- dirname(url)
+  base_url <- ensure_trailing_slash(base_url)
 
+  # get site_libs references
+  index_content <- readChar(article_tmp,
+                            nchars = file.info(article_tmp)$size,
+                            useBytes = TRUE)
+  pattern <- '"[\\./]+site_libs/([^"]+)"'
+  match <- gregexpr(pattern, index_content, useBytes = TRUE)
+  site_libs <- gsub('"', '', regmatches(index_content, match)[[1]])
+  site_libs <- unique(lapply(strsplit(site_libs, split = "site_libs/", fixed = TRUE),
+    function(lib) {
+      name = strsplit(lib[[2]], split = "/")[[1]][[1]]
+      list(
+        name = name,
+        url = url_path(base_url, lib[[1]], "site_libs", name)
+      )
+    }
+  ))
+
+
+  # extract the manifest
+  manifest <- extract_manifest(article_tmp)
+
+  # download the files in the manifest
+  for (file in manifest) {
+
+    # ensure the destination directory exists
+    destination <- file.path(article_dir, file)
+    destination_dir <- dirname(destination)
+    if (!dir_exists(destination_dir))
+      dir.create(destination_dir, recursive = TRUE)
+
+    # the file might be found in site_libs, in that case download from site_libs/
+    download_url <- url_path(url, file)
+    for (site_lib in site_libs) {
+      lib_pattern <- sprintf("_files/%s/", site_lib$name)
+      if (grepl(lib_pattern, file, fixed = TRUE)) {
+        download_url <- url_path(site_lib$url,
+                                 strsplit(file, lib_pattern, fixed = TRUE)[[1]][[2]])
+      }
+    }
+
+    # perform the download
+    downloader::download(download_url, destination)
+  }
+
+  # write the index file
+  writeLines(index_content, file.path(article_dir, "index.html"), useBytes = TRUE)
+
+  # TODO: make download more transactional (write to tmp)
+
+  # TODO: fixup site_libs to point back to _files
+  # TODO: tolerate no manifest for self_contained
+  # TODO: error on website page w/o manifest
+
+  # TODO: check for manifest
   # TODO: download resource files via manifest
   # TODO: fixup ../../site_dir after download
   # TODO render just the imported article automatically
@@ -96,4 +150,5 @@ import_article <- function(url, collection, slug = "auto", date_prefix = FALSE,
 
   # return nothing
   invisible(NULL)
+
 }

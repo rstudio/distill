@@ -15,6 +15,9 @@ manifest_in_header <- function(site_config, input_file, metadata, self_contained
       exclude <- NULL
     }
 
+    # add base html file to exclude (as it will be renamed to index.html)
+    exclude <- c(exclude, file_with_ext(input_file, "html"))
+
     # enumerate resources
     resources <- site_resources(
       site_dir = dirname(input_file),

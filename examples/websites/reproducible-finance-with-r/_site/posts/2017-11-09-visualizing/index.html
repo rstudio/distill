@@ -1,0 +1,1417 @@
+<!DOCTYPE html>
+
+<html xmlns="http://www.w3.org/1999/xhtml" lang="" xml:lang="">
+
+<head>
+  <meta charset="utf-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta http-equiv="X-UA-Compatible" content="IE=Edge,chrome=1"/>
+  <meta name="generator" content="radix" />
+
+  <style type="text/css">
+  /* Hide doc at startup (prevent jankiness while JS renders/transforms) */
+  body {
+    visibility: hidden;
+  }
+  </style>
+
+  <!--radix_placeholder_meta_tags-->
+<title>Reproducible Finance with R: Visualizing Asset Returns</title>
+
+<meta property="description" itemprop="description" content="In this post we take a closer look at the individual assets which compose a portfolio. The motivation is to make sure we have scrutinized our assets before they get into our portfolio, as once the portfolio has been constructed, it is tempting to keep the analysis at the portfolio level &#10;"/>
+
+<link rel="license" href="https://creativecommons.org/licenses/by/4.0/"/>
+<link rel="icon" type="image/png" href="images/favicon.png"/>
+
+<!--  https://schema.org/Article -->
+<meta property="article:published" itemprop="datePublished" content="2017-11-09"/>
+<meta property="article:created" itemprop="dateCreated" content="2017-11-09"/>
+<meta name="article:author" content="Jonathan Regenstein"/>
+
+<!--  https://developers.facebook.com/docs/sharing/webmasters#markup -->
+<meta property="og:title" content="Reproducible Finance with R: Visualizing Asset Returns"/>
+<meta property="og:type" content="article"/>
+<meta property="og:description" content="In this post we take a closer look at the individual assets which compose a portfolio. The motivation is to make sure we have scrutinized our assets before they get into our portfolio, as once the portfolio has been constructed, it is tempting to keep the analysis at the portfolio level &#10;"/>
+<meta property="og:image" content="https://beta.rstudioconnect.com/content/3776/posts/2017-11-09-visualizing/visualizing-asset-returns_files/figure-html5/unnamed-chunk-9-1.png"/>
+<meta property="og:image:width" content="1152"/>
+<meta property="og:image:height" content="576"/>
+<meta property="og:locale" content="en_US"/>
+<meta property="og:site_name" content="Reproducible Finance with R"/>
+
+<!--  https://dev.twitter.com/cards/types/summary -->
+<meta property="twitter:card" content="summary_large_image"/>
+<meta property="twitter:title" content="Reproducible Finance with R: Visualizing Asset Returns"/>
+<meta property="twitter:description" content="In this post we take a closer look at the individual assets which compose a portfolio. The motivation is to make sure we have scrutinized our assets before they get into our portfolio, as once the portfolio has been constructed, it is tempting to keep the analysis at the portfolio level &#10;"/>
+<meta property="twitter:image" content="https://beta.rstudioconnect.com/content/3776/posts/2017-11-09-visualizing/visualizing-asset-returns_files/figure-html5/unnamed-chunk-9-1.png"/>
+<meta property="twitter:image:width" content="1152"/>
+<meta property="twitter:image:height" content="576"/>
+
+<!--/radix_placeholder_meta_tags-->
+  
+  <script type="text/json" id="radix-rmarkdown-metadata">
+  {"type":"list","attributes":{"names":{"type":"character","attributes":{},"value":["title","description","author","date","categories","output"]}},"value":[{"type":"character","attributes":{},"value":["Visualizing Asset Returns"]},{"type":"character","attributes":{},"value":["In this post we take a closer look at the individual assets which compose a portfolio. The motivation is to make sure we have scrutinized our assets before they get into our portfolio, as once the portfolio has been constructed, it is tempting to keep the analysis at the portfolio level \n"]},{"type":"list","attributes":{},"value":[{"type":"list","attributes":{"names":{"type":"character","attributes":{},"value":["name","url","affiliation","affiliation_url"]}},"value":[{"type":"character","attributes":{},"value":["Jonathan Regenstein"]},{"type":"character","attributes":{},"value":["https://www.linkedin.com/in/jkregenstein/"]},{"type":"character","attributes":{},"value":["RStudio"]},{"type":"character","attributes":{},"value":["https://www.rstudio.com"]}]}]},{"type":"character","attributes":{},"value":["11-09-2017"]},{"type":"character","attributes":{},"value":["portfolios","highcharts"]},{"type":"list","attributes":{"names":{"type":"character","attributes":{},"value":["radix::radix_article"]}},"value":[{"type":"list","attributes":{"names":{"type":"character","attributes":{},"value":["self_contained"]}},"value":[{"type":"logical","attributes":{},"value":[false]}]}]}]}
+  </script>
+  
+  <script type="text/json" id="radix-resource-manifest">
+  {"type":"character","attributes":{},"value":["radix-preview.png","visualizing-asset-returns_files/bowser-1.9.3/bowser.min.js","visualizing-asset-returns_files/distill-2.2.21/template.v2.js","visualizing-asset-returns_files/figure-html5/unnamed-chunk-5-1.png","visualizing-asset-returns_files/figure-html5/unnamed-chunk-6-1.png","visualizing-asset-returns_files/figure-html5/unnamed-chunk-7-1.png","visualizing-asset-returns_files/figure-html5/unnamed-chunk-8-1.png","visualizing-asset-returns_files/figure-html5/unnamed-chunk-9-1.png","visualizing-asset-returns_files/fontawesome-4.5.0/font-awesome.min.css","visualizing-asset-returns_files/fontawesome-4.5.0/fonts/fontawesome-webfont.eot","visualizing-asset-returns_files/fontawesome-4.5.0/fonts/fontawesome-webfont.svg","visualizing-asset-returns_files/fontawesome-4.5.0/fonts/fontawesome-webfont.ttf","visualizing-asset-returns_files/fontawesome-4.5.0/fonts/fontawesome-webfont.woff","visualizing-asset-returns_files/fontawesome-4.5.0/fonts/fontawesome-webfont.woff2","visualizing-asset-returns_files/fontawesome-4.5.0/fonts/FontAwesome.otf","visualizing-asset-returns_files/highchart-binding-0.5.0/highchart.js","visualizing-asset-returns_files/highchart-binding-0.5.0/highchart.yaml","visualizing-asset-returns_files/highchart-binding-0.5.0/highchart2.js","visualizing-asset-returns_files/highchart-binding-0.5.0/highchart2.yaml","visualizing-asset-returns_files/highchart-binding-0.5.0/lib/font-awesome-4.5.0/font-awesome.min.css","visualizing-asset-returns_files/highchart-binding-0.5.0/lib/font-awesome-4.5.0/fonts/fontawesome-webfont.eot","visualizing-asset-returns_files/highchart-binding-0.5.0/lib/font-awesome-4.5.0/fonts/fontawesome-webfont.svg","visualizing-asset-returns_files/highchart-binding-0.5.0/lib/font-awesome-4.5.0/fonts/fontawesome-webfont.ttf","visualizing-asset-returns_files/highchart-binding-0.5.0/lib/font-awesome-4.5.0/fonts/fontawesome-webfont.woff","visualizing-asset-returns_files/highchart-binding-0.5.0/lib/font-awesome-4.5.0/fonts/fontawesome-webfont.woff2","visualizing-asset-returns_files/highchart-binding-0.5.0/lib/font-awesome-4.5.0/fonts/FontAwesome.otf","visualizing-asset-returns_files/highchart-binding-0.5.0/lib/highcharts-5.0.6/css/motion.css","visualizing-asset-returns_files/highchart-binding-0.5.0/lib/highcharts-5.0.6/custom/reset.js","visualizing-asset-returns_files/highchart-binding-0.5.0/lib/highcharts-5.0.6/custom/symbols-extra.js","visualizing-asset-returns_files/highchart-binding-0.5.0/lib/highcharts-5.0.6/custom/text-symbols.js","visualizing-asset-returns_files/highchart-binding-0.5.0/lib/highcharts-5.0.6/highcharts-3d.js","visualizing-asset-returns_files/highchart-binding-0.5.0/lib/highcharts-5.0.6/highcharts-more.js","visualizing-asset-returns_files/highchart-binding-0.5.0/lib/highcharts-5.0.6/highcharts.js","visualizing-asset-returns_files/highchart-binding-0.5.0/lib/highcharts-5.0.6/highstock.js","visualizing-asset-returns_files/highchart-binding-0.5.0/lib/highcharts-5.0.6/modules/accessibility.js","visualizing-asset-returns_files/highchart-binding-0.5.0/lib/highcharts-5.0.6/modules/annotations.js","visualizing-asset-returns_files/highchart-binding-0.5.0/lib/highcharts-5.0.6/modules/boost.js","visualizing-asset-returns_files/highchart-binding-0.5.0/lib/highcharts-5.0.6/modules/broken-axis.js","visualizing-asset-returns_files/highchart-binding-0.5.0/lib/highcharts-5.0.6/modules/canvas-tools.js","visualizing-asset-returns_files/highchart-binding-0.5.0/lib/highcharts-5.0.6/modules/data.js","visualizing-asset-returns_files/highchart-binding-0.5.0/lib/highcharts-5.0.6/modules/drilldown.js","visualizing-asset-returns_files/highchart-binding-0.5.0/lib/highcharts-5.0.6/modules/exporting.js","visualizing-asset-returns_files/highchart-binding-0.5.0/lib/highcharts-5.0.6/modules/funnel.js","visualizing-asset-returns_files/highchart-binding-0.5.0/lib/highcharts-5.0.6/modules/heatmap.js","visualizing-asset-returns_files/highchart-binding-0.5.0/lib/highcharts-5.0.6/modules/map.js","visualizing-asset-returns_files/highchart-binding-0.5.0/lib/highcharts-5.0.6/modules/no-data-to-display.js","visualizing-asset-returns_files/highchart-binding-0.5.0/lib/highcharts-5.0.6/modules/offline-exporting.js","visualizing-asset-returns_files/highchart-binding-0.5.0/lib/highcharts-5.0.6/modules/solid-gauge.js","visualizing-asset-returns_files/highchart-binding-0.5.0/lib/highcharts-5.0.6/modules/treemap.js","visualizing-asset-returns_files/highchart-binding-0.5.0/lib/highcharts-5.0.6/plugins/annotations.js","visualizing-asset-returns_files/highchart-binding-0.5.0/lib/highcharts-5.0.6/plugins/draggable-legend.js","visualizing-asset-returns_files/highchart-binding-0.5.0/lib/highcharts-5.0.6/plugins/draggable-points.js","visualizing-asset-returns_files/highchart-binding-0.5.0/lib/highcharts-5.0.6/plugins/export-csv.js","visualizing-asset-returns_files/highchart-binding-0.5.0/lib/highcharts-5.0.6/plugins/grouped-categories.js","visualizing-asset-returns_files/highchart-binding-0.5.0/lib/highcharts-5.0.6/plugins/motion.js","visualizing-asset-returns_files/highchart-binding-0.5.0/lib/highcharts-5.0.6/plugins/pattern-fill-v2.js","visualizing-asset-returns_files/highchart-binding-0.5.0/lib/highcharts-5.0.6/plugins/tooltip-delay.js","visualizing-asset-returns_files/highchart-binding-0.5.0/lib/htmlwdgtgrid/htmlwdgtgrid.css","visualizing-asset-returns_files/highchart-binding-0.5.0/lib/jquery/jquery.min.js","visualizing-asset-returns_files/highchart-binding-0.5.0/lib/proj4js/proj4.js","visualizing-asset-returns_files/highcharts-5.0.6/css/motion.css","visualizing-asset-returns_files/highcharts-5.0.6/custom/reset.js","visualizing-asset-returns_files/highcharts-5.0.6/custom/symbols-extra.js","visualizing-asset-returns_files/highcharts-5.0.6/custom/text-symbols.js","visualizing-asset-returns_files/highcharts-5.0.6/highcharts-3d.js","visualizing-asset-returns_files/highcharts-5.0.6/highcharts-more.js","visualizing-asset-returns_files/highcharts-5.0.6/highcharts.js","visualizing-asset-returns_files/highcharts-5.0.6/highstock.js","visualizing-asset-returns_files/highcharts-5.0.6/modules/accessibility.js","visualizing-asset-returns_files/highcharts-5.0.6/modules/annotations.js","visualizing-asset-returns_files/highcharts-5.0.6/modules/boost.js","visualizing-asset-returns_files/highcharts-5.0.6/modules/broken-axis.js","visualizing-asset-returns_files/highcharts-5.0.6/modules/canvas-tools.js","visualizing-asset-returns_files/highcharts-5.0.6/modules/data.js","visualizing-asset-returns_files/highcharts-5.0.6/modules/drilldown.js","visualizing-asset-returns_files/highcharts-5.0.6/modules/exporting.js","visualizing-asset-returns_files/highcharts-5.0.6/modules/funnel.js","visualizing-asset-returns_files/highcharts-5.0.6/modules/heatmap.js","visualizing-asset-returns_files/highcharts-5.0.6/modules/map.js","visualizing-asset-returns_files/highcharts-5.0.6/modules/no-data-to-display.js","visualizing-asset-returns_files/highcharts-5.0.6/modules/offline-exporting.js","visualizing-asset-returns_files/highcharts-5.0.6/modules/solid-gauge.js","visualizing-asset-returns_files/highcharts-5.0.6/modules/treemap.js","visualizing-asset-returns_files/highcharts-5.0.6/plugins/annotations.js","visualizing-asset-returns_files/highcharts-5.0.6/plugins/draggable-legend.js","visualizing-asset-returns_files/highcharts-5.0.6/plugins/draggable-points.js","visualizing-asset-returns_files/highcharts-5.0.6/plugins/export-csv.js","visualizing-asset-returns_files/highcharts-5.0.6/plugins/grouped-categories.js","visualizing-asset-returns_files/highcharts-5.0.6/plugins/motion.js","visualizing-asset-returns_files/highcharts-5.0.6/plugins/pattern-fill-v2.js","visualizing-asset-returns_files/highcharts-5.0.6/plugins/tooltip-delay.js","visualizing-asset-returns_files/htmlwdgtgrid-1/htmlwdgtgrid.css","visualizing-asset-returns_files/htmlwidgets-1.2/htmlwidgets.js","visualizing-asset-returns_files/jquery-1.11.3/jquery.min.js","visualizing-asset-returns_files/proj4js-2.3.15/proj4.js","visualizing-asset-returns_files/webcomponents-2.0.0/webcomponents.js"]}
+  </script>
+  <!--radix_placeholder_navigation_in_header-->
+
+<script type="application/javascript">
+
+  window.headroom_prevent_pin = false;
+
+  window.document.addEventListener("DOMContentLoaded", function (event) {
+
+    // initialize headroom for banner
+    var header = $('header').get(0);
+    var headerHeight = header.offsetHeight;
+    var headroom = new Headroom(header, {
+      onPin : function() {
+        if (window.headroom_prevent_pin) {
+          window.headroom_prevent_pin = false;
+          headroom.unpin();
+        }
+      }
+    });
+    headroom.init();
+    if(window.location.hash)
+      headroom.unpin();
+    $(header).addClass('headroom--transition');
+
+    // offset scroll location for banner on hash change
+    // (see: https://github.com/WickyNilliams/headroom.js/issues/38)
+    window.addEventListener("hashchange", function(event) {
+      window.scrollTo(0, window.pageYOffset - (headerHeight + 25));
+    });
+
+    // responsive menu
+    $('.radix-site-header').each(function(i, val) {
+      var topnav = $(this);
+      var toggle = topnav.find('.nav-toggle');
+      toggle.on('click', function() {
+        topnav.toggleClass('responsive');
+      });
+    });
+
+    // nav dropdowns
+    $('.nav-dropbtn').click(function(e) {
+      $(this).next('.nav-dropdown-content').toggleClass('nav-dropdown-active');
+      $(this).parent().siblings('.nav-dropdown')
+         .children('.nav-dropdown-content').removeClass('nav-dropdown-active');
+    });
+    $("body").click(function(e){
+      $('.nav-dropdown-content').removeClass('nav-dropdown-active');
+    });
+    $(".nav-dropdown").click(function(e){
+      e.stopPropagation();
+    });
+  });
+</script>
+
+<style type="text/css">
+
+/* Theme (user-documented overrideables for nav appearance) */
+
+.radix-site-nav {
+  color: rgba(255, 255, 255, 0.8);
+  background-color: #455a64;
+  font-size: 15px;
+  font-weight: 300;
+}
+
+.radix-site-nav a {
+  color: inherit;
+  text-decoration: none;
+}
+
+.radix-site-nav a:hover {
+  color: white;
+}
+
+@media print {
+  .radix-site-nav {
+    display: none;
+  }
+}
+
+.radix-site-header {
+
+}
+
+.radix-site-footer {
+
+}
+
+
+/* Site Header */
+
+.radix-site-header {
+  width: 100%;
+  box-sizing: border-box;
+  z-index: 3;
+}
+
+.radix-site-header .nav-left {
+  display: inline-block;
+  margin-left: 8px;
+}
+
+@media screen and (max-width: 768px) {
+  .radix-site-header .nav-left {
+    margin-left: 0;
+  }
+}
+
+
+.radix-site-header .nav-right {
+  float: right;
+  margin-right: 8px;
+}
+
+.radix-site-header a,
+.radix-site-header .title {
+  display: inline-block;
+  text-align: center;
+  padding: 14px 10px 14px 10px;
+}
+
+.radix-site-header .title {
+  font-size: 18px;
+}
+
+.radix-site-header .logo {
+  padding: 0;
+}
+
+.radix-site-header .logo img {
+  display: none;
+  max-height: 20px;
+  width: auto;
+  margin-bottom: -4px;
+}
+
+.radix-site-header .nav-image img {
+  max-height: 18px;
+  width: auto;
+  display: inline-block;
+  margin-bottom: -3px;
+}
+
+
+
+@media screen and (min-width: 1000px) {
+  .radix-site-header .logo img {
+    display: inline-block;
+  }
+  .radix-site-header .nav-left {
+    margin-left: 20px;
+  }
+  .radix-site-header .nav-right {
+    margin-right: 20px;
+  }
+  .radix-site-header .title {
+    padding-left: 12px;
+  }
+}
+
+
+.radix-site-header .nav-toggle {
+  display: none;
+}
+
+.nav-dropdown {
+  display: inline-block;
+  position: relative;
+}
+
+.nav-dropdown .nav-dropbtn {
+  border: none;
+  outline: none;
+  color: rgba(255, 255, 255, 0.8);
+  padding: 16px 10px;
+  background-color: transparent;
+  font-family: inherit;
+  font-size: inherit;
+  font-weight: inherit;
+  margin: 0;
+  margin-top: 1px;
+  z-index: 2;
+}
+
+.nav-dropdown-content {
+  display: none;
+  position: absolute;
+  background-color: white;
+  min-width: 200px;
+  border: 1px solid rgba(0,0,0,0.15);
+  border-radius: 4px;
+  box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.1);
+  z-index: 1;
+  margin-top: 2px;
+  white-space: nowrap;
+  padding-top: 4px;
+  padding-bottom: 4px;
+}
+
+.nav-dropdown-content hr {
+  margin-top: 4px;
+  margin-bottom: 4px;
+  border: none;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+}
+
+.nav-dropdown-active {
+  display: block;
+}
+
+.nav-dropdown-content a {
+  color: black;
+  padding: 6px 24px;
+  text-decoration: none;
+  display: block;
+  text-align: left;
+}
+
+.nav-dropdown:hover .nav-dropbtn {
+  color: white;
+}
+
+.nav-dropdown-content a:hover {
+  background-color: #ddd;
+  color: black;
+}
+
+.nav-right .nav-dropdown-content {
+  margin-left: -45%;
+  right: 0;
+}
+
+@media screen and (max-width: 768px) {
+  .radix-site-header a, .radix-site-header .nav-dropdown  {display: none;}
+  .radix-site-header a.nav-toggle {
+    float: right;
+    display: block;
+  }
+  .radix-site-header .title {
+    margin-left: 0;
+  }
+  .radix-site-header .nav-right {
+    margin-right: 0;
+  }
+  .radix-site-header {
+    overflow: hidden;
+  }
+  .nav-right .nav-dropdown-content {
+    margin-left: 0;
+  }
+}
+
+
+@media screen and (max-width: 768px) {
+  .radix-site-header.responsive {position: relative;}
+  .radix-site-header.responsive a.nav-toggle {
+    position: absolute;
+    right: 0;
+    top: 0;
+  }
+  .radix-site-header.responsive a,
+  .radix-site-header.responsive .nav-dropdown {
+    display: block;
+    text-align: left;
+  }
+  .radix-site-header.responsive .nav-left,
+  .radix-site-header.responsive .nav-right {
+    width: 100%;
+  }
+  .radix-site-header.responsive .nav-dropdown {float: none;}
+  .radix-site-header.responsive .nav-dropdown-content {position: relative;}
+  .radix-site-header.responsive .nav-dropdown .nav-dropbtn {
+    display: block;
+    width: 100%;
+    text-align: left;
+  }
+}
+
+/* Site Footer */
+
+.radix-site-footer {
+  width: 100%;
+  overflow: hidden;
+  box-sizing: border-box;
+  z-index: 3;
+  margin-top: 30px;
+  padding-top: 30px;
+  padding-bottom: 30px;
+  text-align: center;
+}
+
+/* Headroom */
+
+d-title {
+  padding-top: 6rem;
+}
+
+@media print {
+  d-title {
+    padding-top: 4rem;
+  }
+}
+
+.headroom {
+  z-index: 1000;
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+}
+
+.headroom--transition {
+  transition: all .4s ease-in-out;
+}
+
+.headroom--unpinned {
+  top: -100px;
+}
+
+.headroom--pinned {
+  top: 0;
+}
+
+</style>
+
+<link href="../../site_libs/font-awesome-5.1.0/css/all.css" rel="stylesheet"/>
+<link href="../../site_libs/font-awesome-5.1.0/css/v4-shims.css" rel="stylesheet"/>
+<script src="../../site_libs/headroom-0.9.4/headroom.min.js"></script>
+<!--/radix_placeholder_navigation_in_header-->
+  <!--radix_placeholder_distill-->
+
+<style type="text/css">
+
+body {
+  background-color: white;
+}
+
+.pandoc-table {
+  width: 100%;
+}
+
+.pandoc-table th:not([align]) {
+  text-align: left;
+}
+
+.pagedtable-footer {
+  font-size: 15px;
+}
+
+.html-widget {
+  margin-bottom: 2.0em;
+}
+
+.l-screen-inset {
+  padding-right: 16px;
+}
+
+.text-output {
+  margin-top: 0;
+  line-height: 1.5em;
+}
+
+.hidden {
+  display: none !important;
+}
+
+d-article {
+  padding-bottom: 30px;
+}
+
+d-appendix {
+  padding-top: 30px;
+}
+
+figure img.external {
+  background: white;
+  border: 1px solid rgba(0, 0, 0, 0.1);
+  box-shadow: 0 1px 8px rgba(0, 0, 0, 0.1);
+  padding: 18px;
+  box-sizing: border-box;
+}
+
+/* CSS for table of contents */
+
+.d-toc {
+  color: rgba(0,0,0,0.8);
+  font-size: 0.8em;
+  line-height: 1em;
+}
+
+.d-toc-header {
+  font-size: 0.6rem;
+  font-weight: 400;
+  color: rgba(0, 0, 0, 0.5);
+  text-transform: uppercase;
+  margin-top: 0;
+  margin-bottom: 1.3em;
+}
+
+.d-toc a {
+  border-bottom: none;
+}
+
+.d-toc ul {
+  padding-left: 0;
+}
+
+.d-toc li>ul {
+  padding-top: 0.8em;
+  padding-left: 16px;
+  margin-bottom: 0.6em;
+}
+
+.d-toc ul,
+.d-toc li {
+  list-style-type: none;
+}
+
+.d-toc li {
+  margin-bottom: 0.9em;
+}
+
+.d-toc-separator {
+  margin-top: 20px;
+  margin-bottom: 2em;
+}
+
+.d-article-with-toc {
+  border-top: none;
+  padding-top: 0;
+}
+
+
+
+/* Tweak code blocks (note that this CSS is repeated above in an injection
+   into the d-code shadow dom) */
+
+pre.d-code code.d-code {
+  padding-left: 10px;
+  font-size: 12px;
+  border-left: 2px solid rgba(0,0,0,0.1);
+}
+
+pre.text-output {
+
+  font-size: 12px;
+  color: black;
+  background: none;
+  font-family: Consolas, Monaco, 'Andale Mono', 'Ubuntu Mono', monospace;
+  text-align: left;
+  white-space: pre;
+  word-spacing: normal;
+  word-break: normal;
+  word-wrap: normal;
+  line-height: 1.5;
+
+  -moz-tab-size: 4;
+  -o-tab-size: 4;
+  tab-size: 4;
+
+  -webkit-hyphens: none;
+  -moz-hyphens: none;
+  -ms-hyphens: none;
+  hyphens: none;
+}
+
+@media(min-width: 768px) {
+pre.d-code code.d-code  {
+    padding-left: 18px;
+    font-size: 14px;
+}
+pre.text-output {
+  font-size: 14px;
+}
+}
+
+/* Tweak 1000px media break to show more text */
+
+@media(min-width: 1000px) {
+  .base-grid,
+  distill-header,
+  d-title,
+  d-abstract,
+  d-article,
+  d-appendix,
+  distill-appendix,
+  d-byline,
+  d-footnote-list,
+  d-citation-list,
+  distill-footer {
+    grid-template-columns: [screen-start] 1fr [page-start kicker-start] 80px [middle-start] 50px [text-start kicker-end] 65px 65px 65px 65px 65px 65px 65px 65px [text-end gutter-start] 65px [middle-end] 65px [page-end gutter-end] 1fr [screen-end];
+    grid-column-gap: 16px;
+  }
+
+  .grid {
+    grid-column-gap: 16px;
+  }
+
+  d-article {
+    font-size: 1.06rem;
+    line-height: 1.7em;
+  }
+  figure .caption {
+    font-size: 13px;
+  }
+}
+
+
+/* Get the citation styles for the appendix (not auto-injected on render since
+   we do our own rendering of the citation appendix) */
+
+d-appendix .citation-appendix,
+.d-appendix .citation-appendix {
+  font-size: 11px;
+  line-height: 15px;
+  border-left: 1px solid rgba(0, 0, 0, 0.1);
+  padding-left: 18px;
+  border: 1px solid rgba(0,0,0,0.1);
+  background: rgba(0, 0, 0, 0.02);
+  padding: 10px 18px;
+  border-radius: 3px;
+  color: rgba(150, 150, 150, 1);
+  overflow: hidden;
+  margin-top: -12px;
+  white-space: pre-wrap;
+  word-wrap: break-word;
+}
+
+
+/* Social footer */
+
+.social_footer {
+  margin-top: 30px;
+  margin-bottom: 0;
+  color: rgba(0,0,0,0.67);
+}
+
+.disqus-comments {
+  margin-right: 30px;
+}
+
+.disqus-comment-count {
+  border-bottom: 1px solid rgba(0, 0, 0, 0.4);
+  cursor: pointer;
+}
+
+#disqus_thread {
+  margin-top: 30px;
+}
+
+.article-sharing a {
+  border-bottom: none;
+  margin-right: 8px;
+}
+
+.article-sharing a:hover {
+  border-bottom: none;
+}
+
+.sidebar-section.subscribe {
+  font-size: 12px;
+  line-height: 1.6em;
+}
+
+.subscribe p {
+  margin-bottom: 0.5em;
+}
+
+
+.article-footer .subscribe {
+  font-size: 15px;
+  margin-top: 45px;
+}
+
+
+/* Improve display for browsers without grid (IE/Edge <= 15) */
+
+.downlevel {
+  line-height: 1.6em;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen, Ubuntu, Cantarell, "Fira Sans", "Droid Sans", "Helvetica Neue", Arial, sans-serif;
+  margin: 0;
+}
+
+.downlevel .d-title {
+  padding-top: 6rem;
+  padding-bottom: 1.5rem;
+}
+
+.downlevel .d-title h1 {
+  font-size: 50px;
+  font-weight: 700;
+  line-height: 1.1em;
+  margin: 0 0 0.5rem;
+}
+
+.downlevel .d-title p {
+  font-weight: 300;
+  font-size: 1.2rem;
+  line-height: 1.55em;
+  margin-top: 0;
+}
+
+.downlevel .d-byline {
+  padding-top: 0.8em;
+  padding-bottom: 0.8em;
+  font-size: 0.8rem;
+  line-height: 1.8em;
+}
+
+.downlevel .section-separator {
+  border: none;
+  border-top: 1px solid rgba(0, 0, 0, 0.1);
+}
+
+.downlevel .d-article {
+  font-size: 1.06rem;
+  line-height: 1.7em;
+  padding-top: 1rem;
+  padding-bottom: 2rem;
+}
+
+
+.downlevel .d-appendix {
+  padding-left: 0;
+  padding-right: 0;
+  max-width: none;
+  font-size: 0.8em;
+  line-height: 1.7em;
+  margin-bottom: 0;
+  color: rgba(0,0,0,0.5);
+  padding-top: 40px;
+  padding-bottom: 48px;
+}
+
+.downlevel .footnotes ol {
+  padding-left: 13px;
+}
+
+.downlevel .base-grid,
+.downlevel .distill-header,
+.downlevel .d-title,
+.downlevel .d-abstract,
+.downlevel .d-article,
+.downlevel .d-appendix,
+.downlevel .distill-appendix,
+.downlevel .d-byline,
+.downlevel .d-footnote-list,
+.downlevel .d-citation-list,
+.downlevel .distill-footer,
+.downlevel .appendix-bottom,
+.downlevel .posts-container {
+  padding-left: 40px;
+  padding-right: 40px;
+}
+
+@media(min-width: 768px) {
+  .downlevel .base-grid,
+  .downlevel .distill-header,
+  .downlevel .d-title,
+  .downlevel .d-abstract,
+  .downlevel .d-article,
+  .downlevel .d-appendix,
+  .downlevel .distill-appendix,
+  .downlevel .d-byline,
+  .downlevel .d-footnote-list,
+  .downlevel .d-citation-list,
+  .downlevel .distill-footer,
+  .downlevel .appendix-bottom,
+  .downlevel .posts-container {
+  padding-left: 150px;
+  padding-right: 150px;
+  max-width: 900px;
+}
+}
+
+.downlevel pre code {
+  display: block;
+  border-left: 2px solid rgba(0, 0, 0, .1);
+  padding: 0 0 0 20px;
+  font-size: 14px;
+}
+
+.downlevel code, .downlevel pre {
+  color: black;
+  background: none;
+  font-family: Consolas, Monaco, 'Andale Mono', 'Ubuntu Mono', monospace;
+  text-align: left;
+  white-space: pre;
+  word-spacing: normal;
+  word-break: normal;
+  word-wrap: normal;
+  line-height: 1.5;
+
+  -moz-tab-size: 4;
+  -o-tab-size: 4;
+  tab-size: 4;
+
+  -webkit-hyphens: none;
+  -moz-hyphens: none;
+  -ms-hyphens: none;
+  hyphens: none;
+}
+
+</style>
+
+<script type="application/javascript">
+
+function is_downlevel_browser() {
+  if (bowser.isUnsupportedBrowser({ msie: "12", msedge: "16"},
+                                 window.navigator.userAgent)) {
+    return true;
+  } else {
+    return window.load_distill_framework === undefined;
+  }
+}
+
+// show body when load is complete
+function on_load_complete() {
+
+  // set body to visible
+  document.body.style.visibility = 'visible';
+
+  // trigger 'shown' so htmlwidgets resize
+  $('d-article').trigger('shown');
+}
+
+function init_distill() {
+
+  init_common();
+
+  // create front matter
+  var front_matter = $('<d-front-matter></d-front-matter>');
+  $('#distill-front-matter').wrap(front_matter);
+
+  // create d-title
+  $('.d-title').changeElementType('d-title');
+
+  // create d-byline
+  var byline = $('<d-byline></d-byline>');
+  $('.d-byline').replaceWith(byline);
+
+  // create d-article
+  var article = $('<d-article></d-article>');
+  $('.d-article').wrap(article).children().unwrap();
+
+  // move posts container into article
+  $('.posts-container').appendTo($('d-article'));
+
+  // create d-appendix
+  $('.d-appendix').changeElementType('d-appendix');
+
+  // create d-bibliography
+  var bibliography = $('<d-bibliography></d-bibliography>');
+  $('#distill-bibliography').wrap(bibliography);
+
+  // flag indicating that we have appendix items
+  var appendix = $('.appendix-bottom').children('h3').length > 0;
+
+  // replace citations with <d-cite>
+  $('.citation').each(function(i, val) {
+    appendix = true;
+    var cites = $(this).attr('data-cites').split(" ");
+    var dt_cite = $('<d-cite></d-cite>');
+    dt_cite.attr('key', cites.join());
+    $(this).replaceWith(dt_cite);
+  });
+  // remove refs
+  $('#refs').remove();
+
+  // replace footnotes with <d-footnote>
+  $('.footnote-ref').each(function(i, val) {
+    appendix = true;
+    var href = $(this).attr('href');
+    var id = href.replace('#', '');
+    var fn = $('#' + id);
+    var fn_p = $('#fn1>p');
+    fn_p.find('.footnote-back').remove();
+    var text = fn_p.text();
+    var dtfn = $('<d-footnote></d-footnote>');
+    dtfn.text(text);
+    $(this).replaceWith(dtfn);
+  });
+  // remove footnotes
+  $('.footnotes').remove();
+
+  $('h1.appendix, h2.appendix').each(function(i, val) {
+    $(this).changeElementType('h3');
+  });
+  $('h3.appendix').each(function(i, val) {
+    var id = $(this).attr('id');
+    $('.d-toc a[href="#' + id + '"]').parent().remove();
+    appendix = true;
+    $(this).nextUntil($('h1, h2, h3')).addBack().appendTo($('d-appendix'));
+  });
+
+  // show d-appendix if we have appendix content
+  $("d-appendix").css('display', appendix ? 'grid' : 'none');
+
+  // replace code blocks with d-code
+  $('pre>code').each(function(i, val) {
+    var code = $(this);
+    var pre = code.parent();
+    var clz = "";
+    var language = pre.attr('class');
+    if (language) {
+      if ($.inArray(language, ["r", "cpp", "c", "java"]) != -1)
+        language = "clike";
+      language = ' language="' + language + '"';
+      var dt_code = $('<d-code block' + language + clz + '></d-code>');
+      dt_code.text(code.text());
+      pre.replaceWith(dt_code);
+    } else {
+      code.addClass('text-output').unwrap().changeElementType('pre');
+    }
+  });
+
+  // localize layout chunks to just output
+  $('.layout-chunk').each(function(i, val) {
+
+    // capture layout
+    var layout = $(this).attr('data-layout');
+
+    // apply layout to markdown level block elements
+    $(this).children().not('d-code, pre.text-output')
+      .wrap($('<div class="' + layout + '"></div>'));
+
+    // unwrap the layout-chunk div
+    $(this).children().unwrap();
+  });
+
+  // load distill framework
+  load_distill_framework();
+
+  // wait for window.distillRunlevel == 4 to do post processing
+  function distill_post_process() {
+
+    if (!window.distillRunlevel || window.distillRunlevel < 4)
+      return;
+
+    // hide author/affiliations entirely if we have no authors
+    var front_matter = JSON.parse($("#distill-front-matter").html());
+    var have_authors = front_matter.authors && front_matter.authors.length > 0;
+    if (!have_authors)
+      $('d-byline').addClass('hidden');
+
+    // table of contents
+    if (have_authors) // adjust border if we are in authors
+      $('.d-toc').parent().addClass('d-article-with-toc');
+
+    // strip links that point to #
+    $('.authors-affiliations').find('a[href="#"]').removeAttr('href');
+
+    // hide elements of author/affiliations grid that have no value
+    function hide_byline_column(caption) {
+      $('d-byline').find('h3:contains("' + caption + '")').parent().css('visibility', 'hidden');
+    }
+
+    // affiliations
+    var have_affiliations = false;
+    for (var i = 0; i<front_matter.authors.length; ++i) {
+      var author = front_matter.authors[i];
+      if (author.affiliation !== "&nbsp;") {
+        have_affiliations = true;
+        break;
+      }
+    }
+    if (!have_affiliations)
+      $('d-byline').find('h3:contains("Affiliations")').css('visibility', 'hidden');
+
+    // published date
+    if (!front_matter.publishedDate)
+      hide_byline_column("Published");
+
+    // document object identifier
+    var doi = $('d-byline').find('h3:contains("DOI")');
+    var doi_p = doi.next().empty();
+    if (!front_matter.doi) {
+      // if we have a citation and valid citationText then link to that
+      if ($('#citation').length > 0 && front_matter.citationText) {
+        doi.html('Citation');
+        $('<a href="#citation"></a>')
+          .text(front_matter.citationText)
+          .appendTo(doi_p);
+      } else {
+        hide_byline_column("DOI");
+      }
+    } else {
+      $('<a></a>')
+         .attr('href', "https://doi.org/" + front_matter.doi)
+         .html(front_matter.doi)
+         .appendTo(doi_p);
+    }
+
+     // change plural form of authors/affiliations
+    if (front_matter.authors.length === 1) {
+      var grid = $('.authors-affiliations');
+      grid.children('h3:contains("Authors")').text('Author');
+      grid.children('h3:contains("Affiliations")').text('Affiliation');
+    }
+
+    // inject pre code styles (can't do this with a global stylesheet b/c a shadow root is used)
+    $('d-code').each(function(i, val) {
+      var style = document.createElement('style');
+      style.innerHTML = 'pre code { padding-left: 10px; font-size: 12px; border-left: 2px solid rgba(0,0,0,0.1); } ' +
+                        '@media(min-width: 768px) { pre code { padding-left: 18px; font-size: 14px; } }';
+      if (this.shadowRoot)
+        this.shadowRoot.appendChild(style);
+    });
+
+    // move appendix-bottom entries to the bottom
+    $('.appendix-bottom').appendTo('d-appendix').children().unwrap();
+    $('.appendix-bottom').remove();
+
+    // clear polling timer
+    clearInterval(tid);
+
+    // show body now that everything is ready
+    on_load_complete();
+  }
+
+  var tid = setInterval(distill_post_process, 50);
+  distill_post_process();
+
+}
+
+function init_downlevel() {
+
+  init_common();
+
+   // insert hr after d-title
+  $('.d-title').after($('<hr class="section-separator"/>'));
+
+  // check if we have authors
+  var front_matter = JSON.parse($("#distill-front-matter").html());
+  var have_authors = front_matter.authors && front_matter.authors.length > 0;
+
+  // manage byline/border
+  if (!have_authors)
+    $('.d-byline').remove();
+  $('.d-byline').after($('<hr class="section-separator"/>'));
+  $('.d-byline a').remove();
+
+  // remove toc
+  $('.d-toc-header').remove();
+  $('.d-toc').remove();
+  $('.d-toc-separator').remove();
+
+  // move appendix elements
+  $('h1.appendix, h2.appendix').each(function(i, val) {
+    $(this).changeElementType('h3');
+  });
+  $('h3.appendix').each(function(i, val) {
+    $(this).nextUntil($('h1, h2, h3')).addBack().appendTo($('.d-appendix'));
+  });
+
+
+  // inject headers into references and footnotes
+  var refs_header = $('<h3></h3>');
+  refs_header.text('References');
+  $('#refs').prepend(refs_header);
+
+  var footnotes_header = $('<h3></h3');
+  footnotes_header.text('Footnotes');
+  $('.footnotes').children('hr').first().replaceWith(footnotes_header);
+
+  // move appendix-bottom entries to the bottom
+  $('.appendix-bottom').appendTo('.d-appendix').children().unwrap();
+  $('.appendix-bottom').remove();
+
+  // remove appendix if it's empty
+  if ($('.d-appendix').children().length === 0)
+    $('.d-appendix').remove();
+
+  // prepend separator above appendix
+  $('.d-appendix').before($('<hr class="section-separator" style="clear: both"/>'));
+
+  // trim code
+  $('pre>code').each(function(i, val) {
+    $(this).html($.trim($(this).html()));
+  });
+
+  // move posts-container right before article
+  $('.posts-container').insertBefore($('.d-article'));
+
+  $('body').addClass('downlevel');
+
+  on_load_complete();
+}
+
+
+function init_common() {
+
+  // jquery plugin to change element types
+  (function($) {
+    $.fn.changeElementType = function(newType) {
+      var attrs = {};
+
+      $.each(this[0].attributes, function(idx, attr) {
+        attrs[attr.nodeName] = attr.nodeValue;
+      });
+
+      this.replaceWith(function() {
+        return $("<" + newType + "/>", attrs).append($(this).contents());
+      });
+    };
+  })(jQuery);
+
+  // prevent underline for linked images
+  $('a > img').parent().css({'border-bottom' : 'none'});
+
+  // mark figures created by knitr chunks as 100% width
+  $('.layout-chunk').each(function(i, val) {
+    $(this).find('img, .html-widget').css('width', '100%');
+  });
+
+  // auto-append index.html to post-preview links in file: protocol
+  // and in rstudio ide preview
+  $('.post-preview').each(function(i, val) {
+    if (window.location.protocol === "file:")
+      $(this).attr('href', $(this).attr('href') + "index.html");
+  });
+
+  // add class to pandoc style tables
+  $('tr.header').parent('thead').parent('table').addClass('pandoc-table');
+  $('.kable-table').children('table').addClass('pandoc-table');
+
+
+  // initialize posts list
+  if (window.init_posts_list)
+    window.init_posts_list();
+
+  // implmement disqus comment link
+  $('.disqus-comment-count').click(function() {
+    window.headroom_prevent_pin = true;
+    $('#disqus_thread').toggleClass('hidden');
+    if (!$('#disqus_thread').hasClass('hidden')) {
+      var offset = $(this).offset();
+      $('html, body').animate({
+        scrollTop: offset.top - 35
+      });
+    }
+  });
+}
+
+document.addEventListener('DOMContentLoaded', function() {
+  if (is_downlevel_browser())
+    init_downlevel();
+  else
+    window.addEventListener('WebComponentsReady', init_distill);
+});
+
+</script>
+
+<!--/radix_placeholder_distill-->
+  <script src="../../site_libs/htmlwidgets-1.2/htmlwidgets.js"></script>
+  <script src="../../site_libs/jquery-1.11.3/jquery.min.js"></script>
+  <script src="../../site_libs/proj4js-2.3.15/proj4.js"></script>
+  <link href="../../site_libs/highcharts-5.0.6/css/motion.css" rel="stylesheet" />
+  <script src="../../site_libs/highcharts-5.0.6/highstock.js"></script>
+  <script src="../../site_libs/highcharts-5.0.6/highcharts-3d.js"></script>
+  <script src="../../site_libs/highcharts-5.0.6/highcharts-more.js"></script>
+  <script src="../../site_libs/highcharts-5.0.6/modules/annotations.js"></script>
+  <script src="../../site_libs/highcharts-5.0.6/modules/broken-axis.js"></script>
+  <script src="../../site_libs/highcharts-5.0.6/modules/data.js"></script>
+  <script src="../../site_libs/highcharts-5.0.6/modules/drilldown.js"></script>
+  <script src="../../site_libs/highcharts-5.0.6/modules/exporting.js"></script>
+  <script src="../../site_libs/highcharts-5.0.6/modules/funnel.js"></script>
+  <script src="../../site_libs/highcharts-5.0.6/modules/heatmap.js"></script>
+  <script src="../../site_libs/highcharts-5.0.6/modules/map.js"></script>
+  <script src="../../site_libs/highcharts-5.0.6/modules/no-data-to-display.js"></script>
+  <script src="../../site_libs/highcharts-5.0.6/modules/offline-exporting.js"></script>
+  <script src="../../site_libs/highcharts-5.0.6/modules/solid-gauge.js"></script>
+  <script src="../../site_libs/highcharts-5.0.6/modules/treemap.js"></script>
+  <script src="../../site_libs/highcharts-5.0.6/plugins/annotations.js"></script>
+  <script src="../../site_libs/highcharts-5.0.6/plugins/draggable-legend.js"></script>
+  <script src="../../site_libs/highcharts-5.0.6/plugins/draggable-points.js"></script>
+  <script src="../../site_libs/highcharts-5.0.6/plugins/export-csv.js"></script>
+  <script src="../../site_libs/highcharts-5.0.6/plugins/grouped-categories.js"></script>
+  <script src="../../site_libs/highcharts-5.0.6/plugins/motion.js"></script>
+  <script src="../../site_libs/highcharts-5.0.6/plugins/pattern-fill-v2.js"></script>
+  <script src="../../site_libs/highcharts-5.0.6/plugins/tooltip-delay.js"></script>
+  <script src="../../site_libs/highcharts-5.0.6/custom/reset.js"></script>
+  <script src="../../site_libs/highcharts-5.0.6/custom/symbols-extra.js"></script>
+  <script src="../../site_libs/highcharts-5.0.6/custom/text-symbols.js"></script>
+  <link href="../../site_libs/fontawesome-4.5.0/font-awesome.min.css" rel="stylesheet" />
+  <link href="../../site_libs/htmlwdgtgrid-1/htmlwdgtgrid.css" rel="stylesheet" />
+  <script src="../../site_libs/highchart-binding-0.5.0/highchart.js"></script>
+  <script src="../../site_libs/bowser-1.9.3/bowser.min.js"></script>
+  <script src="../../site_libs/webcomponents-2.0.0/webcomponents.js"></script>
+  <script src="../../site_libs/distill-2.2.21/template.v2.js"></script>
+  <!--radix_placeholder_site_in_header-->
+<script async src="https://www.googletagmanager.com/gtag/js?id=UA-77306155-2"></script>
+<script>
+window.dataLayer = window.dataLayer || [];
+function gtag(){dataLayer.push(arguments);}
+gtag('js', new Date());
+gtag('config', 'UA-77306155-2');
+</script>
+<!--/radix_placeholder_site_in_header-->
+
+
+</head>
+
+<body>
+
+
+<script id="distill-front-matter" type="text/json">
+{"title":"Visualizing Asset Returns","description":"In this post we take a closer look at the individual assets which compose a portfolio. The motivation is to make sure we have scrutinized our assets before they get into our portfolio, as once the portfolio has been constructed, it is tempting to keep the analysis at the portfolio level \n","authors":[{"author":"Jonathan Regenstein","authorURL":"https://www.linkedin.com/in/jkregenstein/","affiliation":"RStudio","affiliationURL":"https://www.rstudio.com"}],"publishedDate":"2017-11-09T00:00:00.000-05:00","citationText":"Regenstein, 2017"}
+</script>
+<!--radix_placeholder_navigation_before_body-->
+<header class="header header--fixed" role="banner">
+<nav class="radix-site-nav radix-site-header">
+<div class="nav-left">
+<span class="logo">
+<img src="../../images/rstudio.png"/>
+</span>
+<a href="../../index.html" class="title">Reproducible Finance with R</a>
+</div>
+<div class="nav-right">
+<a href="../../index.html">Home</a>
+<a href="../../about.html">About</a>
+<a href="../../contributors.html">Contributors</a>
+<a href="../../index.xml">
+<i class="fa fa-rss"></i>
+</a>
+<a href="javascript:void(0);" class="nav-toggle">&#9776;</a>
+</div>
+</nav>
+</header>
+<!--/radix_placeholder_navigation_before_body-->
+<!--radix_placeholder_site_before_body-->
+<!--/radix_placeholder_site_before_body-->
+
+<div class="d-title">
+<h1>Visualizing Asset Returns</h1>
+<p>In this post we take a closer look at the individual assets which compose a portfolio. The motivation is to make sure we have scrutinized our assets before they get into our portfolio, as once the portfolio has been constructed, it is tempting to keep the analysis at the portfolio level</p>
+</div>
+
+<div class="d-byline">
+  Jonathan Regenstein <a href="https://www.linkedin.com/in/jkregenstein/" class="uri">https://www.linkedin.com/in/jkregenstein/</a> (RStudio)<a href="https://www.rstudio.com" class="uri">https://www.rstudio.com</a>
+  
+<br/>11-09-2017
+</div>
+
+<div class="d-article">
+<p>Here’s the portfolio we’ll be visualizing the assets of:</p>
+<ul>
+<li>SPY (S&amp;P 500 fund) weighted 25%</li>
+<li>EFA (a non-US equities fund) weighted 25%</li>
+<li>IJS (a small-cap value fund) weighted 20%</li>
+<li>EEM (an emerging-mkts fund) weighted 20%</li>
+<li>AGG (a bond fund) weighted 10%</li>
+</ul>
+<p>Let’s load up our packages.</p>
+<div class="layout-chunk" data-layout="l-body-outset">
+<pre class="r"><code>
+library(tidyverse)
+library(tidyquant)
+library(timetk)
+library(tibbletime)
+library(highcharter)</code></pre>
+</div>
+<p>To get our objects into the global environment, we use the next code chunk, which should look familiar from the previous post: we will create one <code>xts</code> object and one <code>tibble</code>, in long/tidy format, of monthly log returns.</p>
+<div class="layout-chunk" data-layout="l-body-outset">
+<pre class="r"><code>
+# The symbols vector holds our tickers. 
+symbols &lt;- c(&quot;SPY&quot;,&quot;EFA&quot;, &quot;IJS&quot;, &quot;EEM&quot;,&quot;AGG&quot;)
+
+prices &lt;- 
+  getSymbols(symbols, src = &#39;yahoo&#39;, from = &quot;2005-01-01&quot;, 
+             auto.assign = TRUE, warnings = FALSE) %&gt;% 
+  map(~Ad(get(.))) %&gt;% 
+  reduce(merge) %&gt;%
+  `colnames&lt;-`(symbols)
+
+# XTS method
+prices_monthly &lt;- to.monthly(prices, indexAt = &quot;last&quot;, OHLC = FALSE)
+asset_returns &lt;- na.omit(Return.calculate(prices_monthly, method = &quot;log&quot;))
+
+# Tidyverse method, to long, tidy format
+asset_returns_long &lt;- 
+  prices %&gt;% 
+  to.monthly(indexAt = &quot;last&quot;, OHLC = FALSE) %&gt;% 
+  tk_tbl(preserve_index = TRUE, rename_index = &quot;date&quot;) %&gt;%
+  gather(asset, returns, -date) %&gt;% 
+  group_by(asset) %&gt;%  
+  mutate(returns = (log(returns) - log(lag(returns))))</code></pre>
+</div>
+<p>We now have two objects holding monthly log returns, <code>asset_returns</code> and <code>asset_returns_long</code>. First, let’s use <code>highcharter</code> to visualize the <code>xts</code> formatted returns.</p>
+<p>Highcharter is fantastic for visualizing a time series or many time series. First, we set <code>highchart(type = &quot;stock&quot;)</code> to get a nice time series line. Then we add each of our series to the highcharter code flow. In this case, we’ll add our columns from the xts object.</p>
+<div class="layout-chunk" data-layout="l-body-outset">
+<pre class="r"><code>
+highchart(type = &quot;stock&quot;) %&gt;% 
+  hc_title(text = &quot;Monthly Log Returns&quot;) %&gt;%
+  hc_add_series(asset_returns$SPY, 
+                  name = names(asset_returns$SPY)) %&gt;%
+  hc_add_series(asset_returns$EFA, 
+                  name = names(asset_returns$EFA)) %&gt;%
+  hc_add_series(asset_returns$IJS, 
+                  name = names(asset_returns$IJS)) %&gt;%
+  hc_add_theme(hc_theme_flat()) %&gt;%
+  hc_navigator(enabled = FALSE) %&gt;% 
+  hc_scrollbar(enabled = FALSE)</code></pre>
+<div id="htmlwidget-a484bc22a8b475b8ef41" style="width:100%;height:500px;" class="highchart html-widget"></div>
+<script type="application/json" data-for="htmlwidget-a484bc22a8b475b8ef41">{"x":{"hc_opts":{"title":{"text":"Monthly Log Returns"},"yAxis":{"title":{"text":null}},"credits":{"enabled":false},"exporting":{"enabled":false},"plotOptions":{"series":{"turboThreshold":0},"treemap":{"layoutAlgorithm":"squarified"},"bubble":{"minSize":5,"maxSize":25}},"annotationsOptions":{"enabledButtons":false},"tooltip":{"delayForDisplay":10},"series":[{"data":[[1109548800000,0.0206883607687391],[1112227200000,-0.018462154384248],[1114732800000,-0.0189128966973042],[1117497600000,0.0317164683984643],[1120089600000,0.00151360569945425],[1122595200000,0.0375475864796035],[1125446400000,-0.00941882119733961],[1128038400000,0.00799334582056765],[1130716800000,-0.023934859601539],[1133308800000,0.0430141311197794],[1135900800000,-0.00191535703855372],[1138665600000,0.0237302361849796],[1141084800000,0.00570900217267578],[1143763200000,0.0163695033798259],[1146182400000,0.0125522603757444],[1149033600000,-0.030583724620497],[1151625600000,0.00260503822897995],[1154304000000,0.00446832670130082],[1156982400000,0.0215876976068916],[1159488000000,0.026643129265679],[1162252800000,0.0310305105269206],[1164844800000,0.0196900313431625],[1167350400000,0.0132826889376565],[1170201600000,0.0149283959407871],[1172620800000,-0.0198122163105765],[1175212800000,0.0115218176712322],[1177891200000,0.0433427250338134],[1180569600000,0.0333578380196276],[1183075200000,-0.0147290899657024],[1185840000000,-0.0318108234971612],[1188518400000,0.0127513363420766],[1190937600000,0.0379839022652568],[1193788800000,0.0134752882784843],[1196380800000,-0.0395024760081002],[1199059200000,-0.0113244310789238],[1201737600000,-0.0623668063194263],[1204243200000,-0.0261818492946864],[1206921600000,-0.00898237253660117],[1209513600000,0.0465610767999181],[1212105600000,0.0150037481598506],[1214784000000,-0.0872761874639947],[1217462400000,-0.00902675879958625],[1219968000000,0.0153359300492646],[1222732800000,-0.0989078808702475],[1225411200000,-0.180546641004415],[1227830400000,-0.0721478333394607],[1230681600000,0.00974839780270376],[1233273600000,-0.0856824950869406],[1235692800000,-0.113671378229267],[1238457600000,0.0800216943574021],[1241049600000,0.0947156926635033],[1243555200000,0.0568087651580838],[1246320000000,-0.000655065369929098],[1248998400000,0.0719538197299192],[1251676800000,0.0362735110366907],[1254268800000,0.0348432132485401],[1256860800000,-0.0194125225060784],[1259539200000,0.0597835885560878],[1262217600000,0.0189209247829014],[1264723200000,-0.0370194332504461],[1267142400000,0.0307183105943594],[1269993600000,0.0590981882989601],[1272585600000,0.0153517172435595],[1275004800000,-0.0827890132580098],[1277856000000,-0.0531274833043343],[1280448000000,0.0660691833968556],[1283212800000,-0.0460235957201514],[1285804800000,0.0857690745359045],[1288310400000,0.0374905416365063],[1291075200000,0],[1293753600000,0.064712353372725],[1296432000000,0.0230328582652524],[1298851200000,0.0341476386704116],[1301529600000,0.000120267489931436],[1304035200000,0.0285499301045791],[1306800000000,-0.0112780117878613],[1309392000000,-0.0170134498338959],[1311897600000,-0.0202075274703519],[1314748800000,-0.0565443888239834],[1317340800000,-0.0719479964351866],[1320019200000,0.103591368732975],[1322611200000,-0.00407207216413941],[1325203200000,0.0103942385158264],[1327968000000,0.0453313265617705],[1330473600000,0.0424899907912026],[1333065600000,0.0316568849804701],[1335744000000,-0.00669784077992208],[1338422400000,-0.0619347440093918],[1340928000000,0.0397793544019951],[1343692800000,0.0117598610853955],[1346371200000,0.024744200969077],[1348790400000,0.0250351130919872],[1351641600000,-0.0183661353560929],[1354233600000,0.00564373280967612],[1356912000000,0.00889495538211182],[1359590400000,0.0499231138920431],[1362009600000,0.0126782084481052],[1364428800000,0.0372676620251093],[1367280000000,0.0190300649042427],[1369958400000,0.0233357086622981],[1372377600000,-0.013434317965209],[1375228800000,0.0503857816902009],[1377820800000,-0.0304514171387229],[1380499200000,0.031156077098025],[1383177600000,0.0452662236396106],[1385683200000,0.029207191832497],[1388448000000,0.0255971721111452],[1391126400000,-0.0358843924180396],[1393545600000,0.044510425662323],[1396224000000,0.00825925401915928],[1398816000000,0.0069272774959046],[1401408000000,0.0229413205597329],[1404086400000,0.0204328562230653],[1406764800000,-0.0135286861951744],[1409270400000,0.038705007766481],[1412035200000,-0.013891445774048],[1414713600000,0.0232779285606677],[1417132800000,0.0271012600480907],[1419984000000,-0.00254016353038011],[1422576000000,-0.0300771961640294],[1424995200000,0.0546820498858933],[1427760000000,-0.0158312098344622],[1430352000000,0.00978576427507338],[1432857600000,0.0127741782559951],[1435622400000,-0.0203249864799844],[1438300800000,0.021906129378781],[1440979200000,-0.063307028533119],[1443571200000,-0.0253952558903237],[1446163200000,0.0818438258121965],[1448841600000,0.00364863585997721],[1451520000000,-0.0174359030631139],[1454025600000,-0.0510684705020186],[1456704000000,-0.00082656205163012],[1459382400000,0.0650983528933153],[1461888000000,0.00393344867736367],[1464652800000,0.0168687045023788],[1467244800000,0.00347193709630389],[1469750400000,0.0358218083473458],[1472601600000,0.00119682423609646],[1475193600000,5.82944345328684e-05],[1477872000000,-0.0174890326903681],[1480464000000,0.0361760483584854],[1483056000000,0.0200687389005498],[1485820800000,0.0177364569302423],[1488240000000,0.0385393160112875],[1490918400000,0.00124910267793332],[1493337600000,0.00987726569481673],[1496188800000,0.0140142428619274],[1498780800000,0.00635466131299633],[1501459200000,0.0203458410529125],[1504137600000,0.00291339955470615],[1506643200000,0.0199491885903571],[1509408000000,0.0232906778552602],[1512000000000,0.0301080396255688],[1514505600000,0.0120549774680399],[1517356800000,0.0548282861337244],[1519776000000,-0.0370379583952021],[1522281600000,-0.0277931894051342],[1525046400000,0.00515493197057992],[1527724800000,0.0240182943547209],[1530144000000,0.00429580217480297]],"name":"SPY"},{"data":[[1109548800000,0.0371510874027936],[1112227200000,-0.0265838073886915],[1114732800000,-0.0163090360915472],[1117497600000,-0.00867496852231886],[1120089600000,0.0142258284050918],[1122595200000,0.0295272103339603],[1125446400000,0.037644342828735],[1128038400000,0.0362783049115945],[1130716800000,-0.0323594447768043],[1133308800000,0.0228478582995897],[1135900800000,0.050527857147368],[1138665600000,0.0561107516249169],[1141084800000,-0.0070243418208582],[1143763200000,0.0392700563015302],[1146182400000,0.0467929980960173],[1149033600000,-0.0389678696032068],[1151625600000,-0.000611559434153364],[1154304000000,0.00807245323088601],[1156982400000,0.0251661702904649],[1159488000000,0.00221651871287243],[1162252800000,0.0368051768541062],[1164844800000,0.0302670411876531],[1167350400000,0.0314714911952056],[1170201600000,0.0138345013928314],[1172620800000,-0.00121310894183901],[1175212800000,0.0285829128114679],[1177891200000,0.036798121240087],[1180569600000,0.0233484593586546],[1183075200000,-0.00321398420201024],[1185840000000,-0.0231707808276509],[1188518400000,-0.0063557623024364],[1190937600000,0.0518093568131048],[1193788800000,0.041620826270254],[1196380800000,-0.0369096768557977],[1199059200000,-0.0302661430313211],[1201737600000,-0.0817214613228154],[1204243200000,-0.0102819672109398],[1206921600000,0.00418121904417923],[1209513600000,0.0529538382719572],[1212105600000,0.0118018945866272],[1214784000000,-0.091970806502248],[1217462400000,-0.0337659974120492],[1219968000000,-0.0434047861854592],[1222732800000,-0.121447022491645],[1225411200000,-0.233633535071174],[1227830400000,-0.0658406463062033],[1230681600000,0.0849694749570409],[1233273600000,-0.14770640325597],[1235692800000,-0.109676824829664],[1238457600000,0.080575042238332],[1241049600000,0.109024880763803],[1243555200000,0.123913464732606],[1246320000000,-0.0141488362804374],[1248998400000,0.0956873810961381],[1251676800000,0.044046166349585],[1254268800000,0.0372620349525374],[1256860800000,-0.0255616606907774],[1259539200000,0.0384629253685356],[1262217600000,0.00707123397464926],[1264723200000,-0.0519790954359634],[1267142400000,0.00266386387247408],[1269993600000,0.0618983425260504],[1272585600000,-0.0284466417349774],[1275004800000,-0.118702094324684],[1277856000000,-0.0208352310290372],[1280448000000,0.10984420044182],[1283212800000,-0.0386890497126466],[1285804800000,0.0950551437020111],[1288310400000,0.0373490746354785],[1291075200000,-0.0494394967598453],[1293753600000,0.0798095636963425],[1296432000000,0.020738540369142],[1298851200000,0.0348824374421235],[1301529600000,-0.0241729125453873],[1304035200000,0.0547329420337945],[1306800000000,-0.0223080895250298],[1309392000000,-0.012181400086178],[1311897600000,-0.0240652033701161],[1314748800000,-0.0916207162696963],[1317340800000,-0.114382106181624],[1320019200000,0.0919176668071469],[1322611200000,-0.0220041846553114],[1325203200000,-0.0219896853575681],[1327968000000,0.0513539261737375],[1330473600000,0.0471998466978865],[1333065600000,0.00419915744489963],[1335744000000,-0.0209875861196314],[1338422400000,-0.118155325985911],[1340928000000,0.0680633078906698],[1343692800000,0.000800441819795328],[1346371200000,0.0314985254465632],[1348790400000,0.0267703435296598],[1351641600000,0.0108840156081986],[1354233600000,0.02742911624332],[1356912000000,0.042878960758526],[1359590400000,0.0366064145387774],[1362009600000,-0.0129693811664602],[1364428800000,0.0129693811664602],[1367280000000,0.0489677326072959],[1369958400000,-0.0306556337445758],[1372377600000,-0.0271533060765532],[1375228800000,0.0518602909091626],[1377820800000,-0.0197462058147346],[1380499200000,0.0753384915288189],[1383177600000,0.0320817907416453],[1385683200000,0.00544939990833537],[1388448000000,0.0215238044675443],[1391126400000,-0.0534132972197057],[1393545600000,0.05950487696406],[1396224000000,-0.00460252036846498],[1398816000000,0.0165294473468922],[1401408000000,0.0158284454558695],[1404086400000,0.00916828153910831],[1406764800000,-0.0263795062782242],[1409270400000,0.00180027408054251],[1412035200000,-0.0395984875367619],[1414713600000,-0.00265476951541554],[1417132800000,0.000625272637177154],[1419984000000,-0.0407436844727451],[1422576000000,0.00622645119472232],[1424995200000,0.0614506469750609],[1427760000000,-0.0143887877651823],[1430352000000,0.0358166029515763],[1432857600000,0.00195261161357241],[1435622400000,-0.0316717930667627],[1438300800000,0.0201144148091217],[1440979200000,-0.0771524206918439],[1443571200000,-0.0451948928845294],[1446163200000,0.0640259653180895],[1448841600000,-0.00755583695033035],[1451520000000,-0.0235888766672252],[1454025600000,-0.0567578295943303],[1456704000000,-0.0339139493714082],[1459382400000,0.0637455985290032],[1461888000000,0.021975208504073],[1464652800000,-0.000856105820948194],[1467244800000,-0.0244945719223351],[1469750400000,0.0390001824985866],[1472601600000,0.00532700052435064],[1475193600000,0.0132789989388735],[1477872000000,-0.0224036470161302],[1480464000000,-0.017974478580252],[1483056000000,0.0267059088701393],[1485820800000,0.0323818789424957],[1488240000000,0.0118364259034918],[1490918400000,0.0318056981942867],[1493337600000,0.0239521605197286],[1496188800000,0.0348102011675886],[1498780800000,0.00295595083242794],[1501459200000,0.026187991043348],[1504137600000,-0.000448424812764081],[1506643200000,0.0233428500417174],[1509408000000,0.016653638563219],[1512000000000,0.00687009817122863],[1514505600000,0.0133982653471643],[1517356800000,0.048986535889199],[1519776000000,-0.0495556400249386],[1522281600000,-0.00843152197299712],[1525046400000,0.0150977778272878],[1527724800000,-0.0191242275305568],[1530144000000,-0.021508070914761]],"name":"EFA"},{"data":[[1109548800000,0.0286092910746829],[1112227200000,-0.023882249553322],[1114732800000,-0.0525565893510755],[1117497600000,0.0597358801194607],[1120089600000,0.0384082335065998],[1122595200000,0.0567708091813746],[1125446400000,-0.018880334698018],[1128038400000,0.00048839318244065],[1130716800000,-0.0347110837058389],[1133308800000,0.0479257301550815],[1135900800000,-0.0105974379993743],[1138665600000,0.083888854409639],[1141084800000,0.00273143429236455],[1143763200000,0.0474202933933459],[1146182400000,0.00178387432274896],[1149033600000,-0.0465787823755495],[1151625600000,0.000422532171571177],[1154304000000,-0.0314467900462629],[1156982400000,0.026683563679013],[1159488000000,0.0117932938602623],[1162252800000,0.0537275061403912],[1164844800000,0.0234990640120394],[1167350400000,0.00314736102350377],[1170201600000,0.0211442763817633],[1172620800000,-0.00926951550106736],[1175212800000,0.00901970588124623],[1177891200000,0.018213920473908],[1180569600000,0.0452974320767563],[1183075200000,-0.0227115991922417],[1185840000000,-0.0646391250589318],[1188518400000,0.0132135082202609],[1190937600000,0.00315394503505217],[1193788800000,0.0105469139109928],[1196380800000,-0.074158163797299],[1199059200000,-0.00720900709124361],[1201737600000,-0.0408220789817761],[1204243200000,-0.0342096472087103],[1206921600000,0.0082207897844393],[1209513600000,0.0260927013156733],[1212105600000,0.038407397232918],[1214784000000,-0.0879252984975016],[1217462400000,0.0283277032569229],[1219968000000,0.0465201355324263],[1222732800000,-0.0493366839602647],[1225411200000,-0.221415406738064],[1227830400000,-0.125533995570433],[1230681600000,0.0637299554725064],[1233273600000,-0.150182025088582],[1235692800000,-0.139558761449686],[1238457600000,0.0732625878674953],[1241049600000,0.173025974524343],[1243555200000,0.0066791507429369],[1246320000000,0.0150716345115605],[1248998400000,0.104383239021672],[1251676800000,0.0342330547680287],[1254268800000,0.0411531091808093],[1256860800000,-0.0626638853817325],[1259539200000,0.0286025685047933],[1262217600000,0.0778779720004628],[1264723200000,-0.025678282182517],[1267142400000,0.0465281458401003],[1269993600000,0.075079246212014],[1272585600000,0.0641683388490986],[1275004800000,-0.0892741829565571],[1277856000000,-0.0863781523269647],[1280448000000,0.0649646325146831],[1283212800000,-0.0824206920019774],[1285804800000,0.10383359771494],[1288310400000,0.0395794732468921],[1291075200000,0.0244362550051846],[1293753600000,0.0858591787834113],[1296432000000,-0.0023675019928362],[1298851200000,0.0412459086014039],[1301529600000,0.0218399853055313],[1304035200000,0.0105710101358945],[1306800000000,-0.0178133115743551],[1309392000000,-0.0160794120382937],[1311897600000,-0.028128395432562],[1314748800000,-0.0831288419370795],[1317340800000,-0.111610068848766],[1320019200000,0.142717965625723],[1322611200000,0.0062787267441351],[1325203200000,0.0199989815214323],[1327968000000,0.0760204099617949],[1330473600000,0.0169933842600054],[1333065600000,0.0285565277843896],[1335744000000,-0.0192755134532856],[1338422400000,-0.0744575808763015],[1340928000000,0.0444853622464452],[1343692800000,-0.00688498496648737],[1346371200000,0.0399654740659958],[1348790400000,0.0308343889061815],[1351641600000,-0.0198153260124707],[1354233600000,0.0163921688475979],[1356912000000,0.0348938841953421],[1359590400000,0.0521334839407865],[1362009600000,0.016175381047872],[1364428800000,0.0402579402935039],[1367280000000,0.00122254354762585],[1369958400000,0.0419763706730887],[1372377600000,-0.00140297422333813],[1375228800000,0.0635412872810628],[1377820800000,-0.0347433733564806],[1380499200000,0.0638703919026815],[1383177600000,0.0342343703160068],[1385683200000,0.0416609363238196],[1388448000000,0.0128910354440883],[1391126400000,-0.0357752790339685],[1393545600000,0.0452573674090644],[1396224000000,0.0133146942022409],[1398816000000,-0.0231842558505821],[1401408000000,0.00620534373292703],[1404086400000,0.0377145714577516],[1406764800000,-0.0520093689789016],[1409270400000,0.0436580187107669],[1412035200000,-0.0612641356693784],[1414713600000,0.0688746783992027],[1417132800000,0.00477349011488748],[1419984000000,0.025294650981035],[1422576000000,-0.0546279909359457],[1424995200000,0.0569146736996524],[1427760000000,0.0101585823337427],[1430352000000,-0.0184176805145224],[1432857600000,0.00750997613588655],[1435622400000,0.00416772698453904],[1438300800000,-0.0273754187709674],[1440979200000,-0.0472682581345678],[1443571200000,-0.0384634661776602],[1446163200000,0.0635896738242598],[1448841600000,0.0244151618390056],[1451520000000,-0.0521530204489276],[1454025600000,-0.0603068066109262],[1456704000000,0.0206050779217239],[1459382400000,0.0899059192727663],[1461888000000,0.0210442066818475],[1464652800000,0.00439723787330681],[1467244800000,0.00829571596090073],[1469750400000,0.0493483801679373],[1472601600000,0.0112611058591021],[1475193600000,0.0086149139291587],[1477872000000,-0.0381347852324136],[1480464000000,0.125246390798508],[1483056000000,0.0314933156879773],[1485820800000,-0.0121438899020516],[1488240000000,0.0134288365986057],[1490918400000,-0.00653309991320672],[1493337600000,0.00510792214159839],[1496188800000,-0.0228629627314163],[1498780800000,0.0291519132990805],[1501459200000,0.00748152271525537],[1504137600000,-0.0275645884227851],[1506643200000,0.0823216917830631],[1509408000000,0.00591603557059805],[1512000000000,0.0369132822150497],[1514505600000,-0.00373131327275367],[1517356800000,0.0131964992704123],[1519776000000,-0.0412611974897903],[1522281600000,0.0135348572483176],[1525046400000,0.0174809398496274],[1527724800000,0.0570389349978413],[1530144000000,0.012365324474584]],"name":"IJS"}],"navigator":{"enabled":false},"scrollbar":{"enabled":false}},"theme":{"colors":["#f1c40f","#2ecc71","#9b59b6","#e74c3c","#34495e","#3498db","#1abc9c","#f39c12","#d35400"],"chart":{"backgroundColor":"#ECF0F1"},"xAxis":{"gridLineDashStyle":"Dash","gridLineWidth":1,"gridLineColor":"#BDC3C7","lineColor":"#BDC3C7","minorGridLineColor":"#BDC3C7","tickColor":"#BDC3C7","tickWidth":1},"yAxis":{"gridLineDashStyle":"Dash","gridLineColor":"#BDC3C7","lineColor":"#BDC3C7","minorGridLineColor":"#BDC3C7","tickColor":"#BDC3C7","tickWidth":1},"legendBackgroundColor":"rgba(0, 0, 0, 0.5)","background2":"#505053","dataLabelsColor":"#B0B0B3","textColor":"#34495e","contrastTextColor":"#F0F0F3","maskColor":"rgba(255,255,255,0.3)"},"conf_opts":{"global":{"Date":null,"VMLRadialGradientURL":"http =//code.highcharts.com/list(version)/gfx/vml-radial-gradient.png","canvasToolsURL":"http =//code.highcharts.com/list(version)/modules/canvas-tools.js","getTimezoneOffset":null,"timezoneOffset":0,"useUTC":true},"lang":{"contextButtonTitle":"Chart context menu","decimalPoint":".","downloadJPEG":"Download JPEG image","downloadPDF":"Download PDF document","downloadPNG":"Download PNG image","downloadSVG":"Download SVG vector image","drillUpText":"Back to {series.name}","invalidDate":null,"loading":"Loading...","months":["January","February","March","April","May","June","July","August","September","October","November","December"],"noData":"No data to display","numericSymbols":["k","M","G","T","P","E"],"printChart":"Print chart","resetZoom":"Reset zoom","resetZoomTitle":"Reset zoom level 1:1","shortMonths":["Jan","Feb","Mar","Apr","May","Jun","Jul","Aug","Sep","Oct","Nov","Dec"],"thousandsSep":" ","weekdays":["Sunday","Monday","Tuesday","Wednesday","Thursday","Friday","Saturday"]}},"type":"stock","fonts":[],"debug":false},"evals":[],"jsHooks":[]}</script>
+</div>
+<p>Take a look at the chart. It has a line for the monthly log returns of three of our ETFs (and in my opinion, it’s already starting to get crowded). We might be able to pull some useful intuition from this chart. Perhaps one of our ETFs remained stable during the 2008 financial crisis, or had an era of consistently negative/positive returns. Highcharter is great for plotting time series line charts.</p>
+<p>Highcharter does have the capacity for histogram making. One method is to first call the base function <code>hist</code> on the data with the arguments for breaks and <code>plot = FALSE</code>. Then we can call <code>hchart</code> on that object.</p>
+<div class="layout-chunk" data-layout="l-body-outset">
+<pre class="r"><code>
+hc_spy &lt;- hist(asset_returns$SPY, breaks = 50, plot = FALSE)
+
+hchart(hc_spy) %&gt;% 
+  hc_title(text = &quot;SPY Log Returns Distribution&quot;)</code></pre>
+<div id="htmlwidget-76f0fa1e798fe723fdf2" style="width:100%;height:500px;" class="highchart html-widget"></div>
+<script type="application/json" data-for="htmlwidget-76f0fa1e798fe723fdf2">{"x":{"hc_opts":{"title":{"text":"SPY Log Returns Distribution"},"yAxis":{"title":{"text":null}},"credits":{"enabled":false},"exporting":{"enabled":false},"plotOptions":{"series":{"turboThreshold":0},"treemap":{"layoutAlgorithm":"squarified"},"bubble":{"minSize":5,"maxSize":25}},"annotationsOptions":{"enabledButtons":false},"tooltip":{"delayForDisplay":10,"formatter":"function() { return  this.point.name + '<br/>' + this.y; }"},"chart":{"zoomType":"x"},"series":[{"data":[{"x":-0.1825,"y":1,"name":"(-0.185, -0.18]"},{"x":-0.1775,"y":0,"name":"(-0.18, -0.175]"},{"x":-0.1725,"y":0,"name":"(-0.175, -0.17]"},{"x":-0.1675,"y":0,"name":"(-0.17, -0.165]"},{"x":-0.1625,"y":0,"name":"(-0.165, -0.16]"},{"x":-0.1575,"y":0,"name":"(-0.16, -0.155]"},{"x":-0.1525,"y":0,"name":"(-0.155, -0.15]"},{"x":-0.1475,"y":0,"name":"(-0.15, -0.145]"},{"x":-0.1425,"y":0,"name":"(-0.145, -0.14]"},{"x":-0.1375,"y":0,"name":"(-0.14, -0.135]"},{"x":-0.1325,"y":0,"name":"(-0.135, -0.13]"},{"x":-0.1275,"y":0,"name":"(-0.13, -0.125]"},{"x":-0.1225,"y":0,"name":"(-0.125, -0.12]"},{"x":-0.1175,"y":0,"name":"(-0.12, -0.115]"},{"x":-0.1125,"y":1,"name":"(-0.115, -0.11]"},{"x":-0.1075,"y":0,"name":"(-0.11, -0.105]"},{"x":-0.1025,"y":0,"name":"(-0.105, -0.1]"},{"x":-0.0975,"y":1,"name":"(-0.1, -0.095]"},{"x":-0.0925,"y":0,"name":"(-0.095, -0.09]"},{"x":-0.0875,"y":2,"name":"(-0.09, -0.085]"},{"x":-0.0825,"y":1,"name":"(-0.085, -0.08]"},{"x":-0.0775,"y":0,"name":"(-0.08, -0.075]"},{"x":-0.0725,"y":2,"name":"(-0.075, -0.07]"},{"x":-0.0675,"y":0,"name":"(-0.07, -0.065]"},{"x":-0.0625,"y":3,"name":"(-0.065, -0.06]"},{"x":-0.0575,"y":1,"name":"(-0.06, -0.055]"},{"x":-0.0525,"y":2,"name":"(-0.055, -0.05]"},{"x":-0.0475,"y":1,"name":"(-0.05, -0.045]"},{"x":-0.0425,"y":0,"name":"(-0.045, -0.04]"},{"x":-0.0375,"y":4,"name":"(-0.04, -0.035]"},{"x":-0.0325,"y":4,"name":"(-0.035, -0.03]"},{"x":-0.0275,"y":3,"name":"(-0.03, -0.025]"},{"x":-0.0225,"y":3,"name":"(-0.025, -0.02]"},{"x":-0.0175,"y":9,"name":"(-0.02, -0.015]"},{"x":-0.0125,"y":6,"name":"(-0.015, -0.01]"},{"x":-0.00750000000000003,"y":4,"name":"(-0.01, -0.00500000000000003]"},{"x":-0.00250000000000002,"y":6,"name":"(-0.00500000000000002, -1.38777878078145e-17]"},{"x":0.00249999999999999,"y":12,"name":"(-1.38777878078145e-17, 0.00499999999999999]"},{"x":0.00749999999999998,"y":11,"name":"(0.00499999999999998, 0.00999999999999998]"},{"x":0.0125,"y":12,"name":"(0.00999999999999997, 0.015]"},{"x":0.0175,"y":10,"name":"(0.015, 0.02]"},{"x":0.0225,"y":14,"name":"(0.02, 0.025]"},{"x":0.0275,"y":6,"name":"(0.025, 0.03]"},{"x":0.0325,"y":9,"name":"(0.03, 0.035]"},{"x":0.0375,"y":10,"name":"(0.035, 0.04]"},{"x":0.0425,"y":4,"name":"(0.04, 0.045]"},{"x":0.0475,"y":4,"name":"(0.045, 0.05]"},{"x":0.0525,"y":3,"name":"(0.05, 0.055]"},{"x":0.0575,"y":3,"name":"(0.055, 0.06]"},{"x":0.0625,"y":1,"name":"(0.06, 0.065]"},{"x":0.0675,"y":2,"name":"(0.065, 0.07]"},{"x":0.0725,"y":1,"name":"(0.07, 0.075]"},{"x":0.0775,"y":0,"name":"(0.075, 0.08]"},{"x":0.0825,"y":2,"name":"(0.08, 0.085]"},{"x":0.0875,"y":1,"name":"(0.085, 0.09]"},{"x":0.0925,"y":1,"name":"(0.09, 0.095]"},{"x":0.0975,"y":0,"name":"(0.095, 0.1]"},{"x":0.1025,"y":1,"name":"(0.1, 0.105]"}],"type":"column","pointRange":0.005,"groupPadding":0,"pointPadding":0,"borderWidth":0}]},"theme":{"chart":{"backgroundColor":"transparent"}},"conf_opts":{"global":{"Date":null,"VMLRadialGradientURL":"http =//code.highcharts.com/list(version)/gfx/vml-radial-gradient.png","canvasToolsURL":"http =//code.highcharts.com/list(version)/modules/canvas-tools.js","getTimezoneOffset":null,"timezoneOffset":0,"useUTC":true},"lang":{"contextButtonTitle":"Chart context menu","decimalPoint":".","downloadJPEG":"Download JPEG image","downloadPDF":"Download PDF document","downloadPNG":"Download PNG image","downloadSVG":"Download SVG vector image","drillUpText":"Back to {series.name}","invalidDate":null,"loading":"Loading...","months":["January","February","March","April","May","June","July","August","September","October","November","December"],"noData":"No data to display","numericSymbols":["k","M","G","T","P","E"],"printChart":"Print chart","resetZoom":"Reset zoom","resetZoomTitle":"Reset zoom level 1:1","shortMonths":["Jan","Feb","Mar","Apr","May","Jun","Jul","Aug","Sep","Oct","Nov","Dec"],"thousandsSep":" ","weekdays":["Sunday","Monday","Tuesday","Wednesday","Thursday","Friday","Saturday"]}},"type":"chart","fonts":[],"debug":false},"evals":["hc_opts.tooltip.formatter"],"jsHooks":[]}</script>
+</div>
+<p>Nothing wrong with that chart, and it shows us the distribution of SPY returns. However, <code>highcharter</code> is missing an easy way to chart multiple histograms, and to add density lines to those multiple histograms. The functionality is fine for one set of returns, but here we want to see the distribution of all of our returns series together.</p>
+<p>For that, we will head to the tidyverse and use <code>ggplot2</code> on our tidy <code>tibble</code> called <code>assets_returns_long</code>. Because it is in long, tidy format, and it is grouped by the ‘asset’ column, we can chart the asset histograms collectively on one chart.</p>
+<div class="layout-chunk" data-layout="l-body-outset">
+<pre class="r"><code>
+# Make so all titles centered in the upcoming ggplots
+theme_update(plot.title = element_text(hjust = 0.5))
+
+asset_returns_long %&gt;% 
+  ggplot(aes(x = returns, fill = asset)) + 
+  geom_histogram(alpha = 0.25, binwidth = .01)</code></pre>
+<p><img src="visualizing-asset-returns_files/figure-html5/unnamed-chunk-5-1.png" width="576" /></p>
+</div>
+<p>Let’s use <code>facet_wrap(~asset)</code> to break these out by asset. We can add a title with <code>ggtitle</code>.</p>
+<div class="layout-chunk" data-layout="l-body-outset">
+<pre class="r"><code>
+asset_returns_long %&gt;% 
+  ggplot(aes(x = returns, fill = asset)) + 
+  geom_histogram(alpha = 0.25, binwidth = .01) + 
+  facet_wrap(~asset) + 
+  ggtitle(&quot;Monthly Returns Since 2005&quot;)</code></pre>
+<p><img src="visualizing-asset-returns_files/figure-html5/unnamed-chunk-6-1.png" width="576" /></p>
+</div>
+<p>Maybe we don’t want to use a histogram, but instead want to use a density line to visualize the various distributions. We can use the <code>stat_density(geom = &quot;line&quot;, alpha = 1)</code> function to do this. The <code>alpha</code> argument is selecting a line thickness. Let’s also add a label to the x and y axes with the <code>xlab</code> and <code>ylab</code> functions.</p>
+<div class="layout-chunk" data-layout="l-body-outset">
+<pre class="r"><code>
+asset_returns_long %&gt;% 
+  ggplot(aes(x = returns, colour = asset, fill = asset)) +
+  stat_density(geom = &quot;line&quot;, alpha = 1) +
+  ggtitle(&quot;Monthly Returns Since 2005&quot;) +
+  xlab(&quot;monthly returns&quot;) +
+  ylab(&quot;distribution&quot;) </code></pre>
+<p><img src="visualizing-asset-returns_files/figure-html5/unnamed-chunk-7-1.png" width="576" /></p>
+</div>
+<p>That chart is quite digestible, but we can also <code>facet_wrap(~asset)</code> to break the densities out into individual charts.</p>
+<div class="layout-chunk" data-layout="l-body-outset">
+<pre class="r"><code>
+asset_returns_long %&gt;% 
+  ggplot(aes(x = returns, colour = asset, fill = asset)) +
+  stat_density(geom = &quot;line&quot;, alpha = 1) +
+  facet_wrap(~asset) +
+  ggtitle(&quot;Monthly Returns Since 2005&quot;) +
+  xlab(&quot;monthly returns&quot;) +
+  ylab(&quot;distribution&quot;) </code></pre>
+<p><img src="visualizing-asset-returns_files/figure-html5/unnamed-chunk-8-1.png" width="576" /></p>
+</div>
+<p>Now we can combine all of our ggplots into one nice, faceted plot.</p>
+<p>At the same time, to add to the aesthetic toolkit a bit, we will do some editing to the label colors. First off, let’s choose a different color besides black to be the theme. I will go with cornflower blue, because it’s a nice shade and I don’t see it used very frequently elsewhere. Once we have a color, we can choose the different elements of the chart to change in the the <code>theme</code> function. I make a lot of changes here by way of example but feel free to comment out a few of those lines and see the different options.</p>
+<div class="layout-chunk" data-layout="l-body-outset">
+<pre class="r"><code>
+asset_returns_long %&gt;% 
+  ggplot(aes(x = returns, colour = asset, fill = asset)) +
+  stat_density(geom = &quot;line&quot;, alpha = 1) +
+  geom_histogram(alpha = 0.25, binwidth = .01) +
+  facet_wrap(~asset) +
+  ggtitle(&quot;Monthly Returns Since 2005&quot;) +
+  xlab(&quot;monthly returns&quot;) +
+  ylab(&quot;distribution&quot;) +
+  # Lots of elements can be customized in the theme() function
+  theme(plot.title = element_text(colour = &quot;cornflowerblue&quot;),  
+        strip.text.x = element_text(size = 8, colour = &quot;white&quot;), 
+        strip.background = element_rect(colour = &quot;white&quot;, 
+                                        fill = &quot;cornflowerblue&quot;), 
+        axis.text.x = element_text(colour = &quot;cornflowerblue&quot;), 
+        axis.text = element_text(colour = &quot;cornflowerblue&quot;), 
+        axis.ticks.x = element_line(colour = &quot;cornflowerblue&quot;), 
+        axis.text.y = element_text(colour = &quot;cornflowerblue&quot;), 
+        axis.ticks.y = element_line(colour = &quot;cornflowerblue&quot;),
+        axis.title = element_text(colour = &quot;cornflowerblue&quot;),
+        legend.title = element_text(colour = &quot;cornflowerblue&quot;),
+        legend.text = element_text(colour = &quot;cornflowerblue&quot;)
+        )</code></pre>
+<p><img src="visualizing-asset-returns_files/figure-html5/unnamed-chunk-9-1.png" width="576" data-radix-preview=1 /></p>
+</div>
+<p>We now have one chart, with histograms and line densities broken out for each of our assets. This would scale nicely if we had more assets and wanted to peek at more distributions of returns.</p>
+<p>We have not done any substantive work today, but the chart of monthly returns is a tool to quickly glance at the data and see if anything unusual jumps out, or some sort of hypothesis comes to mind. We are going to be combining these assets into a portfolio and, once that occurs, we will rarely view the assets in isolation again. Before that leap to portfolio building, it’s a good idea to glance at the portfolio component distributions.</p>
+<p>That’s all for today. Thanks for reading!</p>
+<!--radix_placeholder_article_footer-->
+<div class="article-footer">
+  <p class="social_footer">
+    <span class="disqus-comments">
+      <i class="fas fa-comments"></i>
+      &nbsp;
+      <span class="disqus-comment-count" data-disqus-identifier="posts/2017-11-09-visualizing/">Comment on this article</span>
+    </span>
+    <span class="article-sharing">
+      Share: &nbsp;
+      <a href="https://twitter.com/share?text=Visualizing%20Asset%20Returns&amp;url=https%3A%2F%2Fbeta.rstudioconnect.com%2Fcontent%2F3776%2Fposts%2F2017-11-09-visualizing%2F">
+        <i class="fab fa-twitter"></i>
+      </a>
+      <a href="https://www.linkedin.com/shareArticle?mini=true&amp;url=https%3A%2F%2Fbeta.rstudioconnect.com%2Fcontent%2F3776%2Fposts%2F2017-11-09-visualizing%2F&amp;title=Visualizing%20Asset%20Returns">
+        <i class="fab fa-linkedin"></i>
+      </a>
+    </span>
+  </p>
+  <script id="dsq-count-scr" src="https://reproducible-finance-with-r.disqus.com/count.js" async></script>
+  <div id="disqus_thread" class="hidden"></div>
+  <script>
+var disqus_config = function () {
+  this.page.url = 'https://beta.rstudioconnect.com/content/3776/posts/2017-11-09-visualizing/';
+  this.page.identifier = 'posts/2017-11-09-visualizing/';
+};
+(function() {
+  var d = document, s = d.createElement('script');
+  s.src = 'https://reproducible-finance-with-r.disqus.com/embed.js';
+  s.setAttribute('data-timestamp', +new Date());
+  (d.head || d.body).appendChild(s);
+})();
+</script>
+  <p>
+    <div class="subscribe">
+<form method='post' action='https://blogtrottr.com'>
+  <p>Enjoy this blog? Get notified of new posts via email:</p>
+  <input type='text' name='btr_email' />
+  <input type='hidden' name='btr_url'
+         value='https://beta.rstudioconnect.com/content/3776/index.xml'/>
+  <input type='hidden' name='schedule_type' value='0' />
+  <input type='submit' value='Subscribe' />
+</form>
+</div>
+  </p>
+</div>
+<!--/radix_placeholder_article_footer-->
+</div>
+
+<div class="d-appendix">
+</div>
+
+
+<!--radix_placeholder_site_after_body-->
+<!--/radix_placeholder_site_after_body-->
+<!--radix_placeholder_appendices-->
+<div class="appendix-bottom">
+  <h3 id="reuse">Reuse</h3>
+  <p>Text and figures are licensed under Creative Commons Attribution <a rel="license" href="https://creativecommons.org/licenses/by/4.0/">CC BY 4.0</a>. The figures that have been reused from other sources don't fall under this license and can be recognized by a note in their caption: "Figure from ...".</p>
+</div>
+<!--/radix_placeholder_appendices-->
+<!--radix_placeholder_navigation_after_body-->
+<!--/radix_placeholder_navigation_after_body-->
+
+</body>
+
+</html>
+
