@@ -97,7 +97,7 @@ import_article <- function(url, collection, slug = "auto", date_prefix = FALSE,
       name = strsplit(lib[[2]], split = "/")[[1]][[1]]
       list(
         name = name,
-        url = url_path(base_url, lib[[1]], "site_libs", name)
+        url = url_path(lib[[1]], "site_libs", name)
       )
     }
   ))
@@ -107,6 +107,7 @@ import_article <- function(url, collection, slug = "auto", date_prefix = FALSE,
   manifest <- extract_manifest(article_tmp)
 
   # download the files in the manifest
+  rewrites <- c()
   for (file in manifest) {
 
     # ensure the destination directory exists
@@ -118,10 +119,24 @@ import_article <- function(url, collection, slug = "auto", date_prefix = FALSE,
     # the file might be found in site_libs, in that case download from site_libs/
     download_url <- url_path(url, file)
     for (site_lib in site_libs) {
+
+      # if it's in site_libs then modify the download_url
       lib_pattern <- sprintf("_files/%s/", site_lib$name)
       if (grepl(lib_pattern, file, fixed = TRUE)) {
-        download_url <- url_path(site_lib$url,
+        download_url <- url_path(base_url,
+                                 site_lib$url,
                                  strsplit(file, lib_pattern, fixed = TRUE)[[1]][[2]])
+
+        # add it to list of site_libs to be re-written
+        rewrite <- list(
+          site_lib = site_lib$url,
+          local_lib = paste0(
+            strsplit(file, lib_pattern, fixed = TRUE)[[1]][[1]],
+            "_files/",
+            site_lib$name
+          )
+        )
+        rewrites[[length(rewrites) + 1]] <- rewrite
       }
     }
 
@@ -129,18 +144,26 @@ import_article <- function(url, collection, slug = "auto", date_prefix = FALSE,
     downloader::download(download_url, destination)
   }
 
+  # perform re-writes
+  rewrites <- unique(rewrites)
+  for (rewrite in rewrites) {
+    index_content <- gsub(
+      pattern = paste0('="', rewrite$site_lib),
+      replacement = paste0('="', rewrite$local_lib),
+      x = index_content,
+      fixed = TRUE,
+      useBytes = TRUE
+    )
+  }
+
   # write the index file
   writeLines(index_content, file.path(article_dir, "index.html"), useBytes = TRUE)
 
   # TODO: make download more transactional (write to tmp)
 
-  # TODO: fixup site_libs to point back to _files
   # TODO: tolerate no manifest for self_contained
   # TODO: error on website page w/o manifest
 
-  # TODO: check for manifest
-  # TODO: download resource files via manifest
-  # TODO: fixup ../../site_dir after download
   # TODO render just the imported article automatically
 
   # TODO: license checking
