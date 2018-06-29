@@ -164,7 +164,8 @@ import_article <- function(url, collection, slug = "auto", date_prefix = FALSE,
   # TODO: tolerate no manifest for self_contained
   # TODO: error on website page w/o manifest
 
-  # TODO render just the imported article automatically
+  # TODO: render just the imported article automatically
+  # TODO: preview after render (may need to be filesystem based)
 
   # TODO: license checking
   # TODO: attribution metadata?
