@@ -41,7 +41,8 @@ Imports:
     rprojroot,
     xml2,
     base64enc,
-    whisker
+    whisker,
+    downloader
 Suggests:
     knitr (>= 1.15.6),
     htmlwidgets,

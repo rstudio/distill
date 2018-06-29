@@ -45,6 +45,12 @@ resolve_date <- function(article_dir, date) {
   parse_date(date)
 }
 
+is_date <- function(x) {
+  lubridate::is.Date(x) ||
+  lubridate::is.POSIXct(x) ||
+  lubridate::is.POSIXlt(x)
+}
+
 parse_date <- function(date) {
   if (!is.null(date)) {
     parsed_date <- lubridate::mdy(date, tz = Sys.timezone(), quiet = TRUE)

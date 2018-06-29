@@ -77,22 +77,13 @@ create_post <- function(title, author = "auto", slug = "auto", date_prefix = TRU
   if (is.null(site_dir))
     stop("You must call create_post from within a Radix website")
 
-  # more discovvery
+  # more discovery
   site_config <- site_config(site_dir)
   posts_dir <- file.path(site_dir, "_posts")
   posts_index <- file.path(site_dir, site_config$output_dir, "posts", "posts.json")
 
   # auto-slug
-  if (identical(slug, "auto")) {
-    slug <- tolower(title)
-    slug <- gsub("\\s+", "-", slug)              # replace spaces with -
-    slug <- gsub("[^a-zA-Z0-9\\-]+", "", slug)   # remove all non-word chars
-    slug <- gsub("\\-{2,}", "-", slug)           # replace multiple - with single -
-    slug <- gsub("^-+", "", slug)                # trim - from start of text
-    slug <- gsub("-+$", "", slug)                # trim - from end of text
-  } else {
-    slug <- gsub("\\s+", "-", title)             # replace spaces with -
-  }
+  slug <- resolve_slug(title, slug)
   post_dir <- file.path(posts_dir, slug)
 
   # add date prefix
@@ -102,9 +93,7 @@ create_post <- function(title, author = "auto", slug = "auto", date_prefix = TRU
       date_prefix <- Sys.Date()
     else if (is.character(date_prefix))
       date_prefix <- parse_date(date_prefix)
-    if (lubridate::is.Date(date_prefix) ||
-        lubridate::is.POSIXct(date_prefix) ||
-        lubridate::is.POSIXlt(date_prefix)) {
+    if (is_date(date_prefix)) {
       post_date <- date_prefix
       date_prefix <- as.character(date_prefix, format = "%Y-%m-%d")
     } else {
@@ -270,6 +259,21 @@ edit_file <- function(file) {
     utils::file.edit(file)
 }
 
+resolve_slug <- function(title, slug) {
+
+  if (identical(slug, "auto"))
+    slug <- title
+
+  slug <- tolower(slug)                        # convert to lowercase
+  slug <- gsub("\\s+", "-", slug)              # replace spaces with -
+  slug <- gsub("[^a-zA-Z0-9\\-]+", "", slug)   # remove all non-word chars
+  slug <- gsub("\\-{2,}", "-", slug)           # replace multiple - with single -
+  slug <- gsub("^-+", "", slug)                # trim - from start of text
+  slug <- gsub("-+$", "", slug)                # trim - from end of text
+
+  slug
+
+}
 
 
 
