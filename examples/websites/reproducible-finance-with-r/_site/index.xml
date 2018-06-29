@@ -16,42 +16,42 @@
     <item>
       <title>Visualizing Asset Returns</title>
       <dc:creator>Jonathan Regenstein</dc:creator>
-      <link>https://beta.rstudioconnect.com/content/3776/posts/visualizing-asset-returns</link>
+      <link>https://beta.rstudioconnect.com/content/3776/posts/2017-11-09-visualizing-asset-returns</link>
       <description>In this post we take a closer look at the individual assets which compose a portfolio. The motivation is to make sure we have scrutinized our assets before they get into our portfolio, as once the portfolio has been constructed, it is tempting to keep the analysis at the portfolio level 
 </description>
-      <guid>https://beta.rstudioconnect.com/content/3776/posts/visualizing-asset-returns</guid>
+      <guid>https://beta.rstudioconnect.com/content/3776/posts/2017-11-09-visualizing-asset-returns</guid>
       <pubDate>Thu, 09 Nov 2017 00:00:00 +0000</pubDate>
-      <media:content url="https://beta.rstudioconnect.com/content/3776/posts/visualizing-asset-returns/visualizing-asset-returns_files/figure-html5/unnamed-chunk-9-1.png" medium="image" type="image/png" width="1152" height="576"/>
+      <media:content url="https://beta.rstudioconnect.com/content/3776/posts/2017-11-09-visualizing-asset-returns/visualizing-asset-returns_files/figure-html5/unnamed-chunk-9-1.png" medium="image" type="image/png" width="1152" height="576"/>
     </item>
     <item>
       <title>Asset Contribution to Portfolio Volatility</title>
       <dc:creator>Jonathan Regenstein</dc:creator>
-      <link>https://beta.rstudioconnect.com/content/3776/posts/asset-volatility</link>
+      <link>https://beta.rstudioconnect.com/content/3776/posts/2017-09-13-asset-volatility</link>
       <description>In this post we explore breaking total portfolio volatility into its constituent parts and investigate how each asset contributes to the volatility.
 </description>
-      <guid>https://beta.rstudioconnect.com/content/3776/posts/asset-volatility</guid>
+      <guid>https://beta.rstudioconnect.com/content/3776/posts/2017-09-13-asset-volatility</guid>
       <pubDate>Wed, 13 Sep 2017 00:00:00 +0000</pubDate>
-      <media:content url="https://beta.rstudioconnect.com/content/3776/posts/asset-volatility/asset-volatility_files/figure-html5/unnamed-chunk-13-1.png" medium="image" type="image/png" width="1152" height="576"/>
+      <media:content url="https://beta.rstudioconnect.com/content/3776/posts/2017-09-13-asset-volatility/asset-volatility_files/figure-html5/unnamed-chunk-13-1.png" medium="image" type="image/png" width="1152" height="576"/>
     </item>
     <item>
       <title>Quandl and Forecasting</title>
       <dc:creator>Jonathan Regenstein</dc:creator>
-      <link>https://beta.rstudioconnect.com/content/3776/posts/quandl-and-forecasting</link>
+      <link>https://beta.rstudioconnect.com/content/3776/posts/2017-03-07-quandl-and-forecasting</link>
       <description>In this post, we will explore commodity prices using data from Quandl, a repository for both free and paid data sources. We will also get into the forecasting game a bit and think about how best to use dygraphs when visualizing predicted time series as an extension of historical data.
 </description>
-      <guid>https://beta.rstudioconnect.com/content/3776/posts/quandl-and-forecasting</guid>
+      <guid>https://beta.rstudioconnect.com/content/3776/posts/2017-03-07-quandl-and-forecasting</guid>
       <pubDate>Tue, 07 Mar 2017 00:00:00 +0000</pubDate>
-      <media:content url="https://beta.rstudioconnect.com/content/3776/posts/quandl-and-forecasting/preview.png" medium="image" type="image/png" width="1656" height="927"/>
+      <media:content url="https://beta.rstudioconnect.com/content/3776/posts/2017-03-07-quandl-and-forecasting/preview.png" medium="image" type="image/png" width="1656" height="927"/>
     </item>
     <item>
       <title>The Sharpe Ratio</title>
       <dc:creator>Jonathan Regenstein</dc:creator>
-      <link>https://beta.rstudioconnect.com/content/3776/posts/sharpe-ratio</link>
+      <link>https://beta.rstudioconnect.com/content/3776/posts/2016-11-08-sharpe-ratio</link>
       <description>In this post we present a classic finance use case using the PerformanceAnalytics, quantmod, and dygraphs packages. We'll demonstrate importing stock data, building a portfolio, and then calculating the Sharpe Ratio. 
 </description>
-      <guid>https://beta.rstudioconnect.com/content/3776/posts/sharpe-ratio</guid>
+      <guid>https://beta.rstudioconnect.com/content/3776/posts/2016-11-08-sharpe-ratio</guid>
       <pubDate>Tue, 08 Nov 2016 00:00:00 +0000</pubDate>
-      <media:content url="https://beta.rstudioconnect.com/content/3776/posts/sharpe-ratio/preview.png" medium="image" type="image/png" width="1644" height="1014"/>
+      <media:content url="https://beta.rstudioconnect.com/content/3776/posts/2016-11-08-sharpe-ratio/preview.png" medium="image" type="image/png" width="1644" height="1014"/>
     </item>
   </channel>
 </rss>

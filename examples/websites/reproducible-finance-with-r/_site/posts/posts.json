@@ -1,6 +1,6 @@
 [
   {
-    "path": "posts/visualizing-asset-returns/",
+    "path": "posts/2017-11-09-visualizing-asset-returns/",
     "title": "Visualizing Asset Returns",
     "description": "In this post we take a closer look at the individual assets which compose a portfolio. The motivation is to make sure we have scrutinized our assets before they get into our portfolio, as once the portfolio has been constructed, it is tempting to keep the analysis at the portfolio level \n",
     "author": [
@@ -14,13 +14,13 @@
       "portfolios",
       "highcharts"
     ],
-    "preview": "posts/visualizing-asset-returns/visualizing-asset-returns_files/figure-html5/unnamed-chunk-9-1.png",
+    "preview": "posts/2017-11-09-visualizing-asset-returns/visualizing-asset-returns_files/figure-html5/unnamed-chunk-9-1.png",
     "last_modified": "2018-06-21T08:47:56-04:00",
     "preview_width": 1152,
     "preview_height": 576
   },
   {
-    "path": "posts/asset-volatility/",
+    "path": "posts/2017-09-13-asset-volatility/",
     "title": "Asset Contribution to Portfolio Volatility",
     "description": "In this post we explore breaking total portfolio volatility into its constituent parts and investigate how each asset contributes to the volatility.\n",
     "author": [
@@ -34,13 +34,13 @@
       "portfolios",
       "highcharts"
     ],
-    "preview": "posts/asset-volatility/asset-volatility_files/figure-html5/unnamed-chunk-13-1.png",
+    "preview": "posts/2017-09-13-asset-volatility/asset-volatility_files/figure-html5/unnamed-chunk-13-1.png",
     "last_modified": "2018-06-20T08:58:01-04:00",
     "preview_width": 1152,
     "preview_height": 576
   },
   {
-    "path": "posts/quandl-and-forecasting/",
+    "path": "posts/2017-03-07-quandl-and-forecasting/",
     "title": "Quandl and Forecasting",
     "description": "In this post, we will explore commodity prices using data from Quandl, a repository for both free and paid data sources. We will also get into the forecasting game a bit and think about how best to use dygraphs when visualizing predicted time series as an extension of historical data.\n",
     "author": [
@@ -54,13 +54,13 @@
       "forecasting",
       "dygraphs"
     ],
-    "preview": "posts/quandl-and-forecasting/preview.png",
+    "preview": "posts/2017-03-07-quandl-and-forecasting/preview.png",
     "last_modified": "2018-06-21T12:05:48-04:00",
     "preview_width": 1656,
     "preview_height": 927
   },
   {
-    "path": "posts/sharpe-ratio/",
+    "path": "posts/2016-11-08-sharpe-ratio/",
     "title": "The Sharpe Ratio",
     "description": "In this post we present a classic finance use case using the PerformanceAnalytics, quantmod, and dygraphs packages. We'll demonstrate importing stock data, building a portfolio, and then calculating the Sharpe Ratio. \n",
     "author": [
@@ -74,7 +74,7 @@
       "portfolios",
       "dygraphs"
     ],
-    "preview": "posts/sharpe-ratio/preview.png",
+    "preview": "posts/2016-11-08-sharpe-ratio/preview.png",
     "last_modified": "2018-06-21T12:05:48-04:00",
     "preview_width": 1644,
     "preview_height": 1014
