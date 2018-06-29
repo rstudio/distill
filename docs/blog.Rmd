@@ -75,39 +75,22 @@ Note that we've also added a feed icon to the right side of the menu bar which m
 
 ### Creating a post
 
-To create a post, simply create a sub-directory of the `_posts` directory and save a Radix article there. For example:
+The easist way to start authoring a new post is to call the `create_post()` function from within your blog's directory. For example:
 
 ```r
-dir.create("_posts/sharpe-ratio", recursive = TRUE)
+library(radix)
+create_post("The Sharpe Ratio")
 ```
 
-Here's what `sharpe_ratio.Rmd` might look like to start with:
+This will create a sub-directory for your post within the `_posts` directory, add a stub Radix article, and open the article for editing. 
 
-**\_posts/sharpe-ratio/sharpe-ratio.Rmd**
+If you want your post to start out as a draft (i.e. not be included within the listing of all posts) then you can add `draft = TRUE`. For example:
 
-```markup
----
-title: "The Sharpe Ratio"
-description: |
-  In this post we present a classic finance use case using the
-  PerformanceAnalytics, quantmod, and dygraphs packages. 
-  We'll demonstrate importing stock data, building a portfolio,
-  and then calculating the Sharpe Ratio. 
-author: 
-  - name: "Jonathan Regenstein"
-    url: https://www.linkedin.com/in/jkregenstein/
-    affiliation: RStudio
-    affiliation_url: https://www.rstudio.com
-date: 11-09-2016
-output: 
-  radix::radix_article:
-    self_contained: false
----
+```r
+create_post("The Sharpe Ratio", draft = TRUE)
 ```
 
-Note that we set `self_contained` to `false` since this article will be published as part of a website.
-
-You work on blog posts independent of the enclosing website (use **Knit** to render preview the post just like any R Markdown document). This is in fact the only way to update post content --- posts are considered standalone documents that are not re-rendered when the site is built. This is because posts are often expensive to render and have R package dependencies that may be difficult to satisfy as time goes on.
+You work on blog posts independent of the enclosing website (use **Knit** to render and preview the post just like any R Markdown document). This is in fact the only way to update post content --- posts are considered standalone documents that are not re-rendered when the site is built. This is because posts are often expensive to render and have R package dependencies that may be difficult to satisfy as time goes on.
 
 In the next section will describe how to create a listing page for all of your posts.
 

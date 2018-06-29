@@ -1292,31 +1292,15 @@ navbar:
 output: radix::radix_article</code></pre>
 <p>Note that we’ve also added a feed icon to the right side of the menu bar which makes it easy to discover and browse the RSS feed for the blog.</p>
 <h3 id="creating-a-post">Creating a post</h3>
-<p>To create a post, simply create a sub-directory of the <code>_posts</code> directory and save a Radix article there. For example:</p>
+<p>The easist way to start authoring a new post is to call the <code>create_post()</code> function from within your blog’s directory. For example:</p>
 <pre class="r"><code>
-dir.create(&quot;_posts/sharpe-ratio&quot;, recursive = TRUE)</code></pre>
-<p>Here’s what <code>sharpe_ratio.Rmd</code> might look like to start with:</p>
-<p><strong>_posts/sharpe-ratio/sharpe-ratio.Rmd</strong></p>
-<pre class="markup"><code>
----
-title: &quot;The Sharpe Ratio&quot;
-description: |
-  In this post we present a classic finance use case using the
-  PerformanceAnalytics, quantmod, and dygraphs packages. 
-  We&#39;ll demonstrate importing stock data, building a portfolio,
-  and then calculating the Sharpe Ratio. 
-author: 
-  - name: &quot;Jonathan Regenstein&quot;
-    url: https://www.linkedin.com/in/jkregenstein/
-    affiliation: RStudio
-    affiliation_url: https://www.rstudio.com
-date: 11-09-2016
-output: 
-  radix::radix_article:
-    self_contained: false
----</code></pre>
-<p>Note that we set <code>self_contained</code> to <code>false</code> since this article will be published as part of a website.</p>
-<p>You work on blog posts independent of the enclosing website (use <strong>Knit</strong> to render preview the post just like any R Markdown document). This is in fact the only way to update post content — posts are considered standalone documents that are not re-rendered when the site is built. This is because posts are often expensive to render and have R package dependencies that may be difficult to satisfy as time goes on.</p>
+library(radix)
+create_post(&quot;The Sharpe Ratio&quot;)</code></pre>
+<p>This will create a sub-directory for your post within the <code>_posts</code> directory, add a stub Radix article, and open the article for editing.</p>
+<p>If you want your post to start out as a draft (i.e. not be included within the listing of all posts) then you can add <code>draft = TRUE</code>. For example:</p>
+<pre class="r"><code>
+create_post(&quot;The Sharpe Ratio&quot;, draft = TRUE)</code></pre>
+<p>You work on blog posts independent of the enclosing website (use <strong>Knit</strong> to render and preview the post just like any R Markdown document). This is in fact the only way to update post content — posts are considered standalone documents that are not re-rendered when the site is built. This is because posts are often expensive to render and have R package dependencies that may be difficult to satisfy as time goes on.</p>
 <p>In the next section will describe how to create a listing page for all of your posts.</p>
 <h3 id="listing-pages">Listing pages</h3>
 <p>Once you have authored one or more posts you’ll want to create a listing page. You can do this by adding a <code>listing</code> metadata entry to the page you to include the listing on. This is often the main page for the website (index.Rmd). For example:</p>
