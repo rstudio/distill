@@ -1,9 +1,5 @@
 
-
-
-
-
-
+- Generate a footer.html
 
 - Embedded article workflow:
 

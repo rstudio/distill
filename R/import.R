@@ -174,6 +174,8 @@ import_article <- function(url, collection, slug = "auto", date_prefix = FALSE,
     file.rename(file.path(articles_dir, basename(article_temp_dir)), article_dir)
   }
 
+  # TODO: Refactor of import_article code
+  # TODO: Imported article should use today for date ordering
 
   # TODO: tolerate no manifest for self_contained
   # TODO: error on website page w/o manifest
