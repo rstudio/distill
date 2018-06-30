@@ -35,8 +35,12 @@ import_article <- function(url, collection, slug = "auto", date_prefix = FALSE,
   site_config <- site_config(site_dir)
   articles_dir <- file.path(site_dir, paste0("_", collection))
 
+  # create an article temp dir
+  article_temp_dir <- tempfile("import-article")
+  dir.create(article_temp_dir, recursive = TRUE)
+
   # download the article to a temp file
-  article_tmp <- tempfile("import-article", fileext = ".html")
+  article_tmp <- file.path(article_temp_dir, "index.html")
   downloader::download(url, destfile = article_tmp, mode = "wb")
 
   # extract metadata from the file
@@ -68,16 +72,10 @@ import_article <- function(url, collection, slug = "auto", date_prefix = FALSE,
 
   # compute the article directory and check whether it already exists
   article_dir <- file.path(articles_dir, slug)
-  if (dir_exists(article_dir)) {
-    if (overwrite)
-      unlink(article_dir, recursive = TRUE)
-    else
-      stop("Import failed (the article '", slug, "' already exists)\n",
-           "Pass overwrite = TRUE to replace the existing article.")
+  if (dir_exists(article_dir) && !overwrite) {
+    stop("Import failed (the article '", slug, "' already exists)\n",
+         "Pass overwrite = TRUE to replace the existing article.")
   }
-
-  # create the article dir
-  dir.create(article_dir, recursive = TRUE)
 
   # compute the base url path for downloads
   base_url <- url
@@ -111,7 +109,7 @@ import_article <- function(url, collection, slug = "auto", date_prefix = FALSE,
   for (file in manifest) {
 
     # ensure the destination directory exists
-    destination <- file.path(article_dir, file)
+    destination <- file.path(article_temp_dir, file)
     destination_dir <- dirname(destination)
     if (!dir_exists(destination_dir))
       dir.create(destination_dir, recursive = TRUE)
@@ -157,9 +155,25 @@ import_article <- function(url, collection, slug = "auto", date_prefix = FALSE,
   }
 
   # write the index file
-  writeLines(index_content, file.path(article_dir, "index.html"), useBytes = TRUE)
+  writeLines(index_content, file.path(article_temp_dir, "index.html"), useBytes = TRUE)
 
-  # TODO: make download more transactional (write to tmp)
+  # remove the existing article_dir if necessary
+  if (dir_exists(article_dir))
+    unlink(article_dir, recursive = TRUE)
+
+  # attempt to move the article in one shot (if that fails then copy it)
+  result <- tryCatch(file.rename(article_temp_dir, article_dir),
+                     error = function(e) FALSE)
+  if (!result) {
+    dir.create(article_dir, recursive = TRUE)
+    file.copy(
+      from = article_temp_dir,
+      to = articles_dir,
+      recursive = TRUE
+    )
+    file.rename(file.path(articles_dir, basename(article_temp_dir)), article_dir)
+  }
+
 
   # TODO: tolerate no manifest for self_contained
   # TODO: error on website page w/o manifest
