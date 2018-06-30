@@ -239,3 +239,23 @@ rendering_note <- function(...) {
   cat("NOTE:", paste(..., collapse = " "), "\n\n", file = stderr())
 }
 
+move_directory <- function(from_dir, to_dir) {
+
+  # remove the existing dir if necessary
+  if (dir_exists(to_dir))
+    unlink(to_dir, recursive = TRUE)
+
+  # attempt to move the dir in one shot (if that fails then copy it)
+  result <- tryCatch(file.rename(from_dir, to_dir),
+                     error = function(e) FALSE)
+  if (!result) {
+    dir.create(to_dir, recursive = TRUE)
+    file.copy(
+      from = from_dir,
+      to = dirname(to_dir),
+      recursive = TRUE
+    )
+    file.rename(file.path(dirname(to_dir), basename(from_dir)), to_dir)
+  }
+
+}

@@ -77,7 +77,35 @@ import_article <- function(url, collection, slug = "auto", date_prefix = FALSE,
          "Pass overwrite = TRUE to replace the existing article.")
   }
 
-  # compute the base url path for downloads
+  # download the article
+  download_article(url, article_tmp)
+
+  # move the article into place
+  move_directory(article_temp_dir, article_dir)
+
+  # TODO: Refactor of import_article code
+  # TODO: Imported article should use today for date ordering
+
+  # TODO: tolerate no manifest for self_contained
+  # TODO: error on website page w/o manifest
+
+  # TODO: render just the imported article automatically
+  # TODO: preview after render (may need to be filesystem based)
+
+  # TODO: license checking
+  # TODO: attribution metadata?
+  # TODO: updates?
+
+
+  # return nothing
+  invisible(NULL)
+
+}
+
+download_article <- function(url, article_tmp) {
+
+  article_temp_dir <- dirname(article_tmp)
+
   base_url <- url
   if (grepl("\\.html?$", url, ignore.case = TRUE))
     base_url <- dirname(url)
@@ -91,13 +119,13 @@ import_article <- function(url, collection, slug = "auto", date_prefix = FALSE,
   match <- gregexpr(pattern, index_content, useBytes = TRUE)
   site_libs <- gsub('"', '', regmatches(index_content, match)[[1]])
   site_libs <- unique(lapply(strsplit(site_libs, split = "site_libs/", fixed = TRUE),
-    function(lib) {
-      name = strsplit(lib[[2]], split = "/")[[1]][[1]]
-      list(
-        name = name,
-        url = url_path(lib[[1]], "site_libs", name)
-      )
-    }
+                             function(lib) {
+                               name = strsplit(lib[[2]], split = "/")[[1]][[1]]
+                               list(
+                                 name = name,
+                                 url = url_path(lib[[1]], "site_libs", name)
+                               )
+                             }
   ))
 
 
@@ -156,39 +184,5 @@ import_article <- function(url, collection, slug = "auto", date_prefix = FALSE,
 
   # write the index file
   writeLines(index_content, file.path(article_temp_dir, "index.html"), useBytes = TRUE)
-
-  # remove the existing article_dir if necessary
-  if (dir_exists(article_dir))
-    unlink(article_dir, recursive = TRUE)
-
-  # attempt to move the article in one shot (if that fails then copy it)
-  result <- tryCatch(file.rename(article_temp_dir, article_dir),
-                     error = function(e) FALSE)
-  if (!result) {
-    dir.create(article_dir, recursive = TRUE)
-    file.copy(
-      from = article_temp_dir,
-      to = articles_dir,
-      recursive = TRUE
-    )
-    file.rename(file.path(articles_dir, basename(article_temp_dir)), article_dir)
-  }
-
-  # TODO: Refactor of import_article code
-  # TODO: Imported article should use today for date ordering
-
-  # TODO: tolerate no manifest for self_contained
-  # TODO: error on website page w/o manifest
-
-  # TODO: render just the imported article automatically
-  # TODO: preview after render (may need to be filesystem based)
-
-  # TODO: license checking
-  # TODO: attribution metadata?
-  # TODO: updates?
-
-
-  # return nothing
-  invisible(NULL)
-
 }
+
