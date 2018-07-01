@@ -189,40 +189,9 @@ render_collection_article_post_processor <- function(encoding_fn) {
 
     } else {
 
-      # provide default date if we need to
-      if (is.null(metadata[["date"]]))
-        metadata$date <- date_today()
-
-      # transform metadata for site
-      metadata <- transform_metadata(
-        article_path,
-        site_config,
-        collection,
-        metadata,
-        auto_preview = TRUE
-      )
-
-      # form an article object
-      article <- list(
-        path = article_path,
-        metadata = metadata
-      )
-
-      # render the article
-      output_file <- render_collection_article(
-        site_dir = site_dir,
-        site_config = site_config,
-        collection = collection,
-        article = article,
-        navigation_html = navigation_html_generator(),
-        distill_html = distill_in_header(),
-        site_includes = site_includes(site_dir, site_config),
-        strip_trailing_newline = FALSE,
-        quiet = TRUE
-      )
-
-      # update the article index and regenerate listing
-      update_collection_listing(site_dir, site_config, collection, article, encoding)
+      # publish article
+      publish_collection_article_to_site(site_dir, site_config, encoding,
+                                         collection, article_path, metadata)
 
       # return the output_file w/ an attribute indicating that
       # base post processing should be done on both the new
@@ -232,6 +201,45 @@ render_collection_article_post_processor <- function(encoding_fn) {
     }
 
   }
+}
+
+publish_collection_article_to_site <- function(site_dir, site_config, encoding,
+                                               collection, article_path, metadata) {
+
+  # provide default date if we need to
+  if (is.null(metadata[["date"]]))
+    metadata$date <- date_today()
+
+  # transform metadata for site
+  metadata <- transform_metadata(
+    article_path,
+    site_config,
+    collection,
+    metadata,
+    auto_preview = TRUE
+  )
+
+  # form an article object
+  article <- list(
+    path = article_path,
+    metadata = metadata
+  )
+
+  # render the article
+  output_file <- render_collection_article(
+    site_dir = site_dir,
+    site_config = site_config,
+    collection = collection,
+    article = article,
+    navigation_html = navigation_html_generator(),
+    distill_html = distill_in_header(),
+    site_includes = site_includes(site_dir, site_config),
+    strip_trailing_newline = FALSE,
+    quiet = TRUE
+  )
+
+  # update the article index and regenerate listing
+  update_collection_listing(site_dir, site_config, collection, article, encoding)
 }
 
 update_collection_listing <- function(site_dir, site_config, collection, article, encoding) {

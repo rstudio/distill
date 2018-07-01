@@ -526,8 +526,11 @@ front_matter_from_metadata <- function(metadata) {
       affiliationURL = not_null(author$affiliation_url, "#")
     )
   })
-  if (!is.null(metadata$date))
+  if (!is.null(metadata$date)) {
+    if (is.character(metadata$date))
+      metadata$date <- parse_date(metadata$date)
     front_matter$publishedDate <- date_as_iso_8601(metadata$date)
+  }
   if (!is.null(metadata$concatenated_authors) && !is.null(metadata$published_year)) {
     front_matter$citationText <- sprintf("%s, %s",
                                          metadata$concatenated_authors,
@@ -557,9 +560,6 @@ embedded_metadata <- function(metadata) {
 }
 
 embedded_metadata_html <- function(metadata) {
-  # make sure date is character
-  if (is_date(metadata$date))
-    metadata$date <- as.character(metadata$date, format = "%m-%d-%Y")
   json_html <- embedded_json(metadata, "radix-rmarkdown-metadata", file = NULL)
   placeholder_html("rmarkdown_metadata", json_html)
 }

@@ -3,6 +3,7 @@
 export(create_blog)
 export(create_post)
 export(create_website)
+export(import_post)
 export(publish_website)
 export(radix_article)
 export(radix_website)

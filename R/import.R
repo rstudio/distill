@@ -57,13 +57,11 @@ import_article <- function(url, collection, slug = "auto",
   if (is.character(date))
     date <- parse_date(date)
   if (!is.null(date))
-    metadata$date <- date
-  else
-    metadata$date <- parse_date(metadata$date)
+    metadata$date <- as.character(date, format = "%m-%d-%Y")
 
   # add date to slug if requested
   if (isTRUE(date_prefix)) {
-    slug <- paste(as.character(metadata$date, format = "%Y-%m-%d"), slug,
+    slug <- paste(as.character(parse_date(metadata$date), format = "%Y-%m-%d"), slug,
                   sep = "-")
   }
 
@@ -80,10 +78,18 @@ import_article <- function(url, collection, slug = "auto",
   # move the article into place
   move_directory(article_temp_dir, article_dir)
 
+  # publish to site
+  collections <- site_collections(site_dir, site_config)
+  publish_collection_article_to_site(site_dir, site_config, getOption("encoding"),
+                                     collections[[collection]],
+                                     file.path(article_dir, "index.html"),
+                                     metadata)
+
+
   # TODO: tolerate no manifest for self_contained
   # TODO: error on website page w/o manifest
 
-  # TODO: render just the imported article automatically
+
   # TODO: preview after render (may need to be filesystem based)
 
   # TODO: license checking

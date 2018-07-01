@@ -5,7 +5,7 @@
 \title{Create a new blog post}
 \usage{
 create_post(title, author = "auto", slug = "auto", date_prefix = TRUE,
-  edit = interactive())
+  draft = FALSE, edit = interactive())
 }
 \arguments{
 \item{title}{Post title}
@@ -18,8 +18,14 @@ provided.}
 \item{date_prefix}{Data prefix for post slug (preserves chronological order for posts
 within the filesystem).}
 
+\item{draft}{Mark the post as a \code{draft} (don't include it in the article listing).}
+
 \item{edit}{Open the post in an editor after creating it.}
 }
 \description{
 Create a new blog post
+}
+\note{
+This function must be called from with a working directory that is within
+a Radix website.
 }
