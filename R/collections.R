@@ -190,8 +190,9 @@ render_collection_article_post_processor <- function(encoding_fn) {
     } else {
 
       # publish article
-      publish_collection_article_to_site(site_dir, site_config, encoding,
-                                         collection, article_path, metadata)
+      output_file <- publish_collection_article_to_site(
+        site_dir, site_config, encoding, collection, article_path, metadata
+      )
 
       # return the output_file w/ an attribute indicating that
       # base post processing should be done on both the new
@@ -240,6 +241,9 @@ publish_collection_article_to_site <- function(site_dir, site_config, encoding,
 
   # update the article index and regenerate listing
   update_collection_listing(site_dir, site_config, collection, article, encoding)
+
+  # return output file
+  output_file
 }
 
 update_collection_listing <- function(site_dir, site_config, collection, article, encoding) {

@@ -12,7 +12,8 @@
 #' @export
 import_post <- function(url, slug = "auto",
                         date = Sys.Date(), date_prefix = TRUE,
-                        overwrite = FALSE) {
+                        overwrite = FALSE,
+                        view = interactive()) {
   # import article
   import_article(
     url,
@@ -28,7 +29,8 @@ import_post <- function(url, slug = "auto",
 
 import_article <- function(url, collection, slug = "auto",
                            date = NULL, date_prefix = FALSE,
-                           overwrite = FALSE) {
+                           overwrite = FALSE,
+                           view = interactive()) {
 
   # determine site_dir (must call from within a site)
   site_dir <- find_site_dir(".")
@@ -80,17 +82,19 @@ import_article <- function(url, collection, slug = "auto",
 
   # publish to site
   collections <- site_collections(site_dir, site_config)
-  publish_collection_article_to_site(site_dir, site_config, getOption("encoding"),
-                                     collections[[collection]],
-                                     file.path(article_dir, "index.html"),
-                                     metadata)
+  output_file <- publish_collection_article_to_site(
+    site_dir, site_config, getOption("encoding"),
+    collections[[collection]], file.path(article_dir, "index.html"), metadata
+  )
 
+  # view output file
+  if (view)
+    utils::browseURL(output_file)
+
+  # TODO: improved download progress treatment (control codes, progress bar)
 
   # TODO: tolerate no manifest for self_contained
   # TODO: error on website page w/o manifest
-
-
-  # TODO: preview after render (may need to be filesystem based)
 
   # TODO: license checking
   # TODO: attribution metadata?
