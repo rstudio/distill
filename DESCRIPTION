@@ -42,7 +42,8 @@ Imports:
     xml2,
     base64enc,
     whisker,
-    downloader
+    downloader,
+    progress
 Suggests:
     knitr (>= 1.15.6),
     htmlwidgets,

@@ -46,8 +46,9 @@ import_article <- function(url, collection, slug = "auto",
   dir.create(article_temp_dir, recursive = TRUE)
 
   # download the article to a temp file
+  message("Importing ", url, "...")
   article_tmp <- file.path(article_temp_dir, "index.html")
-  downloader::download(url, destfile = article_tmp, mode = "wb")
+  downloader::download(url, destfile = article_tmp, mode = "wb", quiet = TRUE)
 
   # extract metadata from the file
   metadata <- extract_embedded_metadata(article_tmp)
@@ -91,7 +92,6 @@ import_article <- function(url, collection, slug = "auto",
   if (view)
     utils::browseURL(output_file)
 
-  # TODO: improved download progress treatment (control codes, progress bar)
 
   # TODO: tolerate no manifest for self_contained
   # TODO: error on website page w/o manifest
@@ -147,9 +147,18 @@ download_article <- function(url, article_tmp, metadata) {
   # extract the manifest
   manifest <- extract_manifest(article_tmp)
 
+  # progress bar
+  pb <- progress::progress_bar$new(
+    format = "[:bar] :file :percent eta: :eta",
+    total = length(manifest)
+  )
+
   # download the files in the manifest
   rewrites <- c()
   for (file in manifest) {
+
+    # tick
+    pb$tick(tokens = list(file = basename(file)))
 
     # ensure the destination directory exists
     destination <- file.path(article_temp_dir, file)
@@ -182,7 +191,7 @@ download_article <- function(url, article_tmp, metadata) {
     }
 
     # perform the download
-    downloader::download(download_url, destination)
+    downloader::download(download_url, destination, mode = "wb", quiet = TRUE)
   }
 
   # perform re-writes
