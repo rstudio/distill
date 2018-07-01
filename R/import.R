@@ -96,7 +96,7 @@ import_article <- function(url, collection, slug = "auto",
 
   # TODO: license checking
   # TODO: attribution metadata?
-  # TODO: updates?
+  # TODO: updates? could just be an import where we preserve the date
 
 
   # return nothing
@@ -214,3 +214,29 @@ download_article <- function(url, article_tmp, metadata) {
   writeLines(index_content, file.path(article_temp_dir, "index.html"), useBytes = TRUE)
 }
 
+
+resolve_github_url <- function(url) {
+
+  # is this a github repo?
+  is_github_repo <- grepl("^https://github\\.com/.*/.*$", url)
+
+  # if it is then look for an article within it
+  if (is_github_repo) {
+    # pull out the owner and repo
+    matches <- regmatches(url,  regexec('^https://github\\.com/(.*)/([^/]+).*$', url))
+    owner <- matches[[1]][[2]]
+    repo <- matches[[1]][[3]]
+
+    # download the file list as json
+    repo_files <- jsonlite::fromJSON(
+      sprintf("https://api.github.com/repos/%s/%s/git/trees/master",
+      owner, repo)
+    )
+
+    str(repo_files)
+
+  } else {
+    url
+  }
+
+}
