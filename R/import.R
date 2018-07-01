@@ -92,9 +92,9 @@ import_article <- function(url, collection, slug = "auto",
   if (view)
     utils::browseURL(output_file)
 
-
-  # TODO: tolerate no manifest for self_contained
   # TODO: error on website page w/o manifest
+
+  # TODO: import from github repo
 
   # TODO: license checking
   # TODO: attribution metadata?
