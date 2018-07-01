@@ -10,12 +10,15 @@
 #' @param url URL for post to import
 #'
 #' @export
-import_post <- function(url, slug = "auto", date_prefix = TRUE,
+import_post <- function(url, slug = "auto",
+                        date = Sys.Date(), date_prefix = TRUE,
                         overwrite = FALSE) {
+  # import article
   import_article(
     url,
     collection = "posts",
     slug = slug,
+    date = date,
     date_prefix = date_prefix,
     overwrite = overwrite
   )
@@ -23,7 +26,8 @@ import_post <- function(url, slug = "auto", date_prefix = TRUE,
 
 
 
-import_article <- function(url, collection, slug = "auto", date_prefix = FALSE,
+import_article <- function(url, collection, slug = "auto",
+                           date = NULL, date_prefix = FALSE,
                            overwrite = FALSE) {
 
   # determine site_dir (must call from within a site)
@@ -49,25 +53,18 @@ import_article <- function(url, collection, slug = "auto", date_prefix = FALSE,
   # compute the base slug
   slug <- resolve_slug(metadata$title, slug)
 
-  # see if we need to add a date prefix
-  if (!identical(date_prefix, FALSE)) {
+  # resolve date change if necessary
+  if (is.character(date))
+    date <- parse_date(date)
+  if (!is.null(date))
+    metadata$date <- date
+  else
+    metadata$date <- parse_date(metadata$date)
 
-    # determine the date
-    if (is_date(date_prefix))
-      date <- date_prefix
-    else if (is.character(date_prefix))
-      date <- parse_date(date_prefix)
-    else if (isTRUE(date_prefix)) {
-      if (!is.null(metadata$date))
-        date <- parse_date(metadata$date)
-      else
-        date <- Sys.Date()
-    } else {
-      stop("You must specify either TRUE/FALSE or a date for date_prefix")
-    }
-
-    # modify the slug
-    slug <- paste(as.character(date, format = "%Y-%m-%d"), slug, sep = "-")
+  # add date to slug if requested
+  if (isTRUE(date_prefix)) {
+    slug <- paste(as.character(metadata$date, format = "%Y-%m-%d"), slug,
+                  sep = "-")
   }
 
   # compute the article directory and check whether it already exists
@@ -78,13 +75,10 @@ import_article <- function(url, collection, slug = "auto", date_prefix = FALSE,
   }
 
   # download the article
-  download_article(url, article_tmp)
+  download_article(url, article_tmp, metadata)
 
   # move the article into place
   move_directory(article_temp_dir, article_dir)
-
-  # TODO: Refactor of import_article code
-  # TODO: Imported article should use today for date ordering
 
   # TODO: tolerate no manifest for self_contained
   # TODO: error on website page w/o manifest
@@ -102,19 +96,31 @@ import_article <- function(url, collection, slug = "auto", date_prefix = FALSE,
 
 }
 
-download_article <- function(url, article_tmp) {
+download_article <- function(url, article_tmp, metadata) {
 
+  # determine target directory
   article_temp_dir <- dirname(article_tmp)
 
+  # compute base url
   base_url <- url
   if (grepl("\\.html?$", url, ignore.case = TRUE))
     base_url <- dirname(url)
   base_url <- ensure_trailing_slash(base_url)
 
-  # get site_libs references
+  # read the index content
   index_content <- readChar(article_tmp,
                             nchars = file.info(article_tmp)$size,
                             useBytes = TRUE)
+
+  # update the metadata (may have a revised date)
+  index_content <- fill_placeholder(index_content,
+                                    "front_matter",
+                                    as.character(front_matter_html(metadata)))
+  index_content <- fill_placeholder(index_content,
+                                    "rmarkdown_metadata",
+                                    as.character(embedded_metadata_html(metadata)))
+
+  # get site_libs references
   pattern <- '"[\\./]+site_libs/([^"]+)"'
   match <- gregexpr(pattern, index_content, useBytes = TRUE)
   site_libs <- gsub('"', '', regmatches(index_content, match)[[1]])
@@ -127,7 +133,6 @@ download_article <- function(url, article_tmp) {
                                )
                              }
   ))
-
 
   # extract the manifest
   manifest <- extract_manifest(article_tmp)

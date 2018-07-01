@@ -536,23 +536,32 @@ front_matter_from_metadata <- function(metadata) {
   jsonlite::toJSON(front_matter, auto_unbox = TRUE)
 }
 
-front_matter_before_body <- function(metadata) {
-  front_matter_html <- placeholder_html("front_matter",
+front_matter_html <- function(metadata) {
+  placeholder_html("front_matter",
     HTML(paste(c(
-      '',
-      '<script id="distill-front-matter" type="text/json">',
-      front_matter_from_metadata(metadata),
-      '</script>',
-      '') ,collapse = "\n")
+     '',
+     '<script id="distill-front-matter" type="text/json">',
+     front_matter_from_metadata(metadata),
+     '</script>',
+     '') ,collapse = "\n")
     )
   )
+}
 
-  html_file(front_matter_html)
+front_matter_before_body <- function(metadata) {
+  html_file(front_matter_html(metadata))
 }
 
 embedded_metadata <- function(metadata) {
+  html_file(embedded_metadata_html(metadata))
+}
+
+embedded_metadata_html <- function(metadata) {
+  # make sure date is character
+  if (is_date(metadata$date))
+    metadata$date <- as.character(metadata$date, format = "%m-%d-%Y")
   json_html <- embedded_json(metadata, "radix-rmarkdown-metadata", file = NULL)
-  html_file(placeholder_html("rmarkdown_metadata", json_html))
+  placeholder_html("rmarkdown_metadata", json_html)
 }
 
 extract_embedded_metadata <- function(file) {
