@@ -27,7 +27,7 @@ manifest_in_header <- function(site_config, input_file, metadata, self_contained
         recursive = TRUE
       )
     } else {
-      resources <- c()
+      resources <- list()
     }
 
     # serialize as json

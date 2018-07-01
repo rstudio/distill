@@ -92,8 +92,6 @@ import_article <- function(url, collection, slug = "auto",
   if (view)
     utils::browseURL(output_file)
 
-  # TODO: error on website page w/o manifest
-
   # TODO: import from github repo
 
   # TODO: license checking
@@ -146,6 +144,12 @@ download_article <- function(url, article_tmp, metadata) {
 
   # extract the manifest
   manifest <- extract_manifest(article_tmp)
+
+  # if manifest is NULL then this is a website page
+  if (is.null(manifest)) {
+    stop("Unable to import article (this article is a page within a Radix website ",
+         "rather than a standalone article", call. = FALSE)
+  }
 
   # progress bar
   pb <- progress::progress_bar$new(
