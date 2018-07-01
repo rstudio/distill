@@ -13,7 +13,7 @@ categories:
   - highcharts
 output: 
   radix::radix_article:
-    self_contained: false
+    self_contained: true
 ---
 
 ```{r setup, message = FALSE, include = FALSE}
