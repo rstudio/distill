@@ -537,24 +537,22 @@ front_matter_from_metadata <- function(metadata) {
 }
 
 front_matter_before_body <- function(metadata) {
-
-  front_matter_script <- HTML(paste(c(
-    '',
-    '<script id="distill-front-matter" type="text/json">',
-    front_matter_from_metadata(metadata),
-    '</script>',
-    '') ,collapse = "\n")
+  front_matter_html <- placeholder_html("front_matter",
+    HTML(paste(c(
+      '',
+      '<script id="distill-front-matter" type="text/json">',
+      front_matter_from_metadata(metadata),
+      '</script>',
+      '') ,collapse = "\n")
+    )
   )
-  front_matter_html <- renderTags(front_matter_script, indent = FALSE)$html
-  front_matter_file <- tempfile(fileext = "html")
-  writeLines(front_matter_html, front_matter_file)
 
-  front_matter_file
-
+  html_file(front_matter_html)
 }
 
 embedded_metadata <- function(metadata) {
-  embedded_json(metadata, "radix-rmarkdown-metadata")
+  json_html <- embedded_json(metadata, "radix-rmarkdown-metadata", file = NULL)
+  html_file(placeholder_html("rmarkdown_metadata", json_html))
 }
 
 extract_embedded_metadata <- function(file) {
@@ -571,13 +569,17 @@ embedded_json <- function(x, id, file = tempfile(fileext = "html")) {
              gsub("</", "<\\u002f", json, fixed = TRUE),
              '</script>')
 
-  # append to the file (guaranteed to be UTF-8)
-  con <- file(file, open = "w", encoding = "UTF-8")
-  on.exit(close(con), add = TRUE)
-  writeLines(lines, con = con)
+  if (!is.null(file)) {
+    # append to the file (guaranteed to be UTF-8)
+    con <- file(file, open = "w", encoding = "UTF-8")
+    on.exit(close(con), add = TRUE)
+    writeLines(lines, con = con)
 
-  # return the file name
-  file
+    # return the file name
+    file
+  } else {
+    HTML(paste(lines, collapse = "\n"))
+  }
 }
 
 extract_embedded_json <- function(file, id) {
