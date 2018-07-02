@@ -259,3 +259,7 @@ move_directory <- function(from_dir, to_dir) {
   }
 
 }
+
+download_file <- function(url, destfile, quiet = TRUE) {
+  downloader::download(url, destfile = destfile, mode = "wb", quiet = quiet)
+}

@@ -56,7 +56,7 @@ import_article <- function(url, collection, slug = "auto",
   if (!is.null(github_url)) {
     url <- github_url
   } else {
-    downloader::download(url, destfile = article_tmp, mode = "wb", quiet = TRUE)
+    download_file(url, destfile = article_tmp)
   }
 
   # extract metadata from the file
@@ -104,9 +104,7 @@ import_article <- function(url, collection, slug = "auto",
   # TODO: fixed width for filename in progress
 
   # TODO: provide date for imported articles w/o one?
-  # TODO: leverage github probe download for article_tmp
 
-  # TODO: single call to downloader::download
   # TODO: provide date by default in new radix article/post
 
   # TODO: license checking
@@ -210,7 +208,7 @@ download_article <- function(url, article_tmp, metadata) {
     }
 
     # perform the download
-    downloader::download(download_url, destination, mode = "wb", quiet = TRUE)
+    download_file(download_url, destination)
   }
 
   # perform re-writes
@@ -264,7 +262,7 @@ resolve_github_url <- function(url, article_tmp) {
 
       # download to a temp file
       article_download <- tempfile("import-article", fileext = "html")
-      downloader::download(url, destfile = article_download, mode = "wb", quiet = TRUE)
+      download_file(url, destfile = article_download)
 
       # see if there is article_metadata
       article_metadata <- extract_embedded_metadata(article_download)
