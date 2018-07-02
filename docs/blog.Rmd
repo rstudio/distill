@@ -307,7 +307,7 @@ The contents of `_subscribe.html` will be included in both the sidebar of the ma
 
 ### Supporting files
 
-When a blog post is published, resource files located alongside the post in it's directory are also published. The following files are *not* published by default:
+When a blog post is published, resource files located alongside the post in its directory are also published. The following files are *not* published by default:
 
 1. Files beginning with `"."` (hidden files).
 
