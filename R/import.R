@@ -45,6 +45,9 @@ import_article <- function(url, collection, slug = "auto",
   article_temp_dir <- tempfile("import-article")
   dir.create(article_temp_dir, recursive = TRUE)
 
+  # resolve github url if necessary
+  url <- resolve_github_url(url)
+
   # download the article to a temp file
   message("Importing ", url, "...")
   article_tmp <- file.path(article_temp_dir, "index.html")
@@ -93,6 +96,13 @@ import_article <- function(url, collection, slug = "auto",
     utils::browseURL(output_file)
 
   # TODO: import from github repo
+  #   - multiple issues w/ imported article
+
+  # TODO: provide date for imported articles w/o one?
+  # TODO: leverage github probe download for article_tmp
+
+  # TODO: single call to downloader::download
+  # TODO: provide date by default in new radix article/post
 
   # TODO: license checking
   # TODO: attribution metadata?
@@ -171,7 +181,7 @@ download_article <- function(url, article_tmp, metadata) {
       dir.create(destination_dir, recursive = TRUE)
 
     # the file might be found in site_libs, in that case download from site_libs/
-    download_url <- url_path(url, file)
+    download_url <- url_path(base_url, file)
     for (site_lib in site_libs) {
 
       # if it's in site_libs then modify the download_url
@@ -230,13 +240,39 @@ resolve_github_url <- function(url) {
     # download the file list as json
     repo_files <- jsonlite::fromJSON(
       sprintf("https://api.github.com/repos/%s/%s/git/trees/master",
-      owner, repo)
+              owner, repo),
+      simplifyVector = FALSE
     )
 
-    str(repo_files)
+    # collect up html files
+    html_files <- Filter(x = repo_files$tree, function(file) {
+      identical(file$type, "blob") && grepl("\\.html?$", file$path)
+    })
+
+    # error if there are no html files
+    if (length(html_files) == 0)
+      stop("No HTML files were found in the root of the specified GitHub repo")
+
+    # look for a radix article
+    for (html_file in html_files) {
+      # form the raw url
+      url <- sprintf("https://raw.githubusercontent.com/%s/%s/master/%s",
+                     owner, repo, html_file$path)
+
+      # download to a temp file
+      article_tmp <- tempfile("import-article", fileext = "html")
+      downloader::download(url, destfile = article_tmp, mode = "wb", quiet = TRUE)
+
+      # see if there is article_metadata
+      article_metadata <- extract_embedded_metadata(article_tmp)
+      if (!is.null(article_metadata))
+        return(url)
+    }
+
+    # if we got this far without finding an article there is no article
+    stop("No HTML files with output type radix::radix_article found in GitHub repo")
 
   } else {
     url
   }
-
 }
