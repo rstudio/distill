@@ -101,8 +101,6 @@ import_article <- function(url, collection, slug = "auto",
   if (view)
     utils::browseURL(output_file)
 
-  # TODO: fixed width for filename in progress
-
   # TODO: provide date for imported articles w/o one?
 
   # TODO: provide date by default in new radix article/post
@@ -175,7 +173,8 @@ download_article <- function(url, article_tmp, metadata) {
   for (file in manifest) {
 
     # tick
-    pb$tick(tokens = list(file = basename(file)))
+    file_progress <- str_pad(str_trunc(basename(file), 25, "right"), 25, "right")
+    pb$tick(tokens = list(file = file_progress))
 
     # ensure the destination directory exists
     destination <- file.path(article_temp_dir, file)
