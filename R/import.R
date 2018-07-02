@@ -101,8 +101,6 @@ import_article <- function(url, collection, slug = "auto",
   if (view)
     utils::browseURL(output_file)
 
-  # TODO: provide date for imported articles w/o one?
-
   # TODO: provide date by default in new radix article/post
 
   # TODO: license checking
@@ -164,7 +162,7 @@ download_article <- function(url, article_tmp, metadata) {
 
   # progress bar
   pb <- progress::progress_bar$new(
-    format = "[:bar] :file :percent eta: :eta",
+    format = "[:bar] :percent  eta: :eta  :file",
     total = length(manifest)
   )
 
