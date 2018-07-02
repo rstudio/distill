@@ -41,17 +41,23 @@ import_article <- function(url, collection, slug = "auto",
   site_config <- site_config(site_dir)
   articles_dir <- file.path(site_dir, paste0("_", collection))
 
-  # create an article temp dir
+  # create article temp space
   article_temp_dir <- tempfile("import-article")
   dir.create(article_temp_dir, recursive = TRUE)
+  article_tmp <- file.path(article_temp_dir, "index.html")
+
+  # progress
+  message("Importing ", url, "...")
 
   # resolve github url if necessary
-  url <- resolve_github_url(url)
+  github_url <- resolve_github_url(url, article_tmp)
 
-  # download the article to a temp file
-  message("Importing ", url, "...")
-  article_tmp <- file.path(article_temp_dir, "index.html")
-  downloader::download(url, destfile = article_tmp, mode = "wb", quiet = TRUE)
+  # if it's from github then record download url, otherwise download original url
+  if (!is.null(github_url)) {
+    url <- github_url
+  } else {
+    downloader::download(url, destfile = article_tmp, mode = "wb", quiet = TRUE)
+  }
 
   # extract metadata from the file
   metadata <- extract_embedded_metadata(article_tmp)
@@ -94,6 +100,8 @@ import_article <- function(url, collection, slug = "auto",
   # view output file
   if (view)
     utils::browseURL(output_file)
+
+  # TODO: fixed width for filename in progress
 
   # TODO: provide date for imported articles w/o one?
   # TODO: leverage github probe download for article_tmp
@@ -222,13 +230,11 @@ download_article <- function(url, article_tmp, metadata) {
 }
 
 
-resolve_github_url <- function(url) {
+resolve_github_url <- function(url, article_tmp) {
 
-  # is this a github repo?
-  is_github_repo <- grepl("^https://github\\.com/.*/.*$", url)
+  # if it's a github repo then look for an article within it
+  if (grepl("^https://github\\.com/.*/.*$", url)) {
 
-  # if it is then look for an article within it
-  if (is_github_repo) {
     # pull out the owner and repo
     matches <- regmatches(url,  regexec('^https://github\\.com/(.*)/([^/]+).*$', url))
     owner <- matches[[1]][[2]]
@@ -257,19 +263,21 @@ resolve_github_url <- function(url) {
                      owner, repo, html_file$path)
 
       # download to a temp file
-      article_tmp <- tempfile("import-article", fileext = "html")
-      downloader::download(url, destfile = article_tmp, mode = "wb", quiet = TRUE)
+      article_download <- tempfile("import-article", fileext = "html")
+      downloader::download(url, destfile = article_download, mode = "wb", quiet = TRUE)
 
       # see if there is article_metadata
-      article_metadata <- extract_embedded_metadata(article_tmp)
-      if (!is.null(article_metadata))
+      article_metadata <- extract_embedded_metadata(article_download)
+      if (!is.null(article_metadata)) {
+        file.copy(article_download, article_tmp)
         return(url)
+      }
     }
 
     # if we got this far without finding an article there is no article
     stop("No HTML files with output type radix::radix_article found in GitHub repo")
 
   } else {
-    url
+    NULL
   }
 }
