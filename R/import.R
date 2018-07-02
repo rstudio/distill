@@ -95,9 +95,6 @@ import_article <- function(url, collection, slug = "auto",
   if (view)
     utils::browseURL(output_file)
 
-  # TODO: import from github repo
-  #   - multiple issues w/ imported article
-
   # TODO: provide date for imported articles w/o one?
   # TODO: leverage github probe download for article_tmp
 
