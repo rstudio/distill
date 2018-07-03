@@ -140,7 +140,7 @@ render_collection <- function(site_dir, site_config, collection,
 
 
 
-render_collection_article_post_processor <- function(encoding_fn) {
+render_collection_article_post_processor <- function(encoding_fn, self_contained) {
 
   function(metadata, input_file, output_file, clean, verbose) {
 
@@ -194,7 +194,8 @@ render_collection_article_post_processor <- function(encoding_fn) {
 
       # publish article
       output_file <- publish_collection_article_to_site(
-        site_dir, site_config, encoding, collection, article_path, metadata
+        site_dir, site_config, encoding, collection, article_path, metadata,
+        strip_trailing_newline = self_contained
       )
 
       # return the output_file w/ an attribute indicating that
@@ -208,7 +209,8 @@ render_collection_article_post_processor <- function(encoding_fn) {
 }
 
 publish_collection_article_to_site <- function(site_dir, site_config, encoding,
-                                               collection, article_path, metadata) {
+                                               collection, article_path, metadata,
+                                               strip_trailing_newline = FALSE) {
 
   # provide default date if we need to
   if (is.null(metadata[["date"]]))
@@ -238,7 +240,7 @@ publish_collection_article_to_site <- function(site_dir, site_config, encoding,
     navigation_html = navigation_html_generator(),
     distill_html = distill_in_header(),
     site_includes = site_includes(site_dir, site_config),
-    strip_trailing_newline = FALSE,
+    strip_trailing_newline = strip_trailing_newline,
     quiet = TRUE
   )
 
