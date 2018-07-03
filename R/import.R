@@ -101,7 +101,6 @@ import_article <- function(url, collection, slug = "auto",
   if (view)
     utils::browseURL(output_file)
 
-  # TODO: deal with the fact that R date expressions are not evaluated in our metadata
   # TODO: provide date by default in new radix article/post
 
   # TODO: license checking

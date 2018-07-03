@@ -263,3 +263,9 @@ move_directory <- function(from_dir, to_dir) {
 download_file <- function(url, destfile, quiet = TRUE) {
   downloader::download(url, destfile = destfile, mode = "wb", quiet = quiet)
 }
+
+eval_metadata <- function(metadata) {
+  metadata_yaml <- yaml::as.yaml(metadata)
+  metadata_yaml <- knitr::knit(text = metadata_yaml)
+  yaml::yaml.load(metadata_yaml)
+}

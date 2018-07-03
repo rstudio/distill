@@ -43,7 +43,9 @@ Imports:
     base64enc,
     whisker,
     downloader,
-    progress
+    progress,
+    stringr,
+    knitr
 Suggests:
     knitr (>= 1.15.6),
     htmlwidgets,

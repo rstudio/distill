@@ -72,7 +72,7 @@ radix_article <- function(toc = FALSE,
   knitr_options$knit_hooks <- list()
   knitr_options$knit_hooks$chunk <- knitr_chunk_hook()
 
-  # shared site_config and encoding
+  # shared variables
   site_config <- NULL
   encoding <- NULL
 
@@ -81,6 +81,9 @@ radix_article <- function(toc = FALSE,
 
     # save encoding
     encoding <<- encoding
+
+    # run R code in metadata
+    metadata <- eval_metadata(metadata)
 
     # pandoc args
     args <- c()

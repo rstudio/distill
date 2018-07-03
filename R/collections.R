@@ -147,6 +147,9 @@ render_collection_article_post_processor <- function(encoding_fn) {
     # resolve encoding
     encoding <- encoding_fn()
 
+    # run R code in metadata
+    metadata <- eval_metadata(metadata)
+
     # is the input file at the top level of a site? if it is then no post processing
     site_config <- site_config(input_file, encoding)
     if (!is.null(site_config))
