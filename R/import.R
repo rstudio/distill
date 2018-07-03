@@ -102,7 +102,6 @@ import_article <- function(url, collection, slug = "auto",
     utils::browseURL(output_file)
 
   # TODO: license checking
-  # TODO: attribution metadata?
   # TODO: updates? could just be an import where we preserve the date
   # TODO: documentation
 
