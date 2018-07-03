@@ -49,22 +49,10 @@ transform_metadata <- function(file, site_config, collection_config, metadata, a
     metadata$base_url <- url_path(base_url, article_path)
   }
 
-  # helper to extract mergable metadata
-  mergeable <- function(config) {
-    if (!is.null(config) && !is.null(names(config))) {
-      config <- config[c("base_url", "repository_url",
-                         "creative_commons", "twitter", "favicon")]
-      config[!is.na(names(config))]
-    } else {
-      NULL
-    }
-  }
-
-  # merge collection level config into site config
-  base_config <- merge_lists(mergeable(site_config), mergeable(collection_config))
-
-  # merge article level metadata
-  metadata <- merge_lists(base_config, metadata)
+  # merge site and collection level metadata
+  metadata <- merge_metadata(site_config, collection_config, metadata,
+                             fields = c("base_url", "repository_url",
+                                        "creative_commons", "twitter", "favicon"))
 
   # propagate citation_url to canonical_url
   if (!is.null(metadata[["citation_url"]]) && is.null(metadata[["canonical_url"]]))
@@ -713,6 +701,25 @@ discover_preview <- function(file) {
   } else {
     NULL
   }
+
+}
+
+merge_metadata <- function(site_config, collection_config, metadata, fields) {
+
+  mergeable <- function(config) {
+    if (!is.null(config) && !is.null(names(config))) {
+      config <- config[fields]
+      config[!is.na(names(config))]
+    } else {
+      NULL
+    }
+  }
+
+  # merge collection level config into site config
+  base_config <- merge_lists(mergeable(site_config), mergeable(collection_config))
+
+  # merge article level metadata
+  merge_lists(base_config, metadata)
 
 }
 

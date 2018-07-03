@@ -391,7 +391,19 @@ render_collection_article <- function(site_dir, site_config, collection, article
                             nchars = file.info(index_html)$size,
                             useBytes = TRUE)
 
-  # substitute metadata
+  # apply creative_commons license if we need to
+  rmarkdown_metadata <- extract_embedded_metadata(index_html)
+  if (is.null(rmarkdown_metadata[["creative_commons"]])) {
+    rmarkdown_metadata <- merge_metadata(site_config, collection, rmarkdown_metadata,
+                                         fields = c("creative_commons"))
+    index_content <- fill_placeholder(
+      index_content,
+      "rmarkdown_metadata",
+      as.character(embedded_metadata_html(rmarkdown_metadata))
+    )
+  }
+
+  # substitute meta tags
   metadata_html <- metadata_html(site_config, metadata, self_contained = FALSE)
   index_content <- fill_placeholder(index_content,
                                     "meta_tags",
