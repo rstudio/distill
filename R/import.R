@@ -124,9 +124,6 @@ import_article <- function(url, collection, slug = "auto",
   else
     maybe_cat("License", "(No license detected)")
 
-  # TODO: updates? could just be an import where we preserve the date
-  # TODO: documentation
-
   # success
   invisible(TRUE)
 

@@ -1,11 +1,8 @@
 
 - Generate a footer.html
 
-- Embedded article workflow:
-
-   - document cannonical url
-   - attribution metadata for inclusion when importing/syndicating (do during import)
-   - import article function(s)
+- updating imported articles? could just be an import where we preserve the date
+- documentation on blog workflow
 
 - larger scale visualization layouts
     - embed_*() family of functions
