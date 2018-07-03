@@ -101,12 +101,10 @@ import_article <- function(url, collection, slug = "auto",
   if (view)
     utils::browseURL(output_file)
 
-  # TODO: provide date by default in new radix article/post
-
   # TODO: license checking
   # TODO: attribution metadata?
   # TODO: updates? could just be an import where we preserve the date
-
+  # TODO: documentation
 
   # return nothing
   invisible(NULL)

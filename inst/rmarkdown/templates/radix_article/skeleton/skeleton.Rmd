@@ -7,6 +7,7 @@ author:
     url: https://example.com/norajones
     affiliation: Spacely Sprockets
     affiliation_url: https://example.com/spacelysprokets
+date: "`r Sys.Date()`"
 output: radix::radix_article
 ---
 
