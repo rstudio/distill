@@ -41,11 +41,7 @@ generate_listing <- function(input_file,
   feed_xml <- write_feed_xml(feed_xml, site_config, collection, feed_articles)
 
   # generate html
-  listing_html <- tagList(
-    html_from_file(system.file("rmarkdown/templates/radix_article/resources/listing.html",
-                               package = "radix")),
-    article_listing_html(site_dir, collection, articles)
-  )
+  listing_html <- article_listing_html(site_dir, collection, articles)
   html <- html_file(listing_html)
 
   # return feed and listing html
@@ -107,23 +103,30 @@ article_listing_html <- function(site_dir, collection, articles) {
   # do we have a sidebar
   sidebar <- !is.null(subscription_html) || !is.null(categories_html)
 
+  # required JS and CSS
+  listing_js_css <- html_from_file(
+    system.file("rmarkdown/templates/radix_article/resources/listing.html",
+                 package = "radix")
+  )
+
   # wrap in a div
   if (sidebar) {
-    placeholder_html("article_listing",
+    placeholder_html("article_listing", tagList(
+      listing_js_css,
       div(class = "posts-container posts-with-sidebar posts-apply-limit l-screen-inset",
         div(class = "posts-list", articles_html),
         div(class = "posts-sidebar", subscription_html, categories_html),
         more_posts
-
       )
-    )
+    ))
   } else {
-    placeholder_html("article_listing",
+    placeholder_html("article_listing", tagList(
+      listing_js_css,
       div(class = "posts-container posts-apply-limit l-page",
         div(class = "posts-list", subscription_html, articles_html),
         more_posts
       )
-    )
+    ))
   }
 }
 
