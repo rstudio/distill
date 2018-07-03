@@ -98,11 +98,7 @@ transform_metadata <- function(file, site_config, collection_config, metadata, a
     }
 
     # compute license url
-    metadata$license_url <-
-      paste0(
-        "https://creativecommons.org/licenses/",
-        tolower(sub("^CC ", "", metadata$creative_commons)), "/4.0/"
-      )
+    metadata$license_url <- creative_commons_url(metadata$creative_commons)
   }
 
   # base_url (strip trailing slashes)
@@ -148,12 +144,7 @@ transform_metadata <- function(file, site_config, collection_config, metadata, a
       metadata$author <- lapply(metadata$author, function(x) list(name = x))
 
     # compute first and last name
-    metadata$author <- lapply(metadata$author, function(author) {
-      names <- strsplit(author$name, '\\s+')[[1]]
-      author$first_name <- paste(utils::head(names, -1), collapse = " ")
-      author$last_name <- utils::tail(names, 1)
-      author
-    })
+    metadata$author <- authors_with_first_and_last_names(metadata$author)
 
     # compute concatenated authors
     metadata$concatenated_authors <-
@@ -165,10 +156,7 @@ transform_metadata <- function(file, site_config, collection_config, metadata, a
       metadata$author[[1]]$last_name
 
     # compute bibtex authors
-    metadata$bibtex_authors <-
-      paste(collapse = " and ", sapply(metadata$author, function(author) {
-        paste0(author$last_name, ', ', author$first_name)
-      }))
+    metadata$bibtex_authors <- bibtex_authors(metadata$author)
 
     # slug
     if (is.null(metadata$slug) && !is.null(metadata$date)) {
@@ -723,6 +711,30 @@ merge_metadata <- function(site_config, collection_config, metadata, fields) {
 
 }
 
+authors_with_first_and_last_names <- function(authors) {
+  lapply(authors, function(author) {
+    names <- strsplit(author$name, '\\s+')[[1]]
+    author$first_name <- paste(utils::head(names, -1), collapse = " ")
+    author$last_name <- utils::tail(names, 1)
+    author
+  })
+}
+
+bibtex_authors <- function(metadata_author) {
+  paste(collapse = " and ", sapply(metadata_author, function(author) {
+    paste0(author$last_name, ', ', author$first_name)
+  }))
+}
+
+creative_commons_url <- function(metadata_creative_commons) {
+  if (!is.null(metadata_creative_commons))
+    paste0(
+      "https://creativecommons.org/licenses/",
+      tolower(sub("^CC ", "", metadata_creative_commons)), "/4.0/"
+    )
+  else
+    NULL
+}
 
 # provide qualified title if specified in site and different from title
 qualified_title <- function(site_config, metadata) {

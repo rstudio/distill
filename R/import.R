@@ -12,6 +12,7 @@
 #' @export
 import_post <- function(url, slug = "auto",
                         date = Sys.Date(), date_prefix = TRUE,
+                        check_license = TRUE,
                         overwrite = FALSE,
                         view = interactive()) {
   # import article
@@ -29,6 +30,7 @@ import_post <- function(url, slug = "auto",
 
 import_article <- function(url, collection, slug = "auto",
                            date = NULL, date_prefix = FALSE,
+                           check_license = TRUE,
                            overwrite = FALSE,
                            view = interactive()) {
 
@@ -47,7 +49,7 @@ import_article <- function(url, collection, slug = "auto",
   article_tmp <- file.path(article_temp_dir, "index.html")
 
   # progress
-  message("Importing ", url, "...")
+  cat("Importing ", url, "...", "\n", sep = "")
 
   # resolve github url if necessary
   github_url <- resolve_github_url(url, article_tmp)
@@ -61,6 +63,12 @@ import_article <- function(url, collection, slug = "auto",
 
   # extract metadata from the file
   metadata <- extract_embedded_metadata(article_tmp)
+
+  # license check
+  if (check_license) {
+    if (!check_import_license(metadata[["creative_commons"]]))
+      return(invisible(FALSE))
+  }
 
   # compute the base slug
   slug <- resolve_slug(metadata$title, slug)
@@ -101,12 +109,28 @@ import_article <- function(url, collection, slug = "auto",
   if (view)
     utils::browseURL(output_file)
 
-  # TODO: license checking
+  # print sucess
+  cat("Imported to _", collection, "/", slug, "\n", sep = "")
+  maybe_cat <- function(field, value) {
+    if (!is.null(value) && nzchar(value))
+      cat("  ", field, ": ", value, "\n", sep = "")
+  }
+  maybe_cat("Title", metadata[["title"]])
+  maybe_cat("Author",
+            bibtex_authors(authors_with_first_and_last_names(metadata[["author"]])))
+  creative_commons <- metadata[["creative_commons"]]
+  if (!is.null(creative_commons))
+    maybe_cat("License", creative_commons_url(creative_commons))
+  else
+    maybe_cat("License", "(No license detected)")
+
+  # TODO: resolve how citations will work for imported articles
+  #       (generally, base_url and citations)
   # TODO: updates? could just be an import where we preserve the date
   # TODO: documentation
 
-  # return nothing
-  invisible(NULL)
+  # success
+  invisible(TRUE)
 
 }
 
@@ -273,3 +297,18 @@ resolve_github_url <- function(url, article_tmp) {
     NULL
   }
 }
+
+check_import_license <- function(article_cc) {
+
+  # if there is no article_cc then verify import
+  if (is.null(article_cc)) {
+    result = readline(
+      "This article does not have a creative commons license. Import anyway? [Y/n]: "
+    )
+    if (tolower(result) == "n")
+      return(FALSE)
+  }
+
+  TRUE
+}
+
