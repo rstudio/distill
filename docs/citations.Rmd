@@ -78,12 +78,14 @@ bibliography: biblio.bib
 ---
 ```
 
+Note that the `citation_url` field is not required for [blog articles](blog.html) (in that case
+it's computed automatically using the site's `base_url` field).
+
 When this metadata is available, a citation appendix is automatically added to the article which looks like this:
 
 ![](images/citation.png){width=95% .screenshot}
 
 Note that we also included a `slug` field (in this case `jones2018radix`) which affects the abbreviated version of the citation included in the BibTeX entry. If you don't provide a `slug` then one will be automatically generated.
-
 
 ### Journal articles
 

@@ -124,8 +124,6 @@ import_article <- function(url, collection, slug = "auto",
   else
     maybe_cat("License", "(No license detected)")
 
-  # TODO: resolve how citations will work for imported articles
-  #       (generally, base_url and citations)
   # TODO: updates? could just be an import where we preserve the date
   # TODO: documentation
 
@@ -192,7 +190,9 @@ download_article <- function(url, article_tmp, metadata) {
   for (file in manifest) {
 
     # tick
-    file_progress <- str_pad(str_trunc(basename(file), 25, "right"), 25, "right")
+    file_progress <- stringr::str_pad(
+      stringr::str_trunc(basename(file), 25, "right"), 25, "right"
+    )
     pb$tick(tokens = list(file = file_progress))
 
     # ensure the destination directory exists
