@@ -245,6 +245,10 @@ move_directory <- function(from_dir, to_dir) {
   if (dir_exists(to_dir))
     unlink(to_dir, recursive = TRUE)
 
+  # create the parent of the to_dir
+  if (!dir_exists(dirname(to_dir)))
+    dir.create(dirname(to_dir), recursive = TRUE)
+
   # attempt to move the dir in one shot (if that fails then copy it)
   result <- tryCatch(file.rename(from_dir, to_dir),
                      error = function(e) FALSE)
@@ -261,7 +265,7 @@ move_directory <- function(from_dir, to_dir) {
 }
 
 download_file <- function(url, destfile, quiet = TRUE) {
-  downloader::download(url, destfile = destfile, mode = "wb", quiet = quiet)
+  downloader::download(url, destfile = destfile, mode = "wb", quiet = quiet, cacheOK = FALSE)
 }
 
 eval_metadata <- function(metadata) {
