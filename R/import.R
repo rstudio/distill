@@ -9,6 +9,10 @@
 #'
 #' @param url URL for post to import
 #'
+#' @return Returns (invisibly) a logical indicating whether the operation completed
+#'  (it may not complete if, for example, the user chose not to import an article
+#'  that lacked a creative commons license).
+#'
 #' @export
 import_post <- function(url, slug = "auto",
                         date = Sys.Date(), date_prefix = TRUE,
@@ -26,6 +30,11 @@ import_post <- function(url, slug = "auto",
   )
 }
 
+#' @rdname import_post
+#' @export
+update_post <- function(slug, view = interactive()) {
+  update_article("posts", slug, view)
+}
 
 
 import_article <- function(url, collection, slug = "auto",
@@ -250,6 +259,38 @@ download_article <- function(url, article_tmp, metadata) {
   # write the index file
   writeLines(index_content, file.path(article_temp_dir, "index.html"), useBytes = TRUE)
 }
+
+
+update_article <- function(collection, slug, view = interactive()) {
+
+  # determine site_dir (must call from within a site)
+  site_dir <- find_site_dir(".")
+  if (is.null(site_dir))
+    stop("You must call update from within a Radix website")
+
+  # more discovery
+  site_config <- site_config(site_dir)
+  article_path <- file.path(paste0("_", collection), slug)
+  article_dir <- file.path(site_dir, article_path)
+  article_html <- file.path(article_dir, "index.html")
+
+  # find import source
+  import_source <- NULL
+  if (file.exists(article_html))
+    import_source <- extract_import_source(article_html)
+  if (is.null(import_source))
+    stop("Previously imported article not found at ", article_path, call. = FALSE)
+
+  # perform import (maintaining slug)
+  import_article(
+    import_source$url,
+    collection,
+    slug = slug,
+    overwrite = TRUE,
+    view = view
+  )
+}
+
 
 
 resolve_github_url <- function(url, article_tmp) {

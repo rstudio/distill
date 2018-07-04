@@ -2,8 +2,6 @@
 
 - cannonical_url for posts (already do citation why not cannonical?)
 
-- updating imported articles? could just be an import where we preserve the date
-
 - documentation on blog workflow
 
 
