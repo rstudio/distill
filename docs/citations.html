@@ -15,6 +15,9 @@
   }
   </style>
 
+ <!--radix_placeholder_import_source-->
+ <!--/radix_placeholder_import_source-->
+
   <!--radix_placeholder_meta_tags-->
   <title>Radix for R Markdown: Citations</title>
   
@@ -1273,6 +1276,7 @@ citation_url: https://radixpub.github.io/radix-r
 slug: jones2018radix
 bibliography: biblio.bib
 ---</code></pre>
+<p>Note that the <code>citation_url</code> field is not required for <a href="blog.html">blog articles</a> (in that case it’s computed automatically using the site’s <code>base_url</code> field).</p>
 <p>When this metadata is available, a citation appendix is automatically added to the article which looks like this:</p>
 <p><img src="images/citation.png" class="screenshot" style="width:95.0%" /></p>
 <p>Note that we also included a <code>slug</code> field (in this case <code>jones2018radix</code>) which affects the abbreviated version of the citation included in the BibTeX entry. If you don’t provide a <code>slug</code> then one will be automatically generated.</p>

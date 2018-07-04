@@ -45,7 +45,8 @@ Imports:
     downloader,
     progress,
     stringr,
-    knitr
+    knitr,
+    digest
 Suggests:
     knitr (>= 1.15.6),
     htmlwidgets,

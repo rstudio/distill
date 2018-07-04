@@ -153,6 +153,11 @@ download_article <- function(url, article_tmp, metadata) {
                                     "rmarkdown_metadata",
                                     as.character(embedded_metadata_html(metadata)))
 
+  # provide import source
+  index_content <- fill_placeholder(index_content,
+                                    "import_source",
+                                    as.character(import_source_html(url, article_tmp)))
+
   # get site_libs references
   pattern <- '"[\\./]+site_libs/([^"]+)"'
   match <- gregexpr(pattern, index_content, useBytes = TRUE)
@@ -308,4 +313,19 @@ check_import_license <- function(article_cc) {
 
   TRUE
 }
+
+import_source_html <- function(url, article_path) {
+  source <- list(
+    url = url,
+    sha1 = digest::digest(file = article_path, algo = "sha1")
+  )
+  json_html <- embedded_json(source, "radix-import-source", file = NULL)
+  placeholder_html("import_source", json_html)
+}
+
+extract_import_source <- function(file) {
+  extract_embedded_json(file, "radix-import-source")
+}
+
+
 
