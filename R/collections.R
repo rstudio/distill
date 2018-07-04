@@ -408,7 +408,7 @@ render_collection_article <- function(site_dir, site_config, collection, article
   }
 
   # imbune with citation_url if we have a base_url
-  if (is.null(metadata$citation_url))
+  if (is.null(metadata$citation_url) && !is.null(metadata$base_url))
     metadata$citation_url <- ensure_trailing_slash(metadata$base_url)
 
   # substitute meta tags
