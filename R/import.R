@@ -79,6 +79,10 @@ import_article <- function(url, collection, slug = "auto",
   if (!is.null(date))
     metadata$date <- as.character(date, format = "%m-%d-%Y")
 
+  # if there is still no date in metadata then assign today
+  if (is.null(metadata$date))
+    metadata$date <- as.character(Sys.Date(), format = "%m-%d-%Y")
+
   # add date to slug if requested
   if (isTRUE(date_prefix)) {
     slug <- paste(as.character(parse_date(metadata$date), format = "%Y-%m-%d"), slug,
