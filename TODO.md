@@ -1,8 +1,9 @@
 
-- Generate a footer.html
-
 - updating imported articles? could just be an import where we preserve the date
 - documentation on blog workflow
+
+- Generate a footer.html
+-
 
 - larger scale visualization layouts
     - embed_*() family of functions

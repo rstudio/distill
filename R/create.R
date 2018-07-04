@@ -189,7 +189,7 @@ new_project_create_blog <- function(dir, ...) {
 
 do_create_website <- function(dir, title, gh_pages, edit, type) {
 
-  # prompt for argumets if we need to
+  # prompt for arguments if we need to
   if (missing(dir)) {
     if (interactive())
       dir <- readline(sprintf("Enter directory name for %s: ", type))
@@ -225,6 +225,10 @@ do_create_website <- function(dir, title, gh_pages, edit, type) {
     message("Creating ", nojekyll, " for gh-pages")
     file.create(nojekyll)
   }
+
+  # if we are running in RStudio then create Rproj
+  if (have_rstudio_project_api())
+    rstudioapi::initializeProject(dir)
 
   if (edit)
     edit_file(file.path(dir, "index.Rmd"))
