@@ -1,11 +1,12 @@
 
 
-- cannonical_url for posts (already do citation why not cannonical?)
+- canonical_url for posts (already do citation why not canonical?)
 
 - documentation on blog workflow
 
-
-
+- gt package integration
+- examples
+- port TF blog
 
 - larger scale visualization layouts
     - embed_*() family of functions
