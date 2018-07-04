@@ -170,7 +170,7 @@ navigation_before_body_html <- function(site_config, offset) {
 }
 
 navigation_after_body_html <- function(site_dir, site_config, offset) {
-  footer <- file.path(site_dir, "footer.html")
+  footer <- file.path(site_dir, "_footer.html")
   if (!is.null(site_config$navbar) && file.exists(footer)) {
     footer_template <- system.file("rmarkdown/templates/radix_article/resources/footer.html",
                                    package = "radix")

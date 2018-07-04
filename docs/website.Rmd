@@ -155,9 +155,9 @@ When you use a navigation bar, you can optionally also include a site footer whi
 
 ![](images/footer-bar.png){width=95% .screenshot}
 
-To add a footer, simply include a file named `footer.html` within your main site directory. For example:
+To add a footer, simply include a file named `_footer.html` within your main site directory. For example:
 
-**footer.html**
+**_footer.html**
 
 ```markup
 © Copyright 2018 [The Distill Template Authors]
