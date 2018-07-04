@@ -396,13 +396,15 @@ render_collection_article <- function(site_dir, site_config, collection, article
   # apply creative_commons license if we need to
   rmarkdown_metadata <- extract_embedded_metadata(index_html)
   if (is.null(rmarkdown_metadata[["creative_commons"]])) {
-    rmarkdown_metadata <- merge_metadata(site_config, collection, rmarkdown_metadata,
-                                         fields = c("creative_commons"))
-    index_content <- fill_placeholder(
-      index_content,
-      "rmarkdown_metadata",
-      as.character(embedded_metadata_html(rmarkdown_metadata))
-    )
+    merged_metadata <- merge_metadata(site_config, collection, rmarkdown_metadata,
+                                      fields = c("creative_commons"))
+    if (!identical(rmarkdown_metadata, merged_metadata)) {
+      index_content <- fill_placeholder(
+        index_content,
+        "rmarkdown_metadata",
+        as.character(embedded_metadata_html(merged_metadata))
+      )
+    }
   }
 
   # imbune with citation_url if we have a base_url
