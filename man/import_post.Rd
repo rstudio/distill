@@ -2,10 +2,13 @@
 % Please edit documentation in R/import.R
 \name{import_post}
 \alias{import_post}
+\alias{update_post}
 \title{Import a post into a blog}
 \usage{
 import_post(url, slug = "auto", date = Sys.Date(), date_prefix = TRUE,
-  overwrite = FALSE)
+  check_license = TRUE, overwrite = FALSE, view = interactive())
+
+update_post(slug, view = interactive())
 }
 \arguments{
 \item{url}{URL for post to import}
@@ -15,6 +18,11 @@ provided.}
 
 \item{date_prefix}{Data prefix for post slug (preserves chronological order for posts
 within the filesystem).}
+}
+\value{
+Returns (invisibly) a logical indicating whether the operation completed
+(it may not complete if, for example, the user chose not to import an article
+that lacked a creative commons license).
 }
 \description{
 Import a post from an external source (e.g. GitHub repo, RPubs article, etc.).
