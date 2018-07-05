@@ -51,8 +51,18 @@ transform_metadata <- function(file, site_config, collection_config, metadata, a
 
   # merge site and collection level metadata
   metadata <- merge_metadata(site_config, collection_config, metadata,
-                             fields = c("base_url", "repository_url",
-                                        "creative_commons", "twitter", "favicon"))
+                             fields = c("repository_url", "creative_commons",
+                                        "twitter", "favicon"))
+
+  # if there is no citation_url then automatically provide one if there is a
+  # base url (this behavior can be disabled via citations: false in the
+  # collection level configuration)
+  if (is.null(metadata$citation_url) &&
+      length(collection_config) > 0 &&
+      not_null(collection_config[["citations"]], TRUE) &&
+      !is.null(metadata$base_url)) {
+    metadata$citation_url <- ensure_trailing_slash(metadata$base_url)
+  }
 
   # propagate citation_url to canonical_url
   if (!is.null(metadata[["citation_url"]]) && is.null(metadata[["canonical_url"]]))

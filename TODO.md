@@ -1,6 +1,6 @@
 
 
-- canonical_url for posts (already do citation why not canonical?)
+- importing posts doesn't not respect original citation_url and cannonical_url
 
 - documentation on blog workflow
 
