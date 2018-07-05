@@ -1,7 +1,5 @@
 
 
-- importing posts doesn't not respect original citation_url and cannonical_url
-
 - documentation on blog workflow
 
 - gt package integration

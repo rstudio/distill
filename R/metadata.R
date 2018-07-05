@@ -54,19 +54,31 @@ transform_metadata <- function(file, site_config, collection_config, metadata, a
                              fields = c("repository_url", "creative_commons",
                                         "twitter", "favicon"))
 
-  # if there is no citation_url then automatically provide one if there is a
-  # base url (this behavior can be disabled via citations: false in the
-  # collection level configuration)
-  if (is.null(metadata$citation_url) &&
-      length(collection_config) > 0 &&
-      not_null(collection_config[["citations"]], TRUE) &&
-      !is.null(metadata$base_url)) {
-    metadata$citation_url <- ensure_trailing_slash(metadata$base_url)
-  }
 
-  # propagate citation_url to canonical_url
-  if (!is.null(metadata[["citation_url"]]) && is.null(metadata[["canonical_url"]]))
-    metadata$canonical_url <- metadata$citation_url
+  # see if we can determine a default canonical_url
+  canonical_url_fields <- c("canonical_url", "citation_url", "base_url")
+  default_canonical_url <- metadata[canonical_url_fields]
+  default_canonical_url <- default_canonical_url[!is.na(names(default_canonical_url))]
+  if (length(default_canonical_url) > 0)
+    default_canonical_url <- ensure_trailing_slash(default_canonical_url[[1]])
+  else
+    default_canonical_url <- NULL
+
+  # provide some urls automagically for collections
+  if (length(collection_config) > 0 && !is.null(default_canonical_url)) {
+
+    # automatically provide canonical_url if possible and permitted
+    if (is.null(metadata[["canonical_url"]]) &&
+        not_null(collection_config[["canonical"]], TRUE)) {
+      metadata$canonical_url <- default_canonical_url
+    }
+
+    # automatically provide citation_url if possible and permitted
+    if (is.null(metadata[["citation_url"]]) &&
+        not_null(collection_config[["citations"]], TRUE)) {
+      metadata$citation_url <- default_canonical_url
+    }
+  }
 
   # parse dates
   article_dir <- basename(normalize_path(dirname(file)))
