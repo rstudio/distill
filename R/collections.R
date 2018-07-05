@@ -393,19 +393,25 @@ render_collection_article <- function(site_dir, site_config, collection, article
                             nchars = file.info(index_html)$size,
                             useBytes = TRUE)
 
-  # apply creative_commons license if we need to
+  # get rmarkdown metadata
   rmarkdown_metadata <- extract_embedded_metadata(index_html)
+
+  # pickup canonical and citation urls
+  rmarkdown_metadata$citation_url <- metadata$citation_url
+  rmarkdown_metadata$canonical_url <- metadata$canonical_url
+
+  # pickup creative_commons from site/collection
   if (is.null(rmarkdown_metadata[["creative_commons"]])) {
-    merged_metadata <- merge_metadata(site_config, collection, rmarkdown_metadata,
-                                      fields = c("creative_commons"))
-    if (!identical(rmarkdown_metadata, merged_metadata)) {
-      index_content <- fill_placeholder(
-        index_content,
-        "rmarkdown_metadata",
-        as.character(embedded_metadata_html(merged_metadata))
-      )
-    }
+    rmarkdown_metadata <- merge_metadata(site_config, collection, rmarkdown_metadata,
+                                         fields = c("creative_commons"))
   }
+
+  # re-write
+  index_content <- fill_placeholder(
+    index_content,
+    "rmarkdown_metadata",
+    as.character(embedded_metadata_html(rmarkdown_metadata))
+  )
 
   # substitute meta tags
   metadata_html <- metadata_html(site_config, metadata, self_contained = FALSE)

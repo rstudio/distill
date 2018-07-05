@@ -113,8 +113,8 @@ radix_article <- function(toc = FALSE,
       args <- c(args, pandoc_variable_arg("date", metadata$date))
     }
 
-    # metadata to json (do this before transforming)
-    metadata_json <- embedded_metadata(metadata)
+    # make copy of metdata before transforming
+    embedable_metadata <- metadata
 
     # transform configuration
     transformed <-  transform_configuration(
@@ -126,6 +126,13 @@ radix_article <- function(toc = FALSE,
     )
     site_config <- transformed$site_config
     metadata <- transformed$metadata
+
+    # pickup canonical and citation urls
+    embedable_metadata$citation_url <- embedable_metadata$citation_url
+    embedable_metadata$canonical_url <- embedable_metadata$canonical_url
+
+    # create metadata json
+    metadata_json <- embedded_metadata(embedable_metadata)
 
     # list of html dependencies
     html_deps <- list(
