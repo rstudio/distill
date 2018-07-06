@@ -1,0 +1,45 @@
+---
+title: "Blog Post Workflow"
+description: |
+ Recommendations on managing blog post drafts and a review of tools 
+ available to incorporate posts contributed by outside authors. 
+output:
+  radix::radix_article:
+    toc: true
+---
+
+```{r setup, include=FALSE}
+library(knitr)
+```
+
+## Overview
+
+Radix supports a variety of workflows for blog post authoring. For a blog authored by a single individual, the following simple conventions are typically all that's required:
+
+1) Author post R Markdown documents within subdirectories of the `_posts` directory.
+
+2) Mark posts under development as [drafts](blog.html#workflow) until they are ready to be published.
+
+For more sophisticated requirements, the following workflows are also supported:
+
+1) Authoring posts within their own standalone Git repositories.
+
+2) Importing posts staged elsewhere on the web (e.g. published to RPubs or published within another Radix blog).
+
+Radix also includes tools for verifying that imported posts are available under an appropriate [Creative Commons](https://creativecommons.org/) license and ensuring that posts syndicated from one blog to another give credit within the Google search index to the originating blog.
+
+## Managing drafts
+
+
+## Importing posts
+
+
+
+
+
+
+
+
+
+
+

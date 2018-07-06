@@ -31,8 +31,11 @@ navbar:
       menu:
         - text: "Creating a Website"
           href: website.html
+        - text: "---"
         - text: "Creating a Blog"
           href: blog.html
+        - text: "Blog Post Workflow"
+          href: blog_workflow.html
         - text: "---"
         - text: "Publishing Websites"
           href: publish_website.html
