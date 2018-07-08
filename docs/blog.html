@@ -1221,7 +1221,7 @@ Publishing
 <li><a href="#creating-a-post">Creating a post</a></li>
 <li><a href="#listing-pages">Listing pages</a></li>
 <li><a href="#rss-feeds">RSS feeds</a></li>
-<li><a href="#workflow">Workflow</a></li>
+<li><a href="#post-drafts">Post drafts</a></li>
 </ul></li>
 <li><a href="#next-steps">Next steps</a><ul>
 <li><a href="#comments-and-sharing">Comments and sharing</a></li>
@@ -1364,7 +1364,7 @@ collections:
   posts:
     feed_items_max: 50</code></pre>
 <p>Specify <code>feed_items_max: false</code> to have no limit on the number of items included in the feed.</p>
-<h3 id="workflow">Workflow</h3>
+<h3 id="post-drafts">Post drafts</h3>
 <p>If you want to work on a post for a period of time without having it be added to the listing page, add <code>draft: true</code> to the post’s metadata. For example:</p>
 <pre class="markup"><code>
 ---
@@ -1377,12 +1377,7 @@ description: |
 draft: true
 ---</code></pre>
 <p>When you are ready to publish the post, either remove the <code>draft</code> option or set it to <code>false</code>, then build the website.</p>
-<p>Beyond support for drafts, Radix has a number of additional features to accomodate a variety of post authoring and contribution workflows, including:</p>
-<ol type="1">
-<li><p>Authoring posts as R Markdown documents contained within the <code>_posts</code> directory (as described above) or authoring posts externally (e.g. within their own Git repositories).</p></li>
-<li><p>Importing posts published elsewhere on the web (e.g. on RPubs, in a Git repository, or on another blog). Posts can be imported from their published form (i.e. you don’t need to access or render the Rmd file used to author the post).</p></li>
-</ol>
-<p>The article on <a href="blog_workflow.html">blog post workflow</a> describes these options in more detail.</p>
+<p>Beyond support for drafts, Radix has a number of additional features to accomodate a variety of post authoring and contribution workflows, including importing posts published elsewhere on the web (e.g. on RPubs, in a Git repository, or on another blog). The article on <a href="blog_workflow.html">blog post workflow</a> describes these options in more detail.</p>
 <h2 id="next-steps">Next steps</h2>
 <h3 id="comments-and-sharing">Comments and sharing</h3>
 <p>Readers will likely want to comment on and share articles they read on your blog. You can enable support for <a href="https://disqus.com/">Disqus comments</a> and sharing links for Twitter, LinkedIn, and other services by adding options to the <code>collection:posts</code> section of <code>_site.yml</code>.</p>

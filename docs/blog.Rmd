@@ -171,7 +171,7 @@ collections:
 
 Specify `feed_items_max: false` to have no limit on the number of items included in the feed.
 
-### Workflow
+### Post drafts
 
 If you want to work on a post for a period of time without having it be added to the listing page, add `draft: true` to the post's metadata. For example:
 
@@ -189,13 +189,7 @@ draft: true
 
 When you are ready to publish the post, either remove the `draft` option or set it to `false`, then build the website.
 
-Beyond support for drafts, Radix has a number of additional features to accomodate a variety of post authoring and contribution workflows, including:
-
-1) Authoring posts as R Markdown documents contained within the `_posts` directory (as described above) or authoring posts externally (e.g. within their own Git repositories).
-
-2) Importing posts published elsewhere on the web (e.g. on RPubs, in a Git repository, or on another blog). Posts can be imported from their published form (i.e. you don't need to access or render the Rmd file used to author the post).
-
-The article on [blog post workflow](blog_workflow.html) describes these options in more detail.
+Beyond support for drafts, Radix has a number of additional features to accomodate a variety of post authoring and contribution workflows, including importing posts published elsewhere on the web (e.g. on RPubs, in a Git repository, or on another blog). The article on [blog post workflow](blog_workflow.html) describes these options in more detail.
 
 ## Next steps
 
