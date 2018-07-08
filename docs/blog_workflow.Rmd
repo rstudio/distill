@@ -26,15 +26,33 @@ For more sophisticated requirements, the following workflows are also supported:
 
 2) Importing posts staged elsewhere on the web (e.g. published to RPubs, located in a Git repository, or published within another Radix blog).
 
-Radix also includes tools for verifying that imported posts are available under an appropriate [Creative Commons](https://creativecommons.org/) license and ensuring that posts syndicated from one blog to another give credit within the Google search index to the originating blog.
-
-
-
+Radix also includes tools for verifying that imported posts are available under an appropriate [Creative Commons](https://creativecommons.org/) license and ensuring that posts syndicated from one blog to another give credit within the Google search index to the originating blog. These tools are described below in the [importing posts] section.
 
 ## Managing drafts
 
+There are two distinct ways to manage work in progress on a Radix post:
+
+1) Using the `draft` option to prevent the article from being listed in the article index; and 
+2) Working on the post within a Git branch and merging/publishing it via pull request.
+
+### Draft option
+
+### Git branches
+
+
 
 ## Importing posts
+
+### Importing a post
+
+### Updating posts
+
+### Creative Commons
+
+
+### Canonical URLs
+
+
 
 
 

@@ -1216,8 +1216,16 @@ Publishing
 <nav class="d-toc" id="TOC">
 <ul>
 <li><a href="#overview">Overview</a></li>
-<li><a href="#managing-drafts">Managing drafts</a></li>
-<li><a href="#importing-posts">Importing posts</a></li>
+<li><a href="#managing-drafts">Managing drafts</a><ul>
+<li><a href="#draft-option">Draft option</a></li>
+<li><a href="#git-branches">Git branches</a></li>
+</ul></li>
+<li><a href="#importing-posts">Importing posts</a><ul>
+<li><a href="#importing-a-post">Importing a post</a></li>
+<li><a href="#updating-posts">Updating posts</a></li>
+<li><a href="#creative-commons">Creative Commons</a></li>
+<li><a href="#canonical-urls">Canonical URLs</a></li>
+</ul></li>
 </ul>
 </nav>
 <hr class="d-toc-separator"/>
@@ -1230,11 +1238,22 @@ Publishing
 <p>For more sophisticated requirements, the following workflows are also supported:</p>
 <ol type="1">
 <li><p>Authoring posts within their own standalone Git repositories.</p></li>
-<li><p>Importing posts staged elsewhere on the web (e.g. published to RPubs or published within another Radix blog).</p></li>
+<li><p>Importing posts staged elsewhere on the web (e.g. published to RPubs, located in a Git repository, or published within another Radix blog).</p></li>
 </ol>
-<p>Radix also includes tools for verifying that imported posts are available under an appropriate <a href="https://creativecommons.org/">Creative Commons</a> license and ensuring that posts syndicated from one blog to another give credit within the Google search index to the originating blog.</p>
+<p>Radix also includes tools for verifying that imported posts are available under an appropriate <a href="https://creativecommons.org/">Creative Commons</a> license and ensuring that posts syndicated from one blog to another give credit within the Google search index to the originating blog. These tools are described below in the <a href="#importing-posts">importing posts</a> section.</p>
 <h2 id="managing-drafts">Managing drafts</h2>
+<p>There are two distinct ways to manage work in progress on a Radix post:</p>
+<ol type="1">
+<li>Using the <code>draft</code> option to prevent the article from being listed in the article index; and</li>
+<li>Working on the post within a Git branch and merging/publishing it via pull request.</li>
+</ol>
+<h3 id="draft-option">Draft option</h3>
+<h3 id="git-branches">Git branches</h3>
 <h2 id="importing-posts">Importing posts</h2>
+<h3 id="importing-a-post">Importing a post</h3>
+<h3 id="updating-posts">Updating posts</h3>
+<h3 id="creative-commons">Creative Commons</h3>
+<h3 id="canonical-urls">Canonical URLs</h3>
 <!--radix_placeholder_article_footer-->
 <!--/radix_placeholder_article_footer-->
 </div>
