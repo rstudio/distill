@@ -261,6 +261,10 @@ update_article <- function(collection, slug, view = interactive()) {
   if (is.null(site_dir))
     stop("You must call update from within a Radix website")
 
+  # if the slug is an existing directory then just it's base name
+  if (dir_exists(slug))
+    slug <- basename(slug)
+
   # more discovery
   site_config <- site_config(site_dir)
   article_path <- file.path(paste0("_", collection), slug)

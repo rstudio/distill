@@ -1,6 +1,4 @@
 
-- update_post should take the path as well
-
 - documentation on blog workflow
 
 - gt package integration
