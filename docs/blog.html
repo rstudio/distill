@@ -553,6 +553,27 @@
     }
   }
   
+  @media(min-width: 1180px) {
+    .base-grid,
+    distill-header,
+    d-title,
+    d-abstract,
+    d-article,
+    d-appendix,
+    distill-appendix,
+    d-byline,
+    d-footnote-list,
+    d-citation-list,
+    distill-footer {
+      grid-template-columns: [screen-start] 1fr [page-start kicker-start] 60px [middle-start] 60px [text-start kicker-end] 60px 60px 60px 60px 60px 60px 60px 60px [text-end gutter-start] 60px [middle-end] 60px [page-end gutter-end] 1fr [screen-end];
+      grid-column-gap: 32px;
+    }
+  
+    .grid {
+      grid-column-gap: 32px;
+    }
+  }
+  
   
   /* Get the citation styles for the appendix (not auto-injected on render since
      we do our own rendering of the citation appendix) */
@@ -1275,7 +1296,7 @@ library(radix)
 create_blog(dir = &quot;my-blog&quot;, title = &quot;My Blog&quot;)</code></pre>
 <p>The basic scaffolding for a blog and an initial welcome post will be created within the <code>my-blog</code> sub-directory.</p>
 <h3 id="configuration">Configuration</h3>
-<p>After you’ve created the blog scafoolding, there are a couple of additional configuration items you’ll want to add to your <code>_site.yml</code> so that it’s easier to share content on the blog via RSS and social networks like Twitter:</p>
+<p>After you’ve created the blog scaffolding, there are a couple of additional configuration items you’ll want to add to your <code>_site.yml</code> so that it’s easier to share content on the blog via RSS and social networks like Twitter:</p>
 <ul>
 <li><p>A short <code>description</code> of the site. This field is used for the channel description of your RSS feed.</p></li>
 <li><p>A <code>base_url</code> for the site (the URL where it will be published to). This is used both for RSS feed items and for sharing posts via <a href="metadata.html#open-graph">Open Graph</a> and <a href="metadata.html#twitter-card">Twitter Card</a>.</p></li>
@@ -1303,7 +1324,7 @@ navbar:
 output: radix::radix_article</code></pre>
 <p>Note that we’ve also added a feed icon to the right side of the menu bar which makes it easy to discover and browse the RSS feed for the blog.</p>
 <h3 id="creating-a-post">Creating a post</h3>
-<p>The easist way to start authoring a new post is to call the <code>create_post()</code> function from within your blog’s directory. For example:</p>
+<p>The easiest way to start authoring a new post is to call the <code>create_post()</code> function from within your blog’s directory. For example:</p>
 <pre class="r"><code>
 library(radix)
 create_post(&quot;The Sharpe Ratio&quot;)</code></pre>
@@ -1377,7 +1398,7 @@ description: |
 draft: true
 ---</code></pre>
 <p>When you are ready to publish the post, either remove the <code>draft</code> option or set it to <code>false</code>, then build the website.</p>
-<p>Beyond support for drafts, Radix has a number of additional features to accomodate a variety of post authoring and contribution workflows, including importing posts published elsewhere on the web (e.g. on RPubs, in a Git repository, or on another blog). The article on <a href="blog_workflow.html">blog post workflow</a> describes these options in more detail.</p>
+<p>Beyond support for drafts, Radix has a number of additional features to accommodate a variety of post authoring and contribution workflows, including importing posts published elsewhere on the web (e.g. on RPubs, in a Git repository, or on another blog). The article on <a href="blog_workflow.html">blog post workflow</a> describes these options in more detail.</p>
 <h2 id="next-steps">Next steps</h2>
 <h3 id="comments-and-sharing">Comments and sharing</h3>
 <p>Readers will likely want to comment on and share articles they read on your blog. You can enable support for <a href="https://disqus.com/">Disqus comments</a> and sharing links for Twitter, LinkedIn, and other services by adding options to the <code>collection:posts</code> section of <code>_site.yml</code>.</p>
@@ -1494,7 +1515,7 @@ resources:
     *.csv    
 ---</code></pre>
 <h2 id="publishing-a-blog">Publishing a blog</h2>
-<p>After you’ve authored one or more posts you will want to build the entire site before publshing it.</p>
+<p>After you’ve authored one or more posts you will want to build the entire site before publishing it.</p>
 <p>If your Radix website is contained within an RStudio project you can use the <strong>Build Website</strong> command available in the Build pane to generate the site:</p>
 <p><img src="images/build-website.png" class="screenshot" style="width:95.0%" /></p>
 <p>To build a website from the command line, use the <code>rmarkdown::render_site()</code> function:</p>

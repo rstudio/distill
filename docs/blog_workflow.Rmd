@@ -37,20 +37,152 @@ There are two distinct ways to manage work in progress on a Radix post:
 
 ### Draft option
 
+If you want to work on a post for a period of time without having it be added to the listing page, add `draft: true` to the post's metadata. For example:
+
+```markup
+---
+title: "The Sharpe Ratio"
+description: |
+  In this post we present a classic finance use case using the
+  PerformanceAnalytics, quantmod, and dygraphs packages. 
+  We'll demonstrate importing stock data, building a portfolio,
+  and then calculating the Sharpe Ratio. 
+draft: true
+---
+```
+
+When you are ready to publish the post, either remove the `draft` option or set it to `false`, then re-Knit the post or build the website using `render_site()`.
+
 ### Git branches
 
+If the source code for you website is managed within [a Git repository](https://git-scm.com/) then another way to organize work on a new post is to create a [Git branch](https://git-scm.com/book/en/v2/Git-Branching-Basic-Branching-and-Merging). 
 
+Once you've done enough work on the post within your branch, you can create a [pull request](https://help.github.com/articles/about-pull-requests/) and then ask others for feedback on the post before it is merged.
+
+This workflow has some nice benefits:
+
+1) You can use the commenting and feedback system of your Git host (e.g. GitHub) to discuss the post in a structured fashion with clear linkages back to the source code.
+
+2) You can manage contributions to your blog from others that don't have commit access to the blog (anyone can create a pull request for a public repository).
+
+The mechanics of creating branches and pull requests are beyond the scope of this article. Follow the links above or reference other online resources to learn more.
 
 ## Importing posts
 
+You may prefer a workflow where posts are worked on separately from your website/blog and then imported when they are ready to be published. This might be the case for a few different reasons:
+
+- You want posts to be contained within their own Git repositories
+- It's more convenient for contributors to work on posts independently and then be incorporated into your blog
+- You want to re-publish posts originally published on another blog. 
+
+Below we will cover how to import posts, synchronize to subsequent updates of those posts, as well as address related copyright and search indexing concerns.
+
 ### Importing a post
+
+You can import a post using the `import_post()` function, passing the URL where the post is published to. For example:
+
+```r
+import_post("https://rpubs.com/jjallaire/visualizing-asset-returns")
+import_post("https://example.com/visualizing-asset-returns.html")
+```
+
+You can also import a post from a GitHub repository. For example:
+
+```r
+import_post("https://github.com/jjallaire/radix-article")
+```
+
+Note that importing a post does not require the original R Markdown document used to author the post---you only need access to the published HTML of a post to import it. 
+
+#### Post dates
+
+When you import a post, the date for the post will be automatically set to the current day (the idea being that whenever the post was authored, the day you import it is the day it's been published to your blog). You can modify this behavior using the `date` parameter. For example:
+
+```r
+import_post("https://github.com/jjallaire/radix-article", 
+            date = as.Date("2017-07-12"))
+```
+
+#### Post slugs
+
+The "slug" for a post determines the URL for the post within your blog. By default, slugs are automatically computed using the date and title of the post. For example, the slug for the example just above would have been `2017-07-12-radix-article`.
+
+You can also override the automatically generated slug entirely using the `slug` parameter. For example:
+
+```r
+import_post("https://github.com/jjallaire/radix-article", 
+            slug = "an-article-about-radix")
+```
+
 
 ### Updating posts
 
+If a post that you have imported is subsequently modified and you want to synchronize to the changes, you can use the `update_post()` post function. For example:
+
+```r
+update_post("_posts/2018-07-09-radix-article")
+```
+
+You can also just use the post slug (rather than including the `_posts` directory prefix):
+
+```r
+update_post("2018-07-09-radix-article")
+```
+
 ### Creative Commons
 
+The Radix tools for importing posts make it very easy to aggregate posts published elsewhere on the web into your blog. Note however that you need to ensure that you have appropriate permission to re-publish these posts! 
+
+To facilitate this, Radix will scan any imported post for [Creative Commons](https://creativecommons.org/licenses/) copyright metadata, and in the case that none is found confirm that you still want to import the post. Consequently, you should ask that authors writing posts for your blog always include the `creative_commons` field in their post metadata. For example:
+
+```markup
+---
+title: "Radix for R Markdown"
+description: | 
+  Scientific and technical writing, native to the web
+output: radix::radix_article
+creative_commons: CC BY
+---
+```
+
+Learn more about the `creative_commons` field in the documentation on [post medatata](metadata.html#creative-commons).
+
+If you know that you have permission to import and republish a post you can suppress this prompt by passing `check_license = FALSE` to the `import_post()` function.
 
 ### Canonical URLs
+
+When you specify a `creative_commons` license for a blog post you make it easier for others to re-publish your post, giving you a broader audience for your work. In this case you may also want to ensure that the original URL where your post appeared be the one that appears in search engine results.
+
+To facilitate this, Radix automatically specifies a [canonical url](https://en.wikipedia.org/wiki/Canonical_link_element) for posts published within a blog. That way, when a post is imported into another blog, search indexes still point back to the original article.
+
+If you prefer to disable this behavior, you can add `canonical: false` to your blog's configuration in `_site.yml`. For example:
+
+```markup
+name: "reproducible-finance-with-r"
+title: "Reproducible Finance with R"
+description: |
+  Exploring reproducible finance with the R statistical 
+  computing environment.
+base_url: https://beta.rstudioconnect.com/content/3776/
+collections:
+  posts:
+    canonical: false
+```
+
+While canonical URLs are provided automatically for blog posts, they aren't for standalone articles. You can explicitly provide a canonical URL for a standalone article using the `canonical_url` metadata field:
+
+```markup
+---
+title: "Radix for R Markdown"
+description: | 
+  Scientific and technical writing, native to the web
+date: May 4, 2018
+author:
+  - name: Nora Jones 
+    url: https://example.com/norajones
+canonical_url: https://radixpub.github.io/radix-r
+---
+```
 
 
 

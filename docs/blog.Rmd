@@ -40,7 +40,7 @@ The basic scaffolding for a blog and an initial welcome post will be created wit
 
 ### Configuration
 
-After you've created the blog scafoolding, there are a couple of additional configuration items you'll want to add to your `_site.yml` so that it's easier to share content on the blog via RSS and social networks like Twitter:
+After you've created the blog scaffolding, there are a couple of additional configuration items you'll want to add to your `_site.yml` so that it's easier to share content on the blog via RSS and social networks like Twitter:
 
 - A short `description` of the site. This field is used for the channel description of your RSS feed.
 
@@ -75,7 +75,7 @@ Note that we've also added a feed icon to the right side of the menu bar which m
 
 ### Creating a post
 
-The easist way to start authoring a new post is to call the `create_post()` function from within your blog's directory. For example:
+The easiest way to start authoring a new post is to call the `create_post()` function from within your blog's directory. For example:
 
 ```r
 library(radix)
@@ -189,7 +189,7 @@ draft: true
 
 When you are ready to publish the post, either remove the `draft` option or set it to `false`, then build the website.
 
-Beyond support for drafts, Radix has a number of additional features to accomodate a variety of post authoring and contribution workflows, including importing posts published elsewhere on the web (e.g. on RPubs, in a Git repository, or on another blog). The article on [blog post workflow](blog_workflow.html) describes these options in more detail.
+Beyond support for drafts, Radix has a number of additional features to accommodate a variety of post authoring and contribution workflows, including importing posts published elsewhere on the web (e.g. on RPubs, in a Git repository, or on another blog). The article on [blog post workflow](blog_workflow.html) describes these options in more detail.
 
 ## Next steps
 
@@ -359,7 +359,7 @@ resources:
 
 ## Publishing a blog
 
-After you've authored one or more posts you will want to build the entire site before publshing it. 
+After you've authored one or more posts you will want to build the entire site before publishing it. 
 
 If your Radix website is contained within an RStudio project you can use the **Build Website** command available in the Build pane to generate the site:
 

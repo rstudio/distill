@@ -50,7 +50,7 @@ If you include one or both of these fields, then an *Updates and Corrections* ap
 
 ## Creative Commons
 
-The [Creative Commons](https://creativecommons.org/licenses/) copyright licenses and tools forge a balance inside the traditional “all rights reserved” setting that copyright law creates. These tools give everyone from individual creators to large companies and institutions a simple, standardized way to grant copyright permissions to their creative work.
+The [Creative Commons](https://creativecommons.org/licenses/) copyright licenses and tools forge a balance inside the traditional "all rights reserved" setting that copyright law creates. These tools give everyone from individual creators to large companies and institutions a simple, standardized way to grant copyright permissions to their creative work.
 
 Here are some of the common forms of Creative Commons content license:
 
