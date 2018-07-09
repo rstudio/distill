@@ -1,5 +1,4 @@
 
-- documentation on blog workflow
 
 - gt package integration
 - examples
