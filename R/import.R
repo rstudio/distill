@@ -60,15 +60,8 @@ import_article <- function(url, collection, slug = "auto",
   # progress
   cat("Importing ", url, "...", "\n", sep = "")
 
-  # resolve github url if necessary
-  github_url <- resolve_github_url(url, article_tmp)
-
-  # if it's from github then record download url, otherwise download original url
-  if (!is.null(github_url)) {
-    url <- github_url
-  } else {
-    download_file(url, destfile = article_tmp)
-  }
+  # download the article index
+  download_url <- download_article_index(url, article_tmp)
 
   # extract metadata from the file
   metadata <- extract_embedded_metadata(article_tmp)
@@ -106,7 +99,7 @@ import_article <- function(url, collection, slug = "auto",
   }
 
   # download the article
-  download_article(url, article_tmp, metadata)
+  download_article(url, download_url, article_tmp, metadata)
 
   # move the article into place
   move_directory(article_temp_dir, article_dir)
@@ -142,15 +135,15 @@ import_article <- function(url, collection, slug = "auto",
 
 }
 
-download_article <- function(url, article_tmp, metadata) {
+download_article <- function(url, download_url, article_tmp, metadata) {
 
   # determine target directory
   article_temp_dir <- dirname(article_tmp)
 
   # compute base url
-  base_url <- url
-  if (grepl("\\.html?$", url, ignore.case = TRUE))
-    base_url <- dirname(url)
+  base_url <- download_url
+  if (grepl("\\.html?$", download_url, ignore.case = TRUE))
+    base_url <- dirname(download_url)
   base_url <- ensure_trailing_slash(base_url)
 
   # read the index content
@@ -291,7 +284,50 @@ update_article <- function(collection, slug, view = interactive()) {
   )
 }
 
+download_article_index <- function(url, article_tmp) {
 
+  # check for github
+  download_url <- resolve_github_url(url, article_tmp)
+
+  # check for rpubs
+  if (is.null(download_url))
+    download_url <- resolve_rpubs_url(url, article_tmp)
+
+  # if none of the above then use original url
+  if (is.null(download_url))
+    download_url <- url
+
+  # perform the download
+  download_file(download_url, article_tmp)
+
+  # return the download url
+  download_url
+}
+
+resolve_rpubs_url <- function(url, article_tmp) {
+
+  # if it's an RPubs url then look for the iframe within it
+  if (grepl("^https?://rpubs\\.com/.*/.*$", url)) {
+
+    # download html
+    rpubs_html <- xml2::read_html(url)
+
+    # find iframe and get url
+    iframe <- xml2::xml_find_all(rpubs_html, "//iframe[@src]")
+    src <- xml2::xml_attr(iframe, "src")
+    url <- paste0("https:", src)
+
+    # download file
+    download_file(url, article_tmp)
+
+    # return url
+    url
+
+  } else {
+    NULL
+  }
+
+}
 
 resolve_github_url <- function(url, article_tmp) {
 

@@ -137,14 +137,18 @@ transform_metadata <- function(file, site_config, collection_config, metadata, a
     # compute the path on disk
     metadata_path <- file.path(dirname(file), metadata$preview)
 
-    # validate that the file exists
+    # if the file doesn't exist then see if we can auto-discover a preview
     if (!file.exists(metadata_path)) {
-      stop("Specified preview file '", metadata$preview, "' does not exist",
-           call. = FALSE)
+      metadata$preview <- NULL
+      if (auto_preview) {
+        metadata$preview <- discover_preview(file)
+        if (!is.null(metadata$preview))
+          metadata_path <- file.path(dirname(file), metadata$preview)
+      }
     }
 
     # resolve preview url
-    if (!is.null(metadata$base_url)) {
+    if (!is.null(metadata$preview) && !is.null(metadata$base_url)) {
 
       # compute preview url
       metadata$preview_url <- url_path(metadata$base_url, metadata$preview)
