@@ -1,5 +1,9 @@
 
 
+- consider making things a bit wider
+
+- bookdown cross-references: https://github.com/radixpub/radix-r/issues/8#issuecomment-403856764
+
 - gt package integration
 - examples
 - port TF blog
@@ -25,6 +29,7 @@
 - packrat ignore Rmds in collection subfolders (site engine?)
 
 - Well documented MailChimp workflow
+- (see https://mailchimp.com/resources/guides/how-to-design-sign-up-forms-that-work/)
 
 
 - Lightbox for asides?
