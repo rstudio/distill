@@ -145,7 +145,7 @@ write_feed_xml <- function(feed_xml, site_config, collection, articles) {
 
     # preview image
     preview_img <- NULL
-    if (!is.null(article$preview)) {
+    if (length(article$preview) > 0) {
       article$preview <- absolute_preview_url(article$preview, site_config$base_url)
       # rss tag
       media_content <- add_child(item, "media:content", attr = c(
