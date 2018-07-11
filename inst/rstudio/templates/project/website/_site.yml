@@ -1,5 +1,7 @@
 name: "{{name}}"
 title: "{{title}}"
+description: |
+  {{title}}
 output_dir: "{{output_dir}}"
 navbar:
   right:
