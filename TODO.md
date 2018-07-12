@@ -1,5 +1,7 @@
 
 
+- handling of index.html within navigational structure (maybe special alias?)
+
 - consider making things a bit wider
 
 - bookdown cross-references: https://github.com/radixpub/radix-r/issues/8#issuecomment-403856764
