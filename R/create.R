@@ -146,7 +146,7 @@ output:
 '
 
 ```{r setup, include=FALSE}
-  knitr::opts_chunk$set(echo = FALSE)
+knitr::opts_chunk$set(echo = FALSE)
 ```
 
 Radix is a publication format for scientific and technical writing, native to the web.
