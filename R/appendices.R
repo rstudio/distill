@@ -1,6 +1,6 @@
 
 
-appendices_after_body_html <- function(site_config, metadata) {
+appendices_after_body_html <- function(input_file, site_config, metadata) {
 
   # write appendixes
   updates_and_corrections <- appendix_updates_and_corrections(metadata)
@@ -16,7 +16,7 @@ appendices_after_body_html <- function(site_config, metadata) {
   if (!is.null(metadata$bibliography)) {
     bibliography <- HTML(paste(c(
       '<script id="distill-bibliography" type="text/bibtex">',
-      readLines(metadata$bibliography, warn = FALSE),
+      readLines(file.path(dirname(input_file), metadata$bibliography), warn = FALSE),
       '</script>'
     ), collapse = "\n"))
   }
@@ -28,8 +28,8 @@ appendices_after_body_html <- function(site_config, metadata) {
   ))
 }
 
-appendices_after_body_file <- function(site_config, metadata) {
-  html_file(appendices_after_body_html(site_config, metadata))
+appendices_after_body_file <- function(input_file, site_config, metadata) {
+  html_file(appendices_after_body_html(input_file, site_config, metadata))
 }
 
 appendix_updates_and_corrections <- function(metadata) {

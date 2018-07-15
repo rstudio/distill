@@ -420,7 +420,7 @@ render_collection_article <- function(site_dir, site_config, collection, article
                                     as.character(metadata_html))
 
   # substitue appendices
-  appendices_html <- appendices_after_body_html(site_config, metadata)
+  appendices_html <- appendices_after_body_html(index_html, site_config, metadata)
   index_content <- fill_placeholder(index_content,
                                     "appendices",
                                     as.character(appendices_html))

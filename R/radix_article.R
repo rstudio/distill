@@ -183,7 +183,7 @@ radix_article <- function(toc = FALSE,
     # after body includes: user then radix
     after_body <- c(includes$after_body,
                     site_after_body_file(site_config),
-                    appendices_after_body_file(site_config, metadata),
+                    appendices_after_body_file(input_file, site_config, metadata),
                     navigation_after_body_file(dirname(input_file), site_config))
 
     # populate args
