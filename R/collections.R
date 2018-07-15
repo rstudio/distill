@@ -419,6 +419,11 @@ render_collection_article <- function(site_dir, site_config, collection, article
                                     "meta_tags",
                                     as.character(metadata_html))
 
+  # substitute front_matter
+  index_content <- fill_placeholder(index_content,
+                                    "front_matter",
+                                    as.character(front_matter_html(metadata)))
+
   # substitue appendices
   appendices_html <- appendices_after_body_html(index_html, site_config, metadata)
   index_content <- fill_placeholder(index_content,
