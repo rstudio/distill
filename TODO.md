@@ -1,7 +1,5 @@
 
 
-- Citation not updating in header on import
-
 - bookdown cross-references: https://github.com/radixpub/radix-r/issues/8#issuecomment-403856764
 
 - gt package integration
