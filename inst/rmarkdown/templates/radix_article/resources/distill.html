@@ -421,6 +421,19 @@ function on_load_complete() {
   // set body to visible
   document.body.style.visibility = 'visible';
 
+  // force redraw for leaflet widgets
+  if (window.HTMLWidgets) {
+    var maps = window.HTMLWidgets.findAll(".leaflet");
+    $.each(maps, function(i, el) {
+      var map = this.getMap();
+      map.invalidateSize();
+      map.eachLayer(function(layer) {
+        if (layer instanceof L.TileLayer)
+          layer.redraw();
+      });
+    });
+  }
+
   // trigger 'shown' so htmlwidgets resize
   $('d-article').trigger('shown');
 }
