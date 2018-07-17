@@ -40,6 +40,10 @@ transform_metadata <- function(file, site_config, collection_config, metadata, a
   if (is.null(metadata$title))
     stop("You must provide a title for Radix articles", call. = FALSE)
 
+  # trim ws from description
+  if (!is.null(metadata$description))
+    metadata$description <- trimws(metadata$description)
+
   # if the site has a base_url then we need to tweak the base url of the
   # input document to use the site
   if (!is.null(site_config[["base_url"]])) {
@@ -567,7 +571,10 @@ embedded_metadata_html <- function(metadata) {
 }
 
 extract_embedded_metadata <- function(file) {
-  extract_embedded_json(file, "radix-rmarkdown-metadata")
+  metadata <- extract_embedded_json(file, "radix-rmarkdown-metadata")
+  if (!is.null(metadata$description))
+    metadata$description <- trimws(metadata$description)
+  metadata
 }
 
 embedded_json <- function(x, id, file = tempfile(fileext = "html")) {
