@@ -154,15 +154,15 @@ download_article <- function(url, download_url, article_tmp, metadata) {
   # update the metadata (may have a revised date)
   index_content <- fill_placeholder(index_content,
                                     "front_matter",
-                                    as.character(front_matter_html(metadata)))
+                                    doRenderTags(front_matter_html(metadata)))
   index_content <- fill_placeholder(index_content,
                                     "rmarkdown_metadata",
-                                    as.character(embedded_metadata_html(metadata)))
+                                    doRenderTags(embedded_metadata_html(metadata)))
 
   # provide import source
   index_content <- fill_placeholder(index_content,
                                     "import_source",
-                                    as.character(import_source_html(url, article_tmp)))
+                                    doRenderTags(import_source_html(url, article_tmp)))
 
   # get site_libs references
   pattern <- '"[\\./]+site_libs/([^"]+)"'

@@ -300,7 +300,7 @@ metadata_html <- function(site_config, metadata, self_contained) {
 
 metadata_in_header <- function(site_config, metadata, self_contained) {
   meta_tags <- metadata_html(site_config, metadata, self_contained)
-  meta_html <- as.character(meta_tags)
+  meta_html <- doRenderTags(meta_tags)
   meta_file <- tempfile(fileext = "html")
   writeLines(meta_html, meta_file, useBytes = TRUE)
   meta_file

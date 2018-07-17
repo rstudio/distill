@@ -410,25 +410,25 @@ render_collection_article <- function(site_dir, site_config, collection, article
   index_content <- fill_placeholder(
     index_content,
     "rmarkdown_metadata",
-    as.character(embedded_metadata_html(rmarkdown_metadata))
+    doRenderTags(embedded_metadata_html(rmarkdown_metadata))
   )
 
   # substitute meta tags
   metadata_html <- metadata_html(site_config, metadata, self_contained = FALSE)
   index_content <- fill_placeholder(index_content,
                                     "meta_tags",
-                                    as.character(metadata_html))
+                                    doRenderTags(metadata_html))
 
   # substitute front_matter
   index_content <- fill_placeholder(index_content,
                                     "front_matter",
-                                    as.character(front_matter_html(metadata)))
+                                    doRenderTags(front_matter_html(metadata)))
 
   # substitue appendices
   appendices_html <- appendices_after_body_html(index_html, site_config, metadata)
   index_content <- fill_placeholder(index_content,
                                     "appendices",
-                                    as.character(appendices_html))
+                                    doRenderTags(appendices_html))
 
   # substitute navigation html
   navigation <- navigation_html(site_dir, site_config, offset)
