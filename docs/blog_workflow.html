@@ -21,7 +21,7 @@
   <!--radix_placeholder_meta_tags-->
   <title>Radix for R Markdown: Blog Post Workflow</title>
   
-  <meta property="description" itemprop="description" content="Recommendations on managing blog post drafts and a review of tools &#10;available to incorporate posts contributed by outside authors. &#10;"/>
+  <meta property="description" itemprop="description" content="Recommendations on managing blog post drafts and a review of tools &#10;available to incorporate posts contributed by outside authors."/>
   
   <link rel="license" href="https://creativecommons.org/licenses/by/4.0/"/>
   <link rel="icon" type="image/png" href="images/favicon.png"/>
@@ -30,14 +30,14 @@
   <!--  https://developers.facebook.com/docs/sharing/webmasters#markup -->
   <meta property="og:title" content="Radix for R Markdown: Blog Post Workflow"/>
   <meta property="og:type" content="article"/>
-  <meta property="og:description" content="Recommendations on managing blog post drafts and a review of tools &#10;available to incorporate posts contributed by outside authors. &#10;"/>
+  <meta property="og:description" content="Recommendations on managing blog post drafts and a review of tools &#10;available to incorporate posts contributed by outside authors."/>
   <meta property="og:locale" content="en_US"/>
   <meta property="og:site_name" content="Radix for R Markdown"/>
   
   <!--  https://dev.twitter.com/cards/types/summary -->
   <meta property="twitter:card" content="summary"/>
   <meta property="twitter:title" content="Radix for R Markdown: Blog Post Workflow"/>
-  <meta property="twitter:description" content="Recommendations on managing blog post drafts and a review of tools &#10;available to incorporate posts contributed by outside authors. &#10;"/>
+  <meta property="twitter:description" content="Recommendations on managing blog post drafts and a review of tools &#10;available to incorporate posts contributed by outside authors."/>
   
   <!--/radix_placeholder_meta_tags-->
   <!--radix_placeholder_rmarkdown_metadata-->
@@ -401,6 +401,23 @@
   
   .l-screen-inset {
     padding-right: 16px;
+  }
+  
+  .shaded {
+    background: rgb(247, 247, 247);
+    padding-top: 20px;
+    padding-bottom: 20px;
+    border-top: 1px solid rgba(0, 0, 0, 0.1);
+    border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+  }
+  
+  .shaded .html-widget {
+    margin-bottom: 0;
+    border: 1px solid rgba(0, 0, 0, 0.1);
+  }
+  
+  .shaded .shaded-content {
+    background: white;
   }
   
   .text-output {
@@ -799,6 +816,19 @@
     // set body to visible
     document.body.style.visibility = 'visible';
   
+    // force redraw for leaflet widgets
+    if (window.HTMLWidgets) {
+      var maps = window.HTMLWidgets.findAll(".leaflet");
+      $.each(maps, function(i, el) {
+        var map = this.getMap();
+        map.invalidateSize();
+        map.eachLayer(function(layer) {
+          if (layer instanceof L.TileLayer)
+            layer.redraw();
+        });
+      });
+    }
+  
     // trigger 'shown' so htmlwidgets resize
     $('d-article').trigger('shown');
   }
@@ -900,8 +930,18 @@
       var layout = $(this).attr('data-layout');
   
       // apply layout to markdown level block elements
-      $(this).children().not('d-code, pre.text-output')
-        .wrap($('<div class="' + layout + '"></div>'));
+      var elements = $(this).children().not('d-code, pre.text-output, script');
+      elements.each(function(i, el) {
+        var layout_div = $('<div class="' + layout + '"></div>');
+        if (layout_div.hasClass('shaded')) {
+          var shaded_content = $('<div class="shaded-content"></div>');
+          $(this).wrap(shaded_content);
+          $(this).parent().wrap(layout_div);
+        } else {
+          $(this).wrap(layout_div);
+        }
+      });
+  
   
       // unwrap the layout-chunk div
       $(this).children().unwrap();
@@ -1175,7 +1215,7 @@
 <!--radix_placeholder_front_matter-->
 
 <script id="distill-front-matter" type="text/json">
-{"title":"Blog Post Workflow","description":"Recommendations on managing blog post drafts and a review of tools \navailable to incorporate posts contributed by outside authors. \n","authors":[]}
+{"title":"Blog Post Workflow","description":"Recommendations on managing blog post drafts and a review of tools \navailable to incorporate posts contributed by outside authors.","authors":[]}
 </script>
 
 <!--/radix_placeholder_front_matter-->

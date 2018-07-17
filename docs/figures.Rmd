@@ -69,6 +69,25 @@ leaflet() %>%
   addMarkers(lng=174.768, lat=-36.852, popup="The birthplace of R")
 ```
 
+Depending on the content displayed by `l-screen-inset`, sometimes it's nice to add some shading to further deliniate the display. You can do this by adding `shaded` to the layout declaration:
+
+````clike
+```{r, layout="l-screen-inset shaded"}`r ''`
+library(leaflet)
+leaflet() %>%
+  addTiles() %>%  # Add default OpenStreetMap map tiles
+  addMarkers(lng=174.768, lat=-36.852, popup="The birthplace of R")
+```
+````
+
+```{r, layout="l-screen-inset shaded"}
+library(leaflet)
+leaflet() %>%
+  addTiles() %>%  # Add default OpenStreetMap map tiles
+  addMarkers(lng=174.768, lat=-36.852, popup="The birthplace of R")
+```
+
+
 
 ## Layout for images
 

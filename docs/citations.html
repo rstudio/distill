@@ -405,6 +405,23 @@
     padding-right: 16px;
   }
   
+  .shaded {
+    background: rgb(247, 247, 247);
+    padding-top: 20px;
+    padding-bottom: 20px;
+    border-top: 1px solid rgba(0, 0, 0, 0.1);
+    border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+  }
+  
+  .shaded .html-widget {
+    margin-bottom: 0;
+    border: 1px solid rgba(0, 0, 0, 0.1);
+  }
+  
+  .shaded .shaded-content {
+    background: white;
+  }
+  
   .text-output {
     margin-top: 0;
     line-height: 1.5em;
@@ -801,6 +818,19 @@
     // set body to visible
     document.body.style.visibility = 'visible';
   
+    // force redraw for leaflet widgets
+    if (window.HTMLWidgets) {
+      var maps = window.HTMLWidgets.findAll(".leaflet");
+      $.each(maps, function(i, el) {
+        var map = this.getMap();
+        map.invalidateSize();
+        map.eachLayer(function(layer) {
+          if (layer instanceof L.TileLayer)
+            layer.redraw();
+        });
+      });
+    }
+  
     // trigger 'shown' so htmlwidgets resize
     $('d-article').trigger('shown');
   }
@@ -902,8 +932,18 @@
       var layout = $(this).attr('data-layout');
   
       // apply layout to markdown level block elements
-      $(this).children().not('d-code, pre.text-output')
-        .wrap($('<div class="' + layout + '"></div>'));
+      var elements = $(this).children().not('d-code, pre.text-output, script');
+      elements.each(function(i, el) {
+        var layout_div = $('<div class="' + layout + '"></div>');
+        if (layout_div.hasClass('shaded')) {
+          var shaded_content = $('<div class="shaded-content"></div>');
+          $(this).wrap(shaded_content);
+          $(this).parent().wrap(layout_div);
+        } else {
+          $(this).wrap(layout_div);
+        }
+      });
+  
   
       // unwrap the layout-chunk div
       $(this).children().unwrap();
