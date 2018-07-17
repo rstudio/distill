@@ -17,6 +17,7 @@
     - publishing/previewing workflow?
     - app.R or ui.R / server.R in the same directory; automagic local run
     - Full bleed media objects (videos, docs (http://viewerjs.org/), etc.)
+      See also https://pdfobject.com/
 
 
 
