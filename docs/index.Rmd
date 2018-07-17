@@ -1,7 +1,6 @@
 ---
 title: "Radix for R Markdown"
-description: | 
-  Scientific and technical writing, native to the web
+description: Scientific and technical writing, native to the web
 author:
   - name: "JJ Allaire"
     url: https://github.com/jjallaire

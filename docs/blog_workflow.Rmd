@@ -1,8 +1,7 @@
 ---
 title: "Blog Post Workflow"
 description: |
- Recommendations on managing blog post drafts and a review of tools 
- available to incorporate posts contributed by outside authors. 
+ Recommendations on managing blog post drafts and a review of tools available to incorporate posts contributed by outside authors. 
 output:
   radix::radix_article:
     toc: true
