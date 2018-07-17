@@ -108,7 +108,8 @@ import_article <- function(url, collection, slug = "auto",
   collections <- site_collections(site_dir, site_config)
   output_file <- publish_collection_article_to_site(
     site_dir, site_config, getOption("encoding"),
-    collections[[collection]], file.path(article_dir, "index.html"), metadata
+    collections[[collection]], file.path(article_dir, "index.html"), metadata,
+    strip_trailing_newline = TRUE
   )
 
   # view output file
@@ -278,11 +279,15 @@ update_article <- function(collection, slug, view = interactive()) {
   if (is.null(import_source))
     stop("Previously imported article not found at ", article_path, call. = FALSE)
 
-  # perform import (maintaining slug)
+  # find date
+  metadata <- extract_embedded_metadata(article_html)
+
+  # perform import (maintaining slug and date)
   import_article(
     import_source$url,
     collection,
     slug = slug,
+    date = metadata$date,
     overwrite = TRUE,
     view = view
   )
