@@ -17,6 +17,19 @@ placeholder_end <- function(context) {
 }
 
 fill_placeholder <- function(html, context, content) {
-  pattern <- paste0(placeholder_begin(context), ".*", placeholder_end(context))
-  sub(pattern, content, html, useBytes = TRUE)
+  begin <- placeholder_begin(context)
+  begin_pos <- regexpr(begin, html, fixed = TRUE)
+  end <- placeholder_end(context)
+  end_pos <- regexpr(end, html, fixed = TRUE)
+  if (begin_pos >= 0 && end_pos >= 0) {
+    paste0(
+      substring(html, first = 1, last = begin_pos - 1),
+      content,
+      substring(html,
+                first = end_pos + attr(end_pos, "match.length"),
+                last = nchar(html))
+    )
+  } else {
+    html
+  }
 }
