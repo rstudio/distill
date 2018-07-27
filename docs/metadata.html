@@ -920,7 +920,7 @@
       var href = $(this).attr('href');
       var id = href.replace('#', '');
       var fn = $('#' + id);
-      var fn_p = $('#fn1>p');
+      var fn_p = $('#' + id + '>p');
       fn_p.find('.footnote-back').remove();
       var text = fn_p.text();
       var dtfn = $('<d-footnote></d-footnote>');
