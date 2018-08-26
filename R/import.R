@@ -8,6 +8,11 @@
 #' @inheritParams create_post
 #'
 #' @param url URL for post to import
+#' @param date Post date (defaults to current date)
+#' @param check_license Verify that the imported posted has a creative commons license
+#' @param overwrite Overwrite existing post? (defaults to `FALSE`, use [update_post()]
+#'   to update an existing post in-place).
+#' @param view View the post after importing it.
 #'
 #' @return Returns (invisibly) a logical indicating whether the operation completed
 #'  (it may not complete if, for example, the user chose not to import an article

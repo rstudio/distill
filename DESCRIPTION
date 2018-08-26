@@ -45,10 +45,10 @@ Imports:
     downloader,
     progress,
     stringr,
-    knitr,
-    digest
-Suggests:
     knitr (>= 1.15.6),
+    digest,
+    yaml
+Suggests:
     htmlwidgets,
     r2d3,
     DiagrammeR,

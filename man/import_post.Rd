@@ -16,8 +16,17 @@ update_post(slug, view = interactive())
 \item{slug}{Post slug (directory name). Automatically computed from title if not
 provided.}
 
+\item{date}{Post date (defaults to current date)}
+
 \item{date_prefix}{Data prefix for post slug (preserves chronological order for posts
 within the filesystem).}
+
+\item{check_license}{Verify that the imported posted has a creative commons license}
+
+\item{overwrite}{Overwrite existing post? (defaults to \code{FALSE}, use \code{\link[=update_post]{update_post()}}
+to update an existing post in-place).}
+
+\item{view}{View the post after importing it.}
 }
 \value{
 Returns (invisibly) a logical indicating whether the operation completed

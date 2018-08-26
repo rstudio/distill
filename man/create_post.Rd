@@ -29,3 +29,10 @@ Create a new blog post
 This function must be called from with a working directory that is within
 a Radix website.
 }
+\examples{
+\dontrun{
+library(radix)
+create_post("My Post")
+}
+
+}

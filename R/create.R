@@ -15,6 +15,11 @@
 #' @note The `dir` and `title` parameters are required (they will be prompted for
 #'   interatively if they are not specified).
 #'
+#' @examples
+#' \dontrun{
+#' library(radix)
+#' create_website("mysite", "My Site")
+#' }
 #' @export
 create_website <- function(dir, title, gh_pages = FALSE, edit = interactive()) {
   do_create_website(dir, title, gh_pages, edit, "website")
@@ -67,6 +72,12 @@ create_blog <- function(dir, title, gh_pages = FALSE, edit = interactive()) {
 #'
 #' @note This function must be called from with a working directory that is within
 #'  a Radix website.
+#'
+#' @examples
+#' \dontrun{
+#' library(radix)
+#' create_post("My Post")
+#' }
 #'
 #' @export
 create_post <- function(title, author = "auto", slug = "auto", date_prefix = TRUE,

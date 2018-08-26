@@ -33,3 +33,10 @@ only.}
 \description{
 Publish a website to RStudio Connect
 }
+\examples{
+\dontrun{
+library(radix)
+publish_website()
+}
+
+}

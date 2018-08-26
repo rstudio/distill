@@ -18,6 +18,12 @@
 #'   automatically after the site is deployed. Defaults to `TRUE` in interactive sessions
 #'   only.
 #'
+#' @examples
+#' \dontrun{
+#' library(radix)
+#' publish_website()
+#' }
+#'
 #' @export
 publish_website <- function(site_dir = ".", site_name = NULL,
                             method = c("rsconnect"), server = NULL, account = NULL,

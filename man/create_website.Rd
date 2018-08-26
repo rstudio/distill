@@ -26,3 +26,9 @@ function for a website and the \code{create_blog()} function for a blog.
 The \code{dir} and \code{title} parameters are required (they will be prompted for
 interatively if they are not specified).
 }
+\examples{
+\dontrun{
+library(radix)
+create_website("mysite", "My Site")
+}
+}
