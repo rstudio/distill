@@ -3,6 +3,10 @@
 # for the internal R Markdown preview window)
 validate_rstudio_version <- function() {
 
+  # don't validate when running under testthat (since it won't preview)
+  if (!is.na(Sys.getenv("R_TESTS", unset = NA)))
+    return()
+
   # if we are running under rstudio then check whether this version
   # can render radix articles (since they use webcomponents polyfill)
   rstudio <- rstudio_version()
