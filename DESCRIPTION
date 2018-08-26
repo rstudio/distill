@@ -53,5 +53,6 @@ Suggests:
     r2d3,
     DiagrammeR,
     shiny,
-    rsconnect
+    rsconnect,
+    testthat
 Language: en-US

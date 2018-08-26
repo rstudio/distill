@@ -1,0 +1,12 @@
+name: "testsite"
+title: "Test Site"
+description: |
+  Test Site
+output_dir: "_site"
+navbar:
+  right:
+    - text: "Home"
+      href: index.html
+    - text: "About"
+      href: about.html
+output: radix::radix_article
