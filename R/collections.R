@@ -728,15 +728,17 @@ write_articles_info <- function(articles, path) {
 
 article_info <- function(site_dir, article) {
 
-  path <- paste0(url_path(article_site_path(site_dir, article$path)), "/")
+  as_utf8 <- function(x) iconv(x, from = "", to = "UTF-8")
+
+  path <- as_utf8(paste0(url_path(article_site_path(site_dir, article$path)), "/"))
   info <- list(
-    path = path,
-    title = article$metadata$title,
-    description = article$metadata$description,
+    path = as_utf8(path),
+    title = as_utf8(article$metadata$title),
+    description = as_utf8(article$metadata$description),
     author = lapply(article$metadata$author, function(author) {
       list(
-        name = author$name,
-        url = author$url
+        name = as_utf8(author$name),
+        url = as_utf8(author$url)
       )
     }),
     date = article$metadata$date,
