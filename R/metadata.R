@@ -616,6 +616,7 @@ extract_embedded_json <- function(file, id) {
 
     # read next 100 lines
     lines <- readLines(con, n = 100, encoding = "UTF-8")
+    lines <- iconv(lines, from = "", to = "UTF-8")
     if (length(lines) == 0)
       break
 
