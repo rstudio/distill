@@ -743,7 +743,7 @@ article_info <- function(site_dir, article) {
     author = lapply(article$metadata$author, function(author) {
       list(
         name = as_utf8(author$name),
-        url = as_utf8(author$url)
+        url = author$url
       )
     }),
     date = article$metadata$date,
