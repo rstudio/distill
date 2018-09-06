@@ -392,6 +392,8 @@ render_collection_article <- function(site_dir, site_config, collection, article
   index_content <- readChar(index_html,
                             nchars = file.info(index_html)$size,
                             useBytes = TRUE)
+  Encoding(index_content) <- "UTF-8"
+
 
   # get rmarkdown metadata
   rmarkdown_metadata <- extract_embedded_metadata(index_html)
@@ -459,14 +461,19 @@ render_collection_article <- function(site_dir, site_config, collection, article
   site_libs <- file.path(site_dir, site_config$output_dir, "site_libs")
   index_content <- apply_site_libs(index_content, article_html, site_libs, offset)
 
+  # remove carriage returns
+  index_content <- gsub("\r\n", "\n", index_content, useBytes = TRUE)
+
   # strip trailing newline if requested (this is necessary so that we can ensure
   # that incremental vs. render_site output is identical so as to not generate
   # spurious diffs)
   if (strip_trailing_newline)
-    index_content <- strip_trailing_newline(index_content)
+    sep = ""
+  else
+    sep = "\n"
 
-  # write the contet
-  writeLines(index_content, index_html, useBytes = TRUE)
+  # write the content
+  writeLines(index_content, index_html, sep = sep, useBytes = TRUE)
 
   # return path to rendered article
   index_html
