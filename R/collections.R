@@ -195,7 +195,7 @@ render_collection_article_post_processor <- function(encoding_fn, self_contained
       # publish article
       output_file <- publish_collection_article_to_site(
         site_dir, site_config, encoding, collection, article_path, metadata,
-        strip_trailing_newline = self_contained
+        strip_trailing_newline = TRUE
       )
 
       # return the output_file w/ an attribute indicating that
