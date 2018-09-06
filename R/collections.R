@@ -735,7 +735,12 @@ write_articles_info <- function(articles, path) {
 
 article_info <- function(site_dir, article) {
 
-  as_utf8 <- function(x) iconv(x, from = "", to = "UTF-8")
+  as_utf8 <- function(x) {
+    if (is.null(x))
+      NULL
+    else
+      iconv(x, from = "", to = "UTF-8")
+  }
 
   path <- as_utf8(paste0(url_path(article_site_path(site_dir, article$path)), "/"))
   info <- list(
