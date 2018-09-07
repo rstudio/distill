@@ -262,7 +262,7 @@ update_collection_listing <- function(site_dir, site_config, collection, article
     return()
 
   # read the index
-  articles <- jsonlite::read_json(collection_index)
+  articles <- read_json(collection_index)
 
   # either edit the index or add a new entry at the appropriate place
   article_info <- article_info(site_dir, article)
@@ -723,14 +723,9 @@ to_article_info <- function(site_dir, articles) {
 }
 
 write_articles_info <- function(articles, path) {
-
-  # write json
-  jsonlite::write_json(
-    articles,
-    path,
-    pretty = TRUE,
-    auto_unbox = TRUE
-  )
+  json <- jsonlite::toJSON(articles, pretty = TRUE, auto_unbox = TRUE)
+  json <- paste0(json, "\n")
+  writeLines(json, path, sep = "", useBytes = TRUE)
 }
 
 article_info <- function(site_dir, article) {
@@ -738,8 +733,10 @@ article_info <- function(site_dir, article) {
   as_utf8 <- function(x) {
     if (is.null(x))
       NULL
-    else
+    else if (Encoding(x) != "UTF-8")
       iconv(x, from = "", to = "UTF-8")
+    else
+      x
   }
 
   path <- as_utf8(paste0(url_path(article_site_path(site_dir, article$path)), "/"))

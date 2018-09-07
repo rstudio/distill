@@ -187,7 +187,7 @@ articles_info <- function(site_dir, collection) {
   if (!file.exists(articles_json))
     stop("The collection '", collection, "' does not have an article listing.\n",
          "(try running render_site() to generate the listing)", call. = FALSE)
-  jsonlite::read_json(articles_json)
+  read_json(articles_json)
 }
 
 as_collection_dir <- function(site_dir, collection) {

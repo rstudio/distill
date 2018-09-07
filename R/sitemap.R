@@ -54,7 +54,7 @@ write_sitemap_xml <- function(site_dir, site_config) {
                                collection$name,
                                file_with_ext(collection$name, "json"))
     if (file.exists(articles_json))
-      lapply(jsonlite::read_json(articles_json), add_article)
+      lapply(read_json(articles_json), add_article)
   }
 
   # write the feed file

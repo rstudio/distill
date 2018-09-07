@@ -600,6 +600,12 @@ embedded_json <- function(x, id, file = tempfile(fileext = "html")) {
   }
 }
 
+read_json <- function(file) {
+  json <- readChar(file, nchars = file.info(file)$size, useBytes = TRUE)
+  Encoding(json) <- "UTF-8"
+  jsonlite::fromJSON(json, simplifyVector = FALSE)
+}
+
 extract_embedded_json <- function(file, id) {
 
   # open connection to file
@@ -642,7 +648,7 @@ extract_embedded_json <- function(file, id) {
 
 unserialize_embedded_json <- function(lines) {
   # unescape code, see https://github.com/rstudio/rmarkdown/issues/943
-  json <- gsub("<\\u002f", "</", lines, fixed = TRUE)
+  json <- gsub("<\\u002f", "</", lines, fixed = TRUE, useBytes = TRUE)
   jsonlite::unserializeJSON(json)
 }
 

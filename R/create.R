@@ -121,7 +121,7 @@ create_post <- function(title, author = "auto", slug = "auto", date_prefix = TRU
 
     # look author of most recent post
     if (file.exists(posts_index))
-      posts <- jsonlite::read_json(posts_index)
+      posts <- read_json(posts_index)
     else
       posts <- list()
     if (length(posts) > 0)
