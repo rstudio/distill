@@ -4,8 +4,8 @@
 \alias{create_post}
 \title{Create a new blog post}
 \usage{
-create_post(title, author = "auto", slug = "auto", date_prefix = TRUE,
-  draft = FALSE, edit = interactive())
+create_post(title, author = "auto", slug = "auto",
+  date_prefix = TRUE, draft = FALSE, edit = interactive())
 }
 \arguments{
 \item{title}{Post title}

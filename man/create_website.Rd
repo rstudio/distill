@@ -14,7 +14,7 @@ create_blog(dir, title, gh_pages = FALSE, edit = interactive())
 
 \item{title}{Title of website}
 
-\item{gh_pages}{Configure the site for publishing using \href{https://pages.github.com/}{GitHubPages}}
+\item{gh_pages}{Configure the site for publishing using \href{https://pages.github.com/}{GitHub Pages}}
 
 \item{edit}{Open site index file or welcome post in an editor.}
 }

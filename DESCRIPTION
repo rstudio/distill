@@ -26,7 +26,7 @@ BugReports: https://github.com/radixpub/radix-r/issues
 Encoding: UTF-8
 LazyData: true
 Roxygen: list(markdown = TRUE)
-RoxygenNote: 6.0.1
+RoxygenNote: 6.1.0
 Imports: 
     utils, 
     stats,

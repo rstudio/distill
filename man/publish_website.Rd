@@ -4,9 +4,9 @@
 \alias{publish_website}
 \title{Publish a Radix Website}
 \usage{
-publish_website(site_dir = ".", site_name = NULL, method = c("rsconnect"),
-  server = NULL, account = NULL, render = TRUE,
-  launch_browser = interactive())
+publish_website(site_dir = ".", site_name = NULL,
+  method = c("rsconnect"), server = NULL, account = NULL,
+  render = TRUE, launch_browser = interactive())
 }
 \arguments{
 \item{site_dir}{Directory containing website. Defaults to current working directory.}
