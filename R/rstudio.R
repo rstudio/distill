@@ -18,7 +18,7 @@ validate_rstudio_version <- function() {
       if (rstudio$version < "1.2.718")
         stop("Radix articles cannot be previewed in this version of RStudio.\n",
              "Please update to version 1.2.718 or higher at ",
-             "https://dailies.rstudio.com/\n",
+             "https://www.rstudio.com/products/rstudio/download/preview/\n",
              call. = FALSE)
     }
   }
