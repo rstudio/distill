@@ -162,7 +162,7 @@ knitr::opts_chunk$set(echo = FALSE)
 
 Radix is a publication format for scientific and technical writing, native to the web.
 
-Learn more about using Radix at <https://radixpub.github.io/radix-r>.
+Learn more about using Radix at <https://rstudio.github.io/radix>.
 
 '
 

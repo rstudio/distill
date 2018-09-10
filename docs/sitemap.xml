@@ -1,51 +1,51 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.sitemaps.org/schemas/sitemap/0.9 http://www.sitemaps.org/schemas/sitemap/0.9/sitemap.xsd" version="1.0">
   <url>
-    <loc>https://radixpub.github.io/radix-r/blog_workflow.html</loc>
-    <lastmod>2018-07-17T12:26:26-04:00</lastmod>
+    <loc>https://rstudio.github.io/radix/blog_workflow.html</loc>
+    <lastmod>2018-09-10T14:07:23-04:00</lastmod>
   </url>
   <url>
-    <loc>https://radixpub.github.io/radix-r/blog.html</loc>
-    <lastmod>2018-07-17T10:06:41-04:00</lastmod>
+    <loc>https://rstudio.github.io/radix/blog.html</loc>
+    <lastmod>2018-09-10T14:12:59-04:00</lastmod>
   </url>
   <url>
-    <loc>https://radixpub.github.io/radix-r/citations.html</loc>
-    <lastmod>2018-07-03T17:48:13-04:00</lastmod>
+    <loc>https://rstudio.github.io/radix/citations.html</loc>
+    <lastmod>2018-09-10T14:11:52-04:00</lastmod>
   </url>
   <url>
-    <loc>https://radixpub.github.io/radix-r/diagrams.html</loc>
-    <lastmod>2018-06-15T15:16:43-04:00</lastmod>
+    <loc>https://rstudio.github.io/radix/diagrams.html</loc>
+    <lastmod>2018-09-10T14:14:36-04:00</lastmod>
   </url>
   <url>
-    <loc>https://radixpub.github.io/radix-r/figures.html</loc>
+    <loc>https://rstudio.github.io/radix/figures.html</loc>
     <lastmod>2018-07-17T12:18:44-04:00</lastmod>
   </url>
   <url>
-    <loc>https://radixpub.github.io/radix-r/</loc>
-    <lastmod>2018-07-17T12:26:01-04:00</lastmod>
+    <loc>https://rstudio.github.io/radix/</loc>
+    <lastmod>2018-09-10T14:11:52-04:00</lastmod>
   </url>
   <url>
-    <loc>https://radixpub.github.io/radix-r/interactivity.html</loc>
+    <loc>https://rstudio.github.io/radix/interactivity.html</loc>
     <lastmod>2018-06-15T15:17:01-04:00</lastmod>
   </url>
   <url>
-    <loc>https://radixpub.github.io/radix-r/metadata.html</loc>
-    <lastmod>2018-07-09T09:55:47-04:00</lastmod>
+    <loc>https://rstudio.github.io/radix/metadata.html</loc>
+    <lastmod>2018-09-10T14:13:51-04:00</lastmod>
   </url>
   <url>
-    <loc>https://radixpub.github.io/radix-r/publish_article.html</loc>
+    <loc>https://rstudio.github.io/radix/publish_article.html</loc>
     <lastmod>2018-06-15T15:17:12-04:00</lastmod>
   </url>
   <url>
-    <loc>https://radixpub.github.io/radix-r/publish_website.html</loc>
+    <loc>https://rstudio.github.io/radix/publish_website.html</loc>
     <lastmod>2018-06-15T15:17:18-04:00</lastmod>
   </url>
   <url>
-    <loc>https://radixpub.github.io/radix-r/tables.html</loc>
+    <loc>https://rstudio.github.io/radix/tables.html</loc>
     <lastmod>2018-06-15T15:17:24-04:00</lastmod>
   </url>
   <url>
-    <loc>https://radixpub.github.io/radix-r/website.html</loc>
-    <lastmod>2018-07-04T08:24:40-04:00</lastmod>
+    <loc>https://rstudio.github.io/radix/website.html</loc>
+    <lastmod>2018-09-10T14:14:09-04:00</lastmod>
   </url>
 </urlset>

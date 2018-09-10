@@ -21,8 +21,8 @@ Description: Scientific and technical article format for the web. 'Radix' articl
     feature attractive, reader-friendly typography, flexible layout options
     for visualizations, and full support for footnotes and citations.
 License: Apache License 2.0
-URL: https://github.com/radixpub/radix-r
-BugReports: https://github.com/radixpub/radix-r/issues
+URL: https://github.com/rstudio/radix
+BugReports: https://github.com/rstudio/radix/issues
 Encoding: UTF-8
 LazyData: true
 Roxygen: list(markdown = TRUE)
