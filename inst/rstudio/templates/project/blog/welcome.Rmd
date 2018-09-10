@@ -18,11 +18,11 @@ output:
 knitr::opts_chunk$set(echo = FALSE)
 
 # Learn more about creating blogs with Radix at:
-# https://radixpub.github.io/radix-r/blog.html
+# https://rstudio.github.io/radix/blog.html
 
 {{#gh_pages}}
 # Learn more about publishing to GitHub Pages at:
-# https://radixpub.github.io/radix-r/publish_website.html#github-pages
+# https://rstudio.github.io/radix/publish_website.html#github-pages
 
 {{/gh_pages}}
 ```

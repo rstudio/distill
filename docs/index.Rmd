@@ -14,8 +14,8 @@ author:
     url: https://github.com/yihui
     affiliation: RStudio
     affiliation_url: https://www.rstudio.com
-date: May 4, 2018
-citation_url: https://radixpub.github.io/radix-r
+date: September 10, 2018
+citation_url: https://rstudio.github.io/radix
 bibliography: biblio.bib
 output:
   radix::radix_article:
@@ -55,7 +55,7 @@ devtools::install_github("rstudio/radix")
 
 Using Radix requires Pandoc v2.0 or higher. If you are using RStudio then you should use RStudio v1.2.718 or higher (which comes bundled with Pandoc v2.0). 
 
-You can download the daily build of RStudio v1.2 at <https://dailies.rstudio.com/>.
+You can download the preview release of RStudio v1.2 at <https://www.rstudio.com/products/rstudio/download/preview/>.
 
 ### Creating an article
 

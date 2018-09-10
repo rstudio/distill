@@ -72,7 +72,7 @@ author:
     url: https://example.com/norajones
     affiliation: Spacely Sprockets
     affiliation_url: https://example.com/spacelysprokets
-citation_url: https://radixpub.github.io/radix-r
+citation_url: https://rstudio.github.io/radix
 slug: jones2018radix
 bibliography: biblio.bib
 ---
@@ -112,7 +112,7 @@ author:
 journal: "Journal of Data Science Software"
 doi: "10.23915/distill.00010"
 slug: jones2018radix
-citation_url: https://radixpub.github.io/radix-r
+citation_url: https://rstudio.github.io/radix
 bibliography: biblio.bib
 ---
 ```

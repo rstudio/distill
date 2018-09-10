@@ -179,7 +179,7 @@ date: May 4, 2018
 author:
   - name: Nora Jones 
     url: https://example.com/norajones
-canonical_url: https://radixpub.github.io/radix-r
+canonical_url: https://rstudio.github.io/radix
 ---
 ```
 
