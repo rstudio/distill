@@ -46,6 +46,12 @@
   border-bottom: none !important;
 }
 
+.posts-list .posts-list-caption {
+  grid-column: screen;
+  font-weight: 500;
+  font-size: 40px;
+}
+
 .posts-list .post-preview h2 {
   margin: 0 0 6px 0;
   line-height: 1.2em;
@@ -248,7 +254,7 @@ function init_posts_list() {
     $('.categories .active').removeClass('active');
 
     // mark all posts invisible to start
-    set_posts_visible($('.posts-list').children(), false);
+    set_posts_visible($('.posts-list').children('a'), false);
 
     // if we have a hash filter
     if (window.location.hash) {

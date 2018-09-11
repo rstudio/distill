@@ -76,6 +76,22 @@ radix_article <- function(toc = FALSE,
   site_config <- NULL
   encoding <- NULL
 
+  eng_yaml <- function(options) {
+    if (identical(options$label, "listing")) {
+      knitr::knit_meta_add(list(
+        structure(class = "radix_listing", list(
+          code = options$code
+        ))
+      ))
+    }
+    NULL
+  }
+
+  # pre-knit
+  pre_knit <- function(input, ...)  {
+    knitr::knit_engines$set(yaml = eng_yaml)
+  }
+
   # post-knit
   post_knit <- function(metadata, input_file, runtime, encoding, ...) {
 
@@ -142,21 +158,34 @@ radix_article <- function(toc = FALSE,
       html_dependency_distill()
     )
 
-    # special handling for listing pages
+    # resolve listing
     listing <- list()
+
+    # get any listing we have from knit_meta
+    yaml_listing <- knitr::knit_meta(class = "radix_listing", clean = TRUE)
+
+    # special handling for listing pages
     if (!is.null(metadata$listing)) {
 
       # resolving listing feed and html
       listing <- resolve_listing(input_file, site_config, metadata)
 
+    } else if (length(yaml_listing) > 0) {
+
+      # resolve yaml based listing
+      listing <- resolve_yaml_listing(input_file, site_config, metadata, yaml_listing)
+
+    }
+
+    if (length(listing) > 0) {
       # indicate we are are using a listing layout
       args <- c(args, pandoc_variable_arg("layout", "listing"))
 
       # forward feed_url if we generated a feed
       if (!is.null(listing$feed))
         args <- c(args,
-          pandoc_variable_arg("feed", url_path(site_config$base_url, listing$feed))
-      )
+                  pandoc_variable_arg("feed", url_path(site_config$base_url, listing$feed))
+        )
     }
 
     # add html dependencies
@@ -204,6 +233,11 @@ radix_article <- function(toc = FALSE,
                                       includes$in_header))
   }
 
+  on_exit <- function() {
+    knitr::knit_engines$set(yaml = NULL)
+    validate_rstudio_version()
+  }
+
   # return format
   output_format(
     knitr = knitr_options,
@@ -212,11 +246,12 @@ radix_article <- function(toc = FALSE,
                             args = args),
     keep_md = keep_md,
     clean_supporting = self_contained,
+    pre_knit = pre_knit,
     post_knit = post_knit,
     pre_processor = pre_processor,
     post_processor = render_collection_article_post_processor(function() encoding,
                                                               self_contained),
-    on_exit = validate_rstudio_version,
+    on_exit = on_exit,
     base_format = html_document_base(
       smart = smart,
       self_contained = self_contained,

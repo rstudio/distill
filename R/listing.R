@@ -17,6 +17,44 @@ resolve_listing <- function(input_file, site_config, metadata) {
   )
 }
 
+resolve_yaml_listing <- function(input_file, site_config, metadata, yaml_listing) {
+
+  yaml_listing <- yaml::yaml.load(yaml_listing[[1]]$code)
+
+  listing_articles <- list()
+
+  for (collection in names(yaml_listing)) {
+
+    articles <- yaml_listing[[collection]]
+
+    all_articles <- read_json(
+      file.path(dirname(input_file),
+                site_config$output_dir,
+                collection,
+                file_with_ext(collection, "json"))
+    )
+
+    articles <- lapply(articles, function(article) {
+      path <- paste0(collection, "/", article, "/")
+      for (article in all_articles) {
+        if (identical(path, article$path))
+          return(article)
+      }
+      NULL
+    })
+    articles[sapply(articles, is.null)] <- NULL
+
+    listing_articles <- append(listing_articles, articles)
+  }
+
+  # generate html
+  listing_html <- html_for_articles(listing_articles, caption = metadata$title, categories = TRUE)
+
+  listing <- list(
+    html = html_file(listing_html)
+  )
+}
+
 generate_listing <- function(input_file,
                              site_config,
                              collection,
@@ -66,6 +104,15 @@ article_listing_html <- function(site_dir, collection, articles) {
     )
   }
 
+  # generate html
+  html_for_articles(articles,
+                    caption = NULL,
+                    categories = categories,
+                    subscription_html = subscription_html)
+}
+
+html_for_articles <- function(articles, caption = NULL, categories = FALSE, subscription_html = NULL) {
+
   # generate categories listing
   categories_html <- if (categories) categories_listing_html(articles)
 
@@ -94,6 +141,14 @@ article_listing_html <- function(site_dir, collection, articles) {
       )
     )
   })
+
+  # prepend caption if we have it
+  if (!is.null(caption)) {
+    articles_html <- htmltools::tagList(
+      h1(class = "posts-list-caption", caption),
+      articles_html
+    )
+  }
 
   # more posts link
   more_posts <- div(class = "posts-more",
