@@ -47,10 +47,10 @@ Radix is based on the [Distill web framework](https://github.com/distillpub/temp
 
 ### Installation
 
-To create an [R Markdown](https://rmarkdown.rstudio.com) document that uses the Radix format, first install the **radix** R package:
+To create an [R Markdown](https://rmarkdown.rstudio.com) document that uses the Radix format, first install the **radix** R package from CRAN:
 
 ```r
-devtools::install_github("rstudio/radix")
+install.packages("radix")
 ```
 
 Using Radix requires Pandoc v2.0 or higher. If you are using RStudio then you should use RStudio v1.2.718 or higher (which comes bundled with Pandoc v2.0). 
