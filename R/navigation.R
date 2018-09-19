@@ -113,8 +113,10 @@ navigation_before_body_html <- function(site_config, offset) {
         } else if (!is.null(item[["text"]]) &&
                     grepl("^\\s*-{3,}\\s*$", item[["text"]])) {
           tags$hr()
-        } else {
+        } else if (!is.null(item[["href"]])) {
           a(href = item[["href"]], item[["text"]])
+        } else {
+          span(class = "nav-dropdown-header", item[["text"]])
         }
       }
       lapply(menu, function(item) {

@@ -207,12 +207,22 @@
   display: block;
 }
 
-.nav-dropdown-content a {
+.nav-dropdown-content a, .nav-dropdown-content .nav-dropdown-header {
   color: black;
   padding: 6px 24px;
   text-decoration: none;
   display: block;
   text-align: left;
+}
+
+.nav-dropdown-content .nav-dropdown-header {
+  display: block;
+  padding: 5px 24px;
+  padding-bottom: 0;
+  text-transform: uppercase;
+  font-size: 14px;
+  color: #999999;
+  white-space: nowrap;
 }
 
 .nav-dropdown:hover .nav-dropbtn {
