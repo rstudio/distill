@@ -262,12 +262,22 @@
     display: block;
   }
   
-  .nav-dropdown-content a {
+  .nav-dropdown-content a, .nav-dropdown-content .nav-dropdown-header {
     color: black;
     padding: 6px 24px;
     text-decoration: none;
     display: block;
     text-align: left;
+  }
+  
+  .nav-dropdown-content .nav-dropdown-header {
+    display: block;
+    padding: 5px 24px;
+    padding-bottom: 0;
+    text-transform: uppercase;
+    font-size: 14px;
+    color: #999999;
+    white-space: nowrap;
   }
   
   .nav-dropdown:hover .nav-dropbtn {
@@ -1185,7 +1195,7 @@
   
     // get rid of index.html references in header
     if (window.location.protocol !== "file:") {
-      $('.radix-site-header a').each(function(i,val) {
+      $('.radix-site-header a[href]').each(function(i,val) {
         $(this).attr('href', $(this).attr('href').replace("index.html", "./"));
       });
     }
