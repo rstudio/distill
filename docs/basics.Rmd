@@ -1,0 +1,17 @@
+---
+title: "Radix Basics"
+description: Scientific and technical writing, native to the web
+---
+
+```{r setup, include=FALSE}
+library(knitr)
+```
+
+
+```{r, child="_common/radix_basics.Rmd"}
+```
+
+
+
+
+

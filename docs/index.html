@@ -61,7 +61,6 @@
   
   <meta name="citation_reference" content="citation_title=Distill;citation_publication_date=2016;citation_publisher=Distill Working Group;citation_doi=10.23915/distill;citation_author=Shan Carter;citation_author=Chirs Olah;citation_author=Arvind Satyanarayan"/>
   <meta name="citation_reference" content="citation_title=Literate programming;citation_publication_date=1984;citation_publisher=British Computer Society;citation_volume=27;citation_author=Donald E. Knuth"/>
-  <meta name="citation_reference" content="citation_title=Dynamic documents with r and knitr;citation_publication_date=2015;citation_publisher=Chapman; Hall/CRC;citation_author=Yihui Xie"/>
   <!--radix_placeholder_rmarkdown_metadata-->
   
   <script type="text/json" id="radix-rmarkdown-metadata">
@@ -1308,7 +1307,7 @@ Authoring
 <span class="down-arrow">&#x25BE;</span>
 </button>
 <div class="nav-dropdown-content">
-<a href="index.html">Radix Basics</a>
+<a href="basics.html">Radix Basics</a>
 <a href="figures.html">Figure Layout</a>
 <a href="tables.html">Tables</a>
 <a href="diagrams.html">Diagrams</a>
@@ -1383,14 +1382,13 @@ Publishing
 <li>The ability to <a href="blog.html">create a blog</a> composed of a collection of Radix articles.</li>
 </ul>
 <p>Radix is based on the <a href="https://github.com/distillpub/template">Distill web framework</a>, which was originally created for use in the Distill Machine Learning Journal <span class="citation" data-cites="distill">(Carter, Olah, and Satyanarayan <a href="#ref-distill">2016</a>)</span>. Radix combines the technical authoring features of Distill with <a href="https://rmarkdown.rstudio.com/">R Markdown</a>, enabling a fully reproducible workflow based on literate programming <span class="citation" data-cites="knuth1984">(Knuth <a href="#ref-knuth1984">1984</a>)</span>.</p>
-<h2 id="getting-started">Getting Started</h2>
-<h3 id="installation">Installation</h3>
+<h2 id="installation">Installation</h2>
 <p>To create an <a href="https://rmarkdown.rstudio.com">R Markdown</a> document that uses the Radix format, first install the <strong>radix</strong> R package from CRAN:</p>
 <pre class="r"><code>
 install.packages(&quot;radix&quot;)</code></pre>
 <p>Using Radix requires Pandoc v2.0 or higher. If you are using RStudio then you should use RStudio v1.2.718 or higher (which comes bundled with Pandoc v2.0).</p>
 <p>You can download the preview release of RStudio v1.2 at <a href="https://www.rstudio.com/products/rstudio/download/preview/" class="uri">https://www.rstudio.com/products/rstudio/download/preview/</a>.</p>
-<h3 id="creating-an-article">Creating an article</h3>
+<h2 id="creating-an-article">Creating an article</h2>
 <p>Use the <strong>New R Markdown</strong> dialog within RStudio to create a new Radix article:</p>
 <p><img src="images/new_radix_article.png" class="screenshot" style="width:100.0%" /></p>
 <p>You can also create a new Radix article from the command line with:</p>
@@ -1506,6 +1504,19 @@ ggplot(mtcars, aes(hp, mpg)) + geom_point() + geom_smooth()
 <aside>
 <img src="images/figure-aside.png" style="width:100.0%" />
 </aside>
+<h2 id="table-of-contents">Table of contents</h2>
+<p>You can add a table of contents (TOC) using the <code>toc</code> option and specify the depth of headers that it applies to using the <code>toc_depth</code> option. For example:</p>
+<pre class="markup"><code>
+---
+title: &quot;Radix for R Markdown&quot;
+description: | 
+  Scientific and technical writing, native to the web
+output:
+  radix::radix_article:
+    toc: true
+    toc_depth: 2
+---</code></pre>
+<p>If the table of contents depth is not explicitly specified, it defaults to 3 (meaning that all level 1, 2, and 3 headers will be included in the table of contents).</p>
 <h2 id="code-blocks">Code blocks</h2>
 <p>Syntax highlighting is provided for knitr code chunks. Note that by default the Radix format does not display the code for chunks that are evaluated to produce output (knitr option <code>echo = FALSE</code>).</p>
 <p>The <code>echo = FALSE</code> default reflects the fact that Radix articles are often used to present the results of analyses rather than the underlying code. To display the code that was evaluated to produce output you can set the <code>echo</code> chunk option to <code>TRUE</code>:</p>

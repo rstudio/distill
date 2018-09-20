@@ -1,6 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.sitemaps.org/schemas/sitemap/0.9 http://www.sitemaps.org/schemas/sitemap/0.9/sitemap.xsd" version="1.0">
   <url>
+    <loc>https://rstudio.github.io/radix/basics.html</loc>
+    <lastmod>2018-09-20T08:27:19-04:00</lastmod>
+  </url>
+  <url>
     <loc>https://rstudio.github.io/radix/blog_workflow.html</loc>
     <lastmod>2018-09-11T07:49:36-04:00</lastmod>
   </url>
@@ -22,7 +26,7 @@
   </url>
   <url>
     <loc>https://rstudio.github.io/radix/</loc>
-    <lastmod>2018-09-17T12:30:56-04:00</lastmod>
+    <lastmod>2018-09-20T08:24:33-04:00</lastmod>
   </url>
   <url>
     <loc>https://rstudio.github.io/radix/interactivity.html</loc>

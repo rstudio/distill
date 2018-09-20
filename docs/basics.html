@@ -19,31 +19,31 @@
  <!--/radix_placeholder_import_source-->
 
   <!--radix_placeholder_meta_tags-->
-  <title>Radix for R Markdown: Tables</title>
+  <title>Radix for R Markdown: Radix Basics</title>
   
-  <meta property="description" itemprop="description" content="Display data in attractive, compact formats"/>
+  <meta property="description" itemprop="description" content="Scientific and technical writing, native to the web"/>
   
   <link rel="license" href="https://creativecommons.org/licenses/by/4.0/"/>
   <link rel="icon" type="image/png" href="images/favicon.png"/>
   
   
   <!--  https://developers.facebook.com/docs/sharing/webmasters#markup -->
-  <meta property="og:title" content="Radix for R Markdown: Tables"/>
+  <meta property="og:title" content="Radix for R Markdown: Radix Basics"/>
   <meta property="og:type" content="article"/>
-  <meta property="og:description" content="Display data in attractive, compact formats"/>
+  <meta property="og:description" content="Scientific and technical writing, native to the web"/>
   <meta property="og:locale" content="en_US"/>
   <meta property="og:site_name" content="Radix for R Markdown"/>
   
   <!--  https://dev.twitter.com/cards/types/summary -->
   <meta property="twitter:card" content="summary"/>
-  <meta property="twitter:title" content="Radix for R Markdown: Tables"/>
-  <meta property="twitter:description" content="Display data in attractive, compact formats"/>
+  <meta property="twitter:title" content="Radix for R Markdown: Radix Basics"/>
+  <meta property="twitter:description" content="Scientific and technical writing, native to the web"/>
   
   <!--/radix_placeholder_meta_tags-->
   <!--radix_placeholder_rmarkdown_metadata-->
   
   <script type="text/json" id="radix-rmarkdown-metadata">
-  {"type":"list","attributes":{"names":{"type":"character","attributes":{},"value":["title","description"]}},"value":[{"type":"character","attributes":{},"value":["Tables"]},{"type":"character","attributes":{},"value":["Display data in attractive, compact formats"]}]}
+  {"type":"list","attributes":{"names":{"type":"character","attributes":{},"value":["title","description"]}},"value":[{"type":"character","attributes":{},"value":["Radix Basics"]},{"type":"character","attributes":{},"value":["Scientific and technical writing, native to the web"]}]}
   </script>
   <!--/radix_placeholder_rmarkdown_metadata-->
   <!--radix_placeholder_navigation_in_header-->
@@ -1265,7 +1265,7 @@
 <!--radix_placeholder_front_matter-->
 
 <script id="distill-front-matter" type="text/json">
-{"title":"Tables","description":"Display data in attractive, compact formats","authors":[]}
+{"title":"Radix Basics","description":"Scientific and technical writing, native to the web","authors":[]}
 </script>
 
 <!--/radix_placeholder_front_matter-->
@@ -1334,8 +1334,8 @@ Publishing
 <!--/radix_placeholder_site_before_body-->
 
 <div class="d-title">
-<h1>Tables</h1>
-<p>Display data in attractive, compact formats</p>
+<h1>Radix Basics</h1>
+<p>Scientific and technical writing, native to the web</p>
 </div>
 
 
@@ -1343,134 +1343,75 @@ Publishing
 <h3 class="d-toc-header">Table of Contents</h3>
 <nav class="d-toc" id="TOC">
 <ul>
-<li><a href="#knitr-kable">Knitr kable</a></li>
-<li><a href="#paged-tables">Paged tables</a></li>
-<li><a href="#markdown-tables">Markdown tables</a></li>
+<li><a href="#creating-an-article">Creating an article</a></li>
+<li><a href="#figures">Figures</a></li>
+<li><a href="#tables">Tables</a></li>
+<li><a href="#equations">Equations</a></li>
+<li><a href="#citations">Citations</a></li>
+<li><a href="#footnotes-and-asides">Footnotes and asides</a></li>
+<li><a href="#table-of-contents">Table of contents</a></li>
+<li><a href="#code-blocks">Code blocks</a></li>
+<li><a href="#appendices">Appendices</a></li>
+<li><a href="#why-radix">Why Radix?</a></li>
+<li><a href="#acknowledgments">Acknowledgments</a></li>
 </ul>
 </nav>
 <hr class="d-toc-separator"/>
-<p>There are a number of options available for displaying tables within Radix articles, including:</p>
-<ul>
-<li><p>Using the <code>knitr::kable()</code> function to render a data frame as HTML.</p></li>
-<li><p>Using the <code>rmarkdown::paged_table()</code> function to create a page-able version of a data frame.</p></li>
-<li><p>Using standard <a href="https://pandoc.org/MANUAL.html#tables">markdown table syntax</a> to create a custom table.</p></li>
-</ul>
-<h2 id="knitr-kable">Knitr kable</h2>
-<p>The <code>knitr::kable()</code> function will render an R data frame as an HTML table. For example:</p>
+<h2 id="creating-an-article">Creating an article</h2>
+<p>Use the <strong>New R Markdown</strong> dialog within RStudio to create a new Radix article:</p>
+<p><img src="images/new_radix_article.png" class="screenshot" style="width:100.0%" /></p>
+<p>You can also create a new Radix article from the command line with:</p>
+<pre class="r"><code>
+library(rmarkdown)
+draft(&quot;article.Rmd&quot;, &quot;radix_article&quot;, package = &quot;radix&quot;)</code></pre>
+<div id="front-matter">
+
+</div>
+<p>Radix articles use <code>radix::radix_article</code> as their output format, and typically include title, description, date, author/affiliation, and bibliography entries in their YAML front-matter:</p>
+<pre class="markup"><code>
+---
+title: &quot;Radix for R Markdown&quot;
+description: | 
+  Scientific and technical writing, native to the web
+date: May 4, 2018
+author:
+  - name: &quot;JJ Allaire&quot;
+    url: https://github.com/jjallaire
+    affiliation: RStudio
+    affiliation_url: https://www.rstudio.com
+  - name: &quot;Rich Iannone&quot;
+    url: https://github.com/rich-iannone
+    affiliation: RStudio
+    affiliation_url: https://www.rstudio.com
+  - name: &quot;Yihui Xie&quot;
+    url: https://github.com/yihui
+    affiliation: RStudio
+    affiliation_url: https://www.rstudio.com
+bibliography: biblio.bib
+output: radix::radix_article
+---</code></pre>
+<p>Author entries must have at least <code>name</code> and <code>url</code> specified (the affiliation fields are optional). The <code>date</code> field should be formatted as month, day, year (various notations are supported as long as the components appear in that order).</p>
+<p>The article’s description and author bylines are automatically rendered as part of the title area of the document.</p>
+<p>The <code>bibliography</code> field is used to provide a reference to the Bibtex file where all of the sources cited in your article are defined. The <a href="#citations">citations</a> section describes how to include references to these sources in your article.</p>
+<h2 id="figures">Figures</h2>
+<p>Radix provides a number of options for laying out figures within your article. By default figures span the width of the main article body:</p>
+<p><img src="images/l-body-figure.png" style="width:100.0%" /></p>
+<p>However, some figures benefit from using additional horizontal space. In this cases the <code>layout</code> chunk option enables you to specify a wide variety of other layouts.</p>
+<p>For example, if we wanted to display a figure a bit outside the bounds of the article text, we could specify the <code>l-body-outset</code> layout via the <code>layout</code> chunk option:</p>
 <pre class="clike"><code>
-```{r, layout=&quot;l-body-outset&quot;}
-library(knitr)
-kable(head(mtcars))
+```{r, layout=&quot;l-body-outset&quot;, fig.width=6, fig.height=1.5}
+library(ggplot2)
+ggplot(diamonds, aes(carat, price)) + geom_smooth() +
+  facet_grid(~ cut)
 ```</code></pre>
 <div class="layout-chunk" data-layout="l-body-outset">
-<table>
-<thead>
-<tr class="header">
-<th></th>
-<th style="text-align: right;">mpg</th>
-<th style="text-align: right;">cyl</th>
-<th style="text-align: right;">disp</th>
-<th style="text-align: right;">hp</th>
-<th style="text-align: right;">drat</th>
-<th style="text-align: right;">wt</th>
-<th style="text-align: right;">qsec</th>
-<th style="text-align: right;">vs</th>
-<th style="text-align: right;">am</th>
-<th style="text-align: right;">gear</th>
-<th style="text-align: right;">carb</th>
-</tr>
-</thead>
-<tbody>
-<tr class="odd">
-<td>Mazda RX4</td>
-<td style="text-align: right;">21.0</td>
-<td style="text-align: right;">6</td>
-<td style="text-align: right;">160</td>
-<td style="text-align: right;">110</td>
-<td style="text-align: right;">3.90</td>
-<td style="text-align: right;">2.620</td>
-<td style="text-align: right;">16.46</td>
-<td style="text-align: right;">0</td>
-<td style="text-align: right;">1</td>
-<td style="text-align: right;">4</td>
-<td style="text-align: right;">4</td>
-</tr>
-<tr class="even">
-<td>Mazda RX4 Wag</td>
-<td style="text-align: right;">21.0</td>
-<td style="text-align: right;">6</td>
-<td style="text-align: right;">160</td>
-<td style="text-align: right;">110</td>
-<td style="text-align: right;">3.90</td>
-<td style="text-align: right;">2.875</td>
-<td style="text-align: right;">17.02</td>
-<td style="text-align: right;">0</td>
-<td style="text-align: right;">1</td>
-<td style="text-align: right;">4</td>
-<td style="text-align: right;">4</td>
-</tr>
-<tr class="odd">
-<td>Datsun 710</td>
-<td style="text-align: right;">22.8</td>
-<td style="text-align: right;">4</td>
-<td style="text-align: right;">108</td>
-<td style="text-align: right;">93</td>
-<td style="text-align: right;">3.85</td>
-<td style="text-align: right;">2.320</td>
-<td style="text-align: right;">18.61</td>
-<td style="text-align: right;">1</td>
-<td style="text-align: right;">1</td>
-<td style="text-align: right;">4</td>
-<td style="text-align: right;">1</td>
-</tr>
-<tr class="even">
-<td>Hornet 4 Drive</td>
-<td style="text-align: right;">21.4</td>
-<td style="text-align: right;">6</td>
-<td style="text-align: right;">258</td>
-<td style="text-align: right;">110</td>
-<td style="text-align: right;">3.08</td>
-<td style="text-align: right;">3.215</td>
-<td style="text-align: right;">19.44</td>
-<td style="text-align: right;">1</td>
-<td style="text-align: right;">0</td>
-<td style="text-align: right;">3</td>
-<td style="text-align: right;">1</td>
-</tr>
-<tr class="odd">
-<td>Hornet Sportabout</td>
-<td style="text-align: right;">18.7</td>
-<td style="text-align: right;">8</td>
-<td style="text-align: right;">360</td>
-<td style="text-align: right;">175</td>
-<td style="text-align: right;">3.15</td>
-<td style="text-align: right;">3.440</td>
-<td style="text-align: right;">17.02</td>
-<td style="text-align: right;">0</td>
-<td style="text-align: right;">0</td>
-<td style="text-align: right;">3</td>
-<td style="text-align: right;">2</td>
-</tr>
-<tr class="even">
-<td>Valiant</td>
-<td style="text-align: right;">18.1</td>
-<td style="text-align: right;">6</td>
-<td style="text-align: right;">225</td>
-<td style="text-align: right;">105</td>
-<td style="text-align: right;">2.76</td>
-<td style="text-align: right;">3.460</td>
-<td style="text-align: right;">20.22</td>
-<td style="text-align: right;">1</td>
-<td style="text-align: right;">0</td>
-<td style="text-align: right;">3</td>
-<td style="text-align: right;">1</td>
-</tr>
-</tbody>
-</table>
+<p><img src="images/l-middle-figure.png" width="576" /></p>
 </div>
-<p>Often times tables will require more width for their display than the standard Radix article text width. Here we use <code>layout=&quot;l-body-outset&quot;</code> to cause the table to outset slightly from the main text column. All of the available <a href="figures.html">figure layouts</a> can also be used with tables.</p>
-<h2 id="paged-tables">Paged tables</h2>
-<p>If a data frame has a large number of rows it might not be practical to display it fully inline. In these situations you can use the <code>rmarkdown::paged_table()</code> function to create a table that allows pagination of rows and columns. For example:</p>
+<p>Note that when specifying an alternate <code>layout</code> you should also specify an appropriate <code>fig.width</code> and <code>fig.height</code> for that layout. These values don’t determine the absolute size of the figure (that’s dynamic based on the layout) but they do determine the aspect ratio of the figure.</p>
+<p>See the documentation on <a href="figures.html">figure layout</a> for details on additional layout options.</p>
+<p>The examples above are based on conventional R plots. Radix articles can also incorporate <a href="diagrams.html">diagrams</a> and <a href="interactivity.html">interactive visualizations</a> based on JavaScript and D3.</p>
+<h2 id="tables">Tables</h2>
+<p>There are a number of options available for HTML display of data frames within Radix articles. Here, we use the <code>paged_table()</code> function to display a page-able view of the <code>mtcars</code> dataset built in to R:</p>
 <pre class="clike"><code>
 ```{r, layout=&quot;l-body-outset&quot;}
 library(rmarkdown)
@@ -1483,65 +1424,154 @@ paged_table(mtcars)
   </script>
 </div>
 </div>
-<p>There are a number of options available that control the display of paged tables. By default, 10 rows at a time are displayed but you can use the <code>rows.print</code> option to increase this. For example:</p>
+<p>Note that we used <code>layout=&quot;l-body-outset&quot;</code> to cause the table to occupy slightly more horizontal space than the article text. All of available <a href="figures.html">figure layout options</a> work as expected for tables.</p>
+<p>See the documentation on <a href="tables.html">table display</a> for details on the various techniques available for rendering tables.</p>
+<h2 id="equations">Equations</h2>
+<p>Inline and display equations are supported via standard markdown <a href="https://www.mathjax.org/">MathJax</a> syntax. For example, the following <a href="https://en.wikibooks.org/wiki/LaTeX/Mathematics">LaTeX math</a>:</p>
+<pre><code>
+$$
+\sigma = \sqrt{ \frac{1}{N} \sum_{i=1}^N (x_i -\mu)^2}
+$$</code></pre>
+<p>Will be rendered as:</p>
+<p><span class="math display">\[
+\sigma = \sqrt{ \frac{1}{N} \sum_{i=1}^N (x_i -\mu)^2}
+\]</span></p>
+<h2 id="citations">Citations</h2>
+<p>Bibtex is the supported way of making academic citations. To include citations, first create a bibtex file and refer to it from the <code>bibliography</code> field of the YAML front-matter (as <a href="#front-matter">illustrated above</a>).</p>
+<p>For example, your bibliography file might contain:</p>
+<pre class="markup"><code>
+@Book{xie2015,
+  title = {Dynamic Documents with R and knitr},
+  author = {Yihui Xie},
+  publisher = {Chapman and Hall/CRC},
+  address = {Boca Raton, Florida},
+  year = {2015},
+  edition = {2nd},
+  note = {ISBN 978-1498716963},
+  url = {http://yihui.name/knitr/},
+}</code></pre>
+<p>Citations are then used in the article body with standard R Markdown notation, for example: <code>[@xie2015]</code> (which references an id provided in the bibliography). Note that multiple ids (separated by semicolons) can be provided.</p>
+<p>The citation is presented inline like this: <span class="citation" data-cites="xie2015">[@xie2015]</span> (a number that displays more information on hover). If you have an appendix, a bibliography is automatically created and populated in it.</p>
+<p>See the article on <a href="citations.html">citations</a> for additional details on using citations, including how to provide the metadata required to make your article more easily citable for others.</p>
+<h2 id="footnotes-and-asides">Footnotes and asides</h2>
+<p>Footnotes use standard Pandoc markdown notation, for example <code>^[This will become a hover-able footnote]</code>. The number of the footnote will be automatically generated. <a href="#fn1" class="footnote-ref" id="fnref1"><sup>1</sup></a></p>
+<p>You can also optionally include notes in the gutter of the article (immediately to the right of the article text). To do this use the <code>&lt;aside&gt;</code> tag.</p>
+<pre class="html"><code>
+&lt;aside&gt;
+This content will appear in the gutter of the article.
+&lt;/aside&gt;</code></pre>
+<aside>
+This content will appear in the gutter of the article.
+</aside>
+<p>You can also include figures in the gutter. Just enclose the code chunk which generates the figure in an <code>&lt;aside&gt;</code> tag:</p>
 <pre class="clike"><code>
-```{r, layout=&quot;l-body-outset&quot;}
-library(rmarkdown)
-paged_table(mtcars, options = list(rows.print = 15))
+&lt;aside&gt;
+```{r}
+ggplot(mtcars, aes(hp, mpg)) + geom_point() + geom_smooth()
+```
+&lt;/aside&gt;</code></pre>
+<aside>
+<img src="images/figure-aside.png" style="width:100.0%" />
+</aside>
+<h2 id="table-of-contents">Table of contents</h2>
+<p>You can add a table of contents (TOC) using the <code>toc</code> option and specify the depth of headers that it applies to using the <code>toc_depth</code> option. For example:</p>
+<pre class="markup"><code>
+---
+title: &quot;Radix for R Markdown&quot;
+description: | 
+  Scientific and technical writing, native to the web
+output:
+  radix::radix_article:
+    toc: true
+    toc_depth: 2
+---</code></pre>
+<p>If the table of contents depth is not explicitly specified, it defaults to 3 (meaning that all level 1, 2, and 3 headers will be included in the table of contents).</p>
+<h2 id="code-blocks">Code blocks</h2>
+<p>Syntax highlighting is provided for knitr code chunks. Note that by default the Radix format does not display the code for chunks that are evaluated to produce output (knitr option <code>echo = FALSE</code>).</p>
+<p>The <code>echo = FALSE</code> default reflects the fact that Radix articles are often used to present the results of analyses rather than the underlying code. To display the code that was evaluated to produce output you can set the <code>echo</code> chunk option to <code>TRUE</code>:</p>
+<pre class="clike"><code>
+```{r, echo=TRUE}
+1 + 1
 ```</code></pre>
-<div class="layout-chunk" data-layout="l-body-outset">
-<div data-pagedtable="false">
-<script data-pagedtable-source type="application/json">
-{"columns":[{"label":[""],"name":["_rn_"],"type":[""],"align":["left"]},{"label":["mpg"],"name":[1],"type":["dbl"],"align":["right"]},{"label":["cyl"],"name":[2],"type":["dbl"],"align":["right"]},{"label":["disp"],"name":[3],"type":["dbl"],"align":["right"]},{"label":["hp"],"name":[4],"type":["dbl"],"align":["right"]},{"label":["drat"],"name":[5],"type":["dbl"],"align":["right"]},{"label":["wt"],"name":[6],"type":["dbl"],"align":["right"]},{"label":["qsec"],"name":[7],"type":["dbl"],"align":["right"]},{"label":["vs"],"name":[8],"type":["dbl"],"align":["right"]},{"label":["am"],"name":[9],"type":["dbl"],"align":["right"]},{"label":["gear"],"name":[10],"type":["dbl"],"align":["right"]},{"label":["carb"],"name":[11],"type":["dbl"],"align":["right"]}],"data":[{"1":"21.0","2":"6","3":"160.0","4":"110","5":"3.90","6":"2.620","7":"16.46","8":"0","9":"1","10":"4","11":"4","_rn_":"Mazda RX4"},{"1":"21.0","2":"6","3":"160.0","4":"110","5":"3.90","6":"2.875","7":"17.02","8":"0","9":"1","10":"4","11":"4","_rn_":"Mazda RX4 Wag"},{"1":"22.8","2":"4","3":"108.0","4":"93","5":"3.85","6":"2.320","7":"18.61","8":"1","9":"1","10":"4","11":"1","_rn_":"Datsun 710"},{"1":"21.4","2":"6","3":"258.0","4":"110","5":"3.08","6":"3.215","7":"19.44","8":"1","9":"0","10":"3","11":"1","_rn_":"Hornet 4 Drive"},{"1":"18.7","2":"8","3":"360.0","4":"175","5":"3.15","6":"3.440","7":"17.02","8":"0","9":"0","10":"3","11":"2","_rn_":"Hornet Sportabout"},{"1":"18.1","2":"6","3":"225.0","4":"105","5":"2.76","6":"3.460","7":"20.22","8":"1","9":"0","10":"3","11":"1","_rn_":"Valiant"},{"1":"14.3","2":"8","3":"360.0","4":"245","5":"3.21","6":"3.570","7":"15.84","8":"0","9":"0","10":"3","11":"4","_rn_":"Duster 360"},{"1":"24.4","2":"4","3":"146.7","4":"62","5":"3.69","6":"3.190","7":"20.00","8":"1","9":"0","10":"4","11":"2","_rn_":"Merc 240D"},{"1":"22.8","2":"4","3":"140.8","4":"95","5":"3.92","6":"3.150","7":"22.90","8":"1","9":"0","10":"4","11":"2","_rn_":"Merc 230"},{"1":"19.2","2":"6","3":"167.6","4":"123","5":"3.92","6":"3.440","7":"18.30","8":"1","9":"0","10":"4","11":"4","_rn_":"Merc 280"},{"1":"17.8","2":"6","3":"167.6","4":"123","5":"3.92","6":"3.440","7":"18.90","8":"1","9":"0","10":"4","11":"4","_rn_":"Merc 280C"},{"1":"16.4","2":"8","3":"275.8","4":"180","5":"3.07","6":"4.070","7":"17.40","8":"0","9":"0","10":"3","11":"3","_rn_":"Merc 450SE"},{"1":"17.3","2":"8","3":"275.8","4":"180","5":"3.07","6":"3.730","7":"17.60","8":"0","9":"0","10":"3","11":"3","_rn_":"Merc 450SL"},{"1":"15.2","2":"8","3":"275.8","4":"180","5":"3.07","6":"3.780","7":"18.00","8":"0","9":"0","10":"3","11":"3","_rn_":"Merc 450SLC"},{"1":"10.4","2":"8","3":"472.0","4":"205","5":"2.93","6":"5.250","7":"17.98","8":"0","9":"0","10":"3","11":"4","_rn_":"Cadillac Fleetwood"},{"1":"10.4","2":"8","3":"460.0","4":"215","5":"3.00","6":"5.424","7":"17.82","8":"0","9":"0","10":"3","11":"4","_rn_":"Lincoln Continental"},{"1":"14.7","2":"8","3":"440.0","4":"230","5":"3.23","6":"5.345","7":"17.42","8":"0","9":"0","10":"3","11":"4","_rn_":"Chrysler Imperial"},{"1":"32.4","2":"4","3":"78.7","4":"66","5":"4.08","6":"2.200","7":"19.47","8":"1","9":"1","10":"4","11":"1","_rn_":"Fiat 128"},{"1":"30.4","2":"4","3":"75.7","4":"52","5":"4.93","6":"1.615","7":"18.52","8":"1","9":"1","10":"4","11":"2","_rn_":"Honda Civic"},{"1":"33.9","2":"4","3":"71.1","4":"65","5":"4.22","6":"1.835","7":"19.90","8":"1","9":"1","10":"4","11":"1","_rn_":"Toyota Corolla"},{"1":"21.5","2":"4","3":"120.1","4":"97","5":"3.70","6":"2.465","7":"20.01","8":"1","9":"0","10":"3","11":"1","_rn_":"Toyota Corona"},{"1":"15.5","2":"8","3":"318.0","4":"150","5":"2.76","6":"3.520","7":"16.87","8":"0","9":"0","10":"3","11":"2","_rn_":"Dodge Challenger"},{"1":"15.2","2":"8","3":"304.0","4":"150","5":"3.15","6":"3.435","7":"17.30","8":"0","9":"0","10":"3","11":"2","_rn_":"AMC Javelin"},{"1":"13.3","2":"8","3":"350.0","4":"245","5":"3.73","6":"3.840","7":"15.41","8":"0","9":"0","10":"3","11":"4","_rn_":"Camaro Z28"},{"1":"19.2","2":"8","3":"400.0","4":"175","5":"3.08","6":"3.845","7":"17.05","8":"0","9":"0","10":"3","11":"2","_rn_":"Pontiac Firebird"},{"1":"27.3","2":"4","3":"79.0","4":"66","5":"4.08","6":"1.935","7":"18.90","8":"1","9":"1","10":"4","11":"1","_rn_":"Fiat X1-9"},{"1":"26.0","2":"4","3":"120.3","4":"91","5":"4.43","6":"2.140","7":"16.70","8":"0","9":"1","10":"5","11":"2","_rn_":"Porsche 914-2"},{"1":"30.4","2":"4","3":"95.1","4":"113","5":"3.77","6":"1.513","7":"16.90","8":"1","9":"1","10":"5","11":"2","_rn_":"Lotus Europa"},{"1":"15.8","2":"8","3":"351.0","4":"264","5":"4.22","6":"3.170","7":"14.50","8":"0","9":"1","10":"5","11":"4","_rn_":"Ford Pantera L"},{"1":"19.7","2":"6","3":"145.0","4":"175","5":"3.62","6":"2.770","7":"15.50","8":"0","9":"1","10":"5","11":"6","_rn_":"Ferrari Dino"},{"1":"15.0","2":"8","3":"301.0","4":"335","5":"3.54","6":"3.570","7":"14.60","8":"0","9":"1","10":"5","11":"8","_rn_":"Maserati Bora"},{"1":"21.4","2":"4","3":"121.0","4":"109","5":"4.11","6":"2.780","7":"18.60","8":"1","9":"1","10":"4","11":"2","_rn_":"Volvo 142E"}],"options":{"columns":{"min":{},"max":[5]},"rows":{"min":[15],"max":[15]},"pages":{}}}
-  </script>
-</div>
-</div>
-<p>Here is a summary of the available paged table options:</p>
+<p>To include code that is only displayed and not evaluated specify the <code>eval=FALSE</code> option:</p>
+<pre class="clike"><code>
+```{r, eval=FALSE, echo=TRUE}
+1 + 1
+```</code></pre>
+<p>There are a number of default values that Radix establishes for knitr chunk options (these defaults also reflect the use case of presenting results/output rather than underlying code):</p>
 <table>
 <thead>
 <tr class="header">
 <th>Option</th>
-<th>Description</th>
+<th>Value</th>
+<th>Comment</th>
 </tr>
 </thead>
 <tbody>
 <tr class="odd">
-<td><code>rows.print</code></td>
-<td>Maximum rows to print per page.</td>
+<td><code>echo</code></td>
+<td><code>FALSE</code></td>
+<td>Don’t print code by default.</td>
 </tr>
 <tr class="even">
-<td><code>max.print</code></td>
-<td>Maximum rows in the table (defaults to 1000).</td>
+<td><code>warning</code></td>
+<td><code>FALSE</code></td>
+<td>Don’t print warnings by default.</td>
 </tr>
 <tr class="odd">
-<td><code>cols.print</code></td>
-<td>Maximum columns in the table (defaults to 10).</td>
+<td><code>message</code></td>
+<td><code>FALSE</code></td>
+<td>Don’t print R messages by default.</td>
 </tr>
 <tr class="even">
-<td><code>rownames.print</code></td>
-<td>Print row names as part of the table.</td>
+<td><code>comment</code></td>
+<td><code>NA</code></td>
+<td>Don’t preface R output with a comment.</td>
+</tr>
+<tr class="odd">
+<td><code>R.options</code></td>
+<td><code>list(width = 70)</code></td>
+<td>70 character wide console output.</td>
 </tr>
 </tbody>
 </table>
-<h2 id="markdown-tables">Markdown tables</h2>
-<p>You can also define <a href="https://pandoc.org/MANUAL.html#tables">tables using markdown</a>. For example, the table from the previous section that describes paged table options was defined with the following markdown:</p>
-<pre class="markdown"><code>
-| Option           | Description                                    |
-|------------------|------------------------------------------------|
-| `rows.print`     | Maximum rows to print per page.                |
-| `max.print`      | Maximum rows in the table (defaults to 1000).  |
-| `cols.print`     | Maximum columns in the table (defaults to 10). |
-| `rownames.print` | Print row names as part of the table.          |</code></pre>
-<p>You can use Radix <a href="figures.html">figure layout</a> classes with markdown tables by enclosing them in markdown div (<code>:::</code>) named with the appropriate class, for example:</p>
-<pre class="markdown"><code>
-::: l-body-outset
-| Option           | Description                                    |
-|------------------|------------------------------------------------|
-| `rows.print`     | Maximum rows to print per page.                |
-| `max.print`      | Maximum rows in the table (defaults to 1000).  |
-| `cols.print`     | Maximum columns in the table (defaults to 10). |
-| `rownames.print` | Print row names as part of the table.          |
-:::</code></pre>
+<p>Keeping R code and output at 70 characters wide (or less) is recommended for readability on a variety of devices and screen sizes.</p>
+<p>As illustrated above, all of these defaults can be overridden on a chunk-by-chunk basis by specifying chunk options.</p>
+<p>You can also change the global defaults using a setup chunk. For example:</p>
+<pre class="clike"><code>
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(
+  echo = TRUE,
+  warning = TRUE,
+  message = TRUE,
+  comment = &quot;##&quot;,
+  R.options = list(width = 60)
+)
+```</code></pre>
+<h2 id="appendices">Appendices</h2>
+<p>Appendices can be added after your article by adding the <code>.appendix</code> class to any level 1 or level 2 header. For example:</p>
+<pre class="html"><code>
+## Acknowledgments {.appendix}
+
+This is a place to recognize people and institutions. It may also be a good place
+to acknowledge and cite software that makes your work possible.
+
+## Author Contributions {.appendix}
+
+We strongly encourage you to include an author contributions statement briefly 
+describing what each author did.</code></pre>
+<p>Footnotes and references will be included in the same section, immediately beneath any custom appendices.</p>
+<h2 id="why-radix">Why Radix?</h2>
+<p>Why the name Radix? The most common <a href="https://en.oxforddictionaries.com/definition/radix">definition of radix</a> in the English language comes from Mathematics, where it is used to describe the base of a system of numeration. It is also used to describe the source or origin of something. Both of these usages derive from the Latin meaning of radix, which is literally <em>root</em>.</p>
+<p>The purpose of scientific communication is to help get to the root of things! Radix provides a set of tools to facilitate clear scientific communication that links richly with other sources of knowledge and insight.</p>
+<h2 id="acknowledgments" class="appendix">Acknowledgments</h2>
+<p>Radix builds on the work of many individuals and projects. <a href="https://github.com/shancarter">Shan Carter</a>, <a href="https://github.com/ludwigschubert">Ludwig Schubert</a>, and <a href="https://github.com/colah">Christopher Olah</a> created the Distill web framework. <a href="https://github.com/jgm">John MacFarlane</a> created the Pandoc universal markup converter. <a href="https://github.com/dpvc">Davide Cervone</a> and <a href="https://github.com/zorkow">Volker Sorge</a> created the MathJax library for rendering mathematical notation on the web. <a href="https://github.com/mbostock">Mike Bostock</a> created the D3 library for producing dynamic, interactive data visualizations for the web. We are grateful for the spirit of generosity that moved these individuals to create high-quality open source software for the benefit of all.</p>
+<section class="footnotes">
+<hr />
+<ol>
+<li id="fn1"><p>This will become a hover-able footnote<a href="#fnref1" class="footnote-back">↩</a></p></li>
+</ol>
+</section>
 <!--radix_placeholder_article_footer-->
 <!--/radix_placeholder_article_footer-->
 </div>
@@ -1549,6 +1579,15 @@ paged_table(mtcars, options = list(rows.print = 15))
 <div class="d-appendix">
 </div>
 
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    script.src  = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML";
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script>
 
 <!--radix_placeholder_site_after_body-->
 <!--/radix_placeholder_site_after_body-->
