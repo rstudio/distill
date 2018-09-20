@@ -28,9 +28,7 @@ resolve_yaml_listing <- function(input_file, site_config, metadata, yaml_listing
     articles <- yaml_listing[[collection]]
 
     all_articles <- read_json(
-      file.path(dirname(input_file),
-                site_config$output_dir,
-                collection,
+      file.path(as_collection_dir(dirname(input_file), collection),
                 file_with_ext(collection, "json"))
     )
 
