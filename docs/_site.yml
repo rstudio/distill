@@ -12,7 +12,7 @@ navbar:
   right:
     - text: "Authoring"
       menu:
-        - text: "Getting Started"
+        - text: "Radix Basics"
           href: index.html
         - text: "Figure Layout"
           href: figures.html

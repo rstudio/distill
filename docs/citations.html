@@ -934,9 +934,9 @@
       var fn = $('#' + id);
       var fn_p = $('#' + id + '>p');
       fn_p.find('.footnote-back').remove();
-      var text = fn_p.text();
+      var text = fn_p.html();
       var dtfn = $('<d-footnote></d-footnote>');
-      dtfn.text(text);
+      dtfn.html(text);
       $(this).replaceWith(dtfn);
     });
     // remove footnotes
@@ -1286,7 +1286,7 @@ Authoring
 <span class="down-arrow">&#x25BE;</span>
 </button>
 <div class="nav-dropdown-content">
-<a href="index.html">Getting Started</a>
+<a href="index.html">Radix Basics</a>
 <a href="figures.html">Figure Layout</a>
 <a href="tables.html">Tables</a>
 <a href="diagrams.html">Diagrams</a>
