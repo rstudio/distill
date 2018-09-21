@@ -67,6 +67,7 @@ radix_article <- function(toc = FALSE,
   knitr_options$opts_chunk$message <- FALSE
   knitr_options$opts_chunk$comment <- NA
   knitr_options$opts_chunk$R.options <- list(width = 70)
+  knitr_options$opts_knit$bookdown.internal.label <- TRUE
   knitr_options$opts_hooks <- list()
   knitr_options$opts_hooks$preview <- knitr_preview_hook
   knitr_options$knit_hooks <- list()
@@ -249,8 +250,7 @@ radix_article <- function(toc = FALSE,
     pre_knit = pre_knit,
     post_knit = post_knit,
     pre_processor = pre_processor,
-    post_processor = render_collection_article_post_processor(function() encoding,
-                                                              self_contained),
+    post_processor = radix_article_post_processor(function() encoding, self_contained),
     on_exit = on_exit,
     base_format = html_document_base(
       smart = smart,

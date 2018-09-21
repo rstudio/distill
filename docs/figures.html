@@ -960,7 +960,10 @@
       var clz = "";
       var language = pre.attr('class');
       if (language) {
-        if ($.inArray(language, ["r", "cpp", "c", "java"]) != -1)
+        // map unknown languages to "clike" (without this they just dissapear)
+        if ($.inArray(language, ["bash", "clike", "css", "go", "html",
+                                 "javascript", "js", "julia", "lua", "markdown",
+                                 "markup", "mathml", "python", "svg", "xml"]) == -1)
           language = "clike";
         language = ' language="' + language + '"';
         var dt_code = $('<d-code block' + language + clz + '></d-code>');
@@ -1352,7 +1355,8 @@ Publishing
 <li><a href="#default-layout">Default layout</a></li>
 <li><a href="#wider-layouts">Wider layouts</a></li>
 <li><a href="#full-screen-layout">Full screen layout</a></li>
-<li><a href="#layout-for-images">Layout for images</a></li>
+<li><a href="#static-figures">Static figures</a></li>
+<li><a href="#cross-references">Cross-references</a></li>
 </ul>
 </nav>
 <hr class="d-toc-separator"/>
@@ -1407,8 +1411,8 @@ leaflet() %&gt;%
   addMarkers(lng=174.768, lat=-36.852, popup=&quot;The birthplace of R&quot;)
 ```</code></pre>
 <div class="layout-chunk" data-layout="l-screen-inset">
-<div id="htmlwidget-7ded59f4b1e32ea1fd21" style="width:576px;height:384px;" class="leaflet html-widget"></div>
-<script type="application/json" data-for="htmlwidget-7ded59f4b1e32ea1fd21">{"x":{"options":{"crs":{"crsClass":"L.CRS.EPSG3857","code":null,"proj4def":null,"projectedBounds":null,"options":{}}},"calls":[{"method":"addTiles","args":["//{s}.tile.openstreetmap.org/{z}/{x}/{y}.png",null,null,{"minZoom":0,"maxZoom":18,"tileSize":256,"subdomains":"abc","errorTileUrl":"","tms":false,"noWrap":false,"zoomOffset":0,"zoomReverse":false,"opacity":1,"zIndex":1,"detectRetina":false,"attribution":"&copy; <a href=\"http://openstreetmap.org\">OpenStreetMap<\/a> contributors, <a href=\"http://creativecommons.org/licenses/by-sa/2.0/\">CC-BY-SA<\/a>"}]},{"method":"addMarkers","args":[-36.852,174.768,null,null,null,{"interactive":true,"draggable":false,"keyboard":true,"title":"","alt":"","zIndexOffset":0,"opacity":1,"riseOnHover":false,"riseOffset":250},"The birthplace of R",null,null,null,null,{"interactive":false,"permanent":false,"direction":"auto","opacity":1,"offset":[0,0],"textsize":"10px","textOnly":false,"className":"","sticky":true},null]}],"limits":{"lat":[-36.852,-36.852],"lng":[174.768,174.768]}},"evals":[],"jsHooks":[]}</script>
+<div id="htmlwidget-4e418d0e777bcf5e8b2b" style="width:576px;height:384px;" class="leaflet html-widget"></div>
+<script type="application/json" data-for="htmlwidget-4e418d0e777bcf5e8b2b">{"x":{"options":{"crs":{"crsClass":"L.CRS.EPSG3857","code":null,"proj4def":null,"projectedBounds":null,"options":{}}},"calls":[{"method":"addTiles","args":["//{s}.tile.openstreetmap.org/{z}/{x}/{y}.png",null,null,{"minZoom":0,"maxZoom":18,"tileSize":256,"subdomains":"abc","errorTileUrl":"","tms":false,"noWrap":false,"zoomOffset":0,"zoomReverse":false,"opacity":1,"zIndex":1,"detectRetina":false,"attribution":"&copy; <a href=\"http://openstreetmap.org\">OpenStreetMap<\/a> contributors, <a href=\"http://creativecommons.org/licenses/by-sa/2.0/\">CC-BY-SA<\/a>"}]},{"method":"addMarkers","args":[-36.852,174.768,null,null,null,{"interactive":true,"draggable":false,"keyboard":true,"title":"","alt":"","zIndexOffset":0,"opacity":1,"riseOnHover":false,"riseOffset":250},"The birthplace of R",null,null,null,null,{"interactive":false,"permanent":false,"direction":"auto","opacity":1,"offset":[0,0],"textsize":"10px","textOnly":false,"className":"","sticky":true},null]}],"limits":{"lat":[-36.852,-36.852],"lng":[174.768,174.768]}},"evals":[],"jsHooks":[]}</script>
 </div>
 <p>Depending on the content displayed by <code>l-screen-inset</code>, sometimes it’s nice to add some shading to further deliniate the display. You can do this by adding <code>shaded</code> to the layout declaration:</p>
 <pre class="clike"><code>
@@ -1419,25 +1423,46 @@ leaflet() %&gt;%
   addMarkers(lng=174.768, lat=-36.852, popup=&quot;The birthplace of R&quot;)
 ```</code></pre>
 <div class="layout-chunk" data-layout="l-screen-inset shaded">
-<div id="htmlwidget-54ddc7d39a7dc7e2354e" style="width:576px;height:384px;" class="leaflet html-widget"></div>
-<script type="application/json" data-for="htmlwidget-54ddc7d39a7dc7e2354e">{"x":{"options":{"crs":{"crsClass":"L.CRS.EPSG3857","code":null,"proj4def":null,"projectedBounds":null,"options":{}}},"calls":[{"method":"addTiles","args":["//{s}.tile.openstreetmap.org/{z}/{x}/{y}.png",null,null,{"minZoom":0,"maxZoom":18,"tileSize":256,"subdomains":"abc","errorTileUrl":"","tms":false,"noWrap":false,"zoomOffset":0,"zoomReverse":false,"opacity":1,"zIndex":1,"detectRetina":false,"attribution":"&copy; <a href=\"http://openstreetmap.org\">OpenStreetMap<\/a> contributors, <a href=\"http://creativecommons.org/licenses/by-sa/2.0/\">CC-BY-SA<\/a>"}]},{"method":"addMarkers","args":[-36.852,174.768,null,null,null,{"interactive":true,"draggable":false,"keyboard":true,"title":"","alt":"","zIndexOffset":0,"opacity":1,"riseOnHover":false,"riseOffset":250},"The birthplace of R",null,null,null,null,{"interactive":false,"permanent":false,"direction":"auto","opacity":1,"offset":[0,0],"textsize":"10px","textOnly":false,"className":"","sticky":true},null]}],"limits":{"lat":[-36.852,-36.852],"lng":[174.768,174.768]}},"evals":[],"jsHooks":[]}</script>
+<div id="htmlwidget-9fe14766c3ab345b5cb0" style="width:576px;height:384px;" class="leaflet html-widget"></div>
+<script type="application/json" data-for="htmlwidget-9fe14766c3ab345b5cb0">{"x":{"options":{"crs":{"crsClass":"L.CRS.EPSG3857","code":null,"proj4def":null,"projectedBounds":null,"options":{}}},"calls":[{"method":"addTiles","args":["//{s}.tile.openstreetmap.org/{z}/{x}/{y}.png",null,null,{"minZoom":0,"maxZoom":18,"tileSize":256,"subdomains":"abc","errorTileUrl":"","tms":false,"noWrap":false,"zoomOffset":0,"zoomReverse":false,"opacity":1,"zIndex":1,"detectRetina":false,"attribution":"&copy; <a href=\"http://openstreetmap.org\">OpenStreetMap<\/a> contributors, <a href=\"http://creativecommons.org/licenses/by-sa/2.0/\">CC-BY-SA<\/a>"}]},{"method":"addMarkers","args":[-36.852,174.768,null,null,null,{"interactive":true,"draggable":false,"keyboard":true,"title":"","alt":"","zIndexOffset":0,"opacity":1,"riseOnHover":false,"riseOffset":250},"The birthplace of R",null,null,null,null,{"interactive":false,"permanent":false,"direction":"auto","opacity":1,"offset":[0,0],"textsize":"10px","textOnly":false,"className":"","sticky":true},null]}],"limits":{"lat":[-36.852,-36.852],"lng":[174.768,174.768]}},"evals":[],"jsHooks":[]}</script>
 </div>
-<h2 id="layout-for-images">Layout for images</h2>
-<p>To include static images that occupy the full width of the article text, be sure to add the <code>width=100%</code> attribute. For example:</p>
-<pre class="markdown"><code>
-![](images/figure.png){width=100%}    </code></pre>
-<p>To include a static images that adheres to a Radix layout, wrap it in a markdown div (<code>:::</code>) named with the appropriate <code>class</code>. For example:</p>
-<pre class="markup"><code>
-::: l-body-outset
-![](images/figure.png){width=100%}  
-:::</code></pre>
-<p>If you are including a figure from an external source, it’s good practice to delineate this by applying the <code>.external</code> class and adding a caption indicating where it is from. For example:</p>
-<pre class="markup"><code>
-![Figure from https://example.com](heatmap.png){.external width=100%}    </code></pre>
-<p>Using the <code>.external</code> class and providing a “Figure from” link makes it clear that the figure originated elsewhere (and is therefore not covered by any of your article’s copyright or creative commons license grants). For example, here’s how a figure taken from a Stack Overflow post might appear:</p>
+<h2 id="static-figures">Static figures</h2>
+<p>To include static figures (i.e. figures based on an existing PNG or JPEG file rather than a dynamically generated R plot), you can use the <code>knitr::include_graphics()</code> function:</p>
+<pre class="clike"><code>
+```{r}
+knitr::include_graphics(&quot;images/figure.png&quot;)
+```</code></pre>
+<p>You can apply Radix layouts to static figures the same way that you do plots:</p>
+<pre class="clike"><code>
+```{r layout=&quot;l-body-outset&quot;}
+knitr::include_graphics(&quot;images/figure.png&quot;)
+```</code></pre>
+<p>If you are including a figure from an external source, it’s good practice to delineate this by applying the <code>external</code> class and adding a caption indicating where it is from. For example:</p>
+<pre class="clike"><code>
+```{r fig.cap=&quot;Figure from https://example.com&quot; out.extra=&quot;class=external&quot;}
+knitr::include_graphics(&quot;images/heatmap.png&quot;)
+```</code></pre>
+<p>Using the <code>external</code> class and providing a “Figure from” link makes it clear that the figure originated elsewhere (and is therefore not covered by any of your article’s copyright or creative commons license grants). For example, here’s how a figure taken from a Stack Overflow post might appear:</p>
 <figure>
 <img src="images/heatmap.png" alt="Figure from https://stackoverflow.com/questions/12196756/" class="external" style="width:100.0%" /><figcaption>Figure from <a href="https://stackoverflow.com/questions/12196756/" class="uri">https://stackoverflow.com/questions/12196756/</a></figcaption>
 </figure>
+<h2 id="cross-references">Cross-references</h2>
+<p>When you assign a figure caption to a code chunk via the chunk option <code>fig.cap</code>, R plots will be put into figure environments, which will be automatically labeled and numbered, and can also be cross-referenced.</p>
+<p>For example, here we add a <code>fig.cap</code> to one of our previous examples:</p>
+<pre class="clike"><code>
+```{r diamonds, fig.cap=&quot;Diamond Prices&quot;}
+library(ggplot2)
+ggplot(diamonds, aes(carat, price)) + geom_smooth() +
+  facet_grid(~ cut)
+```</code></pre>
+<p>The label of the figure environment is generated from the label of the code chunk, e.g., if the chunk label is <code>diamonds</code>, the figure label will be <code>fig:diamonds</code> (the prefix <code>fig:</code> is added before <code>diamonds</code>.</p>
+<p>To reference a figure, use the syntax <code>\@ref(label)</code>, where label is the figure label. So for the example above we’d use <code>\@ref(fig:diamonds)</code>, which would result in a cross-reference like this:</p>
+<div class="layout-chunk" data-layout="l-body">
+<p><img src="images/figure-cross-references.png" width="743" class=screenshot /></p>
+</div>
+<p><strong>Important Note</strong>: Figure cross references are currently only available in the development version of Radix, which you can install with:</p>
+<pre class="r"><code>
+devtools::install_github(&quot;rstudio/radix&quot;)</code></pre>
 <!--radix_placeholder_article_footer-->
 <!--/radix_placeholder_article_footer-->
 </div>

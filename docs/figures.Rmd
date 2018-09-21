@@ -88,35 +88,61 @@ leaflet() %>%
 ```
 
 
+## Static figures
 
-## Layout for images
+To include static figures (i.e. figures based on an existing PNG or JPEG file rather than a dynamically generated R plot), you can use the `knitr::include_graphics()` function:
 
-To include static images that occupy the full width of the article text, be sure to add the `width=100%` attribute. For example:
-
-```markdown
-![](images/figure.png){width=100%}    
+````clike
+```{r}`r ''`
+knitr::include_graphics("images/figure.png")
 ```
+````
 
-To include a static images that adheres to a Radix layout, wrap it in a markdown div (`:::`) named with the appropriate `class`. For example:
+You can apply Radix layouts to static figures the same way that you do plots:
 
-```markup
-::: l-body-outset
-![](images/figure.png){width=100%}  
-:::
+````clike
+```{r layout="l-body-outset"}`r ''`
+knitr::include_graphics("images/figure.png")
 ```
+````
 
+If you are including a figure from an external source, it's good practice to delineate this by applying the `external` class and adding a caption indicating where it is from. For example:
 
-If you are including a figure from an external source, it's good practice to delineate this by applying the `.external` class and adding a caption indicating where it is from. For example:
-
-```markup
-![Figure from https://example.com](heatmap.png){.external width=100%}    
+````clike
+```{r fig.cap="Figure from https://example.com" out.extra="class=external"}`r ''`
+knitr::include_graphics("images/heatmap.png")
 ```
+````
 
-Using the `.external` class and providing a "Figure from" link makes it clear that the figure originated elsewhere (and is therefore not covered by any of your article's copyright or creative commons license grants). For example, here's how a figure taken from a Stack Overflow post might appear:
+Using the `external` class and providing a "Figure from" link makes it clear that the figure originated elsewhere (and is therefore not covered by any of your article's copyright or creative commons license grants). For example, here's how a figure taken from a Stack Overflow post might appear:
 
 ![Figure from <https://stackoverflow.com/questions/12196756/>](images/heatmap.png){.external width=100%}   
 
+## Cross-references
 
+When you assign a figure caption to a code chunk via the chunk option `fig.cap`, R plots will be put into figure environments, which will be automatically labeled and numbered, and can also be cross-referenced.
 
+For example, here we add a `fig.cap` to one of our previous examples:
 
+````clike
+```{r diamonds, fig.cap="Diamond Prices"}`r ''`
+library(ggplot2)
+ggplot(diamonds, aes(carat, price)) + geom_smooth() +
+  facet_grid(~ cut)
+```
+````
+
+The label of the figure environment is generated from the label of the code chunk, e.g., if the chunk label is `diamonds`, the figure label will be `fig:diamonds` (the prefix `fig:` is added before `diamonds`. 
+
+To reference a figure, use the syntax `\@ref(label)`, where label is the figure label. So for the example above we'd use `\@ref(fig:diamonds)`, which would result in a cross-reference like this:
+
+```{r out.extra="class=screenshot"}
+include_graphics("images/figure-cross-references.png")
+```
+
+**Important Note**: Figure cross references are currently only available in the development version of Radix, which you can install with:
+
+```r
+devtools::install_github("rstudio/radix")
+```
 

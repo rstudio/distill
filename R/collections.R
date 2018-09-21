@@ -140,9 +140,14 @@ render_collection <- function(site_dir, site_config, collection,
 
 
 
-render_collection_article_post_processor <- function(encoding_fn, self_contained) {
+radix_article_post_processor <- function(encoding_fn, self_contained) {
 
   function(metadata, input_file, output_file, clean, verbose) {
+
+    # resolve bookdown-style figure cross references
+    html_output <- xfun::read_utf8(output_file)
+    html_output <- bookdown::resolve_refs_html(html_output, global = TRUE)
+    xfun::write_utf8(html_output, output_file)
 
     # resolve encoding
     encoding <- encoding_fn()
