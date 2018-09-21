@@ -960,7 +960,10 @@
       var clz = "";
       var language = pre.attr('class');
       if (language) {
-        if ($.inArray(language, ["r", "cpp", "c", "java"]) != -1)
+        // map unknown languages to "clike" (without this they just dissapear)
+        if ($.inArray(language, ["bash", "clike", "css", "go", "html",
+                                 "javascript", "js", "julia", "lua", "markdown",
+                                 "markup", "mathml", "python", "svg", "xml"]) == -1)
           language = "clike";
         language = ' language="' + language + '"';
         var dt_code = $('<d-code block' + language + clz + '></d-code>');
@@ -1474,7 +1477,7 @@ ggplot(mtcars, aes(hp, mpg)) + geom_point() + geom_smooth()
 <img src="images/figure-aside.png" style="width:100.0%" />
 </aside>
 <h2 id="table-of-contents">Table of contents</h2>
-<p>You can add a table of contents (TOC) using the <code>toc</code> option and specify the depth of headers that it applies to using the <code>toc_depth</code> option. For example:</p>
+<p>You can add a table of contents using the <code>toc</code> option and specify the depth of headers that it applies to using the <code>toc_depth</code> option. For example:</p>
 <pre class="markup"><code>
 ---
 title: &quot;Radix for R Markdown&quot;
