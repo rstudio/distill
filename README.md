@@ -26,10 +26,10 @@ fully reproducible workflow based on literate programming
 
 ### Getting Started
 
-You can install radix from CRAN with:
+You can install radix from GitHub with:
 
 ``` r
-install.packages("radix")
+devtools::install_github("rstudio/radix")
 ```
 
 Learn more about using Radix at <https://rstudio.github.io/radix>.
