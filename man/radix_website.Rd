@@ -7,11 +7,11 @@
 radix_website(input, encoding = getOption("encoding"), ...)
 }
 \arguments{
-\item{input}{Website directory (or the name of a file within the directory)}
+\item{input}{Website directory (or the name of a file within the directory).}
 
 \item{encoding}{The encoding of the input file; see \code{\link{file}}.}
 
-\item{...}{Currently unused}
+\item{...}{Currently unused.}
 }
 \description{
 R Markdown site generator for Radix websites
