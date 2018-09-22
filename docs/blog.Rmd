@@ -379,12 +379,12 @@ There are a variety of options available for making your site available to other
 
 - The TensorFlow for R blog uses Radix: <https://blogs.rstudio.com/tensorflow/>
 
-    The source code for the TensorFlow for R blog can be found here: <https://github.com/rstudio/tensorflow-blog>.
+    The source code for the TensorFlow for R blog can be found here: <https://github.com/rstudio/tensorflow-blog>
 
 
 - An example which reproduces several posts from the Reproducible Finance with R series on the R Views blog can be found here: <https://beta.rstudioconnect.com/content/3776/>
 
-     The source code for the example can be found here: <https://github.com/rstudio/radix/tree/master/examples/websites/reproducible-finance-with-r>.
+    The source code for the example can be found here: <https://github.com/jjallaire/reproducible-finance-with-r>
 
 
 

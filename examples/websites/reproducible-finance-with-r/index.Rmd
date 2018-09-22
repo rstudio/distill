@@ -1,5 +1,0 @@
----
-title: "Reproducible Finance with R"
-site: radix::radix_website
-listing: posts
----
