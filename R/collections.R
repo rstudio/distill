@@ -491,13 +491,23 @@ render_collection_article <- function(site_dir, site_config, collection, article
 
 article_footer_html <- function(site_dir, site_config, collection, article) {
 
-  # get disqus and share
   base_url <- site_config[["base_url"]]
-  discuss_shortname <- collection[["disqus"]]
+
+  disqus_options <- collection[["disqus"]]
+  disqus_class <- NULL
+  if (is.list(disqus_options)) {
+    disqus_shortname <- disqus_options[["shortname"]]
+    if (identical(not_null(disqus_options[["hidden"]], TRUE), TRUE))
+      disqus_class <- "hidden"
+  } else {
+    disqus_shortname <- disqus_options
+    disqus_class <- "hidden"
+  }
+
   share_services <- collection[["share"]]
 
   # validate base_url if needed
-  if (!is.null(discuss_shortname) && is.null(base_url))
+  if (!is.null(disqus_shortname) && is.null(base_url))
     stop("You must specify a base_url when including disqus comments.", call. = FALSE)
   if (!is.null(share_services) && is.null(base_url))
     stop("You must specify a base_url when including sharing links", call. = FALSE)
@@ -554,7 +564,7 @@ article_footer_html <- function(site_dir, site_config, collection, article) {
   # disqus
   disqus <- NULL
   disqus_script <- NULL
-  if (!is.null(discuss_shortname)) {
+  if (!is.null(disqus_shortname)) {
 
     disqus <- tags$span(class = "disqus-comments",
       tag("i", list(class = "fas fa-comments")),
@@ -566,10 +576,10 @@ article_footer_html <- function(site_dir, site_config, collection, article) {
     disqus_script <- tagList(
 
       tags$script(id = "dsq-count-scr",
-                  src = sprintf("https://%s.disqus.com/count.js", discuss_shortname),
+                  src = sprintf("https://%s.disqus.com/count.js", disqus_shortname),
                   async = NA),
 
-      tags$div(id = "disqus_thread", class = "hidden"),
+      tags$div(id = "disqus_thread", class = disqus_class),
 
       tags$script(HTML(paste(sep = "\n",
           sprintf(paste(sep = "\n",
@@ -579,7 +589,7 @@ article_footer_html <- function(site_dir, site_config, collection, article) {
               "};"), article_url, article_id),
           "(function() {",
           "  var d = document, s = d.createElement('script');",
-          sprintf("  s.src = 'https://%s.disqus.com/embed.js';", discuss_shortname),
+          sprintf("  s.src = 'https://%s.disqus.com/embed.js';", disqus_shortname),
           "  s.setAttribute('data-timestamp', +new Date());",
           "  (d.head || d.body).appendChild(s);",
           "})();\n"

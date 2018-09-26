@@ -17,6 +17,8 @@ Install the development version with `devtools::install_github("rstudio/radix")`
 
 * Correctly render favicon for articles in collections
 
+* Provide option to show Disqus comments by default
+
 
 ## radix 0.5 (CRAN)
 

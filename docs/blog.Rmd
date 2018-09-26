@@ -222,6 +222,18 @@ Note that the `base_url` field is required in order to use Disqus and sharing li
 
 Valid values for the `share` option are `twitter`, `linkedin`, `facebook`, `google-plus`, and `pintrest`.
 
+By default, the full text of Disqus comments are not displayed (rather, a link is provided that will expand the comment section). This is done so that a long comment section doesn't obscure the bibliography and other appendices. If you'd rather show the comments by default you can use this alterante syntax for `disqus` configuration:
+
+```markup
+collections:
+  posts:
+    disqus: 
+      shortname: reproducible-finance-with-r
+      hidden: false
+    share: [twitter, linkedin]
+```
+
+Specifying the `hidden: false` option for `disqus` will causes all comments to be displayed inline by default.
 
 ### Organizing posts
 
