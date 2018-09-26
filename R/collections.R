@@ -426,7 +426,7 @@ render_collection_article <- function(site_dir, site_config, collection, article
   )
 
   # substitute meta tags
-  metadata_html <- metadata_html(site_config, metadata, self_contained = FALSE)
+  metadata_html <- metadata_html(site_config, metadata, self_contained = FALSE, offset = offset)
   index_content <- fill_placeholder(index_content,
                                     "meta_tags",
                                     doRenderTags(metadata_html))

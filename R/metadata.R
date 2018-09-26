@@ -207,7 +207,16 @@ transform_metadata <- function(file, site_config, collection_config, metadata, a
   metadata
 }
 
-metadata_html <- function(site_config, metadata, self_contained) {
+metadata_html <- function(site_config, metadata, self_contained, offset = NULL) {
+
+  offset_href <- function(href) {
+    if (is.null(href))
+      NULL
+    else if (!is.null(offset) && !is_url(href))
+      file.path(offset, href)
+    else
+      href
+  }
 
   # title
   title <- list()
@@ -243,7 +252,7 @@ metadata_html <- function(site_config, metadata, self_contained) {
     links[[length(links) + 1]] <- tags$link(
       rel = "icon",
       type = mime::guess_type(metadata$favicon),
-      href = metadata$favicon
+      href = offset_href(metadata$favicon)
     )
   }
 

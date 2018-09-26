@@ -15,6 +15,8 @@ Install the development version with `devtools::install_github("rstudio/radix")`
 
 * Syntax highlighting for unknown languages (now they are mapped to "clike", previously they were removed entirely)
 
+* Correctly render favicon for articles in collections
+
 
 ## radix 0.5 (CRAN)
 
