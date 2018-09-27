@@ -1,6 +1,7 @@
 ---
 title: "Radix Basics"
 description: Scientific and technical writing, native to the web
+bibliography: biblio.bib
 ---
 
 ```{r setup, include=FALSE}

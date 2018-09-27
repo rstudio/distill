@@ -40,10 +40,11 @@
   <meta property="twitter:description" content="Scientific and technical writing, native to the web"/>
   
   <!--/radix_placeholder_meta_tags-->
+  
   <!--radix_placeholder_rmarkdown_metadata-->
   
   <script type="text/json" id="radix-rmarkdown-metadata">
-  {"type":"list","attributes":{"names":{"type":"character","attributes":{},"value":["title","description"]}},"value":[{"type":"character","attributes":{},"value":["Radix Basics"]},{"type":"character","attributes":{},"value":["Scientific and technical writing, native to the web"]}]}
+  {"type":"list","attributes":{"names":{"type":"character","attributes":{},"value":["title","description","bibliography"]}},"value":[{"type":"character","attributes":{},"value":["Radix Basics"]},{"type":"character","attributes":{},"value":["Scientific and technical writing, native to the web"]},{"type":"character","attributes":{},"value":["biblio.bib"]}]}
   </script>
   <!--/radix_placeholder_rmarkdown_metadata-->
   <!--radix_placeholder_navigation_in_header-->
@@ -1212,6 +1213,7 @@
       $('#disqus_thread').toggleClass('hidden');
       if (!$('#disqus_thread').hasClass('hidden')) {
         var offset = $(this).offset();
+        $(window).resize();
         $('html, body').animate({
           scrollTop: offset.top - 35
         });
@@ -1454,10 +1456,10 @@ $$</code></pre>
   url = {http://yihui.name/knitr/},
 }</code></pre>
 <p>Citations are then used in the article body with standard R Markdown notation, for example: <code>[@xie2015]</code> (which references an id provided in the bibliography). Note that multiple ids (separated by semicolons) can be provided.</p>
-<p>The citation is presented inline like this: <span class="citation" data-cites="xie2015">[@xie2015]</span> (a number that displays more information on hover). If you have an appendix, a bibliography is automatically created and populated in it.</p>
+<p>The citation is presented inline like this: <span class="citation" data-cites="xie2015">(Xie <a href="#ref-xie2015">2015</a>)</span> (a number that displays more information on hover). If you have an appendix, a bibliography is automatically created and populated in it.</p>
 <p>See the article on <a href="citations.html">citations</a> for additional details on using citations, including how to provide the metadata required to make your article more easily citable for others.</p>
 <h2 id="footnotes-and-asides">Footnotes and asides</h2>
-<p>Footnotes use standard Pandoc markdown notation, for example <code>^[This will become a hover-able footnote]</code>. The number of the footnote will be automatically generated. <a href="#fn1" class="footnote-ref" id="fnref1"><sup>1</sup></a></p>
+<p>Footnotes use standard Pandoc markdown notation, for example <code>^[This will become a hover-able footnote]</code>. The number of the footnote will be automatically generated.<a href="#fn1" class="footnote-ref" id="fnref1"><sup>1</sup></a></p>
 <p>You can also optionally include notes in the gutter of the article (immediately to the right of the article text). To do this use the <code>&lt;aside&gt;</code> tag.</p>
 <pre class="html"><code>
 &lt;aside&gt;
@@ -1569,6 +1571,11 @@ describing what each author did.</code></pre>
 <p>The purpose of scientific communication is to help get to the root of things! Radix provides a set of tools to facilitate clear scientific communication that links richly with other sources of knowledge and insight.</p>
 <h2 id="acknowledgments" class="appendix">Acknowledgments</h2>
 <p>Radix builds on the work of many individuals and projects. <a href="https://github.com/shancarter">Shan Carter</a>, <a href="https://github.com/ludwigschubert">Ludwig Schubert</a>, and <a href="https://github.com/colah">Christopher Olah</a> created the Distill web framework. <a href="https://github.com/jgm">John MacFarlane</a> created the Pandoc universal markup converter. <a href="https://github.com/dpvc">Davide Cervone</a> and <a href="https://github.com/zorkow">Volker Sorge</a> created the MathJax library for rendering mathematical notation on the web. <a href="https://github.com/mbostock">Mike Bostock</a> created the D3 library for producing dynamic, interactive data visualizations for the web. We are grateful for the spirit of generosity that moved these individuals to create high-quality open source software for the benefit of all.</p>
+<div id="refs" class="references">
+<div id="ref-xie2015">
+<p>Xie, Yihui. 2015. <em>Dynamic Documents with R and Knitr</em>. 2nd ed. Boca Raton, Florida: Chapman; Hall/CRC. <a href="http://yihui.name/knitr/" class="uri">http://yihui.name/knitr/</a>.</p>
+</div>
+</div>
 <section class="footnotes">
 <hr />
 <ol>
@@ -1601,6 +1608,39 @@ describing what each author did.</code></pre>
 <h3 id="reuse">Reuse</h3>
 <p>Text and figures are licensed under Creative Commons Attribution <a rel="license" href="https://creativecommons.org/licenses/by/4.0/">CC BY 4.0</a>. Source code is available at <a href="https://github.com/rstudio/radix">https://github.com/rstudio/radix</a>, unless otherwise noted. The figures that have been reused from other sources don't fall under this license and can be recognized by a note in their caption: "Figure from ...".</p>
 </div>
+<script id="distill-bibliography" type="text/bibtex">
+@misc{distill,
+  author = {Shan Carter and Chirs Olah and Arvind Satyanarayan},
+  doi = {10.23915/distill},
+  url = {https://doi.org/10.23915/distill},
+  publisher = {Distill Working Group},
+  title = {Distill},
+  year = {2016}
+}
+@article{knuth1984,
+  title={Literate programming},
+  author={Knuth, Donald E.},
+  journal={The Computer Journal},
+  volume={27},
+  number={2},
+  pages={97--111},
+  year={1984},
+  publisher={British Computer Society}
+}
+@Book{xie2015,
+  title = {Dynamic Documents with R and knitr},
+  author = {Yihui Xie},
+  publisher = {Chapman and Hall/CRC},
+  address = {Boca Raton, Florida},
+  year = {2015},
+  edition = {2nd},
+  note = {ISBN 978-1498716963},
+  url = {http://yihui.name/knitr/},
+}
+
+
+
+</script>
 <!--/radix_placeholder_appendices-->
 <!--radix_placeholder_navigation_after_body-->
 <div class="radix-site-nav radix-site-footer">
