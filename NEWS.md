@@ -19,6 +19,8 @@ Install the development version with `devtools::install_github("rstudio/radix")`
 
 * Provide option to show Disqus comments by default
 
+* Fix issue with relative references to bibliographies from posts
+
 
 ## radix 0.5 (CRAN)
 
