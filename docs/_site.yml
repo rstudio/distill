@@ -25,7 +25,7 @@ navbar:
         - text: "---"
         - text: "Citations"
           href: citations.html
-        - text: "Ariticle Metadata"
+        - text: "Article Metadata"
           href: metadata.html
     - text: "Websites"
       menu:
