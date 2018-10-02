@@ -21,6 +21,8 @@ Install the development version with `devtools::install_github("rstudio/radix")`
 
 * Fix issue with relative references to bibliographies from posts
 
+* Fix intermediates_dir error that occurred when rendering from source on RStudio Connect
+
 
 ## radix 0.5 (CRAN)
 

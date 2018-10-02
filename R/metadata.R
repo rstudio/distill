@@ -667,6 +667,11 @@ discover_preview <- function(file) {
   if (file.exists(file.path(dirname(file), "_site.yml")))
     return(NULL)
 
+  # if the file doesn't exist then bail (could be b/c we are being rendered
+  # in RSC with an intermediates_dir)
+  if (!file.exists(file))
+    return(NULL)
+
   # open connection to file
   con <- file(file, open = "r", encoding = "UTF-8")
   on.exit(close(con), add = TRUE)
