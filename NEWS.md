@@ -25,6 +25,11 @@ Install the development version with `devtools::install_github("rstudio/radix")`
 
 * Enable `import_post()` to work with file paths as well as URLs
 
+* Set standard plot width to 6.5 inches (was 6.0, new width closer to golden ratio)
+
+* Don't force plots in standard l-body layout to a width of 100%
+
+
 ## radix 0.5 (CRAN)
 
 * Initial CRAN release

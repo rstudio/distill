@@ -16,7 +16,7 @@
 #' @export
 radix_article <- function(toc = FALSE,
                           toc_depth = 3,
-                          fig_width = 6,
+                          fig_width = 6.5,
                           fig_height = 4,
                           fig_retina = 2,
                           fig_caption = TRUE,
