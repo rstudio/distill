@@ -23,6 +23,7 @@ Install the development version with `devtools::install_github("rstudio/radix")`
 
 * Fix intermediates_dir error that occurred when rendering from source on RStudio Connect
 
+* Enable `import_post()` to work with file paths as well as URLs
 
 ## radix 0.5 (CRAN)
 

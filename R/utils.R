@@ -265,7 +265,12 @@ move_directory <- function(from_dir, to_dir) {
 }
 
 download_file <- function(url, destfile, quiet = TRUE) {
-  downloader::download(url, destfile = destfile, mode = "wb", quiet = quiet, cacheOK = FALSE)
+  if (is_url(url))
+    downloader::download(url, destfile = destfile, mode = "wb", quiet = quiet, cacheOK = FALSE)
+  else if (file.exists(url))
+    file.copy(url, destfile, overwrite = TRUE)
+  else
+    stop("Specified file does not exist: ", url)
 }
 
 eval_metadata <- function(metadata) {
