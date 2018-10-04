@@ -1,35 +1,23 @@
 
-## radix 0.6 (Unreleased)
+## radix v0.6 (development)
 
 Install the development version with `devtools::install_github("rstudio/radix")`
 
 * Support for bookdown-style figure cross-references (e.g. `\@ref{fig:plot1}`)
-
 * Allow use of markdown within footnotes
-
 * Support for text headers within website navigation menus
-
 * Fix issue with RStudio version check (check was failing with 4-digit patch version)
-
 * Recover gracefully from invalid posts.json file (e.g. due to git merge)
-
 * Syntax highlighting for unknown languages (now they are mapped to "clike", previously they were removed entirely)
-
 * Correctly render favicon for articles in collections
-
 * Provide option to show Disqus comments by default
-
 * Fix issue with relative references to bibliographies from posts
-
 * Fix intermediates_dir error that occurred when rendering from source on RStudio Connect
-
 * Enable `import_post()` to work with file paths as well as URLs
-
 * Set standard plot width to 6.5 inches (was 6.0, new width closer to golden ratio)
-
 * Don't force plots in standard l-body layout to a width of 100%
 
 
-## radix 0.5 (CRAN)
+## radix v0.5 (CRAN)
 
 * Initial CRAN release

@@ -1,0 +1,15 @@
+---
+title: "Release History"
+output:
+  radix::radix_article:
+    toc: false
+---
+
+```{r setup, include=FALSE}
+library(knitr)
+```
+
+```{r child="../NEWS.md"}
+
+```
+

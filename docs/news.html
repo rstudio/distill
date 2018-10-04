@@ -19,31 +19,28 @@
  <!--/radix_placeholder_import_source-->
 
   <!--radix_placeholder_meta_tags-->
-  <title>Radix for R Markdown: Creating a Blog</title>
+  <title>Radix for R Markdown: Release History</title>
   
-  <meta property="description" itemprop="description" content="Create a blog to publish a collection of Radix articles"/>
   
   <link rel="license" href="https://creativecommons.org/licenses/by/4.0/"/>
   <link rel="icon" type="image/png" href="images/favicon.png"/>
   
   
   <!--  https://developers.facebook.com/docs/sharing/webmasters#markup -->
-  <meta property="og:title" content="Radix for R Markdown: Creating a Blog"/>
+  <meta property="og:title" content="Radix for R Markdown: Release History"/>
   <meta property="og:type" content="article"/>
-  <meta property="og:description" content="Create a blog to publish a collection of Radix articles"/>
   <meta property="og:locale" content="en_US"/>
   <meta property="og:site_name" content="Radix for R Markdown"/>
   
   <!--  https://dev.twitter.com/cards/types/summary -->
   <meta property="twitter:card" content="summary"/>
-  <meta property="twitter:title" content="Radix for R Markdown: Creating a Blog"/>
-  <meta property="twitter:description" content="Create a blog to publish a collection of Radix articles"/>
+  <meta property="twitter:title" content="Radix for R Markdown: Release History"/>
   
   <!--/radix_placeholder_meta_tags-->
   <!--radix_placeholder_rmarkdown_metadata-->
   
   <script type="text/json" id="radix-rmarkdown-metadata">
-  {"type":"list","attributes":{"names":{"type":"character","attributes":{},"value":["title","description"]}},"value":[{"type":"character","attributes":{},"value":["Creating a Blog"]},{"type":"character","attributes":{},"value":["Create a blog to publish a collection of Radix articles"]}]}
+  {"type":"list","attributes":{"names":{"type":"character","attributes":{},"value":["title","output"]}},"value":[{"type":"character","attributes":{},"value":["Release History"]},{"type":"list","attributes":{"names":{"type":"character","attributes":{},"value":["radix::radix_article"]}},"value":[{"type":"list","attributes":{"names":{"type":"character","attributes":{},"value":["toc"]}},"value":[{"type":"logical","attributes":{},"value":[false]}]}]}]}
   </script>
   <!--/radix_placeholder_rmarkdown_metadata-->
   <!--radix_placeholder_navigation_in_header-->
@@ -1272,7 +1269,7 @@
 <!--radix_placeholder_front_matter-->
 
 <script id="distill-front-matter" type="text/json">
-{"title":"Creating a Blog","description":"Create a blog to publish a collection of Radix articles","authors":[]}
+{"title":"Release History","authors":[]}
 </script>
 
 <!--/radix_placeholder_front_matter-->
@@ -1342,317 +1339,32 @@ Publishing
 <!--/radix_placeholder_site_before_body-->
 
 <div class="d-title">
-<h1>Creating a Blog</h1>
-<p>Create a blog to publish a collection of Radix articles</p>
+<h1>Release History</h1>
+
 </div>
 
 
 <div class="d-article">
-<h3 class="d-toc-header">Table of Contents</h3>
-<nav class="d-toc" id="TOC">
+<h2 id="radix-v0.6-development">radix v0.6 (development)</h2>
+<p>Install the development version with <code>devtools::install_github(&quot;rstudio/radix&quot;)</code></p>
 <ul>
-<li><a href="#getting-started">Getting started</a><ul>
-<li><a href="#creating-a-blog">Creating a blog</a></li>
-<li><a href="#configuration">Configuration</a></li>
-<li><a href="#creating-a-post">Creating a post</a></li>
-<li><a href="#listing-pages">Listing pages</a></li>
-<li><a href="#rss-feeds">RSS feeds</a></li>
-<li><a href="#post-drafts">Post drafts</a></li>
-</ul></li>
-<li><a href="#next-steps">Next steps</a><ul>
-<li><a href="#comments-and-sharing">Comments and sharing</a></li>
-<li><a href="#organizing-posts">Organizing posts</a></li>
-<li><a href="#preview-images">Preview images</a></li>
-<li><a href="#citations">Citations</a></li>
-<li><a href="#subscriptions">Subscriptions</a></li>
-<li><a href="#supporting-files">Supporting files</a></li>
-</ul></li>
-<li><a href="#publishing-a-blog">Publishing a blog</a></li>
-<li><a href="#examples">Examples</a></li>
+<li>Support for bookdown-style figure cross-references (e.g. <code>\@ref{fig:plot1}</code>)</li>
+<li>Allow use of markdown within footnotes</li>
+<li>Support for text headers within website navigation menus</li>
+<li>Fix issue with RStudio version check (check was failing with 4-digit patch version)</li>
+<li>Recover gracefully from invalid posts.json file (e.g. due to git merge)</li>
+<li>Syntax highlighting for unknown languages (now they are mapped to “clike”, previously they were removed entirely)</li>
+<li>Correctly render favicon for articles in collections</li>
+<li>Provide option to show Disqus comments by default</li>
+<li>Fix issue with relative references to bibliographies from posts</li>
+<li>Fix intermediates_dir error that occurred when rendering from source on RStudio Connect</li>
+<li>Enable <code>import_post()</code> to work with file paths as well as URLs</li>
+<li>Set standard plot width to 6.5 inches (was 6.0, new width closer to golden ratio)</li>
+<li>Don’t force plots in standard l-body layout to a width of 100%</li>
 </ul>
-</nav>
-<hr class="d-toc-separator"/>
-<p>Radix websites include integrated support for blogging. To create a blog you author a collection of posts (located in the <code>_posts</code> subdirectory of your website) and then dedicate a page (usually the website homepage) to a listing of all of your posts.</p>
-<h2 id="getting-started">Getting started</h2>
-<h3 id="creating-a-blog">Creating a blog</h3>
-<p>If you are using RStudio, the easiest way to get started is to use the Radix Blog option in the RStudio <strong>New Project</strong> dialog:</p>
-<p><img src="images/create-blog.png" class="screenshot" style="width:95.0%" /></p>
-<p>A new <a href="https://support.rstudio.com/hc/en-us/articles/200526207-Using-Projects">RStudio Project</a> for the blog will be created and opened. The blog will include the following files:</p>
-<table>
-<thead>
-<tr class="header">
-<th>Option</th>
-<th>Description</th>
-</tr>
-</thead>
-<tbody>
-<tr class="odd">
-<td><code>_site.yml</code></td>
-<td>Website configuration file.</td>
-</tr>
-<tr class="even">
-<td><code>index.Rmd</code></td>
-<td>Blog home page.</td>
-</tr>
-<tr class="odd">
-<td><code>about.Rmd</code></td>
-<td>Blog about page.</td>
-</tr>
-<tr class="even">
-<td><code>_posts/welcome/welcome.Rmd</code></td>
-<td>Welcome post for the blog.</td>
-</tr>
-</tbody>
-</table>
-<p>Note that the <code>welcome</code> post is just there to provide some skeletal content for the blog – feel free to delete it and add your own initial post to the blog as described in <a href="#creating-a-post">creating a post</a>.</p>
-<p>If you are not using RStudio you can also call the Radix <code>create_blog()</code> function:</p>
-<pre class="r"><code>
-library(radix)
-create_blog(dir = &quot;my-blog&quot;, title = &quot;My Blog&quot;)</code></pre>
-<p>The basic scaffolding for a blog and an initial welcome post will be created within the <code>my-blog</code> sub-directory.</p>
-<h3 id="configuration">Configuration</h3>
-<p>After you’ve created the blog scaffolding, there are a couple of additional configuration items you’ll want to add to your <code>_site.yml</code> so that it’s easier to share content on the blog via RSS and social networks like Twitter:</p>
+<h2 id="radix-v0.5-cran">radix v0.5 (CRAN)</h2>
 <ul>
-<li><p>A short <code>description</code> of the site. This field is used for the channel description of your RSS feed.</p></li>
-<li><p>A <code>base_url</code> for the site (the URL where it will be published to). This is used both for RSS feed items and for sharing posts via <a href="metadata.html#open-graph">Open Graph</a> and <a href="metadata.html#twitter-card">Twitter Card</a>.</p></li>
-</ul>
-<p>For example:</p>
-<p><strong>_site.yml</strong></p>
-<pre class="markup"><code>
-name: &quot;reproducible-finance-with-r&quot;
-title: &quot;Reproducible Finance with R&quot;
-description: |
-  Exploring reproducible finance with the R statistical 
-  computing environment.
-base_url: https://beta.rstudioconnect.com/content/3776/
-navbar:
-  logo: images/rstudio.png
-  right:
-    - text: &quot;Home&quot;
-      href: index.html
-    - text: &quot;About&quot;
-      href: about.html
-    - text: &quot;Contributors&quot;
-      href: contributors.html
-    - icon: fa fa-rss
-      href: index.xml
-output: radix::radix_article</code></pre>
-<p>Note that we’ve also added a feed icon to the right side of the menu bar which makes it easy to discover and browse the RSS feed for the blog.</p>
-<h3 id="creating-a-post">Creating a post</h3>
-<p>The easiest way to start authoring a new post is to call the <code>create_post()</code> function from within your blog’s directory. For example:</p>
-<pre class="r"><code>
-library(radix)
-create_post(&quot;The Sharpe Ratio&quot;)</code></pre>
-<p>This will create a sub-directory for your post within the <code>_posts</code> directory, add a stub Radix article, and open the article for editing.</p>
-<p>If you want your post to start out as a draft (i.e. not be included within the listing of all posts) then you can add <code>draft = TRUE</code>. For example:</p>
-<pre class="r"><code>
-create_post(&quot;The Sharpe Ratio&quot;, draft = TRUE)</code></pre>
-<p>You work on blog posts independent of the enclosing website (use <strong>Knit</strong> to render and preview the post just like any R Markdown document). This is in fact the only way to update post content — posts are considered standalone documents that are not re-rendered when the site is built. This is because posts are often expensive to render and have R package dependencies that may be difficult to satisfy as time goes on.</p>
-<p>In the next section will describe how to create a listing page for all of your posts.</p>
-<h3 id="listing-pages">Listing pages</h3>
-<p>Once you have authored one or more posts you’ll want to create a listing page. You can do this by adding a <code>listing</code> metadata entry to the page you to include the listing on. This is often the main page for the website (index.Rmd). For example:</p>
-<p><strong>index.Rmd</strong></p>
-<pre class="markup"><code>
----
-title: &quot;Reproducible Finance with R&quot;
-site: radix::radix_website
-listing: posts
----</code></pre>
-<p>In our <a href="https://beta.rstudioconnect.com/content/3776/">example blog</a> (which will be described in more detail below) this results in the following listing:</p>
-<p><img src="images/site-listing.png" class="screenshot" style="width:95.0%" /></p>
-<h4 id="categories">Categories</h4>
-<p>If your posts include <code>categories</code> metadata, then the page will also include category links to the right of the article listing. For example, here is some post metadata that includes categories:</p>
-<pre class="markup"><code>
----
-title: &quot;The Sharpe Ratio&quot;
-# (additional metadata e.g. description and date, excluded for brevity)
-categories:
-  - portfolios
-  - dygraphs</code></pre>
-<p>As a result of including <code>categories</code>, the listing page now looks like this:</p>
-<p><img src="images/site-listing-categories.png" class="screenshot" style="width:95.0%" /></p>
-<h3 id="rss-feeds">RSS feeds</h3>
-<p>When you create a listing page an <a href="https://en.wikipedia.org/wiki/RSS">RSS feed</a> is created automatically for the page (using the name of the listing page with a <code>.xml</code> file extension). You can link to the RSS feed within your site’s navigation bar as follows (some navbar entries excluded for brevity):</p>
-<p><strong>_site.yml</strong></p>
-<pre class="markup"><code>
-name: &quot;reproducible-finance-with-r&quot;
-title: &quot;Reproducible Finance with R&quot;
-description: |
-  Exploring reproducible finance with the R statistical 
-  computing environment.
-base_url: https://beta.rstudioconnect.com/content/3776/
-navbar:
-  right:
-    - icon: fa fa-rss
-      href: index.xml
-output: radix::radix_article</code></pre>
-<p>Note that the <code>description</code> and <code>base_url</code> fields are both required to generate an RSS feed.</p>
-<p>By default the most recent 20 articles will be included in the RSS feed. You can change this by specifying <code>feed_items_max</code> within the collection configuration in <code>_site.yml</code> (navbar and output format fields omitted for brevity):</p>
-<p><strong>_site.yml</strong></p>
-<pre class="markup"><code>
-name: &quot;reproducible-finance-with-r&quot;
-title: &quot;Reproducible Finance with R&quot;
-description: |
-  Exploring reproducible finance with the R statistical 
-  computing environment.
-base_url: https://beta.rstudioconnect.com/content/3776/
-collections:
-  posts:
-    feed_items_max: 50</code></pre>
-<p>Specify <code>feed_items_max: false</code> to have no limit on the number of items included in the feed.</p>
-<h3 id="post-drafts">Post drafts</h3>
-<p>If you want to work on a post for a period of time without having it be added to the listing page, add <code>draft: true</code> to the post’s metadata. For example:</p>
-<pre class="markup"><code>
----
-title: &quot;The Sharpe Ratio&quot;
-description: |
-  In this post we present a classic finance use case using the
-  PerformanceAnalytics, quantmod, and dygraphs packages. 
-  We&#39;ll demonstrate importing stock data, building a portfolio,
-  and then calculating the Sharpe Ratio. 
-draft: true
----</code></pre>
-<p>When you are ready to publish the post, either remove the <code>draft</code> option or set it to <code>false</code>, then build the website.</p>
-<p>Beyond support for drafts, Radix has a number of additional features to accommodate a variety of post authoring and contribution workflows, including importing posts published elsewhere on the web (e.g. on RPubs, in a Git repository, or on another blog). The article on <a href="blog_workflow.html">blog post workflow</a> describes these options in more detail.</p>
-<h2 id="next-steps">Next steps</h2>
-<h3 id="comments-and-sharing">Comments and sharing</h3>
-<p>Readers will likely want to comment on and share articles they read on your blog. You can enable support for <a href="https://disqus.com/">Disqus comments</a> and sharing links for Twitter, LinkedIn, and other services by adding options to the <code>collection:posts</code> section of <code>_site.yml</code>.</p>
-<p>For example, the following options provide the <a href="https://help.disqus.com/installation/whats-a-shortname">Disqus shortname</a> for a site and specify that we want sharing buttons for Twitter and LinkedIn.</p>
-<p><strong>_site.yml</strong></p>
-<pre class="markup"><code>
-name: &quot;reproducible-finance-with-r&quot;
-title: &quot;Reproducible Finance with R&quot;
-description: |
-  Exploring reproducible finance with the R statistical 
-  computing environment.
-base_url: https://beta.rstudioconnect.com/content/3776/
-collections:
-  posts:
-    disqus: reproducible-finance-with-r
-    share: [twitter, linkedin]</code></pre>
-<p>The following footer is then automatically included at the end of each post:</p>
-<p><img src="images/social-footer.png" class="screenshot" style="width:80.0%" /></p>
-<p>Note that the <code>base_url</code> field is required in order to use Disqus and sharing links.</p>
-<p>Valid values for the <code>share</code> option are <code>twitter</code>, <code>linkedin</code>, <code>facebook</code>, <code>google-plus</code>, and <code>pintrest</code>.</p>
-<p>By default, the full text of Disqus comments are not displayed (rather, a link is provided that will expand the comment section). This is done so that a long comment section doesn’t obscure the bibliography and other appendices. If you’d rather show the comments by default you can use this alterante syntax for <code>disqus</code> configuration:</p>
-<pre class="markup"><code>
-collections:
-  posts:
-    disqus: 
-      shortname: reproducible-finance-with-r
-      hidden: false
-    share: [twitter, linkedin]</code></pre>
-<p>Specifying the <code>hidden: false</code> option for <code>disqus</code> will causes all comments to be displayed inline by default.</p>
-<h3 id="organizing-posts">Organizing posts</h3>
-<p>You can use whatever scheme you like to organize the <code>_posts</code> directory. You can have all posts at the top level or you can create subdirectories to create groupings of posts.</p>
-<p>One popular scheme for organizing blog posts is to use a date prefix for the post directory names. For example:</p>
-<pre class="markup"><code>
-_posts/
-  2017-11-09-visualizing-asset-returns/
-  2017-09-13-asset-volatility/
-  2017-03-07-quandl-and-forecasting/
-  2016-11-08-sharpe-ratio/</code></pre>
-<p>The benefits of this scheme are that post names are given additional uniqueness (to guard against colliding names over the long term) and are also automatically listed in order when browsing the <code>_posts</code> directory.</p>
-<p>Note that if you use a date-prefixed post directory you are not required to specify an explicit <code>date</code> field within your post’s metadata.</p>
-<h3 id="preview-images">Preview images</h3>
-<p>Note that the listing for our example above includes a preview image for each post. Preview thumbnail images are generated automatically based on the first plot encountered within your post. You can specify that a specific plot should be used as the preview image using the <code>preview</code> chunk option. For example:</p>
-<pre class="clike"><code>
-```{r, layout=&quot;l-body-outset&quot;, preview=TRUE}
-library(ggplot2)
-ggplot(diamonds, aes(carat, price)) + geom_smooth() +
-  facet_grid(~ cut)
-```</code></pre>
-<p>If you want to use another image entirely as a post preview you add a <code>preview</code> field to the post’s metadata. For example, here we add a <code>preview</code> field to the example metadata from above (some fields excluded for brevity):</p>
-<pre class="markup"><code>
----
-title: &quot;The Sharpe Ratio&quot;
-description: |
-  In this post we present a classic finance use case using the
-  PerformanceAnalytics, quantmod, and dygraphs packages. 
-  We&#39;ll demonstrate importing stock data, building a portfolio,
-  and then calculating the Sharpe Ratio. 
-preview: images/sharpe-ratio.png
----</code></pre>
-<p>Preview images are also used for generating <a href="metadata.html#open-graph">Open Graph</a> and <a href="metadata.html#twitter-card">Twitter Card</a> metadata. However, since those systems require that preview images be specified as absolute URLs, you also need to add a <code>base_url</code> field to your <code>_site.yml</code> file as describe above in <a href="#getting-started">Getting Started</a>.</p>
-<h3 id="citations">Citations</h3>
-<p>If your <code>_site.yml</code> file provides a <code>base_url</code> field, then an <a href="citations.html">article citation</a> appendix and related metadata will be included automatically within all published posts. For example:</p>
-<p><img src="images/blog-citation.png" class="screenshot" style="width:95.0%" /></p>
-<p>If you want to disable this behavior you can use the <code>collections:posts:citations</code> field within <code>_site.yml</code>. For example:</p>
-<p><strong>_site.yml</strong></p>
-<pre class="markup"><code>
-name: &quot;reproducible-finance-with-r&quot;
-title: &quot;Reproducible Finance with R&quot;
-description: |
-  Exploring reproducible finance with the R statistical 
-  computing environment.
-base_url: https://beta.rstudioconnect.com/content/3776/
-collections:
-  posts:
-    disqus: reproducible-finance-with-r
-    share: [twitter, linkedin]
-    citations: false</code></pre>
-<h3 id="subscriptions">Subscriptions</h3>
-<p>You can add HTML that enable readers to subscribe to your blog by including the <code>collections:posts:subscribe</code> option within <code>_site.yml</code>. The <code>subscribe</code> option in turn points to an HTML file that provides the ability to subscribe to your blog. For example:</p>
-<p><strong>_site.yml</strong></p>
-<pre class="markup"><code>
-name: &quot;reproducible-finance-with-r&quot;
-title: &quot;Reproducible Finance with R&quot;
-description: |
-  Exploring reproducible finance with the R statistical 
-  computing environment.
-base_url: https://beta.rstudioconnect.com/content/3776/
-collections:
-  posts:
-    disqus: reproducible-finance-with-r
-    share: [twitter, linkedin]
-    subscribe: _subscribe.html</code></pre>
-<p><strong>_subscribe.html</strong></p>
-<pre class="html"><code>
-&lt;form method=&#39;post&#39; action=&#39;https://blogtrottr.com&#39;&gt;
-  &lt;p&gt;Enjoy this blog? Get notified of new posts via email:&lt;/p&gt;
-  &lt;input type=&#39;text&#39; name=&#39;btr_email&#39; /&gt;
-  &lt;input type=&#39;hidden&#39; name=&#39;btr_url&#39;
-         value=&#39;https://beta.rstudioconnect.com/content/3776/index.xml&#39;/&gt;
-  &lt;input type=&#39;hidden&#39; name=&#39;schedule_type&#39; value=&#39;0&#39; /&gt;
-  &lt;input type=&#39;submit&#39; value=&#39;Subscribe&#39; /&gt;
-&lt;/form&gt;</code></pre>
-<p>This example uses the <a href="https://blogtrottr.com/">Blogtrottr</a> service to provide an email subscription. You could also use another service or simply include a link to your RSS feed.</p>
-<p>The contents of <code>_subscribe.html</code> will be included in both the sidebar of the main listing page as well as in the footer of articles. Note that relative URLs won’t work in subscription HTML since the content appears at different levels of the site (thus we include the full URL to the RSS feed in the example above).</p>
-<h3 id="supporting-files">Supporting files</h3>
-<p>When a blog post is published, resource files located alongside the post in its directory are also published. The following files are <em>not</em> published by default:</p>
-<ol type="1">
-<li><p>Files beginning with <code>&quot;.&quot;</code> (hidden files).</p></li>
-<li><p>Files beginning with <code>&quot;_&quot;</code></p></li>
-<li><p>Files known to contain R source code (e.g. <code>&quot;.R&quot;</code>, <code>&quot;.s&quot;</code>, <code>&quot;.Rmd&quot;</code>), R data (e.g. <code>&quot;.RData&quot;</code>, <code>&quot;.rds&quot;</code>), or configuration data (e.g. <code>&quot;rsconnect&quot;</code> ,<code>&quot;packrat&quot;</code>)).</p></li>
-</ol>
-<p>You can override this behavior using a <code>resources</code> metadata entry for your post, which can specify explicit files to <code>include</code> or <code>exclude</code>. For example (some fields excluded for brevity):</p>
-<pre class="markup"><code>
----
-title: &quot;The Sharpe Ratio&quot;
-description: |
-  In this post we present a classic finance use case using the
-  PerformanceAnalytics, quantmod, and dygraphs packages. 
-  We&#39;ll demonstrate importing stock data, building a portfolio,
-  and then calculating the Sharpe Ratio. 
-resources:
-  exclude:
-    *.csv    
----</code></pre>
-<h2 id="publishing-a-blog">Publishing a blog</h2>
-<p>After you’ve authored one or more posts you will want to build the entire site before publishing it.</p>
-<p>If your Radix website is contained within an RStudio project you can use the <strong>Build Website</strong> command available in the Build pane to generate the site:</p>
-<p><img src="images/build-website.png" class="screenshot" style="width:95.0%" /></p>
-<p>To build a website from the command line, use the <code>rmarkdown::render_site()</code> function:</p>
-<pre class="r"><code>
-library(rmarkdown)
-render_site()</code></pre>
-<p>There are a variety of options available for making your site available to others, see the article on <a href="publish_website.html">website publishing</a> for details.</p>
-<h2 id="examples">Examples</h2>
-<ul>
-<li><p>The TensorFlow for R blog uses Radix: <a href="https://blogs.rstudio.com/tensorflow/" class="uri">https://blogs.rstudio.com/tensorflow/</a></p>
-<p>The source code for the TensorFlow for R blog can be found here: <a href="https://github.com/rstudio/tensorflow-blog" class="uri">https://github.com/rstudio/tensorflow-blog</a></p></li>
-<li><p>An example which reproduces several posts from the Reproducible Finance with R series on the R Views blog can be found here: <a href="https://beta.rstudioconnect.com/content/3776/" class="uri">https://beta.rstudioconnect.com/content/3776/</a></p>
-<p>The source code for the example can be found here: <a href="https://github.com/jjallaire/reproducible-finance-with-r" class="uri">https://github.com/jjallaire/reproducible-finance-with-r</a></p></li>
+<li>Initial CRAN release</li>
 </ul>
 <!--radix_placeholder_article_footer-->
 <!--/radix_placeholder_article_footer-->

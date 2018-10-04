@@ -45,6 +45,8 @@ navbar:
           href: publish_article.html
         - text: "Publishing Websites"
           href: publish_website.html
+    - text: "News"
+      href: news.html
     - icon: fab fa-github
       href: https://github.com/rstudio/radix
 output:

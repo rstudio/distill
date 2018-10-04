@@ -413,6 +413,10 @@
     padding-right: 16px;
   }
   
+  .l-screen .caption {
+    margin-left: 10px;
+  }
+  
   .shaded {
     background: rgb(247, 247, 247);
     padding-top: 20px;
@@ -1178,9 +1182,10 @@
     // prevent underline for linked images
     $('a > img').parent().css({'border-bottom' : 'none'});
   
-    // mark figures created by knitr chunks as 100% width
+    // mark non-body figures created by knitr chunks as 100% width
     $('.layout-chunk').each(function(i, val) {
-      $(this).find('img, .html-widget').css('width', '100%');
+      var css_prop = $(this).attr('data-layout') !== "l-body" ? 'width' : 'max-width';
+      $(this).find('img, .html-widget').css(css_prop, '100%');
     });
   
     // auto-append index.html to post-preview links in file: protocol
@@ -1324,6 +1329,7 @@ Publishing
 <a href="publish_website.html">Publishing Websites</a>
 </div>
 </div>
+<a href="news.html">News</a>
 <a href="https://github.com/rstudio/radix">
 <i class="fab fa-github"></i>
 </a>
