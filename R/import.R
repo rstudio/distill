@@ -31,6 +31,7 @@ import_post <- function(url, slug = "auto",
     slug = slug,
     date = date,
     date_prefix = date_prefix,
+    check_license = check_license,
     overwrite = overwrite
   )
 }
