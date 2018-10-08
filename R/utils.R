@@ -77,6 +77,15 @@ date_as_iso_8601 <- function(date, date_only = FALSE) {
   }
 }
 
+fixup_author <- function(author) {
+  if (is.null(author))
+    NULL
+  else if (!is.list(author))
+    lapply(author, function(x) list(name = x))
+  else
+    author
+}
+
 fixup_iso_timezone <- function(time) {
   sub("(\\d{2})(\\d{2})$", "\\1:\\2", time)
 }

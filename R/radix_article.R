@@ -133,6 +133,9 @@ radix_article <- function(toc = FALSE,
     # make copy of metdata before transforming
     embedable_metadata <- metadata
 
+    # fixup author for embedding
+    embedable_metadata$author <- fixup_author(embedable_metadata$author)
+
     # transform configuration
     transformed <-  transform_configuration(
       file = output_file,

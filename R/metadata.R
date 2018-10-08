@@ -170,8 +170,7 @@ transform_metadata <- function(file, site_config, collection_config, metadata, a
   if (!is.null(metadata$author)) {
 
     # convert to list if necessary
-    if (!is.list(metadata$author))
-      metadata$author <- lapply(metadata$author, function(x) list(name = x))
+    metadata$author <- fixup_author(metadata$author)
 
     # compute first and last name
     metadata$author <- authors_with_first_and_last_names(metadata$author)
@@ -583,6 +582,7 @@ extract_embedded_metadata <- function(file) {
   metadata <- extract_embedded_json(file, "radix-rmarkdown-metadata")
   if (!is.null(metadata$description))
     metadata$description <- trimws(metadata$description)
+  metadata$author <- fixup_author(metadata$author)
   metadata
 }
 
