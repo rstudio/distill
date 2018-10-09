@@ -314,6 +314,7 @@ update_collection_listing <- function(site_dir, site_config, collection, article
       # update it
       listing <- generate_listing(
         input_file,
+        metadata,
         site_config,
         collection,
         articles

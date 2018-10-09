@@ -11,6 +11,7 @@ resolve_listing <- function(input_file, site_config, metadata) {
   # generate listing
   generate_listing(
     input_file,
+    metadata,
     site_config,
     collection,
     articles
@@ -54,6 +55,7 @@ resolve_yaml_listing <- function(input_file, site_config, metadata, yaml_listing
 }
 
 generate_listing <- function(input_file,
+                             metadata,
                              site_config,
                              collection,
                              articles) {
@@ -77,7 +79,7 @@ generate_listing <- function(input_file,
   feed_xml <- write_feed_xml(feed_xml, site_config, collection, feed_articles)
 
   # generate html
-  listing_html <- article_listing_html(site_dir, collection, articles)
+  listing_html <- article_listing_html(site_dir, metadata, collection, articles)
   html <- html_file(listing_html)
 
   # return feed and listing html
@@ -88,7 +90,7 @@ generate_listing <- function(input_file,
 }
 
 
-article_listing_html <- function(site_dir, collection, articles) {
+article_listing_html <- function(site_dir, metadata, collection, articles) {
 
   # detect whether we are showing categories in the sidebar
   categories <- not_null(collection[["categories"]], TRUE)
@@ -104,7 +106,7 @@ article_listing_html <- function(site_dir, collection, articles) {
 
   # generate html
   html_for_articles(articles,
-                    caption = NULL,
+                    caption = metadata$title,
                     categories = categories,
                     subscription_html = subscription_html)
 }
