@@ -20,21 +20,25 @@ resolve_listing <- function(input_file, site_config, metadata) {
 
 resolve_yaml_listing <- function(input_file, site_config, metadata, yaml_listing) {
 
+  site_dir <- find_site_dir(input_file)
+
   yaml_listing <- yaml::yaml.load(yaml_listing[[1]]$code)
 
   listing_articles <- list()
 
   for (collection in names(yaml_listing)) {
 
-    articles <- yaml_listing[[collection]]
+    collection <- site_collections(site_dir, site_config)[[collection]]
 
-    all_articles <- read_json(
-      file.path(as_collection_dir(dirname(input_file), collection),
-                file_with_ext(collection, "json"))
-    )
+    articles <- yaml_listing[[collection$name]]
+
+    articles_file <- file.path(as_collection_dir(dirname(input_file), collection$name),
+                               file_with_ext(collection$name, "json"))
+
+    all_articles <- read_articles_json(articles_file, site_dir, site_config, collection)
 
     articles <- lapply(articles, function(article) {
-      path <- paste0(collection, "/", article, "/")
+      path <- paste0(collection$name, "/", article, "/")
       for (article in all_articles) {
         if (identical(path, article$path))
           return(article)

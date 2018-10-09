@@ -256,6 +256,20 @@ publish_collection_article_to_site <- function(site_dir, site_config, encoding,
   output_file
 }
 
+
+read_articles_json <- function(articles_file, site_dir, site_config, collection) {
+  # read the index. if there is an error (possible if the .json file e.g. is invalid
+  # due to merge conflicts) then re-read the articles directly from the collection
+  articles <- NULL
+  if (file.exists(articles_file))
+    articles <- tryCatch(read_json(articles_file), error = function(e) { NULL })
+  if (is.null(articles)) {
+    articles <- enumerate_collection(site_dir, site_config, collection)[["articles"]]
+    articles <- to_article_info(site_dir, articles)
+  }
+  articles
+}
+
 update_collection_listing <- function(site_dir, site_config, collection, article, encoding) {
 
   # path to collection index
@@ -266,13 +280,8 @@ update_collection_listing <- function(site_dir, site_config, collection, article
   if (!file.exists(collection_index))
     return()
 
-  # read the index. if there is an error (possible if the .json file e.g. is invalid
-  # due to merge conflicts) then re-read the articles directly from the collection
-  articles <- tryCatch(read_json(collection_index), error = function(e) { NULL })
-  if (is.null(articles)) {
-    articles <- enumerate_collection(site_dir, site_config, collection)[["articles"]]
-    articles <- to_article_info(site_dir, articles)
-  }
+  # read the index.
+  articles <- read_articles_json(collection_index, site_dir, site_config, collection)
 
   # either edit the index or add a new entry at the appropriate place
   article_info <- article_info(site_dir, article)
