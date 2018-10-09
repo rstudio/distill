@@ -22,8 +22,6 @@ resolve_yaml_listing <- function(input_file, site_config, metadata, yaml_listing
 
   site_dir <- find_site_dir(input_file)
 
-  yaml_listing <- yaml::yaml.load(yaml_listing[[1]]$code)
-
   listing_articles <- list()
 
   for (collection in names(yaml_listing)) {

@@ -29,7 +29,10 @@ radix_website <- function(input, encoding = getOption("encoding"), ...) {
       if (incremental) {
         metadata <- yaml_front_matter(input_file, encoding)
         if (!is.null(metadata$listing)) {
-          site_collections <- site_collections[metadata$listing]
+          if (is.list(metadata$listing))
+            site_collections <- site_collections[names(metadata$listing)]
+          else
+            site_collections <- site_collections[metadata$listing]
         } else {
           site_collections <- list()
         }

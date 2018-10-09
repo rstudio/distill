@@ -77,22 +77,6 @@ radix_article <- function(toc = FALSE,
   site_config <- NULL
   encoding <- NULL
 
-  eng_yaml <- function(options) {
-    if (identical(options$label, "listing")) {
-      knitr::knit_meta_add(list(
-        structure(class = "radix_listing", list(
-          code = options$code
-        ))
-      ))
-    }
-    NULL
-  }
-
-  # pre-knit
-  pre_knit <- function(input, ...)  {
-    knitr::knit_engines$set(yaml = eng_yaml)
-  }
-
   # post-knit
   post_knit <- function(metadata, input_file, runtime, encoding, ...) {
 
@@ -165,20 +149,14 @@ radix_article <- function(toc = FALSE,
     # resolve listing
     listing <- list()
 
-    # get any listing we have from knit_meta
-    yaml_listing <- knitr::knit_meta(class = "radix_listing", clean = TRUE)
-
     # special handling for listing pages
     if (!is.null(metadata$listing)) {
-
-      # resolving listing feed and html
-      listing <- resolve_listing(input_file, site_config, metadata)
-
-    } else if (length(yaml_listing) > 0) {
-
-      # resolve yaml based listing
-      listing <- resolve_yaml_listing(input_file, site_config, metadata, yaml_listing)
-
+      # can be either a character vector with a collection name or a list
+      # of articles by collection
+      if (is.list(metadata$listing))
+        listing <- resolve_yaml_listing(input_file, site_config, metadata, metadata$listing)
+      else
+        listing <- resolve_listing(input_file, site_config, metadata)
     }
 
     if (length(listing) > 0) {
@@ -238,7 +216,6 @@ radix_article <- function(toc = FALSE,
   }
 
   on_exit <- function() {
-    knitr::knit_engines$set(yaml = NULL)
     validate_rstudio_version()
   }
 
@@ -250,7 +227,6 @@ radix_article <- function(toc = FALSE,
                             args = args),
     keep_md = keep_md,
     clean_supporting = self_contained,
-    pre_knit = pre_knit,
     post_knit = post_knit,
     pre_processor = pre_processor,
     post_processor = radix_article_post_processor(function() encoding, self_contained),
