@@ -1348,6 +1348,7 @@ Publishing
 <h2 id="radix-v0.6-development">radix v0.6 (development)</h2>
 <p>Install the development version with <code>devtools::install_github(&quot;rstudio/radix&quot;)</code></p>
 <ul>
+<li>Custom listing pages (e.g. gallery of featured posts)</li>
 <li>Support for bookdown-style figure cross-references (e.g. <code>\@ref{fig:plot1}</code>)</li>
 <li>Allow use of markdown within footnotes</li>
 <li>Support for text headers within website navigation menus</li>
@@ -1361,6 +1362,8 @@ Publishing
 <li>Enable <code>import_post()</code> to work with file paths as well as URLs</li>
 <li>Set standard plot width to 6.5 inches (was 6.0, new width closer to golden ratio)</li>
 <li>Don’t force plots in standard l-body layout to a width of 100%</li>
+<li>Forward <code>check_license</code> from <code>import_post()</code> to <code>import_article()</code></li>
+<li>Normalize authors specified as plain strings to list form</li>
 </ul>
 <h2 id="radix-v0.5-cran">radix v0.5 (CRAN)</h2>
 <ul>

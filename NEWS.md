@@ -3,6 +3,7 @@
 
 Install the development version with `devtools::install_github("rstudio/radix")`
 
+* Custom listing pages (e.g. gallery of featured posts)
 * Support for bookdown-style figure cross-references (e.g. `\@ref{fig:plot1}`)
 * Allow use of markdown within footnotes
 * Support for text headers within website navigation menus

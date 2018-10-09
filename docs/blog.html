@@ -1460,6 +1460,18 @@ listing: posts
 ---</code></pre>
 <p>In our <a href="https://beta.rstudioconnect.com/content/3776/">example blog</a> (which will be described in more detail below) this results in the following listing:</p>
 <p><img src="images/site-listing.png" class="screenshot" style="width:95.0%" /></p>
+<h4 id="custom-listings">Custom listings</h4>
+<p>Above we demonstrated creating a listing pages for all posts. You can also create a custom listing for a subset of posts (e.g. a gallery of featured posts). To do this, just enumerate the posts you want to include as follows:</p>
+<p><strong>gallery.Rmd</strong></p>
+<pre class="markup"><code>
+---
+title: &quot;Gallery of featured posts&quot;
+listing:
+  posts:
+    - 2016-11-08-sharpe-ratio
+    - 2017-11-09-visualizing-asset-returns 
+    - 2017-09-13-asset-volatility 
+---</code></pre>
 <h4 id="categories">Categories</h4>
 <p>If your posts include <code>categories</code> metadata, then the page will also include category links to the right of the article listing. For example, here is some post metadata that includes categories:</p>
 <pre class="markup"><code>
