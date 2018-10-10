@@ -140,6 +140,11 @@ To reference a figure, use the syntax `\@ref(label)`, where label is the figure 
 include_graphics("images/figure-cross-references.png")
 ```
 
+For additional documentation on figure cross-references see the [bookdown documentation on figures](https://bookdown.org/yihui/bookdown/figures.html) (Radix uses the bookdown implementation of cross-references under the hood). 
+
+One important constraint to keep in mind is that if you want to cross-reference figures or tables generated from a code chunk, please make sure the chunk label *only contains* alphanumeric characters (a-z, A-Z, 0-9), slashes (/), or dashes (-).
+
+
 **Important Note**: Figure cross references are currently only available in the development version of Radix, which you can install with:
 
 ```r

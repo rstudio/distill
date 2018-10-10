@@ -397,6 +397,10 @@
     width: 100%;
   }
   
+  .pandoc-table>caption {
+    margin-bottom: 10px;
+  }
+  
   .pandoc-table th:not([align]) {
     text-align: left;
   }
@@ -1206,6 +1210,8 @@
     $('tr.header').parent('thead').parent('table').addClass('pandoc-table');
     $('.kable-table').children('table').addClass('pandoc-table');
   
+    // add figcaption style to pandoc-table captions
+    $('.pandoc-table>caption').addClass("figcaption");
   
     // initialize posts list
     if (window.init_posts_list)
@@ -1418,8 +1424,8 @@ leaflet() %&gt;%
   addMarkers(lng=174.768, lat=-36.852, popup=&quot;The birthplace of R&quot;)
 ```</code></pre>
 <div class="layout-chunk" data-layout="l-screen-inset">
-<div id="htmlwidget-7ded59f4b1e32ea1fd21" style="width:624px;height:384px;" class="leaflet html-widget"></div>
-<script type="application/json" data-for="htmlwidget-7ded59f4b1e32ea1fd21">{"x":{"options":{"crs":{"crsClass":"L.CRS.EPSG3857","code":null,"proj4def":null,"projectedBounds":null,"options":{}}},"calls":[{"method":"addTiles","args":["//{s}.tile.openstreetmap.org/{z}/{x}/{y}.png",null,null,{"minZoom":0,"maxZoom":18,"tileSize":256,"subdomains":"abc","errorTileUrl":"","tms":false,"noWrap":false,"zoomOffset":0,"zoomReverse":false,"opacity":1,"zIndex":1,"detectRetina":false,"attribution":"&copy; <a href=\"http://openstreetmap.org\">OpenStreetMap<\/a> contributors, <a href=\"http://creativecommons.org/licenses/by-sa/2.0/\">CC-BY-SA<\/a>"}]},{"method":"addMarkers","args":[-36.852,174.768,null,null,null,{"interactive":true,"draggable":false,"keyboard":true,"title":"","alt":"","zIndexOffset":0,"opacity":1,"riseOnHover":false,"riseOffset":250},"The birthplace of R",null,null,null,null,{"interactive":false,"permanent":false,"direction":"auto","opacity":1,"offset":[0,0],"textsize":"10px","textOnly":false,"className":"","sticky":true},null]}],"limits":{"lat":[-36.852,-36.852],"lng":[174.768,174.768]}},"evals":[],"jsHooks":[]}</script>
+<div id="htmlwidget-4e418d0e777bcf5e8b2b" style="width:624px;height:384px;" class="leaflet html-widget"></div>
+<script type="application/json" data-for="htmlwidget-4e418d0e777bcf5e8b2b">{"x":{"options":{"crs":{"crsClass":"L.CRS.EPSG3857","code":null,"proj4def":null,"projectedBounds":null,"options":{}}},"calls":[{"method":"addTiles","args":["//{s}.tile.openstreetmap.org/{z}/{x}/{y}.png",null,null,{"minZoom":0,"maxZoom":18,"tileSize":256,"subdomains":"abc","errorTileUrl":"","tms":false,"noWrap":false,"zoomOffset":0,"zoomReverse":false,"opacity":1,"zIndex":1,"detectRetina":false,"attribution":"&copy; <a href=\"http://openstreetmap.org\">OpenStreetMap<\/a> contributors, <a href=\"http://creativecommons.org/licenses/by-sa/2.0/\">CC-BY-SA<\/a>"}]},{"method":"addMarkers","args":[-36.852,174.768,null,null,null,{"interactive":true,"draggable":false,"keyboard":true,"title":"","alt":"","zIndexOffset":0,"opacity":1,"riseOnHover":false,"riseOffset":250},"The birthplace of R",null,null,null,null,{"interactive":false,"permanent":false,"direction":"auto","opacity":1,"offset":[0,0],"textsize":"10px","textOnly":false,"className":"","sticky":true},null]}],"limits":{"lat":[-36.852,-36.852],"lng":[174.768,174.768]}},"evals":[],"jsHooks":[]}</script>
 </div>
 <p>Depending on the content displayed by <code>l-screen-inset</code>, sometimes it’s nice to add some shading to further deliniate the display. You can do this by adding <code>shaded</code> to the layout declaration:</p>
 <pre class="clike"><code>
@@ -1430,8 +1436,8 @@ leaflet() %&gt;%
   addMarkers(lng=174.768, lat=-36.852, popup=&quot;The birthplace of R&quot;)
 ```</code></pre>
 <div class="layout-chunk" data-layout="l-screen-inset shaded">
-<div id="htmlwidget-54ddc7d39a7dc7e2354e" style="width:624px;height:384px;" class="leaflet html-widget"></div>
-<script type="application/json" data-for="htmlwidget-54ddc7d39a7dc7e2354e">{"x":{"options":{"crs":{"crsClass":"L.CRS.EPSG3857","code":null,"proj4def":null,"projectedBounds":null,"options":{}}},"calls":[{"method":"addTiles","args":["//{s}.tile.openstreetmap.org/{z}/{x}/{y}.png",null,null,{"minZoom":0,"maxZoom":18,"tileSize":256,"subdomains":"abc","errorTileUrl":"","tms":false,"noWrap":false,"zoomOffset":0,"zoomReverse":false,"opacity":1,"zIndex":1,"detectRetina":false,"attribution":"&copy; <a href=\"http://openstreetmap.org\">OpenStreetMap<\/a> contributors, <a href=\"http://creativecommons.org/licenses/by-sa/2.0/\">CC-BY-SA<\/a>"}]},{"method":"addMarkers","args":[-36.852,174.768,null,null,null,{"interactive":true,"draggable":false,"keyboard":true,"title":"","alt":"","zIndexOffset":0,"opacity":1,"riseOnHover":false,"riseOffset":250},"The birthplace of R",null,null,null,null,{"interactive":false,"permanent":false,"direction":"auto","opacity":1,"offset":[0,0],"textsize":"10px","textOnly":false,"className":"","sticky":true},null]}],"limits":{"lat":[-36.852,-36.852],"lng":[174.768,174.768]}},"evals":[],"jsHooks":[]}</script>
+<div id="htmlwidget-9fe14766c3ab345b5cb0" style="width:624px;height:384px;" class="leaflet html-widget"></div>
+<script type="application/json" data-for="htmlwidget-9fe14766c3ab345b5cb0">{"x":{"options":{"crs":{"crsClass":"L.CRS.EPSG3857","code":null,"proj4def":null,"projectedBounds":null,"options":{}}},"calls":[{"method":"addTiles","args":["//{s}.tile.openstreetmap.org/{z}/{x}/{y}.png",null,null,{"minZoom":0,"maxZoom":18,"tileSize":256,"subdomains":"abc","errorTileUrl":"","tms":false,"noWrap":false,"zoomOffset":0,"zoomReverse":false,"opacity":1,"zIndex":1,"detectRetina":false,"attribution":"&copy; <a href=\"http://openstreetmap.org\">OpenStreetMap<\/a> contributors, <a href=\"http://creativecommons.org/licenses/by-sa/2.0/\">CC-BY-SA<\/a>"}]},{"method":"addMarkers","args":[-36.852,174.768,null,null,null,{"interactive":true,"draggable":false,"keyboard":true,"title":"","alt":"","zIndexOffset":0,"opacity":1,"riseOnHover":false,"riseOffset":250},"The birthplace of R",null,null,null,null,{"interactive":false,"permanent":false,"direction":"auto","opacity":1,"offset":[0,0],"textsize":"10px","textOnly":false,"className":"","sticky":true},null]}],"limits":{"lat":[-36.852,-36.852],"lng":[174.768,174.768]}},"evals":[],"jsHooks":[]}</script>
 </div>
 <h2 id="static-figures">Static figures</h2>
 <p>To include static figures (i.e. figures based on an existing PNG or JPEG file rather than a dynamically generated R plot), you can use the <code>knitr::include_graphics()</code> function:</p>
@@ -1467,6 +1473,8 @@ ggplot(diamonds, aes(carat, price)) + geom_smooth() +
 <div class="layout-chunk" data-layout="l-body">
 <p><img src="images/figure-cross-references.png" width="743" class=screenshot /></p>
 </div>
+<p>For additional documentation on figure cross-references see the <a href="https://bookdown.org/yihui/bookdown/figures.html">bookdown documentation on figures</a> (Radix uses the bookdown implementation of cross-references under the hood).</p>
+<p>One important constraint to keep in mind is that if you want to cross-reference figures or tables generated from a code chunk, please make sure the chunk label <em>only contains</em> alphanumeric characters (a-z, A-Z, 0-9), slashes (/), or dashes (-).</p>
 <p><strong>Important Note</strong>: Figure cross references are currently only available in the development version of Radix, which you can install with:</p>
 <pre class="r"><code>
 devtools::install_github(&quot;rstudio/radix&quot;)</code></pre>
