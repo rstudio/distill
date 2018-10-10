@@ -9,6 +9,10 @@ body {
   width: 100%;
 }
 
+.pandoc-table>caption {
+  margin-bottom: 10px;
+}
+
 .pandoc-table th:not([align]) {
   text-align: left;
 }
@@ -818,6 +822,8 @@ function init_common() {
   $('tr.header').parent('thead').parent('table').addClass('pandoc-table');
   $('.kable-table').children('table').addClass('pandoc-table');
 
+  // add figcaption style to pandoc-table captions
+  $('.pandoc-table>caption').addClass("figcaption");
 
   // initialize posts list
   if (window.init_posts_list)
