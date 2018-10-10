@@ -800,8 +800,17 @@ function init_common() {
 
   // mark non-body figures created by knitr chunks as 100% width
   $('.layout-chunk').each(function(i, val) {
-    var css_prop = $(this).attr('data-layout') !== "l-body" ? 'width' : 'max-width';
-    $(this).find('img, .html-widget').css(css_prop, '100%');
+    var figures = $(this).find('img, .html-widget');
+    if ($(this).attr('data-layout') !== "l-body") {
+      figures.css('width', '100%');
+    } else {
+      figures.css('max-width', '100%');
+      figures.filter("[width]").each(function(i, val) {
+        var fig = $(this);
+        fig.css('width', fig.attr('width') + 'px');
+      });
+
+    }
   });
 
   // auto-append index.html to post-preview links in file: protocol
