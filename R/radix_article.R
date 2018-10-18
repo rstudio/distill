@@ -292,7 +292,7 @@ validate_pandoc_version <- function() {
                      "Please update at:",
                      "https://www.rstudio.com/rstudio/download/preview/")
       } else {
-        msg <- paste("Radix requires Pandoc v2.0 or greator.",
+        msg <- paste("Radix requires Pandoc v2.0 or greater",
                      "Please update at:",
                       "https://github.com/jgm/pandoc/releases/latest")
       }
