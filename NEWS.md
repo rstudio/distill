@@ -20,7 +20,7 @@ Install the development version with `devtools::install_github("rstudio/radix")`
 * Forward `check_license` from `import_post()` to `import_article()`
 * Normalize authors specified as plain strings to list form
 * Use standard figure caption CSS treatment for table captions
-
+* Provide default title ("Untitled") for articles that lack one
 
 ## radix v0.5 (CRAN)
 

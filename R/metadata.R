@@ -38,7 +38,7 @@ transform_metadata <- function(file, site_config, collection_config, metadata, a
 
   # validate title
   if (is.null(metadata$title))
-    stop("You must provide a title for Radix articles", call. = FALSE)
+    metadata$title <- "Untitled"
 
   # trim ws from description
   if (!is.null(metadata$description))
