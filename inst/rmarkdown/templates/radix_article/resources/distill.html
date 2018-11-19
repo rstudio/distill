@@ -140,6 +140,10 @@ figure img.external {
 /* Tweak code blocks (note that this CSS is repeated above in an injection
    into the d-code shadow dom) */
 
+d-code {
+  overflow-x: auto !important;
+}
+
 pre.d-code code.d-code {
   padding-left: 10px;
   font-size: 12px;
@@ -170,6 +174,11 @@ pre.text-output {
 }
 
 @media(min-width: 768px) {
+
+d-code {
+  overflow-x: visible !important;
+}
+
 pre.d-code code.d-code  {
     padding-left: 18px;
     font-size: 14px;
