@@ -48,6 +48,9 @@ create_blog <- function(dir, title, gh_pages = FALSE, edit = interactive()) {
     )
   )
 
+  # render the welcome post
+  rmarkdown::render(file.path(target_path, welcome))
+
   # render the site
   render_website(dir, "blog")
 

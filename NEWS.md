@@ -23,6 +23,7 @@ Install the development version with `devtools::install_github("rstudio/radix")`
 * Provide default title ("Untitled") for articles that lack one
 * Scroll horizontal overflow from code blocks on mobile devices 
 * Fix problem with mailto links within blog posts
+* Render welcome post in New Radix Blog RStudio template
 
 ## radix v0.5 (CRAN)
 
