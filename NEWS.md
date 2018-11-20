@@ -22,6 +22,7 @@ Install the development version with `devtools::install_github("rstudio/radix")`
 * Use standard figure caption CSS treatment for table captions
 * Provide default title ("Untitled") for articles that lack one
 * Scroll horizontal overflow from code blocks on mobile devices 
+* Fix problem with mailto links within blog posts
 
 ## radix v0.5 (CRAN)
 

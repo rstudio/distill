@@ -144,7 +144,7 @@ url_path <- function(...) {
 }
 
 is_url <- function(x) {
-  grepl("^https?://", x)
+  grepl("^https?://", x) || grepl("^mailto\\:", x)
 }
 
 
