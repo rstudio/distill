@@ -276,5 +276,5 @@ Be sure to enclose Twitter account names in quotes (this is required because the
 
 Website content is by default written to the `_site` sub-directory (you can customize this using the `output_dir` metadata field). Publishing is simply a matter of copying the output directory to a web server or web hosting service.
 
-See the article on [publising websites](publish_website.html) for additional details on publishing sites using a variety of available hosting services.  
+See the article on [publishing websites](publish_website.html) for additional details on publishing sites using a variety of available hosting services.  
 
