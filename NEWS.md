@@ -1,7 +1,5 @@
 
-## radix v0.6 (development)
-
-Install the development version with `devtools::install_github("rstudio/radix")`
+## radix v0.6 (CRAN)
 
 * Custom listing pages (e.g. gallery of featured posts)
 * Support for bookdown-style figure cross-references (e.g. `\@ref{fig:plot1}`)
@@ -25,6 +23,6 @@ Install the development version with `devtools::install_github("rstudio/radix")`
 * Fix problem with mailto links within blog posts
 * Render welcome post in New Radix Blog RStudio template
 
-## radix v0.5 (CRAN)
+## radix v0.5
 
 * Initial CRAN release
