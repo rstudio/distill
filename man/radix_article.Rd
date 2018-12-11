@@ -4,7 +4,7 @@
 \alias{radix_article}
 \title{R Markdown format for Radix articles}
 \usage{
-radix_article(toc = FALSE, toc_depth = 3, fig_width = 6,
+radix_article(toc = FALSE, toc_depth = 3, fig_width = 6.5,
   fig_height = 4, fig_retina = 2, fig_caption = TRUE, dev = "png",
   smart = TRUE, self_contained = TRUE, mathjax = "default",
   extra_dependencies = NULL, css = NULL, includes = NULL,
