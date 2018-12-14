@@ -394,6 +394,10 @@
     width: 100%;
   }
   
+  .pandoc-table>caption {
+    margin-bottom: 10px;
+  }
+  
   .pandoc-table th:not([align]) {
     text-align: left;
   }
@@ -521,6 +525,10 @@
   /* Tweak code blocks (note that this CSS is repeated above in an injection
      into the d-code shadow dom) */
   
+  d-code {
+    overflow-x: auto !important;
+  }
+  
   pre.d-code code.d-code {
     padding-left: 10px;
     font-size: 12px;
@@ -551,6 +559,11 @@
   }
   
   @media(min-width: 768px) {
+  
+  d-code {
+    overflow-x: visible !important;
+  }
+  
   pre.d-code code.d-code  {
       padding-left: 18px;
       font-size: 14px;
@@ -1181,8 +1194,17 @@
   
     // mark non-body figures created by knitr chunks as 100% width
     $('.layout-chunk').each(function(i, val) {
-      var css_prop = $(this).attr('data-layout') !== "l-body" ? 'width' : 'max-width';
-      $(this).find('img, .html-widget').css(css_prop, '100%');
+      var figures = $(this).find('img, .html-widget');
+      if ($(this).attr('data-layout') !== "l-body") {
+        figures.css('width', '100%');
+      } else {
+        figures.css('max-width', '100%');
+        figures.filter("[width]").each(function(i, val) {
+          var fig = $(this);
+          fig.css('width', fig.attr('width') + 'px');
+        });
+  
+      }
     });
   
     // auto-append index.html to post-preview links in file: protocol
@@ -1203,6 +1225,8 @@
     $('tr.header').parent('thead').parent('table').addClass('pandoc-table');
     $('.kable-table').children('table').addClass('pandoc-table');
   
+    // add figcaption style to table captions
+    $('caption').parent('table').addClass("figcaption");
   
     // initialize posts list
     if (window.init_posts_list)
@@ -1345,8 +1369,7 @@ Publishing
 
 
 <div class="d-article">
-<h2 id="radix-v0.6-development">radix v0.6 (development)</h2>
-<p>Install the development version with <code>devtools::install_github(&quot;rstudio/radix&quot;)</code></p>
+<h2 id="radix-v0.6-cran">radix v0.6 (CRAN)</h2>
 <ul>
 <li>Custom listing pages (e.g. gallery of featured posts)</li>
 <li>Support for bookdown-style figure cross-references (e.g. <code>\@ref{fig:plot1}</code>)</li>
@@ -1364,8 +1387,13 @@ Publishing
 <li>Don’t force plots in standard l-body layout to a width of 100%</li>
 <li>Forward <code>check_license</code> from <code>import_post()</code> to <code>import_article()</code></li>
 <li>Normalize authors specified as plain strings to list form</li>
+<li>Use standard figure caption CSS treatment for table captions</li>
+<li>Provide default title (“Untitled”) for articles that lack one</li>
+<li>Scroll horizontal overflow from code blocks on mobile devices</li>
+<li>Fix problem with mailto links within blog posts</li>
+<li>Render welcome post in New Radix Blog RStudio template</li>
 </ul>
-<h2 id="radix-v0.5-cran">radix v0.5 (CRAN)</h2>
+<h2 id="radix-v0.5">radix v0.5</h2>
 <ul>
 <li>Initial CRAN release</li>
 </ul>

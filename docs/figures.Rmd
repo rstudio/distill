@@ -144,10 +144,3 @@ For additional documentation on figure cross-references see the [bookdown docume
 
 One important constraint to keep in mind is that if you want to cross-reference figures or tables generated from a code chunk, please make sure the chunk label *only contains* alphanumeric characters (a-z, A-Z, 0-9), slashes (/), or dashes (-).
 
-
-**Important Note**: Figure cross references are currently only available in the development version of Radix, which you can install with:
-
-```r
-devtools::install_github("rstudio/radix")
-```
-
