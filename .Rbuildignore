@@ -1,3 +1,4 @@
+^configure_template\.R$
 ^.*\.Rproj$
 ^\.Rproj\.user$
 ^scratch$
