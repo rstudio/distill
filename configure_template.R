@@ -9,10 +9,9 @@ system2("npm", args = c("--prefix", path, "install"))
 system2("npm", args = c("--prefix", path, "run", "build"))
 
 transform_for_radix <- function(script) {
-  highlighting_pattern <- "(?<=\\.languages.clike=\\{)"
 
   # Expect `Prism.languages.clike` and `n.languages.clike`
-  count_match <- str_count(script, highlighting_pattern)
+  count_match <- str_count(script, "(?<=\\.languages.clike=\\{)")
   if (!identical(2L, num_matches <- sum(count_match)))
     stop(paste0(num_matches, " matches for pattern ", p, " found, but two expected."), call. = FALSE)
 
@@ -26,6 +25,8 @@ transform_for_radix <- function(script) {
   comment_pattern_to_insert <- "{pattern:/(^|[^\\])#.*/,lookbehind:!0},"
 
   for (p in comment_patterns) {
+    if (!str_detect(script[[line_to_modify]], p))
+      stop("Comment pattern insertion failed: cannot find pattern `", p, "`.", call. = FALSE)
     splitted <- script[[line_to_modify]] %>%
       str_split(p) %>%
       unlist()
@@ -34,12 +35,14 @@ transform_for_radix <- function(script) {
 
   # Replace function patterns
   function_patterns <- c(
-    "(?<=Prism\\.languages\\.clike=\\{.{0,500},function:)(.+?)(?=,number)",
-    "(?<=n\\.languages\\.clike=\\{.{0,500},function:)(.+?)(?=,number)"
+    "(?<=Prism\\.languages\\.clike=\\{.{0,550},function:)(.+?)(?=,number)",
+    "(?<=n\\.languages\\.clike=\\{.{0,550},function:)(.+?)(?=,number)"
   )
   function_pattern_replacement <- "/[a-z\\.0-9_]+(?=\\()/i"
 
   for (p in function_patterns) {
+    if (!str_detect(script[[line_to_modify]], p))
+      stop("Function pattern replacement failed: cannot find pattern `", p, "`.", call. = FALSE)
     script[[line_to_modify]] <- script[[line_to_modify]] %>%
       str_replace(p, function_pattern_replacement)
   }
