@@ -1,4 +1,9 @@
 
+## radix v0.7 (Development)
+
+* Update to latest version of Distll template from https://github.com/distillpub/template
+
+
 ## radix v0.6 (CRAN)
 
 * Custom listing pages (e.g. gallery of featured posts)
