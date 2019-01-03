@@ -22,7 +22,7 @@ transform_for_radix <- function(script) {
     "(?<=Prism\\.languages\\.clike=\\{comment:\\[)",
     "(?<=n\\.languages\\.clike=\\{comment:\\[)"
   )
-  comment_pattern_to_insert <- "{pattern:/(^|[^\\])#.*/,lookbehind:!0},"
+  comment_pattern_to_insert <- "{pattern:/(^|[^\\\\])#.*/,lookbehind:!0},"
 
   for (p in comment_patterns) {
     if (!str_detect(script[[line_to_modify]], p))
@@ -38,7 +38,7 @@ transform_for_radix <- function(script) {
     "(?<=Prism\\.languages\\.clike=\\{.{0,550},function:)(.+?)(?=,number)",
     "(?<=n\\.languages\\.clike=\\{.{0,550},function:)(.+?)(?=,number)"
   )
-  function_pattern_replacement <- "/[a-z\\.0-9_]+(?=\\()/i"
+  function_pattern_replacement <- "/[a-z\\\\.0-9_]+(?=\\\\()/i"
 
   for (p in function_patterns) {
     if (!str_detect(script[[line_to_modify]], p))
