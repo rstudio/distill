@@ -2,7 +2,7 @@
 % Please edit documentation in R/publish.R
 \name{publish_website}
 \alias{publish_website}
-\title{Publish a Radix Website}
+\title{Publish a Distill Website}
 \usage{
 publish_website(site_dir = ".", site_name = NULL,
   method = c("rsconnect"), server = NULL, account = NULL,
@@ -35,7 +35,7 @@ Publish a website to RStudio Connect
 }
 \examples{
 \dontrun{
-library(radix)
+library(distill)
 publish_website()
 }
 

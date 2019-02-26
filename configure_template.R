@@ -8,7 +8,7 @@ repo <- clone("https://github.com/rstudio/template", branch = "radix", path)
 system2("npm", args = c("--prefix", path, "install"))
 system2("npm", args = c("--prefix", path, "run", "build"))
 
-transform_for_radix <- function(script) {
+transform_for_distill <- function(script) {
 
   # Expect `Prism.languages.clike` and `n.languages.clike`
   count_match <- str_count(script, "(?<=\\.languages.clike=\\{)")
@@ -52,7 +52,7 @@ transform_for_radix <- function(script) {
 }
 
 read_lines(file.path(path, "dist", "template.v2.js")) %>%
-  transform_for_radix() %>%
+  transform_for_distill() %>%
   write_lines("inst/www/distill/template.v2.js")
 
 unlink(path, recursive = TRUE)

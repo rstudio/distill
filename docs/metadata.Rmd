@@ -7,7 +7,7 @@ description: Enhance published articles by providing metadata
 library(knitr)
 ```
 
-You can enhance Radix articles by providing various types of metadata, including:
+You can enhance Distill articles by providing various types of metadata, including:
 
 1) Links to the article's source code repository.
 
@@ -23,11 +23,11 @@ You can include the `repository_url` field to indicate where the source code for
 
 ```markup
 ---
-title: "Radix for R Markdown"
+title: "Distill for R Markdown"
 description: | 
   Scientific and technical writing, native to the web
-output: radix::radix_article
-repository_url: https://github.com/rstudio/radix
+output: distill::distill_article
+repository_url: https://github.com/rstudio/distill
 ---
 ```
 
@@ -35,12 +35,12 @@ You can optionally also include a `compare_updates_url` to provide a URL that wi
 
 ```markup
 ---
-title: "Radix for R Markdown"
+title: "Distill for R Markdown"
 description: | 
   Scientific and technical writing, native to the web
-output: radix::radix_article
-repository_url: https://github.com/rstudio/radix
-compare_updates_url: https://github.com/rstudio/radix/compare/pubv1...master
+output: distill::distill_article
+repository_url: https://github.com/rstudio/distill
+compare_updates_url: https://github.com/rstudio/distill/compare/pubv1...master
 ---
 ```
 
@@ -65,10 +65,10 @@ You can designate articles that you create as Creative Commons licensed by addin
 
 ```markup
 ---
-title: "Radix for R Markdown"
+title: "Distill for R Markdown"
 description: | 
   Scientific and technical writing, native to the web
-output: radix::radix_article
+output: distill::distill_article
 creative_commons: CC BY
 ---
 ```
@@ -100,24 +100,24 @@ You can specify a preview image for your article (for sharing on Slack, Twitter,
     ---
     title: "JavaScript & D3"
     description: Enhance communication with interactive visualizations 
-    preview: https://rstudio.github.io/radix/images/javascript-d3-preview.png
+    preview: https://rstudio.github.io/distill/images/javascript-d3-preview.png
     ---
     ```
 
     Note that the preview image is specified with a full absolute URL. This is a requirement of both Open Graph and Twitter (relative image references are not supported). If you are publishing a standalone self-contained HTML version of your article then you'll need to upload the preview image to another location on the web in order to reference it.
 
-2. If your article is not self-contained (it's part of a [Radix website](publish_website.html) or is generated with  `self_contained: false`) then you can include the preview image alongside your document. In this case you still need to specify the root URL where your image will be published to using the `base_url` field:
+2. If your article is not self-contained (it's part of a [Distill website](publish_website.html) or is generated with  `self_contained: false`) then you can include the preview image alongside your document. In this case you still need to specify the root URL where your image will be published to using the `base_url` field:
 
     ```markup
     ---
     title: "JavaScript & D3"
     description: Enhance communication with interactive visualizations 
-    base_url: https://rstudio.github.io/radix
+    base_url: https://rstudio.github.io/distill
     preview: images/javascript-d3-preview.png
     ---
     ```
 
-    This technique is generally preferable to including the full URL since it allows Radix to inspect the image file directly and provide additional information about it's size.
+    This technique is generally preferable to including the full URL since it allows Distill to inspect the image file directly and provide additional information about it's size.
 
 3. You can also specify that a specific figure within your article should be used as the preview image. To do this, just add the `preview = TRUE` chunk option to the chunk which creates the figure. For example:
 
@@ -125,7 +125,7 @@ You can specify a preview image for your article (for sharing on Slack, Twitter,
     ---
     title: "JavaScript & D3"
     description: Enhance communication with interactive visualizations 
-    base_url: https://rstudio.github.io/radix
+    base_url: https://rstudio.github.io/distill
     ---
     ```
 
@@ -137,11 +137,11 @@ You can specify a preview image for your article (for sharing on Slack, Twitter,
     ```
     ````
 
-    As with using the `preview` metadata field, this method requires that your Radix article is not a single standalone HTML file (`self_contained: false`) and also requires that you specify a `base_url` field indicating the domain and path where the article will be published.
+    As with using the `preview` metadata field, this method requires that your Distill article is not a single standalone HTML file (`self_contained: false`) and also requires that you specify a `base_url` field indicating the domain and path where the article will be published.
 
 ## Open Graph
 
-The [Open Graph protocol](http://ogp.me/) is a specification that enables richer sharing of links to articles on the web. Open Graph metadata is automatically generated for Radix articles. For example, here's what you see in Slack when pasting in a link to the article on using [JavaScript and D3](interactivity.html) within Radix articles:
+The [Open Graph protocol](http://ogp.me/) is a specification that enables richer sharing of links to articles on the web. Open Graph metadata is automatically generated for Distill articles. For example, here's what you see in Slack when pasting in a link to the article on using [JavaScript and D3](interactivity.html) within Distill articles:
 
 ![](images/open-graph-screenshot.png){width=95% .screenshot}
 
@@ -152,7 +152,7 @@ Slack uses Open Graph to extract and display the title, description, and a [prev
 
 [Twitter Cards](https://developer.twitter.com/en/docs/tweets/optimize-with-cards/overview/abouts-cards) are a way of enhancing the appearance of links to your article on Twitter. When a link to your article is included in a Tweet, Twitter automatically crawls your site to fetch any available Twitter Card metadata.
 
-For example, here's what happens when you include a link to <https://rstudio.github.io/radix/interactivity.html> within a tweet:
+For example, here's what happens when you include a link to <https://rstudio.github.io/distill/interactivity.html> within a tweet:
 
 ![](images/twitter-card-screenshot.png){width=95%}
 
@@ -166,7 +166,7 @@ Here's a complete example that includes the attribution fields as well as a prev
 ---
 title: "JavaScript & D3"
 description: Enhance communication with interactive visualizations 
-base_url: https://rstudio.github.io/radix
+base_url: https://rstudio.github.io/distill
 preview: images/javascript-d3-preview.png
 twitter:
   site: "@rstudio"

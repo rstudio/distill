@@ -34,14 +34,14 @@ site_includes_html<- function(site_config, context) {
   if (context == "in_header") {
     header_html <- c()
     css_html <- c()
-    with_radix_output_options(site_config, function(output_options) {
+    with_distill_output_options(site_config, function(output_options) {
       header_html <<- includes_as_html(output_options, "in_header")
       css_html <<- css_as_html(output_options)
     })
     header_html <- tagList(header_html, site_header_extras(site_config))
     placeholder_html("site_in_header", header_html, css_html)
   } else {
-    includes_html <- with_radix_output_options(site_config, function(output_options) {
+    includes_html <- with_distill_output_options(site_config, function(output_options) {
       includes_as_html(output_options, context)
     })
     placeholder_html(paste0("site_", context), includes_html)
@@ -74,12 +74,12 @@ site_header_extras <- function(site_config) {
 }
 
 
-with_radix_output_options <- function(site_config, f) {
+with_distill_output_options <- function(site_config, f) {
   site_config_output <- site_config[["output"]]
   if (is.list(site_config_output)) {
-    radix_article_options <- site_config_output[["radix::radix_article"]]
-    if (is.list(radix_article_options))
-      f(radix_article_options)
+    distill_article_options <- site_config_output[["distill::distill_article"]]
+    if (is.list(distill_article_options))
+      f(distill_article_options)
     else
       c()
   } else {

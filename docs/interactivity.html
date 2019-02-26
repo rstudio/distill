@@ -6,7 +6,7 @@
   <meta charset="utf-8"/>
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <meta http-equiv="X-UA-Compatible" content="IE=Edge,chrome=1"/>
-  <meta name="generator" content="radix" />
+  <meta name="generator" content="distill" />
 
   <style type="text/css">
   /* Hide doc at startup (prevent jankiness while JS renders/transforms) */
@@ -19,7 +19,7 @@
  <!--/radix_placeholder_import_source-->
 
   <!--radix_placeholder_meta_tags-->
-  <title>Radix for R Markdown: JavaScript &amp; D3</title>
+  <title>Distill for R Markdown: JavaScript &amp; D3</title>
   
   <meta property="description" itemprop="description" content="Enhance communication with interactive visualizations"/>
   
@@ -28,20 +28,20 @@
   
   
   <!--  https://developers.facebook.com/docs/sharing/webmasters#markup -->
-  <meta property="og:title" content="Radix for R Markdown: JavaScript &amp; D3"/>
+  <meta property="og:title" content="Distill for R Markdown: JavaScript &amp; D3"/>
   <meta property="og:type" content="article"/>
   <meta property="og:description" content="Enhance communication with interactive visualizations"/>
-  <meta property="og:image" content="https://rstudio.github.io/radix/./images/javascript-d3-preview.png"/>
+  <meta property="og:image" content="https://rstudio.github.io/distill/./images/javascript-d3-preview.png"/>
   <meta property="og:image:width" content="1406"/>
   <meta property="og:image:height" content="1146"/>
   <meta property="og:locale" content="en_US"/>
-  <meta property="og:site_name" content="Radix for R Markdown"/>
+  <meta property="og:site_name" content="Distill for R Markdown"/>
   
   <!--  https://dev.twitter.com/cards/types/summary -->
   <meta property="twitter:card" content="summary_large_image"/>
-  <meta property="twitter:title" content="Radix for R Markdown: JavaScript &amp; D3"/>
+  <meta property="twitter:title" content="Distill for R Markdown: JavaScript &amp; D3"/>
   <meta property="twitter:description" content="Enhance communication with interactive visualizations"/>
-  <meta property="twitter:image" content="https://rstudio.github.io/radix/./images/javascript-d3-preview.png"/>
+  <meta property="twitter:image" content="https://rstudio.github.io/distill/./images/javascript-d3-preview.png"/>
   <meta property="twitter:image:width" content="1406"/>
   <meta property="twitter:image:height" content="1146"/>
   
@@ -83,7 +83,7 @@
       });
   
       // responsive menu
-      $('.radix-site-header').each(function(i, val) {
+      $('.distill-site-header').each(function(i, val) {
         var topnav = $(this);
         var toggle = topnav.find('.nav-toggle');
         toggle.on('click', function() {
@@ -110,85 +110,85 @@
   
   /* Theme (user-documented overrideables for nav appearance) */
   
-  .radix-site-nav {
+  .distill-site-nav {
     color: rgba(255, 255, 255, 0.8);
     background-color: #455a64;
     font-size: 15px;
     font-weight: 300;
   }
   
-  .radix-site-nav a {
+  .distill-site-nav a {
     color: inherit;
     text-decoration: none;
   }
   
-  .radix-site-nav a:hover {
+  .distill-site-nav a:hover {
     color: white;
   }
   
   @media print {
-    .radix-site-nav {
+    .distill-site-nav {
       display: none;
     }
   }
   
-  .radix-site-header {
+  .distill-site-header {
   
   }
   
-  .radix-site-footer {
+  .distill-site-footer {
   
   }
   
   
   /* Site Header */
   
-  .radix-site-header {
+  .distill-site-header {
     width: 100%;
     box-sizing: border-box;
     z-index: 3;
   }
   
-  .radix-site-header .nav-left {
+  .distill-site-header .nav-left {
     display: inline-block;
     margin-left: 8px;
   }
   
   @media screen and (max-width: 768px) {
-    .radix-site-header .nav-left {
+    .distill-site-header .nav-left {
       margin-left: 0;
     }
   }
   
   
-  .radix-site-header .nav-right {
+  .distill-site-header .nav-right {
     float: right;
     margin-right: 8px;
   }
   
-  .radix-site-header a,
-  .radix-site-header .title {
+  .distill-site-header a,
+  .distill-site-header .title {
     display: inline-block;
     text-align: center;
     padding: 14px 10px 14px 10px;
   }
   
-  .radix-site-header .title {
+  .distill-site-header .title {
     font-size: 18px;
   }
   
-  .radix-site-header .logo {
+  .distill-site-header .logo {
     padding: 0;
   }
   
-  .radix-site-header .logo img {
+  .distill-site-header .logo img {
     display: none;
     max-height: 20px;
     width: auto;
     margin-bottom: -4px;
   }
   
-  .radix-site-header .nav-image img {
+  .distill-site-header .nav-image img {
     max-height: 18px;
     width: auto;
     display: inline-block;
@@ -198,22 +198,22 @@
   
   
   @media screen and (min-width: 1000px) {
-    .radix-site-header .logo img {
+    .distill-site-header .logo img {
       display: inline-block;
     }
-    .radix-site-header .nav-left {
+    .distill-site-header .nav-left {
       margin-left: 20px;
     }
-    .radix-site-header .nav-right {
+    .distill-site-header .nav-right {
       margin-right: 20px;
     }
-    .radix-site-header .title {
+    .distill-site-header .title {
       padding-left: 12px;
     }
   }
   
   
-  .radix-site-header .nav-toggle {
+  .distill-site-header .nav-toggle {
     display: none;
   }
   
@@ -295,18 +295,18 @@
   }
   
   @media screen and (max-width: 768px) {
-    .radix-site-header a, .radix-site-header .nav-dropdown  {display: none;}
-    .radix-site-header a.nav-toggle {
+    .distill-site-header a, .distill-site-header .nav-dropdown  {display: none;}
+    .distill-site-header a.nav-toggle {
       float: right;
       display: block;
     }
-    .radix-site-header .title {
+    .distill-site-header .title {
       margin-left: 0;
     }
-    .radix-site-header .nav-right {
+    .distill-site-header .nav-right {
       margin-right: 0;
     }
-    .radix-site-header {
+    .distill-site-header {
       overflow: hidden;
     }
     .nav-right .nav-dropdown-content {
@@ -316,24 +316,24 @@
   
   
   @media screen and (max-width: 768px) {
-    .radix-site-header.responsive {position: relative;}
-    .radix-site-header.responsive a.nav-toggle {
+    .distill-site-header.responsive {position: relative;}
+    .distill-site-header.responsive a.nav-toggle {
       position: absolute;
       right: 0;
       top: 0;
     }
-    .radix-site-header.responsive a,
-    .radix-site-header.responsive .nav-dropdown {
+    .distill-site-header.responsive a,
+    .distill-site-header.responsive .nav-dropdown {
       display: block;
       text-align: left;
     }
-    .radix-site-header.responsive .nav-left,
-    .radix-site-header.responsive .nav-right {
+    .distill-site-header.responsive .nav-left,
+    .distill-site-header.responsive .nav-right {
       width: 100%;
     }
-    .radix-site-header.responsive .nav-dropdown {float: none;}
-    .radix-site-header.responsive .nav-dropdown-content {position: relative;}
-    .radix-site-header.responsive .nav-dropdown .nav-dropbtn {
+    .distill-site-header.responsive .nav-dropdown {float: none;}
+    .distill-site-header.responsive .nav-dropdown-content {position: relative;}
+    .distill-site-header.responsive .nav-dropdown .nav-dropbtn {
       display: block;
       width: 100%;
       text-align: left;
@@ -342,7 +342,7 @@
   
   /* Site Footer */
   
-  .radix-site-footer {
+  .distill-site-footer {
     width: 100%;
     overflow: hidden;
     box-sizing: border-box;
@@ -1225,7 +1225,7 @@
   
     // get rid of index.html references in header
     if (window.location.protocol !== "file:") {
-      $('.radix-site-header a[href]').each(function(i,val) {
+      $('.distill-site-header a[href]').each(function(i,val) {
         $(this).attr('href', $(this).attr('href').replace("index.html", "./"));
       });
     }
@@ -1326,12 +1326,12 @@
 <!--/radix_placeholder_front_matter-->
 <!--radix_placeholder_navigation_before_body-->
 <header class="header header--fixed" role="banner">
-<nav class="radix-site-nav radix-site-header">
+<nav class="distill-site-nav distill-site-header">
 <div class="nav-left">
 <a class="logo" href="https://www.rstudio.com">
 <img src="images/logo.png"/>
 </a>
-<a href="index.html" class="title">Radix for R Markdown</a>
+<a href="index.html" class="title">Distill for R Markdown</a>
 </div>
 <div class="nav-right">
 <div class="nav-dropdown">
@@ -1341,7 +1341,7 @@ Authoring
 <span class="down-arrow">&#x25BE;</span>
 </button>
 <div class="nav-dropdown-content">
-<a href="basics.html">Radix Basics</a>
+<a href="basics.html">Distill Basics</a>
 <a href="figures.html">Figure Layout</a>
 <a href="tables.html">Tables</a>
 <a href="diagrams.html">Diagrams</a>
@@ -1349,6 +1349,8 @@ Authoring
 <hr/>
 <a href="citations.html">Citations</a>
 <a href="metadata.html">Article Metadata</a>
+<hr/>
+<a href="migrating.html">Migrating from Radix</a>
 </div>
 </div>
 <div class="nav-dropdown">
@@ -1378,7 +1380,7 @@ Publishing
 </div>
 </div>
 <a href="news.html">News</a>
-<a href="https://github.com/rstudio/radix">
+<a href="https://github.com/rstudio/distill">
 <i class="fab fa-github"></i>
 </a>
 <a href="javascript:void(0);" class="nav-toggle">&#9776;</a>
@@ -1404,7 +1406,7 @@ Publishing
 </ul>
 </nav>
 <hr class="d-toc-separator"/>
-<p>There are a variety of ways to add interactive JavaScript and D3 visualizations to your Radix articles, including:</p>
+<p>There are a variety of ways to add interactive JavaScript and D3 visualizations to your Distill articles, including:</p>
 <ul>
 <li><p>Using pre-built <a href="http://www.htmlwidgets.org">htmlwidgets</a> that wrap JavaScript visualization libraries like <a href="http://rstudio.github.io/leaflet/">Leaflet</a>, <a href="https://plot.ly/r/">Plotly</a>, <a href="http://rstudio.github.io/dygraphs/">dygraphs</a>, and <a href="https://bwlewis.github.io/rthreejs/">threejs</a>.</p></li>
 <li><p>Creating custom <a href="https://d3js.org/">D3.js</a> interactive visualizations using the <a href="https://rstudio.github.io/r2d3/">r2d3</a> package.</p></li>
@@ -1460,13 +1462,13 @@ r2d3(script = &quot;voronoi.js&quot;)
 <!--radix_placeholder_appendices-->
 <div class="appendix-bottom">
 <h3 id="updates-and-corrections">Corrections</h3>
-<p>If you see mistakes or want to suggest changes, please <a href="https://github.com/rstudio/radix/issues/new">create an issue</a> on the source repository.</p>
+<p>If you see mistakes or want to suggest changes, please <a href="https://github.com/rstudio/distill/issues/new">create an issue</a> on the source repository.</p>
 <h3 id="reuse">Reuse</h3>
-<p>Text and figures are licensed under Creative Commons Attribution <a rel="license" href="https://creativecommons.org/licenses/by/4.0/">CC BY 4.0</a>. Source code is available at <a href="https://github.com/rstudio/radix">https://github.com/rstudio/radix</a>, unless otherwise noted. The figures that have been reused from other sources don't fall under this license and can be recognized by a note in their caption: "Figure from ...".</p>
+<p>Text and figures are licensed under Creative Commons Attribution <a rel="license" href="https://creativecommons.org/licenses/by/4.0/">CC BY 4.0</a>. Source code is available at <a href="https://github.com/rstudio/distill">https://github.com/rstudio/distill</a>, unless otherwise noted. The figures that have been reused from other sources don't fall under this license and can be recognized by a note in their caption: "Figure from ...".</p>
 </div>
 <!--/radix_placeholder_appendices-->
 <!--radix_placeholder_navigation_after_body-->
-<div class="radix-site-nav radix-site-footer">
+<div class="distill-site-nav distill-site-footer">
 <p>© Copyright 2018 <a href="https://github.com/distillpub/template/blob/master/AUTHORS">The Distill Template Authors</a> and <a href="https://www.rstudio.com">RStudio, Inc</a>.</p>
 <p>Software licensed under the <a href="https://www.apache.org/licenses/LICENSE-2.0">Apache License, v2.0</a>.</p>
 </div>

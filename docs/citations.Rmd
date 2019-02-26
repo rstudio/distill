@@ -8,7 +8,7 @@ bibliography: biblio.bib
 library(knitr)
 ```
 
-Radix articles support including citations and a corresponding bibliography using standard R Markdown citation syntax. Radix also provides tools for making your articles more [easily citeable](#creating-citeable-articles), as well as for generating [Google Scholar] compatible citation metadata.
+Distill articles support including citations and a corresponding bibliography using standard R Markdown citation syntax. Distill also provides tools for making your articles more [easily citeable](#creating-citeable-articles), as well as for generating [Google Scholar] compatible citation metadata.
 
 ## Citing other works
 
@@ -16,10 +16,10 @@ Radix articles support including citations and a corresponding bibliography usin
 
 ```markup
 ---
-title: "Radix for R Markdown"
+title: "Distill for R Markdown"
 description: | 
   Scientific and technical writing, native to the web
-output: radix::radix_article
+output: distill::distill_article
 date: May 4, 2018
 author:
   - name: Nora Jones 
@@ -49,7 +49,7 @@ To cite this within your article, use standard R Markdown notation, for example:
 
 The citation is presented inline like this: [@xie2015] (a number that displays more information on hover). If you have an appendix, a bibliography is automatically created and populated within it.
 
-Radix chose a numerical inline citation style to improve readability of citation dense articles and because many of the benefits of longer citations are obviated by displaying more information on hover. However, we consider it good style to mention author last names if you discuss something at length and it fits into the flow well---the authors are human and it’s nice for them to have the community associate them with their work.
+Distill chose a numerical inline citation style to improve readability of citation dense articles and because many of the benefits of longer citations are obviated by displaying more information on hover. However, we consider it good style to mention author last names if you discuss something at length and it fits into the flow well---the authors are human and it’s nice for them to have the community associate them with their work.
 
 Also note that you are strongly encouraged you to populate the `url` BibTeX field where possible so that links can be provided for citations.
 
@@ -63,7 +63,7 @@ To provide a citation for an article published to the web, include `author` and 
 
 ```markup
 ---
-title: "Radix for R Markdown"
+title: "Distill for R Markdown"
 description: | 
   Scientific and technical writing, native to the web
 date: May 4, 2018
@@ -72,8 +72,8 @@ author:
     url: https://example.com/norajones
     affiliation: Spacely Sprockets
     affiliation_url: https://example.com/spacelysprokets
-citation_url: https://rstudio.github.io/radix
-slug: jones2018radix
+citation_url: https://rstudio.github.io/distill
+slug: jones2018distill
 bibliography: biblio.bib
 ---
 ```
@@ -85,7 +85,7 @@ When this metadata is available, a citation appendix is automatically added to t
 
 ![](images/citation.png){width=95% .screenshot}
 
-Note that we also included a `slug` field (in this case `jones2018radix`) which affects the abbreviated version of the citation included in the BibTeX entry. If you don't provide a `slug` then one will be automatically generated.
+Note that we also included a `slug` field (in this case `jones2018distill`) which affects the abbreviated version of the citation included in the BibTeX entry. If you don't provide a `slug` then one will be automatically generated.
 
 ### Journal articles
 
@@ -100,7 +100,7 @@ Here's our previous examples amended with these fields:
 
 ```markup
 ---
-title: "Radix for R Markdown"
+title: "Distill for R Markdown"
 description: | 
   Scientific and technical writing, native to the web
 date: May 4, 2018
@@ -111,8 +111,8 @@ author:
     affiliation_url: https://example.com/spacelysprokets
 journal: "Journal of Data Science Software"
 doi: "10.23915/distill.00010"
-slug: jones2018radix
-citation_url: https://rstudio.github.io/radix
+slug: jones2018distill
+citation_url: https://rstudio.github.io/distill
 bibliography: biblio.bib
 ---
 ```

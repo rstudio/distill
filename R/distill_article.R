@@ -1,10 +1,10 @@
 
 
-#' R Markdown format for Radix articles
+#' R Markdown format for Distill articles
 #'
 #' Scientific and technical writing, native to the web.
 #'
-#' Radix articles feature attractive, reader-friendly typography, flexible
+#' Distill articles feature attractive, reader-friendly typography, flexible
 #' layout options for visualizations, and full support for footnotes and
 #' citations.
 #'
@@ -14,7 +14,7 @@
 #' @import htmltools
 #'
 #' @export
-radix_article <- function(toc = FALSE,
+distill_article <- function(toc = FALSE,
                           toc_depth = 3,
                           fig_width = 6.5,
                           fig_height = 4,
@@ -47,11 +47,11 @@ radix_article <- function(toc = FALSE,
 
   # add template
   args <- c(args, "--template",
-            pandoc_path_arg(radix_resource("default.html")))
+            pandoc_path_arg(distill_resource("default.html")))
 
   # lua filter
   args <- c(args, "--lua-filter",
-            pandoc_path_arg(radix_resource("distill.lua")))
+            pandoc_path_arg(distill_resource("distill.lua")))
 
   # use link citations (so we can do citation conversion)
   args <- c(args, "--metadata=link-citations:true")
@@ -176,7 +176,7 @@ radix_article <- function(toc = FALSE,
     # add site related dependencies
     ensure_site_dependencies(site_config, dirname(input_file))
 
-    # header includes: radix then user
+    # header includes: distill then user
     in_header <- c(metadata_in_header(site_config, metadata, self_contained),
                    citation_references_in_header(input_file, metadata$bibliography),
                    metadata_json,
@@ -184,14 +184,14 @@ radix_article <- function(toc = FALSE,
                    navigation_in_header_file(site_config),
                    distill_in_header_file())
 
-    # before body includes: radix then user
+    # before body includes: distill then user
     before_body <- c(front_matter_before_body(metadata),
                      navigation_before_body_file(site_config),
                      site_before_body_file(site_config),
                      includes$before_body,
                      listing$html)
 
-    # after body includes: user then radix
+    # after body includes: user then distill
     after_body <- c(includes$after_body,
                     site_after_body_file(site_config),
                     appendices_after_body_file(input_file, site_config, metadata),
@@ -229,7 +229,7 @@ radix_article <- function(toc = FALSE,
     clean_supporting = self_contained,
     post_knit = post_knit,
     pre_processor = pre_processor,
-    post_processor = radix_article_post_processor(function() encoding, self_contained),
+    post_processor = distill_article_post_processor(function() encoding, self_contained),
     on_exit = on_exit,
     base_format = html_document_base(
       smart = smart,
@@ -248,7 +248,7 @@ radix_article <- function(toc = FALSE,
 
 knitr_preview_hook <- function(options) {
   if (isTRUE(options$preview))
-    options$out.extra <- c(options$out.extra, "data-radix-preview=1")
+    options$out.extra <- c(options$out.extra, "data-distill-preview=1")
   options
 }
 
@@ -288,11 +288,11 @@ validate_pandoc_version <- function() {
   if (!pandoc_available("2.0")) {
     msg <-
       if (!is.null(rstudio_version())) {
-        msg <- paste("Radix requires RStudio v1.2 or greater.",
+        msg <- paste("Distill requires RStudio v1.2 or greater.",
                      "Please update at:",
                      "https://www.rstudio.com/rstudio/download/preview/")
       } else {
-        msg <- paste("Radix requires Pandoc v2.0 or greater",
+        msg <- paste("Distill requires Pandoc v2.0 or greater",
                      "Please update at:",
                       "https://github.com/jgm/pandoc/releases/latest")
       }
@@ -311,8 +311,8 @@ distill_in_header_file <- function() {
 
 distill_in_header_html <- function() {
   distill_html <- html_from_file(
-    system.file("rmarkdown/templates/radix_article/resources/distill.html",
-                package = "radix")
+    system.file("rmarkdown/templates/distill_article/resources/distill.html",
+                package = "distill")
   )
   placeholder_html("distill", distill_html)
 }

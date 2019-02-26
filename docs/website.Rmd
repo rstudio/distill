@@ -1,13 +1,13 @@
 ---
 title: "Creating a Website"
-description: Share a set of Radix articles as a website
+description: Share a set of Distill articles as a website
 ---
 
 ```{r setup, include=FALSE}
 library(knitr)
 ```
 
-This article describes how to create a website that contains a collection of Radix articles. Radix websites include a top level navigation bar that enables readers to discover and browse articles. For example, the documentation pages you are reading now are a Radix website. 
+This article describes how to create a website that contains a collection of Distill articles. Distill websites include a top level navigation bar that enables readers to discover and browse articles. For example, the documentation pages you are reading now are a Distill website. 
 
 Once you've created your website locally, there are a variety of ways available to [publish your site](publish_website.html) to the web. 
 
@@ -15,7 +15,7 @@ Once you've created your website locally, there are a variety of ways available 
 
 ### Creating a website
 
-If you are using RStudio, the easist way to get started is to use the Radix Website option in the RStudio **New Project** dialog:
+If you are using RStudio, the easist way to get started is to use the Distill Website option in the RStudio **New Project** dialog:
 
 ![](images/create-website.png){width=95% .screenshot}
 
@@ -27,10 +27,10 @@ A new [RStudio Project](https://support.rstudio.com/hc/en-us/articles/200526207-
 | `index.Rmd`      | Website home page.  |
 | `about.Rmd`     | Website about page. |
 
-If you are not using RStudio you can also call the Radix `create_website()` function:
+If you are not using RStudio you can also call the Distill `create_website()` function:
 
 ```r
-library(radix)
+library(distill)
 create_website(dir = "my-website", title = "My Website")
 ```
 
@@ -39,7 +39,7 @@ A new website containing Home and About pages will be created within the `my-web
 
 ### Authoring articles
 
-When you use the RStudio **Knit** command on a Radix article within a website, only that article will be rendered and previewed:
+When you use the RStudio **Knit** command on a Distill article within a website, only that article will be rendered and previewed:
 
 ![](images/knit-site-article.png){width=95% .screenshot}
 
@@ -55,7 +55,7 @@ This will build only the specified article (as opposed to all articles in the si
 
 After you've authored the various articles contained within the website you will want to build the entire site before deploying it. 
 
-If your Radix website is contained within an RStudio project you can use the **Build Website** command available in the Build pane to generate the site:
+If your Distill website is contained within an RStudio project you can use the **Build Website** command available in the Build pane to generate the site:
 
 ![](images/build-website.png){width=95% .screenshot}
 
@@ -105,7 +105,7 @@ The `include` and `exclude` fields of **\_site.yml** can be used to override thi
 
 Note that `include` and `exclude` are *not* used to determine which Rmd files are rendered (all of them in the root directory save for those named with the `_` prefix will be rendered).
 
-The R Markdown documentation on [creating websites](https://rmarkdown.rstudio.com/rmarkdown_websites.html) has documentation on  additional available features and configuration options. The remainder of this article describes features that are specific to Radix websites.
+The R Markdown documentation on [creating websites](https://rmarkdown.rstudio.com/rmarkdown_websites.html) has documentation on  additional available features and configuration options. The remainder of this article describes features that are specific to Distill websites.
 
 ## Site navigation
 
@@ -117,8 +117,8 @@ Elements of the site navigation bar are specified within the `navbar` section of
 
 ```markup
 ---
-name: "radix"
-title: "Radix for R Markdown"
+name: "distill"
+title: "Distill for R Markdown"
 navbar:
   logo:
     image: images/logo.png
@@ -140,7 +140,7 @@ navbar:
         - text: "Article Metadata"
           href: metadata.html
     - icon: fab fa-github
-      href: https://github.com/rstudio/radix
+      href: https://github.com/rstudio/distill
 output: distill::distill_article
 ---
 ```
@@ -173,48 +173,48 @@ Software licensed under the [Apache License, v2.0]
 You can use CSS to create an alternate theme for your navigation bar and site footer. Here is the CSS used for the default appearance:
 
 ```css
-.radix-site-nav {
+.distill-site-nav {
   color: rgba(255, 255, 255, 0.8);
   background-color: #455a64;
   font-size: 15px;
   font-weight: 300;
 }
 
-.radix-site-nav a {
+.distill-site-nav a {
   color: inherit;
   text-decoration: none;
 }
 
-.radix-site-nav a:hover {
+.distill-site-nav a:hover {
   color: white;
 }
 
-.radix-site-header {
+.distill-site-header {
 }
 
-.radix-site-footer {
+.distill-site-footer {
 }
 
 @media print {
-  .radix-site-nav {
+  .distill-site-nav {
     display: none;
   }
 }
 ```
 
-The `radix-site-nav` class addresses both the header and footer, whereas the `radix-site-header` and `radix-site-footer` apply (respectively) to just the header and footer.
+The `distill-site-nav` class addresses both the header and footer, whereas the `distill-site-header` and `distill-site-footer` apply (respectively) to just the header and footer.
 
 To override all or part of this CSS, simply include a `styles.css` file in the main site directory and add a reference to it within your site output options. For example: 
 
 **\_site.yml**
 
 ```markup
-name: "radix"
-title: "Radix for R Markdown"
+name: "distill"
+title: "Distill for R Markdown"
 navbar:
   # (navbar definition here)
 output:
-  radix::radix_article:
+  distill::distill_article:
     css: styles.css
 ```
 
@@ -225,20 +225,20 @@ You can add [Google Analytics](https://analytics.google.com/) to your website by
 **\_site.yml**
 
 ```markup
-name: "radix"
-title: "Radix for R Markdown"
-base_url: https://rstudio.github.io/radix
+name: "distill"
+title: "Distill for R Markdown"
+base_url: https://rstudio.github.io/distill
 google_analytics: "UA-77306155-2"
 navbar:
   # (navbar definition here)
-output: radix::radix_article
+output: distill::distill_article
 ```
 
 The Google Analytics tracking code will be automatically included on all pages of your website.
 
 ## Site metadata
 
-Radix articles can include various types of [metadata](metadata.html) to make them easier to index, cite, and share. Metadata included within your `_site.yml` file is conveniently shared across all articles on your site (individual articles can always override any value within their own metadata). 
+Distill articles can include various types of [metadata](metadata.html) to make them easier to index, cite, and share. Metadata included within your `_site.yml` file is conveniently shared across all articles on your site (individual articles can always override any value within their own metadata). 
 
 Several metadata values which you might find useful to define in `_site.yml` are:
 
@@ -256,17 +256,17 @@ Here's a `_site.yml` file that uses all of these fields (save for `license_url` 
 **\_site.yml**
 
 ```markup
-name: "radix"
-title: "Radix for R Markdown"
+name: "distill"
+title: "Distill for R Markdown"
 favicon: images/favicon.png
-base_url: https://rstudio.github.io/radix
-repository_url: https://github.com/rstudio/radix
+base_url: https://rstudio.github.io/distill
+repository_url: https://github.com/rstudio/distill
 creative_commons: CC BY
 twitter:
-  site: "@radixjournal"
+  site: "@distilljournal"
 navbar:
   # (navbar definition here)
-output: radix::radix_article
+output: distill::distill_article
 ```
 
 Be sure to enclose Twitter account names in quotes (this is required because they start with `@`).

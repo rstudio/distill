@@ -117,7 +117,7 @@ write_feed_xml <- function(feed_xml, site_config, collection, articles) {
     add_child(image, "link", text = site_config$base_url)
   }
   add_channel_attribute("copyright")
-  add_child(channel, "generator", text = "Radix")
+  add_child(channel, "generator", text = "Distill")
 
   # last build date is date of most recent article (or now if no articles)
   last_build_date <- NULL

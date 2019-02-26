@@ -1,5 +1,5 @@
 ---
-title: "Radix Basics"
+title: "Distill Basics"
 description: Scientific and technical writing, native to the web
 bibliography: biblio.bib
 ---
@@ -9,7 +9,7 @@ library(knitr)
 ```
 
 
-```{r, child="_common/radix_basics.Rmd"}
+```{r, child="_common/distill_basics.Rmd"}
 ```
 
 

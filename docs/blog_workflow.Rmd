@@ -3,7 +3,7 @@ title: "Blog Post Workflow"
 description: |
  Recommendations on managing blog post drafts and a review of tools available to incorporate posts contributed by outside authors. 
 output:
-  radix::radix_article:
+  distill::distill_article:
     toc: true
 ---
 
@@ -13,7 +13,7 @@ library(knitr)
 
 ## Overview
 
-Radix supports a variety of workflows for blog post authoring. For a blog authored by a single individual, the following simple conventions are typically all that's required:
+Distill supports a variety of workflows for blog post authoring. For a blog authored by a single individual, the following simple conventions are typically all that's required:
 
 1) Author post R Markdown documents within subdirectories of the `_posts` directory.
 
@@ -23,13 +23,13 @@ For more sophisticated requirements, the following workflows are also supported:
 
 1) Authoring posts within their own standalone Git repositories.
 
-2) Importing posts staged elsewhere on the web (e.g. published to RPubs, located in a Git repository, or published within another Radix blog).
+2) Importing posts staged elsewhere on the web (e.g. published to RPubs, located in a Git repository, or published within another Distill blog).
 
-Radix also includes tools for verifying that imported posts are available under an appropriate [Creative Commons](https://creativecommons.org/) license and ensuring that posts syndicated from one blog to another give credit within the Google search index to the originating blog. These tools are described below in the [importing posts] section.
+Distill also includes tools for verifying that imported posts are available under an appropriate [Creative Commons](https://creativecommons.org/) license and ensuring that posts syndicated from one blog to another give credit within the Google search index to the originating blog. These tools are described below in the [importing posts] section.
 
 ## Managing drafts
 
-There are two distinct ways to manage work in progress on a Radix post:
+There are two distinct ways to manage work in progress on a Distill post:
 
 1) Using the `draft` option to prevent the article from being listed in the article index; and 
 2) Working on the post within a Git branch and merging/publishing it via pull request.
@@ -88,7 +88,7 @@ import_post("https://example.com/visualizing-asset-returns.html")
 You can also import a post from a GitHub repository. For example:
 
 ```r
-import_post("https://github.com/jjallaire/radix-article")
+import_post("https://github.com/jjallaire/distill-article")
 ```
 
 Note that importing a post does not require the original R Markdown document used to author the post---you only need access to the published HTML of a post to import it. 
@@ -98,19 +98,19 @@ Note that importing a post does not require the original R Markdown document use
 When you import a post, the date for the post will be automatically set to the current day (the idea being that whenever the post was authored, the day you import it is the day it's been published to your blog). You can modify this behavior using the `date` parameter. For example:
 
 ```r
-import_post("https://github.com/jjallaire/radix-article", 
+import_post("https://github.com/jjallaire/distill-article", 
             date = as.Date("2017-07-12"))
 ```
 
 #### Post slugs
 
-The "slug" for a post determines the URL for the post within your blog. By default, slugs are automatically computed using the date and title of the post. For example, the slug for the example just above would have been `2017-07-12-radix-article`.
+The "slug" for a post determines the URL for the post within your blog. By default, slugs are automatically computed using the date and title of the post. For example, the slug for the example just above would have been `2017-07-12-distill-article`.
 
 You can also override the automatically generated slug entirely using the `slug` parameter. For example:
 
 ```r
-import_post("https://github.com/jjallaire/radix-article", 
-            slug = "an-article-about-radix")
+import_post("https://github.com/jjallaire/distill-article", 
+            slug = "an-article-about-distill")
 ```
 
 
@@ -119,27 +119,27 @@ import_post("https://github.com/jjallaire/radix-article",
 If a post that you have imported is subsequently modified and you want to synchronize to the changes, you can use the `update_post()` post function. For example:
 
 ```r
-update_post("_posts/2018-07-09-radix-article")
+update_post("_posts/2018-07-09-distill-article")
 ```
 
 You can also just use the post slug (rather than including the `_posts` directory prefix):
 
 ```r
-update_post("2018-07-09-radix-article")
+update_post("2018-07-09-distill-article")
 ```
 
 ### Creative Commons
 
-The Radix tools for importing posts make it very easy to aggregate posts published elsewhere on the web into your blog. Note however that you need to ensure that you have appropriate permission to re-publish these posts! 
+The Distill tools for importing posts make it very easy to aggregate posts published elsewhere on the web into your blog. Note however that you need to ensure that you have appropriate permission to re-publish these posts! 
 
-To facilitate this, Radix will scan any imported post for [Creative Commons](https://creativecommons.org/licenses/) copyright metadata, and in the case that none is found confirm that you still want to import the post. Consequently, you should ask that authors writing posts for your blog always include the `creative_commons` field in their post metadata. For example:
+To facilitate this, Distill will scan any imported post for [Creative Commons](https://creativecommons.org/licenses/) copyright metadata, and in the case that none is found confirm that you still want to import the post. Consequently, you should ask that authors writing posts for your blog always include the `creative_commons` field in their post metadata. For example:
 
 ```markup
 ---
-title: "Radix for R Markdown"
+title: "Distill for R Markdown"
 description: | 
   Scientific and technical writing, native to the web
-output: radix::radix_article
+output: distill::distill_article
 creative_commons: CC BY
 ---
 ```
@@ -152,7 +152,7 @@ If you know that you have permission to import and republish a post you can supp
 
 When you specify a `creative_commons` license for a blog post you make it easier for others to re-publish your post, giving you a broader audience for your work. In this case you may also want to ensure that the original URL where your post appeared be the one that appears in search engine results.
 
-To facilitate this, Radix automatically specifies a [canonical url](https://en.wikipedia.org/wiki/Canonical_link_element) for posts published within a blog. That way, when a post is imported into another blog, search indexes still point back to the original article.
+To facilitate this, Distill automatically specifies a [canonical url](https://en.wikipedia.org/wiki/Canonical_link_element) for posts published within a blog. That way, when a post is imported into another blog, search indexes still point back to the original article.
 
 If you prefer to disable this behavior, you can add `canonical: false` to your blog's configuration in `_site.yml`. For example:
 
@@ -172,14 +172,14 @@ While canonical URLs are provided automatically for blog posts, they aren't for 
 
 ```markup
 ---
-title: "Radix for R Markdown"
+title: "Distill for R Markdown"
 description: | 
   Scientific and technical writing, native to the web
 date: May 4, 2018
 author:
   - name: Nora Jones 
     url: https://example.com/norajones
-canonical_url: https://rstudio.github.io/radix
+canonical_url: https://rstudio.github.io/distill
 ---
 ```
 

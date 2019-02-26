@@ -1,24 +1,24 @@
 
 ## Creating an article
 
-Use the **New R Markdown** dialog within RStudio to create a new Radix article:
+Use the **New R Markdown** dialog within RStudio to create a new Distill article:
 
-![](images/new_radix_article.png){width="100%" .screenshot}
+![](images/new_distill_article.png){width="100%" .screenshot}
 
-You can also create a new Radix article from the command line with:
+You can also create a new Distill article from the command line with:
 
 ```r
 library(rmarkdown)
-draft("article.Rmd", "radix_article", package = "radix")
+draft("article.Rmd", "distill_article", package = "distill")
 ```
 
 <div id="front-matter"></div>
 
-Radix articles use `radix::radix_article` as their output format, and typically include title, description, date, author/affiliation, and bibliography entries in their YAML front-matter:
+Distill articles use `distill::distill_article` as their output format, and typically include title, description, date, author/affiliation, and bibliography entries in their YAML front-matter:
 
 ```markup
 ---
-title: "Radix for R Markdown"
+title: "Distill for R Markdown"
 description: | 
   Scientific and technical writing, native to the web
 date: May 4, 2018
@@ -36,7 +36,7 @@ author:
     affiliation: RStudio
     affiliation_url: https://www.rstudio.com
 bibliography: biblio.bib
-output: radix::radix_article
+output: distill::distill_article
 ---
 ```
 
@@ -48,7 +48,7 @@ The `bibliography` field is used to provide a reference to the Bibtex file where
 
 ## Figures
 
-Radix provides a number of options for laying out figures within your article. By default figures span the width of the main article body:
+Distill provides a number of options for laying out figures within your article. By default figures span the width of the main article body:
 
 ![](images/l-body-figure.png){width=100%}
 
@@ -73,11 +73,11 @@ Note that when specifying an alternate `layout` you should also specify an appro
 
 See the documentation on [figure layout](figures.html) for details on additional layout options.
 
-The examples above are based on conventional R plots. Radix articles can also incorporate [diagrams](diagrams.html) and [interactive visualizations](interactivity.html) based on JavaScript and D3.
+The examples above are based on conventional R plots. Distill articles can also incorporate [diagrams](diagrams.html) and [interactive visualizations](interactivity.html) based on JavaScript and D3.
 
 ## Tables
 
-There are a number of options available for HTML display of data frames within Radix articles. Here, we use the `paged_table()` function to display a page-able view of the `mtcars` dataset built in to R:
+There are a number of options available for HTML display of data frames within Distill articles. Here, we use the `paged_table()` function to display a page-able view of the `mtcars` dataset built in to R:
 
 ````clike
 ```{r, layout="l-body-outset"}`r ''`
@@ -172,11 +172,11 @@ You can add a table of contents using the `toc` option and specify the depth of 
 
 ```markup
 ---
-title: "Radix for R Markdown"
+title: "Distill for R Markdown"
 description: | 
   Scientific and technical writing, native to the web
 output:
-  radix::radix_article:
+  distill::distill_article:
     toc: true
     toc_depth: 2
 ---
@@ -186,9 +186,9 @@ If the table of contents depth is not explicitly specified, it defaults to 3 (me
 
 ## Code blocks
 
-Syntax highlighting is provided for knitr code chunks. Note that by default the Radix format does not display the code for chunks that are evaluated to produce output (knitr option `echo = FALSE`). 
+Syntax highlighting is provided for knitr code chunks. Note that by default the Distill format does not display the code for chunks that are evaluated to produce output (knitr option `echo = FALSE`). 
 
-The `echo = FALSE` default reflects the fact that Radix articles are often used to present the results of analyses rather than the underlying code. To display the code that was evaluated to produce output you can set the `echo` chunk option to `TRUE`:
+The `echo = FALSE` default reflects the fact that Distill articles are often used to present the results of analyses rather than the underlying code. To display the code that was evaluated to produce output you can set the `echo` chunk option to `TRUE`:
 
 ````clike
 ```{r, echo=TRUE}`r ''`
@@ -204,7 +204,7 @@ To include code that is only displayed and not evaluated specify the `eval=FALSE
 ```
 ````
 
-There are a number of default values that Radix establishes for knitr chunk options (these defaults also reflect the use case of presenting results/output rather than underlying code):
+There are a number of default values that Distill establishes for knitr chunk options (these defaults also reflect the use case of presenting results/output rather than underlying code):
 
 | Option           |  Value           | Comment                                    |
 |------------------|------------------|------------------------------------------------|
@@ -251,15 +251,9 @@ describing what each author did.
 
 Footnotes and references will be included in the same section, immediately beneath any custom appendices.
 
-## Why Radix?
-
-Why the name Radix? The most common [definition of radix](https://en.oxforddictionaries.com/definition/radix) in the English language comes from Mathematics, where it is used to describe the base of a system of numeration. It is also used to describe the source or origin of something. Both of these usages derive from the Latin meaning of radix, which is literally *root*.
-
-The purpose of scientific communication is to help get to the root of things! Radix provides a set of tools to facilitate clear scientific communication that links richly with other sources of knowledge and insight.
-
 ## Acknowledgments {.appendix}
 
-Radix builds on the work of many individuals and projects. [Shan Carter](https://github.com/shancarter), [Ludwig Schubert](https://github.com/ludwigschubert), and [Christopher Olah](https://github.com/colah) created the Distill web framework. [John MacFarlane](https://github.com/jgm) created the Pandoc universal markup converter. [Davide Cervone](https://github.com/dpvc) and [Volker Sorge](https://github.com/zorkow) created the MathJax library for rendering mathematical notation on the web. [Mike Bostock](https://github.com/mbostock) created the D3 library for producing dynamic, interactive data visualizations for the web. We are grateful for the spirit of generosity that moved these individuals to create high-quality open source software for the benefit of all.
+Distill for R Markdown builds on the work of many individuals and projects. [Shan Carter](https://github.com/shancarter), [Ludwig Schubert](https://github.com/ludwigschubert), and [Christopher Olah](https://github.com/colah) created the Distill web framework. [John MacFarlane](https://github.com/jgm) created the Pandoc universal markup converter. [Davide Cervone](https://github.com/dpvc) and [Volker Sorge](https://github.com/zorkow) created the MathJax library for rendering mathematical notation on the web. [Mike Bostock](https://github.com/mbostock) created the D3 library for producing dynamic, interactive data visualizations for the web. We are grateful for the spirit of generosity that moved these individuals to create high-quality open source software for the benefit of all.
 
 
 

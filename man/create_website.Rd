@@ -3,7 +3,7 @@
 \name{create_website}
 \alias{create_website}
 \alias{create_blog}
-\title{Create a Radix website}
+\title{Create a Distill website}
 \usage{
 create_website(dir, title, gh_pages = FALSE, edit = interactive())
 
@@ -19,7 +19,7 @@ create_blog(dir, title, gh_pages = FALSE, edit = interactive())
 \item{edit}{Open site index file or welcome post in an editor.}
 }
 \description{
-Create a basic skeleton for a Radix website or blog. Use the \code{create_website()}
+Create a basic skeleton for a Distill website or blog. Use the \code{create_website()}
 function for a website and the \code{create_blog()} function for a blog.
 }
 \note{
@@ -28,7 +28,7 @@ interatively if they are not specified).
 }
 \examples{
 \dontrun{
-library(radix)
+library(distill)
 create_website("mysite", "My Site")
 }
 }

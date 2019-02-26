@@ -162,8 +162,8 @@ html_for_articles <- function(articles, caption = NULL, categories = FALSE, subs
 
   # required JS and CSS
   listing_js_css <- html_from_file(
-    system.file("rmarkdown/templates/radix_article/resources/listing.html",
-                 package = "radix")
+    system.file("rmarkdown/templates/distill_article/resources/listing.html",
+                 package = "distill")
   )
 
   # wrap in a div

@@ -1,8 +1,8 @@
-name: "radix"
-title: "Radix for R Markdown"
+name: "distill"
+title: "Distill for R Markdown"
 favicon: images/favicon.png
-base_url: https://rstudio.github.io/radix
-repository_url: https://github.com/rstudio/radix
+base_url: https://rstudio.github.io/distill
+repository_url: https://github.com/rstudio/distill
 creative_commons: CC BY
 output_dir: "."
 navbar:
@@ -12,7 +12,7 @@ navbar:
   right:
     - text: "Authoring"
       menu:
-        - text: "Radix Basics"
+        - text: "Distill Basics"
           href: basics.html
         - text: "Figure Layout"
           href: figures.html
@@ -27,6 +27,9 @@ navbar:
           href: citations.html
         - text: "Article Metadata"
           href: metadata.html
+        - text: "---"
+        - text: "Migrating from Radix"
+          href: migrating.html
     - text: "Websites"
       menu:
         - text: "Creating a Website"
@@ -48,9 +51,9 @@ navbar:
     - text: "News"
       href: news.html
     - icon: fab fa-github
-      href: https://github.com/rstudio/radix
+      href: https://github.com/rstudio/distill
 output:
-  radix::radix_article:
+  distill::distill_article:
     css: styles.css
     toc: true
 

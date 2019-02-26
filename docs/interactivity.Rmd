@@ -4,7 +4,7 @@ description: Enhance communication with interactive visualizations
 preview: images/javascript-d3-preview.png
 ---
 
-There are a variety of ways to add interactive JavaScript and D3 visualizations to your Radix articles, including:
+There are a variety of ways to add interactive JavaScript and D3 visualizations to your Distill articles, including:
 
 - Using pre-built [htmlwidgets](http://www.htmlwidgets.org) that wrap JavaScript visualization libraries like [Leaflet](http://rstudio.github.io/leaflet/), [Plotly](https://plot.ly/r/), [dygraphs](http://rstudio.github.io/dygraphs/), and [threejs](https://bwlewis.github.io/rthreejs/).
 

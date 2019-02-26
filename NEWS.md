@@ -1,5 +1,5 @@
 
-## radix v0.7 (Development)
+## distill v0.7 (Development)
 
 * Update to latest version of Distll template from https://github.com/distillpub/template
 

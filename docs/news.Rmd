@@ -1,7 +1,7 @@
 ---
 title: "Release History"
 output:
-  radix::radix_article:
+  distill::distill_article:
     toc: false
 ---
 

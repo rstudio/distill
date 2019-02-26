@@ -6,7 +6,7 @@
   <meta charset="utf-8"/>
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <meta http-equiv="X-UA-Compatible" content="IE=Edge,chrome=1"/>
-  <meta name="generator" content="radix" />
+  <meta name="generator" content="distill" />
 
   <style type="text/css">
   /* Hide doc at startup (prevent jankiness while JS renders/transforms) */
@@ -19,31 +19,31 @@
  <!--/radix_placeholder_import_source-->
 
   <!--radix_placeholder_meta_tags-->
-  <title>Radix for R Markdown: Publishing Articles</title>
+  <title>Distill for R Markdown: Publishing Articles</title>
   
-  <meta property="description" itemprop="description" content="Sharing Radix articles online"/>
+  <meta property="description" itemprop="description" content="Sharing Distill articles online"/>
   
   <link rel="license" href="https://creativecommons.org/licenses/by/4.0/"/>
   <link rel="icon" type="image/png" href="images/favicon.png"/>
   
   
   <!--  https://developers.facebook.com/docs/sharing/webmasters#markup -->
-  <meta property="og:title" content="Radix for R Markdown: Publishing Articles"/>
+  <meta property="og:title" content="Distill for R Markdown: Publishing Articles"/>
   <meta property="og:type" content="article"/>
-  <meta property="og:description" content="Sharing Radix articles online"/>
+  <meta property="og:description" content="Sharing Distill articles online"/>
   <meta property="og:locale" content="en_US"/>
-  <meta property="og:site_name" content="Radix for R Markdown"/>
+  <meta property="og:site_name" content="Distill for R Markdown"/>
   
   <!--  https://dev.twitter.com/cards/types/summary -->
   <meta property="twitter:card" content="summary"/>
-  <meta property="twitter:title" content="Radix for R Markdown: Publishing Articles"/>
-  <meta property="twitter:description" content="Sharing Radix articles online"/>
+  <meta property="twitter:title" content="Distill for R Markdown: Publishing Articles"/>
+  <meta property="twitter:description" content="Sharing Distill articles online"/>
   
   <!--/radix_placeholder_meta_tags-->
   <!--radix_placeholder_rmarkdown_metadata-->
   
   <script type="text/json" id="radix-rmarkdown-metadata">
-  {"type":"list","attributes":{"names":{"type":"character","attributes":{},"value":["title","description"]}},"value":[{"type":"character","attributes":{},"value":["Publishing Articles"]},{"type":"character","attributes":{},"value":["Sharing Radix articles online"]}]}
+  {"type":"list","attributes":{"names":{"type":"character","attributes":{},"value":["title","description"]}},"value":[{"type":"character","attributes":{},"value":["Publishing Articles"]},{"type":"character","attributes":{},"value":["Sharing Distill articles online"]}]}
   </script>
   <!--/radix_placeholder_rmarkdown_metadata-->
   <!--radix_placeholder_navigation_in_header-->
@@ -77,7 +77,7 @@
       });
   
       // responsive menu
-      $('.radix-site-header').each(function(i, val) {
+      $('.distill-site-header').each(function(i, val) {
         var topnav = $(this);
         var toggle = topnav.find('.nav-toggle');
         toggle.on('click', function() {
@@ -104,85 +104,85 @@
   
   /* Theme (user-documented overrideables for nav appearance) */
   
-  .radix-site-nav {
+  .distill-site-nav {
     color: rgba(255, 255, 255, 0.8);
     background-color: #455a64;
     font-size: 15px;
     font-weight: 300;
   }
   
-  .radix-site-nav a {
+  .distill-site-nav a {
     color: inherit;
     text-decoration: none;
   }
   
-  .radix-site-nav a:hover {
+  .distill-site-nav a:hover {
     color: white;
   }
   
   @media print {
-    .radix-site-nav {
+    .distill-site-nav {
       display: none;
     }
   }
   
-  .radix-site-header {
+  .distill-site-header {
   
   }
   
-  .radix-site-footer {
+  .distill-site-footer {
   
   }
   
   
   /* Site Header */
   
-  .radix-site-header {
+  .distill-site-header {
     width: 100%;
     box-sizing: border-box;
     z-index: 3;
   }
   
-  .radix-site-header .nav-left {
+  .distill-site-header .nav-left {
     display: inline-block;
     margin-left: 8px;
   }
   
   @media screen and (max-width: 768px) {
-    .radix-site-header .nav-left {
+    .distill-site-header .nav-left {
       margin-left: 0;
     }
   }
   
   
-  .radix-site-header .nav-right {
+  .distill-site-header .nav-right {
     float: right;
     margin-right: 8px;
   }
   
-  .radix-site-header a,
-  .radix-site-header .title {
+  .distill-site-header a,
+  .distill-site-header .title {
     display: inline-block;
     text-align: center;
     padding: 14px 10px 14px 10px;
   }
   
-  .radix-site-header .title {
+  .distill-site-header .title {
     font-size: 18px;
   }
   
-  .radix-site-header .logo {
+  .distill-site-header .logo {
     padding: 0;
   }
   
-  .radix-site-header .logo img {
+  .distill-site-header .logo img {
     display: none;
     max-height: 20px;
     width: auto;
     margin-bottom: -4px;
   }
   
-  .radix-site-header .nav-image img {
+  .distill-site-header .nav-image img {
     max-height: 18px;
     width: auto;
     display: inline-block;
@@ -192,22 +192,22 @@
   
   
   @media screen and (min-width: 1000px) {
-    .radix-site-header .logo img {
+    .distill-site-header .logo img {
       display: inline-block;
     }
-    .radix-site-header .nav-left {
+    .distill-site-header .nav-left {
       margin-left: 20px;
     }
-    .radix-site-header .nav-right {
+    .distill-site-header .nav-right {
       margin-right: 20px;
     }
-    .radix-site-header .title {
+    .distill-site-header .title {
       padding-left: 12px;
     }
   }
   
   
-  .radix-site-header .nav-toggle {
+  .distill-site-header .nav-toggle {
     display: none;
   }
   
@@ -289,18 +289,18 @@
   }
   
   @media screen and (max-width: 768px) {
-    .radix-site-header a, .radix-site-header .nav-dropdown  {display: none;}
-    .radix-site-header a.nav-toggle {
+    .distill-site-header a, .distill-site-header .nav-dropdown  {display: none;}
+    .distill-site-header a.nav-toggle {
       float: right;
       display: block;
     }
-    .radix-site-header .title {
+    .distill-site-header .title {
       margin-left: 0;
     }
-    .radix-site-header .nav-right {
+    .distill-site-header .nav-right {
       margin-right: 0;
     }
-    .radix-site-header {
+    .distill-site-header {
       overflow: hidden;
     }
     .nav-right .nav-dropdown-content {
@@ -310,24 +310,24 @@
   
   
   @media screen and (max-width: 768px) {
-    .radix-site-header.responsive {position: relative;}
-    .radix-site-header.responsive a.nav-toggle {
+    .distill-site-header.responsive {position: relative;}
+    .distill-site-header.responsive a.nav-toggle {
       position: absolute;
       right: 0;
       top: 0;
     }
-    .radix-site-header.responsive a,
-    .radix-site-header.responsive .nav-dropdown {
+    .distill-site-header.responsive a,
+    .distill-site-header.responsive .nav-dropdown {
       display: block;
       text-align: left;
     }
-    .radix-site-header.responsive .nav-left,
-    .radix-site-header.responsive .nav-right {
+    .distill-site-header.responsive .nav-left,
+    .distill-site-header.responsive .nav-right {
       width: 100%;
     }
-    .radix-site-header.responsive .nav-dropdown {float: none;}
-    .radix-site-header.responsive .nav-dropdown-content {position: relative;}
-    .radix-site-header.responsive .nav-dropdown .nav-dropbtn {
+    .distill-site-header.responsive .nav-dropdown {float: none;}
+    .distill-site-header.responsive .nav-dropdown-content {position: relative;}
+    .distill-site-header.responsive .nav-dropdown .nav-dropbtn {
       display: block;
       width: 100%;
       text-align: left;
@@ -336,7 +336,7 @@
   
   /* Site Footer */
   
-  .radix-site-footer {
+  .distill-site-footer {
     width: 100%;
     overflow: hidden;
     box-sizing: border-box;
@@ -1219,7 +1219,7 @@
   
     // get rid of index.html references in header
     if (window.location.protocol !== "file:") {
-      $('.radix-site-header a[href]').each(function(i,val) {
+      $('.distill-site-header a[href]').each(function(i,val) {
         $(this).attr('href', $(this).attr('href').replace("index.html", "./"));
       });
     }
@@ -1296,18 +1296,18 @@
 <!--radix_placeholder_front_matter-->
 
 <script id="distill-front-matter" type="text/json">
-{"title":"Publishing Articles","description":"Sharing Radix articles online","authors":[]}
+{"title":"Publishing Articles","description":"Sharing Distill articles online","authors":[]}
 </script>
 
 <!--/radix_placeholder_front_matter-->
 <!--radix_placeholder_navigation_before_body-->
 <header class="header header--fixed" role="banner">
-<nav class="radix-site-nav radix-site-header">
+<nav class="distill-site-nav distill-site-header">
 <div class="nav-left">
 <a class="logo" href="https://www.rstudio.com">
 <img src="images/logo.png"/>
 </a>
-<a href="index.html" class="title">Radix for R Markdown</a>
+<a href="index.html" class="title">Distill for R Markdown</a>
 </div>
 <div class="nav-right">
 <div class="nav-dropdown">
@@ -1317,7 +1317,7 @@ Authoring
 <span class="down-arrow">&#x25BE;</span>
 </button>
 <div class="nav-dropdown-content">
-<a href="basics.html">Radix Basics</a>
+<a href="basics.html">Distill Basics</a>
 <a href="figures.html">Figure Layout</a>
 <a href="tables.html">Tables</a>
 <a href="diagrams.html">Diagrams</a>
@@ -1325,6 +1325,8 @@ Authoring
 <hr/>
 <a href="citations.html">Citations</a>
 <a href="metadata.html">Article Metadata</a>
+<hr/>
+<a href="migrating.html">Migrating from Radix</a>
 </div>
 </div>
 <div class="nav-dropdown">
@@ -1354,7 +1356,7 @@ Publishing
 </div>
 </div>
 <a href="news.html">News</a>
-<a href="https://github.com/rstudio/radix">
+<a href="https://github.com/rstudio/distill">
 <i class="fab fa-github"></i>
 </a>
 <a href="javascript:void(0);" class="nav-toggle">&#9776;</a>
@@ -1367,7 +1369,7 @@ Publishing
 
 <div class="d-title">
 <h1>Publishing Articles</h1>
-<p>Sharing Radix articles online</p>
+<p>Sharing Distill articles online</p>
 </div>
 
 
@@ -1382,16 +1384,16 @@ Publishing
 </ul>
 </nav>
 <hr class="d-toc-separator"/>
-<p>This article covers the various ways you can publish Radix articles, including:</p>
+<p>This article covers the various ways you can publish Distill articles, including:</p>
 <ul>
 <li><p>Sharing a standalone HTML file using E-mail, Dropbox, etc.</p></li>
 <li><p>Publishing to <a href="#rpubs-and-rstudio-connect">RPubs</a> or <a href="#rpubs-and-rstudio-connect">RStudio Connect</a>.</p></li>
 <li><p>Using <a href="#github-pages">GitHub Pages</a> to host your article on GitHub</p></li>
 </ul>
-<p>Note that it’s also possible to publish collections of Radix articles as a website (see the article on <a href="publish_website.html">publishing websites</a> for additional details).</p>
+<p>Note that it’s also possible to publish collections of Distill articles as a website (see the article on <a href="publish_website.html">publishing websites</a> for additional details).</p>
 <h2 id="standalone-html">Standalone HTML</h2>
-<p>When you render a Radix article using R Markdown, all of the content required to render the article (images generated by R plots, required CSS and JavaScript, etc.) are bundled into a single HTML file.</p>
-<p>Often the simplest way to share a Radix article is to share this HTML file using the same means you use to share other document types like spreadsheets, presentations, and PDFs. You can send the article as an E-mail attachment or uploading it to Dropbox or any other file sharing service.</p>
+<p>When you render a Distill article using R Markdown, all of the content required to render the article (images generated by R plots, required CSS and JavaScript, etc.) are bundled into a single HTML file.</p>
+<p>Often the simplest way to share a Distiill article is to share this HTML file using the same means you use to share other document types like spreadsheets, presentations, and PDFs. You can send the article as an E-mail attachment or uploading it to Dropbox or any other file sharing service.</p>
 <p>This type of sharing is suitable for private communications to small groups. If you want to make your article available more broadly the following sections cover various ways to do that.</p>
 <h2 id="rpubs-rstudio-connect">RPubs &amp; RStudio Connect</h2>
 <p><a href="https://rpubs.com">RPubs</a> is a free service from RStudio for sharing documents on the web. <a href="https://www.rstudio.com/products/connect/">RStudio Connect</a> is a server product from RStudio for secure sharing of applications, reports, and plots.</p>
@@ -1400,8 +1402,8 @@ Publishing
 <p>Note that all documents published to RPubs are publicly visible, so you should only publish content you want to share publicly.</p>
 <p>Unlike RPubs, RStudio Connect is a server that you run inside an organization, so is suitable for publishing content that you only want visible within your organization’s network.</p>
 <h2 id="github-pages">GitHub Pages</h2>
-<p><a href="https://pages.github.com/">GitHub Pages</a> is a service that lets you publish a website from any GitHub repository. While the service supports publishing full websites, it’s also a perfectly suitable place to publish a single Radix article.</p>
-<p>Here are the steps required to publish a Radix article to GitHub Pages:</p>
+<p><a href="https://pages.github.com/">GitHub Pages</a> is a service that lets you publish a website from any GitHub repository. While the service supports publishing full websites, it’s also a perfectly suitable place to publish a single Distill article.</p>
+<p>Here are the steps required to publish a Distill article to GitHub Pages:</p>
 <ol type="1">
 <li><p>Create a new Git repository that will be used to host your article.</p></li>
 <li><p>Configure your repository to publish the contents of the <code>master</code> branch (you can do from the <em>Settings</em> page for the repository):</p>
@@ -1409,23 +1411,23 @@ Publishing
 <li><p>Create a file named <code>.nojekyll</code> in your repository (this is required to disable some processing of HTML files that GitHub does by default). You can do this with the following code:</p>
 <pre class="r"><code>
 file.create(&quot;.nojekyll&quot;)</code></pre></li>
-<li><p>Create a Radix article named <code>index.Rmd</code> within the repository (using this name will allow your article to be served as the default web page for the repository).</p></li>
+<li><p>Create a Distill article named <code>index.Rmd</code> within the repository (using this name will allow your article to be served as the default web page for the repository).</p></li>
 <li><p>Add appropriate metadata to the article. The article should at a minimum include <code>title</code> and <code>description</code> fields, and should also specify <code>self_contained: false</code> (this will make the article load faster and will enable you to add a <a href="metadata.html#preview-images">preview image</a> for sharing the article on Slack, Twitter, etc.):</p>
 <pre class="markup"><code>
 ---
-title: &quot;Radix for R Markdown&quot;
+title: &quot;Distill for R Markdown&quot;
 description: |
   Scientific and technical writing, native to the web
 output:
-  radix::radix_article:
+  distill::distill_article:
     self_contained: false
 ---</code></pre></li>
 <li><p>Write and render your article using R Markdown.</p></li>
 <li><p>Push the article (including the HTML file generated when you rendered it) to GitHub. Your article is now published!</p></li>
 </ol>
-<p>GitHub Pages are served on the <code>github.io</code> domain (with your GitHub account as a sub-domain). For example, if your GitHub username is <code>jsmith</code> and your repository is named <code>radix-article</code> then the article will be available at <a href="https://jsmith.github.io/radix-article" class="uri">https://jsmith.github.io/radix-article</a>.</p>
+<p>GitHub Pages are served on the <code>github.io</code> domain (with your GitHub account as a sub-domain). For example, if your GitHub username is <code>jsmith</code> and your repository is named <code>distill-article</code> then the article will be available at <a href="https://jsmith.github.io/distill-article" class="uri">https://jsmith.github.io/distill-article</a>.</p>
 <h2 id="other-services">Other services</h2>
-<p>Note that any web server or web host capable of hosting a static website can equally well host a single Radix article. See the article on publishing Radix websites for details on publishing articles on a variety of other services including <a href="publish_website.html#netlify">Netlify</a>, <a href="publish_website.html#firebase">Firebase</a>, <a href="publish_website.html#site44">Site44</a>, and <a href="publish_website.html#amazon-s3">Amazon S3</a>.</p>
+<p>Note that any web server or web host capable of hosting a static website can equally well host a single Distill article. See the article on publishing Distill websites for details on publishing articles on a variety of other services including <a href="publish_website.html#netlify">Netlify</a>, <a href="publish_website.html#firebase">Firebase</a>, <a href="publish_website.html#site44">Site44</a>, and <a href="publish_website.html#amazon-s3">Amazon S3</a>.</p>
 <!--radix_placeholder_article_footer-->
 <!--/radix_placeholder_article_footer-->
 </div>
@@ -1439,13 +1441,13 @@ output:
 <!--radix_placeholder_appendices-->
 <div class="appendix-bottom">
 <h3 id="updates-and-corrections">Corrections</h3>
-<p>If you see mistakes or want to suggest changes, please <a href="https://github.com/rstudio/radix/issues/new">create an issue</a> on the source repository.</p>
+<p>If you see mistakes or want to suggest changes, please <a href="https://github.com/rstudio/distill/issues/new">create an issue</a> on the source repository.</p>
 <h3 id="reuse">Reuse</h3>
-<p>Text and figures are licensed under Creative Commons Attribution <a rel="license" href="https://creativecommons.org/licenses/by/4.0/">CC BY 4.0</a>. Source code is available at <a href="https://github.com/rstudio/radix">https://github.com/rstudio/radix</a>, unless otherwise noted. The figures that have been reused from other sources don't fall under this license and can be recognized by a note in their caption: "Figure from ...".</p>
+<p>Text and figures are licensed under Creative Commons Attribution <a rel="license" href="https://creativecommons.org/licenses/by/4.0/">CC BY 4.0</a>. Source code is available at <a href="https://github.com/rstudio/distill">https://github.com/rstudio/distill</a>, unless otherwise noted. The figures that have been reused from other sources don't fall under this license and can be recognized by a note in their caption: "Figure from ...".</p>
 </div>
 <!--/radix_placeholder_appendices-->
 <!--radix_placeholder_navigation_after_body-->
-<div class="radix-site-nav radix-site-footer">
+<div class="distill-site-nav distill-site-footer">
 <p>© Copyright 2018 <a href="https://github.com/distillpub/template/blob/master/AUTHORS">The Distill Template Authors</a> and <a href="https://www.rstudio.com">RStudio, Inc</a>.</p>
 <p>Software licensed under the <a href="https://www.apache.org/licenses/LICENSE-2.0">Apache License, v2.0</a>.</p>
 </div>

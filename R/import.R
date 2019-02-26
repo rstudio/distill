@@ -52,7 +52,7 @@ import_article <- function(url, collection, slug = "auto",
   # determine site_dir (must call from within a site)
   site_dir <- find_site_dir(".")
   if (is.null(site_dir))
-    stop("You must call import from within a Radix website")
+    stop("You must call import from within a Distill website")
 
   # more discovery
   site_config <- site_config(site_dir)
@@ -190,7 +190,7 @@ download_article <- function(url, download_url, article_tmp, metadata) {
 
   # if manifest is NULL then this is a website page
   if (is.null(manifest)) {
-    stop("Unable to import article (this article is a page within a Radix website ",
+    stop("Unable to import article (this article is a page within a Distill website ",
          "rather than a standalone article", call. = FALSE)
   }
 
@@ -266,7 +266,7 @@ update_article <- function(collection, slug, view = interactive()) {
   # determine site_dir (must call from within a site)
   site_dir <- find_site_dir(".")
   if (is.null(site_dir))
-    stop("You must call update from within a Radix website")
+    stop("You must call update from within a Distill website")
 
   # if the slug is an existing directory then just it's base name
   if (dir_exists(slug))
@@ -370,7 +370,7 @@ resolve_github_url <- function(url, article_tmp) {
     if (length(html_files) == 0)
       stop("No HTML files were found in the root of the specified GitHub repo")
 
-    # look for a radix article
+    # look for an article
     for (html_file in html_files) {
       # form the raw url
       url <- sprintf("https://raw.githubusercontent.com/%s/%s/master/%s",
@@ -389,7 +389,7 @@ resolve_github_url <- function(url, article_tmp) {
     }
 
     # if we got this far without finding an article there is no article
-    stop("No HTML files with output type radix::radix_article found in GitHub repo")
+    stop("No HTML files with output type distill::distill_article found in GitHub repo")
 
   } else {
     NULL

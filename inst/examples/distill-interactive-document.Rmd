@@ -1,7 +1,7 @@
 ---
-title: "Interactive Radix with Shiny"
+title: "Interactive Distill with Shiny"
 runtime: shiny_prerendered
-output: radix::radix_article
+output: distill::distill_article
 ---
 
 You can embed Shiny inputs and outputs in your document. Outputs are automatically updated whenever inputs change.  This demonstrates how a standard R plot can be made interactive by wrapping it in the Shiny `renderPlot` function. The `selectInput` and `sliderInput` functions create the input widgets used to drive the plot. The `plotOutput` function indicates where to include the plot.
