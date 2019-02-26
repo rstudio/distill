@@ -152,10 +152,6 @@ Slack uses Open Graph to extract and display the title, description, and a [prev
 
 [Twitter Cards](https://developer.twitter.com/en/docs/tweets/optimize-with-cards/overview/abouts-cards) are a way of enhancing the appearance of links to your article on Twitter. When a link to your article is included in a Tweet, Twitter automatically crawls your site to fetch any available Twitter Card metadata.
 
-For example, here's what happens when you include a link to <https://rstudio.github.io/distill/interactivity.html> within a tweet:
-
-![](images/twitter-card-screenshot.png){width=95%}
-
 See the section on [preview images] for additional details on providing an image for your article that will be included on Twitter Cards.
 
 There are two additional fields you can include that provide attribution for your link to the Twitter account of a website and/or creator of the article. This attribution is specified via the `twitter:site` and `twitter:creator` fields. 
