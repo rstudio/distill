@@ -6,7 +6,7 @@
   <meta charset="utf-8"/>
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <meta http-equiv="X-UA-Compatible" content="IE=Edge,chrome=1"/>
-  <meta name="generator" content="radix" />
+  <meta name="generator" content="distill" />
 
   <style type="text/css">
   /* Hide doc at startup (prevent jankiness while JS renders/transforms) */
@@ -19,31 +19,31 @@
  <!--/radix_placeholder_import_source-->
 
   <!--radix_placeholder_meta_tags-->
-  <title>Radix for R Markdown: Creating a Blog</title>
+  <title>Distill for R Markdown: Creating a Blog</title>
   
-  <meta property="description" itemprop="description" content="Create a blog to publish a collection of Radix articles"/>
+  <meta property="description" itemprop="description" content="Create a blog to publish a collection of Distill articles"/>
   
   <link rel="license" href="https://creativecommons.org/licenses/by/4.0/"/>
   <link rel="icon" type="image/png" href="images/favicon.png"/>
   
   
   <!--  https://developers.facebook.com/docs/sharing/webmasters#markup -->
-  <meta property="og:title" content="Radix for R Markdown: Creating a Blog"/>
+  <meta property="og:title" content="Distill for R Markdown: Creating a Blog"/>
   <meta property="og:type" content="article"/>
-  <meta property="og:description" content="Create a blog to publish a collection of Radix articles"/>
+  <meta property="og:description" content="Create a blog to publish a collection of Distill articles"/>
   <meta property="og:locale" content="en_US"/>
-  <meta property="og:site_name" content="Radix for R Markdown"/>
+  <meta property="og:site_name" content="Distill for R Markdown"/>
   
   <!--  https://dev.twitter.com/cards/types/summary -->
   <meta property="twitter:card" content="summary"/>
-  <meta property="twitter:title" content="Radix for R Markdown: Creating a Blog"/>
-  <meta property="twitter:description" content="Create a blog to publish a collection of Radix articles"/>
+  <meta property="twitter:title" content="Distill for R Markdown: Creating a Blog"/>
+  <meta property="twitter:description" content="Create a blog to publish a collection of Distill articles"/>
   
   <!--/radix_placeholder_meta_tags-->
   <!--radix_placeholder_rmarkdown_metadata-->
   
   <script type="text/json" id="radix-rmarkdown-metadata">
-  {"type":"list","attributes":{"names":{"type":"character","attributes":{},"value":["title","description"]}},"value":[{"type":"character","attributes":{},"value":["Creating a Blog"]},{"type":"character","attributes":{},"value":["Create a blog to publish a collection of Radix articles"]}]}
+  {"type":"list","attributes":{"names":{"type":"character","attributes":{},"value":["title","description"]}},"value":[{"type":"character","attributes":{},"value":["Creating a Blog"]},{"type":"character","attributes":{},"value":["Create a blog to publish a collection of Distill articles"]}]}
   </script>
   <!--/radix_placeholder_rmarkdown_metadata-->
   <!--radix_placeholder_navigation_in_header-->
@@ -77,7 +77,7 @@
       });
   
       // responsive menu
-      $('.radix-site-header').each(function(i, val) {
+      $('.distill-site-header').each(function(i, val) {
         var topnav = $(this);
         var toggle = topnav.find('.nav-toggle');
         toggle.on('click', function() {
@@ -104,85 +104,85 @@
   
   /* Theme (user-documented overrideables for nav appearance) */
   
-  .radix-site-nav {
+  .distill-site-nav {
     color: rgba(255, 255, 255, 0.8);
     background-color: #455a64;
     font-size: 15px;
     font-weight: 300;
   }
   
-  .radix-site-nav a {
+  .distill-site-nav a {
     color: inherit;
     text-decoration: none;
   }
   
-  .radix-site-nav a:hover {
+  .distill-site-nav a:hover {
     color: white;
   }
   
   @media print {
-    .radix-site-nav {
+    .distill-site-nav {
       display: none;
     }
   }
   
-  .radix-site-header {
+  .distill-site-header {
   
   }
   
-  .radix-site-footer {
+  .distill-site-footer {
   
   }
   
   
   /* Site Header */
   
-  .radix-site-header {
+  .distill-site-header {
     width: 100%;
     box-sizing: border-box;
     z-index: 3;
   }
   
-  .radix-site-header .nav-left {
+  .distill-site-header .nav-left {
     display: inline-block;
     margin-left: 8px;
   }
   
   @media screen and (max-width: 768px) {
-    .radix-site-header .nav-left {
+    .distill-site-header .nav-left {
       margin-left: 0;
     }
   }
   
   
-  .radix-site-header .nav-right {
+  .distill-site-header .nav-right {
     float: right;
     margin-right: 8px;
   }
   
-  .radix-site-header a,
-  .radix-site-header .title {
+  .distill-site-header a,
+  .distill-site-header .title {
     display: inline-block;
     text-align: center;
     padding: 14px 10px 14px 10px;
   }
   
-  .radix-site-header .title {
+  .distill-site-header .title {
     font-size: 18px;
   }
   
-  .radix-site-header .logo {
+  .distill-site-header .logo {
     padding: 0;
   }
   
-  .radix-site-header .logo img {
+  .distill-site-header .logo img {
     display: none;
     max-height: 20px;
     width: auto;
     margin-bottom: -4px;
   }
   
-  .radix-site-header .nav-image img {
+  .distill-site-header .nav-image img {
     max-height: 18px;
     width: auto;
     display: inline-block;
@@ -192,22 +192,22 @@
   
   
   @media screen and (min-width: 1000px) {
-    .radix-site-header .logo img {
+    .distill-site-header .logo img {
       display: inline-block;
     }
-    .radix-site-header .nav-left {
+    .distill-site-header .nav-left {
       margin-left: 20px;
     }
-    .radix-site-header .nav-right {
+    .distill-site-header .nav-right {
       margin-right: 20px;
     }
-    .radix-site-header .title {
+    .distill-site-header .title {
       padding-left: 12px;
     }
   }
   
   
-  .radix-site-header .nav-toggle {
+  .distill-site-header .nav-toggle {
     display: none;
   }
   
@@ -289,18 +289,18 @@
   }
   
   @media screen and (max-width: 768px) {
-    .radix-site-header a, .radix-site-header .nav-dropdown  {display: none;}
-    .radix-site-header a.nav-toggle {
+    .distill-site-header a, .distill-site-header .nav-dropdown  {display: none;}
+    .distill-site-header a.nav-toggle {
       float: right;
       display: block;
     }
-    .radix-site-header .title {
+    .distill-site-header .title {
       margin-left: 0;
     }
-    .radix-site-header .nav-right {
+    .distill-site-header .nav-right {
       margin-right: 0;
     }
-    .radix-site-header {
+    .distill-site-header {
       overflow: hidden;
     }
     .nav-right .nav-dropdown-content {
@@ -310,24 +310,24 @@
   
   
   @media screen and (max-width: 768px) {
-    .radix-site-header.responsive {position: relative;}
-    .radix-site-header.responsive a.nav-toggle {
+    .distill-site-header.responsive {position: relative;}
+    .distill-site-header.responsive a.nav-toggle {
       position: absolute;
       right: 0;
       top: 0;
     }
-    .radix-site-header.responsive a,
-    .radix-site-header.responsive .nav-dropdown {
+    .distill-site-header.responsive a,
+    .distill-site-header.responsive .nav-dropdown {
       display: block;
       text-align: left;
     }
-    .radix-site-header.responsive .nav-left,
-    .radix-site-header.responsive .nav-right {
+    .distill-site-header.responsive .nav-left,
+    .distill-site-header.responsive .nav-right {
       width: 100%;
     }
-    .radix-site-header.responsive .nav-dropdown {float: none;}
-    .radix-site-header.responsive .nav-dropdown-content {position: relative;}
-    .radix-site-header.responsive .nav-dropdown .nav-dropbtn {
+    .distill-site-header.responsive .nav-dropdown {float: none;}
+    .distill-site-header.responsive .nav-dropdown-content {position: relative;}
+    .distill-site-header.responsive .nav-dropdown .nav-dropbtn {
       display: block;
       width: 100%;
       text-align: left;
@@ -336,7 +336,7 @@
   
   /* Site Footer */
   
-  .radix-site-footer {
+  .distill-site-footer {
     width: 100%;
     overflow: hidden;
     box-sizing: border-box;
@@ -1219,7 +1219,7 @@
   
     // get rid of index.html references in header
     if (window.location.protocol !== "file:") {
-      $('.radix-site-header a[href]').each(function(i,val) {
+      $('.distill-site-header a[href]').each(function(i,val) {
         $(this).attr('href', $(this).attr('href').replace("index.html", "./"));
       });
     }
@@ -1296,18 +1296,18 @@
 <!--radix_placeholder_front_matter-->
 
 <script id="distill-front-matter" type="text/json">
-{"title":"Creating a Blog","description":"Create a blog to publish a collection of Radix articles","authors":[]}
+{"title":"Creating a Blog","description":"Create a blog to publish a collection of Distill articles","authors":[]}
 </script>
 
 <!--/radix_placeholder_front_matter-->
 <!--radix_placeholder_navigation_before_body-->
 <header class="header header--fixed" role="banner">
-<nav class="radix-site-nav radix-site-header">
+<nav class="distill-site-nav distill-site-header">
 <div class="nav-left">
 <a class="logo" href="https://www.rstudio.com">
 <img src="images/logo.png"/>
 </a>
-<a href="index.html" class="title">Radix for R Markdown</a>
+<a href="index.html" class="title">Distill for R Markdown</a>
 </div>
 <div class="nav-right">
 <div class="nav-dropdown">
@@ -1317,7 +1317,7 @@ Authoring
 <span class="down-arrow">&#x25BE;</span>
 </button>
 <div class="nav-dropdown-content">
-<a href="basics.html">Radix Basics</a>
+<a href="basics.html">Distill Basics</a>
 <a href="figures.html">Figure Layout</a>
 <a href="tables.html">Tables</a>
 <a href="diagrams.html">Diagrams</a>
@@ -1325,6 +1325,8 @@ Authoring
 <hr/>
 <a href="citations.html">Citations</a>
 <a href="metadata.html">Article Metadata</a>
+<hr/>
+<a href="migrating.html">Migrating from Radix</a>
 </div>
 </div>
 <div class="nav-dropdown">
@@ -1354,7 +1356,7 @@ Publishing
 </div>
 </div>
 <a href="news.html">News</a>
-<a href="https://github.com/rstudio/radix">
+<a href="https://github.com/rstudio/distill">
 <i class="fab fa-github"></i>
 </a>
 <a href="javascript:void(0);" class="nav-toggle">&#9776;</a>
@@ -1367,7 +1369,7 @@ Publishing
 
 <div class="d-title">
 <h1>Creating a Blog</h1>
-<p>Create a blog to publish a collection of Radix articles</p>
+<p>Create a blog to publish a collection of Distill articles</p>
 </div>
 
 
@@ -1396,10 +1398,10 @@ Publishing
 </ul>
 </nav>
 <hr class="d-toc-separator"/>
-<p>Radix websites include integrated support for blogging. To create a blog you author a collection of posts (located in the <code>_posts</code> subdirectory of your website) and then dedicate a page (usually the website homepage) to a listing of all of your posts.</p>
+<p>Distill for R Markdown websites include integrated support for blogging. To create a blog you author a collection of posts (located in the <code>_posts</code> subdirectory of your website) and then dedicate a page (usually the website homepage) to a listing of all of your posts.</p>
 <h2 id="getting-started">Getting started</h2>
 <h3 id="creating-a-blog">Creating a blog</h3>
-<p>If you are using RStudio, the easiest way to get started is to use the Radix Blog option in the RStudio <strong>New Project</strong> dialog:</p>
+<p>If you are using RStudio, the easiest way to get started is to use the Distill Blog option in the RStudio <strong>New Project</strong> dialog:</p>
 <p><img src="images/create-blog.png" class="screenshot" style="width:95.0%" /></p>
 <p>A new <a href="https://support.rstudio.com/hc/en-us/articles/200526207-Using-Projects">RStudio Project</a> for the blog will be created and opened. The blog will include the following files:</p>
 <table>
@@ -1429,9 +1431,9 @@ Publishing
 </tbody>
 </table>
 <p>Note that the <code>welcome</code> post is just there to provide some skeletal content for the blog – feel free to delete it and add your own initial post to the blog as described in <a href="#creating-a-post">creating a post</a>.</p>
-<p>If you are not using RStudio you can also call the Radix <code>create_blog()</code> function:</p>
+<p>If you are not using RStudio you can also call the Distill <code>create_blog()</code> function:</p>
 <pre class="r"><code>
-library(radix)
+library(distill)
 create_blog(dir = &quot;my-blog&quot;, title = &quot;My Blog&quot;)</code></pre>
 <p>The basic scaffolding for a blog and an initial welcome post will be created within the <code>my-blog</code> sub-directory.</p>
 <h3 id="configuration">Configuration</h3>
@@ -1460,14 +1462,14 @@ navbar:
       href: contributors.html
     - icon: fa fa-rss
       href: index.xml
-output: radix::radix_article</code></pre>
+output: distill::distill_article</code></pre>
 <p>Note that we’ve also added a feed icon to the right side of the menu bar which makes it easy to discover and browse the RSS feed for the blog.</p>
 <h3 id="creating-a-post">Creating a post</h3>
 <p>The easiest way to start authoring a new post is to call the <code>create_post()</code> function from within your blog’s directory. For example:</p>
 <pre class="r"><code>
-library(radix)
+library(distill)
 create_post(&quot;The Sharpe Ratio&quot;)</code></pre>
-<p>This will create a sub-directory for your post within the <code>_posts</code> directory, add a stub Radix article, and open the article for editing.</p>
+<p>This will create a sub-directory for your post within the <code>_posts</code> directory, add a stub Distill article, and open the article for editing.</p>
 <p>If you want your post to start out as a draft (i.e. not be included within the listing of all posts) then you can add <code>draft = TRUE</code>. For example:</p>
 <pre class="r"><code>
 create_post(&quot;The Sharpe Ratio&quot;, draft = TRUE)</code></pre>
@@ -1479,7 +1481,7 @@ create_post(&quot;The Sharpe Ratio&quot;, draft = TRUE)</code></pre>
 <pre class="markup"><code>
 ---
 title: &quot;Reproducible Finance with R&quot;
-site: radix::radix_website
+site: distill::distill_website
 listing: posts
 ---</code></pre>
 <p>In our <a href="https://beta.rstudioconnect.com/content/3776/">example blog</a> (which will be described in more detail below) this results in the following listing:</p>
@@ -1521,7 +1523,7 @@ navbar:
   right:
     - icon: fa fa-rss
       href: index.xml
-output: radix::radix_article</code></pre>
+output: distill::distill_article</code></pre>
 <p>Note that the <code>description</code> and <code>base_url</code> fields are both required to generate an RSS feed.</p>
 <p>By default the most recent 20 articles will be included in the RSS feed. You can change this by specifying <code>feed_items_max</code> within the collection configuration in <code>_site.yml</code> (navbar and output format fields omitted for brevity):</p>
 <p><strong>_site.yml</strong></p>
@@ -1549,7 +1551,7 @@ description: |
 draft: true
 ---</code></pre>
 <p>When you are ready to publish the post, either remove the <code>draft</code> option or set it to <code>false</code>, then build the website.</p>
-<p>Beyond support for drafts, Radix has a number of additional features to accommodate a variety of post authoring and contribution workflows, including importing posts published elsewhere on the web (e.g. on RPubs, in a Git repository, or on another blog). The article on <a href="blog_workflow.html">blog post workflow</a> describes these options in more detail.</p>
+<p>Beyond support for drafts, Distill has a number of additional features to accommodate a variety of post authoring and contribution workflows, including importing posts published elsewhere on the web (e.g. on RPubs, in a Git repository, or on another blog). The article on <a href="blog_workflow.html">blog post workflow</a> describes these options in more detail.</p>
 <h2 id="next-steps">Next steps</h2>
 <h3 id="comments-and-sharing">Comments and sharing</h3>
 <p>Readers will likely want to comment on and share articles they read on your blog. You can enable support for <a href="https://disqus.com/">Disqus comments</a> and sharing links for Twitter, LinkedIn, and other services by adding options to the <code>collection:posts</code> section of <code>_site.yml</code>.</p>
@@ -1676,7 +1678,7 @@ resources:
 ---</code></pre>
 <h2 id="publishing-a-blog">Publishing a blog</h2>
 <p>After you’ve authored one or more posts you will want to build the entire site before publishing it.</p>
-<p>If your Radix website is contained within an RStudio project you can use the <strong>Build Website</strong> command available in the Build pane to generate the site:</p>
+<p>If your Distill website is contained within an RStudio project you can use the <strong>Build Website</strong> command available in the Build pane to generate the site:</p>
 <p><img src="images/build-website.png" class="screenshot" style="width:95.0%" /></p>
 <p>To build a website from the command line, use the <code>rmarkdown::render_site()</code> function:</p>
 <pre class="r"><code>
@@ -1685,7 +1687,7 @@ render_site()</code></pre>
 <p>There are a variety of options available for making your site available to others, see the article on <a href="publish_website.html">website publishing</a> for details.</p>
 <h2 id="examples">Examples</h2>
 <ul>
-<li><p>The TensorFlow for R blog uses Radix: <a href="https://blogs.rstudio.com/tensorflow/" class="uri">https://blogs.rstudio.com/tensorflow/</a></p>
+<li><p>The TensorFlow for R blog uses Distill for R Markdown: <a href="https://blogs.rstudio.com/tensorflow/" class="uri">https://blogs.rstudio.com/tensorflow/</a></p>
 <p>The source code for the TensorFlow for R blog can be found here: <a href="https://github.com/rstudio/tensorflow-blog" class="uri">https://github.com/rstudio/tensorflow-blog</a></p></li>
 <li><p>An example which reproduces several posts from the Reproducible Finance with R series on the R Views blog can be found here: <a href="https://beta.rstudioconnect.com/content/3776/" class="uri">https://beta.rstudioconnect.com/content/3776/</a></p>
 <p>The source code for the example can be found here: <a href="https://github.com/jjallaire/reproducible-finance-with-r" class="uri">https://github.com/jjallaire/reproducible-finance-with-r</a></p></li>
@@ -1703,13 +1705,13 @@ render_site()</code></pre>
 <!--radix_placeholder_appendices-->
 <div class="appendix-bottom">
 <h3 id="updates-and-corrections">Corrections</h3>
-<p>If you see mistakes or want to suggest changes, please <a href="https://github.com/rstudio/radix/issues/new">create an issue</a> on the source repository.</p>
+<p>If you see mistakes or want to suggest changes, please <a href="https://github.com/rstudio/distill/issues/new">create an issue</a> on the source repository.</p>
 <h3 id="reuse">Reuse</h3>
-<p>Text and figures are licensed under Creative Commons Attribution <a rel="license" href="https://creativecommons.org/licenses/by/4.0/">CC BY 4.0</a>. Source code is available at <a href="https://github.com/rstudio/radix">https://github.com/rstudio/radix</a>, unless otherwise noted. The figures that have been reused from other sources don't fall under this license and can be recognized by a note in their caption: "Figure from ...".</p>
+<p>Text and figures are licensed under Creative Commons Attribution <a rel="license" href="https://creativecommons.org/licenses/by/4.0/">CC BY 4.0</a>. Source code is available at <a href="https://github.com/rstudio/distill">https://github.com/rstudio/distill</a>, unless otherwise noted. The figures that have been reused from other sources don't fall under this license and can be recognized by a note in their caption: "Figure from ...".</p>
 </div>
 <!--/radix_placeholder_appendices-->
 <!--radix_placeholder_navigation_after_body-->
-<div class="radix-site-nav radix-site-footer">
+<div class="distill-site-nav distill-site-footer">
 <p>© Copyright 2018 <a href="https://github.com/distillpub/template/blob/master/AUTHORS">The Distill Template Authors</a> and <a href="https://www.rstudio.com">RStudio, Inc</a>.</p>
 <p>Software licensed under the <a href="https://www.apache.org/licenses/LICENSE-2.0">Apache License, v2.0</a>.</p>
 </div>

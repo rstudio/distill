@@ -229,9 +229,9 @@ is_osx <- function() {
 }
 
 # function for resolving resources
-radix_resource <- function(name) {
-  system.file("rmarkdown/templates/radix_article/resources", name,
-              package = "radix")
+distill_resource <- function(name) {
+  system.file("rmarkdown/templates/distill_article/resources", name,
+              package = "distill")
 }
 
 knitr_files_dir <- function(file) {

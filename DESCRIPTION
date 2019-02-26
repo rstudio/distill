@@ -1,5 +1,5 @@
 Type: Package
-Package: radix
+Package: distill
 Title: 'R Markdown' Format for Scientific and Technical Writing
 Version: 0.6.0.9000
 Authors@R: c(
@@ -17,12 +17,12 @@ Authors@R: c(
            comment = "https://www.webcomponents.org/polyfills/"),
     person("Gábor", "Csárdi", role = c("ctb", "cph"), comment = "whoami")
     )
-Description: Scientific and technical article format for the web. 'Radix' articles 
+Description: Scientific and technical article format for the web. 'Distill' articles 
     feature attractive, reader-friendly typography, flexible layout options
     for visualizations, and full support for footnotes and citations.
 License: Apache License 2.0
-URL: https://github.com/rstudio/radix
-BugReports: https://github.com/rstudio/radix/issues
+URL: https://github.com/rstudio/distill
+BugReports: https://github.com/rstudio/distill/issues
 Encoding: UTF-8
 LazyData: true
 Roxygen: list(markdown = TRUE)

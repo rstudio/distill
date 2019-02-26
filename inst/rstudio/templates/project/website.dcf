@@ -1,5 +1,5 @@
 Binding: new_project_create_website
-Title: Radix Website
+Title: Distill Website
 OpenFiles: index.Rmd, about.Rmd, _site.yml
 
 Parameter: title

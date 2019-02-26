@@ -47,7 +47,7 @@ enumerate_collection <- function(site_dir, site_config, collection) {
 
 published_article_from_dir <- function(site_config, collection, article_dir) {
 
-  # resolve to radix article
+  # resolve to article
   article <- discover_article(article_dir)
 
   # bail if there was none found
@@ -140,7 +140,7 @@ render_collection <- function(site_dir, site_config, collection,
 
 
 
-radix_article_post_processor <- function(encoding_fn, self_contained) {
+distill_article_post_processor <- function(encoding_fn, self_contained) {
 
   function(metadata, input_file, output_file, clean, verbose) {
 
@@ -696,7 +696,7 @@ discover_article <- function(article_dir) {
       article_html <- html_files[[index[1]]]
     }
 
-    # look for first one that has radix metadata in it
+    # look for first one that has metadata in it
     else {
       for (html_file in html_files) {
         article_metadata <- extract_embedded_metadata(html_file)

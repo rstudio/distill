@@ -1,23 +1,23 @@
 ---
 title: "Untitled"
 description: |
-  A new article created using the Radix format.
+  A new article created using the Distill format.
 author:
   - name: Nora Jones 
     url: https://example.com/norajones
     affiliation: Spacely Sprockets
     affiliation_url: https://example.com/spacelysprokets
 date: "`r Sys.Date()`"
-output: radix::radix_article
+output: distill::distill_article
 ---
 
 ```{r setup, include=FALSE}
 knitr::opts_chunk$set(echo = FALSE)
 ```
 
-Radix is a publication format for scientific and technical writing, native to the web. 
+Distill is a publication format for scientific and technical writing, native to the web. 
 
-Learn more about using Radix at <https://rstudio.github.io/radix>.
+Learn more about using Distill for R Markdown at <https://rstudio.github.io/distill>.
 
 
 

@@ -7,18 +7,18 @@ description: Publish your website using a variety of services
 library(knitr)
 ```
 
-There are a wide variety of ways to publish Radix websites. Website content is by default written to the `_site` sub-directory (you can customize this using the `output_dir` metadata field). Publishing is simply a matter of copying the output directory to a web server or web hosting service.
+There are a wide variety of ways to publish Distill websites. Website content is by default written to the `_site` sub-directory (you can customize this using the `output_dir` metadata field). Publishing is simply a matter of copying the output directory to a web server or web hosting service.
 
-Below we describe several convenient options for Radix website deployment including [RStudio Connect], [GitHub Pages], [Netlify], [Firebase], [Site44], and [Amazon S3]. We'll mostly defer to the documentation provided by the various services, but will note any Radix website specific configuration required.
+Below we describe several convenient options for Distill website deployment including [RStudio Connect], [GitHub Pages], [Netlify], [Firebase], [Site44], and [Amazon S3]. We'll mostly defer to the documentation provided by the various services, but will note any Distill website specific configuration required.
 
 ## RStudio Connect
 
 [RStudio Connect](https://www.rstudio.com/products/connect/) is a server product from RStudio for secure sharing of websites, applications, reports, and plots. 
 
-You can deploy a Radix website to RStudio Connect from the command line using the `radix::publish_website()` function. For example:
+You can deploy a Distill website to RStudio Connect from the command line using the `distill::publish_website()` function. For example:
 
 ```r
-library(radix)
+library(distill)
 publish_website(server = "https://rsc.example.com")
 ```
 
@@ -28,7 +28,7 @@ Note that once you've published your site for the first time you can omit the `s
 publish_website()
 ```
 
-You can also publish a Radix website directly to an RStudio Connect server from within the website preview window by clicking the **Publish** button:
+You can also publish a Distill website directly to an RStudio Connect server from within the website preview window by clicking the **Publish** button:
 
 ![](images/rstudio-connect.png){width=95% .screenshot} 
 
@@ -38,7 +38,7 @@ Unlike the other website publishing options described below, [RStudio Connect](h
 
 ## GitHub Pages
 
-[GitHub Pages](https://pages.github.com/) is a service that lets you publish a website from any GitHub repository. There are two additional configuration steps required to host a Radix website using GitHub Pages:
+[GitHub Pages](https://pages.github.com/) is a service that lets you publish a website from any GitHub repository. There are two additional configuration steps required to host a Distill website using GitHub Pages:
 
 1. Create a file named `.nojekyll` in your repository (this is required to disable some processing of HTML files that GitHub does by default). You can do this with the following code:
     
@@ -75,8 +75,8 @@ Firebase websites by default deploy content from the `public` directory of the F
 
 ```markup
 ---
-name: "radix"
-title: "Radix for R Markdown"
+name: "distill"
+title: "Distill for R Markdown"
 output_dir: "public"
 ---
 ```
@@ -85,7 +85,7 @@ output_dir: "public"
 
 [Site44](https://www.site44.com/) is a service that allows you to publish websites from within Dropbox folders. Site44 creates a `Dropbox/Apps/site44` directory, and any folders within that directory are published as websites.
 
-The recommended workflow for deploying Radix websites to Site44 is to develop your website in a separate project directory, and then, when it's ready for final publishing, copy the contents of the `_site` directory to the folder for your website.
+The recommended workflow for deploying Distill websites to Site44 is to develop your website in a separate project directory, and then, when it's ready for final publishing, copy the contents of the `_site` directory to the folder for your website.
 
 ## Amazon S3
 
@@ -94,6 +94,6 @@ If you are a user of Amazon Web Services you can serve your website directly fro
 
 ## Other services
 
-Any web server or web host can be used to deploy a Radix website. Here's a recent [CNET roundup](https://www.cnet.com/web-hosting/) of other web hosts you could consider. You can also deploy a Radix website on any internal (intranet) web server.
+Any web server or web host can be used to deploy a Distill website. Here's a recent [CNET roundup](https://www.cnet.com/web-hosting/) of other web hosts you could consider. You can also deploy a Distill website on any internal (intranet) web server.
 
 

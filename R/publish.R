@@ -1,5 +1,5 @@
 
-#' Publish a Radix Website
+#' Publish a Distill Website
 #'
 #' Publish a website to RStudio Connect
 #'
@@ -20,7 +20,7 @@
 #'
 #' @examples
 #' \dontrun{
-#' library(radix)
+#' library(distill)
 #' publish_website()
 #' }
 #'

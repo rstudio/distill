@@ -1,5 +1,5 @@
 ---
-title: "Radix for R Markdown"
+title: "Distill for R Markdown"
 description: Scientific and technical writing, native to the web
 author:
   - name: "JJ Allaire"
@@ -15,12 +15,12 @@ author:
     affiliation: RStudio
     affiliation_url: https://www.rstudio.com
 date: September 10, 2018
-citation_url: https://rstudio.github.io/radix
+citation_url: https://rstudio.github.io/distill
 bibliography: biblio.bib
 output:
-  radix::radix_article:
+  distill::distill_article:
     toc: false
-site: radix::radix_website
+site: distill::distill_website
 ---
 
 
@@ -29,7 +29,7 @@ library(ggplot2)
 library(knitr)
 ```
 
-Radix is an online publication format designed for scientific and technical communication. Radix articles include:
+Distill for R Markdown is a web publishing format optimized for scientific and technical communication. Distill articles include:
 
 - Reader-friendly typography that adapts well to mobile devices.
 - Features essential to technical writing like [LaTeX math](#equations), [citations], and [footnotes](#footnotes-and-asides).
@@ -37,25 +37,24 @@ Radix is an online publication format designed for scientific and technical comm
 - Attractively rendered [tables](tables.html) with optional support for pagination.
 - Support for a wide variety of [diagramming tools](diagrams.html) for illustrating concepts.
 - The ability to incorporate JavaScript and D3-based [interactive visualizations](interactivity.html).
-- A variety of ways to [publish articles](publish_article.html), including support for publishing sets of articles as a [Radix website](website.html).
-- The ability to [create a blog](blog.html) composed of a collection of Radix articles.
+- A variety of ways to [publish articles](publish_article.html), including support for publishing sets of articles as a [Distill website](website.html).
+- The ability to [create a blog](blog.html) composed of a collection of Distill articles.
 
-
-Radix is based on the [Distill web framework](https://github.com/distillpub/template), which was originally created for use in the Distill Machine Learning Journal [@distill]. Radix combines the technical authoring features of Distill with [R Markdown](https://rmarkdown.rstudio.com/), enabling a fully reproducible workflow based on literate programming [@knuth1984].
+Distill for R Markdown is based on the [Distill web framework](https://github.com/distillpub/template), which was originally created for use in the Distill Machine Learning Journal [@distill]. Distill for R Markdown combines the technical authoring features of Distill with [R Markdown](https://rmarkdown.rstudio.com/), enabling a fully reproducible workflow based on literate programming [@knuth1984].
 
 ## Installation
 
-To create an [R Markdown](https://rmarkdown.rstudio.com) document that uses the Radix format, first install the **radix** R package from CRAN:
+To create an [R Markdown](https://rmarkdown.rstudio.com) document that uses the Distill format, first install the **distill** R package from GitHub:
 
 ```r
-install.packages("radix")
+devtools::install_github("rstudio/distill")
 ```
 
-Using Radix requires Pandoc v2.0 or higher. If you are using RStudio then you should use RStudio v1.2.718 or higher (which comes bundled with Pandoc v2.0). 
+Using Distill for R Markdown requires Pandoc v2.0 or higher. If you are using RStudio then you should use RStudio v1.2.718 or higher (which comes bundled with Pandoc v2.0). 
 
 You can download the preview release of RStudio v1.2 at <https://www.rstudio.com/products/rstudio/download/preview/>.
 
-```{r, child="_common/radix_basics.Rmd"}
+```{r, child="_common/distill_basics.Rmd"}
 ```
 
 

@@ -3,7 +3,7 @@ title: "Tables"
 description: Display data in attractive, compact formats
 ---
 
-There are a number of options available for displaying tables within Radix articles, including:
+There are a number of options available for displaying tables within Distill articles, including:
 
 - Using the `knitr::kable()` function to render a data frame as HTML.
 
@@ -28,7 +28,7 @@ library(knitr)
 kable(head(mtcars))
 ```
 
-Often times tables will require more width for their display than the standard Radix article text width. Here we use `layout="l-body-outset"` to cause the table to outset slightly from the main text column. All of the available [figure layouts](figures.html) can also be used with tables.
+Often times tables will require more width for their display than the standard Distill article text width. Here we use `layout="l-body-outset"` to cause the table to outset slightly from the main text column. All of the available [figure layouts](figures.html) can also be used with tables.
 
 ## Paged tables
 
@@ -82,7 +82,7 @@ You can also define [tables using markdown](https://pandoc.org/MANUAL.html#table
 | `rownames.print` | Print row names as part of the table.          |
 ```
 
-You can use Radix [figure layout](figures.html) classes with markdown tables by enclosing them in markdown div (`:::`) named with the appropriate class, for example:
+You can use Distill [figure layout](figures.html) classes with markdown tables by enclosing them in markdown div (`:::`) named with the appropriate class, for example:
 
 ```markdown
 ::: l-body-outset

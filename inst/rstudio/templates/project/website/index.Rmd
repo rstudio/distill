@@ -2,18 +2,18 @@
 title: "{{title}}"
 description: |
   Welcome to the website. I hope you enjoy it!
-site: radix::radix_website
+site: distill::distill_website
 ---
 
 ```{r setup, include=FALSE}
 knitr::opts_chunk$set(echo = FALSE)
 
-# Learn more about creating websites with Radix at:
-# https://rstudio.github.io/radix/website.html
+# Learn more about creating websites with Distill at:
+# https://rstudio.github.io/distill/website.html
 
 {{#gh_pages}}
 # Learn more about publishing to GitHub Pages at:
-# https://rstudio.github.io/radix/publish_website.html#github-pages
+# https://rstudio.github.io/distill/publish_website.html#github-pages
 
 {{/gh_pages}}
 ```

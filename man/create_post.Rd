@@ -27,11 +27,11 @@ Create a new blog post
 }
 \note{
 This function must be called from with a working directory that is within
-a Radix website.
+a Distill website.
 }
 \examples{
 \dontrun{
-library(radix)
+library(distill)
 create_post("My Post")
 }
 

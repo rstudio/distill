@@ -52,8 +52,8 @@ navigation_in_header_html <- function(site_config, offset) {
   if (!is.null(site_config[["navbar"]])) {
 
     in_header_html <- html_from_file(
-      system.file("rmarkdown/templates/radix_article/resources/navbar.html",
-                  package = "radix")
+      system.file("rmarkdown/templates/distill_article/resources/navbar.html",
+                  package = "distill")
     )
 
     in_header_html <- tagList(
@@ -158,7 +158,7 @@ navigation_before_body_html <- function(site_config, offset) {
                      a(href = "javascript:void(0);", class = "nav-toggle", HTML("&#9776;"))
     )
 
-    navbar <- tag("nav", list(class = "radix-site-nav radix-site-header",
+    navbar <- tag("nav", list(class = "distill-site-nav distill-site-header",
                               left_nav,
                               right_nav
     ))
@@ -174,8 +174,8 @@ navigation_before_body_html <- function(site_config, offset) {
 navigation_after_body_html <- function(site_dir, site_config, offset) {
   footer <- file.path(site_dir, "_footer.html")
   if (!is.null(site_config$navbar) && file.exists(footer)) {
-    footer_template <- system.file("rmarkdown/templates/radix_article/resources/footer.html",
-                                   package = "radix")
+    footer_template <- system.file("rmarkdown/templates/distill_article/resources/footer.html",
+                                   package = "distill")
     footer_html <- tempfile(fileext = "html")
     pandoc_convert(
       input = normalize_path(footer),

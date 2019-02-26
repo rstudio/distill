@@ -9,7 +9,7 @@ library(knitr)
 
 ## Default layout
 
-There are a variety of ways to layout figures included within Radix articles. This layout is controlled by a set of layout classes, which are in turn applied to R Markdown chunks using the `layout` chunk option.
+There are a variety of ways to layout figures included within Distill articles. This layout is controlled by a set of layout classes, which are in turn applied to R Markdown chunks using the `layout` chunk option.
 
 The default layout if `layout` is not specified is `l-body`, which will cause content to span the width of the main article body:
 
@@ -98,7 +98,7 @@ knitr::include_graphics("images/figure.png")
 ```
 ````
 
-You can apply Radix layouts to static figures the same way that you do plots:
+You can apply Distill layouts to static figures the same way that you do plots:
 
 ````clike
 ```{r layout="l-body-outset"}`r ''`
@@ -140,7 +140,7 @@ To reference a figure, use the syntax `\@ref(label)`, where label is the figure 
 include_graphics("images/figure-cross-references.png")
 ```
 
-For additional documentation on figure cross-references see the [bookdown documentation on figures](https://bookdown.org/yihui/bookdown/figures.html) (Radix uses the bookdown implementation of cross-references under the hood). 
+For additional documentation on figure cross-references see the [bookdown documentation on figures](https://bookdown.org/yihui/bookdown/figures.html) (Distill for R Markdown uses the bookdown implementation of cross-references under the hood). 
 
 One important constraint to keep in mind is that if you want to cross-reference figures or tables generated from a code chunk, please make sure the chunk label *only contains* alphanumeric characters (a-z, A-Z, 0-9), slashes (/), or dashes (-).
 

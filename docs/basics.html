@@ -6,7 +6,7 @@
   <meta charset="utf-8"/>
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <meta http-equiv="X-UA-Compatible" content="IE=Edge,chrome=1"/>
-  <meta name="generator" content="radix" />
+  <meta name="generator" content="distill" />
 
   <style type="text/css">
   /* Hide doc at startup (prevent jankiness while JS renders/transforms) */
@@ -19,7 +19,7 @@
  <!--/radix_placeholder_import_source-->
 
   <!--radix_placeholder_meta_tags-->
-  <title>Radix for R Markdown: Radix Basics</title>
+  <title>Distill for R Markdown: Distill Basics</title>
   
   <meta property="description" itemprop="description" content="Scientific and technical writing, native to the web"/>
   
@@ -28,15 +28,15 @@
   
   
   <!--  https://developers.facebook.com/docs/sharing/webmasters#markup -->
-  <meta property="og:title" content="Radix for R Markdown: Radix Basics"/>
+  <meta property="og:title" content="Distill for R Markdown: Distill Basics"/>
   <meta property="og:type" content="article"/>
   <meta property="og:description" content="Scientific and technical writing, native to the web"/>
   <meta property="og:locale" content="en_US"/>
-  <meta property="og:site_name" content="Radix for R Markdown"/>
+  <meta property="og:site_name" content="Distill for R Markdown"/>
   
   <!--  https://dev.twitter.com/cards/types/summary -->
   <meta property="twitter:card" content="summary"/>
-  <meta property="twitter:title" content="Radix for R Markdown: Radix Basics"/>
+  <meta property="twitter:title" content="Distill for R Markdown: Distill Basics"/>
   <meta property="twitter:description" content="Scientific and technical writing, native to the web"/>
   
   <!--/radix_placeholder_meta_tags-->
@@ -44,7 +44,7 @@
   <!--radix_placeholder_rmarkdown_metadata-->
   
   <script type="text/json" id="radix-rmarkdown-metadata">
-  {"type":"list","attributes":{"names":{"type":"character","attributes":{},"value":["title","description","bibliography"]}},"value":[{"type":"character","attributes":{},"value":["Radix Basics"]},{"type":"character","attributes":{},"value":["Scientific and technical writing, native to the web"]},{"type":"character","attributes":{},"value":["biblio.bib"]}]}
+  {"type":"list","attributes":{"names":{"type":"character","attributes":{},"value":["title","description","bibliography"]}},"value":[{"type":"character","attributes":{},"value":["Distill Basics"]},{"type":"character","attributes":{},"value":["Scientific and technical writing, native to the web"]},{"type":"character","attributes":{},"value":["biblio.bib"]}]}
   </script>
   <!--/radix_placeholder_rmarkdown_metadata-->
   <!--radix_placeholder_navigation_in_header-->
@@ -78,7 +78,7 @@
       });
   
       // responsive menu
-      $('.radix-site-header').each(function(i, val) {
+      $('.distill-site-header').each(function(i, val) {
         var topnav = $(this);
         var toggle = topnav.find('.nav-toggle');
         toggle.on('click', function() {
@@ -105,85 +105,85 @@
   
   /* Theme (user-documented overrideables for nav appearance) */
   
-  .radix-site-nav {
+  .distill-site-nav {
     color: rgba(255, 255, 255, 0.8);
     background-color: #455a64;
     font-size: 15px;
     font-weight: 300;
   }
   
-  .radix-site-nav a {
+  .distill-site-nav a {
     color: inherit;
     text-decoration: none;
   }
   
-  .radix-site-nav a:hover {
+  .distill-site-nav a:hover {
     color: white;
   }
   
   @media print {
-    .radix-site-nav {
+    .distill-site-nav {
       display: none;
     }
   }
   
-  .radix-site-header {
+  .distill-site-header {
   
   }
   
-  .radix-site-footer {
+  .distill-site-footer {
   
   }
   
   
   /* Site Header */
   
-  .radix-site-header {
+  .distill-site-header {
     width: 100%;
     box-sizing: border-box;
     z-index: 3;
   }
   
-  .radix-site-header .nav-left {
+  .distill-site-header .nav-left {
     display: inline-block;
     margin-left: 8px;
   }
   
   @media screen and (max-width: 768px) {
-    .radix-site-header .nav-left {
+    .distill-site-header .nav-left {
       margin-left: 0;
     }
   }
   
   
-  .radix-site-header .nav-right {
+  .distill-site-header .nav-right {
     float: right;
     margin-right: 8px;
   }
   
-  .radix-site-header a,
-  .radix-site-header .title {
+  .distill-site-header a,
+  .distill-site-header .title {
     display: inline-block;
     text-align: center;
     padding: 14px 10px 14px 10px;
   }
   
-  .radix-site-header .title {
+  .distill-site-header .title {
     font-size: 18px;
   }
   
-  .radix-site-header .logo {
+  .distill-site-header .logo {
     padding: 0;
   }
   
-  .radix-site-header .logo img {
+  .distill-site-header .logo img {
     display: none;
     max-height: 20px;
     width: auto;
     margin-bottom: -4px;
   }
   
-  .radix-site-header .nav-image img {
+  .distill-site-header .nav-image img {
     max-height: 18px;
     width: auto;
     display: inline-block;
@@ -193,22 +193,22 @@
   
   
   @media screen and (min-width: 1000px) {
-    .radix-site-header .logo img {
+    .distill-site-header .logo img {
       display: inline-block;
     }
-    .radix-site-header .nav-left {
+    .distill-site-header .nav-left {
       margin-left: 20px;
     }
-    .radix-site-header .nav-right {
+    .distill-site-header .nav-right {
       margin-right: 20px;
     }
-    .radix-site-header .title {
+    .distill-site-header .title {
       padding-left: 12px;
     }
   }
   
   
-  .radix-site-header .nav-toggle {
+  .distill-site-header .nav-toggle {
     display: none;
   }
   
@@ -290,18 +290,18 @@
   }
   
   @media screen and (max-width: 768px) {
-    .radix-site-header a, .radix-site-header .nav-dropdown  {display: none;}
-    .radix-site-header a.nav-toggle {
+    .distill-site-header a, .distill-site-header .nav-dropdown  {display: none;}
+    .distill-site-header a.nav-toggle {
       float: right;
       display: block;
     }
-    .radix-site-header .title {
+    .distill-site-header .title {
       margin-left: 0;
     }
-    .radix-site-header .nav-right {
+    .distill-site-header .nav-right {
       margin-right: 0;
     }
-    .radix-site-header {
+    .distill-site-header {
       overflow: hidden;
     }
     .nav-right .nav-dropdown-content {
@@ -311,24 +311,24 @@
   
   
   @media screen and (max-width: 768px) {
-    .radix-site-header.responsive {position: relative;}
-    .radix-site-header.responsive a.nav-toggle {
+    .distill-site-header.responsive {position: relative;}
+    .distill-site-header.responsive a.nav-toggle {
       position: absolute;
       right: 0;
       top: 0;
     }
-    .radix-site-header.responsive a,
-    .radix-site-header.responsive .nav-dropdown {
+    .distill-site-header.responsive a,
+    .distill-site-header.responsive .nav-dropdown {
       display: block;
       text-align: left;
     }
-    .radix-site-header.responsive .nav-left,
-    .radix-site-header.responsive .nav-right {
+    .distill-site-header.responsive .nav-left,
+    .distill-site-header.responsive .nav-right {
       width: 100%;
     }
-    .radix-site-header.responsive .nav-dropdown {float: none;}
-    .radix-site-header.responsive .nav-dropdown-content {position: relative;}
-    .radix-site-header.responsive .nav-dropdown .nav-dropbtn {
+    .distill-site-header.responsive .nav-dropdown {float: none;}
+    .distill-site-header.responsive .nav-dropdown-content {position: relative;}
+    .distill-site-header.responsive .nav-dropdown .nav-dropbtn {
       display: block;
       width: 100%;
       text-align: left;
@@ -337,7 +337,7 @@
   
   /* Site Footer */
   
-  .radix-site-footer {
+  .distill-site-footer {
     width: 100%;
     overflow: hidden;
     box-sizing: border-box;
@@ -1220,7 +1220,7 @@
   
     // get rid of index.html references in header
     if (window.location.protocol !== "file:") {
-      $('.radix-site-header a[href]').each(function(i,val) {
+      $('.distill-site-header a[href]').each(function(i,val) {
         $(this).attr('href', $(this).attr('href').replace("index.html", "./"));
       });
     }
@@ -1299,18 +1299,18 @@
 <!--radix_placeholder_front_matter-->
 
 <script id="distill-front-matter" type="text/json">
-{"title":"Radix Basics","description":"Scientific and technical writing, native to the web","authors":[]}
+{"title":"Distill Basics","description":"Scientific and technical writing, native to the web","authors":[]}
 </script>
 
 <!--/radix_placeholder_front_matter-->
 <!--radix_placeholder_navigation_before_body-->
 <header class="header header--fixed" role="banner">
-<nav class="radix-site-nav radix-site-header">
+<nav class="distill-site-nav distill-site-header">
 <div class="nav-left">
 <a class="logo" href="https://www.rstudio.com">
 <img src="images/logo.png"/>
 </a>
-<a href="index.html" class="title">Radix for R Markdown</a>
+<a href="index.html" class="title">Distill for R Markdown</a>
 </div>
 <div class="nav-right">
 <div class="nav-dropdown">
@@ -1320,7 +1320,7 @@ Authoring
 <span class="down-arrow">&#x25BE;</span>
 </button>
 <div class="nav-dropdown-content">
-<a href="basics.html">Radix Basics</a>
+<a href="basics.html">Distill Basics</a>
 <a href="figures.html">Figure Layout</a>
 <a href="tables.html">Tables</a>
 <a href="diagrams.html">Diagrams</a>
@@ -1328,6 +1328,8 @@ Authoring
 <hr/>
 <a href="citations.html">Citations</a>
 <a href="metadata.html">Article Metadata</a>
+<hr/>
+<a href="migrating.html">Migrating from Radix</a>
 </div>
 </div>
 <div class="nav-dropdown">
@@ -1357,7 +1359,7 @@ Publishing
 </div>
 </div>
 <a href="news.html">News</a>
-<a href="https://github.com/rstudio/radix">
+<a href="https://github.com/rstudio/distill">
 <i class="fab fa-github"></i>
 </a>
 <a href="javascript:void(0);" class="nav-toggle">&#9776;</a>
@@ -1369,7 +1371,7 @@ Publishing
 <!--/radix_placeholder_site_before_body-->
 
 <div class="d-title">
-<h1>Radix Basics</h1>
+<h1>Distill Basics</h1>
 <p>Scientific and technical writing, native to the web</p>
 </div>
 
@@ -1387,25 +1389,24 @@ Publishing
 <li><a href="#table-of-contents">Table of contents</a></li>
 <li><a href="#code-blocks">Code blocks</a></li>
 <li><a href="#appendices">Appendices</a></li>
-<li><a href="#why-radix">Why Radix?</a></li>
 <li><a href="#acknowledgments">Acknowledgments</a></li>
 </ul>
 </nav>
 <hr class="d-toc-separator"/>
 <h2 id="creating-an-article">Creating an article</h2>
-<p>Use the <strong>New R Markdown</strong> dialog within RStudio to create a new Radix article:</p>
-<p><img src="images/new_radix_article.png" class="screenshot" style="width:100.0%" /></p>
-<p>You can also create a new Radix article from the command line with:</p>
+<p>Use the <strong>New R Markdown</strong> dialog within RStudio to create a new Distill article:</p>
+<p><img src="images/new_distill_article.png" class="screenshot" style="width:100.0%" /></p>
+<p>You can also create a new Distill article from the command line with:</p>
 <pre class="r"><code>
 library(rmarkdown)
-draft(&quot;article.Rmd&quot;, &quot;radix_article&quot;, package = &quot;radix&quot;)</code></pre>
+draft(&quot;article.Rmd&quot;, &quot;distill_article&quot;, package = &quot;distill&quot;)</code></pre>
 <div id="front-matter">
 
 </div>
-<p>Radix articles use <code>radix::radix_article</code> as their output format, and typically include title, description, date, author/affiliation, and bibliography entries in their YAML front-matter:</p>
+<p>Distill articles use <code>distill::distill_article</code> as their output format, and typically include title, description, date, author/affiliation, and bibliography entries in their YAML front-matter:</p>
 <pre class="markup"><code>
 ---
-title: &quot;Radix for R Markdown&quot;
+title: &quot;Distill for R Markdown&quot;
 description: | 
   Scientific and technical writing, native to the web
 date: May 4, 2018
@@ -1423,13 +1424,13 @@ author:
     affiliation: RStudio
     affiliation_url: https://www.rstudio.com
 bibliography: biblio.bib
-output: radix::radix_article
+output: distill::distill_article
 ---</code></pre>
 <p>Author entries must have at least <code>name</code> and <code>url</code> specified (the affiliation fields are optional). The <code>date</code> field should be formatted as month, day, year (various notations are supported as long as the components appear in that order).</p>
 <p>The article’s description and author bylines are automatically rendered as part of the title area of the document.</p>
 <p>The <code>bibliography</code> field is used to provide a reference to the Bibtex file where all of the sources cited in your article are defined. The <a href="#citations">citations</a> section describes how to include references to these sources in your article.</p>
 <h2 id="figures">Figures</h2>
-<p>Radix provides a number of options for laying out figures within your article. By default figures span the width of the main article body:</p>
+<p>Distill provides a number of options for laying out figures within your article. By default figures span the width of the main article body:</p>
 <p><img src="images/l-body-figure.png" style="width:100.0%" /></p>
 <p>However, some figures benefit from using additional horizontal space. In this cases the <code>layout</code> chunk option enables you to specify a wide variety of other layouts.</p>
 <p>For example, if we wanted to display a figure a bit outside the bounds of the article text, we could specify the <code>l-body-outset</code> layout via the <code>layout</code> chunk option:</p>
@@ -1444,9 +1445,9 @@ ggplot(diamonds, aes(carat, price)) + geom_smooth() +
 </div>
 <p>Note that when specifying an alternate <code>layout</code> you should also specify an appropriate <code>fig.width</code> and <code>fig.height</code> for that layout. These values don’t determine the absolute size of the figure (that’s dynamic based on the layout) but they do determine the aspect ratio of the figure.</p>
 <p>See the documentation on <a href="figures.html">figure layout</a> for details on additional layout options.</p>
-<p>The examples above are based on conventional R plots. Radix articles can also incorporate <a href="diagrams.html">diagrams</a> and <a href="interactivity.html">interactive visualizations</a> based on JavaScript and D3.</p>
+<p>The examples above are based on conventional R plots. Distill articles can also incorporate <a href="diagrams.html">diagrams</a> and <a href="interactivity.html">interactive visualizations</a> based on JavaScript and D3.</p>
 <h2 id="tables">Tables</h2>
-<p>There are a number of options available for HTML display of data frames within Radix articles. Here, we use the <code>paged_table()</code> function to display a page-able view of the <code>mtcars</code> dataset built in to R:</p>
+<p>There are a number of options available for HTML display of data frames within Distill articles. Here, we use the <code>paged_table()</code> function to display a page-able view of the <code>mtcars</code> dataset built in to R:</p>
 <pre class="clike"><code>
 ```{r, layout=&quot;l-body-outset&quot;}
 library(rmarkdown)
@@ -1512,18 +1513,18 @@ ggplot(mtcars, aes(hp, mpg)) + geom_point() + geom_smooth()
 <p>You can add a table of contents using the <code>toc</code> option and specify the depth of headers that it applies to using the <code>toc_depth</code> option. For example:</p>
 <pre class="markup"><code>
 ---
-title: &quot;Radix for R Markdown&quot;
+title: &quot;Distill for R Markdown&quot;
 description: | 
   Scientific and technical writing, native to the web
 output:
-  radix::radix_article:
+  distill::distill_article:
     toc: true
     toc_depth: 2
 ---</code></pre>
 <p>If the table of contents depth is not explicitly specified, it defaults to 3 (meaning that all level 1, 2, and 3 headers will be included in the table of contents).</p>
 <h2 id="code-blocks">Code blocks</h2>
-<p>Syntax highlighting is provided for knitr code chunks. Note that by default the Radix format does not display the code for chunks that are evaluated to produce output (knitr option <code>echo = FALSE</code>).</p>
-<p>The <code>echo = FALSE</code> default reflects the fact that Radix articles are often used to present the results of analyses rather than the underlying code. To display the code that was evaluated to produce output you can set the <code>echo</code> chunk option to <code>TRUE</code>:</p>
+<p>Syntax highlighting is provided for knitr code chunks. Note that by default the Distill format does not display the code for chunks that are evaluated to produce output (knitr option <code>echo = FALSE</code>).</p>
+<p>The <code>echo = FALSE</code> default reflects the fact that Distill articles are often used to present the results of analyses rather than the underlying code. To display the code that was evaluated to produce output you can set the <code>echo</code> chunk option to <code>TRUE</code>:</p>
 <pre class="clike"><code>
 ```{r, echo=TRUE}
 1 + 1
@@ -1533,7 +1534,7 @@ output:
 ```{r, eval=FALSE, echo=TRUE}
 1 + 1
 ```</code></pre>
-<p>There are a number of default values that Radix establishes for knitr chunk options (these defaults also reflect the use case of presenting results/output rather than underlying code):</p>
+<p>There are a number of default values that Distill establishes for knitr chunk options (these defaults also reflect the use case of presenting results/output rather than underlying code):</p>
 <table>
 <thead>
 <tr class="header">
@@ -1596,11 +1597,8 @@ to acknowledge and cite software that makes your work possible.
 We strongly encourage you to include an author contributions statement briefly 
 describing what each author did.</code></pre>
 <p>Footnotes and references will be included in the same section, immediately beneath any custom appendices.</p>
-<h2 id="why-radix">Why Radix?</h2>
-<p>Why the name Radix? The most common <a href="https://en.oxforddictionaries.com/definition/radix">definition of radix</a> in the English language comes from Mathematics, where it is used to describe the base of a system of numeration. It is also used to describe the source or origin of something. Both of these usages derive from the Latin meaning of radix, which is literally <em>root</em>.</p>
-<p>The purpose of scientific communication is to help get to the root of things! Radix provides a set of tools to facilitate clear scientific communication that links richly with other sources of knowledge and insight.</p>
 <h2 id="acknowledgments" class="appendix">Acknowledgments</h2>
-<p>Radix builds on the work of many individuals and projects. <a href="https://github.com/shancarter">Shan Carter</a>, <a href="https://github.com/ludwigschubert">Ludwig Schubert</a>, and <a href="https://github.com/colah">Christopher Olah</a> created the Distill web framework. <a href="https://github.com/jgm">John MacFarlane</a> created the Pandoc universal markup converter. <a href="https://github.com/dpvc">Davide Cervone</a> and <a href="https://github.com/zorkow">Volker Sorge</a> created the MathJax library for rendering mathematical notation on the web. <a href="https://github.com/mbostock">Mike Bostock</a> created the D3 library for producing dynamic, interactive data visualizations for the web. We are grateful for the spirit of generosity that moved these individuals to create high-quality open source software for the benefit of all.</p>
+<p>Distill for R Markdown builds on the work of many individuals and projects. <a href="https://github.com/shancarter">Shan Carter</a>, <a href="https://github.com/ludwigschubert">Ludwig Schubert</a>, and <a href="https://github.com/colah">Christopher Olah</a> created the Distill web framework. <a href="https://github.com/jgm">John MacFarlane</a> created the Pandoc universal markup converter. <a href="https://github.com/dpvc">Davide Cervone</a> and <a href="https://github.com/zorkow">Volker Sorge</a> created the MathJax library for rendering mathematical notation on the web. <a href="https://github.com/mbostock">Mike Bostock</a> created the D3 library for producing dynamic, interactive data visualizations for the web. We are grateful for the spirit of generosity that moved these individuals to create high-quality open source software for the benefit of all.</p>
 <div id="refs" class="references">
 <div id="ref-xie2015">
 <p>Xie, Yihui. 2015. <em>Dynamic Documents with R and Knitr</em>. 2nd ed. Boca Raton, Florida: Chapman; Hall/CRC. <a href="http://yihui.name/knitr/">http://yihui.name/knitr/</a>.</p>
@@ -1634,9 +1632,9 @@ describing what each author did.</code></pre>
 <!--radix_placeholder_appendices-->
 <div class="appendix-bottom">
 <h3 id="updates-and-corrections">Corrections</h3>
-<p>If you see mistakes or want to suggest changes, please <a href="https://github.com/rstudio/radix/issues/new">create an issue</a> on the source repository.</p>
+<p>If you see mistakes or want to suggest changes, please <a href="https://github.com/rstudio/distill/issues/new">create an issue</a> on the source repository.</p>
 <h3 id="reuse">Reuse</h3>
-<p>Text and figures are licensed under Creative Commons Attribution <a rel="license" href="https://creativecommons.org/licenses/by/4.0/">CC BY 4.0</a>. Source code is available at <a href="https://github.com/rstudio/radix">https://github.com/rstudio/radix</a>, unless otherwise noted. The figures that have been reused from other sources don't fall under this license and can be recognized by a note in their caption: "Figure from ...".</p>
+<p>Text and figures are licensed under Creative Commons Attribution <a rel="license" href="https://creativecommons.org/licenses/by/4.0/">CC BY 4.0</a>. Source code is available at <a href="https://github.com/rstudio/distill">https://github.com/rstudio/distill</a>, unless otherwise noted. The figures that have been reused from other sources don't fall under this license and can be recognized by a note in their caption: "Figure from ...".</p>
 </div>
 <script id="distill-bibliography" type="text/bibtex">
 @misc{distill,
@@ -1673,7 +1671,7 @@ describing what each author did.</code></pre>
 </script>
 <!--/radix_placeholder_appendices-->
 <!--radix_placeholder_navigation_after_body-->
-<div class="radix-site-nav radix-site-footer">
+<div class="distill-site-nav distill-site-footer">
 <p>© Copyright 2018 <a href="https://github.com/distillpub/template/blob/master/AUTHORS">The Distill Template Authors</a> and <a href="https://www.rstudio.com">RStudio, Inc</a>.</p>
 <p>Software licensed under the <a href="https://www.apache.org/licenses/LICENSE-2.0">Apache License, v2.0</a>.</p>
 </div>

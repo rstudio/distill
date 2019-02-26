@@ -19,28 +19,31 @@
  <!--/radix_placeholder_import_source-->
 
   <!--radix_placeholder_meta_tags-->
-  <title>Distill for R Markdown: Release History</title>
+  <title>Distill for R Markdown: Migrating from Radix</title>
   
+  <meta property="description" itemprop="description" content="Migrating to distill from the radix package"/>
   
   <link rel="license" href="https://creativecommons.org/licenses/by/4.0/"/>
   <link rel="icon" type="image/png" href="images/favicon.png"/>
   
   
   <!--  https://developers.facebook.com/docs/sharing/webmasters#markup -->
-  <meta property="og:title" content="Distill for R Markdown: Release History"/>
+  <meta property="og:title" content="Distill for R Markdown: Migrating from Radix"/>
   <meta property="og:type" content="article"/>
+  <meta property="og:description" content="Migrating to distill from the radix package"/>
   <meta property="og:locale" content="en_US"/>
   <meta property="og:site_name" content="Distill for R Markdown"/>
   
   <!--  https://dev.twitter.com/cards/types/summary -->
   <meta property="twitter:card" content="summary"/>
-  <meta property="twitter:title" content="Distill for R Markdown: Release History"/>
+  <meta property="twitter:title" content="Distill for R Markdown: Migrating from Radix"/>
+  <meta property="twitter:description" content="Migrating to distill from the radix package"/>
   
   <!--/radix_placeholder_meta_tags-->
   <!--radix_placeholder_rmarkdown_metadata-->
   
   <script type="text/json" id="radix-rmarkdown-metadata">
-  {"type":"list","attributes":{"names":{"type":"character","attributes":{},"value":["title","output"]}},"value":[{"type":"character","attributes":{},"value":["Release History"]},{"type":"list","attributes":{"names":{"type":"character","attributes":{},"value":["distill::distill_article"]}},"value":[{"type":"list","attributes":{"names":{"type":"character","attributes":{},"value":["toc"]}},"value":[{"type":"logical","attributes":{},"value":[false]}]}]}]}
+  {"type":"list","attributes":{"names":{"type":"character","attributes":{},"value":["title","description"]}},"value":[{"type":"character","attributes":{},"value":["Migrating from Radix"]},{"type":"character","attributes":{},"value":["Migrating to distill from the radix package"]}]}
   </script>
   <!--/radix_placeholder_rmarkdown_metadata-->
   <!--radix_placeholder_navigation_in_header-->
@@ -1293,7 +1296,7 @@
 <!--radix_placeholder_front_matter-->
 
 <script id="distill-front-matter" type="text/json">
-{"title":"Release History","authors":[]}
+{"title":"Migrating from Radix","description":"Migrating to distill from the radix package","authors":[]}
 </script>
 
 <!--/radix_placeholder_front_matter-->
@@ -1365,44 +1368,17 @@ Publishing
 <!--/radix_placeholder_site_before_body-->
 
 <div class="d-title">
-<h1>Release History</h1>
-
+<h1>Migrating from Radix</h1>
+<p>Migrating to distill from the radix package</p>
 </div>
 
 
 <div class="d-article">
-<h2 id="distill-v0.7-development">distill v0.7 (Development)</h2>
-<ul>
-<li>Update to latest version of Distll template from <a href="https://github.com/distillpub/template" class="uri">https://github.com/distillpub/template</a></li>
-</ul>
-<h2 id="radix-v0.6-cran">radix v0.6 (CRAN)</h2>
-<ul>
-<li>Custom listing pages (e.g. gallery of featured posts)</li>
-<li>Support for bookdown-style figure cross-references (e.g. <code>\@ref{fig:plot1}</code>)</li>
-<li>Allow use of markdown within footnotes</li>
-<li>Support for text headers within website navigation menus</li>
-<li>Fix issue with RStudio version check (check was failing with 4-digit patch version)</li>
-<li>Recover gracefully from invalid posts.json file (e.g. due to git merge)</li>
-<li>Syntax highlighting for unknown languages (now they are mapped to “clike”, previously they were removed entirely)</li>
-<li>Correctly render favicon for articles in collections</li>
-<li>Provide option to show Disqus comments by default</li>
-<li>Fix issue with relative references to bibliographies from posts</li>
-<li>Fix intermediates_dir error that occurred when rendering from source on RStudio Connect</li>
-<li>Enable <code>import_post()</code> to work with file paths as well as URLs</li>
-<li>Set standard plot width to 6.5 inches (was 6.0, new width closer to golden ratio)</li>
-<li>Don’t force plots in standard l-body layout to a width of 100%</li>
-<li>Forward <code>check_license</code> from <code>import_post()</code> to <code>import_article()</code></li>
-<li>Normalize authors specified as plain strings to list form</li>
-<li>Use standard figure caption CSS treatment for table captions</li>
-<li>Provide default title (“Untitled”) for articles that lack one</li>
-<li>Scroll horizontal overflow from code blocks on mobile devices</li>
-<li>Fix problem with mailto links within blog posts</li>
-<li>Render welcome post in New Radix Blog RStudio template</li>
-</ul>
-<h2 id="radix-v0.5">radix v0.5</h2>
-<ul>
-<li>Initial CRAN release</li>
-</ul>
+<p>When the <strong>distill</strong> package was initially published on CRAN, it was named <strong>radix</strong>. The name of the package has been subsequently changed to reflect it’s relationship with the <a href="https://github.com/distillpub/template">Distill web framework</a>.</p>
+<p>You can migrate your Radix documents to Distill by simply changing the output format from <code>radix::radix_article</code> to <code>distill::distill_article</code>. For example:</p>
+<p><img src="images/migrate-article.png" class="screenshot" style="width:95.0%" /></p>
+<p>If you have created a blog or website with Radix, you should additionally modify the <code>_site.yml</code> and <code>index.Rmd</code> files to reflect the use of the Distill package:</p>
+<p><img src="images/migrate-site.png" class="screenshot" style="width:95.0%" /></p>
 <!--radix_placeholder_article_footer-->
 <!--/radix_placeholder_article_footer-->
 </div>

@@ -6,7 +6,7 @@
   <meta charset="utf-8"/>
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <meta http-equiv="X-UA-Compatible" content="IE=Edge,chrome=1"/>
-  <meta name="generator" content="radix" />
+  <meta name="generator" content="distill" />
 
   <style type="text/css">
   /* Hide doc at startup (prevent jankiness while JS renders/transforms) */
@@ -19,31 +19,31 @@
  <!--/radix_placeholder_import_source-->
 
   <!--radix_placeholder_meta_tags-->
-  <title>Radix for R Markdown: Creating a Website</title>
+  <title>Distill for R Markdown: Creating a Website</title>
   
-  <meta property="description" itemprop="description" content="Share a set of Radix articles as a website"/>
+  <meta property="description" itemprop="description" content="Share a set of Distill articles as a website"/>
   
   <link rel="license" href="https://creativecommons.org/licenses/by/4.0/"/>
   <link rel="icon" type="image/png" href="images/favicon.png"/>
   
   
   <!--  https://developers.facebook.com/docs/sharing/webmasters#markup -->
-  <meta property="og:title" content="Radix for R Markdown: Creating a Website"/>
+  <meta property="og:title" content="Distill for R Markdown: Creating a Website"/>
   <meta property="og:type" content="article"/>
-  <meta property="og:description" content="Share a set of Radix articles as a website"/>
+  <meta property="og:description" content="Share a set of Distill articles as a website"/>
   <meta property="og:locale" content="en_US"/>
-  <meta property="og:site_name" content="Radix for R Markdown"/>
+  <meta property="og:site_name" content="Distill for R Markdown"/>
   
   <!--  https://dev.twitter.com/cards/types/summary -->
   <meta property="twitter:card" content="summary"/>
-  <meta property="twitter:title" content="Radix for R Markdown: Creating a Website"/>
-  <meta property="twitter:description" content="Share a set of Radix articles as a website"/>
+  <meta property="twitter:title" content="Distill for R Markdown: Creating a Website"/>
+  <meta property="twitter:description" content="Share a set of Distill articles as a website"/>
   
   <!--/radix_placeholder_meta_tags-->
   <!--radix_placeholder_rmarkdown_metadata-->
   
   <script type="text/json" id="radix-rmarkdown-metadata">
-  {"type":"list","attributes":{"names":{"type":"character","attributes":{},"value":["title","description"]}},"value":[{"type":"character","attributes":{},"value":["Creating a Website"]},{"type":"character","attributes":{},"value":["Share a set of Radix articles as a website"]}]}
+  {"type":"list","attributes":{"names":{"type":"character","attributes":{},"value":["title","description"]}},"value":[{"type":"character","attributes":{},"value":["Creating a Website"]},{"type":"character","attributes":{},"value":["Share a set of Distill articles as a website"]}]}
   </script>
   <!--/radix_placeholder_rmarkdown_metadata-->
   <!--radix_placeholder_navigation_in_header-->
@@ -77,7 +77,7 @@
       });
   
       // responsive menu
-      $('.radix-site-header').each(function(i, val) {
+      $('.distill-site-header').each(function(i, val) {
         var topnav = $(this);
         var toggle = topnav.find('.nav-toggle');
         toggle.on('click', function() {
@@ -104,85 +104,85 @@
   
   /* Theme (user-documented overrideables for nav appearance) */
   
-  .radix-site-nav {
+  .distill-site-nav {
     color: rgba(255, 255, 255, 0.8);
     background-color: #455a64;
     font-size: 15px;
     font-weight: 300;
   }
   
-  .radix-site-nav a {
+  .distill-site-nav a {
     color: inherit;
     text-decoration: none;
   }
   
-  .radix-site-nav a:hover {
+  .distill-site-nav a:hover {
     color: white;
   }
   
   @media print {
-    .radix-site-nav {
+    .distill-site-nav {
       display: none;
     }
   }
   
-  .radix-site-header {
+  .distill-site-header {
   
   }
   
-  .radix-site-footer {
+  .distill-site-footer {
   
   }
   
   
   /* Site Header */
   
-  .radix-site-header {
+  .distill-site-header {
     width: 100%;
     box-sizing: border-box;
     z-index: 3;
   }
   
-  .radix-site-header .nav-left {
+  .distill-site-header .nav-left {
     display: inline-block;
     margin-left: 8px;
   }
   
   @media screen and (max-width: 768px) {
-    .radix-site-header .nav-left {
+    .distill-site-header .nav-left {
       margin-left: 0;
     }
   }
   
   
-  .radix-site-header .nav-right {
+  .distill-site-header .nav-right {
     float: right;
     margin-right: 8px;
   }
   
-  .radix-site-header a,
-  .radix-site-header .title {
+  .distill-site-header a,
+  .distill-site-header .title {
     display: inline-block;
     text-align: center;
     padding: 14px 10px 14px 10px;
   }
   
-  .radix-site-header .title {
+  .distill-site-header .title {
     font-size: 18px;
   }
   
-  .radix-site-header .logo {
+  .distill-site-header .logo {
     padding: 0;
   }
   
-  .radix-site-header .logo img {
+  .distill-site-header .logo img {
     display: none;
     max-height: 20px;
     width: auto;
     margin-bottom: -4px;
   }
   
-  .radix-site-header .nav-image img {
+  .distill-site-header .nav-image img {
     max-height: 18px;
     width: auto;
     display: inline-block;
@@ -192,22 +192,22 @@
   
   
   @media screen and (min-width: 1000px) {
-    .radix-site-header .logo img {
+    .distill-site-header .logo img {
       display: inline-block;
     }
-    .radix-site-header .nav-left {
+    .distill-site-header .nav-left {
       margin-left: 20px;
     }
-    .radix-site-header .nav-right {
+    .distill-site-header .nav-right {
       margin-right: 20px;
     }
-    .radix-site-header .title {
+    .distill-site-header .title {
       padding-left: 12px;
     }
   }
   
   
-  .radix-site-header .nav-toggle {
+  .distill-site-header .nav-toggle {
     display: none;
   }
   
@@ -289,18 +289,18 @@
   }
   
   @media screen and (max-width: 768px) {
-    .radix-site-header a, .radix-site-header .nav-dropdown  {display: none;}
-    .radix-site-header a.nav-toggle {
+    .distill-site-header a, .distill-site-header .nav-dropdown  {display: none;}
+    .distill-site-header a.nav-toggle {
       float: right;
       display: block;
     }
-    .radix-site-header .title {
+    .distill-site-header .title {
       margin-left: 0;
     }
-    .radix-site-header .nav-right {
+    .distill-site-header .nav-right {
       margin-right: 0;
     }
-    .radix-site-header {
+    .distill-site-header {
       overflow: hidden;
     }
     .nav-right .nav-dropdown-content {
@@ -310,24 +310,24 @@
   
   
   @media screen and (max-width: 768px) {
-    .radix-site-header.responsive {position: relative;}
-    .radix-site-header.responsive a.nav-toggle {
+    .distill-site-header.responsive {position: relative;}
+    .distill-site-header.responsive a.nav-toggle {
       position: absolute;
       right: 0;
       top: 0;
     }
-    .radix-site-header.responsive a,
-    .radix-site-header.responsive .nav-dropdown {
+    .distill-site-header.responsive a,
+    .distill-site-header.responsive .nav-dropdown {
       display: block;
       text-align: left;
     }
-    .radix-site-header.responsive .nav-left,
-    .radix-site-header.responsive .nav-right {
+    .distill-site-header.responsive .nav-left,
+    .distill-site-header.responsive .nav-right {
       width: 100%;
     }
-    .radix-site-header.responsive .nav-dropdown {float: none;}
-    .radix-site-header.responsive .nav-dropdown-content {position: relative;}
-    .radix-site-header.responsive .nav-dropdown .nav-dropbtn {
+    .distill-site-header.responsive .nav-dropdown {float: none;}
+    .distill-site-header.responsive .nav-dropdown-content {position: relative;}
+    .distill-site-header.responsive .nav-dropdown .nav-dropbtn {
       display: block;
       width: 100%;
       text-align: left;
@@ -336,7 +336,7 @@
   
   /* Site Footer */
   
-  .radix-site-footer {
+  .distill-site-footer {
     width: 100%;
     overflow: hidden;
     box-sizing: border-box;
@@ -1219,7 +1219,7 @@
   
     // get rid of index.html references in header
     if (window.location.protocol !== "file:") {
-      $('.radix-site-header a[href]').each(function(i,val) {
+      $('.distill-site-header a[href]').each(function(i,val) {
         $(this).attr('href', $(this).attr('href').replace("index.html", "./"));
       });
     }
@@ -1296,18 +1296,18 @@
 <!--radix_placeholder_front_matter-->
 
 <script id="distill-front-matter" type="text/json">
-{"title":"Creating a Website","description":"Share a set of Radix articles as a website","authors":[]}
+{"title":"Creating a Website","description":"Share a set of Distill articles as a website","authors":[]}
 </script>
 
 <!--/radix_placeholder_front_matter-->
 <!--radix_placeholder_navigation_before_body-->
 <header class="header header--fixed" role="banner">
-<nav class="radix-site-nav radix-site-header">
+<nav class="distill-site-nav distill-site-header">
 <div class="nav-left">
 <a class="logo" href="https://www.rstudio.com">
 <img src="images/logo.png"/>
 </a>
-<a href="index.html" class="title">Radix for R Markdown</a>
+<a href="index.html" class="title">Distill for R Markdown</a>
 </div>
 <div class="nav-right">
 <div class="nav-dropdown">
@@ -1317,7 +1317,7 @@ Authoring
 <span class="down-arrow">&#x25BE;</span>
 </button>
 <div class="nav-dropdown-content">
-<a href="basics.html">Radix Basics</a>
+<a href="basics.html">Distill Basics</a>
 <a href="figures.html">Figure Layout</a>
 <a href="tables.html">Tables</a>
 <a href="diagrams.html">Diagrams</a>
@@ -1325,6 +1325,8 @@ Authoring
 <hr/>
 <a href="citations.html">Citations</a>
 <a href="metadata.html">Article Metadata</a>
+<hr/>
+<a href="migrating.html">Migrating from Radix</a>
 </div>
 </div>
 <div class="nav-dropdown">
@@ -1354,7 +1356,7 @@ Publishing
 </div>
 </div>
 <a href="news.html">News</a>
-<a href="https://github.com/rstudio/radix">
+<a href="https://github.com/rstudio/distill">
 <i class="fab fa-github"></i>
 </a>
 <a href="javascript:void(0);" class="nav-toggle">&#9776;</a>
@@ -1367,7 +1369,7 @@ Publishing
 
 <div class="d-title">
 <h1>Creating a Website</h1>
-<p>Share a set of Radix articles as a website</p>
+<p>Share a set of Distill articles as a website</p>
 </div>
 
 
@@ -1391,11 +1393,11 @@ Publishing
 </ul>
 </nav>
 <hr class="d-toc-separator"/>
-<p>This article describes how to create a website that contains a collection of Radix articles. Radix websites include a top level navigation bar that enables readers to discover and browse articles. For example, the documentation pages you are reading now are a Radix website.</p>
+<p>This article describes how to create a website that contains a collection of Distill articles. Distill websites include a top level navigation bar that enables readers to discover and browse articles. For example, the documentation pages you are reading now are a Distill website.</p>
 <p>Once you’ve created your website locally, there are a variety of ways available to <a href="publish_website.html">publish your site</a> to the web.</p>
 <h2 id="getting-started">Getting started</h2>
 <h3 id="creating-a-website">Creating a website</h3>
-<p>If you are using RStudio, the easist way to get started is to use the Radix Website option in the RStudio <strong>New Project</strong> dialog:</p>
+<p>If you are using RStudio, the easist way to get started is to use the Distill Website option in the RStudio <strong>New Project</strong> dialog:</p>
 <p><img src="images/create-website.png" class="screenshot" style="width:95.0%" /></p>
 <p>A new <a href="https://support.rstudio.com/hc/en-us/articles/200526207-Using-Projects">RStudio Project</a> for the website will be created and opened. The website will include the following files:</p>
 <table>
@@ -1420,13 +1422,13 @@ Publishing
 </tr>
 </tbody>
 </table>
-<p>If you are not using RStudio you can also call the Radix <code>create_website()</code> function:</p>
+<p>If you are not using RStudio you can also call the Distill <code>create_website()</code> function:</p>
 <pre class="r"><code>
-library(radix)
+library(distill)
 create_website(dir = &quot;my-website&quot;, title = &quot;My Website&quot;)</code></pre>
 <p>A new website containing Home and About pages will be created within the <code>my-website</code> directory.</p>
 <h3 id="authoring-articles">Authoring articles</h3>
-<p>When you use the RStudio <strong>Knit</strong> command on a Radix article within a website, only that article will be rendered and previewed:</p>
+<p>When you use the RStudio <strong>Knit</strong> command on a Distill article within a website, only that article will be rendered and previewed:</p>
 <p><img src="images/knit-site-article.png" class="screenshot" style="width:95.0%" /></p>
 <p>You can also preview a single article from within a website by passing the name of the article’s Rmd file to <code>render_site()</code>:</p>
 <pre class="r"><code>
@@ -1434,7 +1436,7 @@ render_site(&quot;about.Rmd&quot;)</code></pre>
 <p>This will build only the specified article (as opposed to all articles in the site). This the recommended workflow for authoring articles since it offers the fastest turnaround time for previews (since only the article you are working on is rendered).</p>
 <h3 id="building-the-site">Building the site</h3>
 <p>After you’ve authored the various articles contained within the website you will want to build the entire site before deploying it.</p>
-<p>If your Radix website is contained within an RStudio project you can use the <strong>Build Website</strong> command available in the Build pane to generate the site:</p>
+<p>If your Distill website is contained within an RStudio project you can use the <strong>Build Website</strong> command available in the Build pane to generate the site:</p>
 <p><img src="images/build-website.png" class="screenshot" style="width:95.0%" /></p>
 <p>When you build a website, the following things occur:</p>
 <ol type="1">
@@ -1465,15 +1467,15 @@ exclude: [&quot;docs.txt&quot;, &quot;*.csv&quot;]</code></pre>
 </ol>
 <p>The <code>include</code> and <code>exclude</code> fields of <strong>_site.yml</strong> can be used to override this default behavior (wildcards can be used to specify groups of files to be included or excluded).</p>
 <p>Note that <code>include</code> and <code>exclude</code> are <em>not</em> used to determine which Rmd files are rendered (all of them in the root directory save for those named with the <code>_</code> prefix will be rendered).</p>
-<p>The R Markdown documentation on <a href="https://rmarkdown.rstudio.com/rmarkdown_websites.html">creating websites</a> has documentation on additional available features and configuration options. The remainder of this article describes features that are specific to Radix websites.</p>
+<p>The R Markdown documentation on <a href="https://rmarkdown.rstudio.com/rmarkdown_websites.html">creating websites</a> has documentation on additional available features and configuration options. The remainder of this article describes features that are specific to Distill websites.</p>
 <h2 id="site-navigation">Site navigation</h2>
 <p>Site navigation bars include the site’s title, an optional logo, top-level links to articles, and if need be drop-down menus that include links to several articles. For example:</p>
 <p><img src="images/navigation-bar.png" class="screenshot" style="width:95.0%" /></p>
 <p>Elements of the site navigation bar are specified within the <code>navbar</code> section of the <code>_site.yml</code> file. For example, here is the YAML that was used to create the navigation bar displayed above:</p>
 <pre class="markup"><code>
 ---
-name: &quot;radix&quot;
-title: &quot;Radix for R Markdown&quot;
+name: &quot;distill&quot;
+title: &quot;Distill for R Markdown&quot;
 navbar:
   logo:
     image: images/logo.png
@@ -1495,7 +1497,7 @@ navbar:
         - text: &quot;Article Metadata&quot;
           href: metadata.html
     - icon: fab fa-github
-      href: https://github.com/rstudio/radix
+      href: https://github.com/rstudio/distill
 output: distill::distill_article
 ---</code></pre>
 <p>Note that we specify that the menu items appear on the <code>right</code> side of the navigation bar. We could have also used <code>left</code>, or chosen to put some items on the <code>left</code> and some on the <code>right</code>.</p>
@@ -1515,58 +1517,58 @@ Software licensed under the [Apache License, v2.0]
 <h3 id="theming">Theming</h3>
 <p>You can use CSS to create an alternate theme for your navigation bar and site footer. Here is the CSS used for the default appearance:</p>
 <pre class="css"><code>
-.radix-site-nav {
+.distill-site-nav {
   color: rgba(255, 255, 255, 0.8);
   background-color: #455a64;
   font-size: 15px;
   font-weight: 300;
 }
 
-.radix-site-nav a {
+.distill-site-nav a {
   color: inherit;
   text-decoration: none;
 }
 
-.radix-site-nav a:hover {
+.distill-site-nav a:hover {
   color: white;
 }
 
-.radix-site-header {
+.distill-site-header {
 }
 
-.radix-site-footer {
+.distill-site-footer {
 }
 
 @media print {
-  .radix-site-nav {
+  .distill-site-nav {
     display: none;
   }
 }</code></pre>
-<p>The <code>radix-site-nav</code> class addresses both the header and footer, whereas the <code>radix-site-header</code> and <code>radix-site-footer</code> apply (respectively) to just the header and footer.</p>
+<p>The <code>distill-site-nav</code> class addresses both the header and footer, whereas the <code>distill-site-header</code> and <code>distill-site-footer</code> apply (respectively) to just the header and footer.</p>
 <p>To override all or part of this CSS, simply include a <code>styles.css</code> file in the main site directory and add a reference to it within your site output options. For example:</p>
 <p><strong>_site.yml</strong></p>
 <pre class="markup"><code>
-name: &quot;radix&quot;
-title: &quot;Radix for R Markdown&quot;
+name: &quot;distill&quot;
+title: &quot;Distill for R Markdown&quot;
 navbar:
   # (navbar definition here)
 output:
-  radix::radix_article:
+  distill::distill_article:
     css: styles.css</code></pre>
 <h2 id="google-analytics">Google analytics</h2>
 <p>You can add <a href="https://analytics.google.com/">Google Analytics</a> to your website by adding a <code>google_analytics</code> tracking ID to your <code>_site.yml</code> file. For example:</p>
 <p><strong>_site.yml</strong></p>
 <pre class="markup"><code>
-name: &quot;radix&quot;
-title: &quot;Radix for R Markdown&quot;
-base_url: https://rstudio.github.io/radix
+name: &quot;distill&quot;
+title: &quot;Distill for R Markdown&quot;
+base_url: https://rstudio.github.io/distill
 google_analytics: &quot;UA-77306155-2&quot;
 navbar:
   # (navbar definition here)
-output: radix::radix_article</code></pre>
+output: distill::distill_article</code></pre>
 <p>The Google Analytics tracking code will be automatically included on all pages of your website.</p>
 <h2 id="site-metadata">Site metadata</h2>
-<p>Radix articles can include various types of <a href="metadata.html">metadata</a> to make them easier to index, cite, and share. Metadata included within your <code>_site.yml</code> file is conveniently shared across all articles on your site (individual articles can always override any value within their own metadata).</p>
+<p>Distill articles can include various types of <a href="metadata.html">metadata</a> to make them easier to index, cite, and share. Metadata included within your <code>_site.yml</code> file is conveniently shared across all articles on your site (individual articles can always override any value within their own metadata).</p>
 <p>Several metadata values which you might find useful to define in <code>_site.yml</code> are:</p>
 <table>
 <colgroup>
@@ -1609,17 +1611,17 @@ output: radix::radix_article</code></pre>
 <p>Here’s a <code>_site.yml</code> file that uses all of these fields (save for <code>license_url</code> since the license is already specified via <code>creative_commons</code>):</p>
 <p><strong>_site.yml</strong></p>
 <pre class="markup"><code>
-name: &quot;radix&quot;
-title: &quot;Radix for R Markdown&quot;
+name: &quot;distill&quot;
+title: &quot;Distill for R Markdown&quot;
 favicon: images/favicon.png
-base_url: https://rstudio.github.io/radix
-repository_url: https://github.com/rstudio/radix
+base_url: https://rstudio.github.io/distill
+repository_url: https://github.com/rstudio/distill
 creative_commons: CC BY
 twitter:
-  site: &quot;@radixjournal&quot;
+  site: &quot;@distilljournal&quot;
 navbar:
   # (navbar definition here)
-output: radix::radix_article</code></pre>
+output: distill::distill_article</code></pre>
 <p>Be sure to enclose Twitter account names in quotes (this is required because they start with <code>@</code>).</p>
 <h2 id="publishing-a-website">Publishing a website</h2>
 <p>Website content is by default written to the <code>_site</code> sub-directory (you can customize this using the <code>output_dir</code> metadata field). Publishing is simply a matter of copying the output directory to a web server or web hosting service.</p>
@@ -1637,13 +1639,13 @@ output: radix::radix_article</code></pre>
 <!--radix_placeholder_appendices-->
 <div class="appendix-bottom">
 <h3 id="updates-and-corrections">Corrections</h3>
-<p>If you see mistakes or want to suggest changes, please <a href="https://github.com/rstudio/radix/issues/new">create an issue</a> on the source repository.</p>
+<p>If you see mistakes or want to suggest changes, please <a href="https://github.com/rstudio/distill/issues/new">create an issue</a> on the source repository.</p>
 <h3 id="reuse">Reuse</h3>
-<p>Text and figures are licensed under Creative Commons Attribution <a rel="license" href="https://creativecommons.org/licenses/by/4.0/">CC BY 4.0</a>. Source code is available at <a href="https://github.com/rstudio/radix">https://github.com/rstudio/radix</a>, unless otherwise noted. The figures that have been reused from other sources don't fall under this license and can be recognized by a note in their caption: "Figure from ...".</p>
+<p>Text and figures are licensed under Creative Commons Attribution <a rel="license" href="https://creativecommons.org/licenses/by/4.0/">CC BY 4.0</a>. Source code is available at <a href="https://github.com/rstudio/distill">https://github.com/rstudio/distill</a>, unless otherwise noted. The figures that have been reused from other sources don't fall under this license and can be recognized by a note in their caption: "Figure from ...".</p>
 </div>
 <!--/radix_placeholder_appendices-->
 <!--radix_placeholder_navigation_after_body-->
-<div class="radix-site-nav radix-site-footer">
+<div class="distill-site-nav distill-site-footer">
 <p>© Copyright 2018 <a href="https://github.com/distillpub/template/blob/master/AUTHORS">The Distill Template Authors</a> and <a href="https://www.rstudio.com">RStudio, Inc</a>.</p>
 <p>Software licensed under the <a href="https://www.apache.org/licenses/LICENSE-2.0">Apache License, v2.0</a>.</p>
 </div>

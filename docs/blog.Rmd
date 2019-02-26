@@ -1,19 +1,19 @@
 ---
 title: "Creating a Blog"
-description: Create a blog to publish a collection of Radix articles
+description: Create a blog to publish a collection of Distill articles
 ---
 
 ```{r setup, include=FALSE}
 library(knitr)
 ```
 
-Radix websites include integrated support for blogging. To create a blog you author a collection of posts (located in the `_posts` subdirectory of your website) and then dedicate a page (usually the website homepage) to a listing of all of your posts.
+Distill for R Markdown websites include integrated support for blogging. To create a blog you author a collection of posts (located in the `_posts` subdirectory of your website) and then dedicate a page (usually the website homepage) to a listing of all of your posts.
 
 ## Getting started
 
 ### Creating a blog
 
-If you are using RStudio, the easiest way to get started is to use the  Radix Blog option in the RStudio **New Project** dialog:
+If you are using RStudio, the easiest way to get started is to use the  Distill Blog option in the RStudio **New Project** dialog:
 
 ![](images/create-blog.png){width=95% .screenshot}
 
@@ -29,10 +29,10 @@ A new [RStudio Project](https://support.rstudio.com/hc/en-us/articles/200526207-
 Note that the `welcome` post is just there to provide some skeletal content for the blog -- feel free to delete it and add your own initial post to the blog as described in [creating a post].
 
 
-If you are not using RStudio you can also call the Radix `create_blog()` function:
+If you are not using RStudio you can also call the Distill `create_blog()` function:
 
 ```r
-library(radix)
+library(distill)
 create_blog(dir = "my-blog", title = "My Blog")
 ```
 
@@ -68,7 +68,7 @@ navbar:
       href: contributors.html
     - icon: fa fa-rss
       href: index.xml
-output: radix::radix_article
+output: distill::distill_article
 ```
 
 Note that we've also added a feed icon to the right side of the menu bar which makes it easy to discover and browse the RSS feed for the blog.
@@ -78,11 +78,11 @@ Note that we've also added a feed icon to the right side of the menu bar which m
 The easiest way to start authoring a new post is to call the `create_post()` function from within your blog's directory. For example:
 
 ```r
-library(radix)
+library(distill)
 create_post("The Sharpe Ratio")
 ```
 
-This will create a sub-directory for your post within the `_posts` directory, add a stub Radix article, and open the article for editing. 
+This will create a sub-directory for your post within the `_posts` directory, add a stub Distill article, and open the article for editing. 
 
 If you want your post to start out as a draft (i.e. not be included within the listing of all posts) then you can add `draft = TRUE`. For example:
 
@@ -104,7 +104,7 @@ Once you have authored one or more posts you'll want to create a listing page. Y
 ```markup
 ---
 title: "Reproducible Finance with R"
-site: radix::radix_website
+site: distill::distill_website
 listing: posts
 ---
 ```
@@ -165,7 +165,7 @@ navbar:
   right:
     - icon: fa fa-rss
       href: index.xml
-output: radix::radix_article
+output: distill::distill_article
 ```
 
 Note that the `description` and `base_url` fields are both required to generate an RSS feed.
@@ -206,7 +206,7 @@ draft: true
 
 When you are ready to publish the post, either remove the `draft` option or set it to `false`, then build the website.
 
-Beyond support for drafts, Radix has a number of additional features to accommodate a variety of post authoring and contribution workflows, including importing posts published elsewhere on the web (e.g. on RPubs, in a Git repository, or on another blog). The article on [blog post workflow](blog_workflow.html) describes these options in more detail.
+Beyond support for drafts, Distill has a number of additional features to accommodate a variety of post authoring and contribution workflows, including importing posts published elsewhere on the web (e.g. on RPubs, in a Git repository, or on another blog). The article on [blog post workflow](blog_workflow.html) describes these options in more detail.
 
 ## Next steps
 
@@ -390,7 +390,7 @@ resources:
 
 After you've authored one or more posts you will want to build the entire site before publishing it. 
 
-If your Radix website is contained within an RStudio project you can use the **Build Website** command available in the Build pane to generate the site:
+If your Distill website is contained within an RStudio project you can use the **Build Website** command available in the Build pane to generate the site:
 
 ![](images/build-website.png){width=95% .screenshot}
 
@@ -406,7 +406,7 @@ There are a variety of options available for making your site available to other
 
 ## Examples
 
-- The TensorFlow for R blog uses Radix: <https://blogs.rstudio.com/tensorflow/>
+- The TensorFlow for R blog uses Distill for R Markdown: <https://blogs.rstudio.com/tensorflow/>
 
     The source code for the TensorFlow for R blog can be found here: <https://github.com/rstudio/tensorflow-blog>
 

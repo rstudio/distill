@@ -1,9 +1,9 @@
 
 
 
-#' Create a Radix website
+#' Create a Distill website
 #'
-#' Create a basic skeleton for a Radix website or blog. Use the `create_website()`
+#' Create a basic skeleton for a Distill website or blog. Use the `create_website()`
 #' function for a website and the `create_blog()` function for a blog.
 #'
 #' @param dir Directory for website
@@ -17,7 +17,7 @@
 #'
 #' @examples
 #' \dontrun{
-#' library(radix)
+#' library(distill)
 #' create_website("mysite", "My Site")
 #' }
 #' @export
@@ -74,11 +74,11 @@ create_blog <- function(dir, title, gh_pages = FALSE, edit = interactive()) {
 #' @param edit Open the post in an editor after creating it.
 #'
 #' @note This function must be called from with a working directory that is within
-#'  a Radix website.
+#'  a Distill website.
 #'
 #' @examples
 #' \dontrun{
-#' library(radix)
+#' library(distill)
 #' create_post("My Post")
 #' }
 #'
@@ -89,7 +89,7 @@ create_post <- function(title, author = "auto", slug = "auto", date_prefix = TRU
   # determine site_dir (must call from within a site)
   site_dir <- find_site_dir(".")
   if (is.null(site_dir))
-    stop("You must call create_post from within a Radix website")
+    stop("You must call create_post from within a Distill website")
 
   # more discovery
   site_config <- site_config(site_dir)
@@ -150,7 +150,7 @@ description: |
   A short description of the post.
 %sdate: %s
 output:
-  radix::radix_article:
+  distill::distill_article:
     self_contained: false%s
 ---', title, author, format.Date(post_date, "%m-%d-%Y"), draft)
 
@@ -163,9 +163,9 @@ output:
 knitr::opts_chunk$set(echo = FALSE)
 ```
 
-Radix is a publication format for scientific and technical writing, native to the web.
+Distill is a publication format for scientific and technical writing, native to the web.
 
-Learn more about using Radix at <https://rstudio.github.io/radix>.
+Learn more about using Distill at <https://rstudio.github.io/distill>.
 
 '
 
@@ -262,7 +262,7 @@ render_website <- function(dir, type) {
 render_template <- function(file, type, target_path, data = list()) {
   message("Creating ", file.path(target_path, file))
   template <- system.file(file.path("rstudio", "templates", "project", type, file),
-                          package = "radix")
+                          package = "distill")
   template <- paste(readLines(template, encoding = "UTF-8"), collapse = "\n")
   output <- whisker::whisker.render(template, data)
   if (!dir_exists(target_path))

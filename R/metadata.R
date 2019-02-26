@@ -458,7 +458,7 @@ citation_references_in_header <- function(file, bibliography) {
     pandoc_convert(file, to = "html5", from = "markdown-tex_math_dollars", output = biblio_html,
                    citeproc = TRUE, options = list(
                      "--bibliography", bibliography,
-                     "--template", pandoc_path_arg(radix_resource("biblio.html"))
+                     "--template", pandoc_path_arg(distill_resource("biblio.html"))
                    ))
 
     # parse the html for citations
@@ -694,12 +694,12 @@ discover_preview <- function(file) {
       line <- lines[[line_index]]
 
       # record image_line if we don't already have one (this will result in
-      # using the first image in the file if there is no data-radix-preview)
+      # using the first image in the file if there is no data-distill-preview)
       if (is.null(image_line))
         image_line <- line
 
-      # if it's marked with data-radix-preview we are done
-      if (grepl('data-radix-preview=', line, fixed = TRUE)) {
+      # if it's marked with data-distill-preview we are done
+      if (grepl('data-distill-preview=', line, fixed = TRUE)) {
         image_line <- line
         completed <- TRUE
         break
@@ -722,7 +722,7 @@ discover_preview <- function(file) {
 
     # if we are in a collection then we copy it to the collection root
     else if (startsWith(img_src, "data:image/")) {
-      preview <- "radix-preview.png"
+      preview <- "distill-preview.png"
       preview_path <- file.path(dirname(file), preview)
       img_base64 <- sub("^data:image/.*,", "", img_src)
       img_bytes <- base64enc::base64decode(img_base64)

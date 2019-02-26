@@ -6,9 +6,9 @@ validate_rstudio_version <- function() {
   # don't validate when running under TESTTHAT
   if (!is.na(Sys.getenv("TESTTHAT", unset = NA)))
     return()
-  
+
   # if we are running under rstudio then check whether this version
-  # can render radix articles (since they use webcomponents polyfill)
+  # can render distill articles (since they use webcomponents polyfill)
   rstudio <- rstudio_version()
   if (!is.null(rstudio)) {
 
@@ -16,7 +16,7 @@ validate_rstudio_version <- function() {
     if (!is_osx() && (rstudio$mode == "desktop")) {
 
       if (package_version(rstudio$version) < package_version("1.2.718"))
-        stop("Radix articles cannot be previewed in this version of RStudio.\n",
+        stop("Distill articles cannot be previewed in this version of RStudio.\n",
              "Please update to version 1.2.718 or higher at ",
              "https://www.rstudio.com/products/rstudio/download/preview/\n",
              call. = FALSE)

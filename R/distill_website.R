@@ -1,11 +1,11 @@
 
 
-#' R Markdown site generator for Radix websites
+#' R Markdown site generator for Distill websites
 #'
 #' @inheritParams rmarkdown::default_site_generator
 #'
 #' @export
-radix_website <- function(input, encoding = getOption("encoding"), ...) {
+distill_website <- function(input, encoding = getOption("encoding"), ...) {
 
   # first great the default site generator
   default <- rmarkdown::default_site_generator(input, encoding, ...)

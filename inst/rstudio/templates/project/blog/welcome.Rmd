@@ -10,19 +10,19 @@ author:
     affiliation_url: https://example.com/spacelysprokets
 date: {{date}}
 output:
-  radix::radix_article:
+  distill::distill_article:
     self_contained: false
 ---
 
 ```{r setup, include=FALSE}
 knitr::opts_chunk$set(echo = FALSE)
 
-# Learn more about creating blogs with Radix at:
-# https://rstudio.github.io/radix/blog.html
+# Learn more about creating blogs with Distill at:
+# https://rstudio.github.io/distill/blog.html
 
 {{#gh_pages}}
 # Learn more about publishing to GitHub Pages at:
-# https://rstudio.github.io/radix/publish_website.html#github-pages
+# https://rstudio.github.io/distill/publish_website.html#github-pages
 
 {{/gh_pages}}
 ```

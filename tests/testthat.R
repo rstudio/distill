@@ -1,7 +1,7 @@
 library(testthat)
-library(radix)
+library(distill)
 
-test_check("radix")
+test_check("distill")
 
 
 
