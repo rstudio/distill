@@ -28,10 +28,10 @@ workflow based on literate programming.
 
 ### Getting Started
 
-You can install distill from GitHub with:
+You can install distill from CRAN with:
 
 ``` r
-devtools::install_github("rstudio/distill")
+install.packages("distill")
 ```
 
 Learn more about using Distill at <https://rstudio.github.io/distill>.
