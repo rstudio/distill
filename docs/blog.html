@@ -1571,7 +1571,7 @@ collections:
 <p>The following footer is then automatically included at the end of each post:</p>
 <p><img src="images/social-footer.png" class="screenshot" style="width:80.0%" /></p>
 <p>Note that the <code>base_url</code> field is required in order to use Disqus and sharing links.</p>
-<p>Valid values for the <code>share</code> option are <code>twitter</code>, <code>linkedin</code>, <code>facebook</code>, <code>google-plus</code>, and <code>pintrest</code>.</p>
+<p>Valid values for the <code>share</code> option are <code>twitter</code>, <code>linkedin</code>, <code>facebook</code>, <code>google-plus</code>, and <code>pinterest</code>.</p>
 <p>By default, the full text of Disqus comments are not displayed (rather, a link is provided that will expand the comment section). This is done so that a long comment section doesn’t obscure the bibliography and other appendices. If you’d rather show the comments by default you can use this alterante syntax for <code>disqus</code> configuration:</p>
 <pre class="markup"><code>
 collections:
@@ -1611,7 +1611,7 @@ description: |
   and then calculating the Sharpe Ratio. 
 preview: images/sharpe-ratio.png
 ---</code></pre>
-<p>Preview images are also used for generating <a href="metadata.html#open-graph">Open Graph</a> and <a href="metadata.html#twitter-card">Twitter Card</a> metadata. However, since those systems require that preview images be specified as absolute URLs, you also need to add a <code>base_url</code> field to your <code>_site.yml</code> file as describe above in <a href="#getting-started">Getting Started</a>.</p>
+<p>Preview images are also used for generating <a href="metadata.html#open-graph">Open Graph</a> and <a href="metadata.html#twitter-card">Twitter Card</a> metadata. However, since those systems require that preview images be specified as absolute URLs, you also need to add a <code>base_url</code> field to your <code>_site.yml</code> file as described above in <a href="#getting-started">Getting Started</a>.</p>
 <h3 id="citations">Citations</h3>
 <p>If your <code>_site.yml</code> file provides a <code>base_url</code> field, then an <a href="citations.html">article citation</a> appendix and related metadata will be included automatically within all published posts. For example:</p>
 <p><img src="images/blog-citation.png" class="screenshot" style="width:95.0%" /></p>
@@ -1630,7 +1630,7 @@ collections:
     share: [twitter, linkedin]
     citations: false</code></pre>
 <h3 id="subscriptions">Subscriptions</h3>
-<p>You can add HTML that enable readers to subscribe to your blog by including the <code>collections:posts:subscribe</code> option within <code>_site.yml</code>. The <code>subscribe</code> option in turn points to an HTML file that provides the ability to subscribe to your blog. For example:</p>
+<p>You can add HTML that enables readers to subscribe to your blog by including the <code>collections:posts:subscribe</code> option within <code>_site.yml</code>. The <code>subscribe</code> option in turn points to an HTML file that provides the ability to subscribe to your blog. For example:</p>
 <p><strong>_site.yml</strong></p>
 <pre class="markup"><code>
 name: &quot;reproducible-finance-with-r&quot;
