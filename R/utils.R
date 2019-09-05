@@ -53,13 +53,18 @@ is_date <- function(x) {
 
 parse_date <- function(date) {
   if (!is.null(date)) {
-    parsed_date <- lubridate::mdy(date, tz = Sys.timezone(), quiet = TRUE)
+    parsed_date <- lubridate::mdy(date, tz = safe_timezone(), quiet = TRUE)
     if (is.na(parsed_date))
-      parsed_date <- lubridate::ymd(date, tz = Sys.timezone(), quiet = TRUE)
+      parsed_date <- lubridate::ymd(date, tz = safe_timezone(), quiet = TRUE)
     if (lubridate::is.POSIXct(parsed_date))
       date <- parsed_date
   }
   date
+}
+
+safe_timezone <- function() {
+  tz <- Sys.timezone()
+  ifelse(is.na(tz), "UTC", tz)
 }
 
 time_as_iso_8601 <- function(time) {
