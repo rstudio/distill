@@ -62,6 +62,36 @@ write_sitemap_xml <- function(site_dir, site_config) {
 
 }
 
+write_feed_xml_html_content <- function(input_path) {
+  html_file <- tempfile(fileext = ".html")
+
+  # prepare source rmd
+  rmd_dir <- tempfile()
+  dir.create(rmd_dir)
+  rmd_file <- file.path(rmd_dir, basename(input_path))
+  file.copy(from = file.path(dirname(input_path), dir(dirname(input_path))),
+            to = rmd_dir,
+            recursive = TRUE)
+
+  # fix headers
+  rmd_content <- paste0(readLines(input_path), collapse = "\n")
+  rmd_content <- gsub("---.*---", "", rmd_content)
+  writeLines(rmd_content, rmd_file)
+
+  # render doc
+  rmarkdown::render(rmd_file,
+                    output_format = "html_document",
+                    output_file = html_file,
+                    quiet = TRUE)
+
+  # extract body
+  html_contents <- paste(readLines(html_file), collapse = "\n")
+  html_contents <- gsub(".*<body[^>]*>", "", html_contents)
+  html_contents <- gsub("</body>.*", "", html_contents)
+
+  html_contents
+}
+
 write_feed_xml <- function(feed_xml, site_config, collection, articles) {
 
   # we can't write an rss feed if there is no base_url
@@ -139,7 +169,21 @@ write_feed_xml <- function(feed_xml, site_config, collection, articles) {
     for (author in article$author)
       add_child(item, "dc:creator", text = author$name)
     add_child(item, "link", text = article$base_url)
-    add_child(item, "description", text = not_null(article$description, default = article$title))
+
+    full_content_path <- NULL
+    if (identical(site_config$rss$full_content, TRUE) && is.character(article$input_file)) {
+      guess_rmd <- paste0(gsub("\\.utf.*\\.md|\\.md", "", article$input_file), ".Rmd")
+      full_content_path <- dir(getwd(), pattern = guess_rmd, full.names = TRUE, recursive = TRUE)
+    }
+
+    if (length(full_content_path) > 0) {
+      html_contents <- write_feed_xml_html_content(full_content_path)
+      add_child(item, "description", text = html_contents)
+    }
+    else {
+      add_child(item, "description", text = not_null(article$description, default = article$title))
+    }
+
     add_child(item, "guid", text = article$base_url)
     add_child(item, "pubDate", text = date_as_rfc_2822(article$date))
 
