@@ -184,6 +184,12 @@ write_feed_xml <- function(feed_xml, site_config, collection, articles) {
       add_child(item, "description", text = not_null(article$description, default = article$title))
     }
 
+    if (!is.null(article$categories)) {
+      for (category in article$categories) {
+        add_child(item, "category", text = category)
+      }
+    }
+
     add_child(item, "guid", text = article$base_url)
     add_child(item, "pubDate", text = date_as_rfc_2822(article$date))
 
