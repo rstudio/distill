@@ -62,6 +62,36 @@ write_sitemap_xml <- function(site_dir, site_config) {
 
 }
 
+write_feed_xml_html_content <- function(input_path) {
+  html_file <- tempfile(fileext = ".html")
+
+  # prepare source rmd
+  rmd_dir <- tempfile()
+  dir.create(rmd_dir)
+  rmd_file <- file.path(rmd_dir, basename(input_path))
+  file.copy(from = file.path(dirname(input_path), dir(dirname(input_path))),
+            to = rmd_dir,
+            recursive = TRUE)
+
+  # fix headers
+  rmd_content <- paste0(readLines(input_path), collapse = "\n")
+  rmd_content <- gsub("---.*---", "", rmd_content)
+  writeLines(rmd_content, rmd_file)
+
+  # render doc
+  rmarkdown::render(rmd_file,
+                    output_format = "html_document",
+                    output_file = html_file,
+                    quiet = TRUE)
+
+  # extract body
+  html_contents <- paste(readLines(html_file), collapse = "\n")
+  html_contents <- gsub(".*<body[^>]*>", "", html_contents)
+  html_contents <- gsub("</body>.*", "", html_contents)
+
+  html_contents
+}
+
 write_feed_xml <- function(feed_xml, site_config, collection, articles) {
 
   # we can't write an rss feed if there is no base_url
@@ -78,14 +108,18 @@ write_feed_xml <- function(feed_xml, site_config, collection, articles) {
     return(NULL)
   }
 
-  # create document root
-  feed <- xml2::xml_new_root("rss",
-                             "xmlns:atom" = "http://www.w3.org/2005/Atom",
-                             "xmlns:media" = "http://search.yahoo.com/mrss/",
-                             "xmlns:content" = "http://purl.org/rss/1.0/modules/content/",
-                             "xmlns:dc" = "http://purl.org/dc/elements/1.1/",
-                             version = "2.0"
+  namespaces <- list(
+    "xmlns:atom" = "http://www.w3.org/2005/Atom",
+    "xmlns:media" = "http://search.yahoo.com/mrss/",
+    "xmlns:content" = "http://purl.org/rss/1.0/modules/content/",
+    "xmlns:dc" = "http://purl.org/dc/elements/1.1/"
   )
+
+  if (identical(site_config$rss$full_content, TRUE))
+      namespaces <- c(namespaces, list("xmlns:distill" = "https://distill.pub/journal/"))
+
+  # create document root
+  feed <- do.call("xml_new_root", c("rss", namespaces, list(version = "2.0")), envir = asNamespace("xml2"))
 
   # helper to add a child element
   add_child <- function(node, tag, attr = c(), text = NULL, optional = FALSE) {
@@ -139,7 +173,47 @@ write_feed_xml <- function(feed_xml, site_config, collection, articles) {
     for (author in article$author)
       add_child(item, "dc:creator", text = author$name)
     add_child(item, "link", text = article$base_url)
-    add_child(item, "description", text = not_null(article$description, default = article$title))
+
+    full_content_path <- NULL
+    if (identical(site_config$rss$full_content, TRUE) && is.character(article$input_file)) {
+      guess_rmd <- paste0(gsub("\\.utf.*\\.md|\\.md", "", article$input_file), ".Rmd")
+      full_content_path <- dir(getwd(), pattern = guess_rmd, full.names = TRUE, recursive = TRUE)
+    }
+
+    if (length(full_content_path) > 0) {
+      browser()
+
+      rss_md5 <- NULL
+      rss_path <- file.path(site_config$output_dir, feed_xml)
+      if (file.exists(rss_path)) {
+        rss_nodes <- xml2::read_xml(rss_path)
+        rss_article_base <- url_path(site_config$base_url, article$path)
+
+        rss_entry <- xml2::xml_find_all(rss_nodes, paste0("/rss/channel/item/link[text()='", rss_article_base, "']/.."))
+        rss_md5 <- xml2::xml_find_all(rss_entry, "distill:md5/text()")
+        rss_description <- xml2::xml_find_all(rss_entry, "description/text()")
+      }
+
+      new_md5 <- openssl::md5(full_content_path)
+      if (identical(rss_md5, new_md5)) {
+        add_child(item, "description", text = rss_description)
+      }
+      else {
+        html_contents <- write_feed_xml_html_content(full_content_path)
+        add_child(item, "description", text = html_contents)
+        add_child(item, "distill:md5", text = new_md5)
+      }
+    }
+    else {
+      add_child(item, "description", text = not_null(article$description, default = article$title))
+    }
+
+    if (!is.null(article$categories)) {
+      for (category in article$categories) {
+        add_child(item, "category", text = category)
+      }
+    }
+
     add_child(item, "guid", text = article$base_url)
     add_child(item, "pubDate", text = date_as_rfc_2822(article$date))
 
