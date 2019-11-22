@@ -108,14 +108,18 @@ write_feed_xml <- function(feed_xml, site_config, collection, articles) {
     return(NULL)
   }
 
-  # create document root
-  feed <- xml2::xml_new_root("rss",
-                             "xmlns:atom" = "http://www.w3.org/2005/Atom",
-                             "xmlns:media" = "http://search.yahoo.com/mrss/",
-                             "xmlns:content" = "http://purl.org/rss/1.0/modules/content/",
-                             "xmlns:dc" = "http://purl.org/dc/elements/1.1/",
-                             version = "2.0"
+  namespaces <- list(
+    "xmlns:atom" = "http://www.w3.org/2005/Atom",
+    "xmlns:media" = "http://search.yahoo.com/mrss/",
+    "xmlns:content" = "http://purl.org/rss/1.0/modules/content/",
+    "xmlns:dc" = "http://purl.org/dc/elements/1.1/"
   )
+
+  if (identical(site_config$rss$full_content, TRUE))
+      namespaces <- c(namespaces, list("xmlns:distill" = "https://distill.pub/journal/"))
+
+  # create document root
+  feed <- do.call("xml_new_root", c("rss", namespaces, list(version = "2.0")), envir = asNamespace("xml2"))
 
   # helper to add a child element
   add_child <- function(node, tag, attr = c(), text = NULL, optional = FALSE) {
@@ -177,8 +181,28 @@ write_feed_xml <- function(feed_xml, site_config, collection, articles) {
     }
 
     if (length(full_content_path) > 0) {
-      html_contents <- write_feed_xml_html_content(full_content_path)
-      add_child(item, "description", text = html_contents)
+      browser()
+
+      rss_md5 <- NULL
+      rss_path <- file.path(site_config$output_dir, feed_xml)
+      if (file.exists(rss_path)) {
+        rss_nodes <- xml2::read_xml(rss_path)
+        rss_article_base <- url_path(site_config$base_url, article$path)
+
+        rss_entry <- xml2::xml_find_all(rss_nodes, paste0("/rss/channel/item/link[text()='", rss_article_base, "']/.."))
+        rss_md5 <- xml2::xml_find_all(rss_entry, "distill:md5/text()")
+        rss_description <- xml2::xml_find_all(rss_entry, "description/text()")
+      }
+
+      new_md5 <- openssl::md5(full_content_path)
+      if (identical(rss_md5, new_md5)) {
+        add_child(item, "description", text = rss_description)
+      }
+      else {
+        html_contents <- write_feed_xml_html_content(full_content_path)
+        add_child(item, "description", text = html_contents)
+        add_child(item, "distill:md5", text = new_md5)
+      }
     }
     else {
       add_child(item, "description", text = not_null(article$description, default = article$title))
