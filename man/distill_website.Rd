@@ -9,7 +9,7 @@ distill_website(input, encoding = getOption("encoding"), ...)
 \arguments{
 \item{input}{Website directory (or the name of a file within the directory).}
 
-\item{encoding}{The encoding of the input file; see \code{\link{file}}.}
+\item{encoding}{The encoding of the input file; see \code{\link[rmarkdown]{file}}.}
 
 \item{...}{Currently unused.}
 }

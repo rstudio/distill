@@ -146,7 +146,7 @@ navigation_before_body_html <- function(site_config, offset) {
       } else if (is.list(logo)) {
         logo <- a(class = "logo",
                   href = offset_href(logo$href),
-                  img(src= offset_href(logo$image)))
+                  img(src= offset_href(logo$image), alt = "Logo"))
       }
     }
 
