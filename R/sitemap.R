@@ -62,7 +62,7 @@ write_sitemap_xml <- function(site_dir, site_config) {
 
 }
 
-write_feed_xml_html_content <- function(input_path) {
+write_feed_xml_html_content <- function(input_path, article) {
   html_file <- tempfile(fileext = ".html")
 
   # prepare source rmd
@@ -82,12 +82,16 @@ write_feed_xml_html_content <- function(input_path) {
   rmarkdown::render(rmd_file,
                     output_format = "html_document",
                     output_file = html_file,
-                    quiet = TRUE)
+                    quiet = TRUE,
+                    output_options = list(self_contained = FALSE))
 
   # extract body
   html_contents <- paste(readLines(html_file), collapse = "\n")
   html_contents <- gsub(".*<body[^>]*>", "", html_contents)
   html_contents <- gsub("</body>.*", "", html_contents)
+
+  # fix image paths
+  html_contents <- gsub(paste0(basename(dirname(rmd_file)), "/"), article$path, html_contents, fixed = TRUE)
 
   html_contents
 }
@@ -181,8 +185,6 @@ write_feed_xml <- function(feed_xml, site_config, collection, articles) {
     }
 
     if (length(full_content_path) > 0) {
-      browser()
-
       rss_md5 <- NULL
       rss_path <- file.path(site_config$output_dir, feed_xml)
       if (file.exists(rss_path)) {
@@ -190,8 +192,11 @@ write_feed_xml <- function(feed_xml, site_config, collection, articles) {
         rss_article_base <- url_path(site_config$base_url, article$path)
 
         rss_entry <- xml2::xml_find_all(rss_nodes, paste0("/rss/channel/item/link[text()='", rss_article_base, "']/.."))
-        rss_md5 <- xml2::xml_find_all(rss_entry, "distill:md5/text()")
-        rss_description <- xml2::xml_find_all(rss_entry, "description/text()")
+
+        if ("distill" %in% names(xml2::xml_ns(rss_nodes))) {
+          rss_md5 <- xml2::xml_find_all(rss_entry, "distill:md5/text()")
+          rss_description <- xml2::xml_find_all(rss_entry, "description/text()")
+        }
       }
 
       new_md5 <- openssl::md5(full_content_path)
@@ -199,7 +204,7 @@ write_feed_xml <- function(feed_xml, site_config, collection, articles) {
         add_child(item, "description", text = rss_description)
       }
       else {
-        html_contents <- write_feed_xml_html_content(full_content_path)
+        html_contents <- write_feed_xml_html_content(full_content_path, article)
         add_child(item, "description", text = html_contents)
         add_child(item, "distill:md5", text = new_md5)
       }
