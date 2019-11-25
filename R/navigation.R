@@ -106,8 +106,11 @@ navigation_before_body_html <- function(site_config, offset) {
         item$href <- offset_href(item$href)
         item$image <- offset_href(item$image)
         if (!is.null(item[["icon"]])) {
-          icon <- tag("i", list(class = icon_class(item[["icon"]])))
-          a(href = item[["href"]], icon)
+          icon <- tag("i", list(
+            class = icon_class(item[["icon"]]),
+            `aria-hidden` = "true"
+          ))
+          a(href = item[["href"]], `aria-label` = item[["text"]], icon)
         } else if (!is.null(item[["image"]])) {
           a(href = item[["href"]], class="nav-image", img(src = item[["image"]]))
         } else if (!is.null(item[["text"]]) &&
