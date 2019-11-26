@@ -5,6 +5,7 @@
 * Support rendering full RSS content when rss/full_content is TRUE in site config
 * Update to latest version of Distll template from https://github.com/distillpub/template
 * Provide aria attributes on toolbar icons
+* Add "volume," "issue," "issn," and "publisher" fields for journal article BibTeX entries when those are provided in YAML.
 
 
 ## radix v0.6 (CRAN)

@@ -15,7 +15,8 @@ Authors@R: c(
            comment = "https://github.com/lancedikson/bowser"),
     person(family = "The Polymer Authors", role = c("ctb", "cph"), 
            comment = "https://www.webcomponents.org/polyfills/"),
-    person("Gábor", "Csárdi", role = c("ctb", "cph"), comment = "whoami")
+    person("Gábor", "Csárdi", role = c("ctb", "cph"), comment = "whoami"),
+    person("JooYoung", "Seo", role="ctb", comment = c(ORCID = "0000-0002-4064-6012"))
     )
 Description: Scientific and technical article format for the web. 'Distill' articles 
     feature attractive, reader-friendly typography, flexible layout options
