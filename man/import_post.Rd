@@ -5,9 +5,15 @@
 \alias{update_post}
 \title{Import a post into a blog}
 \usage{
-import_post(url, slug = "auto", date = Sys.Date(),
-  date_prefix = TRUE, check_license = TRUE, overwrite = FALSE,
-  view = interactive())
+import_post(
+  url,
+  slug = "auto",
+  date = Sys.Date(),
+  date_prefix = TRUE,
+  check_license = TRUE,
+  overwrite = FALSE,
+  view = interactive()
+)
 
 update_post(slug, view = interactive())
 }

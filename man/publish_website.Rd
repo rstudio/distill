@@ -4,15 +4,21 @@
 \alias{publish_website}
 \title{Publish a Distill Website}
 \usage{
-publish_website(site_dir = ".", site_name = NULL,
-  method = c("rsconnect"), server = NULL, account = NULL,
-  render = TRUE, launch_browser = interactive())
+publish_website(
+  site_dir = ".",
+  site_name = NULL,
+  method = c("rsconnect"),
+  server = NULL,
+  account = NULL,
+  render = TRUE,
+  launch_browser = interactive()
+)
 }
 \arguments{
 \item{site_dir}{Directory containing website. Defaults to current working directory.}
 
 \item{site_name}{Name for the site (names must be unique within an account). Defaults
-to the \code{name} provided in \code{_site.yml} (or to the name of the site_dir if there is no
+to the \code{name} provided in \verb{_site.yml} (or to the name of the site_dir if there is no
 \code{name} specified).}
 
 \item{method}{Publishing method (currently only "rsconnect" is available)}

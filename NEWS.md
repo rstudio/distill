@@ -5,6 +5,7 @@
 * Support rendering full RSS content when rss/full_content is TRUE in site config
 * Update to latest version of Distll template from https://github.com/distillpub/template
 * Provide aria attributes on toolbar icons
+* Provide alt text for logo image in navigation bar.
 
 
 ## radix v0.6 (CRAN)
