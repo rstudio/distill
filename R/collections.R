@@ -273,6 +273,25 @@ read_articles_json <- function(articles_file, site_dir, site_config, collection)
   articles
 }
 
+move_feed_categories_xml <- function(main_feed, site_config) {
+  for (category in site_config$rss$categories) {
+    posts <- xml2::read_xml(main_feed)
+    category_filter <- paste0("/rss/channel/item/category[text()='", category, "']/..")
+    filtered <- xml2::xml_find_all(posts, category_filter)
+
+    xml2::xml_remove(xml2::xml_find_first(posts, "/rss/channel/item"))
+    channel_root <- xml2::xml_find_first(posts, "/rss/channel")
+    for (entry in filtered) {
+      xml2::xml_add_child(channel_root, entry)
+    }
+
+    target_path <- file.path(site_config$output_dir, "categories", tolower(category))
+    if (!dir.exists(target_path)) dir.create(target_path, recursive = TRUE)
+
+    xml2::write_xml(posts, file.path(target_path, basename(main_feed)))
+  }
+}
+
 update_collection_listing <- function(site_dir, site_config, collection, article, encoding,
                                       input_file) {
 
@@ -335,8 +354,12 @@ update_collection_listing <- function(site_dir, site_config, collection, article
 
       # move feed
       if (site_config$output_dir != "." && !is.null(listing$feed)) {
-        file.rename(listing$feed,
-                    file.path(site_config$output_dir, basename(listing$feed)))
+        main_feed <- file.path(site_config$output_dir, basename(listing$feed))
+        file.rename(listing$feed, main_feed)
+
+        if (!is.null(site_config$rss$categories)) {
+          move_feed_categories_xml(main_feed, site_config)
+        }
       }
 
       # replace listing html

@@ -1,7 +1,7 @@
 
 ## distill v0.7 (Development)
 
-* Add categories to rss feeds
+* Generate RSS category feeds using rss/categories in site config
 * Support rendering full RSS content when rss/full_content is TRUE in site config
 * Update to latest version of Distll template from https://github.com/distillpub/template
 * Provide aria attributes on toolbar icons
