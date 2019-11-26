@@ -136,6 +136,14 @@ appendix_citation <- function(site_config, metadata) {
           suffix <- c(suffix, sprintf(',\n  note = {%s}', metadata$citation_url))
         if (!is.null(metadata$doi))
           suffix <- c(suffix, sprintf(',\n  doi = {%s}', metadata$doi))
+        if (!is.null(metadata$volume))
+          suffix <- c(suffix, sprintf(',\n  volume = {%s}', metadata$volume))
+        if (!is.null(metadata$issue))
+          suffix <- c(suffix, sprintf(',\n  issue = {%s}', metadata$issue))
+        if (!is.null(metadata$journal$issn))
+          suffix <- c(suffix, sprintf(',\n  issn = {%s}', metadata$journal$issn))
+        if (!is.null(metadata$journal$publisher))
+          suffix <- c(suffix, sprintf(',\n  publisher = {%s}', metadata$journal$publisher))
         suffix <- paste0(c(suffix, '\n}'), collapse = '')
         sprintf(paste('@article{%s,',
                       '  author = {%s},',
