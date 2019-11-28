@@ -62,7 +62,7 @@ write_sitemap_xml <- function(site_dir, site_config) {
 
 }
 
-write_feed_xml_html_content <- function(input_path, article) {
+write_feed_xml_html_content <- function(input_path, article, site_config) {
   html_file <- tempfile(fileext = ".html")
 
   # prepare source rmd
@@ -91,7 +91,10 @@ write_feed_xml_html_content <- function(input_path, article) {
   html_contents <- gsub("</body>.*", "", html_contents)
 
   # fix image paths
-  html_contents <- gsub(paste0(basename(dirname(rmd_file)), "/"), article$path, html_contents, fixed = TRUE)
+  html_contents <- gsub(paste0(basename(dirname(rmd_file)), "/"),
+                        file.path(site_config$base_url, article$path),
+                        html_contents,
+                        fixed = TRUE)
 
   html_contents
 }
@@ -204,7 +207,7 @@ write_feed_xml <- function(feed_xml, site_config, collection, articles) {
         add_child(item, "description", text = rss_description)
       }
       else {
-        html_contents <- write_feed_xml_html_content(full_content_path, article)
+        html_contents <- write_feed_xml_html_content(full_content_path, article, site_config)
         add_child(item, "description", text = html_contents)
         add_child(item, "distill:md5", text = new_md5)
       }
