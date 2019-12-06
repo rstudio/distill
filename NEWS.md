@@ -7,6 +7,8 @@
 * Provide aria attributes on toolbar icons
 * Add "volume," "issue," "issn," and "publisher" fields for journal article BibTeX entries when those are provided in YAML.
 * Provide alt text for logo image in navigation bar.
+* Add support some missing Google Scholar meta tags such as `citation_conference_title`, `citation_isbn`, `citation_firstpage`, `citation_lastpage`, `citation_dissertation_institution`, `citation_technical_report_institution`, and `citation_technical_report_number` and their corresponding bibliography entries.
+
 
 ## radix v0.6 (CRAN)
 
