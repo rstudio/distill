@@ -30,10 +30,10 @@ create_website <- function(dir, title, gh_pages = FALSE, edit = interactive()) {
 
 #' @rdname create_website
 #' @export
-create_blog <- function(dir, title, posts, gh_pages = FALSE, edit = interactive()) {
+create_blog <- function(dir, title, gh_pages = FALSE, edit = interactive()) {
 
   # create the website
-  params <- do_create_website(dir, title, posts, gh_pages, edit = FALSE, "blog")
+  params <- do_create_website(dir, title, gh_pages, edit = FALSE, "blog")
 
   # create the welcome post
   welcome <- "welcome.Rmd"
