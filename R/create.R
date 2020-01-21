@@ -30,14 +30,14 @@ create_website <- function(dir, title, gh_pages = FALSE, edit = interactive()) {
 
 #' @rdname create_website
 #' @export
-create_blog <- function(dir, title, gh_pages = FALSE, edit = interactive()) {
+create_blog <- function(dir, title, posts, gh_pages = FALSE, edit = interactive()) {
 
   # create the website
-  params <- do_create_website(dir, title, gh_pages, edit = FALSE, "blog")
+  params <- do_create_website(dir, title, posts, gh_pages, edit = FALSE, "blog")
 
   # create the welcome post
   welcome <- "welcome.Rmd"
-  target_path <- file.path(params$dir, "_posts", "welcome")
+  target_path <- file.path(params$dir, site_config$blog_dir, "welcome")
   render_template(
     file = welcome,
     type = "blog",
@@ -91,10 +91,11 @@ create_post <- function(title, author = "auto", slug = "auto", date_prefix = TRU
   if (is.null(site_dir))
     stop("You must call create_post from within a Distill website")
 
-  # more discovery
+  # more discovery 
   site_config <- site_config(site_dir)
-  posts_dir <- file.path(site_dir, "_posts")
-  posts_index <- file.path(site_dir, site_config$output_dir, "posts", "posts.json")
+  posts_dir <- file.path(site_dir, site_config$blog_dir)
+  posts_index <- file.path(site_dir, site_config$output_dir, gsub("[[:punct:]]", "", site_config$blog_dir),
+                           cat(site_config$output_dir, ".json", sep=""))
 
   # auto-slug
   slug <- resolve_slug(title, slug)
