@@ -120,12 +120,17 @@ transform_metadata <- function(file, site_config, collection_config, metadata, a
     metadata$conference <- list()
   }
 
-  # normalize thesis (for citations)
+  # normalize thesis (for citations). This entry does need thesis type (e.g., "phd" or "masters") instead of title since thesis will use default page title.
   if (!is.null(metadata$thesis)) {
     if (is.character(metadata$thesis))
       metadata$thesis <- list(type = metadata$thesis)
   } else {
     metadata$thesis <- list()
+  }
+
+  # normalize technical_report (for citations). This entry only requires a list as a normalized base.
+  if (length(metadata$technical_report) == 0) {
+  metadata$technical_report <- list()
   }
 
   # resolve creative commons license
@@ -439,26 +444,30 @@ google_scholar_metadata <- function(site_config, metadata) {
   add_meta("citation_doi", metadata$doi)
   add_meta("citation_isbn", metadata$isbn)
   journal <- metadata$journal
-  journal_title <- if (!is.null(journal$full_title) )
-    journal$full_title
-  else
-    journal$title
-  add_meta("citation_journal_title", journal$title)
-  add_meta("citation_journal_abbrev", journal$abbrev_title)
-  add_meta("citation_issn", journal$issn)
-  add_meta("citation_publisher", journal$publisher)
-  add_meta("citation_firstpage", journal$firstpage)
-  add_meta("citation_lastpage", journal$lastpage)
+  if(length(journal) != 0) {
+    journal_title <- if (!is.null(journal$full_title) )
+      journal$full_title
+    else
+      journal$title
+    add_meta("citation_journal_title", journal$title)
+    add_meta("citation_journal_abbrev", journal$abbrev_title)
+    add_meta("citation_issn", journal$issn)
+    add_meta("citation_publisher", journal$publisher)
+    add_meta("citation_firstpage", journal$firstpage)
+    add_meta("citation_lastpage", journal$lastpage)
+  }
   conference <- metadata$conference
-  conference_title <- if (!is.null(conference$full_title) )
-    conference$full_title
-  else
-    conference$title
-  add_meta("citation_conference_title", conference$title)
-  add_meta("citation_issn", conference$issn)
-  add_meta("citation_publisher", conference$publisher)
-  add_meta("citation_firstpage", conference$firstpage)
-  add_meta("citation_lastpage", conference$lastpage)
+  if(length(conference) != 0) {
+    conference_title <- if (!is.null(conference$full_title) )
+      conference$full_title
+    else
+      conference$title
+    add_meta("citation_conference_title", conference$title)
+    add_meta("citation_issn", conference$issn)
+    add_meta("citation_publisher", conference$publisher)
+    add_meta("citation_firstpage", conference$firstpage)
+    add_meta("citation_lastpage", conference$lastpage)
+  }
   if (!is.null(metadata$creative_commons))
     add_meta("citation_fulltext_world_readable", "")
   citation_date <- sprintf("%s/%s/%s",
@@ -472,23 +481,27 @@ google_scholar_metadata <- function(site_config, metadata) {
     add_meta("citation_author", author$name)
     add_meta("citation_author_institution", author$affiliation)
   }
-  if (!is.null(metadata$thesis))
+  thesis <- metadata$thesis
+  if(length(thesis) != 0) {
     for (author in metadata$author) {
       add_meta("citation_dissertation_institution", author$affiliation)
     }
-  add_meta("citation_issn", thesis$issn)
-  add_meta("citation_publisher", thesis$publisher)
-  add_meta("citation_firstpage", thesis$firstpage)
-  add_meta("citation_lastpage", thesis$lastpage)
-  if (!is.null(metadata$technical_report))
+    add_meta("citation_issn", thesis$issn)
+    add_meta("citation_publisher", thesis$publisher)
+    add_meta("citation_firstpage", thesis$firstpage)
+    add_meta("citation_lastpage", thesis$lastpage)
+  }
+  technical_report <- metadata$technical_report
+  if(length(technical_report) != 0) {
     for (author in metadata$author) {
       add_meta("citation_technical_report_institution", author$affiliation)
     }
-  add_meta("citation_technical_report_number", technical_report$number)
-  add_meta("citation_issn", technical_report$issn)
-  add_meta("citation_publisher", technical_report$publisher)
-  add_meta("citation_firstpage", technical_report$firstpage)
-  add_meta("citation_lastpage", technical_report$lastpage)
+    add_meta("citation_technical_report_number", technical_report$number)
+    add_meta("citation_issn", technical_report$issn)
+    add_meta("citation_publisher", technical_report$publisher)
+    add_meta("citation_firstpage", technical_report$firstpage)  
+    add_meta("citation_lastpage", technical_report$lastpage)
+  }
 
   google_scholar_meta
 }
