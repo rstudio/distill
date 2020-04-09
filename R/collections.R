@@ -279,7 +279,7 @@ move_feed_categories_xml <- function(main_feed, site_config) {
     category_filter <- paste0("/rss/channel/item/category[text()='", category, "']/..")
     filtered <- xml2::xml_find_all(posts, category_filter)
 
-    xml2::xml_remove(xml2::xml_find_first(posts, "/rss/channel/item"))
+    xml2::xml_remove(xml2::xml_find_all(posts, "/rss/channel/item"))
     channel_root <- xml2::xml_find_first(posts, "/rss/channel")
     for (entry in filtered) {
       xml2::xml_add_child(channel_root, entry)
