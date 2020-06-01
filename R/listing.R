@@ -106,14 +106,22 @@ article_listing_html <- function(site_dir, metadata, collection, articles) {
     )
   }
 
+  # check for custom HTML
+  custom_html <- custom_html(site_dir, collection)
+  if (!is.null(custom_html)) {
+    # No header applied here. This is applied, if desired, within the custom HTML itself
+    custom_html <- tags$div(class = "sidebar-section custom", custom_html)
+  }
+
   # generate html
   html_for_articles(articles,
                     caption = metadata$title,
                     categories = categories,
-                    subscription_html = subscription_html)
+                    subscription_html = subscription_html,
+                    custom_html = custom_html)
 }
 
-html_for_articles <- function(articles, caption = NULL, categories = FALSE, subscription_html = NULL) {
+html_for_articles <- function(articles, caption = NULL, categories = FALSE, subscription_html = NULL, custom_html = NULL) {
 
   # generate categories listing
   categories_html <- if (categories) categories_listing_html(articles)
@@ -158,7 +166,7 @@ html_for_articles <- function(articles, caption = NULL, categories = FALSE, subs
   )
 
   # do we have a sidebar
-  sidebar <- !is.null(subscription_html) || !is.null(categories_html)
+  sidebar <- !is.null(custom_html) || !is.null(subscription_html) || !is.null(categories_html)
 
   # required JS and CSS
   listing_js_css <- html_from_file(
@@ -172,7 +180,7 @@ html_for_articles <- function(articles, caption = NULL, categories = FALSE, subs
       listing_js_css,
       div(class = "posts-container posts-with-sidebar posts-apply-limit l-screen-inset",
         div(class = "posts-list", articles_html),
-        div(class = "posts-sidebar", subscription_html, categories_html),
+        div(class = "posts-sidebar", custom_html, subscription_html, categories_html),
         more_posts
       )
     ))
@@ -180,11 +188,26 @@ html_for_articles <- function(articles, caption = NULL, categories = FALSE, subs
     placeholder_html("article_listing", tagList(
       listing_js_css,
       div(class = "posts-container posts-apply-limit l-page",
-        div(class = "posts-list", subscription_html, articles_html),
+        div(class = "posts-list", custom_html, subscription_html, articles_html),
         more_posts
       )
     ))
   }
+}
+
+custom_html <- function(site_dir, collection) {
+
+  # check for custom HTML entry
+  custom <- collection[["custom"]]
+  if (!is.null(custom)) {
+    custom <- file.path(site_dir, custom)
+    if (!file.exists(custom))
+      stop("Specified custom file '", custom, "' does not exist", call. = FALSE)
+    html_from_file(custom)
+  } else {
+    NULL
+  }
+
 }
 
 subscription_html <- function(site_dir, collection) {
