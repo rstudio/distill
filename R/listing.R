@@ -109,8 +109,8 @@ article_listing_html <- function(site_dir, metadata, collection, articles) {
   # check for custom HTML
   custom_html <- custom_html(site_dir, collection)
   if (!is.null(custom_html)) {
-    # No header applied here. This is applied, if desired, within the custom HTML itself
-    custom_html <- tags$div(class = "sidebar-section custom", custom_html)
+    # Bring your own header and styling. CSS class "sidebar-section.custom" is available if desired.
+    custom_html <- tags$div(custom_html)
   }
 
   # generate html

@@ -734,6 +734,16 @@
   }
   
   
+  .sidebar-section.custom {
+    font-size: 12px;
+    line-height: 1.6em;
+  }
+  
+  .custom p {
+    margin-bottom: 0.5em;
+  }
+  
+  
   /* Improve display for browsers without grid (IE/Edge <= 15) */
   
   .downlevel {
@@ -1305,7 +1315,7 @@
 <nav class="distill-site-nav distill-site-header">
 <div class="nav-left">
 <a class="logo" href="https://www.rstudio.com">
-<img src="images/logo.png"/>
+<img src="images/logo.png" alt="Logo"/>
 </a>
 <a href="index.html" class="title">Distill for R Markdown</a>
 </div>
@@ -1357,7 +1367,7 @@ Publishing
 </div>
 <a href="news.html">News</a>
 <a href="https://github.com/rstudio/distill">
-<i class="fab fa-github"></i>
+<i class="fab fa-github" aria-hidden="true"></i>
 </a>
 <a href="javascript:void(0);" class="nav-toggle">&#9776;</a>
 </div>
@@ -1391,6 +1401,7 @@ Publishing
 <li><a href="#preview-images">Preview images</a></li>
 <li><a href="#citations">Citations</a></li>
 <li><a href="#subscriptions">Subscriptions</a></li>
+<li><a href="#custom-html">Custom HTML</a></li>
 <li><a href="#supporting-files">Supporting files</a></li>
 </ul></li>
 <li><a href="#publishing-a-blog">Publishing a blog</a></li>
@@ -1656,12 +1667,49 @@ collections:
 &lt;/form&gt;</code></pre>
 <p>This example uses the <a href="https://blogtrottr.com/">Blogtrottr</a> service to provide an email subscription. You could also use another service or simply include a link to your RSS feed.</p>
 <p>The contents of <code>_subscribe.html</code> will be included in both the sidebar of the main listing page as well as in the footer of articles. Note that relative URLs won’t work in subscription HTML since the content appears at different levels of the site (thus we include the full URL to the RSS feed in the example above).</p>
+<h3 id="custom-html">Custom HTML</h3>
+<p>You can also add arbitrary HTML to the top of the sidebar by including the <code>collections:posts:custom</code> option within <code>_site.yml</code>. The <code>custom</code> option in turn points to an HTML file that will be displayed above the “Subscribe” and “Categories” sections. This feature can be used for displaying anything in the sidebar that Distill does not automatically generate. While only one custom file may be defined per collection, the HTML contained within is extremely adaptable to different use cases (even several simultaneously). For example, the below snippets will display an About section on top, and below that a search bar:</p>
+<p><strong>_site.yml</strong></p>
+<pre class="markup"><code>
+name: &quot;reproducible-finance-with-r&quot;
+title: &quot;Reproducible Finance with R&quot;
+description: |
+  Exploring reproducible finance with the R statistical 
+  computing environment.
+base_url: https://beta.rstudioconnect.com/content/3776/
+collections:
+  posts:
+    disqus: reproducible-finance-with-r
+    share: [twitter, linkedin]
+    custom: _custom.html</code></pre>
+<p><strong>_custom.html</strong></p>
+<pre class="html"><code>
+&lt;div class=&quot;sidebar-section custom&quot;&gt;
+  &lt;h3&gt;About&lt;/h3&gt;
+  This blog explores reproducible finance with the 
+  &lt;a href=&quot;https://www.r-project.org/&quot;&gt;R&lt;/a&gt; 
+  statistical computing environment.
+&lt;/div&gt;
+
+&lt;div class=&quot;sidebar-section custom&quot;&gt;
+  &lt;h3&gt;Search&lt;/h3&gt;
+  &lt;form action=&quot;https://duckduckgo.com/&quot;&gt;
+    &lt;input type=&quot;text&quot; name=&quot;q&quot; placeholder=&quot;Search...&quot;&gt;
+    &lt;input type=&quot;hidden&quot; name=&quot;sites&quot; 
+      value=&quot;https://beta.rstudioconnect.com/content/3776/&quot;&gt; &lt;!-- Replace with your blog URL --&gt;
+    &lt;!--&lt;button type=&quot;submit&quot;&gt;Search&lt;/button&gt;--&gt;
+  &lt;/form&gt;
+&lt;/div&gt;</code></pre>
+<p><img src="images/custom_html_example_about_search.png" class="screenshot" style="width:50.0%" /></p>
+<p>While the custom HTML option inherits general CSS styling from the rest of the Distill blog, by default it does not inherit the sidebar-specific CSS. In order to fully match the rest of the sidebar sections, each section must be nested within a <code>&lt;div class="sidebar-section custom"&gt;</code> tag, as seen in the above example. This optional step is intended to provide a good balance between flexibility and ease-of-use.</p>
+<p>The contents of the custom HTML will be only be displayed in the sidebar of the main listing page. They do not appear in article footers.</p>
+<p>The example search bar functionality uses the popular <a href="duckduckgo.com">DuckDuckGo</a> search engine. After entering search terms and hitting the enter key the user is taken to the search engine’s website and shown relevant search results from the blog. Note that the blog will need to have been recently crawled by the search engine in order for search results to be thorough and up to date. Replacing the HTML snippet’s hard-coded blog URL should be the only modification necessary to begin using this example. Other search engines may be used with further modification. The “Search” button has been left out in this example, but may be uncommented if desired.</p>
 <h3 id="supporting-files">Supporting files</h3>
 <p>When a blog post is published, resource files located alongside the post in its directory are also published. The following files are <em>not</em> published by default:</p>
 <ol type="1">
-<li><p>Files beginning with <code>&quot;.&quot;</code> (hidden files).</p></li>
-<li><p>Files beginning with <code>&quot;_&quot;</code></p></li>
-<li><p>Files known to contain R source code (e.g. <code>&quot;.R&quot;</code>, <code>&quot;.s&quot;</code>, <code>&quot;.Rmd&quot;</code>), R data (e.g. <code>&quot;.RData&quot;</code>, <code>&quot;.rds&quot;</code>), or configuration data (e.g. <code>&quot;rsconnect&quot;</code> ,<code>&quot;packrat&quot;</code>)).</p></li>
+<li><p>Files beginning with <code>"."</code> (hidden files).</p></li>
+<li><p>Files beginning with <code>"_"</code></p></li>
+<li><p>Files known to contain R source code (e.g. <code>".R"</code>, <code>".s"</code>, <code>".Rmd"</code>), R data (e.g. <code>".RData"</code>, <code>".rds"</code>), or configuration data (e.g. <code>"rsconnect"</code> ,<code>"packrat"</code>)).</p></li>
 </ol>
 <p>You can override this behavior using a <code>resources</code> metadata entry for your post, which can specify explicit files to <code>include</code> or <code>exclude</code>. For example (some fields excluded for brevity):</p>
 <pre class="markup"><code>
