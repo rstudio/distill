@@ -56,7 +56,7 @@ title: "Reproducible Finance with R"
 description: |
   Exploring reproducible finance with the R statistical 
   computing environment.
-base_url: https://beta.rstudioconnect.com/content/3776/
+base_url: https://beta.rstudioconnect.com/content/11424/
 navbar:
   logo: images/rstudio.png
   right:
@@ -109,7 +109,7 @@ listing: posts
 ---
 ```
 
-In our [example blog](https://beta.rstudioconnect.com/content/3776/) (which will be described in more detail below) this results in the following listing:
+In our [example blog](https://beta.rstudioconnect.com/content/11424/) (which will be described in more detail below) this results in the following listing:
 
 ![](images/site-listing.png){width=95% .screenshot}
 
@@ -160,7 +160,7 @@ title: "Reproducible Finance with R"
 description: |
   Exploring reproducible finance with the R statistical 
   computing environment.
-base_url: https://beta.rstudioconnect.com/content/3776/
+base_url: https://beta.rstudioconnect.com/content/11424/
 navbar:
   right:
     - icon: fa fa-rss
@@ -180,7 +180,7 @@ title: "Reproducible Finance with R"
 description: |
   Exploring reproducible finance with the R statistical 
   computing environment.
-base_url: https://beta.rstudioconnect.com/content/3776/
+base_url: https://beta.rstudioconnect.com/content/11424/
 collections:
   posts:
     feed_items_max: 50
@@ -224,7 +224,7 @@ title: "Reproducible Finance with R"
 description: |
   Exploring reproducible finance with the R statistical 
   computing environment.
-base_url: https://beta.rstudioconnect.com/content/3776/
+base_url: https://beta.rstudioconnect.com/content/11424/
 collections:
   posts:
     disqus: reproducible-finance-with-r
@@ -314,7 +314,7 @@ title: "Reproducible Finance with R"
 description: |
   Exploring reproducible finance with the R statistical 
   computing environment.
-base_url: https://beta.rstudioconnect.com/content/3776/
+base_url: https://beta.rstudioconnect.com/content/11424/
 collections:
   posts:
     disqus: reproducible-finance-with-r
@@ -335,7 +335,7 @@ title: "Reproducible Finance with R"
 description: |
   Exploring reproducible finance with the R statistical 
   computing environment.
-base_url: https://beta.rstudioconnect.com/content/3776/
+base_url: https://beta.rstudioconnect.com/content/11424/
 collections:
   posts:
     disqus: reproducible-finance-with-r
@@ -350,7 +350,7 @@ collections:
   <p>Enjoy this blog? Get notified of new posts via email:</p>
   <input type='text' name='btr_email' />
   <input type='hidden' name='btr_url'
-         value='https://beta.rstudioconnect.com/content/3776/index.xml'/>
+         value='https://beta.rstudioconnect.com/content/11424/index.xml'/>
   <input type='hidden' name='schedule_type' value='0' />
   <input type='submit' value='Subscribe' />
 </form>
@@ -411,7 +411,7 @@ There are a variety of options available for making your site available to other
     The source code for the TensorFlow for R blog can be found here: <https://github.com/rstudio/tensorflow-blog>
 
 
-- An example which reproduces several posts from the Reproducible Finance with R series on the R Views blog can be found here: <https://beta.rstudioconnect.com/content/3776/>
+- An example which reproduces several posts from the Reproducible Finance with R series on the R Views blog can be found here: <https://beta.rstudioconnect.com/content/11424/>
 
     The source code for the example can be found here: <https://github.com/jjallaire/reproducible-finance-with-r>
 
