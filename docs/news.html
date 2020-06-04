@@ -731,6 +731,16 @@
   }
 
 
+  .sidebar-section.custom {
+    font-size: 12px;
+    line-height: 1.6em;
+  }
+
+  .custom p {
+    margin-bottom: 0.5em;
+  }
+
+
   /* Improve display for browsers without grid (IE/Edge <= 15) */
 
   .downlevel {
@@ -1303,7 +1313,7 @@
 <nav class="distill-site-nav distill-site-header">
 <div class="nav-left">
 <a class="logo" href="https://www.rstudio.com">
-<img src="images/logo.png"/>
+<img src="images/logo.png" alt="Logo"/>
 </a>
 <a href="index.html" class="title">Distill for R Markdown</a>
 </div>
@@ -1355,7 +1365,7 @@ Publishing
 </div>
 <a href="news.html">News</a>
 <a href="https://github.com/rstudio/distill">
-<i class="fab fa-github"></i>
+<i class="fab fa-github" aria-hidden="true"></i>
 </a>
 <a href="javascript:void(0);" class="nav-toggle">&#9776;</a>
 </div>
@@ -1376,6 +1386,7 @@ Publishing
 <ul>
 <li>Generate RSS category feeds using rss/categories in site config</li>
 <li>Support rendering full RSS content when rss/full_content is TRUE in site config</li>
+<li>Ability to add custom HTML to top of sidebar.</li>
 <li>Update to latest version of Distll template from <a href="https://github.com/distillpub/template" class="uri">https://github.com/distillpub/template</a></li>
 <li>Provide aria attributes on toolbar icons</li>
 <li>Add “volume,” “issue,” “issn,” and “publisher” fields for journal article BibTeX entries when those are provided in YAML.</li>
