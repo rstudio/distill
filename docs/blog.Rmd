@@ -360,6 +360,56 @@ This example uses the [Blogtrottr](https://blogtrottr.com/) service to provide a
 
 The contents of `_subscribe.html` will be included in both the sidebar of the main listing page as well as in the footer of articles. Note that relative URLs won't work in subscription HTML since the content appears at different levels of the site (thus we include the full URL to the RSS feed in the example above).
 
+
+### Custom HTML
+
+You can also add arbitrary HTML to the top of the sidebar by including the `collections:posts:custom` option within `_site.yml`. The `custom` option in turn points to an HTML file that will be displayed above the "Subscribe" and "Categories" sections. Unlike the Subscribe HTML, Cutstom HTML is not displayed in article footers. This custom feature can be used to display anything in the sidebar that Distill does not automatically generate. While only one custom file may be defined per collection, the HTML contained within is extremely adaptable to different use cases (even several simultaneously). For example, the below snippets will display an About section on top, and below that a search bar:
+
+**\_site.yml**
+
+```markup
+name: "reproducible-finance-with-r"
+title: "Reproducible Finance with R"
+description: |
+  Exploring reproducible finance with the R statistical 
+  computing environment.
+base_url: https://beta.rstudioconnect.com/content/3776/
+collections:
+  posts:
+    disqus: reproducible-finance-with-r
+    share: [twitter, linkedin]
+    custom: _custom.html
+```
+
+**\_custom.html**
+
+```html
+<div class="sidebar-section custom">
+  <h3>About</h3>
+  This blog explores reproducible finance with the 
+  <a href="https://www.r-project.org/">R</a> 
+  statistical computing environment.
+</div>
+
+<div class="sidebar-section custom">
+  <h3>Search</h3>
+  <form action="https://duckduckgo.com/">
+    <input type="text" name="q" placeholder="Search...">
+    <input type="hidden" name="sites" 
+      value="https://beta.rstudioconnect.com/content/3776/"> <!-- Replace with your blog URL -->
+    <!--<button type="submit">Search</button>-->
+  </form>
+</div>
+```
+
+![](images/custom_html_example_about_search.png){width=50% .screenshot}
+
+While the custom HTML option inherits general CSS styling from the rest of the Distill blog, by default it does not inherit the sidebar-specific CSS. In order to fully match the rest of the sidebar sections, each section must be nested within a `<div class="sidebar-section custom">` tag, as seen in the above example. This configuration is intended to provide a good balance between flexibility and ease-of-use.
+
+The example search bar functionality uses the popular [DuckDuckGo](duckduckgo.com) search engine. After entering search terms and hitting the enter key the user is taken to the search engine's website and shown relevant search results from the blog. Note that the blog will need to have been recently crawled by the search engine in order for search results to be thorough and up to date. Replacing the HTML snippet's hard-coded blog URL should be the only modification necessary to begin using this example. Other search engines may be used with further modification. The "Search" button has been left out in this example, but may be uncommented if desired.
+
+
+
 ### Supporting files
 
 When a blog post is published, resource files located alongside the post in its directory are also published. The following files are *not* published by default:
