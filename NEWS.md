@@ -1,5 +1,5 @@
 
-## distill v0.8 (Development)
+## distill v0.8 (CRAN)
 
 * Generate RSS category feeds using rss/categories in site config
 * Support rendering full RSS content when rss/full_content is TRUE in site config
