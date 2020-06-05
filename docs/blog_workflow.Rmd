@@ -31,7 +31,7 @@ Distill also includes tools for verifying that imported posts are available unde
 
 There are two distinct ways to manage work in progress on a Distill post:
 
-1) Using the `draft` option to prevent the article from being listed in the article index; and 
+1) Using the `draft` option to prevent the article from being listed in the article index and in the sitemap; and 
 2) Working on the post within a Git branch and merging/publishing it via pull request.
 
 ### Draft option
@@ -60,9 +60,11 @@ Once you've done enough work on the post within your branch, you can create a [p
 
 This workflow has some nice benefits:
 
-1) You can use the commenting and feedback system of your Git host (e.g. GitHub) to discuss the post in a structured fashion with clear linkages back to the source code.
+1) You can use the commenting and feedback system of your Git host (e.g. GitHub) to discuss the post in a structured fashion with clear linkages back to the source code. Depending on the service used to publish your website you might get a preview associated with the PR (e.g. with Netlify and GitHub).
 
 2) You can manage contributions to your blog from others that don't have commit access to the blog (anyone can create a pull request for a public repository).
+
+3) You can [squash and merge](https://help.github.com/en/github/collaborating-with-issues-and-pull-requests/about-pull-request-merges#squash-and-merge-your-pull-request-commits) to have a clean commit history on master.
 
 The mechanics of creating branches and pull requests are beyond the scope of this article. Follow the links above or reference other online resources to learn more.
 
