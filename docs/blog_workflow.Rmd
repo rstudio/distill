@@ -181,7 +181,7 @@ title: "Reproducible Finance with R"
 description: |
   Exploring reproducible finance with the R statistical 
   computing environment.
-base_url: https://beta.rstudioconnect.com/content/3776/
+base_url: https://beta.rstudioconnect.com/content/11424/
 collections:
   posts:
     canonical: false

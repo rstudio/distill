@@ -1,7 +1,7 @@
 Type: Package
 Package: distill
 Title: 'R Markdown' Format for Scientific and Technical Writing
-Version: 0.7
+Version: 0.8
 Authors@R: c(
     person("JJ", "Allaire", role = c("aut", "cre"), email = "jj@rstudio.com"),
     person("Rich", "Iannone", role = c("aut")),
@@ -50,7 +50,8 @@ Imports:
     stringr,
     knitr (>= 1.15.6),
     digest,
-    yaml
+    yaml,
+    openssl
 Suggests:
     htmlwidgets,
     r2d3,

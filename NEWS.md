@@ -1,14 +1,17 @@
 
-## distill v0.7 (Development)
+## distill v0.8 (CRAN)
 
 * Generate RSS category feeds using rss/categories in site config
 * Support rendering full RSS content when rss/full_content is TRUE in site config
-* Update to latest version of Distll template from https://github.com/distillpub/template
+* Ability to add custom HTML to top of sidebar.
 * Provide aria attributes on toolbar icons
 * Add "volume," "issue," "issn," and "publisher" fields for journal article BibTeX entries when those are provided in YAML.
 * Provide alt text for logo image in navigation bar.
 * Add support some missing Google Scholar meta tags such as `citation_conference_title`, `citation_isbn`, `citation_firstpage`, `citation_lastpage`, `citation_dissertation_institution`, `citation_technical_report_institution`, and `citation_technical_report_number` and their corresponding bibliography entries.
 
+## distill v0.7 (CRAN)
+
+* Update to latest version of Distill template from https://github.com/distillpub/template
 
 ## radix v0.6 (CRAN)
 
