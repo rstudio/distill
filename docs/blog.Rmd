@@ -11,6 +11,9 @@ Distill for R Markdown websites include integrated support for blogging. To crea
 
 ## Getting started
 
+```{r, child="_common/website_vs_blog.Rmd"}
+```
+
 ### Creating a blog
 
 If you are using RStudio, the easiest way to get started is to use the  Distill Blog option in the RStudio **New Project** dialog:

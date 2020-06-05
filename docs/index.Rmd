@@ -37,8 +37,11 @@ Distill for R Markdown is a web publishing format optimized for scientific and t
 - Attractively rendered [tables](tables.html) with optional support for pagination.
 - Support for a wide variety of [diagramming tools](diagrams.html) for illustrating concepts.
 - The ability to incorporate JavaScript and D3-based [interactive visualizations](interactivity.html).
-- A variety of ways to [publish articles](publish_article.html), including support for publishing sets of articles as a [Distill website](website.html).
-- The ability to [create a blog](blog.html) composed of a collection of Distill articles.
+- A variety of ways to [publish articles](publish_article.html), including support for publishing sets of articles as a [Distill website](website.html) or as a [Distill blog](blog.html).
+
+```{r, child="_common/website_vs_blog.Rmd"}
+```
+
 
 Distill for R Markdown is based on the [Distill web framework](https://github.com/distillpub/template), which was originally created for use in the Distill Machine Learning Journal [@distill]. Distill for R Markdown combines the technical authoring features of Distill with [R Markdown](https://rmarkdown.rstudio.com/), enabling a fully reproducible workflow based on literate programming [@knuth1984].
 
