@@ -71,7 +71,7 @@ The mechanics of creating branches and pull requests are beyond the scope of thi
 You may prefer a workflow where posts are worked on separately from your website/blog and then imported when they are ready to be published. This might be the case for a few different reasons:
 
 - You want posts to be contained within their own Git repositories
-- It's more convenient for contributors to work on posts independently and then be incorporated into your blog
+- It's more convenient for contributors to work on posts independently and then be incorporated into your blog. [Example in the wild: RStudio AI blog](https://blogs.rstudio.com/ai/contributing.html).
 - You want to re-publish posts originally published on another blog. 
 
 Below we will cover how to create a standalone post, how to import posts, synchronize to subsequent updates of those posts, as well as address related copyright and search indexing concerns.
