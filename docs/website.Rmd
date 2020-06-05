@@ -13,6 +13,10 @@ Once you've created your website locally, there are a variety of ways available 
 
 ## Getting started
 
+```{r, child="_common/website_vs_blog.Rmd"}
+```
+
+
 ### Creating a website
 
 If you are using RStudio, the easist way to get started is to use the Distill Website option in the RStudio **New Project** dialog:

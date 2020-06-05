@@ -1269,7 +1269,7 @@
   </script>
 
   <!--/radix_placeholder_distill-->
-  <script src="site_libs/header-attrs-2.1/header-attrs.js"></script>
+  <script src="site_libs/header-attrs-2.2.2/header-attrs.js"></script>
   <script src="site_libs/jquery-1.11.3/jquery.min.js"></script>
   <script src="site_libs/bowser-1.9.3/bowser.min.js"></script>
   <script src="site_libs/webcomponents-2.0.0/webcomponents.js"></script>
@@ -1390,6 +1390,7 @@ Publishing
 <ul>
 <li><a href="#getting-started">Getting started</a>
 <ul>
+<li><a href="#website-or-blog">Website or blog?</a></li>
 <li><a href="#creating-a-website">Creating a website</a></li>
 <li><a href="#authoring-articles">Authoring articles</a></li>
 <li><a href="#building-the-site">Building the site</a></li>
@@ -1409,6 +1410,9 @@ Publishing
 <p>This article describes how to create a website that contains a collection of Distill articles. Distill websites include a top level navigation bar that enables readers to discover and browse articles. For example, the documentation pages you are reading now are a Distill website.</p>
 <p>Once you’ve created your website locally, there are a variety of ways available to <a href="publish_website.html">publish your site</a> to the web.</p>
 <h2 id="getting-started">Getting started</h2>
+<h3 id="website-or-blog">Website or blog?</h3>
+<p>Structure difference: <a href="website.html">Websites</a> are just collections of pages you can navigate to via the menu, whereas <a href="blog.html">blogs</a> have collections of posts that can be indexed and syndicated (via their RSS feed). Distill blogs are a distill website with added blog posts.</p>
+<p>Workflow difference: Furthermore, <em>website</em> pages and root pages of <em>blogs</em> are re-rendered when the site is rebuilt but blog articles are not. Each blog article has to be rendered on its own, with intent. Why? Given that R package upgrades have a tendency to break older code, continuously re-rendering old posts is nearly impossible to do without errors, especially over longer periods of time.</p>
 <h3 id="creating-a-website">Creating a website</h3>
 <p>If you are using RStudio, the easist way to get started is to use the Distill Website option in the RStudio <strong>New Project</strong> dialog:</p>
 <p><img src="images/create-website.png" class="screenshot" style="width:95.0%" /></p>
