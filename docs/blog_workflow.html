@@ -1394,8 +1394,8 @@ Publishing
 <li><a href="#draft-option">Draft option</a></li>
 <li><a href="#git-branches">Git branches</a></li>
 </ul></li>
-<li><a href="#importing-posts">Importing posts</a>
-<ul>
+<li><a href="#importing-posts">Importing posts</a><ul>
+<li><a href="#creating-a-post">Creating a post</a></li>
 <li><a href="#importing-a-post">Importing a post</a></li>
 <li><a href="#updating-posts">Updating posts</a></li>
 <li><a href="#creative-commons">Creative Commons</a></li>
@@ -1419,7 +1419,7 @@ Publishing
 <h2 id="managing-drafts">Managing drafts</h2>
 <p>There are two distinct ways to manage work in progress on a Distill post:</p>
 <ol type="1">
-<li>Using the <code>draft</code> option to prevent the article from being listed in the article index; and</li>
+<li>Using the <code>draft</code> option to prevent the article from being listed in the article index and in the sitemap; and</li>
 <li>Working on the post within a Git branch and merging/publishing it via pull request.</li>
 </ol>
 <h3 id="draft-option">Draft option</h3>
@@ -1440,18 +1440,29 @@ draft: true
 <p>Once you’ve done enough work on the post within your branch, you can create a <a href="https://help.github.com/articles/about-pull-requests/">pull request</a> and then ask others for feedback on the post before it is merged.</p>
 <p>This workflow has some nice benefits:</p>
 <ol type="1">
-<li><p>You can use the commenting and feedback system of your Git host (e.g. GitHub) to discuss the post in a structured fashion with clear linkages back to the source code.</p></li>
+<li><p>You can use the commenting and feedback system of your Git host (e.g. GitHub) to discuss the post in a structured fashion with clear linkages back to the source code. Depending on the service used to publish your website you might get a preview associated with the PR (e.g. with Netlify and GitHub).</p></li>
 <li><p>You can manage contributions to your blog from others that don’t have commit access to the blog (anyone can create a pull request for a public repository).</p></li>
+<li><p>You can <a href="https://help.github.com/en/github/collaborating-with-issues-and-pull-requests/about-pull-request-merges#squash-and-merge-your-pull-request-commits">squash and merge</a> to have a clean commit history on master.</p></li>
 </ol>
 <p>The mechanics of creating branches and pull requests are beyond the scope of this article. Follow the links above or reference other online resources to learn more.</p>
 <h2 id="importing-posts">Importing posts</h2>
 <p>You may prefer a workflow where posts are worked on separately from your website/blog and then imported when they are ready to be published. This might be the case for a few different reasons:</p>
 <ul>
 <li>You want posts to be contained within their own Git repositories</li>
-<li>It’s more convenient for contributors to work on posts independently and then be incorporated into your blog</li>
+<li>It’s more convenient for contributors to work on posts independently and then be incorporated into your blog. <a href="https://blogs.rstudio.com/ai/contributing.html">Example in the wild: RStudio AI blog</a>.</li>
 <li>You want to re-publish posts originally published on another blog.</li>
 </ul>
-<p>Below we will cover how to import posts, synchronize to subsequent updates of those posts, as well as address related copyright and search indexing concerns.</p>
+<p>Below we will cover how to create a standalone post, how to import posts, synchronize to subsequent updates of those posts, as well as address related copyright and search indexing concerns.</p>
+<h3 id="creating-a-post">Creating a post</h3>
+<p>You want to have a public GitHub repository that contains the html output of a distill post. Here’s a possible workflow using RStudio IDE and <a href="https://usethis.r-lib.org/"><code>usethis</code></a>, and not taking into account your using private data (that’d you need to <a href="https://usethis.r-lib.org/reference/use_git_ignore.html">add to .gitignore</a>)</p>
+<ul>
+<li><p>Create a new RStudio project,</p></li>
+<li><p>In that project from the new file menu choose “New file”, “R Markdown”,“From template”: distill article;</p></li>
+<li><p><a href="https://usethis.r-lib.org/reference/use_git.html"><code>usethis::use_git()</code></a>;</p></li>
+<li><p><a href="https://usethis.r-lib.org/reference/use_github.html"><code>usethis::use_github()</code></a>;</p></li>
+<li><p>Edit the Rmd, knit, commit.</p></li>
+</ul>
+<p>Note that with this workflow your name won’t be guessed based on previous posts.</p>
 <h3 id="importing-a-post">Importing a post</h3>
 <p>You can import a post using the <code>import_post()</code> function, passing the URL where the post is published to. For example:</p>
 <pre class="r"><code>
