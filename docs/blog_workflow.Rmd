@@ -74,7 +74,24 @@ You may prefer a workflow where posts are worked on separately from your website
 - It's more convenient for contributors to work on posts independently and then be incorporated into your blog
 - You want to re-publish posts originally published on another blog. 
 
-Below we will cover how to import posts, synchronize to subsequent updates of those posts, as well as address related copyright and search indexing concerns.
+Below we will cover how to create a standalone post, how to import posts, synchronize to subsequent updates of those posts, as well as address related copyright and search indexing concerns.
+
+### Creating a post
+
+You want to have a public GitHub repository that contains the html output of a distill post.
+Here's a possible workflow using RStudio IDE and [`usethis`](https://usethis.r-lib.org/), and not taking into account your using private data (that'd you need to [add to .gitignore](https://usethis.r-lib.org/reference/use_git_ignore.html))
+
+* Create a new RStudio project,
+
+* In that project from the new file menu choose "New file", "R Markdown","From template": distill article;
+
+* [`usethis::use_git()`](https://usethis.r-lib.org/reference/use_git.html);
+
+* [`usethis::use_github()`](https://usethis.r-lib.org/reference/use_github.html);
+
+* Edit the Rmd, knit, commit.
+
+Note that with this workflow your name won't be guessed based on previous posts.
 
 ### Importing a post
 
