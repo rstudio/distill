@@ -1483,7 +1483,7 @@ ggplot(diamonds, aes(carat, price)) + geom_smooth() +
   facet_grid(~ cut)
 ```</code></pre>
 <div class="layout-chunk" data-layout="l-body-outset">
-<p><img src="../images/l-middle-figure.png" /><!-- --></p>
+<p><img src="images/l-middle-figure.png" width="576" /></p>
 </div>
 <p>Note that when specifying an alternate <code>layout</code> you should also specify an appropriate <code>fig.width</code> and <code>fig.height</code> for that layout. These values don’t determine the absolute size of the figure (that’s dynamic based on the layout) but they do determine the aspect ratio of the figure.</p>
 <p>See the documentation on <a href="figures.html">figure layout</a> for details on additional layout options.</p>
@@ -1539,7 +1539,7 @@ $$</code></pre>
 This content will appear in the gutter of the article.
 &lt;/aside&gt;</code></pre>
 <aside>
-This content will appear in the gutter of the article.
+<p>This content will appear in the gutter of the article.</p>
 </aside>
 <p>You can also include figures in the gutter. Just enclose the code chunk which generates the figure in an <code>&lt;aside&gt;</code> tag:</p>
 <pre class="clike"><code>
@@ -1549,7 +1549,7 @@ ggplot(mtcars, aes(hp, mpg)) + geom_point() + geom_smooth()
 ```
 &lt;/aside&gt;</code></pre>
 <aside>
-<img src="images/figure-aside.png" style="width:100.0%" />
+<p><img src="images/figure-aside.png" style="width:100.0%" /></p>
 </aside>
 <h2 id="table-of-contents">Table of contents</h2>
 <p>You can add a table of contents using the <code>toc</code> option and specify the depth of headers that it applies to using the <code>toc_depth</code> option. For example:</p>

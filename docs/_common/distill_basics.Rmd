@@ -65,7 +65,7 @@ ggplot(diamonds, aes(carat, price)) + geom_smooth() +
 ````
 
 ```{r, layout="l-body-outset"}
-include_graphics("../images/l-middle-figure.png")
+include_graphics("~/packages/distill/docs/images/l-middle-figure.png")
 ```
 
 Note that when specifying an alternate `layout` you should also specify an appropriate `fig.width` and `fig.height` for that layout. These values don't determine the absolute size of the figure (that's dynamic based on the layout) but they do determine the aspect ratio of the figure.
