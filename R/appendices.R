@@ -3,28 +3,19 @@
 appendices_after_body_html <- function(input_file, site_config, metadata) {
 
   # write appendixes
+  references <- appendix_bibliography(metadata)
   updates_and_corrections <- appendix_updates_and_corrections(metadata)
   creative_commons <- appendix_creative_commons(metadata)
   citation <- appendix_citation(site_config, metadata)
   appendix <- tags$div(class = "appendix-bottom",
+                       references,
                        updates_and_corrections,
                        creative_commons,
                        citation)
 
-  # write bibliography
-  bibliography <- c()
-  if (!is.null(metadata$bibliography)) {
-    bibliography <- HTML(paste(c(
-      '<script id="distill-bibliography" type="text/bibtex">',
-      readLines(file.path(dirname(input_file), metadata$bibliography), warn = FALSE),
-      '</script>'
-    ), collapse = "\n"))
-  }
-
   # wrap in placeholder
   placeholder_html("appendices", tagList(
-    appendix,
-    bibliography
+    appendix
   ))
 }
 
@@ -64,6 +55,17 @@ appendix_updates_and_corrections <- function(metadata) {
       tags$p(
         updates_and_corrections
       )
+    )
+  } else {
+    NULL
+  }
+}
+
+appendix_bibliography <- function(metadata) {
+  if (!is.null(metadata$bibliography)) {
+    list(
+      tags$h3(id = "references", "References"),
+      tags$div(id = "references-listing")
     )
   } else {
     NULL
