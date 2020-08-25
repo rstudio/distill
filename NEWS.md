@@ -1,6 +1,6 @@
 ## distill v0.9 (Development)
 
-* Use pandoc rather than distill framewor for bibliography generation. Provides support for `csl` and `nocite` as well as use of multiple bibliographies (including non-BibTeX ones). Eliminates distill framework provided mouse-over citation display, but users seem to value the Pandoc features more than this one.
+* Use pandoc rather than distill framework for bibliography generation. Provides support for `csl` and `nocite` as well as use of multiple bibliographies (including non-BibTeX ones). Eliminates distill framework provided mouse-over citation display, but users seem to value the Pandoc features more than this one.
 
 ## distill v0.8 (CRAN)
 
