@@ -1,6 +1,6 @@
 ---
 title: "Article Metadata"
-description: Enhance published articles by providing metadata 
+description: Enhance published articles by providing metadata
 ---
 
 ```{r setup, include=FALSE}
@@ -9,19 +9,19 @@ library(knitr)
 
 You can enhance Distill articles by providing various types of metadata, including:
 
-1) Links to the article's source code repository.
+1)  Links to the article's source code repository.
 
-2) [Creative Commons] licensing terms.
+2)  [Creative Commons] licensing terms.
 
-3) [Open Graph] and [Twitter Card] metadata that is automatically included when the article is shared (e.g. on Twitter or within Slack).
+3)  [Open Graph] and [Twitter Card] metadata that is automatically included when the article is shared (e.g. on Twitter or within Slack).
 
-4) [Google Scholar] compatible citation metadata for your article as well as other works cited by your article.
+4)  [Google Scholar] compatible citation metadata for your article as well as other works cited by your article.
 
 ## Code repository
 
 You can include the `repository_url` field to indicate where the source code for your article can be found. For example:
 
-```markup
+``` {.markup}
 ---
 title: "Distill for R Markdown"
 description: | 
@@ -33,7 +33,7 @@ repository_url: https://github.com/rstudio/distill
 
 You can optionally also include a `compare_updates_url` to provide a URL that will show the differences between the article's current version and the version that was initially published. For example:
 
-```markup
+``` {.markup}
 ---
 title: "Distill for R Markdown"
 description: | 
@@ -46,7 +46,7 @@ compare_updates_url: https://github.com/rstudio/distill/compare/pubv1...master
 
 If you include one or both of these fields, then an *Updates and Corrections* appendix is automatically generated. For example:
 
-![](images/repository-appendix.png){width=95% .screenshot}
+![](images/repository-appendix.png){.screenshot width="95%"}
 
 ## Creative Commons
 
@@ -54,16 +54,16 @@ The [Creative Commons](https://creativecommons.org/licenses/) copyright licenses
 
 Here are some of the common forms of Creative Commons content license:
 
-| License   | Name     | Description                          |
-|-----------|-----------|-------------------------------------|
-| [CC BY](https://creativecommons.org/licenses/by/4.0/)   | Attribution | This license lets others distribute, remix, tweak, and build upon your work, even commercially, as long as they credit you for the original creation. This is the most accommodating of licenses offered. 
-| [CC BY-SA](https://creativecommons.org/licenses/by-sa/4.0/)   | Attribution-ShareAlike  | This license lets others remix, tweak, and build upon your work even for commercial purposes, as long as they credit you and license their new creations under the identical terms. This license is often compared to “copyleft” free and open source software licenses. All new works based on yours will carry the same license, so any derivatives will also allow commercial use. |
-| [CC BY-ND](https://creativecommons.org/licenses/by-nd/4.0/)   | Attribution-NoDerivs  | This license allows for redistribution, commercial and non-commercial, as long as it is passed along unchanged and in whole, with credit to you. |
-| [CC BY-NC](https://creativecommons.org/licenses/by-nc/4.0/)   | Attribution-NonCommercial   | This license lets others remix, tweak, and build upon your work non-commercially, and although their new works must also acknowledge you and be non-commercial, they don’t have to license their derivative works on the same terms. |
+| License                                                     | Name                      | Description                                                                                                                                                                                                                                                                                                                                                                           |
+|-------------------------------------------------------------|---------------------------|---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| [CC BY](https://creativecommons.org/licenses/by/4.0/)       | Attribution               | This license lets others distribute, remix, tweak, and build upon your work, even commercially, as long as they credit you for the original creation. This is the most accommodating of licenses offered.                                                                                                                                                                             |
+| [CC BY-SA](https://creativecommons.org/licenses/by-sa/4.0/) | Attribution-ShareAlike    | This license lets others remix, tweak, and build upon your work even for commercial purposes, as long as they credit you and license their new creations under the identical terms. This license is often compared to "copyleft" free and open source software licenses. All new works based on yours will carry the same license, so any derivatives will also allow commercial use. |
+| [CC BY-ND](https://creativecommons.org/licenses/by-nd/4.0/) | Attribution-NoDerivs      | This license allows for redistribution, commercial and non-commercial, as long as it is passed along unchanged and in whole, with credit to you.                                                                                                                                                                                                                                      |
+| [CC BY-NC](https://creativecommons.org/licenses/by-nc/4.0/) | Attribution-NonCommercial | This license lets others remix, tweak, and build upon your work non-commercially, and although their new works must also acknowledge you and be non-commercial, they don't have to license their derivative works on the same terms.                                                                                                                                                  |
 
 You can designate articles that you create as Creative Commons licensed by adding the `creative_commons` field and specifying one of the standard Creative Commons licenses. For example:
 
-```markup
+``` {.markup}
 ---
 title: "Distill for R Markdown"
 description: | 
@@ -75,28 +75,27 @@ creative_commons: CC BY
 
 If you include this field then a *Reuse* appendix is automatically generated. For example:
 
-![](images/creative-commons.png){width=95% .screenshot}
+![](images/creative-commons.png){.screenshot width="95%"}
 
 ### External figures
 
 Note that figures from external sources are explicitly carved out of the license. If you are including a figure from an external source, it's good practice to delineate this by applying the `.external` class and adding a caption indicating where it is from. For example:
 
-```markup
+``` {.markup}
 ![Figure from https://example.com](heatmap.png){width=100% .external}    
 ```
 
 Using the `.external` class and providing a "Figure from" link makes it clear that the figure originated elsewhere (and is therefore not covered by any of your article's copyright or creative commons license grants). For example, here's how a figure taken from a Stack Overflow post might appear:
 
-![Figure from <https://stackoverflow.com/questions/12196756/>](images/heatmap.png){width=100% .external}   
+![Figure from <https://stackoverflow.com/questions/12196756/>](images/heatmap.png){.external width="100%"}
 
-
-## Preview images
+## Preview images {#preview-images}
 
 You can specify a preview image for your article (for sharing on Slack, Twitter, etc.) in a number of different ways:
 
-1. You can explicitly provide the full URL of the preview image via the `preview` field in the article's metadata. For example:
+1.  You can explicitly provide the full URL of the preview image via the `preview` field in the article's metadata. For example:
 
-    ```markup
+    ``` {.markup}
     ---
     title: "JavaScript & D3"
     description: Enhance communication with interactive visualizations 
@@ -106,9 +105,9 @@ You can specify a preview image for your article (for sharing on Slack, Twitter,
 
     Note that the preview image is specified with a full absolute URL. This is a requirement of both Open Graph and Twitter (relative image references are not supported). If you are publishing a standalone self-contained HTML version of your article then you'll need to upload the preview image to another location on the web in order to reference it.
 
-2. If your article is not self-contained (it's part of a [Distill website](publish_website.html) or is generated with  `self_contained: false`) then you can include the preview image alongside your document. In this case you still need to specify the root URL where your image will be published to using the `base_url` field:
+2.  If your article is not self-contained (it's part of a [Distill website](publish_website.html) or is generated with `self_contained: false`) then you can include the preview image alongside your document. In this case you still need to specify the root URL where your image will be published to using the `base_url` field:
 
-    ```markup
+    ``` {.markup}
     ---
     title: "JavaScript & D3"
     description: Enhance communication with interactive visualizations 
@@ -119,9 +118,9 @@ You can specify a preview image for your article (for sharing on Slack, Twitter,
 
     This technique is generally preferable to including the full URL since it allows Distill to inspect the image file directly and provide additional information about it's size.
 
-3. You can also specify that a specific figure within your article should be used as the preview image. To do this, just add the `preview = TRUE` chunk option to the chunk which creates the figure. For example:
+3.  You can also specify that a specific figure within your article should be used as the preview image. To do this, just add the `preview = TRUE` chunk option to the chunk which creates the figure. For example:
 
-    ```markup
+    ``` {.markup}
     ---
     title: "JavaScript & D3"
     description: Enhance communication with interactive visualizations 
@@ -129,7 +128,7 @@ You can specify a preview image for your article (for sharing on Slack, Twitter,
     ---
     ```
 
-    ````clike
+    ```` {.clike}
     ```{r, layout="l-body-outset", preview=TRUE}`r ''`
     library(ggplot2)
     ggplot(diamonds, aes(carat, price)) + geom_smooth() +
@@ -143,22 +142,21 @@ You can specify a preview image for your article (for sharing on Slack, Twitter,
 
 The [Open Graph protocol](http://ogp.me/) is a specification that enables richer sharing of links to articles on the web. Open Graph metadata is automatically generated for Distill articles. For example, here's what you see in Slack when pasting in a link to the article on using [JavaScript and D3](interactivity.html) within Distill articles:
 
-![](images/open-graph-screenshot.png){width=95% .screenshot}
+![](images/open-graph-screenshot.png){.screenshot width="95%"}
 
 Slack uses Open Graph to extract and display the title, description, and a [preview image](#preview-images) (if specified) for the link.
-
 
 ## Twitter Card
 
 [Twitter Cards](https://developer.twitter.com/en/docs/tweets/optimize-with-cards/overview/abouts-cards) are a way of enhancing the appearance of links to your article on Twitter. When a link to your article is included in a Tweet, Twitter automatically crawls your site to fetch any available Twitter Card metadata.
 
-See the section on [preview images] for additional details on providing an image for your article that will be included on Twitter Cards.
+See the section on [preview images](#preview-images) for additional details on providing an image for your article that will be included on Twitter Cards.
 
-There are two additional fields you can include that provide attribution for your link to the Twitter account of a website and/or creator of the article. This attribution is specified via the `twitter:site` and `twitter:creator` fields. 
+There are two additional fields you can include that provide attribution for your link to the Twitter account of a website and/or creator of the article. This attribution is specified via the `twitter:site` and `twitter:creator` fields.
 
 Here's a complete example that includes the attribution fields as well as a preview image:
 
-```markup
+``` {.markup}
 ---
 title: "JavaScript & D3"
 description: Enhance communication with interactive visualizations 
@@ -172,18 +170,5 @@ twitter:
 
 Be sure to enclose the Twitter account names in quotes (this is required because they start with `@`).
 
-
 ```{r, child="_common/google_scholar.Rmd"}
 ```
-
-
-
-
-
-
-
-
-
-
-
-

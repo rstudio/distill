@@ -1455,7 +1455,7 @@ render_site(&quot;about.Rmd&quot;)</code></pre>
 <p><img src="images/build-website.png" class="screenshot" style="width:95.0%" /></p>
 <p>When you build a website, the following things occur:</p>
 <ol type="1">
-<li><p>All of the Rmd and md files in the root website directory will be rendered into HTML. Note however that markdown files beginning with "_" are not rendered (this is a convention to designate files that are included by top level documents).</p></li>
+<li><p>All of the Rmd and md files in the root website directory will be rendered into HTML. Note however that markdown files beginning with “_” are not rendered (this is a convention to designate files that are included by top level documents).</p></li>
 <li><p>Blog posts will be copied into the <code>posts</code> sub-directory of the output directory and blog <a href="blog.html#listing-pages">listing pages</a> will be re-generated.</p></li>
 <li><p>The generated HTML files and any supporting files (e.g. CSS and JavaScript) are copied into an output directory (<code>_site</code> by default).</p></li>
 </ol>
@@ -1473,8 +1473,8 @@ output_dir: &quot;_site&quot;
 include: [&quot;import.R&quot;]
 exclude: [&quot;docs.txt&quot;, &quot;*.csv&quot;]</code></pre>
 <p>The <code>name</code> field provides a suggested URL path for your website when it is published (by default this is just the name of the directory containing the site).</p>
-<p>The <code>output_dir</code> field indicates which directory to copy site content into ("_site" is the default if none is specified). Note that this can be “.” to keep all content within the root website directory alongside the source code.</p>
-<p>The <code>include</code> and <code>exclude</code> fields enable you to override the default behavior visa-vi what files are copied into the output directory. By default, all files within the website directory are copied into the output directory (e.g. "_site") save for the following:</p>
+<p>The <code>output_dir</code> field indicates which directory to copy site content into (“_site” is the default if none is specified). Note that this can be “.” to keep all content within the root website directory alongside the source code.</p>
+<p>The <code>include</code> and <code>exclude</code> fields enable you to override the default behavior visa-vi what files are copied into the output directory. By default, all files within the website directory are copied into the output directory (e.g. “_site”) save for the following:</p>
 <ol type="1">
 <li><p>Files beginning with <code>"."</code> (hidden files).</p></li>
 <li><p>Files beginning with <code>"_"</code></p></li>
@@ -1521,7 +1521,7 @@ output: distill::distill_article
 <p>When you use a navigation bar, you can optionally also include a site footer which uses the same theme (background and foreground colors). For example:</p>
 <p><img src="images/footer-bar.png" class="screenshot" style="width:95.0%" /></p>
 <p>To add a footer, simply include a file named <code>_footer.html</code> within your main site directory. For example:</p>
-<p>**_footer.html**</p>
+<p><strong>_footer.html</strong></p>
 <pre class="markup"><code>
 © Copyright 2018 [The Distill Template Authors]
 (https://github.com/distillpub/template/blob/master/AUTHORS) 
@@ -1587,8 +1587,8 @@ output: distill::distill_article</code></pre>
 <p>Several metadata values which you might find useful to define in <code>_site.yml</code> are:</p>
 <table>
 <colgroup>
-<col style="width: 27%" />
-<col style="width: 72%" />
+<col style="width: 10%" />
+<col style="width: 89%" />
 </colgroup>
 <thead>
 <tr class="header">

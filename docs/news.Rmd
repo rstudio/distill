@@ -10,6 +10,4 @@ library(knitr)
 ```
 
 ```{r child="../NEWS.md"}
-
 ```
-

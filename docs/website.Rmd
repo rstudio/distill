@@ -7,49 +7,47 @@ description: Share a set of Distill articles as a website
 library(knitr)
 ```
 
-This article describes how to create a website that contains a collection of Distill articles. Distill websites include a top level navigation bar that enables readers to discover and browse articles. For example, the documentation pages you are reading now are a Distill website. 
+This article describes how to create a website that contains a collection of Distill articles. Distill websites include a top level navigation bar that enables readers to discover and browse articles. For example, the documentation pages you are reading now are a Distill website.
 
-Once you've created your website locally, there are a variety of ways available to [publish your site](publish_website.html) to the web. 
+Once you've created your website locally, there are a variety of ways available to [publish your site](publish_website.html) to the web.
 
 ## Getting started
 
 ```{r, child="_common/website_vs_blog.Rmd"}
 ```
 
-
 ### Creating a website
 
 If you are using RStudio, the easist way to get started is to use the Distill Website option in the RStudio **New Project** dialog:
 
-![](images/create-website.png){width=95% .screenshot}
+![](images/create-website.png){.screenshot width="95%"}
 
 A new [RStudio Project](https://support.rstudio.com/hc/en-us/articles/200526207-Using-Projects) for the website will be created and opened. The website will include the following files:
 
-| Option           | Description                                    |
-|------------------|------------------------------------------------|
-| `_site.yml`     | Website configuration file.             |
-| `index.Rmd`      | Website home page.  |
-| `about.Rmd`     | Website about page. |
+| Option      | Description                 |
+|-------------|-----------------------------|
+| `_site.yml` | Website configuration file. |
+| `index.Rmd` | Website home page.          |
+| `about.Rmd` | Website about page.         |
 
 If you are not using RStudio you can also call the Distill `create_website()` function:
 
-```r
+``` {.r}
 library(distill)
 create_website(dir = "my-website", title = "My Website")
 ```
 
 A new website containing Home and About pages will be created within the `my-website` directory.
 
-
 ### Authoring articles
 
 When you use the RStudio **Knit** command on a Distill article within a website, only that article will be rendered and previewed:
 
-![](images/knit-site-article.png){width=95% .screenshot}
+![](images/knit-site-article.png){.screenshot width="95%"}
 
 You can also preview a single article from within a website by passing the name of the article's Rmd file to `render_site()`:
 
-```r
+``` {.r}
 render_site("about.Rmd")
 ```
 
@@ -57,25 +55,25 @@ This will build only the specified article (as opposed to all articles in the si
 
 ### Building the site
 
-After you've authored the various articles contained within the website you will want to build the entire site before deploying it. 
+After you've authored the various articles contained within the website you will want to build the entire site before deploying it.
 
 If your Distill website is contained within an RStudio project you can use the **Build Website** command available in the Build pane to generate the site:
 
-![](images/build-website.png){width=95% .screenshot}
+![](images/build-website.png){.screenshot width="95%"}
 
 When you build a website, the following things occur:
 
-1. All of the Rmd and md files in the root website directory will be rendered into HTML. Note however that markdown files beginning with "_" are not rendered (this is a convention to designate files that are included by top level documents).
+1.  All of the Rmd and md files in the root website directory will be rendered into HTML. Note however that markdown files beginning with "\_" are not rendered (this is a convention to designate files that are included by top level documents).
 
-2. Blog posts will be copied into the `posts` sub-directory of the output directory and blog [listing pages](blog.html#listing-pages) will be re-generated.
+2.  Blog posts will be copied into the `posts` sub-directory of the output directory and blog [listing pages](blog.html#listing-pages) will be re-generated.
 
-3. The generated HTML files and any supporting files (e.g. CSS and JavaScript) are copied into an output directory (`_site` by default).
+3.  The generated HTML files and any supporting files (e.g. CSS and JavaScript) are copied into an output directory (`_site` by default).
 
-The HTML files within the `_site` directory are now ready to deploy as a standalone static website. 
+The HTML files within the `_site` directory are now ready to deploy as a standalone static website.
 
 To build a website from the command line, use the `rmarkdown::render_site()` function:
 
-```r
+``` {.r}
 library(rmarkdown)
 render_site()
 ```
@@ -86,40 +84,40 @@ The **\_site.yml** file has a number of options that affect site output includin
 
 **\_site.yml**
 
-```markup
+``` {.markup}
 name: "my-website"
 output_dir: "_site"
 include: ["import.R"]
 exclude: ["docs.txt", "*.csv"]
 ```
 
-The `name` field provides a suggested URL path for your website when it is published (by default this is just the name of the directory containing the site). 
+The `name` field provides a suggested URL path for your website when it is published (by default this is just the name of the directory containing the site).
 
-The `output_dir` field indicates which directory to copy site content into ("_site" is the default if none is specified). Note that this can be "." to keep all content within the root website directory alongside the source code.
+The `output_dir` field indicates which directory to copy site content into ("\_site" is the default if none is specified). Note that this can be "." to keep all content within the root website directory alongside the source code.
 
-The `include` and `exclude` fields enable you to override the default behavior visa-vi what files are copied into the output directory. By default, all files within the website directory are copied into the output directory (e.g. "_site") save for the following:
+The `include` and `exclude` fields enable you to override the default behavior visa-vi what files are copied into the output directory. By default, all files within the website directory are copied into the output directory (e.g. "\_site") save for the following:
 
-1. Files beginning with `"."` (hidden files).
+1.  Files beginning with `"."` (hidden files).
 
-2. Files beginning with `"_"`
+2.  Files beginning with `"_"`
 
-3. Files known to contain R source code (e.g. `".R"`, `".s"`, `".Rmd"`), R data (e.g. `".RData"`, `".rds"`), or configuration data (e.g. `"rsconnect"` ,`"packrat"`)).
+3.  Files known to contain R source code (e.g. `".R"`, `".s"`, `".Rmd"`), R data (e.g. `".RData"`, `".rds"`), or configuration data (e.g. `"rsconnect"` ,`"packrat"`)).
 
 The `include` and `exclude` fields of **\_site.yml** can be used to override this default behavior (wildcards can be used to specify groups of files to be included or excluded).
 
 Note that `include` and `exclude` are *not* used to determine which Rmd files are rendered (all of them in the root directory save for those named with the `_` prefix will be rendered).
 
-The R Markdown documentation on [creating websites](https://rmarkdown.rstudio.com/rmarkdown_websites.html) has documentation on  additional available features and configuration options. The remainder of this article describes features that are specific to Distill websites.
+The R Markdown documentation on [creating websites](https://rmarkdown.rstudio.com/rmarkdown_websites.html) has documentation on additional available features and configuration options. The remainder of this article describes features that are specific to Distill websites.
 
 ## Site navigation
 
 Site navigation bars include the site's title, an optional logo, top-level links to articles, and if need be drop-down menus that include links to several articles. For example:
 
-![](images/navigation-bar.png){width=95% .screenshot}
+![](images/navigation-bar.png){.screenshot width="95%"}
 
 Elements of the site navigation bar are specified within the `navbar` section of the `_site.yml` file. For example, here is the YAML that was used to create the navigation bar displayed above:
 
-```markup
+``` {.markup}
 ---
 name: "distill"
 title: "Distill for R Markdown"
@@ -149,7 +147,7 @@ output: distill::distill_article
 ---
 ```
 
-Note that we specify that the menu items appear on the `right` side of the navigation bar. We could have also used `left`, or chosen to put some items on the `left` and some on the `right`. 
+Note that we specify that the menu items appear on the `right` side of the navigation bar. We could have also used `left`, or chosen to put some items on the `left` and some on the `right`.
 
 Note also that we used an `icon` for one of the menus, specifying the [Font Awesome](https://fontawesome.com/) `fab fa-github` identifier for the GitHub icon (you can use any Font Awesome icon). If there isn't a Font Awesome icon that matches the image you want, you can also specify a custom `image` rather than an `icon`.
 
@@ -157,13 +155,13 @@ Note also that we used an `icon` for one of the menus, specifying the [Font Awes
 
 When you use a navigation bar, you can optionally also include a site footer which uses the same theme (background and foreground colors). For example:
 
-![](images/footer-bar.png){width=95% .screenshot}
+![](images/footer-bar.png){.screenshot width="95%"}
 
 To add a footer, simply include a file named `_footer.html` within your main site directory. For example:
 
-**_footer.html**
+**\_footer.html**
 
-```markup
+``` {.markup}
 © Copyright 2018 [The Distill Template Authors]
 (https://github.com/distillpub/template/blob/master/AUTHORS) 
 and [RStudio, Inc](https://www.rstudio.com).
@@ -176,7 +174,7 @@ Software licensed under the [Apache License, v2.0]
 
 You can use CSS to create an alternate theme for your navigation bar and site footer. Here is the CSS used for the default appearance:
 
-```css
+``` {.css}
 .distill-site-nav {
   color: rgba(255, 255, 255, 0.8);
   background-color: #455a64;
@@ -208,11 +206,11 @@ You can use CSS to create an alternate theme for your navigation bar and site fo
 
 The `distill-site-nav` class addresses both the header and footer, whereas the `distill-site-header` and `distill-site-footer` apply (respectively) to just the header and footer.
 
-To override all or part of this CSS, simply include a `styles.css` file in the main site directory and add a reference to it within your site output options. For example: 
+To override all or part of this CSS, simply include a `styles.css` file in the main site directory and add a reference to it within your site output options. For example:
 
 **\_site.yml**
 
-```markup
+``` {.markup}
 name: "distill"
 title: "Distill for R Markdown"
 navbar:
@@ -228,7 +226,7 @@ You can add [Google Analytics](https://analytics.google.com/) to your website by
 
 **\_site.yml**
 
-```markup
+``` {.markup}
 name: "distill"
 title: "Distill for R Markdown"
 base_url: https://rstudio.github.io/distill
@@ -242,24 +240,24 @@ The Google Analytics tracking code will be automatically included on all pages o
 
 ## Site metadata
 
-Distill articles can include various types of [metadata](metadata.html) to make them easier to index, cite, and share. Metadata included within your `_site.yml` file is conveniently shared across all articles on your site (individual articles can always override any value within their own metadata). 
+Distill articles can include various types of [metadata](metadata.html) to make them easier to index, cite, and share. Metadata included within your `_site.yml` file is conveniently shared across all articles on your site (individual articles can always override any value within their own metadata).
 
 Several metadata values which you might find useful to define in `_site.yml` are:
 
-| Metadata           | Description                                    |
-|------------------|------------------------------------------------|
-| `base_url` |  Base (root) URL for the location where the website will be deployed (used for providing [preview images](metadata.html#preview-images) for Open Graph and Twitter Card). |
-| `repository_url`     |   URL for the source code of your website (note that individual articles will often want to override this value). Used to automatically create a *Corrections* appendix. |
-| `creative_commons`      |  [Creative Commons](metadata.html#creative-commons) license terms for website content. Used to automatically generate a *Reuse* appendix. |
-| `license_url`     | Alternate licensing terms for website content if not using a Creative Commons license. |
-| `favicon` | Favicon (image file) to use for browser tabs/bookmarks |
-| `twitter` | Site handle for Twitter Card metadata |
+| Metadata           | Description                                                                                                                                                              |
+|--------------------|--------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| `base_url`         | Base (root) URL for the location where the website will be deployed (used for providing [preview images](metadata.html#preview-images) for Open Graph and Twitter Card). |
+| `repository_url`   | URL for the source code of your website (note that individual articles will often want to override this value). Used to automatically create a *Corrections* appendix.   |
+| `creative_commons` | [Creative Commons](metadata.html#creative-commons) license terms for website content. Used to automatically generate a *Reuse* appendix.                                 |
+| `license_url`      | Alternate licensing terms for website content if not using a Creative Commons license.                                                                                   |
+| `favicon`          | Favicon (image file) to use for browser tabs/bookmarks                                                                                                                   |
+| `twitter`          | Site handle for Twitter Card metadata                                                                                                                                    |
 
 Here's a `_site.yml` file that uses all of these fields (save for `license_url` since the license is already specified via `creative_commons`):
 
 **\_site.yml**
 
-```markup
+``` {.markup}
 name: "distill"
 title: "Distill for R Markdown"
 favicon: images/favicon.png
@@ -275,10 +273,8 @@ output: distill::distill_article
 
 Be sure to enclose Twitter account names in quotes (this is required because they start with `@`).
 
-
 ## Publishing a website
 
 Website content is by default written to the `_site` sub-directory (you can customize this using the `output_dir` metadata field). Publishing is simply a matter of copying the output directory to a web server or web hosting service.
 
-See the article on [publishing websites](publish_website.html) for additional details on publishing sites using a variety of available hosting services.  
-
+See the article on [publishing websites](publish_website.html) for additional details on publishing sites using a variety of available hosting services.

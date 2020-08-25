@@ -5,23 +5,23 @@ description: "Illustrate concepts with diagrams"
 
 There are a number of ways to create diagrams for use in Distill articles, a few worth considering are:
 
-- The [DiagrammerR](http://rich-iannone.github.io/DiagrammeR/) package, which enables you to generate graph diagrams using text (both [GraphViz](https://www.graphviz.org/) and [Mermaid](https://mermaidjs.github.io/) are supported). 
+-   The [DiagrammerR](http://rich-iannone.github.io/DiagrammeR/) package, which enables you to generate graph diagrams using text (both [GraphViz](https://www.graphviz.org/) and [Mermaid](https://mermaidjs.github.io/) are supported).
 
-- The [r2d3](https://rstudio.github.io/r2d3) package, which enables you to create fully custom diagrams with [D3.js](https://d3js.org/).
+-   The [r2d3](https://rstudio.github.io/r2d3) package, which enables you to create fully custom diagrams with [D3.js](https://d3js.org/).
 
-- For more highly customized static diagrams you can use a variety of vector graphics tools (e.g. [Inkscape](https://inkscape.org/en/)) to create SVG files that can be included within your article.
+-   For more highly customized static diagrams you can use a variety of vector graphics tools (e.g. [Inkscape](https://inkscape.org/en/)) to create SVG files that can be included within your article.
 
 ## DiagrammeR
 
 You can use the [DiagrammerR](http://rich-iannone.github.io/DiagrammeR/) package to include [GraphViz](https://www.graphviz.org/) visualizations within a Distill article. For example, if you have a GraphViz file [graph.gv](https://github.com/rstudio/distill/blob/master/docs/images/graph.gv), you can include it with the following code:
 
-````clike
+```` {.clike}
 ```{r, layout="l-page", fig.height=2}`r ''`
 library(DiagrammeR)
 grViz("images/graph.gv")
 ```
 ````
-    
+
 ```{r, layout="l-page", fig.height=2}
 library(DiagrammeR)
 grViz("images/graph.gv")
@@ -31,7 +31,7 @@ Note that since this diagram is much wider than it is tall, we specify `layout="
 
 DiagrammeR also supports diagrams created with [Mermaid](https://mermaidjs.github.io/). For example:
 
-````clike
+```` {.clike}
 ```{r}`r ''`
 library(DiagrammeR)
 mermaid(diagram = '
@@ -71,7 +71,7 @@ sequenceDiagram
 
 The [r2d3](https://rstudio.github.io/r2d3) package enables you to include illustrations created using [D3.js](https://d3js.org/). For example, the following code renders [flare.json](https://github.com/rstudio/distill/blob/master/docs/d3/circlepacking/flare.json) using the [circlepacking.js](https://github.com/rstudio/distill/blob/master/docs/d3/circlepacking/circlepacking.js) script:
 
-````clike
+```` {.clike}
 ```{r, layout="l-screen-inset", fig.height=8}`r ''`
 library(r2d3)
 data <- jsonlite::read_json("flare.json")
@@ -89,11 +89,11 @@ This is an illustration that has lots of detail so it benefits from being render
 
 ## Static diagrams
 
-For more highly customized static diagrams you can use a vector graphics tools like [Inkscape](https://inkscape.org/en/), [Adobe Illustrator](https://www.adobe.com/products/illustrator.html), or [Sketch](https://www.sketchapp.com/). 
+For more highly customized static diagrams you can use a vector graphics tools like [Inkscape](https://inkscape.org/en/), [Adobe Illustrator](https://www.adobe.com/products/illustrator.html), or [Sketch](https://www.sketchapp.com/).
 
 These programs are all capable of exporting [SVG (Scalable Vector Graphics)](https://en.wikipedia.org/wiki/Scalable_Vector_Graphics). Once you've exported an SVG you can include it in your article using the `knitr::include_graphics()` function. For example, to include the SVG file created within this [Inkscape tutorial](http://www.ioncannon.net/utilities/123/10-tips-for-creating-good-looking-diagrams-using-inkscape/) you would use the following code:
 
-````clike
+```` {.clike}
 ```{r}`r ''`
 library(knitr)
 include_graphics("images/flowchart.svg")
@@ -106,7 +106,3 @@ include_graphics("images/flowchart.svg")
 ```
 
 This particular illustration uses the default layout (occupying the full width of the article text). Note though that you can use the various [figure layout](figures.html) options to control the size and placement of SVG files included from illustration programs.
-
-
-
-

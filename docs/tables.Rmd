@@ -5,23 +5,22 @@ description: Display data in attractive, compact formats
 
 There are a number of options available for displaying tables within Distill articles, including:
 
-- Using the `knitr::kable()` function to render a data frame as HTML.
+-   Using the `knitr::kable()` function to render a data frame as HTML.
 
-- Using the `rmarkdown::paged_table()` function to create a page-able version of a data frame.
+-   Using the `rmarkdown::paged_table()` function to create a page-able version of a data frame.
 
-- Using standard [markdown table syntax](https://pandoc.org/MANUAL.html#tables) to create a custom table.
+-   Using standard [markdown table syntax](https://pandoc.org/MANUAL.html#tables) to create a custom table.
 
 ## Knitr kable
 
 The `knitr::kable()` function will render an R data frame as an HTML table. For example:
 
-````clike
+```` {.clike}
 ```{r, layout="l-body-outset"}`r ''`
 library(knitr)
 kable(head(mtcars))
 ```
 ````
-
 
 ```{r, layout="l-body-outset"}
 library(knitr)
@@ -34,7 +33,7 @@ Often times tables will require more width for their display than the standard D
 
 If a data frame has a large number of rows it might not be practical to display it fully inline. In these situations you can use the `rmarkdown::paged_table()` function to create a table that allows pagination of rows and columns. For example:
 
-````clike
+```` {.clike}
 ```{r, layout="l-body-outset"}`r ''`
 library(rmarkdown)
 paged_table(mtcars)
@@ -48,7 +47,7 @@ paged_table(mtcars)
 
 There are a number of options available that control the display of paged tables. By default, 10 rows at a time are displayed but you can use the `rows.print` option to increase this. For example:
 
-````clike
+```` {.clike}
 ```{r, layout="l-body-outset"}`r ''`
 library(rmarkdown)
 paged_table(mtcars, options = list(rows.print = 15))
@@ -73,7 +72,7 @@ Here is a summary of the available paged table options:
 
 You can also define [tables using markdown](https://pandoc.org/MANUAL.html#tables). For example, the table from the previous section that describes paged table options was defined with the following markdown:
 
-```markdown
+``` {.markdown}
 | Option           | Description                                    |
 |------------------|------------------------------------------------|
 | `rows.print`     | Maximum rows to print per page.                |
@@ -84,7 +83,7 @@ You can also define [tables using markdown](https://pandoc.org/MANUAL.html#table
 
 You can use Distill [figure layout](figures.html) classes with markdown tables by enclosing them in markdown div (`:::`) named with the appropriate class, for example:
 
-```markdown
+``` {.markdown}
 ::: l-body-outset
 | Option           | Description                                    |
 |------------------|------------------------------------------------|
@@ -94,9 +93,3 @@ You can use Distill [figure layout](figures.html) classes with markdown tables b
 | `rownames.print` | Print row names as part of the table.          |
 :::
 ```
-
-
-
-
-
-

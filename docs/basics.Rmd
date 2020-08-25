@@ -8,11 +8,5 @@ bibliography: biblio.bib
 library(knitr)
 ```
 
-
 ```{r, child="_common/distill_basics.Rmd"}
 ```
-
-
-
-
-

@@ -7,12 +7,8 @@ When the **distill** package was initially published on CRAN, it was named **rad
 
 You can migrate your Radix documents to Distill by simply changing the output format from `radix::radix_article` to `distill::distill_article`. For example:
 
-![](images/migrate-article.png){width=95% .screenshot}
-
+![](images/migrate-article.png){.screenshot width="95%"}
 
 If you have created a blog or website with Radix, you should additionally modify the `_site.yml` and `index.Rmd` files to reflect the use of the Distill package:
 
-![](images/migrate-site.png){width=95% .screenshot}
-
-
-
+![](images/migrate-site.png){.screenshot width="95%"}

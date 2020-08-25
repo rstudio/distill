@@ -14,7 +14,7 @@ Distill articles support including citations and a corresponding bibliography us
 
 [BibTeX](http://www.bibtex.org/) is the supported way of making academic citations. To include citations, first create a BibTeX file and refer to it from the `bibliography` field of the YAML front-matter. For example:
 
-```markup
+``` {.markup}
 ---
 title: "Distill for R Markdown"
 description: | 
@@ -32,7 +32,7 @@ bibliography: biblio.bib
 
 Here's an example of what one of the entries in your BibTeX file might look like:
 
-```markup
+``` {.markup}
 @Book{xie2015,
   title = {Dynamic Documents with R and knitr},
   author = {Yihui Xie},
@@ -49,19 +49,19 @@ To cite this within your article, use standard R Markdown notation, for example:
 
 The citation is presented inline like this: [@xie2015] (a number that displays more information on hover). If you have an appendix, a bibliography is automatically created and populated within it.
 
-Distill chose a numerical inline citation style to improve readability of citation dense articles and because many of the benefits of longer citations are obviated by displaying more information on hover. However, we consider it good style to mention author last names if you discuss something at length and it fits into the flow well---the authors are human and it’s nice for them to have the community associate them with their work.
+Distill chose a numerical inline citation style to improve readability of citation dense articles and because many of the benefits of longer citations are obviated by displaying more information on hover. However, we consider it good style to mention author last names if you discuss something at length and it fits into the flow well---the authors are human and it's nice for them to have the community associate them with their work.
 
 Also note that you are strongly encouraged you to populate the `url` BibTeX field where possible so that links can be provided for citations.
 
-## Creating citeable articles
+## Creating citeable articles {#creating-citeable-articles}
 
 You can make it easier for others to cite your work by providing additional metadata with the YAML front-matter of your article. Citations can be provided for both articles published to the web or for articles published in journals (with or without a [DOI](https://www.doi.org/)).
 
 ### Web articles
 
-To provide a citation for an article published to the web, include `author` and `date` metadata as well as a  `citation_url`. For example:
+To provide a citation for an article published to the web, include `author` and `date` metadata as well as a `citation_url`. For example:
 
-```markup
+``` {.markup}
 ---
 title: "Distill for R Markdown"
 description: | 
@@ -78,12 +78,11 @@ bibliography: biblio.bib
 ---
 ```
 
-Note that the `citation_url` field is not required for [blog articles](blog.html) (in that case
-it's computed automatically using the site's `base_url` field).
+Note that the `citation_url` field is not required for [blog articles](blog.html) (in that case it's computed automatically using the site's `base_url` field).
 
 When this metadata is available, a citation appendix is automatically added to the article which looks like this:
 
-![](images/citation.png){width=95% .screenshot}
+![](images/citation.png){.screenshot width="95%"}
 
 Note that we also included a `slug` field (in this case `jones2018distill`) which affects the abbreviated version of the citation included in the BibTeX entry. If you don't provide a `slug` then one will be automatically generated.
 
@@ -91,14 +90,14 @@ Note that we also included a `slug` field (in this case `jones2018distill`) whic
 
 If your article is published within a Journal, you can add the following the additional fields to generate the appropriate citation entry:
 
-| Metadata           | Description                                    |
-|--------------------|------------------------------------------------|
-| `journal`          | Name of Journal published within               |
-| `doi`              | Digital Object Identifier ([DOI](https://www.doi.org/)) |
+| Metadata  | Description                                             |
+|-----------|---------------------------------------------------------|
+| `journal` | Name of Journal published within                        |
+| `doi`     | Digital Object Identifier ([DOI](https://www.doi.org/)) |
 
 Here's our previous examples amended with these fields:
 
-```markup
+``` {.markup}
 ---
 title: "Distill for R Markdown"
 description: | 
@@ -119,14 +118,9 @@ bibliography: biblio.bib
 
 This is how the citation is presented in the appendix:
 
-![](images/citation-journal.png){width=95% .screenshot}
+![](images/citation-journal.png){.screenshot width="95%"}
 
 For Journal articles, the `citation_url` is included in the BibTeX entry within the `note` field.
 
 ```{r, child="_common/google_scholar.Rmd"}
 ```
-
-
-
-
-

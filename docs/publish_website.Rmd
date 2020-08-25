@@ -13,24 +13,24 @@ Below we describe several convenient options for Distill website deployment incl
 
 ## RStudio Connect
 
-[RStudio Connect](https://www.rstudio.com/products/connect/) is a server product from RStudio for secure sharing of websites, applications, reports, and plots. 
+[RStudio Connect](https://www.rstudio.com/products/connect/) is a server product from RStudio for secure sharing of websites, applications, reports, and plots.
 
 You can deploy a Distill website to RStudio Connect from the command line using the `distill::publish_website()` function. For example:
 
-```r
+``` {.r}
 library(distill)
 publish_website(server = "https://rsc.example.com")
 ```
 
 Note that once you've published your site for the first time you can omit the `server` argument:
 
-```r
+``` {.r}
 publish_website()
 ```
 
 You can also publish a Distill website directly to an RStudio Connect server from within the website preview window by clicking the **Publish** button:
 
-![](images/rstudio-connect.png){width=95% .screenshot} 
+![](images/rstudio-connect.png){.screenshot width="95%"}
 
 Note that you can either publish your website with the source code (so it can be regenerated on a scheduled basis) or publish a copy of the website you built locally. Generally publishing a copy is more straightforward so that's the recommended option unless you have specialized requirements.
 
@@ -40,19 +40,19 @@ Unlike the other website publishing options described below, [RStudio Connect](h
 
 [GitHub Pages](https://pages.github.com/) is a service that lets you publish a website from any GitHub repository. There are two additional configuration steps required to host a Distill website using GitHub Pages:
 
-1. Create a file named `.nojekyll` in your repository (this is required to disable some processing of HTML files that GitHub does by default). You can do this with the following code:
-    
-    ```r
+1.  Create a file named `.nojekyll` in your repository (this is required to disable some processing of HTML files that GitHub does by default). You can do this with the following code:
+
+    ``` {.r}
     file.create(".nojekyll")
     ```
 
-2. Set the `output_dir` within `_site.yml` to match the repository directory your site is served from. You can configure GitHub Pages to publish from the root of your master branch or the `docs` sub-directory:
+2.  Set the `output_dir` within `_site.yml` to match the repository directory your site is served from. You can configure GitHub Pages to publish from the root of your master branch or the `docs` sub-directory:
 
-    ![](images/github-pages-directory.png){width=95%}    
+    ![](images/github-pages-directory.png){width="95%"}
 
     Depending on your configuration you should set the `output_dir` as follows:
 
-    ```markup
+    ``` {.markup}
     output_dir: "."     # root of master branch
     output_dir: "docs"  # docs directory of master branch
     ```
@@ -65,15 +65,15 @@ See the [GitHub Pages](https://pages.github.com/) documentation for additional d
 
 If you are using Netlify Git integration, be sure to set the publish directory to the output directory of your website (`_site` by default but modifiable via the `output_dir` metadata value). For example:
 
-![](images/netlify-publish-dir.png){width=95% .screenshot}
+![](images/netlify-publish-dir.png){.screenshot width="95%"}
 
 ## Google Firebase
 
 Google Firebase has a [web hosting service](https://firebase.google.com/docs/hosting/quickstart) that enables easy deployment of websites using a set of command line tools.
 
-Firebase websites by default deploy content from the `public` directory of the Firebase project directory. This means that you should set the `output_dir` to `"public"`  within `_site.yml`:
+Firebase websites by default deploy content from the `public` directory of the Firebase project directory. This means that you should set the `output_dir` to `"public"` within `_site.yml`:
 
-```markup
+``` {.markup}
 ---
 name: "distill"
 title: "Distill for R Markdown"
@@ -91,9 +91,6 @@ The recommended workflow for deploying Distill websites to Site44 is to develop 
 
 If you are a user of Amazon Web Services you can serve your website directly from Amazon S3. Note however that this option is a bit more technically involved than GitHub Pages, Netlify, or Site 44. See the article on [Hosting a Static Website on Amazon S3](https://docs.aws.amazon.com/AmazonS3/latest/dev/WebsiteHosting.html) for additional details.
 
-
 ## Other services
 
 Any web server or web host can be used to deploy a Distill website. Here's a recent [CNET roundup](https://www.cnet.com/web-hosting/) of other web hosts you could consider. You can also deploy a Distill website on any internal (intranet) web server.
-
-
