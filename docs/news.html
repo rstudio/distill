@@ -609,6 +609,16 @@
     color: rgba(0, 0, 0, 1.0);
   }
 
+  /* Citations */
+
+  d-article .citation {
+    color: inherit;
+    cursor: inherit;
+  }
+
+  div.hanging-indent{
+    margin-left: 1em; text-indent: -1em;
+  }
 
 
   /* Tweak 1000px media break to show more text */
@@ -930,23 +940,8 @@
     // create d-appendix
     $('.d-appendix').changeElementType('d-appendix');
 
-    // create d-bibliography
-    var bibliography = $('<d-bibliography></d-bibliography>');
-    $('#distill-bibliography').wrap(bibliography);
-
     // flag indicating that we have appendix items
     var appendix = $('.appendix-bottom').children('h3').length > 0;
-
-    // replace citations with <d-cite>
-    $('.citation').each(function(i, val) {
-      appendix = true;
-      var cites = $(this).attr('data-cites').split(" ");
-      var dt_cite = $('<d-cite></d-cite>');
-      dt_cite.attr('key', cites.join());
-      $(this).replaceWith(dt_cite);
-    });
-    // remove refs
-    $('#refs').remove();
 
     // replace footnotes with <d-footnote>
     $('.footnote-ref').each(function(i, val) {
@@ -963,6 +958,9 @@
     });
     // remove footnotes
     $('.footnotes').remove();
+
+    // move refs into #references-listing
+    $('#references-listing').replaceWith($('#refs'));
 
     $('h1.appendix, h2.appendix').each(function(i, val) {
       $(this).changeElementType('h3');
@@ -1266,7 +1264,7 @@
   </script>
 
   <!--/radix_placeholder_distill-->
-  <script src="site_libs/header-attrs-2.2.2/header-attrs.js"></script>
+  <script src="site_libs/header-attrs-2.3/header-attrs.js"></script>
   <script src="site_libs/jquery-1.11.3/jquery.min.js"></script>
   <script src="site_libs/bowser-1.9.3/bowser.min.js"></script>
   <script src="site_libs/webcomponents-2.0.0/webcomponents.js"></script>
@@ -1382,6 +1380,7 @@ Publishing
 
 
 <div class="d-article">
+<h2 id="distill-v0.9-development">distill v0.9 (Development)</h2>
 <h2 id="distill-v0.8-cran">distill v0.8 (CRAN)</h2>
 <ul>
 <li>Generate RSS category feeds using rss/categories in site config</li>

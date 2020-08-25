@@ -612,6 +612,16 @@
     color: rgba(0, 0, 0, 1.0);
   }
 
+  /* Citations */
+
+  d-article .citation {
+    color: inherit;
+    cursor: inherit;
+  }
+
+  div.hanging-indent{
+    margin-left: 1em; text-indent: -1em;
+  }
 
 
   /* Tweak 1000px media break to show more text */
@@ -933,23 +943,8 @@
     // create d-appendix
     $('.d-appendix').changeElementType('d-appendix');
 
-    // create d-bibliography
-    var bibliography = $('<d-bibliography></d-bibliography>');
-    $('#distill-bibliography').wrap(bibliography);
-
     // flag indicating that we have appendix items
     var appendix = $('.appendix-bottom').children('h3').length > 0;
-
-    // replace citations with <d-cite>
-    $('.citation').each(function(i, val) {
-      appendix = true;
-      var cites = $(this).attr('data-cites').split(" ");
-      var dt_cite = $('<d-cite></d-cite>');
-      dt_cite.attr('key', cites.join());
-      $(this).replaceWith(dt_cite);
-    });
-    // remove refs
-    $('#refs').remove();
 
     // replace footnotes with <d-footnote>
     $('.footnote-ref').each(function(i, val) {
@@ -966,6 +961,9 @@
     });
     // remove footnotes
     $('.footnotes').remove();
+
+    // move refs into #references-listing
+    $('#references-listing').replaceWith($('#refs'));
 
     $('h1.appendix, h2.appendix').each(function(i, val) {
       $(this).changeElementType('h3');
@@ -1269,7 +1267,7 @@
   </script>
 
   <!--/radix_placeholder_distill-->
-  <script src="site_libs/header-attrs-2.2.2/header-attrs.js"></script>
+  <script src="site_libs/header-attrs-2.3/header-attrs.js"></script>
   <link href="site_libs/pagedtable-1.1/css/pagedtable.css" rel="stylesheet" />
   <script src="site_libs/pagedtable-1.1/js/pagedtable.js"></script>
   <script src="site_libs/jquery-1.11.3/jquery.min.js"></script>
@@ -1413,7 +1411,7 @@ kable(head(mtcars))
 <table>
 <thead>
 <tr class="header">
-<th></th>
+<th style="text-align: left;"></th>
 <th style="text-align: right;">mpg</th>
 <th style="text-align: right;">cyl</th>
 <th style="text-align: right;">disp</th>
@@ -1429,7 +1427,7 @@ kable(head(mtcars))
 </thead>
 <tbody>
 <tr class="odd">
-<td>Mazda RX4</td>
+<td style="text-align: left;">Mazda RX4</td>
 <td style="text-align: right;">21.0</td>
 <td style="text-align: right;">6</td>
 <td style="text-align: right;">160</td>
@@ -1443,7 +1441,7 @@ kable(head(mtcars))
 <td style="text-align: right;">4</td>
 </tr>
 <tr class="even">
-<td>Mazda RX4 Wag</td>
+<td style="text-align: left;">Mazda RX4 Wag</td>
 <td style="text-align: right;">21.0</td>
 <td style="text-align: right;">6</td>
 <td style="text-align: right;">160</td>
@@ -1457,7 +1455,7 @@ kable(head(mtcars))
 <td style="text-align: right;">4</td>
 </tr>
 <tr class="odd">
-<td>Datsun 710</td>
+<td style="text-align: left;">Datsun 710</td>
 <td style="text-align: right;">22.8</td>
 <td style="text-align: right;">4</td>
 <td style="text-align: right;">108</td>
@@ -1471,7 +1469,7 @@ kable(head(mtcars))
 <td style="text-align: right;">1</td>
 </tr>
 <tr class="even">
-<td>Hornet 4 Drive</td>
+<td style="text-align: left;">Hornet 4 Drive</td>
 <td style="text-align: right;">21.4</td>
 <td style="text-align: right;">6</td>
 <td style="text-align: right;">258</td>
@@ -1485,7 +1483,7 @@ kable(head(mtcars))
 <td style="text-align: right;">1</td>
 </tr>
 <tr class="odd">
-<td>Hornet Sportabout</td>
+<td style="text-align: left;">Hornet Sportabout</td>
 <td style="text-align: right;">18.7</td>
 <td style="text-align: right;">8</td>
 <td style="text-align: right;">360</td>
@@ -1499,7 +1497,7 @@ kable(head(mtcars))
 <td style="text-align: right;">2</td>
 </tr>
 <tr class="even">
-<td>Valiant</td>
+<td style="text-align: left;">Valiant</td>
 <td style="text-align: right;">18.1</td>
 <td style="text-align: right;">6</td>
 <td style="text-align: right;">225</td>

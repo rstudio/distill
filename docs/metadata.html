@@ -612,6 +612,16 @@
     color: rgba(0, 0, 0, 1.0);
   }
 
+  /* Citations */
+
+  d-article .citation {
+    color: inherit;
+    cursor: inherit;
+  }
+
+  div.hanging-indent{
+    margin-left: 1em; text-indent: -1em;
+  }
 
 
   /* Tweak 1000px media break to show more text */
@@ -933,23 +943,8 @@
     // create d-appendix
     $('.d-appendix').changeElementType('d-appendix');
 
-    // create d-bibliography
-    var bibliography = $('<d-bibliography></d-bibliography>');
-    $('#distill-bibliography').wrap(bibliography);
-
     // flag indicating that we have appendix items
     var appendix = $('.appendix-bottom').children('h3').length > 0;
-
-    // replace citations with <d-cite>
-    $('.citation').each(function(i, val) {
-      appendix = true;
-      var cites = $(this).attr('data-cites').split(" ");
-      var dt_cite = $('<d-cite></d-cite>');
-      dt_cite.attr('key', cites.join());
-      $(this).replaceWith(dt_cite);
-    });
-    // remove refs
-    $('#refs').remove();
 
     // replace footnotes with <d-footnote>
     $('.footnote-ref').each(function(i, val) {
@@ -966,6 +961,9 @@
     });
     // remove footnotes
     $('.footnotes').remove();
+
+    // move refs into #references-listing
+    $('#references-listing').replaceWith($('#refs'));
 
     $('h1.appendix, h2.appendix').each(function(i, val) {
       $(this).changeElementType('h3');
@@ -1269,7 +1267,7 @@
   </script>
 
   <!--/radix_placeholder_distill-->
-  <script src="site_libs/header-attrs-2.2.2/header-attrs.js"></script>
+  <script src="site_libs/header-attrs-2.3/header-attrs.js"></script>
   <script src="site_libs/jquery-1.11.3/jquery.min.js"></script>
   <script src="site_libs/bowser-1.9.3/bowser.min.js"></script>
   <script src="site_libs/webcomponents-2.0.0/webcomponents.js"></script>
@@ -1485,7 +1483,7 @@ creative_commons: CC BY
 ![Figure from https://example.com](heatmap.png){width=100% .external}    </code></pre>
 <p>Using the <code>.external</code> class and providing a “Figure from” link makes it clear that the figure originated elsewhere (and is therefore not covered by any of your article’s copyright or creative commons license grants). For example, here’s how a figure taken from a Stack Overflow post might appear:</p>
 <figure>
-<img src="images/heatmap.png" class="external" style="width:100.0%" alt="" /><figcaption>Figure from <a href="https://stackoverflow.com/questions/12196756/" class="uri">https://stackoverflow.com/questions/12196756/</a></figcaption>
+<img src="images/heatmap.png" class="external" style="width:100.0%" alt="Figure from https://stackoverflow.com/questions/12196756/" /><figcaption aria-hidden="true">Figure from <a href="https://stackoverflow.com/questions/12196756/" class="uri">https://stackoverflow.com/questions/12196756/</a></figcaption>
 </figure>
 <h2 id="preview-images">Preview images</h2>
 <p>You can specify a preview image for your article (for sharing on Slack, Twitter, etc.) in a number of different ways:</p>

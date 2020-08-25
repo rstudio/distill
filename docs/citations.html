@@ -614,6 +614,16 @@
     color: rgba(0, 0, 0, 1.0);
   }
 
+  /* Citations */
+
+  d-article .citation {
+    color: inherit;
+    cursor: inherit;
+  }
+
+  div.hanging-indent{
+    margin-left: 1em; text-indent: -1em;
+  }
 
 
   /* Tweak 1000px media break to show more text */
@@ -935,23 +945,8 @@
     // create d-appendix
     $('.d-appendix').changeElementType('d-appendix');
 
-    // create d-bibliography
-    var bibliography = $('<d-bibliography></d-bibliography>');
-    $('#distill-bibliography').wrap(bibliography);
-
     // flag indicating that we have appendix items
     var appendix = $('.appendix-bottom').children('h3').length > 0;
-
-    // replace citations with <d-cite>
-    $('.citation').each(function(i, val) {
-      appendix = true;
-      var cites = $(this).attr('data-cites').split(" ");
-      var dt_cite = $('<d-cite></d-cite>');
-      dt_cite.attr('key', cites.join());
-      $(this).replaceWith(dt_cite);
-    });
-    // remove refs
-    $('#refs').remove();
 
     // replace footnotes with <d-footnote>
     $('.footnote-ref').each(function(i, val) {
@@ -968,6 +963,9 @@
     });
     // remove footnotes
     $('.footnotes').remove();
+
+    // move refs into #references-listing
+    $('#references-listing').replaceWith($('#refs'));
 
     $('h1.appendix, h2.appendix').each(function(i, val) {
       $(this).changeElementType('h3');
@@ -1271,7 +1269,7 @@
   </script>
 
   <!--/radix_placeholder_distill-->
-  <script src="site_libs/header-attrs-2.2.2/header-attrs.js"></script>
+  <script src="site_libs/header-attrs-2.3/header-attrs.js"></script>
   <script src="site_libs/jquery-1.11.3/jquery.min.js"></script>
   <script src="site_libs/bowser-1.9.3/bowser.min.js"></script>
   <script src="site_libs/webcomponents-2.0.0/webcomponents.js"></script>
@@ -1566,44 +1564,13 @@ bibliography: biblio.bib
 <!--/radix_placeholder_site_after_body-->
 <!--radix_placeholder_appendices-->
 <div class="appendix-bottom">
+<h3 id="references">References</h3>
+<div id="references-listing"></div>
 <h3 id="updates-and-corrections">Corrections</h3>
 <p>If you see mistakes or want to suggest changes, please <a href="https://github.com/rstudio/distill/issues/new">create an issue</a> on the source repository.</p>
 <h3 id="reuse">Reuse</h3>
 <p>Text and figures are licensed under Creative Commons Attribution <a rel="license" href="https://creativecommons.org/licenses/by/4.0/">CC BY 4.0</a>. Source code is available at <a href="https://github.com/rstudio/distill">https://github.com/rstudio/distill</a>, unless otherwise noted. The figures that have been reused from other sources don't fall under this license and can be recognized by a note in their caption: "Figure from ...".</p>
 </div>
-<script id="distill-bibliography" type="text/bibtex">
-@misc{distill,
-  author = {Shan Carter and Chirs Olah and Arvind Satyanarayan},
-  doi = {10.23915/distill},
-  url = {https://doi.org/10.23915/distill},
-  publisher = {Distill Working Group},
-  title = {Distill},
-  year = {2016}
-}
-@article{knuth1984,
-  title={Literate programming},
-  author={Knuth, Donald E.},
-  journal={The Computer Journal},
-  volume={27},
-  number={2},
-  pages={97--111},
-  year={1984},
-  publisher={British Computer Society}
-}
-@Book{xie2015,
-  title = {Dynamic Documents with R and knitr},
-  author = {Yihui Xie},
-  publisher = {Chapman and Hall/CRC},
-  address = {Boca Raton, Florida},
-  year = {2015},
-  edition = {2nd},
-  note = {ISBN 978-1498716963},
-  url = {http://yihui.name/knitr/},
-}
-
-
-
-</script>
 <!--/radix_placeholder_appendices-->
 <!--radix_placeholder_navigation_after_body-->
 <div class="distill-site-nav distill-site-footer">
