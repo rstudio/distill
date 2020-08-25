@@ -12,7 +12,7 @@ Distill articles support including citations and a corresponding bibliography us
 
 ## Citing other works
 
-[BibTeX](http://www.bibtex.org/) is the supported way of making academic citations. To include citations, first create a BibTeX file and refer to it from the `bibliography` field of the YAML front-matter. For example:
+Use standard [R Markdown bibliographies](https://rmarkdown.rstudio.com/authoring_bibliographies_and_citations.html) for citing other works. To do this, first create a bibliography file using a supported format (e.g. BibTeX or CSL) and refer to it from the `bibliography` field of the YAML front-matter. For example:
 
 ``` {.markup}
 ---
@@ -46,12 +46,6 @@ Here's an example of what one of the entries in your BibTeX file might look like
 ```
 
 To cite this within your article, use standard R Markdown notation, for example: `[@xie2015]` (referencing an id provided in the bibliography). Note that multiple ids (separated by semicolons) can be provided.
-
-The citation is presented inline like this: [@xie2015] (a number that displays more information on hover). If you have an appendix, a bibliography is automatically created and populated within it.
-
-Distill chose a numerical inline citation style to improve readability of citation dense articles and because many of the benefits of longer citations are obviated by displaying more information on hover. However, we consider it good style to mention author last names if you discuss something at length and it fits into the flow well---the authors are human and it's nice for them to have the community associate them with their work.
-
-Also note that you are strongly encouraged you to populate the `url` BibTeX field where possible so that links can be provided for citations.
 
 ## Creating citeable articles {#creating-citeable-articles}
 
