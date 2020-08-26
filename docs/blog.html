@@ -1393,6 +1393,18 @@ Publishing
 <li><a href="#configuration">Configuration</a></li>
 <li><a href="#creating-a-post">Creating a post</a></li>
 <li><a href="#listing-pages">Listing pages</a></li>
+<li><a href="#rss-feeds">RSS feeds</a></li>
+<li><a href="#post-drafts">Post drafts</a></li>
+</ul></li>
+<li><a href="#next-steps">Next steps</a>
+<ul>
+<li><a href="#comments-and-sharing">Comments and sharing</a></li>
+<li><a href="#organizing-posts">Organizing posts</a></li>
+<li><a href="#preview-images">Preview images</a></li>
+<li><a href="#citations">Citations</a></li>
+<li><a href="#subscriptions">Subscriptions</a></li>
+<li><a href="#custom-html">Custom HTML</a></li>
+<li><a href="#supporting-files">Supporting files</a></li>
 </ul></li>
 <li><a href="#publishing-a-blog">Publishing a blog</a></li>
 <li><a href="#examples">Examples</a></li>
@@ -1510,21 +1522,13 @@ title: &quot;The Sharpe Ratio&quot;
 # (additional metadata e.g. description and date, excluded for brevity)
 categories:
   - portfolios
-  - dygraphs
-```
-
-As a result of including `categories`, the listing page now looks like this:
-
-![](images/site-listing-categories.png){width=95% .screenshot}
-
-
-### RSS feeds
-
-When you create a listing page an [RSS feed](https://en.wikipedia.org/wiki/RSS) is created automatically for the page (using the name of the listing page with a `.xml` file extension). You can link to the RSS feed within your site&#39;s navigation bar as follows (some navbar entries excluded for brevity):
-
-**\_site.yml**
-
-```markup
+  - dygraphs</code></pre>
+<p>As a result of including <code>categories</code>, the listing page now looks like this:</p>
+<p><img src="images/site-listing-categories.png" class="screenshot" style="width:95.0%" /></p>
+<h3 id="rss-feeds">RSS feeds</h3>
+<p>When you create a listing page an <a href="https://en.wikipedia.org/wiki/RSS">RSS feed</a> is created automatically for the page (using the name of the listing page with a <code>.xml</code> file extension). You can link to the RSS feed within your site’s navigation bar as follows (some navbar entries excluded for brevity):</p>
+<p><strong>_site.yml</strong></p>
+<pre class="markup"><code>
 name: &quot;reproducible-finance-with-r&quot;
 title: &quot;Reproducible Finance with R&quot;
 description: |
@@ -1535,16 +1539,11 @@ navbar:
   right:
     - icon: fa fa-rss
       href: index.xml
-output: distill::distill_article
-```
-
-Note that the `description` and `base_url` fields are both required to generate an RSS feed.
-
-By default the most recent 20 articles will be included in the RSS feed. You can change this by specifying `feed_items_max` within the collection configuration in `_site.yml` (navbar and output format fields omitted for brevity):
-
-**\_site.yml**
-
-```markup
+output: distill::distill_article</code></pre>
+<p>Note that the <code>description</code> and <code>base_url</code> fields are both required to generate an RSS feed.</p>
+<p>By default the most recent 20 articles will be included in the RSS feed. You can change this by specifying <code>feed_items_max</code> within the collection configuration in <code>_site.yml</code> (navbar and output format fields omitted for brevity):</p>
+<p><strong>_site.yml</strong></p>
+<pre class="markup"><code>
 name: &quot;reproducible-finance-with-r&quot;
 title: &quot;Reproducible Finance with R&quot;
 description: |
@@ -1553,16 +1552,11 @@ description: |
 base_url: https://beta.rstudioconnect.com/content/11424/
 collections:
   posts:
-    feed_items_max: 50
-```
-
-Specify `feed_items_max: false` to have no limit on the number of items included in the feed.
-
-### Post drafts
-
-If you want to work on a post for a period of time without having it be added to the listing page, add `draft: true` to the post&#39;s metadata. For example:
-
-```markup
+    feed_items_max: 50</code></pre>
+<p>Specify <code>feed_items_max: false</code> to have no limit on the number of items included in the feed.</p>
+<h3 id="post-drafts">Post drafts</h3>
+<p>If you want to work on a post for a period of time without having it be added to the listing page, add <code>draft: true</code> to the post’s metadata. For example:</p>
+<pre class="markup"><code>
 ---
 title: &quot;The Sharpe Ratio&quot;
 description: |
@@ -1571,24 +1565,15 @@ description: |
   We&#39;ll demonstrate importing stock data, building a portfolio,
   and then calculating the Sharpe Ratio. 
 draft: true
----
-```
-
-When you are ready to publish the post, either remove the `draft` option or set it to `false`, then build the website.
-
-Beyond support for drafts, Distill has a number of additional features to accommodate a variety of post authoring and contribution workflows, including importing posts published elsewhere on the web (e.g. on RPubs, in a Git repository, or on another blog). The article on [blog post workflow](blog_workflow.html) describes these options in more detail.
-
-## Next steps
-
-### Comments and sharing
-
-Readers will likely want to comment on and share articles they read on your blog. You can enable support for [Disqus comments](https://disqus.com/) and sharing links for Twitter, LinkedIn, and other services by adding options to the `collection:posts` section of `_site.yml`.
-
-For example, the following options provide the [Disqus shortname](https://help.disqus.com/installation/whats-a-shortname) for a site and specify that we want sharing buttons for Twitter and LinkedIn. 
-
-**\_site.yml**
-
-```markup
+---</code></pre>
+<p>When you are ready to publish the post, either remove the <code>draft</code> option or set it to <code>false</code>, then build the website.</p>
+<p>Beyond support for drafts, Distill has a number of additional features to accommodate a variety of post authoring and contribution workflows, including importing posts published elsewhere on the web (e.g. on RPubs, in a Git repository, or on another blog). The article on <a href="blog_workflow.html">blog post workflow</a> describes these options in more detail.</p>
+<h2 id="next-steps">Next steps</h2>
+<h3 id="comments-and-sharing">Comments and sharing</h3>
+<p>Readers will likely want to comment on and share articles they read on your blog. You can enable support for <a href="https://disqus.com/">Disqus comments</a> and sharing links for Twitter, LinkedIn, and other services by adding options to the <code>collection:posts</code> section of <code>_site.yml</code>.</p>
+<p>For example, the following options provide the <a href="https://help.disqus.com/installation/whats-a-shortname">Disqus shortname</a> for a site and specify that we want sharing buttons for Twitter and LinkedIn.</p>
+<p><strong>_site.yml</strong></p>
+<pre class="markup"><code>
 name: &quot;reproducible-finance-with-r&quot;
 title: &quot;Reproducible Finance with R&quot;
 description: |
@@ -1598,63 +1583,41 @@ base_url: https://beta.rstudioconnect.com/content/11424/
 collections:
   posts:
     disqus: reproducible-finance-with-r
-    share: [twitter, linkedin]
-```
-
-The following footer is then automatically included at the end of each post:
-
-![](images/social-footer.png){width=80% .screenshot}
-
-Note that the `base_url` field is required in order to use Disqus and sharing links.
-
-Valid values for the `share` option are `twitter`, `linkedin`, `facebook`, `google-plus`, and `pinterest`.
-
-By default, the full text of Disqus comments are not displayed (rather, a link is provided that will expand the comment section). This is done so that a long comment section doesn&#39;t obscure the bibliography and other appendices. If you&#39;d rather show the comments by default you can use this alterante syntax for `disqus` configuration:
-
-```markup
+    share: [twitter, linkedin]</code></pre>
+<p>The following footer is then automatically included at the end of each post:</p>
+<p><img src="images/social-footer.png" class="screenshot" style="width:80.0%" /></p>
+<p>Note that the <code>base_url</code> field is required in order to use Disqus and sharing links.</p>
+<p>Valid values for the <code>share</code> option are <code>twitter</code>, <code>linkedin</code>, <code>facebook</code>, <code>google-plus</code>, and <code>pinterest</code>.</p>
+<p>By default, the full text of Disqus comments are not displayed (rather, a link is provided that will expand the comment section). This is done so that a long comment section doesn’t obscure the bibliography and other appendices. If you’d rather show the comments by default you can use this alterante syntax for <code>disqus</code> configuration:</p>
+<pre class="markup"><code>
 collections:
   posts:
     disqus: 
       shortname: reproducible-finance-with-r
       hidden: false
-    share: [twitter, linkedin]
-```
-
-Specifying the `hidden: false` option for `disqus` will causes all comments to be displayed inline by default.
-
-### Organizing posts
-
-You can use whatever scheme you like to organize the `_posts` directory. You can have all posts at the top level or you can create subdirectories to create groupings of posts.
-
-One popular scheme for organizing blog posts is to use a date prefix for the post directory names. For example:
-
-```markup
+    share: [twitter, linkedin]</code></pre>
+<p>Specifying the <code>hidden: false</code> option for <code>disqus</code> will causes all comments to be displayed inline by default.</p>
+<h3 id="organizing-posts">Organizing posts</h3>
+<p>You can use whatever scheme you like to organize the <code>_posts</code> directory. You can have all posts at the top level or you can create subdirectories to create groupings of posts.</p>
+<p>One popular scheme for organizing blog posts is to use a date prefix for the post directory names. For example:</p>
+<pre class="markup"><code>
 _posts/
   2017-11-09-visualizing-asset-returns/
   2017-09-13-asset-volatility/
   2017-03-07-quandl-and-forecasting/
-  2016-11-08-sharpe-ratio/
-```
-
-The benefits of this scheme are that post names are given additional uniqueness (to guard against colliding names over the long term) and are also automatically listed in order when browsing the `_posts` directory.
-
-Note that if you use a date-prefixed post directory you are not required to specify an explicit `date` field within your post&#39;s metadata.
-
-### Preview images
-
-Note that the listing for our example above includes a preview image for each post. Preview thumbnail images are generated automatically based on the first plot encountered within your post. You can specify that a specific plot should be used as the preview image using the `preview` chunk option. For example:
-
-````clike
+  2016-11-08-sharpe-ratio/</code></pre>
+<p>The benefits of this scheme are that post names are given additional uniqueness (to guard against colliding names over the long term) and are also automatically listed in order when browsing the <code>_posts</code> directory.</p>
+<p>Note that if you use a date-prefixed post directory you are not required to specify an explicit <code>date</code> field within your post’s metadata.</p>
+<h3 id="preview-images">Preview images</h3>
+<p>Note that the listing for our example above includes a preview image for each post. Preview thumbnail images are generated automatically based on the first plot encountered within your post. You can specify that a specific plot should be used as the preview image using the <code>preview</code> chunk option. For example:</p>
+<pre class="clike"><code>
 ```{r, layout=&quot;l-body-outset&quot;, preview=TRUE}
 library(ggplot2)
 ggplot(diamonds, aes(carat, price)) + geom_smooth() +
   facet_grid(~ cut)
-```
-````
-
-If you want to use another image entirely as a post preview you add a `preview` field to the post&#39;s metadata. For example, here we add a `preview` field to the example metadata from above (some fields excluded for brevity):
-
-```markup
+```</code></pre>
+<p>If you want to use another image entirely as a post preview you add a <code>preview</code> field to the post’s metadata. For example, here we add a <code>preview</code> field to the example metadata from above (some fields excluded for brevity):</p>
+<pre class="markup"><code>
 ---
 title: &quot;The Sharpe Ratio&quot;
 description: |
@@ -1663,22 +1626,14 @@ description: |
   We&#39;ll demonstrate importing stock data, building a portfolio,
   and then calculating the Sharpe Ratio. 
 preview: images/sharpe-ratio.png
----
-```
-
-Preview images are also used for generating [Open Graph](metadata.html#open-graph) and [Twitter Card](metadata.html#twitter-card) metadata. However, since those systems require that preview images be specified as absolute URLs, you also need to add a `base_url` field to your `_site.yml` file as described above in [Getting Started].
-
-### Citations
-
-If your `_site.yml` file provides a `base_url` field, then an [article citation](citations.html) appendix and related metadata will be included automatically within all published posts. For example:
-
-![](images/blog-citation.png){width=95% .screenshot}
-
-If you want to disable this behavior you can use the `collections:posts:citations` field within `_site.yml`. For example:
-
-**\_site.yml**
-
-```markup
+---</code></pre>
+<p>Preview images are also used for generating <a href="metadata.html#open-graph">Open Graph</a> and <a href="metadata.html#twitter-card">Twitter Card</a> metadata. However, since those systems require that preview images be specified as absolute URLs, you also need to add a <code>base_url</code> field to your <code>_site.yml</code> file as described above in <a href="#getting-started">Getting Started</a>.</p>
+<h3 id="citations">Citations</h3>
+<p>If your <code>_site.yml</code> file provides a <code>base_url</code> field, then an <a href="citations.html">article citation</a> appendix and related metadata will be included automatically within all published posts. For example:</p>
+<p><img src="images/blog-citation.png" class="screenshot" style="width:95.0%" /></p>
+<p>If you want to disable this behavior you can use the <code>collections:posts:citations</code> field within <code>_site.yml</code>. For example:</p>
+<p><strong>_site.yml</strong></p>
+<pre class="markup"><code>
 name: &quot;reproducible-finance-with-r&quot;
 title: &quot;Reproducible Finance with R&quot;
 description: |
@@ -1689,17 +1644,11 @@ collections:
   posts:
     disqus: reproducible-finance-with-r
     share: [twitter, linkedin]
-    citations: false
-```
-
-
-### Subscriptions
-
-You can add HTML that enables readers to subscribe to your blog by including the `collections:posts:subscribe` option within `_site.yml`. The `subscribe` option in turn points to an HTML file that provides the ability to subscribe to your blog. For example:
-
-**\_site.yml**
-
-```markup
+    citations: false</code></pre>
+<h3 id="subscriptions">Subscriptions</h3>
+<p>You can add HTML that enables readers to subscribe to your blog by including the <code>collections:posts:subscribe</code> option within <code>_site.yml</code>. The <code>subscribe</code> option in turn points to an HTML file that provides the ability to subscribe to your blog. For example:</p>
+<p><strong>_site.yml</strong></p>
+<pre class="markup"><code>
 name: &quot;reproducible-finance-with-r&quot;
 title: &quot;Reproducible Finance with R&quot;
 description: |
@@ -1710,12 +1659,9 @@ collections:
   posts:
     disqus: reproducible-finance-with-r
     share: [twitter, linkedin]
-    subscribe: _subscribe.html
-```
-
-**\_subscribe.html**
-
-```html
+    subscribe: _subscribe.html</code></pre>
+<p><strong>_subscribe.html</strong></p>
+<pre class="html"><code>
 &lt;form method=&#39;post&#39; action=&#39;https://blogtrottr.com&#39;&gt;
   &lt;p&gt;Enjoy this blog? Get notified of new posts via email:&lt;/p&gt;
   &lt;input type=&#39;text&#39; name=&#39;btr_email&#39; /&gt;
@@ -1723,21 +1669,13 @@ collections:
          value=&#39;https://beta.rstudioconnect.com/content/11424/index.xml&#39;/&gt;
   &lt;input type=&#39;hidden&#39; name=&#39;schedule_type&#39; value=&#39;0&#39; /&gt;
   &lt;input type=&#39;submit&#39; value=&#39;Subscribe&#39; /&gt;
-&lt;/form&gt;
-```
-
-This example uses the [Blogtrottr](https://blogtrottr.com/) service to provide an email subscription. You could also use another service or simply include a link to your RSS feed.
-
-The contents of `_subscribe.html` will be included in both the sidebar of the main listing page as well as in the footer of articles. Note that relative URLs won&#39;t work in subscription HTML since the content appears at different levels of the site (thus we include the full URL to the RSS feed in the example above).
-
-
-### Custom HTML
-
-You can also add arbitrary HTML to the top of the sidebar by including the `collections:posts:custom` option within `_site.yml`. The `custom` option in turn points to an HTML file that will be displayed above the &quot;Subscribe&quot; and &quot;Categories&quot; sections. Unlike the Subscribe HTML, Cutstom HTML is not displayed in article footers. This custom feature can be used to display anything in the sidebar that Distill does not automatically generate. While only one custom file may be defined per collection, the HTML contained within is extremely adaptable to different use cases (even several simultaneously). For example, the below snippets will display an About section on top, and below that a search bar:
-
-**\_site.yml**
-
-```markup
+&lt;/form&gt;</code></pre>
+<p>This example uses the <a href="https://blogtrottr.com/">Blogtrottr</a> service to provide an email subscription. You could also use another service or simply include a link to your RSS feed.</p>
+<p>The contents of <code>_subscribe.html</code> will be included in both the sidebar of the main listing page as well as in the footer of articles. Note that relative URLs won’t work in subscription HTML since the content appears at different levels of the site (thus we include the full URL to the RSS feed in the example above).</p>
+<h3 id="custom-html">Custom HTML</h3>
+<p>You can also add arbitrary HTML to the top of the sidebar by including the <code>collections:posts:custom</code> option within <code>_site.yml</code>. The <code>custom</code> option in turn points to an HTML file that will be displayed above the “Subscribe” and “Categories” sections. Unlike the Subscribe HTML, Cutstom HTML is not displayed in article footers. This custom feature can be used to display anything in the sidebar that Distill does not automatically generate. While only one custom file may be defined per collection, the HTML contained within is extremely adaptable to different use cases (even several simultaneously). For example, the below snippets will display an About section on top, and below that a search bar:</p>
+<p><strong>_site.yml</strong></p>
+<pre class="markup"><code>
 name: &quot;reproducible-finance-with-r&quot;
 title: &quot;Reproducible Finance with R&quot;
 description: |
@@ -1748,12 +1686,9 @@ collections:
   posts:
     disqus: reproducible-finance-with-r
     share: [twitter, linkedin]
-    custom: _custom.html
-```
-
-**\_custom.html**
-
-```html
+    custom: _custom.html</code></pre>
+<p><strong>_custom.html</strong></p>
+<pre class="html"><code>
 &lt;div class=&quot;sidebar-section custom&quot;&gt;
   &lt;h3&gt;About&lt;/h3&gt;
   This blog explores reproducible finance with the 
@@ -1769,30 +1704,19 @@ collections:
       value=&quot;https://beta.rstudioconnect.com/content/3776/&quot;&gt; &lt;!-- Replace with your blog URL --&gt;
     &lt;!--&lt;button type=&quot;submit&quot;&gt;Search&lt;/button&gt;--&gt;
   &lt;/form&gt;
-&lt;/div&gt;
-```
-
-![](images/custom_html_example_about_search.png){width=50% .screenshot}
-
-While the custom HTML option inherits general CSS styling from the rest of the Distill blog, by default it does not inherit the sidebar-specific CSS. In order to fully match the rest of the sidebar sections, each section must be nested within a `&lt;div class=&quot;sidebar-section custom&quot;&gt;` tag, as seen in the above example. This configuration is intended to provide a good balance between flexibility and ease-of-use.
-
-The example search bar functionality uses the popular [DuckDuckGo](duckduckgo.com) search engine. After entering search terms and hitting the enter key the user is taken to the search engine&#39;s website and shown relevant search results from the blog. Note that the blog will need to have been recently crawled by the search engine in order for search results to be thorough and up to date. Replacing the HTML snippet&#39;s hard-coded blog URL should be the only modification necessary to begin using this example. Other search engines may be used with further modification. The &quot;Search&quot; button has been left out in this example, but may be uncommented if desired.
-
-
-
-### Supporting files
-
-When a blog post is published, resource files located alongside the post in its directory are also published. The following files are *not* published by default:
-
-1. Files beginning with `&quot;.&quot;` (hidden files).
-
-2. Files beginning with `&quot;_&quot;`
-
-3. Files known to contain R source code (e.g. `&quot;.R&quot;`, `&quot;.s&quot;`, `&quot;.Rmd&quot;`), R data (e.g. `&quot;.RData&quot;`, `&quot;.rds&quot;`), or configuration data (e.g. `&quot;rsconnect&quot;` ,`&quot;packrat&quot;`)).
-
-You can override this behavior using a `resources` metadata entry for your post, which can specify explicit files to `include` or `exclude`. For example (some fields excluded for brevity):
-
-```markup
+&lt;/div&gt;</code></pre>
+<p><img src="images/custom_html_example_about_search.png" class="screenshot" style="width:50.0%" /></p>
+<p>While the custom HTML option inherits general CSS styling from the rest of the Distill blog, by default it does not inherit the sidebar-specific CSS. In order to fully match the rest of the sidebar sections, each section must be nested within a <code>&lt;div class="sidebar-section custom"&gt;</code> tag, as seen in the above example. This configuration is intended to provide a good balance between flexibility and ease-of-use.</p>
+<p>The example search bar functionality uses the popular <a href="duckduckgo.com">DuckDuckGo</a> search engine. After entering search terms and hitting the enter key the user is taken to the search engine’s website and shown relevant search results from the blog. Note that the blog will need to have been recently crawled by the search engine in order for search results to be thorough and up to date. Replacing the HTML snippet’s hard-coded blog URL should be the only modification necessary to begin using this example. Other search engines may be used with further modification. The “Search” button has been left out in this example, but may be uncommented if desired.</p>
+<h3 id="supporting-files">Supporting files</h3>
+<p>When a blog post is published, resource files located alongside the post in its directory are also published. The following files are <em>not</em> published by default:</p>
+<ol type="1">
+<li><p>Files beginning with <code>"."</code> (hidden files).</p></li>
+<li><p>Files beginning with <code>"_"</code></p></li>
+<li><p>Files known to contain R source code (e.g. <code>".R"</code>, <code>".s"</code>, <code>".Rmd"</code>), R data (e.g. <code>".RData"</code>, <code>".rds"</code>), or configuration data (e.g. <code>"rsconnect"</code> ,<code>"packrat"</code>)).</p></li>
+</ol>
+<p>You can override this behavior using a <code>resources</code> metadata entry for your post, which can specify explicit files to <code>include</code> or <code>exclude</code>. For example (some fields excluded for brevity):</p>
+<pre class="markup"><code>
 ---
 title: &quot;The Sharpe Ratio&quot;
 description: |

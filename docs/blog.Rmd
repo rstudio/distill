@@ -135,7 +135,7 @@ listing:
 
 If your posts include `categories` metadata, then the page will also include category links to the right of the article listing. For example, here is some post metadata that includes categories:
 
-````` {.markup}
+``` {.markup}
 ---
 title: "The Sharpe Ratio"
 # (additional metadata e.g. description and date, excluded for brevity)
@@ -146,8 +146,7 @@ categories:
 
 As a result of including `categories`, the listing page now looks like this:
 
-![](images/site-listing-categories.png){width=95% .screenshot}
-
+![](images/site-listing-categories.png){.screenshot width="95%"}
 
 ### RSS feeds
 
@@ -155,7 +154,7 @@ When you create a listing page an [RSS feed](https://en.wikipedia.org/wiki/RSS) 
 
 **\_site.yml**
 
-```markup
+``` {.markup}
 name: "reproducible-finance-with-r"
 title: "Reproducible Finance with R"
 description: |
@@ -175,7 +174,7 @@ By default the most recent 20 articles will be included in the RSS feed. You can
 
 **\_site.yml**
 
-```markup
+``` {.markup}
 name: "reproducible-finance-with-r"
 title: "Reproducible Finance with R"
 description: |
@@ -193,7 +192,7 @@ Specify `feed_items_max: false` to have no limit on the number of items included
 
 If you want to work on a post for a period of time without having it be added to the listing page, add `draft: true` to the post's metadata. For example:
 
-```markup
+``` {.markup}
 ---
 title: "The Sharpe Ratio"
 description: |
@@ -215,11 +214,11 @@ Beyond support for drafts, Distill has a number of additional features to accomm
 
 Readers will likely want to comment on and share articles they read on your blog. You can enable support for [Disqus comments](https://disqus.com/) and sharing links for Twitter, LinkedIn, and other services by adding options to the `collection:posts` section of `_site.yml`.
 
-For example, the following options provide the [Disqus shortname](https://help.disqus.com/installation/whats-a-shortname) for a site and specify that we want sharing buttons for Twitter and LinkedIn. 
+For example, the following options provide the [Disqus shortname](https://help.disqus.com/installation/whats-a-shortname) for a site and specify that we want sharing buttons for Twitter and LinkedIn.
 
 **\_site.yml**
 
-```markup
+``` {.markup}
 name: "reproducible-finance-with-r"
 title: "Reproducible Finance with R"
 description: |
@@ -234,7 +233,7 @@ collections:
 
 The following footer is then automatically included at the end of each post:
 
-![](images/social-footer.png){width=80% .screenshot}
+![](images/social-footer.png){.screenshot width="80%"}
 
 Note that the `base_url` field is required in order to use Disqus and sharing links.
 
@@ -242,7 +241,7 @@ Valid values for the `share` option are `twitter`, `linkedin`, `facebook`, `goog
 
 By default, the full text of Disqus comments are not displayed (rather, a link is provided that will expand the comment section). This is done so that a long comment section doesn't obscure the bibliography and other appendices. If you'd rather show the comments by default you can use this alterante syntax for `disqus` configuration:
 
-```markup
+``` {.markup}
 collections:
   posts:
     disqus: 
@@ -259,7 +258,7 @@ You can use whatever scheme you like to organize the `_posts` directory. You can
 
 One popular scheme for organizing blog posts is to use a date prefix for the post directory names. For example:
 
-```markup
+``` {.markup}
 _posts/
   2017-11-09-visualizing-asset-returns/
   2017-09-13-asset-volatility/
@@ -275,7 +274,7 @@ Note that if you use a date-prefixed post directory you are not required to spec
 
 Note that the listing for our example above includes a preview image for each post. Preview thumbnail images are generated automatically based on the first plot encountered within your post. You can specify that a specific plot should be used as the preview image using the `preview` chunk option. For example:
 
-````clike
+```` {.clike}
 ```{r, layout="l-body-outset", preview=TRUE}`r ''`
 library(ggplot2)
 ggplot(diamonds, aes(carat, price)) + geom_smooth() +
@@ -285,7 +284,7 @@ ggplot(diamonds, aes(carat, price)) + geom_smooth() +
 
 If you want to use another image entirely as a post preview you add a `preview` field to the post's metadata. For example, here we add a `preview` field to the example metadata from above (some fields excluded for brevity):
 
-```markup
+``` {.markup}
 ---
 title: "The Sharpe Ratio"
 description: |
@@ -303,13 +302,13 @@ Preview images are also used for generating [Open Graph](metadata.html#open-grap
 
 If your `_site.yml` file provides a `base_url` field, then an [article citation](citations.html) appendix and related metadata will be included automatically within all published posts. For example:
 
-![](images/blog-citation.png){width=95% .screenshot}
+![](images/blog-citation.png){.screenshot width="95%"}
 
 If you want to disable this behavior you can use the `collections:posts:citations` field within `_site.yml`. For example:
 
 **\_site.yml**
 
-```markup
+``` {.markup}
 name: "reproducible-finance-with-r"
 title: "Reproducible Finance with R"
 description: |
@@ -323,14 +322,13 @@ collections:
     citations: false
 ```
 
-
 ### Subscriptions
 
 You can add HTML that enables readers to subscribe to your blog by including the `collections:posts:subscribe` option within `_site.yml`. The `subscribe` option in turn points to an HTML file that provides the ability to subscribe to your blog. For example:
 
 **\_site.yml**
 
-```markup
+``` {.markup}
 name: "reproducible-finance-with-r"
 title: "Reproducible Finance with R"
 description: |
@@ -346,7 +344,7 @@ collections:
 
 **\_subscribe.html**
 
-```html
+``` {.html}
 <form method='post' action='https://blogtrottr.com'>
   <p>Enjoy this blog? Get notified of new posts via email:</p>
   <input type='text' name='btr_email' />
@@ -361,14 +359,13 @@ This example uses the [Blogtrottr](https://blogtrottr.com/) service to provide a
 
 The contents of `_subscribe.html` will be included in both the sidebar of the main listing page as well as in the footer of articles. Note that relative URLs won't work in subscription HTML since the content appears at different levels of the site (thus we include the full URL to the RSS feed in the example above).
 
-
 ### Custom HTML
 
 You can also add arbitrary HTML to the top of the sidebar by including the `collections:posts:custom` option within `_site.yml`. The `custom` option in turn points to an HTML file that will be displayed above the "Subscribe" and "Categories" sections. Unlike the Subscribe HTML, Cutstom HTML is not displayed in article footers. This custom feature can be used to display anything in the sidebar that Distill does not automatically generate. While only one custom file may be defined per collection, the HTML contained within is extremely adaptable to different use cases (even several simultaneously). For example, the below snippets will display an About section on top, and below that a search bar:
 
 **\_site.yml**
 
-```markup
+``` {.markup}
 name: "reproducible-finance-with-r"
 title: "Reproducible Finance with R"
 description: |
@@ -384,7 +381,7 @@ collections:
 
 **\_custom.html**
 
-```html
+``` {.html}
 <div class="sidebar-section custom">
   <h3>About</h3>
   This blog explores reproducible finance with the 
@@ -403,27 +400,25 @@ collections:
 </div>
 ```
 
-![](images/custom_html_example_about_search.png){width=50% .screenshot}
+![](images/custom_html_example_about_search.png){.screenshot width="50%"}
 
 While the custom HTML option inherits general CSS styling from the rest of the Distill blog, by default it does not inherit the sidebar-specific CSS. In order to fully match the rest of the sidebar sections, each section must be nested within a `<div class="sidebar-section custom">` tag, as seen in the above example. This configuration is intended to provide a good balance between flexibility and ease-of-use.
 
 The example search bar functionality uses the popular [DuckDuckGo](duckduckgo.com) search engine. After entering search terms and hitting the enter key the user is taken to the search engine's website and shown relevant search results from the blog. Note that the blog will need to have been recently crawled by the search engine in order for search results to be thorough and up to date. Replacing the HTML snippet's hard-coded blog URL should be the only modification necessary to begin using this example. Other search engines may be used with further modification. The "Search" button has been left out in this example, but may be uncommented if desired.
 
-
-
 ### Supporting files
 
 When a blog post is published, resource files located alongside the post in its directory are also published. The following files are *not* published by default:
 
-1. Files beginning with `"."` (hidden files).
+1.  Files beginning with `"."` (hidden files).
 
-2. Files beginning with `"_"`
+2.  Files beginning with `"_"`
 
-3. Files known to contain R source code (e.g. `".R"`, `".s"`, `".Rmd"`), R data (e.g. `".RData"`, `".rds"`), or configuration data (e.g. `"rsconnect"` ,`"packrat"`)).
+3.  Files known to contain R source code (e.g. `".R"`, `".s"`, `".Rmd"`), R data (e.g. `".RData"`, `".rds"`), or configuration data (e.g. `"rsconnect"` ,`"packrat"`)).
 
 You can override this behavior using a `resources` metadata entry for your post, which can specify explicit files to `include` or `exclude`. For example (some fields excluded for brevity):
 
-```markup
+``` {.markup}
 ---
 title: "The Sharpe Ratio"
 description: |
@@ -435,7 +430,7 @@ resources:
   exclude:
     *.csv    
 ---
-`````
+```
 
 ## Publishing a blog
 
