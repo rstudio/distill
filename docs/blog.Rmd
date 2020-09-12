@@ -7,7 +7,7 @@ description: Create a blog to publish a collection of Distill articles
 library(knitr)
 ```
 
-Distill for R Markdown websites include integrated support for blogging. To create a blog you author a collection of posts (located in the `_posts` subdirectory of your website) and then dedicate a page (usually the website homepage) to a listing of all of your posts.
+Distill for R Markdown websites include integrated support for blogging. To create a blog you author a collection of posts (located in the `_posts` sub-directory of your website) and then dedicate a page (usually the website homepage) to a listing of all of your posts.
 
 ## Getting started
 
