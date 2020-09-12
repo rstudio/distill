@@ -129,7 +129,7 @@ For example, your bibliography file might contain:
 
 Citations are then used in the article body with standard R Markdown notation, for example: `[@xie2015]` (which references an id provided in the bibliography). Note that multiple ids (separated by semicolons) can be provided.
 
-The citation is presented inline like this: [@xie2015] (a number that displays more information on hover). If you have an appendix, a bibliography is automatically created and populated in it.
+The citation is presented inline like this: [@xie2015]. If you have an appendix, a bibliography is automatically created and populated in it.
 
 See the article on [citations](citations.html) for additional details on using citations, including how to provide the metadata required to make your article more easily citable for others.
 
