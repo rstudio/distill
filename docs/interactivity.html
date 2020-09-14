@@ -493,57 +493,103 @@
     box-sizing: border-box;
   }
 
-  /* CSS for table of contents */
+  /* CSS for d-contents */
 
-  .d-toc {
+  .d-contents {
     color: rgba(0,0,0,0.8);
-    font-size: 0.8em;
-    line-height: 1em;
+    font-size: 0.9em;
+    padding-bottom: 1em;
+    margin-bottom: 1em;
   }
 
-  .d-toc-header {
-    font-size: 0.6rem;
+  @media(max-width: 1000px) {
+    .d-contents {
+      grid-column: text;
+      width: 100%;
+      justify-self: start;
+      align-self: start;
+      padding-bottom: 0.5em;
+      margin-bottom: 1em;
+      padding-left: 0.25em;
+    }
+  }
+
+  @media(min-width: 1180px) {
+    .d-contents {
+      height: 0;
+      grid-column-start: 1;
+      grid-column-end: 4;
+      justify-self: center;
+      padding-right: 3em;
+      padding-left: 2em;
+    }
+  }
+
+  .d-contents nav h3 {
+    font-size: 0.7rem;
     font-weight: 400;
-    color: rgba(0, 0, 0, 0.5);
+    color: rgba(0, 0, 0, 0.6);
     text-transform: uppercase;
     margin-top: 0;
-    margin-bottom: 1.3em;
+    margin-bottom: 0.5em;
   }
 
-  .d-toc a {
+  .d-contents nav a {
+    color: rgba(0, 0, 0, 0.8);
     border-bottom: none;
+    text-decoration: none
   }
 
-  .d-toc ul {
+  .d-contents li {
+    list-style-type: none
+  }
+
+  .d-contents nav > ul {
     padding-left: 0;
   }
 
-  .d-toc li>ul {
-    padding-top: 0.8em;
-    padding-left: 16px;
-    margin-bottom: 0.6em;
+  .d-contents ul {
+    padding-left: 1em
   }
 
-  .d-toc ul,
-  .d-toc li {
-    list-style-type: none;
+  .d-contents nav ul li {
+    margin-bottom: 0.15em;
   }
 
-  .d-toc li {
-    margin-bottom: 0.9em;
+  .d-contents nav a:hover {
+    text-decoration: underline solid rgba(0, 0, 0, 0.6)
   }
 
-  .d-toc-separator {
-    margin-top: 20px;
-    margin-bottom: 2em;
+  .d-contents nav ul {
+    margin-top: 0;
+    margin-bottom: 0.25em;
+  }
+
+  .d-contents nav>div {
+    display: block;
+    outline: none;
+    margin-bottom: 0.5em
+  }
+
+  .d-contents nav>div>a {
+    font-size: 13px;
+    font-weight: 600
+  }
+
+  .d-contents nav>div>a {
+    font-size: 13px;
+    font-weight: 600
+  }
+
+  .d-contents nav>div>a:hover,
+  .d-contents nav>ul>li>a:hover {
+    text-decoration: none
   }
 
   .d-article-with-toc {
     border-top: none;
     padding-top: 0;
   }
-
-
 
   /* Tweak code blocks (note that this CSS is repeated above in an injection
      into the d-code shadow dom) */
@@ -990,7 +1036,7 @@
     });
     $('h3.appendix').each(function(i, val) {
       var id = $(this).attr('id');
-      $('.d-toc a[href="#' + id + '"]').parent().remove();
+      $('.d-contents a[href="#' + id + '"]').parent().remove();
       appendix = true;
       $(this).nextUntil($('h1, h2, h3')).addBack().appendTo($('d-appendix'));
     });
@@ -1060,7 +1106,7 @@
 
       // table of contents
       if (have_authors) // adjust border if we are in authors
-        $('.d-toc').parent().addClass('d-article-with-toc');
+        $('.d-contents').parent().addClass('d-article-with-toc');
 
       // strip links that point to #
       $('.authors-affiliations').find('a[href="#"]').removeAttr('href');
@@ -1171,9 +1217,7 @@
     $('.d-byline a').remove();
 
     // remove toc
-    $('.d-toc-header').remove();
-    $('.d-toc').remove();
-    $('.d-toc-separator').remove();
+    $('.d-contents').remove();
 
     // move appendix elements
     $('h1.appendix, h2.appendix').each(function(i, val) {
@@ -1436,14 +1480,15 @@ Publishing
 
 
 <div class="d-article">
-<h3 class="d-toc-header">Table of Contents</h3>
-<nav class="d-toc" id="TOC">
+<div class="d-contents">
+<nav class="toc" id="TOC">
+<h3>Table of Contents</h3>
 <ul>
 <li><a href="#htmlwidgets">htmlwidgets</a></li>
 <li><a href="#d3-visualizations">D3 visualizations</a></li>
 </ul>
 </nav>
-<hr class="d-toc-separator"/>
+</div>
 <p>There are a variety of ways to add interactive JavaScript and D3 visualizations to your Distill articles, including:</p>
 <ul>
 <li><p>Using pre-built <a href="http://www.htmlwidgets.org">htmlwidgets</a> that wrap JavaScript visualization libraries like <a href="http://rstudio.github.io/leaflet/">Leaflet</a>, <a href="https://plot.ly/r/">Plotly</a>, <a href="http://rstudio.github.io/dygraphs/">dygraphs</a>, and <a href="https://bwlewis.github.io/rthreejs/">threejs</a>.</p></li>
