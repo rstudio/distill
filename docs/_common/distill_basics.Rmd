@@ -23,6 +23,11 @@ description: |
   Scientific and technical writing, native to the web
 date: May 4, 2018
 author:
+  - name: "Yihui Xie"
+    url: https://github.com/yihui
+    affiliation: RStudio
+    affiliation_url: https://www.rstudio.com
+    orcid_id: 0000-0003-0645-5666
   - name: "JJ Allaire"
     url: https://github.com/jjallaire
     affiliation: RStudio
@@ -31,18 +36,16 @@ author:
     url: https://github.com/rich-iannone
     affiliation: RStudio
     affiliation_url: https://www.rstudio.com
-  - name: "Yihui Xie"
-    url: https://github.com/yihui
-    affiliation: RStudio
-    affiliation_url: https://www.rstudio.com
 bibliography: biblio.bib
 output: distill::distill_article
 ---
 ```
 
-Author entries must have at least `name` and `url` specified (the affiliation fields are optional). The `date` field should be formatted as month, day, year (various notations are supported as long as the components appear in that order).
+Author entries must have at least `name` and `url` specified (the affiliation fields are optional). Specify an author's [Orcid ID](https://orcid.org/) using the `orcid_id` field.
 
 The article's description and author bylines are automatically rendered as part of the title area of the document.
+
+The `date` field should be formatted as month, day, year (various notations are supported as long as the components appear in that order).
 
 The `bibliography` field is used to provide a reference to the Bibtex file where all of the sources cited in your article are defined. The [citations] section describes how to include references to these sources in your article.
 

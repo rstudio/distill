@@ -2,10 +2,6 @@
 title: "Distill for R Markdown"
 description: Scientific and technical writing, native to the web
 author:
-  - name: "Yihui Xie"
-    url: https://github.com/yihui
-    affiliation: RStudio
-    affiliation_url: https://www.rstudio.com
   - name: "JJ Allaire"
     url: https://github.com/jjallaire
     affiliation: RStudio
@@ -14,6 +10,11 @@ author:
     url: https://github.com/rich-iannone
     affiliation: RStudio
     affiliation_url: https://www.rstudio.com
+  - name: "Yihui Xie"
+    url: https://github.com/yihui
+    affiliation: RStudio
+    affiliation_url: https://www.rstudio.com
+    orcid_id: 0000-0003-0645-5666
 date: September 10, 2018
 citation_url: https://rstudio.github.io/distill
 bibliography: biblio.bib
