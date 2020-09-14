@@ -4,6 +4,8 @@
 
 -   Don't apply table td/th bottom border styles to gt tables.
 
+-   Support for `orcid_id` author metadata (displays next to author name).
+
 ## distill v0.8 (CRAN)
 
 -   Generate RSS category feeds using rss/categories in site config
