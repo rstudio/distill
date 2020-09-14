@@ -58,11 +58,12 @@ $endif$
 
 <div class="d-article">
 $if(toc)$
-<h3 class="d-toc-header">Table of Contents</h3>
-<nav class="d-toc" id="$idprefix$TOC">
+<div class="d-contents">
+<nav class="toc" id="$idprefix$TOC">
+<h3>Table of Contents</h3>
 $table-of-contents$
 </nav>
-<hr class="d-toc-separator"/>
+</div>
 $endif$
 $body$
 <!--radix_placeholder_article_footer-->
