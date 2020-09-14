@@ -1544,7 +1544,7 @@ listing:
     - 2017-09-13-asset-volatility 
 ---</code></pre>
 <h4 id="categories">Categories</h4>
-<p>If your posts include <code>categories</code> metadata, then the page will also include category links to the right of the article listing. For example, here is some post metadata that includes categories:</p>
+<p>If your posts include <code>categories</code> metadata, then the page will also include categories within the article listing. For example, here is some post metadata that includes categories:</p>
 <pre class="markup"><code>
 ---
 title: &quot;The Sharpe Ratio&quot;
@@ -1554,6 +1554,19 @@ categories:
   - dygraphs</code></pre>
 <p>As a result of including <code>categories</code>, the listing page now looks like this:</p>
 <p><img src="images/site-listing-categories.png" class="screenshot" style="width:95.0%" /></p>
+<p>Categories are listed in the right-hand sidebar and are also displayed as metadata for each post. You can disable either of both category displays using <code>collection</code> properties defined in <code>_site.yml</code>. For example:</p>
+<p><strong>_site.yml</strong></p>
+<pre class="markup"><code>
+name: &quot;reproducible-finance-with-r&quot;
+title: &quot;Reproducible Finance with R&quot;
+description: |
+  Exploring reproducible finance with the R statistical 
+  computing environment.
+base_url: https://beta.rstudioconnect.com/content/11424/
+collections:
+  posts:
+    categories: false
+    categories_metadata: false</code></pre>
 <h3 id="rss-feeds">RSS feeds</h3>
 <p>When you create a listing page an <a href="https://en.wikipedia.org/wiki/RSS">RSS feed</a> is created automatically for the page (using the name of the listing page with a <code>.xml</code> file extension). You can link to the RSS feed within your site’s navigation bar as follows (some navbar entries excluded for brevity):</p>
 <p><strong>_site.yml</strong></p>

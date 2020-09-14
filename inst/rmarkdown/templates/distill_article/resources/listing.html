@@ -90,13 +90,17 @@
 }
 
 .posts-list .metadata .tags {
+  display: block;
   margin-top: 1em;
+  margin-right: 1em;
 }
 
 .posts-list .tags .tag {
+  display: inline-block;
   color: rgba(0,0,0,0.67);
-  padding: 0.3em 0.5em;
-  margin: 0;
+  padding: 0em 0.3em;
+  margin-right: 0.2em;
+  margin-bottom: 0.4em;
   font-size: 80%;
   border: 1px solid rgba(0,0,0,0.4);
   border-radius: 3px;
@@ -292,6 +296,12 @@ function init_posts_list() {
       $('.posts-more a').addClass('hidden');
     }
   }
+
+  // click handling for tags
+  $('.tag').click(function(ev) {
+    window.location.hash = '#' + $(this).text().replace(/ /g, "_");
+    return false;
+  })
 
   // hash filter handling
   apply_hash_filter();

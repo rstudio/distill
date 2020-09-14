@@ -133,7 +133,7 @@ listing:
 
 #### Categories
 
-If your posts include `categories` metadata, then the page will also include category links to the right of the article listing. For example, here is some post metadata that includes categories:
+If your posts include `categories` metadata, then the page will also include categories within the article listing. For example, here is some post metadata that includes categories:
 
 ``` {.markup}
 ---
@@ -147,6 +147,23 @@ categories:
 As a result of including `categories`, the listing page now looks like this:
 
 ![](images/site-listing-categories.png){.screenshot width="95%"}
+
+Categories are listed in the right-hand sidebar and are also displayed as metadata for each post. You can disable either of both category displays using `collection` properties defined in `_site.yml`. For example:
+
+**\_site.yml**
+
+``` {.markup}
+name: "reproducible-finance-with-r"
+title: "Reproducible Finance with R"
+description: |
+  Exploring reproducible finance with the R statistical 
+  computing environment.
+base_url: https://beta.rstudioconnect.com/content/11424/
+collections:
+  posts:
+    categories: false
+    categories_metadata: false
+```
 
 ### RSS feeds
 

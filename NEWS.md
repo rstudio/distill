@@ -6,6 +6,8 @@
 
 -   Support for `orcid_id` author metadata (displays next to author name).
 
+-   Show article categories as buttons per article on listing page.
+
 ## distill v0.8 (CRAN)
 
 -   Generate RSS category feeds using rss/categories in site config
