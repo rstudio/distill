@@ -6,7 +6,7 @@
 
 -   Support for `orcid_id` author metadata (displays next to author name).
 
--   Show article categories as buttons per article on listing page.
+-   Show article categories on article pages and individual article listings.
 
 -   Show table of contents in left sidebar.
 

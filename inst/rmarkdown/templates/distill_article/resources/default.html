@@ -41,6 +41,15 @@ $endif$
 
 <div class="d-title">
 <h1>$pagetitle$</h1>
+<!--radix_placeholder_categories-->
+$if(categories)$
+<div class="dt-tags">
+$for(categories)$
+<div class="dt=tag">$categories$</div>
+$endfor$
+</div>
+$endif$
+<!--/radix_placeholder_categories-->
 $if(description)$<p>$description$</p>$endif$
 </div>
 

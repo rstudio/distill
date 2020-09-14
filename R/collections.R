@@ -499,6 +499,11 @@ render_collection_article <- function(site_dir, site_config, collection, article
   index_content <- apply_site_include(index_content, "before_body")
   index_content <- apply_site_include(index_content, "after_body")
 
+  # categories
+  index_content <- fill_placeholder(index_content, "categories", placeholder_html(
+    "categories", categories_html(offset, article)
+  ))
+
   # article footer
   index_content <- fill_placeholder(index_content, "article_footer", placeholder_html(
     "article_footer", article_footer_html(site_dir, site_config, collection, article)
@@ -524,6 +529,20 @@ render_collection_article <- function(site_dir, site_config, collection, article
 
   # return path to rendered article
   index_html
+}
+
+categories_html <- function(offset, article) {
+
+  if (!is.null(article$metadata$categories)) {
+    div(class = "dt-tags",
+      lapply(article$metadata$categories, function(category) {
+        href <- paste0(offset, "/index.html", category_hash(category))
+        a(href = href, class = "dt-tag", category)
+      })
+    )
+  } else {
+    NULL
+  }
 }
 
 article_footer_html <- function(site_dir, site_config, collection, article) {

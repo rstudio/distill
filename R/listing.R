@@ -219,9 +219,9 @@ html_for_articles <- function(articles, caption = NULL, categories = FALSE, cate
 html_for_categories_metadata <- function(article) {
   if (is.list(article[["categories"]])) {
     tags <- lapply(article[["categories"]], function(category) {
-      div(class = "tag", category)
+      div(class = "dt-tag", category)
     })
-    div(class = "tags", tags)
+    div(class = "dt-tags", tags)
   } else {
     NULL
   }
