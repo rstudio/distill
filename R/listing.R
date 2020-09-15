@@ -180,13 +180,10 @@ html_for_articles <- function(articles, caption = NULL, categories = FALSE, cate
     )
   })
 
-  # prepend caption if we have it
-  if (!is.null(caption)) {
-    articles_html <- htmltools::tagList(
-      h1(class = "posts-list-caption", caption),
-      articles_html
-    )
-  }
+  articles_html <- htmltools::tagList(
+    h1(class = "posts-list-caption", `data-caption` = caption, caption),
+    articles_html
+  )
 
   # more posts link
   more_posts <- div(class = "posts-more",
