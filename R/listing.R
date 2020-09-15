@@ -273,12 +273,17 @@ categories_listing_html <- function(articles) {
     indexes <- order(names(categories))
     categories <- categories[indexes]
 
+    # caption for 'all articles'
+    all_articles <- "Articles"
+    if (identical(names(categories), tolower(names(categories))))
+      all_articles <- tolower(all_articles)
+
     # generate html
     tags$div(class = "sidebar-section categories",
       tags$h3("Categories"),
       tags$ul(
         tags$li(
-          tags$a(href = "#", "articles"),
+          tags$a(href = "#", all_articles),
           tags$span(class = "category-count", sprintf("(%d)", length(articles)))
         ),
         lapply(names(categories), function(name) {
