@@ -142,14 +142,21 @@ html_for_articles <- function(articles, caption = NULL, categories = FALSE, cate
   categories_html <- if (categories) categories_listing_html(articles)
 
   # generate html
+  article_index <- 0
   articles_html <- lapply(articles, function(article) {
+
+    # bump article index
+    article_index <<- article_index + 1
 
     # metadata
     metadata <- list()
     metadata$categories <- as.character(article[["categories"]])
 
     if (!is.null(article$preview))
-      preview <- img(`data-src` = article$preview)
+      if (article_index <= 10)
+        preview <- img(src = article$preview)
+      else
+        preview <- img(`data-src` = article$preview)
     else
       preview <- NULL
 
