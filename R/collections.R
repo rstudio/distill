@@ -501,7 +501,7 @@ render_collection_article <- function(site_dir, site_config, collection, article
 
   # categories
   index_content <- fill_placeholder(index_content, "categories", placeholder_html(
-    "categories", categories_html(offset, article)
+    "categories", categories_html(collection, offset, article)
   ))
 
   # article footer
@@ -531,9 +531,9 @@ render_collection_article <- function(site_dir, site_config, collection, article
   index_html
 }
 
-categories_html <- function(offset, article) {
+categories_html <- function(collection, offset, article) {
 
-  if (!is.null(article$metadata$categories)) {
+  if (identical(collection$name, "posts") && !is.null(article$metadata$categories)) {
     div(class = "dt-tags",
       lapply(article$metadata$categories, function(category) {
         href <- paste0(offset, "/index.html", category_hash(category))
