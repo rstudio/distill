@@ -25,6 +25,16 @@ html_dependency_webcomponents <- function() {
   )
 }
 
+# https://github.com/algolia/autocomplete.js
+html_dependency_autocomplete <- function() {
+  htmltools::htmlDependency(
+    name = "autocomplete",
+    version = "0.37.1",
+    src = system.file("www/autocomplete", package = "distill"),
+    script = c("autocomplete.min.js")
+  )
+}
+
 html_dependency_headroom <- function() {
   htmltools::htmlDependency(
     name = "headroom",

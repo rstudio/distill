@@ -150,10 +150,18 @@ navigation_before_body_html <- function(site_config, offset) {
       }
     }
 
+    if (!identical(site_config[["navbar"]][["search"]], FALSE)) {
+      search_box <- tag("input", list(id = "distill-search", class="nav-search",
+                                      type = "text", placeholder = "Search..."))
+    } else {
+      search_box <- NULL
+    }
+
     left_nav <- div(class = "nav-left",
                     logo,
                     a(href = offset_href("index.html"), class = "title", site_config$navbar$title),
-                    build_menu(site_config[["navbar"]][["left"]])
+                    build_menu(site_config[["navbar"]][["left"]]),
+                    search_box
     )
 
     right_nav <- div(class = "nav-right",
@@ -290,7 +298,8 @@ site_dependencies <- function(site_config) {
   if (length(site_config) > 0) {
     list(
       site_dependency(html_dependency_font_awesome()),
-      site_dependency(html_dependency_headroom())
+      site_dependency(html_dependency_headroom()),
+      site_dependency(html_dependency_autocomplete())
     )
   } else {
     list()
