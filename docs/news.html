@@ -415,6 +415,25 @@
     padding-bottom: 2px;
   }
 
+  d-title .dt-tags {
+    margin-top: 1em;
+    grid-column: text;
+  }
+
+  .dt-tags .dt-tag {
+    text-decoration: none;
+    display: inline-block;
+    color: rgba(0,0,0,0.67);
+    padding: 0em 0.4em;
+    margin-right: 0.5em;
+    margin-bottom: 0.4em;
+    font-size: 70%;
+    border: 1px solid rgba(0,0,0,0.4);
+    border-radius: 3px;
+    text-transform: uppercase;
+    font-weight: 500;
+  }
+
   d-article table.gt_table td,
   d-article table.gt_table th {
     border-bottom: none;
@@ -1448,6 +1467,8 @@ Publishing
 
 <div class="d-title">
 <h1>Release History</h1>
+<!--radix_placeholder_categories-->
+<!--/radix_placeholder_categories-->
 
 </div>
 
@@ -1455,10 +1476,11 @@ Publishing
 <div class="d-article">
 <h2 id="distill-v0.9-development">distill v0.9 (Development)</h2>
 <ul>
-<li><p>Use pandoc rather than distill framework for bibliography generation. Provides support for <code>csl</code> and <code>nocite</code> as well as use of multiple bibliographies (including non-BibTeX ones). Eliminates distill framework provided mouse-over citation display, but users seem to value the Pandoc features more than this one.</p></li>
+<li><p>Use pandoc rather than distill framework for bibliography generation. Provides support for <code>csl</code>, <code>nocite</code>, and <code>link-citations</code>, as well as the use of multiple bibliographies (including non-BibTeX ones). Eliminates distill framework provided mouse-over citation display, but users seem to value the Pandoc features more than this one.</p></li>
+<li><p>Various improvements to category display, including showing categories on article pages and within individual article listings, adding a special “articles” category at the top that shows all articles, and display of the active category when a category filter is applied to a listing.</p></li>
 <li><p>Don’t apply table td/th bottom border styles to gt tables.</p></li>
 <li><p>Support for <code>orcid_id</code> author metadata (displays next to author name).</p></li>
-<li><p>Show article categories as buttons per article on listing page.</p></li>
+<li><p>Show table of contents in left sidebar.</p></li>
 </ul>
 <h2 id="distill-v0.8-cran">distill v0.8 (CRAN)</h2>
 <ul>
