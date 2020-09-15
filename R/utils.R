@@ -5,6 +5,15 @@ is_shiny_classic <- function(runtime) {
   identical(runtime, "shiny")
 }
 
+as_utf8 <- function(x) {
+  if (is.null(x))
+    NULL
+  else if (Encoding(x) != "UTF-8")
+    iconv(x, from = "", to = "UTF-8")
+  else
+    x
+}
+
 # wrapper over normalizePath that preserves NULLs and applies pandoc-friendly defaults
 normalize_path <- function(path,
                            winslash = "/",

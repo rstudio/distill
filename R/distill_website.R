@@ -58,6 +58,9 @@ distill_website <- function(input, encoding = getOption("encoding"), ...) {
       # write sitemap
       write_sitemap_xml(input, config)
 
+      # write top level article search index
+      write_search_json(input, config)
+
       # return result
       result
     },

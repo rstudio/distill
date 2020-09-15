@@ -324,7 +324,7 @@ update_collection_listing <- function(site_dir, site_config, collection, article
                      articles)
 
   # re-write the index
-  write_articles_info(articles, collection_index)
+  write_articles_json(articles, collection_index)
 
   # re-write the sitemap
   write_sitemap_xml(site_dir, site_config)
@@ -788,7 +788,7 @@ write_collection_metadata <- function(site_dir, collection) {
   articles <- to_article_info(site_dir, collection[["articles"]])
 
   # write
-  write_articles_info(articles, collection_json_path(site_dir, collection))
+  write_articles_json(articles, collection_json_path(site_dir, collection))
 
 }
 
@@ -798,22 +798,29 @@ to_article_info <- function(site_dir, articles) {
   })
 }
 
-write_articles_info <- function(articles, path) {
+write_articles_json <- function(articles, path) {
   json <- jsonlite::toJSON(articles, pretty = TRUE, auto_unbox = TRUE)
   json <- paste0(json, "\n")
   writeLines(json, path, sep = "", useBytes = TRUE)
 }
 
+article_contents <- function(path) {
+  contents <- ""
+  html <- xml2::read_html(path)
+  article_html <- xml2::xml_find_first(
+    html,
+    "descendant-or-self::*[(@class and contains(concat(' ', normalize-space(@class), ' '), ' d-article '))]"
+  )
+  if (!is.na(article_html)) {
+    contents <- as_utf8(xml2::xml_text(article_html))
+  }
+  contents
+}
+
 article_info <- function(site_dir, article) {
 
-  as_utf8 <- function(x) {
-    if (is.null(x))
-      NULL
-    else if (Encoding(x) != "UTF-8")
-      iconv(x, from = "", to = "UTF-8")
-    else
-      x
-  }
+  # read article contents
+  contents <- article_contents(article$path)
 
   path <- as_utf8(paste0(url_path(article_site_path(site_dir, article$path)), "/"))
   info <- list(
@@ -828,6 +835,7 @@ article_info <- function(site_dir, article) {
     }),
     date = article$metadata$date,
     categories = as.list(article$metadata$categories),
+    contents = as_utf8(contents),
     preview = resolve_preview_url(article$metadata$preview, path),
     last_modified = time_as_iso_8601(file.info(article$path)$mtime),
     input_file = article$input_file

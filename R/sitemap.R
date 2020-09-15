@@ -1,4 +1,51 @@
 
+
+write_search_json <- function(site_dir, config) {
+
+  # path to search.json
+  site_output_dir <- file.path(site_dir, config$output_dir)
+  search_json <- file.path(site_output_dir, "search.json")
+
+  # top-level articles
+  input_files <- list.files(site_dir, pattern = "^[^_].*\\.[Rr]?md$")
+  articles <- lapply(input_files, function(file) {
+    html_file <- file_with_ext(file, "html")
+    path <- normalize_path(file.path(site_output_dir, html_file))
+    contents <- article_contents(path)
+    metadata <- rmarkdown::yaml_front_matter(file.path(site_dir, file))
+    article <- list()
+    article$path = as_utf8(html_file)
+    article$title <- as_utf8(metadata$title)
+    article$description <- as_utf8(metadata$description)
+    article$author = lapply(metadata$author, function(author) {
+      list(
+        name = as_utf8(author$name),
+        url = author$url
+      )
+    })
+    article$date <- as_utf8(metadata$date)
+    article$contents = as_utf8(contents)
+    article$last_modified = time_as_iso_8601(file.info(path)$mtime)
+    article
+  })
+
+  # filter on existence
+  articles <- Filter(function(x) file.exists(file.path(site_output_dir, x$path)), articles)
+
+  # enumerate collections
+  collections <- names(site_collections(site_dir, config))
+
+  # json
+  articles_json <- list(
+    articles = articles,
+    collections = I(paste0(collections,"/",collections,".json"))
+  )
+
+  # save as json
+  write_articles_json(articles_json, search_json)
+
+}
+
 write_sitemap_xml <- function(site_dir, site_config) {
 
   # don't write sitemap unless we have a base_url
