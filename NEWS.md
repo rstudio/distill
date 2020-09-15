@@ -1,16 +1,14 @@
 ## distill v0.9 (Development)
 
--   Use pandoc rather than distill framework for bibliography generation. Provides support for `csl` and `nocite` as well as use of multiple bibliographies (including non-BibTeX ones). Eliminates distill framework provided mouse-over citation display, but users seem to value the Pandoc features more than this one.
+-   Use pandoc rather than distill framework for bibliography generation. Provides support for `csl`, `nocite`, and `link-citations`, as well as the use of multiple bibliographies (including non-BibTeX ones). Eliminates distill framework provided mouse-over citation display, but users seem to value the Pandoc features more than this one.
+
+-   Various improvements to category display, including showing categories on article pages and within individual article listings, adding a special "articles" category at the top that shows all articles, and display of the active category when a category filter is applied to a listing.
 
 -   Don't apply table td/th bottom border styles to gt tables.
 
 -   Support for `orcid_id` author metadata (displays next to author name).
 
--   Show article categories on article pages and individual article listings.
-
 -   Show table of contents in left sidebar.
-
--   Include special "articles" category at the top that shows all articles.
 
 ## distill v0.8 (CRAN)
 
