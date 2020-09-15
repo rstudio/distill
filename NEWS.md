@@ -10,6 +10,8 @@
 
 -   Show table of contents in left sidebar.
 
+-   Include special "articles" category at the top that shows all articles.
+
 ## distill v0.8 (CRAN)
 
 -   Generate RSS category feeds using rss/categories in site config
