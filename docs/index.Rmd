@@ -18,6 +18,7 @@ author:
 date: September 10, 2018
 citation_url: https://rstudio.github.io/distill
 bibliography: biblio.bib
+link-citations: true
 output:
   distill::distill_article:
     toc: false
