@@ -74,11 +74,15 @@ function createFuseIndex() {
 
 window.document.addEventListener("DOMContentLoaded", function (event) {
 
+  // get search element (bail if we don't have one)
+  var searchEl = window.document.getElementById('distill-search');
+  if (!searchEl)
+    return;
+
   createFuseIndex()
     .then(function(fuse) {
 
-      // display search box now that we are initialized
-      var searchEl = window.document.getElementById('distill-search');
+      // make search box visible
       searchEl.classList.remove('hidden');
 
       // initialize autocomplete
