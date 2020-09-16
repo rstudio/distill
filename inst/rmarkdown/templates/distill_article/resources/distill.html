@@ -389,6 +389,19 @@ d-appendix .citation-appendix,
 }
 
 
+/* Anchor.js */
+
+.anchorjs-link {
+  /*transition: all .25s linear; */
+  text-decoration: none;
+  border-bottom: none;
+}
+*:hover > .anchorjs-link {
+  margin-left: -1.125em !important;
+  text-decoration: none;
+  border-bottom: none;
+}
+
 /* Social footer */
 
 .social_footer {
@@ -588,6 +601,13 @@ function is_downlevel_browser() {
 
 // show body when load is complete
 function on_load_complete() {
+
+  // add anchors
+  if (window.anchors) {
+    window.anchors.options.placement = 'left';
+    window.anchors.add('d-article > h2, d-article > h3, d-article > h4, d-article > h5');
+  }
+
 
   // set body to visible
   document.body.style.visibility = 'visible';

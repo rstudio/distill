@@ -4,13 +4,15 @@
 
 -   Use pandoc rather than distill framework for bibliography generation. Provides support for `csl`, `nocite`, and `link-citations`, as well as the use of multiple bibliographies (including non-BibTeX ones). Eliminates distill framework provided mouse-over citation display, but users seem to value the Pandoc features more than this one.
 
+-   Provide heading anchor links in left margin on hover.
+
+-   Display article table of contents in the left sidebar. This is done only when the browser is wide enough, otherwise it's shown at the top.
+
 -   Various improvements to category display, including showing categories on article pages and within individual article listings, adding a special "articles" category at the top that shows all articles, and display of the active category when a category filter is applied to a listing.
 
 -   Don't apply table td/th bottom border styles to gt tables.
 
 -   Support for `orcid_id` author metadata (displays next to author name).
-
--   Show table of contents in left sidebar.
 
 ## distill v0.8 (CRAN)
 

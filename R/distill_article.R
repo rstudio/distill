@@ -141,6 +141,7 @@ distill_article <- function(toc = FALSE,
     # list of html dependencies
     html_deps <- list(
       html_dependency_jquery(),
+      html_dependency_anchor(),
       html_dependency_bowser(),
       html_dependency_webcomponents(),
       html_dependency_distill()
