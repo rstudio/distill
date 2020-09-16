@@ -73,7 +73,12 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
   var fuse = createIndex();
   fetchArticles(fuse);
 
-  window.autocomplete('#distill-search', { hint: false }, [{
+  var autocompleteOptions = {
+    autoselect: true,
+    hint: false,
+    minLength: 2,
+  };
+  window.autocomplete('#distill-search', autocompleteOptions, [{
     source: function(query, callback) {
       const searchOptions = {
         isCaseSensitive: false,
@@ -91,6 +96,7 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
     },
     templates: {
       suggestion: function(suggestion) {
+
         return suggestion.title;
       }
     }
@@ -144,7 +150,7 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
   padding: 5px 4px;
 }
 .algolia-autocomplete .aa-dropdown-menu .aa-suggestion.aa-cursor {
-  background-color: #B2D7FF;
+  background-color: #eee;
 }
 .algolia-autocomplete .aa-dropdown-menu .aa-suggestion em {
   font-weight: bold;
