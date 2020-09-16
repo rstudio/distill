@@ -269,6 +269,23 @@ collections:
 
 Specifying the `hidden: false` option for `disqus` will causes all comments to be displayed inline by default.
 
+### Site search
+
+Blog sites automatically include a search box within the navigation bar. You can disable the search box using the the `search` field of the `navbar` key within `_site.yml`. For example:
+
+``` {.yaml}
+---
+name: "distill"
+title: "Distill for R Markdown"
+navbar:
+  logo:
+    image: images/logo.png
+    href: https://www.rstudio.com
+  search: false
+```
+
+Note that top level articles within blog sites will also be included in search results so long as they have a `description` metadata field.
+
 ### Organizing posts
 
 You can use whatever scheme you like to organize the `_posts` directory. You can have all posts at the top level or you can create subdirectories to create groupings of posts.
