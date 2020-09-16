@@ -153,7 +153,7 @@ html_for_articles <- function(articles, caption = NULL, categories = FALSE, cate
     metadata$categories <- as.character(article[["categories"]])
 
     if (!is.null(article$preview))
-      if (article_index <= 10)
+      if (article_index <= 5)
         preview <- img(src = article$preview)
       else
         preview <- img(`data-src` = article$preview)
