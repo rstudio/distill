@@ -32,14 +32,18 @@ write_search_json <- function(site_dir, config) {
   # filter on existence
   articles <- Filter(function(x) file.exists(file.path(site_output_dir, x$path)), articles)
 
-  # enumerate collections
-  collections <- names(site_collections(site_dir, config))
-
-  # json
+  # include articles
   articles_json <- list(
-    articles = articles,
-    collections = I(paste0(collections,"/",collections,".json"))
+    articles = articles
   )
+
+  # include collections (if any)
+  collections <- names(site_collections(site_dir, config))
+  if (length(collections) > 0) {
+    articles_json$collections = I(paste0(collections,"/",collections,".json"))
+  } else {
+    articles_json$collections = character()
+  }
 
   # save as json
   write_articles_json(articles_json, search_json)
