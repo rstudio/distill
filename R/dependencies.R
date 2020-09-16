@@ -35,6 +35,16 @@ html_dependency_autocomplete <- function() {
   )
 }
 
+# https://github.com/krisk/fuse
+html_dependency_fuse <- function() {
+  htmltools::htmlDependency(
+    name = "fuse",
+    version = "6.4.1",
+    src = system.file("www/fuse", package = "distill"),
+    script = c("fuse.min.js")
+  )
+}
+
 html_dependency_headroom <- function() {
   htmltools::htmlDependency(
     name = "headroom",

@@ -150,7 +150,7 @@ navigation_before_body_html <- function(site_config, offset) {
       }
     }
 
-    if (!identical(site_config[["navbar"]][["search"]], FALSE)) {
+    if (site_search_enabled(site_config)) {
       search_box <- tag("input", list(id = "distill-search", class="nav-search",
                                       type = "text", placeholder = "Search..."))
     } else {
@@ -296,16 +296,31 @@ site_dependencies <- function(site_config) {
   }
 
   if (length(site_config) > 0) {
-    list(
+    deps <- list(
       site_dependency(html_dependency_font_awesome()),
-      site_dependency(html_dependency_headroom()),
-      site_dependency(html_dependency_autocomplete())
+      site_dependency(html_dependency_headroom())
     )
+    if (site_search_enabled(site_config)) {
+      deps <- append(deps, list(
+        site_dependency(html_dependency_autocomplete()),
+        site_dependency(html_dependency_fuse())
+      ))
+    }
+    deps
   } else {
     list()
   }
 }
 
+
+site_search_enabled <- function(site_config) {
+  navbar <- site_config[["navbar"]]
+  if (is.list(navbar)) {
+    !identical(site_config[["navbar"]][["search"]], FALSE)
+  } else {
+    FALSE
+  }
+}
 
 
 

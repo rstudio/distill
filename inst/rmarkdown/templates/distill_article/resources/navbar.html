@@ -49,9 +49,9 @@
       e.stopPropagation();
     });
 
-
-    // search
-    autocomplete('#distill-search', { hint: false }, [
+    // search (if enabled)
+    if (window.autocomplete) {
+      window.autocomplete('#distill-search', { hint: false }, [
       {
         source: function(query, callback) {
           callback([
@@ -73,6 +73,8 @@
       }]).on('autocomplete:selected', function(event, suggestion, dataset, context) {
         console.log(event, suggestion, dataset, context);
       });
+    }
+
   });
 </script>
 
