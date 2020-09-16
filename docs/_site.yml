@@ -9,6 +9,7 @@ navbar:
   logo:
     image: images/logo.png
     href: https://www.rstudio.com
+  source_link: true
   right:
     - text: "Authoring"
       menu:
@@ -50,8 +51,6 @@ navbar:
           href: publish_website.html
     - text: "News"
       href: news.html
-    - icon: fab fa-github
-      href: https://github.com/rstudio/distill
 output:
   distill::distill_article:
     css: styles.css

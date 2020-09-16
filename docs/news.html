@@ -1031,6 +1031,19 @@
   }
 
 
+  /* Anchor.js */
+
+  .anchorjs-link {
+    /*transition: all .25s linear; */
+    text-decoration: none;
+    border-bottom: none;
+  }
+  *:hover > .anchorjs-link {
+    margin-left: -1.125em !important;
+    text-decoration: none;
+    border-bottom: none;
+  }
+
   /* Social footer */
 
   .social_footer {
@@ -1230,6 +1243,13 @@
 
   // show body when load is complete
   function on_load_complete() {
+
+    // add anchors
+    if (window.anchors) {
+      window.anchors.options.placement = 'left';
+      window.anchors.add('d-article > h2, d-article > h3, d-article > h4, d-article > h5');
+    }
+
 
     // set body to visible
     document.body.style.visibility = 'visible';
@@ -1615,6 +1635,7 @@
   <!--/radix_placeholder_distill-->
   <script src="site_libs/header-attrs-2.3/header-attrs.js"></script>
   <script src="site_libs/jquery-1.11.3/jquery.min.js"></script>
+  <script src="site_libs/anchor-4.2.2/anchor.min.js"></script>
   <script src="site_libs/bowser-1.9.3/bowser.min.js"></script>
   <script src="site_libs/webcomponents-2.0.0/webcomponents.js"></script>
   <script src="site_libs/distill-2.2.21/template.v2.js"></script>
@@ -1711,7 +1732,7 @@ Publishing
 </div>
 </div>
 <a href="news.html">News</a>
-<a href="https://github.com/rstudio/distill">
+<a href="https://github.com/rstudio/distill" aria-label="Link to source">
 <i class="fab fa-github" aria-hidden="true"></i>
 </a>
 <a href="javascript:void(0);" class="nav-toggle">&#9776;</a>
@@ -1733,12 +1754,14 @@ Publishing
 <div class="d-article">
 <h2 id="distill-v0.9-development">distill v0.9 (Development)</h2>
 <ul>
-<li><p>Add site search feature using <a href="https://github.com/krisk/Fuse">Fuse.js</a> (enabled by default for blog sites). Can be explicitly enabled or disabled for any site using the <code>search</code> field in <code>_site.yml</code>.</p></li>
+<li><p>Add site search feature using <a href="https://github.com/krisk/Fuse">Fuse.js</a> (enabled by default for blog sites). Can be explicitly enabled or disabled for any site using the <code>search</code> field in the <code>navbar</code> key of <code>_site.yml</code>.</p></li>
 <li><p>Use pandoc rather than distill framework for bibliography generation. Provides support for <code>csl</code>, <code>nocite</code>, and <code>link-citations</code>, as well as the use of multiple bibliographies (including non-BibTeX ones). Eliminates distill framework provided mouse-over citation display, but users seem to value the Pandoc features more than this one.</p></li>
+<li><p>Provide heading anchor links in left margin on hover.</p></li>
+<li><p>Provide navbar link to website source code when <code>repository_url</code> is provided in <code>_site.yml</code>.</p></li>
+<li><p>Display article table of contents in the left sidebar. This is done only when the browser is wide enough, otherwise it’s shown at the top.</p></li>
 <li><p>Various improvements to category display, including showing categories on article pages and within individual article listings, adding a special “articles” category at the top that shows all articles, and display of the active category when a category filter is applied to a listing.</p></li>
 <li><p>Don’t apply table td/th bottom border styles to gt tables.</p></li>
 <li><p>Support for <code>orcid_id</code> author metadata (displays next to author name).</p></li>
-<li><p>Show table of contents in left sidebar.</p></li>
 </ul>
 <h2 id="distill-v0.8-cran">distill v0.8 (CRAN)</h2>
 <ul>
