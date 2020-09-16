@@ -123,8 +123,24 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
   padding-bottom: 0;
   border-radius: 6px;
   border: 1px #455a64 solid;
-  width: 200px;
+  width: 180px;
 }
+
+
+@media screen and (max-width: 768px) {
+  .distill-site-nav .algolia-autocomplete {
+    visibility: hidden
+  }
+  .distill-site-nav.responsive .algolia-autocomplete {
+    visibility: visible;
+  }
+  .distill-site-nav.responsive .algolia-autocomplete .aa-dropdown-menu {
+    margin-left: 0;
+    width: 400px;
+    max-height: 400px;
+  }
+}
+
 .algolia-autocomplete .aa-input, .algolia-autocomplete .aa-hint {
   width: 90%;
   outline: none;
