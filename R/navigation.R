@@ -177,8 +177,23 @@ navigation_before_body_html <- function(site_dir, site_config, offset) {
                     search_box
     )
 
+    # add source code icon to right nav if repository_url is available
+    right_menu <- site_config[["navbar"]][["right"]]
+    if (is.null(right_menu))
+      right_menu <- list()
+    repo_url <- site_config[["repository_url"]]
+    if (!is.null(repo_url)) {
+      right_menu <- append(right_menu, list(
+        list(
+          href = repo_url,
+          icon = repo_icon(repo_url),
+          text = "source code"
+        )
+      ))
+    }
+
     right_nav <- div(class = "nav-right",
-                     build_menu(site_config[["navbar"]][["right"]]),
+                     build_menu(right_menu),
                      a(href = "javascript:void(0);", class = "nav-toggle", HTML("&#9776;"))
     )
 
@@ -193,6 +208,17 @@ navigation_before_body_html <- function(site_dir, site_config, offset) {
   }
 
   placeholder_html("navigation_before_body", header)
+}
+
+repo_icon <- function(repo_url) {
+  if (grepl("github.com", repo_url, fixed = TRUE))
+    "fab fa-github"
+  else if (grepl("gitlab.com", repo_url, fixed = TRUE))
+    "fab fa-gitlab"
+  else if (grepl("bitbucket.org", repo_url, fixed = TRUE))
+    "fab fa-bitbucket"
+  else
+    "fa fa-code"
 }
 
 navigation_after_body_html <- function(site_dir, site_config, offset) {

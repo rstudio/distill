@@ -6,6 +6,8 @@
 
 -   Provide heading anchor links in left margin on hover.
 
+-   Provide navbar link to website source code when `repository_url` is provided in `_site.yml`.
+
 -   Display article table of contents in the left sidebar. This is done only when the browser is wide enough, otherwise it's shown at the top.
 
 -   Various improvements to category display, including showing categories on article pages and within individual article listings, adding a special "articles" category at the top that shows all articles, and display of the active category when a category filter is applied to a listing.
