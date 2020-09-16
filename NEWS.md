@@ -1,6 +1,6 @@
 ## distill v0.9 (Development)
 
--   Add site search feature using [Fuse.js](https://github.com/krisk/Fuse) (enabled by default for blog sites). Can be explicitly enabled or disabled for any site using the `search` field in `_site.yml`.
+-   Add site search feature using [Fuse.js](https://github.com/krisk/Fuse) (enabled by default for blog sites). Can be explicitly enabled or disabled for any site using the `search` field in the `navbar` key of `_site.yml`.
 
 -   Use pandoc rather than distill framework for bibliography generation. Provides support for `csl`, `nocite`, and `link-citations`, as well as the use of multiple bibliographies (including non-BibTeX ones). Eliminates distill framework provided mouse-over citation display, but users seem to value the Pandoc features more than this one.
 
