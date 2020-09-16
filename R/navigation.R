@@ -164,7 +164,7 @@ navigation_before_body_html <- function(site_dir, site_config, offset) {
 
     search_default = length(site_collections(site_dir, site_config)) > 0
     if (site_search_enabled(site_config, search_default)) {
-      search_box <- tag("input", list(id = "distill-search", class="nav-search",
+      search_box <- tag("input", list(id = "distill-search", class="nav-search hidden",
                                       type = "text", placeholder = "Search..."))
     } else {
       search_box <- NULL

@@ -27,7 +27,11 @@ function createIndex() {
   return new window.Fuse([],options);
 }
 
-function fetchArticles(fuse) {
+function createFuseIndex() {
+
+  // create fuse index
+  var options = { keys: ["title", "description", "contents"] };
+  var fuse = new window.Fuse([], options);
 
   // fetch the main search.json
   return fetch(offsetURL('search.json'))
@@ -48,62 +52,70 @@ function fetchArticles(fuse) {
                   });
                 })
               } else {
-                console.log('Unexpected status from search index request: ' +
-                  response.status);
+                return Promise.reject(
+                  new Error('Unexpected status from search index request: ' +
+                            response.status)
+                );
               }
             });
-          }));
+          })).then(function() {
+            return fuse;
+          });
         });
 
       } else {
-        console.log('Unexpected status from search index request: ' +
-                    response.status);
+        return Promise.reject(
+          new Error('Unexpected status from search index request: ' +
+                      response.status)
+        );
       }
-    })
-    .catch(function(error) {
-       console.log('Error fetching search index');
-       console.log(error);
     });
-
 }
 
 window.document.addEventListener("DOMContentLoaded", function (event) {
 
-  // create fuse index and fetch articles
-  var fuse = createIndex();
-  fetchArticles(fuse);
+  createFuseIndex()
+    .then(function(fuse) {
 
-  var autocompleteOptions = {
-    autoselect: true,
-    hint: false,
-    minLength: 2,
-  };
-  window.autocomplete('#distill-search', autocompleteOptions, [{
-    source: function(query, callback) {
-      const searchOptions = {
-        isCaseSensitive: false,
-        shouldSort: true,
-        minMatchCharLength: 2,
-        limit: 10,
-        keys: [
-          { name: 'title', weight: 20 },
-          { name: 'description', weight: 10 },
-          { name: 'contents', weight: 5 },
-        ],
+      // display search box now that we are initialized
+      var searchEl = window.document.getElementById('distill-search');
+      searchEl.classList.remove('hidden');
+
+      // initialize autocomplete
+      var options = {
+        autoselect: true,
+        hint: false,
+        minLength: 2,
       };
-      var results = fuse.search(query, searchOptions);
-      callback(results.map(function(result) { return result.item; }))
-    },
-    templates: {
-      suggestion: function(suggestion) {
+      window.autocomplete(searchEl, options, [{
+        source: function(query, callback) {
+          const searchOptions = {
+            isCaseSensitive: false,
+            shouldSort: true,
+            minMatchCharLength: 2,
+            limit: 10,
+            keys: [
+              { name: 'title', weight: 20 },
+              { name: 'description', weight: 10 },
+              { name: 'contents', weight: 5 },
+            ],
+          };
+          var results = fuse.search(query, searchOptions);
+          callback(results.map(function(result) { return result.item; }))
+        },
+        templates: {
+          suggestion: function(suggestion) {
 
-        return suggestion.title;
-      }
-    }
-  }]).on('autocomplete:selected', function(event, suggestion, dataset, context) {
-    window.location.href = offsetURL(suggestion.path);
-  });
-
+            return suggestion.title;
+          }
+        }
+      }]).on('autocomplete:selected', function(event, suggestion) {
+        window.location.href = offsetURL(suggestion.path);
+      });
+    })
+    .catch(function(error) {
+      console.log(error);
+    });
 });
 
 </script>
