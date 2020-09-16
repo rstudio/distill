@@ -4,8 +4,8 @@ navigation_in_header <- function(site_config, offset) {
   render_navigation_html(navigation_in_header_html(site_config, offset))
 }
 
-navigation_before_body <- function(site_config, offset) {
-  render_navigation_html(navigation_before_body_html(site_config, offset))
+navigation_before_body <- function(site_dir, site_config, offset) {
+  render_navigation_html(navigation_before_body_html(site_dir, site_config, offset))
 }
 
 navigation_after_body <- function(site_dir, site_config, offset) {
@@ -16,8 +16,8 @@ navigation_in_header_file <- function(site_config, offset = NULL) {
   render_navigation_html_file(navigation_in_header_html(site_config, offset))
 }
 
-navigation_before_body_file <- function(site_config, offset = NULL) {
-  render_navigation_html_file(navigation_before_body_html(site_config, offset))
+navigation_before_body_file <- function(site_dir, site_config, offset = NULL) {
+  render_navigation_html_file(navigation_before_body_html(site_dir, site_config, offset))
 }
 
 navigation_after_body_file <- function(site_dir, site_config, offset = NULL) {
@@ -36,7 +36,7 @@ navigation_html_generator <- function() {
       # generate html and assign into cache
       assign(offset, envir = cache, list(
         in_header = navigation_in_header(site_config, offset),
-        before_body = navigation_before_body(site_config, offset),
+        before_body = navigation_before_body(site_dir, site_config, offset),
         after_body = navigation_after_body(site_dir, site_config, offset)
       ))
     }
@@ -90,7 +90,7 @@ navigation_in_header_html <- function(site_config, offset) {
 
 }
 
-navigation_before_body_html <- function(site_config, offset) {
+navigation_before_body_html <- function(site_dir, site_config, offset) {
 
   # helper to apply offset (if any)
   offset_href <- function(href) {
@@ -162,7 +162,8 @@ navigation_before_body_html <- function(site_config, offset) {
       }
     }
 
-    if (site_search_enabled(site_config)) {
+    search_default = length(site_collections(site_dir, site_config)) > 0
+    if (site_search_enabled(site_config, search_default)) {
       search_box <- tag("input", list(id = "distill-search", class="nav-search",
                                       type = "text", placeholder = "Search..."))
     } else {
@@ -325,10 +326,14 @@ site_dependencies <- function(site_config) {
 }
 
 
-site_search_enabled <- function(site_config) {
+site_search_enabled <- function(site_config, default = TRUE) {
   navbar <- site_config[["navbar"]]
   if (is.list(navbar)) {
-    !identical(site_config[["navbar"]][["search"]], FALSE)
+    search <- site_config[["navbar"]][["search"]]
+    if (is.logical(search))
+      search
+    else
+      default
   } else {
     FALSE
   }

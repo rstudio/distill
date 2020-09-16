@@ -186,7 +186,7 @@ distill_article <- function(toc = FALSE,
 
     # before body includes: distill then user
     before_body <- c(front_matter_before_body(metadata),
-                     navigation_before_body_file(site_config),
+                     navigation_before_body_file(dirname(input_file), site_config),
                      site_before_body_file(site_config),
                      includes$before_body,
                      listing$html)
