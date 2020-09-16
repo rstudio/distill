@@ -67,6 +67,8 @@ navigation_in_header_html <- function(site_config, offset) {
 
     in_header_html <- tagList(
       HTML("<!--radix_placeholder_navigation_in_header-->"),
+      htmltools::tags$meta(name = "distill:offset",
+                           content = strip_trailing_slash(not_null(offset))),
       navbar_html,
       lapply(site_dependencies(site_config), function(lib) {
         if (!is.null(offset))

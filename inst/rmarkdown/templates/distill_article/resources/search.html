@@ -1,27 +1,92 @@
 
 <script type="application/javascript">
 
+function getMeta(metaName) {
+  var metas = document.getElementsByTagName('meta');
+  for (let i = 0; i < metas.length; i++) {
+    if (metas[i].getAttribute('name') === metaName) {
+      return metas[i].getAttribute('content');
+    }
+  }
+  return '';
+}
+
+function offsetURL(url) {
+  var offset = getMeta('distill:offset');
+  return offset ? offset + '/' + url : url;
+}
+
+function createIndex() {
+  var options = {
+    isCaseSensitive: false,
+    shouldSort: true,
+    keys: [
+      "title",
+      "description",
+      "contents"
+    ]
+  };
+  return new window.Fuse([],options);
+}
+
+function fetchArticles(fuse) {
+
+  // fetch the main search.json
+  return fetch(offsetURL('search.json'))
+    .then(function(response) {
+      if (response.status == 200) {
+        return response.json().then(function(json) {
+          // index main articles
+          json.articles.forEach(function(article) {
+            fuse.add(article);
+          });
+          // download collections and index their articles
+          return Promise.all(json.collections.map(function(collection) {
+            return fetch(offsetURL(collection)).then(function(response) {
+              if (response.status === 200) {
+                return response.json().then(function(articles) {
+                  articles.forEach(function(article) {
+                    fuse.add(article);
+                  });
+                })
+              } else {
+                console.log('Unexpected status from search index request: ' +
+                  response.status);
+              }
+            });
+          }));
+        });
+
+      } else {
+        console.log('Unexpected status from search index request: ' +
+                    response.status);
+      }
+    })
+    .catch(function(error) {
+       console.log('Error fetching search index');
+       console.log(error);
+    });
+
+}
+
 window.document.addEventListener("DOMContentLoaded", function (event) {
+
+  // create fuse index and fetch articles
+  var fuse = createIndex();
+  fetchArticles(fuse);
+
   window.autocomplete('#distill-search', { hint: false }, [{
     source: function(query, callback) {
-      callback([
-        {
-          name: "foo"
-        },
-        {
-          name: "bar"
-        }
-      ]);
-    },
-    displayKey: function(suggestion) {
-      return suggestion.name;
+      var results = fuse.search(query, { limit: 10 });
+      callback(results.map(function(result) { return result.item; }))
     },
     templates: {
-      // suggestion: function(suggestion) {
-      //  return ;
+      suggestion: function(suggestion) {
+        return suggestion.title;
+      }
     }
   }]).on('autocomplete:selected', function(event, suggestion, dataset, context) {
-    console.log(event, suggestion, dataset, context);
+    window.location.href = offsetURL(suggestion.path);
   });
 
 });
