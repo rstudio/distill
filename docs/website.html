@@ -1770,6 +1770,7 @@ Publishing
 <li><a href="#site-navigation">Site navigation</a>
 <ul>
 <li><a href="#site-search">Site search</a></li>
+<li><a href="#source-code">Source code</a></li>
 <li><a href="#site-footer">Site footer</a></li>
 <li><a href="#theming">Theming</a></li>
 </ul></li>
@@ -1893,7 +1894,7 @@ output: distill::distill_article
 <p>Note also that we used an <code>icon</code> for one of the menus, specifying the <a href="https://fontawesome.com/">Font Awesome</a> <code>fab fa-github</code> identifier for the GitHub icon (you can use any Font Awesome icon). If there isn’t a Font Awesome icon that matches the image you want, you can also specify a custom <code>image</code> rather than an <code>icon</code>.</p>
 <h3 id="site-search">Site search</h3>
 <p>You can add a search box to the navigation bar using the <code>search</code> field of the <code>navbar</code> key within <code>_site.yml</code>. For example:</p>
-<pre class="yaml"><code>
+<pre class="markup"><code>
 ---
 name: &quot;distill&quot;
 title: &quot;Distill for R Markdown&quot;
@@ -1901,8 +1902,22 @@ navbar:
   logo:
     image: images/logo.png
     href: https://www.rstudio.com
-  search: true</code></pre>
+  search: true
+---</code></pre>
 <p>Note that only articles with a <code>description</code> metadata field are included within search results. Also note that search is enabled by default for <a href="blog.html">blog sites</a>.</p>
+<h3 id="source-code">Source code</h3>
+<p>If you want to display a link to the source code for your website on the navigation bar, add a <code>source_url</code> field to the <code>navbar</code> definition. For example:</p>
+<pre class="markup"><code>
+---
+name: &quot;distill&quot;
+title: &quot;Distill for R Markdown&quot;
+navbar:
+  logo:
+    image: images/logo.png
+    href: https://www.rstudio.com
+  source_url: https://github.com/rstudio/distill
+---</code></pre>
+<p>Note that if you’ve already defined a <code>repository_url</code> field in <code>_site.yml</code> you can just use <code>source_url: true</code> and your <code>repository_url</code> will be used for the link.</p>
 <h3 id="site-footer">Site footer</h3>
 <p>When you use a navigation bar, you can optionally also include a site footer which uses the same theme (background and foreground colors). For example:</p>
 <p><img src="images/footer-bar.png" class="screenshot" style="width:95.0%" /></p>

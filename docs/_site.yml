@@ -9,7 +9,7 @@ navbar:
   logo:
     image: images/logo.png
     href: https://www.rstudio.com
-  source_link: true
+  source_url: true
   right:
     - text: "Authoring"
       menu:

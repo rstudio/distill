@@ -1773,6 +1773,7 @@ Publishing
 <ul>
 <li><a href="#comments-and-sharing">Comments and sharing</a></li>
 <li><a href="#site-search">Site search</a></li>
+<li><a href="#source-code">Source code</a></li>
 <li><a href="#organizing-posts">Organizing posts</a></li>
 <li><a href="#preview-images">Preview images</a></li>
 <li><a href="#citations">Citations</a></li>
@@ -1986,7 +1987,7 @@ collections:
 <p>Specifying the <code>hidden: false</code> option for <code>disqus</code> will causes all comments to be displayed inline by default.</p>
 <h3 id="site-search">Site search</h3>
 <p>Blog sites automatically include a search box within the navigation bar. You can disable the search box using the the <code>search</code> field of the <code>navbar</code> key within <code>_site.yml</code>. For example:</p>
-<pre class="yaml"><code>
+<pre class="markup"><code>
 ---
 name: &quot;distill&quot;
 title: &quot;Distill for R Markdown&quot;
@@ -1994,8 +1995,22 @@ navbar:
   logo:
     image: images/logo.png
     href: https://www.rstudio.com
-  search: false</code></pre>
+  search: false
+---</code></pre>
 <p>Note that top level articles within blog sites will also be included in search results so long as they have a <code>description</code> metadata field.</p>
+<h3 id="source-code">Source code</h3>
+<p>If you want to display a link to the source code for your blog on the navigation bar, add a <code>source_url</code> field to the <code>navbar</code> definition. For example:</p>
+<pre class="markup"><code>
+---
+name: &quot;distill&quot;
+title: &quot;Distill for R Markdown&quot;
+navbar:
+  logo:
+    image: images/logo.png
+    href: https://www.rstudio.com
+  source_url: https://github.com/rstudio/distill
+---</code></pre>
+<p>Note that if you’ve already defined a <code>repository_url</code> field in <code>_site.yml</code> you can just use <code>source_url: true</code> and your <code>repository_url</code> will be used for the link.</p>
 <h3 id="organizing-posts">Organizing posts</h3>
 <p>You can use whatever scheme you like to organize the <code>_posts</code> directory. You can have all posts at the top level or you can create subdirectories to create groupings of posts.</p>
 <p>One popular scheme for organizing blog posts is to use a date prefix for the post directory names. For example:</p>

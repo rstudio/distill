@@ -214,7 +214,7 @@ navigation_before_body_html <- function(site_dir, site_config, offset) {
 
 navbar_repo_url <- function(site_config) {
   repo_url <- site_config[["repository_url"]]
-  source_url <- site_config[["navbar"]][["source_link"]]
+  source_url <- site_config[["navbar"]][["source_url"]]
   if (is.character(source_url)) {
     source_url
   } else if (isTRUE(source_url) && !is.null(repo_url)) {

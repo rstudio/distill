@@ -273,7 +273,7 @@ Specifying the `hidden: false` option for `disqus` will causes all comments to b
 
 Blog sites automatically include a search box within the navigation bar. You can disable the search box using the the `search` field of the `navbar` key within `_site.yml`. For example:
 
-``` {.yaml}
+``` {.markup}
 ---
 name: "distill"
 title: "Distill for R Markdown"
@@ -282,9 +282,28 @@ navbar:
     image: images/logo.png
     href: https://www.rstudio.com
   search: false
+---
 ```
 
 Note that top level articles within blog sites will also be included in search results so long as they have a `description` metadata field.
+
+### Source code
+
+If you want to display a link to the source code for your blog on the navigation bar, add a `source_url` field to the `navbar` definition. For example:
+
+``` {.markup}
+---
+name: "distill"
+title: "Distill for R Markdown"
+navbar:
+  logo:
+    image: images/logo.png
+    href: https://www.rstudio.com
+  source_url: https://github.com/rstudio/distill
+---
+```
+
+Note that if you've already defined a `repository_url` field in `_site.yml` you can just use `source_url: true` and your `repository_url` will be used for the link.
 
 ### Organizing posts
 

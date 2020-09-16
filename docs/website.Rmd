@@ -155,7 +155,7 @@ Note also that we used an `icon` for one of the menus, specifying the [Font Awes
 
 You can add a search box to the navigation bar using the `search` field of the `navbar` key within `_site.yml`. For example:
 
-``` {.yaml}
+``` {.markup}
 ---
 name: "distill"
 title: "Distill for R Markdown"
@@ -164,9 +164,28 @@ navbar:
     image: images/logo.png
     href: https://www.rstudio.com
   search: true
+---
 ```
 
 Note that only articles with a `description` metadata field are included within search results. Also note that search is enabled by default for [blog sites](blog.html).
+
+### Source code
+
+If you want to display a link to the source code for your website on the navigation bar, add a `source_url` field to the `navbar` definition. For example:
+
+``` {.markup}
+---
+name: "distill"
+title: "Distill for R Markdown"
+navbar:
+  logo:
+    image: images/logo.png
+    href: https://www.rstudio.com
+  source_url: https://github.com/rstudio/distill
+---
+```
+
+Note that if you've already defined a `repository_url` field in `_site.yml` you can just use `source_url: true` and your `repository_url` will be used for the link.
 
 ### Site footer
 
@@ -261,21 +280,14 @@ Distill articles can include various types of [metadata](metadata.html) to make 
 
 Several metadata values which you might find useful to define in `_site.yml` are:
 
-+--------------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
 | Metadata           | Description                                                                                                                                                              |
-+====================+==========================================================================================================================================================================+
+|--------------------|--------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
 | `base_url`         | Base (root) URL for the location where the website will be deployed (used for providing [preview images](metadata.html#preview-images) for Open Graph and Twitter Card). |
-+--------------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
 | `repository_url`   | URL for the source code of your website. Used to create a navbar link back to the repository and to create a *Corrections* appendix.                                     |
-+--------------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
 | `creative_commons` | [Creative Commons](metadata.html#creative-commons) license terms for website content. Used to automatically generate a *Reuse* appendix.                                 |
-+--------------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
 | `license_url`      | Alternate licensing terms for website content if not using a Creative Commons license.                                                                                   |
-+--------------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
 | `favicon`          | Favicon (image file) to use for browser tabs/bookmarks                                                                                                                   |
-+--------------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
 | `twitter`          | Site handle for Twitter Card metadata                                                                                                                                    |
-+--------------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
 
 Here's a `_site.yml` file that uses all of these fields (save for `license_url` since the license is already specified via `creative_commons`):
 
