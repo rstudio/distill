@@ -287,7 +287,7 @@ categories_listing_html <- function(articles) {
       tags$h3("Categories"),
       tags$ul(
         tags$li(
-          tags$a(href = "#", all_articles),
+          tags$a(href = category_hash(all_articles), all_articles),
           tags$span(class = "category-count", sprintf("(%d)", length(articles)))
         ),
         lapply(names(categories), function(name) {
@@ -306,7 +306,7 @@ categories_listing_html <- function(articles) {
 
 
 category_hash <- function(category) {
-  paste0("#",gsub(" ", "_", category))
+  paste0("#category:",gsub(" ", "_", category))
 }
 
 

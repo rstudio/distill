@@ -257,16 +257,16 @@ function init_posts_list() {
     set_posts_visible($('.posts-list').children('a'), false);
 
     // if we have a hash filter
-    if (window.location.hash) {
+    if (window.location.hash && window.location.hash.startsWith("#category:")) {
 
       // mark posts that match the category visible
-      var page_category = window.location.hash.replace("#", "");
+      var page_category = window.location.hash.replace(/^#category:/, "");
       var posts = $('.post-metadata').map(function(idx, script) {
         var metadata = $.parseJSON($(script).html());
         var post = null;
         $.each(metadata.categories, function(idx, category) {
           category = category.replace(/ /g,"_");
-          if (category == page_category) {
+          if (page_category === "articles" || category === page_category) {
             post = $(script).parent().get();
             return false;
           }
@@ -280,7 +280,10 @@ function init_posts_list() {
 
       // update the list_caption
       var list_caption = $('.posts-list-caption');
-      list_caption.text('Category: ' + page_category);
+      var caption = page_category === "articles"
+        ? list_caption.attr('data-caption')
+        : ('Category: ' + page_category);
+      list_caption.text(caption);
 
     } else {
 
@@ -308,7 +311,7 @@ function init_posts_list() {
 
   // click handling for tags
   $('.dt-tag').click(function(ev) {
-    window.location.hash = '#' + $(this).text().replace(/ /g, "_");
+    window.location.hash = '#category:' + $(this).text().replace(/ /g, "_");
     return false;
   })
 
