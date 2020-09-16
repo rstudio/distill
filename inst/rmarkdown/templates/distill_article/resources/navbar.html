@@ -48,33 +48,6 @@
     $(".nav-dropdown").click(function(e){
       e.stopPropagation();
     });
-
-    // search (if enabled)
-    if (window.autocomplete) {
-      window.autocomplete('#distill-search', { hint: false }, [
-      {
-        source: function(query, callback) {
-          callback([
-            {
-              name: "foo"
-            },
-            {
-              name: "bar"
-            }
-          ]);
-        },
-        displayKey: function(suggestion) {
-          return suggestion.name;
-        },
-        templates: {
-          // suggestion: function(suggestion) {
-          //  return ;
-        }
-      }]).on('autocomplete:selected', function(event, suggestion, dataset, context) {
-        console.log(event, suggestion, dataset, context);
-      });
-    }
-
   });
 </script>
 
@@ -356,53 +329,6 @@ d-title {
 
 .headroom--pinned {
   top: 0;
-}
-
-/* Algolioa Autocomplete */
-
-.algolia-autocomplete {
-  display: inline-block;
-  margin-left: 10px;
-  vertical-align: sub;
-  background-color: white;
-  color: black;
-  padding: 6px;
-  padding-top: 8px;
-  padding-bottom: 0;
-  border-radius: 6px;
-  border: 1px #455a64 solid;
-  width: 200px;
-}
-.algolia-autocomplete .aa-input, .algolia-autocomplete .aa-hint {
-  width: 90%;
-  outline: none;
-  border: none;
-}
-
-.algolia-autocomplete .aa-hint {
-  color: #999;
-}
-.algolia-autocomplete .aa-dropdown-menu {
-  width: 550px;
-  overflow-x: visible;
-  padding: 5px;
-  margin-top: 3px;
-  margin-left: -150px;
-  background-color: #fff;
-  border-radius: 5px;
-  border: 1px solid #999;
-  border-top: none;
-}
-.algolia-autocomplete .aa-dropdown-menu .aa-suggestion {
-  cursor: pointer;
-  padding: 5px 4px;
-}
-.algolia-autocomplete .aa-dropdown-menu .aa-suggestion.aa-cursor {
-  background-color: #B2D7FF;
-}
-.algolia-autocomplete .aa-dropdown-menu .aa-suggestion em {
-  font-weight: bold;
-  font-style: normal;
 }
 
 </style>

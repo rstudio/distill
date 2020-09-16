@@ -51,14 +51,23 @@ navigation_in_header_html <- function(site_config, offset) {
 
   if (!is.null(site_config[["navbar"]])) {
 
-    in_header_html <- html_from_file(
+    navbar_html <- html_from_file(
       system.file("rmarkdown/templates/distill_article/resources/navbar.html",
                   package = "distill")
     )
 
+    if (site_search_enabled(site_config)) {
+      search_html <- html_from_file(
+        system.file("rmarkdown/templates/distill_article/resources/search.html",
+                    package = "distill")
+      )
+    } else {
+      search_html <- NULL
+    }
+
     in_header_html <- tagList(
       HTML("<!--radix_placeholder_navigation_in_header-->"),
-      in_header_html,
+      navbar_html,
       lapply(site_dependencies(site_config), function(lib) {
         if (!is.null(offset))
           lib$path <- file.path(offset, lib$path)
@@ -67,6 +76,7 @@ navigation_in_header_html <- function(site_config, offset) {
           lapply(lib$dep$script, function(script) { tags$script(src = file.path(lib$path, script)) } )
         )
       }),
+      search_html,
       HTML("<!--/radix_placeholder_navigation_in_header-->")
     )
 
