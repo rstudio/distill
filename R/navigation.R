@@ -177,17 +177,19 @@ navigation_before_body_html <- function(site_dir, site_config, offset) {
                     search_box
     )
 
-    # add source code icon to right nav if repository_url is available
+    # ensure we have a valid right menu target
     right_menu <- site_config[["navbar"]][["right"]]
     if (is.null(right_menu))
       right_menu <- list()
-    repo_url <- site_config[["repository_url"]]
-    if (!is.null(repo_url)) {
+
+    # see if we need to add a source lnk
+    navbar_repo_url <- navbar_repo_url(site_config)
+    if (!is.null(navbar_repo_url)) {
       right_menu <- append(right_menu, list(
         list(
-          href = repo_url,
-          icon = repo_icon(repo_url),
-          text = "source code"
+          href = navbar_repo_url,
+          icon = navbar_repo_icon(navbar_repo_url),
+          text = "Link to source"
         )
       ))
     }
@@ -210,7 +212,19 @@ navigation_before_body_html <- function(site_dir, site_config, offset) {
   placeholder_html("navigation_before_body", header)
 }
 
-repo_icon <- function(repo_url) {
+navbar_repo_url <- function(site_config) {
+  repo_url <- site_config[["repository_url"]]
+  source_url <- site_config[["navbar"]][["source_link"]]
+  if (is.character(source_url)) {
+    source_url
+  } else if (isTRUE(source_url) && !is.null(repo_url)) {
+    repo_url
+  } else {
+    NULL
+  }
+}
+
+navbar_repo_icon <- function(repo_url) {
   if (grepl("github.com", repo_url, fixed = TRUE))
     "fab fa-github"
   else if (grepl("gitlab.com", repo_url, fixed = TRUE))
