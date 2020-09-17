@@ -130,25 +130,18 @@ figure img.external {
 /* CSS for d-contents */
 
 .d-contents {
+  grid-column: text;
   color: rgba(0,0,0,0.8);
   font-size: 0.9em;
   padding-bottom: 1em;
   margin-bottom: 1em;
+  padding-bottom: 0.5em;
+  margin-bottom: 1em;
+  padding-left: 0.25em;
+  justify-self: start;
 }
 
-@media(max-width: 1000px) {
-  .d-contents {
-    grid-column: text;
-    width: 100%;
-    justify-self: start;
-    align-self: start;
-    padding-bottom: 0.5em;
-    margin-bottom: 1em;
-    padding-left: 0.25em;
-  }
-}
-
-@media(min-width: 1180px) {
+@media(min-width: 1000px) {
   .d-contents {
     height: 0;
     grid-column-start: 1;
