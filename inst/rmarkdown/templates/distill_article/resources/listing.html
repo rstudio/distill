@@ -282,7 +282,7 @@ function init_posts_list() {
       var list_caption = $('.posts-list-caption');
       var caption = page_category === "articles"
         ? list_caption.attr('data-caption')
-        : ('Category: ' + page_category);
+        : ('Category: ' + page_category.replace(/_/g," "));
       list_caption.text(caption);
 
     } else {
