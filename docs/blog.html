@@ -683,12 +683,12 @@
   .dt-tags .dt-tag {
     text-decoration: none;
     display: inline-block;
-    color: rgba(0,0,0,0.67);
+    color: rgba(0,0,0,0.6);
     padding: 0em 0.4em;
     margin-right: 0.5em;
     margin-bottom: 0.4em;
     font-size: 70%;
-    border: 1px solid rgba(0,0,0,0.4);
+    border: 1px solid rgba(0,0,0,0.2);
     border-radius: 3px;
     text-transform: uppercase;
     font-weight: 500;
@@ -738,6 +738,7 @@
   }
 
   d-article {
+    padding-top: 2.5rem;
     padding-bottom: 30px;
   }
 
@@ -747,6 +748,14 @@
 
   d-article>p>img {
     width: 100%;
+  }
+
+  d-article h2 {
+    margin: 1rem 0 1.5rem 0;
+  }
+
+  d-article h3 {
+    margin-top: 1.5rem;
   }
 
   d-article iframe {
@@ -766,25 +775,18 @@
   /* CSS for d-contents */
 
   .d-contents {
+    grid-column: text;
     color: rgba(0,0,0,0.8);
     font-size: 0.9em;
     padding-bottom: 1em;
     margin-bottom: 1em;
+    padding-bottom: 0.5em;
+    margin-bottom: 1em;
+    padding-left: 0.25em;
+    justify-self: start;
   }
 
-  @media(max-width: 1000px) {
-    .d-contents {
-      grid-column: text;
-      width: 100%;
-      justify-self: start;
-      align-self: start;
-      padding-bottom: 0.5em;
-      margin-bottom: 1em;
-      padding-left: 0.25em;
-    }
-  }
-
-  @media(min-width: 1180px) {
+  @media(min-width: 1000px) {
     .d-contents {
       height: 0;
       grid-column-start: 1;
@@ -796,18 +798,9 @@
   }
 
   .d-contents nav h3 {
-    font-size: 0.7rem;
-    font-weight: 400;
-    color: rgba(0, 0, 0, 0.6);
-    text-transform: uppercase;
+    font-size: 18px;
     margin-top: 0;
-    margin-bottom: 0.5em;
-  }
-
-  .d-contents nav a {
-    color: rgba(0, 0, 0, 0.8);
-    border-bottom: none;
-    text-decoration: none
+    margin-bottom: 1em;
   }
 
   .d-contents li {
@@ -823,42 +816,41 @@
   }
 
   .d-contents nav ul li {
-    margin-bottom: 0.15em;
+    margin-top: 0.6em;
+    margin-bottom: 0.2em;
+  }
+
+  .d-contents nav a {
+    font-size: 13px;
+    border-bottom: none;
+    text-decoration: none
+    color: rgba(0, 0, 0, 0.8);
   }
 
   .d-contents nav a:hover {
     text-decoration: underline solid rgba(0, 0, 0, 0.6)
   }
 
+  .d-contents nav > ul > li > a {
+    font-weight: 600;
+  }
+
+  .d-contents nav > ul > li > ul {
+    font-weight: inherit;
+  }
+
+  .d-contents nav > ul > li > ul > li {
+    margin-top: 0.2em;
+  }
+
+
   .d-contents nav ul {
     margin-top: 0;
     margin-bottom: 0.25em;
   }
 
-  .d-contents nav>div {
-    display: block;
-    outline: none;
-    margin-bottom: 0.5em
-  }
-
-  .d-contents nav>div>a {
-    font-size: 13px;
-    font-weight: 600
-  }
-
-  .d-contents nav>div>a {
-    font-size: 13px;
-    font-weight: 600
-  }
-
-  .d-contents nav>div>a:hover,
-  .d-contents nav>ul>li>a:hover {
-    text-decoration: none
-  }
-
-  .d-article-with-toc {
-    border-top: none;
-    padding-top: 0;
+  .d-article-with-toc h2:nth-child(2) {
+    margin-top: 0;
   }
 
   /* Tweak code blocks (note that this CSS is repeated above in an injection
@@ -1394,9 +1386,8 @@
       if (!have_authors)
         $('d-byline').addClass('hidden');
 
-      // table of contents
-      if (have_authors) // adjust border if we are in authors
-        $('.d-contents').parent().addClass('d-article-with-toc');
+      // article with toc class
+      $('.d-contents').parent().addClass('d-article-with-toc');
 
       // strip links that point to #
       $('.authors-affiliations').find('a[href="#"]').removeAttr('href');
@@ -1636,7 +1627,7 @@
   </script>
 
   <!--/radix_placeholder_distill-->
-  <script src="site_libs/header-attrs-2.3/header-attrs.js"></script>
+  <script src="site_libs/header-attrs-2.3.5/header-attrs.js"></script>
   <script src="site_libs/jquery-1.11.3/jquery.min.js"></script>
   <script src="site_libs/anchor-4.2.2/anchor.min.js"></script>
   <script src="site_libs/bowser-1.9.3/bowser.min.js"></script>
@@ -1756,8 +1747,8 @@ Publishing
 
 <div class="d-article">
 <div class="d-contents">
-<nav class="toc" id="TOC">
-<h3>Table of Contents</h3>
+<nav class="l-text toc figcaption" id="TOC">
+<h3>Contents</h3>
 <ul>
 <li><a href="#getting-started">Getting started</a>
 <ul>
