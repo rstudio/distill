@@ -134,7 +134,10 @@ write_feed_xml_html_content <- function(input_path, article, site_config) {
                     output_format = "html_document",
                     output_file = html_file,
                     quiet = TRUE,
-                    output_options = list(self_contained = FALSE))
+                    output_options = list(
+                      self_contained = FALSE,
+                      pandoc_args = c("--metadata", "title:untitled")
+                    ))
 
   # extract body
   html_contents <- paste(readLines(html_file), collapse = "\n")
