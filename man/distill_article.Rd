@@ -45,7 +45,7 @@ outputting HTML directly into the markdown document).}
 \item{dev}{Graphics device to use for figure output (defaults to png)}
 
 \item{smart}{Produce typographically correct output, converting straight
-quotes to curly quotes, \code{---} to em-dashes, \code{--} to en-dashes, and
+quotes to curly quotes, \verb{---} to em-dashes, \verb{--} to en-dashes, and
 \code{...} to ellipses.}
 
 \item{self_contained}{Produce a standalone HTML file with no external

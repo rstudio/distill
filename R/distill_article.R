@@ -10,8 +10,13 @@
 #'
 #' @inheritParams rmarkdown::html_document
 #'
+#' @param smart Produce typographically correct output, converting straight
+#'   quotes to curly quotes, `---` to em-dashes, `--` to en-dashes, and
+#'   `...` to ellipses.
+#'
 #' @import rmarkdown
 #' @import htmltools
+#' @import downlit
 #'
 #' @export
 distill_article <- function(toc = FALSE,
@@ -70,6 +75,7 @@ distill_article <- function(toc = FALSE,
   knitr_options$opts_hooks$preview <- knitr_preview_hook
   knitr_options$knit_hooks <- list()
   knitr_options$knit_hooks$chunk <- knitr_chunk_hook()
+  knitr_options$knit_hooks$source <- knitr_source_hook
 
   # shared variables
   site_config <- NULL
@@ -249,6 +255,18 @@ knitr_preview_hook <- function(options) {
   if (isTRUE(options$preview))
     options$out.extra <- c(options$out.extra, "data-distill-preview=1")
   options
+}
+
+# hook to highlight R code with downlit
+knitr_source_hook <- function(x, options) {
+  x <- paste0(x, "\n", collapse = "")
+  if (options$engine == "R") {
+    x <- paste0("<div class=\"sourceCode\"><pre><code>",
+               highlight(x, classes_pandoc(), pre_class = NULL),
+               "</code></pre></div>")
+  }
+  x <- paste0(x, "\n")
+  x
 }
 
 # hook to enclose output in div with layout class
