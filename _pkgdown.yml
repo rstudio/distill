@@ -1,0 +1,42 @@
+destination: pkgdown
+
+template:
+  package: quillt
+
+development:
+  mode: auto
+
+navbar:
+  title: ~
+  type: default
+  left:
+  - text: Get started
+    href: articles/basics.html
+  - text: Reference
+    href: reference/index.html
+  right:
+  - text: News
+    href: news/index.html
+  - icon: fa-github fa-lg
+    href: https://github.com/rstudio/distill
+
+reference:
+- title: Output formats
+  desc: >
+    Specify in your document's YAML frontmatter to knit,
+    or specify as the `output_format` with `rmarkdown::render()`.
+  contents:
+  - '`distill_article`'
+  - '`distill_website`'
+- title: Create websites
+  contents:
+  - '`create_website`'
+  - '`create_blog`'
+- title: Add and update blog posts
+  contents:
+  - '`create_post`'
+  - '`import_post`'
+  - '`update_post`'
+- title: Publish websites
+  contents:
+  - '`publish_website`'
