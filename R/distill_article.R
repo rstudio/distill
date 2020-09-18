@@ -13,6 +13,12 @@
 #' @param smart Produce typographically correct output, converting straight
 #'   quotes to curly quotes, `---` to em-dashes, `--` to en-dashes, and
 #'   `...` to ellipses.
+#' @param highlight Syntax highlighting style. Supported styles include
+#'   "default", "tango", "pygments", "kate", "monochrome", "espresso",
+#'   "zenburn", "breezedark", and  "haddock". Pass NULL to prevent syntax
+#'   highlighting.
+#' @param highlight_downlit Use the \pkg{downlit} package to highlight
+#'   R code (including providing hyperlinks to function documentation).
 #'
 #' @import rmarkdown
 #' @import htmltools
@@ -28,6 +34,8 @@ distill_article <- function(toc = FALSE,
                           dev = "png",
                           smart = TRUE,
                           self_contained = TRUE,
+                          highlight = "default",
+                          highlight_downlit = TRUE,
                           mathjax = "default",
                           extra_dependencies = NULL,
                           css = NULL,
@@ -48,8 +56,10 @@ distill_article <- function(toc = FALSE,
   args <- c(args, pandoc_toc_args(toc, toc_depth))
 
   # add highlighting
-  args <- c(args, "--highlight",
-            pandoc_path_arg(distill_resource("highlight.theme")) )
+  args <- c(args, pandoc_highlight_args(
+    highlight,
+    default = pandoc_path_arg(distill_resource("highlight.theme")))
+  )
 
   # add template
   args <- c(args, "--template",
@@ -75,7 +85,8 @@ distill_article <- function(toc = FALSE,
   knitr_options$opts_hooks$preview <- knitr_preview_hook
   knitr_options$knit_hooks <- list()
   knitr_options$knit_hooks$chunk <- knitr_chunk_hook()
-  knitr_options$knit_hooks$source <- knitr_source_hook
+  if (highlight_downlit)
+    knitr_options$knit_hooks$source <- knitr_source_hook
 
   # shared variables
   site_config <- NULL

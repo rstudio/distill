@@ -4,7 +4,9 @@
 
 -   Use pandoc rather than distill framework for bibliography generation. Provides support for `csl`, `nocite`, and `link-citations`, as well as the use of multiple bibliographies (including non-BibTeX ones). Eliminates distill framework provided mouse-over citation display, but users seem to value the Pandoc features more than this one.
 
--   Use pandoc rather than distill for code output. Use the [downlit](https://downlit.r-lib.org/) package to syntax highlight R code chunks.
+-   Use pandoc rather than distill for code output (syntax highlighting themes can be customized using the `highlight` option).
+
+-   Use the [downlit](https://downlit.r-lib.org/) package to syntax highlight R code chunks (controlled by the `highlight_downlit` option, which is enabled by default).
 
 -   Provide heading anchor links in left margin on hover.
 

@@ -14,6 +14,8 @@ distill_article(
   dev = "png",
   smart = TRUE,
   self_contained = TRUE,
+  highlight = "default",
+  highlight_downlit = TRUE,
   mathjax = "default",
   extra_dependencies = NULL,
   css = NULL,
@@ -53,6 +55,14 @@ dependencies, using data: URIs to incorporate the contents of linked
 scripts, stylesheets, images, and videos. Note that even for self contained
 documents MathJax is still loaded externally (this is necessary because of
 its size).}
+
+\item{highlight}{Syntax highlighting style. Supported styles include
+"default", "tango", "pygments", "kate", "monochrome", "espresso",
+"zenburn", "breezedark", and  "haddock". Pass NULL to prevent syntax
+highlighting.}
+
+\item{highlight_downlit}{Use the \pkg{downlit} package to highlight
+R code (including providing hyperlinks to function documentation).}
 
 \item{mathjax}{Include mathjax. The "default" option uses an https URL from a
 MathJax CDN. The "local" option uses a local version of MathJax (which is
