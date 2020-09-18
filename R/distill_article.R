@@ -42,16 +42,14 @@ distill_article <- function(toc = FALSE,
   # table of contents
   args <- c(args, pandoc_toc_args(toc, toc_depth))
 
-  # prevent highlighting
-  args <- c(args, "--no-highlight")
+  # add highlighting
+  args <- c(args, "--highlight",
+            pandoc_path_arg(distill_resource("highlight.theme")) )
 
   # add template
   args <- c(args, "--template",
             pandoc_path_arg(distill_resource("default.html")))
 
-  # lua filter
-  args <- c(args, "--lua-filter",
-            pandoc_path_arg(distill_resource("distill.lua")))
 
   # use link citations (so we can do citation conversion)
   args <- c(args, "--metadata=link-citations:true")
