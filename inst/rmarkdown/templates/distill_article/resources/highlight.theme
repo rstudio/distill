@@ -33,7 +33,7 @@
             "underline": false
         },
         "String": {
-            "text-color": "#008080",
+            "text-color": "#036a07",
             "background-color": null,
             "bold": false,
             "italic": false,
@@ -138,7 +138,7 @@
             "underline": false
         },
         "Comment": {
-            "text-color": "#008000",
+            "text-color": "#4c886b",
             "background-color": null,
             "bold": false,
             "italic": false,
