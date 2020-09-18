@@ -52,7 +52,7 @@ Imports:
     digest,
     yaml,
     openssl,
-    downlit
+    downlit (>= 0.1.0.9000)
 Suggests:
     htmlwidgets,
     r2d3,
@@ -60,4 +60,6 @@ Suggests:
     shiny,
     rsconnect,
     testthat
+Remotes:
+    r-lib/downlit
 Language: en-US
