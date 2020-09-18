@@ -26,12 +26,20 @@ Markdown combines the technical authoring features of Distill with [R
 Markdown](https://rmarkdown.rstudio.com/), enabling a fully reproducible
 workflow based on literate programming.
 
-### Getting Started
+## Installation
 
-You can install distill from CRAN with:
+Install the released version of distill from CRAN:
 
-``` r
-install.packages("distill")
-```
+    install.packages("distill")
+
+Or install the development version from GitHub with:
+
+    # install.packages("devtools")
+    devtools::install_github("rstudio/distill")
 
 Learn more about using Distill at <https://rstudio.github.io/distill>.
+
+## Get help
+
+The [RStudio community](https://community.rstudio.com/tag/distill) is a
+friendly place to ask any questions about distill.
