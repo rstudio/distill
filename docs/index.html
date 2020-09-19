@@ -2051,7 +2051,7 @@ knitr::opts_chunk$set(
 )
 ```</code></pre>
 <h2 id="syntax-highlighting">Syntax highlighting</h2>
-<p>Syntax highlighting for R code is done using the <a href="https://downlit.r-lib.org">downlit</a> package, which provides automatic linking of R functions to their online documentation. The default highlighting theme matches the appearance of code within RStudio’s default theme.</p>
+<p>Syntax highlighting for R code is done using the <a href="https://downlit.r-lib.org">downlit</a> package, which provides automatic linking of R functions to their online documentation. By default, highlighting matches the appearance of code within the RStudio editor.</p>
 <p>You can customize highlighting behavior using the <code>highlight</code> and <code>highlight_downlit</code> options. For example, to use the Pandoc “haddock” highlighting theme and disable the use of downlit, you would do this:</p>
 <pre class="markup"><code>---
 title: &quot;Distill for R Markdown&quot;
@@ -2062,8 +2062,33 @@ output:
     highlight: haddock
     highlight_downlit: false
 ---</code></pre>
-<p>You can see a preview of available Pandoc highlighting themes here: <a href="https://www.garrickadenbuie.com/blog/pandoc-syntax-highlighting-examples/" class="uri">https://www.garrickadenbuie.com/blog/pandoc-syntax-highlighting-examples/</a> (note that dark themes won’t work well with Distill articles!).</p>
-<p>You can also create a custom highlighting theme file (<a href="https://pandoc.org/MANUAL.html#syntax-highlighting">as described here</a>) and provide the path to that file as the <code>highlight</code> option.</p>
+<p>Available options for <code>highlight</code> include:</p>
+<table>
+<colgroup>
+<col style="width: 33%" />
+<col style="width: 66%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th>Option(s)</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><code>default</code></td>
+<td>RStudio editor theme</td>
+</tr>
+<tr class="even">
+<td><code>haddock</code>, <code>kate</code>, <code>monochrome</code>, <code>pygments</code>, <code>tango</code></td>
+<td>Pandoc highlighting <a href="https://www.garrickadenbuie.com/blog/pandoc-syntax-highlighting-examples/">themes</a>.</td>
+</tr>
+<tr class="odd">
+<td>Path to <code>.theme</code> file</td>
+<td>Custom Pandoc <a href="https://pandoc.org/MANUAL.html#syntax-highlighting">theme file</a>.</td>
+</tr>
+</tbody>
+</table>
 <h2 id="appendices">Appendices</h2>
 <p>Appendices can be added after your article by adding the <code>.appendix</code> class to any level 1 or level 2 header. For example:</p>
 <div class="sourceCode" id="cb15"><pre class="sourceCode html"><code class="sourceCode html"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true"></a>## Acknowledgments {.appendix}</span>

@@ -240,7 +240,7 @@ knitr::opts_chunk$set(
 
 ## Syntax highlighting
 
-Syntax highlighting for R code is done using the [downlit](https://downlit.r-lib.org) package, which provides automatic linking of R functions to their online documentation. The default highlighting theme matches the appearance of code within RStudio's default theme.
+Syntax highlighting for R code is done using the [downlit](https://downlit.r-lib.org) package, which provides automatic linking of R functions to their online documentation. By default, highlighting matches the appearance of code within the RStudio editor.
 
 You can customize highlighting behavior using the `highlight` and `highlight_downlit` options. For example, to use the Pandoc "haddock" highlighting theme and disable the use of downlit, you would do this:
 
@@ -256,9 +256,17 @@ output:
 ---
 ```
 
-You can see a preview of available Pandoc highlighting themes here: <https://www.garrickadenbuie.com/blog/pandoc-syntax-highlighting-examples/> (note that dark themes won't work well with Distill articles!).
+Available options for `highlight` include:
 
-You can also create a custom highlighting theme file ([as described here](https://pandoc.org/MANUAL.html#syntax-highlighting)) and provide the path to that file as the `highlight` option.
++------------------------------------------------------+----------------------------------------------------------------------------------------------------------+
+| Option(s)                                            | Description                                                                                              |
++======================================================+==========================================================================================================+
+| `default`                                            | RStudio editor theme                                                                                     |
++------------------------------------------------------+----------------------------------------------------------------------------------------------------------+
+| `haddock`, `kate`, `monochrome`, `pygments`, `tango` | Pandoc highlighting [themes](https://www.garrickadenbuie.com/blog/pandoc-syntax-highlighting-examples/). |
++------------------------------------------------------+----------------------------------------------------------------------------------------------------------+
+| Path to `.theme` file                                | Custom Pandoc [theme file](https://pandoc.org/MANUAL.html#syntax-highlighting).                          |
++------------------------------------------------------+----------------------------------------------------------------------------------------------------------+
 
 ## Appendices
 
