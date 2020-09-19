@@ -269,7 +269,9 @@ distill_highlighting_args <- function(highlight) {
   #
   # To create the theme we started with pandoc --print-highlight-style haddock
   # (since that was the closest pandoc them to textmate) then made
-  # changes as required for consistency w/ textmate.
+  # the following changes to create the RStudio textmate version:
+  #
+  #  https://github.com/rstudio/distill/compare/02b241083b8ca5cda90954c6c37e9f11bf830b2c...13fb0f6b34e9d04df0bd24a02980e29105a8f68d#diff-f088084fe658ee281215b486b2f18dab
   #
   # all available pandoc highlighting tokens are enumerated here:
   #
