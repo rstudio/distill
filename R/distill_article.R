@@ -324,12 +324,18 @@ knit_hooks <- function(downlit) {
   if (downlit) {
     hooks$source <- function(x, options) {
       if (options$engine == "R") {
-        x <- paste0(x, "\n", collapse = "")
-        x <- paste0("<div class=\"sourceCode\"><pre><code>",
-                    highlight(x, classes_pandoc(), pre_class = NULL),
-                    "</code></pre></div>")
-        x <- paste0(x, "\n")
-        x
+        code <- highlight(paste0(x, "\n", collapse = ""),
+                          classes_pandoc(),
+                          pre_class = NULL)
+        if (is.na(code)) {
+          default_source_hook(x, options)
+        } else {
+          x <- paste0("<div class=\"sourceCode\"><pre><code>",
+                      code,
+                      "</code></pre></div>")
+          x <- paste0(x, "\n")
+          x
+        }
       } else {
         default_source_hook(x, options)
       }
