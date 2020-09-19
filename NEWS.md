@@ -2,7 +2,9 @@
 
 -   Add site search feature using [Fuse.js](https://github.com/krisk/Fuse) (enabled by default for blog sites). Can be explicitly enabled or disabled for any site using the `search` field in the `navbar` key of `_site.yml`.
 
--   Use pandoc rather than distill framework for bibliography generation. Provides support for `csl`, `nocite`, and `link-citations`, as well as the use of multiple bibliographies (including non-BibTeX ones). Eliminates distill framework provided mouse-over citation display, but users seem to value the Pandoc features more than this one.
+-   Provide navbar link to website source code when `source_url` is provided in the `navbar` key of `_site.yml`.
+
+-   Use pandoc rather than distill for bibliography generation. Provides support for `csl`, `nocite`, and `link-citations`, as well as the use of multiple bibliographies (including non-BibTeX ones). Eliminates distill provided mouse-over citation display, but users seem to value the Pandoc features more than this one.
 
 -   Use pandoc rather than distill for code output (syntax highlighting themes can be customized using the `highlight` option).
 
@@ -10,9 +12,7 @@
 
 -   Provide heading anchor links in left margin on hover.
 
--   Provide navbar link to website source code when `repository_url` is provided in `_site.yml`.
-
--   Display article table of contents in the left sidebar. This is done only when the browser is wide enough, otherwise it's shown at the top.
+-   Display article table of contents in the left sidebar. This is done only when the browser \>= 1000 pixels wide, otherwise it's shown at the top.
 
 -   Various improvements to category display, including showing categories on article pages and within individual article listings, adding a special "articles" category at the top that shows all articles, and display of the active category when a category filter is applied to a listing.
 
