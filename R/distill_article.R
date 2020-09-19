@@ -35,7 +35,7 @@ distill_article <- function(toc = FALSE,
                           smart = TRUE,
                           self_contained = TRUE,
                           highlight = "default",
-                          highlight_downlit = FALSE,
+                          highlight_downlit = TRUE,
                           mathjax = "default",
                           extra_dependencies = NULL,
                           css = NULL,
@@ -61,6 +61,10 @@ distill_article <- function(toc = FALSE,
     default = pandoc_path_arg(distill_resource("highlight.theme")))
   )
 
+  # turn off downlit if there is no highlighting at all
+  if (is.null(highlight))
+    highlight_downlit <- FALSE
+
   # add template
   args <- c(args, "--template",
             pandoc_path_arg(distill_resource("default.html")))
@@ -83,10 +87,7 @@ distill_article <- function(toc = FALSE,
   knitr_options$opts_knit$bookdown.internal.label <- TRUE
   knitr_options$opts_hooks <- list()
   knitr_options$opts_hooks$preview <- knitr_preview_hook
-  knitr_options$knit_hooks <- list()
-  knitr_options$knit_hooks$chunk <- knitr_chunk_hook()
-  if (!is.null(highlight) && highlight_downlit)
-    knitr_options$knit_hooks$source <- knitr_source_hook()
+  knitr_options$knit_hooks <- knit_hooks(downlit = highlight_downlit)
 
   # shared variables
   site_config <- NULL
@@ -261,65 +262,61 @@ distill_article <- function(toc = FALSE,
   )
 }
 
-
 knitr_preview_hook <- function(options) {
   if (isTRUE(options$preview))
     options$out.extra <- c(options$out.extra, "data-distill-preview=1")
   options
 }
 
-# hook to highlight R code with downlit
-knitr_source_hook <- function() {
+knit_hooks <- function(downlit) {
 
-  # capture the default source hook
-  previous_hooks <- knitr::knit_hooks$get()
-  on.exit(knitr::knit_hooks$restore(previous_hooks), add = TRUE)
-  knitr::render_markdown()
-  default_source_hook <- knitr::knit_hooks$get("source")
-
-  function(x, options) {
-    if (options$engine == "R") {
-      x <- paste0(x, "\n", collapse = "")
-      x <- paste0("<div class=\"sourceCode\"><pre><code>",
-                  highlight(x, classes_pandoc(), pre_class = NULL),
-                  "</code></pre></div>")
-      x <- paste0(x, "\n")
-      x
-    } else {
-      default_source_hook(x, options)
-    }
-  }
-}
-
-# hook to enclose output in div with layout class
-knitr_chunk_hook <- function() {
-
-  # capture the default chunk hook
+  # capture the default chunk and source hooks
   previous_hooks <- knitr::knit_hooks$get()
   on.exit(knitr::knit_hooks$restore(previous_hooks), add = TRUE)
   knitr::render_markdown()
   default_chunk_hook <- knitr::knit_hooks$get("chunk")
+  default_source_hook <- knitr::knit_hooks$get("source")
 
-  # hook
-  function(x, options) {
+  # apply chunk hook
+  hooks <- list(
+    chunk = function(x, options) {
+      # apply default layout
+      if (is.null(options$layout))
+        options$layout <- "l-body"
 
-    # apply default layout
-    if (is.null(options$layout))
-      options$layout <- "l-body"
+      # apply default hook and determine padding
+      output <- default_chunk_hook(x, options)
+      pad_chars <- nchar(output) - nchar(sub("^ +", "", output))
+      padding <- paste(rep(' ', pad_chars), collapse = '')
 
-    # apply default hook and determine padding
-    output <- default_chunk_hook(x, options)
-    pad_chars <- nchar(output) - nchar(sub("^ +", "", output))
-    padding <- paste(rep(' ', pad_chars), collapse = '')
+      # enclose default output in div (with appropriate padding)
+      paste0(
+        padding, '<div class="layout-chunk" data-layout="', options$layout, '">\n',
+        output, '\n',
+        padding, '\n',
+        padding, '</div>\n'
+      )
+    }
+  )
 
-    # enclose default output in div (with appropriate padding)
-    paste0(
-      padding, '<div class="layout-chunk" data-layout="', options$layout, '">\n',
-      output, '\n',
-      padding, '\n',
-      padding, '</div>\n'
-    )
+  # apply source hook if downlit is enabled
+  if (downlit) {
+    hooks$source <- function(x, options) {
+      if (options$engine == "R") {
+        x <- paste0(x, "\n", collapse = "")
+        x <- paste0("<div class=\"sourceCode\"><pre><code>",
+                    highlight(x, classes_pandoc(), pre_class = NULL),
+                    "</code></pre></div>")
+        x <- paste0(x, "\n")
+        x
+      } else {
+        default_source_hook(x, options)
+      }
+    }
   }
+
+  # return hooks
+  hooks
 }
 
 
