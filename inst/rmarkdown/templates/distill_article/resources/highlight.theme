@@ -39,6 +39,13 @@
             "italic": false,
             "underline": false
         },
+        "Float": {
+            "text-color": "#0000cd",
+            "background-color": null,
+            "bold": false,
+            "italic": false,
+            "underline": false
+        },
         "ControlFlow": {
             "text-color": "#0000ff",
             "background-color": null,
@@ -47,7 +54,7 @@
             "underline": false
         },
         "Operator": {
-            "text-color": null,
+            "text-color": "#687687",
             "background-color": null,
             "bold": false,
             "italic": false,
@@ -152,7 +159,7 @@
             "underline": false
         },
         "Constant": {
-            "text-color": null,
+            "text-color": "#585cf6",
             "background-color": null,
             "bold": false,
             "italic": false,

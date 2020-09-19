@@ -56,10 +56,7 @@ distill_article <- function(toc = FALSE,
   args <- c(args, pandoc_toc_args(toc, toc_depth))
 
   # add highlighting
-  args <- c(args, pandoc_highlight_args(
-    highlight,
-    default = pandoc_path_arg(distill_resource("highlight.theme")))
-  )
+  args <- c(args, distill_highlighting_args(highlight))
 
   # turn off downlit if there is no highlighting at all
   if (is.null(highlight))
@@ -260,6 +257,28 @@ distill_article <- function(toc = FALSE,
       ...
     )
   )
+}
+
+distill_highlighting_args <- function(highlight) {
+
+  # The default highlighting is a custom pandoc theme intended to
+  # emulate the RStudio default 'textmate' theme. It's in a JSON
+  # theme file as described here:
+  #
+  #   https://pandoc.org/MANUAL.html#syntax-highlighting
+  #
+  # To create the theme we started with pandoc --print-highlight-style haddock
+  # (since that was the closest pandoc them to textmate) then made
+  # changes as required for consistency w/ textmate.
+  #
+  # all available pandoc highlighting tokens are enumerated here:
+  #
+  #   https://github.com/jgm/skylighting/blob/a1d02a0db6260c73aaf04aae2e6e18b569caacdc/skylighting-core/src/Skylighting/Format/HTML.hs#L117-L147
+  #
+  default = pandoc_path_arg(distill_resource("highlight.theme"))
+
+  # yield highlight args
+  pandoc_highlight_args(highlight, default)
 }
 
 knitr_preview_hook <- function(options) {
