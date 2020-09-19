@@ -18,6 +18,69 @@
  <!--radix_placeholder_import_source-->
  <!--/radix_placeholder_import_source-->
 
+<style type="text/css">code{white-space: pre;}</style>
+<style type="text/css" data-origin="pandoc">
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    color: #aaaaaa;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+code span.al { color: #ff0000; } /* Alert */
+code span.an { color: #008000; } /* Annotation */
+code span.at { } /* Attribute */
+code span.bu { } /* BuiltIn */
+code span.cf { color: #0000ff; } /* ControlFlow */
+code span.ch { color: #008080; } /* Char */
+code span.cn { color: #585cf6; } /* Constant */
+code span.co { color: #4c886b; } /* Comment */
+code span.cv { color: #008000; } /* CommentVar */
+code span.do { color: #008000; } /* Documentation */
+code span.dv { color: #0000cd; } /* DecVal */
+code span.er { color: #ff0000; font-weight: bold; } /* Error */
+code span.ex { } /* Extension */
+code span.fl { color: #0000cd; } /* Float */
+code span.im { } /* Import */
+code span.in { color: #008000; } /* Information */
+code span.kw { color: #0000ff; } /* Keyword */
+code span.op { color: #687687; } /* Operator */
+code span.ot { color: #ff4000; } /* Other */
+code span.pp { color: #ff4000; } /* Preprocessor */
+code span.sc { color: #008080; } /* SpecialChar */
+code span.ss { color: #008080; } /* SpecialString */
+code span.st { color: #036a07; } /* String */
+code span.va { } /* Variable */
+code span.vs { color: #008080; } /* VerbatimString */
+code span.wa { color: #008000; font-weight: bold; } /* Warning */
+</style>
+
   <!--radix_placeholder_meta_tags-->
   <title>Distill for R Markdown: Blog Post Workflow</title>
 
@@ -764,6 +827,79 @@
     width: 100%;
   }
 
+  /* Tweak code blocks */
+
+  d-article div.sourceCode code,
+  d-article pre code {
+    font-family: Consolas, Monaco, 'Andale Mono', 'Ubuntu Mono', monospace;
+  }
+
+  d-article pre,
+  d-article div.sourceCode,
+  d-article div.sourceCode pre {
+    overflow: hidden;
+  }
+
+  d-article div.sourceCode {
+    background-color: white;
+  }
+
+  d-article div.sourceCode pre {
+    padding-left: 10px;
+    font-size: 12px;
+    border-left: 2px solid rgba(0,0,0,0.1);
+  }
+
+  d-article pre {
+    font-size: 12px;
+    color: black;
+    background: none;
+    margin-top: 0;
+    text-align: left;
+    white-space: pre;
+    word-spacing: normal;
+    word-break: normal;
+    word-wrap: normal;
+    line-height: 1.5;
+
+    -moz-tab-size: 4;
+    -o-tab-size: 4;
+    tab-size: 4;
+
+    -webkit-hyphens: none;
+    -moz-hyphens: none;
+    -ms-hyphens: none;
+    hyphens: none;
+  }
+
+  d-article pre a {
+    border-bottom: none;
+  }
+
+  d-article pre a:hover {
+    border-bottom: none;
+    text-decoration: underline;
+  }
+
+  @media(min-width: 768px) {
+
+  d-article pre,
+  d-article div.sourceCode,
+  d-article div.sourceCode pre {
+    overflow: visible !important;
+  }
+
+  d-article div.sourceCode pre {
+    padding-left: 18px;
+    font-size: 14px;
+  }
+
+  d-article pre {
+    font-size: 14px;
+  }
+
+  }
+
   figure img.external {
     background: white;
     border: 1px solid rgba(0, 0, 0, 0.1);
@@ -853,56 +989,6 @@
     margin-top: 0;
   }
 
-  /* Tweak code blocks (note that this CSS is repeated above in an injection
-     into the d-code shadow dom) */
-
-  d-code {
-    overflow-x: auto !important;
-  }
-
-  pre.d-code code.d-code {
-    padding-left: 10px;
-    font-size: 12px;
-    border-left: 2px solid rgba(0,0,0,0.1);
-  }
-
-  pre.text-output {
-
-    font-size: 12px;
-    color: black;
-    background: none;
-    font-family: Consolas, Monaco, 'Andale Mono', 'Ubuntu Mono', monospace;
-    text-align: left;
-    white-space: pre;
-    word-spacing: normal;
-    word-break: normal;
-    word-wrap: normal;
-    line-height: 1.5;
-
-    -moz-tab-size: 4;
-    -o-tab-size: 4;
-    tab-size: 4;
-
-    -webkit-hyphens: none;
-    -moz-hyphens: none;
-    -ms-hyphens: none;
-    hyphens: none;
-  }
-
-  @media(min-width: 768px) {
-
-  d-code {
-    overflow-x: visible !important;
-  }
-
-  pre.d-code code.d-code  {
-      padding-left: 18px;
-      font-size: 14px;
-  }
-  pre.text-output {
-    font-size: 14px;
-  }
-  }
 
   /* Figure */
 
@@ -1326,27 +1412,6 @@
     // show d-appendix if we have appendix content
     $("d-appendix").css('display', appendix ? 'grid' : 'none');
 
-    // replace code blocks with d-code
-    $('pre>code').each(function(i, val) {
-      var code = $(this);
-      var pre = code.parent();
-      var clz = "";
-      var language = pre.attr('class');
-      if (language) {
-        // map unknown languages to "clike" (without this they just dissapear)
-        if ($.inArray(language, ["bash", "clike", "css", "go", "html",
-                                 "javascript", "js", "julia", "lua", "markdown",
-                                 "markup", "mathml", "python", "svg", "xml"]) == -1)
-          language = "clike";
-        language = ' language="' + language + '"';
-        var dt_code = $('<d-code block' + language + clz + '></d-code>');
-        dt_code.text(code.text());
-        pre.replaceWith(dt_code);
-      } else {
-        code.addClass('text-output').unwrap().changeElementType('pre');
-      }
-    });
-
     // localize layout chunks to just output
     $('.layout-chunk').each(function(i, val) {
 
@@ -1354,7 +1419,7 @@
       var layout = $(this).attr('data-layout');
 
       // apply layout to markdown level block elements
-      var elements = $(this).children().not('d-code, pre.text-output, script');
+      var elements = $(this).children().not('div.sourceCode, pre, script');
       elements.each(function(i, el) {
         var layout_div = $('<div class="' + layout + '"></div>');
         if (layout_div.hasClass('shaded')) {
@@ -1454,15 +1519,6 @@
         grid.children('h3:contains("Authors")').text('Author');
         grid.children('h3:contains("Affiliations")').text('Affiliation');
       }
-
-      // inject pre code styles (can't do this with a global stylesheet b/c a shadow root is used)
-      $('d-code').each(function(i, val) {
-        var style = document.createElement('style');
-        style.innerHTML = 'pre code { padding-left: 10px; font-size: 12px; border-left: 2px solid rgba(0,0,0,0.1); } ' +
-                          '@media(min-width: 768px) { pre code { padding-left: 18px; font-size: 14px; } }';
-        if (this.shadowRoot)
-          this.shadowRoot.appendChild(style);
-      });
 
       // move appendix-bottom entries to the bottom
       $('.appendix-bottom').appendTo('d-appendix').children().unwrap();
@@ -1627,7 +1683,7 @@
   </script>
 
   <!--/radix_placeholder_distill-->
-  <script src="site_libs/header-attrs-2.3.5/header-attrs.js"></script>
+  <script src="site_libs/header-attrs-2.3.8/header-attrs.js"></script>
   <script src="site_libs/jquery-1.11.3/jquery.min.js"></script>
   <script src="site_libs/anchor-4.2.2/anchor.min.js"></script>
   <script src="site_libs/bowser-1.9.3/bowser.min.js"></script>
@@ -1787,8 +1843,7 @@ Publishing
 </ol>
 <h3 id="draft-option">Draft option</h3>
 <p>If you want to work on a post for a period of time without having it be added to the listing page, add <code>draft: true</code> to the post’s metadata. For example:</p>
-<pre class="markup"><code>
----
+<pre class="markup"><code>---
 title: &quot;The Sharpe Ratio&quot;
 description: |
   In this post we present a classic finance use case using the
@@ -1828,36 +1883,29 @@ draft: true
 <p>Note that with this workflow your name won’t be guessed based on previous posts.</p>
 <h3 id="importing-a-post">Importing a post</h3>
 <p>You can import a post using the <code>import_post()</code> function, passing the URL where the post is published to. For example:</p>
-<pre class="r"><code>
-import_post(&quot;https://rpubs.com/jjallaire/visualizing-asset-returns&quot;)
-import_post(&quot;https://example.com/visualizing-asset-returns.html&quot;)</code></pre>
+<div class="sourceCode" id="cb2"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true"></a><span class="kw">import_post</span>(<span class="st">&quot;https://rpubs.com/jjallaire/visualizing-asset-returns&quot;</span>)</span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true"></a><span class="kw">import_post</span>(<span class="st">&quot;https://example.com/visualizing-asset-returns.html&quot;</span>)</span></code></pre></div>
 <p>You can also import a post from a GitHub repository. For example:</p>
-<pre class="r"><code>
-import_post(&quot;https://github.com/jjallaire/distill-article&quot;)</code></pre>
+<div class="sourceCode" id="cb3"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true"></a><span class="kw">import_post</span>(<span class="st">&quot;https://github.com/jjallaire/distill-article&quot;</span>)</span></code></pre></div>
 <p>Note that importing a post does not require the original R Markdown document used to author the post—you only need access to the published HTML of a post to import it.</p>
 <h4 id="post-dates">Post dates</h4>
 <p>When you import a post, the date for the post will be automatically set to the current day (the idea being that whenever the post was authored, the day you import it is the day it’s been published to your blog). You can modify this behavior using the <code>date</code> parameter. For example:</p>
-<pre class="r"><code>
-import_post(&quot;https://github.com/jjallaire/distill-article&quot;, 
-            date = as.Date(&quot;2017-07-12&quot;))</code></pre>
+<div class="sourceCode" id="cb4"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true"></a><span class="kw">import_post</span>(<span class="st">&quot;https://github.com/jjallaire/distill-article&quot;</span>, </span>
+<span id="cb4-2"><a href="#cb4-2" aria-hidden="true"></a>            <span class="dt">date =</span> <span class="kw">as.Date</span>(<span class="st">&quot;2017-07-12&quot;</span>))</span></code></pre></div>
 <h4 id="post-slugs">Post slugs</h4>
 <p>The “slug” for a post determines the URL for the post within your blog. By default, slugs are automatically computed using the date and title of the post. For example, the slug for the example just above would have been <code>2017-07-12-distill-article</code>.</p>
 <p>You can also override the automatically generated slug entirely using the <code>slug</code> parameter. For example:</p>
-<pre class="r"><code>
-import_post(&quot;https://github.com/jjallaire/distill-article&quot;, 
-            slug = &quot;an-article-about-distill&quot;)</code></pre>
+<div class="sourceCode" id="cb5"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true"></a><span class="kw">import_post</span>(<span class="st">&quot;https://github.com/jjallaire/distill-article&quot;</span>, </span>
+<span id="cb5-2"><a href="#cb5-2" aria-hidden="true"></a>            <span class="dt">slug =</span> <span class="st">&quot;an-article-about-distill&quot;</span>)</span></code></pre></div>
 <h3 id="updating-posts">Updating posts</h3>
 <p>If a post that you have imported is subsequently modified and you want to synchronize to the changes, you can use the <code>update_post()</code> post function. For example:</p>
-<pre class="r"><code>
-update_post(&quot;_posts/2018-07-09-distill-article&quot;)</code></pre>
+<div class="sourceCode" id="cb6"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true"></a><span class="kw">update_post</span>(<span class="st">&quot;_posts/2018-07-09-distill-article&quot;</span>)</span></code></pre></div>
 <p>You can also just use the post slug (rather than including the <code>_posts</code> directory prefix):</p>
-<pre class="r"><code>
-update_post(&quot;2018-07-09-distill-article&quot;)</code></pre>
+<div class="sourceCode" id="cb7"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true"></a><span class="kw">update_post</span>(<span class="st">&quot;2018-07-09-distill-article&quot;</span>)</span></code></pre></div>
 <h3 id="creative-commons">Creative Commons</h3>
 <p>The Distill tools for importing posts make it very easy to aggregate posts published elsewhere on the web into your blog. Note however that you need to ensure that you have appropriate permission to re-publish these posts!</p>
 <p>To facilitate this, Distill will scan any imported post for <a href="https://creativecommons.org/licenses/">Creative Commons</a> copyright metadata, and in the case that none is found confirm that you still want to import the post. Consequently, you should ask that authors writing posts for your blog always include the <code>creative_commons</code> field in their post metadata. For example:</p>
-<pre class="markup"><code>
----
+<pre class="markup"><code>---
 title: &quot;Distill for R Markdown&quot;
 description: | 
   Scientific and technical writing, native to the web
@@ -1870,8 +1918,7 @@ creative_commons: CC BY
 <p>When you specify a <code>creative_commons</code> license for a blog post you make it easier for others to re-publish your post, giving you a broader audience for your work. In this case you may also want to ensure that the original URL where your post appeared be the one that appears in search engine results.</p>
 <p>To facilitate this, Distill automatically specifies a <a href="https://en.wikipedia.org/wiki/Canonical_link_element">canonical url</a> for posts published within a blog. That way, when a post is imported into another blog, search indexes still point back to the original article.</p>
 <p>If you prefer to disable this behavior, you can add <code>canonical: false</code> to your blog’s configuration in <code>_site.yml</code>. For example:</p>
-<pre class="markup"><code>
-name: &quot;reproducible-finance-with-r&quot;
+<pre class="markup"><code>name: &quot;reproducible-finance-with-r&quot;
 title: &quot;Reproducible Finance with R&quot;
 description: |
   Exploring reproducible finance with the R statistical 
@@ -1881,8 +1928,7 @@ collections:
   posts:
     canonical: false</code></pre>
 <p>While canonical URLs are provided automatically for blog posts, they aren’t for standalone articles. You can explicitly provide a canonical URL for a standalone article using the <code>canonical_url</code> metadata field:</p>
-<pre class="markup"><code>
----
+<pre class="markup"><code>---
 title: &quot;Distill for R Markdown&quot;
 description: | 
   Scientific and technical writing, native to the web

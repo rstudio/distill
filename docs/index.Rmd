@@ -21,7 +21,7 @@ bibliography: biblio.bib
 link-citations: true
 output:
   distill::distill_article:
-    toc: false
+    toc: true
 site: distill::distill_website
 ---
 

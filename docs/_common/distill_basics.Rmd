@@ -192,7 +192,7 @@ If the table of contents depth is not explicitly specified, it defaults to 3 (me
 
 ## Code blocks
 
-Syntax highlighting is provided for knitr code chunks. Note that by default the Distill format does not display the code for chunks that are evaluated to produce output (knitr option `echo = FALSE`).
+By default the Distill format does not display the code for chunks that are evaluated to produce output (knitr option `echo = FALSE`).
 
 The `echo = FALSE` default reflects the fact that Distill articles are often used to present the results of analyses rather than the underlying code. To display the code that was evaluated to produce output you can set the `echo` chunk option to `TRUE`:
 
@@ -237,6 +237,28 @@ knitr::opts_chunk$set(
 )
 ```
 ````
+
+## Syntax highlighting
+
+Syntax highlighting for R code is done using the [downlit](https://downlit.r-lib.org) package, which provides automatic linking of R functions to their online documentation. The default highlighting theme matches the appearance of code within RStudio's default theme.
+
+You can customize highlighting behavior using the `highlight` and `highlight_downlit` options. For example, to use the Pandoc "haddock" highlighting theme and disable the use of downlit, you would do this:
+
+``` {.markup}
+---
+title: "Distill for R Markdown"
+description: | 
+  Scientific and technical writing, native to the web
+output:
+  distill::distill_article:
+    highlight: haddock
+    highlight_downlit: false
+---
+```
+
+You can see a preview of available Pandoc highlighting themes here: <https://www.garrickadenbuie.com/blog/pandoc-syntax-highlighting-examples/> (note that dark themes won't work well with Distill articles!).
+
+You can also create a custom highlighting theme file ([as described here](https://pandoc.org/MANUAL.html#syntax-highlighting)) and provide the path to that file as the `highlight` option.
 
 ## Appendices
 

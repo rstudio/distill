@@ -18,6 +18,69 @@
  <!--radix_placeholder_import_source-->
  <!--/radix_placeholder_import_source-->
 
+<style type="text/css">code{white-space: pre;}</style>
+<style type="text/css" data-origin="pandoc">
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    color: #aaaaaa;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+code span.al { color: #ff0000; } /* Alert */
+code span.an { color: #008000; } /* Annotation */
+code span.at { } /* Attribute */
+code span.bu { } /* BuiltIn */
+code span.cf { color: #0000ff; } /* ControlFlow */
+code span.ch { color: #008080; } /* Char */
+code span.cn { color: #585cf6; } /* Constant */
+code span.co { color: #4c886b; } /* Comment */
+code span.cv { color: #008000; } /* CommentVar */
+code span.do { color: #008000; } /* Documentation */
+code span.dv { color: #0000cd; } /* DecVal */
+code span.er { color: #ff0000; font-weight: bold; } /* Error */
+code span.ex { } /* Extension */
+code span.fl { color: #0000cd; } /* Float */
+code span.im { } /* Import */
+code span.in { color: #008000; } /* Information */
+code span.kw { color: #0000ff; } /* Keyword */
+code span.op { color: #687687; } /* Operator */
+code span.ot { color: #ff4000; } /* Other */
+code span.pp { color: #ff4000; } /* Preprocessor */
+code span.sc { color: #008080; } /* SpecialChar */
+code span.ss { color: #008080; } /* SpecialString */
+code span.st { color: #036a07; } /* String */
+code span.va { } /* Variable */
+code span.vs { color: #008080; } /* VerbatimString */
+code span.wa { color: #008000; font-weight: bold; } /* Warning */
+</style>
+
   <!--radix_placeholder_meta_tags-->
   <title>Distill for R Markdown: Creating a Blog</title>
 
@@ -764,6 +827,79 @@
     width: 100%;
   }
 
+  /* Tweak code blocks */
+
+  d-article div.sourceCode code,
+  d-article pre code {
+    font-family: Consolas, Monaco, 'Andale Mono', 'Ubuntu Mono', monospace;
+  }
+
+  d-article pre,
+  d-article div.sourceCode,
+  d-article div.sourceCode pre {
+    overflow: hidden;
+  }
+
+  d-article div.sourceCode {
+    background-color: white;
+  }
+
+  d-article div.sourceCode pre {
+    padding-left: 10px;
+    font-size: 12px;
+    border-left: 2px solid rgba(0,0,0,0.1);
+  }
+
+  d-article pre {
+    font-size: 12px;
+    color: black;
+    background: none;
+    margin-top: 0;
+    text-align: left;
+    white-space: pre;
+    word-spacing: normal;
+    word-break: normal;
+    word-wrap: normal;
+    line-height: 1.5;
+
+    -moz-tab-size: 4;
+    -o-tab-size: 4;
+    tab-size: 4;
+
+    -webkit-hyphens: none;
+    -moz-hyphens: none;
+    -ms-hyphens: none;
+    hyphens: none;
+  }
+
+  d-article pre a {
+    border-bottom: none;
+  }
+
+  d-article pre a:hover {
+    border-bottom: none;
+    text-decoration: underline;
+  }
+
+  @media(min-width: 768px) {
+
+  d-article pre,
+  d-article div.sourceCode,
+  d-article div.sourceCode pre {
+    overflow: visible !important;
+  }
+
+  d-article div.sourceCode pre {
+    padding-left: 18px;
+    font-size: 14px;
+  }
+
+  d-article pre {
+    font-size: 14px;
+  }
+
+  }
+
   figure img.external {
     background: white;
     border: 1px solid rgba(0, 0, 0, 0.1);
@@ -853,56 +989,6 @@
     margin-top: 0;
   }
 
-  /* Tweak code blocks (note that this CSS is repeated above in an injection
-     into the d-code shadow dom) */
-
-  d-code {
-    overflow-x: auto !important;
-  }
-
-  pre.d-code code.d-code {
-    padding-left: 10px;
-    font-size: 12px;
-    border-left: 2px solid rgba(0,0,0,0.1);
-  }
-
-  pre.text-output {
-
-    font-size: 12px;
-    color: black;
-    background: none;
-    font-family: Consolas, Monaco, 'Andale Mono', 'Ubuntu Mono', monospace;
-    text-align: left;
-    white-space: pre;
-    word-spacing: normal;
-    word-break: normal;
-    word-wrap: normal;
-    line-height: 1.5;
-
-    -moz-tab-size: 4;
-    -o-tab-size: 4;
-    tab-size: 4;
-
-    -webkit-hyphens: none;
-    -moz-hyphens: none;
-    -ms-hyphens: none;
-    hyphens: none;
-  }
-
-  @media(min-width: 768px) {
-
-  d-code {
-    overflow-x: visible !important;
-  }
-
-  pre.d-code code.d-code  {
-      padding-left: 18px;
-      font-size: 14px;
-  }
-  pre.text-output {
-    font-size: 14px;
-  }
-  }
 
   /* Figure */
 
@@ -1326,27 +1412,6 @@
     // show d-appendix if we have appendix content
     $("d-appendix").css('display', appendix ? 'grid' : 'none');
 
-    // replace code blocks with d-code
-    $('pre>code').each(function(i, val) {
-      var code = $(this);
-      var pre = code.parent();
-      var clz = "";
-      var language = pre.attr('class');
-      if (language) {
-        // map unknown languages to "clike" (without this they just dissapear)
-        if ($.inArray(language, ["bash", "clike", "css", "go", "html",
-                                 "javascript", "js", "julia", "lua", "markdown",
-                                 "markup", "mathml", "python", "svg", "xml"]) == -1)
-          language = "clike";
-        language = ' language="' + language + '"';
-        var dt_code = $('<d-code block' + language + clz + '></d-code>');
-        dt_code.text(code.text());
-        pre.replaceWith(dt_code);
-      } else {
-        code.addClass('text-output').unwrap().changeElementType('pre');
-      }
-    });
-
     // localize layout chunks to just output
     $('.layout-chunk').each(function(i, val) {
 
@@ -1354,7 +1419,7 @@
       var layout = $(this).attr('data-layout');
 
       // apply layout to markdown level block elements
-      var elements = $(this).children().not('d-code, pre.text-output, script');
+      var elements = $(this).children().not('div.sourceCode, pre, script');
       elements.each(function(i, el) {
         var layout_div = $('<div class="' + layout + '"></div>');
         if (layout_div.hasClass('shaded')) {
@@ -1454,15 +1519,6 @@
         grid.children('h3:contains("Authors")').text('Author');
         grid.children('h3:contains("Affiliations")').text('Affiliation');
       }
-
-      // inject pre code styles (can't do this with a global stylesheet b/c a shadow root is used)
-      $('d-code').each(function(i, val) {
-        var style = document.createElement('style');
-        style.innerHTML = 'pre code { padding-left: 10px; font-size: 12px; border-left: 2px solid rgba(0,0,0,0.1); } ' +
-                          '@media(min-width: 768px) { pre code { padding-left: 18px; font-size: 14px; } }';
-        if (this.shadowRoot)
-          this.shadowRoot.appendChild(style);
-      });
 
       // move appendix-bottom entries to the bottom
       $('.appendix-bottom').appendTo('d-appendix').children().unwrap();
@@ -1627,7 +1683,7 @@
   </script>
 
   <!--/radix_placeholder_distill-->
-  <script src="site_libs/header-attrs-2.3.5/header-attrs.js"></script>
+  <script src="site_libs/header-attrs-2.3.8/header-attrs.js"></script>
   <script src="site_libs/jquery-1.11.3/jquery.min.js"></script>
   <script src="site_libs/anchor-4.2.2/anchor.min.js"></script>
   <script src="site_libs/bowser-1.9.3/bowser.min.js"></script>
@@ -1814,9 +1870,8 @@ Publishing
 </table>
 <p>Note that the <code>welcome</code> post is just there to provide some skeletal content for the blog – feel free to delete it and add your own initial post to the blog as described in <a href="#creating-a-post">creating a post</a>.</p>
 <p>If you are not using RStudio you can also call the Distill <code>create_blog()</code> function:</p>
-<pre class="r"><code>
-library(distill)
-create_blog(dir = &quot;my-blog&quot;, title = &quot;My Blog&quot;)</code></pre>
+<div class="sourceCode" id="cb1"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true"></a><span class="kw">library</span>(distill)</span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true"></a><span class="kw">create_blog</span>(<span class="dt">dir =</span> <span class="st">&quot;my-blog&quot;</span>, <span class="dt">title =</span> <span class="st">&quot;My Blog&quot;</span>)</span></code></pre></div>
 <p>The basic scaffolding for a blog and an initial welcome post will be created within the <code>my-blog</code> sub-directory.</p>
 <h3 id="configuration">Configuration</h3>
 <p>After you’ve created the blog scaffolding, there are a couple of additional configuration items you’ll want to add to your <code>_site.yml</code> so that it’s easier to share content on the blog via RSS and social networks like Twitter:</p>
@@ -1826,8 +1881,7 @@ create_blog(dir = &quot;my-blog&quot;, title = &quot;My Blog&quot;)</code></pre>
 </ul>
 <p>For example:</p>
 <p><strong>_site.yml</strong></p>
-<pre class="markup"><code>
-name: &quot;reproducible-finance-with-r&quot;
+<pre class="markup"><code>name: &quot;reproducible-finance-with-r&quot;
 title: &quot;Reproducible Finance with R&quot;
 description: |
   Exploring reproducible finance with the R statistical 
@@ -1848,20 +1902,17 @@ output: distill::distill_article</code></pre>
 <p>Note that we’ve also added a feed icon to the right side of the menu bar which makes it easy to discover and browse the RSS feed for the blog.</p>
 <h3 id="creating-a-post">Creating a post</h3>
 <p>The easiest way to start authoring a new post is to call the <code>create_post()</code> function from within your blog’s directory. For example:</p>
-<pre class="r"><code>
-library(distill)
-create_post(&quot;The Sharpe Ratio&quot;)</code></pre>
+<div class="sourceCode" id="cb3"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true"></a><span class="kw">library</span>(distill)</span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true"></a><span class="kw">create_post</span>(<span class="st">&quot;The Sharpe Ratio&quot;</span>)</span></code></pre></div>
 <p>This will create a sub-directory for your post within the <code>_posts</code> directory, add a stub Distill article, and open the article for editing.</p>
 <p>If you want your post to start out as a draft (i.e. not be included within the listing of all posts) then you can add <code>draft = TRUE</code>. For example:</p>
-<pre class="r"><code>
-create_post(&quot;The Sharpe Ratio&quot;, draft = TRUE)</code></pre>
+<div class="sourceCode" id="cb4"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true"></a><span class="kw">create_post</span>(<span class="st">&quot;The Sharpe Ratio&quot;</span>, <span class="dt">draft =</span> <span class="ot">TRUE</span>)</span></code></pre></div>
 <p>You work on blog posts independent of the enclosing website (use <strong>Knit</strong> to render and preview the post just like any R Markdown document). This is in fact the only way to update post content — posts are considered standalone documents that are not re-rendered when the site is built. This is because posts are often expensive to render and have R package dependencies that may be difficult to satisfy as time goes on.</p>
 <p>In the next section will describe how to create a listing page for all of your posts.</p>
 <h3 id="listing-pages">Listing pages</h3>
 <p>Once you have authored one or more posts you’ll want to create a listing page. You can do this by adding a <code>listing</code> metadata entry to the page you to include the listing on. This is often the main page for the website (index.Rmd). For example:</p>
 <p><strong>index.Rmd</strong></p>
-<pre class="markup"><code>
----
+<pre class="markup"><code>---
 title: &quot;Reproducible Finance with R&quot;
 site: distill::distill_website
 listing: posts
@@ -1871,8 +1922,7 @@ listing: posts
 <h4 id="custom-listings">Custom listings</h4>
 <p>Above we demonstrated creating a listing page for all posts. You can also create a custom listing for a subset of posts (e.g. a gallery of featured posts). To do this, just enumerate the posts you want to include as follows:</p>
 <p><strong>gallery.Rmd</strong></p>
-<pre class="markup"><code>
----
+<pre class="markup"><code>---
 title: &quot;Gallery of featured posts&quot;
 listing:
   posts:
@@ -1882,8 +1932,7 @@ listing:
 ---</code></pre>
 <h4 id="categories">Categories</h4>
 <p>If your posts include <code>categories</code> metadata, then the page will also include categories within the article listing. For example, here is some post metadata that includes categories:</p>
-<pre class="markup"><code>
----
+<pre class="markup"><code>---
 title: &quot;The Sharpe Ratio&quot;
 # (additional metadata e.g. description and date, excluded for brevity)
 categories:
@@ -1893,8 +1942,7 @@ categories:
 <p><img src="images/site-listing-categories.png" class="screenshot" style="width:95.0%" /></p>
 <p>Categories are listed in the right-hand sidebar and are also displayed as metadata for each post. You can disable either of both category displays using <code>collection</code> properties defined in <code>_site.yml</code>. For example:</p>
 <p><strong>_site.yml</strong></p>
-<pre class="markup"><code>
-name: &quot;reproducible-finance-with-r&quot;
+<pre class="markup"><code>name: &quot;reproducible-finance-with-r&quot;
 title: &quot;Reproducible Finance with R&quot;
 description: |
   Exploring reproducible finance with the R statistical 
@@ -1907,8 +1955,7 @@ collections:
 <h3 id="rss-feeds">RSS feeds</h3>
 <p>When you create a listing page an <a href="https://en.wikipedia.org/wiki/RSS">RSS feed</a> is created automatically for the page (using the name of the listing page with a <code>.xml</code> file extension). You can link to the RSS feed within your site’s navigation bar as follows (some navbar entries excluded for brevity):</p>
 <p><strong>_site.yml</strong></p>
-<pre class="markup"><code>
-name: &quot;reproducible-finance-with-r&quot;
+<pre class="markup"><code>name: &quot;reproducible-finance-with-r&quot;
 title: &quot;Reproducible Finance with R&quot;
 description: |
   Exploring reproducible finance with the R statistical 
@@ -1922,8 +1969,7 @@ output: distill::distill_article</code></pre>
 <p>Note that the <code>description</code> and <code>base_url</code> fields are both required to generate an RSS feed.</p>
 <p>By default the most recent 20 articles will be included in the RSS feed. You can change this by specifying <code>feed_items_max</code> within the collection configuration in <code>_site.yml</code> (navbar and output format fields omitted for brevity):</p>
 <p><strong>_site.yml</strong></p>
-<pre class="markup"><code>
-name: &quot;reproducible-finance-with-r&quot;
+<pre class="markup"><code>name: &quot;reproducible-finance-with-r&quot;
 title: &quot;Reproducible Finance with R&quot;
 description: |
   Exploring reproducible finance with the R statistical 
@@ -1935,8 +1981,7 @@ collections:
 <p>Specify <code>feed_items_max: false</code> to have no limit on the number of items included in the feed.</p>
 <h3 id="post-drafts">Post drafts</h3>
 <p>If you want to work on a post for a period of time without having it be added to the listing page, add <code>draft: true</code> to the post’s metadata. For example:</p>
-<pre class="markup"><code>
----
+<pre class="markup"><code>---
 title: &quot;The Sharpe Ratio&quot;
 description: |
   In this post we present a classic finance use case using the
@@ -1952,8 +1997,7 @@ draft: true
 <p>Readers will likely want to comment on and share articles they read on your blog. You can enable support for <a href="https://disqus.com/">Disqus comments</a> and sharing links for Twitter, LinkedIn, and other services by adding options to the <code>collection:posts</code> section of <code>_site.yml</code>.</p>
 <p>For example, the following options provide the <a href="https://help.disqus.com/installation/whats-a-shortname">Disqus shortname</a> for a site and specify that we want sharing buttons for Twitter and LinkedIn.</p>
 <p><strong>_site.yml</strong></p>
-<pre class="markup"><code>
-name: &quot;reproducible-finance-with-r&quot;
+<pre class="markup"><code>name: &quot;reproducible-finance-with-r&quot;
 title: &quot;Reproducible Finance with R&quot;
 description: |
   Exploring reproducible finance with the R statistical 
@@ -1968,8 +2012,7 @@ collections:
 <p>Note that the <code>base_url</code> field is required in order to use Disqus and sharing links.</p>
 <p>Valid values for the <code>share</code> option are <code>twitter</code>, <code>linkedin</code>, <code>facebook</code>, <code>google-plus</code>, and <code>pinterest</code>.</p>
 <p>By default, the full text of Disqus comments are not displayed (rather, a link is provided that will expand the comment section). This is done so that a long comment section doesn’t obscure the bibliography and other appendices. If you’d rather show the comments by default you can use this alterante syntax for <code>disqus</code> configuration:</p>
-<pre class="markup"><code>
-collections:
+<pre class="markup"><code>collections:
   posts:
     disqus: 
       shortname: reproducible-finance-with-r
@@ -1978,8 +2021,7 @@ collections:
 <p>Specifying the <code>hidden: false</code> option for <code>disqus</code> will causes all comments to be displayed inline by default.</p>
 <h3 id="site-search">Site search</h3>
 <p>Blog sites automatically include a search box within the navigation bar. You can disable the search box using the the <code>search</code> field of the <code>navbar</code> key within <code>_site.yml</code>. For example:</p>
-<pre class="markup"><code>
----
+<pre class="markup"><code>---
 name: &quot;distill&quot;
 title: &quot;Distill for R Markdown&quot;
 navbar:
@@ -1991,8 +2033,7 @@ navbar:
 <p>Note that top level articles within blog sites will also be included in search results so long as they have a <code>description</code> metadata field.</p>
 <h3 id="source-code">Source code</h3>
 <p>If you want to display a link to the source code for your blog on the navigation bar, add a <code>source_url</code> field to the <code>navbar</code> definition. For example:</p>
-<pre class="markup"><code>
----
+<pre class="markup"><code>---
 name: &quot;distill&quot;
 title: &quot;Distill for R Markdown&quot;
 navbar:
@@ -2005,8 +2046,7 @@ navbar:
 <h3 id="organizing-posts">Organizing posts</h3>
 <p>You can use whatever scheme you like to organize the <code>_posts</code> directory. You can have all posts at the top level or you can create subdirectories to create groupings of posts.</p>
 <p>One popular scheme for organizing blog posts is to use a date prefix for the post directory names. For example:</p>
-<pre class="markup"><code>
-_posts/
+<pre class="markup"><code>_posts/
   2017-11-09-visualizing-asset-returns/
   2017-09-13-asset-volatility/
   2017-03-07-quandl-and-forecasting/
@@ -2015,15 +2055,13 @@ _posts/
 <p>Note that if you use a date-prefixed post directory you are not required to specify an explicit <code>date</code> field within your post’s metadata.</p>
 <h3 id="preview-images">Preview images</h3>
 <p>Note that the listing for our example above includes a preview image for each post. Preview thumbnail images are generated automatically based on the first plot encountered within your post. You can specify that a specific plot should be used as the preview image using the <code>preview</code> chunk option. For example:</p>
-<pre class="clike"><code>
-```{r, layout=&quot;l-body-outset&quot;, preview=TRUE}
+<pre class="clike"><code>```{r, layout=&quot;l-body-outset&quot;, preview=TRUE}
 library(ggplot2)
 ggplot(diamonds, aes(carat, price)) + geom_smooth() +
   facet_grid(~ cut)
 ```</code></pre>
 <p>If you want to use another image entirely as a post preview you add a <code>preview</code> field to the post’s metadata. For example, here we add a <code>preview</code> field to the example metadata from above (some fields excluded for brevity):</p>
-<pre class="markup"><code>
----
+<pre class="markup"><code>---
 title: &quot;The Sharpe Ratio&quot;
 description: |
   In this post we present a classic finance use case using the
@@ -2038,8 +2076,7 @@ preview: images/sharpe-ratio.png
 <p><img src="images/blog-citation.png" class="screenshot" style="width:95.0%" /></p>
 <p>If you want to disable this behavior you can use the <code>collections:posts:citations</code> field within <code>_site.yml</code>. For example:</p>
 <p><strong>_site.yml</strong></p>
-<pre class="markup"><code>
-name: &quot;reproducible-finance-with-r&quot;
+<pre class="markup"><code>name: &quot;reproducible-finance-with-r&quot;
 title: &quot;Reproducible Finance with R&quot;
 description: |
   Exploring reproducible finance with the R statistical 
@@ -2053,8 +2090,7 @@ collections:
 <h3 id="subscriptions">Subscriptions</h3>
 <p>You can add HTML that enables readers to subscribe to your blog by including the <code>collections:posts:subscribe</code> option within <code>_site.yml</code>. The <code>subscribe</code> option in turn points to an HTML file that provides the ability to subscribe to your blog. For example:</p>
 <p><strong>_site.yml</strong></p>
-<pre class="markup"><code>
-name: &quot;reproducible-finance-with-r&quot;
+<pre class="markup"><code>name: &quot;reproducible-finance-with-r&quot;
 title: &quot;Reproducible Finance with R&quot;
 description: |
   Exploring reproducible finance with the R statistical 
@@ -2066,22 +2102,20 @@ collections:
     share: [twitter, linkedin]
     subscribe: _subscribe.html</code></pre>
 <p><strong>_subscribe.html</strong></p>
-<pre class="html"><code>
-&lt;form method=&#39;post&#39; action=&#39;https://blogtrottr.com&#39;&gt;
-  &lt;p&gt;Enjoy this blog? Get notified of new posts via email:&lt;/p&gt;
-  &lt;input type=&#39;text&#39; name=&#39;btr_email&#39; /&gt;
-  &lt;input type=&#39;hidden&#39; name=&#39;btr_url&#39;
-         value=&#39;https://beta.rstudioconnect.com/content/11424/index.xml&#39;/&gt;
-  &lt;input type=&#39;hidden&#39; name=&#39;schedule_type&#39; value=&#39;0&#39; /&gt;
-  &lt;input type=&#39;submit&#39; value=&#39;Subscribe&#39; /&gt;
-&lt;/form&gt;</code></pre>
+<div class="sourceCode" id="cb21"><pre class="sourceCode html"><code class="sourceCode html"><span id="cb21-1"><a href="#cb21-1" aria-hidden="true"></a><span class="kw">&lt;form</span><span class="ot"> method=</span><span class="st">&#39;post&#39;</span><span class="ot"> action=</span><span class="st">&#39;https://blogtrottr.com&#39;</span><span class="kw">&gt;</span></span>
+<span id="cb21-2"><a href="#cb21-2" aria-hidden="true"></a>  <span class="kw">&lt;p&gt;</span>Enjoy this blog? Get notified of new posts via email:<span class="kw">&lt;/p&gt;</span></span>
+<span id="cb21-3"><a href="#cb21-3" aria-hidden="true"></a>  <span class="kw">&lt;input</span><span class="ot"> type=</span><span class="st">&#39;text&#39;</span><span class="ot"> name=</span><span class="st">&#39;btr_email&#39;</span> <span class="kw">/&gt;</span></span>
+<span id="cb21-4"><a href="#cb21-4" aria-hidden="true"></a>  <span class="kw">&lt;input</span><span class="ot"> type=</span><span class="st">&#39;hidden&#39;</span><span class="ot"> name=</span><span class="st">&#39;btr_url&#39;</span></span>
+<span id="cb21-5"><a href="#cb21-5" aria-hidden="true"></a><span class="ot">         value=</span><span class="st">&#39;https://beta.rstudioconnect.com/content/11424/index.xml&#39;</span><span class="kw">/&gt;</span></span>
+<span id="cb21-6"><a href="#cb21-6" aria-hidden="true"></a>  <span class="kw">&lt;input</span><span class="ot"> type=</span><span class="st">&#39;hidden&#39;</span><span class="ot"> name=</span><span class="st">&#39;schedule_type&#39;</span><span class="ot"> value=</span><span class="st">&#39;0&#39;</span> <span class="kw">/&gt;</span></span>
+<span id="cb21-7"><a href="#cb21-7" aria-hidden="true"></a>  <span class="kw">&lt;input</span><span class="ot"> type=</span><span class="st">&#39;submit&#39;</span><span class="ot"> value=</span><span class="st">&#39;Subscribe&#39;</span> <span class="kw">/&gt;</span></span>
+<span id="cb21-8"><a href="#cb21-8" aria-hidden="true"></a><span class="kw">&lt;/form&gt;</span></span></code></pre></div>
 <p>This example uses the <a href="https://blogtrottr.com/">Blogtrottr</a> service to provide an email subscription. You could also use another service or simply include a link to your RSS feed.</p>
 <p>The contents of <code>_subscribe.html</code> will be included in both the sidebar of the main listing page as well as in the footer of articles. Note that relative URLs won’t work in subscription HTML since the content appears at different levels of the site (thus we include the full URL to the RSS feed in the example above).</p>
 <h3 id="custom-html">Custom HTML</h3>
 <p>You can also add arbitrary HTML to the top of the sidebar by including the <code>collections:posts:custom</code> option within <code>_site.yml</code>. The <code>custom</code> option in turn points to an HTML file that will be displayed above the “Subscribe” and “Categories” sections. Unlike the Subscribe HTML, Cutstom HTML is not displayed in article footers. This custom feature can be used to display anything in the sidebar that Distill does not automatically generate. While only one custom file may be defined per collection, the HTML contained within is extremely adaptable to different use cases (even several simultaneously). For example, the below snippets will display an About section on top, and below that a search bar:</p>
 <p><strong>_site.yml</strong></p>
-<pre class="markup"><code>
-name: &quot;reproducible-finance-with-r&quot;
+<pre class="markup"><code>name: &quot;reproducible-finance-with-r&quot;
 title: &quot;Reproducible Finance with R&quot;
 description: |
   Exploring reproducible finance with the R statistical 
@@ -2093,23 +2127,22 @@ collections:
     share: [twitter, linkedin]
     custom: _custom.html</code></pre>
 <p><strong>_custom.html</strong></p>
-<pre class="html"><code>
-&lt;div class=&quot;sidebar-section custom&quot;&gt;
-  &lt;h3&gt;About&lt;/h3&gt;
-  This blog explores reproducible finance with the 
-  &lt;a href=&quot;https://www.r-project.org/&quot;&gt;R&lt;/a&gt; 
-  statistical computing environment.
-&lt;/div&gt;
-
-&lt;div class=&quot;sidebar-section custom&quot;&gt;
-  &lt;h3&gt;Search&lt;/h3&gt;
-  &lt;form action=&quot;https://duckduckgo.com/&quot;&gt;
-    &lt;input type=&quot;text&quot; name=&quot;q&quot; placeholder=&quot;Search...&quot;&gt;
-    &lt;input type=&quot;hidden&quot; name=&quot;sites&quot; 
-      value=&quot;https://beta.rstudioconnect.com/content/3776/&quot;&gt; &lt;!-- Replace with your blog URL --&gt;
-    &lt;!--&lt;button type=&quot;submit&quot;&gt;Search&lt;/button&gt;--&gt;
-  &lt;/form&gt;
-&lt;/div&gt;</code></pre>
+<div class="sourceCode" id="cb23"><pre class="sourceCode html"><code class="sourceCode html"><span id="cb23-1"><a href="#cb23-1" aria-hidden="true"></a><span class="kw">&lt;div</span><span class="ot"> class=</span><span class="st">&quot;sidebar-section custom&quot;</span><span class="kw">&gt;</span></span>
+<span id="cb23-2"><a href="#cb23-2" aria-hidden="true"></a>  <span class="kw">&lt;h3&gt;</span>About<span class="kw">&lt;/h3&gt;</span></span>
+<span id="cb23-3"><a href="#cb23-3" aria-hidden="true"></a>  This blog explores reproducible finance with the </span>
+<span id="cb23-4"><a href="#cb23-4" aria-hidden="true"></a>  <span class="kw">&lt;a</span><span class="ot"> href=</span><span class="st">&quot;https://www.r-project.org/&quot;</span><span class="kw">&gt;</span>R<span class="kw">&lt;/a&gt;</span> </span>
+<span id="cb23-5"><a href="#cb23-5" aria-hidden="true"></a>  statistical computing environment.</span>
+<span id="cb23-6"><a href="#cb23-6" aria-hidden="true"></a><span class="kw">&lt;/div&gt;</span></span>
+<span id="cb23-7"><a href="#cb23-7" aria-hidden="true"></a></span>
+<span id="cb23-8"><a href="#cb23-8" aria-hidden="true"></a><span class="kw">&lt;div</span><span class="ot"> class=</span><span class="st">&quot;sidebar-section custom&quot;</span><span class="kw">&gt;</span></span>
+<span id="cb23-9"><a href="#cb23-9" aria-hidden="true"></a>  <span class="kw">&lt;h3&gt;</span>Search<span class="kw">&lt;/h3&gt;</span></span>
+<span id="cb23-10"><a href="#cb23-10" aria-hidden="true"></a>  <span class="kw">&lt;form</span><span class="ot"> action=</span><span class="st">&quot;https://duckduckgo.com/&quot;</span><span class="kw">&gt;</span></span>
+<span id="cb23-11"><a href="#cb23-11" aria-hidden="true"></a>    <span class="kw">&lt;input</span><span class="ot"> type=</span><span class="st">&quot;text&quot;</span><span class="ot"> name=</span><span class="st">&quot;q&quot;</span><span class="ot"> placeholder=</span><span class="st">&quot;Search...&quot;</span><span class="kw">&gt;</span></span>
+<span id="cb23-12"><a href="#cb23-12" aria-hidden="true"></a>    <span class="kw">&lt;input</span><span class="ot"> type=</span><span class="st">&quot;hidden&quot;</span><span class="ot"> name=</span><span class="st">&quot;sites&quot;</span> </span>
+<span id="cb23-13"><a href="#cb23-13" aria-hidden="true"></a><span class="ot">      value=</span><span class="st">&quot;https://beta.rstudioconnect.com/content/3776/&quot;</span><span class="kw">&gt;</span> <span class="co">&lt;!-- Replace with your blog URL --&gt;</span></span>
+<span id="cb23-14"><a href="#cb23-14" aria-hidden="true"></a>    <span class="co">&lt;!--&lt;button type=&quot;submit&quot;&gt;Search&lt;/button&gt;--&gt;</span></span>
+<span id="cb23-15"><a href="#cb23-15" aria-hidden="true"></a>  <span class="kw">&lt;/form&gt;</span></span>
+<span id="cb23-16"><a href="#cb23-16" aria-hidden="true"></a><span class="kw">&lt;/div&gt;</span></span></code></pre></div>
 <p><img src="images/custom_html_example_about_search.png" class="screenshot" style="width:50.0%" /></p>
 <p>While the custom HTML option inherits general CSS styling from the rest of the Distill blog, by default it does not inherit the sidebar-specific CSS. In order to fully match the rest of the sidebar sections, each section must be nested within a <code>&lt;div class="sidebar-section custom"&gt;</code> tag, as seen in the above example. This configuration is intended to provide a good balance between flexibility and ease-of-use.</p>
 <p>The example search bar functionality uses the popular <a href="duckduckgo.com">DuckDuckGo</a> search engine. After entering search terms and hitting the enter key the user is taken to the search engine’s website and shown relevant search results from the blog. Note that the blog will need to have been recently crawled by the search engine in order for search results to be thorough and up to date. Replacing the HTML snippet’s hard-coded blog URL should be the only modification necessary to begin using this example. Other search engines may be used with further modification. The “Search” button has been left out in this example, but may be uncommented if desired.</p>
@@ -2121,8 +2154,7 @@ collections:
 <li><p>Files known to contain R source code (e.g. <code>".R"</code>, <code>".s"</code>, <code>".Rmd"</code>), R data (e.g. <code>".RData"</code>, <code>".rds"</code>), or configuration data (e.g. <code>"rsconnect"</code> ,<code>"packrat"</code>)).</p></li>
 </ol>
 <p>You can override this behavior using a <code>resources</code> metadata entry for your post, which can specify explicit files to <code>include</code> or <code>exclude</code>. For example (some fields excluded for brevity):</p>
-<pre class="markup"><code>
----
+<pre class="markup"><code>---
 title: &quot;The Sharpe Ratio&quot;
 description: |
   In this post we present a classic finance use case using the
@@ -2138,9 +2170,8 @@ resources:
 <p>If your Distill website is contained within an RStudio project you can use the <strong>Build Website</strong> command available in the Build pane to generate the site:</p>
 <p><img src="images/build-website.png" class="screenshot" style="width:95.0%" /></p>
 <p>To build a website from the command line, use the <code>rmarkdown::render_site()</code> function:</p>
-<pre class="r"><code>
-library(rmarkdown)
-render_site()</code></pre>
+<div class="sourceCode" id="cb25"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb25-1"><a href="#cb25-1" aria-hidden="true"></a><span class="kw">library</span>(rmarkdown)</span>
+<span id="cb25-2"><a href="#cb25-2" aria-hidden="true"></a><span class="kw">render_site</span>()</span></code></pre></div>
 <p>There are a variety of options available for making your site available to others, see the article on <a href="publish_website.html">website publishing</a> for details.</p>
 <h2 id="examples">Examples</h2>
 <ul>

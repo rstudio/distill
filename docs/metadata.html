@@ -18,6 +18,69 @@
  <!--radix_placeholder_import_source-->
  <!--/radix_placeholder_import_source-->
 
+<style type="text/css">code{white-space: pre;}</style>
+<style type="text/css" data-origin="pandoc">
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    color: #aaaaaa;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+code span.al { color: #ff0000; } /* Alert */
+code span.an { color: #008000; } /* Annotation */
+code span.at { } /* Attribute */
+code span.bu { } /* BuiltIn */
+code span.cf { color: #0000ff; } /* ControlFlow */
+code span.ch { color: #008080; } /* Char */
+code span.cn { color: #585cf6; } /* Constant */
+code span.co { color: #4c886b; } /* Comment */
+code span.cv { color: #008000; } /* CommentVar */
+code span.do { color: #008000; } /* Documentation */
+code span.dv { color: #0000cd; } /* DecVal */
+code span.er { color: #ff0000; font-weight: bold; } /* Error */
+code span.ex { } /* Extension */
+code span.fl { color: #0000cd; } /* Float */
+code span.im { } /* Import */
+code span.in { color: #008000; } /* Information */
+code span.kw { color: #0000ff; } /* Keyword */
+code span.op { color: #687687; } /* Operator */
+code span.ot { color: #ff4000; } /* Other */
+code span.pp { color: #ff4000; } /* Preprocessor */
+code span.sc { color: #008080; } /* SpecialChar */
+code span.ss { color: #008080; } /* SpecialString */
+code span.st { color: #036a07; } /* String */
+code span.va { } /* Variable */
+code span.vs { color: #008080; } /* VerbatimString */
+code span.wa { color: #008000; font-weight: bold; } /* Warning */
+</style>
+
   <!--radix_placeholder_meta_tags-->
   <title>Distill for R Markdown: Article Metadata</title>
 
@@ -764,6 +827,79 @@
     width: 100%;
   }
 
+  /* Tweak code blocks */
+
+  d-article div.sourceCode code,
+  d-article pre code {
+    font-family: Consolas, Monaco, 'Andale Mono', 'Ubuntu Mono', monospace;
+  }
+
+  d-article pre,
+  d-article div.sourceCode,
+  d-article div.sourceCode pre {
+    overflow: hidden;
+  }
+
+  d-article div.sourceCode {
+    background-color: white;
+  }
+
+  d-article div.sourceCode pre {
+    padding-left: 10px;
+    font-size: 12px;
+    border-left: 2px solid rgba(0,0,0,0.1);
+  }
+
+  d-article pre {
+    font-size: 12px;
+    color: black;
+    background: none;
+    margin-top: 0;
+    text-align: left;
+    white-space: pre;
+    word-spacing: normal;
+    word-break: normal;
+    word-wrap: normal;
+    line-height: 1.5;
+
+    -moz-tab-size: 4;
+    -o-tab-size: 4;
+    tab-size: 4;
+
+    -webkit-hyphens: none;
+    -moz-hyphens: none;
+    -ms-hyphens: none;
+    hyphens: none;
+  }
+
+  d-article pre a {
+    border-bottom: none;
+  }
+
+  d-article pre a:hover {
+    border-bottom: none;
+    text-decoration: underline;
+  }
+
+  @media(min-width: 768px) {
+
+  d-article pre,
+  d-article div.sourceCode,
+  d-article div.sourceCode pre {
+    overflow: visible !important;
+  }
+
+  d-article div.sourceCode pre {
+    padding-left: 18px;
+    font-size: 14px;
+  }
+
+  d-article pre {
+    font-size: 14px;
+  }
+
+  }
+
   figure img.external {
     background: white;
     border: 1px solid rgba(0, 0, 0, 0.1);
@@ -853,56 +989,6 @@
     margin-top: 0;
   }
 
-  /* Tweak code blocks (note that this CSS is repeated above in an injection
-     into the d-code shadow dom) */
-
-  d-code {
-    overflow-x: auto !important;
-  }
-
-  pre.d-code code.d-code {
-    padding-left: 10px;
-    font-size: 12px;
-    border-left: 2px solid rgba(0,0,0,0.1);
-  }
-
-  pre.text-output {
-
-    font-size: 12px;
-    color: black;
-    background: none;
-    font-family: Consolas, Monaco, 'Andale Mono', 'Ubuntu Mono', monospace;
-    text-align: left;
-    white-space: pre;
-    word-spacing: normal;
-    word-break: normal;
-    word-wrap: normal;
-    line-height: 1.5;
-
-    -moz-tab-size: 4;
-    -o-tab-size: 4;
-    tab-size: 4;
-
-    -webkit-hyphens: none;
-    -moz-hyphens: none;
-    -ms-hyphens: none;
-    hyphens: none;
-  }
-
-  @media(min-width: 768px) {
-
-  d-code {
-    overflow-x: visible !important;
-  }
-
-  pre.d-code code.d-code  {
-      padding-left: 18px;
-      font-size: 14px;
-  }
-  pre.text-output {
-    font-size: 14px;
-  }
-  }
 
   /* Figure */
 
@@ -1326,27 +1412,6 @@
     // show d-appendix if we have appendix content
     $("d-appendix").css('display', appendix ? 'grid' : 'none');
 
-    // replace code blocks with d-code
-    $('pre>code').each(function(i, val) {
-      var code = $(this);
-      var pre = code.parent();
-      var clz = "";
-      var language = pre.attr('class');
-      if (language) {
-        // map unknown languages to "clike" (without this they just dissapear)
-        if ($.inArray(language, ["bash", "clike", "css", "go", "html",
-                                 "javascript", "js", "julia", "lua", "markdown",
-                                 "markup", "mathml", "python", "svg", "xml"]) == -1)
-          language = "clike";
-        language = ' language="' + language + '"';
-        var dt_code = $('<d-code block' + language + clz + '></d-code>');
-        dt_code.text(code.text());
-        pre.replaceWith(dt_code);
-      } else {
-        code.addClass('text-output').unwrap().changeElementType('pre');
-      }
-    });
-
     // localize layout chunks to just output
     $('.layout-chunk').each(function(i, val) {
 
@@ -1354,7 +1419,7 @@
       var layout = $(this).attr('data-layout');
 
       // apply layout to markdown level block elements
-      var elements = $(this).children().not('d-code, pre.text-output, script');
+      var elements = $(this).children().not('div.sourceCode, pre, script');
       elements.each(function(i, el) {
         var layout_div = $('<div class="' + layout + '"></div>');
         if (layout_div.hasClass('shaded')) {
@@ -1454,15 +1519,6 @@
         grid.children('h3:contains("Authors")').text('Author');
         grid.children('h3:contains("Affiliations")').text('Affiliation');
       }
-
-      // inject pre code styles (can't do this with a global stylesheet b/c a shadow root is used)
-      $('d-code').each(function(i, val) {
-        var style = document.createElement('style');
-        style.innerHTML = 'pre code { padding-left: 10px; font-size: 12px; border-left: 2px solid rgba(0,0,0,0.1); } ' +
-                          '@media(min-width: 768px) { pre code { padding-left: 18px; font-size: 14px; } }';
-        if (this.shadowRoot)
-          this.shadowRoot.appendChild(style);
-      });
 
       // move appendix-bottom entries to the bottom
       $('.appendix-bottom').appendTo('d-appendix').children().unwrap();
@@ -1627,7 +1683,7 @@
   </script>
 
   <!--/radix_placeholder_distill-->
-  <script src="site_libs/header-attrs-2.3.5/header-attrs.js"></script>
+  <script src="site_libs/header-attrs-2.3.8/header-attrs.js"></script>
   <script src="site_libs/jquery-1.11.3/jquery.min.js"></script>
   <script src="site_libs/anchor-4.2.2/anchor.min.js"></script>
   <script src="site_libs/bowser-1.9.3/bowser.min.js"></script>
@@ -1771,8 +1827,7 @@ Publishing
 </ol>
 <h2 id="code-repository">Code repository</h2>
 <p>You can include the <code>repository_url</code> field to indicate where the source code for your article can be found. For example:</p>
-<pre class="markup"><code>
----
+<pre class="markup"><code>---
 title: &quot;Distill for R Markdown&quot;
 description: | 
   Scientific and technical writing, native to the web
@@ -1780,8 +1835,7 @@ output: distill::distill_article
 repository_url: https://github.com/rstudio/distill
 ---</code></pre>
 <p>You can optionally also include a <code>compare_updates_url</code> to provide a URL that will show the differences between the article’s current version and the version that was initially published. For example:</p>
-<pre class="markup"><code>
----
+<pre class="markup"><code>---
 title: &quot;Distill for R Markdown&quot;
 description: | 
   Scientific and technical writing, native to the web
@@ -1831,8 +1885,7 @@ compare_updates_url: https://github.com/rstudio/distill/compare/pubv1...master
 </tbody>
 </table>
 <p>You can designate articles that you create as Creative Commons licensed by adding the <code>creative_commons</code> field and specifying one of the standard Creative Commons licenses. For example:</p>
-<pre class="markup"><code>
----
+<pre class="markup"><code>---
 title: &quot;Distill for R Markdown&quot;
 description: | 
   Scientific and technical writing, native to the web
@@ -1843,8 +1896,7 @@ creative_commons: CC BY
 <p><img src="images/creative-commons.png" class="screenshot" style="width:95.0%" /></p>
 <h3 id="external-figures">External figures</h3>
 <p>Note that figures from external sources are explicitly carved out of the license. If you are including a figure from an external source, it’s good practice to delineate this by applying the <code>.external</code> class and adding a caption indicating where it is from. For example:</p>
-<pre class="markup"><code>
-![Figure from https://example.com](heatmap.png){width=100% .external}    </code></pre>
+<pre class="markup"><code>![Figure from https://example.com](heatmap.png){width=100% .external}    </code></pre>
 <p>Using the <code>.external</code> class and providing a “Figure from” link makes it clear that the figure originated elsewhere (and is therefore not covered by any of your article’s copyright or creative commons license grants). For example, here’s how a figure taken from a Stack Overflow post might appear:</p>
 <figure>
 <img src="images/heatmap.png" class="external" style="width:100.0%" alt="Figure from https://stackoverflow.com/questions/12196756/" /><figcaption aria-hidden="true">Figure from <a href="https://stackoverflow.com/questions/12196756/" class="uri">https://stackoverflow.com/questions/12196756/</a></figcaption>
@@ -1853,16 +1905,14 @@ creative_commons: CC BY
 <p>You can specify a preview image for your article (for sharing on Slack, Twitter, etc.) in a number of different ways:</p>
 <ol type="1">
 <li><p>You can explicitly provide the full URL of the preview image via the <code>preview</code> field in the article’s metadata. For example:</p>
-<pre class="markup"><code>
----
+<pre class="markup"><code>---
 title: &quot;JavaScript &amp; D3&quot;
 description: Enhance communication with interactive visualizations 
 preview: https://rstudio.github.io/distill/images/javascript-d3-preview.png
 ---</code></pre>
 <p>Note that the preview image is specified with a full absolute URL. This is a requirement of both Open Graph and Twitter (relative image references are not supported). If you are publishing a standalone self-contained HTML version of your article then you’ll need to upload the preview image to another location on the web in order to reference it.</p></li>
 <li><p>If your article is not self-contained (it’s part of a <a href="publish_website.html">Distill website</a> or is generated with <code>self_contained: false</code>) then you can include the preview image alongside your document. In this case you still need to specify the root URL where your image will be published to using the <code>base_url</code> field:</p>
-<pre class="markup"><code>
----
+<pre class="markup"><code>---
 title: &quot;JavaScript &amp; D3&quot;
 description: Enhance communication with interactive visualizations 
 base_url: https://rstudio.github.io/distill
@@ -1870,14 +1920,12 @@ preview: images/javascript-d3-preview.png
 ---</code></pre>
 <p>This technique is generally preferable to including the full URL since it allows Distill to inspect the image file directly and provide additional information about it’s size.</p></li>
 <li><p>You can also specify that a specific figure within your article should be used as the preview image. To do this, just add the <code>preview = TRUE</code> chunk option to the chunk which creates the figure. For example:</p>
-<pre class="markup"><code>
----
+<pre class="markup"><code>---
 title: &quot;JavaScript &amp; D3&quot;
 description: Enhance communication with interactive visualizations 
 base_url: https://rstudio.github.io/distill
 ---</code></pre>
-<pre class="clike"><code>
-```{r, layout=&quot;l-body-outset&quot;, preview=TRUE}
+<pre class="clike"><code>```{r, layout=&quot;l-body-outset&quot;, preview=TRUE}
 library(ggplot2)
 ggplot(diamonds, aes(carat, price)) + geom_smooth() +
   facet_grid(~ cut)
@@ -1893,8 +1941,7 @@ ggplot(diamonds, aes(carat, price)) + geom_smooth() +
 <p>See the section on <a href="#preview-images">preview images</a> for additional details on providing an image for your article that will be included on Twitter Cards.</p>
 <p>There are two additional fields you can include that provide attribution for your link to the Twitter account of a website and/or creator of the article. This attribution is specified via the <code>twitter:site</code> and <code>twitter:creator</code> fields.</p>
 <p>Here’s a complete example that includes the attribution fields as well as a preview image:</p>
-<pre class="markup"><code>
----
+<pre class="markup"><code>---
 title: &quot;JavaScript &amp; D3&quot;
 description: Enhance communication with interactive visualizations 
 base_url: https://rstudio.github.io/distill
@@ -1907,35 +1954,33 @@ twitter:
 <h2 id="google-scholar">Google Scholar</h2>
 <p>Distill articles automatically include metadata compatible with the format indexed by <a href="https://scholar.google.com/intl/en/scholar/inclusion.html#indexing">Google Scholar</a>. This makes it easy for indexing engines (Google Scholar or otherwise) to extract not only a citation for your article but also information on other sources which you cited.</p>
 <p>For example, here is the Google Scholar metadata automatically included for the home page of the Distill for R Markdown website:</p>
-<pre class="html"><code>
-&lt;!--  https://scholar.google.com/intl/en/scholar/inclusion.html#indexing --&gt;
-&lt;meta name=&quot;citation_title&quot; content=&quot;Distill for R Markdown&quot;/&gt;
-&lt;meta name=&quot;citation_fulltext_html_url&quot; content=&quot;https://rstudio.github.io/distill&quot;/&gt;
-&lt;meta name=&quot;citation_fulltext_world_readable&quot; content=&quot;&quot;/&gt;
-&lt;meta name=&quot;citation_online_date&quot; content=&quot;2018/05/04&quot;/&gt;
-&lt;meta name=&quot;citation_publication_date&quot; content=&quot;2018/05/04&quot;/&gt;
-&lt;meta name=&quot;citation_author&quot; content=&quot;JJ Allaire&quot;/&gt;
-&lt;meta name=&quot;citation_author_institution&quot; content=&quot;RStudio&quot;/&gt;
-&lt;meta name=&quot;citation_author&quot; content=&quot;Rich Iannone&quot;/&gt;
-&lt;meta name=&quot;citation_author_institution&quot; content=&quot;RStudio&quot;/&gt;
-&lt;meta name=&quot;citation_author&quot; content=&quot;Yihui Xie&quot;/&gt;
-&lt;meta name=&quot;citation_author_institution&quot; content=&quot;RStudio&quot;/&gt;
-&lt;meta name=&quot;citation_reference&quot; content=&quot;citation_title=Distill;
-citation_publication_date=2016;citation_publisher=Distill Working
-Group;citation_doi=10.23915/distill;citation_author=Shan Carter;
-citation_author=Chirs Olah;citation_author=Arvind Satyanarayan&quot;/&gt;
-&lt;meta name=&quot;citation_reference&quot; content=&quot;citation_title=Literate
-programming;citation_publication_date=1984;
-citation_publisher=British Computer Society;citation_volume=27;
-citation_author=Donald E. Knuth&quot;/&gt;
-&lt;meta name=&quot;citation_reference&quot; content=&quot;citation_title=Dynamic
-documents with r and knitr;citation_publication_date=2015;
-citation_publisher=Chapman; Hall/CRC;citation_author=Yihui Xie&quot;/&gt;</code></pre>
+<div class="sourceCode" id="cb10"><pre class="sourceCode html"><code class="sourceCode html"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true"></a><span class="co">&lt;!--  https://scholar.google.com/intl/en/scholar/inclusion.html#indexing --&gt;</span></span>
+<span id="cb10-2"><a href="#cb10-2" aria-hidden="true"></a><span class="kw">&lt;meta</span><span class="ot"> name=</span><span class="st">&quot;citation_title&quot;</span><span class="ot"> content=</span><span class="st">&quot;Distill for R Markdown&quot;</span><span class="kw">/&gt;</span></span>
+<span id="cb10-3"><a href="#cb10-3" aria-hidden="true"></a><span class="kw">&lt;meta</span><span class="ot"> name=</span><span class="st">&quot;citation_fulltext_html_url&quot;</span><span class="ot"> content=</span><span class="st">&quot;https://rstudio.github.io/distill&quot;</span><span class="kw">/&gt;</span></span>
+<span id="cb10-4"><a href="#cb10-4" aria-hidden="true"></a><span class="kw">&lt;meta</span><span class="ot"> name=</span><span class="st">&quot;citation_fulltext_world_readable&quot;</span><span class="ot"> content=</span><span class="st">&quot;&quot;</span><span class="kw">/&gt;</span></span>
+<span id="cb10-5"><a href="#cb10-5" aria-hidden="true"></a><span class="kw">&lt;meta</span><span class="ot"> name=</span><span class="st">&quot;citation_online_date&quot;</span><span class="ot"> content=</span><span class="st">&quot;2018/05/04&quot;</span><span class="kw">/&gt;</span></span>
+<span id="cb10-6"><a href="#cb10-6" aria-hidden="true"></a><span class="kw">&lt;meta</span><span class="ot"> name=</span><span class="st">&quot;citation_publication_date&quot;</span><span class="ot"> content=</span><span class="st">&quot;2018/05/04&quot;</span><span class="kw">/&gt;</span></span>
+<span id="cb10-7"><a href="#cb10-7" aria-hidden="true"></a><span class="kw">&lt;meta</span><span class="ot"> name=</span><span class="st">&quot;citation_author&quot;</span><span class="ot"> content=</span><span class="st">&quot;JJ Allaire&quot;</span><span class="kw">/&gt;</span></span>
+<span id="cb10-8"><a href="#cb10-8" aria-hidden="true"></a><span class="kw">&lt;meta</span><span class="ot"> name=</span><span class="st">&quot;citation_author_institution&quot;</span><span class="ot"> content=</span><span class="st">&quot;RStudio&quot;</span><span class="kw">/&gt;</span></span>
+<span id="cb10-9"><a href="#cb10-9" aria-hidden="true"></a><span class="kw">&lt;meta</span><span class="ot"> name=</span><span class="st">&quot;citation_author&quot;</span><span class="ot"> content=</span><span class="st">&quot;Rich Iannone&quot;</span><span class="kw">/&gt;</span></span>
+<span id="cb10-10"><a href="#cb10-10" aria-hidden="true"></a><span class="kw">&lt;meta</span><span class="ot"> name=</span><span class="st">&quot;citation_author_institution&quot;</span><span class="ot"> content=</span><span class="st">&quot;RStudio&quot;</span><span class="kw">/&gt;</span></span>
+<span id="cb10-11"><a href="#cb10-11" aria-hidden="true"></a><span class="kw">&lt;meta</span><span class="ot"> name=</span><span class="st">&quot;citation_author&quot;</span><span class="ot"> content=</span><span class="st">&quot;Yihui Xie&quot;</span><span class="kw">/&gt;</span></span>
+<span id="cb10-12"><a href="#cb10-12" aria-hidden="true"></a><span class="kw">&lt;meta</span><span class="ot"> name=</span><span class="st">&quot;citation_author_institution&quot;</span><span class="ot"> content=</span><span class="st">&quot;RStudio&quot;</span><span class="kw">/&gt;</span></span>
+<span id="cb10-13"><a href="#cb10-13" aria-hidden="true"></a><span class="kw">&lt;meta</span><span class="ot"> name=</span><span class="st">&quot;citation_reference&quot;</span><span class="ot"> content=</span><span class="st">&quot;citation_title=Distill;</span></span>
+<span id="cb10-14"><a href="#cb10-14" aria-hidden="true"></a><span class="st">citation_publication_date=2016;citation_publisher=Distill Working</span></span>
+<span id="cb10-15"><a href="#cb10-15" aria-hidden="true"></a><span class="st">Group;citation_doi=10.23915/distill;citation_author=Shan Carter;</span></span>
+<span id="cb10-16"><a href="#cb10-16" aria-hidden="true"></a><span class="st">citation_author=Chirs Olah;citation_author=Arvind Satyanarayan&quot;</span><span class="kw">/&gt;</span></span>
+<span id="cb10-17"><a href="#cb10-17" aria-hidden="true"></a><span class="kw">&lt;meta</span><span class="ot"> name=</span><span class="st">&quot;citation_reference&quot;</span><span class="ot"> content=</span><span class="st">&quot;citation_title=Literate</span></span>
+<span id="cb10-18"><a href="#cb10-18" aria-hidden="true"></a><span class="st">programming;citation_publication_date=1984;</span></span>
+<span id="cb10-19"><a href="#cb10-19" aria-hidden="true"></a><span class="st">citation_publisher=British Computer Society;citation_volume=27;</span></span>
+<span id="cb10-20"><a href="#cb10-20" aria-hidden="true"></a><span class="st">citation_author=Donald E. Knuth&quot;</span><span class="kw">/&gt;</span></span>
+<span id="cb10-21"><a href="#cb10-21" aria-hidden="true"></a><span class="kw">&lt;meta</span><span class="ot"> name=</span><span class="st">&quot;citation_reference&quot;</span><span class="ot"> content=</span><span class="st">&quot;citation_title=Dynamic</span></span>
+<span id="cb10-22"><a href="#cb10-22" aria-hidden="true"></a><span class="st">documents with r and knitr;citation_publication_date=2015;</span></span>
+<span id="cb10-23"><a href="#cb10-23" aria-hidden="true"></a><span class="st">citation_publisher=Chapman; Hall/CRC;citation_author=Yihui Xie&quot;</span><span class="kw">/&gt;</span></span></code></pre></div>
 <p>Note that the <code>citation_reference</code> fields provide information on which works your article cited.</p>
 <p>The code above is HTML so don’t worry if you aren’t familiar with the syntax. The important thing to know is that citation data is provided in a way that machines can easily read and index.</p>
 <p>If you are publishing a Journal article, there are some additional metadata fields you can provide to enhance the Google Scholar metadata generated by Distill. These include additional fields describing the Journal (<code>title</code>, <code>issn</code>, and <code>publisher</code>) as well fields describing the <code>volume</code> and <code>issue</code> in which your article was published. For example:</p>
-<pre class="markup"><code>
----
+<pre class="markup"><code>---
 title: &quot;Distill for R Markdown&quot;
 description: | 
   Scientific and technical writing, native to the web

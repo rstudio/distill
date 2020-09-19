@@ -18,6 +18,69 @@
  <!--radix_placeholder_import_source-->
  <!--/radix_placeholder_import_source-->
 
+<style type="text/css">code{white-space: pre;}</style>
+<style type="text/css" data-origin="pandoc">
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    color: #aaaaaa;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+code span.al { color: #ff0000; } /* Alert */
+code span.an { color: #008000; } /* Annotation */
+code span.at { } /* Attribute */
+code span.bu { } /* BuiltIn */
+code span.cf { color: #0000ff; } /* ControlFlow */
+code span.ch { color: #008080; } /* Char */
+code span.cn { color: #585cf6; } /* Constant */
+code span.co { color: #4c886b; } /* Comment */
+code span.cv { color: #008000; } /* CommentVar */
+code span.do { color: #008000; } /* Documentation */
+code span.dv { color: #0000cd; } /* DecVal */
+code span.er { color: #ff0000; font-weight: bold; } /* Error */
+code span.ex { } /* Extension */
+code span.fl { color: #0000cd; } /* Float */
+code span.im { } /* Import */
+code span.in { color: #008000; } /* Information */
+code span.kw { color: #0000ff; } /* Keyword */
+code span.op { color: #687687; } /* Operator */
+code span.ot { color: #ff4000; } /* Other */
+code span.pp { color: #ff4000; } /* Preprocessor */
+code span.sc { color: #008080; } /* SpecialChar */
+code span.ss { color: #008080; } /* SpecialString */
+code span.st { color: #036a07; } /* String */
+code span.va { } /* Variable */
+code span.vs { color: #008080; } /* VerbatimString */
+code span.wa { color: #008000; font-weight: bold; } /* Warning */
+</style>
+
   <!--radix_placeholder_meta_tags-->
   <title>Distill for R Markdown: Distill Basics</title>
 
@@ -765,6 +828,79 @@
     width: 100%;
   }
 
+  /* Tweak code blocks */
+
+  d-article div.sourceCode code,
+  d-article pre code {
+    font-family: Consolas, Monaco, 'Andale Mono', 'Ubuntu Mono', monospace;
+  }
+
+  d-article pre,
+  d-article div.sourceCode,
+  d-article div.sourceCode pre {
+    overflow: hidden;
+  }
+
+  d-article div.sourceCode {
+    background-color: white;
+  }
+
+  d-article div.sourceCode pre {
+    padding-left: 10px;
+    font-size: 12px;
+    border-left: 2px solid rgba(0,0,0,0.1);
+  }
+
+  d-article pre {
+    font-size: 12px;
+    color: black;
+    background: none;
+    margin-top: 0;
+    text-align: left;
+    white-space: pre;
+    word-spacing: normal;
+    word-break: normal;
+    word-wrap: normal;
+    line-height: 1.5;
+
+    -moz-tab-size: 4;
+    -o-tab-size: 4;
+    tab-size: 4;
+
+    -webkit-hyphens: none;
+    -moz-hyphens: none;
+    -ms-hyphens: none;
+    hyphens: none;
+  }
+
+  d-article pre a {
+    border-bottom: none;
+  }
+
+  d-article pre a:hover {
+    border-bottom: none;
+    text-decoration: underline;
+  }
+
+  @media(min-width: 768px) {
+
+  d-article pre,
+  d-article div.sourceCode,
+  d-article div.sourceCode pre {
+    overflow: visible !important;
+  }
+
+  d-article div.sourceCode pre {
+    padding-left: 18px;
+    font-size: 14px;
+  }
+
+  d-article pre {
+    font-size: 14px;
+  }
+
+  }
+
   figure img.external {
     background: white;
     border: 1px solid rgba(0, 0, 0, 0.1);
@@ -854,56 +990,6 @@
     margin-top: 0;
   }
 
-  /* Tweak code blocks (note that this CSS is repeated above in an injection
-     into the d-code shadow dom) */
-
-  d-code {
-    overflow-x: auto !important;
-  }
-
-  pre.d-code code.d-code {
-    padding-left: 10px;
-    font-size: 12px;
-    border-left: 2px solid rgba(0,0,0,0.1);
-  }
-
-  pre.text-output {
-
-    font-size: 12px;
-    color: black;
-    background: none;
-    font-family: Consolas, Monaco, 'Andale Mono', 'Ubuntu Mono', monospace;
-    text-align: left;
-    white-space: pre;
-    word-spacing: normal;
-    word-break: normal;
-    word-wrap: normal;
-    line-height: 1.5;
-
-    -moz-tab-size: 4;
-    -o-tab-size: 4;
-    tab-size: 4;
-
-    -webkit-hyphens: none;
-    -moz-hyphens: none;
-    -ms-hyphens: none;
-    hyphens: none;
-  }
-
-  @media(min-width: 768px) {
-
-  d-code {
-    overflow-x: visible !important;
-  }
-
-  pre.d-code code.d-code  {
-      padding-left: 18px;
-      font-size: 14px;
-  }
-  pre.text-output {
-    font-size: 14px;
-  }
-  }
 
   /* Figure */
 
@@ -1327,27 +1413,6 @@
     // show d-appendix if we have appendix content
     $("d-appendix").css('display', appendix ? 'grid' : 'none');
 
-    // replace code blocks with d-code
-    $('pre>code').each(function(i, val) {
-      var code = $(this);
-      var pre = code.parent();
-      var clz = "";
-      var language = pre.attr('class');
-      if (language) {
-        // map unknown languages to "clike" (without this they just dissapear)
-        if ($.inArray(language, ["bash", "clike", "css", "go", "html",
-                                 "javascript", "js", "julia", "lua", "markdown",
-                                 "markup", "mathml", "python", "svg", "xml"]) == -1)
-          language = "clike";
-        language = ' language="' + language + '"';
-        var dt_code = $('<d-code block' + language + clz + '></d-code>');
-        dt_code.text(code.text());
-        pre.replaceWith(dt_code);
-      } else {
-        code.addClass('text-output').unwrap().changeElementType('pre');
-      }
-    });
-
     // localize layout chunks to just output
     $('.layout-chunk').each(function(i, val) {
 
@@ -1355,7 +1420,7 @@
       var layout = $(this).attr('data-layout');
 
       // apply layout to markdown level block elements
-      var elements = $(this).children().not('d-code, pre.text-output, script');
+      var elements = $(this).children().not('div.sourceCode, pre, script');
       elements.each(function(i, el) {
         var layout_div = $('<div class="' + layout + '"></div>');
         if (layout_div.hasClass('shaded')) {
@@ -1455,15 +1520,6 @@
         grid.children('h3:contains("Authors")').text('Author');
         grid.children('h3:contains("Affiliations")').text('Affiliation');
       }
-
-      // inject pre code styles (can't do this with a global stylesheet b/c a shadow root is used)
-      $('d-code').each(function(i, val) {
-        var style = document.createElement('style');
-        style.innerHTML = 'pre code { padding-left: 10px; font-size: 12px; border-left: 2px solid rgba(0,0,0,0.1); } ' +
-                          '@media(min-width: 768px) { pre code { padding-left: 18px; font-size: 14px; } }';
-        if (this.shadowRoot)
-          this.shadowRoot.appendChild(style);
-      });
 
       // move appendix-bottom entries to the bottom
       $('.appendix-bottom').appendTo('d-appendix').children().unwrap();
@@ -1628,7 +1684,7 @@
   </script>
 
   <!--/radix_placeholder_distill-->
-  <script src="site_libs/header-attrs-2.3.5/header-attrs.js"></script>
+  <script src="site_libs/header-attrs-2.3.8/header-attrs.js"></script>
   <link href="site_libs/pagedtable-1.1/css/pagedtable.css" rel="stylesheet" />
   <script src="site_libs/pagedtable-1.1/js/pagedtable.js"></script>
   <script src="site_libs/jquery-1.11.3/jquery.min.js"></script>
@@ -1761,6 +1817,7 @@ Publishing
 <li><a href="#footnotes-and-asides">Footnotes and asides</a></li>
 <li><a href="#table-of-contents">Table of contents</a></li>
 <li><a href="#code-blocks">Code blocks</a></li>
+<li><a href="#syntax-highlighting">Syntax highlighting</a></li>
 <li><a href="#appendices">Appendices</a></li>
 <li><a href="#acknowledgments">Acknowledgments</a></li>
 </ul>
@@ -1770,15 +1827,13 @@ Publishing
 <p>Use the <strong>New R Markdown</strong> dialog within RStudio to create a new Distill article:</p>
 <p><img src="images/new_distill_article.png" class="screenshot" style="width:100.0%" /></p>
 <p>You can also create a new Distill article from the command line with:</p>
-<pre class="r"><code>
-library(rmarkdown)
-draft(&quot;article.Rmd&quot;, &quot;distill_article&quot;, package = &quot;distill&quot;)</code></pre>
+<div class="sourceCode" id="cb1"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true"></a><span class="kw">library</span>(rmarkdown)</span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true"></a><span class="kw">draft</span>(<span class="st">&quot;article.Rmd&quot;</span>, <span class="st">&quot;distill_article&quot;</span>, <span class="dt">package =</span> <span class="st">&quot;distill&quot;</span>)</span></code></pre></div>
 <div id="front-matter">
 
 </div>
 <p>Distill articles use <code>distill::distill_article</code> as their output format, and typically include title, description, date, author/affiliation, and bibliography entries in their YAML front-matter:</p>
-<pre class="markup"><code>
----
+<pre class="markup"><code>---
 title: &quot;Distill for R Markdown&quot;
 description: | 
   Scientific and technical writing, native to the web
@@ -1809,8 +1864,7 @@ output: distill::distill_article
 <p><img src="images/l-body-figure.png" style="width:100.0%" /></p>
 <p>However, some figures benefit from using additional horizontal space. In this cases the <code>layout</code> chunk option enables you to specify a wide variety of other layouts.</p>
 <p>For example, if we wanted to display a figure a bit outside the bounds of the article text, we could specify the <code>l-body-outset</code> layout via the <code>layout</code> chunk option:</p>
-<pre class="clike"><code>
-```{r, layout=&quot;l-body-outset&quot;, fig.width=6, fig.height=1.5}
+<pre class="clike"><code>```{r, layout=&quot;l-body-outset&quot;, fig.width=6, fig.height=1.5}
 library(ggplot2)
 ggplot(diamonds, aes(carat, price)) + geom_smooth() +
   facet_grid(~ cut)
@@ -1823,8 +1877,7 @@ ggplot(diamonds, aes(carat, price)) + geom_smooth() +
 <p>The examples above are based on conventional R plots. Distill articles can also incorporate <a href="diagrams.html">diagrams</a> and <a href="interactivity.html">interactive visualizations</a> based on JavaScript and D3.</p>
 <h2 id="tables">Tables</h2>
 <p>There are a number of options available for HTML display of data frames within Distill articles. Here, we use the <code>paged_table()</code> function to display a page-able view of the <code>mtcars</code> dataset built in to R:</p>
-<pre class="clike"><code>
-```{r, layout=&quot;l-body-outset&quot;}
+<pre class="clike"><code>```{r, layout=&quot;l-body-outset&quot;}
 library(rmarkdown)
 paged_table(mtcars)
 ```</code></pre>
@@ -1839,8 +1892,7 @@ paged_table(mtcars)
 <p>See the documentation on <a href="tables.html">table display</a> for details on the various techniques available for rendering tables.</p>
 <h2 id="equations">Equations</h2>
 <p>Inline and display equations are supported via standard markdown <a href="https://www.mathjax.org/">MathJax</a> syntax. For example, the following <a href="https://en.wikibooks.org/wiki/LaTeX/Mathematics">LaTeX math</a>:</p>
-<pre><code>
-$$
+<pre><code>$$
 \sigma = \sqrt{ \frac{1}{N} \sum_{i=1}^N (x_i -\mu)^2}
 $$</code></pre>
 <p>Will be rendered as:</p>
@@ -1850,8 +1902,7 @@ $$</code></pre>
 <h2 id="citations">Citations</h2>
 <p>Bibtex is the supported way of making academic citations. To include citations, first create a bibtex file and refer to it from the <code>bibliography</code> field of the YAML front-matter (as <a href="#front-matter">illustrated above</a>).</p>
 <p>For example, your bibliography file might contain:</p>
-<pre class="markup"><code>
-@Book{xie2015,
+<pre class="markup"><code>@Book{xie2015,
   title = {Dynamic Documents with R and knitr},
   author = {Yihui Xie},
   publisher = {Chapman and Hall/CRC},
@@ -1867,16 +1918,14 @@ $$</code></pre>
 <h2 id="footnotes-and-asides">Footnotes and asides</h2>
 <p>Footnotes use standard Pandoc markdown notation, for example <code>^[This will become a hover-able footnote]</code>. The number of the footnote will be automatically generated.<a href="#fn1" class="footnote-ref" id="fnref1" role="doc-noteref"><sup>1</sup></a></p>
 <p>You can also optionally include notes in the gutter of the article (immediately to the right of the article text). To do this use the <code>&lt;aside&gt;</code> tag.</p>
-<pre class="html"><code>
-&lt;aside&gt;
-This content will appear in the gutter of the article.
-&lt;/aside&gt;</code></pre>
+<div class="sourceCode" id="cb7"><pre class="sourceCode html"><code class="sourceCode html"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true"></a><span class="kw">&lt;aside&gt;</span></span>
+<span id="cb7-2"><a href="#cb7-2" aria-hidden="true"></a>This content will appear in the gutter of the article.</span>
+<span id="cb7-3"><a href="#cb7-3" aria-hidden="true"></a><span class="kw">&lt;/aside&gt;</span></span></code></pre></div>
 <aside>
 <p>This content will appear in the gutter of the article.</p>
 </aside>
 <p>You can also include figures in the gutter. Just enclose the code chunk which generates the figure in an <code>&lt;aside&gt;</code> tag:</p>
-<pre class="clike"><code>
-&lt;aside&gt;
+<pre class="clike"><code>&lt;aside&gt;
 ```{r}
 ggplot(mtcars, aes(hp, mpg)) + geom_point() + geom_smooth()
 ```
@@ -1886,8 +1935,7 @@ ggplot(mtcars, aes(hp, mpg)) + geom_point() + geom_smooth()
 </aside>
 <h2 id="table-of-contents">Table of contents</h2>
 <p>You can add a table of contents using the <code>toc</code> option and specify the depth of headers that it applies to using the <code>toc_depth</code> option. For example:</p>
-<pre class="markup"><code>
----
+<pre class="markup"><code>---
 title: &quot;Distill for R Markdown&quot;
 description: | 
   Scientific and technical writing, native to the web
@@ -1898,15 +1946,13 @@ output:
 ---</code></pre>
 <p>If the table of contents depth is not explicitly specified, it defaults to 3 (meaning that all level 1, 2, and 3 headers will be included in the table of contents).</p>
 <h2 id="code-blocks">Code blocks</h2>
-<p>Syntax highlighting is provided for knitr code chunks. Note that by default the Distill format does not display the code for chunks that are evaluated to produce output (knitr option <code>echo = FALSE</code>).</p>
+<p>By default the Distill format does not display the code for chunks that are evaluated to produce output (knitr option <code>echo = FALSE</code>).</p>
 <p>The <code>echo = FALSE</code> default reflects the fact that Distill articles are often used to present the results of analyses rather than the underlying code. To display the code that was evaluated to produce output you can set the <code>echo</code> chunk option to <code>TRUE</code>:</p>
-<pre class="clike"><code>
-```{r, echo=TRUE}
+<pre class="clike"><code>```{r, echo=TRUE}
 1 + 1
 ```</code></pre>
 <p>To include code that is only displayed and not evaluated specify the <code>eval=FALSE</code> option:</p>
-<pre class="clike"><code>
-```{r, eval=FALSE, echo=TRUE}
+<pre class="clike"><code>```{r, eval=FALSE, echo=TRUE}
 1 + 1
 ```</code></pre>
 <p>There are a number of default values that Distill establishes for knitr chunk options (these defaults also reflect the use case of presenting results/output rather than underlying code):</p>
@@ -1949,8 +1995,7 @@ output:
 <p>Keeping R code and output at 70 characters wide (or less) is recommended for readability on a variety of devices and screen sizes.</p>
 <p>As illustrated above, all of these defaults can be overridden on a chunk-by-chunk basis by specifying chunk options.</p>
 <p>You can also change the global defaults using a setup chunk. For example:</p>
-<pre class="clike"><code>
-```{r setup, include=FALSE}
+<pre class="clike"><code>```{r setup, include=FALSE}
 knitr::opts_chunk$set(
   echo = TRUE,
   warning = TRUE,
@@ -1959,18 +2004,31 @@ knitr::opts_chunk$set(
   R.options = list(width = 60)
 )
 ```</code></pre>
+<h2 id="syntax-highlighting">Syntax highlighting</h2>
+<p>Syntax highlighting for R code is done using the <a href="https://downlit.r-lib.org">downlit</a> package, which provides automatic linking of R functions to their online documentation. The default highlighting theme matches the appearance of code within RStudio’s default theme.</p>
+<p>You can customize highlighting behavior using the <code>highlight</code> and <code>highlight_downlit</code> options. For example, to use the Pandoc “haddock” highlighting theme and disable the use of downlit, you would do this:</p>
+<pre class="markup"><code>---
+title: &quot;Distill for R Markdown&quot;
+description: | 
+  Scientific and technical writing, native to the web
+output:
+  distill::distill_article:
+    highlight: haddock
+    highlight_downlit: false
+---</code></pre>
+<p>You can see a preview of available Pandoc highlighting themes here: <a href="https://www.garrickadenbuie.com/blog/pandoc-syntax-highlighting-examples/" class="uri">https://www.garrickadenbuie.com/blog/pandoc-syntax-highlighting-examples/</a> (note that dark themes won’t work well with Distill articles!).</p>
+<p>You can also create a custom highlighting theme file (<a href="https://pandoc.org/MANUAL.html#syntax-highlighting">as described here</a>) and provide the path to that file as the <code>highlight</code> option.</p>
 <h2 id="appendices">Appendices</h2>
 <p>Appendices can be added after your article by adding the <code>.appendix</code> class to any level 1 or level 2 header. For example:</p>
-<pre class="html"><code>
-## Acknowledgments {.appendix}
-
-This is a place to recognize people and institutions. It may also be a good place
-to acknowledge and cite software that makes your work possible.
-
-## Author Contributions {.appendix}
-
-We strongly encourage you to include an author contributions statement briefly 
-describing what each author did.</code></pre>
+<div class="sourceCode" id="cb14"><pre class="sourceCode html"><code class="sourceCode html"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true"></a>## Acknowledgments {.appendix}</span>
+<span id="cb14-2"><a href="#cb14-2" aria-hidden="true"></a></span>
+<span id="cb14-3"><a href="#cb14-3" aria-hidden="true"></a>This is a place to recognize people and institutions. It may also be a good place</span>
+<span id="cb14-4"><a href="#cb14-4" aria-hidden="true"></a>to acknowledge and cite software that makes your work possible.</span>
+<span id="cb14-5"><a href="#cb14-5" aria-hidden="true"></a></span>
+<span id="cb14-6"><a href="#cb14-6" aria-hidden="true"></a>## Author Contributions {.appendix}</span>
+<span id="cb14-7"><a href="#cb14-7" aria-hidden="true"></a></span>
+<span id="cb14-8"><a href="#cb14-8" aria-hidden="true"></a>We strongly encourage you to include an author contributions statement briefly </span>
+<span id="cb14-9"><a href="#cb14-9" aria-hidden="true"></a>describing what each author did.</span></code></pre></div>
 <p>Footnotes and references will be included in the same section, immediately beneath any custom appendices.</p>
 <h2 class="appendix" id="acknowledgments">Acknowledgments</h2>
 <p>Distill for R Markdown builds on the work of many individuals and projects. <a href="https://github.com/shancarter">Shan Carter</a>, <a href="https://github.com/ludwigschubert">Ludwig Schubert</a>, and <a href="https://github.com/colah">Christopher Olah</a> created the Distill web framework. <a href="https://github.com/jgm">John MacFarlane</a> created the Pandoc universal markup converter. <a href="https://github.com/dpvc">Davide Cervone</a> and <a href="https://github.com/zorkow">Volker Sorge</a> created the MathJax library for rendering mathematical notation on the web. <a href="https://github.com/mbostock">Mike Bostock</a> created the D3 library for producing dynamic, interactive data visualizations for the web. We are grateful for the spirit of generosity that moved these individuals to create high-quality open source software for the benefit of all.</p>

@@ -18,6 +18,69 @@
  <!--radix_placeholder_import_source-->
  <!--/radix_placeholder_import_source-->
 
+<style type="text/css">code{white-space: pre;}</style>
+<style type="text/css" data-origin="pandoc">
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    color: #aaaaaa;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+code span.al { color: #ff0000; } /* Alert */
+code span.an { color: #008000; } /* Annotation */
+code span.at { } /* Attribute */
+code span.bu { } /* BuiltIn */
+code span.cf { color: #0000ff; } /* ControlFlow */
+code span.ch { color: #008080; } /* Char */
+code span.cn { color: #585cf6; } /* Constant */
+code span.co { color: #4c886b; } /* Comment */
+code span.cv { color: #008000; } /* CommentVar */
+code span.do { color: #008000; } /* Documentation */
+code span.dv { color: #0000cd; } /* DecVal */
+code span.er { color: #ff0000; font-weight: bold; } /* Error */
+code span.ex { } /* Extension */
+code span.fl { color: #0000cd; } /* Float */
+code span.im { } /* Import */
+code span.in { color: #008000; } /* Information */
+code span.kw { color: #0000ff; } /* Keyword */
+code span.op { color: #687687; } /* Operator */
+code span.ot { color: #ff4000; } /* Other */
+code span.pp { color: #ff4000; } /* Preprocessor */
+code span.sc { color: #008080; } /* SpecialChar */
+code span.ss { color: #008080; } /* SpecialString */
+code span.st { color: #036a07; } /* String */
+code span.va { } /* Variable */
+code span.vs { color: #008080; } /* VerbatimString */
+code span.wa { color: #008000; font-weight: bold; } /* Warning */
+</style>
+
   <!--radix_placeholder_meta_tags-->
   <title>Distill for R Markdown: Creating a Website</title>
 
@@ -764,6 +827,79 @@
     width: 100%;
   }
 
+  /* Tweak code blocks */
+
+  d-article div.sourceCode code,
+  d-article pre code {
+    font-family: Consolas, Monaco, 'Andale Mono', 'Ubuntu Mono', monospace;
+  }
+
+  d-article pre,
+  d-article div.sourceCode,
+  d-article div.sourceCode pre {
+    overflow: hidden;
+  }
+
+  d-article div.sourceCode {
+    background-color: white;
+  }
+
+  d-article div.sourceCode pre {
+    padding-left: 10px;
+    font-size: 12px;
+    border-left: 2px solid rgba(0,0,0,0.1);
+  }
+
+  d-article pre {
+    font-size: 12px;
+    color: black;
+    background: none;
+    margin-top: 0;
+    text-align: left;
+    white-space: pre;
+    word-spacing: normal;
+    word-break: normal;
+    word-wrap: normal;
+    line-height: 1.5;
+
+    -moz-tab-size: 4;
+    -o-tab-size: 4;
+    tab-size: 4;
+
+    -webkit-hyphens: none;
+    -moz-hyphens: none;
+    -ms-hyphens: none;
+    hyphens: none;
+  }
+
+  d-article pre a {
+    border-bottom: none;
+  }
+
+  d-article pre a:hover {
+    border-bottom: none;
+    text-decoration: underline;
+  }
+
+  @media(min-width: 768px) {
+
+  d-article pre,
+  d-article div.sourceCode,
+  d-article div.sourceCode pre {
+    overflow: visible !important;
+  }
+
+  d-article div.sourceCode pre {
+    padding-left: 18px;
+    font-size: 14px;
+  }
+
+  d-article pre {
+    font-size: 14px;
+  }
+
+  }
+
   figure img.external {
     background: white;
     border: 1px solid rgba(0, 0, 0, 0.1);
@@ -853,56 +989,6 @@
     margin-top: 0;
   }
 
-  /* Tweak code blocks (note that this CSS is repeated above in an injection
-     into the d-code shadow dom) */
-
-  d-code {
-    overflow-x: auto !important;
-  }
-
-  pre.d-code code.d-code {
-    padding-left: 10px;
-    font-size: 12px;
-    border-left: 2px solid rgba(0,0,0,0.1);
-  }
-
-  pre.text-output {
-
-    font-size: 12px;
-    color: black;
-    background: none;
-    font-family: Consolas, Monaco, 'Andale Mono', 'Ubuntu Mono', monospace;
-    text-align: left;
-    white-space: pre;
-    word-spacing: normal;
-    word-break: normal;
-    word-wrap: normal;
-    line-height: 1.5;
-
-    -moz-tab-size: 4;
-    -o-tab-size: 4;
-    tab-size: 4;
-
-    -webkit-hyphens: none;
-    -moz-hyphens: none;
-    -ms-hyphens: none;
-    hyphens: none;
-  }
-
-  @media(min-width: 768px) {
-
-  d-code {
-    overflow-x: visible !important;
-  }
-
-  pre.d-code code.d-code  {
-      padding-left: 18px;
-      font-size: 14px;
-  }
-  pre.text-output {
-    font-size: 14px;
-  }
-  }
 
   /* Figure */
 
@@ -1326,27 +1412,6 @@
     // show d-appendix if we have appendix content
     $("d-appendix").css('display', appendix ? 'grid' : 'none');
 
-    // replace code blocks with d-code
-    $('pre>code').each(function(i, val) {
-      var code = $(this);
-      var pre = code.parent();
-      var clz = "";
-      var language = pre.attr('class');
-      if (language) {
-        // map unknown languages to "clike" (without this they just dissapear)
-        if ($.inArray(language, ["bash", "clike", "css", "go", "html",
-                                 "javascript", "js", "julia", "lua", "markdown",
-                                 "markup", "mathml", "python", "svg", "xml"]) == -1)
-          language = "clike";
-        language = ' language="' + language + '"';
-        var dt_code = $('<d-code block' + language + clz + '></d-code>');
-        dt_code.text(code.text());
-        pre.replaceWith(dt_code);
-      } else {
-        code.addClass('text-output').unwrap().changeElementType('pre');
-      }
-    });
-
     // localize layout chunks to just output
     $('.layout-chunk').each(function(i, val) {
 
@@ -1354,7 +1419,7 @@
       var layout = $(this).attr('data-layout');
 
       // apply layout to markdown level block elements
-      var elements = $(this).children().not('d-code, pre.text-output, script');
+      var elements = $(this).children().not('div.sourceCode, pre, script');
       elements.each(function(i, el) {
         var layout_div = $('<div class="' + layout + '"></div>');
         if (layout_div.hasClass('shaded')) {
@@ -1454,15 +1519,6 @@
         grid.children('h3:contains("Authors")').text('Author');
         grid.children('h3:contains("Affiliations")').text('Affiliation');
       }
-
-      // inject pre code styles (can't do this with a global stylesheet b/c a shadow root is used)
-      $('d-code').each(function(i, val) {
-        var style = document.createElement('style');
-        style.innerHTML = 'pre code { padding-left: 10px; font-size: 12px; border-left: 2px solid rgba(0,0,0,0.1); } ' +
-                          '@media(min-width: 768px) { pre code { padding-left: 18px; font-size: 14px; } }';
-        if (this.shadowRoot)
-          this.shadowRoot.appendChild(style);
-      });
 
       // move appendix-bottom entries to the bottom
       $('.appendix-bottom').appendTo('d-appendix').children().unwrap();
@@ -1627,7 +1683,7 @@
   </script>
 
   <!--/radix_placeholder_distill-->
-  <script src="site_libs/header-attrs-2.3.5/header-attrs.js"></script>
+  <script src="site_libs/header-attrs-2.3.8/header-attrs.js"></script>
   <script src="site_libs/jquery-1.11.3/jquery.min.js"></script>
   <script src="site_libs/anchor-4.2.2/anchor.min.js"></script>
   <script src="site_libs/bowser-1.9.3/bowser.min.js"></script>
@@ -1804,16 +1860,14 @@ Publishing
 </tbody>
 </table>
 <p>If you are not using RStudio you can also call the Distill <code>create_website()</code> function:</p>
-<pre class="r"><code>
-library(distill)
-create_website(dir = &quot;my-website&quot;, title = &quot;My Website&quot;)</code></pre>
+<div class="sourceCode" id="cb1"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true"></a><span class="kw">library</span>(distill)</span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true"></a><span class="kw">create_website</span>(<span class="dt">dir =</span> <span class="st">&quot;my-website&quot;</span>, <span class="dt">title =</span> <span class="st">&quot;My Website&quot;</span>)</span></code></pre></div>
 <p>A new website containing Home and About pages will be created within the <code>my-website</code> directory.</p>
 <h3 id="authoring-articles">Authoring articles</h3>
 <p>When you use the RStudio <strong>Knit</strong> command on a Distill article within a website, only that article will be rendered and previewed:</p>
 <p><img src="images/knit-site-article.png" class="screenshot" style="width:95.0%" /></p>
 <p>You can also preview a single article from within a website by passing the name of the article’s Rmd file to <code>render_site()</code>:</p>
-<pre class="r"><code>
-render_site(&quot;about.Rmd&quot;)</code></pre>
+<div class="sourceCode" id="cb2"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true"></a><span class="kw">render_site</span>(<span class="st">&quot;about.Rmd&quot;</span>)</span></code></pre></div>
 <p>This will build only the specified article (as opposed to all articles in the site). This the recommended workflow for authoring articles since it offers the fastest turnaround time for previews (since only the article you are working on is rendered).</p>
 <h3 id="building-the-site">Building the site</h3>
 <p>After you’ve authored the various articles contained within the website you will want to build the entire site before deploying it.</p>
@@ -1827,14 +1881,12 @@ render_site(&quot;about.Rmd&quot;)</code></pre>
 </ol>
 <p>The HTML files within the <code>_site</code> directory are now ready to deploy as a standalone static website.</p>
 <p>To build a website from the command line, use the <code>rmarkdown::render_site()</code> function:</p>
-<pre class="r"><code>
-library(rmarkdown)
-render_site()</code></pre>
+<div class="sourceCode" id="cb3"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true"></a><span class="kw">library</span>(rmarkdown)</span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true"></a><span class="kw">render_site</span>()</span></code></pre></div>
 <h2 id="site-output">Site output</h2>
 <p>The <strong>_site.yml</strong> file has a number of options that affect site output including where it is written and what files are included and excluded from the site. Here’s an example that makes use of a few of these options:</p>
 <p><strong>_site.yml</strong></p>
-<pre class="markup"><code>
-name: &quot;my-website&quot;
+<pre class="markup"><code>name: &quot;my-website&quot;
 output_dir: &quot;_site&quot;
 include: [&quot;import.R&quot;]
 exclude: [&quot;docs.txt&quot;, &quot;*.csv&quot;]</code></pre>
@@ -1853,8 +1905,7 @@ exclude: [&quot;docs.txt&quot;, &quot;*.csv&quot;]</code></pre>
 <p>Site navigation bars include the site’s title, an optional logo, top-level links to articles, and if need be drop-down menus that include links to several articles. For example:</p>
 <p><img src="images/navigation-bar.png" class="screenshot" style="width:95.0%" /></p>
 <p>Elements of the site navigation bar are specified within the <code>navbar</code> section of the <code>_site.yml</code> file. For example, here is the YAML that was used to create the navigation bar displayed above:</p>
-<pre class="markup"><code>
----
+<pre class="markup"><code>---
 name: &quot;distill&quot;
 title: &quot;Distill for R Markdown&quot;
 navbar:
@@ -1885,8 +1936,7 @@ output: distill::distill_article
 <p>Note also that we used an <code>icon</code> for one of the menus, specifying the <a href="https://fontawesome.com/">Font Awesome</a> <code>fab fa-github</code> identifier for the GitHub icon (you can use any Font Awesome icon). If there isn’t a Font Awesome icon that matches the image you want, you can also specify a custom <code>image</code> rather than an <code>icon</code>.</p>
 <h3 id="site-search">Site search</h3>
 <p>You can add a search box to the navigation bar using the <code>search</code> field of the <code>navbar</code> key within <code>_site.yml</code>. For example:</p>
-<pre class="markup"><code>
----
+<pre class="markup"><code>---
 name: &quot;distill&quot;
 title: &quot;Distill for R Markdown&quot;
 navbar:
@@ -1898,8 +1948,7 @@ navbar:
 <p>Note that only articles with a <code>description</code> metadata field are included within search results. Also note that search is enabled by default for <a href="blog.html">blog sites</a>.</p>
 <h3 id="source-code">Source code</h3>
 <p>If you want to display a link to the source code for your website on the navigation bar, add a <code>source_url</code> field to the <code>navbar</code> definition. For example:</p>
-<pre class="markup"><code>
----
+<pre class="markup"><code>---
 name: &quot;distill&quot;
 title: &quot;Distill for R Markdown&quot;
 navbar:
@@ -1914,8 +1963,7 @@ navbar:
 <p><img src="images/footer-bar.png" class="screenshot" style="width:95.0%" /></p>
 <p>To add a footer, simply include a file named <code>_footer.html</code> within your main site directory. For example:</p>
 <p><strong>_footer.html</strong></p>
-<pre class="markup"><code>
-© Copyright 2018 [The Distill Template Authors]
+<pre class="markup"><code>© Copyright 2018 [The Distill Template Authors]
 (https://github.com/distillpub/template/blob/master/AUTHORS) 
 and [RStudio, Inc](https://www.rstudio.com).
 
@@ -1923,39 +1971,37 @@ Software licensed under the [Apache License, v2.0]
 (https://www.apache.org/licenses/LICENSE-2.0).</code></pre>
 <h3 id="theming">Theming</h3>
 <p>You can use CSS to create an alternate theme for your navigation bar and site footer. Here is the CSS used for the default appearance:</p>
-<pre class="css"><code>
-.distill-site-nav {
-  color: rgba(255, 255, 255, 0.8);
-  background-color: #455a64;
-  font-size: 15px;
-  font-weight: 300;
-}
-
-.distill-site-nav a {
-  color: inherit;
-  text-decoration: none;
-}
-
-.distill-site-nav a:hover {
-  color: white;
-}
-
-.distill-site-header {
-}
-
-.distill-site-footer {
-}
-
-@media print {
-  .distill-site-nav {
-    display: none;
-  }
-}</code></pre>
+<div class="sourceCode" id="cb9"><pre class="sourceCode css"><code class="sourceCode css"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true"></a><span class="fu">.distill-site-nav</span> {</span>
+<span id="cb9-2"><a href="#cb9-2" aria-hidden="true"></a>  <span class="kw">color</span>: <span class="fu">rgba(</span><span class="dv">255</span><span class="op">,</span> <span class="dv">255</span><span class="op">,</span> <span class="dv">255</span><span class="op">,</span> <span class="dv">0.8</span><span class="fu">)</span><span class="op">;</span></span>
+<span id="cb9-3"><a href="#cb9-3" aria-hidden="true"></a>  <span class="kw">background-color</span>: <span class="cn">#455a64</span><span class="op">;</span></span>
+<span id="cb9-4"><a href="#cb9-4" aria-hidden="true"></a>  <span class="kw">font-size</span>: <span class="dv">15</span><span class="dt">px</span><span class="op">;</span></span>
+<span id="cb9-5"><a href="#cb9-5" aria-hidden="true"></a>  <span class="kw">font-weight</span>: <span class="dv">300</span><span class="op">;</span></span>
+<span id="cb9-6"><a href="#cb9-6" aria-hidden="true"></a>}</span>
+<span id="cb9-7"><a href="#cb9-7" aria-hidden="true"></a></span>
+<span id="cb9-8"><a href="#cb9-8" aria-hidden="true"></a><span class="fu">.distill-site-nav</span> a {</span>
+<span id="cb9-9"><a href="#cb9-9" aria-hidden="true"></a>  <span class="kw">color</span>: <span class="bu">inherit</span><span class="op">;</span></span>
+<span id="cb9-10"><a href="#cb9-10" aria-hidden="true"></a>  <span class="kw">text-decoration</span>: <span class="dv">none</span><span class="op">;</span></span>
+<span id="cb9-11"><a href="#cb9-11" aria-hidden="true"></a>}</span>
+<span id="cb9-12"><a href="#cb9-12" aria-hidden="true"></a></span>
+<span id="cb9-13"><a href="#cb9-13" aria-hidden="true"></a><span class="fu">.distill-site-nav</span> a<span class="in">:hover</span> {</span>
+<span id="cb9-14"><a href="#cb9-14" aria-hidden="true"></a>  <span class="kw">color</span>: <span class="cn">white</span><span class="op">;</span></span>
+<span id="cb9-15"><a href="#cb9-15" aria-hidden="true"></a>}</span>
+<span id="cb9-16"><a href="#cb9-16" aria-hidden="true"></a></span>
+<span id="cb9-17"><a href="#cb9-17" aria-hidden="true"></a><span class="fu">.distill-site-header</span> {</span>
+<span id="cb9-18"><a href="#cb9-18" aria-hidden="true"></a>}</span>
+<span id="cb9-19"><a href="#cb9-19" aria-hidden="true"></a></span>
+<span id="cb9-20"><a href="#cb9-20" aria-hidden="true"></a><span class="fu">.distill-site-footer</span> {</span>
+<span id="cb9-21"><a href="#cb9-21" aria-hidden="true"></a>}</span>
+<span id="cb9-22"><a href="#cb9-22" aria-hidden="true"></a></span>
+<span id="cb9-23"><a href="#cb9-23" aria-hidden="true"></a><span class="im">@media</span> <span class="dv">print</span> {</span>
+<span id="cb9-24"><a href="#cb9-24" aria-hidden="true"></a>  <span class="fu">.distill-site-nav</span> {</span>
+<span id="cb9-25"><a href="#cb9-25" aria-hidden="true"></a>    <span class="kw">display</span>: <span class="dv">none</span><span class="op">;</span></span>
+<span id="cb9-26"><a href="#cb9-26" aria-hidden="true"></a>  }</span>
+<span id="cb9-27"><a href="#cb9-27" aria-hidden="true"></a>}</span></code></pre></div>
 <p>The <code>distill-site-nav</code> class addresses both the header and footer, whereas the <code>distill-site-header</code> and <code>distill-site-footer</code> apply (respectively) to just the header and footer.</p>
 <p>To override all or part of this CSS, simply include a <code>styles.css</code> file in the main site directory and add a reference to it within your site output options. For example:</p>
 <p><strong>_site.yml</strong></p>
-<pre class="markup"><code>
-name: &quot;distill&quot;
+<pre class="markup"><code>name: &quot;distill&quot;
 title: &quot;Distill for R Markdown&quot;
 navbar:
   # (navbar definition here)
@@ -1965,8 +2011,7 @@ output:
 <h2 id="google-analytics">Google analytics</h2>
 <p>You can add <a href="https://analytics.google.com/">Google Analytics</a> to your website by adding a <code>google_analytics</code> tracking ID to your <code>_site.yml</code> file. For example:</p>
 <p><strong>_site.yml</strong></p>
-<pre class="markup"><code>
-name: &quot;distill&quot;
+<pre class="markup"><code>name: &quot;distill&quot;
 title: &quot;Distill for R Markdown&quot;
 base_url: https://rstudio.github.io/distill
 google_analytics: &quot;UA-77306155-2&quot;
@@ -2017,8 +2062,7 @@ output: distill::distill_article</code></pre>
 </table>
 <p>Here’s a <code>_site.yml</code> file that uses all of these fields (save for <code>license_url</code> since the license is already specified via <code>creative_commons</code>):</p>
 <p><strong>_site.yml</strong></p>
-<pre class="markup"><code>
-name: &quot;distill&quot;
+<pre class="markup"><code>name: &quot;distill&quot;
 title: &quot;Distill for R Markdown&quot;
 favicon: images/favicon.png
 base_url: https://rstudio.github.io/distill
