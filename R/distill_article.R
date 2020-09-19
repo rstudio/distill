@@ -85,8 +85,8 @@ distill_article <- function(toc = FALSE,
   knitr_options$opts_hooks$preview <- knitr_preview_hook
   knitr_options$knit_hooks <- list()
   knitr_options$knit_hooks$chunk <- knitr_chunk_hook()
-  if (highlight_downlit)
-    knitr_options$knit_hooks$source <- knitr_source_hook
+  if (!is.null(highlight) && highlight_downlit)
+    knitr_options$knit_hooks$source <- knitr_source_hook()
 
   # shared variables
   site_config <- NULL
@@ -269,15 +269,26 @@ knitr_preview_hook <- function(options) {
 }
 
 # hook to highlight R code with downlit
-knitr_source_hook <- function(x, options) {
-  x <- paste0(x, "\n", collapse = "")
-  if (options$engine == "R") {
-    x <- paste0("<div class=\"sourceCode\"><pre><code>",
-               highlight(x, classes_pandoc(), pre_class = NULL),
-               "</code></pre></div>")
+knitr_source_hook <- function() {
+
+  # capture the default source hook
+  previous_hooks <- knitr::knit_hooks$get()
+  on.exit(knitr::knit_hooks$restore(previous_hooks), add = TRUE)
+  knitr::render_markdown()
+  default_source_hook <- knitr::knit_hooks$get("source")
+
+  function(x, options) {
+    if (options$engine == "R") {
+      x <- paste0(x, "\n", collapse = "")
+      x <- paste0("<div class=\"sourceCode\"><pre><code>",
+                  highlight(x, classes_pandoc(), pre_class = NULL),
+                  "</code></pre></div>")
+      x <- paste0(x, "\n")
+      x
+    } else {
+      default_source_hook(x, options)
+    }
   }
-  x <- paste0(x, "\n")
-  x
 }
 
 # hook to enclose output in div with layout class
