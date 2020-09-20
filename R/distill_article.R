@@ -277,7 +277,7 @@ distill_highlighting_args <- function(highlight) {
   #
   #   https://github.com/jgm/skylighting/blob/a1d02a0db6260c73aaf04aae2e6e18b569caacdc/skylighting-core/src/Skylighting/Format/HTML.hs#L117-L147
   #
-  default = pandoc_path_arg(distill_resource("highlight.theme"))
+  default = pandoc_path_arg(distill_resource("rstudio.theme"))
 
   # yield highlight args
   pandoc_highlight_args(highlight, default)
