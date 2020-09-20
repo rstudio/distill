@@ -1866,15 +1866,25 @@ Publishing
 <p>Distill for R Markdown is based on the <a href="https://github.com/distillpub/template">Distill web framework</a>, which was originally created for use in the Distill Machine Learning Journal <span class="citation" data-cites="distill">(Carter, Olah, and Satyanarayan <a href="#ref-distill" role="doc-biblioref">2016</a>)</span>. Distill for R Markdown combines the technical authoring features of Distill with <a href="https://rmarkdown.rstudio.com/">R Markdown</a>, enabling a fully reproducible workflow based on literate programming <span class="citation" data-cites="knuth1984">(Knuth <a href="#ref-knuth1984" role="doc-biblioref">1984</a>)</span>.</p>
 <h2 id="installation">Installation</h2>
 <p>To create an <a href="https://rmarkdown.rstudio.com">R Markdown</a> document that uses the Distill format, first install the development version of the <strong>distill</strong> R package from GitHub:</p>
-<div class="sourceCode" id="cb1"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true"></a>devtools<span class="op">::</span><span class="kw">install_github</span>(<span class="st">&quot;rstudio/distill&quot;</span>)</span></code></pre></div>
+<div class="layout-chunk" data-layout="l-body">
+<div class="sourceCode">
+<pre><code><span class='fu'>devtools</span><span class='fu'>::</span><span class='fu'><a href='https://rdrr.io/pkg/devtools/man/remote-reexports.html'>install_github</a></span><span class='op'>(</span><span class='st'>"rstudio/distill"</span><span class='op'>)</span>
+</code></pre>
+</div>
+</div>
 <p>Using Distill for R Markdown requires Pandoc v2.0 or higher. If you are using RStudio then you should use RStudio v1.2.718 or higher (which comes bundled with Pandoc v2.0).</p>
 <p>You can download the latest version of RStudio at <a href="https://www.rstudio.com/products/rstudio/download/" class="uri">https://www.rstudio.com/products/rstudio/download/</a>.</p>
 <h2 id="creating-an-article">Creating an article</h2>
 <p>Use the <strong>New R Markdown</strong> dialog within RStudio to create a new Distill article:</p>
 <p><img src="images/new_distill_article.png" class="screenshot" style="width:100.0%" /></p>
 <p>You can also create a new Distill article from the command line with:</p>
-<div class="sourceCode" id="cb2"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true"></a><span class="kw">library</span>(rmarkdown)</span>
-<span id="cb2-2"><a href="#cb2-2" aria-hidden="true"></a><span class="kw">draft</span>(<span class="st">&quot;article.Rmd&quot;</span>, <span class="st">&quot;distill_article&quot;</span>, <span class="dt">package =</span> <span class="st">&quot;distill&quot;</span>)</span></code></pre></div>
+<div class="layout-chunk" data-layout="l-body">
+<div class="sourceCode">
+<pre><code><span class='kw'><a href='https://rdrr.io/r/base/library.html'>library</a></span><span class='op'>(</span><span class='va'><a href='https://github.com/rstudio/rmarkdown'>rmarkdown</a></span><span class='op'>)</span>
+<span class='fu'><a href='https://rdrr.io/pkg/rmarkdown/man/draft.html'>draft</a></span><span class='op'>(</span><span class='st'>"article.Rmd"</span>, <span class='st'>"distill_article"</span>, package <span class='op'>=</span> <span class='st'>"distill"</span><span class='op'>)</span>
+</code></pre>
+</div>
+</div>
 <div id="front-matter">
 
 </div>
@@ -1964,9 +1974,9 @@ $$</code></pre>
 <h2 id="footnotes-and-asides">Footnotes and asides</h2>
 <p>Footnotes use standard Pandoc markdown notation, for example <code>^[This will become a hover-able footnote]</code>. The number of the footnote will be automatically generated.<a href="#fn1" class="footnote-ref" id="fnref1" role="doc-noteref"><sup>1</sup></a></p>
 <p>You can also optionally include notes in the gutter of the article (immediately to the right of the article text). To do this use the <code>&lt;aside&gt;</code> tag.</p>
-<div class="sourceCode" id="cb8"><pre class="sourceCode html"><code class="sourceCode html"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true"></a><span class="kw">&lt;aside&gt;</span></span>
-<span id="cb8-2"><a href="#cb8-2" aria-hidden="true"></a>This content will appear in the gutter of the article.</span>
-<span id="cb8-3"><a href="#cb8-3" aria-hidden="true"></a><span class="kw">&lt;/aside&gt;</span></span></code></pre></div>
+<div class="sourceCode" id="cb6"><pre class="sourceCode html"><code class="sourceCode html"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true"></a><span class="kw">&lt;aside&gt;</span></span>
+<span id="cb6-2"><a href="#cb6-2" aria-hidden="true"></a>This content will appear in the gutter of the article.</span>
+<span id="cb6-3"><a href="#cb6-3" aria-hidden="true"></a><span class="kw">&lt;/aside&gt;</span></span></code></pre></div>
 <aside>
 <p>This content will appear in the gutter of the article.</p>
 </aside>
@@ -2064,10 +2074,6 @@ output:
 ---</code></pre>
 <p>Available options for <code>highlight</code> include:</p>
 <table>
-<colgroup>
-<col style="width: 33%" />
-<col style="width: 66%" />
-</colgroup>
 <thead>
 <tr class="header">
 <th>Option(s)</th>
@@ -2091,15 +2097,15 @@ output:
 </table>
 <h2 id="appendices">Appendices</h2>
 <p>Appendices can be added after your article by adding the <code>.appendix</code> class to any level 1 or level 2 header. For example:</p>
-<div class="sourceCode" id="cb15"><pre class="sourceCode html"><code class="sourceCode html"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true"></a>## Acknowledgments {.appendix}</span>
-<span id="cb15-2"><a href="#cb15-2" aria-hidden="true"></a></span>
-<span id="cb15-3"><a href="#cb15-3" aria-hidden="true"></a>This is a place to recognize people and institutions. It may also be a good place</span>
-<span id="cb15-4"><a href="#cb15-4" aria-hidden="true"></a>to acknowledge and cite software that makes your work possible.</span>
-<span id="cb15-5"><a href="#cb15-5" aria-hidden="true"></a></span>
-<span id="cb15-6"><a href="#cb15-6" aria-hidden="true"></a>## Author Contributions {.appendix}</span>
-<span id="cb15-7"><a href="#cb15-7" aria-hidden="true"></a></span>
-<span id="cb15-8"><a href="#cb15-8" aria-hidden="true"></a>We strongly encourage you to include an author contributions statement briefly </span>
-<span id="cb15-9"><a href="#cb15-9" aria-hidden="true"></a>describing what each author did.</span></code></pre></div>
+<div class="sourceCode" id="cb13"><pre class="sourceCode html"><code class="sourceCode html"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true"></a>## Acknowledgments {.appendix}</span>
+<span id="cb13-2"><a href="#cb13-2" aria-hidden="true"></a></span>
+<span id="cb13-3"><a href="#cb13-3" aria-hidden="true"></a>This is a place to recognize people and institutions. It may also be a good place</span>
+<span id="cb13-4"><a href="#cb13-4" aria-hidden="true"></a>to acknowledge and cite software that makes your work possible.</span>
+<span id="cb13-5"><a href="#cb13-5" aria-hidden="true"></a></span>
+<span id="cb13-6"><a href="#cb13-6" aria-hidden="true"></a>## Author Contributions {.appendix}</span>
+<span id="cb13-7"><a href="#cb13-7" aria-hidden="true"></a></span>
+<span id="cb13-8"><a href="#cb13-8" aria-hidden="true"></a>We strongly encourage you to include an author contributions statement briefly </span>
+<span id="cb13-9"><a href="#cb13-9" aria-hidden="true"></a>describing what each author did.</span></code></pre></div>
 <p>Footnotes and references will be included in the same section, immediately beneath any custom appendices.</p>
 <h2 class="appendix" id="acknowledgments">Acknowledgments</h2>
 <p>Distill for R Markdown builds on the work of many individuals and projects. <a href="https://github.com/shancarter">Shan Carter</a>, <a href="https://github.com/ludwigschubert">Ludwig Schubert</a>, and <a href="https://github.com/colah">Christopher Olah</a> created the Distill web framework. <a href="https://github.com/jgm">John MacFarlane</a> created the Pandoc universal markup converter. <a href="https://github.com/dpvc">Davide Cervone</a> and <a href="https://github.com/zorkow">Volker Sorge</a> created the MathJax library for rendering mathematical notation on the web. <a href="https://github.com/mbostock">Mike Bostock</a> created the D3 library for producing dynamic, interactive data visualizations for the web. We are grateful for the spirit of generosity that moved these individuals to create high-quality open source software for the benefit of all.</p>

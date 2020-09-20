@@ -18,68 +18,6 @@
  <!--radix_placeholder_import_source-->
  <!--/radix_placeholder_import_source-->
 
-<style type="text/css">code{white-space: pre;}</style>
-<style type="text/css" data-origin="pandoc">
-pre > code.sourceCode { white-space: pre; position: relative; }
-pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
-pre > code.sourceCode > span:empty { height: 1.2em; }
-code.sourceCode > span { color: inherit; text-decoration: inherit; }
-div.sourceCode { margin: 1em 0; }
-pre.sourceCode { margin: 0; }
-@media screen {
-div.sourceCode { overflow: auto; }
-}
-@media print {
-pre > code.sourceCode { white-space: pre-wrap; }
-pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
-}
-pre.numberSource code
-  { counter-reset: source-line 0; }
-pre.numberSource code > span
-  { position: relative; left: -4em; counter-increment: source-line; }
-pre.numberSource code > span > a:first-child::before
-  { content: counter(source-line);
-    position: relative; left: -1em; text-align: right; vertical-align: baseline;
-    border: none; display: inline-block;
-    -webkit-touch-callout: none; -webkit-user-select: none;
-    -khtml-user-select: none; -moz-user-select: none;
-    -ms-user-select: none; user-select: none;
-    padding: 0 4px; width: 4em;
-    color: #aaaaaa;
-  }
-pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
-div.sourceCode
-  {   }
-@media screen {
-pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
-}
-code span.al { color: #ff0000; } /* Alert */
-code span.an { color: #008000; } /* Annotation */
-code span.at { } /* Attribute */
-code span.bu { } /* BuiltIn */
-code span.cf { color: #0000ff; } /* ControlFlow */
-code span.ch { color: #008080; } /* Char */
-code span.cn { color: #585cf6; } /* Constant */
-code span.co { color: #4c886b; } /* Comment */
-code span.cv { color: #008000; } /* CommentVar */
-code span.do { color: #008000; } /* Documentation */
-code span.dv { color: #0000cd; } /* DecVal */
-code span.er { color: #ff0000; font-weight: bold; } /* Error */
-code span.ex { } /* Extension */
-code span.fl { color: #0000cd; } /* Float */
-code span.im { } /* Import */
-code span.in { color: #008000; } /* Information */
-code span.kw { color: #0000ff; } /* Keyword */
-code span.op { color: #687687; } /* Operator */
-code span.ot { color: #ff4000; } /* Other */
-code span.pp { color: #ff4000; } /* Preprocessor */
-code span.sc { color: #008080; } /* SpecialChar */
-code span.ss { color: #008080; } /* SpecialString */
-code span.st { color: #036a07; } /* String */
-code span.va { } /* Variable */
-code span.vs { color: #008080; } /* VerbatimString */
-code span.wa { color: #008000; font-weight: bold; } /* Warning */
-</style>
 
   <!--radix_placeholder_meta_tags-->
   <title>Distill for R Markdown: Publishing Websites</title>
@@ -1821,10 +1759,20 @@ Publishing
 <h2 id="rstudio-connect">RStudio Connect</h2>
 <p><a href="https://www.rstudio.com/products/connect/">RStudio Connect</a> is a server product from RStudio for secure sharing of websites, applications, reports, and plots.</p>
 <p>You can deploy a Distill website to RStudio Connect from the command line using the <code>distill::publish_website()</code> function. For example:</p>
-<div class="sourceCode" id="cb1"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true"></a><span class="kw">library</span>(distill)</span>
-<span id="cb1-2"><a href="#cb1-2" aria-hidden="true"></a><span class="kw">publish_website</span>(<span class="dt">server =</span> <span class="st">&quot;https://rsc.example.com&quot;</span>)</span></code></pre></div>
+<div class="layout-chunk" data-layout="l-body">
+<div class="sourceCode">
+<pre><code><span class='kw'><a href='https://rdrr.io/r/base/library.html'>library</a></span><span class='op'>(</span><span class='va'><a href='https://github.com/rstudio/distill'>distill</a></span><span class='op'>)</span>
+<span class='fu'><a href='https://rdrr.io/pkg/distill/man/publish_website.html'>publish_website</a></span><span class='op'>(</span>server <span class='op'>=</span> <span class='st'>"https://rsc.example.com"</span><span class='op'>)</span>
+</code></pre>
+</div>
+</div>
 <p>Note that once you’ve published your site for the first time you can omit the <code>server</code> argument:</p>
-<div class="sourceCode" id="cb2"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true"></a><span class="kw">publish_website</span>()</span></code></pre></div>
+<div class="layout-chunk" data-layout="l-body">
+<div class="sourceCode">
+<pre><code><span class='fu'><a href='https://rdrr.io/pkg/distill/man/publish_website.html'>publish_website</a></span><span class='op'>(</span><span class='op'>)</span>
+</code></pre>
+</div>
+</div>
 <p>You can also publish a Distill website directly to an RStudio Connect server from within the website preview window by clicking the <strong>Publish</strong> button:</p>
 <p><img src="images/rstudio-connect.png" class="screenshot" style="width:95.0%" /></p>
 <p>Note that you can either publish your website with the source code (so it can be regenerated on a scheduled basis) or publish a copy of the website you built locally. Generally publishing a copy is more straightforward so that’s the recommended option unless you have specialized requirements.</p>
@@ -1833,7 +1781,12 @@ Publishing
 <p><a href="https://pages.github.com/">GitHub Pages</a> is a service that lets you publish a website from any GitHub repository. There are two additional configuration steps required to host a Distill website using GitHub Pages:</p>
 <ol type="1">
 <li><p>Create a file named <code>.nojekyll</code> in your repository (this is required to disable some processing of HTML files that GitHub does by default). You can do this with the following code:</p>
-<div class="sourceCode" id="cb3"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true"></a><span class="kw">file.create</span>(<span class="st">&quot;.nojekyll&quot;</span>)</span></code></pre></div></li>
+<div class="layout-chunk" data-layout="l-body">
+<div class="sourceCode">
+<pre><code><span class='fu'><a href='https://rdrr.io/r/base/files.html'>file.create</a></span><span class='op'>(</span><span class='st'>".nojekyll"</span><span class='op'>)</span>
+</code></pre>
+</div>
+</div></li>
 <li><p>Set the <code>output_dir</code> within <code>_site.yml</code> to match the repository directory your site is served from. You can configure GitHub Pages to publish from the root of your master branch or the <code>docs</code> sub-directory:</p>
 <p><img src="images/github-pages-directory.png" style="width:95.0%" /></p>
 <p>Depending on your configuration you should set the <code>output_dir</code> as follows:</p>

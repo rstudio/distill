@@ -17,14 +17,14 @@ Below we describe several convenient options for Distill website deployment incl
 
 You can deploy a Distill website to RStudio Connect from the command line using the `distill::publish_website()` function. For example:
 
-``` {.r}
+```{r, eval=FALSE, echo=TRUE}
 library(distill)
 publish_website(server = "https://rsc.example.com")
 ```
 
 Note that once you've published your site for the first time you can omit the `server` argument:
 
-``` {.r}
+```{r, eval=FALSE, echo=TRUE}
 publish_website()
 ```
 
@@ -42,7 +42,7 @@ Unlike the other website publishing options described below, [RStudio Connect](h
 
 1.  Create a file named `.nojekyll` in your repository (this is required to disable some processing of HTML files that GitHub does by default). You can do this with the following code:
 
-    ``` {.r}
+    ```{r, eval=FALSE, echo=TRUE}
     file.create(".nojekyll")
     ```
 

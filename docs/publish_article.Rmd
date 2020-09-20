@@ -51,7 +51,7 @@ Here are the steps required to publish a Distill article to GitHub Pages:
 
 3)  Create a file named `.nojekyll` in your repository (this is required to disable some processing of HTML files that GitHub does by default). You can do this with the following code:
 
-    ``` {.r}
+    ```{r, eval=FALSE, echo=TRUE}
     file.create(".nojekyll")
     ```
 

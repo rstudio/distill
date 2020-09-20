@@ -33,7 +33,7 @@ Note that the `welcome` post is just there to provide some skeletal content for 
 
 If you are not using RStudio you can also call the Distill `create_blog()` function:
 
-``` {.r}
+```{r, eval=FALSE, echo=TRUE}
 library(distill)
 create_blog(dir = "my-blog", title = "My Blog")
 ```
@@ -79,7 +79,7 @@ Note that we've also added a feed icon to the right side of the menu bar which m
 
 The easiest way to start authoring a new post is to call the `create_post()` function from within your blog's directory. For example:
 
-``` {.r}
+```{r, eval=FALSE, echo=TRUE}
 library(distill)
 create_post("The Sharpe Ratio")
 ```
@@ -88,7 +88,7 @@ This will create a sub-directory for your post within the `_posts` directory, ad
 
 If you want your post to start out as a draft (i.e. not be included within the listing of all posts) then you can add `draft = TRUE`. For example:
 
-``` {.r}
+```{r, eval=FALSE, echo=TRUE}
 create_post("The Sharpe Ratio", draft = TRUE)
 ```
 
@@ -495,7 +495,7 @@ If your Distill website is contained within an RStudio project you can use the *
 
 To build a website from the command line, use the `rmarkdown::render_site()` function:
 
-``` {.r}
+```{r, eval=FALSE, echo=TRUE}
 library(rmarkdown)
 render_site()
 ```

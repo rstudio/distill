@@ -1860,14 +1860,24 @@ Publishing
 </tbody>
 </table>
 <p>If you are not using RStudio you can also call the Distill <code>create_website()</code> function:</p>
-<div class="sourceCode" id="cb1"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true"></a><span class="kw">library</span>(distill)</span>
-<span id="cb1-2"><a href="#cb1-2" aria-hidden="true"></a><span class="kw">create_website</span>(<span class="dt">dir =</span> <span class="st">&quot;my-website&quot;</span>, <span class="dt">title =</span> <span class="st">&quot;My Website&quot;</span>)</span></code></pre></div>
+<div class="layout-chunk" data-layout="l-body">
+<div class="sourceCode">
+<pre><code><span class='kw'><a href='https://rdrr.io/r/base/library.html'>library</a></span><span class='op'>(</span><span class='va'><a href='https://github.com/rstudio/distill'>distill</a></span><span class='op'>)</span>
+<span class='fu'><a href='https://rdrr.io/pkg/distill/man/create_website.html'>create_website</a></span><span class='op'>(</span>dir <span class='op'>=</span> <span class='st'>"my-website"</span>, title <span class='op'>=</span> <span class='st'>"My Website"</span><span class='op'>)</span>
+</code></pre>
+</div>
+</div>
 <p>A new website containing Home and About pages will be created within the <code>my-website</code> directory.</p>
 <h3 id="authoring-articles">Authoring articles</h3>
 <p>When you use the RStudio <strong>Knit</strong> command on a Distill article within a website, only that article will be rendered and previewed:</p>
 <p><img src="images/knit-site-article.png" class="screenshot" style="width:95.0%" /></p>
 <p>You can also preview a single article from within a website by passing the name of the article’s Rmd file to <code>render_site()</code>:</p>
-<div class="sourceCode" id="cb2"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true"></a><span class="kw">render_site</span>(<span class="st">&quot;about.Rmd&quot;</span>)</span></code></pre></div>
+<div class="layout-chunk" data-layout="l-body">
+<div class="sourceCode">
+<pre><code><span class='fu'><a href='https://rdrr.io/pkg/rmarkdown/man/render_site.html'>render_site</a></span><span class='op'>(</span><span class='st'>"about.Rmd"</span><span class='op'>)</span>
+</code></pre>
+</div>
+</div>
 <p>This will build only the specified article (as opposed to all articles in the site). This the recommended workflow for authoring articles since it offers the fastest turnaround time for previews (since only the article you are working on is rendered).</p>
 <h3 id="building-the-site">Building the site</h3>
 <p>After you’ve authored the various articles contained within the website you will want to build the entire site before deploying it.</p>
@@ -1881,8 +1891,13 @@ Publishing
 </ol>
 <p>The HTML files within the <code>_site</code> directory are now ready to deploy as a standalone static website.</p>
 <p>To build a website from the command line, use the <code>rmarkdown::render_site()</code> function:</p>
-<div class="sourceCode" id="cb3"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true"></a><span class="kw">library</span>(rmarkdown)</span>
-<span id="cb3-2"><a href="#cb3-2" aria-hidden="true"></a><span class="kw">render_site</span>()</span></code></pre></div>
+<div class="layout-chunk" data-layout="l-body">
+<div class="sourceCode">
+<pre><code><span class='kw'><a href='https://rdrr.io/r/base/library.html'>library</a></span><span class='op'>(</span><span class='va'><a href='https://github.com/rstudio/rmarkdown'>rmarkdown</a></span><span class='op'>)</span>
+<span class='fu'><a href='https://rdrr.io/pkg/rmarkdown/man/render_site.html'>render_site</a></span><span class='op'>(</span><span class='op'>)</span>
+</code></pre>
+</div>
+</div>
 <h2 id="site-output">Site output</h2>
 <p>The <strong>_site.yml</strong> file has a number of options that affect site output including where it is written and what files are included and excluded from the site. Here’s an example that makes use of a few of these options:</p>
 <p><strong>_site.yml</strong></p>
@@ -1971,33 +1986,33 @@ Software licensed under the [Apache License, v2.0]
 (https://www.apache.org/licenses/LICENSE-2.0).</code></pre>
 <h3 id="theming">Theming</h3>
 <p>You can use CSS to create an alternate theme for your navigation bar and site footer. Here is the CSS used for the default appearance:</p>
-<div class="sourceCode" id="cb9"><pre class="sourceCode css"><code class="sourceCode css"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true"></a><span class="fu">.distill-site-nav</span> {</span>
-<span id="cb9-2"><a href="#cb9-2" aria-hidden="true"></a>  <span class="kw">color</span>: <span class="fu">rgba(</span><span class="dv">255</span><span class="op">,</span> <span class="dv">255</span><span class="op">,</span> <span class="dv">255</span><span class="op">,</span> <span class="dv">0.8</span><span class="fu">)</span><span class="op">;</span></span>
-<span id="cb9-3"><a href="#cb9-3" aria-hidden="true"></a>  <span class="kw">background-color</span>: <span class="cn">#455a64</span><span class="op">;</span></span>
-<span id="cb9-4"><a href="#cb9-4" aria-hidden="true"></a>  <span class="kw">font-size</span>: <span class="dv">15</span><span class="dt">px</span><span class="op">;</span></span>
-<span id="cb9-5"><a href="#cb9-5" aria-hidden="true"></a>  <span class="kw">font-weight</span>: <span class="dv">300</span><span class="op">;</span></span>
-<span id="cb9-6"><a href="#cb9-6" aria-hidden="true"></a>}</span>
-<span id="cb9-7"><a href="#cb9-7" aria-hidden="true"></a></span>
-<span id="cb9-8"><a href="#cb9-8" aria-hidden="true"></a><span class="fu">.distill-site-nav</span> a {</span>
-<span id="cb9-9"><a href="#cb9-9" aria-hidden="true"></a>  <span class="kw">color</span>: <span class="bu">inherit</span><span class="op">;</span></span>
-<span id="cb9-10"><a href="#cb9-10" aria-hidden="true"></a>  <span class="kw">text-decoration</span>: <span class="dv">none</span><span class="op">;</span></span>
-<span id="cb9-11"><a href="#cb9-11" aria-hidden="true"></a>}</span>
-<span id="cb9-12"><a href="#cb9-12" aria-hidden="true"></a></span>
-<span id="cb9-13"><a href="#cb9-13" aria-hidden="true"></a><span class="fu">.distill-site-nav</span> a<span class="in">:hover</span> {</span>
-<span id="cb9-14"><a href="#cb9-14" aria-hidden="true"></a>  <span class="kw">color</span>: <span class="cn">white</span><span class="op">;</span></span>
-<span id="cb9-15"><a href="#cb9-15" aria-hidden="true"></a>}</span>
-<span id="cb9-16"><a href="#cb9-16" aria-hidden="true"></a></span>
-<span id="cb9-17"><a href="#cb9-17" aria-hidden="true"></a><span class="fu">.distill-site-header</span> {</span>
-<span id="cb9-18"><a href="#cb9-18" aria-hidden="true"></a>}</span>
-<span id="cb9-19"><a href="#cb9-19" aria-hidden="true"></a></span>
-<span id="cb9-20"><a href="#cb9-20" aria-hidden="true"></a><span class="fu">.distill-site-footer</span> {</span>
-<span id="cb9-21"><a href="#cb9-21" aria-hidden="true"></a>}</span>
-<span id="cb9-22"><a href="#cb9-22" aria-hidden="true"></a></span>
-<span id="cb9-23"><a href="#cb9-23" aria-hidden="true"></a><span class="im">@media</span> <span class="dv">print</span> {</span>
-<span id="cb9-24"><a href="#cb9-24" aria-hidden="true"></a>  <span class="fu">.distill-site-nav</span> {</span>
-<span id="cb9-25"><a href="#cb9-25" aria-hidden="true"></a>    <span class="kw">display</span>: <span class="dv">none</span><span class="op">;</span></span>
-<span id="cb9-26"><a href="#cb9-26" aria-hidden="true"></a>  }</span>
-<span id="cb9-27"><a href="#cb9-27" aria-hidden="true"></a>}</span></code></pre></div>
+<div class="sourceCode" id="cb6"><pre class="sourceCode css"><code class="sourceCode css"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true"></a><span class="fu">.distill-site-nav</span> {</span>
+<span id="cb6-2"><a href="#cb6-2" aria-hidden="true"></a>  <span class="kw">color</span>: <span class="fu">rgba(</span><span class="dv">255</span><span class="op">,</span> <span class="dv">255</span><span class="op">,</span> <span class="dv">255</span><span class="op">,</span> <span class="dv">0.8</span><span class="fu">)</span><span class="op">;</span></span>
+<span id="cb6-3"><a href="#cb6-3" aria-hidden="true"></a>  <span class="kw">background-color</span>: <span class="cn">#455a64</span><span class="op">;</span></span>
+<span id="cb6-4"><a href="#cb6-4" aria-hidden="true"></a>  <span class="kw">font-size</span>: <span class="dv">15</span><span class="dt">px</span><span class="op">;</span></span>
+<span id="cb6-5"><a href="#cb6-5" aria-hidden="true"></a>  <span class="kw">font-weight</span>: <span class="dv">300</span><span class="op">;</span></span>
+<span id="cb6-6"><a href="#cb6-6" aria-hidden="true"></a>}</span>
+<span id="cb6-7"><a href="#cb6-7" aria-hidden="true"></a></span>
+<span id="cb6-8"><a href="#cb6-8" aria-hidden="true"></a><span class="fu">.distill-site-nav</span> a {</span>
+<span id="cb6-9"><a href="#cb6-9" aria-hidden="true"></a>  <span class="kw">color</span>: <span class="bu">inherit</span><span class="op">;</span></span>
+<span id="cb6-10"><a href="#cb6-10" aria-hidden="true"></a>  <span class="kw">text-decoration</span>: <span class="dv">none</span><span class="op">;</span></span>
+<span id="cb6-11"><a href="#cb6-11" aria-hidden="true"></a>}</span>
+<span id="cb6-12"><a href="#cb6-12" aria-hidden="true"></a></span>
+<span id="cb6-13"><a href="#cb6-13" aria-hidden="true"></a><span class="fu">.distill-site-nav</span> a<span class="in">:hover</span> {</span>
+<span id="cb6-14"><a href="#cb6-14" aria-hidden="true"></a>  <span class="kw">color</span>: <span class="cn">white</span><span class="op">;</span></span>
+<span id="cb6-15"><a href="#cb6-15" aria-hidden="true"></a>}</span>
+<span id="cb6-16"><a href="#cb6-16" aria-hidden="true"></a></span>
+<span id="cb6-17"><a href="#cb6-17" aria-hidden="true"></a><span class="fu">.distill-site-header</span> {</span>
+<span id="cb6-18"><a href="#cb6-18" aria-hidden="true"></a>}</span>
+<span id="cb6-19"><a href="#cb6-19" aria-hidden="true"></a></span>
+<span id="cb6-20"><a href="#cb6-20" aria-hidden="true"></a><span class="fu">.distill-site-footer</span> {</span>
+<span id="cb6-21"><a href="#cb6-21" aria-hidden="true"></a>}</span>
+<span id="cb6-22"><a href="#cb6-22" aria-hidden="true"></a></span>
+<span id="cb6-23"><a href="#cb6-23" aria-hidden="true"></a><span class="im">@media</span> <span class="dv">print</span> {</span>
+<span id="cb6-24"><a href="#cb6-24" aria-hidden="true"></a>  <span class="fu">.distill-site-nav</span> {</span>
+<span id="cb6-25"><a href="#cb6-25" aria-hidden="true"></a>    <span class="kw">display</span>: <span class="dv">none</span><span class="op">;</span></span>
+<span id="cb6-26"><a href="#cb6-26" aria-hidden="true"></a>  }</span>
+<span id="cb6-27"><a href="#cb6-27" aria-hidden="true"></a>}</span></code></pre></div>
 <p>The <code>distill-site-nav</code> class addresses both the header and footer, whereas the <code>distill-site-header</code> and <code>distill-site-footer</code> apply (respectively) to just the header and footer.</p>
 <p>To override all or part of this CSS, simply include a <code>styles.css</code> file in the main site directory and add a reference to it within your site output options. For example:</p>
 <p><strong>_site.yml</strong></p>

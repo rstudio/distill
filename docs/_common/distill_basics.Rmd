@@ -6,7 +6,7 @@ Use the **New R Markdown** dialog within RStudio to create a new Distill article
 
 You can also create a new Distill article from the command line with:
 
-``` {.r}
+```{r, eval=FALSE, echo=TRUE}
 library(rmarkdown)
 draft("article.Rmd", "distill_article", package = "distill")
 ```
@@ -258,15 +258,11 @@ output:
 
 Available options for `highlight` include:
 
-+------------------------------------------------------+----------------------------------------------------------------------------------------------------------+
 | Option(s)                                            | Description                                                                                              |
-+======================================================+==========================================================================================================+
+|------------------------------------------------------|----------------------------------------------------------------------------------------------------------|
 | `default`                                            | RStudio editor theme                                                                                     |
-+------------------------------------------------------+----------------------------------------------------------------------------------------------------------+
 | `haddock`, `kate`, `monochrome`, `pygments`, `tango` | Pandoc highlighting [themes](https://www.garrickadenbuie.com/blog/pandoc-syntax-highlighting-examples/). |
-+------------------------------------------------------+----------------------------------------------------------------------------------------------------------+
 | Path to `.theme` file                                | Custom Pandoc [theme file](https://pandoc.org/MANUAL.html#syntax-highlighting).                          |
-+------------------------------------------------------+----------------------------------------------------------------------------------------------------------+
 
 ## Appendices
 

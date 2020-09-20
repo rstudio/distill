@@ -46,7 +46,7 @@ Distill for R Markdown is based on the [Distill web framework](https://github.co
 
 To create an [R Markdown](https://rmarkdown.rstudio.com) document that uses the Distill format, first install the development version of the **distill** R package from GitHub:
 
-``` {.r}
+```{r, eval=FALSE, echo=TRUE}
 devtools::install_github("rstudio/distill")
 ```
 

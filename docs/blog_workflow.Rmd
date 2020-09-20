@@ -98,14 +98,14 @@ Note that with this workflow your name won't be guessed based on previous posts.
 
 You can import a post using the `import_post()` function, passing the URL where the post is published to. For example:
 
-``` {.r}
+```{r, eval=FALSE, echo=TRUE}
 import_post("https://rpubs.com/jjallaire/visualizing-asset-returns")
 import_post("https://example.com/visualizing-asset-returns.html")
 ```
 
 You can also import a post from a GitHub repository. For example:
 
-``` {.r}
+```{r, eval=FALSE, echo=TRUE}
 import_post("https://github.com/jjallaire/distill-article")
 ```
 
@@ -115,7 +115,7 @@ Note that importing a post does not require the original R Markdown document use
 
 When you import a post, the date for the post will be automatically set to the current day (the idea being that whenever the post was authored, the day you import it is the day it's been published to your blog). You can modify this behavior using the `date` parameter. For example:
 
-``` {.r}
+```{r, eval=FALSE, echo=TRUE}
 import_post("https://github.com/jjallaire/distill-article", 
             date = as.Date("2017-07-12"))
 ```
@@ -126,7 +126,7 @@ The "slug" for a post determines the URL for the post within your blog. By defau
 
 You can also override the automatically generated slug entirely using the `slug` parameter. For example:
 
-``` {.r}
+```{r, eval=FALSE, echo=TRUE}
 import_post("https://github.com/jjallaire/distill-article", 
             slug = "an-article-about-distill")
 ```
@@ -135,13 +135,13 @@ import_post("https://github.com/jjallaire/distill-article",
 
 If a post that you have imported is subsequently modified and you want to synchronize to the changes, you can use the `update_post()` post function. For example:
 
-``` {.r}
+```{r, eval=FALSE, echo=TRUE}
 update_post("_posts/2018-07-09-distill-article")
 ```
 
 You can also just use the post slug (rather than including the `_posts` directory prefix):
 
-``` {.r}
+```{r, eval=FALSE, echo=TRUE}
 update_post("2018-07-09-distill-article")
 ```
 

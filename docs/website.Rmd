@@ -32,7 +32,7 @@ A new [RStudio Project](https://support.rstudio.com/hc/en-us/articles/200526207-
 
 If you are not using RStudio you can also call the Distill `create_website()` function:
 
-``` {.r}
+```{r, eval=FALSE, echo=TRUE}
 library(distill)
 create_website(dir = "my-website", title = "My Website")
 ```
@@ -47,7 +47,7 @@ When you use the RStudio **Knit** command on a Distill article within a website,
 
 You can also preview a single article from within a website by passing the name of the article's Rmd file to `render_site()`:
 
-``` {.r}
+```{r, eval=FALSE, echo=TRUE}
 render_site("about.Rmd")
 ```
 
@@ -73,7 +73,7 @@ The HTML files within the `_site` directory are now ready to deploy as a standal
 
 To build a website from the command line, use the `rmarkdown::render_site()` function:
 
-``` {.r}
+```{r, eval=FALSE, echo=TRUE}
 library(rmarkdown)
 render_site()
 ```
