@@ -733,7 +733,7 @@ function init_distill() {
 
   // remove empty line numbers inserted by pandoc when using a
   // custom syntax highlighting theme
-  $('code.sourceCode a[aria-hidden="true"]').remove();
+  $('code.sourceCode a:empty').remove();
 
   // load distill framework
   load_distill_framework();
