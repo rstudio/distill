@@ -320,8 +320,10 @@ knit_hooks <- function(downlit) {
     }
   )
 
-  # apply source hook if downlit is enabled
+  # apply source and document hook if downlit is enabled
   if (downlit) {
+
+    # source hook to do downlit processing
     hooks$source <- function(x, options) {
       if (options$engine == "R") {
         code <- highlight(paste0(x, "\n", collapse = ""),
@@ -339,6 +341,13 @@ knit_hooks <- function(downlit) {
       } else {
         default_source_hook(x, options)
       }
+    }
+
+    # document hook to inject a fake empty code block a the end of the
+    # document (to force pandoc to including highlighting cssm which it
+    # might not do if all chunks are handled by downlit)
+    hooks$document <- function(x, options) {
+      c(x, '\n```{.r}\n```\n')
     }
   }
 
