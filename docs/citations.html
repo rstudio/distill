@@ -1437,6 +1437,9 @@ code span.wa { color: #008000; font-weight: bold; } /* Warning */
       $(this).children().unwrap();
     });
 
+    // remove code block used to force  highlighting css
+    $('.distill-force-highlighting-css').parent().remove();
+
     // load distill framework
     load_distill_framework();
 
@@ -1957,6 +1960,8 @@ slug: jones2018distill
 citation_url: https://rstudio.github.io/distill
 bibliography: biblio.bib
 ---</code></pre>
+<div class="sourceCode" id="cb7"><pre class="sourceCode r distill-force-highlighting-css"><code class="sourceCode r"></code></pre></div>
+<div class="sourceCode" id="cb8"><pre class="sourceCode r distill-force-highlighting-css"><code class="sourceCode r"></code></pre></div>
 <!--radix_placeholder_article_footer-->
 <!--/radix_placeholder_article_footer-->
 </div>

@@ -1437,6 +1437,9 @@ code span.wa { color: #008000; font-weight: bold; } /* Warning */
       $(this).children().unwrap();
     });
 
+    // remove code block used to force  highlighting css
+    $('.distill-force-highlighting-css').parent().remove();
+
     // load distill framework
     load_distill_framework();
 
@@ -2058,6 +2061,8 @@ output:
 <p>Footnotes and references will be included in the same section, immediately beneath any custom appendices.</p>
 <h2 class="appendix" id="acknowledgments">Acknowledgments</h2>
 <p>Distill for R Markdown builds on the work of many individuals and projects. <a href="https://github.com/shancarter">Shan Carter</a>, <a href="https://github.com/ludwigschubert">Ludwig Schubert</a>, and <a href="https://github.com/colah">Christopher Olah</a> created the Distill web framework. <a href="https://github.com/jgm">John MacFarlane</a> created the Pandoc universal markup converter. <a href="https://github.com/dpvc">Davide Cervone</a> and <a href="https://github.com/zorkow">Volker Sorge</a> created the MathJax library for rendering mathematical notation on the web. <a href="https://github.com/mbostock">Mike Bostock</a> created the D3 library for producing dynamic, interactive data visualizations for the web. We are grateful for the spirit of generosity that moved these individuals to create high-quality open source software for the benefit of all.</p>
+<div class="sourceCode" id="cb14"><pre class="sourceCode r distill-force-highlighting-css"><code class="sourceCode r"></code></pre></div>
+<div class="sourceCode" id="cb15"><pre class="sourceCode r distill-force-highlighting-css"><code class="sourceCode r"></code></pre></div>
 <div id="refs" class="references hanging-indent" role="doc-bibliography">
 <div id="ref-xie2015">
 <p>Xie, Yihui. 2015. <em>Dynamic Documents with R and Knitr</em>. 2nd ed. Boca Raton, Florida: Chapman; Hall/CRC. <a href="http://yihui.name/knitr/">http://yihui.name/knitr/</a>.</p>

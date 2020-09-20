@@ -1436,6 +1436,9 @@ code span.wa { color: #008000; font-weight: bold; } /* Warning */
       $(this).children().unwrap();
     });
 
+    // remove code block used to force  highlighting css
+    $('.distill-force-highlighting-css').parent().remove();
+
     // load distill framework
     load_distill_framework();
 
@@ -1838,6 +1841,7 @@ Publishing
 <h3 id="website-or-blog">Website or blog?</h3>
 <p>Structure difference: <a href="website.html">Websites</a> are just collections of pages you can navigate to via the menu, whereas <a href="blog.html">blogs</a> have collections of posts that can be indexed and syndicated (via their RSS feed). Distill blogs are a distill website with added blog posts.</p>
 <p>Workflow difference: Furthermore, <em>website</em> pages and root pages of <em>blogs</em> are re-rendered when the site is rebuilt but blog articles are not. Each blog article has to be rendered on its own, with intent. Why? Given that R package upgrades have a tendency to break older code, continuously re-rendering old posts is nearly impossible to do without errors, especially over longer periods of time.</p>
+<div class="sourceCode" id="cb1"><pre class="sourceCode r distill-force-highlighting-css"><code class="sourceCode r"></code></pre></div>
 <h3 id="creating-a-blog">Creating a blog</h3>
 <p>If you are using RStudio, the easiest way to get started is to use the Distill Blog option in the RStudio <strong>New Project</strong> dialog:</p>
 <p><img src="images/create-blog.png" class="screenshot" style="width:95.0%" /></p>
@@ -2117,14 +2121,14 @@ collections:
     share: [twitter, linkedin]
     subscribe: _subscribe.html</code></pre>
 <p><strong>_subscribe.html</strong></p>
-<div class="sourceCode" id="cb18"><pre class="sourceCode html"><code class="sourceCode html"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true"></a><span class="kw">&lt;form</span><span class="ot"> method=</span><span class="st">&#39;post&#39;</span><span class="ot"> action=</span><span class="st">&#39;https://blogtrottr.com&#39;</span><span class="kw">&gt;</span></span>
-<span id="cb18-2"><a href="#cb18-2" aria-hidden="true"></a>  <span class="kw">&lt;p&gt;</span>Enjoy this blog? Get notified of new posts via email:<span class="kw">&lt;/p&gt;</span></span>
-<span id="cb18-3"><a href="#cb18-3" aria-hidden="true"></a>  <span class="kw">&lt;input</span><span class="ot"> type=</span><span class="st">&#39;text&#39;</span><span class="ot"> name=</span><span class="st">&#39;btr_email&#39;</span> <span class="kw">/&gt;</span></span>
-<span id="cb18-4"><a href="#cb18-4" aria-hidden="true"></a>  <span class="kw">&lt;input</span><span class="ot"> type=</span><span class="st">&#39;hidden&#39;</span><span class="ot"> name=</span><span class="st">&#39;btr_url&#39;</span></span>
-<span id="cb18-5"><a href="#cb18-5" aria-hidden="true"></a><span class="ot">         value=</span><span class="st">&#39;https://beta.rstudioconnect.com/content/11424/index.xml&#39;</span><span class="kw">/&gt;</span></span>
-<span id="cb18-6"><a href="#cb18-6" aria-hidden="true"></a>  <span class="kw">&lt;input</span><span class="ot"> type=</span><span class="st">&#39;hidden&#39;</span><span class="ot"> name=</span><span class="st">&#39;schedule_type&#39;</span><span class="ot"> value=</span><span class="st">&#39;0&#39;</span> <span class="kw">/&gt;</span></span>
-<span id="cb18-7"><a href="#cb18-7" aria-hidden="true"></a>  <span class="kw">&lt;input</span><span class="ot"> type=</span><span class="st">&#39;submit&#39;</span><span class="ot"> value=</span><span class="st">&#39;Subscribe&#39;</span> <span class="kw">/&gt;</span></span>
-<span id="cb18-8"><a href="#cb18-8" aria-hidden="true"></a><span class="kw">&lt;/form&gt;</span></span></code></pre></div>
+<div class="sourceCode" id="cb19"><pre class="sourceCode html"><code class="sourceCode html"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true"></a><span class="kw">&lt;form</span><span class="ot"> method=</span><span class="st">&#39;post&#39;</span><span class="ot"> action=</span><span class="st">&#39;https://blogtrottr.com&#39;</span><span class="kw">&gt;</span></span>
+<span id="cb19-2"><a href="#cb19-2" aria-hidden="true"></a>  <span class="kw">&lt;p&gt;</span>Enjoy this blog? Get notified of new posts via email:<span class="kw">&lt;/p&gt;</span></span>
+<span id="cb19-3"><a href="#cb19-3" aria-hidden="true"></a>  <span class="kw">&lt;input</span><span class="ot"> type=</span><span class="st">&#39;text&#39;</span><span class="ot"> name=</span><span class="st">&#39;btr_email&#39;</span> <span class="kw">/&gt;</span></span>
+<span id="cb19-4"><a href="#cb19-4" aria-hidden="true"></a>  <span class="kw">&lt;input</span><span class="ot"> type=</span><span class="st">&#39;hidden&#39;</span><span class="ot"> name=</span><span class="st">&#39;btr_url&#39;</span></span>
+<span id="cb19-5"><a href="#cb19-5" aria-hidden="true"></a><span class="ot">         value=</span><span class="st">&#39;https://beta.rstudioconnect.com/content/11424/index.xml&#39;</span><span class="kw">/&gt;</span></span>
+<span id="cb19-6"><a href="#cb19-6" aria-hidden="true"></a>  <span class="kw">&lt;input</span><span class="ot"> type=</span><span class="st">&#39;hidden&#39;</span><span class="ot"> name=</span><span class="st">&#39;schedule_type&#39;</span><span class="ot"> value=</span><span class="st">&#39;0&#39;</span> <span class="kw">/&gt;</span></span>
+<span id="cb19-7"><a href="#cb19-7" aria-hidden="true"></a>  <span class="kw">&lt;input</span><span class="ot"> type=</span><span class="st">&#39;submit&#39;</span><span class="ot"> value=</span><span class="st">&#39;Subscribe&#39;</span> <span class="kw">/&gt;</span></span>
+<span id="cb19-8"><a href="#cb19-8" aria-hidden="true"></a><span class="kw">&lt;/form&gt;</span></span></code></pre></div>
 <p>This example uses the <a href="https://blogtrottr.com/">Blogtrottr</a> service to provide an email subscription. You could also use another service or simply include a link to your RSS feed.</p>
 <p>The contents of <code>_subscribe.html</code> will be included in both the sidebar of the main listing page as well as in the footer of articles. Note that relative URLs won’t work in subscription HTML since the content appears at different levels of the site (thus we include the full URL to the RSS feed in the example above).</p>
 <h3 id="custom-html">Custom HTML</h3>
@@ -2142,22 +2146,22 @@ collections:
     share: [twitter, linkedin]
     custom: _custom.html</code></pre>
 <p><strong>_custom.html</strong></p>
-<div class="sourceCode" id="cb20"><pre class="sourceCode html"><code class="sourceCode html"><span id="cb20-1"><a href="#cb20-1" aria-hidden="true"></a><span class="kw">&lt;div</span><span class="ot"> class=</span><span class="st">&quot;sidebar-section custom&quot;</span><span class="kw">&gt;</span></span>
-<span id="cb20-2"><a href="#cb20-2" aria-hidden="true"></a>  <span class="kw">&lt;h3&gt;</span>About<span class="kw">&lt;/h3&gt;</span></span>
-<span id="cb20-3"><a href="#cb20-3" aria-hidden="true"></a>  This blog explores reproducible finance with the </span>
-<span id="cb20-4"><a href="#cb20-4" aria-hidden="true"></a>  <span class="kw">&lt;a</span><span class="ot"> href=</span><span class="st">&quot;https://www.r-project.org/&quot;</span><span class="kw">&gt;</span>R<span class="kw">&lt;/a&gt;</span> </span>
-<span id="cb20-5"><a href="#cb20-5" aria-hidden="true"></a>  statistical computing environment.</span>
-<span id="cb20-6"><a href="#cb20-6" aria-hidden="true"></a><span class="kw">&lt;/div&gt;</span></span>
-<span id="cb20-7"><a href="#cb20-7" aria-hidden="true"></a></span>
-<span id="cb20-8"><a href="#cb20-8" aria-hidden="true"></a><span class="kw">&lt;div</span><span class="ot"> class=</span><span class="st">&quot;sidebar-section custom&quot;</span><span class="kw">&gt;</span></span>
-<span id="cb20-9"><a href="#cb20-9" aria-hidden="true"></a>  <span class="kw">&lt;h3&gt;</span>Search<span class="kw">&lt;/h3&gt;</span></span>
-<span id="cb20-10"><a href="#cb20-10" aria-hidden="true"></a>  <span class="kw">&lt;form</span><span class="ot"> action=</span><span class="st">&quot;https://duckduckgo.com/&quot;</span><span class="kw">&gt;</span></span>
-<span id="cb20-11"><a href="#cb20-11" aria-hidden="true"></a>    <span class="kw">&lt;input</span><span class="ot"> type=</span><span class="st">&quot;text&quot;</span><span class="ot"> name=</span><span class="st">&quot;q&quot;</span><span class="ot"> placeholder=</span><span class="st">&quot;Search...&quot;</span><span class="kw">&gt;</span></span>
-<span id="cb20-12"><a href="#cb20-12" aria-hidden="true"></a>    <span class="kw">&lt;input</span><span class="ot"> type=</span><span class="st">&quot;hidden&quot;</span><span class="ot"> name=</span><span class="st">&quot;sites&quot;</span> </span>
-<span id="cb20-13"><a href="#cb20-13" aria-hidden="true"></a><span class="ot">      value=</span><span class="st">&quot;https://beta.rstudioconnect.com/content/3776/&quot;</span><span class="kw">&gt;</span> <span class="co">&lt;!-- Replace with your blog URL --&gt;</span></span>
-<span id="cb20-14"><a href="#cb20-14" aria-hidden="true"></a>    <span class="co">&lt;!--&lt;button type=&quot;submit&quot;&gt;Search&lt;/button&gt;--&gt;</span></span>
-<span id="cb20-15"><a href="#cb20-15" aria-hidden="true"></a>  <span class="kw">&lt;/form&gt;</span></span>
-<span id="cb20-16"><a href="#cb20-16" aria-hidden="true"></a><span class="kw">&lt;/div&gt;</span></span></code></pre></div>
+<div class="sourceCode" id="cb21"><pre class="sourceCode html"><code class="sourceCode html"><span id="cb21-1"><a href="#cb21-1" aria-hidden="true"></a><span class="kw">&lt;div</span><span class="ot"> class=</span><span class="st">&quot;sidebar-section custom&quot;</span><span class="kw">&gt;</span></span>
+<span id="cb21-2"><a href="#cb21-2" aria-hidden="true"></a>  <span class="kw">&lt;h3&gt;</span>About<span class="kw">&lt;/h3&gt;</span></span>
+<span id="cb21-3"><a href="#cb21-3" aria-hidden="true"></a>  This blog explores reproducible finance with the </span>
+<span id="cb21-4"><a href="#cb21-4" aria-hidden="true"></a>  <span class="kw">&lt;a</span><span class="ot"> href=</span><span class="st">&quot;https://www.r-project.org/&quot;</span><span class="kw">&gt;</span>R<span class="kw">&lt;/a&gt;</span> </span>
+<span id="cb21-5"><a href="#cb21-5" aria-hidden="true"></a>  statistical computing environment.</span>
+<span id="cb21-6"><a href="#cb21-6" aria-hidden="true"></a><span class="kw">&lt;/div&gt;</span></span>
+<span id="cb21-7"><a href="#cb21-7" aria-hidden="true"></a></span>
+<span id="cb21-8"><a href="#cb21-8" aria-hidden="true"></a><span class="kw">&lt;div</span><span class="ot"> class=</span><span class="st">&quot;sidebar-section custom&quot;</span><span class="kw">&gt;</span></span>
+<span id="cb21-9"><a href="#cb21-9" aria-hidden="true"></a>  <span class="kw">&lt;h3&gt;</span>Search<span class="kw">&lt;/h3&gt;</span></span>
+<span id="cb21-10"><a href="#cb21-10" aria-hidden="true"></a>  <span class="kw">&lt;form</span><span class="ot"> action=</span><span class="st">&quot;https://duckduckgo.com/&quot;</span><span class="kw">&gt;</span></span>
+<span id="cb21-11"><a href="#cb21-11" aria-hidden="true"></a>    <span class="kw">&lt;input</span><span class="ot"> type=</span><span class="st">&quot;text&quot;</span><span class="ot"> name=</span><span class="st">&quot;q&quot;</span><span class="ot"> placeholder=</span><span class="st">&quot;Search...&quot;</span><span class="kw">&gt;</span></span>
+<span id="cb21-12"><a href="#cb21-12" aria-hidden="true"></a>    <span class="kw">&lt;input</span><span class="ot"> type=</span><span class="st">&quot;hidden&quot;</span><span class="ot"> name=</span><span class="st">&quot;sites&quot;</span> </span>
+<span id="cb21-13"><a href="#cb21-13" aria-hidden="true"></a><span class="ot">      value=</span><span class="st">&quot;https://beta.rstudioconnect.com/content/3776/&quot;</span><span class="kw">&gt;</span> <span class="co">&lt;!-- Replace with your blog URL --&gt;</span></span>
+<span id="cb21-14"><a href="#cb21-14" aria-hidden="true"></a>    <span class="co">&lt;!--&lt;button type=&quot;submit&quot;&gt;Search&lt;/button&gt;--&gt;</span></span>
+<span id="cb21-15"><a href="#cb21-15" aria-hidden="true"></a>  <span class="kw">&lt;/form&gt;</span></span>
+<span id="cb21-16"><a href="#cb21-16" aria-hidden="true"></a><span class="kw">&lt;/div&gt;</span></span></code></pre></div>
 <p><img src="images/custom_html_example_about_search.png" class="screenshot" style="width:50.0%" /></p>
 <p>While the custom HTML option inherits general CSS styling from the rest of the Distill blog, by default it does not inherit the sidebar-specific CSS. In order to fully match the rest of the sidebar sections, each section must be nested within a <code>&lt;div class="sidebar-section custom"&gt;</code> tag, as seen in the above example. This configuration is intended to provide a good balance between flexibility and ease-of-use.</p>
 <p>The example search bar functionality uses the popular <a href="duckduckgo.com">DuckDuckGo</a> search engine. After entering search terms and hitting the enter key the user is taken to the search engine’s website and shown relevant search results from the blog. Note that the blog will need to have been recently crawled by the search engine in order for search results to be thorough and up to date. Replacing the HTML snippet’s hard-coded blog URL should be the only modification necessary to begin using this example. Other search engines may be used with further modification. The “Search” button has been left out in this example, but may be uncommented if desired.</p>
@@ -2198,7 +2202,8 @@ resources:
 <li><p>The TensorFlow for R blog uses Distill for R Markdown: <a href="https://blogs.rstudio.com/tensorflow/" class="uri">https://blogs.rstudio.com/tensorflow/</a></p>
 <p>The source code for the TensorFlow for R blog can be found here: <a href="https://github.com/rstudio/tensorflow-blog" class="uri">https://github.com/rstudio/tensorflow-blog</a></p></li>
 <li><p>An example which reproduces several posts from the Reproducible Finance with R series on the R Views blog can be found here: <a href="https://beta.rstudioconnect.com/content/11424/" class="uri">https://beta.rstudioconnect.com/content/11424/</a></p>
-<p>The source code for the example can be found here: <a href="https://github.com/jjallaire/reproducible-finance-with-r" class="uri">https://github.com/jjallaire/reproducible-finance-with-r</a></p></li>
+<p>The source code for the example can be found here: <a href="https://github.com/jjallaire/reproducible-finance-with-r" class="uri">https://github.com/jjallaire/reproducible-finance-with-r</a></p>
+<div class="sourceCode" id="cb23"><pre class="sourceCode r distill-force-highlighting-css"><code class="sourceCode r"></code></pre></div></li>
 </ul>
 <!--radix_placeholder_article_footer-->
 <!--/radix_placeholder_article_footer-->

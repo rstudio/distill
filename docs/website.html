@@ -1436,6 +1436,9 @@ code span.wa { color: #008000; font-weight: bold; } /* Warning */
       $(this).children().unwrap();
     });
 
+    // remove code block used to force  highlighting css
+    $('.distill-force-highlighting-css').parent().remove();
+
     // load distill framework
     load_distill_framework();
 
@@ -1833,6 +1836,7 @@ Publishing
 <h3 id="website-or-blog">Website or blog?</h3>
 <p>Structure difference: <a href="website.html">Websites</a> are just collections of pages you can navigate to via the menu, whereas <a href="blog.html">blogs</a> have collections of posts that can be indexed and syndicated (via their RSS feed). Distill blogs are a distill website with added blog posts.</p>
 <p>Workflow difference: Furthermore, <em>website</em> pages and root pages of <em>blogs</em> are re-rendered when the site is rebuilt but blog articles are not. Each blog article has to be rendered on its own, with intent. Why? Given that R package upgrades have a tendency to break older code, continuously re-rendering old posts is nearly impossible to do without errors, especially over longer periods of time.</p>
+<div class="sourceCode" id="cb1"><pre class="sourceCode r distill-force-highlighting-css"><code class="sourceCode r"></code></pre></div>
 <h3 id="creating-a-website">Creating a website</h3>
 <p>If you are using RStudio, the easist way to get started is to use the Distill Website option in the RStudio <strong>New Project</strong> dialog:</p>
 <p><img src="images/create-website.png" class="screenshot" style="width:95.0%" /></p>
@@ -1986,33 +1990,33 @@ Software licensed under the [Apache License, v2.0]
 (https://www.apache.org/licenses/LICENSE-2.0).</code></pre>
 <h3 id="theming">Theming</h3>
 <p>You can use CSS to create an alternate theme for your navigation bar and site footer. Here is the CSS used for the default appearance:</p>
-<div class="sourceCode" id="cb6"><pre class="sourceCode css"><code class="sourceCode css"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true"></a><span class="fu">.distill-site-nav</span> {</span>
-<span id="cb6-2"><a href="#cb6-2" aria-hidden="true"></a>  <span class="kw">color</span>: <span class="fu">rgba(</span><span class="dv">255</span><span class="op">,</span> <span class="dv">255</span><span class="op">,</span> <span class="dv">255</span><span class="op">,</span> <span class="dv">0.8</span><span class="fu">)</span><span class="op">;</span></span>
-<span id="cb6-3"><a href="#cb6-3" aria-hidden="true"></a>  <span class="kw">background-color</span>: <span class="cn">#455a64</span><span class="op">;</span></span>
-<span id="cb6-4"><a href="#cb6-4" aria-hidden="true"></a>  <span class="kw">font-size</span>: <span class="dv">15</span><span class="dt">px</span><span class="op">;</span></span>
-<span id="cb6-5"><a href="#cb6-5" aria-hidden="true"></a>  <span class="kw">font-weight</span>: <span class="dv">300</span><span class="op">;</span></span>
-<span id="cb6-6"><a href="#cb6-6" aria-hidden="true"></a>}</span>
-<span id="cb6-7"><a href="#cb6-7" aria-hidden="true"></a></span>
-<span id="cb6-8"><a href="#cb6-8" aria-hidden="true"></a><span class="fu">.distill-site-nav</span> a {</span>
-<span id="cb6-9"><a href="#cb6-9" aria-hidden="true"></a>  <span class="kw">color</span>: <span class="bu">inherit</span><span class="op">;</span></span>
-<span id="cb6-10"><a href="#cb6-10" aria-hidden="true"></a>  <span class="kw">text-decoration</span>: <span class="dv">none</span><span class="op">;</span></span>
-<span id="cb6-11"><a href="#cb6-11" aria-hidden="true"></a>}</span>
-<span id="cb6-12"><a href="#cb6-12" aria-hidden="true"></a></span>
-<span id="cb6-13"><a href="#cb6-13" aria-hidden="true"></a><span class="fu">.distill-site-nav</span> a<span class="in">:hover</span> {</span>
-<span id="cb6-14"><a href="#cb6-14" aria-hidden="true"></a>  <span class="kw">color</span>: <span class="cn">white</span><span class="op">;</span></span>
-<span id="cb6-15"><a href="#cb6-15" aria-hidden="true"></a>}</span>
-<span id="cb6-16"><a href="#cb6-16" aria-hidden="true"></a></span>
-<span id="cb6-17"><a href="#cb6-17" aria-hidden="true"></a><span class="fu">.distill-site-header</span> {</span>
-<span id="cb6-18"><a href="#cb6-18" aria-hidden="true"></a>}</span>
-<span id="cb6-19"><a href="#cb6-19" aria-hidden="true"></a></span>
-<span id="cb6-20"><a href="#cb6-20" aria-hidden="true"></a><span class="fu">.distill-site-footer</span> {</span>
-<span id="cb6-21"><a href="#cb6-21" aria-hidden="true"></a>}</span>
-<span id="cb6-22"><a href="#cb6-22" aria-hidden="true"></a></span>
-<span id="cb6-23"><a href="#cb6-23" aria-hidden="true"></a><span class="im">@media</span> <span class="dv">print</span> {</span>
-<span id="cb6-24"><a href="#cb6-24" aria-hidden="true"></a>  <span class="fu">.distill-site-nav</span> {</span>
-<span id="cb6-25"><a href="#cb6-25" aria-hidden="true"></a>    <span class="kw">display</span>: <span class="dv">none</span><span class="op">;</span></span>
-<span id="cb6-26"><a href="#cb6-26" aria-hidden="true"></a>  }</span>
-<span id="cb6-27"><a href="#cb6-27" aria-hidden="true"></a>}</span></code></pre></div>
+<div class="sourceCode" id="cb7"><pre class="sourceCode css"><code class="sourceCode css"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true"></a><span class="fu">.distill-site-nav</span> {</span>
+<span id="cb7-2"><a href="#cb7-2" aria-hidden="true"></a>  <span class="kw">color</span>: <span class="fu">rgba(</span><span class="dv">255</span><span class="op">,</span> <span class="dv">255</span><span class="op">,</span> <span class="dv">255</span><span class="op">,</span> <span class="dv">0.8</span><span class="fu">)</span><span class="op">;</span></span>
+<span id="cb7-3"><a href="#cb7-3" aria-hidden="true"></a>  <span class="kw">background-color</span>: <span class="cn">#455a64</span><span class="op">;</span></span>
+<span id="cb7-4"><a href="#cb7-4" aria-hidden="true"></a>  <span class="kw">font-size</span>: <span class="dv">15</span><span class="dt">px</span><span class="op">;</span></span>
+<span id="cb7-5"><a href="#cb7-5" aria-hidden="true"></a>  <span class="kw">font-weight</span>: <span class="dv">300</span><span class="op">;</span></span>
+<span id="cb7-6"><a href="#cb7-6" aria-hidden="true"></a>}</span>
+<span id="cb7-7"><a href="#cb7-7" aria-hidden="true"></a></span>
+<span id="cb7-8"><a href="#cb7-8" aria-hidden="true"></a><span class="fu">.distill-site-nav</span> a {</span>
+<span id="cb7-9"><a href="#cb7-9" aria-hidden="true"></a>  <span class="kw">color</span>: <span class="bu">inherit</span><span class="op">;</span></span>
+<span id="cb7-10"><a href="#cb7-10" aria-hidden="true"></a>  <span class="kw">text-decoration</span>: <span class="dv">none</span><span class="op">;</span></span>
+<span id="cb7-11"><a href="#cb7-11" aria-hidden="true"></a>}</span>
+<span id="cb7-12"><a href="#cb7-12" aria-hidden="true"></a></span>
+<span id="cb7-13"><a href="#cb7-13" aria-hidden="true"></a><span class="fu">.distill-site-nav</span> a<span class="in">:hover</span> {</span>
+<span id="cb7-14"><a href="#cb7-14" aria-hidden="true"></a>  <span class="kw">color</span>: <span class="cn">white</span><span class="op">;</span></span>
+<span id="cb7-15"><a href="#cb7-15" aria-hidden="true"></a>}</span>
+<span id="cb7-16"><a href="#cb7-16" aria-hidden="true"></a></span>
+<span id="cb7-17"><a href="#cb7-17" aria-hidden="true"></a><span class="fu">.distill-site-header</span> {</span>
+<span id="cb7-18"><a href="#cb7-18" aria-hidden="true"></a>}</span>
+<span id="cb7-19"><a href="#cb7-19" aria-hidden="true"></a></span>
+<span id="cb7-20"><a href="#cb7-20" aria-hidden="true"></a><span class="fu">.distill-site-footer</span> {</span>
+<span id="cb7-21"><a href="#cb7-21" aria-hidden="true"></a>}</span>
+<span id="cb7-22"><a href="#cb7-22" aria-hidden="true"></a></span>
+<span id="cb7-23"><a href="#cb7-23" aria-hidden="true"></a><span class="im">@media</span> <span class="dv">print</span> {</span>
+<span id="cb7-24"><a href="#cb7-24" aria-hidden="true"></a>  <span class="fu">.distill-site-nav</span> {</span>
+<span id="cb7-25"><a href="#cb7-25" aria-hidden="true"></a>    <span class="kw">display</span>: <span class="dv">none</span><span class="op">;</span></span>
+<span id="cb7-26"><a href="#cb7-26" aria-hidden="true"></a>  }</span>
+<span id="cb7-27"><a href="#cb7-27" aria-hidden="true"></a>}</span></code></pre></div>
 <p>The <code>distill-site-nav</code> class addresses both the header and footer, whereas the <code>distill-site-header</code> and <code>distill-site-footer</code> apply (respectively) to just the header and footer.</p>
 <p>To override all or part of this CSS, simply include a <code>styles.css</code> file in the main site directory and add a reference to it within your site output options. For example:</p>
 <p><strong>_site.yml</strong></p>
@@ -2092,6 +2096,7 @@ output: distill::distill_article</code></pre>
 <h2 id="publishing-a-website">Publishing a website</h2>
 <p>Website content is by default written to the <code>_site</code> sub-directory (you can customize this using the <code>output_dir</code> metadata field). Publishing is simply a matter of copying the output directory to a web server or web hosting service.</p>
 <p>See the article on <a href="publish_website.html">publishing websites</a> for additional details on publishing sites using a variety of available hosting services.</p>
+<div class="sourceCode" id="cb11"><pre class="sourceCode r distill-force-highlighting-css"><code class="sourceCode r"></code></pre></div>
 <!--radix_placeholder_article_footer-->
 <!--/radix_placeholder_article_footer-->
 </div>

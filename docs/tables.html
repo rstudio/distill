@@ -1436,6 +1436,9 @@ code span.wa { color: #008000; font-weight: bold; } /* Warning */
       $(this).children().unwrap();
     });
 
+    // remove code block used to force  highlighting css
+    $('.distill-force-highlighting-css').parent().remove();
+
     // load distill framework
     load_distill_framework();
 
@@ -2002,6 +2005,7 @@ paged_table(mtcars, options = list(rows.print = 15))
 <span id="cb5-6"><a href="#cb5-6" aria-hidden="true"></a>| <span class="in">`cols.print`</span>     | Maximum columns in the table (defaults to 10). |</span>
 <span id="cb5-7"><a href="#cb5-7" aria-hidden="true"></a>| <span class="in">`rownames.print`</span> | Print row names as part of the table.          |</span>
 <span id="cb5-8"><a href="#cb5-8" aria-hidden="true"></a>:::</span></code></pre></div>
+<div class="sourceCode" id="cb6"><pre class="sourceCode r distill-force-highlighting-css"><code class="sourceCode r"></code></pre></div>
 <!--radix_placeholder_article_footer-->
 <!--/radix_placeholder_article_footer-->
 </div>
