@@ -52,7 +52,7 @@ Unlike the other website publishing options described below, [RStudio Connect](h
 
     Depending on your configuration you should set the `output_dir` as follows:
 
-    ``` {.markup}
+    ``` {.yaml}
     output_dir: "."     # root of master branch
     output_dir: "docs"  # docs directory of master branch
     ```
@@ -73,7 +73,7 @@ Google Firebase has a [web hosting service](https://firebase.google.com/docs/hos
 
 Firebase websites by default deploy content from the `public` directory of the Firebase project directory. This means that you should set the `output_dir` to `"public"` within `_site.yml`:
 
-``` {.markup}
+``` {.yaml}
 ---
 name: "distill"
 title: "Distill for R Markdown"

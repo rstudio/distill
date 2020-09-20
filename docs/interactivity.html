@@ -1445,6 +1445,10 @@ code span.wa { color: #008000; font-weight: bold; } /* Warning */
     // remove code block used to force  highlighting css
     $('.distill-force-highlighting-css').parent().remove();
 
+    // remove empty line numbers inserted by pandoc when using a
+    // custom syntax highlighting theme
+    $('code.sourceCode a[aria-hidden="true"]').remove();
+
     // load distill framework
     load_distill_framework();
 

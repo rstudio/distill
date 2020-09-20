@@ -84,7 +84,7 @@ The **\_site.yml** file has a number of options that affect site output includin
 
 **\_site.yml**
 
-``` {.markup}
+``` {.yaml}
 name: "my-website"
 output_dir: "_site"
 include: ["import.R"]
@@ -117,7 +117,7 @@ Site navigation bars include the site's title, an optional logo, top-level links
 
 Elements of the site navigation bar are specified within the `navbar` section of the `_site.yml` file. For example, here is the YAML that was used to create the navigation bar displayed above:
 
-``` {.markup}
+``` {.yaml}
 ---
 name: "distill"
 title: "Distill for R Markdown"
@@ -155,7 +155,7 @@ Note also that we used an `icon` for one of the menus, specifying the [Font Awes
 
 You can add a search box to the navigation bar using the `search` field of the `navbar` key within `_site.yml`. For example:
 
-``` {.markup}
+``` {.yaml}
 ---
 name: "distill"
 title: "Distill for R Markdown"
@@ -173,7 +173,7 @@ Note that only articles with a `description` metadata field are included within 
 
 If you want to display a link to the source code for your website on the navigation bar, add a `source_url` field to the `navbar` definition. For example:
 
-``` {.markup}
+``` {.yaml}
 ---
 name: "distill"
 title: "Distill for R Markdown"
@@ -246,7 +246,7 @@ To override all or part of this CSS, simply include a `styles.css` file in the m
 
 **\_site.yml**
 
-``` {.markup}
+``` {.yaml}
 name: "distill"
 title: "Distill for R Markdown"
 navbar:
@@ -262,7 +262,7 @@ You can add [Google Analytics](https://analytics.google.com/) to your website by
 
 **\_site.yml**
 
-``` {.markup}
+``` {.yaml}
 name: "distill"
 title: "Distill for R Markdown"
 base_url: https://rstudio.github.io/distill
@@ -293,7 +293,7 @@ Here's a `_site.yml` file that uses all of these fields (save for `license_url` 
 
 **\_site.yml**
 
-``` {.markup}
+``` {.yaml}
 name: "distill"
 title: "Distill for R Markdown"
 favicon: images/favicon.png

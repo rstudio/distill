@@ -11,12 +11,9 @@ library(rmarkdown)
 draft("article.Rmd", "distill_article", package = "distill")
 ```
 
-::: {#front-matter}
-:::
-
 Distill articles use `distill::distill_article` as their output format, and typically include title, description, date, author/affiliation, and bibliography entries in their YAML front-matter:
 
-``` {.markup}
+``` {.yaml}
 ---
 title: "Distill for R Markdown"
 description: | 
@@ -117,7 +114,7 @@ Bibtex is the supported way of making academic citations. To include citations, 
 
 For example, your bibliography file might contain:
 
-``` {.markup}
+``` {.bibtex}
 @Book{xie2015,
   title = {Dynamic Documents with R and knitr},
   author = {Yihui Xie},
@@ -176,7 +173,7 @@ ggplot(mtcars, aes(hp, mpg)) + geom_point() + geom_smooth()
 
 You can add a table of contents using the `toc` option and specify the depth of headers that it applies to using the `toc_depth` option. For example:
 
-``` {.markup}
+``` {.yaml}
 ---
 title: "Distill for R Markdown"
 description: | 
@@ -244,7 +241,7 @@ Syntax highlighting for R code is done using the [downlit](https://downlit.r-lib
 
 You can customize highlighting behavior using the `highlight` and `highlight_downlit` options. For example, to use the Pandoc "haddock" highlighting theme and disable the use of downlit, you would do this:
 
-``` {.markup}
+``` {.yaml}
 ---
 title: "Distill for R Markdown"
 description: | 

@@ -59,7 +59,7 @@ Here are the steps required to publish a Distill article to GitHub Pages:
 
 5)  Add appropriate metadata to the article. The article should at a minimum include `title` and `description` fields, and should also specify `self_contained: false` (this will make the article load faster and will enable you to add a [preview image](metadata.html#preview-images) for sharing the article on Slack, Twitter, etc.):
 
-    ``` {.markup}
+    ``` {.yaml}
     ---
     title: "Distill for R Markdown"
     description: |

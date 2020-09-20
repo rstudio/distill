@@ -1439,6 +1439,10 @@ code span.wa { color: #008000; font-weight: bold; } /* Warning */
     // remove code block used to force  highlighting css
     $('.distill-force-highlighting-css').parent().remove();
 
+    // remove empty line numbers inserted by pandoc when using a
+    // custom syntax highlighting theme
+    $('code.sourceCode a[aria-hidden="true"]').remove();
+
     // load distill framework
     load_distill_framework();
 
@@ -1830,22 +1834,22 @@ Publishing
 </ol>
 <h2 id="code-repository">Code repository</h2>
 <p>You can include the <code>repository_url</code> field to indicate where the source code for your article can be found. For example:</p>
-<pre class="markup"><code>---
-title: &quot;Distill for R Markdown&quot;
-description: | 
-  Scientific and technical writing, native to the web
-output: distill::distill_article
-repository_url: https://github.com/rstudio/distill
----</code></pre>
+<div class="sourceCode" id="cb1"><pre class="sourceCode yaml"><code class="sourceCode yaml"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true"></a><span class="pp">---</span></span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true"></a><span class="fu">title</span><span class="kw">:</span><span class="at"> </span><span class="st">&quot;Distill for R Markdown&quot;</span></span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true"></a><span class="fu">description</span><span class="kw">: </span><span class="ch">|</span><span class="at"> </span></span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true"></a>  Scientific and technical writing, native to the web</span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true"></a><span class="fu">output</span><span class="kw">:</span><span class="at"> distill::distill_article</span></span>
+<span id="cb1-6"><a href="#cb1-6" aria-hidden="true"></a><span class="fu">repository_url</span><span class="kw">:</span><span class="at"> https://github.com/rstudio/distill</span></span>
+<span id="cb1-7"><a href="#cb1-7" aria-hidden="true"></a><span class="pp">---</span></span></code></pre></div>
 <p>You can optionally also include a <code>compare_updates_url</code> to provide a URL that will show the differences between the article’s current version and the version that was initially published. For example:</p>
-<pre class="markup"><code>---
-title: &quot;Distill for R Markdown&quot;
-description: | 
-  Scientific and technical writing, native to the web
-output: distill::distill_article
-repository_url: https://github.com/rstudio/distill
-compare_updates_url: https://github.com/rstudio/distill/compare/pubv1...master
----</code></pre>
+<div class="sourceCode" id="cb2"><pre class="sourceCode yaml"><code class="sourceCode yaml"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true"></a><span class="pp">---</span></span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true"></a><span class="fu">title</span><span class="kw">:</span><span class="at"> </span><span class="st">&quot;Distill for R Markdown&quot;</span></span>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true"></a><span class="fu">description</span><span class="kw">: </span><span class="ch">|</span><span class="at"> </span></span>
+<span id="cb2-4"><a href="#cb2-4" aria-hidden="true"></a>  Scientific and technical writing, native to the web</span>
+<span id="cb2-5"><a href="#cb2-5" aria-hidden="true"></a><span class="fu">output</span><span class="kw">:</span><span class="at"> distill::distill_article</span></span>
+<span id="cb2-6"><a href="#cb2-6" aria-hidden="true"></a><span class="fu">repository_url</span><span class="kw">:</span><span class="at"> https://github.com/rstudio/distill</span></span>
+<span id="cb2-7"><a href="#cb2-7" aria-hidden="true"></a><span class="fu">compare_updates_url</span><span class="kw">:</span><span class="at"> https://github.com/rstudio/distill/compare/pubv1...master</span></span>
+<span id="cb2-8"><a href="#cb2-8" aria-hidden="true"></a><span class="pp">---</span></span></code></pre></div>
 <p>If you include one or both of these fields, then an <em>Updates and Corrections</em> appendix is automatically generated. For example:</p>
 <p><img src="images/repository-appendix.png" class="screenshot" style="width:95.0%" /></p>
 <h2 id="creative-commons">Creative Commons</h2>
@@ -1888,13 +1892,13 @@ compare_updates_url: https://github.com/rstudio/distill/compare/pubv1...master
 </tbody>
 </table>
 <p>You can designate articles that you create as Creative Commons licensed by adding the <code>creative_commons</code> field and specifying one of the standard Creative Commons licenses. For example:</p>
-<pre class="markup"><code>---
-title: &quot;Distill for R Markdown&quot;
-description: | 
-  Scientific and technical writing, native to the web
-output: distill::distill_article
-creative_commons: CC BY
----</code></pre>
+<div class="sourceCode" id="cb3"><pre class="sourceCode yaml"><code class="sourceCode yaml"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true"></a><span class="pp">---</span></span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true"></a><span class="fu">title</span><span class="kw">:</span><span class="at"> </span><span class="st">&quot;Distill for R Markdown&quot;</span></span>
+<span id="cb3-3"><a href="#cb3-3" aria-hidden="true"></a><span class="fu">description</span><span class="kw">: </span><span class="ch">|</span><span class="at"> </span></span>
+<span id="cb3-4"><a href="#cb3-4" aria-hidden="true"></a>  Scientific and technical writing, native to the web</span>
+<span id="cb3-5"><a href="#cb3-5" aria-hidden="true"></a><span class="fu">output</span><span class="kw">:</span><span class="at"> distill::distill_article</span></span>
+<span id="cb3-6"><a href="#cb3-6" aria-hidden="true"></a><span class="fu">creative_commons</span><span class="kw">:</span><span class="at"> CC BY</span></span>
+<span id="cb3-7"><a href="#cb3-7" aria-hidden="true"></a><span class="pp">---</span></span></code></pre></div>
 <p>If you include this field then a <em>Reuse</em> appendix is automatically generated. For example:</p>
 <p><img src="images/creative-commons.png" class="screenshot" style="width:95.0%" /></p>
 <h3 id="external-figures">External figures</h3>
@@ -1908,26 +1912,26 @@ creative_commons: CC BY
 <p>You can specify a preview image for your article (for sharing on Slack, Twitter, etc.) in a number of different ways:</p>
 <ol type="1">
 <li><p>You can explicitly provide the full URL of the preview image via the <code>preview</code> field in the article’s metadata. For example:</p>
-<pre class="markup"><code>---
-title: &quot;JavaScript &amp; D3&quot;
-description: Enhance communication with interactive visualizations 
-preview: https://rstudio.github.io/distill/images/javascript-d3-preview.png
----</code></pre>
+<div class="sourceCode" id="cb5"><pre class="sourceCode yaml"><code class="sourceCode yaml"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true"></a><span class="pp">---</span></span>
+<span id="cb5-2"><a href="#cb5-2" aria-hidden="true"></a><span class="fu">title</span><span class="kw">:</span><span class="at"> </span><span class="st">&quot;JavaScript &amp; D3&quot;</span></span>
+<span id="cb5-3"><a href="#cb5-3" aria-hidden="true"></a><span class="fu">description</span><span class="kw">:</span><span class="at"> Enhance communication with interactive visualizations </span></span>
+<span id="cb5-4"><a href="#cb5-4" aria-hidden="true"></a><span class="fu">preview</span><span class="kw">:</span><span class="at"> https://rstudio.github.io/distill/images/javascript-d3-preview.png</span></span>
+<span id="cb5-5"><a href="#cb5-5" aria-hidden="true"></a><span class="pp">---</span></span></code></pre></div>
 <p>Note that the preview image is specified with a full absolute URL. This is a requirement of both Open Graph and Twitter (relative image references are not supported). If you are publishing a standalone self-contained HTML version of your article then you’ll need to upload the preview image to another location on the web in order to reference it.</p></li>
 <li><p>If your article is not self-contained (it’s part of a <a href="publish_website.html">Distill website</a> or is generated with <code>self_contained: false</code>) then you can include the preview image alongside your document. In this case you still need to specify the root URL where your image will be published to using the <code>base_url</code> field:</p>
-<pre class="markup"><code>---
-title: &quot;JavaScript &amp; D3&quot;
-description: Enhance communication with interactive visualizations 
-base_url: https://rstudio.github.io/distill
-preview: images/javascript-d3-preview.png
----</code></pre>
+<div class="sourceCode" id="cb6"><pre class="sourceCode yaml"><code class="sourceCode yaml"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true"></a><span class="pp">---</span></span>
+<span id="cb6-2"><a href="#cb6-2" aria-hidden="true"></a><span class="fu">title</span><span class="kw">:</span><span class="at"> </span><span class="st">&quot;JavaScript &amp; D3&quot;</span></span>
+<span id="cb6-3"><a href="#cb6-3" aria-hidden="true"></a><span class="fu">description</span><span class="kw">:</span><span class="at"> Enhance communication with interactive visualizations </span></span>
+<span id="cb6-4"><a href="#cb6-4" aria-hidden="true"></a><span class="fu">base_url</span><span class="kw">:</span><span class="at"> https://rstudio.github.io/distill</span></span>
+<span id="cb6-5"><a href="#cb6-5" aria-hidden="true"></a><span class="fu">preview</span><span class="kw">:</span><span class="at"> images/javascript-d3-preview.png</span></span>
+<span id="cb6-6"><a href="#cb6-6" aria-hidden="true"></a><span class="pp">---</span></span></code></pre></div>
 <p>This technique is generally preferable to including the full URL since it allows Distill to inspect the image file directly and provide additional information about it’s size.</p></li>
 <li><p>You can also specify that a specific figure within your article should be used as the preview image. To do this, just add the <code>preview = TRUE</code> chunk option to the chunk which creates the figure. For example:</p>
-<pre class="markup"><code>---
-title: &quot;JavaScript &amp; D3&quot;
-description: Enhance communication with interactive visualizations 
-base_url: https://rstudio.github.io/distill
----</code></pre>
+<div class="sourceCode" id="cb7"><pre class="sourceCode yaml"><code class="sourceCode yaml"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true"></a><span class="pp">---</span></span>
+<span id="cb7-2"><a href="#cb7-2" aria-hidden="true"></a><span class="fu">title</span><span class="kw">:</span><span class="at"> </span><span class="st">&quot;JavaScript &amp; D3&quot;</span></span>
+<span id="cb7-3"><a href="#cb7-3" aria-hidden="true"></a><span class="fu">description</span><span class="kw">:</span><span class="at"> Enhance communication with interactive visualizations </span></span>
+<span id="cb7-4"><a href="#cb7-4" aria-hidden="true"></a><span class="fu">base_url</span><span class="kw">:</span><span class="at"> https://rstudio.github.io/distill</span></span>
+<span id="cb7-5"><a href="#cb7-5" aria-hidden="true"></a><span class="pp">---</span></span></code></pre></div>
 <pre class="clike"><code>```{r, layout=&quot;l-body-outset&quot;, preview=TRUE}
 library(ggplot2)
 ggplot(diamonds, aes(carat, price)) + geom_smooth() +
@@ -1944,15 +1948,15 @@ ggplot(diamonds, aes(carat, price)) + geom_smooth() +
 <p>See the section on <a href="#preview-images">preview images</a> for additional details on providing an image for your article that will be included on Twitter Cards.</p>
 <p>There are two additional fields you can include that provide attribution for your link to the Twitter account of a website and/or creator of the article. This attribution is specified via the <code>twitter:site</code> and <code>twitter:creator</code> fields.</p>
 <p>Here’s a complete example that includes the attribution fields as well as a preview image:</p>
-<pre class="markup"><code>---
-title: &quot;JavaScript &amp; D3&quot;
-description: Enhance communication with interactive visualizations 
-base_url: https://rstudio.github.io/distill
-preview: images/javascript-d3-preview.png
-twitter:
-  site: &quot;@rstudio&quot;
-  creator: &quot;@fly_upside_down&quot;
----</code></pre>
+<div class="sourceCode" id="cb9"><pre class="sourceCode yaml"><code class="sourceCode yaml"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true"></a><span class="pp">---</span></span>
+<span id="cb9-2"><a href="#cb9-2" aria-hidden="true"></a><span class="fu">title</span><span class="kw">:</span><span class="at"> </span><span class="st">&quot;JavaScript &amp; D3&quot;</span></span>
+<span id="cb9-3"><a href="#cb9-3" aria-hidden="true"></a><span class="fu">description</span><span class="kw">:</span><span class="at"> Enhance communication with interactive visualizations </span></span>
+<span id="cb9-4"><a href="#cb9-4" aria-hidden="true"></a><span class="fu">base_url</span><span class="kw">:</span><span class="at"> https://rstudio.github.io/distill</span></span>
+<span id="cb9-5"><a href="#cb9-5" aria-hidden="true"></a><span class="fu">preview</span><span class="kw">:</span><span class="at"> images/javascript-d3-preview.png</span></span>
+<span id="cb9-6"><a href="#cb9-6" aria-hidden="true"></a><span class="fu">twitter</span><span class="kw">:</span></span>
+<span id="cb9-7"><a href="#cb9-7" aria-hidden="true"></a><span class="at">  </span><span class="fu">site</span><span class="kw">:</span><span class="at"> </span><span class="st">&quot;@rstudio&quot;</span></span>
+<span id="cb9-8"><a href="#cb9-8" aria-hidden="true"></a><span class="at">  </span><span class="fu">creator</span><span class="kw">:</span><span class="at"> </span><span class="st">&quot;@fly_upside_down&quot;</span></span>
+<span id="cb9-9"><a href="#cb9-9" aria-hidden="true"></a><span class="pp">---</span></span></code></pre></div>
 <p>Be sure to enclose the Twitter account names in quotes (this is required because they start with <code>@</code>).</p>
 <h2 id="google-scholar">Google Scholar</h2>
 <p>Distill articles automatically include metadata compatible with the format indexed by <a href="https://scholar.google.com/intl/en/scholar/inclusion.html#indexing">Google Scholar</a>. This makes it easy for indexing engines (Google Scholar or otherwise) to extract not only a citation for your article but also information on other sources which you cited.</p>
@@ -1983,27 +1987,27 @@ twitter:
 <p>Note that the <code>citation_reference</code> fields provide information on which works your article cited.</p>
 <p>The code above is HTML so don’t worry if you aren’t familiar with the syntax. The important thing to know is that citation data is provided in a way that machines can easily read and index.</p>
 <p>If you are publishing a Journal article, there are some additional metadata fields you can provide to enhance the Google Scholar metadata generated by Distill. These include additional fields describing the Journal (<code>title</code>, <code>issn</code>, and <code>publisher</code>) as well fields describing the <code>volume</code> and <code>issue</code> in which your article was published. For example:</p>
-<pre class="markup"><code>---
-title: &quot;Distill for R Markdown&quot;
-description: | 
-  Scientific and technical writing, native to the web
-date: May 4, 2018
-author:
-  - name: Norah Jones 
-    url: https://example.com/norahjones
-    affiliation: Spacely Sprockets
-    affiliation_url: https://example.com/spacelysprokets
-journal: 
-  title: &quot;Journal of Data Science Software&quot;
-  issn: 2490-1752
-  publisher: Data Science Press
-volume: 10
-issue: 4
-doi: &quot;10.23915/distill.00010&quot;
-slug: jones2018distill
-citation_url: https://rstudio.github.io/distill
-bibliography: biblio.bib
----</code></pre>
+<div class="sourceCode" id="cb11"><pre class="sourceCode yaml"><code class="sourceCode yaml"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true"></a><span class="pp">---</span></span>
+<span id="cb11-2"><a href="#cb11-2" aria-hidden="true"></a><span class="fu">title</span><span class="kw">:</span><span class="at"> </span><span class="st">&quot;Distill for R Markdown&quot;</span></span>
+<span id="cb11-3"><a href="#cb11-3" aria-hidden="true"></a><span class="fu">description</span><span class="kw">: </span><span class="ch">|</span><span class="at"> </span></span>
+<span id="cb11-4"><a href="#cb11-4" aria-hidden="true"></a>  Scientific and technical writing, native to the web</span>
+<span id="cb11-5"><a href="#cb11-5" aria-hidden="true"></a><span class="fu">date</span><span class="kw">:</span><span class="at"> May 4, 2018</span></span>
+<span id="cb11-6"><a href="#cb11-6" aria-hidden="true"></a><span class="fu">author</span><span class="kw">:</span></span>
+<span id="cb11-7"><a href="#cb11-7" aria-hidden="true"></a><span class="at">  </span><span class="kw">-</span><span class="at"> </span><span class="fu">name</span><span class="kw">:</span><span class="at"> Norah Jones </span></span>
+<span id="cb11-8"><a href="#cb11-8" aria-hidden="true"></a><span class="at">    </span><span class="fu">url</span><span class="kw">:</span><span class="at"> https://example.com/norahjones</span></span>
+<span id="cb11-9"><a href="#cb11-9" aria-hidden="true"></a><span class="at">    </span><span class="fu">affiliation</span><span class="kw">:</span><span class="at"> Spacely Sprockets</span></span>
+<span id="cb11-10"><a href="#cb11-10" aria-hidden="true"></a><span class="at">    </span><span class="fu">affiliation_url</span><span class="kw">:</span><span class="at"> https://example.com/spacelysprokets</span></span>
+<span id="cb11-11"><a href="#cb11-11" aria-hidden="true"></a><span class="fu">journal</span><span class="kw">:</span><span class="at"> </span></span>
+<span id="cb11-12"><a href="#cb11-12" aria-hidden="true"></a><span class="at">  </span><span class="fu">title</span><span class="kw">:</span><span class="at"> </span><span class="st">&quot;Journal of Data Science Software&quot;</span></span>
+<span id="cb11-13"><a href="#cb11-13" aria-hidden="true"></a><span class="at">  </span><span class="fu">issn</span><span class="kw">:</span><span class="at"> 2490-1752</span></span>
+<span id="cb11-14"><a href="#cb11-14" aria-hidden="true"></a><span class="at">  </span><span class="fu">publisher</span><span class="kw">:</span><span class="at"> Data Science Press</span></span>
+<span id="cb11-15"><a href="#cb11-15" aria-hidden="true"></a><span class="fu">volume</span><span class="kw">:</span><span class="at"> </span><span class="dv">10</span></span>
+<span id="cb11-16"><a href="#cb11-16" aria-hidden="true"></a><span class="fu">issue</span><span class="kw">:</span><span class="at"> </span><span class="dv">4</span></span>
+<span id="cb11-17"><a href="#cb11-17" aria-hidden="true"></a><span class="fu">doi</span><span class="kw">:</span><span class="at"> </span><span class="st">&quot;10.23915/distill.00010&quot;</span></span>
+<span id="cb11-18"><a href="#cb11-18" aria-hidden="true"></a><span class="fu">slug</span><span class="kw">:</span><span class="at"> jones2018distill</span></span>
+<span id="cb11-19"><a href="#cb11-19" aria-hidden="true"></a><span class="fu">citation_url</span><span class="kw">:</span><span class="at"> https://rstudio.github.io/distill</span></span>
+<span id="cb11-20"><a href="#cb11-20" aria-hidden="true"></a><span class="fu">bibliography</span><span class="kw">:</span><span class="at"> biblio.bib</span></span>
+<span id="cb11-21"><a href="#cb11-21" aria-hidden="true"></a><span class="pp">---</span></span></code></pre></div>
 <div class="sourceCode" id="cb12"><pre class="sourceCode r distill-force-highlighting-css"><code class="sourceCode r"></code></pre></div>
 <div class="sourceCode" id="cb13"><pre class="sourceCode r distill-force-highlighting-css"><code class="sourceCode r"></code></pre></div>
 <!--radix_placeholder_article_footer-->

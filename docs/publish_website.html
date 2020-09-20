@@ -1439,6 +1439,10 @@ code span.wa { color: #008000; font-weight: bold; } /* Warning */
     // remove code block used to force  highlighting css
     $('.distill-force-highlighting-css').parent().remove();
 
+    // remove empty line numbers inserted by pandoc when using a
+    // custom syntax highlighting theme
+    $('code.sourceCode a[aria-hidden="true"]').remove();
+
     // load distill framework
     load_distill_framework();
 
@@ -1855,8 +1859,8 @@ Publishing
 <li><p>Set the <code>output_dir</code> within <code>_site.yml</code> to match the repository directory your site is served from. You can configure GitHub Pages to publish from the root of your master branch or the <code>docs</code> sub-directory:</p>
 <p><img src="images/github-pages-directory.png" style="width:95.0%" /></p>
 <p>Depending on your configuration you should set the <code>output_dir</code> as follows:</p>
-<pre class="markup"><code>output_dir: &quot;.&quot;     # root of master branch
-output_dir: &quot;docs&quot;  # docs directory of master branch</code></pre></li>
+<div class="sourceCode" id="cb1"><pre class="sourceCode yaml"><code class="sourceCode yaml"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true"></a><span class="fu">output_dir</span><span class="kw">:</span><span class="at"> </span><span class="st">&quot;.&quot;</span><span class="co">     # root of master branch</span></span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true"></a><span class="fu">output_dir</span><span class="kw">:</span><span class="at"> </span><span class="st">&quot;docs&quot;</span><span class="co">  # docs directory of master branch</span></span></code></pre></div></li>
 </ol>
 <p>See the <a href="https://pages.github.com/">GitHub Pages</a> documentation for additional details on creating and deploying websites with GitHub.</p>
 <h2 id="netlify">Netlify</h2>
@@ -1866,11 +1870,11 @@ output_dir: &quot;docs&quot;  # docs directory of master branch</code></pre></li
 <h2 id="google-firebase">Google Firebase</h2>
 <p>Google Firebase has a <a href="https://firebase.google.com/docs/hosting/quickstart">web hosting service</a> that enables easy deployment of websites using a set of command line tools.</p>
 <p>Firebase websites by default deploy content from the <code>public</code> directory of the Firebase project directory. This means that you should set the <code>output_dir</code> to <code>"public"</code> within <code>_site.yml</code>:</p>
-<pre class="markup"><code>---
-name: &quot;distill&quot;
-title: &quot;Distill for R Markdown&quot;
-output_dir: &quot;public&quot;
----</code></pre>
+<div class="sourceCode" id="cb2"><pre class="sourceCode yaml"><code class="sourceCode yaml"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true"></a><span class="pp">---</span></span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true"></a><span class="fu">name</span><span class="kw">:</span><span class="at"> </span><span class="st">&quot;distill&quot;</span></span>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true"></a><span class="fu">title</span><span class="kw">:</span><span class="at"> </span><span class="st">&quot;Distill for R Markdown&quot;</span></span>
+<span id="cb2-4"><a href="#cb2-4" aria-hidden="true"></a><span class="fu">output_dir</span><span class="kw">:</span><span class="at"> </span><span class="st">&quot;public&quot;</span></span>
+<span id="cb2-5"><a href="#cb2-5" aria-hidden="true"></a><span class="pp">---</span></span></code></pre></div>
 <h2 id="site44-dropbox">Site44 (Dropbox)</h2>
 <p><a href="https://www.site44.com/">Site44</a> is a service that allows you to publish websites from within Dropbox folders. Site44 creates a <code>Dropbox/Apps/site44</code> directory, and any folders within that directory are published as websites.</p>
 <p>The recommended workflow for deploying Distill websites to Site44 is to develop your website in a separate project directory, and then, when it’s ready for final publishing, copy the contents of the <code>_site</code> directory to the folder for your website.</p>

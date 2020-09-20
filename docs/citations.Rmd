@@ -14,7 +14,7 @@ Distill articles support including citations and a corresponding bibliography us
 
 Use standard [R Markdown bibliographies](https://rmarkdown.rstudio.com/authoring_bibliographies_and_citations.html) for citing other works. To do this, first create a bibliography file using a supported format (e.g. BibTeX or CSL) and refer to it from the `bibliography` field of the YAML front-matter. For example:
 
-``` {.markup}
+``` {.yaml}
 ---
 title: "Distill for R Markdown"
 description: | 
@@ -32,7 +32,7 @@ bibliography: biblio.bib
 
 Here's an example of what one of the entries in your BibTeX file might look like:
 
-``` {.markup}
+``` {.bibtex}
 @Book{xie2015,
   title = {Dynamic Documents with R and knitr},
   author = {Yihui Xie},
@@ -55,7 +55,7 @@ You can make it easier for others to cite your work by providing additional meta
 
 To provide a citation for an article published to the web, include `author` and `date` metadata as well as a `citation_url`. For example:
 
-``` {.markup}
+``` {.yaml}
 ---
 title: "Distill for R Markdown"
 description: | 
@@ -91,7 +91,7 @@ If your article is published within a Journal, you can add the following the add
 
 Here's our previous examples amended with these fields:
 
-``` {.markup}
+``` {.yaml}
 ---
 title: "Distill for R Markdown"
 description: | 

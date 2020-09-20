@@ -52,7 +52,7 @@ For example:
 
 **\_site.yml**
 
-``` {.markup}
+``` {.yaml}
 name: "reproducible-finance-with-r"
 title: "Reproducible Finance with R"
 description: |
@@ -102,7 +102,7 @@ Once you have authored one or more posts you'll want to create a listing page. Y
 
 **index.Rmd**
 
-``` {.markup}
+``` {.yaml}
 ---
 title: "Reproducible Finance with R"
 site: distill::distill_website
@@ -120,7 +120,7 @@ Above we demonstrated creating a listing page for all posts. You can also create
 
 **gallery.Rmd**
 
-``` {.markup}
+``` {.yaml}
 ---
 title: "Gallery of featured posts"
 listing:
@@ -135,7 +135,7 @@ listing:
 
 If your posts include `categories` metadata, then the page will also include categories within the article listing. For example, here is some post metadata that includes categories:
 
-``` {.markup}
+``` {.yaml}
 ---
 title: "The Sharpe Ratio"
 # (additional metadata e.g. description and date, excluded for brevity)
@@ -152,7 +152,7 @@ Categories are listed in the right-hand sidebar and are also displayed as metada
 
 **\_site.yml**
 
-``` {.markup}
+``` {.yaml}
 name: "reproducible-finance-with-r"
 title: "Reproducible Finance with R"
 description: |
@@ -171,7 +171,7 @@ When you create a listing page an [RSS feed](https://en.wikipedia.org/wiki/RSS) 
 
 **\_site.yml**
 
-``` {.markup}
+``` {.yaml}
 name: "reproducible-finance-with-r"
 title: "Reproducible Finance with R"
 description: |
@@ -191,7 +191,7 @@ By default the most recent 20 articles will be included in the RSS feed. You can
 
 **\_site.yml**
 
-``` {.markup}
+``` {.yaml}
 name: "reproducible-finance-with-r"
 title: "Reproducible Finance with R"
 description: |
@@ -209,7 +209,7 @@ Specify `feed_items_max: false` to have no limit on the number of items included
 
 If you want to work on a post for a period of time without having it be added to the listing page, add `draft: true` to the post's metadata. For example:
 
-``` {.markup}
+``` {.yaml}
 ---
 title: "The Sharpe Ratio"
 description: |
@@ -235,7 +235,7 @@ For example, the following options provide the [Disqus shortname](https://help.d
 
 **\_site.yml**
 
-``` {.markup}
+``` {.yaml}
 name: "reproducible-finance-with-r"
 title: "Reproducible Finance with R"
 description: |
@@ -258,7 +258,7 @@ Valid values for the `share` option are `twitter`, `linkedin`, `facebook`, `goog
 
 By default, the full text of Disqus comments are not displayed (rather, a link is provided that will expand the comment section). This is done so that a long comment section doesn't obscure the bibliography and other appendices. If you'd rather show the comments by default you can use this alterante syntax for `disqus` configuration:
 
-``` {.markup}
+``` {.yaml}
 collections:
   posts:
     disqus: 
@@ -273,7 +273,7 @@ Specifying the `hidden: false` option for `disqus` will causes all comments to b
 
 Blog sites automatically include a search box within the navigation bar. You can disable the search box using the the `search` field of the `navbar` key within `_site.yml`. For example:
 
-``` {.markup}
+``` {.yaml}
 ---
 name: "distill"
 title: "Distill for R Markdown"
@@ -291,7 +291,7 @@ Note that top level articles within blog sites will also be included in search r
 
 If you want to display a link to the source code for your blog on the navigation bar, add a `source_url` field to the `navbar` definition. For example:
 
-``` {.markup}
+``` {.yaml}
 ---
 name: "distill"
 title: "Distill for R Markdown"
@@ -337,7 +337,7 @@ ggplot(diamonds, aes(carat, price)) + geom_smooth() +
 
 If you want to use another image entirely as a post preview you add a `preview` field to the post's metadata. For example, here we add a `preview` field to the example metadata from above (some fields excluded for brevity):
 
-``` {.markup}
+``` {.yaml}
 ---
 title: "The Sharpe Ratio"
 description: |
@@ -361,7 +361,7 @@ If you want to disable this behavior you can use the `collections:posts:citation
 
 **\_site.yml**
 
-``` {.markup}
+``` {.yaml}
 name: "reproducible-finance-with-r"
 title: "Reproducible Finance with R"
 description: |
@@ -381,7 +381,7 @@ You can add HTML that enables readers to subscribe to your blog by including the
 
 **\_site.yml**
 
-``` {.markup}
+``` {.yaml}
 name: "reproducible-finance-with-r"
 title: "Reproducible Finance with R"
 description: |
@@ -418,7 +418,7 @@ You can also add arbitrary HTML to the top of the sidebar by including the `coll
 
 **\_site.yml**
 
-``` {.markup}
+``` {.yaml}
 name: "reproducible-finance-with-r"
 title: "Reproducible Finance with R"
 description: |
@@ -471,7 +471,7 @@ When a blog post is published, resource files located alongside the post in its 
 
 You can override this behavior using a `resources` metadata entry for your post, which can specify explicit files to `include` or `exclude`. For example (some fields excluded for brevity):
 
-``` {.markup}
+``` {.yaml}
 ---
 title: "The Sharpe Ratio"
 description: |

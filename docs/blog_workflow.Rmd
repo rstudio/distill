@@ -38,7 +38,7 @@ There are two distinct ways to manage work in progress on a Distill post:
 
 If you want to work on a post for a period of time without having it be added to the listing page, add `draft: true` to the post's metadata. For example:
 
-``` {.markup}
+``` {.yaml}
 ---
 title: "The Sharpe Ratio"
 description: |
@@ -151,7 +151,7 @@ The Distill tools for importing posts make it very easy to aggregate posts publi
 
 To facilitate this, Distill will scan any imported post for [Creative Commons](https://creativecommons.org/licenses/) copyright metadata, and in the case that none is found confirm that you still want to import the post. Consequently, you should ask that authors writing posts for your blog always include the `creative_commons` field in their post metadata. For example:
 
-``` {.markup}
+``` {.yaml}
 ---
 title: "Distill for R Markdown"
 description: | 
@@ -173,7 +173,7 @@ To facilitate this, Distill automatically specifies a [canonical url](https://en
 
 If you prefer to disable this behavior, you can add `canonical: false` to your blog's configuration in `_site.yml`. For example:
 
-``` {.markup}
+``` {.yaml}
 name: "reproducible-finance-with-r"
 title: "Reproducible Finance with R"
 description: |
@@ -187,7 +187,7 @@ collections:
 
 While canonical URLs are provided automatically for blog posts, they aren't for standalone articles. You can explicitly provide a canonical URL for a standalone article using the `canonical_url` metadata field:
 
-``` {.markup}
+``` {.yaml}
 ---
 title: "Distill for R Markdown"
 description: | 
