@@ -347,7 +347,7 @@ knit_hooks <- function(downlit) {
     # document (to force pandoc to including highlighting cssm which it
     # might not do if all chunks are handled by downlit)
     hooks$document <- function(x, options) {
-      c(x, '\n```{.r}\n```\n')
+      c(x, "```{.r .distill-force-highlighting-css}", "```")
     }
   }
 

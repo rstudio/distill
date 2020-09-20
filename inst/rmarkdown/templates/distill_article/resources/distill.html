@@ -728,6 +728,9 @@ function init_distill() {
     $(this).children().unwrap();
   });
 
+  // remove code block used to force  highlighting css
+  $('.distill-force-highlighting-css').parent().remove();
+
   // load distill framework
   load_distill_framework();
 
