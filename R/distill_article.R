@@ -14,7 +14,7 @@
 #'   quotes to curly quotes, `---` to em-dashes, `--` to en-dashes, and
 #'   `...` to ellipses.
 #' @param highlight Syntax highlighting style. Supported styles include
-#'   "default", "a11y", "tango", "pygments", "kate", "monochrome", "espresso",
+#'   "default", "rstudio", "tango", "pygments", "kate", "monochrome", "espresso",
 #'   "zenburn", "breezedark", and  "haddock". Pass NULL to prevent syntax
 #'   highlighting.
 #' @param highlight_downlit Use the \pkg{downlit} package to highlight
@@ -261,9 +261,9 @@ distill_article <- function(toc = FALSE,
 
 distill_highlighting_args <- function(highlight) {
 
-  # The default highlighting is a custom pandoc theme intended to
-  # emulate the RStudio default 'textmate' theme. It's in a JSON
-  # theme file as described here:
+  # The default highlighting is a custom pandoc theme based on
+  # https://github.com/ericwbailey/a11y-syntax-highlighting
+  # It's in a JSON theme file as described here:
   #
   #   https://pandoc.org/MANUAL.html#syntax-highlighting
   #
@@ -277,11 +277,11 @@ distill_highlighting_args <- function(highlight) {
   #
   #   https://github.com/jgm/skylighting/blob/a1d02a0db6260c73aaf04aae2e6e18b569caacdc/skylighting-core/src/Skylighting/Format/HTML.hs#L117-L147
   #
-  default = pandoc_path_arg(distill_resource("rstudio.theme"))
+  default <- pandoc_path_arg(distill_resource("a11y.theme"))
 
-  # if it's "a11y", then use the embedded theme file
-  if (identical(highlight, "a11y")) {
-    highlight <- pandoc_path_arg(distill_resource("a11y.theme"))
+  # if it's "rstudio", then use an embedded theme file
+  if (identical(highlight, "rstudio")) {
+    highlight <- pandoc_path_arg(distill_resource("rstudio.theme"))
   }
 
   pandoc_highlight_args(highlight, default)

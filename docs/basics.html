@@ -2014,7 +2014,7 @@ knitr::opts_chunk$set(
 )
 ```</code></pre>
 <h2 id="syntax-highlighting">Syntax highlighting</h2>
-<p>Syntax highlighting for R code is done using the <a href="https://downlit.r-lib.org">downlit</a> package, which provides automatic linking of R functions to their online documentation. By default, highlighting matches the appearance of code within the RStudio editor.</p>
+<p>Syntax highlighting for R code is done using the <a href="https://downlit.r-lib.org">downlit</a> package, which provides automatic linking of R functions to their online documentation. By default, highlighting is done using colors <a href="https://github.com/ericwbailey/a11y-syntax-highlighting">optimized for accessibility</a>.</p>
 <p>You can customize highlighting behavior using the <code>highlight</code> and <code>highlight_downlit</code> options. For example, to use the Pandoc “haddock” highlighting theme and disable the use of downlit, you would do this:</p>
 <div class="sourceCode" id="cb12"><pre class="sourceCode yaml"><code class="sourceCode yaml"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true"></a><span class="pp">---</span></span>
 <span id="cb12-2"><a href="#cb12-2" aria-hidden="true"></a><span class="fu">title</span><span class="kw">:</span><span class="at"> </span><span class="st">&quot;Distill for R Markdown&quot;</span></span>
@@ -2036,11 +2036,11 @@ knitr::opts_chunk$set(
 <tbody>
 <tr class="odd">
 <td><code>default</code></td>
-<td>RStudio editor theme</td>
+<td>Default (accessible) theme</td>
 </tr>
 <tr class="even">
-<td><code>a11y</code></td>
-<td>Accessible <a href="https://github.com/ericwbailey/a11y-syntax-highlighting">theme</a>.</td>
+<td><code>rstudio</code></td>
+<td>RStudio editor theme</td>
 </tr>
 <tr class="odd">
 <td><code>haddock</code>, <code>kate</code>, <code>monochrome</code>, <code>pygments</code>, <code>tango</code></td>

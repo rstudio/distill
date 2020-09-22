@@ -237,7 +237,7 @@ knitr::opts_chunk$set(
 
 ## Syntax highlighting
 
-Syntax highlighting for R code is done using the [downlit](https://downlit.r-lib.org) package, which provides automatic linking of R functions to their online documentation. By default, highlighting matches the appearance of code within the RStudio editor.
+Syntax highlighting for R code is done using the [downlit](https://downlit.r-lib.org) package, which provides automatic linking of R functions to their online documentation. By default, highlighting is done using colors [optimized for accessibility](https://github.com/ericwbailey/a11y-syntax-highlighting).
 
 You can customize highlighting behavior using the `highlight` and `highlight_downlit` options. For example, to use the Pandoc "haddock" highlighting theme and disable the use of downlit, you would do this:
 
@@ -257,8 +257,8 @@ Available options for `highlight` include:
 
 | Option(s)                                            | Description                                                                                              |
 |------------------------------------------------------|----------------------------------------------------------------------------------------------------------|
-| `default`                                            | RStudio editor theme                                                                                     |
-| `a11y`                                               | Accessible [theme](https://github.com/ericwbailey/a11y-syntax-highlighting).                             |
+| `default`                                            | Default (accessible) theme                                                                               |
+| `rstudio`                                            | RStudio editor theme                                                                                     |
 | `haddock`, `kate`, `monochrome`, `pygments`, `tango` | Pandoc highlighting [themes](https://www.garrickadenbuie.com/blog/pandoc-syntax-highlighting-examples/). |
 | Path to `.theme` file                                | Custom Pandoc [theme file](https://pandoc.org/MANUAL.html#syntax-highlighting).                          |
 
