@@ -14,7 +14,7 @@
 #'   quotes to curly quotes, `---` to em-dashes, `--` to en-dashes, and
 #'   `...` to ellipses.
 #' @param highlight Syntax highlighting style. Supported styles include
-#'   "default", "tango", "pygments", "kate", "monochrome", "espresso",
+#'   "default", "a11y", "tango", "pygments", "kate", "monochrome", "espresso",
 #'   "zenburn", "breezedark", and  "haddock". Pass NULL to prevent syntax
 #'   highlighting.
 #' @param highlight_downlit Use the \pkg{downlit} package to highlight
@@ -279,7 +279,11 @@ distill_highlighting_args <- function(highlight) {
   #
   default = pandoc_path_arg(distill_resource("rstudio.theme"))
 
-  # yield highlight args
+  # if it's "a11y", then use the embedded theme file
+  if (identical(highlight, "a11y")) {
+    highlight <- pandoc_path_arg(distill_resource("a11y.theme"))
+  }
+
   pandoc_highlight_args(highlight, default)
 }
 

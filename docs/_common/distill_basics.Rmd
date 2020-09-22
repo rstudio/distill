@@ -258,6 +258,7 @@ Available options for `highlight` include:
 | Option(s)                                            | Description                                                                                              |
 |------------------------------------------------------|----------------------------------------------------------------------------------------------------------|
 | `default`                                            | RStudio editor theme                                                                                     |
+| `a11y`                                               | Accessible [theme](https://github.com/ericwbailey/a11y-syntax-highlighting).                             |
 | `haddock`, `kate`, `monochrome`, `pygments`, `tango` | Pandoc highlighting [themes](https://www.garrickadenbuie.com/blog/pandoc-syntax-highlighting-examples/). |
 | Path to `.theme` file                                | Custom Pandoc [theme file](https://pandoc.org/MANUAL.html#syntax-highlighting).                          |
 
