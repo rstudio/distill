@@ -167,7 +167,7 @@ code span.wa { color: #008000; font-weight: bold; } /* Warning */
 
   .distill-site-nav {
     color: rgba(255, 255, 255, 0.8);
-    background-color: #455a64;
+    background-color: #0F2E3D;
     font-size: 15px;
     font-weight: 300;
   }
@@ -603,7 +603,7 @@ code span.wa { color: #008000; font-weight: bold; } /* Warning */
     padding-top: 8px;
     padding-bottom: 0;
     border-radius: 6px;
-    border: 1px #455a64 solid;
+    border: 1px #0F2E3D solid;
     width: 180px;
   }
 
@@ -1811,11 +1811,12 @@ Publishing
 <li><p>Add site search feature using <a href="https://github.com/krisk/Fuse">Fuse.js</a> (enabled by default for blog sites). Can be explicitly enabled or disabled for any site using the <code>search</code> field in the <code>navbar</code> key of <code>_site.yml</code>.</p></li>
 <li><p>Provide navbar link to website source code when <code>source_url</code> is provided in the <code>navbar</code> key of <code>_site.yml</code>.</p></li>
 <li><p>Use pandoc rather than distill for bibliography generation. Provides support for <code>csl</code>, <code>nocite</code>, and <code>link-citations</code>, as well as the use of multiple bibliographies (including non-BibTeX ones). Eliminates distill provided mouse-over citation display, but users seem to value the Pandoc features more than this one.</p></li>
-<li><p>Use pandoc rather than distill for code output (syntax highlighting themes can be customized using the <code>highlight</code> option).</p></li>
+<li><p>Use pandoc rather than distill for code output (syntax highlighting themes can be customized using the <code>highlight</code> option). New default highlighting theme optimized for accessibility.</p></li>
 <li><p>Use the <a href="https://downlit.r-lib.org/">downlit</a> package to syntax highlight R code chunks (controlled by the <code>highlight_downlit</code> option, which is enabled by default).</p></li>
 <li><p>Provide heading anchor links in left margin on hover.</p></li>
 <li><p>Display article table of contents in the left sidebar. This is done only when the browser &gt;= 1000 pixels wide, otherwise it’s shown at the top.</p></li>
-<li><p>Various improvements to category display, including showing categories on article pages and within individual article listings, adding a special “articles” category at the top that shows all articles, and display of the active category when a category filter is applied to a listing.</p></li>
+<li><p>Show author (below date) within article listings.</p></li>
+<li><p>Various improvements to category display, including showing categories on article pages and within article listings, adding a special “articles” category at the top that shows all articles, and display of the active category when a category filter is applied to a listing.</p></li>
 <li><p>Don’t apply table td/th bottom border styles to gt tables.</p></li>
 <li><p>Support for <code>orcid_id</code> author metadata (displays next to author name).</p></li>
 </ul>
