@@ -1,7 +1,7 @@
-Distill for R Markdown
-================
 
 <!-- README.md is generated from README.Rmd. Please edit that file -->
+
+# distill for R Markdown <a href='https://flexdashboard.rmarkdown.io'><img src="man/figures/logo.png" align="right" height="138.5"/></a>
 
 Distill for R Markdown is a web publishing format optimized for
 scientific and technical communication. Distill articles include:
