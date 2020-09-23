@@ -54,6 +54,7 @@ navbar:
 output:
   distill::distill_article:
     css: styles.css
+    highlight: rstudio
     toc: true
 
 

@@ -21,6 +21,13 @@ $endif$
  <!--radix_placeholder_import_source-->
  <!--/radix_placeholder_import_source-->
 
+$if(highlighting-css)$
+<style type="text/css">code{white-space: pre;}</style>
+<style type="text/css" data-origin="pandoc">
+$highlighting-css$
+</style>
+$endif$
+
 $for(header-includes)$
   $header-includes$
 $endfor$

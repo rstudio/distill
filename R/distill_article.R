@@ -10,8 +10,19 @@
 #'
 #' @inheritParams rmarkdown::html_document
 #'
+#' @param smart Produce typographically correct output, converting straight
+#'   quotes to curly quotes, `---` to em-dashes, `--` to en-dashes, and
+#'   `...` to ellipses.
+#' @param highlight Syntax highlighting style. Supported styles include
+#'   "default", "rstudio", "tango", "pygments", "kate", "monochrome", "espresso",
+#'   "zenburn", "breezedark", and  "haddock". Pass NULL to prevent syntax
+#'   highlighting.
+#' @param highlight_downlit Use the \pkg{downlit} package to highlight
+#'   R code (including providing hyperlinks to function documentation).
+#'
 #' @import rmarkdown
 #' @import htmltools
+#' @import downlit
 #'
 #' @export
 distill_article <- function(toc = FALSE,
@@ -23,6 +34,8 @@ distill_article <- function(toc = FALSE,
                           dev = "png",
                           smart = TRUE,
                           self_contained = TRUE,
+                          highlight = "default",
+                          highlight_downlit = TRUE,
                           mathjax = "default",
                           extra_dependencies = NULL,
                           css = NULL,
@@ -42,16 +55,17 @@ distill_article <- function(toc = FALSE,
   # table of contents
   args <- c(args, pandoc_toc_args(toc, toc_depth))
 
-  # prevent highlighting
-  args <- c(args, "--no-highlight")
+  # add highlighting
+  args <- c(args, distill_highlighting_args(highlight))
+
+  # turn off downlit if there is no highlighting at all
+  if (is.null(highlight))
+    highlight_downlit <- FALSE
 
   # add template
   args <- c(args, "--template",
             pandoc_path_arg(distill_resource("default.html")))
 
-  # lua filter
-  args <- c(args, "--lua-filter",
-            pandoc_path_arg(distill_resource("distill.lua")))
 
   # use link citations (so we can do citation conversion)
   args <- c(args, "--metadata=link-citations:true")
@@ -70,8 +84,7 @@ distill_article <- function(toc = FALSE,
   knitr_options$opts_knit$bookdown.internal.label <- TRUE
   knitr_options$opts_hooks <- list()
   knitr_options$opts_hooks$preview <- knitr_preview_hook
-  knitr_options$knit_hooks <- list()
-  knitr_options$knit_hooks$chunk <- knitr_chunk_hook()
+  knitr_options$knit_hooks <- knit_hooks(downlit = highlight_downlit)
 
   # shared variables
   site_config <- NULL
@@ -246,6 +259,33 @@ distill_article <- function(toc = FALSE,
   )
 }
 
+distill_highlighting_args <- function(highlight) {
+
+  # The default highlighting is a custom pandoc theme based on
+  # https://github.com/ericwbailey/a11y-syntax-highlighting
+  # It's in a JSON theme file as described here:
+  #
+  #   https://pandoc.org/MANUAL.html#syntax-highlighting
+  #
+  # To create the theme we started with pandoc --print-highlight-style haddock
+  # (since that was the closest pandoc them to textmate) then made
+  # the following changes to create the RStudio textmate version:
+  #
+  #  https://github.com/rstudio/distill/compare/02b241083b8ca5cda90954c6c37e9f11bf830b2c...13fb0f6b34e9d04df0bd24a02980e29105a8f68d#diff-f088084fe658ee281215b486b2f18dab
+  #
+  # all available pandoc highlighting tokens are enumerated here:
+  #
+  #   https://github.com/jgm/skylighting/blob/a1d02a0db6260c73aaf04aae2e6e18b569caacdc/skylighting-core/src/Skylighting/Format/HTML.hs#L117-L147
+  #
+  default <- pandoc_path_arg(distill_resource("a11y.theme"))
+
+  # if it's "rstudio", then use an embedded theme file
+  if (identical(highlight, "rstudio")) {
+    highlight <- pandoc_path_arg(distill_resource("rstudio.theme"))
+  }
+
+  pandoc_highlight_args(highlight, default)
+}
 
 knitr_preview_hook <- function(options) {
   if (isTRUE(options$preview))
@@ -253,35 +293,70 @@ knitr_preview_hook <- function(options) {
   options
 }
 
-# hook to enclose output in div with layout class
-knitr_chunk_hook <- function() {
+knit_hooks <- function(downlit) {
 
-  # capture the default chunk hook
+  # capture the default chunk and source hooks
   previous_hooks <- knitr::knit_hooks$get()
   on.exit(knitr::knit_hooks$restore(previous_hooks), add = TRUE)
   knitr::render_markdown()
   default_chunk_hook <- knitr::knit_hooks$get("chunk")
+  default_source_hook <- knitr::knit_hooks$get("source")
 
-  # hook
-  function(x, options) {
+  # apply chunk hook
+  hooks <- list(
+    chunk = function(x, options) {
+      # apply default layout
+      if (is.null(options$layout))
+        options$layout <- "l-body"
 
-    # apply default layout
-    if (is.null(options$layout))
-      options$layout <- "l-body"
+      # apply default hook and determine padding
+      output <- default_chunk_hook(x, options)
+      pad_chars <- nchar(output) - nchar(sub("^ +", "", output))
+      padding <- paste(rep(' ', pad_chars), collapse = '')
 
-    # apply default hook and determine padding
-    output <- default_chunk_hook(x, options)
-    pad_chars <- nchar(output) - nchar(sub("^ +", "", output))
-    padding <- paste(rep(' ', pad_chars), collapse = '')
+      # enclose default output in div (with appropriate padding)
+      paste0(
+        padding, '<div class="layout-chunk" data-layout="', options$layout, '">\n',
+        output, '\n',
+        padding, '\n',
+        padding, '</div>\n'
+      )
+    }
+  )
 
-    # enclose default output in div (with appropriate padding)
-    paste0(
-      padding, '<div class="layout-chunk" data-layout="', options$layout, '">\n',
-      output, '\n',
-      padding, '\n',
-      padding, '</div>\n'
-    )
+  # apply source and document hook if downlit is enabled
+  if (downlit) {
+
+    # source hook to do downlit processing
+    hooks$source <- function(x, options) {
+      if (options$engine == "R") {
+        code <- highlight(paste0(x, "\n", collapse = ""),
+                          classes_pandoc(),
+                          pre_class = NULL)
+        if (is.na(code)) {
+          default_source_hook(x, options)
+        } else {
+          x <- paste0("<div class=\"sourceCode\"><pre><code>",
+                      code,
+                      "</code></pre></div>")
+          x <- paste0(x, "\n")
+          x
+        }
+      } else {
+        default_source_hook(x, options)
+      }
+    }
+
+    # document hook to inject a fake empty code block a the end of the
+    # document (to force pandoc to including highlighting cssm which it
+    # might not do if all chunks are handled by downlit)
+    hooks$document <- function(x, options) {
+      c(x, "```{.r .distill-force-highlighting-css}", "```")
+    }
   }
+
+  # return hooks
+  hooks
 }
 
 

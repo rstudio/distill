@@ -6,17 +6,14 @@ Use the **New R Markdown** dialog within RStudio to create a new Distill article
 
 You can also create a new Distill article from the command line with:
 
-``` {.r}
+```{r, eval=FALSE, echo=TRUE}
 library(rmarkdown)
 draft("article.Rmd", "distill_article", package = "distill")
 ```
 
-::: {#front-matter}
-:::
-
 Distill articles use `distill::distill_article` as their output format, and typically include title, description, date, author/affiliation, and bibliography entries in their YAML front-matter:
 
-``` {.markup}
+``` {.yaml}
 ---
 title: "Distill for R Markdown"
 description: | 
@@ -117,7 +114,7 @@ Bibtex is the supported way of making academic citations. To include citations, 
 
 For example, your bibliography file might contain:
 
-``` {.markup}
+``` {.bibtex}
 @Book{xie2015,
   title = {Dynamic Documents with R and knitr},
   author = {Yihui Xie},
@@ -176,7 +173,7 @@ ggplot(mtcars, aes(hp, mpg)) + geom_point() + geom_smooth()
 
 You can add a table of contents using the `toc` option and specify the depth of headers that it applies to using the `toc_depth` option. For example:
 
-``` {.markup}
+``` {.yaml}
 ---
 title: "Distill for R Markdown"
 description: | 
@@ -192,7 +189,7 @@ If the table of contents depth is not explicitly specified, it defaults to 3 (me
 
 ## Code blocks
 
-Syntax highlighting is provided for knitr code chunks. Note that by default the Distill format does not display the code for chunks that are evaluated to produce output (knitr option `echo = FALSE`).
+By default the Distill format does not display the code for chunks that are evaluated to produce output (knitr option `echo = FALSE`).
 
 The `echo = FALSE` default reflects the fact that Distill articles are often used to present the results of analyses rather than the underlying code. To display the code that was evaluated to produce output you can set the `echo` chunk option to `TRUE`:
 
@@ -237,6 +234,33 @@ knitr::opts_chunk$set(
 )
 ```
 ````
+
+## Syntax highlighting
+
+Syntax highlighting for R code is done using the [downlit](https://downlit.r-lib.org) package, which provides automatic linking of R functions to their online documentation. By default, highlighting is done using colors [optimized for accessibility](https://github.com/ericwbailey/a11y-syntax-highlighting).
+
+You can customize highlighting behavior using the `highlight` and `highlight_downlit` options. For example, to use the Pandoc "haddock" highlighting theme and disable the use of downlit, you would do this:
+
+``` {.yaml}
+---
+title: "Distill for R Markdown"
+description: | 
+  Scientific and technical writing, native to the web
+output:
+  distill::distill_article:
+    highlight: haddock
+    highlight_downlit: false
+---
+```
+
+Available options for `highlight` include:
+
+| Option(s)                                            | Description                                                                                              |
+|------------------------------------------------------|----------------------------------------------------------------------------------------------------------|
+| `default`                                            | Default (accessible) theme                                                                               |
+| `rstudio`                                            | RStudio editor theme                                                                                     |
+| `haddock`, `kate`, `monochrome`, `pygments`, `tango` | Pandoc highlighting [themes](https://www.garrickadenbuie.com/blog/pandoc-syntax-highlighting-examples/). |
+| Path to `.theme` file                                | Custom Pandoc [theme file](https://pandoc.org/MANUAL.html#syntax-highlighting).                          |
 
 ## Appendices
 
