@@ -38,6 +38,7 @@ jobs:
           install.packages("r2d3")
           install.packages("jsonlite")
           install.packages("leaflet")
+          install.packages("dygraphs")
         shell: Rscript {0}
 
       - name: Install package
