@@ -37,6 +37,7 @@ jobs:
           install.packages("DiagrammeR")
           install.packages("r2d3")
           install.packages("jsonlite")
+          install.packages("leaflet")
         shell: Rscript {0}
 
       - name: Install package
