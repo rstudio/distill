@@ -14,7 +14,9 @@
 
 -   Display article table of contents in the left sidebar. This is done only when the browser \>= 1000 pixels wide, otherwise it's shown at the top.
 
--   Various improvements to category display, including showing categories on article pages and within individual article listings, adding a special "articles" category at the top that shows all articles, and display of the active category when a category filter is applied to a listing.
+-   Show author (below date) within article listings.
+
+-   Various improvements to category display, including showing categories on article pages and within article listings, adding a special "articles" category at the top that shows all articles, and display of the active category when a category filter is applied to a listing.
 
 -   Don't apply table td/th bottom border styles to gt tables.
 

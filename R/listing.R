@@ -170,11 +170,12 @@ html_for_articles <- function(articles, caption = NULL, categories = FALSE, cate
                   HTML(jsonlite::toJSON(metadata))),
       div(class = "metadata",
         div(class = "publishedDate", date_as_abbrev(article$date)),
-        categories_metadata_html,
+        html_for_author(article$author)
       ),
       div(class = "thumbnail", preview),
       div(class = "description",
         h2(article$title),
+        categories_metadata_html,
         p(article$description)
       )
     )
@@ -231,6 +232,18 @@ html_for_categories_metadata <- function(article) {
   }
 }
 
+
+html_for_author <- function(author) {
+  author <- fixup_author(author)
+  if (!is.null(author)) {
+    tags <- lapply(author, function(auth) {
+      div(class = "dt-author", auth$name)
+    })
+    div(class = "dt-authors", tags)
+  } else {
+    NULL
+  }
+}
 
 custom_html <- function(site_dir, collection) {
 
