@@ -11,7 +11,9 @@ navbar:
   type: default
   left:
   - text: Get started
-    href: articles/basics.html
+    href: articles/start.html
+  - text: Examples
+    href: articles/examples.html
   - text: Reference
     href: reference/index.html
   right:

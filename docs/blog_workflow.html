@@ -449,261 +449,6 @@ code span.wa { color: #008000; font-weight: bold; } /* Warning */
   <link href="site_libs/font-awesome-5.1.0/css/all.css" rel="stylesheet"/>
   <link href="site_libs/font-awesome-5.1.0/css/v4-shims.css" rel="stylesheet"/>
   <script src="site_libs/headroom-0.9.4/headroom.min.js"></script>
-  <script src="site_libs/autocomplete-0.37.1/autocomplete.min.js"></script>
-  <script src="site_libs/fuse-6.4.1/fuse.min.js"></script>
-
-  <script type="application/javascript">
-
-  function getMeta(metaName) {
-    var metas = document.getElementsByTagName('meta');
-    for (let i = 0; i < metas.length; i++) {
-      if (metas[i].getAttribute('name') === metaName) {
-        return metas[i].getAttribute('content');
-      }
-    }
-    return '';
-  }
-
-  function offsetURL(url) {
-    var offset = getMeta('distill:offset');
-    return offset ? offset + '/' + url : url;
-  }
-
-  function createIndex() {
-    var options = {
-      keys: [
-        "title",
-        "categories",
-        "description",
-        "contents"
-      ]
-    };
-    return new window.Fuse([],options);
-  }
-
-  function createFuseIndex() {
-
-    // create fuse index
-    var options = { keys: ["title", "description", "contents"] };
-    var fuse = new window.Fuse([], options);
-
-    // fetch the main search.json
-    return fetch(offsetURL('search.json'))
-      .then(function(response) {
-        if (response.status == 200) {
-          return response.json().then(function(json) {
-            // index main articles
-            json.articles.forEach(function(article) {
-              fuse.add(article);
-            });
-            // download collections and index their articles
-            return Promise.all(json.collections.map(function(collection) {
-              return fetch(offsetURL(collection)).then(function(response) {
-                if (response.status === 200) {
-                  return response.json().then(function(articles) {
-                    articles.forEach(function(article) {
-                      fuse.add(article);
-                    });
-                  })
-                } else {
-                  return Promise.reject(
-                    new Error('Unexpected status from search index request: ' +
-                              response.status)
-                  );
-                }
-              });
-            })).then(function() {
-              return fuse;
-            });
-          });
-
-        } else {
-          return Promise.reject(
-            new Error('Unexpected status from search index request: ' +
-                        response.status)
-          );
-        }
-      });
-  }
-
-  window.document.addEventListener("DOMContentLoaded", function (event) {
-
-    // get search element (bail if we don't have one)
-    var searchEl = window.document.getElementById('distill-search');
-    if (!searchEl)
-      return;
-
-    createFuseIndex()
-      .then(function(fuse) {
-
-        // make search box visible
-        searchEl.classList.remove('hidden');
-
-        // initialize autocomplete
-        var options = {
-          autoselect: true,
-          hint: false,
-          minLength: 2,
-        };
-        window.autocomplete(searchEl, options, [{
-          source: function(query, callback) {
-            const searchOptions = {
-              isCaseSensitive: false,
-              shouldSort: true,
-              minMatchCharLength: 2,
-              limit: 10,
-              keys: [
-                { name: 'title', weight: 20 },
-                { name: 'categories', weight: 15 },
-                { name: 'description', weight: 10 },
-                { name: 'contents', weight: 5 },
-              ],
-            };
-            var results = fuse.search(query, searchOptions);
-            callback(results
-              .map(function(result) { return result.item; })
-              .filter(function(item) { return !!item.description; })
-            );
-          },
-          templates: {
-            suggestion: function(suggestion) {
-              var html = `
-                <div class="search-item">
-                  <h3>${suggestion.title}</h3>
-                  <div class="search-item-description">
-                    ${suggestion.description}
-                  </div>
-                  <div class="search-item-preview">
-                    <img src="${suggestion.preview ? offsetURL(suggestion.preview) : ''}"</img>
-                  </div>
-                </div>
-              `;
-              return html;
-            }
-          }
-        }]).on('autocomplete:selected', function(event, suggestion) {
-          window.location.href = offsetURL(suggestion.path);
-        });
-      })
-      .catch(function(error) {
-        console.log(error);
-      });
-  });
-
-  </script>
-
-  <style type="text/css">
-
-  /* Algolioa Autocomplete */
-
-  .algolia-autocomplete {
-    display: inline-block;
-    margin-left: 10px;
-    vertical-align: sub;
-    background-color: white;
-    color: black;
-    padding: 6px;
-    padding-top: 8px;
-    padding-bottom: 0;
-    border-radius: 6px;
-    border: 1px #0F2E3D solid;
-    width: 180px;
-  }
-
-
-  @media screen and (max-width: 768px) {
-    .distill-site-nav .algolia-autocomplete {
-      visibility: hidden
-    }
-    .distill-site-nav.responsive .algolia-autocomplete {
-      visibility: visible;
-    }
-    .distill-site-nav.responsive .algolia-autocomplete .aa-dropdown-menu {
-      margin-left: 0;
-      width: 400px;
-      max-height: 400px;
-    }
-  }
-
-  .algolia-autocomplete .aa-input, .algolia-autocomplete .aa-hint {
-    width: 90%;
-    outline: none;
-    border: none;
-  }
-
-  .algolia-autocomplete .aa-hint {
-    color: #999;
-  }
-  .algolia-autocomplete .aa-dropdown-menu {
-    width: 550px;
-    max-height: 70vh;
-    overflow-x: visible;
-    overflow-y: scroll;
-    padding: 5px;
-    margin-top: 3px;
-    margin-left: -150px;
-    background-color: #fff;
-    border-radius: 5px;
-    border: 1px solid #999;
-    border-top: none;
-  }
-
-  .algolia-autocomplete .aa-dropdown-menu .aa-suggestion {
-    cursor: pointer;
-    padding: 5px 4px;
-    border-bottom: 1px solid #eee;
-  }
-
-  .algolia-autocomplete .aa-dropdown-menu .aa-suggestion:last-of-type {
-    border-bottom: none;
-    margin-bottom: 2px;
-  }
-
-  .algolia-autocomplete .aa-dropdown-menu .aa-suggestion .search-item {
-    overflow: hidden;
-    font-size: 0.8em;
-    line-height: 1.4em;
-  }
-
-  .algolia-autocomplete .aa-dropdown-menu .aa-suggestion .search-item h3 {
-    margin-block-start: 0;
-    margin-block-end: 5px;
-  }
-
-  .algolia-autocomplete .aa-dropdown-menu .aa-suggestion .search-item-description {
-    display: inline-block;
-    overflow: hidden;
-    height: 2.8em;
-    width: 80%;
-    margin-right: 4%;
-  }
-
-  .algolia-autocomplete .aa-dropdown-menu .aa-suggestion .search-item-preview {
-    display: inline-block;
-    width: 15%;
-  }
-
-  .algolia-autocomplete .aa-dropdown-menu .aa-suggestion .search-item-preview img {
-    height: 3em;
-    width: auto;
-    display: none;
-  }
-
-  .algolia-autocomplete .aa-dropdown-menu .aa-suggestion .search-item-preview img[src] {
-    display: initial;
-  }
-
-  .algolia-autocomplete .aa-dropdown-menu .aa-suggestion.aa-cursor {
-    background-color: #eee;
-  }
-  .algolia-autocomplete .aa-dropdown-menu .aa-suggestion em {
-    font-weight: bold;
-    font-style: normal;
-  }
-
-  </style>
-
-
   <!--/radix_placeholder_navigation_in_header-->
   <!--radix_placeholder_distill-->
 
@@ -1690,7 +1435,7 @@ code span.wa { color: #008000; font-weight: bold; } /* Warning */
   </script>
 
   <!--/radix_placeholder_distill-->
-  <script src="site_libs/header-attrs-2.3.8/header-attrs.js"></script>
+  <script src="site_libs/header-attrs-2.3.9/header-attrs.js"></script>
   <script src="site_libs/jquery-1.11.3/jquery.min.js"></script>
   <script src="site_libs/anchor-4.2.2/anchor.min.js"></script>
   <script src="site_libs/bowser-1.9.3/bowser.min.js"></script>
@@ -1788,7 +1533,6 @@ Publishing
 <a href="publish_website.html">Publishing Websites</a>
 </div>
 </div>
-<a href="news.html">News</a>
 <a href="https://github.com/rstudio/distill" aria-label="Link to source">
 <i class="fab fa-github" aria-hidden="true"></i>
 </a>
@@ -1850,15 +1594,15 @@ Publishing
 </ol>
 <h3 id="draft-option">Draft option</h3>
 <p>If you want to work on a post for a period of time without having it be added to the listing page, add <code>draft: true</code> to the post’s metadata. For example:</p>
-<div class="sourceCode" id="cb1"><pre class="sourceCode yaml"><code class="sourceCode yaml"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true"></a><span class="pp">---</span></span>
-<span id="cb1-2"><a href="#cb1-2" aria-hidden="true"></a><span class="fu">title</span><span class="kw">:</span><span class="at"> </span><span class="st">&quot;The Sharpe Ratio&quot;</span></span>
-<span id="cb1-3"><a href="#cb1-3" aria-hidden="true"></a><span class="fu">description</span><span class="kw">: </span><span class="ch">|</span></span>
-<span id="cb1-4"><a href="#cb1-4" aria-hidden="true"></a>  In this post we present a classic finance use case using the</span>
-<span id="cb1-5"><a href="#cb1-5" aria-hidden="true"></a>  PerformanceAnalytics, quantmod, and dygraphs packages. </span>
-<span id="cb1-6"><a href="#cb1-6" aria-hidden="true"></a>  We&#39;ll demonstrate importing stock data, building a portfolio,</span>
-<span id="cb1-7"><a href="#cb1-7" aria-hidden="true"></a>  and then calculating the Sharpe Ratio. </span>
-<span id="cb1-8"><a href="#cb1-8" aria-hidden="true"></a><span class="fu">draft</span><span class="kw">:</span><span class="at"> </span><span class="ch">true</span></span>
-<span id="cb1-9"><a href="#cb1-9" aria-hidden="true"></a><span class="pp">---</span></span></code></pre></div>
+<div class="sourceCode" id="cb1"><pre class="sourceCode yaml"><code class="sourceCode yaml"><span id="cb1-1"><a href="#cb1-1"></a><span class="pp">---</span></span>
+<span id="cb1-2"><a href="#cb1-2"></a><span class="fu">title</span><span class="kw">:</span><span class="at"> </span><span class="st">&quot;The Sharpe Ratio&quot;</span></span>
+<span id="cb1-3"><a href="#cb1-3"></a><span class="fu">description</span><span class="kw">: </span><span class="ch">|</span></span>
+<span id="cb1-4"><a href="#cb1-4"></a>  In this post we present a classic finance use case using the</span>
+<span id="cb1-5"><a href="#cb1-5"></a>  PerformanceAnalytics, quantmod, and dygraphs packages. </span>
+<span id="cb1-6"><a href="#cb1-6"></a>  We&#39;ll demonstrate importing stock data, building a portfolio,</span>
+<span id="cb1-7"><a href="#cb1-7"></a>  and then calculating the Sharpe Ratio. </span>
+<span id="cb1-8"><a href="#cb1-8"></a><span class="fu">draft</span><span class="kw">:</span><span class="at"> </span><span class="ch">true</span></span>
+<span id="cb1-9"><a href="#cb1-9"></a><span class="pp">---</span></span></code></pre></div>
 <p>When you are ready to publish the post, either remove the <code>draft</code> option or set it to <code>false</code>, then re-Knit the post or build the website using <code>render_site()</code>.</p>
 <h3 id="git-branches">Git branches</h3>
 <p>If the source code for you website is managed within <a href="https://git-scm.com/">a Git repository</a> then another way to organize work on a new post is to create a <a href="https://git-scm.com/book/en/v2/Git-Branching-Basic-Branching-and-Merging">Git branch</a>.</p>
@@ -1942,39 +1686,39 @@ Publishing
 <h3 id="creative-commons">Creative Commons</h3>
 <p>The Distill tools for importing posts make it very easy to aggregate posts published elsewhere on the web into your blog. Note however that you need to ensure that you have appropriate permission to re-publish these posts!</p>
 <p>To facilitate this, Distill will scan any imported post for <a href="https://creativecommons.org/licenses/">Creative Commons</a> copyright metadata, and in the case that none is found confirm that you still want to import the post. Consequently, you should ask that authors writing posts for your blog always include the <code>creative_commons</code> field in their post metadata. For example:</p>
-<div class="sourceCode" id="cb2"><pre class="sourceCode yaml"><code class="sourceCode yaml"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true"></a><span class="pp">---</span></span>
-<span id="cb2-2"><a href="#cb2-2" aria-hidden="true"></a><span class="fu">title</span><span class="kw">:</span><span class="at"> </span><span class="st">&quot;Distill for R Markdown&quot;</span></span>
-<span id="cb2-3"><a href="#cb2-3" aria-hidden="true"></a><span class="fu">description</span><span class="kw">: </span><span class="ch">|</span><span class="at"> </span></span>
-<span id="cb2-4"><a href="#cb2-4" aria-hidden="true"></a>  Scientific and technical writing, native to the web</span>
-<span id="cb2-5"><a href="#cb2-5" aria-hidden="true"></a><span class="fu">output</span><span class="kw">:</span><span class="at"> distill::distill_article</span></span>
-<span id="cb2-6"><a href="#cb2-6" aria-hidden="true"></a><span class="fu">creative_commons</span><span class="kw">:</span><span class="at"> CC BY</span></span>
-<span id="cb2-7"><a href="#cb2-7" aria-hidden="true"></a><span class="pp">---</span></span></code></pre></div>
+<div class="sourceCode" id="cb2"><pre class="sourceCode yaml"><code class="sourceCode yaml"><span id="cb2-1"><a href="#cb2-1"></a><span class="pp">---</span></span>
+<span id="cb2-2"><a href="#cb2-2"></a><span class="fu">title</span><span class="kw">:</span><span class="at"> </span><span class="st">&quot;Distill for R Markdown&quot;</span></span>
+<span id="cb2-3"><a href="#cb2-3"></a><span class="fu">description</span><span class="kw">: </span><span class="ch">|</span><span class="at"> </span></span>
+<span id="cb2-4"><a href="#cb2-4"></a>  Scientific and technical writing, native to the web</span>
+<span id="cb2-5"><a href="#cb2-5"></a><span class="fu">output</span><span class="kw">:</span><span class="at"> distill::distill_article</span></span>
+<span id="cb2-6"><a href="#cb2-6"></a><span class="fu">creative_commons</span><span class="kw">:</span><span class="at"> CC BY</span></span>
+<span id="cb2-7"><a href="#cb2-7"></a><span class="pp">---</span></span></code></pre></div>
 <p>Learn more about the <code>creative_commons</code> field in the documentation on <a href="metadata.html#creative-commons">post medatata</a>.</p>
 <p>If you know that you have permission to import and republish a post you can suppress this prompt by passing <code>check_license = FALSE</code> to the <code>import_post()</code> function.</p>
 <h3 id="canonical-urls">Canonical URLs</h3>
 <p>When you specify a <code>creative_commons</code> license for a blog post you make it easier for others to re-publish your post, giving you a broader audience for your work. In this case you may also want to ensure that the original URL where your post appeared be the one that appears in search engine results.</p>
 <p>To facilitate this, Distill automatically specifies a <a href="https://en.wikipedia.org/wiki/Canonical_link_element">canonical url</a> for posts published within a blog. That way, when a post is imported into another blog, search indexes still point back to the original article.</p>
 <p>If you prefer to disable this behavior, you can add <code>canonical: false</code> to your blog’s configuration in <code>_site.yml</code>. For example:</p>
-<div class="sourceCode" id="cb3"><pre class="sourceCode yaml"><code class="sourceCode yaml"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true"></a><span class="fu">name</span><span class="kw">:</span><span class="at"> </span><span class="st">&quot;reproducible-finance-with-r&quot;</span></span>
-<span id="cb3-2"><a href="#cb3-2" aria-hidden="true"></a><span class="fu">title</span><span class="kw">:</span><span class="at"> </span><span class="st">&quot;Reproducible Finance with R&quot;</span></span>
-<span id="cb3-3"><a href="#cb3-3" aria-hidden="true"></a><span class="fu">description</span><span class="kw">: </span><span class="ch">|</span></span>
-<span id="cb3-4"><a href="#cb3-4" aria-hidden="true"></a>  Exploring reproducible finance with the R statistical </span>
-<span id="cb3-5"><a href="#cb3-5" aria-hidden="true"></a>  computing environment.</span>
-<span id="cb3-6"><a href="#cb3-6" aria-hidden="true"></a><span class="fu">base_url</span><span class="kw">:</span><span class="at"> https://beta.rstudioconnect.com/content/11424/</span></span>
-<span id="cb3-7"><a href="#cb3-7" aria-hidden="true"></a><span class="fu">collections</span><span class="kw">:</span></span>
-<span id="cb3-8"><a href="#cb3-8" aria-hidden="true"></a><span class="at">  </span><span class="fu">posts</span><span class="kw">:</span></span>
-<span id="cb3-9"><a href="#cb3-9" aria-hidden="true"></a><span class="at">    </span><span class="fu">canonical</span><span class="kw">:</span><span class="at"> </span><span class="ch">false</span></span></code></pre></div>
+<div class="sourceCode" id="cb3"><pre class="sourceCode yaml"><code class="sourceCode yaml"><span id="cb3-1"><a href="#cb3-1"></a><span class="fu">name</span><span class="kw">:</span><span class="at"> </span><span class="st">&quot;reproducible-finance-with-r&quot;</span></span>
+<span id="cb3-2"><a href="#cb3-2"></a><span class="fu">title</span><span class="kw">:</span><span class="at"> </span><span class="st">&quot;Reproducible Finance with R&quot;</span></span>
+<span id="cb3-3"><a href="#cb3-3"></a><span class="fu">description</span><span class="kw">: </span><span class="ch">|</span></span>
+<span id="cb3-4"><a href="#cb3-4"></a>  Exploring reproducible finance with the R statistical </span>
+<span id="cb3-5"><a href="#cb3-5"></a>  computing environment.</span>
+<span id="cb3-6"><a href="#cb3-6"></a><span class="fu">base_url</span><span class="kw">:</span><span class="at"> https://beta.rstudioconnect.com/content/11424/</span></span>
+<span id="cb3-7"><a href="#cb3-7"></a><span class="fu">collections</span><span class="kw">:</span></span>
+<span id="cb3-8"><a href="#cb3-8"></a><span class="at">  </span><span class="fu">posts</span><span class="kw">:</span></span>
+<span id="cb3-9"><a href="#cb3-9"></a><span class="at">    </span><span class="fu">canonical</span><span class="kw">:</span><span class="at"> </span><span class="ch">false</span></span></code></pre></div>
 <p>While canonical URLs are provided automatically for blog posts, they aren’t for standalone articles. You can explicitly provide a canonical URL for a standalone article using the <code>canonical_url</code> metadata field:</p>
-<div class="sourceCode" id="cb4"><pre class="sourceCode yaml"><code class="sourceCode yaml"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true"></a><span class="pp">---</span></span>
-<span id="cb4-2"><a href="#cb4-2" aria-hidden="true"></a><span class="fu">title</span><span class="kw">:</span><span class="at"> </span><span class="st">&quot;Distill for R Markdown&quot;</span></span>
-<span id="cb4-3"><a href="#cb4-3" aria-hidden="true"></a><span class="fu">description</span><span class="kw">: </span><span class="ch">|</span><span class="at"> </span></span>
-<span id="cb4-4"><a href="#cb4-4" aria-hidden="true"></a>  Scientific and technical writing, native to the web</span>
-<span id="cb4-5"><a href="#cb4-5" aria-hidden="true"></a><span class="fu">date</span><span class="kw">:</span><span class="at"> May 4, 2018</span></span>
-<span id="cb4-6"><a href="#cb4-6" aria-hidden="true"></a><span class="fu">author</span><span class="kw">:</span></span>
-<span id="cb4-7"><a href="#cb4-7" aria-hidden="true"></a><span class="at">  </span><span class="kw">-</span><span class="at"> </span><span class="fu">name</span><span class="kw">:</span><span class="at"> Nora Jones </span></span>
-<span id="cb4-8"><a href="#cb4-8" aria-hidden="true"></a><span class="at">    </span><span class="fu">url</span><span class="kw">:</span><span class="at"> https://example.com/norajones</span></span>
-<span id="cb4-9"><a href="#cb4-9" aria-hidden="true"></a><span class="fu">canonical_url</span><span class="kw">:</span><span class="at"> https://rstudio.github.io/distill</span></span>
-<span id="cb4-10"><a href="#cb4-10" aria-hidden="true"></a><span class="pp">---</span></span></code></pre></div>
+<div class="sourceCode" id="cb4"><pre class="sourceCode yaml"><code class="sourceCode yaml"><span id="cb4-1"><a href="#cb4-1"></a><span class="pp">---</span></span>
+<span id="cb4-2"><a href="#cb4-2"></a><span class="fu">title</span><span class="kw">:</span><span class="at"> </span><span class="st">&quot;Distill for R Markdown&quot;</span></span>
+<span id="cb4-3"><a href="#cb4-3"></a><span class="fu">description</span><span class="kw">: </span><span class="ch">|</span><span class="at"> </span></span>
+<span id="cb4-4"><a href="#cb4-4"></a>  Scientific and technical writing, native to the web</span>
+<span id="cb4-5"><a href="#cb4-5"></a><span class="fu">date</span><span class="kw">:</span><span class="at"> May 4, 2018</span></span>
+<span id="cb4-6"><a href="#cb4-6"></a><span class="fu">author</span><span class="kw">:</span></span>
+<span id="cb4-7"><a href="#cb4-7"></a><span class="at">  </span><span class="kw">-</span><span class="at"> </span><span class="fu">name</span><span class="kw">:</span><span class="at"> Nora Jones </span></span>
+<span id="cb4-8"><a href="#cb4-8"></a><span class="at">    </span><span class="fu">url</span><span class="kw">:</span><span class="at"> https://example.com/norajones</span></span>
+<span id="cb4-9"><a href="#cb4-9"></a><span class="fu">canonical_url</span><span class="kw">:</span><span class="at"> https://rstudio.github.io/distill</span></span>
+<span id="cb4-10"><a href="#cb4-10"></a><span class="pp">---</span></span></code></pre></div>
 <div class="sourceCode" id="cb5"><pre class="sourceCode r distill-force-highlighting-css"><code class="sourceCode r"></code></pre></div>
 <!--radix_placeholder_article_footer-->
 <!--/radix_placeholder_article_footer-->

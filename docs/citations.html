@@ -450,261 +450,6 @@ code span.wa { color: #008000; font-weight: bold; } /* Warning */
   <link href="site_libs/font-awesome-5.1.0/css/all.css" rel="stylesheet"/>
   <link href="site_libs/font-awesome-5.1.0/css/v4-shims.css" rel="stylesheet"/>
   <script src="site_libs/headroom-0.9.4/headroom.min.js"></script>
-  <script src="site_libs/autocomplete-0.37.1/autocomplete.min.js"></script>
-  <script src="site_libs/fuse-6.4.1/fuse.min.js"></script>
-
-  <script type="application/javascript">
-
-  function getMeta(metaName) {
-    var metas = document.getElementsByTagName('meta');
-    for (let i = 0; i < metas.length; i++) {
-      if (metas[i].getAttribute('name') === metaName) {
-        return metas[i].getAttribute('content');
-      }
-    }
-    return '';
-  }
-
-  function offsetURL(url) {
-    var offset = getMeta('distill:offset');
-    return offset ? offset + '/' + url : url;
-  }
-
-  function createIndex() {
-    var options = {
-      keys: [
-        "title",
-        "categories",
-        "description",
-        "contents"
-      ]
-    };
-    return new window.Fuse([],options);
-  }
-
-  function createFuseIndex() {
-
-    // create fuse index
-    var options = { keys: ["title", "description", "contents"] };
-    var fuse = new window.Fuse([], options);
-
-    // fetch the main search.json
-    return fetch(offsetURL('search.json'))
-      .then(function(response) {
-        if (response.status == 200) {
-          return response.json().then(function(json) {
-            // index main articles
-            json.articles.forEach(function(article) {
-              fuse.add(article);
-            });
-            // download collections and index their articles
-            return Promise.all(json.collections.map(function(collection) {
-              return fetch(offsetURL(collection)).then(function(response) {
-                if (response.status === 200) {
-                  return response.json().then(function(articles) {
-                    articles.forEach(function(article) {
-                      fuse.add(article);
-                    });
-                  })
-                } else {
-                  return Promise.reject(
-                    new Error('Unexpected status from search index request: ' +
-                              response.status)
-                  );
-                }
-              });
-            })).then(function() {
-              return fuse;
-            });
-          });
-
-        } else {
-          return Promise.reject(
-            new Error('Unexpected status from search index request: ' +
-                        response.status)
-          );
-        }
-      });
-  }
-
-  window.document.addEventListener("DOMContentLoaded", function (event) {
-
-    // get search element (bail if we don't have one)
-    var searchEl = window.document.getElementById('distill-search');
-    if (!searchEl)
-      return;
-
-    createFuseIndex()
-      .then(function(fuse) {
-
-        // make search box visible
-        searchEl.classList.remove('hidden');
-
-        // initialize autocomplete
-        var options = {
-          autoselect: true,
-          hint: false,
-          minLength: 2,
-        };
-        window.autocomplete(searchEl, options, [{
-          source: function(query, callback) {
-            const searchOptions = {
-              isCaseSensitive: false,
-              shouldSort: true,
-              minMatchCharLength: 2,
-              limit: 10,
-              keys: [
-                { name: 'title', weight: 20 },
-                { name: 'categories', weight: 15 },
-                { name: 'description', weight: 10 },
-                { name: 'contents', weight: 5 },
-              ],
-            };
-            var results = fuse.search(query, searchOptions);
-            callback(results
-              .map(function(result) { return result.item; })
-              .filter(function(item) { return !!item.description; })
-            );
-          },
-          templates: {
-            suggestion: function(suggestion) {
-              var html = `
-                <div class="search-item">
-                  <h3>${suggestion.title}</h3>
-                  <div class="search-item-description">
-                    ${suggestion.description}
-                  </div>
-                  <div class="search-item-preview">
-                    <img src="${suggestion.preview ? offsetURL(suggestion.preview) : ''}"</img>
-                  </div>
-                </div>
-              `;
-              return html;
-            }
-          }
-        }]).on('autocomplete:selected', function(event, suggestion) {
-          window.location.href = offsetURL(suggestion.path);
-        });
-      })
-      .catch(function(error) {
-        console.log(error);
-      });
-  });
-
-  </script>
-
-  <style type="text/css">
-
-  /* Algolioa Autocomplete */
-
-  .algolia-autocomplete {
-    display: inline-block;
-    margin-left: 10px;
-    vertical-align: sub;
-    background-color: white;
-    color: black;
-    padding: 6px;
-    padding-top: 8px;
-    padding-bottom: 0;
-    border-radius: 6px;
-    border: 1px #0F2E3D solid;
-    width: 180px;
-  }
-
-
-  @media screen and (max-width: 768px) {
-    .distill-site-nav .algolia-autocomplete {
-      visibility: hidden
-    }
-    .distill-site-nav.responsive .algolia-autocomplete {
-      visibility: visible;
-    }
-    .distill-site-nav.responsive .algolia-autocomplete .aa-dropdown-menu {
-      margin-left: 0;
-      width: 400px;
-      max-height: 400px;
-    }
-  }
-
-  .algolia-autocomplete .aa-input, .algolia-autocomplete .aa-hint {
-    width: 90%;
-    outline: none;
-    border: none;
-  }
-
-  .algolia-autocomplete .aa-hint {
-    color: #999;
-  }
-  .algolia-autocomplete .aa-dropdown-menu {
-    width: 550px;
-    max-height: 70vh;
-    overflow-x: visible;
-    overflow-y: scroll;
-    padding: 5px;
-    margin-top: 3px;
-    margin-left: -150px;
-    background-color: #fff;
-    border-radius: 5px;
-    border: 1px solid #999;
-    border-top: none;
-  }
-
-  .algolia-autocomplete .aa-dropdown-menu .aa-suggestion {
-    cursor: pointer;
-    padding: 5px 4px;
-    border-bottom: 1px solid #eee;
-  }
-
-  .algolia-autocomplete .aa-dropdown-menu .aa-suggestion:last-of-type {
-    border-bottom: none;
-    margin-bottom: 2px;
-  }
-
-  .algolia-autocomplete .aa-dropdown-menu .aa-suggestion .search-item {
-    overflow: hidden;
-    font-size: 0.8em;
-    line-height: 1.4em;
-  }
-
-  .algolia-autocomplete .aa-dropdown-menu .aa-suggestion .search-item h3 {
-    margin-block-start: 0;
-    margin-block-end: 5px;
-  }
-
-  .algolia-autocomplete .aa-dropdown-menu .aa-suggestion .search-item-description {
-    display: inline-block;
-    overflow: hidden;
-    height: 2.8em;
-    width: 80%;
-    margin-right: 4%;
-  }
-
-  .algolia-autocomplete .aa-dropdown-menu .aa-suggestion .search-item-preview {
-    display: inline-block;
-    width: 15%;
-  }
-
-  .algolia-autocomplete .aa-dropdown-menu .aa-suggestion .search-item-preview img {
-    height: 3em;
-    width: auto;
-    display: none;
-  }
-
-  .algolia-autocomplete .aa-dropdown-menu .aa-suggestion .search-item-preview img[src] {
-    display: initial;
-  }
-
-  .algolia-autocomplete .aa-dropdown-menu .aa-suggestion.aa-cursor {
-    background-color: #eee;
-  }
-  .algolia-autocomplete .aa-dropdown-menu .aa-suggestion em {
-    font-weight: bold;
-    font-style: normal;
-  }
-
-  </style>
-
-
   <!--/radix_placeholder_navigation_in_header-->
   <!--radix_placeholder_distill-->
 
@@ -1691,7 +1436,7 @@ code span.wa { color: #008000; font-weight: bold; } /* Warning */
   </script>
 
   <!--/radix_placeholder_distill-->
-  <script src="site_libs/header-attrs-2.3.8/header-attrs.js"></script>
+  <script src="site_libs/header-attrs-2.3.9/header-attrs.js"></script>
   <script src="site_libs/jquery-1.11.3/jquery.min.js"></script>
   <script src="site_libs/anchor-4.2.2/anchor.min.js"></script>
   <script src="site_libs/bowser-1.9.3/bowser.min.js"></script>
@@ -1789,7 +1534,6 @@ Publishing
 <a href="publish_website.html">Publishing Websites</a>
 </div>
 </div>
-<a href="news.html">News</a>
 <a href="https://github.com/rstudio/distill" aria-label="Link to source">
 <i class="fab fa-github" aria-hidden="true"></i>
 </a>
@@ -1827,49 +1571,49 @@ Publishing
 <p>Distill articles support including citations and a corresponding bibliography using standard R Markdown citation syntax. Distill also provides tools for making your articles more <a href="#creating-citeable-articles">easily citeable</a>, as well as for generating <a href="#google-scholar">Google Scholar</a> compatible citation metadata.</p>
 <h2 id="citing-other-works">Citing other works</h2>
 <p>Use standard <a href="https://rmarkdown.rstudio.com/authoring_bibliographies_and_citations.html">R Markdown bibliographies</a> for citing other works. To do this, first create a bibliography file using a supported format (e.g. BibTeX or CSL) and refer to it from the <code>bibliography</code> field of the YAML front-matter. For example:</p>
-<div class="sourceCode" id="cb1"><pre class="sourceCode yaml"><code class="sourceCode yaml"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true"></a><span class="pp">---</span></span>
-<span id="cb1-2"><a href="#cb1-2" aria-hidden="true"></a><span class="fu">title</span><span class="kw">:</span><span class="at"> </span><span class="st">&quot;Distill for R Markdown&quot;</span></span>
-<span id="cb1-3"><a href="#cb1-3" aria-hidden="true"></a><span class="fu">description</span><span class="kw">: </span><span class="ch">|</span><span class="at"> </span></span>
-<span id="cb1-4"><a href="#cb1-4" aria-hidden="true"></a>  Scientific and technical writing, native to the web</span>
-<span id="cb1-5"><a href="#cb1-5" aria-hidden="true"></a><span class="fu">output</span><span class="kw">:</span><span class="at"> distill::distill_article</span></span>
-<span id="cb1-6"><a href="#cb1-6" aria-hidden="true"></a><span class="fu">date</span><span class="kw">:</span><span class="at"> May 4, 2018</span></span>
-<span id="cb1-7"><a href="#cb1-7" aria-hidden="true"></a><span class="fu">author</span><span class="kw">:</span></span>
-<span id="cb1-8"><a href="#cb1-8" aria-hidden="true"></a><span class="at">  </span><span class="kw">-</span><span class="at"> </span><span class="fu">name</span><span class="kw">:</span><span class="at"> Nora Jones </span></span>
-<span id="cb1-9"><a href="#cb1-9" aria-hidden="true"></a><span class="at">    </span><span class="fu">url</span><span class="kw">:</span><span class="at"> https://example.com/norajones</span></span>
-<span id="cb1-10"><a href="#cb1-10" aria-hidden="true"></a><span class="at">    </span><span class="fu">affiliation</span><span class="kw">:</span><span class="at"> Spacely Sprockets</span></span>
-<span id="cb1-11"><a href="#cb1-11" aria-hidden="true"></a><span class="at">    </span><span class="fu">affiliation_url</span><span class="kw">:</span><span class="at"> https://example.com/spacelysprokets</span></span>
-<span id="cb1-12"><a href="#cb1-12" aria-hidden="true"></a><span class="fu">bibliography</span><span class="kw">:</span><span class="at"> biblio.bib</span></span>
-<span id="cb1-13"><a href="#cb1-13" aria-hidden="true"></a><span class="pp">---</span></span></code></pre></div>
+<div class="sourceCode" id="cb1"><pre class="sourceCode yaml"><code class="sourceCode yaml"><span id="cb1-1"><a href="#cb1-1"></a><span class="pp">---</span></span>
+<span id="cb1-2"><a href="#cb1-2"></a><span class="fu">title</span><span class="kw">:</span><span class="at"> </span><span class="st">&quot;Distill for R Markdown&quot;</span></span>
+<span id="cb1-3"><a href="#cb1-3"></a><span class="fu">description</span><span class="kw">: </span><span class="ch">|</span><span class="at"> </span></span>
+<span id="cb1-4"><a href="#cb1-4"></a>  Scientific and technical writing, native to the web</span>
+<span id="cb1-5"><a href="#cb1-5"></a><span class="fu">output</span><span class="kw">:</span><span class="at"> distill::distill_article</span></span>
+<span id="cb1-6"><a href="#cb1-6"></a><span class="fu">date</span><span class="kw">:</span><span class="at"> May 4, 2018</span></span>
+<span id="cb1-7"><a href="#cb1-7"></a><span class="fu">author</span><span class="kw">:</span></span>
+<span id="cb1-8"><a href="#cb1-8"></a><span class="at">  </span><span class="kw">-</span><span class="at"> </span><span class="fu">name</span><span class="kw">:</span><span class="at"> Nora Jones </span></span>
+<span id="cb1-9"><a href="#cb1-9"></a><span class="at">    </span><span class="fu">url</span><span class="kw">:</span><span class="at"> https://example.com/norajones</span></span>
+<span id="cb1-10"><a href="#cb1-10"></a><span class="at">    </span><span class="fu">affiliation</span><span class="kw">:</span><span class="at"> Spacely Sprockets</span></span>
+<span id="cb1-11"><a href="#cb1-11"></a><span class="at">    </span><span class="fu">affiliation_url</span><span class="kw">:</span><span class="at"> https://example.com/spacelysprokets</span></span>
+<span id="cb1-12"><a href="#cb1-12"></a><span class="fu">bibliography</span><span class="kw">:</span><span class="at"> biblio.bib</span></span>
+<span id="cb1-13"><a href="#cb1-13"></a><span class="pp">---</span></span></code></pre></div>
 <p>Here’s an example of what one of the entries in your BibTeX file might look like:</p>
-<div class="sourceCode" id="cb2"><pre class="sourceCode bibtex"><code class="sourceCode bibtex"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true"></a><span class="va">@Book</span>{<span class="ot">xie2015</span>,</span>
-<span id="cb2-2"><a href="#cb2-2" aria-hidden="true"></a>  <span class="dt">title</span> = {Dynamic Documents with R and knitr},</span>
-<span id="cb2-3"><a href="#cb2-3" aria-hidden="true"></a>  <span class="dt">author</span> = {Yihui Xie},</span>
-<span id="cb2-4"><a href="#cb2-4" aria-hidden="true"></a>  <span class="dt">publisher</span> = {Chapman and Hall/CRC},</span>
-<span id="cb2-5"><a href="#cb2-5" aria-hidden="true"></a>  <span class="dt">address</span> = {Boca Raton, Florida},</span>
-<span id="cb2-6"><a href="#cb2-6" aria-hidden="true"></a>  <span class="dt">year</span> = {2015},</span>
-<span id="cb2-7"><a href="#cb2-7" aria-hidden="true"></a>  <span class="dt">edition</span> = {2nd},</span>
-<span id="cb2-8"><a href="#cb2-8" aria-hidden="true"></a>  <span class="dt">note</span> = {ISBN 978-1498716963},</span>
-<span id="cb2-9"><a href="#cb2-9" aria-hidden="true"></a>  <span class="dt">url</span> = {http://yihui.name/knitr/},</span>
-<span id="cb2-10"><a href="#cb2-10" aria-hidden="true"></a>}</span></code></pre></div>
+<div class="sourceCode" id="cb2"><pre class="sourceCode bibtex"><code class="sourceCode bibtex"><span id="cb2-1"><a href="#cb2-1"></a><span class="va">@Book</span>{<span class="ot">xie2015</span>,</span>
+<span id="cb2-2"><a href="#cb2-2"></a>  <span class="dt">title</span> = {Dynamic Documents with R and knitr},</span>
+<span id="cb2-3"><a href="#cb2-3"></a>  <span class="dt">author</span> = {Yihui Xie},</span>
+<span id="cb2-4"><a href="#cb2-4"></a>  <span class="dt">publisher</span> = {Chapman and Hall/CRC},</span>
+<span id="cb2-5"><a href="#cb2-5"></a>  <span class="dt">address</span> = {Boca Raton, Florida},</span>
+<span id="cb2-6"><a href="#cb2-6"></a>  <span class="dt">year</span> = {2015},</span>
+<span id="cb2-7"><a href="#cb2-7"></a>  <span class="dt">edition</span> = {2nd},</span>
+<span id="cb2-8"><a href="#cb2-8"></a>  <span class="dt">note</span> = {ISBN 978-1498716963},</span>
+<span id="cb2-9"><a href="#cb2-9"></a>  <span class="dt">url</span> = {http://yihui.name/knitr/},</span>
+<span id="cb2-10"><a href="#cb2-10"></a>}</span></code></pre></div>
 <p>To cite this within your article, use standard R Markdown notation, for example: <code>[@xie2015]</code> (referencing an id provided in the bibliography). Note that multiple ids (separated by semicolons) can be provided.</p>
 <h2 id="creating-citeable-articles">Creating citeable articles</h2>
 <p>You can make it easier for others to cite your work by providing additional metadata with the YAML front-matter of your article. Citations can be provided for both articles published to the web or for articles published in journals (with or without a <a href="https://www.doi.org/">DOI</a>).</p>
 <h3 id="web-articles">Web articles</h3>
 <p>To provide a citation for an article published to the web, include <code>author</code> and <code>date</code> metadata as well as a <code>citation_url</code>. For example:</p>
-<div class="sourceCode" id="cb3"><pre class="sourceCode yaml"><code class="sourceCode yaml"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true"></a><span class="pp">---</span></span>
-<span id="cb3-2"><a href="#cb3-2" aria-hidden="true"></a><span class="fu">title</span><span class="kw">:</span><span class="at"> </span><span class="st">&quot;Distill for R Markdown&quot;</span></span>
-<span id="cb3-3"><a href="#cb3-3" aria-hidden="true"></a><span class="fu">description</span><span class="kw">: </span><span class="ch">|</span><span class="at"> </span></span>
-<span id="cb3-4"><a href="#cb3-4" aria-hidden="true"></a>  Scientific and technical writing, native to the web</span>
-<span id="cb3-5"><a href="#cb3-5" aria-hidden="true"></a><span class="fu">date</span><span class="kw">:</span><span class="at"> May 4, 2018</span></span>
-<span id="cb3-6"><a href="#cb3-6" aria-hidden="true"></a><span class="fu">author</span><span class="kw">:</span></span>
-<span id="cb3-7"><a href="#cb3-7" aria-hidden="true"></a><span class="at">  </span><span class="kw">-</span><span class="at"> </span><span class="fu">name</span><span class="kw">:</span><span class="at"> Nora Jones </span></span>
-<span id="cb3-8"><a href="#cb3-8" aria-hidden="true"></a><span class="at">    </span><span class="fu">url</span><span class="kw">:</span><span class="at"> https://example.com/norajones</span></span>
-<span id="cb3-9"><a href="#cb3-9" aria-hidden="true"></a><span class="at">    </span><span class="fu">affiliation</span><span class="kw">:</span><span class="at"> Spacely Sprockets</span></span>
-<span id="cb3-10"><a href="#cb3-10" aria-hidden="true"></a><span class="at">    </span><span class="fu">affiliation_url</span><span class="kw">:</span><span class="at"> https://example.com/spacelysprokets</span></span>
-<span id="cb3-11"><a href="#cb3-11" aria-hidden="true"></a><span class="fu">citation_url</span><span class="kw">:</span><span class="at"> https://rstudio.github.io/distill</span></span>
-<span id="cb3-12"><a href="#cb3-12" aria-hidden="true"></a><span class="fu">slug</span><span class="kw">:</span><span class="at"> jones2018distill</span></span>
-<span id="cb3-13"><a href="#cb3-13" aria-hidden="true"></a><span class="fu">bibliography</span><span class="kw">:</span><span class="at"> biblio.bib</span></span>
-<span id="cb3-14"><a href="#cb3-14" aria-hidden="true"></a><span class="pp">---</span></span></code></pre></div>
+<div class="sourceCode" id="cb3"><pre class="sourceCode yaml"><code class="sourceCode yaml"><span id="cb3-1"><a href="#cb3-1"></a><span class="pp">---</span></span>
+<span id="cb3-2"><a href="#cb3-2"></a><span class="fu">title</span><span class="kw">:</span><span class="at"> </span><span class="st">&quot;Distill for R Markdown&quot;</span></span>
+<span id="cb3-3"><a href="#cb3-3"></a><span class="fu">description</span><span class="kw">: </span><span class="ch">|</span><span class="at"> </span></span>
+<span id="cb3-4"><a href="#cb3-4"></a>  Scientific and technical writing, native to the web</span>
+<span id="cb3-5"><a href="#cb3-5"></a><span class="fu">date</span><span class="kw">:</span><span class="at"> May 4, 2018</span></span>
+<span id="cb3-6"><a href="#cb3-6"></a><span class="fu">author</span><span class="kw">:</span></span>
+<span id="cb3-7"><a href="#cb3-7"></a><span class="at">  </span><span class="kw">-</span><span class="at"> </span><span class="fu">name</span><span class="kw">:</span><span class="at"> Nora Jones </span></span>
+<span id="cb3-8"><a href="#cb3-8"></a><span class="at">    </span><span class="fu">url</span><span class="kw">:</span><span class="at"> https://example.com/norajones</span></span>
+<span id="cb3-9"><a href="#cb3-9"></a><span class="at">    </span><span class="fu">affiliation</span><span class="kw">:</span><span class="at"> Spacely Sprockets</span></span>
+<span id="cb3-10"><a href="#cb3-10"></a><span class="at">    </span><span class="fu">affiliation_url</span><span class="kw">:</span><span class="at"> https://example.com/spacelysprokets</span></span>
+<span id="cb3-11"><a href="#cb3-11"></a><span class="fu">citation_url</span><span class="kw">:</span><span class="at"> https://rstudio.github.io/distill</span></span>
+<span id="cb3-12"><a href="#cb3-12"></a><span class="fu">slug</span><span class="kw">:</span><span class="at"> jones2018distill</span></span>
+<span id="cb3-13"><a href="#cb3-13"></a><span class="fu">bibliography</span><span class="kw">:</span><span class="at"> biblio.bib</span></span>
+<span id="cb3-14"><a href="#cb3-14"></a><span class="pp">---</span></span></code></pre></div>
 <p>Note that the <code>citation_url</code> field is not required for <a href="blog.html">blog articles</a> (in that case it’s computed automatically using the site’s <code>base_url</code> field).</p>
 <p>When this metadata is available, a citation appendix is automatically added to the article which looks like this:</p>
 <p><img src="images/citation.png" class="screenshot" style="width:95.0%" /></p>
@@ -1895,75 +1639,75 @@ Publishing
 </tbody>
 </table>
 <p>Here’s our previous examples amended with these fields:</p>
-<div class="sourceCode" id="cb4"><pre class="sourceCode yaml"><code class="sourceCode yaml"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true"></a><span class="pp">---</span></span>
-<span id="cb4-2"><a href="#cb4-2" aria-hidden="true"></a><span class="fu">title</span><span class="kw">:</span><span class="at"> </span><span class="st">&quot;Distill for R Markdown&quot;</span></span>
-<span id="cb4-3"><a href="#cb4-3" aria-hidden="true"></a><span class="fu">description</span><span class="kw">: </span><span class="ch">|</span><span class="at"> </span></span>
-<span id="cb4-4"><a href="#cb4-4" aria-hidden="true"></a>  Scientific and technical writing, native to the web</span>
-<span id="cb4-5"><a href="#cb4-5" aria-hidden="true"></a><span class="fu">date</span><span class="kw">:</span><span class="at"> May 4, 2018</span></span>
-<span id="cb4-6"><a href="#cb4-6" aria-hidden="true"></a><span class="fu">author</span><span class="kw">:</span></span>
-<span id="cb4-7"><a href="#cb4-7" aria-hidden="true"></a><span class="at">  </span><span class="kw">-</span><span class="at"> </span><span class="fu">name</span><span class="kw">:</span><span class="at"> Nora Jones </span></span>
-<span id="cb4-8"><a href="#cb4-8" aria-hidden="true"></a><span class="at">    </span><span class="fu">url</span><span class="kw">:</span><span class="at"> https://example.com/norajones</span></span>
-<span id="cb4-9"><a href="#cb4-9" aria-hidden="true"></a><span class="at">    </span><span class="fu">affiliation</span><span class="kw">:</span><span class="at"> Spacely Sprockets</span></span>
-<span id="cb4-10"><a href="#cb4-10" aria-hidden="true"></a><span class="at">    </span><span class="fu">affiliation_url</span><span class="kw">:</span><span class="at"> https://example.com/spacelysprokets</span></span>
-<span id="cb4-11"><a href="#cb4-11" aria-hidden="true"></a><span class="fu">journal</span><span class="kw">:</span><span class="at"> </span><span class="st">&quot;Journal of Data Science Software&quot;</span></span>
-<span id="cb4-12"><a href="#cb4-12" aria-hidden="true"></a><span class="fu">doi</span><span class="kw">:</span><span class="at"> </span><span class="st">&quot;10.23915/distill.00010&quot;</span></span>
-<span id="cb4-13"><a href="#cb4-13" aria-hidden="true"></a><span class="fu">slug</span><span class="kw">:</span><span class="at"> jones2018distill</span></span>
-<span id="cb4-14"><a href="#cb4-14" aria-hidden="true"></a><span class="fu">citation_url</span><span class="kw">:</span><span class="at"> https://rstudio.github.io/distill</span></span>
-<span id="cb4-15"><a href="#cb4-15" aria-hidden="true"></a><span class="fu">bibliography</span><span class="kw">:</span><span class="at"> biblio.bib</span></span>
-<span id="cb4-16"><a href="#cb4-16" aria-hidden="true"></a><span class="pp">---</span></span></code></pre></div>
+<div class="sourceCode" id="cb4"><pre class="sourceCode yaml"><code class="sourceCode yaml"><span id="cb4-1"><a href="#cb4-1"></a><span class="pp">---</span></span>
+<span id="cb4-2"><a href="#cb4-2"></a><span class="fu">title</span><span class="kw">:</span><span class="at"> </span><span class="st">&quot;Distill for R Markdown&quot;</span></span>
+<span id="cb4-3"><a href="#cb4-3"></a><span class="fu">description</span><span class="kw">: </span><span class="ch">|</span><span class="at"> </span></span>
+<span id="cb4-4"><a href="#cb4-4"></a>  Scientific and technical writing, native to the web</span>
+<span id="cb4-5"><a href="#cb4-5"></a><span class="fu">date</span><span class="kw">:</span><span class="at"> May 4, 2018</span></span>
+<span id="cb4-6"><a href="#cb4-6"></a><span class="fu">author</span><span class="kw">:</span></span>
+<span id="cb4-7"><a href="#cb4-7"></a><span class="at">  </span><span class="kw">-</span><span class="at"> </span><span class="fu">name</span><span class="kw">:</span><span class="at"> Nora Jones </span></span>
+<span id="cb4-8"><a href="#cb4-8"></a><span class="at">    </span><span class="fu">url</span><span class="kw">:</span><span class="at"> https://example.com/norajones</span></span>
+<span id="cb4-9"><a href="#cb4-9"></a><span class="at">    </span><span class="fu">affiliation</span><span class="kw">:</span><span class="at"> Spacely Sprockets</span></span>
+<span id="cb4-10"><a href="#cb4-10"></a><span class="at">    </span><span class="fu">affiliation_url</span><span class="kw">:</span><span class="at"> https://example.com/spacelysprokets</span></span>
+<span id="cb4-11"><a href="#cb4-11"></a><span class="fu">journal</span><span class="kw">:</span><span class="at"> </span><span class="st">&quot;Journal of Data Science Software&quot;</span></span>
+<span id="cb4-12"><a href="#cb4-12"></a><span class="fu">doi</span><span class="kw">:</span><span class="at"> </span><span class="st">&quot;10.23915/distill.00010&quot;</span></span>
+<span id="cb4-13"><a href="#cb4-13"></a><span class="fu">slug</span><span class="kw">:</span><span class="at"> jones2018distill</span></span>
+<span id="cb4-14"><a href="#cb4-14"></a><span class="fu">citation_url</span><span class="kw">:</span><span class="at"> https://rstudio.github.io/distill</span></span>
+<span id="cb4-15"><a href="#cb4-15"></a><span class="fu">bibliography</span><span class="kw">:</span><span class="at"> biblio.bib</span></span>
+<span id="cb4-16"><a href="#cb4-16"></a><span class="pp">---</span></span></code></pre></div>
 <p>This is how the citation is presented in the appendix:</p>
 <p><img src="images/citation-journal.png" class="screenshot" style="width:95.0%" /></p>
 <p>For Journal articles, the <code>citation_url</code> is included in the BibTeX entry within the <code>note</code> field.</p>
 <h2 id="google-scholar">Google Scholar</h2>
 <p>Distill articles automatically include metadata compatible with the format indexed by <a href="https://scholar.google.com/intl/en/scholar/inclusion.html#indexing">Google Scholar</a>. This makes it easy for indexing engines (Google Scholar or otherwise) to extract not only a citation for your article but also information on other sources which you cited.</p>
 <p>For example, here is the Google Scholar metadata automatically included for the home page of the Distill for R Markdown website:</p>
-<div class="sourceCode" id="cb5"><pre class="sourceCode html"><code class="sourceCode html"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true"></a><span class="co">&lt;!--  https://scholar.google.com/intl/en/scholar/inclusion.html#indexing --&gt;</span></span>
-<span id="cb5-2"><a href="#cb5-2" aria-hidden="true"></a><span class="kw">&lt;meta</span><span class="ot"> name=</span><span class="st">&quot;citation_title&quot;</span><span class="ot"> content=</span><span class="st">&quot;Distill for R Markdown&quot;</span><span class="kw">/&gt;</span></span>
-<span id="cb5-3"><a href="#cb5-3" aria-hidden="true"></a><span class="kw">&lt;meta</span><span class="ot"> name=</span><span class="st">&quot;citation_fulltext_html_url&quot;</span><span class="ot"> content=</span><span class="st">&quot;https://rstudio.github.io/distill&quot;</span><span class="kw">/&gt;</span></span>
-<span id="cb5-4"><a href="#cb5-4" aria-hidden="true"></a><span class="kw">&lt;meta</span><span class="ot"> name=</span><span class="st">&quot;citation_fulltext_world_readable&quot;</span><span class="ot"> content=</span><span class="st">&quot;&quot;</span><span class="kw">/&gt;</span></span>
-<span id="cb5-5"><a href="#cb5-5" aria-hidden="true"></a><span class="kw">&lt;meta</span><span class="ot"> name=</span><span class="st">&quot;citation_online_date&quot;</span><span class="ot"> content=</span><span class="st">&quot;2018/05/04&quot;</span><span class="kw">/&gt;</span></span>
-<span id="cb5-6"><a href="#cb5-6" aria-hidden="true"></a><span class="kw">&lt;meta</span><span class="ot"> name=</span><span class="st">&quot;citation_publication_date&quot;</span><span class="ot"> content=</span><span class="st">&quot;2018/05/04&quot;</span><span class="kw">/&gt;</span></span>
-<span id="cb5-7"><a href="#cb5-7" aria-hidden="true"></a><span class="kw">&lt;meta</span><span class="ot"> name=</span><span class="st">&quot;citation_author&quot;</span><span class="ot"> content=</span><span class="st">&quot;JJ Allaire&quot;</span><span class="kw">/&gt;</span></span>
-<span id="cb5-8"><a href="#cb5-8" aria-hidden="true"></a><span class="kw">&lt;meta</span><span class="ot"> name=</span><span class="st">&quot;citation_author_institution&quot;</span><span class="ot"> content=</span><span class="st">&quot;RStudio&quot;</span><span class="kw">/&gt;</span></span>
-<span id="cb5-9"><a href="#cb5-9" aria-hidden="true"></a><span class="kw">&lt;meta</span><span class="ot"> name=</span><span class="st">&quot;citation_author&quot;</span><span class="ot"> content=</span><span class="st">&quot;Rich Iannone&quot;</span><span class="kw">/&gt;</span></span>
-<span id="cb5-10"><a href="#cb5-10" aria-hidden="true"></a><span class="kw">&lt;meta</span><span class="ot"> name=</span><span class="st">&quot;citation_author_institution&quot;</span><span class="ot"> content=</span><span class="st">&quot;RStudio&quot;</span><span class="kw">/&gt;</span></span>
-<span id="cb5-11"><a href="#cb5-11" aria-hidden="true"></a><span class="kw">&lt;meta</span><span class="ot"> name=</span><span class="st">&quot;citation_author&quot;</span><span class="ot"> content=</span><span class="st">&quot;Yihui Xie&quot;</span><span class="kw">/&gt;</span></span>
-<span id="cb5-12"><a href="#cb5-12" aria-hidden="true"></a><span class="kw">&lt;meta</span><span class="ot"> name=</span><span class="st">&quot;citation_author_institution&quot;</span><span class="ot"> content=</span><span class="st">&quot;RStudio&quot;</span><span class="kw">/&gt;</span></span>
-<span id="cb5-13"><a href="#cb5-13" aria-hidden="true"></a><span class="kw">&lt;meta</span><span class="ot"> name=</span><span class="st">&quot;citation_reference&quot;</span><span class="ot"> content=</span><span class="st">&quot;citation_title=Distill;</span></span>
-<span id="cb5-14"><a href="#cb5-14" aria-hidden="true"></a><span class="st">citation_publication_date=2016;citation_publisher=Distill Working</span></span>
-<span id="cb5-15"><a href="#cb5-15" aria-hidden="true"></a><span class="st">Group;citation_doi=10.23915/distill;citation_author=Shan Carter;</span></span>
-<span id="cb5-16"><a href="#cb5-16" aria-hidden="true"></a><span class="st">citation_author=Chirs Olah;citation_author=Arvind Satyanarayan&quot;</span><span class="kw">/&gt;</span></span>
-<span id="cb5-17"><a href="#cb5-17" aria-hidden="true"></a><span class="kw">&lt;meta</span><span class="ot"> name=</span><span class="st">&quot;citation_reference&quot;</span><span class="ot"> content=</span><span class="st">&quot;citation_title=Literate</span></span>
-<span id="cb5-18"><a href="#cb5-18" aria-hidden="true"></a><span class="st">programming;citation_publication_date=1984;</span></span>
-<span id="cb5-19"><a href="#cb5-19" aria-hidden="true"></a><span class="st">citation_publisher=British Computer Society;citation_volume=27;</span></span>
-<span id="cb5-20"><a href="#cb5-20" aria-hidden="true"></a><span class="st">citation_author=Donald E. Knuth&quot;</span><span class="kw">/&gt;</span></span>
-<span id="cb5-21"><a href="#cb5-21" aria-hidden="true"></a><span class="kw">&lt;meta</span><span class="ot"> name=</span><span class="st">&quot;citation_reference&quot;</span><span class="ot"> content=</span><span class="st">&quot;citation_title=Dynamic</span></span>
-<span id="cb5-22"><a href="#cb5-22" aria-hidden="true"></a><span class="st">documents with r and knitr;citation_publication_date=2015;</span></span>
-<span id="cb5-23"><a href="#cb5-23" aria-hidden="true"></a><span class="st">citation_publisher=Chapman; Hall/CRC;citation_author=Yihui Xie&quot;</span><span class="kw">/&gt;</span></span></code></pre></div>
+<div class="sourceCode" id="cb5"><pre class="sourceCode html"><code class="sourceCode html"><span id="cb5-1"><a href="#cb5-1"></a><span class="co">&lt;!--  https://scholar.google.com/intl/en/scholar/inclusion.html#indexing --&gt;</span></span>
+<span id="cb5-2"><a href="#cb5-2"></a><span class="kw">&lt;meta</span><span class="ot"> name=</span><span class="st">&quot;citation_title&quot;</span><span class="ot"> content=</span><span class="st">&quot;Distill for R Markdown&quot;</span><span class="kw">/&gt;</span></span>
+<span id="cb5-3"><a href="#cb5-3"></a><span class="kw">&lt;meta</span><span class="ot"> name=</span><span class="st">&quot;citation_fulltext_html_url&quot;</span><span class="ot"> content=</span><span class="st">&quot;https://rstudio.github.io/distill&quot;</span><span class="kw">/&gt;</span></span>
+<span id="cb5-4"><a href="#cb5-4"></a><span class="kw">&lt;meta</span><span class="ot"> name=</span><span class="st">&quot;citation_fulltext_world_readable&quot;</span><span class="ot"> content=</span><span class="st">&quot;&quot;</span><span class="kw">/&gt;</span></span>
+<span id="cb5-5"><a href="#cb5-5"></a><span class="kw">&lt;meta</span><span class="ot"> name=</span><span class="st">&quot;citation_online_date&quot;</span><span class="ot"> content=</span><span class="st">&quot;2018/05/04&quot;</span><span class="kw">/&gt;</span></span>
+<span id="cb5-6"><a href="#cb5-6"></a><span class="kw">&lt;meta</span><span class="ot"> name=</span><span class="st">&quot;citation_publication_date&quot;</span><span class="ot"> content=</span><span class="st">&quot;2018/05/04&quot;</span><span class="kw">/&gt;</span></span>
+<span id="cb5-7"><a href="#cb5-7"></a><span class="kw">&lt;meta</span><span class="ot"> name=</span><span class="st">&quot;citation_author&quot;</span><span class="ot"> content=</span><span class="st">&quot;JJ Allaire&quot;</span><span class="kw">/&gt;</span></span>
+<span id="cb5-8"><a href="#cb5-8"></a><span class="kw">&lt;meta</span><span class="ot"> name=</span><span class="st">&quot;citation_author_institution&quot;</span><span class="ot"> content=</span><span class="st">&quot;RStudio&quot;</span><span class="kw">/&gt;</span></span>
+<span id="cb5-9"><a href="#cb5-9"></a><span class="kw">&lt;meta</span><span class="ot"> name=</span><span class="st">&quot;citation_author&quot;</span><span class="ot"> content=</span><span class="st">&quot;Rich Iannone&quot;</span><span class="kw">/&gt;</span></span>
+<span id="cb5-10"><a href="#cb5-10"></a><span class="kw">&lt;meta</span><span class="ot"> name=</span><span class="st">&quot;citation_author_institution&quot;</span><span class="ot"> content=</span><span class="st">&quot;RStudio&quot;</span><span class="kw">/&gt;</span></span>
+<span id="cb5-11"><a href="#cb5-11"></a><span class="kw">&lt;meta</span><span class="ot"> name=</span><span class="st">&quot;citation_author&quot;</span><span class="ot"> content=</span><span class="st">&quot;Yihui Xie&quot;</span><span class="kw">/&gt;</span></span>
+<span id="cb5-12"><a href="#cb5-12"></a><span class="kw">&lt;meta</span><span class="ot"> name=</span><span class="st">&quot;citation_author_institution&quot;</span><span class="ot"> content=</span><span class="st">&quot;RStudio&quot;</span><span class="kw">/&gt;</span></span>
+<span id="cb5-13"><a href="#cb5-13"></a><span class="kw">&lt;meta</span><span class="ot"> name=</span><span class="st">&quot;citation_reference&quot;</span><span class="ot"> content=</span><span class="st">&quot;citation_title=Distill;</span></span>
+<span id="cb5-14"><a href="#cb5-14"></a><span class="st">citation_publication_date=2016;citation_publisher=Distill Working</span></span>
+<span id="cb5-15"><a href="#cb5-15"></a><span class="st">Group;citation_doi=10.23915/distill;citation_author=Shan Carter;</span></span>
+<span id="cb5-16"><a href="#cb5-16"></a><span class="st">citation_author=Chirs Olah;citation_author=Arvind Satyanarayan&quot;</span><span class="kw">/&gt;</span></span>
+<span id="cb5-17"><a href="#cb5-17"></a><span class="kw">&lt;meta</span><span class="ot"> name=</span><span class="st">&quot;citation_reference&quot;</span><span class="ot"> content=</span><span class="st">&quot;citation_title=Literate</span></span>
+<span id="cb5-18"><a href="#cb5-18"></a><span class="st">programming;citation_publication_date=1984;</span></span>
+<span id="cb5-19"><a href="#cb5-19"></a><span class="st">citation_publisher=British Computer Society;citation_volume=27;</span></span>
+<span id="cb5-20"><a href="#cb5-20"></a><span class="st">citation_author=Donald E. Knuth&quot;</span><span class="kw">/&gt;</span></span>
+<span id="cb5-21"><a href="#cb5-21"></a><span class="kw">&lt;meta</span><span class="ot"> name=</span><span class="st">&quot;citation_reference&quot;</span><span class="ot"> content=</span><span class="st">&quot;citation_title=Dynamic</span></span>
+<span id="cb5-22"><a href="#cb5-22"></a><span class="st">documents with r and knitr;citation_publication_date=2015;</span></span>
+<span id="cb5-23"><a href="#cb5-23"></a><span class="st">citation_publisher=Chapman; Hall/CRC;citation_author=Yihui Xie&quot;</span><span class="kw">/&gt;</span></span></code></pre></div>
 <p>Note that the <code>citation_reference</code> fields provide information on which works your article cited.</p>
 <p>The code above is HTML so don’t worry if you aren’t familiar with the syntax. The important thing to know is that citation data is provided in a way that machines can easily read and index.</p>
 <p>If you are publishing a Journal article, there are some additional metadata fields you can provide to enhance the Google Scholar metadata generated by Distill. These include additional fields describing the Journal (<code>title</code>, <code>issn</code>, and <code>publisher</code>) as well fields describing the <code>volume</code> and <code>issue</code> in which your article was published. For example:</p>
-<div class="sourceCode" id="cb6"><pre class="sourceCode yaml"><code class="sourceCode yaml"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true"></a><span class="pp">---</span></span>
-<span id="cb6-2"><a href="#cb6-2" aria-hidden="true"></a><span class="fu">title</span><span class="kw">:</span><span class="at"> </span><span class="st">&quot;Distill for R Markdown&quot;</span></span>
-<span id="cb6-3"><a href="#cb6-3" aria-hidden="true"></a><span class="fu">description</span><span class="kw">: </span><span class="ch">|</span><span class="at"> </span></span>
-<span id="cb6-4"><a href="#cb6-4" aria-hidden="true"></a>  Scientific and technical writing, native to the web</span>
-<span id="cb6-5"><a href="#cb6-5" aria-hidden="true"></a><span class="fu">date</span><span class="kw">:</span><span class="at"> May 4, 2018</span></span>
-<span id="cb6-6"><a href="#cb6-6" aria-hidden="true"></a><span class="fu">author</span><span class="kw">:</span></span>
-<span id="cb6-7"><a href="#cb6-7" aria-hidden="true"></a><span class="at">  </span><span class="kw">-</span><span class="at"> </span><span class="fu">name</span><span class="kw">:</span><span class="at"> Norah Jones </span></span>
-<span id="cb6-8"><a href="#cb6-8" aria-hidden="true"></a><span class="at">    </span><span class="fu">url</span><span class="kw">:</span><span class="at"> https://example.com/norahjones</span></span>
-<span id="cb6-9"><a href="#cb6-9" aria-hidden="true"></a><span class="at">    </span><span class="fu">affiliation</span><span class="kw">:</span><span class="at"> Spacely Sprockets</span></span>
-<span id="cb6-10"><a href="#cb6-10" aria-hidden="true"></a><span class="at">    </span><span class="fu">affiliation_url</span><span class="kw">:</span><span class="at"> https://example.com/spacelysprokets</span></span>
-<span id="cb6-11"><a href="#cb6-11" aria-hidden="true"></a><span class="fu">journal</span><span class="kw">:</span><span class="at"> </span></span>
-<span id="cb6-12"><a href="#cb6-12" aria-hidden="true"></a><span class="at">  </span><span class="fu">title</span><span class="kw">:</span><span class="at"> </span><span class="st">&quot;Journal of Data Science Software&quot;</span></span>
-<span id="cb6-13"><a href="#cb6-13" aria-hidden="true"></a><span class="at">  </span><span class="fu">issn</span><span class="kw">:</span><span class="at"> 2490-1752</span></span>
-<span id="cb6-14"><a href="#cb6-14" aria-hidden="true"></a><span class="at">  </span><span class="fu">publisher</span><span class="kw">:</span><span class="at"> Data Science Press</span></span>
-<span id="cb6-15"><a href="#cb6-15" aria-hidden="true"></a><span class="fu">volume</span><span class="kw">:</span><span class="at"> </span><span class="dv">10</span></span>
-<span id="cb6-16"><a href="#cb6-16" aria-hidden="true"></a><span class="fu">issue</span><span class="kw">:</span><span class="at"> </span><span class="dv">4</span></span>
-<span id="cb6-17"><a href="#cb6-17" aria-hidden="true"></a><span class="fu">doi</span><span class="kw">:</span><span class="at"> </span><span class="st">&quot;10.23915/distill.00010&quot;</span></span>
-<span id="cb6-18"><a href="#cb6-18" aria-hidden="true"></a><span class="fu">slug</span><span class="kw">:</span><span class="at"> jones2018distill</span></span>
-<span id="cb6-19"><a href="#cb6-19" aria-hidden="true"></a><span class="fu">citation_url</span><span class="kw">:</span><span class="at"> https://rstudio.github.io/distill</span></span>
-<span id="cb6-20"><a href="#cb6-20" aria-hidden="true"></a><span class="fu">bibliography</span><span class="kw">:</span><span class="at"> biblio.bib</span></span>
-<span id="cb6-21"><a href="#cb6-21" aria-hidden="true"></a><span class="pp">---</span></span></code></pre></div>
+<div class="sourceCode" id="cb6"><pre class="sourceCode yaml"><code class="sourceCode yaml"><span id="cb6-1"><a href="#cb6-1"></a><span class="pp">---</span></span>
+<span id="cb6-2"><a href="#cb6-2"></a><span class="fu">title</span><span class="kw">:</span><span class="at"> </span><span class="st">&quot;Distill for R Markdown&quot;</span></span>
+<span id="cb6-3"><a href="#cb6-3"></a><span class="fu">description</span><span class="kw">: </span><span class="ch">|</span><span class="at"> </span></span>
+<span id="cb6-4"><a href="#cb6-4"></a>  Scientific and technical writing, native to the web</span>
+<span id="cb6-5"><a href="#cb6-5"></a><span class="fu">date</span><span class="kw">:</span><span class="at"> May 4, 2018</span></span>
+<span id="cb6-6"><a href="#cb6-6"></a><span class="fu">author</span><span class="kw">:</span></span>
+<span id="cb6-7"><a href="#cb6-7"></a><span class="at">  </span><span class="kw">-</span><span class="at"> </span><span class="fu">name</span><span class="kw">:</span><span class="at"> Norah Jones </span></span>
+<span id="cb6-8"><a href="#cb6-8"></a><span class="at">    </span><span class="fu">url</span><span class="kw">:</span><span class="at"> https://example.com/norahjones</span></span>
+<span id="cb6-9"><a href="#cb6-9"></a><span class="at">    </span><span class="fu">affiliation</span><span class="kw">:</span><span class="at"> Spacely Sprockets</span></span>
+<span id="cb6-10"><a href="#cb6-10"></a><span class="at">    </span><span class="fu">affiliation_url</span><span class="kw">:</span><span class="at"> https://example.com/spacelysprokets</span></span>
+<span id="cb6-11"><a href="#cb6-11"></a><span class="fu">journal</span><span class="kw">:</span><span class="at"> </span></span>
+<span id="cb6-12"><a href="#cb6-12"></a><span class="at">  </span><span class="fu">title</span><span class="kw">:</span><span class="at"> </span><span class="st">&quot;Journal of Data Science Software&quot;</span></span>
+<span id="cb6-13"><a href="#cb6-13"></a><span class="at">  </span><span class="fu">issn</span><span class="kw">:</span><span class="at"> 2490-1752</span></span>
+<span id="cb6-14"><a href="#cb6-14"></a><span class="at">  </span><span class="fu">publisher</span><span class="kw">:</span><span class="at"> Data Science Press</span></span>
+<span id="cb6-15"><a href="#cb6-15"></a><span class="fu">volume</span><span class="kw">:</span><span class="at"> </span><span class="dv">10</span></span>
+<span id="cb6-16"><a href="#cb6-16"></a><span class="fu">issue</span><span class="kw">:</span><span class="at"> </span><span class="dv">4</span></span>
+<span id="cb6-17"><a href="#cb6-17"></a><span class="fu">doi</span><span class="kw">:</span><span class="at"> </span><span class="st">&quot;10.23915/distill.00010&quot;</span></span>
+<span id="cb6-18"><a href="#cb6-18"></a><span class="fu">slug</span><span class="kw">:</span><span class="at"> jones2018distill</span></span>
+<span id="cb6-19"><a href="#cb6-19"></a><span class="fu">citation_url</span><span class="kw">:</span><span class="at"> https://rstudio.github.io/distill</span></span>
+<span id="cb6-20"><a href="#cb6-20"></a><span class="fu">bibliography</span><span class="kw">:</span><span class="at"> biblio.bib</span></span>
+<span id="cb6-21"><a href="#cb6-21"></a><span class="pp">---</span></span></code></pre></div>
 <div class="sourceCode" id="cb7"><pre class="sourceCode r distill-force-highlighting-css"><code class="sourceCode r"></code></pre></div>
 <div class="sourceCode" id="cb8"><pre class="sourceCode r distill-force-highlighting-css"><code class="sourceCode r"></code></pre></div>
 <!--radix_placeholder_article_footer-->

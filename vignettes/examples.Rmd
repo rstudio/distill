@@ -1,0 +1,15 @@
+---
+title: "Example websites"
+resource_files:
+  - images/
+---
+
+```{r setup, include = FALSE}
+library(quillt)
+```
+
+The examples below illustrate the use of Distill for making websites. If you want to learn more about how the websites were created, each example includes a link to its source code.
+
+```{r, echo=FALSE}
+examples(yml = "examples.yml")
+```
