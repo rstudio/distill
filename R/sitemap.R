@@ -124,25 +124,17 @@ write_feed_xml_html_content <- function(input_path, article, site_config) {
             to = rmd_dir,
             recursive = TRUE)
 
-  # fix headers
-  rmd_content <- paste0(readLines(input_path), collapse = "\n")
-  rmd_content <- gsub("---.*---", "", rmd_content)
-  writeLines(rmd_content, rmd_file)
-
   # render doc
   rmarkdown::render(rmd_file,
-                    output_format = "html_document",
+                    output_format = "html_fragment",
                     output_file = html_file,
                     quiet = TRUE,
                     output_options = list(
-                      self_contained = FALSE,
-                      pandoc_args = c("--metadata", "title:untitled")
+                      section_divs = FALSE
                     ))
 
-  # extract body
+  # read contents
   html_contents <- paste(readLines(html_file), collapse = "\n")
-  html_contents <- gsub(".*<body[^>]*>", "", html_contents)
-  html_contents <- gsub("</body>.*", "", html_contents)
 
   # fix image paths
   html_contents <- gsub(paste0(basename(dirname(rmd_file)), "/"),
