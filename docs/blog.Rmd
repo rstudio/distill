@@ -165,7 +165,7 @@ collections:
     categories_metadata: false
 ```
 
-### RSS feeds
+### RSS feed
 
 When you create a listing page an [RSS feed](https://en.wikipedia.org/wiki/RSS) is created automatically for the page (using the name of the listing page with a `.xml` file extension). You can link to the RSS feed within your site's navigation bar as follows (some navbar entries excluded for brevity):
 
@@ -204,6 +204,31 @@ collections:
 ```
 
 Specify `feed_items_max: false` to have no limit on the number of items included in the feed.
+
+#### RSS options
+
+By default, RSS feeds include only a summary of each post (based on the `description` field). If you want to include the full contents of the post (e.g. for syndication to another blog) add an `rss: full_content` entry to your site config as follows:
+
+**\_site.yml**
+
+``` {.yaml}
+rss:
+  full_content: true
+```
+
+If you want to create dedicated feeds that map to particular categories (e.g. to syndicate only a subset of your posts), you can do this:
+
+**\_site.yml**
+
+``` {.yaml}
+rss:
+  full_content: true
+  categories:
+    - portfolios
+    - forecasting
+```
+
+The category-based feeds will be created in a `categories` directory at the top level of the site.
 
 ### Post drafts
 
