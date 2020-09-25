@@ -205,6 +205,35 @@ collections:
 
 Specify `feed_items_max: false` to have no limit on the number of items included in the feed.
 
+By default, RSS feeds include only a summary of each post (based on the `description` field). If you want to include the full contents of the post (e.g. for syndication to another blog) add an `rss: full_content` entry to your site config as follows:
+
+**\_site.yml**
+
+``` {.yaml}
+name: "reproducible-finance-with-r"
+title: "Reproducible Finance with R"
+description: |
+  Exploring reproducible finance with the R statistical 
+  computing environment.
+base_url: https://beta.rstudioconnect.com/content/11424/
+rss:
+  full_content: true
+```
+
+If you want to create dedicated feeds that map to particular categories (e.g. to syndicate only a subset of your posts), you can do this:
+
+**\_site.yml**
+
+``` {.yaml}
+rss:
+  full_content: true
+  categories:
+    - portfolios
+    - forecasting
+```
+
+The category-based feeds will be created in a `categories` directory at the top level of the site.
+
 ### Post drafts
 
 If you want to work on a post for a period of time without having it be added to the listing page, add `draft: true` to the post's metadata. For example:
