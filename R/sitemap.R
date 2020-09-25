@@ -214,6 +214,13 @@ write_feed_xml <- function(feed_xml, site_config, collection, articles) {
     last_build_date <- Sys.Date()
   add_child(channel, "lastBuildDate", text = date_as_rfc_2822(last_build_date))
 
+  # read all rss nodes (used for checking md5s)
+  rss_nodes <- NULL
+  rss_path <- file.path(site_config$output_dir, feed_xml)
+  if (file.exists(rss_path)) {
+    rss_nodes <- xml2::read_xml(rss_path)
+  }
+
   # add entries to channel
   for (article in articles) {
 
@@ -235,9 +242,7 @@ write_feed_xml <- function(feed_xml, site_config, collection, articles) {
 
     if (length(full_content_path) > 0) {
       rss_md5 <- NULL
-      rss_path <- file.path(site_config$output_dir, feed_xml)
-      if (file.exists(rss_path)) {
-        rss_nodes <- xml2::read_xml(rss_path)
+      if (!is.null(rss_nodes)) {
         rss_article_base <- url_path(site_config$base_url, article$path)
 
         rss_entry <- xml2::xml_find_all(rss_nodes, paste0("/rss/channel/item/link[text()='", rss_article_base, "']/.."))
