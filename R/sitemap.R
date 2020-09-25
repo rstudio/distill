@@ -126,7 +126,11 @@ write_feed_xml_html_content <- function(input_path, article, site_config) {
 
   # fix headers
   rmd_content <- paste0(readLines(input_path), collapse = "\n")
-  rmd_content <- gsub("---.*---", "", rmd_content)
+  headers <- stringr::str_locate_all(rmd_content, "---")
+  if (nrow(headers[[1]]) >= 2) {
+    rmd_content <- stringr::str_sub(rmd_content, headers[[1]][2,2] + 1)
+  }
+
   writeLines(rmd_content, rmd_file)
 
   # render doc
