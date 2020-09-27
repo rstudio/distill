@@ -9,7 +9,7 @@ import_post(
   url,
   slug = "auto",
   date = Sys.Date(),
-  date_prefix = TRUE,
+  date_prefix = date,
   check_license = TRUE,
   overwrite = FALSE,
   view = interactive()
@@ -25,8 +25,8 @@ provided.}
 
 \item{date}{Post date (defaults to current date)}
 
-\item{date_prefix}{Data prefix for post slug (preserves chronological order for posts
-within the filesystem).}
+\item{date_prefix}{Date prefix for post slug (preserves chronological order for posts
+within the filesystem). Pass \code{NULL} for no date prefix.}
 
 \item{check_license}{Verify that the imported posted has a creative commons license}
 

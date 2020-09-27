@@ -68,8 +68,9 @@ create_blog <- function(dir, title, gh_pages = FALSE, edit = interactive()) {
 #' @param author Post author. Automatically drawn from previous post if not provided.
 #' @param slug Post slug (directory name). Automatically computed from title if not
 #'   provided.
-#' @param date_prefix Data prefix for post slug (preserves chronological order for posts
-#'   within the filesystem).
+#' @param date Post date (defaults to current date)
+#' @param date_prefix Date prefix for post slug (preserves chronological order for posts
+#'   within the filesystem). Pass `NULL` for no date prefix.
 #' @param draft Mark the post as a `draft` (don't include it in the article listing).
 #' @param edit Open the post in an editor after creating it.
 #'
@@ -83,8 +84,13 @@ create_blog <- function(dir, title, gh_pages = FALSE, edit = interactive()) {
 #' }
 #'
 #' @export
-create_post <- function(title, author = "auto", slug = "auto", date_prefix = TRUE,
-                        draft = FALSE, edit = interactive()) {
+create_post <- function(title,
+                        author = "auto",
+                        slug = "auto",
+                        date = Sys.Date(),
+                        date_prefix = date,
+                        draft = FALSE,
+                        edit = interactive()) {
 
   # determine site_dir (must call from within a site)
   site_dir <- find_site_dir(".")
@@ -101,14 +107,12 @@ create_post <- function(title, author = "auto", slug = "auto", date_prefix = TRU
   post_dir <- file.path(posts_dir, slug)
 
   # add date prefix
-  post_date <- Sys.Date()
-  if (!identical(date_prefix, FALSE)) {
+  if (!is.null(date_prefix)) {
     if (isTRUE(date_prefix))
       date_prefix <- Sys.Date()
     else if (is.character(date_prefix))
       date_prefix <- parse_date(date_prefix)
     if (is_date(date_prefix)) {
-      post_date <- date_prefix
       date_prefix <- as.character(date_prefix, format = "%Y-%m-%d")
     } else {
       stop("You must specify either TRUE/FALSE or a date for date_prefix")
@@ -152,7 +156,7 @@ description: |
 output:
   distill::distill_article:
     self_contained: false%s
----', title, author, format.Date(post_date, "%m-%d-%Y"), draft)
+---', title, author, format.Date(date, "%m-%d-%Y"), draft)
 
 
   # body

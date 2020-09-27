@@ -8,7 +8,6 @@
 #' @inheritParams create_post
 #'
 #' @param url URL for post to import
-#' @param date Post date (defaults to current date)
 #' @param check_license Verify that the imported posted has a creative commons license
 #' @param overwrite Overwrite existing post? (defaults to `FALSE`, use [update_post()]
 #'   to update an existing post in-place).
@@ -20,7 +19,8 @@
 #'
 #' @export
 import_post <- function(url, slug = "auto",
-                        date = Sys.Date(), date_prefix = TRUE,
+                        date = Sys.Date(),
+                        date_prefix = date,
                         check_license = TRUE,
                         overwrite = FALSE,
                         view = interactive()) {
