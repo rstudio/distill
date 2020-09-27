@@ -178,8 +178,8 @@ Learn more about using Distill at <https://rstudio.github.io/distill>.
   post_file <- file.path(post_dir, file_with_ext(slug, "Rmd"))
   con <- file(post_file, open = "w", encoding = "UTF-8")
   on.exit(close(con), add = TRUE)
-  writeChar(yaml, con, eos = NULL, useBytes = TRUE)
-  writeChar(body, con, eos = NULL, useBytes = TRUE)
+  xfun::write_utf8(yaml, con)
+  xfun::write_utf8(body, con)
 
   # edit if requested
   if (edit)
