@@ -1,4 +1,6 @@
+::: {.l-body-outset}
 ## Creating an article
+:::
 
 Use the **New R Markdown** dialog within RStudio to create a new Distill article:
 
@@ -20,7 +22,8 @@ description: |
   Scientific and technical writing, native to the web
 date: May 4, 2018
 author:
-  - name: "Yihui Xie"
+  - first_name: "Yihui"
+    last_name: "Xie"
     url: https://github.com/yihui
     affiliation: RStudio
     affiliation_url: https://www.rstudio.com
@@ -38,7 +41,7 @@ output: distill::distill_article
 ---
 ```
 
-Author entries must have at least `name` and `url` specified (the affiliation fields are optional). Specify an author's [Orcid ID](https://orcid.org/) using the `orcid_id` field.
+Author names can be specified using explicit `first_name` and `last_name` fields or with a single `name` field. Author entries must have at least a name and `url` specified (the affiliation fields are optional). Specify an author's [Orcid ID](https://orcid.org/) using the `orcid_id` field.
 
 The article's description and author bylines are automatically rendered as part of the title area of the document.
 
@@ -50,7 +53,7 @@ The `bibliography` field is used to provide a reference to the Bibtex file where
 
 Distill provides a number of options for laying out figures within your article. By default figures span the width of the main article body:
 
-![](images/l-body-figure.png){width="100%"}
+![](images/l-body-figure.png)
 
 However, some figures benefit from using additional horizontal space. In this cases the `layout` chunk option enables you to specify a wide variety of other layouts.
 
@@ -64,9 +67,9 @@ ggplot(diamonds, aes(carat, price)) + geom_smooth() +
 ```
 ````
 
-```{r, layout="l-body-outset"}
-include_graphics("../images/l-middle-figure.png")
-```
+::: {.l-body-outset}
+![](images/l-middle-figure.png){style="width: 100%"}
+:::
 
 Note that when specifying an alternate `layout` you should also specify an appropriate `fig.width` and `fig.height` for that layout. These values don't determine the absolute size of the figure (that's dynamic based on the layout) but they do determine the aspect ratio of the figure.
 

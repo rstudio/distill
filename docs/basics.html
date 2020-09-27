@@ -1691,7 +1691,7 @@ code span.wa { color: #008000; font-weight: bold; } /* Warning */
   </script>
 
   <!--/radix_placeholder_distill-->
-  <script src="site_libs/header-attrs-2.3.8/header-attrs.js"></script>
+  <script src="site_libs/header-attrs-2.3/header-attrs.js"></script>
   <link href="site_libs/pagedtable-1.1/css/pagedtable.css" rel="stylesheet" />
   <script src="site_libs/pagedtable-1.1/js/pagedtable.js"></script>
   <script src="site_libs/jquery-1.11.3/jquery.min.js"></script>
@@ -1830,7 +1830,9 @@ Publishing
 </ul>
 </nav>
 </div>
-<h2 id="creating-an-article">Creating an article</h2>
+<section id="creating-an-article" class="l-body-outset">
+<h2>Creating an article</h2>
+</section>
 <p>Use the <strong>New R Markdown</strong> dialog within RStudio to create a new Distill article:</p>
 <p><img src="images/new_distill_article.png" class="screenshot" style="width:100.0%" /></p>
 <p>You can also create a new Distill article from the command line with:</p>
@@ -1848,29 +1850,30 @@ Publishing
 <span id="cb1-4"><a href="#cb1-4" aria-hidden="true"></a>  Scientific and technical writing, native to the web</span>
 <span id="cb1-5"><a href="#cb1-5" aria-hidden="true"></a><span class="fu">date</span><span class="kw">:</span><span class="at"> May 4, 2018</span></span>
 <span id="cb1-6"><a href="#cb1-6" aria-hidden="true"></a><span class="fu">author</span><span class="kw">:</span></span>
-<span id="cb1-7"><a href="#cb1-7" aria-hidden="true"></a><span class="at">  </span><span class="kw">-</span><span class="at"> </span><span class="fu">name</span><span class="kw">:</span><span class="at"> </span><span class="st">&quot;Yihui Xie&quot;</span></span>
-<span id="cb1-8"><a href="#cb1-8" aria-hidden="true"></a><span class="at">    </span><span class="fu">url</span><span class="kw">:</span><span class="at"> https://github.com/yihui</span></span>
-<span id="cb1-9"><a href="#cb1-9" aria-hidden="true"></a><span class="at">    </span><span class="fu">affiliation</span><span class="kw">:</span><span class="at"> RStudio</span></span>
-<span id="cb1-10"><a href="#cb1-10" aria-hidden="true"></a><span class="at">    </span><span class="fu">affiliation_url</span><span class="kw">:</span><span class="at"> https://www.rstudio.com</span></span>
-<span id="cb1-11"><a href="#cb1-11" aria-hidden="true"></a><span class="at">    </span><span class="fu">orcid_id</span><span class="kw">:</span><span class="at"> 0000-0003-0645-5666</span></span>
-<span id="cb1-12"><a href="#cb1-12" aria-hidden="true"></a><span class="at">  </span><span class="kw">-</span><span class="at"> </span><span class="fu">name</span><span class="kw">:</span><span class="at"> </span><span class="st">&quot;JJ Allaire&quot;</span></span>
-<span id="cb1-13"><a href="#cb1-13" aria-hidden="true"></a><span class="at">    </span><span class="fu">url</span><span class="kw">:</span><span class="at"> https://github.com/jjallaire</span></span>
-<span id="cb1-14"><a href="#cb1-14" aria-hidden="true"></a><span class="at">    </span><span class="fu">affiliation</span><span class="kw">:</span><span class="at"> RStudio</span></span>
-<span id="cb1-15"><a href="#cb1-15" aria-hidden="true"></a><span class="at">    </span><span class="fu">affiliation_url</span><span class="kw">:</span><span class="at"> https://www.rstudio.com</span></span>
-<span id="cb1-16"><a href="#cb1-16" aria-hidden="true"></a><span class="at">  </span><span class="kw">-</span><span class="at"> </span><span class="fu">name</span><span class="kw">:</span><span class="at"> </span><span class="st">&quot;Rich Iannone&quot;</span></span>
-<span id="cb1-17"><a href="#cb1-17" aria-hidden="true"></a><span class="at">    </span><span class="fu">url</span><span class="kw">:</span><span class="at"> https://github.com/rich-iannone</span></span>
-<span id="cb1-18"><a href="#cb1-18" aria-hidden="true"></a><span class="at">    </span><span class="fu">affiliation</span><span class="kw">:</span><span class="at"> RStudio</span></span>
-<span id="cb1-19"><a href="#cb1-19" aria-hidden="true"></a><span class="at">    </span><span class="fu">affiliation_url</span><span class="kw">:</span><span class="at"> https://www.rstudio.com</span></span>
-<span id="cb1-20"><a href="#cb1-20" aria-hidden="true"></a><span class="fu">bibliography</span><span class="kw">:</span><span class="at"> biblio.bib</span></span>
-<span id="cb1-21"><a href="#cb1-21" aria-hidden="true"></a><span class="fu">output</span><span class="kw">:</span><span class="at"> distill::distill_article</span></span>
-<span id="cb1-22"><a href="#cb1-22" aria-hidden="true"></a><span class="pp">---</span></span></code></pre></div>
-<p>Author entries must have at least <code>name</code> and <code>url</code> specified (the affiliation fields are optional). Specify an author’s <a href="https://orcid.org/">Orcid ID</a> using the <code>orcid_id</code> field.</p>
+<span id="cb1-7"><a href="#cb1-7" aria-hidden="true"></a><span class="at">  </span><span class="kw">-</span><span class="at"> </span><span class="fu">first_name</span><span class="kw">:</span><span class="at"> </span><span class="st">&quot;Yihui&quot;</span></span>
+<span id="cb1-8"><a href="#cb1-8" aria-hidden="true"></a><span class="at">    </span><span class="fu">last_name</span><span class="kw">:</span><span class="at"> </span><span class="st">&quot;Xie&quot;</span></span>
+<span id="cb1-9"><a href="#cb1-9" aria-hidden="true"></a><span class="at">    </span><span class="fu">url</span><span class="kw">:</span><span class="at"> https://github.com/yihui</span></span>
+<span id="cb1-10"><a href="#cb1-10" aria-hidden="true"></a><span class="at">    </span><span class="fu">affiliation</span><span class="kw">:</span><span class="at"> RStudio</span></span>
+<span id="cb1-11"><a href="#cb1-11" aria-hidden="true"></a><span class="at">    </span><span class="fu">affiliation_url</span><span class="kw">:</span><span class="at"> https://www.rstudio.com</span></span>
+<span id="cb1-12"><a href="#cb1-12" aria-hidden="true"></a><span class="at">    </span><span class="fu">orcid_id</span><span class="kw">:</span><span class="at"> 0000-0003-0645-5666</span></span>
+<span id="cb1-13"><a href="#cb1-13" aria-hidden="true"></a><span class="at">  </span><span class="kw">-</span><span class="at"> </span><span class="fu">name</span><span class="kw">:</span><span class="at"> </span><span class="st">&quot;JJ Allaire&quot;</span></span>
+<span id="cb1-14"><a href="#cb1-14" aria-hidden="true"></a><span class="at">    </span><span class="fu">url</span><span class="kw">:</span><span class="at"> https://github.com/jjallaire</span></span>
+<span id="cb1-15"><a href="#cb1-15" aria-hidden="true"></a><span class="at">    </span><span class="fu">affiliation</span><span class="kw">:</span><span class="at"> RStudio</span></span>
+<span id="cb1-16"><a href="#cb1-16" aria-hidden="true"></a><span class="at">    </span><span class="fu">affiliation_url</span><span class="kw">:</span><span class="at"> https://www.rstudio.com</span></span>
+<span id="cb1-17"><a href="#cb1-17" aria-hidden="true"></a><span class="at">  </span><span class="kw">-</span><span class="at"> </span><span class="fu">name</span><span class="kw">:</span><span class="at"> </span><span class="st">&quot;Rich Iannone&quot;</span></span>
+<span id="cb1-18"><a href="#cb1-18" aria-hidden="true"></a><span class="at">    </span><span class="fu">url</span><span class="kw">:</span><span class="at"> https://github.com/rich-iannone</span></span>
+<span id="cb1-19"><a href="#cb1-19" aria-hidden="true"></a><span class="at">    </span><span class="fu">affiliation</span><span class="kw">:</span><span class="at"> RStudio</span></span>
+<span id="cb1-20"><a href="#cb1-20" aria-hidden="true"></a><span class="at">    </span><span class="fu">affiliation_url</span><span class="kw">:</span><span class="at"> https://www.rstudio.com</span></span>
+<span id="cb1-21"><a href="#cb1-21" aria-hidden="true"></a><span class="fu">bibliography</span><span class="kw">:</span><span class="at"> biblio.bib</span></span>
+<span id="cb1-22"><a href="#cb1-22" aria-hidden="true"></a><span class="fu">output</span><span class="kw">:</span><span class="at"> distill::distill_article</span></span>
+<span id="cb1-23"><a href="#cb1-23" aria-hidden="true"></a><span class="pp">---</span></span></code></pre></div>
+<p>Author names can be specified using explicit <code>first_name</code> and <code>last_name</code> fields or with a single <code>name</code> field. Author entries must have at least a name and <code>url</code> specified (the affiliation fields are optional). Specify an author’s <a href="https://orcid.org/">Orcid ID</a> using the <code>orcid_id</code> field.</p>
 <p>The article’s description and author bylines are automatically rendered as part of the title area of the document.</p>
 <p>The <code>date</code> field should be formatted as month, day, year (various notations are supported as long as the components appear in that order).</p>
 <p>The <code>bibliography</code> field is used to provide a reference to the Bibtex file where all of the sources cited in your article are defined. The <a href="#citations">citations</a> section describes how to include references to these sources in your article.</p>
 <h2 id="figures">Figures</h2>
 <p>Distill provides a number of options for laying out figures within your article. By default figures span the width of the main article body:</p>
-<p><img src="images/l-body-figure.png" style="width:100.0%" /></p>
+<p><img src="images/l-body-figure.png" /></p>
 <p>However, some figures benefit from using additional horizontal space. In this cases the <code>layout</code> chunk option enables you to specify a wide variety of other layouts.</p>
 <p>For example, if we wanted to display a figure a bit outside the bounds of the article text, we could specify the <code>l-body-outset</code> layout via the <code>layout</code> chunk option:</p>
 <pre class="clike"><code>```{r, layout=&quot;l-body-outset&quot;, fig.width=6, fig.height=1.5}
@@ -1878,8 +1881,8 @@ library(ggplot2)
 ggplot(diamonds, aes(carat, price)) + geom_smooth() +
   facet_grid(~ cut)
 ```</code></pre>
-<div class="layout-chunk" data-layout="l-body-outset">
-<p><img src="../images/l-middle-figure.png" /><!-- --></p>
+<div class="l-body-outset">
+<p><img src="images/l-middle-figure.png" style="width: 100%" /></p>
 </div>
 <p>Note that when specifying an alternate <code>layout</code> you should also specify an appropriate <code>fig.width</code> and <code>fig.height</code> for that layout. These values don’t determine the absolute size of the figure (that’s dynamic based on the layout) but they do determine the aspect ratio of the figure.</p>
 <p>See the documentation on <a href="figures.html">figure layout</a> for details on additional layout options.</p>
