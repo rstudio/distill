@@ -190,6 +190,15 @@ output:
 
 If the table of contents depth is not explicitly specified, it defaults to 3 (meaning that all level 1, 2, and 3 headers will be included in the table of contents).
 
+The table of contents will automatically float to the left when the article is displayed at more than 1000px wide. To always show the table of contents on top specify `toc_float: false`:
+
+``` {.yaml}
+output:
+  distill::distill_article:
+    toc: true
+    toc_float: false
+```
+
 ## Code blocks
 
 By default the Distill format does not display the code for chunks that are evaluated to produce output (knitr option `echo = FALSE`).
