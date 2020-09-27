@@ -94,7 +94,28 @@ create_post("The Sharpe Ratio", draft = TRUE)
 
 You work on blog posts independent of the enclosing website (use **Knit** to render and preview the post just like any R Markdown document). This is in fact the only way to update post content --- posts are considered standalone documents that are not re-rendered when the site is built. This is because posts are often expensive to render and have R package dependencies that may be difficult to satisfy as time goes on.
 
-In the next section will describe how to create a listing page for all of your posts.
+#### Post directory name
+
+Posts are stored within the `_posts` sub-directory of your site, and have a directory name that reflects the date which you created the post along with the post's [title slug](https://en.wikipedia.org/wiki/Clean_URL#Slug). For example:
+
+`_posts/2016-11-08-sharpe-ratio`
+
+Note that the date prefix is not strictly required, but is done by default as a convenience so that posts appear in chronological order within the filesystem.
+
+If you work on a post over the course of a few days and/or if you change your post's title after you begin working on it, you may want to rename the post directory. You can use the `rename_post_dir()` function to update the date and/or title slug reflected in the directory name. For example:
+
+```{r, eval=FALSE, echo=TRUE}
+# rename to reflect current title & today's date
+rename_post_dir("_posts/2016-11-08-sharpe-ratio") 
+
+# rename to reflect current title & explicit date
+rename_post_dir("_posts/2016-11-08-sharpe-ratio", 
+                date_prefix = "11/15/2016") 
+
+# rename with new title slug & today's date
+rename_post_dir("_posts/2016-11-08-sharpe-ratio", 
+                slug = "sharpe-ratio-calculation") 
+```
 
 ### Listing pages
 

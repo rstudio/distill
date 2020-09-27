@@ -1931,7 +1931,26 @@ Publishing
 </div>
 </div>
 <p>You work on blog posts independent of the enclosing website (use <strong>Knit</strong> to render and preview the post just like any R Markdown document). This is in fact the only way to update post content — posts are considered standalone documents that are not re-rendered when the site is built. This is because posts are often expensive to render and have R package dependencies that may be difficult to satisfy as time goes on.</p>
-<p>In the next section will describe how to create a listing page for all of your posts.</p>
+<h4 id="post-directory-name">Post directory name</h4>
+<p>Posts are stored within the <code>_posts</code> sub-directory of your site, and have a directory name that reflects the date which you created the post along with the post’s <a href="https://en.wikipedia.org/wiki/Clean_URL#Slug">title slug</a>. For example:</p>
+<p><code>_posts/2016-11-08-sharpe-ratio</code></p>
+<p>Note that the date prefix is not strictly required, but is done by default as a convenience so that posts appear in chronological order within the filesystem.</p>
+<p>If you work on a post over the course of a few days and/or if you change your post’s title after you begin working on it, you may want to rename the post directory. You can use the <code>rename_post_dir()</code> function to update the date and/or title slug reflected in the directory name. For example:</p>
+<div class="layout-chunk" data-layout="l-body">
+<div class="sourceCode">
+<pre><code><span class='co'># rename to reflect current title &amp; today's date</span>
+<span class='fu'><a href='https://rdrr.io/pkg/distill/man/rename_post_dir.html'>rename_post_dir</a></span><span class='op'>(</span><span class='st'>"_posts/2016-11-08-sharpe-ratio"</span><span class='op'>)</span> 
+
+<span class='co'># rename to reflect current title &amp; explicit date</span>
+<span class='fu'><a href='https://rdrr.io/pkg/distill/man/rename_post_dir.html'>rename_post_dir</a></span><span class='op'>(</span><span class='st'>"_posts/2016-11-08-sharpe-ratio"</span>, 
+                date_prefix <span class='op'>=</span> <span class='st'>"11/15/2016"</span><span class='op'>)</span> 
+
+<span class='co'># rename with new title slug &amp; today's date</span>
+<span class='fu'><a href='https://rdrr.io/pkg/distill/man/rename_post_dir.html'>rename_post_dir</a></span><span class='op'>(</span><span class='st'>"_posts/2016-11-08-sharpe-ratio"</span>, 
+                slug <span class='op'>=</span> <span class='st'>"sharpe-ratio-calculation"</span><span class='op'>)</span> 
+</code></pre>
+</div>
+</div>
 <h3 id="listing-pages">Listing pages</h3>
 <p>Once you have authored one or more posts you’ll want to create a listing page. You can do this by adding a <code>listing</code> metadata entry to the page you to include the listing on. This is often the main page for the website (index.Rmd). For example:</p>
 <p><strong>index.Rmd</strong></p>
