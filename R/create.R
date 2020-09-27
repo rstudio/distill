@@ -104,21 +104,9 @@ create_post <- function(title,
 
   # auto-slug
   slug <- resolve_slug(title, slug)
-  post_dir <- file.path(posts_dir, slug)
 
-  # add date prefix
-  if (!is.null(date_prefix)) {
-    if (isTRUE(date_prefix))
-      date_prefix <- Sys.Date()
-    else if (is.character(date_prefix))
-      date_prefix <- parse_date(date_prefix)
-    if (is_date(date_prefix)) {
-      date_prefix <- as.character(date_prefix, format = "%Y-%m-%d")
-    } else {
-      stop("You must specify either TRUE/FALSE or a date for date_prefix")
-    }
-    post_dir <- file.path(posts_dir, paste(date_prefix, slug, sep = "-"))
-  }
+  # resolve post dir
+  post_dir <- resolve_post_dir(posts_dir, slug, date_prefix)
 
   # determine author
   if (identical(author, "auto")) {
@@ -193,6 +181,95 @@ Learn more about using Distill at <https://rstudio.github.io/distill>.
   invisible(post_file)
 }
 
+
+#' Rename a blog post directory
+#'
+#' @inheritParams create_post
+#' @param post_dir Path to post directory
+#' @param date_prefix Date prefix for post.
+#'
+#' @note This function must be called from with a working directory that is within
+#'  a Distill website.
+#'
+#' @examples
+#' \dontrun{
+#' library(distill)
+#' rename_post_dir("_posts/2020-09-12-my-post")
+#' rename_post_dir("_posts/2020-09-12-my-post", date_prefix = "9/15/2020")
+#' }
+#'
+#' @export
+rename_post_dir <- function(post_dir, slug = "auto", date_prefix = Sys.Date()) {
+
+  # determine site_dir (must call from within a site)
+  site_dir <- find_site_dir(".")
+  if (is.null(site_dir))
+    stop("You must call rename_post from within a Distill website")
+
+  # more discovery
+  site_config <- site_config(site_dir)
+  posts_dir <- file.path(site_dir, "_posts")
+
+  # verify post exists
+  post_path <- normalize_path(file.path(site_dir, post_dir), mustWork = FALSE)
+  if (!dir_exists(post_path)) {
+    stop("Unable to find post to rename at \"", post_path, "\"")
+  }
+
+  # read the post title from the rmd
+  title <- find_post_title(post_path)
+
+  # resolve new post path
+  slug <- resolve_slug(title, slug)
+  new_post_path <- normalize_path(resolve_post_dir(posts_dir, slug, date_prefix),
+                                  mustWork = FALSE)
+
+  # move the post
+  if (!identical(post_path, new_post_path)) {
+    file.rename(post_path, new_post_path)
+    message("Post directory renamed to \"", paste0('_posts/', basename(new_post_path)), "\"")
+  } else {
+    message("Post directory already has name \"", paste0('_posts/', basename(new_post_path)), "\"")
+  }
+}
+
+find_post_title <- function(post_dir) {
+
+  md_files <- list.files(post_dir,
+                         pattern = "^[^_].*\\.[Rr]?md$",
+                         full.names = TRUE)
+  for (md_file in md_files) {
+    front_matter <- yaml_front_matter(md_file)
+    if (!is.null(front_matter$title)) {
+      return(front_matter$title)
+    }
+  }
+
+  stop("No post found in ", post_dir)
+
+}
+
+resolve_post_dir <- function(posts_dir, slug, date_prefix) {
+
+  # start with slug
+  post_dir <- file.path(posts_dir, slug)
+
+  # add date prefix
+  if (!is.null(date_prefix)) {
+    if (isTRUE(date_prefix))
+      date_prefix <- Sys.Date()
+    else if (is.character(date_prefix))
+      date_prefix <- parse_date(date_prefix)
+    if (is_date(date_prefix)) {
+      date_prefix <- as.character(date_prefix, format = "%Y-%m-%d")
+    } else {
+      stop("You must specify either NULL or a date for date_prefix")
+    }
+    post_dir <- file.path(posts_dir, paste(date_prefix, slug, sep = "-"))
+  }
+
+  post_dir
+}
 
 
 new_project_create_website <- function(dir, ...) {

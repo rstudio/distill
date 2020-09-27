@@ -22,6 +22,8 @@
 
 -   Support for `orcid_id` author metadata (displays next to author name).
 
+-   Added `rename_post_dir()` function for renaming post directories to reflect updated titles and publishing dates.
+
 ## distill v0.8 (CRAN)
 
 -   Generate RSS category feeds using rss/categories in site config
