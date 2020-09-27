@@ -10,6 +10,9 @@
 #'
 #' @inheritParams rmarkdown::html_document
 #'
+#' @param toc_float Float the table of contents to the left when the article
+#'   is displayed at widths > 1000px. If set to `FALSE` or the width is less
+#'   than 1000px the table of contents will be placed above the article body.
 #' @param smart Produce typographically correct output, converting straight
 #'   quotes to curly quotes, `---` to em-dashes, `--` to en-dashes, and
 #'   `...` to ellipses.
@@ -27,6 +30,7 @@
 #' @export
 distill_article <- function(toc = FALSE,
                           toc_depth = 3,
+                          toc_float = TRUE,
                           fig_width = 6.5,
                           fig_height = 4,
                           fig_retina = 2,
@@ -54,6 +58,11 @@ distill_article <- function(toc = FALSE,
 
   # table of contents
   args <- c(args, pandoc_toc_args(toc, toc_depth))
+
+  # toc_float
+  if (toc_float) {
+    args <- c(args, pandoc_variable_arg("toc-float", "1"))
+  }
 
   # add highlighting
   args <- c(args, distill_highlighting_args(highlight))

@@ -74,7 +74,7 @@ $endif$
 
 <div class="d-article">
 $if(toc)$
-<div class="d-contents">
+<div class="d-contents$if(toc-float)$ d-contents-float$endif$">
 <nav class="l-text toc figcaption" id="$idprefix$TOC">
 <h3>Contents</h3>
 $table-of-contents$
