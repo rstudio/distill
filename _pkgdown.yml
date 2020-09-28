@@ -1,4 +1,4 @@
-destination: pkgdown
+destination: reference
 
 template:
   package: quillt
@@ -11,7 +11,7 @@ navbar:
   type: default
   left:
   - text: Get started
-    href: articles/start.html
+    href: articles/distill.html
   - text: Examples
     href: articles/examples.html
   - text: Reference
