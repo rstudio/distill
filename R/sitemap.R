@@ -124,17 +124,29 @@ write_feed_xml_html_content <- function(input_path, article, site_config) {
             to = rmd_dir,
             recursive = TRUE)
 
+  # fix headers
+  rmd_content <- paste0(readLines(input_path), collapse = "\n")
+  headers <- stringr::str_locate_all(rmd_content, "---")
+  if (nrow(headers[[1]]) >= 2) {
+    rmd_content <- stringr::str_sub(rmd_content, headers[[1]][2,2] + 1)
+  }
+
+  writeLines(rmd_content, rmd_file)
+
   # render doc
   rmarkdown::render(rmd_file,
-                    output_format = "html_fragment",
+                    output_format = "html_document",
                     output_file = html_file,
                     quiet = TRUE,
                     output_options = list(
-                      section_divs = FALSE
+                      self_contained = FALSE,
+                      pandoc_args = c("--metadata", "title:untitled")
                     ))
 
-  # read contents
+  # extract body, avoid base64 images that are not supported in many rss readers
   html_contents <- paste(readLines(html_file), collapse = "\n")
+  html_contents <- gsub(".*<body[^>]*>", "", html_contents)
+  html_contents <- gsub("</body>.*", "", html_contents)
 
   # fix image paths
   html_contents <- gsub(paste0(basename(dirname(rmd_file)), "/"),
