@@ -7,10 +7,17 @@ d-title h1 {
   color: var(--title-color);
 }
 
+/*-- HEADERS --*/
+/* only text outside of <p> tags */
+d-article:not(p) {
+  color: var(--header-color);
+}
+
 /*-- BODY --*/
-d-article {
-  font-size: var(--body-size);
+/* only text inside of <p> tags */
+d-article > p {
   color: var(--body-color);
+  font-size: var(--body-size);
 }
 
 /*-- CODE --*/

@@ -16,6 +16,7 @@
   --fig-cap-size:    13px;                /* default */
   /*-- font colors --*/
   --title-color:     black;               /* default */
+  --header-color:    rgba(0, 0, 0, 0.8);  /* default */
   --body-color:      rgba(0, 0, 0, 0.8);  /* default */
   --toc-h3-color:    rgba(0, 0, 0, 0.6);  /* default */
   --byline-h3-color: rgba(0, 0, 0, 0.5);  /* default */
