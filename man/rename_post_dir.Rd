@@ -4,7 +4,7 @@
 \alias{rename_post_dir}
 \title{Rename a blog post directory}
 \usage{
-rename_post_dir(post_dir, slug = "auto", date_prefix = Sys.Date())
+rename_post_dir(post_dir, slug = "auto", date_prefix = "auto")
 }
 \arguments{
 \item{post_dir}{Path to post directory}
@@ -12,10 +12,13 @@ rename_post_dir(post_dir, slug = "auto", date_prefix = Sys.Date())
 \item{slug}{Post slug (directory name). Automatically computed from title if not
 provided.}
 
-\item{date_prefix}{Date prefix for post.}
+\item{date_prefix}{Date prefix for post. Defaults to the post's date
+field (or the current date if there is none). Pass \code{NULL} to not
+use a date prefix.}
 }
 \description{
-Rename a blog post directory
+Rename a blog post directory, by default using the title and date
+specified within the post's front matter.
 }
 \note{
 This function must be called from with a working directory that is within
