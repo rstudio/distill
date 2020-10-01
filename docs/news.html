@@ -1108,6 +1108,62 @@ code span.wa { color: #008000; font-weight: bold; } /* Warning */
     word-wrap: break-word;
   }
 
+  /* Include appendix styles here so they can be overridden */
+
+  d-appendix {
+    contain: layout style;
+    font-size: 0.8em;
+    line-height: 1.7em;
+    margin-top: 60px;
+    margin-bottom: 0;
+    border-top: 1px solid rgba(0, 0, 0, 0.1);
+    color: rgba(0,0,0,0.5);
+    padding-top: 60px;
+    padding-bottom: 48px;
+  }
+
+  d-appendix h3 {
+    grid-column: page-start / text-start;
+    font-size: 15px;
+    font-weight: 500;
+    margin-top: 1em;
+    margin-bottom: 0;
+    color: rgba(0,0,0,0.65);
+  }
+
+  d-appendix h3 + * {
+    margin-top: 1em;
+  }
+
+  d-appendix ol {
+    padding: 0 0 0 15px;
+  }
+
+  @media (min-width: 768px) {
+    d-appendix ol {
+      padding: 0 0 0 30px;
+      margin-left: -30px;
+    }
+  }
+
+  d-appendix li {
+    margin-bottom: 1em;
+  }
+
+  d-appendix a {
+    color: rgba(0, 0, 0, 0.6);
+  }
+
+  d-appendix > * {
+    grid-column: text;
+  }
+
+  d-appendix > d-footnote-list,
+  d-appendix > d-citation-list,
+  d-appendix > distill-appendix {
+    grid-column: screen;
+  }
+
 
   /* Anchor.js */
 
@@ -1524,6 +1580,9 @@ code span.wa { color: #008000; font-weight: bold; } /* Warning */
         grid.children('h3:contains("Affiliations")').text('Affiliation');
       }
 
+      // remove d-appendix local styles
+      $('d-appendix > style:first-child').remove();
+
       // move appendix-bottom entries to the bottom
       $('.appendix-bottom').appendTo('d-appendix').children().unwrap();
       $('.appendix-bottom').remove();
@@ -1819,6 +1878,7 @@ Publishing
 <li><p>Various improvements to category display, including showing categories on article pages and within article listings, adding a special “articles” category at the top that shows all articles, and display of the active category when a category filter is applied to a listing.</p></li>
 <li><p>Don’t apply table td/th bottom border styles to gt tables.</p></li>
 <li><p>Support for <code>orcid_id</code> author metadata (displays next to author name).</p></li>
+<li><p>Added <code>rename_post_dir()</code> function for renaming post directories to reflect updated titles and publishing dates.</p></li>
 </ul>
 <h2 id="distill-v0.8-cran">distill v0.8 (CRAN)</h2>
 <ul>
