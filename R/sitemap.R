@@ -130,6 +130,7 @@ write_feed_xml_html_content <- function(input_path, article, site_config) {
                     output_file = html_file,
                     quiet = TRUE,
                     output_options = list(
+                      self_contained = FALSE,
                       section_divs = FALSE
                     ))
 
