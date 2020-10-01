@@ -2,6 +2,7 @@
 
 export(create_blog)
 export(create_post)
+export(create_theme)
 export(create_website)
 export(distill_article)
 export(distill_website)

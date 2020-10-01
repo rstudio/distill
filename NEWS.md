@@ -10,6 +10,8 @@
 
 -   Use the [downlit](https://downlit.r-lib.org/) package to syntax highlight R code chunks (controlled by the `highlight_downlit` option, which is enabled by default).
 
+-   More straightforward theming using the `theme` option (available for both articles and sites) and the `create_theme()` function.
+
 -   Provide heading anchor links in left margin on hover.
 
 -   Display article table of contents in the left sidebar. This is done only when the browser \>= 1000 pixels wide, otherwise it's shown at the top.
