@@ -19,6 +19,7 @@ distill_article(
   highlight_downlit = TRUE,
   mathjax = "default",
   extra_dependencies = NULL,
+  theme = NULL,
   css = NULL,
   includes = NULL,
   keep_md = FALSE,
@@ -76,6 +77,8 @@ copied into the output directory). You can pass an alternate URL or pass
 
 \item{extra_dependencies}{Additional function arguments to pass to the
 base R Markdown HTML output formatter \code{\link[rmarkdown]{html_document_base}}}
+
+\item{theme}{CSS file with theme variable definitions}
 
 \item{css}{One or more css files to include}
 

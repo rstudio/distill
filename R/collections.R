@@ -77,7 +77,9 @@ render_collections <- function(site_dir, site_config, collections, quiet = FALSE
   navigation_html <- navigation_html_generator()
 
   # distill html
-  distill_html <- distill_in_header()
+  theme <- if (!is.null(site_config$theme))
+    file.path(site_dir, site_config$theme)
+  distill_html <- distill_in_header(theme)
 
   # site includes
   site_includes <- site_includes(site_dir, site_config)
@@ -98,10 +100,12 @@ render_collections <- function(site_dir, site_config, collections, quiet = FALSE
 }
 
 
-render_collection <- function(site_dir, site_config, collection,
-                              navigation_html = navigation_html_generator(),
-                              distill_html = distill_in_header(),
-                              site_includes = site_includes(site_dir, site_config),
+render_collection <- function(site_dir,
+                              site_config,
+                              collection,
+                              navigation_html,
+                              distill_html,
+                              site_includes,
                               quiet = FALSE) {
 
   if (!quiet)
@@ -239,6 +243,9 @@ publish_collection_article_to_site <- function(site_dir, site_config, encoding,
     input_file = input_file
   )
 
+  theme <- if (!is.null(site_config$theme))
+    file.path(site_dir, site_config$theme)
+
   # render the article
   output_file <- render_collection_article(
     site_dir = site_dir,
@@ -246,7 +253,7 @@ publish_collection_article_to_site <- function(site_dir, site_config, encoding,
     collection = collection,
     article = article,
     navigation_html = navigation_html_generator(),
-    distill_html = distill_in_header(),
+    distill_html = distill_in_header(theme),
     site_includes = site_includes(site_dir, site_config),
     strip_trailing_newline = strip_trailing_newline,
     quiet = TRUE
