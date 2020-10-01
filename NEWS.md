@@ -24,6 +24,8 @@
 
 -   Added `rename_post_dir()` function for renaming post directories to reflect updated titles and publishing dates.
 
+-   Ensure that date fields in RSS feeds and sitemaps use `en_US.UTF-8` locale.
+
 ## distill v0.8 (CRAN)
 
 -   Generate RSS category feeds using rss/categories in site config
