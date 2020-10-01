@@ -110,7 +110,10 @@ date_today <- function() {
 
 date_as_rfc_2822 <- function(date) {
   date <- as.Date(date, tz = "UTC")
-  as.character(date, format = "%a, %d %b %Y %H:%M:%S %z", tz = "UTC")
+  withr::with_locale(
+    new = c("LC_TIME" = "en_US.UTF-8"),
+    as.character(date, format = "%a, %d %b %Y %H:%M:%S %z", tz = "UTC")
+  )
 }
 
 date_as_abbrev <- function(date) {
