@@ -1,0 +1,16 @@
+Posts are stored within the `_posts` sub-directory of your site, and have a directory name that reflects the date which you created the post along with the post's [title slug](https://en.wikipedia.org/wiki/Clean_URL#Slug). For example:
+
+`_posts/2016-11-08-sharpe-ratio`
+
+Note that the date prefix is not strictly required, but is done by default as a convenience so that posts appear in chronological order within the filesystem.
+
+If you work on a post over the course of a few days and/or if you change your post's title after you begin working on it, you may want to rename the post directory. You can use the `rename_post_dir()` function to update the date and/or title slug reflected in the directory name. For example:
+
+```{r, eval=FALSE, echo=TRUE}
+# rename to reflect the title and date in the post YAML front-matter
+rename_post_dir("_posts/2016-11-08-sharpe-ratio") 
+```
+
+You can also specify and explicit `slug` and/or `date_prefix` if you prefer not to use values derived from the post's YAML.
+
+Note that you should be sure to rebuild your site after renaming a post so that it's updated URL is reflected in the index page and RSS feed.

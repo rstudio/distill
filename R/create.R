@@ -184,9 +184,14 @@ Learn more about using Distill at <https://rstudio.github.io/distill>.
 
 #' Rename a blog post directory
 #'
+#' Rename a blog post directory, by default using the title and date
+#' specified within the post's front matter.
+#'
 #' @inheritParams create_post
 #' @param post_dir Path to post directory
-#' @param date_prefix Date prefix for post.
+#' @param date_prefix Date prefix for post. Defaults to the post's date
+#'   field (or the current date if there is none). Pass `NULL` to not
+#'   use a date prefix.
 #'
 #' @note This function must be called from with a working directory that is within
 #'  a Distill website.
@@ -199,7 +204,7 @@ Learn more about using Distill at <https://rstudio.github.io/distill>.
 #' }
 #'
 #' @export
-rename_post_dir <- function(post_dir, slug = "auto", date_prefix = Sys.Date()) {
+rename_post_dir <- function(post_dir, slug = "auto", date_prefix = "auto") {
 
   # determine site_dir (must call from within a site)
   site_dir <- find_site_dir(".")
@@ -217,7 +222,17 @@ rename_post_dir <- function(post_dir, slug = "auto", date_prefix = Sys.Date()) {
   }
 
   # read the post title from the rmd
-  title <- find_post_title(post_path)
+  front_matter <- post_front_matter(post_path)
+  title <- front_matter$title
+
+  # determine the date prefix
+  if (identical(date_prefix, "auto")) {
+    if (!is.null(front_matter$date)) {
+      date_prefix <- parse_date(front_matter$date)
+    } else {
+      date_prefix = Sys.Date()
+    }
+  }
 
   # resolve new post path
   slug <- resolve_slug(title, slug)
@@ -233,7 +248,7 @@ rename_post_dir <- function(post_dir, slug = "auto", date_prefix = Sys.Date()) {
   }
 }
 
-find_post_title <- function(post_dir) {
+post_front_matter <- function(post_dir) {
 
   md_files <- list.files(post_dir,
                          pattern = "^[^_].*\\.[Rr]?md$",
@@ -241,7 +256,7 @@ find_post_title <- function(post_dir) {
   for (md_file in md_files) {
     front_matter <- yaml_front_matter(md_file)
     if (!is.null(front_matter$title)) {
-      return(front_matter$title)
+      return(front_matter)
     }
   }
 
