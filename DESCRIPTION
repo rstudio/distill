@@ -29,18 +29,18 @@ LazyData: true
 Roxygen: list(markdown = TRUE)
 RoxygenNote: 7.1.1
 Imports: 
-    utils, 
+    utils,
     stats,
-    tools, 
-    rmarkdown (>= 1.10), 
+    tools,
+    rmarkdown (>= 1.10),
     bookdown (>= 0.8),
     xfun (>= 0.2),
-    htmltools, 
-    jsonlite (>= 1.3), 
-    lubridate, 
-    png, 
-    mime, 
-    rstudioapi, 
+    htmltools,
+    jsonlite (>= 1.3),
+    lubridate,
+    png,
+    mime,
+    rstudioapi,
     rprojroot,
     xml2,
     base64enc,
@@ -52,7 +52,8 @@ Imports:
     digest,
     yaml,
     openssl,
-    downlit (>= 0.2)
+    downlit (>= 0.2),
+    withr
 Suggests:
     htmlwidgets,
     r2d3,
