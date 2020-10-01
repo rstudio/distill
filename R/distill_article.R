@@ -410,8 +410,8 @@ distill_in_header_html <- function(theme = NULL) {
     css <- paste(c(
       "",
       xfun::read_utf8(distill_resource("base-variables.css")),
-      xfun::read_utf8(distill_resource("base-style.css")),
       xfun::read_utf8(theme),
+      xfun::read_utf8(distill_resource("base-style.css")),
       ""
     ), collapse = "\n")
     theme_html <- tags$style(type = "text/css", css)
