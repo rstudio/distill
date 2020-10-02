@@ -2,16 +2,25 @@
 /* base style */
 
 /*-- TITLE --*/
-d-title h1 {
-  font-size: var(--title-size);
+d-title h1,
+.posts-list > h1 {
   color: var(--title-color);
 }
 
+d-title h1 {
+  font-size: var(--title-size);
+}
+
 /*-- HEADERS --*/
-/* only text outside of <p> tags */
-d-article:not(p) {
+d-article h1,
+d-article h2,
+d-article h3,
+d-article h4,
+d-article h5,
+d-article h6 {
   color: var(--header-color);
 }
+
 
 /*-- BODY --*/
 /* only text inside of <p> tags */
