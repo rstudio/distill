@@ -72,3 +72,28 @@ figure figcaption {
 	font-size: var(--fig-cap-size);
 	color: var(--fig-cap-color);
 }
+
+/*-- WEBSITE HEADER + FOOTER --*/
+.distill-site-header .title {
+	font-size: var(--head-title-size);
+}
+
+.distill-site-header {
+	font-size: var(--head-text-size);
+	color: var(--head-text-color);
+	background-color: var(--head-bkgd-color);
+}
+
+.distill-site-header a:hover {
+	color: var(--head-hover-color);
+}
+
+.distill-site-footer {
+	font-size: var(--foot-text-size);
+	color: var(--foot-text-color);
+	background-color: var(--foot-bkgd-color);
+}
+
+.distill-site-footer a:hover {
+	color: var(--foot-hover-color);
+}
