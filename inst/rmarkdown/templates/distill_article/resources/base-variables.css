@@ -25,7 +25,7 @@
   --appx-color:      rgba(0, 0, 0, 0.5);        /* default */
   --aside-color:     rgba(0, 0, 0, 0.6);        /* default */
   --fig-cap-color:   rgba(0, 0, 0, 0.6);        /* default */
-  /* websites */
+  /* website header + footer */
   --head-title-size:  18px;                     /* default */
   --head-text-color:  rgba(255, 255, 255, 0.8); /* default */
   --head-text-size:   15px;                     /* default */
