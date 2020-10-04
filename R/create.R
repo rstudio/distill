@@ -62,6 +62,28 @@ create_blog <- function(dir, title, gh_pages = FALSE, edit = interactive()) {
 }
 
 
+#' Create a new article
+#'
+#' Create (and optionally edit) a new distill article.
+#'
+#' @inheritParams rmarkdown::draft
+#' @param create_dir `TRUE` to create a new directory for the document
+#'   (defaults to `FALSE`).
+#'
+#' @export
+create_article <- function(file, create_dir = FALSE, edit = TRUE) {
+  article <- rmarkdown::draft(
+    file,
+    "distill_article",
+    package = "distill",
+    create_dir = create_dir,
+    edit = FALSE
+  )
+  if (edit) {
+    edit_file(article)
+  }
+}
+
 #' Create a new blog post
 #'
 #' @param title Post title
