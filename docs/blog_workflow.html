@@ -449,8 +449,6 @@ code span.wa { color: #008000; font-weight: bold; } /* Warning */
   <link href="site_libs/font-awesome-5.1.0/css/all.css" rel="stylesheet"/>
   <link href="site_libs/font-awesome-5.1.0/css/v4-shims.css" rel="stylesheet"/>
   <script src="site_libs/headroom-0.9.4/headroom.min.js"></script>
-<<<<<<< HEAD
-=======
   <script src="site_libs/autocomplete-0.37.1/autocomplete.min.js"></script>
   <script src="site_libs/fuse-6.4.1/fuse.min.js"></script>
 
@@ -586,14 +584,10 @@ code span.wa { color: #008000; font-weight: bold; } /* Warning */
         }]).on('autocomplete:selected', function(event, suggestion) {
           window.location.href = offsetURL(suggestion.path);
         });
-        // remove inline display style on autocompleter (we want to
-        // manage responsive display via css)
-        $('.algolia-autocomplete').css("display", "");
       })
       .catch(function(error) {
         console.log(error);
       });
-
   });
 
   </script>
@@ -619,11 +613,9 @@ code span.wa { color: #008000; font-weight: bold; } /* Warning */
 
   @media screen and (max-width: 768px) {
     .distill-site-nav .algolia-autocomplete {
-      display: none;
-      visibility: hidden;
+      visibility: hidden
     }
     .distill-site-nav.responsive .algolia-autocomplete {
-      display: inline-block;
       visibility: visible;
     }
     .distill-site-nav.responsive .algolia-autocomplete .aa-dropdown-menu {
@@ -712,7 +704,6 @@ code span.wa { color: #008000; font-weight: bold; } /* Warning */
   </style>
 
 
->>>>>>> 6999f43d6b2df504d0ff8ffdf497e200bf7844f5
   <!--/radix_placeholder_navigation_in_header-->
   <!--radix_placeholder_distill-->
 
@@ -932,7 +923,7 @@ code span.wa { color: #008000; font-weight: bold; } /* Warning */
   }
 
   @media(min-width: 1000px) {
-    .d-contents.d-contents-float {
+    .d-contents {
       height: 0;
       grid-column-start: 1;
       grid-column-end: 4;
@@ -1119,78 +1110,6 @@ code span.wa { color: #008000; font-weight: bold; } /* Warning */
     white-space: pre-wrap;
     word-wrap: break-word;
   }
-
-  /* Include appendix styles here so they can be overridden */
-
-  d-appendix {
-    contain: layout style;
-    font-size: 0.8em;
-    line-height: 1.7em;
-    margin-top: 60px;
-    margin-bottom: 0;
-    border-top: 1px solid rgba(0, 0, 0, 0.1);
-    color: rgba(0,0,0,0.5);
-    padding-top: 60px;
-    padding-bottom: 48px;
-  }
-
-  d-appendix h3 {
-    grid-column: page-start / text-start;
-    font-size: 15px;
-    font-weight: 500;
-    margin-top: 1em;
-    margin-bottom: 0;
-    color: rgba(0,0,0,0.65);
-  }
-
-  d-appendix h3 + * {
-    margin-top: 1em;
-  }
-
-  d-appendix ol {
-    padding: 0 0 0 15px;
-  }
-
-  @media (min-width: 768px) {
-    d-appendix ol {
-      padding: 0 0 0 30px;
-      margin-left: -30px;
-    }
-  }
-
-  d-appendix li {
-    margin-bottom: 1em;
-  }
-
-  d-appendix a {
-    color: rgba(0, 0, 0, 0.6);
-  }
-
-  d-appendix > * {
-    grid-column: text;
-  }
-
-  d-appendix > d-footnote-list,
-  d-appendix > d-citation-list,
-  d-appendix > distill-appendix {
-    grid-column: screen;
-  }
-
-  /* Include footnote styles here so they can be overridden */
-
-  d-footnote-list {
-    contain: layout style;
-  }
-
-  d-footnote-list > * {
-    grid-column: text;
-  }
-
-  d-footnote-list a.footnote-backlink {
-    color: rgba(0,0,0,0.3);
-    padding-left: 0.5em;
-  }
-
 
 
   /* Anchor.js */
@@ -1608,10 +1527,6 @@ code span.wa { color: #008000; font-weight: bold; } /* Warning */
         grid.children('h3:contains("Affiliations")').text('Affiliation');
       }
 
-      // remove d-appendix and d-footnote-list local styles
-      $('d-appendix > style:first-child').remove();
-      $('d-footnote-list > style:first-child').remove();
-
       // move appendix-bottom entries to the bottom
       $('.appendix-bottom').appendTo('d-appendix').children().unwrap();
       $('.appendix-bottom').remove();
@@ -1775,11 +1690,7 @@ code span.wa { color: #008000; font-weight: bold; } /* Warning */
   </script>
 
   <!--/radix_placeholder_distill-->
-<<<<<<< HEAD
-  <script src="site_libs/header-attrs-2.3.9/header-attrs.js"></script>
-=======
-  <script src="site_libs/header-attrs-2.3/header-attrs.js"></script>
->>>>>>> 6999f43d6b2df504d0ff8ffdf497e200bf7844f5
+  <script src="site_libs/header-attrs-2.4/header-attrs.js"></script>
   <script src="site_libs/jquery-1.11.3/jquery.min.js"></script>
   <script src="site_libs/anchor-4.2.2/anchor.min.js"></script>
   <script src="site_libs/bowser-1.9.3/bowser.min.js"></script>
@@ -1830,6 +1741,7 @@ code span.wa { color: #008000; font-weight: bold; } /* Warning */
 <img src="images/logo.png" alt="Logo"/>
 </a>
 <a href="index.html" class="title">Distill for R Markdown</a>
+<input id="distill-search" class="nav-search hidden" type="text" placeholder="Search..."/>
 </div>
 <div class="nav-right">
 <div class="nav-dropdown">
@@ -1897,7 +1809,7 @@ Publishing
 
 
 <div class="d-article">
-<div class="d-contents d-contents-float">
+<div class="d-contents">
 <nav class="l-text toc figcaption" id="TOC">
 <h3>Contents</h3>
 <ul>
@@ -1967,7 +1879,7 @@ Publishing
 <div class="layout-chunk" data-layout="l-body">
 <div class="sourceCode">
 <pre><code><span class='co'># rename to reflect the title and date in the post YAML front-matter</span>
-<span class='fu'><a href='https://rdrr.io/pkg/distill/man/rename_post_dir.html'>rename_post_dir</a></span><span class='op'>(</span><span class='st'>"_posts/2016-11-08-sharpe-ratio"</span><span class='op'>)</span> 
+<span class='fu'>rename_post_dir</span><span class='op'>(</span><span class='st'>"_posts/2016-11-08-sharpe-ratio"</span><span class='op'>)</span> 
 </code></pre>
 </div>
 </div>
@@ -2046,74 +1958,40 @@ Publishing
 <h3 id="creative-commons">Creative Commons</h3>
 <p>The Distill tools for importing posts make it very easy to aggregate posts published elsewhere on the web into your blog. Note however that you need to ensure that you have appropriate permission to re-publish these posts!</p>
 <p>To facilitate this, Distill will scan any imported post for <a href="https://creativecommons.org/licenses/">Creative Commons</a> copyright metadata, and in the case that none is found confirm that you still want to import the post. Consequently, you should ask that authors writing posts for your blog always include the <code>creative_commons</code> field in their post metadata. For example:</p>
-<<<<<<< HEAD
-<div class="sourceCode" id="cb2"><pre class="sourceCode yaml"><code class="sourceCode yaml"><span id="cb2-1"><a href="#cb2-1"></a><span class="pp">---</span></span>
-<span id="cb2-2"><a href="#cb2-2"></a><span class="fu">title</span><span class="kw">:</span><span class="at"> </span><span class="st">&quot;Distill for R Markdown&quot;</span></span>
-<span id="cb2-3"><a href="#cb2-3"></a><span class="fu">description</span><span class="kw">: </span><span class="ch">|</span><span class="at"> </span></span>
-<span id="cb2-4"><a href="#cb2-4"></a>  Scientific and technical writing, native to the web</span>
-<span id="cb2-5"><a href="#cb2-5"></a><span class="fu">output</span><span class="kw">:</span><span class="at"> distill::distill_article</span></span>
-<span id="cb2-6"><a href="#cb2-6"></a><span class="fu">creative_commons</span><span class="kw">:</span><span class="at"> CC BY</span></span>
-<span id="cb2-7"><a href="#cb2-7"></a><span class="pp">---</span></span></code></pre></div>
-=======
-<div class="sourceCode" id="cb3"><pre class="sourceCode yaml"><code class="sourceCode yaml"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true"></a><span class="pp">---</span></span>
-<span id="cb3-2"><a href="#cb3-2" aria-hidden="true"></a><span class="fu">title</span><span class="kw">:</span><span class="at"> </span><span class="st">&quot;Distill for R Markdown&quot;</span></span>
-<span id="cb3-3"><a href="#cb3-3" aria-hidden="true"></a><span class="fu">description</span><span class="kw">: </span><span class="ch">|</span><span class="at"> </span></span>
-<span id="cb3-4"><a href="#cb3-4" aria-hidden="true"></a>  Scientific and technical writing, native to the web</span>
-<span id="cb3-5"><a href="#cb3-5" aria-hidden="true"></a><span class="fu">output</span><span class="kw">:</span><span class="at"> distill::distill_article</span></span>
-<span id="cb3-6"><a href="#cb3-6" aria-hidden="true"></a><span class="fu">creative_commons</span><span class="kw">:</span><span class="at"> CC BY</span></span>
-<span id="cb3-7"><a href="#cb3-7" aria-hidden="true"></a><span class="pp">---</span></span></code></pre></div>
->>>>>>> 6999f43d6b2df504d0ff8ffdf497e200bf7844f5
+<div class="sourceCode" id="cb3"><pre class="sourceCode yaml"><code class="sourceCode yaml"><span id="cb3-1"><a href="#cb3-1"></a><span class="pp">---</span></span>
+<span id="cb3-2"><a href="#cb3-2"></a><span class="fu">title</span><span class="kw">:</span><span class="at"> </span><span class="st">&quot;Distill for R Markdown&quot;</span></span>
+<span id="cb3-3"><a href="#cb3-3"></a><span class="fu">description</span><span class="kw">: </span><span class="ch">|</span><span class="at"> </span></span>
+<span id="cb3-4"><a href="#cb3-4"></a>  Scientific and technical writing, native to the web</span>
+<span id="cb3-5"><a href="#cb3-5"></a><span class="fu">output</span><span class="kw">:</span><span class="at"> distill::distill_article</span></span>
+<span id="cb3-6"><a href="#cb3-6"></a><span class="fu">creative_commons</span><span class="kw">:</span><span class="at"> CC BY</span></span>
+<span id="cb3-7"><a href="#cb3-7"></a><span class="pp">---</span></span></code></pre></div>
 <p>Learn more about the <code>creative_commons</code> field in the documentation on <a href="metadata.html#creative-commons">post medatata</a>.</p>
 <p>If you know that you have permission to import and republish a post you can suppress this prompt by passing <code>check_license = FALSE</code> to the <code>import_post()</code> function.</p>
 <h3 id="canonical-urls">Canonical URLs</h3>
 <p>When you specify a <code>creative_commons</code> license for a blog post you make it easier for others to re-publish your post, giving you a broader audience for your work. In this case you may also want to ensure that the original URL where your post appeared be the one that appears in search engine results.</p>
 <p>To facilitate this, Distill automatically specifies a <a href="https://en.wikipedia.org/wiki/Canonical_link_element">canonical url</a> for posts published within a blog. That way, when a post is imported into another blog, search indexes still point back to the original article.</p>
 <p>If you prefer to disable this behavior, you can add <code>canonical: false</code> to your blog’s configuration in <code>_site.yml</code>. For example:</p>
-<<<<<<< HEAD
-<div class="sourceCode" id="cb3"><pre class="sourceCode yaml"><code class="sourceCode yaml"><span id="cb3-1"><a href="#cb3-1"></a><span class="fu">name</span><span class="kw">:</span><span class="at"> </span><span class="st">&quot;reproducible-finance-with-r&quot;</span></span>
-<span id="cb3-2"><a href="#cb3-2"></a><span class="fu">title</span><span class="kw">:</span><span class="at"> </span><span class="st">&quot;Reproducible Finance with R&quot;</span></span>
-<span id="cb3-3"><a href="#cb3-3"></a><span class="fu">description</span><span class="kw">: </span><span class="ch">|</span></span>
-<span id="cb3-4"><a href="#cb3-4"></a>  Exploring reproducible finance with the R statistical </span>
-<span id="cb3-5"><a href="#cb3-5"></a>  computing environment.</span>
-<span id="cb3-6"><a href="#cb3-6"></a><span class="fu">base_url</span><span class="kw">:</span><span class="at"> https://beta.rstudioconnect.com/content/11424/</span></span>
-<span id="cb3-7"><a href="#cb3-7"></a><span class="fu">collections</span><span class="kw">:</span></span>
-<span id="cb3-8"><a href="#cb3-8"></a><span class="at">  </span><span class="fu">posts</span><span class="kw">:</span></span>
-<span id="cb3-9"><a href="#cb3-9"></a><span class="at">    </span><span class="fu">canonical</span><span class="kw">:</span><span class="at"> </span><span class="ch">false</span></span></code></pre></div>
+<div class="sourceCode" id="cb4"><pre class="sourceCode yaml"><code class="sourceCode yaml"><span id="cb4-1"><a href="#cb4-1"></a><span class="fu">name</span><span class="kw">:</span><span class="at"> </span><span class="st">&quot;reproducible-finance-with-r&quot;</span></span>
+<span id="cb4-2"><a href="#cb4-2"></a><span class="fu">title</span><span class="kw">:</span><span class="at"> </span><span class="st">&quot;Reproducible Finance with R&quot;</span></span>
+<span id="cb4-3"><a href="#cb4-3"></a><span class="fu">description</span><span class="kw">: </span><span class="ch">|</span></span>
+<span id="cb4-4"><a href="#cb4-4"></a>  Exploring reproducible finance with the R statistical </span>
+<span id="cb4-5"><a href="#cb4-5"></a>  computing environment.</span>
+<span id="cb4-6"><a href="#cb4-6"></a><span class="fu">base_url</span><span class="kw">:</span><span class="at"> https://beta.rstudioconnect.com/content/11424/</span></span>
+<span id="cb4-7"><a href="#cb4-7"></a><span class="fu">collections</span><span class="kw">:</span></span>
+<span id="cb4-8"><a href="#cb4-8"></a><span class="at">  </span><span class="fu">posts</span><span class="kw">:</span></span>
+<span id="cb4-9"><a href="#cb4-9"></a><span class="at">    </span><span class="fu">canonical</span><span class="kw">:</span><span class="at"> </span><span class="ch">false</span></span></code></pre></div>
 <p>While canonical URLs are provided automatically for blog posts, they aren’t for standalone articles. You can explicitly provide a canonical URL for a standalone article using the <code>canonical_url</code> metadata field:</p>
-<div class="sourceCode" id="cb4"><pre class="sourceCode yaml"><code class="sourceCode yaml"><span id="cb4-1"><a href="#cb4-1"></a><span class="pp">---</span></span>
-<span id="cb4-2"><a href="#cb4-2"></a><span class="fu">title</span><span class="kw">:</span><span class="at"> </span><span class="st">&quot;Distill for R Markdown&quot;</span></span>
-<span id="cb4-3"><a href="#cb4-3"></a><span class="fu">description</span><span class="kw">: </span><span class="ch">|</span><span class="at"> </span></span>
-<span id="cb4-4"><a href="#cb4-4"></a>  Scientific and technical writing, native to the web</span>
-<span id="cb4-5"><a href="#cb4-5"></a><span class="fu">date</span><span class="kw">:</span><span class="at"> May 4, 2018</span></span>
-<span id="cb4-6"><a href="#cb4-6"></a><span class="fu">author</span><span class="kw">:</span></span>
-<span id="cb4-7"><a href="#cb4-7"></a><span class="at">  </span><span class="kw">-</span><span class="at"> </span><span class="fu">name</span><span class="kw">:</span><span class="at"> Nora Jones </span></span>
-<span id="cb4-8"><a href="#cb4-8"></a><span class="at">    </span><span class="fu">url</span><span class="kw">:</span><span class="at"> https://example.com/norajones</span></span>
-<span id="cb4-9"><a href="#cb4-9"></a><span class="fu">canonical_url</span><span class="kw">:</span><span class="at"> https://rstudio.github.io/distill</span></span>
-<span id="cb4-10"><a href="#cb4-10"></a><span class="pp">---</span></span></code></pre></div>
-<div class="sourceCode" id="cb5"><pre class="sourceCode r distill-force-highlighting-css"><code class="sourceCode r"></code></pre></div>
-=======
-<div class="sourceCode" id="cb4"><pre class="sourceCode yaml"><code class="sourceCode yaml"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true"></a><span class="fu">name</span><span class="kw">:</span><span class="at"> </span><span class="st">&quot;reproducible-finance-with-r&quot;</span></span>
-<span id="cb4-2"><a href="#cb4-2" aria-hidden="true"></a><span class="fu">title</span><span class="kw">:</span><span class="at"> </span><span class="st">&quot;Reproducible Finance with R&quot;</span></span>
-<span id="cb4-3"><a href="#cb4-3" aria-hidden="true"></a><span class="fu">description</span><span class="kw">: </span><span class="ch">|</span></span>
-<span id="cb4-4"><a href="#cb4-4" aria-hidden="true"></a>  Exploring reproducible finance with the R statistical </span>
-<span id="cb4-5"><a href="#cb4-5" aria-hidden="true"></a>  computing environment.</span>
-<span id="cb4-6"><a href="#cb4-6" aria-hidden="true"></a><span class="fu">base_url</span><span class="kw">:</span><span class="at"> https://beta.rstudioconnect.com/content/11424/</span></span>
-<span id="cb4-7"><a href="#cb4-7" aria-hidden="true"></a><span class="fu">collections</span><span class="kw">:</span></span>
-<span id="cb4-8"><a href="#cb4-8" aria-hidden="true"></a><span class="at">  </span><span class="fu">posts</span><span class="kw">:</span></span>
-<span id="cb4-9"><a href="#cb4-9" aria-hidden="true"></a><span class="at">    </span><span class="fu">canonical</span><span class="kw">:</span><span class="at"> </span><span class="ch">false</span></span></code></pre></div>
-<p>While canonical URLs are provided automatically for blog posts, they aren’t for standalone articles. You can explicitly provide a canonical URL for a standalone article using the <code>canonical_url</code> metadata field:</p>
-<div class="sourceCode" id="cb5"><pre class="sourceCode yaml"><code class="sourceCode yaml"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true"></a><span class="pp">---</span></span>
-<span id="cb5-2"><a href="#cb5-2" aria-hidden="true"></a><span class="fu">title</span><span class="kw">:</span><span class="at"> </span><span class="st">&quot;Distill for R Markdown&quot;</span></span>
-<span id="cb5-3"><a href="#cb5-3" aria-hidden="true"></a><span class="fu">description</span><span class="kw">: </span><span class="ch">|</span><span class="at"> </span></span>
-<span id="cb5-4"><a href="#cb5-4" aria-hidden="true"></a>  Scientific and technical writing, native to the web</span>
-<span id="cb5-5"><a href="#cb5-5" aria-hidden="true"></a><span class="fu">date</span><span class="kw">:</span><span class="at"> May 4, 2018</span></span>
-<span id="cb5-6"><a href="#cb5-6" aria-hidden="true"></a><span class="fu">author</span><span class="kw">:</span></span>
-<span id="cb5-7"><a href="#cb5-7" aria-hidden="true"></a><span class="at">  </span><span class="kw">-</span><span class="at"> </span><span class="fu">name</span><span class="kw">:</span><span class="at"> Nora Jones </span></span>
-<span id="cb5-8"><a href="#cb5-8" aria-hidden="true"></a><span class="at">    </span><span class="fu">url</span><span class="kw">:</span><span class="at"> https://example.com/norajones</span></span>
-<span id="cb5-9"><a href="#cb5-9" aria-hidden="true"></a><span class="fu">canonical_url</span><span class="kw">:</span><span class="at"> https://rstudio.github.io/distill</span></span>
-<span id="cb5-10"><a href="#cb5-10" aria-hidden="true"></a><span class="pp">---</span></span></code></pre></div>
+<div class="sourceCode" id="cb5"><pre class="sourceCode yaml"><code class="sourceCode yaml"><span id="cb5-1"><a href="#cb5-1"></a><span class="pp">---</span></span>
+<span id="cb5-2"><a href="#cb5-2"></a><span class="fu">title</span><span class="kw">:</span><span class="at"> </span><span class="st">&quot;Distill for R Markdown&quot;</span></span>
+<span id="cb5-3"><a href="#cb5-3"></a><span class="fu">description</span><span class="kw">: </span><span class="ch">|</span><span class="at"> </span></span>
+<span id="cb5-4"><a href="#cb5-4"></a>  Scientific and technical writing, native to the web</span>
+<span id="cb5-5"><a href="#cb5-5"></a><span class="fu">date</span><span class="kw">:</span><span class="at"> May 4, 2018</span></span>
+<span id="cb5-6"><a href="#cb5-6"></a><span class="fu">author</span><span class="kw">:</span></span>
+<span id="cb5-7"><a href="#cb5-7"></a><span class="at">  </span><span class="kw">-</span><span class="at"> </span><span class="fu">name</span><span class="kw">:</span><span class="at"> Nora Jones </span></span>
+<span id="cb5-8"><a href="#cb5-8"></a><span class="at">    </span><span class="fu">url</span><span class="kw">:</span><span class="at"> https://example.com/norajones</span></span>
+<span id="cb5-9"><a href="#cb5-9"></a><span class="fu">canonical_url</span><span class="kw">:</span><span class="at"> https://rstudio.github.io/distill</span></span>
+<span id="cb5-10"><a href="#cb5-10"></a><span class="pp">---</span></span></code></pre></div>
 <div class="sourceCode" id="cb6"><pre class="sourceCode r distill-force-highlighting-css"><code class="sourceCode r"></code></pre></div>
->>>>>>> 6999f43d6b2df504d0ff8ffdf497e200bf7844f5
 <!--radix_placeholder_article_footer-->
 <!--/radix_placeholder_article_footer-->
 </div>

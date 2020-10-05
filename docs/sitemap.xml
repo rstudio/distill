@@ -6,19 +6,11 @@
   </url>
   <url>
     <loc>https://rstudio.github.io/distill/blog_workflow.html</loc>
-<<<<<<< HEAD
-    <lastmod>2020-09-23T11:06:06-04:00</lastmod>
+    <lastmod>2020-10-05T16:51:55-04:00</lastmod>
   </url>
   <url>
     <loc>https://rstudio.github.io/distill/blog.html</loc>
-    <lastmod>2020-09-23T11:06:06-04:00</lastmod>
-=======
-    <lastmod>2020-10-01T06:03:50-04:00</lastmod>
-  </url>
-  <url>
-    <loc>https://rstudio.github.io/distill/blog.html</loc>
-    <lastmod>2020-10-01T06:04:03-04:00</lastmod>
->>>>>>> 6999f43d6b2df504d0ff8ffdf497e200bf7844f5
+    <lastmod>2020-10-05T16:51:55-04:00</lastmod>
   </url>
   <url>
     <loc>https://rstudio.github.io/distill/citations.html</loc>
@@ -34,11 +26,7 @@
   </url>
   <url>
     <loc>https://rstudio.github.io/distill/</loc>
-<<<<<<< HEAD
-    <lastmod>2020-09-23T11:06:06-04:00</lastmod>
-=======
-    <lastmod>2020-10-01T16:52:54-04:00</lastmod>
->>>>>>> 6999f43d6b2df504d0ff8ffdf497e200bf7844f5
+    <lastmod>2020-10-05T16:51:55-04:00</lastmod>
   </url>
   <url>
     <loc>https://rstudio.github.io/distill/interactivity.html</loc>
@@ -62,11 +50,7 @@
   </url>
   <url>
     <loc>https://rstudio.github.io/distill/tables.html</loc>
-<<<<<<< HEAD
-    <lastmod>2020-09-17T17:35:08-04:00</lastmod>
-=======
-    <lastmod>2020-09-27T08:10:44-04:00</lastmod>
->>>>>>> 6999f43d6b2df504d0ff8ffdf497e200bf7844f5
+    <lastmod>2020-10-05T16:51:55-04:00</lastmod>
   </url>
   <url>
     <loc>https://rstudio.github.io/distill/website.html</loc>

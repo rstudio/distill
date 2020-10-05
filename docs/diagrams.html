@@ -449,8 +449,6 @@ code span.wa { color: #008000; font-weight: bold; } /* Warning */
   <link href="site_libs/font-awesome-5.1.0/css/all.css" rel="stylesheet"/>
   <link href="site_libs/font-awesome-5.1.0/css/v4-shims.css" rel="stylesheet"/>
   <script src="site_libs/headroom-0.9.4/headroom.min.js"></script>
-<<<<<<< HEAD
-=======
   <script src="site_libs/autocomplete-0.37.1/autocomplete.min.js"></script>
   <script src="site_libs/fuse-6.4.1/fuse.min.js"></script>
 
@@ -586,14 +584,10 @@ code span.wa { color: #008000; font-weight: bold; } /* Warning */
         }]).on('autocomplete:selected', function(event, suggestion) {
           window.location.href = offsetURL(suggestion.path);
         });
-        // remove inline display style on autocompleter (we want to
-        // manage responsive display via css)
-        $('.algolia-autocomplete').css("display", "");
       })
       .catch(function(error) {
         console.log(error);
       });
-
   });
 
   </script>
@@ -619,11 +613,9 @@ code span.wa { color: #008000; font-weight: bold; } /* Warning */
 
   @media screen and (max-width: 768px) {
     .distill-site-nav .algolia-autocomplete {
-      display: none;
-      visibility: hidden;
+      visibility: hidden
     }
     .distill-site-nav.responsive .algolia-autocomplete {
-      display: inline-block;
       visibility: visible;
     }
     .distill-site-nav.responsive .algolia-autocomplete .aa-dropdown-menu {
@@ -712,7 +704,6 @@ code span.wa { color: #008000; font-weight: bold; } /* Warning */
   </style>
 
 
->>>>>>> 6999f43d6b2df504d0ff8ffdf497e200bf7844f5
   <!--/radix_placeholder_navigation_in_header-->
   <!--radix_placeholder_distill-->
 
@@ -932,7 +923,7 @@ code span.wa { color: #008000; font-weight: bold; } /* Warning */
   }
 
   @media(min-width: 1000px) {
-    .d-contents.d-contents-float {
+    .d-contents {
       height: 0;
       grid-column-start: 1;
       grid-column-end: 4;
@@ -1119,78 +1110,6 @@ code span.wa { color: #008000; font-weight: bold; } /* Warning */
     white-space: pre-wrap;
     word-wrap: break-word;
   }
-
-  /* Include appendix styles here so they can be overridden */
-
-  d-appendix {
-    contain: layout style;
-    font-size: 0.8em;
-    line-height: 1.7em;
-    margin-top: 60px;
-    margin-bottom: 0;
-    border-top: 1px solid rgba(0, 0, 0, 0.1);
-    color: rgba(0,0,0,0.5);
-    padding-top: 60px;
-    padding-bottom: 48px;
-  }
-
-  d-appendix h3 {
-    grid-column: page-start / text-start;
-    font-size: 15px;
-    font-weight: 500;
-    margin-top: 1em;
-    margin-bottom: 0;
-    color: rgba(0,0,0,0.65);
-  }
-
-  d-appendix h3 + * {
-    margin-top: 1em;
-  }
-
-  d-appendix ol {
-    padding: 0 0 0 15px;
-  }
-
-  @media (min-width: 768px) {
-    d-appendix ol {
-      padding: 0 0 0 30px;
-      margin-left: -30px;
-    }
-  }
-
-  d-appendix li {
-    margin-bottom: 1em;
-  }
-
-  d-appendix a {
-    color: rgba(0, 0, 0, 0.6);
-  }
-
-  d-appendix > * {
-    grid-column: text;
-  }
-
-  d-appendix > d-footnote-list,
-  d-appendix > d-citation-list,
-  d-appendix > distill-appendix {
-    grid-column: screen;
-  }
-
-  /* Include footnote styles here so they can be overridden */
-
-  d-footnote-list {
-    contain: layout style;
-  }
-
-  d-footnote-list > * {
-    grid-column: text;
-  }
-
-  d-footnote-list a.footnote-backlink {
-    color: rgba(0,0,0,0.3);
-    padding-left: 0.5em;
-  }
-
 
 
   /* Anchor.js */
@@ -1608,10 +1527,6 @@ code span.wa { color: #008000; font-weight: bold; } /* Warning */
         grid.children('h3:contains("Affiliations")').text('Affiliation');
       }
 
-      // remove d-appendix and d-footnote-list local styles
-      $('d-appendix > style:first-child').remove();
-      $('d-footnote-list > style:first-child').remove();
-
       // move appendix-bottom entries to the bottom
       $('.appendix-bottom').appendTo('d-appendix').children().unwrap();
       $('.appendix-bottom').remove();
@@ -1775,12 +1690,8 @@ code span.wa { color: #008000; font-weight: bold; } /* Warning */
   </script>
 
   <!--/radix_placeholder_distill-->
-<<<<<<< HEAD
-  <script src="site_libs/header-attrs-2.3.9/header-attrs.js"></script>
-=======
-  <script src="site_libs/header-attrs-2.3/header-attrs.js"></script>
->>>>>>> 6999f43d6b2df504d0ff8ffdf497e200bf7844f5
-  <script src="site_libs/htmlwidgets-1.5.1/htmlwidgets.js"></script>
+  <script src="site_libs/header-attrs-2.4/header-attrs.js"></script>
+  <script src="site_libs/htmlwidgets-1.5.2/htmlwidgets.js"></script>
   <script src="site_libs/viz-1.8.2/viz.js"></script>
   <link href="site_libs/DiagrammeR-styles-0.2/styles.css" rel="stylesheet" />
   <script src="site_libs/grViz-binding-1.0.6.1/grViz.js"></script>
@@ -1843,6 +1754,7 @@ code span.wa { color: #008000; font-weight: bold; } /* Warning */
 <img src="images/logo.png" alt="Logo"/>
 </a>
 <a href="index.html" class="title">Distill for R Markdown</a>
+<input id="distill-search" class="nav-search hidden" type="text" placeholder="Search..."/>
 </div>
 <div class="nav-right">
 <div class="nav-dropdown">
@@ -1910,7 +1822,7 @@ Publishing
 
 
 <div class="d-article">
-<div class="d-contents d-contents-float">
+<div class="d-contents">
 <nav class="l-text toc figcaption" id="TOC">
 <h3>Contents</h3>
 <ul>
