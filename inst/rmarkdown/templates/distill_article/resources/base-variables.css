@@ -6,6 +6,10 @@
    for each row; values shown are the CSS defaults.
    All values must end with a semi-colon.                  */
 
+/* Optional: embed custom fonts here with `@import`        */
+
+
+
 :root {
   /*-- Main font sizes --*/
   --title-size:      50px;                      /* default */
@@ -19,6 +23,10 @@
   --body-color:      rgba(0, 0, 0, 0.8);        /* default */
   --aside-color:     rgba(0, 0, 0, 0.6);        /* default */
   --fig-cap-color:   rgba(0, 0, 0, 0.6);        /* default */
+  /*-- Specify custom fonts ~~~ must be imported above   --*/
+  --heading-font:    sans-serif;
+  --mono-font:       monospace;
+  --body-font:       sans-serif;
 }
 
 /*-- ARTICLE METADATA --*/
