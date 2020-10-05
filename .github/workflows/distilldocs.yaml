@@ -39,6 +39,7 @@ jobs:
           install.packages("jsonlite")
           install.packages("leaflet")
           install.packages("dygraphs")
+          install.packages("gtsummary")
         shell: Rscript {0}
 
       - name: Install package
