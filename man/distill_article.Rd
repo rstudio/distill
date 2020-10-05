@@ -7,6 +7,7 @@
 distill_article(
   toc = FALSE,
   toc_depth = 3,
+  toc_float = TRUE,
   fig_width = 6.5,
   fig_height = 4,
   fig_retina = 2,
@@ -18,6 +19,7 @@ distill_article(
   highlight_downlit = TRUE,
   mathjax = "default",
   extra_dependencies = NULL,
+  theme = NULL,
   css = NULL,
   includes = NULL,
   keep_md = FALSE,
@@ -31,6 +33,10 @@ distill_article(
 \item{toc}{\code{TRUE} to include a table of contents in the output}
 
 \item{toc_depth}{Depth of headers to include in table of contents}
+
+\item{toc_float}{Float the table of contents to the left when the article
+is displayed at widths > 1000px. If set to \code{FALSE} or the width is less
+than 1000px the table of contents will be placed above the article body.}
 
 \item{fig_width}{Default width (in inches) for figures}
 
@@ -57,7 +63,7 @@ documents MathJax is still loaded externally (this is necessary because of
 its size).}
 
 \item{highlight}{Syntax highlighting style. Supported styles include
-"default", "tango", "pygments", "kate", "monochrome", "espresso",
+"default", "rstudio", "tango", "pygments", "kate", "monochrome", "espresso",
 "zenburn", "breezedark", and  "haddock". Pass NULL to prevent syntax
 highlighting.}
 
@@ -71,6 +77,8 @@ copied into the output directory). You can pass an alternate URL or pass
 
 \item{extra_dependencies}{Additional function arguments to pass to the
 base R Markdown HTML output formatter \code{\link[rmarkdown]{html_document_base}}}
+
+\item{theme}{CSS file with theme variable definitions}
 
 \item{css}{One or more css files to include}
 

@@ -124,25 +124,18 @@ write_feed_xml_html_content <- function(input_path, article, site_config) {
             to = rmd_dir,
             recursive = TRUE)
 
-  # fix headers
-  rmd_content <- paste0(readLines(input_path), collapse = "\n")
-  rmd_content <- gsub("---.*---", "", rmd_content)
-  writeLines(rmd_content, rmd_file)
-
   # render doc
   rmarkdown::render(rmd_file,
-                    output_format = "html_document",
+                    output_format = "html_fragment",
                     output_file = html_file,
                     quiet = TRUE,
                     output_options = list(
                       self_contained = FALSE,
-                      pandoc_args = c("--metadata", "title:untitled")
+                      section_divs = FALSE
                     ))
 
-  # extract body
+  # read contents
   html_contents <- paste(readLines(html_file), collapse = "\n")
-  html_contents <- gsub(".*<body[^>]*>", "", html_contents)
-  html_contents <- gsub("</body>.*", "", html_contents)
 
   # fix image paths
   html_contents <- gsub(paste0(basename(dirname(rmd_file)), "/"),
@@ -222,6 +215,13 @@ write_feed_xml <- function(feed_xml, site_config, collection, articles) {
     last_build_date <- Sys.Date()
   add_child(channel, "lastBuildDate", text = date_as_rfc_2822(last_build_date))
 
+  # read all rss nodes (used for checking md5s)
+  rss_nodes <- NULL
+  rss_path <- file.path(site_config$output_dir, feed_xml)
+  if (file.exists(rss_path)) {
+    rss_nodes <- xml2::read_xml(rss_path)
+  }
+
   # add entries to channel
   for (article in articles) {
 
@@ -243,9 +243,7 @@ write_feed_xml <- function(feed_xml, site_config, collection, articles) {
 
     if (length(full_content_path) > 0) {
       rss_md5 <- NULL
-      rss_path <- file.path(site_config$output_dir, feed_xml)
-      if (file.exists(rss_path)) {
-        rss_nodes <- xml2::read_xml(rss_path)
+      if (!is.null(rss_nodes)) {
         rss_article_base <- url_path(site_config$base_url, article$path)
 
         rss_entry <- xml2::xml_find_all(rss_nodes, paste0("/rss/channel/item/link[text()='", rss_article_base, "']/.."))

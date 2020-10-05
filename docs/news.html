@@ -82,32 +82,28 @@ code span.wa { color: #008000; font-weight: bold; } /* Warning */
 </style>
 
   <!--radix_placeholder_meta_tags-->
-  <title>Distill for R Markdown: Distill Basics</title>
+  <title>Distill for R Markdown: Release History</title>
 
-  <meta property="description" itemprop="description" content="Scientific and technical writing, native to the web"/>
 
   <link rel="license" href="https://creativecommons.org/licenses/by/4.0/"/>
   <link rel="icon" type="image/png" href="images/favicon.png"/>
 
 
   <!--  https://developers.facebook.com/docs/sharing/webmasters#markup -->
-  <meta property="og:title" content="Distill for R Markdown: Distill Basics"/>
+  <meta property="og:title" content="Distill for R Markdown: Release History"/>
   <meta property="og:type" content="article"/>
-  <meta property="og:description" content="Scientific and technical writing, native to the web"/>
   <meta property="og:locale" content="en_US"/>
   <meta property="og:site_name" content="Distill for R Markdown"/>
 
   <!--  https://dev.twitter.com/cards/types/summary -->
   <meta property="twitter:card" content="summary"/>
-  <meta property="twitter:title" content="Distill for R Markdown: Distill Basics"/>
-  <meta property="twitter:description" content="Scientific and technical writing, native to the web"/>
+  <meta property="twitter:title" content="Distill for R Markdown: Release History"/>
 
   <!--/radix_placeholder_meta_tags-->
-  
   <!--radix_placeholder_rmarkdown_metadata-->
 
   <script type="text/json" id="radix-rmarkdown-metadata">
-  {"type":"list","attributes":{"names":{"type":"character","attributes":{},"value":["title","description","bibliography"]}},"value":[{"type":"character","attributes":{},"value":["Distill Basics"]},{"type":"character","attributes":{},"value":["Scientific and technical writing, native to the web"]},{"type":"character","attributes":{},"value":["biblio.bib"]}]}
+  {"type":"list","attributes":{"names":{"type":"character","attributes":{},"value":["title","output"]}},"value":[{"type":"character","attributes":{},"value":["Release History"]},{"type":"list","attributes":{"names":{"type":"character","attributes":{},"value":["distill::distill_article"]}},"value":[{"type":"list","attributes":{"names":{"type":"character","attributes":{},"value":["toc"]}},"value":[{"type":"logical","attributes":{},"value":[false]}]}]}]}
   </script>
   <!--/radix_placeholder_rmarkdown_metadata-->
   <!--radix_placeholder_navigation_in_header-->
@@ -450,8 +446,6 @@ code span.wa { color: #008000; font-weight: bold; } /* Warning */
   <link href="site_libs/font-awesome-5.1.0/css/all.css" rel="stylesheet"/>
   <link href="site_libs/font-awesome-5.1.0/css/v4-shims.css" rel="stylesheet"/>
   <script src="site_libs/headroom-0.9.4/headroom.min.js"></script>
-<<<<<<< HEAD
-=======
   <script src="site_libs/autocomplete-0.37.1/autocomplete.min.js"></script>
   <script src="site_libs/fuse-6.4.1/fuse.min.js"></script>
 
@@ -713,7 +707,6 @@ code span.wa { color: #008000; font-weight: bold; } /* Warning */
   </style>
 
 
->>>>>>> 6999f43d6b2df504d0ff8ffdf497e200bf7844f5
   <!--/radix_placeholder_navigation_in_header-->
   <!--radix_placeholder_distill-->
 
@@ -1776,13 +1769,7 @@ code span.wa { color: #008000; font-weight: bold; } /* Warning */
   </script>
 
   <!--/radix_placeholder_distill-->
-<<<<<<< HEAD
-  <script src="site_libs/header-attrs-2.3.9/header-attrs.js"></script>
-=======
   <script src="site_libs/header-attrs-2.3/header-attrs.js"></script>
->>>>>>> 6999f43d6b2df504d0ff8ffdf497e200bf7844f5
-  <link href="site_libs/pagedtable-1.1/css/pagedtable.css" rel="stylesheet" />
-  <script src="site_libs/pagedtable-1.1/js/pagedtable.js"></script>
   <script src="site_libs/jquery-1.11.3/jquery.min.js"></script>
   <script src="site_libs/anchor-4.2.2/anchor.min.js"></script>
   <script src="site_libs/bowser-1.9.3/bowser.min.js"></script>
@@ -1821,7 +1808,7 @@ code span.wa { color: #008000; font-weight: bold; } /* Warning */
 <!--radix_placeholder_front_matter-->
 
 <script id="distill-front-matter" type="text/json">
-{"title":"Distill Basics","description":"Scientific and technical writing, native to the web","authors":[]}
+{"title":"Release History","authors":[]}
 </script>
 
 <!--/radix_placeholder_front_matter-->
@@ -1880,6 +1867,7 @@ Publishing
 <a href="publish_website.html">Publishing Websites</a>
 </div>
 </div>
+<a href="news.html">News</a>
 <a href="https://github.com/rstudio/distill" aria-label="Link to source">
 <i class="fab fa-github" aria-hidden="true"></i>
 </a>
@@ -1892,344 +1880,76 @@ Publishing
 <!--/radix_placeholder_site_before_body-->
 
 <div class="d-title">
-<h1>Distill Basics</h1>
+<h1>Release History</h1>
 <!--radix_placeholder_categories-->
 <!--/radix_placeholder_categories-->
-<p>Scientific and technical writing, native to the web</p>
+
 </div>
 
 
 <div class="d-article">
-<div class="d-contents d-contents-float">
-<nav class="l-text toc figcaption" id="TOC">
-<h3>Contents</h3>
+<h2 id="distill-v0.9-development">distill v0.9 (Development)</h2>
 <ul>
-<li><a href="#creating-an-article">Creating an article</a></li>
-<li><a href="#figures">Figures</a></li>
-<li><a href="#tables">Tables</a></li>
-<li><a href="#equations">Equations</a></li>
-<li><a href="#citations">Citations</a></li>
-<li><a href="#footnotes-and-asides">Footnotes and asides</a></li>
-<li><a href="#table-of-contents">Table of contents</a></li>
-<li><a href="#code-blocks">Code blocks</a></li>
-<li><a href="#syntax-highlighting">Syntax highlighting</a></li>
-<li><a href="#appendices">Appendices</a></li>
-<li><a href="#acknowledgments">Acknowledgments</a></li>
+<li><p>Add site search feature using <a href="https://github.com/krisk/Fuse">Fuse.js</a> (enabled by default for blog sites). Can be explicitly enabled or disabled for any site using the <code>search</code> field in the <code>navbar</code> key of <code>_site.yml</code>.</p></li>
+<li><p>Provide navbar link to website source code when <code>source_url</code> is provided in the <code>navbar</code> key of <code>_site.yml</code>.</p></li>
+<li><p>Use pandoc rather than distill for bibliography generation. Provides support for <code>csl</code>, <code>nocite</code>, and <code>link-citations</code>, as well as the use of multiple bibliographies (including non-BibTeX ones). Eliminates distill provided mouse-over citation display, but users seem to value the Pandoc features more than this one.</p></li>
+<li><p>Use pandoc rather than distill for code output (syntax highlighting themes can be customized using the <code>highlight</code> option). New default highlighting theme optimized for accessibility.</p></li>
+<li><p>Use the <a href="https://downlit.r-lib.org/">downlit</a> package to syntax highlight R code chunks (controlled by the <code>highlight_downlit</code> option, which is enabled by default).</p></li>
+<li><p>More straightforward theming using the <code>theme</code> option (available for both articles and sites) and the <code>create_theme()</code> function.</p></li>
+<li><p>Provide heading anchor links in left margin on hover.</p></li>
+<li><p>Display article table of contents in the left sidebar. This is done only when the browser &gt;= 1000 pixels wide, otherwise it’s shown at the top.</p></li>
+<li><p>Added <code>create_article()</code> function for straightforward creation of new articles.</p></li>
+<li><p>Show author (below date) within article listings.</p></li>
+<li><p>Various improvements to category display, including showing categories on article pages and within article listings, adding a special “articles” category at the top that shows all articles, and display of the active category when a category filter is applied to a listing.</p></li>
+<li><p>Don’t apply table td/th bottom border styles to gt tables.</p></li>
+<li><p>Support for <code>orcid_id</code> author metadata (displays next to author name).</p></li>
+<li><p>Added <code>rename_post_dir()</code> function for renaming post directories to reflect updated titles and publishing dates.</p></li>
+<li><p>Ensure that date fields in RSS feeds and sitemaps use <code>en_US.UTF-8</code> locale.</p></li>
 </ul>
-</nav>
-</div>
-<section id="creating-an-article" class="l-body-outset">
-<h2>Creating an article</h2>
-</section>
-<p>Use the <strong>New R Markdown</strong> dialog within RStudio to create a new Distill article:</p>
-<p><img src="images/new_distill_article.png" class="screenshot" style="width:100.0%" /></p>
-<p>You can also create a new Distill article from the command line with:</p>
-<div class="layout-chunk" data-layout="l-body">
-<div class="sourceCode">
-<pre><code><span class='kw'><a href='https://rdrr.io/r/base/library.html'>library</a></span><span class='op'>(</span><span class='va'><a href='https://github.com/rstudio/distill'>distill</a></span><span class='op'>)</span>
-<span class='fu'><a href='https://rdrr.io/pkg/distill/man/create_article.html'>create_article</a></span><span class='op'>(</span><span class='st'>"article.Rmd"</span><span class='op'>)</span>
-</code></pre>
-</div>
-</div>
-<p>Distill articles use <code>distill::distill_article</code> as their output format, and typically include title, description, date, author/affiliation, and bibliography entries in their YAML front-matter:</p>
-<<<<<<< HEAD
-<div class="sourceCode" id="cb1"><pre class="sourceCode yaml"><code class="sourceCode yaml"><span id="cb1-1"><a href="#cb1-1"></a><span class="pp">---</span></span>
-<span id="cb1-2"><a href="#cb1-2"></a><span class="fu">title</span><span class="kw">:</span><span class="at"> </span><span class="st">&quot;Distill for R Markdown&quot;</span></span>
-<span id="cb1-3"><a href="#cb1-3"></a><span class="fu">description</span><span class="kw">: </span><span class="ch">|</span><span class="at"> </span></span>
-<span id="cb1-4"><a href="#cb1-4"></a>  Scientific and technical writing, native to the web</span>
-<span id="cb1-5"><a href="#cb1-5"></a><span class="fu">date</span><span class="kw">:</span><span class="at"> May 4, 2018</span></span>
-<span id="cb1-6"><a href="#cb1-6"></a><span class="fu">author</span><span class="kw">:</span></span>
-<span id="cb1-7"><a href="#cb1-7"></a><span class="at">  </span><span class="kw">-</span><span class="at"> </span><span class="fu">name</span><span class="kw">:</span><span class="at"> </span><span class="st">&quot;Yihui Xie&quot;</span></span>
-<span id="cb1-8"><a href="#cb1-8"></a><span class="at">    </span><span class="fu">url</span><span class="kw">:</span><span class="at"> https://github.com/yihui</span></span>
-<span id="cb1-9"><a href="#cb1-9"></a><span class="at">    </span><span class="fu">affiliation</span><span class="kw">:</span><span class="at"> RStudio</span></span>
-<span id="cb1-10"><a href="#cb1-10"></a><span class="at">    </span><span class="fu">affiliation_url</span><span class="kw">:</span><span class="at"> https://www.rstudio.com</span></span>
-<span id="cb1-11"><a href="#cb1-11"></a><span class="at">    </span><span class="fu">orcid_id</span><span class="kw">:</span><span class="at"> 0000-0003-0645-5666</span></span>
-<span id="cb1-12"><a href="#cb1-12"></a><span class="at">  </span><span class="kw">-</span><span class="at"> </span><span class="fu">name</span><span class="kw">:</span><span class="at"> </span><span class="st">&quot;JJ Allaire&quot;</span></span>
-<span id="cb1-13"><a href="#cb1-13"></a><span class="at">    </span><span class="fu">url</span><span class="kw">:</span><span class="at"> https://github.com/jjallaire</span></span>
-<span id="cb1-14"><a href="#cb1-14"></a><span class="at">    </span><span class="fu">affiliation</span><span class="kw">:</span><span class="at"> RStudio</span></span>
-<span id="cb1-15"><a href="#cb1-15"></a><span class="at">    </span><span class="fu">affiliation_url</span><span class="kw">:</span><span class="at"> https://www.rstudio.com</span></span>
-<span id="cb1-16"><a href="#cb1-16"></a><span class="at">  </span><span class="kw">-</span><span class="at"> </span><span class="fu">name</span><span class="kw">:</span><span class="at"> </span><span class="st">&quot;Rich Iannone&quot;</span></span>
-<span id="cb1-17"><a href="#cb1-17"></a><span class="at">    </span><span class="fu">url</span><span class="kw">:</span><span class="at"> https://github.com/rich-iannone</span></span>
-<span id="cb1-18"><a href="#cb1-18"></a><span class="at">    </span><span class="fu">affiliation</span><span class="kw">:</span><span class="at"> RStudio</span></span>
-<span id="cb1-19"><a href="#cb1-19"></a><span class="at">    </span><span class="fu">affiliation_url</span><span class="kw">:</span><span class="at"> https://www.rstudio.com</span></span>
-<span id="cb1-20"><a href="#cb1-20"></a><span class="fu">bibliography</span><span class="kw">:</span><span class="at"> biblio.bib</span></span>
-<span id="cb1-21"><a href="#cb1-21"></a><span class="fu">output</span><span class="kw">:</span><span class="at"> distill::distill_article</span></span>
-<span id="cb1-22"><a href="#cb1-22"></a><span class="pp">---</span></span></code></pre></div>
-<p>Author entries must have at least <code>name</code> and <code>url</code> specified (the affiliation fields are optional). Specify an author’s <a href="https://orcid.org/">Orcid ID</a> using the <code>orcid_id</code> field.</p>
-=======
-<div class="sourceCode" id="cb1"><pre class="sourceCode yaml"><code class="sourceCode yaml"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true"></a><span class="pp">---</span></span>
-<span id="cb1-2"><a href="#cb1-2" aria-hidden="true"></a><span class="fu">title</span><span class="kw">:</span><span class="at"> </span><span class="st">&quot;Distill for R Markdown&quot;</span></span>
-<span id="cb1-3"><a href="#cb1-3" aria-hidden="true"></a><span class="fu">description</span><span class="kw">: </span><span class="ch">|</span><span class="at"> </span></span>
-<span id="cb1-4"><a href="#cb1-4" aria-hidden="true"></a>  Scientific and technical writing, native to the web</span>
-<span id="cb1-5"><a href="#cb1-5" aria-hidden="true"></a><span class="fu">date</span><span class="kw">:</span><span class="at"> May 4, 2018</span></span>
-<span id="cb1-6"><a href="#cb1-6" aria-hidden="true"></a><span class="fu">author</span><span class="kw">:</span></span>
-<span id="cb1-7"><a href="#cb1-7" aria-hidden="true"></a><span class="at">  </span><span class="kw">-</span><span class="at"> </span><span class="fu">first_name</span><span class="kw">:</span><span class="at"> </span><span class="st">&quot;Yihui&quot;</span></span>
-<span id="cb1-8"><a href="#cb1-8" aria-hidden="true"></a><span class="at">    </span><span class="fu">last_name</span><span class="kw">:</span><span class="at"> </span><span class="st">&quot;Xie&quot;</span></span>
-<span id="cb1-9"><a href="#cb1-9" aria-hidden="true"></a><span class="at">    </span><span class="fu">url</span><span class="kw">:</span><span class="at"> https://github.com/yihui</span></span>
-<span id="cb1-10"><a href="#cb1-10" aria-hidden="true"></a><span class="at">    </span><span class="fu">affiliation</span><span class="kw">:</span><span class="at"> RStudio</span></span>
-<span id="cb1-11"><a href="#cb1-11" aria-hidden="true"></a><span class="at">    </span><span class="fu">affiliation_url</span><span class="kw">:</span><span class="at"> https://www.rstudio.com</span></span>
-<span id="cb1-12"><a href="#cb1-12" aria-hidden="true"></a><span class="at">    </span><span class="fu">orcid_id</span><span class="kw">:</span><span class="at"> 0000-0003-0645-5666</span></span>
-<span id="cb1-13"><a href="#cb1-13" aria-hidden="true"></a><span class="at">  </span><span class="kw">-</span><span class="at"> </span><span class="fu">name</span><span class="kw">:</span><span class="at"> </span><span class="st">&quot;JJ Allaire&quot;</span></span>
-<span id="cb1-14"><a href="#cb1-14" aria-hidden="true"></a><span class="at">    </span><span class="fu">url</span><span class="kw">:</span><span class="at"> https://github.com/jjallaire</span></span>
-<span id="cb1-15"><a href="#cb1-15" aria-hidden="true"></a><span class="at">    </span><span class="fu">affiliation</span><span class="kw">:</span><span class="at"> RStudio</span></span>
-<span id="cb1-16"><a href="#cb1-16" aria-hidden="true"></a><span class="at">    </span><span class="fu">affiliation_url</span><span class="kw">:</span><span class="at"> https://www.rstudio.com</span></span>
-<span id="cb1-17"><a href="#cb1-17" aria-hidden="true"></a><span class="at">  </span><span class="kw">-</span><span class="at"> </span><span class="fu">name</span><span class="kw">:</span><span class="at"> </span><span class="st">&quot;Rich Iannone&quot;</span></span>
-<span id="cb1-18"><a href="#cb1-18" aria-hidden="true"></a><span class="at">    </span><span class="fu">url</span><span class="kw">:</span><span class="at"> https://github.com/rich-iannone</span></span>
-<span id="cb1-19"><a href="#cb1-19" aria-hidden="true"></a><span class="at">    </span><span class="fu">affiliation</span><span class="kw">:</span><span class="at"> RStudio</span></span>
-<span id="cb1-20"><a href="#cb1-20" aria-hidden="true"></a><span class="at">    </span><span class="fu">affiliation_url</span><span class="kw">:</span><span class="at"> https://www.rstudio.com</span></span>
-<span id="cb1-21"><a href="#cb1-21" aria-hidden="true"></a><span class="fu">bibliography</span><span class="kw">:</span><span class="at"> biblio.bib</span></span>
-<span id="cb1-22"><a href="#cb1-22" aria-hidden="true"></a><span class="fu">output</span><span class="kw">:</span><span class="at"> distill::distill_article</span></span>
-<span id="cb1-23"><a href="#cb1-23" aria-hidden="true"></a><span class="pp">---</span></span></code></pre></div>
-<p>Author names can be specified using explicit <code>first_name</code> and <code>last_name</code> fields or with a single <code>name</code> field. Author entries must have at least a name and <code>url</code> specified (the affiliation fields are optional). Specify an author’s <a href="https://orcid.org/">Orcid ID</a> using the <code>orcid_id</code> field.</p>
->>>>>>> 6999f43d6b2df504d0ff8ffdf497e200bf7844f5
-<p>The article’s description and author bylines are automatically rendered as part of the title area of the document.</p>
-<p>The <code>date</code> field should be formatted as month, day, year (various notations are supported as long as the components appear in that order).</p>
-<p>The <code>bibliography</code> field is used to provide a reference to the Bibtex file where all of the sources cited in your article are defined. The <a href="#citations">citations</a> section describes how to include references to these sources in your article.</p>
-<h2 id="figures">Figures</h2>
-<p>Distill provides a number of options for laying out figures within your article. By default figures span the width of the main article body:</p>
-<p><img src="images/l-body-figure.png" /></p>
-<p>However, some figures benefit from using additional horizontal space. In this cases the <code>layout</code> chunk option enables you to specify a wide variety of other layouts.</p>
-<p>For example, if we wanted to display a figure a bit outside the bounds of the article text, we could specify the <code>l-body-outset</code> layout via the <code>layout</code> chunk option:</p>
-<pre class="clike"><code>```{r, layout=&quot;l-body-outset&quot;, fig.width=6, fig.height=1.5}
-library(ggplot2)
-ggplot(diamonds, aes(carat, price)) + geom_smooth() +
-  facet_grid(~ cut)
-```</code></pre>
-<<<<<<< HEAD
-<div class="layout-chunk" data-layout="l-body-outset">
-<p><img src="../images/l-middle-figure.png" /><!-- --></p>
-=======
-<div class="l-body-outset">
-<p><img src="images/l-middle-figure.png" style="width: 100%" /></p>
->>>>>>> 6999f43d6b2df504d0ff8ffdf497e200bf7844f5
-</div>
-<p>Note that when specifying an alternate <code>layout</code> you should also specify an appropriate <code>fig.width</code> and <code>fig.height</code> for that layout. These values don’t determine the absolute size of the figure (that’s dynamic based on the layout) but they do determine the aspect ratio of the figure.</p>
-<p>See the documentation on <a href="figures.html">figure layout</a> for details on additional layout options.</p>
-<p>The examples above are based on conventional R plots. Distill articles can also incorporate <a href="diagrams.html">diagrams</a> and <a href="interactivity.html">interactive visualizations</a> based on JavaScript and D3.</p>
-<h2 id="tables">Tables</h2>
-<p>There are a number of options available for HTML display of data frames within Distill articles. Here, we use the <code>paged_table()</code> function to display a page-able view of the <code>mtcars</code> dataset built in to R:</p>
-<pre class="clike"><code>```{r, layout=&quot;l-body-outset&quot;}
-library(rmarkdown)
-paged_table(mtcars)
-```</code></pre>
-<div class="layout-chunk" data-layout="l-body-outset">
-<div data-pagedtable="false">
-<script data-pagedtable-source type="application/json">
-{"columns":[{"label":[""],"name":["_rn_"],"type":[""],"align":["left"]},{"label":["mpg"],"name":[1],"type":["dbl"],"align":["right"]},{"label":["cyl"],"name":[2],"type":["dbl"],"align":["right"]},{"label":["disp"],"name":[3],"type":["dbl"],"align":["right"]},{"label":["hp"],"name":[4],"type":["dbl"],"align":["right"]},{"label":["drat"],"name":[5],"type":["dbl"],"align":["right"]},{"label":["wt"],"name":[6],"type":["dbl"],"align":["right"]},{"label":["qsec"],"name":[7],"type":["dbl"],"align":["right"]},{"label":["vs"],"name":[8],"type":["dbl"],"align":["right"]},{"label":["am"],"name":[9],"type":["dbl"],"align":["right"]},{"label":["gear"],"name":[10],"type":["dbl"],"align":["right"]},{"label":["carb"],"name":[11],"type":["dbl"],"align":["right"]}],"data":[{"1":"21.0","2":"6","3":"160.0","4":"110","5":"3.90","6":"2.620","7":"16.46","8":"0","9":"1","10":"4","11":"4","_rn_":"Mazda RX4"},{"1":"21.0","2":"6","3":"160.0","4":"110","5":"3.90","6":"2.875","7":"17.02","8":"0","9":"1","10":"4","11":"4","_rn_":"Mazda RX4 Wag"},{"1":"22.8","2":"4","3":"108.0","4":"93","5":"3.85","6":"2.320","7":"18.61","8":"1","9":"1","10":"4","11":"1","_rn_":"Datsun 710"},{"1":"21.4","2":"6","3":"258.0","4":"110","5":"3.08","6":"3.215","7":"19.44","8":"1","9":"0","10":"3","11":"1","_rn_":"Hornet 4 Drive"},{"1":"18.7","2":"8","3":"360.0","4":"175","5":"3.15","6":"3.440","7":"17.02","8":"0","9":"0","10":"3","11":"2","_rn_":"Hornet Sportabout"},{"1":"18.1","2":"6","3":"225.0","4":"105","5":"2.76","6":"3.460","7":"20.22","8":"1","9":"0","10":"3","11":"1","_rn_":"Valiant"},{"1":"14.3","2":"8","3":"360.0","4":"245","5":"3.21","6":"3.570","7":"15.84","8":"0","9":"0","10":"3","11":"4","_rn_":"Duster 360"},{"1":"24.4","2":"4","3":"146.7","4":"62","5":"3.69","6":"3.190","7":"20.00","8":"1","9":"0","10":"4","11":"2","_rn_":"Merc 240D"},{"1":"22.8","2":"4","3":"140.8","4":"95","5":"3.92","6":"3.150","7":"22.90","8":"1","9":"0","10":"4","11":"2","_rn_":"Merc 230"},{"1":"19.2","2":"6","3":"167.6","4":"123","5":"3.92","6":"3.440","7":"18.30","8":"1","9":"0","10":"4","11":"4","_rn_":"Merc 280"},{"1":"17.8","2":"6","3":"167.6","4":"123","5":"3.92","6":"3.440","7":"18.90","8":"1","9":"0","10":"4","11":"4","_rn_":"Merc 280C"},{"1":"16.4","2":"8","3":"275.8","4":"180","5":"3.07","6":"4.070","7":"17.40","8":"0","9":"0","10":"3","11":"3","_rn_":"Merc 450SE"},{"1":"17.3","2":"8","3":"275.8","4":"180","5":"3.07","6":"3.730","7":"17.60","8":"0","9":"0","10":"3","11":"3","_rn_":"Merc 450SL"},{"1":"15.2","2":"8","3":"275.8","4":"180","5":"3.07","6":"3.780","7":"18.00","8":"0","9":"0","10":"3","11":"3","_rn_":"Merc 450SLC"},{"1":"10.4","2":"8","3":"472.0","4":"205","5":"2.93","6":"5.250","7":"17.98","8":"0","9":"0","10":"3","11":"4","_rn_":"Cadillac Fleetwood"},{"1":"10.4","2":"8","3":"460.0","4":"215","5":"3.00","6":"5.424","7":"17.82","8":"0","9":"0","10":"3","11":"4","_rn_":"Lincoln Continental"},{"1":"14.7","2":"8","3":"440.0","4":"230","5":"3.23","6":"5.345","7":"17.42","8":"0","9":"0","10":"3","11":"4","_rn_":"Chrysler Imperial"},{"1":"32.4","2":"4","3":"78.7","4":"66","5":"4.08","6":"2.200","7":"19.47","8":"1","9":"1","10":"4","11":"1","_rn_":"Fiat 128"},{"1":"30.4","2":"4","3":"75.7","4":"52","5":"4.93","6":"1.615","7":"18.52","8":"1","9":"1","10":"4","11":"2","_rn_":"Honda Civic"},{"1":"33.9","2":"4","3":"71.1","4":"65","5":"4.22","6":"1.835","7":"19.90","8":"1","9":"1","10":"4","11":"1","_rn_":"Toyota Corolla"},{"1":"21.5","2":"4","3":"120.1","4":"97","5":"3.70","6":"2.465","7":"20.01","8":"1","9":"0","10":"3","11":"1","_rn_":"Toyota Corona"},{"1":"15.5","2":"8","3":"318.0","4":"150","5":"2.76","6":"3.520","7":"16.87","8":"0","9":"0","10":"3","11":"2","_rn_":"Dodge Challenger"},{"1":"15.2","2":"8","3":"304.0","4":"150","5":"3.15","6":"3.435","7":"17.30","8":"0","9":"0","10":"3","11":"2","_rn_":"AMC Javelin"},{"1":"13.3","2":"8","3":"350.0","4":"245","5":"3.73","6":"3.840","7":"15.41","8":"0","9":"0","10":"3","11":"4","_rn_":"Camaro Z28"},{"1":"19.2","2":"8","3":"400.0","4":"175","5":"3.08","6":"3.845","7":"17.05","8":"0","9":"0","10":"3","11":"2","_rn_":"Pontiac Firebird"},{"1":"27.3","2":"4","3":"79.0","4":"66","5":"4.08","6":"1.935","7":"18.90","8":"1","9":"1","10":"4","11":"1","_rn_":"Fiat X1-9"},{"1":"26.0","2":"4","3":"120.3","4":"91","5":"4.43","6":"2.140","7":"16.70","8":"0","9":"1","10":"5","11":"2","_rn_":"Porsche 914-2"},{"1":"30.4","2":"4","3":"95.1","4":"113","5":"3.77","6":"1.513","7":"16.90","8":"1","9":"1","10":"5","11":"2","_rn_":"Lotus Europa"},{"1":"15.8","2":"8","3":"351.0","4":"264","5":"4.22","6":"3.170","7":"14.50","8":"0","9":"1","10":"5","11":"4","_rn_":"Ford Pantera L"},{"1":"19.7","2":"6","3":"145.0","4":"175","5":"3.62","6":"2.770","7":"15.50","8":"0","9":"1","10":"5","11":"6","_rn_":"Ferrari Dino"},{"1":"15.0","2":"8","3":"301.0","4":"335","5":"3.54","6":"3.570","7":"14.60","8":"0","9":"1","10":"5","11":"8","_rn_":"Maserati Bora"},{"1":"21.4","2":"4","3":"121.0","4":"109","5":"4.11","6":"2.780","7":"18.60","8":"1","9":"1","10":"4","11":"2","_rn_":"Volvo 142E"}],"options":{"columns":{"min":{},"max":[10]},"rows":{"min":[10],"max":[10]},"pages":{}}}
-  </script>
-</div>
-</div>
-<p>Note that we used <code>layout="l-body-outset"</code> to cause the table to occupy slightly more horizontal space than the article text. All of available <a href="figures.html">figure layout options</a> work as expected for tables.</p>
-<p>See the documentation on <a href="tables.html">table display</a> for details on the various techniques available for rendering tables.</p>
-<h2 id="equations">Equations</h2>
-<p>Inline and display equations are supported via standard markdown <a href="https://www.mathjax.org/">MathJax</a> syntax. For example, the following <a href="https://en.wikibooks.org/wiki/LaTeX/Mathematics">LaTeX math</a>:</p>
-<pre><code>$$
-\sigma = \sqrt{ \frac{1}{N} \sum_{i=1}^N (x_i -\mu)^2}
-$$</code></pre>
-<p>Will be rendered as:</p>
-<p><span class="math display">\[
-\sigma = \sqrt{ \frac{1}{N} \sum_{i=1}^N (x_i -\mu)^2}
-\]</span></p>
-<h2 id="citations">Citations</h2>
-<p>Bibtex is the supported way of making academic citations. To include citations, first create a bibtex file and refer to it from the <code>bibliography</code> field of the YAML front-matter (as <a href="#front-matter">illustrated above</a>).</p>
-<p>For example, your bibliography file might contain:</p>
-<div class="sourceCode" id="cb5"><pre class="sourceCode bibtex"><code class="sourceCode bibtex"><span id="cb5-1"><a href="#cb5-1"></a><span class="va">@Book</span>{<span class="ot">xie2015</span>,</span>
-<span id="cb5-2"><a href="#cb5-2"></a>  <span class="dt">title</span> = {Dynamic Documents with R and knitr},</span>
-<span id="cb5-3"><a href="#cb5-3"></a>  <span class="dt">author</span> = {Yihui Xie},</span>
-<span id="cb5-4"><a href="#cb5-4"></a>  <span class="dt">publisher</span> = {Chapman and Hall/CRC},</span>
-<span id="cb5-5"><a href="#cb5-5"></a>  <span class="dt">address</span> = {Boca Raton, Florida},</span>
-<span id="cb5-6"><a href="#cb5-6"></a>  <span class="dt">year</span> = {2015},</span>
-<span id="cb5-7"><a href="#cb5-7"></a>  <span class="dt">edition</span> = {2nd},</span>
-<span id="cb5-8"><a href="#cb5-8"></a>  <span class="dt">note</span> = {ISBN 978-1498716963},</span>
-<span id="cb5-9"><a href="#cb5-9"></a>  <span class="dt">url</span> = {http://yihui.name/knitr/},</span>
-<span id="cb5-10"><a href="#cb5-10"></a>}</span></code></pre></div>
-<p>Citations are then used in the article body with standard R Markdown notation, for example: <code>[@xie2015]</code> (which references an id provided in the bibliography). Note that multiple ids (separated by semicolons) can be provided.</p>
-<p>The citation is presented inline like this: <span class="citation" data-cites="xie2015">(Xie <a href="#ref-xie2015" role="doc-biblioref">2015</a>)</span>. If you have an appendix, a bibliography is automatically created and populated in it.</p>
-<p>See the article on <a href="citations.html">citations</a> for additional details on using citations, including how to provide the metadata required to make your article more easily citable for others.</p>
-<h2 id="footnotes-and-asides">Footnotes and asides</h2>
-<p>Footnotes use standard Pandoc markdown notation, for example <code>^[This will become a hover-able footnote]</code>. The number of the footnote will be automatically generated.<a href="#fn1" class="footnote-ref" id="fnref1" role="doc-noteref"><sup>1</sup></a></p>
-<p>You can also optionally include notes in the gutter of the article (immediately to the right of the article text). To do this use the <code>&lt;aside&gt;</code> tag.</p>
-<div class="sourceCode" id="cb6"><pre class="sourceCode html"><code class="sourceCode html"><span id="cb6-1"><a href="#cb6-1"></a><span class="kw">&lt;aside&gt;</span></span>
-<span id="cb6-2"><a href="#cb6-2"></a>This content will appear in the gutter of the article.</span>
-<span id="cb6-3"><a href="#cb6-3"></a><span class="kw">&lt;/aside&gt;</span></span></code></pre></div>
-<aside>
-<p>This content will appear in the gutter of the article.</p>
-</aside>
-<p>You can also include figures in the gutter. Just enclose the code chunk which generates the figure in an <code>&lt;aside&gt;</code> tag:</p>
-<pre class="clike"><code>&lt;aside&gt;
-```{r}
-ggplot(mtcars, aes(hp, mpg)) + geom_point() + geom_smooth()
-```
-&lt;/aside&gt;</code></pre>
-<aside>
-<p><img src="images/figure-aside.png" style="width:100.0%" /></p>
-</aside>
-<h2 id="table-of-contents">Table of contents</h2>
-<p>You can add a table of contents using the <code>toc</code> option and specify the depth of headers that it applies to using the <code>toc_depth</code> option. For example:</p>
-<div class="sourceCode" id="cb8"><pre class="sourceCode yaml"><code class="sourceCode yaml"><span id="cb8-1"><a href="#cb8-1"></a><span class="pp">---</span></span>
-<span id="cb8-2"><a href="#cb8-2"></a><span class="fu">title</span><span class="kw">:</span><span class="at"> </span><span class="st">&quot;Distill for R Markdown&quot;</span></span>
-<span id="cb8-3"><a href="#cb8-3"></a><span class="fu">description</span><span class="kw">: </span><span class="ch">|</span><span class="at"> </span></span>
-<span id="cb8-4"><a href="#cb8-4"></a>  Scientific and technical writing, native to the web</span>
-<span id="cb8-5"><a href="#cb8-5"></a><span class="fu">output</span><span class="kw">:</span></span>
-<span id="cb8-6"><a href="#cb8-6"></a><span class="at">  distill:</span><span class="fu">:distill_article</span><span class="kw">:</span></span>
-<span id="cb8-7"><a href="#cb8-7"></a><span class="at">    </span><span class="fu">toc</span><span class="kw">:</span><span class="at"> </span><span class="ch">true</span></span>
-<span id="cb8-8"><a href="#cb8-8"></a><span class="at">    </span><span class="fu">toc_depth</span><span class="kw">:</span><span class="at"> </span><span class="dv">2</span></span>
-<span id="cb8-9"><a href="#cb8-9"></a><span class="pp">---</span></span></code></pre></div>
-<p>If the table of contents depth is not explicitly specified, it defaults to 3 (meaning that all level 1, 2, and 3 headers will be included in the table of contents).</p>
-<p>The table of contents will automatically float to the left when the article is displayed at more than 1000px wide. To always show the table of contents on top specify <code>toc_float: false</code>:</p>
-<div class="sourceCode" id="cb9"><pre class="sourceCode yaml"><code class="sourceCode yaml"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true"></a><span class="fu">output</span><span class="kw">:</span></span>
-<span id="cb9-2"><a href="#cb9-2" aria-hidden="true"></a><span class="at">  distill:</span><span class="fu">:distill_article</span><span class="kw">:</span></span>
-<span id="cb9-3"><a href="#cb9-3" aria-hidden="true"></a><span class="at">    </span><span class="fu">toc</span><span class="kw">:</span><span class="at"> </span><span class="ch">true</span></span>
-<span id="cb9-4"><a href="#cb9-4" aria-hidden="true"></a><span class="at">    </span><span class="fu">toc_float</span><span class="kw">:</span><span class="at"> </span><span class="ch">false</span></span></code></pre></div>
-<h2 id="code-blocks">Code blocks</h2>
-<p>By default the Distill format does not display the code for chunks that are evaluated to produce output (knitr option <code>echo = FALSE</code>).</p>
-<p>The <code>echo = FALSE</code> default reflects the fact that Distill articles are often used to present the results of analyses rather than the underlying code. To display the code that was evaluated to produce output you can set the <code>echo</code> chunk option to <code>TRUE</code>:</p>
-<pre class="clike"><code>```{r, echo=TRUE}
-1 + 1
-```</code></pre>
-<p>To include code that is only displayed and not evaluated specify the <code>eval=FALSE</code> option:</p>
-<pre class="clike"><code>```{r, eval=FALSE, echo=TRUE}
-1 + 1
-```</code></pre>
-<p>There are a number of default values that Distill establishes for knitr chunk options (these defaults also reflect the use case of presenting results/output rather than underlying code):</p>
-<table>
-<thead>
-<tr class="header">
-<th>Option</th>
-<th>Value</th>
-<th>Comment</th>
-</tr>
-</thead>
-<tbody>
-<tr class="odd">
-<td><code>echo</code></td>
-<td><code>FALSE</code></td>
-<td>Don’t print code by default.</td>
-</tr>
-<tr class="even">
-<td><code>warning</code></td>
-<td><code>FALSE</code></td>
-<td>Don’t print warnings by default.</td>
-</tr>
-<tr class="odd">
-<td><code>message</code></td>
-<td><code>FALSE</code></td>
-<td>Don’t print R messages by default.</td>
-</tr>
-<tr class="even">
-<td><code>comment</code></td>
-<td><code>NA</code></td>
-<td>Don’t preface R output with a comment.</td>
-</tr>
-<tr class="odd">
-<td><code>R.options</code></td>
-<td><code>list(width = 70)</code></td>
-<td>70 character wide console output.</td>
-</tr>
-</tbody>
-</table>
-<p>Keeping R code and output at 70 characters wide (or less) is recommended for readability on a variety of devices and screen sizes.</p>
-<p>As illustrated above, all of these defaults can be overridden on a chunk-by-chunk basis by specifying chunk options.</p>
-<p>You can also change the global defaults using a setup chunk. For example:</p>
-<pre class="clike"><code>```{r setup, include=FALSE}
-knitr::opts_chunk$set(
-  echo = TRUE,
-  warning = TRUE,
-  message = TRUE,
-  comment = &quot;##&quot;,
-  R.options = list(width = 60)
-)
-```</code></pre>
-<h2 id="syntax-highlighting">Syntax highlighting</h2>
-<p>Syntax highlighting for R code is done using the <a href="https://downlit.r-lib.org">downlit</a> package, which provides automatic linking of R functions to their online documentation. By default, highlighting is done using colors <a href="https://github.com/ericwbailey/a11y-syntax-highlighting">optimized for accessibility</a>.</p>
-<p>You can customize highlighting behavior using the <code>highlight</code> and <code>highlight_downlit</code> options. For example, to use the Pandoc “haddock” highlighting theme and disable the use of downlit, you would do this:</p>
-<<<<<<< HEAD
-<div class="sourceCode" id="cb12"><pre class="sourceCode yaml"><code class="sourceCode yaml"><span id="cb12-1"><a href="#cb12-1"></a><span class="pp">---</span></span>
-<span id="cb12-2"><a href="#cb12-2"></a><span class="fu">title</span><span class="kw">:</span><span class="at"> </span><span class="st">&quot;Distill for R Markdown&quot;</span></span>
-<span id="cb12-3"><a href="#cb12-3"></a><span class="fu">description</span><span class="kw">: </span><span class="ch">|</span><span class="at"> </span></span>
-<span id="cb12-4"><a href="#cb12-4"></a>  Scientific and technical writing, native to the web</span>
-<span id="cb12-5"><a href="#cb12-5"></a><span class="fu">output</span><span class="kw">:</span></span>
-<span id="cb12-6"><a href="#cb12-6"></a><span class="at">  distill:</span><span class="fu">:distill_article</span><span class="kw">:</span></span>
-<span id="cb12-7"><a href="#cb12-7"></a><span class="at">    </span><span class="fu">highlight</span><span class="kw">:</span><span class="at"> haddock</span></span>
-<span id="cb12-8"><a href="#cb12-8"></a><span class="at">    </span><span class="fu">highlight_downlit</span><span class="kw">:</span><span class="at"> </span><span class="ch">false</span></span>
-<span id="cb12-9"><a href="#cb12-9"></a><span class="pp">---</span></span></code></pre></div>
-=======
-<div class="sourceCode" id="cb13"><pre class="sourceCode yaml"><code class="sourceCode yaml"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true"></a><span class="pp">---</span></span>
-<span id="cb13-2"><a href="#cb13-2" aria-hidden="true"></a><span class="fu">title</span><span class="kw">:</span><span class="at"> </span><span class="st">&quot;Distill for R Markdown&quot;</span></span>
-<span id="cb13-3"><a href="#cb13-3" aria-hidden="true"></a><span class="fu">description</span><span class="kw">: </span><span class="ch">|</span><span class="at"> </span></span>
-<span id="cb13-4"><a href="#cb13-4" aria-hidden="true"></a>  Scientific and technical writing, native to the web</span>
-<span id="cb13-5"><a href="#cb13-5" aria-hidden="true"></a><span class="fu">output</span><span class="kw">:</span></span>
-<span id="cb13-6"><a href="#cb13-6" aria-hidden="true"></a><span class="at">  distill:</span><span class="fu">:distill_article</span><span class="kw">:</span></span>
-<span id="cb13-7"><a href="#cb13-7" aria-hidden="true"></a><span class="at">    </span><span class="fu">highlight</span><span class="kw">:</span><span class="at"> haddock</span></span>
-<span id="cb13-8"><a href="#cb13-8" aria-hidden="true"></a><span class="at">    </span><span class="fu">highlight_downlit</span><span class="kw">:</span><span class="at"> </span><span class="ch">false</span></span>
-<span id="cb13-9"><a href="#cb13-9" aria-hidden="true"></a><span class="pp">---</span></span></code></pre></div>
->>>>>>> 6999f43d6b2df504d0ff8ffdf497e200bf7844f5
-<p>Available options for <code>highlight</code> include:</p>
-<table>
-<thead>
-<tr class="header">
-<th>Option(s)</th>
-<th>Description</th>
-</tr>
-</thead>
-<tbody>
-<tr class="odd">
-<td><code>default</code></td>
-<td>Default (accessible) theme</td>
-</tr>
-<tr class="even">
-<td><code>rstudio</code></td>
-<td>RStudio editor theme</td>
-</tr>
-<tr class="odd">
-<td><code>haddock</code>, <code>kate</code>, <code>monochrome</code>, <code>pygments</code>, <code>tango</code></td>
-<td>Pandoc highlighting <a href="https://www.garrickadenbuie.com/blog/pandoc-syntax-highlighting-examples/">themes</a>.</td>
-</tr>
-<tr class="even">
-<td>Path to <code>.theme</code> file</td>
-<td>Custom Pandoc <a href="https://pandoc.org/MANUAL.html#syntax-highlighting">theme file</a>.</td>
-</tr>
-</tbody>
-</table>
-<h2 id="appendices">Appendices</h2>
-<p>Appendices can be added after your article by adding the <code>.appendix</code> class to any level 1 or level 2 header. For example:</p>
-<<<<<<< HEAD
-<div class="sourceCode" id="cb13"><pre class="sourceCode html"><code class="sourceCode html"><span id="cb13-1"><a href="#cb13-1"></a>## Acknowledgments {.appendix}</span>
-<span id="cb13-2"><a href="#cb13-2"></a></span>
-<span id="cb13-3"><a href="#cb13-3"></a>This is a place to recognize people and institutions. It may also be a good place</span>
-<span id="cb13-4"><a href="#cb13-4"></a>to acknowledge and cite software that makes your work possible.</span>
-<span id="cb13-5"><a href="#cb13-5"></a></span>
-<span id="cb13-6"><a href="#cb13-6"></a>## Author Contributions {.appendix}</span>
-<span id="cb13-7"><a href="#cb13-7"></a></span>
-<span id="cb13-8"><a href="#cb13-8"></a>We strongly encourage you to include an author contributions statement briefly </span>
-<span id="cb13-9"><a href="#cb13-9"></a>describing what each author did.</span></code></pre></div>
-=======
-<div class="sourceCode" id="cb14"><pre class="sourceCode html"><code class="sourceCode html"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true"></a>## Acknowledgments {.appendix}</span>
-<span id="cb14-2"><a href="#cb14-2" aria-hidden="true"></a></span>
-<span id="cb14-3"><a href="#cb14-3" aria-hidden="true"></a>This is a place to recognize people and institutions. It may also be a good place</span>
-<span id="cb14-4"><a href="#cb14-4" aria-hidden="true"></a>to acknowledge and cite software that makes your work possible.</span>
-<span id="cb14-5"><a href="#cb14-5" aria-hidden="true"></a></span>
-<span id="cb14-6"><a href="#cb14-6" aria-hidden="true"></a>## Author Contributions {.appendix}</span>
-<span id="cb14-7"><a href="#cb14-7" aria-hidden="true"></a></span>
-<span id="cb14-8"><a href="#cb14-8" aria-hidden="true"></a>We strongly encourage you to include an author contributions statement briefly </span>
-<span id="cb14-9"><a href="#cb14-9" aria-hidden="true"></a>describing what each author did.</span></code></pre></div>
->>>>>>> 6999f43d6b2df504d0ff8ffdf497e200bf7844f5
-<p>Footnotes and references will be included in the same section, immediately beneath any custom appendices.</p>
-<h2 class="appendix" id="acknowledgments">Acknowledgments</h2>
-<p>Distill for R Markdown builds on the work of many individuals and projects. <a href="https://github.com/shancarter">Shan Carter</a>, <a href="https://github.com/ludwigschubert">Ludwig Schubert</a>, and <a href="https://github.com/colah">Christopher Olah</a> created the Distill web framework. <a href="https://github.com/jgm">John MacFarlane</a> created the Pandoc universal markup converter. <a href="https://github.com/dpvc">Davide Cervone</a> and <a href="https://github.com/zorkow">Volker Sorge</a> created the MathJax library for rendering mathematical notation on the web. <a href="https://github.com/mbostock">Mike Bostock</a> created the D3 library for producing dynamic, interactive data visualizations for the web. We are grateful for the spirit of generosity that moved these individuals to create high-quality open source software for the benefit of all.</p>
-<div class="sourceCode" id="cb15"><pre class="sourceCode r distill-force-highlighting-css"><code class="sourceCode r"></code></pre></div>
-<div class="sourceCode" id="cb16"><pre class="sourceCode r distill-force-highlighting-css"><code class="sourceCode r"></code></pre></div>
-<div id="refs" class="references hanging-indent" role="doc-bibliography">
-<div id="ref-xie2015">
-<p>Xie, Yihui. 2015. <em>Dynamic Documents with R and Knitr</em>. 2nd ed. Boca Raton, Florida: Chapman; Hall/CRC. <a href="http://yihui.name/knitr/">http://yihui.name/knitr/</a>.</p>
-</div>
-</div>
-<section class="footnotes" role="doc-endnotes">
-<hr />
-<ol>
-<li id="fn1" role="doc-endnote"><p>This will become a hover-able footnote<a href="#fnref1" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
-</ol>
-</section>
+<h2 id="distill-v0.8-cran">distill v0.8 (CRAN)</h2>
+<ul>
+<li>Generate RSS category feeds using rss/categories in site config</li>
+<li>Support rendering full RSS content when rss/full_content is TRUE in site config</li>
+<li>Ability to add custom HTML to top of sidebar.</li>
+<li>Provide aria attributes on toolbar icons</li>
+<li>Add “volume,” “issue,” “issn,” and “publisher” fields for journal article BibTeX entries when those are provided in YAML.</li>
+<li>Provide alt text for logo image in navigation bar.</li>
+<li>Add support some missing Google Scholar meta tags such as <code>citation_conference_title</code>, <code>citation_isbn</code>, <code>citation_firstpage</code>, <code>citation_lastpage</code>, <code>citation_dissertation_institution</code>, <code>citation_technical_report_institution</code>, and <code>citation_technical_report_number</code> and their corresponding bibliography entries.</li>
+</ul>
+<h2 id="distill-v0.7-cran">distill v0.7 (CRAN)</h2>
+<ul>
+<li>Update to latest version of Distill template from <a href="https://github.com/distillpub/template" class="uri">https://github.com/distillpub/template</a></li>
+</ul>
+<h2 id="radix-v0.6-cran">radix v0.6 (CRAN)</h2>
+<ul>
+<li>Custom listing pages (e.g. gallery of featured posts)</li>
+<li>Support for bookdown-style figure cross-references (e.g. <code>\@ref{fig:plot1}</code>)</li>
+<li>Allow use of markdown within footnotes</li>
+<li>Support for text headers within website navigation menus</li>
+<li>Fix issue with RStudio version check (check was failing with 4-digit patch version)</li>
+<li>Recover gracefully from invalid posts.json file (e.g. due to git merge)</li>
+<li>Syntax highlighting for unknown languages (now they are mapped to “clike”, previously they were removed entirely)</li>
+<li>Correctly render favicon for articles in collections</li>
+<li>Provide option to show Disqus comments by default</li>
+<li>Fix issue with relative references to bibliographies from posts</li>
+<li>Fix intermediates_dir error that occurred when rendering from source on RStudio Connect</li>
+<li>Enable <code>import_post()</code> to work with file paths as well as URLs</li>
+<li>Set standard plot width to 6.5 inches (was 6.0, new width closer to golden ratio)</li>
+<li>Don’t force plots in standard l-body layout to a width of 100%</li>
+<li>Forward <code>check_license</code> from <code>import_post()</code> to <code>import_article()</code></li>
+<li>Normalize authors specified as plain strings to list form</li>
+<li>Use standard figure caption CSS treatment for table captions</li>
+<li>Provide default title (“Untitled”) for articles that lack one</li>
+<li>Scroll horizontal overflow from code blocks on mobile devices</li>
+<li>Fix problem with mailto links within blog posts</li>
+<li>Render welcome post in New Radix Blog RStudio template</li>
+</ul>
+<h2 id="radix-v0.5">radix v0.5</h2>
+<ul>
+<li>Initial CRAN release</li>
+</ul>
+<div class="sourceCode" id="cb1"><pre class="sourceCode r distill-force-highlighting-css"><code class="sourceCode r"></code></pre></div>
+<div class="sourceCode" id="cb2"><pre class="sourceCode r distill-force-highlighting-css"><code class="sourceCode r"></code></pre></div>
 <!--radix_placeholder_article_footer-->
 <!--/radix_placeholder_article_footer-->
 </div>
@@ -2237,22 +1957,11 @@ knitr::opts_chunk$set(
 <div class="d-appendix">
 </div>
 
-<!-- dynamically load mathjax for compatibility with self-contained -->
-<script>
-  (function () {
-    var script = document.createElement("script");
-    script.type = "text/javascript";
-    script.src  = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML";
-    document.getElementsByTagName("head")[0].appendChild(script);
-  })();
-</script>
 
 <!--radix_placeholder_site_after_body-->
 <!--/radix_placeholder_site_after_body-->
 <!--radix_placeholder_appendices-->
 <div class="appendix-bottom">
-<h3 id="references">References</h3>
-<div id="references-listing"></div>
 <h3 id="updates-and-corrections">Corrections</h3>
 <p>If you see mistakes or want to suggest changes, please <a href="https://github.com/rstudio/distill/issues/new">create an issue</a> on the source repository.</p>
 <h3 id="reuse">Reuse</h3>

@@ -1,0 +1,81 @@
+
+/* base style */
+
+/*-- TITLE --*/
+d-title h1 {
+  font-size: var(--title-size);
+  color: var(--title-color);
+}
+
+/*-- HEADERS --*/
+/* only text outside of <p> tags */
+d-article:not(p) {
+  color: var(--header-color);
+}
+
+/*-- BODY --*/
+/* only text inside of <p> tags */
+d-article > p {
+  color: var(--body-color);
+  font-size: var(--body-size);
+}
+
+/*-- CODE --*/
+d-article div.sourceCode code,
+d-article pre code {
+	font-size: var(--code-size);
+}
+
+/*-- METADATA --*/
+d-byline h3 {
+	font-size: var(--byline-h3-size);
+	color: var(--byline-h3-color);
+}
+
+d-byline {
+	font-size: var(--byline-size);
+	color: var(--byline-color);
+}
+
+d-byline a,
+d-article d-byline a {
+	color: var(--byline-color);
+}
+
+/*-- TABLE OF CONTENTS --*/
+.d-contents nav h3 {
+	font-size: var(--toc-h3-size);
+	color: var(--toc-h3-color);
+}
+
+.d-contents nav a {
+	font-size: var(--toc-size);
+}
+
+/*-- APPENDIX --*/
+d-appendix h3 {
+  font-size: var(--appx-h3-size);
+	color: var(--appx-h3-color);
+}
+
+d-appendix {
+  font-size: var(--appx-size);
+	color: var(--appx-color);
+}
+
+d-footnote-list a.footnote-backlink {
+	color: var(--appx-color);
+}
+
+/*-- ASIDE --*/
+d-article aside {
+	font-size: var(--aside-size);
+	color: var(--aside-color);
+}
+
+/*-- FIGURE CAPTIONS --*/
+figure .caption,
+figure figcaption {
+	font-size: var(--fig-cap-size);
+	color: var(--fig-cap-color);
+}

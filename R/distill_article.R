@@ -10,6 +10,9 @@
 #'
 #' @inheritParams rmarkdown::html_document
 #'
+#' @param toc_float Float the table of contents to the left when the article
+#'   is displayed at widths > 1000px. If set to `FALSE` or the width is less
+#'   than 1000px the table of contents will be placed above the article body.
 #' @param smart Produce typographically correct output, converting straight
 #'   quotes to curly quotes, `---` to em-dashes, `--` to en-dashes, and
 #'   `...` to ellipses.
@@ -19,6 +22,7 @@
 #'   highlighting.
 #' @param highlight_downlit Use the \pkg{downlit} package to highlight
 #'   R code (including providing hyperlinks to function documentation).
+#' @param theme CSS file with theme variable definitions
 #'
 #' @import rmarkdown
 #' @import htmltools
@@ -27,6 +31,7 @@
 #' @export
 distill_article <- function(toc = FALSE,
                           toc_depth = 3,
+                          toc_float = TRUE,
                           fig_width = 6.5,
                           fig_height = 4,
                           fig_retina = 2,
@@ -38,6 +43,7 @@ distill_article <- function(toc = FALSE,
                           highlight_downlit = TRUE,
                           mathjax = "default",
                           extra_dependencies = NULL,
+                          theme = NULL,
                           css = NULL,
                           includes = NULL,
                           keep_md = FALSE,
@@ -54,6 +60,11 @@ distill_article <- function(toc = FALSE,
 
   # table of contents
   args <- c(args, pandoc_toc_args(toc, toc_depth))
+
+  # toc_float
+  if (toc_float) {
+    args <- c(args, pandoc_variable_arg("toc-float", "1"))
+  }
 
   # add highlighting
   args <- c(args, distill_highlighting_args(highlight))
@@ -190,13 +201,18 @@ distill_article <- function(toc = FALSE,
     # add site related dependencies
     ensure_site_dependencies(site_config, dirname(input_file))
 
+    # derive theme from article or site
+    if (is.null(theme) && !is.null(site_config$theme)) {
+      theme <- site_config$theme
+    }
+
     # header includes: distill then user
     in_header <- c(metadata_in_header(site_config, metadata, self_contained),
                    citation_references_in_header(input_file, metadata$bibliography),
                    metadata_json,
                    manifest_in_header(site_config, input_file, metadata, self_contained),
                    navigation_in_header_file(site_config),
-                   distill_in_header_file())
+                   distill_in_header_file(theme))
 
     # before body includes: distill then user
     before_body <- c(front_matter_before_body(metadata),
@@ -377,20 +393,32 @@ validate_pandoc_version <- function() {
 }
 
 
-distill_in_header <- function() {
-  doRenderTags(distill_in_header_html())
+distill_in_header <- function(theme = NULL) {
+  doRenderTags(distill_in_header_html(theme))
 }
 
-distill_in_header_file <- function() {
-  html_file(distill_in_header_html())
+distill_in_header_file <- function(theme = NULL) {
+  html_file(distill_in_header_html(theme))
 }
 
-distill_in_header_html <- function() {
+distill_in_header_html <- function(theme = NULL) {
   distill_html <- html_from_file(
     system.file("rmarkdown/templates/distill_article/resources/distill.html",
                 package = "distill")
   )
-  placeholder_html("distill", distill_html)
+  if (!is.null(theme)) {
+    css <- paste(c(
+      "",
+      xfun::read_utf8(distill_resource("base-variables.css")),
+      xfun::read_utf8(theme),
+      xfun::read_utf8(distill_resource("base-style.css")),
+      ""
+    ), collapse = "\n")
+    theme_html <- tags$style(type = "text/css", css)
+  } else {
+    theme_html <- NULL
+  }
+  placeholder_html("distill", distill_html, theme_html)
 }
 
 

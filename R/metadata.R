@@ -210,9 +210,11 @@ transform_metadata <- function(file, site_config, collection_config, metadata, a
 
     # slug
     if (is.null(metadata$slug) && !is.null(metadata$date)) {
-      metadata$slug <- paste0(tolower(metadata$author[[1]]$last_name),
-                              metadata$published_year,
-                              tolower(strsplit(metadata$title, ' ')[[1]][[1]]))
+      metadata$slug <- paste0(
+        tolower(gsub(" ", "", metadata$author[[1]]$last_name, fixed = TRUE)),
+        metadata$published_year,
+        tolower(strsplit(metadata$title, ' ')[[1]][[1]])
+      )
     }
   }
 
@@ -828,9 +830,14 @@ merge_metadata <- function(site_config, collection_config, metadata, fields) {
 
 authors_with_first_and_last_names <- function(authors) {
   lapply(authors, function(author) {
-    names <- strsplit(author$name, '\\s+')[[1]]
-    author$first_name <- paste(utils::head(names, -1), collapse = " ")
-    author$last_name <- utils::tail(names, 1)
+    if (is.null(author$name)) {
+      author$name <- trimws(paste(not_null(author$first_name),
+                                  not_null(author$last_name)))
+    } else {
+      names <- strsplit(author$name, '\\s+')[[1]]
+      author$first_name <- paste(utils::head(names, -1), collapse = " ")
+      author$last_name <- utils::tail(names, 1)
+    }
     author
   })
 }

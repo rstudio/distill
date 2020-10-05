@@ -10,9 +10,13 @@
 
 -   Use the [downlit](https://downlit.r-lib.org/) package to syntax highlight R code chunks (controlled by the `highlight_downlit` option, which is enabled by default).
 
+-   More straightforward theming using the `theme` option (available for both articles and sites) and the `create_theme()` function.
+
 -   Provide heading anchor links in left margin on hover.
 
 -   Display article table of contents in the left sidebar. This is done only when the browser \>= 1000 pixels wide, otherwise it's shown at the top.
+
+-   Added `create_article()` function for straightforward creation of new articles.
 
 -   Show author (below date) within article listings.
 
@@ -21,6 +25,10 @@
 -   Don't apply table td/th bottom border styles to gt tables.
 
 -   Support for `orcid_id` author metadata (displays next to author name).
+
+-   Added `rename_post_dir()` function for renaming post directories to reflect updated titles and publishing dates.
+
+-   Ensure that date fields in RSS feeds and sitemaps use `en_US.UTF-8` locale.
 
 ## distill v0.8 (CRAN)
 

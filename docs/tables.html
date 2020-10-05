@@ -449,6 +449,270 @@ code span.wa { color: #008000; font-weight: bold; } /* Warning */
   <link href="site_libs/font-awesome-5.1.0/css/all.css" rel="stylesheet"/>
   <link href="site_libs/font-awesome-5.1.0/css/v4-shims.css" rel="stylesheet"/>
   <script src="site_libs/headroom-0.9.4/headroom.min.js"></script>
+<<<<<<< HEAD
+=======
+  <script src="site_libs/autocomplete-0.37.1/autocomplete.min.js"></script>
+  <script src="site_libs/fuse-6.4.1/fuse.min.js"></script>
+
+  <script type="application/javascript">
+
+  function getMeta(metaName) {
+    var metas = document.getElementsByTagName('meta');
+    for (let i = 0; i < metas.length; i++) {
+      if (metas[i].getAttribute('name') === metaName) {
+        return metas[i].getAttribute('content');
+      }
+    }
+    return '';
+  }
+
+  function offsetURL(url) {
+    var offset = getMeta('distill:offset');
+    return offset ? offset + '/' + url : url;
+  }
+
+  function createIndex() {
+    var options = {
+      keys: [
+        "title",
+        "categories",
+        "description",
+        "contents"
+      ]
+    };
+    return new window.Fuse([],options);
+  }
+
+  function createFuseIndex() {
+
+    // create fuse index
+    var options = { keys: ["title", "description", "contents"] };
+    var fuse = new window.Fuse([], options);
+
+    // fetch the main search.json
+    return fetch(offsetURL('search.json'))
+      .then(function(response) {
+        if (response.status == 200) {
+          return response.json().then(function(json) {
+            // index main articles
+            json.articles.forEach(function(article) {
+              fuse.add(article);
+            });
+            // download collections and index their articles
+            return Promise.all(json.collections.map(function(collection) {
+              return fetch(offsetURL(collection)).then(function(response) {
+                if (response.status === 200) {
+                  return response.json().then(function(articles) {
+                    articles.forEach(function(article) {
+                      fuse.add(article);
+                    });
+                  })
+                } else {
+                  return Promise.reject(
+                    new Error('Unexpected status from search index request: ' +
+                              response.status)
+                  );
+                }
+              });
+            })).then(function() {
+              return fuse;
+            });
+          });
+
+        } else {
+          return Promise.reject(
+            new Error('Unexpected status from search index request: ' +
+                        response.status)
+          );
+        }
+      });
+  }
+
+  window.document.addEventListener("DOMContentLoaded", function (event) {
+
+    // get search element (bail if we don't have one)
+    var searchEl = window.document.getElementById('distill-search');
+    if (!searchEl)
+      return;
+
+    createFuseIndex()
+      .then(function(fuse) {
+
+        // make search box visible
+        searchEl.classList.remove('hidden');
+
+        // initialize autocomplete
+        var options = {
+          autoselect: true,
+          hint: false,
+          minLength: 2,
+        };
+        window.autocomplete(searchEl, options, [{
+          source: function(query, callback) {
+            const searchOptions = {
+              isCaseSensitive: false,
+              shouldSort: true,
+              minMatchCharLength: 2,
+              limit: 10,
+              keys: [
+                { name: 'title', weight: 20 },
+                { name: 'categories', weight: 15 },
+                { name: 'description', weight: 10 },
+                { name: 'contents', weight: 5 },
+              ],
+            };
+            var results = fuse.search(query, searchOptions);
+            callback(results
+              .map(function(result) { return result.item; })
+              .filter(function(item) { return !!item.description; })
+            );
+          },
+          templates: {
+            suggestion: function(suggestion) {
+              var html = `
+                <div class="search-item">
+                  <h3>${suggestion.title}</h3>
+                  <div class="search-item-description">
+                    ${suggestion.description}
+                  </div>
+                  <div class="search-item-preview">
+                    <img src="${suggestion.preview ? offsetURL(suggestion.preview) : ''}"</img>
+                  </div>
+                </div>
+              `;
+              return html;
+            }
+          }
+        }]).on('autocomplete:selected', function(event, suggestion) {
+          window.location.href = offsetURL(suggestion.path);
+        });
+        // remove inline display style on autocompleter (we want to
+        // manage responsive display via css)
+        $('.algolia-autocomplete').css("display", "");
+      })
+      .catch(function(error) {
+        console.log(error);
+      });
+
+  });
+
+  </script>
+
+  <style type="text/css">
+
+  /* Algolioa Autocomplete */
+
+  .algolia-autocomplete {
+    display: inline-block;
+    margin-left: 10px;
+    vertical-align: sub;
+    background-color: white;
+    color: black;
+    padding: 6px;
+    padding-top: 8px;
+    padding-bottom: 0;
+    border-radius: 6px;
+    border: 1px #0F2E3D solid;
+    width: 180px;
+  }
+
+
+  @media screen and (max-width: 768px) {
+    .distill-site-nav .algolia-autocomplete {
+      display: none;
+      visibility: hidden;
+    }
+    .distill-site-nav.responsive .algolia-autocomplete {
+      display: inline-block;
+      visibility: visible;
+    }
+    .distill-site-nav.responsive .algolia-autocomplete .aa-dropdown-menu {
+      margin-left: 0;
+      width: 400px;
+      max-height: 400px;
+    }
+  }
+
+  .algolia-autocomplete .aa-input, .algolia-autocomplete .aa-hint {
+    width: 90%;
+    outline: none;
+    border: none;
+  }
+
+  .algolia-autocomplete .aa-hint {
+    color: #999;
+  }
+  .algolia-autocomplete .aa-dropdown-menu {
+    width: 550px;
+    max-height: 70vh;
+    overflow-x: visible;
+    overflow-y: scroll;
+    padding: 5px;
+    margin-top: 3px;
+    margin-left: -150px;
+    background-color: #fff;
+    border-radius: 5px;
+    border: 1px solid #999;
+    border-top: none;
+  }
+
+  .algolia-autocomplete .aa-dropdown-menu .aa-suggestion {
+    cursor: pointer;
+    padding: 5px 4px;
+    border-bottom: 1px solid #eee;
+  }
+
+  .algolia-autocomplete .aa-dropdown-menu .aa-suggestion:last-of-type {
+    border-bottom: none;
+    margin-bottom: 2px;
+  }
+
+  .algolia-autocomplete .aa-dropdown-menu .aa-suggestion .search-item {
+    overflow: hidden;
+    font-size: 0.8em;
+    line-height: 1.4em;
+  }
+
+  .algolia-autocomplete .aa-dropdown-menu .aa-suggestion .search-item h3 {
+    margin-block-start: 0;
+    margin-block-end: 5px;
+  }
+
+  .algolia-autocomplete .aa-dropdown-menu .aa-suggestion .search-item-description {
+    display: inline-block;
+    overflow: hidden;
+    height: 2.8em;
+    width: 80%;
+    margin-right: 4%;
+  }
+
+  .algolia-autocomplete .aa-dropdown-menu .aa-suggestion .search-item-preview {
+    display: inline-block;
+    width: 15%;
+  }
+
+  .algolia-autocomplete .aa-dropdown-menu .aa-suggestion .search-item-preview img {
+    height: 3em;
+    width: auto;
+    display: none;
+  }
+
+  .algolia-autocomplete .aa-dropdown-menu .aa-suggestion .search-item-preview img[src] {
+    display: initial;
+  }
+
+  .algolia-autocomplete .aa-dropdown-menu .aa-suggestion.aa-cursor {
+    background-color: #eee;
+  }
+  .algolia-autocomplete .aa-dropdown-menu .aa-suggestion em {
+    font-weight: bold;
+    font-style: normal;
+  }
+
+  </style>
+
+
+>>>>>>> 6999f43d6b2df504d0ff8ffdf497e200bf7844f5
   <!--/radix_placeholder_navigation_in_header-->
   <!--radix_placeholder_distill-->
 
@@ -668,7 +932,7 @@ code span.wa { color: #008000; font-weight: bold; } /* Warning */
   }
 
   @media(min-width: 1000px) {
-    .d-contents {
+    .d-contents.d-contents-float {
       height: 0;
       grid-column-start: 1;
       grid-column-end: 4;
@@ -855,6 +1119,78 @@ code span.wa { color: #008000; font-weight: bold; } /* Warning */
     white-space: pre-wrap;
     word-wrap: break-word;
   }
+
+  /* Include appendix styles here so they can be overridden */
+
+  d-appendix {
+    contain: layout style;
+    font-size: 0.8em;
+    line-height: 1.7em;
+    margin-top: 60px;
+    margin-bottom: 0;
+    border-top: 1px solid rgba(0, 0, 0, 0.1);
+    color: rgba(0,0,0,0.5);
+    padding-top: 60px;
+    padding-bottom: 48px;
+  }
+
+  d-appendix h3 {
+    grid-column: page-start / text-start;
+    font-size: 15px;
+    font-weight: 500;
+    margin-top: 1em;
+    margin-bottom: 0;
+    color: rgba(0,0,0,0.65);
+  }
+
+  d-appendix h3 + * {
+    margin-top: 1em;
+  }
+
+  d-appendix ol {
+    padding: 0 0 0 15px;
+  }
+
+  @media (min-width: 768px) {
+    d-appendix ol {
+      padding: 0 0 0 30px;
+      margin-left: -30px;
+    }
+  }
+
+  d-appendix li {
+    margin-bottom: 1em;
+  }
+
+  d-appendix a {
+    color: rgba(0, 0, 0, 0.6);
+  }
+
+  d-appendix > * {
+    grid-column: text;
+  }
+
+  d-appendix > d-footnote-list,
+  d-appendix > d-citation-list,
+  d-appendix > distill-appendix {
+    grid-column: screen;
+  }
+
+  /* Include footnote styles here so they can be overridden */
+
+  d-footnote-list {
+    contain: layout style;
+  }
+
+  d-footnote-list > * {
+    grid-column: text;
+  }
+
+  d-footnote-list a.footnote-backlink {
+    color: rgba(0,0,0,0.3);
+    padding-left: 0.5em;
+  }
+
 
 
   /* Anchor.js */
@@ -1272,6 +1608,10 @@ code span.wa { color: #008000; font-weight: bold; } /* Warning */
         grid.children('h3:contains("Affiliations")').text('Affiliation');
       }
 
+      // remove d-appendix and d-footnote-list local styles
+      $('d-appendix > style:first-child').remove();
+      $('d-footnote-list > style:first-child').remove();
+
       // move appendix-bottom entries to the bottom
       $('.appendix-bottom').appendTo('d-appendix').children().unwrap();
       $('.appendix-bottom').remove();
@@ -1435,7 +1775,11 @@ code span.wa { color: #008000; font-weight: bold; } /* Warning */
   </script>
 
   <!--/radix_placeholder_distill-->
+<<<<<<< HEAD
   <script src="site_libs/header-attrs-2.3.9/header-attrs.js"></script>
+=======
+  <script src="site_libs/header-attrs-2.3/header-attrs.js"></script>
+>>>>>>> 6999f43d6b2df504d0ff8ffdf497e200bf7844f5
   <link href="site_libs/pagedtable-1.1/css/pagedtable.css" rel="stylesheet" />
   <script src="site_libs/pagedtable-1.1/js/pagedtable.js"></script>
   <script src="site_libs/jquery-1.11.3/jquery.min.js"></script>
@@ -1555,12 +1899,14 @@ Publishing
 
 
 <div class="d-article">
-<div class="d-contents">
+<div class="d-contents d-contents-float">
 <nav class="l-text toc figcaption" id="TOC">
 <h3>Contents</h3>
 <ul>
 <li><a href="#knitr-kable">Knitr kable</a></li>
 <li><a href="#paged-tables">Paged tables</a></li>
+<li><a href="#gtsummary-tables">gtsummary tables</a></li>
+<li><a href="#gt-tables">gt tables</a></li>
 <li><a href="#markdown-tables">Markdown tables</a></li>
 </ul>
 </nav>
@@ -1569,6 +1915,7 @@ Publishing
 <ul>
 <li><p>Using the <code>knitr::kable()</code> function to render a data frame as HTML.</p></li>
 <li><p>Using the <code>rmarkdown::paged_table()</code> function to create a page-able version of a data frame.</p></li>
+<li><p>Use the <a href="http://www.danieldsjoberg.com/gtsummary/">gtsummary</a> and <a href="https://gt.rstudio.com/">gt</a> packages to create to create publication-ready analytical and summary tables.</p></li>
 <li><p>Using standard <a href="https://pandoc.org/MANUAL.html#tables">markdown table syntax</a> to create a custom table.</p></li>
 </ul>
 <h2 id="knitr-kable">Knitr kable</h2>
@@ -1736,8 +2083,923 @@ paged_table(mtcars, options = list(rows.print = 15))
 </tr>
 </tbody>
 </table>
+<h2 id="gtsummary-tables">gtsummary tables</h2>
+<p>The <a href="http://www.danieldsjoberg.com/gtsummary/">gtsummary</a> package provides an elegant and flexible way to create publication-ready analytical and summary tables. The package summarizes data sets, regression models, and more, using sensible defaults with highly customizable capabilities. For example:</p>
+<pre class="clike"><code>```{r}
+library(gtsummary)
+library(survival)
+
+# build glm table
+mod1 &lt;- glm(response ~ trt + age + grade, trial, family = binomial)
+t1 &lt;- tbl_regression(mod1, exponentiate = TRUE)
+
+# build survival model table
+t2 &lt;-
+  coxph(Surv(ttdeath, death) ~ trt + grade + age, trial) %&gt;%
+  tbl_regression(exponentiate = TRUE)
+
+# merge tables 
+tbl_merge(
+  tbls = list(t1, t2),
+  tab_spanner = c(&quot;**Tumor Response**&quot;, &quot;**Time to Death**&quot;)
+)
+```</code></pre>
+<div class="layout-chunk" data-layout="l-body">
+<style>html {
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Helvetica Neue', 'Fira Sans', 'Droid Sans', Arial, sans-serif;
+}
+
+#wfpsyznlwv .gt_table {
+  display: table;
+  border-collapse: collapse;
+  margin-left: auto;
+  margin-right: auto;
+  color: #333333;
+  font-size: 16px;
+  font-weight: normal;
+  font-style: normal;
+  background-color: #FFFFFF;
+  width: auto;
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #A8A8A8;
+  border-right-style: none;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #A8A8A8;
+  border-left-style: none;
+  border-left-width: 2px;
+  border-left-color: #D3D3D3;
+}
+
+#wfpsyznlwv .gt_heading {
+  background-color: #FFFFFF;
+  text-align: center;
+  border-bottom-color: #FFFFFF;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+}
+
+#wfpsyznlwv .gt_title {
+  color: #333333;
+  font-size: 125%;
+  font-weight: initial;
+  padding-top: 4px;
+  padding-bottom: 4px;
+  border-bottom-color: #FFFFFF;
+  border-bottom-width: 0;
+}
+
+#wfpsyznlwv .gt_subtitle {
+  color: #333333;
+  font-size: 85%;
+  font-weight: initial;
+  padding-top: 0;
+  padding-bottom: 4px;
+  border-top-color: #FFFFFF;
+  border-top-width: 0;
+}
+
+#wfpsyznlwv .gt_bottom_border {
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+}
+
+#wfpsyznlwv .gt_col_headings {
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+}
+
+#wfpsyznlwv .gt_col_heading {
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: normal;
+  text-transform: inherit;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+  vertical-align: bottom;
+  padding-top: 5px;
+  padding-bottom: 6px;
+  padding-left: 5px;
+  padding-right: 5px;
+  overflow-x: hidden;
+}
+
+#wfpsyznlwv .gt_column_spanner_outer {
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: normal;
+  text-transform: inherit;
+  padding-top: 0;
+  padding-bottom: 0;
+  padding-left: 4px;
+  padding-right: 4px;
+}
+
+#wfpsyznlwv .gt_column_spanner_outer:first-child {
+  padding-left: 0;
+}
+
+#wfpsyznlwv .gt_column_spanner_outer:last-child {
+  padding-right: 0;
+}
+
+#wfpsyznlwv .gt_column_spanner {
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  vertical-align: bottom;
+  padding-top: 5px;
+  padding-bottom: 6px;
+  overflow-x: hidden;
+  display: inline-block;
+  width: 100%;
+}
+
+#wfpsyznlwv .gt_group_heading {
+  padding: 8px;
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: initial;
+  text-transform: inherit;
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+  vertical-align: middle;
+}
+
+#wfpsyznlwv .gt_empty_group_heading {
+  padding: 0.5px;
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: initial;
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  vertical-align: middle;
+}
+
+#wfpsyznlwv .gt_from_md > :first-child {
+  margin-top: 0;
+}
+
+#wfpsyznlwv .gt_from_md > :last-child {
+  margin-bottom: 0;
+}
+
+#wfpsyznlwv .gt_row {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  margin: 10px;
+  border-top-style: solid;
+  border-top-width: 1px;
+  border-top-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+  vertical-align: middle;
+  overflow-x: hidden;
+}
+
+#wfpsyznlwv .gt_stub {
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: initial;
+  text-transform: inherit;
+  border-right-style: solid;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+  padding-left: 12px;
+}
+
+#wfpsyznlwv .gt_summary_row {
+  color: #333333;
+  background-color: #FFFFFF;
+  text-transform: inherit;
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#wfpsyznlwv .gt_first_summary_row {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #D3D3D3;
+}
+
+#wfpsyznlwv .gt_grand_summary_row {
+  color: #333333;
+  background-color: #FFFFFF;
+  text-transform: inherit;
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#wfpsyznlwv .gt_first_grand_summary_row {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-top-style: double;
+  border-top-width: 6px;
+  border-top-color: #D3D3D3;
+}
+
+#wfpsyznlwv .gt_striped {
+  background-color: rgba(128, 128, 128, 0.05);
+}
+
+#wfpsyznlwv .gt_table_body {
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+}
+
+#wfpsyznlwv .gt_footnotes {
+  color: #333333;
+  background-color: #FFFFFF;
+  border-bottom-style: none;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 2px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+}
+
+#wfpsyznlwv .gt_footnote {
+  margin: 0px;
+  font-size: 90%;
+  padding: 4px;
+}
+
+#wfpsyznlwv .gt_sourcenotes {
+  color: #333333;
+  background-color: #FFFFFF;
+  border-bottom-style: none;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 2px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+}
+
+#wfpsyznlwv .gt_sourcenote {
+  font-size: 90%;
+  padding: 4px;
+}
+
+#wfpsyznlwv .gt_left {
+  text-align: left;
+}
+
+#wfpsyznlwv .gt_center {
+  text-align: center;
+}
+
+#wfpsyznlwv .gt_right {
+  text-align: right;
+  font-variant-numeric: tabular-nums;
+}
+
+#wfpsyznlwv .gt_font_normal {
+  font-weight: normal;
+}
+
+#wfpsyznlwv .gt_font_bold {
+  font-weight: bold;
+}
+
+#wfpsyznlwv .gt_font_italic {
+  font-style: italic;
+}
+
+#wfpsyznlwv .gt_super {
+  font-size: 65%;
+}
+
+#wfpsyznlwv .gt_footnote_marks {
+  font-style: italic;
+  font-size: 65%;
+}
+</style>
+<div id="wfpsyznlwv" style="overflow-x:auto;overflow-y:auto;width:auto;height:auto;"><table class="gt_table">
+  
+  <thead class="gt_col_headings">
+    <tr>
+      <th class="gt_col_heading gt_center gt_columns_bottom_border" rowspan="2" colspan="1"><strong>Characteristic</strong></th>
+      <th class="gt_center gt_columns_top_border gt_column_spanner_outer" rowspan="1" colspan="3">
+        <span class="gt_column_spanner"><strong>Tumor Response</strong></span>
+      </th>
+      <th class="gt_center gt_columns_top_border gt_column_spanner_outer" rowspan="1" colspan="3">
+        <span class="gt_column_spanner"><strong>Time to Death</strong></span>
+      </th>
+    </tr>
+    <tr>
+      <th class="gt_col_heading gt_columns_bottom_border gt_center" rowspan="1" colspan="1"><strong>OR</strong><sup class="gt_footnote_marks">1</sup></th>
+      <th class="gt_col_heading gt_columns_bottom_border gt_center" rowspan="1" colspan="1"><strong>95% CI</strong><sup class="gt_footnote_marks">1</sup></th>
+      <th class="gt_col_heading gt_columns_bottom_border gt_center" rowspan="1" colspan="1"><strong>p-value</strong></th>
+      <th class="gt_col_heading gt_columns_bottom_border gt_center" rowspan="1" colspan="1"><strong>HR</strong><sup class="gt_footnote_marks">1</sup></th>
+      <th class="gt_col_heading gt_columns_bottom_border gt_center" rowspan="1" colspan="1"><strong>95% CI</strong><sup class="gt_footnote_marks">1</sup></th>
+      <th class="gt_col_heading gt_columns_bottom_border gt_center" rowspan="1" colspan="1"><strong>p-value</strong></th>
+    </tr>
+  </thead>
+  <tbody class="gt_table_body">
+    <tr>
+      <td class="gt_row gt_left">Chemotherapy Treatment</td>
+      <td class="gt_row gt_center"></td>
+      <td class="gt_row gt_center"></td>
+      <td class="gt_row gt_center"></td>
+      <td class="gt_row gt_center"></td>
+      <td class="gt_row gt_center"></td>
+      <td class="gt_row gt_center"></td>
+    </tr>
+    <tr>
+      <td class="gt_row gt_left" style="text-align: left; text-indent: 10px;">Drug A</td>
+      <td class="gt_row gt_center">&mdash;</td>
+      <td class="gt_row gt_center">&mdash;</td>
+      <td class="gt_row gt_center"></td>
+      <td class="gt_row gt_center">&mdash;</td>
+      <td class="gt_row gt_center">&mdash;</td>
+      <td class="gt_row gt_center"></td>
+    </tr>
+    <tr>
+      <td class="gt_row gt_left" style="text-align: left; text-indent: 10px;">Drug B</td>
+      <td class="gt_row gt_center">1.13</td>
+      <td class="gt_row gt_center">0.60, 2.13</td>
+      <td class="gt_row gt_center">0.7</td>
+      <td class="gt_row gt_center">1.30</td>
+      <td class="gt_row gt_center">0.88, 1.92</td>
+      <td class="gt_row gt_center">0.2</td>
+    </tr>
+    <tr>
+      <td class="gt_row gt_left">Age</td>
+      <td class="gt_row gt_center">1.02</td>
+      <td class="gt_row gt_center">1.00, 1.04</td>
+      <td class="gt_row gt_center">0.10</td>
+      <td class="gt_row gt_center">1.01</td>
+      <td class="gt_row gt_center">0.99, 1.02</td>
+      <td class="gt_row gt_center">0.3</td>
+    </tr>
+    <tr>
+      <td class="gt_row gt_left">Grade</td>
+      <td class="gt_row gt_center"></td>
+      <td class="gt_row gt_center"></td>
+      <td class="gt_row gt_center"></td>
+      <td class="gt_row gt_center"></td>
+      <td class="gt_row gt_center"></td>
+      <td class="gt_row gt_center"></td>
+    </tr>
+    <tr>
+      <td class="gt_row gt_left" style="text-align: left; text-indent: 10px;">I</td>
+      <td class="gt_row gt_center">&mdash;</td>
+      <td class="gt_row gt_center">&mdash;</td>
+      <td class="gt_row gt_center"></td>
+      <td class="gt_row gt_center">&mdash;</td>
+      <td class="gt_row gt_center">&mdash;</td>
+      <td class="gt_row gt_center"></td>
+    </tr>
+    <tr>
+      <td class="gt_row gt_left" style="text-align: left; text-indent: 10px;">II</td>
+      <td class="gt_row gt_center">0.85</td>
+      <td class="gt_row gt_center">0.39, 1.85</td>
+      <td class="gt_row gt_center">0.7</td>
+      <td class="gt_row gt_center">1.21</td>
+      <td class="gt_row gt_center">0.73, 1.99</td>
+      <td class="gt_row gt_center">0.5</td>
+    </tr>
+    <tr>
+      <td class="gt_row gt_left" style="text-align: left; text-indent: 10px;">III</td>
+      <td class="gt_row gt_center">1.01</td>
+      <td class="gt_row gt_center">0.47, 2.15</td>
+      <td class="gt_row gt_center">>0.9</td>
+      <td class="gt_row gt_center">1.79</td>
+      <td class="gt_row gt_center">1.12, 2.86</td>
+      <td class="gt_row gt_center">0.014</td>
+    </tr>
+  </tbody>
+  
+  <tfoot>
+    <tr class="gt_footnotes">
+      <td colspan="7">
+        <p class="gt_footnote">
+          <sup class="gt_footnote_marks">
+            <em>1</em>
+          </sup>
+           
+          OR = Odds Ratio, CI = Confidence Interval, HR = Hazard Ratio
+          <br />
+        </p>
+      </td>
+    </tr>
+  </tfoot>
+</table></div>
+</div>
+<h2 id="gt-tables">gt tables</h2>
+<p>The <a href="http://www.danieldsjoberg.com/gtsummary/">gtsummary</a> package is built in top of the <a href="https://gt.rstudio.com/">gt</a> package, which provides a flexible foundation for creating just about any sort of table you can imagine. Here is a brief example of how to use <strong>gt</strong> to create a table from the included <code>sp500</code> dataset:</p>
+<pre class="clike"><code>```{r}
+library(gt)
+library(tidyverse)
+library(glue)
+
+# Define the start and end dates for the data range
+start_date &lt;- &quot;2010-06-07&quot;
+end_date &lt;- &quot;2010-06-14&quot;
+
+# Create a gt table based on preprocessed
+# `sp500` table data
+sp500 %&gt;%
+  dplyr::filter(date &gt;= start_date &amp; date &lt;= end_date) %&gt;%
+  dplyr::select(-adj_close) %&gt;%
+  gt() %&gt;%
+  tab_header(
+    title = &quot;S&amp;P 500&quot;,
+    subtitle = glue::glue(&quot;{start_date} to {end_date}&quot;)
+  ) %&gt;%
+  fmt_date(
+    columns = vars(date),
+    date_style = 3
+  ) %&gt;%
+  fmt_currency(
+    columns = vars(open, high, low, close),
+    currency = &quot;USD&quot;
+  ) %&gt;%
+  fmt_number(
+    columns = vars(volume),
+    suffixing = TRUE
+  )
+```</code></pre>
+<div class="layout-chunk" data-layout="l-body">
+<style>html {
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Helvetica Neue', 'Fira Sans', 'Droid Sans', Arial, sans-serif;
+}
+
+#fdwfbggwkx .gt_table {
+  display: table;
+  border-collapse: collapse;
+  margin-left: auto;
+  margin-right: auto;
+  color: #333333;
+  font-size: 16px;
+  font-weight: normal;
+  font-style: normal;
+  background-color: #FFFFFF;
+  width: auto;
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #A8A8A8;
+  border-right-style: none;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #A8A8A8;
+  border-left-style: none;
+  border-left-width: 2px;
+  border-left-color: #D3D3D3;
+}
+
+#fdwfbggwkx .gt_heading {
+  background-color: #FFFFFF;
+  text-align: center;
+  border-bottom-color: #FFFFFF;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+}
+
+#fdwfbggwkx .gt_title {
+  color: #333333;
+  font-size: 125%;
+  font-weight: initial;
+  padding-top: 4px;
+  padding-bottom: 4px;
+  border-bottom-color: #FFFFFF;
+  border-bottom-width: 0;
+}
+
+#fdwfbggwkx .gt_subtitle {
+  color: #333333;
+  font-size: 85%;
+  font-weight: initial;
+  padding-top: 0;
+  padding-bottom: 4px;
+  border-top-color: #FFFFFF;
+  border-top-width: 0;
+}
+
+#fdwfbggwkx .gt_bottom_border {
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+}
+
+#fdwfbggwkx .gt_col_headings {
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+}
+
+#fdwfbggwkx .gt_col_heading {
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: normal;
+  text-transform: inherit;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+  vertical-align: bottom;
+  padding-top: 5px;
+  padding-bottom: 6px;
+  padding-left: 5px;
+  padding-right: 5px;
+  overflow-x: hidden;
+}
+
+#fdwfbggwkx .gt_column_spanner_outer {
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: normal;
+  text-transform: inherit;
+  padding-top: 0;
+  padding-bottom: 0;
+  padding-left: 4px;
+  padding-right: 4px;
+}
+
+#fdwfbggwkx .gt_column_spanner_outer:first-child {
+  padding-left: 0;
+}
+
+#fdwfbggwkx .gt_column_spanner_outer:last-child {
+  padding-right: 0;
+}
+
+#fdwfbggwkx .gt_column_spanner {
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  vertical-align: bottom;
+  padding-top: 5px;
+  padding-bottom: 6px;
+  overflow-x: hidden;
+  display: inline-block;
+  width: 100%;
+}
+
+#fdwfbggwkx .gt_group_heading {
+  padding: 8px;
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: initial;
+  text-transform: inherit;
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+  vertical-align: middle;
+}
+
+#fdwfbggwkx .gt_empty_group_heading {
+  padding: 0.5px;
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: initial;
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  vertical-align: middle;
+}
+
+#fdwfbggwkx .gt_from_md > :first-child {
+  margin-top: 0;
+}
+
+#fdwfbggwkx .gt_from_md > :last-child {
+  margin-bottom: 0;
+}
+
+#fdwfbggwkx .gt_row {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  margin: 10px;
+  border-top-style: solid;
+  border-top-width: 1px;
+  border-top-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+  vertical-align: middle;
+  overflow-x: hidden;
+}
+
+#fdwfbggwkx .gt_stub {
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: initial;
+  text-transform: inherit;
+  border-right-style: solid;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+  padding-left: 12px;
+}
+
+#fdwfbggwkx .gt_summary_row {
+  color: #333333;
+  background-color: #FFFFFF;
+  text-transform: inherit;
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#fdwfbggwkx .gt_first_summary_row {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #D3D3D3;
+}
+
+#fdwfbggwkx .gt_grand_summary_row {
+  color: #333333;
+  background-color: #FFFFFF;
+  text-transform: inherit;
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#fdwfbggwkx .gt_first_grand_summary_row {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-top-style: double;
+  border-top-width: 6px;
+  border-top-color: #D3D3D3;
+}
+
+#fdwfbggwkx .gt_striped {
+  background-color: rgba(128, 128, 128, 0.05);
+}
+
+#fdwfbggwkx .gt_table_body {
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+}
+
+#fdwfbggwkx .gt_footnotes {
+  color: #333333;
+  background-color: #FFFFFF;
+  border-bottom-style: none;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 2px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+}
+
+#fdwfbggwkx .gt_footnote {
+  margin: 0px;
+  font-size: 90%;
+  padding: 4px;
+}
+
+#fdwfbggwkx .gt_sourcenotes {
+  color: #333333;
+  background-color: #FFFFFF;
+  border-bottom-style: none;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 2px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+}
+
+#fdwfbggwkx .gt_sourcenote {
+  font-size: 90%;
+  padding: 4px;
+}
+
+#fdwfbggwkx .gt_left {
+  text-align: left;
+}
+
+#fdwfbggwkx .gt_center {
+  text-align: center;
+}
+
+#fdwfbggwkx .gt_right {
+  text-align: right;
+  font-variant-numeric: tabular-nums;
+}
+
+#fdwfbggwkx .gt_font_normal {
+  font-weight: normal;
+}
+
+#fdwfbggwkx .gt_font_bold {
+  font-weight: bold;
+}
+
+#fdwfbggwkx .gt_font_italic {
+  font-style: italic;
+}
+
+#fdwfbggwkx .gt_super {
+  font-size: 65%;
+}
+
+#fdwfbggwkx .gt_footnote_marks {
+  font-style: italic;
+  font-size: 65%;
+}
+</style>
+<div id="fdwfbggwkx" style="overflow-x:auto;overflow-y:auto;width:auto;height:auto;"><table class="gt_table">
+  <thead class="gt_header">
+    <tr>
+      <th colspan="6" class="gt_heading gt_title gt_font_normal" style>S&amp;P 500</th>
+    </tr>
+    <tr>
+      <th colspan="6" class="gt_heading gt_subtitle gt_font_normal gt_bottom_border" style>2010-06-07 to 2010-06-14</th>
+    </tr>
+  </thead>
+  <thead class="gt_col_headings">
+    <tr>
+      <th class="gt_col_heading gt_columns_bottom_border gt_left" rowspan="1" colspan="1">date</th>
+      <th class="gt_col_heading gt_columns_bottom_border gt_right" rowspan="1" colspan="1">open</th>
+      <th class="gt_col_heading gt_columns_bottom_border gt_right" rowspan="1" colspan="1">high</th>
+      <th class="gt_col_heading gt_columns_bottom_border gt_right" rowspan="1" colspan="1">low</th>
+      <th class="gt_col_heading gt_columns_bottom_border gt_right" rowspan="1" colspan="1">close</th>
+      <th class="gt_col_heading gt_columns_bottom_border gt_right" rowspan="1" colspan="1">volume</th>
+    </tr>
+  </thead>
+  <tbody class="gt_table_body">
+    <tr>
+      <td class="gt_row gt_left">Mon, Jun 14, 2010</td>
+      <td class="gt_row gt_right">$1,095.00</td>
+      <td class="gt_row gt_right">$1,105.91</td>
+      <td class="gt_row gt_right">$1,089.03</td>
+      <td class="gt_row gt_right">$1,089.63</td>
+      <td class="gt_row gt_right">4.43B</td>
+    </tr>
+    <tr>
+      <td class="gt_row gt_left">Fri, Jun 11, 2010</td>
+      <td class="gt_row gt_right">$1,082.65</td>
+      <td class="gt_row gt_right">$1,092.25</td>
+      <td class="gt_row gt_right">$1,077.12</td>
+      <td class="gt_row gt_right">$1,091.60</td>
+      <td class="gt_row gt_right">4.06B</td>
+    </tr>
+    <tr>
+      <td class="gt_row gt_left">Thu, Jun 10, 2010</td>
+      <td class="gt_row gt_right">$1,058.77</td>
+      <td class="gt_row gt_right">$1,087.85</td>
+      <td class="gt_row gt_right">$1,058.77</td>
+      <td class="gt_row gt_right">$1,086.84</td>
+      <td class="gt_row gt_right">5.14B</td>
+    </tr>
+    <tr>
+      <td class="gt_row gt_left">Wed, Jun 9, 2010</td>
+      <td class="gt_row gt_right">$1,062.75</td>
+      <td class="gt_row gt_right">$1,077.74</td>
+      <td class="gt_row gt_right">$1,052.25</td>
+      <td class="gt_row gt_right">$1,055.69</td>
+      <td class="gt_row gt_right">5.98B</td>
+    </tr>
+    <tr>
+      <td class="gt_row gt_left">Tue, Jun 8, 2010</td>
+      <td class="gt_row gt_right">$1,050.81</td>
+      <td class="gt_row gt_right">$1,063.15</td>
+      <td class="gt_row gt_right">$1,042.17</td>
+      <td class="gt_row gt_right">$1,062.00</td>
+      <td class="gt_row gt_right">6.19B</td>
+    </tr>
+    <tr>
+      <td class="gt_row gt_left">Mon, Jun 7, 2010</td>
+      <td class="gt_row gt_right">$1,065.84</td>
+      <td class="gt_row gt_right">$1,071.36</td>
+      <td class="gt_row gt_right">$1,049.86</td>
+      <td class="gt_row gt_right">$1,050.47</td>
+      <td class="gt_row gt_right">5.47B</td>
+    </tr>
+  </tbody>
+  
+  
+</table></div>
+</div>
 <h2 id="markdown-tables">Markdown tables</h2>
 <p>You can also define <a href="https://pandoc.org/MANUAL.html#tables">tables using markdown</a>. For example, the table from the previous section that describes paged table options was defined with the following markdown:</p>
+<<<<<<< HEAD
 <div class="sourceCode" id="cb4"><pre class="sourceCode markdown"><code class="sourceCode markdown"><span id="cb4-1"><a href="#cb4-1"></a>| Option           | Description                                    |</span>
 <span id="cb4-2"><a href="#cb4-2"></a>|------------------|------------------------------------------------|</span>
 <span id="cb4-3"><a href="#cb4-3"></a>| <span class="in">`rows.print`</span>     | Maximum rows to print per page.                |</span>
@@ -1754,6 +3016,24 @@ paged_table(mtcars, options = list(rows.print = 15))
 <span id="cb5-7"><a href="#cb5-7"></a>| <span class="in">`rownames.print`</span> | Print row names as part of the table.          |</span>
 <span id="cb5-8"><a href="#cb5-8"></a>:::</span></code></pre></div>
 <div class="sourceCode" id="cb6"><pre class="sourceCode r distill-force-highlighting-css"><code class="sourceCode r"></code></pre></div>
+=======
+<div class="sourceCode" id="cb6"><pre class="sourceCode markdown"><code class="sourceCode markdown"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true"></a>| Option           | Description                                    |</span>
+<span id="cb6-2"><a href="#cb6-2" aria-hidden="true"></a>|------------------|------------------------------------------------|</span>
+<span id="cb6-3"><a href="#cb6-3" aria-hidden="true"></a>| <span class="in">`rows.print`</span>     | Maximum rows to print per page.                |</span>
+<span id="cb6-4"><a href="#cb6-4" aria-hidden="true"></a>| <span class="in">`max.print`</span>      | Maximum rows in the table (defaults to 1000).  |</span>
+<span id="cb6-5"><a href="#cb6-5" aria-hidden="true"></a>| <span class="in">`cols.print`</span>     | Maximum columns in the table (defaults to 10). |</span>
+<span id="cb6-6"><a href="#cb6-6" aria-hidden="true"></a>| <span class="in">`rownames.print`</span> | Print row names as part of the table.          |</span></code></pre></div>
+<p>You can use Distill <a href="figures.html">figure layout</a> classes with markdown tables by enclosing them in markdown div (<code>:::</code>) named with the appropriate class, for example:</p>
+<div class="sourceCode" id="cb7"><pre class="sourceCode markdown"><code class="sourceCode markdown"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true"></a>::: l-body-outset</span>
+<span id="cb7-2"><a href="#cb7-2" aria-hidden="true"></a>| Option           | Description                                    |</span>
+<span id="cb7-3"><a href="#cb7-3" aria-hidden="true"></a>|------------------|------------------------------------------------|</span>
+<span id="cb7-4"><a href="#cb7-4" aria-hidden="true"></a>| <span class="in">`rows.print`</span>     | Maximum rows to print per page.                |</span>
+<span id="cb7-5"><a href="#cb7-5" aria-hidden="true"></a>| <span class="in">`max.print`</span>      | Maximum rows in the table (defaults to 1000).  |</span>
+<span id="cb7-6"><a href="#cb7-6" aria-hidden="true"></a>| <span class="in">`cols.print`</span>     | Maximum columns in the table (defaults to 10). |</span>
+<span id="cb7-7"><a href="#cb7-7" aria-hidden="true"></a>| <span class="in">`rownames.print`</span> | Print row names as part of the table.          |</span>
+<span id="cb7-8"><a href="#cb7-8" aria-hidden="true"></a>:::</span></code></pre></div>
+<div class="sourceCode" id="cb8"><pre class="sourceCode r distill-force-highlighting-css"><code class="sourceCode r"></code></pre></div>
+>>>>>>> 6999f43d6b2df504d0ff8ffdf497e200bf7844f5
 <!--radix_placeholder_article_footer-->
 <!--/radix_placeholder_article_footer-->
 </div>

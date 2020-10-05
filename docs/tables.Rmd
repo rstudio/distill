@@ -9,6 +9,8 @@ There are a number of options available for displaying tables within Distill art
 
 -   Using the `rmarkdown::paged_table()` function to create a page-able version of a data frame.
 
+-   Use the [gtsummary](http://www.danieldsjoberg.com/gtsummary/) and [gt](https://gt.rstudio.com/) packages to create to create publication-ready analytical and summary tables.
+
 -   Using standard [markdown table syntax](https://pandoc.org/MANUAL.html#tables) to create a custom table.
 
 ## Knitr kable
@@ -67,6 +69,124 @@ Here is a summary of the available paged table options:
 | `max.print`      | Maximum rows in the table (defaults to 1000).  |
 | `cols.print`     | Maximum columns in the table (defaults to 10). |
 | `rownames.print` | Print row names as part of the table.          |
+
+## gtsummary tables
+
+The [gtsummary](http://www.danieldsjoberg.com/gtsummary/) package provides an elegant and flexible way to create publication-ready analytical and summary tables. The package summarizes data sets, regression models, and more, using sensible defaults with highly customizable capabilities. For example:
+
+```` {.clike}
+```{r}`r ''`
+library(gtsummary)
+library(survival)
+
+# build glm table
+mod1 <- glm(response ~ trt + age + grade, trial, family = binomial)
+t1 <- tbl_regression(mod1, exponentiate = TRUE)
+
+# build survival model table
+t2 <-
+  coxph(Surv(ttdeath, death) ~ trt + grade + age, trial) %>%
+  tbl_regression(exponentiate = TRUE)
+
+# merge tables 
+tbl_merge(
+  tbls = list(t1, t2),
+  tab_spanner = c("**Tumor Response**", "**Time to Death**")
+)
+```
+````
+
+```{r}
+library(gtsummary)
+library(survival)
+
+# build glm table
+mod1 <- glm(response ~ trt + age + grade, trial, family = binomial)
+t1 <- tbl_regression(mod1, exponentiate = TRUE)
+
+# build survival model table
+t2 <-
+  coxph(Surv(ttdeath, death) ~ trt + grade + age, trial) %>%
+  tbl_regression(exponentiate = TRUE)
+
+# merge tables 
+tbl_merge(
+  tbls = list(t1, t2),
+  tab_spanner = c("**Tumor Response**", "**Time to Death**")
+)
+```
+
+## gt tables
+
+The [gtsummary](http://www.danieldsjoberg.com/gtsummary/) package is built in top of the [gt](https://gt.rstudio.com/) package, which provides a flexible foundation for creating just about any sort of table you can imagine. Here is a brief example of how to use **gt** to create a table from the included `sp500` dataset:
+
+```` {.clike}
+```{r}`r ''`
+library(gt)
+library(tidyverse)
+library(glue)
+
+# Define the start and end dates for the data range
+start_date <- "2010-06-07"
+end_date <- "2010-06-14"
+
+# Create a gt table based on preprocessed
+# `sp500` table data
+sp500 %>%
+  dplyr::filter(date >= start_date & date <= end_date) %>%
+  dplyr::select(-adj_close) %>%
+  gt() %>%
+  tab_header(
+    title = "S&P 500",
+    subtitle = glue::glue("{start_date} to {end_date}")
+  ) %>%
+  fmt_date(
+    columns = vars(date),
+    date_style = 3
+  ) %>%
+  fmt_currency(
+    columns = vars(open, high, low, close),
+    currency = "USD"
+  ) %>%
+  fmt_number(
+    columns = vars(volume),
+    suffixing = TRUE
+  )
+```
+````
+
+```{r}
+library(gt)
+library(tidyverse)
+library(glue)
+
+# Define the start and end dates for the data range
+start_date <- "2010-06-07"
+end_date <- "2010-06-14"
+
+# Create a gt table based on preprocessed
+# `sp500` table data
+sp500 %>%
+  dplyr::filter(date >= start_date & date <= end_date) %>%
+  dplyr::select(-adj_close) %>%
+  gt() %>%
+  tab_header(
+    title = "S&P 500",
+    subtitle = glue::glue("{start_date} to {end_date}")
+  ) %>%
+  fmt_date(
+    columns = vars(date),
+    date_style = 3
+  ) %>%
+  fmt_currency(
+    columns = vars(open, high, low, close),
+    currency = "USD"
+  ) %>%
+  fmt_number(
+    columns = vars(volume),
+    suffixing = TRUE
+  )
+```
 
 ## Markdown tables
 

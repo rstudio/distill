@@ -3,9 +3,10 @@ Package: distill
 Title: 'R Markdown' Format for Scientific and Technical Writing
 Version: 0.8.1
 Authors@R: c(
-    person("JJ", "Allaire", role = c("aut", "cre"), email = "jj@rstudio.com"),
+    person("JJ", "Allaire", role = c("aut", "cre"), email = "jj@rstudio.com",
+           comment = c(ORCID = "0000-0003-0174-9868")),
     person("Rich", "Iannone", role = c("aut")),
-    person("Yihui", "Xie", role = c("aut")),
+    person("Yihui", "Xie", role = c("aut"), comment = c(ORCID = "0000-0003-0645-5666")),
     person(family = "RStudio, Inc.", role = "cph"),
     person(family = "Google LLC", role = c("ctb", "cph"), 
            comment = "https://distill.pub/guide/"),
@@ -16,7 +17,8 @@ Authors@R: c(
     person(family = "The Polymer Authors", role = c("ctb", "cph"), 
            comment = "https://www.webcomponents.org/polyfills/"),
     person("Gábor", "Csárdi", role = c("ctb", "cph"), comment = "whoami"),
-    person("JooYoung", "Seo", role="ctb", comment = c(ORCID = "0000-0002-4064-6012"))
+    person("JooYoung", "Seo", role="ctb", comment = c(ORCID = "0000-0002-4064-6012")),
+    person("Alison", "Presmanes Hill", role = "ctb", comment = c(ORCID = "0000-0002-8082-1890"))
     )
 Description: Scientific and technical article format for the web. 'Distill' articles 
     feature attractive, reader-friendly typography, flexible layout options
@@ -27,7 +29,7 @@ BugReports: https://github.com/rstudio/distill/issues
 Encoding: UTF-8
 LazyData: true
 Roxygen: list(markdown = TRUE)
-RoxygenNote: 7.1.0
+RoxygenNote: 7.1.1
 Imports: 
     utils, 
     stats,
@@ -45,21 +47,18 @@ Imports:
     xml2,
     base64enc,
     whisker,
-    downloader,
-    progress,
     stringr,
     knitr (>= 1.15.6),
     digest,
     yaml,
     openssl,
-    downlit (>= 0.1.0.9000)
+    downlit (>= 0.2)
 Suggests:
     htmlwidgets,
+    progress,
     r2d3,
     DiagrammeR,
     shiny,
     rsconnect,
     testthat
-Remotes:
-    r-lib/downlit
 Language: en-US

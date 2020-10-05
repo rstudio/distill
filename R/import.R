@@ -8,7 +8,6 @@
 #' @inheritParams create_post
 #'
 #' @param url URL for post to import
-#' @param date Post date (defaults to current date)
 #' @param check_license Verify that the imported posted has a creative commons license
 #' @param overwrite Overwrite existing post? (defaults to `FALSE`, use [update_post()]
 #'   to update an existing post in-place).
@@ -20,7 +19,8 @@
 #'
 #' @export
 import_post <- function(url, slug = "auto",
-                        date = Sys.Date(), date_prefix = TRUE,
+                        date = Sys.Date(),
+                        date_prefix = date,
                         check_license = TRUE,
                         overwrite = FALSE,
                         view = interactive()) {
@@ -195,10 +195,14 @@ download_article <- function(url, download_url, article_tmp, metadata) {
   }
 
   # progress bar
-  pb <- progress::progress_bar$new(
-    format = "[:bar] :percent  eta: :eta  :file",
-    total = length(manifest)
-  )
+  if (requireNamespace("progress", quietly = TRUE)) {
+    pb <- progress::progress_bar$new(
+      format = "[:bar] :percent  eta: :eta  :file",
+      total = length(manifest)
+    )
+  } else {
+    pb <- NULL
+  }
 
   # download the files in the manifest
   rewrites <- c()
@@ -208,7 +212,10 @@ download_article <- function(url, download_url, article_tmp, metadata) {
     file_progress <- stringr::str_pad(
       stringr::str_trunc(basename(file), 25, "right"), 25, "right"
     )
-    pb$tick(tokens = list(file = file_progress))
+    if (!is.null(pb)) {
+      pb$tick(tokens = list(file = file_progress))
+    }
+
 
     # ensure the destination directory exists
     destination <- file.path(article_temp_dir, file)

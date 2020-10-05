@@ -68,6 +68,11 @@ This workflow has some nice benefits:
 
 The mechanics of creating branches and pull requests are beyond the scope of this article. Follow the links above or reference other online resources to learn more.
 
+## Renaming posts
+
+```{r, child="_common/renaming_posts.Rmd"}
+```
+
 ## Importing posts
 
 You may prefer a workflow where posts are worked on separately from your website/blog and then imported when they are ready to be published. This might be the case for a few different reasons:

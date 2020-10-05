@@ -90,6 +90,7 @@
 }
 
 .posts-list .metadata .dt-authors {
+  display: block;
   margin-top: 0.3em;
   margin-right: 2em;
 }
@@ -270,7 +271,7 @@ function init_posts_list() {
         var post = null;
         $.each(metadata.categories, function(idx, category) {
           category = category.replace(/ /g,"_");
-          if (page_category === "articles" || category === page_category) {
+          if ((page_category || '').toLowerCase() === "articles" || category === page_category) {
             post = $(script).parent().get();
             return false;
           }
@@ -284,7 +285,7 @@ function init_posts_list() {
 
       // update the list_caption
       var list_caption = $('.posts-list-caption');
-      var caption = page_category === "articles"
+      var caption = (page_category || '').toLowerCase() === "articles"
         ? list_caption.attr('data-caption')
         : ('Category: ' + page_category.replace(/_/g," "));
       list_caption.text(caption);

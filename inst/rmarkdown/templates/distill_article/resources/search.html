@@ -131,10 +131,14 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
       }]).on('autocomplete:selected', function(event, suggestion) {
         window.location.href = offsetURL(suggestion.path);
       });
+      // remove inline display style on autocompleter (we want to
+      // manage responsive display via css)
+      $('.algolia-autocomplete').css("display", "");
     })
     .catch(function(error) {
       console.log(error);
     });
+
 });
 
 </script>
@@ -160,9 +164,11 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 
 @media screen and (max-width: 768px) {
   .distill-site-nav .algolia-autocomplete {
-    visibility: hidden
+    display: none;
+    visibility: hidden;
   }
   .distill-site-nav.responsive .algolia-autocomplete {
+    display: inline-block;
     visibility: visible;
   }
   .distill-site-nav.responsive .algolia-autocomplete .aa-dropdown-menu {

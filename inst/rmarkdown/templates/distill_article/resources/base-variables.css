@@ -1,0 +1,28 @@
+
+/* base variables */
+
+:root {
+  /*-- font sizes --*/
+  --title-size:      50px;                /* default */
+  --body-size:       1.06rem;             /* default */
+  --code-size:       14px;                /* default */
+  --toc-h3-size:     18px;                /* default */
+  --toc-size:        13px;                /* default */
+  --byline-h3-size:  0.6rem;              /* default */
+  --byline-size:     0.8rem;              /* default */
+  --appx-h3-size:    15px;                /* default */
+  --appx-size:       0.8em;               /* default */
+  --aside-size:      12px;                /* default */
+  --fig-cap-size:    13px;                /* default */
+  /*-- font colors --*/
+  --title-color:     black;               /* default */
+  --header-color:    rgba(0, 0, 0, 0.8);  /* default */
+  --body-color:      rgba(0, 0, 0, 0.8);  /* default */
+  --toc-h3-color:    rgba(0, 0, 0, 0.6);  /* default */
+  --byline-h3-color: rgba(0, 0, 0, 0.5);  /* default */
+  --byline-color:    rgba(0, 0, 0, 0.8);  /* default */
+  --appx-h3-color:   rgba(0, 0, 0, 0.65); /* default */
+  --appx-color:      rgba(0, 0, 0, 0.5);  /* default */
+  --aside-color:     rgba(0, 0, 0, 0.6);  /* default */
+  --fig-cap-color:   rgba(0, 0, 0, 0.6);  /* default */
+}

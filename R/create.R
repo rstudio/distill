@@ -62,14 +62,37 @@ create_blog <- function(dir, title, gh_pages = FALSE, edit = interactive()) {
 }
 
 
+#' Create a new article
+#'
+#' Create (and optionally edit) a new distill article.
+#'
+#' @inheritParams rmarkdown::draft
+#' @param create_dir `TRUE` to create a new directory for the document
+#'   (defaults to `FALSE`).
+#'
+#' @export
+create_article <- function(file, create_dir = FALSE, edit = TRUE) {
+  article <- rmarkdown::draft(
+    file,
+    "distill_article",
+    package = "distill",
+    create_dir = create_dir,
+    edit = FALSE
+  )
+  if (edit) {
+    edit_file(article)
+  }
+}
+
 #' Create a new blog post
 #'
 #' @param title Post title
 #' @param author Post author. Automatically drawn from previous post if not provided.
 #' @param slug Post slug (directory name). Automatically computed from title if not
 #'   provided.
-#' @param date_prefix Data prefix for post slug (preserves chronological order for posts
-#'   within the filesystem).
+#' @param date Post date (defaults to current date)
+#' @param date_prefix Date prefix for post slug (preserves chronological order for posts
+#'   within the filesystem). Pass `NULL` for no date prefix.
 #' @param draft Mark the post as a `draft` (don't include it in the article listing).
 #' @param edit Open the post in an editor after creating it.
 #'
@@ -83,8 +106,13 @@ create_blog <- function(dir, title, gh_pages = FALSE, edit = interactive()) {
 #' }
 #'
 #' @export
-create_post <- function(title, author = "auto", slug = "auto", date_prefix = TRUE,
-                        draft = FALSE, edit = interactive()) {
+create_post <- function(title,
+                        author = "auto",
+                        slug = "auto",
+                        date = Sys.Date(),
+                        date_prefix = date,
+                        draft = FALSE,
+                        edit = interactive()) {
 
   # determine site_dir (must call from within a site)
   site_dir <- find_site_dir(".")
@@ -98,23 +126,9 @@ create_post <- function(title, author = "auto", slug = "auto", date_prefix = TRU
 
   # auto-slug
   slug <- resolve_slug(title, slug)
-  post_dir <- file.path(posts_dir, slug)
 
-  # add date prefix
-  post_date <- Sys.Date()
-  if (!identical(date_prefix, FALSE)) {
-    if (isTRUE(date_prefix))
-      date_prefix <- Sys.Date()
-    else if (is.character(date_prefix))
-      date_prefix <- parse_date(date_prefix)
-    if (is_date(date_prefix)) {
-      post_date <- date_prefix
-      date_prefix <- as.character(date_prefix, format = "%Y-%m-%d")
-    } else {
-      stop("You must specify either TRUE/FALSE or a date for date_prefix")
-    }
-    post_dir <- file.path(posts_dir, paste(date_prefix, slug, sep = "-"))
-  }
+  # resolve post dir
+  post_dir <- resolve_post_dir(posts_dir, slug, date_prefix)
 
   # determine author
   if (identical(author, "auto")) {
@@ -152,7 +166,7 @@ description: |
 output:
   distill::distill_article:
     self_contained: false%s
----', title, author, format.Date(post_date, "%m-%d-%Y"), draft)
+---', title, author, format.Date(date, "%m-%d-%Y"), draft)
 
 
   # body
@@ -178,8 +192,8 @@ Learn more about using Distill at <https://rstudio.github.io/distill>.
   post_file <- file.path(post_dir, file_with_ext(slug, "Rmd"))
   con <- file(post_file, open = "w", encoding = "UTF-8")
   on.exit(close(con), add = TRUE)
-  writeChar(yaml, con, eos = NULL, useBytes = TRUE)
-  writeChar(body, con, eos = NULL, useBytes = TRUE)
+  xfun::write_utf8(yaml, con)
+  xfun::write_utf8(body, con)
 
   # edit if requested
   if (edit)
@@ -189,6 +203,110 @@ Learn more about using Distill at <https://rstudio.github.io/distill>.
   invisible(post_file)
 }
 
+
+#' Rename a blog post directory
+#'
+#' Rename a blog post directory, by default using the title and date
+#' specified within the post's front matter.
+#'
+#' @inheritParams create_post
+#' @param post_dir Path to post directory
+#' @param date_prefix Date prefix for post. Defaults to the post's date
+#'   field (or the current date if there is none). Pass `NULL` to not
+#'   use a date prefix.
+#'
+#' @note This function must be called from with a working directory that is within
+#'  a Distill website.
+#'
+#' @examples
+#' \dontrun{
+#' library(distill)
+#' rename_post_dir("_posts/2020-09-12-my-post")
+#' rename_post_dir("_posts/2020-09-12-my-post", date_prefix = "9/15/2020")
+#' }
+#'
+#' @export
+rename_post_dir <- function(post_dir, slug = "auto", date_prefix = "auto") {
+
+  # determine site_dir (must call from within a site)
+  site_dir <- find_site_dir(".")
+  if (is.null(site_dir))
+    stop("You must call rename_post from within a Distill website")
+
+  # more discovery
+  site_config <- site_config(site_dir)
+  posts_dir <- file.path(site_dir, "_posts")
+
+  # verify post exists
+  post_path <- normalize_path(file.path(site_dir, post_dir), mustWork = FALSE)
+  if (!dir_exists(post_path)) {
+    stop("Unable to find post to rename at \"", post_path, "\"")
+  }
+
+  # read the post title from the rmd
+  front_matter <- post_front_matter(post_path)
+  title <- front_matter$title
+
+  # determine the date prefix
+  if (identical(date_prefix, "auto")) {
+    if (!is.null(front_matter$date)) {
+      date_prefix <- parse_date(front_matter$date)
+    } else {
+      date_prefix = Sys.Date()
+    }
+  }
+
+  # resolve new post path
+  slug <- resolve_slug(title, slug)
+  new_post_path <- normalize_path(resolve_post_dir(posts_dir, slug, date_prefix),
+                                  mustWork = FALSE)
+
+  # move the post
+  if (!identical(post_path, new_post_path)) {
+    file.rename(post_path, new_post_path)
+    message("Post directory renamed to \"", paste0('_posts/', basename(new_post_path)), "\"")
+  } else {
+    message("Post directory already has name \"", paste0('_posts/', basename(new_post_path)), "\"")
+  }
+}
+
+post_front_matter <- function(post_dir) {
+
+  md_files <- list.files(post_dir,
+                         pattern = "^[^_].*\\.[Rr]?md$",
+                         full.names = TRUE)
+  for (md_file in md_files) {
+    front_matter <- yaml_front_matter(md_file)
+    if (!is.null(front_matter$title)) {
+      return(front_matter)
+    }
+  }
+
+  stop("No post found in ", post_dir)
+
+}
+
+resolve_post_dir <- function(posts_dir, slug, date_prefix) {
+
+  # start with slug
+  post_dir <- file.path(posts_dir, slug)
+
+  # add date prefix
+  if (!is.null(date_prefix)) {
+    if (isTRUE(date_prefix))
+      date_prefix <- Sys.Date()
+    else if (is.character(date_prefix))
+      date_prefix <- parse_date(date_prefix)
+    if (is_date(date_prefix)) {
+      date_prefix <- as.character(date_prefix, format = "%Y-%m-%d")
+    } else {
+      stop("You must specify either NULL or a date for date_prefix")
+    }
+    post_dir <- file.path(posts_dir, paste(date_prefix, slug, sep = "-"))
+  }
+
+  post_dir
+}
 
 
 new_project_create_website <- function(dir, ...) {

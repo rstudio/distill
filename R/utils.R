@@ -110,7 +110,10 @@ date_today <- function() {
 
 date_as_rfc_2822 <- function(date) {
   date <- as.Date(date, tz = "UTC")
-  as.character(date, format = "%a, %d %b %Y %H:%M:%S %z", tz = "UTC")
+  with_locale(
+    new = c("LC_TIME" = "en_US.UTF-8"),
+    as.character(date, format = "%a, %d %b %Y %H:%M:%S %z", tz = "UTC")
+  )
 }
 
 date_as_abbrev <- function(date) {
@@ -289,7 +292,7 @@ move_directory <- function(from_dir, to_dir) {
 
 download_file <- function(url, destfile, quiet = TRUE) {
   if (is_url(url))
-    downloader::download(url, destfile = destfile, mode = "wb", quiet = quiet, cacheOK = FALSE)
+    utils::download.file(url, destfile = destfile, mode = "wb", quiet = quiet, cacheOK = FALSE)
   else if (file.exists(url))
     file.copy(url, destfile, overwrite = TRUE)
   else
@@ -301,3 +304,31 @@ eval_metadata <- function(metadata) {
   metadata_yaml <- knitr::knit(text = metadata_yaml)
   yaml::yaml.load(metadata_yaml)
 }
+
+
+with_locale <-function (new, code) {
+  old <- set_locale(cats = new)
+  on.exit(set_locale(old))
+  force(code)
+}
+
+set_locale <- function (cats) {
+  cats <- as_character(cats)
+  if ("LC_ALL" %in% names(cats)) {
+    stop("Setting LC_ALL category not implemented.", call. = FALSE)
+  }
+  old <- vapply(names(cats), Sys.getlocale, character(1))
+  mapply(Sys.setlocale, names(cats), cats)
+  invisible(old)
+}
+
+as_character <- function (x) {
+  nms <- names(x)
+  res <- as.character(x)
+  names(res) <- nms
+  res
+}
+
+
+
+

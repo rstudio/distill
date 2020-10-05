@@ -8,7 +8,8 @@ create_post(
   title,
   author = "auto",
   slug = "auto",
-  date_prefix = TRUE,
+  date = Sys.Date(),
+  date_prefix = date,
   draft = FALSE,
   edit = interactive()
 )
@@ -21,8 +22,10 @@ create_post(
 \item{slug}{Post slug (directory name). Automatically computed from title if not
 provided.}
 
-\item{date_prefix}{Data prefix for post slug (preserves chronological order for posts
-within the filesystem).}
+\item{date}{Post date (defaults to current date)}
+
+\item{date_prefix}{Date prefix for post slug (preserves chronological order for posts
+within the filesystem). Pass \code{NULL} for no date prefix.}
 
 \item{draft}{Mark the post as a \code{draft} (don't include it in the article listing).}
 
