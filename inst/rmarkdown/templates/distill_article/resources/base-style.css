@@ -4,11 +4,11 @@
 /*-- TITLE --*/
 d-title h1,
 .posts-list > h1 {
-  color: var(--title-color);
+  color: var(--title-color, black);
 }
 
 d-title h1 {
-  font-size: var(--title-size);
+  font-size: var(--title-size, 50px);
 }
 
 /*-- HEADERS --*/
@@ -18,98 +18,97 @@ d-article h3,
 d-article h4,
 d-article h5,
 d-article h6 {
-  color: var(--header-color);
+  color: var(--header-color, rgba(0, 0, 0, 0.8));
 }
-
 
 /*-- BODY --*/
 /* only text inside of <p> tags */
 d-article > p {
-  color: var(--body-color);
-  font-size: var(--body-size);
+  color: var(--body-color, rgba(0, 0, 0, 0.8));
+  font-size: var(--body-size, 1.06rem);
 }
 
 /*-- CODE --*/
 d-article div.sourceCode code,
 d-article pre code {
-	font-size: var(--code-size);
-}
-
-/*-- METADATA --*/
-d-byline h3 {
-	font-size: var(--byline-h3-size);
-	color: var(--byline-h3-color);
-}
-
-d-byline {
-	font-size: var(--byline-size);
-	color: var(--byline-color);
-}
-
-d-byline a,
-d-article d-byline a {
-	color: var(--byline-color);
-}
-
-/*-- TABLE OF CONTENTS --*/
-.d-contents nav h3 {
-	font-size: var(--toc-h3-size);
-	color: var(--toc-h3-color);
-}
-
-.d-contents nav a {
-	font-size: var(--toc-size);
-}
-
-/*-- APPENDIX --*/
-d-appendix h3 {
-  font-size: var(--appx-h3-size);
-	color: var(--appx-h3-color);
-}
-
-d-appendix {
-  font-size: var(--appx-size);
-	color: var(--appx-color);
-}
-
-d-footnote-list a.footnote-backlink {
-	color: var(--appx-color);
+	font-size: var(--code-size, 14px);
 }
 
 /*-- ASIDE --*/
 d-article aside {
-	font-size: var(--aside-size);
-	color: var(--aside-color);
+	font-size: var(--aside-size, 12px);
+	color: var(--aside-color, rgba(0, 0, 0, 0.6));
 }
 
 /*-- FIGURE CAPTIONS --*/
 figure .caption,
-figure figcaption {
-	font-size: var(--fig-cap-size);
-	color: var(--fig-cap-color);
+figure figcaption,
+.figure .caption {
+	font-size: var(--fig-cap-size, 13px);
+	color: var(--fig-cap-color, rgba(0, 0, 0, 0.6));
+}
+
+/*-- METADATA --*/
+d-byline h3 {
+	font-size: var(--heading-size, 0.6rem);
+	color: var(--heading-color, rgba(0, 0, 0, 0.5));
+}
+
+d-byline {
+	font-size: var(--body-size, 0.8rem);
+	color: var(--body-color, rgba(0, 0, 0, 0.8));
+}
+
+d-byline a,
+d-article d-byline a {
+	color: var(--body-color, rgba(0, 0, 0, 0.8));
+}
+
+/*-- TABLE OF CONTENTS --*/
+.d-contents nav h3 {
+	font-size: var(--heading-size, 18px);
+}
+
+.d-contents nav a {
+	font-size: var(--contents-size, 13px);
+}
+
+/*-- APPENDIX --*/
+d-appendix h3 {
+  font-size: var(--heading-size, 15px);
+	color: var(--heading-color, rgba(0, 0, 0, 0.65));
+}
+
+d-appendix {
+  font-size: var(--text-size, 0.8em);
+	color: var(--text-color, rgba(0, 0, 0, 0.5));
+}
+
+d-appendix d-footnote-list a.footnote-backlink {
+	color: var(--text-color, rgba(0, 0, 0, 0.5));
 }
 
 /*-- WEBSITE HEADER + FOOTER --*/
 .distill-site-header .title {
-	font-size: var(--head-title-size);
+	font-size: var(--title-size, 18px);
 }
 
 .distill-site-header {
-	font-size: var(--head-text-size);
-	color: var(--head-text-color);
-	background-color: var(--head-bkgd-color);
+	font-size: var(--text-size, 15px);
+	color: var(--text-color, rgba(255, 255, 255, 0.8));
+	background-color: var(--bkgd-color, #0F2E3D);
 }
 
 .distill-site-header a:hover {
-	color: var(--head-hover-color);
+	color: var(--hover-color, white);
 }
 
 .distill-site-footer {
-	font-size: var(--foot-text-size);
-	color: var(--foot-text-color);
-	background-color: var(--foot-bkgd-color);
+	font-size: var(--text-size, 15px);
+	color: var(--text-color, rgba(255, 255, 255, 0.8));
+	background-color: var(--bkgd-color, #0F2E3D);
 }
 
 .distill-site-footer a:hover {
-	color: var(--foot-hover-color);
+	color: var(--hover-color, white);
 }
