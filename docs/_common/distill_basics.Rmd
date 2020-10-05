@@ -1,6 +1,4 @@
-::: {.l-body-outset}
 ## Creating an article
-:::
 
 Use the **New R Markdown** dialog within RStudio to create a new Distill article:
 
