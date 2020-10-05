@@ -236,9 +236,16 @@ write_feed_xml <- function(feed_xml, site_config, collection, articles) {
     add_child(item, "link", text = article$base_url)
 
     full_content_path <- NULL
-    if (identical(site_config$rss$full_content, TRUE) && is.character(article$input_file)) {
-      guess_rmd <- paste0(gsub("\\.utf.*\\.md|\\.md", "", article$input_file), ".Rmd")
-      full_content_path <- dir(getwd(), pattern = guess_rmd, full.names = TRUE, recursive = TRUE)
+    if (identical(site_config$rss$full_content, TRUE)) {
+      if (is.character(article$input_file)) {
+        guess_rmd <- paste0(gsub("\\.utf.*\\.md|\\.md", "", article$input_file), ".Rmd")
+        full_content_path <- dir(getwd(), pattern = guess_rmd, full.names = TRUE, recursive = TRUE)
+      }
+      else {
+        full_content_path <- Filter(
+          function(e) grepl(article$path, e, fixed = T),
+          dir(full.names = TRUE, pattern = "Rmd", recursive = TRUE))
+      }
     }
 
     if (length(full_content_path) > 0) {
