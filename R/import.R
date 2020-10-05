@@ -195,10 +195,14 @@ download_article <- function(url, download_url, article_tmp, metadata) {
   }
 
   # progress bar
-  pb <- progress::progress_bar$new(
-    format = "[:bar] :percent  eta: :eta  :file",
-    total = length(manifest)
-  )
+  if (requireNamespace("progress", quietly = TRUE)) {
+    pb <- progress::progress_bar$new(
+      format = "[:bar] :percent  eta: :eta  :file",
+      total = length(manifest)
+    )
+  } else {
+    pb <- NULL
+  }
 
   # download the files in the manifest
   rewrites <- c()
@@ -208,7 +212,10 @@ download_article <- function(url, download_url, article_tmp, metadata) {
     file_progress <- stringr::str_pad(
       stringr::str_trunc(basename(file), 25, "right"), 25, "right"
     )
-    pb$tick(tokens = list(file = file_progress))
+    if (!is.null(pb)) {
+      pb$tick(tokens = list(file = file_progress))
+    }
+
 
     # ensure the destination directory exists
     destination <- file.path(article_temp_dir, file)

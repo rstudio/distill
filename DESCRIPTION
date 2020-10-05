@@ -47,17 +47,15 @@ Imports:
     xml2,
     base64enc,
     whisker,
-    downloader,
-    progress,
     stringr,
     knitr (>= 1.15.6),
     digest,
     yaml,
     openssl,
-    downlit (>= 0.2),
-    withr
+    downlit (>= 0.2)
 Suggests:
     htmlwidgets,
+    progress,
     r2d3,
     DiagrammeR,
     shiny,
