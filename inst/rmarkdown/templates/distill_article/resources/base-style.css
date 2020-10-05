@@ -1,6 +1,21 @@
 
 /* base style */
 
+/* FONT FAMILIES */
+
+body {
+  font-family: var(--body-font, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen, Ubuntu, Cantarell, "Fira Sans", "Droid Sans", "Helvetica Neue", Arial, sans-serif);
+}
+
+h1, h2, h3, h4, h5, h6 {
+  font-family: var(--heading-font, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen, Ubuntu, Cantarell, "Fira Sans", "Droid Sans", "Helvetica Neue", Arial, sans-serif);
+}
+
+d-article div.sourceCode code,
+d-article pre code {
+	font-family: var(--mono-font, Consolas, Monaco, 'Andale Mono', 'Ubuntu Mono', monospace);
+}
+
 /*-- TITLE --*/
 d-title h1,
 .posts-list > h1 {
