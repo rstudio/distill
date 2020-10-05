@@ -30,8 +30,9 @@ reference:
   contents:
   - '`distill_article`'
   - '`distill_website`'
-- title: Create websites
+- title: Create articles and websites
   contents:
+  - '`create_article`'
   - '`create_website`'
   - '`create_blog`'
 - title: Add and update blog posts
@@ -39,6 +40,9 @@ reference:
   - '`create_post`'
   - '`import_post`'
   - '`update_post`'
+- title: Add a theme to an article or website
+  contents:
+  - '`create_theme`'
 - title: Publish websites
   contents:
   - '`publish_website`'
