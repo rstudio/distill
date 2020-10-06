@@ -243,7 +243,7 @@ write_feed_xml <- function(feed_xml, site_config, collection, articles) {
       }
       else {
         full_content_path <- Filter(
-          function(e) grepl(article$path, e, fixed = T),
+          function(e) grepl(article$path, e, fixed = TRUE),
           dir(full.names = TRUE, pattern = "Rmd", recursive = TRUE))
       }
     }
