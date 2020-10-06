@@ -2,11 +2,12 @@
 /* base variables */
 
 /* Edit the CSS properties in this file to create a custom
-   Distill theme. Only edit values in the middle column
+   Distill theme. Only edit values in the right column
    for each row; values shown are the CSS defaults.
-   All values must end with a semi-colon.                  */
+   All rows must end with a semi-colon.                    */
 
 /* Optional: embed custom fonts here with `@import`        */
+/* This must remain at the top of this file.               */
 
 
 
