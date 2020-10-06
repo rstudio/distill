@@ -407,14 +407,14 @@ distill_in_header_html <- function(theme = NULL) {
                 package = "distill")
   )
   if (!is.null(theme)) {
-    css <- paste(c(
-      "",
-      xfun::read_utf8(distill_resource("base-variables.css")),
-      xfun::read_utf8(theme),
-      xfun::read_utf8(distill_resource("base-style.css")),
-      ""
-    ), collapse = "\n")
-    theme_html <- tags$style(type = "text/css", css)
+    themeStyle <- function(file) {
+      tags$style(type = "text/css", paste(xfun::read_utf8(file), collapse = "\n"))
+    }
+    theme_html <- tagList(
+      themeStyle(distill_resource("base-variables.css")),
+      themeStyle(theme),
+      themeStyle(distill_resource("base-style.css"))
+    )
   } else {
     theme_html <- NULL
   }
