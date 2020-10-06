@@ -2,27 +2,29 @@
 /* base variables */
 
 /* Edit the CSS properties in this file to create a custom
-   Distill theme. Only edit values in the middle column
+   Distill theme. Only edit values in the right column
    for each row; values shown are the CSS defaults.
-   All values must end with a semi-colon.                  */
+   All rows must end with a semi-colon.                      */
 
-/* Optional: embed custom fonts here with `@import`        */
+/* Optional: embed custom fonts here with `@import`          */
+/* This must remain at the top of this file.                 */
+/* To import multiple fonts, use separate `@import` requests */
 
 
 
-:root {
+html {
   /*-- Main font sizes --*/
-  --title-size:      50px;                      /* default */
-  --body-size:       1.06rem;                   /* default */
-  --code-size:       14px;                      /* default */
-  --aside-size:      12px;                      /* default */
-  --fig-cap-size:    13px;                      /* default */
+  --title-size:      50px;
+  --body-size:       1.06rem;
+  --code-size:       14px;
+  --aside-size:      12px;
+  --fig-cap-size:    13px;
   /*-- Main font colors --*/
-  --title-color:     #000000;                   /* default */
-  --header-color:    rgba(0, 0, 0, 0.8);        /* default */
-  --body-color:      rgba(0, 0, 0, 0.8);        /* default */
-  --aside-color:     rgba(0, 0, 0, 0.6);        /* default */
-  --fig-cap-color:   rgba(0, 0, 0, 0.6);        /* default */
+  --title-color:     #000000;
+  --header-color:    rgba(0, 0, 0, 0.8);
+  --body-color:      rgba(0, 0, 0, 0.8);
+  --aside-color:     rgba(0, 0, 0, 0.6);
+  --fig-cap-color:   rgba(0, 0, 0, 0.6);
   /*-- Specify custom fonts ~~~ must be imported above   --*/
   --heading-font:    sans-serif;
   --mono-font:       monospace;
@@ -31,40 +33,40 @@
 
 /*-- ARTICLE METADATA --*/
 .d-byline {
-  --heading-size:    0.6rem;                    /* default */
-  --heading-color:   rgba(0, 0, 0, 0.5);        /* default */
-  --body-size:       0.8rem;                    /* default */
-  --body-color:      rgba(0, 0, 0, 0.8);        /* default */
+  --heading-size:    0.6rem;
+  --heading-color:   rgba(0, 0, 0, 0.5);
+  --body-size:       0.8rem;
+  --body-color:      rgba(0, 0, 0, 0.8);
 }
 
 /*-- ARTICLE TABLE OF CONTENTS --*/
 .d-contents {
-  --heading-size:    18px;                      /* default */
-  --contents-size:   13px;                      /* default */
+  --heading-size:    18px;
+  --contents-size:   13px;
 }
 
 /*-- ARTICLE APPENDIX --*/
 d-appendix {
-  --heading-size:    15px;                      /* default */
-  --heading-color:   rgba(0, 0, 0, 0.65);       /* default */
-  --text-size:       0.8em;                     /* default */
-  --text-color:      rgba(0, 0, 0, 0.5);        /* default */
+  --heading-size:    15px;
+  --heading-color:   rgba(0, 0, 0, 0.65);
+  --text-size:       0.8em;
+  --text-color:      rgba(0, 0, 0, 0.5);
 }
 
 /*-- WEBSITE HEADER + FOOTER --*/
 /* These properties only apply to Distill sites and blogs  */
 
 .distill-site-header {
-  --title-size:       18px;                     /* default */
-  --text-color:       rgba(255, 255, 255, 0.8); /* default */
-  --text-size:        15px;                     /* default */
-  --hover-color:      white;                    /* default */
-  --bkgd-color:       #0F2E3D;                  /* default */
+  --title-size:       18px;
+  --text-color:       rgba(255, 255, 255, 0.8);
+  --text-size:        15px;
+  --hover-color:      white;
+  --bkgd-color:       #0F2E3D;
 }
 
 .distill-site-footer {
-  --text-color:       rgba(255, 255, 255, 0.8); /* default */
-  --text-size:        15px;                     /* default */
-  --hover-color:      white;                    /* default */
-  --bkgd-color:       #0F2E3D;                  /* default */
+  --text-color:       rgba(255, 255, 255, 0.8);
+  --text-size:        15px;
+  --hover-color:      white;
+  --bkgd-color:       #0F2E3D;
 }
