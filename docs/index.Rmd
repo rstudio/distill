@@ -7,15 +7,21 @@ author:
     affiliation: RStudio
     affiliation_url: https://www.rstudio.com
     orcid_id: 0000-0003-0174-9868
+  - name: "Rich Iannone"
+    url: https://github.com/rich-iannone
+    affiliation: RStudio
+    affiliation_url: https://www.rstudio.com
+  - first_name: "Alison"
+    last_name: "Presmanes Hill"
+    affiliation: RStudio
+    affiliation_url: https://www.rstudio.com
+    orcid_id: 0000-0002-8082-1890
   - name: "Yihui Xie"
     url: https://github.com/yihui
     affiliation: RStudio
     affiliation_url: https://www.rstudio.com
     orcid_id: 0000-0003-0645-5666
-  - name: "Rich Iannone"
-    url: https://github.com/rich-iannone
-    affiliation: RStudio
-    affiliation_url: https://www.rstudio.com
+
 date: September 10, 2018
 citation_url: https://rstudio.github.io/distill
 bibliography: biblio.bib
