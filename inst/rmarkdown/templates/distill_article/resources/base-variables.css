@@ -10,7 +10,7 @@
 
 
 
-:root {
+html {
   /*-- Main font sizes --*/
   --title-size:      50px;                      /* default */
   --body-size:       1.06rem;                   /* default */
