@@ -407,9 +407,6 @@ distill_in_header_html <- function(theme = NULL) {
                 package = "distill")
   )
   if (!is.null(theme)) {
-    themeStyle <- function(file) {
-      tags$style(type = "text/css", paste(xfun::read_utf8(file), collapse = "\n"))
-    }
     theme_html <- tagList(
       htmltools::includeCSS(distill_resource("base-variables.css")),
       htmltools::includeCSS(theme),
