@@ -407,13 +407,10 @@ distill_in_header_html <- function(theme = NULL) {
                 package = "distill")
   )
   if (!is.null(theme)) {
-    themeStyle <- function(file) {
-      tags$style(type = "text/css", paste(xfun::read_utf8(file), collapse = "\n"))
-    }
     theme_html <- tagList(
-      themeStyle(distill_resource("base-variables.css")),
-      themeStyle(theme),
-      themeStyle(distill_resource("base-style.css"))
+      includeCSS(distill_resource("base-variables.css")),
+      includeCSS(theme),
+      includeCSS(distill_resource("base-style.css"))
     )
   } else {
     theme_html <- NULL
