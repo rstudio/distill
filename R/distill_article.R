@@ -411,9 +411,9 @@ distill_in_header_html <- function(theme = NULL) {
       tags$style(type = "text/css", paste(xfun::read_utf8(file), collapse = "\n"))
     }
     theme_html <- tagList(
-      themeStyle(distill_resource("base-variables.css")),
-      themeStyle(theme),
-      themeStyle(distill_resource("base-style.css"))
+      htmltools::includeCSS(distill_resource("base-variables.css")),
+      htmltools::includeCSS(theme),
+      htmltools::includeCSS(distill_resource("base-style.css"))
     )
   } else {
     theme_html <- NULL
