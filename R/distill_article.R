@@ -408,9 +408,9 @@ distill_in_header_html <- function(theme = NULL) {
   )
   if (!is.null(theme)) {
     theme_html <- tagList(
-      htmltools::includeCSS(distill_resource("base-variables.css")),
-      htmltools::includeCSS(theme),
-      htmltools::includeCSS(distill_resource("base-style.css"))
+      includeCSS(distill_resource("base-variables.css")),
+      includeCSS(theme),
+      includeCSS(distill_resource("base-style.css"))
     )
   } else {
     theme_html <- NULL
