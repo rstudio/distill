@@ -212,14 +212,14 @@ distill_article <- function(toc = FALSE,
                    metadata_json,
                    manifest_in_header(site_config, input_file, metadata, self_contained),
                    navigation_in_header_file(site_config),
+                   listing$html,
                    distill_in_header_file(theme))
 
     # before body includes: distill then user
     before_body <- c(front_matter_before_body(metadata),
                      navigation_before_body_file(dirname(input_file), site_config),
                      site_before_body_file(site_config),
-                     includes$before_body,
-                     listing$html)
+                     includes$before_body)
 
     # after body includes: user then distill
     after_body <- c(includes$after_body,
