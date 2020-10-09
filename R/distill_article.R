@@ -201,9 +201,9 @@ distill_article <- function(toc = FALSE,
     # add site related dependencies
     ensure_site_dependencies(site_config, dirname(input_file))
 
-    # derive theme from article or site
-    if (is.null(theme) && !is.null(site_config$theme)) {
-      theme <- site_config$theme
+    # resolve theme from site if it's not specified in the article
+    if ((is.null(theme) || !file.exists(theme))) {
+      theme <- theme_from_site_config(find_site_dir(input_file), site_config)
     }
 
     # header includes: distill then user

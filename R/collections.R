@@ -76,9 +76,8 @@ render_collections <- function(site_dir, site_config, collections, quiet = FALSE
   # caching html generator
   navigation_html <- navigation_html_generator()
 
-  # distill html
-  theme <- if (!is.null(site_config$theme))
-    file.path(site_dir, site_config$theme)
+  # distill html (w/ theme if available)
+  theme <- theme_from_site_config(site_dir, site_config)
   distill_html <- distill_in_header(theme)
 
   # site includes
@@ -243,8 +242,8 @@ publish_collection_article_to_site <- function(site_dir, site_config, encoding,
     input_file = input_file
   )
 
-  theme <- if (!is.null(site_config$theme))
-    file.path(site_dir, site_config$theme)
+  # get site theme
+  theme <- theme_from_site_config(site_dir, site_config)
 
   # render the article
   output_file <- render_collection_article(
@@ -264,6 +263,20 @@ publish_collection_article_to_site <- function(site_dir, site_config, encoding,
 
   # return output file
   output_file
+}
+
+# theme can either be specified @ site_config level or as an article option
+theme_from_site_config <- function(site_dir, site_config) {
+  theme <- site_config$theme
+  if (is.null(theme)) {
+    with_distill_output_options(site_config, function(output_options) {
+      theme <<- output_options$theme
+    })
+  }
+  if (!is.null(theme))
+    file.path(site_dir, theme)
+  else
+    theme
 }
 
 
