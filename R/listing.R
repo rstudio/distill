@@ -26,6 +26,7 @@ resolve_yaml_listing <- function(input_file, site_config, metadata, yaml_listing
 
   categories <- TRUE
   categories_metadata <- TRUE
+  authors_metadata <- TRUE
 
   for (collection in names(yaml_listing)) {
 
@@ -37,6 +38,10 @@ resolve_yaml_listing <- function(input_file, site_config, metadata, yaml_listing
 
     if (identical(collection[["categories_metadata"]], FALSE))
       categories_metadata <- FALSE
+
+    if (identical(collection[["authors_metadata"]], FALSE))
+      authors_metadata <- FALSE
+
 
     articles <- yaml_listing[[collection$name]]
 
@@ -62,7 +67,8 @@ resolve_yaml_listing <- function(input_file, site_config, metadata, yaml_listing
   listing_html <- html_for_articles(listing_articles,
                                     caption = metadata$title,
                                     categories = categories,
-                                    categories_metadata = categories_metadata)
+                                    categories_metadata = categories_metadata,
+                                    authors_metadata = authors_metadata)
 
   listing <- list(
     html = html_file(listing_html)
@@ -110,6 +116,7 @@ article_listing_html <- function(site_dir, metadata, collection, articles) {
   # detect whether we are showing categories (sidebar and inline)
   categories <- not_null(collection[["categories"]], TRUE)
   categories_metadata <- not_null(collection[["categories_metadata"]], TRUE)
+  authors_metadata <- not_null(collection[["authors_metadata"]], TRUE)
 
   # check for subscription
   subscription_html <- subscription_html(site_dir, collection)
@@ -132,11 +139,12 @@ article_listing_html <- function(site_dir, metadata, collection, articles) {
                     caption = metadata$title,
                     categories = categories,
                     categories_metadata = categories_metadata,
+                    authors_metadata = authors_metadata,
                     subscription_html = subscription_html,
                     custom_html = custom_html)
 }
 
-html_for_articles <- function(articles, caption = NULL, categories = FALSE, categories_metadata = FALSE, subscription_html = NULL, custom_html = NULL) {
+html_for_articles <- function(articles, caption = NULL, categories = FALSE, categories_metadata = FALSE, authors_metadata = FALSE, subscription_html = NULL, custom_html = NULL) {
 
   # generate categories listing
   categories_html <- if (categories) categories_listing_html(articles)
@@ -170,7 +178,7 @@ html_for_articles <- function(articles, caption = NULL, categories = FALSE, cate
                   HTML(jsonlite::toJSON(metadata))),
       div(class = "metadata",
         div(class = "publishedDate", date_as_abbrev(article$date)),
-        html_for_author(article$author)
+        if (authors_metadata) html_for_author(article$author)
       ),
       div(class = "thumbnail", preview),
       div(class = "description",
