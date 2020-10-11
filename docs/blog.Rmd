@@ -151,7 +151,7 @@ As a result of including `categories`, the listing page now looks like this:
 
 ![](images/site-listing-categories.png){.screenshot width="95%"}
 
-Categories are listed in the right-hand sidebar and are also displayed as metadata for each post. You can disable either of both category displays using `collection` properties defined in `_site.yml`. For example:
+Categories are listed in the right-hand sidebar and are also displayed as metadata for each post. The name of each post's author is also displayed in the article listing. You can disable both category displays as well as authors display using `collection` properties defined in `_site.yml`. For example:
 
 **\_site.yml**
 
@@ -166,6 +166,7 @@ collections:
   posts:
     categories: false
     categories_metadata: false
+    authors_metadata: false
 ```
 
 ### RSS feed

@@ -201,9 +201,9 @@ distill_article <- function(toc = FALSE,
     # add site related dependencies
     ensure_site_dependencies(site_config, dirname(input_file))
 
-    # derive theme from article or site
-    if (is.null(theme) && !is.null(site_config$theme)) {
-      theme <- site_config$theme
+    # resolve theme from site if it's not specified in the article
+    if ((is.null(theme) || !file.exists(theme))) {
+      theme <- theme_from_site_config(find_site_dir(input_file), site_config)
     }
 
     # header includes: distill then user
@@ -407,14 +407,11 @@ distill_in_header_html <- function(theme = NULL) {
                 package = "distill")
   )
   if (!is.null(theme)) {
-    css <- paste(c(
-      "",
-      xfun::read_utf8(distill_resource("base-variables.css")),
-      xfun::read_utf8(theme),
-      xfun::read_utf8(distill_resource("base-style.css")),
-      ""
-    ), collapse = "\n")
-    theme_html <- tags$style(type = "text/css", css)
+    theme_html <- tagList(
+      includeCSS(distill_resource("base-variables.css")),
+      includeCSS(theme),
+      includeCSS(distill_resource("base-style.css"))
+    )
   } else {
     theme_html <- NULL
   }
