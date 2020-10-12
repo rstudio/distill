@@ -10,7 +10,6 @@ navbar:
     image: images/logo.png
     href: https://www.rstudio.com
   source_url: true
-  search: true
   right:
     - text: "Authoring"
       menu:
