@@ -30,6 +30,7 @@ html {
   --heading-font:    sans-serif;
   --mono-font:       monospace;
   --body-font:       sans-serif;
+  --navbar-font:     sans-serif;  /* websites + blogs only */
 }
 
 /*-- ARTICLE METADATA --*/
@@ -71,3 +72,7 @@ d-appendix {
   --hover-color:      white;
   --bkgd-color:       #0F2E3D;
 }
+
+/*-- Additional custom styles --*/
+/* Add any additional CSS rules below                      */
+

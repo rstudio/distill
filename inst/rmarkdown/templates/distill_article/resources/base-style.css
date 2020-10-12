@@ -9,11 +9,15 @@
   --body-default: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen, Ubuntu, Cantarell, "Fira Sans", "Droid Sans", "Helvetica Neue", Arial, sans-serif;
 }
 
-body {
+body,
+.posts-list .post-preview p,
+.posts-list .description p {
   font-family: var(--body-font), var(--body-default);
 }
 
-h1, h2, h3, h4, h5, h6 {
+h1, h2, h3, h4, h5, h6,
+.posts-list .post-preview h2,
+.posts-list .description h2 {
   font-family: var(--heading-font), var(--heading-default);
 }
 
@@ -113,16 +117,21 @@ d-appendix d-footnote-list a.footnote-backlink {
 /*-- WEBSITE HEADER + FOOTER --*/
 .distill-site-header .title {
 	font-size: var(--title-size, 18px);
+	font-family: var(--navbar-font), var(--heading-default);
+}
+
+.distill-site-header a {
+  font-family: var(--navbar-font), var(--heading-default);
+}
+
+.distill-site-header a:hover {
+	color: var(--hover-color, white);
 }
 
 .distill-site-header {
 	font-size: var(--text-size, 15px);
 	color: var(--text-color, rgba(255, 255, 255, 0.8));
 	background-color: var(--bkgd-color, #0F2E3D);
-}
-
-.distill-site-header a:hover {
-	color: var(--hover-color, white);
 }
 
 .distill-site-footer {
