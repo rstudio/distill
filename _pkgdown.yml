@@ -1,0 +1,50 @@
+destination: reference
+
+template:
+  package: quillt
+
+url: https://distill.netlify.app
+
+development:
+  mode: auto
+
+navbar:
+  title: ~
+  type: default
+  left:
+  - text: Get started
+    href: articles/distill.html
+  - text: Examples
+    href: articles/examples.html
+  - text: Reference
+    href: reference/index.html
+  right:
+  - text: News
+    href: news/index.html
+  - icon: fa-github fa-lg
+    href: https://github.com/rstudio/distill
+
+reference:
+- title: Output formats
+  desc: >
+    Specify in your document's YAML frontmatter to knit,
+    or specify as the `output_format` with `rmarkdown::render()`.
+  contents:
+  - '`distill_article`'
+  - '`distill_website`'
+- title: Create articles and websites
+  contents:
+  - '`create_article`'
+  - '`create_website`'
+  - '`create_blog`'
+- title: Create blog posts
+  contents:
+  - '`create_post`'
+  - '`import_post`'
+  - '`update_post`'
+- title: Create a theme to add to an article or website
+  contents:
+  - '`create_theme`'
+- title: Publish a website
+  contents:
+  - '`publish_website`'

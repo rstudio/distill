@@ -1995,7 +1995,7 @@ code span.wa { color: #008000; font-weight: bold; } /* Warning */
   </script>
 
   <!--/radix_placeholder_distill-->
-  <script src="site_libs/header-attrs-2.4.1/header-attrs.js"></script>
+  <script src="site_libs/header-attrs-2.4/header-attrs.js"></script>
   <script src="site_libs/jquery-1.11.3/jquery.min.js"></script>
   <script src="site_libs/anchor-4.2.2/anchor.min.js"></script>
   <script src="site_libs/bowser-1.9.3/bowser.min.js"></script>
@@ -2093,7 +2093,6 @@ Publishing
 <a href="publish_website.html">Publishing Websites</a>
 </div>
 </div>
-<a href="news.html">News</a>
 <a href="https://github.com/rstudio/distill" aria-label="Link to source">
 <i class="fab fa-github" aria-hidden="true"></i>
 </a>
@@ -2214,10 +2213,10 @@ Publishing
 <h2 id="site-output">Site output</h2>
 <p>The <strong>_site.yml</strong> file has a number of options that affect site output including where it is written and what files are included and excluded from the site. Here’s an example that makes use of a few of these options:</p>
 <p><strong>_site.yml</strong></p>
-<div class="sourceCode" id="cb2"><pre class="sourceCode yaml"><code class="sourceCode yaml"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true"></a><span class="fu">name</span><span class="kw">:</span><span class="at"> </span><span class="st">&quot;my-website&quot;</span></span>
-<span id="cb2-2"><a href="#cb2-2" aria-hidden="true"></a><span class="fu">output_dir</span><span class="kw">:</span><span class="at"> </span><span class="st">&quot;_site&quot;</span></span>
-<span id="cb2-3"><a href="#cb2-3" aria-hidden="true"></a><span class="fu">include</span><span class="kw">:</span><span class="at"> </span><span class="kw">[</span><span class="st">&quot;import.R&quot;</span><span class="kw">]</span></span>
-<span id="cb2-4"><a href="#cb2-4" aria-hidden="true"></a><span class="fu">exclude</span><span class="kw">:</span><span class="at"> </span><span class="kw">[</span><span class="st">&quot;docs.txt&quot;</span><span class="kw">,</span><span class="at"> </span><span class="st">&quot;*.csv&quot;</span><span class="kw">]</span></span></code></pre></div>
+<div class="sourceCode" id="cb2"><pre class="sourceCode yaml"><code class="sourceCode yaml"><span id="cb2-1"><a href="#cb2-1"></a><span class="fu">name</span><span class="kw">:</span><span class="at"> </span><span class="st">&quot;my-website&quot;</span></span>
+<span id="cb2-2"><a href="#cb2-2"></a><span class="fu">output_dir</span><span class="kw">:</span><span class="at"> </span><span class="st">&quot;_site&quot;</span></span>
+<span id="cb2-3"><a href="#cb2-3"></a><span class="fu">include</span><span class="kw">:</span><span class="at"> </span><span class="kw">[</span><span class="st">&quot;import.R&quot;</span><span class="kw">]</span></span>
+<span id="cb2-4"><a href="#cb2-4"></a><span class="fu">exclude</span><span class="kw">:</span><span class="at"> </span><span class="kw">[</span><span class="st">&quot;docs.txt&quot;</span><span class="kw">,</span><span class="at"> </span><span class="st">&quot;*.csv&quot;</span><span class="kw">]</span></span></code></pre></div>
 <p>The <code>name</code> field provides a suggested URL path for your website when it is published (by default this is just the name of the directory containing the site).</p>
 <p>The <code>output_dir</code> field indicates which directory to copy site content into (“_site” is the default if none is specified). Note that this can be “.” to keep all content within the root website directory alongside the source code.</p>
 <p>The <code>include</code> and <code>exclude</code> fields enable you to override the default behavior visa-vi what files are copied into the output directory. By default, all files within the website directory are copied into the output directory (e.g. “_site”) save for the following:</p>
@@ -2233,58 +2232,58 @@ Publishing
 <p>Site navigation bars include the site’s title, an optional logo, top-level links to articles, and if need be drop-down menus that include links to several articles. For example:</p>
 <p><img src="images/navigation-bar.png" class="screenshot" style="width:95.0%" /></p>
 <p>Elements of the site navigation bar are specified within the <code>navbar</code> section of the <code>_site.yml</code> file. For example, here is the YAML that was used to create the navigation bar displayed above:</p>
-<div class="sourceCode" id="cb3"><pre class="sourceCode yaml"><code class="sourceCode yaml"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true"></a><span class="pp">---</span></span>
-<span id="cb3-2"><a href="#cb3-2" aria-hidden="true"></a><span class="fu">name</span><span class="kw">:</span><span class="at"> </span><span class="st">&quot;distill&quot;</span></span>
-<span id="cb3-3"><a href="#cb3-3" aria-hidden="true"></a><span class="fu">title</span><span class="kw">:</span><span class="at"> </span><span class="st">&quot;Distill for R Markdown&quot;</span></span>
-<span id="cb3-4"><a href="#cb3-4" aria-hidden="true"></a><span class="fu">navbar</span><span class="kw">:</span></span>
-<span id="cb3-5"><a href="#cb3-5" aria-hidden="true"></a><span class="at">  </span><span class="fu">logo</span><span class="kw">:</span></span>
-<span id="cb3-6"><a href="#cb3-6" aria-hidden="true"></a><span class="at">    </span><span class="fu">image</span><span class="kw">:</span><span class="at"> images/logo.png</span></span>
-<span id="cb3-7"><a href="#cb3-7" aria-hidden="true"></a><span class="at">    </span><span class="fu">href</span><span class="kw">:</span><span class="at"> https://www.rstudio.com</span></span>
-<span id="cb3-8"><a href="#cb3-8" aria-hidden="true"></a><span class="at">  </span><span class="fu">right</span><span class="kw">:</span></span>
-<span id="cb3-9"><a href="#cb3-9" aria-hidden="true"></a><span class="at">    </span><span class="kw">-</span><span class="at"> </span><span class="fu">text</span><span class="kw">:</span><span class="at"> </span><span class="st">&quot;Figures&quot;</span></span>
-<span id="cb3-10"><a href="#cb3-10" aria-hidden="true"></a><span class="at">      </span><span class="fu">href</span><span class="kw">:</span><span class="at"> figures.html</span></span>
-<span id="cb3-11"><a href="#cb3-11" aria-hidden="true"></a><span class="at">    </span><span class="kw">-</span><span class="at"> </span><span class="fu">text</span><span class="kw">:</span><span class="at"> </span><span class="st">&quot;Tables&quot;</span></span>
-<span id="cb3-12"><a href="#cb3-12" aria-hidden="true"></a><span class="at">      </span><span class="fu">href</span><span class="kw">:</span><span class="at"> tables.html</span></span>
-<span id="cb3-13"><a href="#cb3-13" aria-hidden="true"></a><span class="at">    </span><span class="kw">-</span><span class="at"> </span><span class="fu">text</span><span class="kw">:</span><span class="at"> </span><span class="st">&quot;Citations&quot;</span></span>
-<span id="cb3-14"><a href="#cb3-14" aria-hidden="true"></a><span class="at">      </span><span class="fu">href</span><span class="kw">:</span><span class="at"> citations.html</span></span>
-<span id="cb3-15"><a href="#cb3-15" aria-hidden="true"></a><span class="at">    </span><span class="kw">-</span><span class="at"> </span><span class="fu">text</span><span class="kw">:</span><span class="at"> </span><span class="st">&quot;Publish&quot;</span></span>
-<span id="cb3-16"><a href="#cb3-16" aria-hidden="true"></a><span class="at">      </span><span class="fu">menu</span><span class="kw">:</span></span>
-<span id="cb3-17"><a href="#cb3-17" aria-hidden="true"></a><span class="at">        </span><span class="kw">-</span><span class="at"> </span><span class="fu">text</span><span class="kw">:</span><span class="at"> </span><span class="st">&quot;Publishing Articles&quot;</span></span>
-<span id="cb3-18"><a href="#cb3-18" aria-hidden="true"></a><span class="at">          </span><span class="fu">href</span><span class="kw">:</span><span class="at"> publish_article.html</span></span>
-<span id="cb3-19"><a href="#cb3-19" aria-hidden="true"></a><span class="at">        </span><span class="kw">-</span><span class="at"> </span><span class="fu">text</span><span class="kw">:</span><span class="at"> </span><span class="st">&quot;Publishing a Website&quot;</span></span>
-<span id="cb3-20"><a href="#cb3-20" aria-hidden="true"></a><span class="at">          </span><span class="fu">href</span><span class="kw">:</span><span class="at"> publish_website.html</span></span>
-<span id="cb3-21"><a href="#cb3-21" aria-hidden="true"></a><span class="at">        </span><span class="kw">-</span><span class="at"> </span><span class="fu">text</span><span class="kw">:</span><span class="at"> </span><span class="st">&quot;---&quot;</span></span>
-<span id="cb3-22"><a href="#cb3-22" aria-hidden="true"></a><span class="at">        </span><span class="kw">-</span><span class="at"> </span><span class="fu">text</span><span class="kw">:</span><span class="at"> </span><span class="st">&quot;Article Metadata&quot;</span></span>
-<span id="cb3-23"><a href="#cb3-23" aria-hidden="true"></a><span class="at">          </span><span class="fu">href</span><span class="kw">:</span><span class="at"> metadata.html</span></span>
-<span id="cb3-24"><a href="#cb3-24" aria-hidden="true"></a><span class="at">    </span><span class="kw">-</span><span class="at"> </span><span class="fu">icon</span><span class="kw">:</span><span class="at"> fab fa-github</span></span>
-<span id="cb3-25"><a href="#cb3-25" aria-hidden="true"></a><span class="at">      </span><span class="fu">href</span><span class="kw">:</span><span class="at"> https://github.com/rstudio/distill</span></span>
-<span id="cb3-26"><a href="#cb3-26" aria-hidden="true"></a><span class="fu">output</span><span class="kw">:</span><span class="at"> distill::distill_article</span></span>
-<span id="cb3-27"><a href="#cb3-27" aria-hidden="true"></a><span class="pp">---</span></span></code></pre></div>
+<div class="sourceCode" id="cb3"><pre class="sourceCode yaml"><code class="sourceCode yaml"><span id="cb3-1"><a href="#cb3-1"></a><span class="pp">---</span></span>
+<span id="cb3-2"><a href="#cb3-2"></a><span class="fu">name</span><span class="kw">:</span><span class="at"> </span><span class="st">&quot;distill&quot;</span></span>
+<span id="cb3-3"><a href="#cb3-3"></a><span class="fu">title</span><span class="kw">:</span><span class="at"> </span><span class="st">&quot;Distill for R Markdown&quot;</span></span>
+<span id="cb3-4"><a href="#cb3-4"></a><span class="fu">navbar</span><span class="kw">:</span></span>
+<span id="cb3-5"><a href="#cb3-5"></a><span class="at">  </span><span class="fu">logo</span><span class="kw">:</span></span>
+<span id="cb3-6"><a href="#cb3-6"></a><span class="at">    </span><span class="fu">image</span><span class="kw">:</span><span class="at"> images/logo.png</span></span>
+<span id="cb3-7"><a href="#cb3-7"></a><span class="at">    </span><span class="fu">href</span><span class="kw">:</span><span class="at"> https://www.rstudio.com</span></span>
+<span id="cb3-8"><a href="#cb3-8"></a><span class="at">  </span><span class="fu">right</span><span class="kw">:</span></span>
+<span id="cb3-9"><a href="#cb3-9"></a><span class="at">    </span><span class="kw">-</span><span class="at"> </span><span class="fu">text</span><span class="kw">:</span><span class="at"> </span><span class="st">&quot;Figures&quot;</span></span>
+<span id="cb3-10"><a href="#cb3-10"></a><span class="at">      </span><span class="fu">href</span><span class="kw">:</span><span class="at"> figures.html</span></span>
+<span id="cb3-11"><a href="#cb3-11"></a><span class="at">    </span><span class="kw">-</span><span class="at"> </span><span class="fu">text</span><span class="kw">:</span><span class="at"> </span><span class="st">&quot;Tables&quot;</span></span>
+<span id="cb3-12"><a href="#cb3-12"></a><span class="at">      </span><span class="fu">href</span><span class="kw">:</span><span class="at"> tables.html</span></span>
+<span id="cb3-13"><a href="#cb3-13"></a><span class="at">    </span><span class="kw">-</span><span class="at"> </span><span class="fu">text</span><span class="kw">:</span><span class="at"> </span><span class="st">&quot;Citations&quot;</span></span>
+<span id="cb3-14"><a href="#cb3-14"></a><span class="at">      </span><span class="fu">href</span><span class="kw">:</span><span class="at"> citations.html</span></span>
+<span id="cb3-15"><a href="#cb3-15"></a><span class="at">    </span><span class="kw">-</span><span class="at"> </span><span class="fu">text</span><span class="kw">:</span><span class="at"> </span><span class="st">&quot;Publish&quot;</span></span>
+<span id="cb3-16"><a href="#cb3-16"></a><span class="at">      </span><span class="fu">menu</span><span class="kw">:</span></span>
+<span id="cb3-17"><a href="#cb3-17"></a><span class="at">        </span><span class="kw">-</span><span class="at"> </span><span class="fu">text</span><span class="kw">:</span><span class="at"> </span><span class="st">&quot;Publishing Articles&quot;</span></span>
+<span id="cb3-18"><a href="#cb3-18"></a><span class="at">          </span><span class="fu">href</span><span class="kw">:</span><span class="at"> publish_article.html</span></span>
+<span id="cb3-19"><a href="#cb3-19"></a><span class="at">        </span><span class="kw">-</span><span class="at"> </span><span class="fu">text</span><span class="kw">:</span><span class="at"> </span><span class="st">&quot;Publishing a Website&quot;</span></span>
+<span id="cb3-20"><a href="#cb3-20"></a><span class="at">          </span><span class="fu">href</span><span class="kw">:</span><span class="at"> publish_website.html</span></span>
+<span id="cb3-21"><a href="#cb3-21"></a><span class="at">        </span><span class="kw">-</span><span class="at"> </span><span class="fu">text</span><span class="kw">:</span><span class="at"> </span><span class="st">&quot;---&quot;</span></span>
+<span id="cb3-22"><a href="#cb3-22"></a><span class="at">        </span><span class="kw">-</span><span class="at"> </span><span class="fu">text</span><span class="kw">:</span><span class="at"> </span><span class="st">&quot;Article Metadata&quot;</span></span>
+<span id="cb3-23"><a href="#cb3-23"></a><span class="at">          </span><span class="fu">href</span><span class="kw">:</span><span class="at"> metadata.html</span></span>
+<span id="cb3-24"><a href="#cb3-24"></a><span class="at">    </span><span class="kw">-</span><span class="at"> </span><span class="fu">icon</span><span class="kw">:</span><span class="at"> fab fa-github</span></span>
+<span id="cb3-25"><a href="#cb3-25"></a><span class="at">      </span><span class="fu">href</span><span class="kw">:</span><span class="at"> https://github.com/rstudio/distill</span></span>
+<span id="cb3-26"><a href="#cb3-26"></a><span class="fu">output</span><span class="kw">:</span><span class="at"> distill::distill_article</span></span>
+<span id="cb3-27"><a href="#cb3-27"></a><span class="pp">---</span></span></code></pre></div>
 <p>Note that we specify that the menu items appear on the <code>right</code> side of the navigation bar. We could have also used <code>left</code>, or chosen to put some items on the <code>left</code> and some on the <code>right</code>.</p>
 <p>Note also that we used an <code>icon</code> for one of the menus, specifying the <a href="https://fontawesome.com/">Font Awesome</a> <code>fab fa-github</code> identifier for the GitHub icon (you can use any Font Awesome icon). If there isn’t a Font Awesome icon that matches the image you want, you can also specify a custom <code>image</code> rather than an <code>icon</code>.</p>
 <h3 id="site-search">Site search</h3>
 <p>You can add a search box to the navigation bar using the <code>search</code> field of the <code>navbar</code> key within <code>_site.yml</code>. For example:</p>
-<div class="sourceCode" id="cb4"><pre class="sourceCode yaml"><code class="sourceCode yaml"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true"></a><span class="pp">---</span></span>
-<span id="cb4-2"><a href="#cb4-2" aria-hidden="true"></a><span class="fu">name</span><span class="kw">:</span><span class="at"> </span><span class="st">&quot;distill&quot;</span></span>
-<span id="cb4-3"><a href="#cb4-3" aria-hidden="true"></a><span class="fu">title</span><span class="kw">:</span><span class="at"> </span><span class="st">&quot;Distill for R Markdown&quot;</span></span>
-<span id="cb4-4"><a href="#cb4-4" aria-hidden="true"></a><span class="fu">navbar</span><span class="kw">:</span></span>
-<span id="cb4-5"><a href="#cb4-5" aria-hidden="true"></a><span class="at">  </span><span class="fu">logo</span><span class="kw">:</span></span>
-<span id="cb4-6"><a href="#cb4-6" aria-hidden="true"></a><span class="at">    </span><span class="fu">image</span><span class="kw">:</span><span class="at"> images/logo.png</span></span>
-<span id="cb4-7"><a href="#cb4-7" aria-hidden="true"></a><span class="at">    </span><span class="fu">href</span><span class="kw">:</span><span class="at"> https://www.rstudio.com</span></span>
-<span id="cb4-8"><a href="#cb4-8" aria-hidden="true"></a><span class="at">  </span><span class="fu">search</span><span class="kw">:</span><span class="at"> </span><span class="ch">true</span></span>
-<span id="cb4-9"><a href="#cb4-9" aria-hidden="true"></a><span class="pp">---</span></span></code></pre></div>
+<div class="sourceCode" id="cb4"><pre class="sourceCode yaml"><code class="sourceCode yaml"><span id="cb4-1"><a href="#cb4-1"></a><span class="pp">---</span></span>
+<span id="cb4-2"><a href="#cb4-2"></a><span class="fu">name</span><span class="kw">:</span><span class="at"> </span><span class="st">&quot;distill&quot;</span></span>
+<span id="cb4-3"><a href="#cb4-3"></a><span class="fu">title</span><span class="kw">:</span><span class="at"> </span><span class="st">&quot;Distill for R Markdown&quot;</span></span>
+<span id="cb4-4"><a href="#cb4-4"></a><span class="fu">navbar</span><span class="kw">:</span></span>
+<span id="cb4-5"><a href="#cb4-5"></a><span class="at">  </span><span class="fu">logo</span><span class="kw">:</span></span>
+<span id="cb4-6"><a href="#cb4-6"></a><span class="at">    </span><span class="fu">image</span><span class="kw">:</span><span class="at"> images/logo.png</span></span>
+<span id="cb4-7"><a href="#cb4-7"></a><span class="at">    </span><span class="fu">href</span><span class="kw">:</span><span class="at"> https://www.rstudio.com</span></span>
+<span id="cb4-8"><a href="#cb4-8"></a><span class="at">  </span><span class="fu">search</span><span class="kw">:</span><span class="at"> </span><span class="ch">true</span></span>
+<span id="cb4-9"><a href="#cb4-9"></a><span class="pp">---</span></span></code></pre></div>
 <p>Note that only articles with a <code>description</code> metadata field are included within search results. Also note that search is enabled by default for <a href="blog.html">blog sites</a>.</p>
 <h3 id="source-code">Source code</h3>
 <p>If you want to display a link to the source code for your website on the navigation bar, add a <code>source_url</code> field to the <code>navbar</code> definition. For example:</p>
-<div class="sourceCode" id="cb5"><pre class="sourceCode yaml"><code class="sourceCode yaml"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true"></a><span class="pp">---</span></span>
-<span id="cb5-2"><a href="#cb5-2" aria-hidden="true"></a><span class="fu">name</span><span class="kw">:</span><span class="at"> </span><span class="st">&quot;distill&quot;</span></span>
-<span id="cb5-3"><a href="#cb5-3" aria-hidden="true"></a><span class="fu">title</span><span class="kw">:</span><span class="at"> </span><span class="st">&quot;Distill for R Markdown&quot;</span></span>
-<span id="cb5-4"><a href="#cb5-4" aria-hidden="true"></a><span class="fu">navbar</span><span class="kw">:</span></span>
-<span id="cb5-5"><a href="#cb5-5" aria-hidden="true"></a><span class="at">  </span><span class="fu">logo</span><span class="kw">:</span></span>
-<span id="cb5-6"><a href="#cb5-6" aria-hidden="true"></a><span class="at">    </span><span class="fu">image</span><span class="kw">:</span><span class="at"> images/logo.png</span></span>
-<span id="cb5-7"><a href="#cb5-7" aria-hidden="true"></a><span class="at">    </span><span class="fu">href</span><span class="kw">:</span><span class="at"> https://www.rstudio.com</span></span>
-<span id="cb5-8"><a href="#cb5-8" aria-hidden="true"></a><span class="at">  </span><span class="fu">source_url</span><span class="kw">:</span><span class="at"> https://github.com/rstudio/distill</span></span>
-<span id="cb5-9"><a href="#cb5-9" aria-hidden="true"></a><span class="pp">---</span></span></code></pre></div>
+<div class="sourceCode" id="cb5"><pre class="sourceCode yaml"><code class="sourceCode yaml"><span id="cb5-1"><a href="#cb5-1"></a><span class="pp">---</span></span>
+<span id="cb5-2"><a href="#cb5-2"></a><span class="fu">name</span><span class="kw">:</span><span class="at"> </span><span class="st">&quot;distill&quot;</span></span>
+<span id="cb5-3"><a href="#cb5-3"></a><span class="fu">title</span><span class="kw">:</span><span class="at"> </span><span class="st">&quot;Distill for R Markdown&quot;</span></span>
+<span id="cb5-4"><a href="#cb5-4"></a><span class="fu">navbar</span><span class="kw">:</span></span>
+<span id="cb5-5"><a href="#cb5-5"></a><span class="at">  </span><span class="fu">logo</span><span class="kw">:</span></span>
+<span id="cb5-6"><a href="#cb5-6"></a><span class="at">    </span><span class="fu">image</span><span class="kw">:</span><span class="at"> images/logo.png</span></span>
+<span id="cb5-7"><a href="#cb5-7"></a><span class="at">    </span><span class="fu">href</span><span class="kw">:</span><span class="at"> https://www.rstudio.com</span></span>
+<span id="cb5-8"><a href="#cb5-8"></a><span class="at">  </span><span class="fu">source_url</span><span class="kw">:</span><span class="at"> https://github.com/rstudio/distill</span></span>
+<span id="cb5-9"><a href="#cb5-9"></a><span class="pp">---</span></span></code></pre></div>
 <p>Note that if you’ve already defined a <code>repository_url</code> field in <code>_site.yml</code> you can just use <code>source_url: true</code> and your <code>repository_url</code> will be used for the link.</p>
 <h3 id="site-footer">Site footer</h3>
 <p>When you use a navigation bar, you can optionally also include a site footer which uses the same theme (background and foreground colors). For example:</p>
@@ -2299,53 +2298,53 @@ Software licensed under the [Apache License, v2.0]
 (https://www.apache.org/licenses/LICENSE-2.0).</code></pre>
 <h3 id="theming">Theming</h3>
 <p>You can use CSS to create an alternate theme for your navigation bar and site footer. Here is the CSS used for the default appearance:</p>
-<div class="sourceCode" id="cb7"><pre class="sourceCode css"><code class="sourceCode css"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true"></a><span class="fu">.distill-site-nav</span> {</span>
-<span id="cb7-2"><a href="#cb7-2" aria-hidden="true"></a>  <span class="kw">color</span>: <span class="fu">rgba(</span><span class="dv">255</span><span class="op">,</span> <span class="dv">255</span><span class="op">,</span> <span class="dv">255</span><span class="op">,</span> <span class="dv">0.8</span><span class="fu">)</span><span class="op">;</span></span>
-<span id="cb7-3"><a href="#cb7-3" aria-hidden="true"></a>  <span class="kw">background-color</span>: <span class="cn">#455a64</span><span class="op">;</span></span>
-<span id="cb7-4"><a href="#cb7-4" aria-hidden="true"></a>  <span class="kw">font-size</span>: <span class="dv">15</span><span class="dt">px</span><span class="op">;</span></span>
-<span id="cb7-5"><a href="#cb7-5" aria-hidden="true"></a>  <span class="kw">font-weight</span>: <span class="dv">300</span><span class="op">;</span></span>
-<span id="cb7-6"><a href="#cb7-6" aria-hidden="true"></a>}</span>
-<span id="cb7-7"><a href="#cb7-7" aria-hidden="true"></a></span>
-<span id="cb7-8"><a href="#cb7-8" aria-hidden="true"></a><span class="fu">.distill-site-nav</span> a {</span>
-<span id="cb7-9"><a href="#cb7-9" aria-hidden="true"></a>  <span class="kw">color</span>: <span class="bu">inherit</span><span class="op">;</span></span>
-<span id="cb7-10"><a href="#cb7-10" aria-hidden="true"></a>  <span class="kw">text-decoration</span>: <span class="dv">none</span><span class="op">;</span></span>
-<span id="cb7-11"><a href="#cb7-11" aria-hidden="true"></a>}</span>
-<span id="cb7-12"><a href="#cb7-12" aria-hidden="true"></a></span>
-<span id="cb7-13"><a href="#cb7-13" aria-hidden="true"></a><span class="fu">.distill-site-nav</span> a<span class="in">:hover</span> {</span>
-<span id="cb7-14"><a href="#cb7-14" aria-hidden="true"></a>  <span class="kw">color</span>: <span class="cn">white</span><span class="op">;</span></span>
-<span id="cb7-15"><a href="#cb7-15" aria-hidden="true"></a>}</span>
-<span id="cb7-16"><a href="#cb7-16" aria-hidden="true"></a></span>
-<span id="cb7-17"><a href="#cb7-17" aria-hidden="true"></a><span class="fu">.distill-site-header</span> {</span>
-<span id="cb7-18"><a href="#cb7-18" aria-hidden="true"></a>}</span>
-<span id="cb7-19"><a href="#cb7-19" aria-hidden="true"></a></span>
-<span id="cb7-20"><a href="#cb7-20" aria-hidden="true"></a><span class="fu">.distill-site-footer</span> {</span>
-<span id="cb7-21"><a href="#cb7-21" aria-hidden="true"></a>}</span>
-<span id="cb7-22"><a href="#cb7-22" aria-hidden="true"></a></span>
-<span id="cb7-23"><a href="#cb7-23" aria-hidden="true"></a><span class="im">@media</span> <span class="dv">print</span> {</span>
-<span id="cb7-24"><a href="#cb7-24" aria-hidden="true"></a>  <span class="fu">.distill-site-nav</span> {</span>
-<span id="cb7-25"><a href="#cb7-25" aria-hidden="true"></a>    <span class="kw">display</span>: <span class="dv">none</span><span class="op">;</span></span>
-<span id="cb7-26"><a href="#cb7-26" aria-hidden="true"></a>  }</span>
-<span id="cb7-27"><a href="#cb7-27" aria-hidden="true"></a>}</span></code></pre></div>
+<div class="sourceCode" id="cb7"><pre class="sourceCode css"><code class="sourceCode css"><span id="cb7-1"><a href="#cb7-1"></a><span class="fu">.distill-site-nav</span> {</span>
+<span id="cb7-2"><a href="#cb7-2"></a>  <span class="kw">color</span>: <span class="fu">rgba(</span><span class="dv">255</span><span class="op">,</span> <span class="dv">255</span><span class="op">,</span> <span class="dv">255</span><span class="op">,</span> <span class="dv">0.8</span><span class="fu">)</span><span class="op">;</span></span>
+<span id="cb7-3"><a href="#cb7-3"></a>  <span class="kw">background-color</span>: <span class="cn">#455a64</span><span class="op">;</span></span>
+<span id="cb7-4"><a href="#cb7-4"></a>  <span class="kw">font-size</span>: <span class="dv">15</span><span class="dt">px</span><span class="op">;</span></span>
+<span id="cb7-5"><a href="#cb7-5"></a>  <span class="kw">font-weight</span>: <span class="dv">300</span><span class="op">;</span></span>
+<span id="cb7-6"><a href="#cb7-6"></a>}</span>
+<span id="cb7-7"><a href="#cb7-7"></a></span>
+<span id="cb7-8"><a href="#cb7-8"></a><span class="fu">.distill-site-nav</span> a {</span>
+<span id="cb7-9"><a href="#cb7-9"></a>  <span class="kw">color</span>: <span class="bu">inherit</span><span class="op">;</span></span>
+<span id="cb7-10"><a href="#cb7-10"></a>  <span class="kw">text-decoration</span>: <span class="dv">none</span><span class="op">;</span></span>
+<span id="cb7-11"><a href="#cb7-11"></a>}</span>
+<span id="cb7-12"><a href="#cb7-12"></a></span>
+<span id="cb7-13"><a href="#cb7-13"></a><span class="fu">.distill-site-nav</span> a<span class="in">:hover</span> {</span>
+<span id="cb7-14"><a href="#cb7-14"></a>  <span class="kw">color</span>: <span class="cn">white</span><span class="op">;</span></span>
+<span id="cb7-15"><a href="#cb7-15"></a>}</span>
+<span id="cb7-16"><a href="#cb7-16"></a></span>
+<span id="cb7-17"><a href="#cb7-17"></a><span class="fu">.distill-site-header</span> {</span>
+<span id="cb7-18"><a href="#cb7-18"></a>}</span>
+<span id="cb7-19"><a href="#cb7-19"></a></span>
+<span id="cb7-20"><a href="#cb7-20"></a><span class="fu">.distill-site-footer</span> {</span>
+<span id="cb7-21"><a href="#cb7-21"></a>}</span>
+<span id="cb7-22"><a href="#cb7-22"></a></span>
+<span id="cb7-23"><a href="#cb7-23"></a><span class="im">@media</span> <span class="dv">print</span> {</span>
+<span id="cb7-24"><a href="#cb7-24"></a>  <span class="fu">.distill-site-nav</span> {</span>
+<span id="cb7-25"><a href="#cb7-25"></a>    <span class="kw">display</span>: <span class="dv">none</span><span class="op">;</span></span>
+<span id="cb7-26"><a href="#cb7-26"></a>  }</span>
+<span id="cb7-27"><a href="#cb7-27"></a>}</span></code></pre></div>
 <p>The <code>distill-site-nav</code> class addresses both the header and footer, whereas the <code>distill-site-header</code> and <code>distill-site-footer</code> apply (respectively) to just the header and footer.</p>
 <p>To override all or part of this CSS, simply include a <code>styles.css</code> file in the main site directory and add a reference to it within your site output options. For example:</p>
 <p><strong>_site.yml</strong></p>
-<div class="sourceCode" id="cb8"><pre class="sourceCode yaml"><code class="sourceCode yaml"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true"></a><span class="fu">name</span><span class="kw">:</span><span class="at"> </span><span class="st">&quot;distill&quot;</span></span>
-<span id="cb8-2"><a href="#cb8-2" aria-hidden="true"></a><span class="fu">title</span><span class="kw">:</span><span class="at"> </span><span class="st">&quot;Distill for R Markdown&quot;</span></span>
-<span id="cb8-3"><a href="#cb8-3" aria-hidden="true"></a><span class="fu">navbar</span><span class="kw">:</span></span>
-<span id="cb8-4"><a href="#cb8-4" aria-hidden="true"></a><span class="co">  # (navbar definition here)</span></span>
-<span id="cb8-5"><a href="#cb8-5" aria-hidden="true"></a><span class="fu">output</span><span class="kw">:</span></span>
-<span id="cb8-6"><a href="#cb8-6" aria-hidden="true"></a><span class="at">  distill:</span><span class="fu">:distill_article</span><span class="kw">:</span></span>
-<span id="cb8-7"><a href="#cb8-7" aria-hidden="true"></a><span class="at">    </span><span class="fu">css</span><span class="kw">:</span><span class="at"> styles.css</span></span></code></pre></div>
+<div class="sourceCode" id="cb8"><pre class="sourceCode yaml"><code class="sourceCode yaml"><span id="cb8-1"><a href="#cb8-1"></a><span class="fu">name</span><span class="kw">:</span><span class="at"> </span><span class="st">&quot;distill&quot;</span></span>
+<span id="cb8-2"><a href="#cb8-2"></a><span class="fu">title</span><span class="kw">:</span><span class="at"> </span><span class="st">&quot;Distill for R Markdown&quot;</span></span>
+<span id="cb8-3"><a href="#cb8-3"></a><span class="fu">navbar</span><span class="kw">:</span></span>
+<span id="cb8-4"><a href="#cb8-4"></a><span class="co">  # (navbar definition here)</span></span>
+<span id="cb8-5"><a href="#cb8-5"></a><span class="fu">output</span><span class="kw">:</span></span>
+<span id="cb8-6"><a href="#cb8-6"></a><span class="at">  distill:</span><span class="fu">:distill_article</span><span class="kw">:</span></span>
+<span id="cb8-7"><a href="#cb8-7"></a><span class="at">    </span><span class="fu">css</span><span class="kw">:</span><span class="at"> styles.css</span></span></code></pre></div>
 <h2 id="google-analytics">Google analytics</h2>
 <p>You can add <a href="https://analytics.google.com/">Google Analytics</a> to your website by adding a <code>google_analytics</code> tracking ID to your <code>_site.yml</code> file. For example:</p>
 <p><strong>_site.yml</strong></p>
-<div class="sourceCode" id="cb9"><pre class="sourceCode yaml"><code class="sourceCode yaml"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true"></a><span class="fu">name</span><span class="kw">:</span><span class="at"> </span><span class="st">&quot;distill&quot;</span></span>
-<span id="cb9-2"><a href="#cb9-2" aria-hidden="true"></a><span class="fu">title</span><span class="kw">:</span><span class="at"> </span><span class="st">&quot;Distill for R Markdown&quot;</span></span>
-<span id="cb9-3"><a href="#cb9-3" aria-hidden="true"></a><span class="fu">base_url</span><span class="kw">:</span><span class="at"> https://rstudio.github.io/distill</span></span>
-<span id="cb9-4"><a href="#cb9-4" aria-hidden="true"></a><span class="fu">google_analytics</span><span class="kw">:</span><span class="at"> </span><span class="st">&quot;UA-77306155-2&quot;</span></span>
-<span id="cb9-5"><a href="#cb9-5" aria-hidden="true"></a><span class="fu">navbar</span><span class="kw">:</span></span>
-<span id="cb9-6"><a href="#cb9-6" aria-hidden="true"></a><span class="co">  # (navbar definition here)</span></span>
-<span id="cb9-7"><a href="#cb9-7" aria-hidden="true"></a><span class="fu">output</span><span class="kw">:</span><span class="at"> distill::distill_article</span></span></code></pre></div>
+<div class="sourceCode" id="cb9"><pre class="sourceCode yaml"><code class="sourceCode yaml"><span id="cb9-1"><a href="#cb9-1"></a><span class="fu">name</span><span class="kw">:</span><span class="at"> </span><span class="st">&quot;distill&quot;</span></span>
+<span id="cb9-2"><a href="#cb9-2"></a><span class="fu">title</span><span class="kw">:</span><span class="at"> </span><span class="st">&quot;Distill for R Markdown&quot;</span></span>
+<span id="cb9-3"><a href="#cb9-3"></a><span class="fu">base_url</span><span class="kw">:</span><span class="at"> https://rstudio.github.io/distill</span></span>
+<span id="cb9-4"><a href="#cb9-4"></a><span class="fu">google_analytics</span><span class="kw">:</span><span class="at"> </span><span class="st">&quot;UA-77306155-2&quot;</span></span>
+<span id="cb9-5"><a href="#cb9-5"></a><span class="fu">navbar</span><span class="kw">:</span></span>
+<span id="cb9-6"><a href="#cb9-6"></a><span class="co">  # (navbar definition here)</span></span>
+<span id="cb9-7"><a href="#cb9-7"></a><span class="fu">output</span><span class="kw">:</span><span class="at"> distill::distill_article</span></span></code></pre></div>
 <p>The Google Analytics tracking code will be automatically included on all pages of your website.</p>
 <h2 id="site-metadata">Site metadata</h2>
 <p>Distill articles can include various types of <a href="metadata.html">metadata</a> to make them easier to index, cite, and share. Metadata included within your <code>_site.yml</code> file is conveniently shared across all articles on your site (individual articles can always override any value within their own metadata).</p>
@@ -2390,17 +2389,17 @@ Software licensed under the [Apache License, v2.0]
 </table>
 <p>Here’s a <code>_site.yml</code> file that uses all of these fields (save for <code>license_url</code> since the license is already specified via <code>creative_commons</code>):</p>
 <p><strong>_site.yml</strong></p>
-<div class="sourceCode" id="cb10"><pre class="sourceCode yaml"><code class="sourceCode yaml"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true"></a><span class="fu">name</span><span class="kw">:</span><span class="at"> </span><span class="st">&quot;distill&quot;</span></span>
-<span id="cb10-2"><a href="#cb10-2" aria-hidden="true"></a><span class="fu">title</span><span class="kw">:</span><span class="at"> </span><span class="st">&quot;Distill for R Markdown&quot;</span></span>
-<span id="cb10-3"><a href="#cb10-3" aria-hidden="true"></a><span class="fu">favicon</span><span class="kw">:</span><span class="at"> images/favicon.png</span></span>
-<span id="cb10-4"><a href="#cb10-4" aria-hidden="true"></a><span class="fu">base_url</span><span class="kw">:</span><span class="at"> https://rstudio.github.io/distill</span></span>
-<span id="cb10-5"><a href="#cb10-5" aria-hidden="true"></a><span class="fu">repository_url</span><span class="kw">:</span><span class="at"> https://github.com/rstudio/distill</span></span>
-<span id="cb10-6"><a href="#cb10-6" aria-hidden="true"></a><span class="fu">creative_commons</span><span class="kw">:</span><span class="at"> CC BY</span></span>
-<span id="cb10-7"><a href="#cb10-7" aria-hidden="true"></a><span class="fu">twitter</span><span class="kw">:</span></span>
-<span id="cb10-8"><a href="#cb10-8" aria-hidden="true"></a><span class="at">  </span><span class="fu">site</span><span class="kw">:</span><span class="at"> </span><span class="st">&quot;@distilljournal&quot;</span></span>
-<span id="cb10-9"><a href="#cb10-9" aria-hidden="true"></a><span class="fu">navbar</span><span class="kw">:</span></span>
-<span id="cb10-10"><a href="#cb10-10" aria-hidden="true"></a><span class="co">  # (navbar definition here)</span></span>
-<span id="cb10-11"><a href="#cb10-11" aria-hidden="true"></a><span class="fu">output</span><span class="kw">:</span><span class="at"> distill::distill_article</span></span></code></pre></div>
+<div class="sourceCode" id="cb10"><pre class="sourceCode yaml"><code class="sourceCode yaml"><span id="cb10-1"><a href="#cb10-1"></a><span class="fu">name</span><span class="kw">:</span><span class="at"> </span><span class="st">&quot;distill&quot;</span></span>
+<span id="cb10-2"><a href="#cb10-2"></a><span class="fu">title</span><span class="kw">:</span><span class="at"> </span><span class="st">&quot;Distill for R Markdown&quot;</span></span>
+<span id="cb10-3"><a href="#cb10-3"></a><span class="fu">favicon</span><span class="kw">:</span><span class="at"> images/favicon.png</span></span>
+<span id="cb10-4"><a href="#cb10-4"></a><span class="fu">base_url</span><span class="kw">:</span><span class="at"> https://rstudio.github.io/distill</span></span>
+<span id="cb10-5"><a href="#cb10-5"></a><span class="fu">repository_url</span><span class="kw">:</span><span class="at"> https://github.com/rstudio/distill</span></span>
+<span id="cb10-6"><a href="#cb10-6"></a><span class="fu">creative_commons</span><span class="kw">:</span><span class="at"> CC BY</span></span>
+<span id="cb10-7"><a href="#cb10-7"></a><span class="fu">twitter</span><span class="kw">:</span></span>
+<span id="cb10-8"><a href="#cb10-8"></a><span class="at">  </span><span class="fu">site</span><span class="kw">:</span><span class="at"> </span><span class="st">&quot;@distilljournal&quot;</span></span>
+<span id="cb10-9"><a href="#cb10-9"></a><span class="fu">navbar</span><span class="kw">:</span></span>
+<span id="cb10-10"><a href="#cb10-10"></a><span class="co">  # (navbar definition here)</span></span>
+<span id="cb10-11"><a href="#cb10-11"></a><span class="fu">output</span><span class="kw">:</span><span class="at"> distill::distill_article</span></span></code></pre></div>
 <p>Be sure to enclose Twitter account names in quotes (this is required because they start with <code>@</code>).</p>
 <h2 id="publishing-a-website">Publishing a website</h2>
 <p>Website content is by default written to the <code>_site</code> sub-directory (you can customize this using the <code>output_dir</code> metadata field). Publishing is simply a matter of copying the output directory to a web server or web hosting service.</p>

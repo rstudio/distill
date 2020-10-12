@@ -11,3 +11,7 @@ rsconnect
 issues
 notes
 ^README\.Rmd$
+^_pkgdown\.yml$
+^reference$
+^pkgdown$
+^vignettes
