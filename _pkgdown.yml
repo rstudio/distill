@@ -3,6 +3,8 @@ destination: reference
 template:
   package: quillt
 
+url: https://distill.netlify.app
+
 development:
   mode: auto
 
@@ -35,7 +37,7 @@ reference:
   - '`create_article`'
   - '`create_website`'
   - '`create_blog`'
-- title: Create, import, and update blog posts
+- title: Create blog posts
   contents:
   - '`create_post`'
   - '`import_post`'
@@ -43,6 +45,6 @@ reference:
 - title: Create a theme to add to an article or website
   contents:
   - '`create_theme`'
-- title: Publish websites
+- title: Publish a website
   contents:
   - '`publish_website`'
