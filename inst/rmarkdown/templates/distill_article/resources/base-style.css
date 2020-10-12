@@ -113,16 +113,21 @@ d-appendix d-footnote-list a.footnote-backlink {
 /*-- WEBSITE HEADER + FOOTER --*/
 .distill-site-header .title {
 	font-size: var(--title-size, 18px);
+	font-family: var(--navbar-font), var(--heading-default);
+}
+
+.distill-site-header a {
+  font-family: var(--navbar-font), var(--heading-default);
+}
+
+.distill-site-header a:hover {
+	color: var(--hover-color, white);
 }
 
 .distill-site-header {
 	font-size: var(--text-size, 15px);
 	color: var(--text-color, rgba(255, 255, 255, 0.8));
 	background-color: var(--bkgd-color, #0F2E3D);
-}
-
-.distill-site-header a:hover {
-	color: var(--hover-color, white);
 }
 
 .distill-site-footer {
