@@ -9,11 +9,15 @@
   --body-default: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen, Ubuntu, Cantarell, "Fira Sans", "Droid Sans", "Helvetica Neue", Arial, sans-serif;
 }
 
-body {
+body,
+.posts-list .post-preview p,
+.posts-list .description p {
   font-family: var(--body-font), var(--body-default);
 }
 
-h1, h2, h3, h4, h5, h6 {
+h1, h2, h3, h4, h5, h6,
+.posts-list .post-preview h2,
+.posts-list .description h2 {
   font-family: var(--heading-font), var(--heading-default);
 }
 
