@@ -30,7 +30,15 @@
   img: images/taras-kaduk.png
   href: https://taraskaduk.com/
   showcase: true
-- title: "RStudio Education: Teaching in Production"
+- title: "Teaching in Production"
   img: images/rstudio-tip.png
   href: https://rstd.io/tip
+  showcase: true
+- title: "Tidyquintro"
+  img: images/tidyquintro.png
+  href: https://athanasiamo.github.io/tidyquintro/
+  showcase: true
+- title: "Tidymodels, Virtually"
+  img: images/tmv.png
+  href: https://tmv.netlify.app/site/
   showcase: true
