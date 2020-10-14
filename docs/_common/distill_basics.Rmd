@@ -290,6 +290,91 @@ describing what each author did.
 
 Footnotes and references will be included in the same section, immediately beneath any custom appendices.
 
+## Theming
+
+The appearance of a Distill article can be customized using a [theme](website.html#theming) and [CSS](website.html#custom-style) just like Distill sites and blogs. You can use the `create_theme()` function to add a theme CSS file in the current working directory.
+
+For example:
+
+```{r, eval=FALSE, echo=TRUE}
+create_theme(name = "theme") 
+```
+
+Read more about how to customize a Distill [theme](website.html#create-theme). To apply a custom theme to an article, add a `theme` key to your article's YAML front-matter:
+
+``` {.yaml}
+---
+title: "The Sharpe Ratio"
+output: 
+  distill::distill_article:
+    toc: true
+    theme: theme.css
+---
+```
+
+One of the fastest ways to change the default appearance is to use custom Google fonts. To do this, you need to do two things:
+
+1.  Embed the font using the [\@import](https://developer.mozilla.org/en-US/docs/Web/CSS/@import) method, and
+
+2.  Specify the font in the CSS file.
+
+You can do both of these things inside your `theme.css` file. For example, here is an article styled with the demo theme detailed [here](website.html#theming).
+
+```{r panelset, echo=FALSE}
+xaringanExtra::use_panelset()
+```
+
+::: {.panelset}
+::: {.panel}
+#### Screenshot
+
+![A themed article](images/article-after.png)
+:::
+
+::: {.panel}
+#### `theme.css` snippet
+
+``` {.css}
+/* base variables */
+
+/* Edit the CSS properties in this file to create a custom
+   Distill theme. Only edit values in the right column
+   for each row; values shown are the CSS defaults.
+   To return any property to the default,
+   you may set its value to: unset
+   All rows must end with a semi-colon.                      */
+
+/* Optional: embed custom fonts here with `@import`          */
+/* This must remain at the top of this file.                 */
+@import url('https://fonts.googleapis.com/css2?family=Amiri');
+@import url('https://fonts.googleapis.com/css2?family=Bitter');
+@import url('https://fonts.googleapis.com/css2?family=DM+Mono');
+
+html {
+  /*-- Main font sizes --*/
+  --title-size:      50px;
+  --body-size:       1.06rem;
+  --code-size:       14px;
+  --aside-size:      12px;
+  --fig-cap-size:    13px;
+  /*-- Main font colors --*/
+  --title-color:     #000000;
+  --header-color:    rgba(0, 0, 0, 0.8);
+  --body-color:      rgba(0, 0, 0, 0.8);
+  --aside-color:     rgba(0, 0, 0, 0.6);
+  --fig-cap-color:   rgba(0, 0, 0, 0.6);
+  /*-- Specify custom fonts ~~~ must be imported above   --*/
+  --heading-font:    "Amiri", serif;
+  --mono-font:       "DM Mono", monospace;
+  --body-font:       "Bitter", sans-serif;
+  --navbar-font:     "Amiri", serif;
+}
+
+/* More properties ... */
+```
+:::
+:::
+
 ## Acknowledgments {.appendix}
 
 Distill for R Markdown builds on the work of many individuals and projects. [Shan Carter](https://github.com/shancarter), [Ludwig Schubert](https://github.com/ludwigschubert), and [Christopher Olah](https://github.com/colah) created the Distill web framework. [John MacFarlane](https://github.com/jgm) created the Pandoc universal markup converter. [Davide Cervone](https://github.com/dpvc) and [Volker Sorge](https://github.com/zorkow) created the MathJax library for rendering mathematical notation on the web. [Mike Bostock](https://github.com/mbostock) created the D3 library for producing dynamic, interactive data visualizations for the web. We are grateful for the spirit of generosity that moved these individuals to create high-quality open source software for the benefit of all.

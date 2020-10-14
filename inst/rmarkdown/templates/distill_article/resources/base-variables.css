@@ -34,7 +34,7 @@ html {
 }
 
 /*-- ARTICLE METADATA --*/
-.d-byline {
+d-byline {
   --heading-size:    0.6rem;
   --heading-color:   rgba(0, 0, 0, 0.5);
   --body-size:       0.8rem;

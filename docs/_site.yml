@@ -49,6 +49,8 @@ navbar:
           href: publish_article.html
         - text: "Publishing Websites"
           href: publish_website.html
+    - text: Reference
+      href: https://distill.netlify.app/
 output:
   distill::distill_article:
     css: styles.css

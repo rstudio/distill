@@ -94,12 +94,12 @@ create_post("The Sharpe Ratio", draft = TRUE)
 
 You work on blog posts independent of the enclosing website (use **Knit** to render and preview the post just like any R Markdown document). This is in fact the only way to update post content --- posts are considered standalone documents that are not re-rendered when the site is built. This is because posts are often expensive to render and have R package dependencies that may be difficult to satisfy as time goes on.
 
-### Renaming Posts
+### Renaming posts
 
 ```{r, child="_common/renaming_posts.Rmd"}
 ```
 
-### Listing pages
+### Listing pages {#listing-pages}
 
 Once you have authored one or more posts you'll want to create a listing page. You can do this by adding a `listing` metadata entry to the page you to include the listing on. This is often the main page for the website (index.Rmd). For example:
 
@@ -117,7 +117,7 @@ In our [example blog](https://beta.rstudioconnect.com/content/11424/) (which wil
 
 ![](images/site-listing.png){.screenshot width="95%"}
 
-#### Custom listings
+#### Custom listings {#custom-listings}
 
 Above we demonstrated creating a listing page for all posts. You can also create a custom listing for a subset of posts (e.g. a gallery of featured posts). To do this, just enumerate the posts you want to include as follows:
 
@@ -514,6 +514,76 @@ resources:
 ---
 ```
 
+## Theming
+
+Distill blogs can use [themes](website.html#theming) and [CSS](website.html#custom-style) just like Distill sites. You can use the `create_theme()` function to add a theme CSS file in the current working directory.
+
+For example:
+
+```{r, eval=FALSE, echo=TRUE}
+create_theme(name = "theme") 
+```
+
+Read more about customizing a Distill [theme](website.html#create-theme). To apply a custom theme site-wide, add a `theme` key to the top-level of your `_site.yml` configuration file:
+
+``` {.yaml}
+name: "distill"
+title: "Distill for R Markdown"
+theme: theme.css 
+navbar:
+# (navbar definition here)
+```
+
+Blog posts (along with [listing](#listing-pages) and [custom listing pages](#custom-listings)) will follow the theme. Below are some examples of different themes applied to our demo blog.
+
+```{r panelset, echo=FALSE}
+xaringanExtra::use_panelset()
+```
+
+### Example themes
+
+::: {.panelset}
+::: {.panel}
+#### Demo
+
+Demo theme detailed [here](website.html#theming).
+
+```{r echo=FALSE}
+knitr::include_graphics("images/demo-after.png")
+```
+:::
+
+::: {.panel}
+#### Piping Hot Data
+
+Inspired by: <https://www.pipinghotdata.com/>
+
+```{r echo=FALSE}
+knitr::include_graphics("images/shannon-after.png")
+```
+:::
+
+::: {.panel}
+#### Before I Sleep
+
+Inspired by: <https://milesmcbain.xyz/>
+
+```{r echo=FALSE}
+knitr::include_graphics("images/miles-after.png")
+```
+:::
+
+::: {.panel}
+#### Tidymodels
+
+Inspired by: <https://tidymodels.org> (courtesy [Desirée De Leon](https://desiree.rbind.io/))
+
+```{r echo=FALSE}
+knitr::include_graphics("images/tidymodels-after.png")
+```
+:::
+:::
+
 ## Publishing a blog
 
 After you've authored one or more posts you will want to build the entire site before publishing it.
@@ -533,9 +603,7 @@ There are a variety of options available for making your site available to other
 
 ## Examples
 
--   The TensorFlow for R blog uses Distill for R Markdown: <https://blogs.rstudio.com/tensorflow/>
-
-    The source code for the TensorFlow for R blog can be found here: <https://github.com/rstudio/tensorflow-blog>
+-   The [distill reference site](https://distill.netlify.app) includes several [example sites and blogs](https://distill.netlify.app/articles/examples.html).
 
 -   An example which reproduces several posts from the Reproducible Finance with R series on the R Views blog can be found here: <https://beta.rstudioconnect.com/content/11424/>
 

@@ -2019,9 +2019,11 @@ code span.wa { color: #008000; font-weight: bold; } /* Warning */
   </script>
 
   <!--/radix_placeholder_distill-->
-  <script src="site_libs/header-attrs-2.4/header-attrs.js"></script>
+  <script src="site_libs/header-attrs-2.4.4/header-attrs.js"></script>
   <link href="site_libs/pagedtable-1.1/css/pagedtable.css" rel="stylesheet" />
   <script src="site_libs/pagedtable-1.1/js/pagedtable.js"></script>
+  <link href="site_libs/panelset-0.2.3.9000/panelset.css" rel="stylesheet" />
+  <script src="site_libs/panelset-0.2.3.9000/panelset.js"></script>
   <script src="site_libs/jquery-1.11.3/jquery.min.js"></script>
   <script src="site_libs/anchor-4.2.2/anchor.min.js"></script>
   <script src="site_libs/bowser-1.9.3/bowser.min.js"></script>
@@ -2119,6 +2121,7 @@ Publishing
 <a href="publish_website.html">Publishing Websites</a>
 </div>
 </div>
+<a href="https://distill.netlify.app/">Reference</a>
 <a href="https://github.com/rstudio/distill" aria-label="Link to source">
 <i class="fab fa-github" aria-hidden="true"></i>
 </a>
@@ -2166,6 +2169,7 @@ Publishing
 <li><a href="#code-blocks">Code blocks</a></li>
 <li><a href="#syntax-highlighting">Syntax highlighting</a></li>
 <li><a href="#appendices">Appendices</a></li>
+<li><a href="#theming">Theming</a></li>
 <li><a href="#acknowledgments">Acknowledgments</a></li>
 </ul>
 </nav>
@@ -2198,7 +2202,7 @@ Publishing
 <div class="layout-chunk" data-layout="l-body">
 <div class="sourceCode">
 <pre><code><span class='kw'><a href='https://rdrr.io/r/base/library.html'>library</a></span><span class='op'>(</span><span class='va'><a href='https://github.com/rstudio/distill'>distill</a></span><span class='op'>)</span>
-<span class='fu'><a href='https://rdrr.io/pkg/distill/man/create_article.html'>create_article</a></span><span class='op'>(</span><span class='st'>"article.Rmd"</span><span class='op'>)</span>
+<span class='fu'><a href='https://distill.netlify.app/reference/create_article.html'>create_article</a></span><span class='op'>(</span><span class='st'>"article.Rmd"</span><span class='op'>)</span>
 </code></pre>
 </div>
 </div>
@@ -2431,10 +2435,83 @@ knitr::opts_chunk$set(
 <span id="cb14-8"><a href="#cb14-8"></a>We strongly encourage you to include an author contributions statement briefly </span>
 <span id="cb14-9"><a href="#cb14-9"></a>describing what each author did.</span></code></pre></div>
 <p>Footnotes and references will be included in the same section, immediately beneath any custom appendices.</p>
+<h2 id="theming">Theming</h2>
+<p>The appearance of a Distill article can be customized using a <a href="website.html#theming">theme</a> and <a href="website.html#custom-style">CSS</a> just like Distill sites and blogs. You can use the <code>create_theme()</code> function to add a theme CSS file in the current working directory.</p>
+<p>For example:</p>
+<div class="layout-chunk" data-layout="l-body">
+<div class="sourceCode">
+<pre><code><span class='fu'><a href='https://distill.netlify.app/reference/create_theme.html'>create_theme</a></span><span class='op'>(</span>name <span class='op'>=</span> <span class='st'>"theme"</span><span class='op'>)</span> 
+</code></pre>
+</div>
+</div>
+<p>Read more about how to customize a Distill <a href="website.html#create-theme">theme</a>. To apply a custom theme to an article, add a <code>theme</code> key to your article’s YAML front-matter:</p>
+<div class="sourceCode" id="cb15"><pre class="sourceCode yaml"><code class="sourceCode yaml"><span id="cb15-1"><a href="#cb15-1"></a><span class="pp">---</span></span>
+<span id="cb15-2"><a href="#cb15-2"></a><span class="fu">title</span><span class="kw">:</span><span class="at"> </span><span class="st">&quot;The Sharpe Ratio&quot;</span></span>
+<span id="cb15-3"><a href="#cb15-3"></a><span class="fu">output</span><span class="kw">:</span><span class="at"> </span></span>
+<span id="cb15-4"><a href="#cb15-4"></a><span class="at">  distill:</span><span class="fu">:distill_article</span><span class="kw">:</span></span>
+<span id="cb15-5"><a href="#cb15-5"></a><span class="at">    </span><span class="fu">toc</span><span class="kw">:</span><span class="at"> </span><span class="ch">true</span></span>
+<span id="cb15-6"><a href="#cb15-6"></a><span class="at">    </span><span class="fu">theme</span><span class="kw">:</span><span class="at"> theme.css</span></span>
+<span id="cb15-7"><a href="#cb15-7"></a><span class="pp">---</span></span></code></pre></div>
+<p>One of the fastest ways to change the default appearance is to use custom Google fonts. To do this, you need to do two things:</p>
+<ol type="1">
+<li><p>Embed the font using the <a href="https://developer.mozilla.org/en-US/docs/Web/CSS/@import">@import</a> method, and</p></li>
+<li><p>Specify the font in the CSS file.</p></li>
+</ol>
+<p>You can do both of these things inside your <code>theme.css</code> file. For example, here is an article styled with the demo theme detailed <a href="website.html#theming">here</a>.</p>
+<div class="layout-chunk" data-layout="l-body">
+
+</div>
+<div class="panelset">
+<section id="screenshot" class="panel">
+<h4>Screenshot</h4>
+<figure>
+<img src="images/article-after.png" alt="" /><figcaption>A themed article</figcaption>
+</figure>
+</section>
+<section id="theme.css-snippet" class="panel">
+<h4><code>theme.css</code> snippet</h4>
+<div class="sourceCode" id="cb16"><pre class="sourceCode css"><code class="sourceCode css"><span id="cb16-1"><a href="#cb16-1"></a><span class="co">/* base variables */</span></span>
+<span id="cb16-2"><a href="#cb16-2"></a></span>
+<span id="cb16-3"><a href="#cb16-3"></a><span class="co">/* Edit the CSS properties in this file to create a custom</span></span>
+<span id="cb16-4"><a href="#cb16-4"></a><span class="co">   Distill theme. Only edit values in the right column</span></span>
+<span id="cb16-5"><a href="#cb16-5"></a><span class="co">   for each row; values shown are the CSS defaults.</span></span>
+<span id="cb16-6"><a href="#cb16-6"></a><span class="co">   To return any property to the default,</span></span>
+<span id="cb16-7"><a href="#cb16-7"></a><span class="co">   you may set its value to: unset</span></span>
+<span id="cb16-8"><a href="#cb16-8"></a><span class="co">   All rows must end with a semi-colon.                      */</span></span>
+<span id="cb16-9"><a href="#cb16-9"></a></span>
+<span id="cb16-10"><a href="#cb16-10"></a><span class="co">/* Optional: embed custom fonts here with `@import`          */</span></span>
+<span id="cb16-11"><a href="#cb16-11"></a><span class="co">/* This must remain at the top of this file.                 */</span></span>
+<span id="cb16-12"><a href="#cb16-12"></a><span class="im">@import</span> <span class="fu">url(</span><span class="st">&#39;https://fonts.googleapis.com/css2?family=Amiri&#39;</span><span class="fu">)</span><span class="op">;</span></span>
+<span id="cb16-13"><a href="#cb16-13"></a><span class="im">@import</span> <span class="fu">url(</span><span class="st">&#39;https://fonts.googleapis.com/css2?family=Bitter&#39;</span><span class="fu">)</span><span class="op">;</span></span>
+<span id="cb16-14"><a href="#cb16-14"></a><span class="im">@import</span> <span class="fu">url(</span><span class="st">&#39;https://fonts.googleapis.com/css2?family=DM+Mono&#39;</span><span class="fu">)</span><span class="op">;</span></span>
+<span id="cb16-15"><a href="#cb16-15"></a></span>
+<span id="cb16-16"><a href="#cb16-16"></a>html {</span>
+<span id="cb16-17"><a href="#cb16-17"></a>  <span class="co">/*-- Main font sizes --*/</span></span>
+<span id="cb16-18"><a href="#cb16-18"></a>  <span class="va">--title-size</span>:      <span class="dv">50</span><span class="dt">px</span><span class="op">;</span></span>
+<span id="cb16-19"><a href="#cb16-19"></a>  <span class="va">--body-size</span>:       <span class="dv">1.06</span><span class="dt">rem</span><span class="op">;</span></span>
+<span id="cb16-20"><a href="#cb16-20"></a>  <span class="va">--code-size</span>:       <span class="dv">14</span><span class="dt">px</span><span class="op">;</span></span>
+<span id="cb16-21"><a href="#cb16-21"></a>  <span class="va">--aside-size</span>:      <span class="dv">12</span><span class="dt">px</span><span class="op">;</span></span>
+<span id="cb16-22"><a href="#cb16-22"></a>  <span class="va">--fig-cap-size</span>:    <span class="dv">13</span><span class="dt">px</span><span class="op">;</span></span>
+<span id="cb16-23"><a href="#cb16-23"></a>  <span class="co">/*-- Main font colors --*/</span></span>
+<span id="cb16-24"><a href="#cb16-24"></a>  <span class="va">--title-color</span>:     <span class="cn">#000000</span><span class="op">;</span></span>
+<span id="cb16-25"><a href="#cb16-25"></a>  <span class="va">--header-color</span>:    <span class="fu">rgba(</span><span class="dv">0</span><span class="op">,</span> <span class="dv">0</span><span class="op">,</span> <span class="dv">0</span><span class="op">,</span> <span class="dv">0.8</span><span class="fu">)</span><span class="op">;</span></span>
+<span id="cb16-26"><a href="#cb16-26"></a>  <span class="va">--body-color</span>:      <span class="fu">rgba(</span><span class="dv">0</span><span class="op">,</span> <span class="dv">0</span><span class="op">,</span> <span class="dv">0</span><span class="op">,</span> <span class="dv">0.8</span><span class="fu">)</span><span class="op">;</span></span>
+<span id="cb16-27"><a href="#cb16-27"></a>  <span class="va">--aside-color</span>:     <span class="fu">rgba(</span><span class="dv">0</span><span class="op">,</span> <span class="dv">0</span><span class="op">,</span> <span class="dv">0</span><span class="op">,</span> <span class="dv">0.6</span><span class="fu">)</span><span class="op">;</span></span>
+<span id="cb16-28"><a href="#cb16-28"></a>  <span class="va">--fig-cap-color</span>:   <span class="fu">rgba(</span><span class="dv">0</span><span class="op">,</span> <span class="dv">0</span><span class="op">,</span> <span class="dv">0</span><span class="op">,</span> <span class="dv">0.6</span><span class="fu">)</span><span class="op">;</span></span>
+<span id="cb16-29"><a href="#cb16-29"></a>  <span class="co">/*-- Specify custom fonts ~~~ must be imported above   --*/</span></span>
+<span id="cb16-30"><a href="#cb16-30"></a>  <span class="va">--heading-font</span>:    <span class="st">&quot;Amiri&quot;</span><span class="op">,</span> <span class="dv">serif</span><span class="op">;</span></span>
+<span id="cb16-31"><a href="#cb16-31"></a>  <span class="va">--mono-font</span>:       <span class="st">&quot;DM Mono&quot;</span><span class="op">,</span> <span class="dv">monospace</span><span class="op">;</span></span>
+<span id="cb16-32"><a href="#cb16-32"></a>  <span class="va">--body-font</span>:       <span class="st">&quot;Bitter&quot;</span><span class="op">,</span> <span class="dv">sans-serif</span><span class="op">;</span></span>
+<span id="cb16-33"><a href="#cb16-33"></a>  <span class="va">--navbar-font</span>:     <span class="st">&quot;Amiri&quot;</span><span class="op">,</span> <span class="dv">serif</span><span class="op">;</span></span>
+<span id="cb16-34"><a href="#cb16-34"></a>}</span>
+<span id="cb16-35"><a href="#cb16-35"></a></span>
+<span id="cb16-36"><a href="#cb16-36"></a><span class="co">/* More properties ... */</span></span></code></pre></div>
+</section>
+</div>
 <h2 class="appendix" id="acknowledgments">Acknowledgments</h2>
 <p>Distill for R Markdown builds on the work of many individuals and projects. <a href="https://github.com/shancarter">Shan Carter</a>, <a href="https://github.com/ludwigschubert">Ludwig Schubert</a>, and <a href="https://github.com/colah">Christopher Olah</a> created the Distill web framework. <a href="https://github.com/jgm">John MacFarlane</a> created the Pandoc universal markup converter. <a href="https://github.com/dpvc">Davide Cervone</a> and <a href="https://github.com/zorkow">Volker Sorge</a> created the MathJax library for rendering mathematical notation on the web. <a href="https://github.com/mbostock">Mike Bostock</a> created the D3 library for producing dynamic, interactive data visualizations for the web. We are grateful for the spirit of generosity that moved these individuals to create high-quality open source software for the benefit of all.</p>
-<div class="sourceCode" id="cb15"><pre class="sourceCode r distill-force-highlighting-css"><code class="sourceCode r"></code></pre></div>
-<div class="sourceCode" id="cb16"><pre class="sourceCode r distill-force-highlighting-css"><code class="sourceCode r"></code></pre></div>
+<div class="sourceCode" id="cb17"><pre class="sourceCode r distill-force-highlighting-css"><code class="sourceCode r"></code></pre></div>
+<div class="sourceCode" id="cb18"><pre class="sourceCode r distill-force-highlighting-css"><code class="sourceCode r"></code></pre></div>
 <div id="refs" class="references hanging-indent" role="doc-bibliography">
 <div id="ref-distill">
 <p>Carter, Shan, Chirs Olah, and Arvind Satyanarayan. 2016. “Distill.” Distill Working Group. <a href="https://doi.org/10.23915/distill">https://doi.org/10.23915/distill</a>.</p>

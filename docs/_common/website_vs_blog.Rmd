@@ -1,5 +1,7 @@
 ### Website or blog?
 
-Structure difference: [Websites](website.html) are just collections of pages you can navigate to via the menu, whereas [blogs](blog.html) have collections of posts that can be indexed and syndicated (via their RSS feed). Distill blogs are a distill website with added blog posts.
+Structure difference: [Websites](website.html) are just collections of pages you can navigate to via the top navigation bar, whereas [blogs](blog.html) have collections of posts that can be indexed and syndicated (via their RSS feed). Distill blogs are a distill website with added blog posts.
+
+Layout difference: Within a [blog](blog.html), Distill enables a special page on your website called a [listing page](blog.html#listing-pages). Whereas websites require you to manually set up links to pages, a listing page collects links to posts for you, displaying key metadata (like date published, author, categories, title, etc.) and a thumbnail image. When you knit and publish a new post, this page automatically updates by adding the most recent post to the top of the list.
 
 Workflow difference: Furthermore, *website* pages and root pages of *blogs* are re-rendered when the site is rebuilt but blog articles are not. Each blog article has to be rendered on its own, with intent. Why? Given that R package upgrades have a tendency to break older code, continuously re-rendering old posts is nearly impossible to do without errors, especially over longer periods of time.

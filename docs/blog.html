@@ -1995,7 +1995,9 @@ code span.wa { color: #008000; font-weight: bold; } /* Warning */
   </script>
 
   <!--/radix_placeholder_distill-->
-  <script src="site_libs/header-attrs-2.4/header-attrs.js"></script>
+  <script src="site_libs/header-attrs-2.4.4/header-attrs.js"></script>
+  <link href="site_libs/panelset-0.2.3.9000/panelset.css" rel="stylesheet" />
+  <script src="site_libs/panelset-0.2.3.9000/panelset.js"></script>
   <script src="site_libs/jquery-1.11.3/jquery.min.js"></script>
   <script src="site_libs/anchor-4.2.2/anchor.min.js"></script>
   <script src="site_libs/bowser-1.9.3/bowser.min.js"></script>
@@ -2093,6 +2095,7 @@ Publishing
 <a href="publish_website.html">Publishing Websites</a>
 </div>
 </div>
+<a href="https://distill.netlify.app/">Reference</a>
 <a href="https://github.com/rstudio/distill" aria-label="Link to source">
 <i class="fab fa-github" aria-hidden="true"></i>
 </a>
@@ -2123,7 +2126,7 @@ Publishing
 <li><a href="#creating-a-blog">Creating a blog</a></li>
 <li><a href="#configuration">Configuration</a></li>
 <li><a href="#creating-a-post">Creating a post</a></li>
-<li><a href="#renaming-posts">Renaming Posts</a></li>
+<li><a href="#renaming-posts">Renaming posts</a></li>
 <li><a href="#listing-pages">Listing pages</a></li>
 <li><a href="#rss-feed">RSS feed</a></li>
 <li><a href="#post-drafts">Post drafts</a></li>
@@ -2140,6 +2143,10 @@ Publishing
 <li><a href="#custom-html">Custom HTML</a></li>
 <li><a href="#supporting-files">Supporting files</a></li>
 </ul></li>
+<li><a href="#theming">Theming</a>
+<ul>
+<li><a href="#example-themes">Example themes</a></li>
+</ul></li>
 <li><a href="#publishing-a-blog">Publishing a blog</a></li>
 <li><a href="#examples">Examples</a></li>
 </ul>
@@ -2148,7 +2155,8 @@ Publishing
 <p>Distill for R Markdown websites include integrated support for blogging. To create a blog you author a collection of posts (located in the <code>_posts</code> sub-directory of your website) and then dedicate a page (usually the website homepage) to a listing of all of your posts.</p>
 <h2 id="getting-started">Getting started</h2>
 <h3 id="website-or-blog">Website or blog?</h3>
-<p>Structure difference: <a href="website.html">Websites</a> are just collections of pages you can navigate to via the menu, whereas <a href="blog.html">blogs</a> have collections of posts that can be indexed and syndicated (via their RSS feed). Distill blogs are a distill website with added blog posts.</p>
+<p>Structure difference: <a href="website.html">Websites</a> are just collections of pages you can navigate to via the top navigation bar, whereas <a href="blog.html">blogs</a> have collections of posts that can be indexed and syndicated (via their RSS feed). Distill blogs are a distill website with added blog posts.</p>
+<p>Layout difference: Within a <a href="blog.html">blog</a>, Distill enables a special page on your website called a <a href="blog.html#listing-pages">listing page</a>. Whereas websites require you to manually set up links to pages, a listing page collects links to posts for you, displaying key metadata (like date published, author, categories, title, etc.) and a thumbnail image. When you knit and publish a new post, this page automatically updates by adding the most recent post to the top of the list.</p>
 <p>Workflow difference: Furthermore, <em>website</em> pages and root pages of <em>blogs</em> are re-rendered when the site is rebuilt but blog articles are not. Each blog article has to be rendered on its own, with intent. Why? Given that R package upgrades have a tendency to break older code, continuously re-rendering old posts is nearly impossible to do without errors, especially over longer periods of time.</p>
 <div class="sourceCode" id="cb1"><pre class="sourceCode r distill-force-highlighting-css"><code class="sourceCode r"></code></pre></div>
 <h3 id="creating-a-blog">Creating a blog</h3>
@@ -2186,7 +2194,7 @@ Publishing
 <div class="layout-chunk" data-layout="l-body">
 <div class="sourceCode">
 <pre><code><span class='kw'><a href='https://rdrr.io/r/base/library.html'>library</a></span><span class='op'>(</span><span class='va'><a href='https://github.com/rstudio/distill'>distill</a></span><span class='op'>)</span>
-<span class='fu'><a href='https://rdrr.io/pkg/distill/man/create_website.html'>create_blog</a></span><span class='op'>(</span>dir <span class='op'>=</span> <span class='st'>"my-blog"</span>, title <span class='op'>=</span> <span class='st'>"My Blog"</span><span class='op'>)</span>
+<span class='fu'><a href='https://distill.netlify.app/reference/create_website.html'>create_blog</a></span><span class='op'>(</span>dir <span class='op'>=</span> <span class='st'>"my-blog"</span>, title <span class='op'>=</span> <span class='st'>"My Blog"</span><span class='op'>)</span>
 </code></pre>
 </div>
 </div>
@@ -2223,7 +2231,7 @@ Publishing
 <div class="layout-chunk" data-layout="l-body">
 <div class="sourceCode">
 <pre><code><span class='kw'><a href='https://rdrr.io/r/base/library.html'>library</a></span><span class='op'>(</span><span class='va'><a href='https://github.com/rstudio/distill'>distill</a></span><span class='op'>)</span>
-<span class='fu'><a href='https://rdrr.io/pkg/distill/man/create_post.html'>create_post</a></span><span class='op'>(</span><span class='st'>"The Sharpe Ratio"</span><span class='op'>)</span>
+<span class='fu'><a href='https://distill.netlify.app/reference/create_post.html'>create_post</a></span><span class='op'>(</span><span class='st'>"The Sharpe Ratio"</span><span class='op'>)</span>
 </code></pre>
 </div>
 </div>
@@ -2231,12 +2239,12 @@ Publishing
 <p>If you want your post to start out as a draft (i.e. not be included within the listing of all posts) then you can add <code>draft = TRUE</code>. For example:</p>
 <div class="layout-chunk" data-layout="l-body">
 <div class="sourceCode">
-<pre><code><span class='fu'><a href='https://rdrr.io/pkg/distill/man/create_post.html'>create_post</a></span><span class='op'>(</span><span class='st'>"The Sharpe Ratio"</span>, draft <span class='op'>=</span> <span class='cn'>TRUE</span><span class='op'>)</span>
+<pre><code><span class='fu'><a href='https://distill.netlify.app/reference/create_post.html'>create_post</a></span><span class='op'>(</span><span class='st'>"The Sharpe Ratio"</span>, draft <span class='op'>=</span> <span class='cn'>TRUE</span><span class='op'>)</span>
 </code></pre>
 </div>
 </div>
 <p>You work on blog posts independent of the enclosing website (use <strong>Knit</strong> to render and preview the post just like any R Markdown document). This is in fact the only way to update post content — posts are considered standalone documents that are not re-rendered when the site is built. This is because posts are often expensive to render and have R package dependencies that may be difficult to satisfy as time goes on.</p>
-<h3 id="renaming-posts">Renaming Posts</h3>
+<h3 id="renaming-posts">Renaming posts</h3>
 <p>Posts are stored within the <code>_posts</code> sub-directory of your site, and have a directory name that reflects the date which you created the post along with the post’s <a href="https://en.wikipedia.org/wiki/Clean_URL#Slug">title slug</a>. For example:</p>
 <p><code>_posts/2016-11-08-sharpe-ratio</code></p>
 <p>Note that the date prefix is not strictly required, but is done by default as a convenience so that posts appear in chronological order within the filesystem.</p>
@@ -2244,7 +2252,7 @@ Publishing
 <div class="layout-chunk" data-layout="l-body">
 <div class="sourceCode">
 <pre><code><span class='co'># rename to reflect the title and date in the post YAML front-matter</span>
-<span class='fu'><a href='https://rdrr.io/pkg/distill/man/rename_post_dir.html'>rename_post_dir</a></span><span class='op'>(</span><span class='st'>"_posts/2016-11-08-sharpe-ratio"</span><span class='op'>)</span> 
+<span class='fu'><a href='https://distill.netlify.app/reference/rename_post_dir.html'>rename_post_dir</a></span><span class='op'>(</span><span class='st'>"_posts/2016-11-08-sharpe-ratio"</span><span class='op'>)</span> 
 </code></pre>
 </div>
 </div>
@@ -2521,6 +2529,56 @@ ggplot(diamonds, aes(carat, price)) + geom_smooth() +
 <span id="cb25-9"><a href="#cb25-9"></a><span class="at">  </span><span class="fu">exclude</span><span class="kw">:</span></span>
 <span id="cb25-10"><a href="#cb25-10"></a><span class="at">    </span><span class="ot">*.csv</span><span class="at">    </span></span>
 <span id="cb25-11"><a href="#cb25-11"></a><span class="pp">---</span></span></code></pre></div>
+<h2 id="theming">Theming</h2>
+<p>Distill blogs can use <a href="website.html#theming">themes</a> and <a href="website.html#custom-style">CSS</a> just like Distill sites. You can use the <code>create_theme()</code> function to add a theme CSS file in the current working directory.</p>
+<p>For example:</p>
+<div class="layout-chunk" data-layout="l-body">
+<div class="sourceCode">
+<pre><code><span class='fu'><a href='https://distill.netlify.app/reference/create_theme.html'>create_theme</a></span><span class='op'>(</span>name <span class='op'>=</span> <span class='st'>"theme"</span><span class='op'>)</span> 
+</code></pre>
+</div>
+</div>
+<p>Read more about customizing a Distill <a href="website.html#create-theme">theme</a>. To apply a custom theme site-wide, add a <code>theme</code> key to the top-level of your <code>_site.yml</code> configuration file:</p>
+<div class="sourceCode" id="cb26"><pre class="sourceCode yaml"><code class="sourceCode yaml"><span id="cb26-1"><a href="#cb26-1"></a><span class="fu">name</span><span class="kw">:</span><span class="at"> </span><span class="st">&quot;distill&quot;</span></span>
+<span id="cb26-2"><a href="#cb26-2"></a><span class="fu">title</span><span class="kw">:</span><span class="at"> </span><span class="st">&quot;Distill for R Markdown&quot;</span></span>
+<span id="cb26-3"><a href="#cb26-3"></a><span class="fu">theme</span><span class="kw">:</span><span class="at"> theme.css </span></span>
+<span id="cb26-4"><a href="#cb26-4"></a><span class="fu">navbar</span><span class="kw">:</span></span>
+<span id="cb26-5"><a href="#cb26-5"></a><span class="co"># (navbar definition here)</span></span></code></pre></div>
+<p>Blog posts (along with <a href="#listing-pages">listing</a> and <a href="#custom-listings">custom listing pages</a>) will follow the theme. Below are some examples of different themes applied to our demo blog.</p>
+<div class="layout-chunk" data-layout="l-body">
+
+</div>
+<h3 id="example-themes">Example themes</h3>
+<div class="panelset">
+<section id="demo" class="panel">
+<h4>Demo</h4>
+<p>Demo theme detailed <a href="website.html#theming">here</a>.</p>
+<div class="layout-chunk" data-layout="l-body">
+<p><img src="images/demo-after.png" width="1032" /></p>
+</div>
+</section>
+<section id="piping-hot-data" class="panel">
+<h4>Piping Hot Data</h4>
+<p>Inspired by: <a href="https://www.pipinghotdata.com/" class="uri">https://www.pipinghotdata.com/</a></p>
+<div class="layout-chunk" data-layout="l-body">
+<p><img src="images/shannon-after.png" width="1006" /></p>
+</div>
+</section>
+<section id="before-i-sleep" class="panel">
+<h4>Before I Sleep</h4>
+<p>Inspired by: <a href="https://milesmcbain.xyz/" class="uri">https://milesmcbain.xyz/</a></p>
+<div class="layout-chunk" data-layout="l-body">
+<p><img src="images/miles-after.png" width="1006" /></p>
+</div>
+</section>
+<section id="tidymodels" class="panel">
+<h4>Tidymodels</h4>
+<p>Inspired by: <a href="https://tidymodels.org" class="uri">https://tidymodels.org</a> (courtesy <a href="https://desiree.rbind.io/">Desirée De Leon</a>)</p>
+<div class="layout-chunk" data-layout="l-body">
+<p><img src="images/tidymodels-after.png" width="1006" /></p>
+</div>
+</section>
+</div>
 <h2 id="publishing-a-blog">Publishing a blog</h2>
 <p>After you’ve authored one or more posts you will want to build the entire site before publishing it.</p>
 <p>If your Distill website is contained within an RStudio project you can use the <strong>Build Website</strong> command available in the Build pane to generate the site:</p>
@@ -2536,11 +2594,10 @@ ggplot(diamonds, aes(carat, price)) + geom_smooth() +
 <p>There are a variety of options available for making your site available to others, see the article on <a href="publish_website.html">website publishing</a> for details.</p>
 <h2 id="examples">Examples</h2>
 <ul>
-<li><p>The TensorFlow for R blog uses Distill for R Markdown: <a href="https://blogs.rstudio.com/tensorflow/" class="uri">https://blogs.rstudio.com/tensorflow/</a></p>
-<p>The source code for the TensorFlow for R blog can be found here: <a href="https://github.com/rstudio/tensorflow-blog" class="uri">https://github.com/rstudio/tensorflow-blog</a></p></li>
+<li><p>The <a href="https://distill.netlify.app">distill reference site</a> includes several <a href="https://distill.netlify.app/articles/examples.html">example sites and blogs</a>.</p></li>
 <li><p>An example which reproduces several posts from the Reproducible Finance with R series on the R Views blog can be found here: <a href="https://beta.rstudioconnect.com/content/11424/" class="uri">https://beta.rstudioconnect.com/content/11424/</a></p>
 <p>The source code for the example can be found here: <a href="https://github.com/jjallaire/reproducible-finance-with-r" class="uri">https://github.com/jjallaire/reproducible-finance-with-r</a></p>
-<div class="sourceCode" id="cb26"><pre class="sourceCode r distill-force-highlighting-css"><code class="sourceCode r"></code></pre></div></li>
+<div class="sourceCode" id="cb27"><pre class="sourceCode r distill-force-highlighting-css"><code class="sourceCode r"></code></pre></div></li>
 </ul>
 <!--radix_placeholder_article_footer-->
 <!--/radix_placeholder_article_footer-->
