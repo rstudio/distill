@@ -7,7 +7,7 @@ description: Share a set of Distill articles as a website
 library(knitr)
 ```
 
-This article describes how to create a website that contains a collection of Distill articles. Distill websites include a top level navigation bar that enables readers to discover and browse articles. For example, the documentation pages you are reading now are a Distill website.
+This article describes how to create a website that contains a collection of Distill articles. Distill websites include a top level navigation bar that enables readers to discover and browse articles. For example, the documentation pages you are reading now are a Distill website. You can view more examples of Distill websites on the package [reference site](https://distill.netlify.app/articles/examples.html).
 
 Once you've created your website locally, there are a variety of ways available to [publish your site](publish_website.html) to the web.
 
@@ -18,7 +18,7 @@ Once you've created your website locally, there are a variety of ways available 
 
 ### Creating a website
 
-If you are using RStudio, the easist way to get started is to use the Distill Website option in the RStudio **New Project** dialog:
+If you are using RStudio, the easiest way to get started is to use the Distill Website option in the RStudio **New Project** dialog:
 
 ![](images/create-website.png){.screenshot width="95%"}
 
@@ -51,13 +51,13 @@ You can also preview a single article from within a website by passing the name 
 render_site("about.Rmd")
 ```
 
-This will build only the specified article (as opposed to all articles in the site). This the recommended workflow for authoring articles since it offers the fastest turnaround time for previews (since only the article you are working on is rendered).
+This will build only the specified article (as opposed to all articles in the site). This is our recommended workflow for authoring articles since it offers the fastest turnaround time for previews (since only the article you are working on is rendered).
 
 ### Building the site
 
-After you've authored the various articles contained within the website you will want to build the entire site before deploying it.
+After you've authored the various articles contained within the website, you will want to build the entire site before deploying it.
 
-If your Distill website is contained within an RStudio project you can use the **Build Website** command available in the Build pane to generate the site:
+If your Distill website is contained within an RStudio project, you can use the **Build Website** command available in the Build pane to generate the site:
 
 ![](images/build-website.png){.screenshot width="95%"}
 
@@ -206,9 +206,194 @@ Software licensed under the [Apache License, v2.0]
 (https://www.apache.org/licenses/LICENSE-2.0).
 ```
 
-### Theming
+## Theming
 
-You can use CSS to create an alternate theme for your navigation bar and site footer. Here is the CSS used for the default appearance:
+Distill ships with a default CSS framework that can be fully customized. To change the appearance of your Distill site or blog, you can use CSS to override the default values, provided you are comfortable writing CSS rules and selecting CSS elements. Alternatively, you may [create](#create-theme) and [apply](#apply-theme) a Distill theme, which allows you to customize common elements without needing to create a CSS file from scratch.
+
+### Create theme {#create-theme}
+
+You can use the `create_theme()` function to add a theme CSS file in the current working directory.
+
+For example:
+
+```{r, eval=FALSE, echo=TRUE}
+create_theme(name = "theme") 
+```
+
+This function creates a file named `theme` with the file extension `.css`. The file defines [CSS custom properties](https://developer.mozilla.org/en-US/docs/Web/CSS/--*) that you can edit to create a custom Distill theme. This file has several sections, defined by a common `scope`. For each scoped section, you'll find multiple properties that are defined that look something like this:
+
+``` {.css}
+scope {
+  --a-property:       50px;
+  --another-property: #fff;
+}
+```
+
+The values provided for each property (i.e., those in the right-most column) are the default values. For example, this portion at the top of the file allows you to quickly change the main font sizes for any Distill output format:
+
+``` {.css}
+html {
+  /*-- Main font sizes --*/
+  --title-size:      50px;
+  --body-size:       1.06rem;
+  --code-size:       14px;
+  --aside-size:      12px;
+  --fig-cap-size:    13px;
+  /*-- More properties --*/
+  ...
+}
+```
+
+Changing the values for each custom property is akin to developing your own custom CSS rules, but the theme allows you to bypass the detective work typically involved in discovering which CSS selectors are needed to change the key elements most users wish to control.
+
+We'll demonstrate how to edit and use a theme by showing a single article within a Distill website. The default theme is shown in Figure \@ref(fig:default-theme).
+
+```{r default-theme, echo=FALSE, fig.cap="The default Distill theme"}
+knitr::include_graphics("images/theme-before.png")
+```
+
+One of the fastest ways to change the default appearance is to use custom Google fonts. To do this, you need to do two things:
+
+1.  Embed the font using the [\@import](https://developer.mozilla.org/en-US/docs/Web/CSS/@import) method, and
+
+2.  Specify the font in the CSS file.
+
+You can do both of these things inside your `theme.css` file. For example, let's import the [Amiri](https://fonts.google.com/specimen/Amiri), [Bitter](https://fonts.google.com/specimen/Bitter), and [DM Mono](https://fonts.google.com/specimen/DM+Mono) fonts:
+
+``` {.css}
+/* Optional: embed custom fonts here with `@import`          */
+/* This must remain at the top of this file.                 */
+@import url('https://fonts.googleapis.com/css2?family=Amiri');
+@import url('https://fonts.googleapis.com/css2?family=Bitter');
+@import url('https://fonts.googleapis.com/css2?family=DM+Mono');
+```
+
+The `@import` requests *must* be at the very top of your `theme.css`, before any rules. Next, scroll down to the bottom of the properties with the `html` scope to specify the embedded fonts:
+
+``` {.css}
+html {
+  ...
+  /*-- Specify custom fonts ~~~ must be imported above   --*/
+  --heading-font:    "Amiri", serif;
+  --mono-font:       "DM Mono", monospace;
+  --body-font:       "Bitter", sans-serif;
+  --navbar-font:     "Amiri", serif;
+}
+```
+
+But we can go even further! Let's also change the background color of the navbar, the text color, and the hover color. These three properties are listed with the `.distill-site-header` scope. For example:
+
+``` {.css}
+/*-- WEBSITE HEADER + FOOTER --*/
+/* These properties only apply to Distill sites and blogs  */
+
+.distill-site-header {
+  --title-size:       18px;    
+  --text-color:       #ff414b; /* edited */
+  --text-size:        15px;
+  --hover-color:      #dd424c; /* edited */
+  --bkgd-color:       #ffd8db; /* edited */
+}
+```
+
+```{r panelset, echo=FALSE}
+xaringanExtra::use_panelset()
+```
+
+Our new custom theme is shown below. In this example, we only changed four font properties and three website header properties, and already our site looks quite different from the default.
+
+::: {.panelset}
+::: {.panel}
+#### Themed site {.theme-after}
+
+```{r theme-after, echo=FALSE, fig.cap="A custom Distill theme"}
+knitr::include_graphics("images/theme-after.png")
+```
+:::
+
+::: {.panel}
+#### Default site {.theme-before}
+
+```{r ref.label="default-theme", echo=FALSE, fig.cap="The default Distill theme"}
+```
+:::
+:::
+
+<aside>
+
+To preview your custom Distill theme, you'll also need to [apply](#apply-theme) it to your article or site.
+
+</aside>
+
+As you can see, we include a lot more properties for you to explore and edit in your own custom theme. If you find yourself editing too much and want to return back to a default value, you may set any property to `unset`. For example:
+
+``` {.css}
+html {
+  /*-- Main font sizes --*/
+  --title-size:      unset;
+}
+```
+
+Of course, there may be additional properties that you'd like to change, and you may always add in your own [custom CSS rules](#custom-style) in the space provided at the bottom of your theme file, or in a separate `.css` file.
+
+To see your theme in action, you'll need to also [apply](#apply-theme) it to your article or site.
+
+### Apply theme {#apply-theme}
+
+The [previous section](#create-theme) described how to create and customize a Distill theme file. How do you apply a custom theme to a Distill site or blog? You have two options:
+
+1.  Apply it site-wide by adding a `theme` key to the top-level of your `_site.yml` configuration file:
+
+    ``` {.yaml}
+    name: "distill"
+    title: "Distill for R Markdown"
+    theme: theme.css 
+    navbar:
+      # (navbar definition here)
+    ```
+
+2.  Apply to an individual article by adding a `theme` key to your article's YAML front-matter:
+
+    ``` {.yaml}
+    ---
+    title: "The Sharpe Ratio"
+    output: 
+      distill::distill_article:
+        toc: true
+        theme: theme.css
+    ---
+    ```
+
+The second option allows for you to apply your theme to individual articles, while using a different theme for the rest of your site. Note that this is only possible for stand-alone articles within a website --- you cannot apply a theme to individual blog posts *only*. Blog posts (along with [listing](blog.html#listing-pages) and [custom listing pages](blog.html#custom-listings)) will follow the theme if you use the first option and add it to your `_site.yml`.
+
+### Custom CSS styles {#custom-style}
+
+If you prefer working with CSS directly, or you would like to change site elements not included in the theme file, you can define your own CSS as well. For example, we can override the default styles for bullets and links by adding additional CSS rules in the space provided at the bottom of your `theme.css`. We'll add the following CSS rules on top of the theme we made in the [previous section](#create-theme):
+
+``` {.css}
+/*-- Additional custom styles --*/
+/* Add any additional CSS rules below                      */
+
+/* Change bullets */
+ul > li::marker {
+  font-size: 1.125em;
+  color: #ff414b;
+}
+
+/* Change link appearance */
+d-article a {
+  border-bottom: 2px solid #ffd8db;
+  text-decoration: none;
+}
+```
+
+Here is the before (left) and after (right):
+
+```{r out.width='49%', fig.show='hold'}
+knitr::include_graphics(c("images/css-before.png", "images/css-after.png"))
+```
+
+Using CSS, you can change anything about your site's appearance. For example, the `distill-site-nav` class addresses both the header and footer, whereas the `distill-site-header` and `distill-site-footer` apply (respectively) to just the header and footer. Here is the CSS used for the default appearance:
 
 ``` {.css}
 .distill-site-nav {
@@ -240,9 +425,7 @@ You can use CSS to create an alternate theme for your navigation bar and site fo
 }
 ```
 
-The `distill-site-nav` class addresses both the header and footer, whereas the `distill-site-header` and `distill-site-footer` apply (respectively) to just the header and footer.
-
-To override all or part of this CSS, simply include a `styles.css` file in the main site directory and add a reference to it within your site output options. For example:
+To override any CSS properties, you may include a `styles.css` file in the main site directory and add a reference to it within your site output options. For example:
 
 **\_site.yml**
 
@@ -255,6 +438,404 @@ output:
   distill::distill_article:
     css: styles.css
 ```
+
+### Example themes
+
+Below are some sample themes to see what is possible using a Distill theme, plus a handful of custom CSS rules.
+
+#### Piping Hot Data
+
+::: {.panelset}
+::: {.panel}
+#### Inspiration
+
+<https://www.pipinghotdata.com/>
+:::
+
+::: {.panel}
+#### Screenshot {.phd-screenshot}
+
+```{r echo=FALSE}
+knitr::include_graphics("images/shannon-after.png")
+```
+:::
+
+::: {.panel}
+#### `theme.css` {.phd-css}
+
+``` {.css}
+/* base variables */
+
+/* Edit the CSS properties in this file to create a custom
+   Distill theme. Only edit values in the right column
+   for each row; values shown are the CSS defaults.
+   To return any property to the default,
+   you may set its value to: unset
+   All rows must end with a semi-colon.                      */
+
+/* Optional: embed custom fonts here with `@import`          */
+/* This must remain at the top of this file.                 */
+@import url('https://fonts.googleapis.com/css2?family=Lato');
+@import url('https://fonts.googleapis.com/css2?family=Fira+Mono');
+@import url('https://fonts.googleapis.com/css2?family=Montserrat');
+
+html {
+  /*-- Main font sizes --*/
+  --title-size:      50px;
+  --body-size:       1.0rem;                     /* edited */
+  --code-size:       0.9rem;                     /* edited */
+  --aside-size:      12px;
+  --fig-cap-size:    13px;
+  /*-- Main font colors --*/
+  --title-color:     #000000;
+  --heading-color:   rgba(0, 0, 0, 0.8);
+  --body-color:      #383838;                    /* edited */
+  --aside-color:     rgba(0, 0, 0, 0.6);
+  --fig-cap-color:   rgba(0, 0, 0, 0.6);
+  /*-- Specify custom fonts ~~~ must be imported above   --*/
+  --heading-font:    'Lato', sans-serif;         /* edited */
+  --mono-font:       'Fira Mono', monospace;     /* edited */
+  --body-font:       'Lato', sans-serif;         /* edited */
+  --navbar-font:     'Montserrat', sans-serif;   /* edited */
+}
+
+/*-- ARTICLE METADATA --*/
+d-byline {
+  --heading-size:    0.6rem;
+  --heading-color:   rgba(0, 0, 0, 0.5);
+  --body-size:       0.8rem;
+  --body-color:      rgba(0, 0, 0, 0.8);
+}
+
+/*-- ARTICLE TABLE OF CONTENTS --*/
+.d-contents {
+  --heading-size:    18px;
+  --contents-size:   13px;
+}
+
+/*-- ARTICLE APPENDIX --*/
+d-appendix {
+  --heading-size:    15px;
+  --heading-color:   rgba(0, 0, 0, 0.65);
+  --text-size:       0.8em;
+  --text-color:      rgba(0, 0, 0, 0.5);
+}
+
+/*-- WEBSITE HEADER + FOOTER --*/
+/* These properties only apply to Distill sites and blogs  */
+
+.distill-site-header {
+  --title-size:       20px;                      /* edited */
+  --text-color:       #FFFFFF;                   /* edited */
+  --text-size:        20px;                      /* edited */
+  --hover-color:      #383838;                   /* edited */
+  --bkgd-color:       rgb(249, 83, 85);          /* edited */
+}
+
+.distill-site-footer {
+  --text-color:       rgba(255, 255, 255, 0.8);
+  --text-size:        15px;
+  --hover-color:      white;
+  --bkgd-color:       #0F2E3D;
+}
+
+
+/*-- Additional custom styles --*/
+
+.posts-list .metadata .publishedDate {
+    color: rgb(249, 83, 85);
+}
+
+d-article p code {
+  color: #383838;
+  background: rgba(249, 83, 85, 0.1);
+  font-weight: 400;
+  font-size: 0.9em;
+}
+
+d-article a {
+    border-bottom: 2px solid rgba(249, 83, 85, 0.4);
+    text-decoration: none;
+}
+
+.distill-site-header .title {
+    font-weight: 600; 
+}
+
+ul > li::marker {
+  color: rgb(249, 83, 85);
+}
+```
+:::
+:::
+
+#### Before I Sleep
+
+::: {.panelset}
+::: {.panel}
+#### Inspiration
+
+<https://milesmcbain.xyz/>
+:::
+
+::: {.panel}
+#### Screenshot {.bis-screenshot}
+
+```{r echo=FALSE}
+knitr::include_graphics("images/miles-after.png")
+```
+:::
+
+::: {.panel}
+#### `theme.css` {.bis-css}
+
+``` {.css}
+/* base variables */
+
+/* Edit the CSS properties in this file to create a custom
+   Distill theme. Only edit values in the right column
+   for each row; values shown are the CSS defaults.
+   To return any property to the default,
+   you may set its value to: unset
+   All rows must end with a semi-colon.                      */
+
+/* Optional: embed custom fonts here with `@import`          */
+/* This must remain at the top of this file.                 */
+@import url('https://fonts.googleapis.com/css2?family=Cardo');
+@import url('https://fonts.googleapis.com/css2?family=Alata');
+
+
+html {
+  /*-- Main font sizes --*/
+  --title-size:      50px;
+  --body-size:       1.075rem;                   /* edited */
+  --code-size:       14px;
+  --aside-size:      12px;
+  --fig-cap-size:    13px;
+  /*-- Main font colors --*/
+  --title-color:     #000000;
+  --heading-color:   rgba(0, 0, 0, 0.8);
+  --body-color:      rgba(0, 0, 0, 0.8);
+  --aside-color:     rgba(0, 0, 0, 0.6);
+  --fig-cap-color:   rgba(0, 0, 0, 0.6);
+  /*-- Specify custom fonts ~~~ must be imported above   --*/
+  --heading-font:    'Alata', sans-serif;        /* edited */
+  --mono-font:       monospace;
+  --body-font:       'Cardo', serif;             /* edited */
+  --navbar-font:     'Alata', sans-serif;        /* edited */
+}
+
+/*-- ARTICLE METADATA --*/
+d-byline {
+  --heading-size:    0.6rem;
+  --heading-color:   rgba(0, 0, 0, 0.5);
+  --body-size:       0.8rem;
+  --body-color:      rgba(0, 0, 0, 0.8);
+}
+
+/*-- ARTICLE TABLE OF CONTENTS --*/
+.d-contents {
+  --heading-size:    18px;
+  --contents-size:   13px;
+}
+
+/*-- ARTICLE APPENDIX --*/
+d-appendix {
+  --heading-size:    15px;
+  --heading-color:   rgba(0, 0, 0, 0.65);
+  --text-size:       1.075rem;                   /* edited */
+  --text-color:      rgb(0, 0, 0);               /* edited */
+}
+
+/*-- WEBSITE HEADER + FOOTER --*/
+/* These properties only apply to Distill sites and blogs  */
+
+.distill-site-header {
+  --title-size:       18px;
+  --text-color:       #000;                     /* edited */
+  --text-size:        15px;
+  --hover-color:      #ff00ff;                  /* edited */
+  --bkgd-color:       #fff;                     /* edited */
+}
+
+.distill-site-footer {
+  --text-color:       rgba(255, 255, 255, 0.8);
+  --text-size:        15px;
+  --hover-color:      white;
+  --bkgd-color:       #0F2E3D;
+}
+
+/*-- Additional custom styles --*/
+
+.categories li > a:hover {
+    color: #00ff00;
+    border-bottom: 1px #00ff00;
+}
+
+p a:hover  {
+    color: #00ff00;
+}
+
+/* Change appearance of headers */
+h1, h2, h3, h4, h5 {
+    font-weight: 700;
+}
+
+/* Use specific font in the body of the text */
+html, body, p {
+    font-weight: 200;
+    /*line-height: 1.3rem; */
+    /*font-style: normal;*/
+}
+
+ul > li::marker {
+    font-weight: 700;
+    font-size: 1.125em;
+}
+```
+:::
+:::
+
+#### Tidymodels
+
+::: {.panelset}
+::: {.panel}
+#### Inspiration
+
+<https://tidymodels.org> (courtesy [Desirée De Leon](https://desiree.rbind.io/))
+:::
+
+::: {.panel}
+#### Screenshot {.tmv-screenshot}
+
+```{r echo=FALSE}
+knitr::include_graphics("images/tidymodels-after.png")
+```
+:::
+
+::: {.panel}
+#### `theme.css` {.tmv-css}
+
+``` {.css}
+/* base variables */
+
+/* Edit the CSS properties in this file to create a custom
+   Distill theme. Only edit values in the right column
+   for each row; values shown are the CSS defaults.
+   To return any property to the default,
+   you may set its value to: unset
+   All rows must end with a semi-colon.                      */
+
+/* Optional: embed custom fonts here with `@import`          */
+/* This must remain at the top of this file.                 */
+@import url('https://fonts.googleapis.com/css?family=Noto+Serif+JP:300, 300i&display=swap');
+@import url('https://fonts.googleapis.com/css?family=Lato:400,400i,700&display=swap');
+@import url('https://fonts.googleapis.com/css?family=IBM+Plex+Mono&display=swap');
+
+html {
+  /*-- Main font sizes --*/
+  --title-size:      50px;
+  --body-size:       1.06rem;
+  --code-size:       14px;
+  --aside-size:      12px;
+  --fig-cap-size:    13px;
+  /*-- Main font colors --*/
+  --title-color:     #ca225e;
+  --header-color:    #ca225e;                    /* edited */
+  --body-color:      #404040;                    /* edited */
+  --aside-color:     rgba(0, 0, 0, 0.6);
+  --fig-cap-color:   rgba(0, 0, 0, 0.6);
+  /*-- Specify custom fonts ~~~ must be imported above   --*/
+  --heading-font:    "Noto Serif JP", sans-serif; /* edited */
+  --mono-font:       "IBM Plex Mono", monospace;  /* edited */
+  --body-font:       "Lato", sans-serif;          /* edited */
+  --navbar-font:     "Lato", sans-serif;          /* edited */
+}
+
+/*-- ARTICLE METADATA --*/
+d-byline {
+  --heading-size:    0.9rem;                      /* edited */
+  --heading-color:   rgba(0, 0, 0, 0.5);
+  --body-size:       0.95rem;                     /* edited */
+  --body-color:      rgba(0, 0, 0, 0.8);
+}
+
+/*-- ARTICLE TABLE OF CONTENTS --*/
+.d-contents {
+  --heading-size:    18px;
+  --contents-size:   13px;
+}
+
+/*-- ARTICLE APPENDIX --*/
+d-appendix {
+  --heading-size:    15px;
+  --heading-color:   rgba(0, 0, 0, 0.65);      
+  --text-size:       0.9rem;                    /* edited */
+  --text-color:      #1a162d;                   /* edited */
+}
+
+/*-- WEBSITE HEADER + FOOTER --*/
+/* These properties only apply to Distill sites and blogs  */
+
+.distill-site-header {
+  --title-size:       18px;
+  --text-color:       #1f1f1f;                   /* edited */
+  --text-size:        15px;
+  --hover-color:      #787878;                   /* edited */
+  --bkgd-color:       #fff;                      /* edited */
+}
+
+.distill-site-footer {
+  --text-color:       #7e7b88;                   /* edited */
+  --text-size:        15px;
+  --hover-color:      white;
+  --bkgd-color:       #ca225e3d;                 /* edited */
+}
+
+/*-- Additional custom styles --*/
+
+ul > li::marker {
+  color: #ca225e;
+}
+
+.distill-site-header { 
+  letter-spacing: 2px;
+  text-transform: uppercase;
+}
+
+h1, h2, h3, h4, h5, h6 {
+  letter-spacing: 2px;
+  font-weight: 300;
+}
+
+.distill-site-header .logo img{
+  max-height: 40px; /* Makes logo bigger, default was 20px */
+}
+
+.distill-site-header {
+  padding-top: 1rem;
+}
+
+d-title h1,
+d-article h2,
+.posts-list .description h2,
+.posts-list > h1 {
+    font-weight: 300;
+}
+
+d-appendix {
+  background-color: #fdf7f9;
+  border-top: none;
+}
+```
+:::
+:::
+
+<aside>
+
+These [panelsets](https://github.com/rstudio/distill/issues/11#issuecomment-692142414) were made with the [xaringanExtra](https://pkg.garrickadenbuie.com/xaringanExtra/#/panelset) package.
+
+</aside>
 
 ## Google analytics
 
