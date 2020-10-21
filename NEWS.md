@@ -33,7 +33,7 @@
 ## distill v0.8 (CRAN)
 
 -   Generate RSS category feeds using rss/categories in site config
--   Support rendering full RSS content when rss/full\_content is TRUE in site config
+-   Support rendering full RSS content when rss/full_content is TRUE in site config
 -   Ability to add custom HTML to top of sidebar.
 -   Provide aria attributes on toolbar icons
 -   Add "volume," "issue," "issn," and "publisher" fields for journal article BibTeX entries when those are provided in YAML.
@@ -56,7 +56,7 @@
 -   Correctly render favicon for articles in collections
 -   Provide option to show Disqus comments by default
 -   Fix issue with relative references to bibliographies from posts
--   Fix intermediates\_dir error that occurred when rendering from source on RStudio Connect
+-   Fix intermediates_dir error that occurred when rendering from source on RStudio Connect
 -   Enable `import_post()` to work with file paths as well as URLs
 -   Set standard plot width to 6.5 inches (was 6.0, new width closer to golden ratio)
 -   Don't force plots in standard l-body layout to a width of 100%

@@ -34,7 +34,7 @@ Imports:
     utils, 
     stats,
     tools, 
-    rmarkdown (>= 2.4.4), 
+    rmarkdown (>= 2.5), 
     bookdown (>= 0.8),
     xfun (>= 0.2),
     htmltools, 
@@ -61,7 +61,5 @@ Suggests:
     shiny,
     rsconnect,
     testthat
-Remotes: 
-    rstudio/rmarkdown
 Language: en-US
 

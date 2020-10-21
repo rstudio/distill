@@ -15,3 +15,5 @@ notes
 ^reference$
 ^pkgdown$
 ^vignettes
+.github
+
