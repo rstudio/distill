@@ -1,5 +1,7 @@
 ## distill v1.1 (Development)
 
+-   Fixed issue with `overflow: hidden` for code blocks on mobile devices (is now `overflow: auto`).
+
 ## distill v1.0 (CRAN)
 
 -   Add site search feature using [Fuse.js](https://github.com/krisk/Fuse) (enabled by default for blog sites). Can be explicitly enabled or disabled for any site using the `search` field in the `navbar` key of `_site.yml`.
