@@ -72,8 +72,16 @@ parse_date <- function(date) {
 }
 
 safe_timezone <- function() {
-  tz <- Sys.timezone()
-  ifelse(is.na(tz), "UTC", tz)
+  # if TZDIR is set to "internal" or "macOS" on R 4.0.3 then lubridate
+  # will throw an error. This will need to be fixed either in
+  # lubridate or R, in the meantime force to UTC in this config
+  if (getRversion() == "4.0.3" &&
+      Sys.getenv("TZDIR", "") %in% c("internal", "macOS")) {
+    "UTC"
+  } else {
+    tz <- Sys.timezone()
+    ifelse(is.na(tz), "UTC", tz)
+  }
 }
 
 time_as_iso_8601 <- function(time) {
