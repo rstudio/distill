@@ -469,22 +469,19 @@ code span.wa { color: #008000; font-weight: bold; } /* Warning */
     return offset ? offset + '/' + url : url;
   }
 
-  function createIndex() {
-    var options = {
-      keys: [
-        "title",
-        "categories",
-        "description",
-        "contents"
-      ]
-    };
-    return new window.Fuse([],options);
-  }
-
   function createFuseIndex() {
 
     // create fuse index
-    var options = { keys: ["title", "description", "contents"] };
+    var options = {
+      keys: [
+        { name: 'title', weight: 20 },
+        { name: 'categories', weight: 15 },
+        { name: 'description', weight: 10 },
+        { name: 'contents', weight: 5 },
+      ],
+      ignoreLocation: true,
+      threshold: 0
+    };
     var fuse = new window.Fuse([], options);
 
     // fetch the main search.json
@@ -552,12 +549,6 @@ code span.wa { color: #008000; font-weight: bold; } /* Warning */
               shouldSort: true,
               minMatchCharLength: 2,
               limit: 10,
-              keys: [
-                { name: 'title', weight: 20 },
-                { name: 'categories', weight: 15 },
-                { name: 'description', weight: 10 },
-                { name: 'contents', weight: 5 },
-              ],
             };
             var results = fuse.search(query, searchOptions);
             callback(results
@@ -855,7 +846,7 @@ code span.wa { color: #008000; font-weight: bold; } /* Warning */
   d-article pre,
   d-article div.sourceCode,
   d-article div.sourceCode pre {
-    overflow: hidden;
+    overflow: auto;
   }
 
   d-article div.sourceCode {
@@ -1995,7 +1986,7 @@ code span.wa { color: #008000; font-weight: bold; } /* Warning */
   </script>
 
   <!--/radix_placeholder_distill-->
-  <script src="site_libs/header-attrs-2.5.1/header-attrs.js"></script>
+  <script src="site_libs/header-attrs-2.5/header-attrs.js"></script>
   <link href="site_libs/pagedtable-1.1/css/pagedtable.css" rel="stylesheet" />
   <script src="site_libs/pagedtable-1.1/js/pagedtable.js"></script>
   <script src="site_libs/jquery-1.11.3/jquery.min.js"></script>
@@ -2048,6 +2039,7 @@ code span.wa { color: #008000; font-weight: bold; } /* Warning */
 <img src="images/logo.png" alt="Logo"/>
 </a>
 <a href="index.html" class="title">Distill for R Markdown</a>
+<input id="distill-search" class="nav-search hidden" type="text" placeholder="Search..."/>
 </div>
 <div class="nav-right">
 <div class="nav-dropdown">
@@ -2095,7 +2087,7 @@ Publishing
 <a href="publish_website.html">Publishing Websites</a>
 </div>
 </div>
-<a href="https://distill.netlify.app/">Reference</a>
+<a href="https://pkgs.rstudio.com/distill">Reference</a>
 <a href="https://github.com/rstudio/distill" aria-label="Link to source">
 <i class="fab fa-github" aria-hidden="true"></i>
 </a>
@@ -2329,6 +2321,7 @@ tbl_merge(
 #wfpsyznlwv .gt_table {
   display: table;
   border-collapse: collapse;
+  max-width: 100%;
   margin-left: auto;
   margin-right: auto;
   color: #333333;
@@ -2499,6 +2492,12 @@ tbl_merge(
 
 #wfpsyznlwv .gt_from_md > :last-child {
   margin-bottom: 0;
+}
+
+#wfpsyznlwv .gt_from_md p {
+  line-height: 1em;
+  margin-bottom: 0em;
+  margin-top: 0em;
 }
 
 #wfpsyznlwv .gt_row {
@@ -2812,6 +2811,7 @@ sp500 %&gt;%
 #fdwfbggwkx .gt_table {
   display: table;
   border-collapse: collapse;
+  max-width: 100%;
   margin-left: auto;
   margin-right: auto;
   color: #333333;
@@ -2982,6 +2982,12 @@ sp500 %&gt;%
 
 #fdwfbggwkx .gt_from_md > :last-child {
   margin-bottom: 0;
+}
+
+#fdwfbggwkx .gt_from_md p {
+  line-height: 1em;
+  margin-bottom: 0em;
+  margin-top: 0em;
 }
 
 #fdwfbggwkx .gt_row {
@@ -3216,21 +3222,21 @@ sp500 %&gt;%
 </div>
 <h2 id="markdown-tables">Markdown tables</h2>
 <p>You can also define <a href="https://pandoc.org/MANUAL.html#tables">tables using markdown</a>. For example, the table from the previous section that describes paged table options was defined with the following markdown:</p>
-<div class="sourceCode" id="cb6"><pre class="sourceCode markdown"><code class="sourceCode markdown"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a>| Option           | Description                                    |</span>
-<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a>|------------------|------------------------------------------------|</span>
-<span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a>| <span class="in">`rows.print`</span>     | Maximum rows to print per page.                |</span>
-<span id="cb6-4"><a href="#cb6-4" aria-hidden="true" tabindex="-1"></a>| <span class="in">`max.print`</span>      | Maximum rows in the table (defaults to 1000).  |</span>
-<span id="cb6-5"><a href="#cb6-5" aria-hidden="true" tabindex="-1"></a>| <span class="in">`cols.print`</span>     | Maximum columns in the table (defaults to 10). |</span>
-<span id="cb6-6"><a href="#cb6-6" aria-hidden="true" tabindex="-1"></a>| <span class="in">`rownames.print`</span> | Print row names as part of the table.          |</span></code></pre></div>
+<div class="sourceCode" id="cb6"><pre class="sourceCode markdown"><code class="sourceCode markdown"><span id="cb6-1"><a href="#cb6-1"></a>| Option           | Description                                    |</span>
+<span id="cb6-2"><a href="#cb6-2"></a>|------------------|------------------------------------------------|</span>
+<span id="cb6-3"><a href="#cb6-3"></a>| <span class="in">`rows.print`</span>     | Maximum rows to print per page.                |</span>
+<span id="cb6-4"><a href="#cb6-4"></a>| <span class="in">`max.print`</span>      | Maximum rows in the table (defaults to 1000).  |</span>
+<span id="cb6-5"><a href="#cb6-5"></a>| <span class="in">`cols.print`</span>     | Maximum columns in the table (defaults to 10). |</span>
+<span id="cb6-6"><a href="#cb6-6"></a>| <span class="in">`rownames.print`</span> | Print row names as part of the table.          |</span></code></pre></div>
 <p>You can use Distill <a href="figures.html">figure layout</a> classes with markdown tables by enclosing them in markdown div (<code>:::</code>) named with the appropriate class, for example:</p>
-<div class="sourceCode" id="cb7"><pre class="sourceCode markdown"><code class="sourceCode markdown"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a>::: l-body-outset</span>
-<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a>| Option           | Description                                    |</span>
-<span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a>|------------------|------------------------------------------------|</span>
-<span id="cb7-4"><a href="#cb7-4" aria-hidden="true" tabindex="-1"></a>| <span class="in">`rows.print`</span>     | Maximum rows to print per page.                |</span>
-<span id="cb7-5"><a href="#cb7-5" aria-hidden="true" tabindex="-1"></a>| <span class="in">`max.print`</span>      | Maximum rows in the table (defaults to 1000).  |</span>
-<span id="cb7-6"><a href="#cb7-6" aria-hidden="true" tabindex="-1"></a>| <span class="in">`cols.print`</span>     | Maximum columns in the table (defaults to 10). |</span>
-<span id="cb7-7"><a href="#cb7-7" aria-hidden="true" tabindex="-1"></a>| <span class="in">`rownames.print`</span> | Print row names as part of the table.          |</span>
-<span id="cb7-8"><a href="#cb7-8" aria-hidden="true" tabindex="-1"></a>:::</span></code></pre></div>
+<div class="sourceCode" id="cb7"><pre class="sourceCode markdown"><code class="sourceCode markdown"><span id="cb7-1"><a href="#cb7-1"></a>::: l-body-outset</span>
+<span id="cb7-2"><a href="#cb7-2"></a>| Option           | Description                                    |</span>
+<span id="cb7-3"><a href="#cb7-3"></a>|------------------|------------------------------------------------|</span>
+<span id="cb7-4"><a href="#cb7-4"></a>| <span class="in">`rows.print`</span>     | Maximum rows to print per page.                |</span>
+<span id="cb7-5"><a href="#cb7-5"></a>| <span class="in">`max.print`</span>      | Maximum rows in the table (defaults to 1000).  |</span>
+<span id="cb7-6"><a href="#cb7-6"></a>| <span class="in">`cols.print`</span>     | Maximum columns in the table (defaults to 10). |</span>
+<span id="cb7-7"><a href="#cb7-7"></a>| <span class="in">`rownames.print`</span> | Print row names as part of the table.          |</span>
+<span id="cb7-8"><a href="#cb7-8"></a>:::</span></code></pre></div>
 <div class="sourceCode" id="cb8"><pre class="sourceCode r distill-force-highlighting-css"><code class="sourceCode r"></code></pre></div>
 <!--radix_placeholder_article_footer-->
 <!--/radix_placeholder_article_footer-->

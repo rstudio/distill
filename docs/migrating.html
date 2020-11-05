@@ -469,22 +469,19 @@ code span.wa { color: #008000; font-weight: bold; } /* Warning */
     return offset ? offset + '/' + url : url;
   }
 
-  function createIndex() {
-    var options = {
-      keys: [
-        "title",
-        "categories",
-        "description",
-        "contents"
-      ]
-    };
-    return new window.Fuse([],options);
-  }
-
   function createFuseIndex() {
 
     // create fuse index
-    var options = { keys: ["title", "description", "contents"] };
+    var options = {
+      keys: [
+        { name: 'title', weight: 20 },
+        { name: 'categories', weight: 15 },
+        { name: 'description', weight: 10 },
+        { name: 'contents', weight: 5 },
+      ],
+      ignoreLocation: true,
+      threshold: 0
+    };
     var fuse = new window.Fuse([], options);
 
     // fetch the main search.json
@@ -552,12 +549,6 @@ code span.wa { color: #008000; font-weight: bold; } /* Warning */
               shouldSort: true,
               minMatchCharLength: 2,
               limit: 10,
-              keys: [
-                { name: 'title', weight: 20 },
-                { name: 'categories', weight: 15 },
-                { name: 'description', weight: 10 },
-                { name: 'contents', weight: 5 },
-              ],
             };
             var results = fuse.search(query, searchOptions);
             callback(results
@@ -855,7 +846,7 @@ code span.wa { color: #008000; font-weight: bold; } /* Warning */
   d-article pre,
   d-article div.sourceCode,
   d-article div.sourceCode pre {
-    overflow: hidden;
+    overflow: auto;
   }
 
   d-article div.sourceCode {
@@ -1995,7 +1986,7 @@ code span.wa { color: #008000; font-weight: bold; } /* Warning */
   </script>
 
   <!--/radix_placeholder_distill-->
-  <script src="site_libs/header-attrs-2.5.1/header-attrs.js"></script>
+  <script src="site_libs/header-attrs-2.5/header-attrs.js"></script>
   <script src="site_libs/jquery-1.11.3/jquery.min.js"></script>
   <script src="site_libs/anchor-4.2.2/anchor.min.js"></script>
   <script src="site_libs/bowser-1.9.3/bowser.min.js"></script>
@@ -2046,6 +2037,7 @@ code span.wa { color: #008000; font-weight: bold; } /* Warning */
 <img src="images/logo.png" alt="Logo"/>
 </a>
 <a href="index.html" class="title">Distill for R Markdown</a>
+<input id="distill-search" class="nav-search hidden" type="text" placeholder="Search..."/>
 </div>
 <div class="nav-right">
 <div class="nav-dropdown">
@@ -2093,7 +2085,7 @@ Publishing
 <a href="publish_website.html">Publishing Websites</a>
 </div>
 </div>
-<a href="https://distill.netlify.app/">Reference</a>
+<a href="https://pkgs.rstudio.com/distill">Reference</a>
 <a href="https://github.com/rstudio/distill" aria-label="Link to source">
 <i class="fab fa-github" aria-hidden="true"></i>
 </a>

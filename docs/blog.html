@@ -469,22 +469,19 @@ code span.wa { color: #008000; font-weight: bold; } /* Warning */
     return offset ? offset + '/' + url : url;
   }
 
-  function createIndex() {
-    var options = {
-      keys: [
-        "title",
-        "categories",
-        "description",
-        "contents"
-      ]
-    };
-    return new window.Fuse([],options);
-  }
-
   function createFuseIndex() {
 
     // create fuse index
-    var options = { keys: ["title", "description", "contents"] };
+    var options = {
+      keys: [
+        { name: 'title', weight: 20 },
+        { name: 'categories', weight: 15 },
+        { name: 'description', weight: 10 },
+        { name: 'contents', weight: 5 },
+      ],
+      ignoreLocation: true,
+      threshold: 0
+    };
     var fuse = new window.Fuse([], options);
 
     // fetch the main search.json
@@ -552,12 +549,6 @@ code span.wa { color: #008000; font-weight: bold; } /* Warning */
               shouldSort: true,
               minMatchCharLength: 2,
               limit: 10,
-              keys: [
-                { name: 'title', weight: 20 },
-                { name: 'categories', weight: 15 },
-                { name: 'description', weight: 10 },
-                { name: 'contents', weight: 5 },
-              ],
             };
             var results = fuse.search(query, searchOptions);
             callback(results
@@ -855,7 +846,7 @@ code span.wa { color: #008000; font-weight: bold; } /* Warning */
   d-article pre,
   d-article div.sourceCode,
   d-article div.sourceCode pre {
-    overflow: hidden;
+    overflow: auto;
   }
 
   d-article div.sourceCode {
@@ -1995,9 +1986,9 @@ code span.wa { color: #008000; font-weight: bold; } /* Warning */
   </script>
 
   <!--/radix_placeholder_distill-->
-  <script src="site_libs/header-attrs-2.5.1/header-attrs.js"></script>
-  <link href="site_libs/panelset-0.2.4/panelset.css" rel="stylesheet" />
-  <script src="site_libs/panelset-0.2.4/panelset.js"></script>
+  <script src="site_libs/header-attrs-2.5/header-attrs.js"></script>
+  <link href="site_libs/panelset-0.2.3.9000/panelset.css" rel="stylesheet" />
+  <script src="site_libs/panelset-0.2.3.9000/panelset.js"></script>
   <script src="site_libs/jquery-1.11.3/jquery.min.js"></script>
   <script src="site_libs/anchor-4.2.2/anchor.min.js"></script>
   <script src="site_libs/bowser-1.9.3/bowser.min.js"></script>
@@ -2048,6 +2039,7 @@ code span.wa { color: #008000; font-weight: bold; } /* Warning */
 <img src="images/logo.png" alt="Logo"/>
 </a>
 <a href="index.html" class="title">Distill for R Markdown</a>
+<input id="distill-search" class="nav-search hidden" type="text" placeholder="Search..."/>
 </div>
 <div class="nav-right">
 <div class="nav-dropdown">
@@ -2095,7 +2087,7 @@ Publishing
 <a href="publish_website.html">Publishing Websites</a>
 </div>
 </div>
-<a href="https://distill.netlify.app/">Reference</a>
+<a href="https://pkgs.rstudio.com/distill">Reference</a>
 <a href="https://github.com/rstudio/distill" aria-label="Link to source">
 <i class="fab fa-github" aria-hidden="true"></i>
 </a>
@@ -2207,24 +2199,24 @@ Publishing
 </ul>
 <p>For example:</p>
 <p><strong>_site.yml</strong></p>
-<div class="sourceCode" id="cb2"><pre class="sourceCode yaml"><code class="sourceCode yaml"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="fu">name</span><span class="kw">:</span><span class="at"> </span><span class="st">&quot;reproducible-finance-with-r&quot;</span></span>
-<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a><span class="fu">title</span><span class="kw">:</span><span class="at"> </span><span class="st">&quot;Reproducible Finance with R&quot;</span></span>
-<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a><span class="fu">description</span><span class="kw">: </span><span class="ch">|</span></span>
-<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a>  Exploring reproducible finance with the R statistical </span>
-<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a>  computing environment.</span>
-<span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a><span class="fu">base_url</span><span class="kw">:</span><span class="at"> https://beta.rstudioconnect.com/content/11424/</span></span>
-<span id="cb2-7"><a href="#cb2-7" aria-hidden="true" tabindex="-1"></a><span class="fu">navbar</span><span class="kw">:</span></span>
-<span id="cb2-8"><a href="#cb2-8" aria-hidden="true" tabindex="-1"></a><span class="at">  </span><span class="fu">logo</span><span class="kw">:</span><span class="at"> images/rstudio.png</span></span>
-<span id="cb2-9"><a href="#cb2-9" aria-hidden="true" tabindex="-1"></a><span class="at">  </span><span class="fu">right</span><span class="kw">:</span></span>
-<span id="cb2-10"><a href="#cb2-10" aria-hidden="true" tabindex="-1"></a><span class="at">    </span><span class="kw">-</span><span class="at"> </span><span class="fu">text</span><span class="kw">:</span><span class="at"> </span><span class="st">&quot;Home&quot;</span></span>
-<span id="cb2-11"><a href="#cb2-11" aria-hidden="true" tabindex="-1"></a><span class="at">      </span><span class="fu">href</span><span class="kw">:</span><span class="at"> index.html</span></span>
-<span id="cb2-12"><a href="#cb2-12" aria-hidden="true" tabindex="-1"></a><span class="at">    </span><span class="kw">-</span><span class="at"> </span><span class="fu">text</span><span class="kw">:</span><span class="at"> </span><span class="st">&quot;About&quot;</span></span>
-<span id="cb2-13"><a href="#cb2-13" aria-hidden="true" tabindex="-1"></a><span class="at">      </span><span class="fu">href</span><span class="kw">:</span><span class="at"> about.html</span></span>
-<span id="cb2-14"><a href="#cb2-14" aria-hidden="true" tabindex="-1"></a><span class="at">    </span><span class="kw">-</span><span class="at"> </span><span class="fu">text</span><span class="kw">:</span><span class="at"> </span><span class="st">&quot;Contributors&quot;</span></span>
-<span id="cb2-15"><a href="#cb2-15" aria-hidden="true" tabindex="-1"></a><span class="at">      </span><span class="fu">href</span><span class="kw">:</span><span class="at"> contributors.html</span></span>
-<span id="cb2-16"><a href="#cb2-16" aria-hidden="true" tabindex="-1"></a><span class="at">    </span><span class="kw">-</span><span class="at"> </span><span class="fu">icon</span><span class="kw">:</span><span class="at"> fa fa-rss</span></span>
-<span id="cb2-17"><a href="#cb2-17" aria-hidden="true" tabindex="-1"></a><span class="at">      </span><span class="fu">href</span><span class="kw">:</span><span class="at"> index.xml</span></span>
-<span id="cb2-18"><a href="#cb2-18" aria-hidden="true" tabindex="-1"></a><span class="fu">output</span><span class="kw">:</span><span class="at"> distill::distill_article</span></span></code></pre></div>
+<div class="sourceCode" id="cb2"><pre class="sourceCode yaml"><code class="sourceCode yaml"><span id="cb2-1"><a href="#cb2-1"></a><span class="fu">name</span><span class="kw">:</span><span class="at"> </span><span class="st">&quot;reproducible-finance-with-r&quot;</span></span>
+<span id="cb2-2"><a href="#cb2-2"></a><span class="fu">title</span><span class="kw">:</span><span class="at"> </span><span class="st">&quot;Reproducible Finance with R&quot;</span></span>
+<span id="cb2-3"><a href="#cb2-3"></a><span class="fu">description</span><span class="kw">: </span><span class="ch">|</span></span>
+<span id="cb2-4"><a href="#cb2-4"></a>  Exploring reproducible finance with the R statistical </span>
+<span id="cb2-5"><a href="#cb2-5"></a>  computing environment.</span>
+<span id="cb2-6"><a href="#cb2-6"></a><span class="fu">base_url</span><span class="kw">:</span><span class="at"> https://beta.rstudioconnect.com/content/11424/</span></span>
+<span id="cb2-7"><a href="#cb2-7"></a><span class="fu">navbar</span><span class="kw">:</span></span>
+<span id="cb2-8"><a href="#cb2-8"></a><span class="at">  </span><span class="fu">logo</span><span class="kw">:</span><span class="at"> images/rstudio.png</span></span>
+<span id="cb2-9"><a href="#cb2-9"></a><span class="at">  </span><span class="fu">right</span><span class="kw">:</span></span>
+<span id="cb2-10"><a href="#cb2-10"></a><span class="at">    </span><span class="kw">-</span><span class="at"> </span><span class="fu">text</span><span class="kw">:</span><span class="at"> </span><span class="st">&quot;Home&quot;</span></span>
+<span id="cb2-11"><a href="#cb2-11"></a><span class="at">      </span><span class="fu">href</span><span class="kw">:</span><span class="at"> index.html</span></span>
+<span id="cb2-12"><a href="#cb2-12"></a><span class="at">    </span><span class="kw">-</span><span class="at"> </span><span class="fu">text</span><span class="kw">:</span><span class="at"> </span><span class="st">&quot;About&quot;</span></span>
+<span id="cb2-13"><a href="#cb2-13"></a><span class="at">      </span><span class="fu">href</span><span class="kw">:</span><span class="at"> about.html</span></span>
+<span id="cb2-14"><a href="#cb2-14"></a><span class="at">    </span><span class="kw">-</span><span class="at"> </span><span class="fu">text</span><span class="kw">:</span><span class="at"> </span><span class="st">&quot;Contributors&quot;</span></span>
+<span id="cb2-15"><a href="#cb2-15"></a><span class="at">      </span><span class="fu">href</span><span class="kw">:</span><span class="at"> contributors.html</span></span>
+<span id="cb2-16"><a href="#cb2-16"></a><span class="at">    </span><span class="kw">-</span><span class="at"> </span><span class="fu">icon</span><span class="kw">:</span><span class="at"> fa fa-rss</span></span>
+<span id="cb2-17"><a href="#cb2-17"></a><span class="at">      </span><span class="fu">href</span><span class="kw">:</span><span class="at"> index.xml</span></span>
+<span id="cb2-18"><a href="#cb2-18"></a><span class="fu">output</span><span class="kw">:</span><span class="at"> distill::distill_article</span></span></code></pre></div>
 <p>Note that we’ve also added a feed icon to the right side of the menu bar which makes it easy to discover and browse the RSS feed for the blog.</p>
 <h3 id="creating-a-post">Creating a post</h3>
 <p>The easiest way to start authoring a new post is to call the <code>create_post()</code> function from within your blog’s directory. For example:</p>
@@ -2262,98 +2254,98 @@ Publishing
 <h3 id="listing-pages">Listing pages</h3>
 <p>Once you have authored one or more posts you’ll want to create a listing page. You can do this by adding a <code>listing</code> metadata entry to the page you to include the listing on. This is often the main page for the website (index.Rmd). For example:</p>
 <p><strong>index.Rmd</strong></p>
-<div class="sourceCode" id="cb4"><pre class="sourceCode yaml"><code class="sourceCode yaml"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="pp">---</span></span>
-<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a><span class="fu">title</span><span class="kw">:</span><span class="at"> </span><span class="st">&quot;Reproducible Finance with R&quot;</span></span>
-<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a><span class="fu">site</span><span class="kw">:</span><span class="at"> distill::distill_website</span></span>
-<span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a><span class="fu">listing</span><span class="kw">:</span><span class="at"> posts</span></span>
-<span id="cb4-5"><a href="#cb4-5" aria-hidden="true" tabindex="-1"></a><span class="pp">---</span></span></code></pre></div>
+<div class="sourceCode" id="cb4"><pre class="sourceCode yaml"><code class="sourceCode yaml"><span id="cb4-1"><a href="#cb4-1"></a><span class="pp">---</span></span>
+<span id="cb4-2"><a href="#cb4-2"></a><span class="fu">title</span><span class="kw">:</span><span class="at"> </span><span class="st">&quot;Reproducible Finance with R&quot;</span></span>
+<span id="cb4-3"><a href="#cb4-3"></a><span class="fu">site</span><span class="kw">:</span><span class="at"> distill::distill_website</span></span>
+<span id="cb4-4"><a href="#cb4-4"></a><span class="fu">listing</span><span class="kw">:</span><span class="at"> posts</span></span>
+<span id="cb4-5"><a href="#cb4-5"></a><span class="pp">---</span></span></code></pre></div>
 <p>In our <a href="https://beta.rstudioconnect.com/content/11424/">example blog</a> (which will be described in more detail below) this results in the following listing:</p>
 <p><img src="images/site-listing.png" class="screenshot" style="width:95.0%" /></p>
 <h4 id="custom-listings">Custom listings</h4>
 <p>Above we demonstrated creating a listing page for all posts. You can also create a custom listing for a subset of posts (e.g. a gallery of featured posts). To do this, just enumerate the posts you want to include as follows:</p>
 <p><strong>gallery.Rmd</strong></p>
-<div class="sourceCode" id="cb5"><pre class="sourceCode yaml"><code class="sourceCode yaml"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="pp">---</span></span>
-<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a><span class="fu">title</span><span class="kw">:</span><span class="at"> </span><span class="st">&quot;Gallery of featured posts&quot;</span></span>
-<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a><span class="fu">listing</span><span class="kw">:</span></span>
-<span id="cb5-4"><a href="#cb5-4" aria-hidden="true" tabindex="-1"></a><span class="at">  </span><span class="fu">posts</span><span class="kw">:</span></span>
-<span id="cb5-5"><a href="#cb5-5" aria-hidden="true" tabindex="-1"></a><span class="at">    </span><span class="kw">-</span><span class="at"> 2016-11-08-sharpe-ratio</span></span>
-<span id="cb5-6"><a href="#cb5-6" aria-hidden="true" tabindex="-1"></a><span class="at">    </span><span class="kw">-</span><span class="at"> 2017-11-09-visualizing-asset-returns </span></span>
-<span id="cb5-7"><a href="#cb5-7" aria-hidden="true" tabindex="-1"></a><span class="at">    </span><span class="kw">-</span><span class="at"> 2017-09-13-asset-volatility </span></span>
-<span id="cb5-8"><a href="#cb5-8" aria-hidden="true" tabindex="-1"></a><span class="pp">---</span></span></code></pre></div>
+<div class="sourceCode" id="cb5"><pre class="sourceCode yaml"><code class="sourceCode yaml"><span id="cb5-1"><a href="#cb5-1"></a><span class="pp">---</span></span>
+<span id="cb5-2"><a href="#cb5-2"></a><span class="fu">title</span><span class="kw">:</span><span class="at"> </span><span class="st">&quot;Gallery of featured posts&quot;</span></span>
+<span id="cb5-3"><a href="#cb5-3"></a><span class="fu">listing</span><span class="kw">:</span></span>
+<span id="cb5-4"><a href="#cb5-4"></a><span class="at">  </span><span class="fu">posts</span><span class="kw">:</span></span>
+<span id="cb5-5"><a href="#cb5-5"></a><span class="at">    </span><span class="kw">-</span><span class="at"> 2016-11-08-sharpe-ratio</span></span>
+<span id="cb5-6"><a href="#cb5-6"></a><span class="at">    </span><span class="kw">-</span><span class="at"> 2017-11-09-visualizing-asset-returns </span></span>
+<span id="cb5-7"><a href="#cb5-7"></a><span class="at">    </span><span class="kw">-</span><span class="at"> 2017-09-13-asset-volatility </span></span>
+<span id="cb5-8"><a href="#cb5-8"></a><span class="pp">---</span></span></code></pre></div>
 <h4 id="categories">Categories</h4>
 <p>If your posts include <code>categories</code> metadata, then the page will also include categories within the article listing. For example, here is some post metadata that includes categories:</p>
-<div class="sourceCode" id="cb6"><pre class="sourceCode yaml"><code class="sourceCode yaml"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="pp">---</span></span>
-<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a><span class="fu">title</span><span class="kw">:</span><span class="at"> </span><span class="st">&quot;The Sharpe Ratio&quot;</span></span>
-<span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a><span class="co"># (additional metadata e.g. description and date, excluded for brevity)</span></span>
-<span id="cb6-4"><a href="#cb6-4" aria-hidden="true" tabindex="-1"></a><span class="fu">categories</span><span class="kw">:</span></span>
-<span id="cb6-5"><a href="#cb6-5" aria-hidden="true" tabindex="-1"></a><span class="at">  </span><span class="kw">-</span><span class="at"> portfolios</span></span>
-<span id="cb6-6"><a href="#cb6-6" aria-hidden="true" tabindex="-1"></a><span class="at">  </span><span class="kw">-</span><span class="at"> dygraphs</span></span></code></pre></div>
+<div class="sourceCode" id="cb6"><pre class="sourceCode yaml"><code class="sourceCode yaml"><span id="cb6-1"><a href="#cb6-1"></a><span class="pp">---</span></span>
+<span id="cb6-2"><a href="#cb6-2"></a><span class="fu">title</span><span class="kw">:</span><span class="at"> </span><span class="st">&quot;The Sharpe Ratio&quot;</span></span>
+<span id="cb6-3"><a href="#cb6-3"></a><span class="co"># (additional metadata e.g. description and date, excluded for brevity)</span></span>
+<span id="cb6-4"><a href="#cb6-4"></a><span class="fu">categories</span><span class="kw">:</span></span>
+<span id="cb6-5"><a href="#cb6-5"></a><span class="at">  </span><span class="kw">-</span><span class="at"> portfolios</span></span>
+<span id="cb6-6"><a href="#cb6-6"></a><span class="at">  </span><span class="kw">-</span><span class="at"> dygraphs</span></span></code></pre></div>
 <p>As a result of including <code>categories</code>, the listing page now looks like this:</p>
 <p><img src="images/site-listing-categories.png" class="screenshot" style="width:95.0%" /></p>
 <p>Categories are listed in the right-hand sidebar and are also displayed as metadata for each post. The name of each post’s author is also displayed in the article listing. You can disable both category displays as well as authors display using <code>collection</code> properties defined in <code>_site.yml</code>. For example:</p>
 <p><strong>_site.yml</strong></p>
-<div class="sourceCode" id="cb7"><pre class="sourceCode yaml"><code class="sourceCode yaml"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="fu">name</span><span class="kw">:</span><span class="at"> </span><span class="st">&quot;reproducible-finance-with-r&quot;</span></span>
-<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a><span class="fu">title</span><span class="kw">:</span><span class="at"> </span><span class="st">&quot;Reproducible Finance with R&quot;</span></span>
-<span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a><span class="fu">description</span><span class="kw">: </span><span class="ch">|</span></span>
-<span id="cb7-4"><a href="#cb7-4" aria-hidden="true" tabindex="-1"></a>  Exploring reproducible finance with the R statistical </span>
-<span id="cb7-5"><a href="#cb7-5" aria-hidden="true" tabindex="-1"></a>  computing environment.</span>
-<span id="cb7-6"><a href="#cb7-6" aria-hidden="true" tabindex="-1"></a><span class="fu">base_url</span><span class="kw">:</span><span class="at"> https://beta.rstudioconnect.com/content/11424/</span></span>
-<span id="cb7-7"><a href="#cb7-7" aria-hidden="true" tabindex="-1"></a><span class="fu">collections</span><span class="kw">:</span></span>
-<span id="cb7-8"><a href="#cb7-8" aria-hidden="true" tabindex="-1"></a><span class="at">  </span><span class="fu">posts</span><span class="kw">:</span></span>
-<span id="cb7-9"><a href="#cb7-9" aria-hidden="true" tabindex="-1"></a><span class="at">    </span><span class="fu">categories</span><span class="kw">:</span><span class="at"> </span><span class="ch">false</span></span>
-<span id="cb7-10"><a href="#cb7-10" aria-hidden="true" tabindex="-1"></a><span class="at">    </span><span class="fu">categories_metadata</span><span class="kw">:</span><span class="at"> </span><span class="ch">false</span></span>
-<span id="cb7-11"><a href="#cb7-11" aria-hidden="true" tabindex="-1"></a><span class="at">    </span><span class="fu">authors_metadata</span><span class="kw">:</span><span class="at"> </span><span class="ch">false</span></span></code></pre></div>
+<div class="sourceCode" id="cb7"><pre class="sourceCode yaml"><code class="sourceCode yaml"><span id="cb7-1"><a href="#cb7-1"></a><span class="fu">name</span><span class="kw">:</span><span class="at"> </span><span class="st">&quot;reproducible-finance-with-r&quot;</span></span>
+<span id="cb7-2"><a href="#cb7-2"></a><span class="fu">title</span><span class="kw">:</span><span class="at"> </span><span class="st">&quot;Reproducible Finance with R&quot;</span></span>
+<span id="cb7-3"><a href="#cb7-3"></a><span class="fu">description</span><span class="kw">: </span><span class="ch">|</span></span>
+<span id="cb7-4"><a href="#cb7-4"></a>  Exploring reproducible finance with the R statistical </span>
+<span id="cb7-5"><a href="#cb7-5"></a>  computing environment.</span>
+<span id="cb7-6"><a href="#cb7-6"></a><span class="fu">base_url</span><span class="kw">:</span><span class="at"> https://beta.rstudioconnect.com/content/11424/</span></span>
+<span id="cb7-7"><a href="#cb7-7"></a><span class="fu">collections</span><span class="kw">:</span></span>
+<span id="cb7-8"><a href="#cb7-8"></a><span class="at">  </span><span class="fu">posts</span><span class="kw">:</span></span>
+<span id="cb7-9"><a href="#cb7-9"></a><span class="at">    </span><span class="fu">categories</span><span class="kw">:</span><span class="at"> </span><span class="ch">false</span></span>
+<span id="cb7-10"><a href="#cb7-10"></a><span class="at">    </span><span class="fu">categories_metadata</span><span class="kw">:</span><span class="at"> </span><span class="ch">false</span></span>
+<span id="cb7-11"><a href="#cb7-11"></a><span class="at">    </span><span class="fu">authors_metadata</span><span class="kw">:</span><span class="at"> </span><span class="ch">false</span></span></code></pre></div>
 <h3 id="rss-feed">RSS feed</h3>
 <p>When you create a listing page an <a href="https://en.wikipedia.org/wiki/RSS">RSS feed</a> is created automatically for the page (using the name of the listing page with a <code>.xml</code> file extension). You can link to the RSS feed within your site’s navigation bar as follows (some navbar entries excluded for brevity):</p>
 <p><strong>_site.yml</strong></p>
-<div class="sourceCode" id="cb8"><pre class="sourceCode yaml"><code class="sourceCode yaml"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="fu">name</span><span class="kw">:</span><span class="at"> </span><span class="st">&quot;reproducible-finance-with-r&quot;</span></span>
-<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a><span class="fu">title</span><span class="kw">:</span><span class="at"> </span><span class="st">&quot;Reproducible Finance with R&quot;</span></span>
-<span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a><span class="fu">description</span><span class="kw">: </span><span class="ch">|</span></span>
-<span id="cb8-4"><a href="#cb8-4" aria-hidden="true" tabindex="-1"></a>  Exploring reproducible finance with the R statistical </span>
-<span id="cb8-5"><a href="#cb8-5" aria-hidden="true" tabindex="-1"></a>  computing environment.</span>
-<span id="cb8-6"><a href="#cb8-6" aria-hidden="true" tabindex="-1"></a><span class="fu">base_url</span><span class="kw">:</span><span class="at"> https://beta.rstudioconnect.com/content/11424/</span></span>
-<span id="cb8-7"><a href="#cb8-7" aria-hidden="true" tabindex="-1"></a><span class="fu">navbar</span><span class="kw">:</span></span>
-<span id="cb8-8"><a href="#cb8-8" aria-hidden="true" tabindex="-1"></a><span class="at">  </span><span class="fu">right</span><span class="kw">:</span></span>
-<span id="cb8-9"><a href="#cb8-9" aria-hidden="true" tabindex="-1"></a><span class="at">    </span><span class="kw">-</span><span class="at"> </span><span class="fu">icon</span><span class="kw">:</span><span class="at"> fa fa-rss</span></span>
-<span id="cb8-10"><a href="#cb8-10" aria-hidden="true" tabindex="-1"></a><span class="at">      </span><span class="fu">href</span><span class="kw">:</span><span class="at"> index.xml</span></span>
-<span id="cb8-11"><a href="#cb8-11" aria-hidden="true" tabindex="-1"></a><span class="fu">output</span><span class="kw">:</span><span class="at"> distill::distill_article</span></span></code></pre></div>
+<div class="sourceCode" id="cb8"><pre class="sourceCode yaml"><code class="sourceCode yaml"><span id="cb8-1"><a href="#cb8-1"></a><span class="fu">name</span><span class="kw">:</span><span class="at"> </span><span class="st">&quot;reproducible-finance-with-r&quot;</span></span>
+<span id="cb8-2"><a href="#cb8-2"></a><span class="fu">title</span><span class="kw">:</span><span class="at"> </span><span class="st">&quot;Reproducible Finance with R&quot;</span></span>
+<span id="cb8-3"><a href="#cb8-3"></a><span class="fu">description</span><span class="kw">: </span><span class="ch">|</span></span>
+<span id="cb8-4"><a href="#cb8-4"></a>  Exploring reproducible finance with the R statistical </span>
+<span id="cb8-5"><a href="#cb8-5"></a>  computing environment.</span>
+<span id="cb8-6"><a href="#cb8-6"></a><span class="fu">base_url</span><span class="kw">:</span><span class="at"> https://beta.rstudioconnect.com/content/11424/</span></span>
+<span id="cb8-7"><a href="#cb8-7"></a><span class="fu">navbar</span><span class="kw">:</span></span>
+<span id="cb8-8"><a href="#cb8-8"></a><span class="at">  </span><span class="fu">right</span><span class="kw">:</span></span>
+<span id="cb8-9"><a href="#cb8-9"></a><span class="at">    </span><span class="kw">-</span><span class="at"> </span><span class="fu">icon</span><span class="kw">:</span><span class="at"> fa fa-rss</span></span>
+<span id="cb8-10"><a href="#cb8-10"></a><span class="at">      </span><span class="fu">href</span><span class="kw">:</span><span class="at"> index.xml</span></span>
+<span id="cb8-11"><a href="#cb8-11"></a><span class="fu">output</span><span class="kw">:</span><span class="at"> distill::distill_article</span></span></code></pre></div>
 <p>Note that the <code>description</code> and <code>base_url</code> fields are both required to generate an RSS feed.</p>
 <p>By default the most recent 20 articles will be included in the RSS feed. You can change this by specifying <code>feed_items_max</code> within the collection configuration in <code>_site.yml</code> (navbar and output format fields omitted for brevity):</p>
 <p><strong>_site.yml</strong></p>
-<div class="sourceCode" id="cb9"><pre class="sourceCode yaml"><code class="sourceCode yaml"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="fu">name</span><span class="kw">:</span><span class="at"> </span><span class="st">&quot;reproducible-finance-with-r&quot;</span></span>
-<span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a><span class="fu">title</span><span class="kw">:</span><span class="at"> </span><span class="st">&quot;Reproducible Finance with R&quot;</span></span>
-<span id="cb9-3"><a href="#cb9-3" aria-hidden="true" tabindex="-1"></a><span class="fu">description</span><span class="kw">: </span><span class="ch">|</span></span>
-<span id="cb9-4"><a href="#cb9-4" aria-hidden="true" tabindex="-1"></a>  Exploring reproducible finance with the R statistical </span>
-<span id="cb9-5"><a href="#cb9-5" aria-hidden="true" tabindex="-1"></a>  computing environment.</span>
-<span id="cb9-6"><a href="#cb9-6" aria-hidden="true" tabindex="-1"></a><span class="fu">base_url</span><span class="kw">:</span><span class="at"> https://beta.rstudioconnect.com/content/11424/</span></span>
-<span id="cb9-7"><a href="#cb9-7" aria-hidden="true" tabindex="-1"></a><span class="fu">collections</span><span class="kw">:</span></span>
-<span id="cb9-8"><a href="#cb9-8" aria-hidden="true" tabindex="-1"></a><span class="at">  </span><span class="fu">posts</span><span class="kw">:</span></span>
-<span id="cb9-9"><a href="#cb9-9" aria-hidden="true" tabindex="-1"></a><span class="at">    </span><span class="fu">feed_items_max</span><span class="kw">:</span><span class="at"> </span><span class="dv">50</span></span></code></pre></div>
+<div class="sourceCode" id="cb9"><pre class="sourceCode yaml"><code class="sourceCode yaml"><span id="cb9-1"><a href="#cb9-1"></a><span class="fu">name</span><span class="kw">:</span><span class="at"> </span><span class="st">&quot;reproducible-finance-with-r&quot;</span></span>
+<span id="cb9-2"><a href="#cb9-2"></a><span class="fu">title</span><span class="kw">:</span><span class="at"> </span><span class="st">&quot;Reproducible Finance with R&quot;</span></span>
+<span id="cb9-3"><a href="#cb9-3"></a><span class="fu">description</span><span class="kw">: </span><span class="ch">|</span></span>
+<span id="cb9-4"><a href="#cb9-4"></a>  Exploring reproducible finance with the R statistical </span>
+<span id="cb9-5"><a href="#cb9-5"></a>  computing environment.</span>
+<span id="cb9-6"><a href="#cb9-6"></a><span class="fu">base_url</span><span class="kw">:</span><span class="at"> https://beta.rstudioconnect.com/content/11424/</span></span>
+<span id="cb9-7"><a href="#cb9-7"></a><span class="fu">collections</span><span class="kw">:</span></span>
+<span id="cb9-8"><a href="#cb9-8"></a><span class="at">  </span><span class="fu">posts</span><span class="kw">:</span></span>
+<span id="cb9-9"><a href="#cb9-9"></a><span class="at">    </span><span class="fu">feed_items_max</span><span class="kw">:</span><span class="at"> </span><span class="dv">50</span></span></code></pre></div>
 <p>Specify <code>feed_items_max: false</code> to have no limit on the number of items included in the feed.</p>
 <h4 id="rss-options">RSS options</h4>
 <p>By default, RSS feeds include only a summary of each post (based on the <code>description</code> field). If you want to include the full contents of the post (e.g. for syndication to another blog) add an <code>rss: full_content</code> entry to your site config as follows:</p>
 <p><strong>_site.yml</strong></p>
-<div class="sourceCode" id="cb10"><pre class="sourceCode yaml"><code class="sourceCode yaml"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="fu">rss</span><span class="kw">:</span></span>
-<span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a><span class="at">  </span><span class="fu">full_content</span><span class="kw">:</span><span class="at"> </span><span class="ch">true</span></span></code></pre></div>
+<div class="sourceCode" id="cb10"><pre class="sourceCode yaml"><code class="sourceCode yaml"><span id="cb10-1"><a href="#cb10-1"></a><span class="fu">rss</span><span class="kw">:</span></span>
+<span id="cb10-2"><a href="#cb10-2"></a><span class="at">  </span><span class="fu">full_content</span><span class="kw">:</span><span class="at"> </span><span class="ch">true</span></span></code></pre></div>
 <p>If you want to create dedicated feeds that map to particular categories (e.g. to syndicate only a subset of your posts), you can do this:</p>
 <p><strong>_site.yml</strong></p>
-<div class="sourceCode" id="cb11"><pre class="sourceCode yaml"><code class="sourceCode yaml"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a><span class="fu">rss</span><span class="kw">:</span></span>
-<span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a><span class="at">  </span><span class="fu">full_content</span><span class="kw">:</span><span class="at"> </span><span class="ch">true</span></span>
-<span id="cb11-3"><a href="#cb11-3" aria-hidden="true" tabindex="-1"></a><span class="at">  </span><span class="fu">categories</span><span class="kw">:</span></span>
-<span id="cb11-4"><a href="#cb11-4" aria-hidden="true" tabindex="-1"></a><span class="at">    </span><span class="kw">-</span><span class="at"> portfolios</span></span>
-<span id="cb11-5"><a href="#cb11-5" aria-hidden="true" tabindex="-1"></a><span class="at">    </span><span class="kw">-</span><span class="at"> forecasting</span></span></code></pre></div>
+<div class="sourceCode" id="cb11"><pre class="sourceCode yaml"><code class="sourceCode yaml"><span id="cb11-1"><a href="#cb11-1"></a><span class="fu">rss</span><span class="kw">:</span></span>
+<span id="cb11-2"><a href="#cb11-2"></a><span class="at">  </span><span class="fu">full_content</span><span class="kw">:</span><span class="at"> </span><span class="ch">true</span></span>
+<span id="cb11-3"><a href="#cb11-3"></a><span class="at">  </span><span class="fu">categories</span><span class="kw">:</span></span>
+<span id="cb11-4"><a href="#cb11-4"></a><span class="at">    </span><span class="kw">-</span><span class="at"> portfolios</span></span>
+<span id="cb11-5"><a href="#cb11-5"></a><span class="at">    </span><span class="kw">-</span><span class="at"> forecasting</span></span></code></pre></div>
 <p>The category-based feeds will be created in a <code>categories</code> directory at the top level of the site.</p>
 <h3 id="post-drafts">Post drafts</h3>
 <p>If you want to work on a post for a period of time without having it be added to the listing page, add <code>draft: true</code> to the post’s metadata. For example:</p>
-<div class="sourceCode" id="cb12"><pre class="sourceCode yaml"><code class="sourceCode yaml"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a><span class="pp">---</span></span>
-<span id="cb12-2"><a href="#cb12-2" aria-hidden="true" tabindex="-1"></a><span class="fu">title</span><span class="kw">:</span><span class="at"> </span><span class="st">&quot;The Sharpe Ratio&quot;</span></span>
-<span id="cb12-3"><a href="#cb12-3" aria-hidden="true" tabindex="-1"></a><span class="fu">description</span><span class="kw">: </span><span class="ch">|</span></span>
-<span id="cb12-4"><a href="#cb12-4" aria-hidden="true" tabindex="-1"></a>  In this post we present a classic finance use case using the</span>
-<span id="cb12-5"><a href="#cb12-5" aria-hidden="true" tabindex="-1"></a>  PerformanceAnalytics, quantmod, and dygraphs packages. </span>
-<span id="cb12-6"><a href="#cb12-6" aria-hidden="true" tabindex="-1"></a>  We&#39;ll demonstrate importing stock data, building a portfolio,</span>
-<span id="cb12-7"><a href="#cb12-7" aria-hidden="true" tabindex="-1"></a>  and then calculating the Sharpe Ratio. </span>
-<span id="cb12-8"><a href="#cb12-8" aria-hidden="true" tabindex="-1"></a><span class="fu">draft</span><span class="kw">:</span><span class="at"> </span><span class="ch">true</span></span>
-<span id="cb12-9"><a href="#cb12-9" aria-hidden="true" tabindex="-1"></a><span class="pp">---</span></span></code></pre></div>
+<div class="sourceCode" id="cb12"><pre class="sourceCode yaml"><code class="sourceCode yaml"><span id="cb12-1"><a href="#cb12-1"></a><span class="pp">---</span></span>
+<span id="cb12-2"><a href="#cb12-2"></a><span class="fu">title</span><span class="kw">:</span><span class="at"> </span><span class="st">&quot;The Sharpe Ratio&quot;</span></span>
+<span id="cb12-3"><a href="#cb12-3"></a><span class="fu">description</span><span class="kw">: </span><span class="ch">|</span></span>
+<span id="cb12-4"><a href="#cb12-4"></a>  In this post we present a classic finance use case using the</span>
+<span id="cb12-5"><a href="#cb12-5"></a>  PerformanceAnalytics, quantmod, and dygraphs packages. </span>
+<span id="cb12-6"><a href="#cb12-6"></a>  We&#39;ll demonstrate importing stock data, building a portfolio,</span>
+<span id="cb12-7"><a href="#cb12-7"></a>  and then calculating the Sharpe Ratio. </span>
+<span id="cb12-8"><a href="#cb12-8"></a><span class="fu">draft</span><span class="kw">:</span><span class="at"> </span><span class="ch">true</span></span>
+<span id="cb12-9"><a href="#cb12-9"></a><span class="pp">---</span></span></code></pre></div>
 <p>When you are ready to publish the post, either remove the <code>draft</code> option or set it to <code>false</code>, then build the website.</p>
 <p>Beyond support for drafts, Distill has a number of additional features to accommodate a variety of post authoring and contribution workflows, including importing posts published elsewhere on the web (e.g. on RPubs, in a Git repository, or on another blog). The article on <a href="blog_workflow.html">blog post workflow</a> describes these options in more detail.</p>
 <h2 id="next-steps">Next steps</h2>
@@ -2361,51 +2353,51 @@ Publishing
 <p>Readers will likely want to comment on and share articles they read on your blog. You can enable support for <a href="https://disqus.com/">Disqus comments</a> and sharing links for Twitter, LinkedIn, and other services by adding options to the <code>collection:posts</code> section of <code>_site.yml</code>.</p>
 <p>For example, the following options provide the <a href="https://help.disqus.com/installation/whats-a-shortname">Disqus shortname</a> for a site and specify that we want sharing buttons for Twitter and LinkedIn.</p>
 <p><strong>_site.yml</strong></p>
-<div class="sourceCode" id="cb13"><pre class="sourceCode yaml"><code class="sourceCode yaml"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a><span class="fu">name</span><span class="kw">:</span><span class="at"> </span><span class="st">&quot;reproducible-finance-with-r&quot;</span></span>
-<span id="cb13-2"><a href="#cb13-2" aria-hidden="true" tabindex="-1"></a><span class="fu">title</span><span class="kw">:</span><span class="at"> </span><span class="st">&quot;Reproducible Finance with R&quot;</span></span>
-<span id="cb13-3"><a href="#cb13-3" aria-hidden="true" tabindex="-1"></a><span class="fu">description</span><span class="kw">: </span><span class="ch">|</span></span>
-<span id="cb13-4"><a href="#cb13-4" aria-hidden="true" tabindex="-1"></a>  Exploring reproducible finance with the R statistical </span>
-<span id="cb13-5"><a href="#cb13-5" aria-hidden="true" tabindex="-1"></a>  computing environment.</span>
-<span id="cb13-6"><a href="#cb13-6" aria-hidden="true" tabindex="-1"></a><span class="fu">base_url</span><span class="kw">:</span><span class="at"> https://beta.rstudioconnect.com/content/11424/</span></span>
-<span id="cb13-7"><a href="#cb13-7" aria-hidden="true" tabindex="-1"></a><span class="fu">collections</span><span class="kw">:</span></span>
-<span id="cb13-8"><a href="#cb13-8" aria-hidden="true" tabindex="-1"></a><span class="at">  </span><span class="fu">posts</span><span class="kw">:</span></span>
-<span id="cb13-9"><a href="#cb13-9" aria-hidden="true" tabindex="-1"></a><span class="at">    </span><span class="fu">disqus</span><span class="kw">:</span><span class="at"> reproducible-finance-with-r</span></span>
-<span id="cb13-10"><a href="#cb13-10" aria-hidden="true" tabindex="-1"></a><span class="at">    </span><span class="fu">share</span><span class="kw">:</span><span class="at"> </span><span class="kw">[</span><span class="at">twitter</span><span class="kw">,</span><span class="at"> linkedin</span><span class="kw">]</span></span></code></pre></div>
+<div class="sourceCode" id="cb13"><pre class="sourceCode yaml"><code class="sourceCode yaml"><span id="cb13-1"><a href="#cb13-1"></a><span class="fu">name</span><span class="kw">:</span><span class="at"> </span><span class="st">&quot;reproducible-finance-with-r&quot;</span></span>
+<span id="cb13-2"><a href="#cb13-2"></a><span class="fu">title</span><span class="kw">:</span><span class="at"> </span><span class="st">&quot;Reproducible Finance with R&quot;</span></span>
+<span id="cb13-3"><a href="#cb13-3"></a><span class="fu">description</span><span class="kw">: </span><span class="ch">|</span></span>
+<span id="cb13-4"><a href="#cb13-4"></a>  Exploring reproducible finance with the R statistical </span>
+<span id="cb13-5"><a href="#cb13-5"></a>  computing environment.</span>
+<span id="cb13-6"><a href="#cb13-6"></a><span class="fu">base_url</span><span class="kw">:</span><span class="at"> https://beta.rstudioconnect.com/content/11424/</span></span>
+<span id="cb13-7"><a href="#cb13-7"></a><span class="fu">collections</span><span class="kw">:</span></span>
+<span id="cb13-8"><a href="#cb13-8"></a><span class="at">  </span><span class="fu">posts</span><span class="kw">:</span></span>
+<span id="cb13-9"><a href="#cb13-9"></a><span class="at">    </span><span class="fu">disqus</span><span class="kw">:</span><span class="at"> reproducible-finance-with-r</span></span>
+<span id="cb13-10"><a href="#cb13-10"></a><span class="at">    </span><span class="fu">share</span><span class="kw">:</span><span class="at"> </span><span class="kw">[</span><span class="at">twitter</span><span class="kw">,</span><span class="at"> linkedin</span><span class="kw">]</span></span></code></pre></div>
 <p>The following footer is then automatically included at the end of each post:</p>
 <p><img src="images/social-footer.png" class="screenshot" style="width:80.0%" /></p>
 <p>Note that the <code>base_url</code> field is required in order to use Disqus and sharing links.</p>
 <p>Valid values for the <code>share</code> option are <code>twitter</code>, <code>linkedin</code>, <code>facebook</code>, <code>google-plus</code>, and <code>pinterest</code>.</p>
 <p>By default, the full text of Disqus comments are not displayed (rather, a link is provided that will expand the comment section). This is done so that a long comment section doesn’t obscure the bibliography and other appendices. If you’d rather show the comments by default you can use this alterante syntax for <code>disqus</code> configuration:</p>
-<div class="sourceCode" id="cb14"><pre class="sourceCode yaml"><code class="sourceCode yaml"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a><span class="fu">collections</span><span class="kw">:</span></span>
-<span id="cb14-2"><a href="#cb14-2" aria-hidden="true" tabindex="-1"></a><span class="at">  </span><span class="fu">posts</span><span class="kw">:</span></span>
-<span id="cb14-3"><a href="#cb14-3" aria-hidden="true" tabindex="-1"></a><span class="at">    </span><span class="fu">disqus</span><span class="kw">:</span><span class="at"> </span></span>
-<span id="cb14-4"><a href="#cb14-4" aria-hidden="true" tabindex="-1"></a><span class="at">      </span><span class="fu">shortname</span><span class="kw">:</span><span class="at"> reproducible-finance-with-r</span></span>
-<span id="cb14-5"><a href="#cb14-5" aria-hidden="true" tabindex="-1"></a><span class="at">      </span><span class="fu">hidden</span><span class="kw">:</span><span class="at"> </span><span class="ch">false</span></span>
-<span id="cb14-6"><a href="#cb14-6" aria-hidden="true" tabindex="-1"></a><span class="at">    </span><span class="fu">share</span><span class="kw">:</span><span class="at"> </span><span class="kw">[</span><span class="at">twitter</span><span class="kw">,</span><span class="at"> linkedin</span><span class="kw">]</span></span></code></pre></div>
+<div class="sourceCode" id="cb14"><pre class="sourceCode yaml"><code class="sourceCode yaml"><span id="cb14-1"><a href="#cb14-1"></a><span class="fu">collections</span><span class="kw">:</span></span>
+<span id="cb14-2"><a href="#cb14-2"></a><span class="at">  </span><span class="fu">posts</span><span class="kw">:</span></span>
+<span id="cb14-3"><a href="#cb14-3"></a><span class="at">    </span><span class="fu">disqus</span><span class="kw">:</span><span class="at"> </span></span>
+<span id="cb14-4"><a href="#cb14-4"></a><span class="at">      </span><span class="fu">shortname</span><span class="kw">:</span><span class="at"> reproducible-finance-with-r</span></span>
+<span id="cb14-5"><a href="#cb14-5"></a><span class="at">      </span><span class="fu">hidden</span><span class="kw">:</span><span class="at"> </span><span class="ch">false</span></span>
+<span id="cb14-6"><a href="#cb14-6"></a><span class="at">    </span><span class="fu">share</span><span class="kw">:</span><span class="at"> </span><span class="kw">[</span><span class="at">twitter</span><span class="kw">,</span><span class="at"> linkedin</span><span class="kw">]</span></span></code></pre></div>
 <p>Specifying the <code>hidden: false</code> option for <code>disqus</code> will causes all comments to be displayed inline by default.</p>
 <h3 id="site-search">Site search</h3>
 <p>Blog sites automatically include a search box within the navigation bar. You can disable the search box using the the <code>search</code> field of the <code>navbar</code> key within <code>_site.yml</code>. For example:</p>
-<div class="sourceCode" id="cb15"><pre class="sourceCode yaml"><code class="sourceCode yaml"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a><span class="pp">---</span></span>
-<span id="cb15-2"><a href="#cb15-2" aria-hidden="true" tabindex="-1"></a><span class="fu">name</span><span class="kw">:</span><span class="at"> </span><span class="st">&quot;distill&quot;</span></span>
-<span id="cb15-3"><a href="#cb15-3" aria-hidden="true" tabindex="-1"></a><span class="fu">title</span><span class="kw">:</span><span class="at"> </span><span class="st">&quot;Distill for R Markdown&quot;</span></span>
-<span id="cb15-4"><a href="#cb15-4" aria-hidden="true" tabindex="-1"></a><span class="fu">navbar</span><span class="kw">:</span></span>
-<span id="cb15-5"><a href="#cb15-5" aria-hidden="true" tabindex="-1"></a><span class="at">  </span><span class="fu">logo</span><span class="kw">:</span></span>
-<span id="cb15-6"><a href="#cb15-6" aria-hidden="true" tabindex="-1"></a><span class="at">    </span><span class="fu">image</span><span class="kw">:</span><span class="at"> images/logo.png</span></span>
-<span id="cb15-7"><a href="#cb15-7" aria-hidden="true" tabindex="-1"></a><span class="at">    </span><span class="fu">href</span><span class="kw">:</span><span class="at"> https://www.rstudio.com</span></span>
-<span id="cb15-8"><a href="#cb15-8" aria-hidden="true" tabindex="-1"></a><span class="at">  </span><span class="fu">search</span><span class="kw">:</span><span class="at"> </span><span class="ch">false</span></span>
-<span id="cb15-9"><a href="#cb15-9" aria-hidden="true" tabindex="-1"></a><span class="pp">---</span></span></code></pre></div>
+<div class="sourceCode" id="cb15"><pre class="sourceCode yaml"><code class="sourceCode yaml"><span id="cb15-1"><a href="#cb15-1"></a><span class="pp">---</span></span>
+<span id="cb15-2"><a href="#cb15-2"></a><span class="fu">name</span><span class="kw">:</span><span class="at"> </span><span class="st">&quot;distill&quot;</span></span>
+<span id="cb15-3"><a href="#cb15-3"></a><span class="fu">title</span><span class="kw">:</span><span class="at"> </span><span class="st">&quot;Distill for R Markdown&quot;</span></span>
+<span id="cb15-4"><a href="#cb15-4"></a><span class="fu">navbar</span><span class="kw">:</span></span>
+<span id="cb15-5"><a href="#cb15-5"></a><span class="at">  </span><span class="fu">logo</span><span class="kw">:</span></span>
+<span id="cb15-6"><a href="#cb15-6"></a><span class="at">    </span><span class="fu">image</span><span class="kw">:</span><span class="at"> images/logo.png</span></span>
+<span id="cb15-7"><a href="#cb15-7"></a><span class="at">    </span><span class="fu">href</span><span class="kw">:</span><span class="at"> https://www.rstudio.com</span></span>
+<span id="cb15-8"><a href="#cb15-8"></a><span class="at">  </span><span class="fu">search</span><span class="kw">:</span><span class="at"> </span><span class="ch">false</span></span>
+<span id="cb15-9"><a href="#cb15-9"></a><span class="pp">---</span></span></code></pre></div>
 <p>Note that top level articles within blog sites will also be included in search results so long as they have a <code>description</code> metadata field.</p>
 <h3 id="source-code">Source code</h3>
 <p>If you want to display a link to the source code for your blog on the navigation bar, add a <code>source_url</code> field to the <code>navbar</code> definition. For example:</p>
-<div class="sourceCode" id="cb16"><pre class="sourceCode yaml"><code class="sourceCode yaml"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a><span class="pp">---</span></span>
-<span id="cb16-2"><a href="#cb16-2" aria-hidden="true" tabindex="-1"></a><span class="fu">name</span><span class="kw">:</span><span class="at"> </span><span class="st">&quot;distill&quot;</span></span>
-<span id="cb16-3"><a href="#cb16-3" aria-hidden="true" tabindex="-1"></a><span class="fu">title</span><span class="kw">:</span><span class="at"> </span><span class="st">&quot;Distill for R Markdown&quot;</span></span>
-<span id="cb16-4"><a href="#cb16-4" aria-hidden="true" tabindex="-1"></a><span class="fu">navbar</span><span class="kw">:</span></span>
-<span id="cb16-5"><a href="#cb16-5" aria-hidden="true" tabindex="-1"></a><span class="at">  </span><span class="fu">logo</span><span class="kw">:</span></span>
-<span id="cb16-6"><a href="#cb16-6" aria-hidden="true" tabindex="-1"></a><span class="at">    </span><span class="fu">image</span><span class="kw">:</span><span class="at"> images/logo.png</span></span>
-<span id="cb16-7"><a href="#cb16-7" aria-hidden="true" tabindex="-1"></a><span class="at">    </span><span class="fu">href</span><span class="kw">:</span><span class="at"> https://www.rstudio.com</span></span>
-<span id="cb16-8"><a href="#cb16-8" aria-hidden="true" tabindex="-1"></a><span class="at">  </span><span class="fu">source_url</span><span class="kw">:</span><span class="at"> https://github.com/rstudio/distill</span></span>
-<span id="cb16-9"><a href="#cb16-9" aria-hidden="true" tabindex="-1"></a><span class="pp">---</span></span></code></pre></div>
+<div class="sourceCode" id="cb16"><pre class="sourceCode yaml"><code class="sourceCode yaml"><span id="cb16-1"><a href="#cb16-1"></a><span class="pp">---</span></span>
+<span id="cb16-2"><a href="#cb16-2"></a><span class="fu">name</span><span class="kw">:</span><span class="at"> </span><span class="st">&quot;distill&quot;</span></span>
+<span id="cb16-3"><a href="#cb16-3"></a><span class="fu">title</span><span class="kw">:</span><span class="at"> </span><span class="st">&quot;Distill for R Markdown&quot;</span></span>
+<span id="cb16-4"><a href="#cb16-4"></a><span class="fu">navbar</span><span class="kw">:</span></span>
+<span id="cb16-5"><a href="#cb16-5"></a><span class="at">  </span><span class="fu">logo</span><span class="kw">:</span></span>
+<span id="cb16-6"><a href="#cb16-6"></a><span class="at">    </span><span class="fu">image</span><span class="kw">:</span><span class="at"> images/logo.png</span></span>
+<span id="cb16-7"><a href="#cb16-7"></a><span class="at">    </span><span class="fu">href</span><span class="kw">:</span><span class="at"> https://www.rstudio.com</span></span>
+<span id="cb16-8"><a href="#cb16-8"></a><span class="at">  </span><span class="fu">source_url</span><span class="kw">:</span><span class="at"> https://github.com/rstudio/distill</span></span>
+<span id="cb16-9"><a href="#cb16-9"></a><span class="pp">---</span></span></code></pre></div>
 <p>Note that if you’ve already defined a <code>repository_url</code> field in <code>_site.yml</code> you can just use <code>source_url: true</code> and your <code>repository_url</code> will be used for the link.</p>
 <h3 id="organizing-posts">Organizing posts</h3>
 <p>You can use whatever scheme you like to organize the <code>_posts</code> directory. You can have all posts at the top level or you can create subdirectories to create groupings of posts.</p>
@@ -2425,88 +2417,88 @@ ggplot(diamonds, aes(carat, price)) + geom_smooth() +
   facet_grid(~ cut)
 ```</code></pre>
 <p>If you want to use another image entirely as a post preview you add a <code>preview</code> field to the post’s metadata. For example, here we add a <code>preview</code> field to the example metadata from above (some fields excluded for brevity):</p>
-<div class="sourceCode" id="cb19"><pre class="sourceCode yaml"><code class="sourceCode yaml"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a><span class="pp">---</span></span>
-<span id="cb19-2"><a href="#cb19-2" aria-hidden="true" tabindex="-1"></a><span class="fu">title</span><span class="kw">:</span><span class="at"> </span><span class="st">&quot;The Sharpe Ratio&quot;</span></span>
-<span id="cb19-3"><a href="#cb19-3" aria-hidden="true" tabindex="-1"></a><span class="fu">description</span><span class="kw">: </span><span class="ch">|</span></span>
-<span id="cb19-4"><a href="#cb19-4" aria-hidden="true" tabindex="-1"></a>  In this post we present a classic finance use case using the</span>
-<span id="cb19-5"><a href="#cb19-5" aria-hidden="true" tabindex="-1"></a>  PerformanceAnalytics, quantmod, and dygraphs packages. </span>
-<span id="cb19-6"><a href="#cb19-6" aria-hidden="true" tabindex="-1"></a>  We&#39;ll demonstrate importing stock data, building a portfolio,</span>
-<span id="cb19-7"><a href="#cb19-7" aria-hidden="true" tabindex="-1"></a>  and then calculating the Sharpe Ratio. </span>
-<span id="cb19-8"><a href="#cb19-8" aria-hidden="true" tabindex="-1"></a><span class="fu">preview</span><span class="kw">:</span><span class="at"> images/sharpe-ratio.png</span></span>
-<span id="cb19-9"><a href="#cb19-9" aria-hidden="true" tabindex="-1"></a><span class="pp">---</span></span></code></pre></div>
+<div class="sourceCode" id="cb19"><pre class="sourceCode yaml"><code class="sourceCode yaml"><span id="cb19-1"><a href="#cb19-1"></a><span class="pp">---</span></span>
+<span id="cb19-2"><a href="#cb19-2"></a><span class="fu">title</span><span class="kw">:</span><span class="at"> </span><span class="st">&quot;The Sharpe Ratio&quot;</span></span>
+<span id="cb19-3"><a href="#cb19-3"></a><span class="fu">description</span><span class="kw">: </span><span class="ch">|</span></span>
+<span id="cb19-4"><a href="#cb19-4"></a>  In this post we present a classic finance use case using the</span>
+<span id="cb19-5"><a href="#cb19-5"></a>  PerformanceAnalytics, quantmod, and dygraphs packages. </span>
+<span id="cb19-6"><a href="#cb19-6"></a>  We&#39;ll demonstrate importing stock data, building a portfolio,</span>
+<span id="cb19-7"><a href="#cb19-7"></a>  and then calculating the Sharpe Ratio. </span>
+<span id="cb19-8"><a href="#cb19-8"></a><span class="fu">preview</span><span class="kw">:</span><span class="at"> images/sharpe-ratio.png</span></span>
+<span id="cb19-9"><a href="#cb19-9"></a><span class="pp">---</span></span></code></pre></div>
 <p>Preview images are also used for generating <a href="metadata.html#open-graph">Open Graph</a> and <a href="metadata.html#twitter-card">Twitter Card</a> metadata. However, since those systems require that preview images be specified as absolute URLs, you also need to add a <code>base_url</code> field to your <code>_site.yml</code> file as described above in <a href="#getting-started">Getting Started</a>.</p>
 <h3 id="citations">Citations</h3>
 <p>If your <code>_site.yml</code> file provides a <code>base_url</code> field, then an <a href="citations.html">article citation</a> appendix and related metadata will be included automatically within all published posts. For example:</p>
 <p><img src="images/blog-citation.png" class="screenshot" style="width:95.0%" /></p>
 <p>If you want to disable this behavior you can use the <code>collections:posts:citations</code> field within <code>_site.yml</code>. For example:</p>
 <p><strong>_site.yml</strong></p>
-<div class="sourceCode" id="cb20"><pre class="sourceCode yaml"><code class="sourceCode yaml"><span id="cb20-1"><a href="#cb20-1" aria-hidden="true" tabindex="-1"></a><span class="fu">name</span><span class="kw">:</span><span class="at"> </span><span class="st">&quot;reproducible-finance-with-r&quot;</span></span>
-<span id="cb20-2"><a href="#cb20-2" aria-hidden="true" tabindex="-1"></a><span class="fu">title</span><span class="kw">:</span><span class="at"> </span><span class="st">&quot;Reproducible Finance with R&quot;</span></span>
-<span id="cb20-3"><a href="#cb20-3" aria-hidden="true" tabindex="-1"></a><span class="fu">description</span><span class="kw">: </span><span class="ch">|</span></span>
-<span id="cb20-4"><a href="#cb20-4" aria-hidden="true" tabindex="-1"></a>  Exploring reproducible finance with the R statistical </span>
-<span id="cb20-5"><a href="#cb20-5" aria-hidden="true" tabindex="-1"></a>  computing environment.</span>
-<span id="cb20-6"><a href="#cb20-6" aria-hidden="true" tabindex="-1"></a><span class="fu">base_url</span><span class="kw">:</span><span class="at"> https://beta.rstudioconnect.com/content/11424/</span></span>
-<span id="cb20-7"><a href="#cb20-7" aria-hidden="true" tabindex="-1"></a><span class="fu">collections</span><span class="kw">:</span></span>
-<span id="cb20-8"><a href="#cb20-8" aria-hidden="true" tabindex="-1"></a><span class="at">  </span><span class="fu">posts</span><span class="kw">:</span></span>
-<span id="cb20-9"><a href="#cb20-9" aria-hidden="true" tabindex="-1"></a><span class="at">    </span><span class="fu">disqus</span><span class="kw">:</span><span class="at"> reproducible-finance-with-r</span></span>
-<span id="cb20-10"><a href="#cb20-10" aria-hidden="true" tabindex="-1"></a><span class="at">    </span><span class="fu">share</span><span class="kw">:</span><span class="at"> </span><span class="kw">[</span><span class="at">twitter</span><span class="kw">,</span><span class="at"> linkedin</span><span class="kw">]</span></span>
-<span id="cb20-11"><a href="#cb20-11" aria-hidden="true" tabindex="-1"></a><span class="at">    </span><span class="fu">citations</span><span class="kw">:</span><span class="at"> </span><span class="ch">false</span></span></code></pre></div>
+<div class="sourceCode" id="cb20"><pre class="sourceCode yaml"><code class="sourceCode yaml"><span id="cb20-1"><a href="#cb20-1"></a><span class="fu">name</span><span class="kw">:</span><span class="at"> </span><span class="st">&quot;reproducible-finance-with-r&quot;</span></span>
+<span id="cb20-2"><a href="#cb20-2"></a><span class="fu">title</span><span class="kw">:</span><span class="at"> </span><span class="st">&quot;Reproducible Finance with R&quot;</span></span>
+<span id="cb20-3"><a href="#cb20-3"></a><span class="fu">description</span><span class="kw">: </span><span class="ch">|</span></span>
+<span id="cb20-4"><a href="#cb20-4"></a>  Exploring reproducible finance with the R statistical </span>
+<span id="cb20-5"><a href="#cb20-5"></a>  computing environment.</span>
+<span id="cb20-6"><a href="#cb20-6"></a><span class="fu">base_url</span><span class="kw">:</span><span class="at"> https://beta.rstudioconnect.com/content/11424/</span></span>
+<span id="cb20-7"><a href="#cb20-7"></a><span class="fu">collections</span><span class="kw">:</span></span>
+<span id="cb20-8"><a href="#cb20-8"></a><span class="at">  </span><span class="fu">posts</span><span class="kw">:</span></span>
+<span id="cb20-9"><a href="#cb20-9"></a><span class="at">    </span><span class="fu">disqus</span><span class="kw">:</span><span class="at"> reproducible-finance-with-r</span></span>
+<span id="cb20-10"><a href="#cb20-10"></a><span class="at">    </span><span class="fu">share</span><span class="kw">:</span><span class="at"> </span><span class="kw">[</span><span class="at">twitter</span><span class="kw">,</span><span class="at"> linkedin</span><span class="kw">]</span></span>
+<span id="cb20-11"><a href="#cb20-11"></a><span class="at">    </span><span class="fu">citations</span><span class="kw">:</span><span class="at"> </span><span class="ch">false</span></span></code></pre></div>
 <h3 id="subscriptions">Subscriptions</h3>
 <p>You can add HTML that enables readers to subscribe to your blog by including the <code>collections:posts:subscribe</code> option within <code>_site.yml</code>. The <code>subscribe</code> option in turn points to an HTML file that provides the ability to subscribe to your blog. For example:</p>
 <p><strong>_site.yml</strong></p>
-<div class="sourceCode" id="cb21"><pre class="sourceCode yaml"><code class="sourceCode yaml"><span id="cb21-1"><a href="#cb21-1" aria-hidden="true" tabindex="-1"></a><span class="fu">name</span><span class="kw">:</span><span class="at"> </span><span class="st">&quot;reproducible-finance-with-r&quot;</span></span>
-<span id="cb21-2"><a href="#cb21-2" aria-hidden="true" tabindex="-1"></a><span class="fu">title</span><span class="kw">:</span><span class="at"> </span><span class="st">&quot;Reproducible Finance with R&quot;</span></span>
-<span id="cb21-3"><a href="#cb21-3" aria-hidden="true" tabindex="-1"></a><span class="fu">description</span><span class="kw">: </span><span class="ch">|</span></span>
-<span id="cb21-4"><a href="#cb21-4" aria-hidden="true" tabindex="-1"></a>  Exploring reproducible finance with the R statistical </span>
-<span id="cb21-5"><a href="#cb21-5" aria-hidden="true" tabindex="-1"></a>  computing environment.</span>
-<span id="cb21-6"><a href="#cb21-6" aria-hidden="true" tabindex="-1"></a><span class="fu">base_url</span><span class="kw">:</span><span class="at"> https://beta.rstudioconnect.com/content/11424/</span></span>
-<span id="cb21-7"><a href="#cb21-7" aria-hidden="true" tabindex="-1"></a><span class="fu">collections</span><span class="kw">:</span></span>
-<span id="cb21-8"><a href="#cb21-8" aria-hidden="true" tabindex="-1"></a><span class="at">  </span><span class="fu">posts</span><span class="kw">:</span></span>
-<span id="cb21-9"><a href="#cb21-9" aria-hidden="true" tabindex="-1"></a><span class="at">    </span><span class="fu">disqus</span><span class="kw">:</span><span class="at"> reproducible-finance-with-r</span></span>
-<span id="cb21-10"><a href="#cb21-10" aria-hidden="true" tabindex="-1"></a><span class="at">    </span><span class="fu">share</span><span class="kw">:</span><span class="at"> </span><span class="kw">[</span><span class="at">twitter</span><span class="kw">,</span><span class="at"> linkedin</span><span class="kw">]</span></span>
-<span id="cb21-11"><a href="#cb21-11" aria-hidden="true" tabindex="-1"></a><span class="at">    </span><span class="fu">subscribe</span><span class="kw">:</span><span class="at"> _subscribe.html</span></span></code></pre></div>
+<div class="sourceCode" id="cb21"><pre class="sourceCode yaml"><code class="sourceCode yaml"><span id="cb21-1"><a href="#cb21-1"></a><span class="fu">name</span><span class="kw">:</span><span class="at"> </span><span class="st">&quot;reproducible-finance-with-r&quot;</span></span>
+<span id="cb21-2"><a href="#cb21-2"></a><span class="fu">title</span><span class="kw">:</span><span class="at"> </span><span class="st">&quot;Reproducible Finance with R&quot;</span></span>
+<span id="cb21-3"><a href="#cb21-3"></a><span class="fu">description</span><span class="kw">: </span><span class="ch">|</span></span>
+<span id="cb21-4"><a href="#cb21-4"></a>  Exploring reproducible finance with the R statistical </span>
+<span id="cb21-5"><a href="#cb21-5"></a>  computing environment.</span>
+<span id="cb21-6"><a href="#cb21-6"></a><span class="fu">base_url</span><span class="kw">:</span><span class="at"> https://beta.rstudioconnect.com/content/11424/</span></span>
+<span id="cb21-7"><a href="#cb21-7"></a><span class="fu">collections</span><span class="kw">:</span></span>
+<span id="cb21-8"><a href="#cb21-8"></a><span class="at">  </span><span class="fu">posts</span><span class="kw">:</span></span>
+<span id="cb21-9"><a href="#cb21-9"></a><span class="at">    </span><span class="fu">disqus</span><span class="kw">:</span><span class="at"> reproducible-finance-with-r</span></span>
+<span id="cb21-10"><a href="#cb21-10"></a><span class="at">    </span><span class="fu">share</span><span class="kw">:</span><span class="at"> </span><span class="kw">[</span><span class="at">twitter</span><span class="kw">,</span><span class="at"> linkedin</span><span class="kw">]</span></span>
+<span id="cb21-11"><a href="#cb21-11"></a><span class="at">    </span><span class="fu">subscribe</span><span class="kw">:</span><span class="at"> _subscribe.html</span></span></code></pre></div>
 <p><strong>_subscribe.html</strong></p>
-<div class="sourceCode" id="cb22"><pre class="sourceCode html"><code class="sourceCode html"><span id="cb22-1"><a href="#cb22-1" aria-hidden="true" tabindex="-1"></a><span class="kw">&lt;form</span><span class="ot"> method=</span><span class="st">&#39;post&#39;</span><span class="ot"> action=</span><span class="st">&#39;https://blogtrottr.com&#39;</span><span class="kw">&gt;</span></span>
-<span id="cb22-2"><a href="#cb22-2" aria-hidden="true" tabindex="-1"></a>  <span class="kw">&lt;p&gt;</span>Enjoy this blog? Get notified of new posts via email:<span class="kw">&lt;/p&gt;</span></span>
-<span id="cb22-3"><a href="#cb22-3" aria-hidden="true" tabindex="-1"></a>  <span class="kw">&lt;input</span><span class="ot"> type=</span><span class="st">&#39;text&#39;</span><span class="ot"> name=</span><span class="st">&#39;btr_email&#39;</span> <span class="kw">/&gt;</span></span>
-<span id="cb22-4"><a href="#cb22-4" aria-hidden="true" tabindex="-1"></a>  <span class="kw">&lt;input</span><span class="ot"> type=</span><span class="st">&#39;hidden&#39;</span><span class="ot"> name=</span><span class="st">&#39;btr_url&#39;</span></span>
-<span id="cb22-5"><a href="#cb22-5" aria-hidden="true" tabindex="-1"></a><span class="ot">         value=</span><span class="st">&#39;https://beta.rstudioconnect.com/content/11424/index.xml&#39;</span><span class="kw">/&gt;</span></span>
-<span id="cb22-6"><a href="#cb22-6" aria-hidden="true" tabindex="-1"></a>  <span class="kw">&lt;input</span><span class="ot"> type=</span><span class="st">&#39;hidden&#39;</span><span class="ot"> name=</span><span class="st">&#39;schedule_type&#39;</span><span class="ot"> value=</span><span class="st">&#39;0&#39;</span> <span class="kw">/&gt;</span></span>
-<span id="cb22-7"><a href="#cb22-7" aria-hidden="true" tabindex="-1"></a>  <span class="kw">&lt;input</span><span class="ot"> type=</span><span class="st">&#39;submit&#39;</span><span class="ot"> value=</span><span class="st">&#39;Subscribe&#39;</span> <span class="kw">/&gt;</span></span>
-<span id="cb22-8"><a href="#cb22-8" aria-hidden="true" tabindex="-1"></a><span class="kw">&lt;/form&gt;</span></span></code></pre></div>
+<div class="sourceCode" id="cb22"><pre class="sourceCode html"><code class="sourceCode html"><span id="cb22-1"><a href="#cb22-1"></a><span class="kw">&lt;form</span><span class="ot"> method=</span><span class="st">&#39;post&#39;</span><span class="ot"> action=</span><span class="st">&#39;https://blogtrottr.com&#39;</span><span class="kw">&gt;</span></span>
+<span id="cb22-2"><a href="#cb22-2"></a>  <span class="kw">&lt;p&gt;</span>Enjoy this blog? Get notified of new posts via email:<span class="kw">&lt;/p&gt;</span></span>
+<span id="cb22-3"><a href="#cb22-3"></a>  <span class="kw">&lt;input</span><span class="ot"> type=</span><span class="st">&#39;text&#39;</span><span class="ot"> name=</span><span class="st">&#39;btr_email&#39;</span> <span class="kw">/&gt;</span></span>
+<span id="cb22-4"><a href="#cb22-4"></a>  <span class="kw">&lt;input</span><span class="ot"> type=</span><span class="st">&#39;hidden&#39;</span><span class="ot"> name=</span><span class="st">&#39;btr_url&#39;</span></span>
+<span id="cb22-5"><a href="#cb22-5"></a><span class="ot">         value=</span><span class="st">&#39;https://beta.rstudioconnect.com/content/11424/index.xml&#39;</span><span class="kw">/&gt;</span></span>
+<span id="cb22-6"><a href="#cb22-6"></a>  <span class="kw">&lt;input</span><span class="ot"> type=</span><span class="st">&#39;hidden&#39;</span><span class="ot"> name=</span><span class="st">&#39;schedule_type&#39;</span><span class="ot"> value=</span><span class="st">&#39;0&#39;</span> <span class="kw">/&gt;</span></span>
+<span id="cb22-7"><a href="#cb22-7"></a>  <span class="kw">&lt;input</span><span class="ot"> type=</span><span class="st">&#39;submit&#39;</span><span class="ot"> value=</span><span class="st">&#39;Subscribe&#39;</span> <span class="kw">/&gt;</span></span>
+<span id="cb22-8"><a href="#cb22-8"></a><span class="kw">&lt;/form&gt;</span></span></code></pre></div>
 <p>This example uses the <a href="https://blogtrottr.com/">Blogtrottr</a> service to provide an email subscription. You could also use another service or simply include a link to your RSS feed.</p>
 <p>The contents of <code>_subscribe.html</code> will be included in both the sidebar of the main listing page as well as in the footer of articles. Note that relative URLs won’t work in subscription HTML since the content appears at different levels of the site (thus we include the full URL to the RSS feed in the example above).</p>
 <h3 id="custom-html">Custom HTML</h3>
 <p>You can also add arbitrary HTML to the top of the sidebar by including the <code>collections:posts:custom</code> option within <code>_site.yml</code>. The <code>custom</code> option in turn points to an HTML file that will be displayed above the “Subscribe” and “Categories” sections. Unlike the Subscribe HTML, Cutstom HTML is not displayed in article footers. This custom feature can be used to display anything in the sidebar that Distill does not automatically generate. While only one custom file may be defined per collection, the HTML contained within is extremely adaptable to different use cases (even several simultaneously). For example, the below snippets will display an About section on top, and below that a search bar:</p>
 <p><strong>_site.yml</strong></p>
-<div class="sourceCode" id="cb23"><pre class="sourceCode yaml"><code class="sourceCode yaml"><span id="cb23-1"><a href="#cb23-1" aria-hidden="true" tabindex="-1"></a><span class="fu">name</span><span class="kw">:</span><span class="at"> </span><span class="st">&quot;reproducible-finance-with-r&quot;</span></span>
-<span id="cb23-2"><a href="#cb23-2" aria-hidden="true" tabindex="-1"></a><span class="fu">title</span><span class="kw">:</span><span class="at"> </span><span class="st">&quot;Reproducible Finance with R&quot;</span></span>
-<span id="cb23-3"><a href="#cb23-3" aria-hidden="true" tabindex="-1"></a><span class="fu">description</span><span class="kw">: </span><span class="ch">|</span></span>
-<span id="cb23-4"><a href="#cb23-4" aria-hidden="true" tabindex="-1"></a>  Exploring reproducible finance with the R statistical </span>
-<span id="cb23-5"><a href="#cb23-5" aria-hidden="true" tabindex="-1"></a>  computing environment.</span>
-<span id="cb23-6"><a href="#cb23-6" aria-hidden="true" tabindex="-1"></a><span class="fu">base_url</span><span class="kw">:</span><span class="at"> https://beta.rstudioconnect.com/content/3776/</span></span>
-<span id="cb23-7"><a href="#cb23-7" aria-hidden="true" tabindex="-1"></a><span class="fu">collections</span><span class="kw">:</span></span>
-<span id="cb23-8"><a href="#cb23-8" aria-hidden="true" tabindex="-1"></a><span class="at">  </span><span class="fu">posts</span><span class="kw">:</span></span>
-<span id="cb23-9"><a href="#cb23-9" aria-hidden="true" tabindex="-1"></a><span class="at">    </span><span class="fu">disqus</span><span class="kw">:</span><span class="at"> reproducible-finance-with-r</span></span>
-<span id="cb23-10"><a href="#cb23-10" aria-hidden="true" tabindex="-1"></a><span class="at">    </span><span class="fu">share</span><span class="kw">:</span><span class="at"> </span><span class="kw">[</span><span class="at">twitter</span><span class="kw">,</span><span class="at"> linkedin</span><span class="kw">]</span></span>
-<span id="cb23-11"><a href="#cb23-11" aria-hidden="true" tabindex="-1"></a><span class="at">    </span><span class="fu">custom</span><span class="kw">:</span><span class="at"> _custom.html</span></span></code></pre></div>
+<div class="sourceCode" id="cb23"><pre class="sourceCode yaml"><code class="sourceCode yaml"><span id="cb23-1"><a href="#cb23-1"></a><span class="fu">name</span><span class="kw">:</span><span class="at"> </span><span class="st">&quot;reproducible-finance-with-r&quot;</span></span>
+<span id="cb23-2"><a href="#cb23-2"></a><span class="fu">title</span><span class="kw">:</span><span class="at"> </span><span class="st">&quot;Reproducible Finance with R&quot;</span></span>
+<span id="cb23-3"><a href="#cb23-3"></a><span class="fu">description</span><span class="kw">: </span><span class="ch">|</span></span>
+<span id="cb23-4"><a href="#cb23-4"></a>  Exploring reproducible finance with the R statistical </span>
+<span id="cb23-5"><a href="#cb23-5"></a>  computing environment.</span>
+<span id="cb23-6"><a href="#cb23-6"></a><span class="fu">base_url</span><span class="kw">:</span><span class="at"> https://beta.rstudioconnect.com/content/3776/</span></span>
+<span id="cb23-7"><a href="#cb23-7"></a><span class="fu">collections</span><span class="kw">:</span></span>
+<span id="cb23-8"><a href="#cb23-8"></a><span class="at">  </span><span class="fu">posts</span><span class="kw">:</span></span>
+<span id="cb23-9"><a href="#cb23-9"></a><span class="at">    </span><span class="fu">disqus</span><span class="kw">:</span><span class="at"> reproducible-finance-with-r</span></span>
+<span id="cb23-10"><a href="#cb23-10"></a><span class="at">    </span><span class="fu">share</span><span class="kw">:</span><span class="at"> </span><span class="kw">[</span><span class="at">twitter</span><span class="kw">,</span><span class="at"> linkedin</span><span class="kw">]</span></span>
+<span id="cb23-11"><a href="#cb23-11"></a><span class="at">    </span><span class="fu">custom</span><span class="kw">:</span><span class="at"> _custom.html</span></span></code></pre></div>
 <p><strong>_custom.html</strong></p>
-<div class="sourceCode" id="cb24"><pre class="sourceCode html"><code class="sourceCode html"><span id="cb24-1"><a href="#cb24-1" aria-hidden="true" tabindex="-1"></a><span class="kw">&lt;div</span><span class="ot"> class=</span><span class="st">&quot;sidebar-section custom&quot;</span><span class="kw">&gt;</span></span>
-<span id="cb24-2"><a href="#cb24-2" aria-hidden="true" tabindex="-1"></a>  <span class="kw">&lt;h3&gt;</span>About<span class="kw">&lt;/h3&gt;</span></span>
-<span id="cb24-3"><a href="#cb24-3" aria-hidden="true" tabindex="-1"></a>  This blog explores reproducible finance with the </span>
-<span id="cb24-4"><a href="#cb24-4" aria-hidden="true" tabindex="-1"></a>  <span class="kw">&lt;a</span><span class="ot"> href=</span><span class="st">&quot;https://www.r-project.org/&quot;</span><span class="kw">&gt;</span>R<span class="kw">&lt;/a&gt;</span> </span>
-<span id="cb24-5"><a href="#cb24-5" aria-hidden="true" tabindex="-1"></a>  statistical computing environment.</span>
-<span id="cb24-6"><a href="#cb24-6" aria-hidden="true" tabindex="-1"></a><span class="kw">&lt;/div&gt;</span></span>
-<span id="cb24-7"><a href="#cb24-7" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb24-8"><a href="#cb24-8" aria-hidden="true" tabindex="-1"></a><span class="kw">&lt;div</span><span class="ot"> class=</span><span class="st">&quot;sidebar-section custom&quot;</span><span class="kw">&gt;</span></span>
-<span id="cb24-9"><a href="#cb24-9" aria-hidden="true" tabindex="-1"></a>  <span class="kw">&lt;h3&gt;</span>Search<span class="kw">&lt;/h3&gt;</span></span>
-<span id="cb24-10"><a href="#cb24-10" aria-hidden="true" tabindex="-1"></a>  <span class="kw">&lt;form</span><span class="ot"> action=</span><span class="st">&quot;https://duckduckgo.com/&quot;</span><span class="kw">&gt;</span></span>
-<span id="cb24-11"><a href="#cb24-11" aria-hidden="true" tabindex="-1"></a>    <span class="kw">&lt;input</span><span class="ot"> type=</span><span class="st">&quot;text&quot;</span><span class="ot"> name=</span><span class="st">&quot;q&quot;</span><span class="ot"> placeholder=</span><span class="st">&quot;Search...&quot;</span><span class="kw">&gt;</span></span>
-<span id="cb24-12"><a href="#cb24-12" aria-hidden="true" tabindex="-1"></a>    <span class="kw">&lt;input</span><span class="ot"> type=</span><span class="st">&quot;hidden&quot;</span><span class="ot"> name=</span><span class="st">&quot;sites&quot;</span> </span>
-<span id="cb24-13"><a href="#cb24-13" aria-hidden="true" tabindex="-1"></a><span class="ot">      value=</span><span class="st">&quot;https://beta.rstudioconnect.com/content/3776/&quot;</span><span class="kw">&gt;</span> <span class="co">&lt;!-- Replace with your blog URL --&gt;</span></span>
-<span id="cb24-14"><a href="#cb24-14" aria-hidden="true" tabindex="-1"></a>    <span class="co">&lt;!--&lt;button type=&quot;submit&quot;&gt;Search&lt;/button&gt;--&gt;</span></span>
-<span id="cb24-15"><a href="#cb24-15" aria-hidden="true" tabindex="-1"></a>  <span class="kw">&lt;/form&gt;</span></span>
-<span id="cb24-16"><a href="#cb24-16" aria-hidden="true" tabindex="-1"></a><span class="kw">&lt;/div&gt;</span></span></code></pre></div>
+<div class="sourceCode" id="cb24"><pre class="sourceCode html"><code class="sourceCode html"><span id="cb24-1"><a href="#cb24-1"></a><span class="kw">&lt;div</span><span class="ot"> class=</span><span class="st">&quot;sidebar-section custom&quot;</span><span class="kw">&gt;</span></span>
+<span id="cb24-2"><a href="#cb24-2"></a>  <span class="kw">&lt;h3&gt;</span>About<span class="kw">&lt;/h3&gt;</span></span>
+<span id="cb24-3"><a href="#cb24-3"></a>  This blog explores reproducible finance with the </span>
+<span id="cb24-4"><a href="#cb24-4"></a>  <span class="kw">&lt;a</span><span class="ot"> href=</span><span class="st">&quot;https://www.r-project.org/&quot;</span><span class="kw">&gt;</span>R<span class="kw">&lt;/a&gt;</span> </span>
+<span id="cb24-5"><a href="#cb24-5"></a>  statistical computing environment.</span>
+<span id="cb24-6"><a href="#cb24-6"></a><span class="kw">&lt;/div&gt;</span></span>
+<span id="cb24-7"><a href="#cb24-7"></a></span>
+<span id="cb24-8"><a href="#cb24-8"></a><span class="kw">&lt;div</span><span class="ot"> class=</span><span class="st">&quot;sidebar-section custom&quot;</span><span class="kw">&gt;</span></span>
+<span id="cb24-9"><a href="#cb24-9"></a>  <span class="kw">&lt;h3&gt;</span>Search<span class="kw">&lt;/h3&gt;</span></span>
+<span id="cb24-10"><a href="#cb24-10"></a>  <span class="kw">&lt;form</span><span class="ot"> action=</span><span class="st">&quot;https://duckduckgo.com/&quot;</span><span class="kw">&gt;</span></span>
+<span id="cb24-11"><a href="#cb24-11"></a>    <span class="kw">&lt;input</span><span class="ot"> type=</span><span class="st">&quot;text&quot;</span><span class="ot"> name=</span><span class="st">&quot;q&quot;</span><span class="ot"> placeholder=</span><span class="st">&quot;Search...&quot;</span><span class="kw">&gt;</span></span>
+<span id="cb24-12"><a href="#cb24-12"></a>    <span class="kw">&lt;input</span><span class="ot"> type=</span><span class="st">&quot;hidden&quot;</span><span class="ot"> name=</span><span class="st">&quot;sites&quot;</span> </span>
+<span id="cb24-13"><a href="#cb24-13"></a><span class="ot">      value=</span><span class="st">&quot;https://beta.rstudioconnect.com/content/3776/&quot;</span><span class="kw">&gt;</span> <span class="co">&lt;!-- Replace with your blog URL --&gt;</span></span>
+<span id="cb24-14"><a href="#cb24-14"></a>    <span class="co">&lt;!--&lt;button type=&quot;submit&quot;&gt;Search&lt;/button&gt;--&gt;</span></span>
+<span id="cb24-15"><a href="#cb24-15"></a>  <span class="kw">&lt;/form&gt;</span></span>
+<span id="cb24-16"><a href="#cb24-16"></a><span class="kw">&lt;/div&gt;</span></span></code></pre></div>
 <p><img src="images/custom_html_example_about_search.png" class="screenshot" style="width:50.0%" /></p>
 <p>While the custom HTML option inherits general CSS styling from the rest of the Distill blog, by default it does not inherit the sidebar-specific CSS. In order to fully match the rest of the sidebar sections, each section must be nested within a <code>&lt;div class="sidebar-section custom"&gt;</code> tag, as seen in the above example. This configuration is intended to provide a good balance between flexibility and ease-of-use.</p>
 <p>The example search bar functionality uses the popular <a href="duckduckgo.com">DuckDuckGo</a> search engine. After entering search terms and hitting the enter key the user is taken to the search engine’s website and shown relevant search results from the blog. Note that the blog will need to have been recently crawled by the search engine in order for search results to be thorough and up to date. Replacing the HTML snippet’s hard-coded blog URL should be the only modification necessary to begin using this example. Other search engines may be used with further modification. The “Search” button has been left out in this example, but may be uncommented if desired.</p>
@@ -2518,17 +2510,17 @@ ggplot(diamonds, aes(carat, price)) + geom_smooth() +
 <li><p>Files known to contain R source code (e.g. <code>".R"</code>, <code>".s"</code>, <code>".Rmd"</code>), R data (e.g. <code>".RData"</code>, <code>".rds"</code>), or configuration data (e.g. <code>"rsconnect"</code> ,<code>"packrat"</code>)).</p></li>
 </ol>
 <p>You can override this behavior using a <code>resources</code> metadata entry for your post, which can specify explicit files to <code>include</code> or <code>exclude</code>. For example (some fields excluded for brevity):</p>
-<div class="sourceCode" id="cb25"><pre class="sourceCode yaml"><code class="sourceCode yaml"><span id="cb25-1"><a href="#cb25-1" aria-hidden="true" tabindex="-1"></a><span class="pp">---</span></span>
-<span id="cb25-2"><a href="#cb25-2" aria-hidden="true" tabindex="-1"></a><span class="fu">title</span><span class="kw">:</span><span class="at"> </span><span class="st">&quot;The Sharpe Ratio&quot;</span></span>
-<span id="cb25-3"><a href="#cb25-3" aria-hidden="true" tabindex="-1"></a><span class="fu">description</span><span class="kw">: </span><span class="ch">|</span></span>
-<span id="cb25-4"><a href="#cb25-4" aria-hidden="true" tabindex="-1"></a>  In this post we present a classic finance use case using the</span>
-<span id="cb25-5"><a href="#cb25-5" aria-hidden="true" tabindex="-1"></a>  PerformanceAnalytics, quantmod, and dygraphs packages. </span>
-<span id="cb25-6"><a href="#cb25-6" aria-hidden="true" tabindex="-1"></a>  We&#39;ll demonstrate importing stock data, building a portfolio,</span>
-<span id="cb25-7"><a href="#cb25-7" aria-hidden="true" tabindex="-1"></a>  and then calculating the Sharpe Ratio. </span>
-<span id="cb25-8"><a href="#cb25-8" aria-hidden="true" tabindex="-1"></a><span class="fu">resources</span><span class="kw">:</span></span>
-<span id="cb25-9"><a href="#cb25-9" aria-hidden="true" tabindex="-1"></a><span class="at">  </span><span class="fu">exclude</span><span class="kw">:</span></span>
-<span id="cb25-10"><a href="#cb25-10" aria-hidden="true" tabindex="-1"></a><span class="at">    </span><span class="ot">*.csv</span><span class="at">    </span></span>
-<span id="cb25-11"><a href="#cb25-11" aria-hidden="true" tabindex="-1"></a><span class="pp">---</span></span></code></pre></div>
+<div class="sourceCode" id="cb25"><pre class="sourceCode yaml"><code class="sourceCode yaml"><span id="cb25-1"><a href="#cb25-1"></a><span class="pp">---</span></span>
+<span id="cb25-2"><a href="#cb25-2"></a><span class="fu">title</span><span class="kw">:</span><span class="at"> </span><span class="st">&quot;The Sharpe Ratio&quot;</span></span>
+<span id="cb25-3"><a href="#cb25-3"></a><span class="fu">description</span><span class="kw">: </span><span class="ch">|</span></span>
+<span id="cb25-4"><a href="#cb25-4"></a>  In this post we present a classic finance use case using the</span>
+<span id="cb25-5"><a href="#cb25-5"></a>  PerformanceAnalytics, quantmod, and dygraphs packages. </span>
+<span id="cb25-6"><a href="#cb25-6"></a>  We&#39;ll demonstrate importing stock data, building a portfolio,</span>
+<span id="cb25-7"><a href="#cb25-7"></a>  and then calculating the Sharpe Ratio. </span>
+<span id="cb25-8"><a href="#cb25-8"></a><span class="fu">resources</span><span class="kw">:</span></span>
+<span id="cb25-9"><a href="#cb25-9"></a><span class="at">  </span><span class="fu">exclude</span><span class="kw">:</span></span>
+<span id="cb25-10"><a href="#cb25-10"></a><span class="at">    </span><span class="ot">*.csv</span><span class="at">    </span></span>
+<span id="cb25-11"><a href="#cb25-11"></a><span class="pp">---</span></span></code></pre></div>
 <h2 id="theming">Theming</h2>
 <p>Distill blogs can use <a href="website.html#theming">themes</a> and <a href="website.html#custom-style">CSS</a> just like Distill sites. You can use the <code>create_theme()</code> function to add a theme CSS file in the current working directory.</p>
 <p>For example:</p>
@@ -2539,11 +2531,11 @@ ggplot(diamonds, aes(carat, price)) + geom_smooth() +
 </div>
 </div>
 <p>Read more about customizing a Distill <a href="website.html#create-theme">theme</a>. To apply a custom theme site-wide, add a <code>theme</code> key to the top-level of your <code>_site.yml</code> configuration file:</p>
-<div class="sourceCode" id="cb26"><pre class="sourceCode yaml"><code class="sourceCode yaml"><span id="cb26-1"><a href="#cb26-1" aria-hidden="true" tabindex="-1"></a><span class="fu">name</span><span class="kw">:</span><span class="at"> </span><span class="st">&quot;distill&quot;</span></span>
-<span id="cb26-2"><a href="#cb26-2" aria-hidden="true" tabindex="-1"></a><span class="fu">title</span><span class="kw">:</span><span class="at"> </span><span class="st">&quot;Distill for R Markdown&quot;</span></span>
-<span id="cb26-3"><a href="#cb26-3" aria-hidden="true" tabindex="-1"></a><span class="fu">theme</span><span class="kw">:</span><span class="at"> theme.css </span></span>
-<span id="cb26-4"><a href="#cb26-4" aria-hidden="true" tabindex="-1"></a><span class="fu">navbar</span><span class="kw">:</span></span>
-<span id="cb26-5"><a href="#cb26-5" aria-hidden="true" tabindex="-1"></a><span class="co"># (navbar definition here)</span></span></code></pre></div>
+<div class="sourceCode" id="cb26"><pre class="sourceCode yaml"><code class="sourceCode yaml"><span id="cb26-1"><a href="#cb26-1"></a><span class="fu">name</span><span class="kw">:</span><span class="at"> </span><span class="st">&quot;distill&quot;</span></span>
+<span id="cb26-2"><a href="#cb26-2"></a><span class="fu">title</span><span class="kw">:</span><span class="at"> </span><span class="st">&quot;Distill for R Markdown&quot;</span></span>
+<span id="cb26-3"><a href="#cb26-3"></a><span class="fu">theme</span><span class="kw">:</span><span class="at"> theme.css </span></span>
+<span id="cb26-4"><a href="#cb26-4"></a><span class="fu">navbar</span><span class="kw">:</span></span>
+<span id="cb26-5"><a href="#cb26-5"></a><span class="co"># (navbar definition here)</span></span></code></pre></div>
 <p>Blog posts (along with <a href="#listing-pages">listing</a> and <a href="#custom-listings">custom listing pages</a>) will follow the theme. Below are some examples of different themes applied to our demo blog.</p>
 <div class="layout-chunk" data-layout="l-body">
 
@@ -2594,7 +2586,7 @@ ggplot(diamonds, aes(carat, price)) + geom_smooth() +
 <p>There are a variety of options available for making your site available to others, see the article on <a href="publish_website.html">website publishing</a> for details.</p>
 <h2 id="examples">Examples</h2>
 <ul>
-<li><p>The <a href="https://distill.netlify.app">distill reference site</a> includes several <a href="https://distill.netlify.app/articles/examples.html">example sites and blogs</a>.</p></li>
+<li><p>The <a href="https://pkgs.rstudio.com/distill">distill reference site</a> includes several <a href="https://pkgs.rstudio.com/distill/articles/examples.html">example sites and blogs</a>.</p></li>
 <li><p>An example which reproduces several posts from the Reproducible Finance with R series on the R Views blog can be found here: <a href="https://beta.rstudioconnect.com/content/11424/" class="uri">https://beta.rstudioconnect.com/content/11424/</a></p>
 <p>The source code for the example can be found here: <a href="https://github.com/jjallaire/reproducible-finance-with-r" class="uri">https://github.com/jjallaire/reproducible-finance-with-r</a></p>
 <div class="sourceCode" id="cb27"><pre class="sourceCode r distill-force-highlighting-css"><code class="sourceCode r"></code></pre></div></li>
