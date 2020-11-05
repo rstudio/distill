@@ -50,7 +50,7 @@ navbar:
         - text: "Publishing Websites"
           href: publish_website.html
     - text: Reference
-      href: https://distill.netlify.app/
+      href: https://pkgs.rstudio.com/distill
 output:
   distill::distill_article:
     css: styles.css
