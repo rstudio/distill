@@ -7,7 +7,7 @@ description: Share a set of Distill articles as a website
 library(knitr)
 ```
 
-This article describes how to create a website that contains a collection of Distill articles. Distill websites include a top level navigation bar that enables readers to discover and browse articles. For example, the documentation pages you are reading now are a Distill website. You can view more examples of Distill websites on the package [reference site](https://distill.netlify.app/articles/examples.html).
+This article describes how to create a website that contains a collection of Distill articles. Distill websites include a top level navigation bar that enables readers to discover and browse articles. For example, the documentation pages you are reading now are a Distill website. You can view more examples of Distill websites on the package [reference site](https://pkgs.rstudio.com/distill/articles/examples.html).
 
 Once you've created your website locally, there are a variety of ways available to [publish your site](publish_website.html) to the web.
 

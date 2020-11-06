@@ -24,7 +24,7 @@ Description: Scientific and technical article format for the web. 'Distill' arti
     feature attractive, reader-friendly typography, flexible layout options
     for visualizations, and full support for footnotes and citations.
 License: Apache License 2.0
-URL: https://github.com/rstudio/distill, https://distill.netlify.app
+URL: https://github.com/rstudio/distill, https://pkgs.rstudio.com/distill
 BugReports: https://github.com/rstudio/distill/issues
 Encoding: UTF-8
 LazyData: true

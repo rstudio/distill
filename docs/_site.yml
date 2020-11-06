@@ -9,6 +9,7 @@ navbar:
   logo:
     image: images/logo.png
     href: https://www.rstudio.com
+  search: true
   source_url: true
   right:
     - text: "Authoring"
@@ -50,7 +51,7 @@ navbar:
         - text: "Publishing Websites"
           href: publish_website.html
     - text: Reference
-      href: https://distill.netlify.app/
+      href: https://pkgs.rstudio.com/distill
 output:
   distill::distill_article:
     css: styles.css

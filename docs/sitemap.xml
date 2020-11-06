@@ -2,58 +2,58 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.sitemaps.org/schemas/sitemap/0.9 http://www.sitemaps.org/schemas/sitemap/0.9/sitemap.xsd" version="1.0">
   <url>
     <loc>https://rstudio.github.io/distill/basics.html</loc>
-    <lastmod>2020-08-25T09:31:59-04:00</lastmod>
+    <lastmod>2020-09-17T17:35:08-04:00</lastmod>
   </url>
   <url>
     <loc>https://rstudio.github.io/distill/blog_workflow.html</loc>
-    <lastmod>2020-10-01T06:03:50-04:00</lastmod>
+    <lastmod>2020-10-05T16:51:55-04:00</lastmod>
   </url>
   <url>
     <loc>https://rstudio.github.io/distill/blog.html</loc>
-    <lastmod>2020-10-22T05:21:54-04:00</lastmod>
+    <lastmod>2020-11-05T14:29:14-05:00</lastmod>
   </url>
   <url>
     <loc>https://rstudio.github.io/distill/citations.html</loc>
-    <lastmod>2020-09-20T08:42:33-04:00</lastmod>
+    <lastmod>2020-09-23T11:06:06-04:00</lastmod>
   </url>
   <url>
     <loc>https://rstudio.github.io/distill/diagrams.html</loc>
-    <lastmod>2020-08-25T09:32:45-04:00</lastmod>
+    <lastmod>2020-09-23T23:42:42-04:00</lastmod>
   </url>
   <url>
     <loc>https://rstudio.github.io/distill/figures.html</loc>
-    <lastmod>2020-08-25T09:32:50-04:00</lastmod>
+    <lastmod>2020-09-23T23:42:42-04:00</lastmod>
   </url>
   <url>
     <loc>https://rstudio.github.io/distill/</loc>
-    <lastmod>2020-10-22T05:22:50-04:00</lastmod>
+    <lastmod>2020-11-05T14:25:57-05:00</lastmod>
   </url>
   <url>
     <loc>https://rstudio.github.io/distill/interactivity.html</loc>
-    <lastmod>2020-08-25T09:32:56-04:00</lastmod>
+    <lastmod>2020-09-17T17:35:08-04:00</lastmod>
   </url>
   <url>
     <loc>https://rstudio.github.io/distill/metadata.html</loc>
-    <lastmod>2020-10-12T15:08:38-04:00</lastmod>
+    <lastmod>2020-09-23T11:06:06-04:00</lastmod>
   </url>
   <url>
     <loc>https://rstudio.github.io/distill/migrating.html</loc>
-    <lastmod>2020-08-25T09:33:09-04:00</lastmod>
+    <lastmod>2020-09-17T17:35:08-04:00</lastmod>
   </url>
   <url>
     <loc>https://rstudio.github.io/distill/publish_article.html</loc>
-    <lastmod>2020-09-20T08:43:56-04:00</lastmod>
+    <lastmod>2020-09-23T11:06:06-04:00</lastmod>
   </url>
   <url>
     <loc>https://rstudio.github.io/distill/publish_website.html</loc>
-    <lastmod>2020-09-20T08:43:07-04:00</lastmod>
+    <lastmod>2020-09-23T11:06:06-04:00</lastmod>
   </url>
   <url>
     <loc>https://rstudio.github.io/distill/tables.html</loc>
-    <lastmod>2020-09-27T08:10:44-04:00</lastmod>
+    <lastmod>2020-10-05T16:51:55-04:00</lastmod>
   </url>
   <url>
     <loc>https://rstudio.github.io/distill/website.html</loc>
-    <lastmod>2020-10-22T05:24:04-04:00</lastmod>
+    <lastmod>2020-11-05T14:28:42-05:00</lastmod>
   </url>
 </urlset>

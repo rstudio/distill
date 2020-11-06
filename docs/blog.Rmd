@@ -603,7 +603,7 @@ There are a variety of options available for making your site available to other
 
 ## Examples
 
--   The [distill reference site](https://distill.netlify.app) includes several [example sites and blogs](https://distill.netlify.app/articles/examples.html).
+-   The [distill reference site](https://pkgs.rstudio.com/distill) includes several [example sites and blogs](https://pkgs.rstudio.com/distill/articles/examples.html).
 
 -   An example which reproduces several posts from the Reproducible Finance with R series on the R Views blog can be found here: <https://beta.rstudioconnect.com/content/11424/>
 
