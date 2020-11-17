@@ -146,7 +146,6 @@ code span.wa { color: #008000; font-weight: bold; } /* Warning */
       var header = $('header').get(0);
       var headerHeight = header.offsetHeight;
       var headroom = new Headroom(header, {
-        tolerance: 5,
         onPin : function() {
           if (window.headroom_prevent_pin) {
             window.headroom_prevent_pin = false;
@@ -2014,8 +2013,8 @@ code span.wa { color: #008000; font-weight: bold; } /* Warning */
   <script src="site_libs/header-attrs-2.5/header-attrs.js"></script>
   <link href="site_libs/pagedtable-1.1/css/pagedtable.css" rel="stylesheet" />
   <script src="site_libs/pagedtable-1.1/js/pagedtable.js"></script>
-  <link href="site_libs/panelset-0.2.4/panelset.css" rel="stylesheet" />
-  <script src="site_libs/panelset-0.2.4/panelset.js"></script>
+  <link href="site_libs/panelset-0.2.3.9000/panelset.css" rel="stylesheet" />
+  <script src="site_libs/panelset-0.2.3.9000/panelset.js"></script>
   <script src="site_libs/jquery-1.11.3/jquery.min.js"></script>
   <script src="site_libs/anchor-4.2.2/anchor.min.js"></script>
   <script src="site_libs/bowser-1.9.3/bowser.min.js"></script>
@@ -2054,7 +2053,7 @@ code span.wa { color: #008000; font-weight: bold; } /* Warning */
 <!--radix_placeholder_front_matter-->
 
 <script id="distill-front-matter" type="text/json">
-{"title":"Distill for R Markdown","description":"Scientific and technical writing, native to the web","authors":[{"author":"JJ Allaire","authorURL":"https://github.com/jjallaire","affiliation":"RStudio","affiliationURL":"https://www.rstudio.com","orcidID":"0000-0003-0174-9868"},{"author":"Rich Iannone","authorURL":"https://github.com/rich-iannone","affiliation":"RStudio","affiliationURL":"https://www.rstudio.com","orcidID":""},{"author":"Alison Presmanes Hill","authorURL":"#","affiliation":"RStudio","affiliationURL":"https://www.rstudio.com","orcidID":"0000-0002-8082-1890"},{"author":"Yihui Xie","authorURL":"https://github.com/yihui","affiliation":"RStudio","affiliationURL":"https://www.rstudio.com","orcidID":"0000-0003-0645-5666"}],"publishedDate":"2018-09-10T00:00:00.000+00:00","citationText":"Allaire, et al., 2018"}
+{"title":"Distill for R Markdown","description":"Scientific and technical writing, native to the web","authors":[{"author":"JJ Allaire","authorURL":"https://github.com/jjallaire","affiliation":"RStudio","affiliationURL":"https://www.rstudio.com","orcidID":"0000-0003-0174-9868"},{"author":"Rich Iannone","authorURL":"https://github.com/rich-iannone","affiliation":"RStudio","affiliationURL":"https://www.rstudio.com","orcidID":""},{"author":"Alison Presmanes Hill","authorURL":"#","affiliation":"RStudio","affiliationURL":"https://www.rstudio.com","orcidID":"0000-0002-8082-1890"},{"author":"Yihui Xie","authorURL":"https://github.com/yihui","affiliation":"RStudio","affiliationURL":"https://www.rstudio.com","orcidID":"0000-0003-0645-5666"}],"publishedDate":"2018-09-10T00:00:00.000-04:00","citationText":"Allaire, et al., 2018"}
 </script>
 
 <!--/radix_placeholder_front_matter-->
@@ -2182,7 +2181,7 @@ Publishing
 <p>To create an <a href="https://rmarkdown.rstudio.com">R Markdown</a> document that uses the Distill format, first install the <strong>distill</strong> R package from GitHub:</p>
 <div class="layout-chunk" data-layout="l-body">
 <div class="sourceCode">
-<pre><code><span class='fu'>devtools</span><span class='fu'>::</span><span class='fu'><a href='https://devtools.r-lib.org//reference/remote-reexports.html'>install_github</a></span><span class='op'>(</span><span class='st'>"distill"</span><span class='op'>)</span>
+<pre><code><span class='fu'>devtools</span><span class='fu'>::</span><span class='fu'><a href='https://devtools.r-lib.org//reference/remote-reexports.html'>install_github</a></span><span class='op'>(</span><span class='st'>"rstudio/distill"</span><span class='op'>)</span>
 </code></pre>
 </div>
 </div>
