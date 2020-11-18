@@ -3,7 +3,7 @@ destination: reference
 template:
   package: quillt
 
-url: https://distill.netlify.app
+url: https://pkgs.rstudio.com/distill/
 
 development:
   mode: auto
