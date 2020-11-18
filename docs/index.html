@@ -146,6 +146,7 @@ code span.wa { color: #008000; font-weight: bold; } /* Warning */
       var header = $('header').get(0);
       var headerHeight = header.offsetHeight;
       var headroom = new Headroom(header, {
+        tolerance: 5,
         onPin : function() {
           if (window.headroom_prevent_pin) {
             window.headroom_prevent_pin = false;
@@ -2053,7 +2054,7 @@ code span.wa { color: #008000; font-weight: bold; } /* Warning */
 <!--radix_placeholder_front_matter-->
 
 <script id="distill-front-matter" type="text/json">
-{"title":"Distill for R Markdown","description":"Scientific and technical writing, native to the web","authors":[{"author":"JJ Allaire","authorURL":"https://github.com/jjallaire","affiliation":"RStudio","affiliationURL":"https://www.rstudio.com","orcidID":"0000-0003-0174-9868"},{"author":"Rich Iannone","authorURL":"https://github.com/rich-iannone","affiliation":"RStudio","affiliationURL":"https://www.rstudio.com","orcidID":""},{"author":"Alison Presmanes Hill","authorURL":"#","affiliation":"RStudio","affiliationURL":"https://www.rstudio.com","orcidID":"0000-0002-8082-1890"},{"author":"Yihui Xie","authorURL":"https://github.com/yihui","affiliation":"RStudio","affiliationURL":"https://www.rstudio.com","orcidID":"0000-0003-0645-5666"}],"publishedDate":"2018-09-10T00:00:00.000-04:00","citationText":"Allaire, et al., 2018"}
+{"title":"Distill for R Markdown","description":"Scientific and technical writing, native to the web","authors":[{"author":"JJ Allaire","authorURL":"https://github.com/jjallaire","affiliation":"RStudio","affiliationURL":"https://www.rstudio.com","orcidID":"0000-0003-0174-9868"},{"author":"Rich Iannone","authorURL":"https://github.com/rich-iannone","affiliation":"RStudio","affiliationURL":"https://www.rstudio.com","orcidID":""},{"author":"Alison Presmanes Hill","authorURL":"#","affiliation":"RStudio","affiliationURL":"https://www.rstudio.com","orcidID":"0000-0002-8082-1890"},{"author":"Yihui Xie","authorURL":"https://github.com/yihui","affiliation":"RStudio","affiliationURL":"https://www.rstudio.com","orcidID":"0000-0003-0645-5666"}],"publishedDate":"2018-09-10T00:00:00.000+00:00","citationText":"Allaire, et al., 2018"}
 </script>
 
 <!--/radix_placeholder_front_matter-->
@@ -2194,7 +2195,7 @@ Publishing
 <div class="layout-chunk" data-layout="l-body">
 <div class="sourceCode">
 <pre><code><span class='kw'><a href='https://rdrr.io/r/base/library.html'>library</a></span><span class='op'>(</span><span class='va'><a href='https://github.com/rstudio/distill'>distill</a></span><span class='op'>)</span>
-<span class='fu'><a href='https://rdrr.io/pkg/distill/man/create_article.html'>create_article</a></span><span class='op'>(</span><span class='st'>"article.Rmd"</span><span class='op'>)</span>
+<span class='fu'><a href='https://pkgs.rstudio.com/distill//reference/create_article.html'>create_article</a></span><span class='op'>(</span><span class='st'>"article.Rmd"</span><span class='op'>)</span>
 </code></pre>
 </div>
 </div>
@@ -2432,7 +2433,7 @@ knitr::opts_chunk$set(
 <p>For example:</p>
 <div class="layout-chunk" data-layout="l-body">
 <div class="sourceCode">
-<pre><code><span class='fu'><a href='https://rdrr.io/pkg/distill/man/create_theme.html'>create_theme</a></span><span class='op'>(</span>name <span class='op'>=</span> <span class='st'>"theme"</span><span class='op'>)</span> 
+<pre><code><span class='fu'><a href='https://pkgs.rstudio.com/distill//reference/create_theme.html'>create_theme</a></span><span class='op'>(</span>name <span class='op'>=</span> <span class='st'>"theme"</span><span class='op'>)</span> 
 </code></pre>
 </div>
 </div>
