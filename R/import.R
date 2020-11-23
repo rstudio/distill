@@ -361,10 +361,14 @@ resolve_github_url <- function(url, article_tmp) {
     owner <- matches[[1]][[2]]
     repo <- matches[[1]][[3]]
 
+    # determine the default branch
+    branches <- jsonlite::fromJSON("https://api.github.com/repos/rstudio/distill")
+    branch <- branches$default_branch
+
     # download the file list as json
     repo_files <- jsonlite::fromJSON(
-      sprintf("https://api.github.com/repos/%s/%s/git/trees/master",
-              owner, repo),
+      sprintf("https://api.github.com/repos/%s/%s/git/trees/%s",
+              owner, repo, branch),
       simplifyVector = FALSE
     )
 
@@ -380,8 +384,8 @@ resolve_github_url <- function(url, article_tmp) {
     # look for an article
     for (html_file in html_files) {
       # form the raw url
-      url <- sprintf("https://raw.githubusercontent.com/%s/%s/master/%s",
-                     owner, repo, html_file$path)
+      url <- sprintf("https://raw.githubusercontent.com/%s/%s/%s/%s",
+                     owner, repo, branch, html_file$path)
 
       # download to a temp file
       article_download <- tempfile("import-article", fileext = "html")
