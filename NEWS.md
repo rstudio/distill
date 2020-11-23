@@ -3,6 +3,7 @@
 -   Fixed issue with `overflow: hidden` for code blocks on mobile devices (is now `overflow: auto`).
 -   Improve full text search behavior w/ `ignoreLocation: true` and `threshold: 0`.
 -   Fix issue w/ importing articles from git repos with `main` default branch.
+-   Make headroom scroll tolerance a bit more forgiving (5px vs. 1px).
 
 ## distill v1.0 (CRAN)
 
