@@ -1,0 +1,25 @@
+How do you apply a custom theme to a Distill site or blog? You have two options:
+
+1.  Apply it site-wide by adding a `theme` key to the top-level of your `_site.yml` configuration file:
+
+    ``` {.yaml}
+    name: "distill"
+    title: "Distill for R Markdown"
+    theme: theme.css
+    navbar:
+      # (navbar definition here)
+    ```
+
+2.  Apply to an individual article by adding a `theme` key to your article's YAML front-matter:
+
+    ``` {.yaml}
+    ---
+    title: "The Sharpe Ratio"
+    output:
+      distill::distill_article:
+        toc: true
+        theme: theme.css
+    ---
+    ```
+
+The second option allows for you to apply your theme to individual articles, while using a different theme for the rest of your site. Note that this is only possible for stand-alone articles within a website --- you cannot apply a theme to individual blog posts *only*.

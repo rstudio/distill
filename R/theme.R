@@ -6,6 +6,12 @@
 #' @param name Name of theme file (will be written as name.css)
 #' @param edit Open an editor for the theme file
 #'
+#' @includeRmd man/rmd-fragments/apply-theme.Rmd
+#'
+#' @section More details:
+#' For further details about theming refer to the
+#' [online documentation](https://rstudio.github.io/distill/website.html#theming).
+#'
 #' @export
 create_theme  <- function(name = "theme", edit = TRUE) {
   css <- file_with_ext(name, "css")
