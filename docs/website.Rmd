@@ -345,7 +345,9 @@ The [previous section](#create-theme) described how to create and customize a Di
 ```{r child='../man/rmd-fragments/apply-theme.Rmd'}
 ```
 
-Blog posts (along with [listing](blog.html#listing-pages) and [custom listing pages](blog.html#custom-listings)) will follow the theme if you use the first option and add it to your `_site.yml`. \#\#\# Custom CSS styles {\#custom-style}
+Blog posts (along with [listing](blog.html#listing-pages) and [custom listing pages](blog.html#custom-listings)) will follow the theme if you use the first option and add it to your `_site.yml`.
+
+### Custom CSS styles {#custom-style}
 
 If you prefer working with CSS directly, or you would like to change site elements not included in the theme file, you can define your own CSS as well. For example, we can override the default styles for bullets and links by adding additional CSS rules in the space provided at the bottom of your `theme.css`. We'll add the following CSS rules on top of the theme we made in the [previous section](#create-theme):
 
