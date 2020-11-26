@@ -14,3 +14,38 @@ create_theme(name = "theme", edit = TRUE)
 \description{
 Create a theme CSS file and write it to the current working directory
 }
+\details{
+How do you apply a custom theme to a Distill site or blog? You have two
+options:
+\enumerate{
+\item Apply it site-wide by adding a \code{theme} key to the top-level of your
+\verb{_site.yml} configuration file:\if{html}{\out{<div class="yaml">}}\preformatted{name: "distill"
+title: "Distill for R Markdown"
+theme: theme.css
+navbar:
+  # (navbar definition here)
+}\if{html}{\out{</div>}}
+\item Apply to an individual article by adding a \code{theme} key to your
+article’s YAML front-matter:\if{html}{\out{<div class="yaml">}}\preformatted{---
+title: "The Sharpe Ratio"
+output:
+  distill::distill_article:
+    toc: true
+    theme: theme.css
+---
+}\if{html}{\out{</div>}}
+}
+
+The second option allows for you to apply your theme to individual
+articles, while using a different theme for the rest of your site. Note
+that this is only possible for stand-alone articles within a website —
+you cannot apply a theme to individual blog posts \emph{only}. Blog posts
+(along with \href{blog.html#listing-pages}{listing} and \href{blog.html#custom-listings}{custom listing pages}) will follow the theme if you use the
+first option and add it to your \verb{_site.yml}.
+}
+\section{More details}{
+
+For further details about theming refer to the
+\href{https://rstudio.github.io/distill/website.html#theming}{online documentation}.
+}
+
