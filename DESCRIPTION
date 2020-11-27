@@ -29,7 +29,7 @@ BugReports: https://github.com/rstudio/distill/issues
 Encoding: UTF-8
 LazyData: true
 Roxygen: list(markdown = TRUE)
-RoxygenNote: 7.1.1
+RoxygenNote: 7.1.1.9000
 Imports: 
     utils,
     stats,
@@ -52,9 +52,7 @@ Imports:
     digest,
     yaml,
     openssl,
-    downlit (>= 0.2),
-    cli,
-    crayon
+    downlit (>= 0.2)
 Suggests:
     htmlwidgets,
     progress,
