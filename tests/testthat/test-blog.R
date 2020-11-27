@@ -1,15 +1,8 @@
-
-context("blog")
-
-source("utils.R")
-
 test_that("blogs can be created", {
 
   skip_if_pandoc_not_installed()
 
-  tmpdir <- tempfile()
-  dir.create(tmpdir, recursive = TRUE)
-  on.exit(unlink(tmpdir, recursive = TRUE), add = TRUE)
+  tmpdir <- withr::local_tempdir()
 
   blog_path <- file.path(tmpdir, "testblog")
 
@@ -18,8 +11,7 @@ test_that("blogs can be created", {
   }, NA)
 
   expect_error({
-    oldwd <- setwd(blog_path)
-    on.exit(setwd(oldwd), add = TRUE)
+    withr::local_dir(blog_path)
     create_post("My Post", edit = FALSE)
   }, NA)
 
