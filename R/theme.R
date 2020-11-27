@@ -22,4 +22,14 @@ create_theme  <- function(name = "theme", edit = TRUE) {
   if (edit && rstudioapi::isAvailable()) {
     rstudioapi::navigateToFile(css)
   }
+
+  bullet <- "v"
+  circle <- "o"
+
+  cat(paste(bullet, "Created CSS file at theme.css"), "\n", sep = "")
+  cat(paste(circle, "TODO: Amend it to suit your needs"), "\n", sep = "")
+  cat(
+    paste(circle, "TODO: Apply it to your site/article cf ?create_theme"),
+    "\n", sep = ""
+    )
 }

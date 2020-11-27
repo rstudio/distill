@@ -39,9 +39,7 @@ output:
 The second option allows for you to apply your theme to individual
 articles, while using a different theme for the rest of your site. Note
 that this is only possible for stand-alone articles within a website —
-you cannot apply a theme to individual blog posts \emph{only}. Blog posts
-(along with \href{blog.html#listing-pages}{listing} and \href{blog.html#custom-listings}{custom listing pages}) will follow the theme if you use the
-first option and add it to your \verb{_site.yml}.
+you cannot apply a theme to individual blog posts \emph{only}.
 }
 \section{More details}{
 
