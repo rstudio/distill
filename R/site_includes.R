@@ -54,7 +54,7 @@ site_header_extras <- function(site_config) {
   if (!is.null(site_config$cookie_consent)) {
     cookie_consent <- tagList(
       tags$script(type = "text/javascript",
-                  src = "https:////www.cookieconsent.com/releases/3.1.0/cookie-consent.js"),
+                  src = "https://www.cookieconsent.com/releases/3.1.0/cookie-consent.js"),
       tags$script(type = "text/javascript",
                   HTML(paste(sep = "\n",
                              "\ndocument.addEventListener('DOMContentLoaded', function () {",
@@ -64,7 +64,8 @@ site_header_extras <- function(site_config) {
                              sprintf("'palette': '%s',", site_config$cookie_consent$palette),
                              sprintf("'language': '%s',", site_config$cookie_consent$lang),
                              sprintf("'website_name': '%s',", site_config$name),
-                             sprintf("'cookies_policy_url': '%s'", site_config$cookie_consent$privacy_policy),
+                             sprintf("'cookies_policy_url': '%s'", site_config$cookie_consent$cookies_policy),
+                             "'change_preferences_selector':'#changePreferences'",
                              "});});")))
       )
   }
