@@ -48,6 +48,16 @@ site_includes_html<- function(site_config, context) {
   }
 }
 
+# Checking if Cookie Consent is enabled
+cc_check <- function(site_config, cookie_type) {
+  cc_tag <- NULL
+  if (!is.null(site_config$cookie_consent)) {
+    cc_tag <- "text/plain"
+  }else{
+    cc_tag <- "text/javascript"
+  }
+}
+
 site_header_extras <- function(site_config) {
   # cookieconsent.com banner
   cookie_consent <- NULL
@@ -69,16 +79,17 @@ site_header_extras <- function(site_config) {
                              "});});")))
       )
   }
+
   # google analytics }
   google_analytics <- NULL
   if (!is.null(site_config$google_analytics)) {
     google_analytics <- tagList(
-      tags$script(type = "text/plain",
+      tags$script(type = cc_check(site_config),
                   `cookie-consent`="tracking",
                   async = NA,
                   src = sprintf("https://www.googletagmanager.com/gtag/js?id=%s",
                                 site_config$google_analytics)),
-      tags$script(type = "text/plain",
+      tags$script(type = cc_check(site_config),
                   `cookie-consent`="tracking",
                   HTML(paste(sep = "\n",
                              "\nwindow.dataLayer = window.dataLayer || [];",
@@ -94,7 +105,6 @@ site_header_extras <- function(site_config) {
     google_analytics
   )
 }
-
 
 with_distill_output_options <- function(site_config, f) {
   site_config_output <- site_config[["output"]]
