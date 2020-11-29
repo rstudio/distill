@@ -855,6 +855,49 @@ output: distill::distill_article
 
 The Google Analytics tracking code will be automatically included on all pages of your website.
 
+## GDPR Compliancy: Cookie consent banner
+
+Disclaimer: The information provided in this section does not, and is not intended to, constitute legal advice; instead, all information, content, and materials available in this section are for general informational purposes only.
+
+When using Google Analytics, Disqus and other services that set cookies in the end-user's browser, it is important to ensure compliance with Data Protection regulations, e.g., [GDPR](https://gdpr.eu/what-is-gdpr/) among others. Besides the GDPR many countries are imposing their own data privacy laws, and leading law experts expect that the pace of legislation in this field, will continue accelerating through the foreseeable future.
+
+The GDPR is one of the strictest and most far-reaching of these regulations, imposing obligations onto data controllers anywhere in the world, who processes personal data of subjects residing in the EU. Therefore, the GDPR is also a great standard to ensure compliance with most data protection regulations in general. In order to ensure compliance with the GDPR, data controllers must acquire consent from data subjects, before processing their personal information, and this also includes setting web cookies. One way of requesting consent is through a Cookie Consent banner, which can be enabled in the \_site.yml like so:
+
+**\_site.yml**
+
+``` {.yaml}
+cookie_consent:
+    style: simple
+    type: express
+    palette: light
+    lang: en
+    cookies_policy: url
+```
+
+### Cookie consent banner options
+
+The cookie consent banner is generated using a javascript plugin from [Cookieconsent.com](http://cookieconsent.com/), which features different options for customizing the banner.
+
+-   style: simple/headline/interstitial/standalone
+-   type: express/implied
+-   palette: light/dark
+-   lang: en/de/fr/es/ca_es/it/nl/pt/fi/hu/cs/hr/da/sl/pl/ro/sr/bg/cy
+-   cookies_policy: link to cookies policy
+
+### Tagging custom javascript
+
+If your site uses custom javascript that sets cookies, these should be tagged as text/plain and either as strictly-necessary, functionality, tracking or targeting. For example:
+
+``` {.html}
+<script type="text/plain" cookie-consent="functionality" src="myscript.js"></script>
+```
+
+Note that besides having a cookie consent banner, to ensure GDPR compliance, your site should have a Cookies policy separate of your Privacy policy, and also allow site users to change cookie preferences continually. A button to open the Cookie Preferences Center can be added to the footer, by creating a button or a link with the id-tag set to changePreferences, in \_footer.html. For example:
+
+``` {.html}
+<a id='changePreferences'>Cookie preferences</a>
+```
+
 ## Site metadata
 
 Distill articles can include various types of [metadata](metadata.html) to make them easier to index, cite, and share. Metadata included within your `_site.yml` file is conveniently shared across all articles on your site (individual articles can always override any value within their own metadata).

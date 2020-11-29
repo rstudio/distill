@@ -1988,14 +1988,26 @@ code span.wa { color: #008000; font-weight: bold; } /* Warning */
 
   <!--/radix_placeholder_distill-->
   <script src="site_libs/header-attrs-2.5/header-attrs.js"></script>
-  <link href="site_libs/panelset-0.2.3.9000/panelset.css" rel="stylesheet" />
-  <script src="site_libs/panelset-0.2.3.9000/panelset.js"></script>
+  <link href="site_libs/panelset-0.2.4/panelset.css" rel="stylesheet" />
+  <script src="site_libs/panelset-0.2.4/panelset.js"></script>
   <script src="site_libs/jquery-1.11.3/jquery.min.js"></script>
   <script src="site_libs/anchor-4.2.2/anchor.min.js"></script>
   <script src="site_libs/bowser-1.9.3/bowser.min.js"></script>
   <script src="site_libs/webcomponents-2.0.0/webcomponents.js"></script>
   <script src="site_libs/distill-2.2.21/template.v2.js"></script>
   <!--radix_placeholder_site_in_header-->
+  <script type="text/javascript" src="https://www.cookieconsent.com/releases/3.1.0/cookie-consent.js"></script>
+  <script type="text/javascript">
+  document.addEventListener('DOMContentLoaded', function () {
+  cookieconsent.run({
+  'notice_banner_type':'headline',
+  'consent_type': 'express',
+  'palette': 'light',
+  'language': 'en',
+  'website_name': 'distill',
+
+  'change_preferences_selector':'#changePreferences'
+  });});</script>
   <style type="text/css">
   .screenshot {
     border: 1px solid rgba(0, 0, 0, 0.2);
@@ -2135,6 +2147,11 @@ Publishing
 <li><a href="#example-themes">Example themes</a></li>
 </ul></li>
 <li><a href="#google-analytics">Google analytics</a></li>
+<li><a href="#gdpr-compliancy-cookie-consent-banner">GDPR Compliancy: Cookie consent banner</a>
+<ul>
+<li><a href="#cookie-consent-banner-options">Cookie consent banner options</a></li>
+<li><a href="#tagging-custom-javascript">Tagging custom javascript</a></li>
+</ul></li>
 <li><a href="#site-metadata">Site metadata</a></li>
 <li><a href="#publishing-a-website">Publishing a website</a></li>
 </ul>
@@ -2858,6 +2875,31 @@ Figure 3: The default Distill theme
 <span id="cb21-6"><a href="#cb21-6" aria-hidden="true" tabindex="-1"></a><span class="co">  # (navbar definition here)</span></span>
 <span id="cb21-7"><a href="#cb21-7" aria-hidden="true" tabindex="-1"></a><span class="fu">output</span><span class="kw">:</span><span class="at"> distill::distill_article</span></span></code></pre></div>
 <p>The Google Analytics tracking code will be automatically included on all pages of your website.</p>
+<h2 id="gdpr-compliancy-cookie-consent-banner">GDPR Compliancy: Cookie consent banner</h2>
+<p>Disclaimer: The information provided in this section does not, and is not intended to, constitute legal advice; instead, all information, content, and materials available in this section are for general informational purposes only.</p>
+<p>When using Google Analytics, Disqus and other services that set cookies in the end-user’s browser, it is important to ensure compliance with Data Protection regulations, e.g., <a href="https://gdpr.eu/what-is-gdpr/">GDPR</a> among others. Besides the GDPR many countries are imposing their own data privacy laws, and leading law experts expect that the pace of legislation in this field, will continue accelerating through the foreseeable future.</p>
+<p>The GDPR is one of the strictest and most far-reaching of these regulations, imposing obligations onto data controllers anywhere in the world, who processes personal data of subjects residing in the EU. Therefore, the GDPR is also a great standard to ensure compliance with most data protection regulations in general. In order to ensure compliance with the GDPR, data controllers must acquire consent from data subjects, before processing their personal information, and this also includes setting web cookies. One way of requesting consent is through a Cookie Consent banner, which can be enabled in the _site.yml like so:</p>
+<p><strong>_site.yml</strong></p>
+<div class="sourceCode" id="cb22"><pre class="sourceCode yaml"><code class="sourceCode yaml"><span id="cb22-1"><a href="#cb22-1" aria-hidden="true" tabindex="-1"></a><span class="fu">cookie_consent</span><span class="kw">:</span></span>
+<span id="cb22-2"><a href="#cb22-2" aria-hidden="true" tabindex="-1"></a><span class="at">    </span><span class="fu">style</span><span class="kw">:</span><span class="at"> simple</span></span>
+<span id="cb22-3"><a href="#cb22-3" aria-hidden="true" tabindex="-1"></a><span class="at">    </span><span class="fu">type</span><span class="kw">:</span><span class="at"> express</span></span>
+<span id="cb22-4"><a href="#cb22-4" aria-hidden="true" tabindex="-1"></a><span class="at">    </span><span class="fu">palette</span><span class="kw">:</span><span class="at"> light</span></span>
+<span id="cb22-5"><a href="#cb22-5" aria-hidden="true" tabindex="-1"></a><span class="at">    </span><span class="fu">lang</span><span class="kw">:</span><span class="at"> en</span></span>
+<span id="cb22-6"><a href="#cb22-6" aria-hidden="true" tabindex="-1"></a><span class="at">    </span><span class="fu">cookies_policy</span><span class="kw">:</span><span class="at"> url</span></span></code></pre></div>
+<h3 id="cookie-consent-banner-options">Cookie consent banner options</h3>
+<p>The cookie consent banner is generated using a javascript plugin from <a href="http://cookieconsent.com/">Cookieconsent.com</a>, which features different options for customizing the banner.</p>
+<ul>
+<li>style: simple/headline/interstitial/standalone</li>
+<li>type: express/implied</li>
+<li>palette: light/dark</li>
+<li>lang: en/de/fr/es/ca_es/it/nl/pt/fi/hu/cs/hr/da/sl/pl/ro/sr/bg/cy</li>
+<li>cookies_policy: link to cookies policy</li>
+</ul>
+<h3 id="tagging-custom-javascript">Tagging custom javascript</h3>
+<p>If your site uses custom javascript that sets cookies, these should be tagged as text/plain and either as strictly-necessary, functionality, tracking or targeting. For example:</p>
+<div class="sourceCode" id="cb23"><pre class="sourceCode html"><code class="sourceCode html"><span id="cb23-1"><a href="#cb23-1" aria-hidden="true" tabindex="-1"></a><span class="kw">&lt;script</span><span class="ot"> type=</span><span class="st">&quot;text/plain&quot;</span><span class="ot"> cookie-consent=</span><span class="st">&quot;functionality&quot;</span><span class="ot"> src=</span><span class="st">&quot;myscript.js&quot;</span><span class="kw">&gt;&lt;/script&gt;</span></span></code></pre></div>
+<p>Note that besides having a cookie consent banner, to ensure GDPR compliance, your site should have a Cookies policy separate of your Privacy policy, and also allow site users to change cookie preferences continually. A button to open the Cookie Preferences Center can be added to the footer, by creating a button or a link with the id-tag set to changePreferences, in _footer.html. For example:</p>
+<div class="sourceCode" id="cb24"><pre class="sourceCode html"><code class="sourceCode html"><span id="cb24-1"><a href="#cb24-1" aria-hidden="true" tabindex="-1"></a><span class="kw">&lt;a</span><span class="ot"> id=</span><span class="st">&#39;changePreferences&#39;</span><span class="kw">&gt;</span>Cookie preferences<span class="kw">&lt;/a&gt;</span></span></code></pre></div>
 <h2 id="site-metadata">Site metadata</h2>
 <p>Distill articles can include various types of <a href="metadata.html">metadata</a> to make them easier to index, cite, and share. Metadata included within your <code>_site.yml</code> file is conveniently shared across all articles on your site (individual articles can always override any value within their own metadata).</p>
 <p>Several metadata values which you might find useful to define in <code>_site.yml</code> are:</p>
@@ -2901,22 +2943,22 @@ Figure 3: The default Distill theme
 </table>
 <p>Here’s a <code>_site.yml</code> file that uses all of these fields (save for <code>license_url</code> since the license is already specified via <code>creative_commons</code>):</p>
 <p><strong>_site.yml</strong></p>
-<div class="sourceCode" id="cb22"><pre class="sourceCode yaml"><code class="sourceCode yaml"><span id="cb22-1"><a href="#cb22-1" aria-hidden="true" tabindex="-1"></a><span class="fu">name</span><span class="kw">:</span><span class="at"> </span><span class="st">&quot;distill&quot;</span></span>
-<span id="cb22-2"><a href="#cb22-2" aria-hidden="true" tabindex="-1"></a><span class="fu">title</span><span class="kw">:</span><span class="at"> </span><span class="st">&quot;Distill for R Markdown&quot;</span></span>
-<span id="cb22-3"><a href="#cb22-3" aria-hidden="true" tabindex="-1"></a><span class="fu">favicon</span><span class="kw">:</span><span class="at"> images/favicon.png</span></span>
-<span id="cb22-4"><a href="#cb22-4" aria-hidden="true" tabindex="-1"></a><span class="fu">base_url</span><span class="kw">:</span><span class="at"> https://rstudio.github.io/distill</span></span>
-<span id="cb22-5"><a href="#cb22-5" aria-hidden="true" tabindex="-1"></a><span class="fu">repository_url</span><span class="kw">:</span><span class="at"> https://github.com/rstudio/distill</span></span>
-<span id="cb22-6"><a href="#cb22-6" aria-hidden="true" tabindex="-1"></a><span class="fu">creative_commons</span><span class="kw">:</span><span class="at"> CC BY</span></span>
-<span id="cb22-7"><a href="#cb22-7" aria-hidden="true" tabindex="-1"></a><span class="fu">twitter</span><span class="kw">:</span></span>
-<span id="cb22-8"><a href="#cb22-8" aria-hidden="true" tabindex="-1"></a><span class="at">  </span><span class="fu">site</span><span class="kw">:</span><span class="at"> </span><span class="st">&quot;@distilljournal&quot;</span></span>
-<span id="cb22-9"><a href="#cb22-9" aria-hidden="true" tabindex="-1"></a><span class="fu">navbar</span><span class="kw">:</span></span>
-<span id="cb22-10"><a href="#cb22-10" aria-hidden="true" tabindex="-1"></a><span class="co">  # (navbar definition here)</span></span>
-<span id="cb22-11"><a href="#cb22-11" aria-hidden="true" tabindex="-1"></a><span class="fu">output</span><span class="kw">:</span><span class="at"> distill::distill_article</span></span></code></pre></div>
+<div class="sourceCode" id="cb25"><pre class="sourceCode yaml"><code class="sourceCode yaml"><span id="cb25-1"><a href="#cb25-1" aria-hidden="true" tabindex="-1"></a><span class="fu">name</span><span class="kw">:</span><span class="at"> </span><span class="st">&quot;distill&quot;</span></span>
+<span id="cb25-2"><a href="#cb25-2" aria-hidden="true" tabindex="-1"></a><span class="fu">title</span><span class="kw">:</span><span class="at"> </span><span class="st">&quot;Distill for R Markdown&quot;</span></span>
+<span id="cb25-3"><a href="#cb25-3" aria-hidden="true" tabindex="-1"></a><span class="fu">favicon</span><span class="kw">:</span><span class="at"> images/favicon.png</span></span>
+<span id="cb25-4"><a href="#cb25-4" aria-hidden="true" tabindex="-1"></a><span class="fu">base_url</span><span class="kw">:</span><span class="at"> https://rstudio.github.io/distill</span></span>
+<span id="cb25-5"><a href="#cb25-5" aria-hidden="true" tabindex="-1"></a><span class="fu">repository_url</span><span class="kw">:</span><span class="at"> https://github.com/rstudio/distill</span></span>
+<span id="cb25-6"><a href="#cb25-6" aria-hidden="true" tabindex="-1"></a><span class="fu">creative_commons</span><span class="kw">:</span><span class="at"> CC BY</span></span>
+<span id="cb25-7"><a href="#cb25-7" aria-hidden="true" tabindex="-1"></a><span class="fu">twitter</span><span class="kw">:</span></span>
+<span id="cb25-8"><a href="#cb25-8" aria-hidden="true" tabindex="-1"></a><span class="at">  </span><span class="fu">site</span><span class="kw">:</span><span class="at"> </span><span class="st">&quot;@distilljournal&quot;</span></span>
+<span id="cb25-9"><a href="#cb25-9" aria-hidden="true" tabindex="-1"></a><span class="fu">navbar</span><span class="kw">:</span></span>
+<span id="cb25-10"><a href="#cb25-10" aria-hidden="true" tabindex="-1"></a><span class="co">  # (navbar definition here)</span></span>
+<span id="cb25-11"><a href="#cb25-11" aria-hidden="true" tabindex="-1"></a><span class="fu">output</span><span class="kw">:</span><span class="at"> distill::distill_article</span></span></code></pre></div>
 <p>Be sure to enclose Twitter account names in quotes (this is required because they start with <code>@</code>).</p>
 <h2 id="publishing-a-website">Publishing a website</h2>
 <p>Website content is by default written to the <code>_site</code> sub-directory (you can customize this using the <code>output_dir</code> metadata field). Publishing is simply a matter of copying the output directory to a web server or web hosting service.</p>
 <p>See the article on <a href="publish_website.html">publishing websites</a> for additional details on publishing sites using a variety of available hosting services.</p>
-<div class="sourceCode" id="cb23"><pre class="sourceCode r distill-force-highlighting-css"><code class="sourceCode r"></code></pre></div>
+<div class="sourceCode" id="cb26"><pre class="sourceCode r distill-force-highlighting-css"><code class="sourceCode r"></code></pre></div>
 <!--radix_placeholder_article_footer-->
 <!--/radix_placeholder_article_footer-->
 </div>
@@ -2939,6 +2981,7 @@ Figure 3: The default Distill theme
 <div class="distill-site-nav distill-site-footer">
 <p>© Copyright 2018 <a href="https://github.com/distillpub/template/blob/master/AUTHORS">The Distill Template Authors</a> and <a href="https://www.rstudio.com">RStudio, Inc</a>.</p>
 <p>Software licensed under the <a href="https://www.apache.org/licenses/LICENSE-2.0">Apache License, v2.0</a>.</p>
+<p><a id='changePreferences'>Cookie preferences</a></p>
 </div>
 <!--/radix_placeholder_navigation_after_body-->
 

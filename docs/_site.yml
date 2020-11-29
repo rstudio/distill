@@ -5,6 +5,11 @@ base_url: https://rstudio.github.io/distill
 repository_url: https://github.com/rstudio/distill
 creative_commons: CC BY
 output_dir: "."
+cookie_consent:
+  style: headline
+  type: express
+  palette: light
+  lang: en
 navbar:
   logo:
     image: images/logo.png
