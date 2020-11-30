@@ -49,7 +49,7 @@ site_includes_html<- function(site_config, context) {
 }
 
 # Checking if Cookie Consent is enabled
-cc_check <- function(site_config, cookie_type) {
+cc_check <- function(site_config) {
   cc_tag <- NULL
   if (!is.null(site_config$cookie_consent)) {
     cc_tag <- "text/plain"
