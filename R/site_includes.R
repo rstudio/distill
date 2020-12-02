@@ -74,7 +74,7 @@ site_header_extras <- function(site_config) {
                              sprintf("'palette': '%s',", site_config$cookie_consent$palette),
                              sprintf("'language': '%s',", site_config$cookie_consent$lang),
                              sprintf("'website_name': '%s',", site_config$name),
-                             sprintf("'cookies_policy_url': '%s'", site_config$cookie_consent$cookies_policy),
+                             sprintf("'cookies_policy_url': '%s',", site_config$cookie_consent$cookies_policy),
                              "'change_preferences_selector':'#changePreferences'",
                              "});});")))
       )
