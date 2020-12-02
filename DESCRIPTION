@@ -1,7 +1,7 @@
 Type: Package
 Package: distill
 Title: 'R Markdown' Format for Scientific and Technical Writing
-Version: 1.0.1
+Version: 1.1
 Authors@R: c(
     person("JJ", "Allaire", role = c("aut", "cre"), email = "jj@rstudio.com",
            comment = c(ORCID = "0000-0003-0174-9868")),
@@ -29,7 +29,7 @@ BugReports: https://github.com/rstudio/distill/issues
 Encoding: UTF-8
 LazyData: true
 Roxygen: list(markdown = TRUE)
-RoxygenNote: 7.1.1.9000
+RoxygenNote: 7.1.1
 Imports: 
     utils,
     stats,
