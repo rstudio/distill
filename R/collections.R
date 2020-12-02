@@ -531,6 +531,8 @@ render_collection_article <- function(site_dir, site_config, collection, article
 
   # resolve site_libs
   site_libs <- file.path(site_dir, site_config$output_dir, "site_libs")
+  if (!dir_exists(site_libs))
+    dir.create(site_libs, recursive = TRUE)
   index_content <- apply_site_libs(index_content, article_html, site_libs, offset)
 
   # remove carriage returns
