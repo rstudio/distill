@@ -120,7 +120,8 @@ d-appendix d-footnote-list a.footnote-backlink {
 	font-family: var(--navbar-font), var(--heading-default);
 }
 
-.distill-site-header a {
+.distill-site-header a,
+.nav-dropdown .nav-dropbtn {
   font-family: var(--navbar-font), var(--heading-default);
 }
 
