@@ -51,10 +51,10 @@ Distill for R Markdown is based on the [Distill web framework](https://github.co
 
 ## Installation
 
-To create an [R Markdown](https://rmarkdown.rstudio.com) document that uses the Distill format, first install the **distill** R package from GitHub:
+To create an [R Markdown](https://rmarkdown.rstudio.com) document that uses the Distill format, first install the **distill** R package from CRAN:
 
 ```{r, eval=FALSE, echo=TRUE}
-devtools::install_github("rstudio/distill")
+install.packages("distill")
 ```
 
 Using Distill for R Markdown requires Pandoc v2.0 or higher. If you are using RStudio then you should use RStudio v1.2.718 or higher (which comes bundled with Pandoc v2.0).

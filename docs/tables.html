@@ -2322,7 +2322,6 @@ tbl_merge(
 #wfpsyznlwv .gt_table {
   display: table;
   border-collapse: collapse;
-  max-width: 100%;
   margin-left: auto;
   margin-right: auto;
   color: #333333;
@@ -2495,12 +2494,6 @@ tbl_merge(
   margin-bottom: 0;
 }
 
-#wfpsyznlwv .gt_from_md p {
-  line-height: 1em;
-  margin-bottom: 0em;
-  margin-top: 0em;
-}
-
 #wfpsyznlwv .gt_row {
   padding-top: 8px;
   padding-bottom: 8px;
@@ -2662,7 +2655,7 @@ tbl_merge(
   
   <thead class="gt_col_headings">
     <tr>
-      <th class="gt_col_heading gt_center gt_columns_bottom_border" rowspan="2" colspan="1"><strong>Characteristic</strong></th>
+      <th class="gt_col_heading gt_columns_bottom_border gt_left" rowspan="2" colspan="1"><strong>Characteristic</strong></th>
       <th class="gt_center gt_columns_top_border gt_column_spanner_outer" rowspan="1" colspan="3">
         <span class="gt_column_spanner"><strong>Tumor Response</strong></span>
       </th>
@@ -2680,78 +2673,62 @@ tbl_merge(
     </tr>
   </thead>
   <tbody class="gt_table_body">
-    <tr>
-      <td class="gt_row gt_left">Chemotherapy Treatment</td>
-      <td class="gt_row gt_center"></td>
-      <td class="gt_row gt_center"></td>
-      <td class="gt_row gt_center"></td>
-      <td class="gt_row gt_center"></td>
-      <td class="gt_row gt_center"></td>
-      <td class="gt_row gt_center"></td>
-    </tr>
-    <tr>
-      <td class="gt_row gt_left" style="text-align: left; text-indent: 10px;">Drug A</td>
-      <td class="gt_row gt_center">&mdash;</td>
-      <td class="gt_row gt_center">&mdash;</td>
-      <td class="gt_row gt_center"></td>
-      <td class="gt_row gt_center">&mdash;</td>
-      <td class="gt_row gt_center">&mdash;</td>
-      <td class="gt_row gt_center"></td>
-    </tr>
-    <tr>
-      <td class="gt_row gt_left" style="text-align: left; text-indent: 10px;">Drug B</td>
-      <td class="gt_row gt_center">1.13</td>
-      <td class="gt_row gt_center">0.60, 2.13</td>
-      <td class="gt_row gt_center">0.7</td>
-      <td class="gt_row gt_center">1.30</td>
-      <td class="gt_row gt_center">0.88, 1.92</td>
-      <td class="gt_row gt_center">0.2</td>
-    </tr>
-    <tr>
-      <td class="gt_row gt_left">Age</td>
-      <td class="gt_row gt_center">1.02</td>
-      <td class="gt_row gt_center">1.00, 1.04</td>
-      <td class="gt_row gt_center">0.10</td>
-      <td class="gt_row gt_center">1.01</td>
-      <td class="gt_row gt_center">0.99, 1.02</td>
-      <td class="gt_row gt_center">0.3</td>
-    </tr>
-    <tr>
-      <td class="gt_row gt_left">Grade</td>
-      <td class="gt_row gt_center"></td>
-      <td class="gt_row gt_center"></td>
-      <td class="gt_row gt_center"></td>
-      <td class="gt_row gt_center"></td>
-      <td class="gt_row gt_center"></td>
-      <td class="gt_row gt_center"></td>
-    </tr>
-    <tr>
-      <td class="gt_row gt_left" style="text-align: left; text-indent: 10px;">I</td>
-      <td class="gt_row gt_center">&mdash;</td>
-      <td class="gt_row gt_center">&mdash;</td>
-      <td class="gt_row gt_center"></td>
-      <td class="gt_row gt_center">&mdash;</td>
-      <td class="gt_row gt_center">&mdash;</td>
-      <td class="gt_row gt_center"></td>
-    </tr>
-    <tr>
-      <td class="gt_row gt_left" style="text-align: left; text-indent: 10px;">II</td>
-      <td class="gt_row gt_center">0.85</td>
-      <td class="gt_row gt_center">0.39, 1.85</td>
-      <td class="gt_row gt_center">0.7</td>
-      <td class="gt_row gt_center">1.21</td>
-      <td class="gt_row gt_center">0.73, 1.99</td>
-      <td class="gt_row gt_center">0.5</td>
-    </tr>
-    <tr>
-      <td class="gt_row gt_left" style="text-align: left; text-indent: 10px;">III</td>
-      <td class="gt_row gt_center">1.01</td>
-      <td class="gt_row gt_center">0.47, 2.15</td>
-      <td class="gt_row gt_center">>0.9</td>
-      <td class="gt_row gt_center">1.79</td>
-      <td class="gt_row gt_center">1.12, 2.86</td>
-      <td class="gt_row gt_center">0.014</td>
-    </tr>
+    <tr><td class="gt_row gt_left">Chemotherapy Treatment</td>
+<td class="gt_row gt_center"></td>
+<td class="gt_row gt_center"></td>
+<td class="gt_row gt_center"></td>
+<td class="gt_row gt_center"></td>
+<td class="gt_row gt_center"></td>
+<td class="gt_row gt_center"></td></tr>
+    <tr><td class="gt_row gt_left" style="text-align: left; text-indent: 10px;">Drug A</td>
+<td class="gt_row gt_center">&mdash;</td>
+<td class="gt_row gt_center">&mdash;</td>
+<td class="gt_row gt_center"></td>
+<td class="gt_row gt_center">&mdash;</td>
+<td class="gt_row gt_center">&mdash;</td>
+<td class="gt_row gt_center"></td></tr>
+    <tr><td class="gt_row gt_left" style="text-align: left; text-indent: 10px;">Drug B</td>
+<td class="gt_row gt_center">1.13</td>
+<td class="gt_row gt_center">0.60, 2.13</td>
+<td class="gt_row gt_center">0.7</td>
+<td class="gt_row gt_center">1.30</td>
+<td class="gt_row gt_center">0.88, 1.92</td>
+<td class="gt_row gt_center">0.2</td></tr>
+    <tr><td class="gt_row gt_left">Age</td>
+<td class="gt_row gt_center">1.02</td>
+<td class="gt_row gt_center">1.00, 1.04</td>
+<td class="gt_row gt_center">0.10</td>
+<td class="gt_row gt_center">1.01</td>
+<td class="gt_row gt_center">0.99, 1.02</td>
+<td class="gt_row gt_center">0.3</td></tr>
+    <tr><td class="gt_row gt_left">Grade</td>
+<td class="gt_row gt_center"></td>
+<td class="gt_row gt_center"></td>
+<td class="gt_row gt_center"></td>
+<td class="gt_row gt_center"></td>
+<td class="gt_row gt_center"></td>
+<td class="gt_row gt_center"></td></tr>
+    <tr><td class="gt_row gt_left" style="text-align: left; text-indent: 10px;">I</td>
+<td class="gt_row gt_center">&mdash;</td>
+<td class="gt_row gt_center">&mdash;</td>
+<td class="gt_row gt_center"></td>
+<td class="gt_row gt_center">&mdash;</td>
+<td class="gt_row gt_center">&mdash;</td>
+<td class="gt_row gt_center"></td></tr>
+    <tr><td class="gt_row gt_left" style="text-align: left; text-indent: 10px;">II</td>
+<td class="gt_row gt_center">0.85</td>
+<td class="gt_row gt_center">0.39, 1.85</td>
+<td class="gt_row gt_center">0.7</td>
+<td class="gt_row gt_center">1.21</td>
+<td class="gt_row gt_center">0.73, 1.99</td>
+<td class="gt_row gt_center">0.5</td></tr>
+    <tr><td class="gt_row gt_left" style="text-align: left; text-indent: 10px;">III</td>
+<td class="gt_row gt_center">1.01</td>
+<td class="gt_row gt_center">0.47, 2.15</td>
+<td class="gt_row gt_center">>0.9</td>
+<td class="gt_row gt_center">1.79</td>
+<td class="gt_row gt_center">1.12, 2.86</td>
+<td class="gt_row gt_center">0.014</td></tr>
   </tbody>
   
   <tfoot>
@@ -2812,7 +2789,6 @@ sp500 %&gt;%
 #fdwfbggwkx .gt_table {
   display: table;
   border-collapse: collapse;
-  max-width: 100%;
   margin-left: auto;
   margin-right: auto;
   color: #333333;
@@ -2983,12 +2959,6 @@ sp500 %&gt;%
 
 #fdwfbggwkx .gt_from_md > :last-child {
   margin-bottom: 0;
-}
-
-#fdwfbggwkx .gt_from_md p {
-  line-height: 1em;
-  margin-bottom: 0em;
-  margin-top: 0em;
 }
 
 #fdwfbggwkx .gt_row {
@@ -3168,54 +3138,42 @@ sp500 %&gt;%
     </tr>
   </thead>
   <tbody class="gt_table_body">
-    <tr>
-      <td class="gt_row gt_left">Mon, Jun 14, 2010</td>
-      <td class="gt_row gt_right">$1,095.00</td>
-      <td class="gt_row gt_right">$1,105.91</td>
-      <td class="gt_row gt_right">$1,089.03</td>
-      <td class="gt_row gt_right">$1,089.63</td>
-      <td class="gt_row gt_right">4.43B</td>
-    </tr>
-    <tr>
-      <td class="gt_row gt_left">Fri, Jun 11, 2010</td>
-      <td class="gt_row gt_right">$1,082.65</td>
-      <td class="gt_row gt_right">$1,092.25</td>
-      <td class="gt_row gt_right">$1,077.12</td>
-      <td class="gt_row gt_right">$1,091.60</td>
-      <td class="gt_row gt_right">4.06B</td>
-    </tr>
-    <tr>
-      <td class="gt_row gt_left">Thu, Jun 10, 2010</td>
-      <td class="gt_row gt_right">$1,058.77</td>
-      <td class="gt_row gt_right">$1,087.85</td>
-      <td class="gt_row gt_right">$1,058.77</td>
-      <td class="gt_row gt_right">$1,086.84</td>
-      <td class="gt_row gt_right">5.14B</td>
-    </tr>
-    <tr>
-      <td class="gt_row gt_left">Wed, Jun 9, 2010</td>
-      <td class="gt_row gt_right">$1,062.75</td>
-      <td class="gt_row gt_right">$1,077.74</td>
-      <td class="gt_row gt_right">$1,052.25</td>
-      <td class="gt_row gt_right">$1,055.69</td>
-      <td class="gt_row gt_right">5.98B</td>
-    </tr>
-    <tr>
-      <td class="gt_row gt_left">Tue, Jun 8, 2010</td>
-      <td class="gt_row gt_right">$1,050.81</td>
-      <td class="gt_row gt_right">$1,063.15</td>
-      <td class="gt_row gt_right">$1,042.17</td>
-      <td class="gt_row gt_right">$1,062.00</td>
-      <td class="gt_row gt_right">6.19B</td>
-    </tr>
-    <tr>
-      <td class="gt_row gt_left">Mon, Jun 7, 2010</td>
-      <td class="gt_row gt_right">$1,065.84</td>
-      <td class="gt_row gt_right">$1,071.36</td>
-      <td class="gt_row gt_right">$1,049.86</td>
-      <td class="gt_row gt_right">$1,050.47</td>
-      <td class="gt_row gt_right">5.47B</td>
-    </tr>
+    <tr><td class="gt_row gt_left">Mon, Jun 14, 2010</td>
+<td class="gt_row gt_right">$1,095.00</td>
+<td class="gt_row gt_right">$1,105.91</td>
+<td class="gt_row gt_right">$1,089.03</td>
+<td class="gt_row gt_right">$1,089.63</td>
+<td class="gt_row gt_right">4.43B</td></tr>
+    <tr><td class="gt_row gt_left">Fri, Jun 11, 2010</td>
+<td class="gt_row gt_right">$1,082.65</td>
+<td class="gt_row gt_right">$1,092.25</td>
+<td class="gt_row gt_right">$1,077.12</td>
+<td class="gt_row gt_right">$1,091.60</td>
+<td class="gt_row gt_right">4.06B</td></tr>
+    <tr><td class="gt_row gt_left">Thu, Jun 10, 2010</td>
+<td class="gt_row gt_right">$1,058.77</td>
+<td class="gt_row gt_right">$1,087.85</td>
+<td class="gt_row gt_right">$1,058.77</td>
+<td class="gt_row gt_right">$1,086.84</td>
+<td class="gt_row gt_right">5.14B</td></tr>
+    <tr><td class="gt_row gt_left">Wed, Jun 9, 2010</td>
+<td class="gt_row gt_right">$1,062.75</td>
+<td class="gt_row gt_right">$1,077.74</td>
+<td class="gt_row gt_right">$1,052.25</td>
+<td class="gt_row gt_right">$1,055.69</td>
+<td class="gt_row gt_right">5.98B</td></tr>
+    <tr><td class="gt_row gt_left">Tue, Jun 8, 2010</td>
+<td class="gt_row gt_right">$1,050.81</td>
+<td class="gt_row gt_right">$1,063.15</td>
+<td class="gt_row gt_right">$1,042.17</td>
+<td class="gt_row gt_right">$1,062.00</td>
+<td class="gt_row gt_right">6.19B</td></tr>
+    <tr><td class="gt_row gt_left">Mon, Jun 7, 2010</td>
+<td class="gt_row gt_right">$1,065.84</td>
+<td class="gt_row gt_right">$1,071.36</td>
+<td class="gt_row gt_right">$1,049.86</td>
+<td class="gt_row gt_right">$1,050.47</td>
+<td class="gt_row gt_right">5.47B</td></tr>
   </tbody>
   
   
