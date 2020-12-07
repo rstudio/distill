@@ -1,11 +1,11 @@
-## distill v1.1 (Development)
+## distill v1.1 (CRAN)
 
 -   Fixed issue with `overflow: hidden` for code blocks on mobile devices (is now `overflow: auto`).
 -   Improve full text search behavior w/ `ignoreLocation: true` and `threshold: 0`.
 -   Fix issue w/ importing articles from git repos with `main` default branch.
 -   Make headroom scroll tolerance a bit more forgiving (5px vs. 1px).
 
-## distill v1.0 (CRAN)
+## distill v1.0
 
 -   Add site search feature using [Fuse.js](https://github.com/krisk/Fuse) (enabled by default for blog sites). Can be explicitly enabled or disabled for any site using the `search` field in the `navbar` key of `_site.yml`.
 

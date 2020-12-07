@@ -56,7 +56,7 @@ HTMLWidgets.widget({
         
         // convert non-arrays to arrays
         for (var index = 0; index < attrs.file.length; index++) {
-          if (!$.isArray(attrs.file[index]))
+          if (!Array.isArray(attrs.file[index]))
             attrs.file[index] = [].concat(attrs.file[index]);
         }
             
