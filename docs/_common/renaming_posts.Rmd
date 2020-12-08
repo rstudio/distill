@@ -1,4 +1,4 @@
-Posts are stored within the `_posts` sub-directory of your site, and have a directory name that reflects the date which you created the post along with the post's [title slug](https://en.wikipedia.org/wiki/Clean_URL#Slug). For example:
+Posts are stored within the `_posts` sub-directory of your site, and have a directory name that reflects the date that you created the post along with the post's [title slug](https://en.wikipedia.org/wiki/Clean_URL#Slug). For example:
 
 `_posts/2016-11-08-sharpe-ratio`
 
@@ -11,6 +11,6 @@ If you work on a post over the course of a few days and/or if you change your po
 rename_post_dir("_posts/2016-11-08-sharpe-ratio") 
 ```
 
-You can also specify and explicit `slug` and/or `date_prefix` if you prefer not to use values derived from the post's YAML.
+You can also specify an explicit `slug` and/or `date_prefix` if you prefer not to use values derived from the post's YAML.
 
 Note that you should be sure to rebuild your site after renaming a post so that it's updated URL is reflected in the index page and RSS feed.
