@@ -26,7 +26,7 @@ create_theme  <- function(name = "theme", edit = TRUE) {
   bullet <- "v"
   circle <- "o"
 
-  cat(paste(bullet, "Created CSS file at theme.css"), "\n", sep = "")
+  cat(paste(bullet, "Created CSS file at", css), "\n", sep = "")
   cat(paste(circle, "TODO: Customize it to suit your needs"), "\n", sep = "")
   cat(
     paste(circle, "TODO: Add 'theme' entry to your`site/article YAML\n"),
