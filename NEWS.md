@@ -1,3 +1,7 @@
+## distill v1.2 (Development)
+
+-   Fix an issue with highlighting on Windows when there is a space in the resource's path (\#236).
+
 ## distill v1.1 (CRAN)
 
 -   Fixed issue with `overflow: hidden` for code blocks on mobile devices (is now `overflow: auto`).
