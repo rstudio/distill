@@ -29,7 +29,7 @@ create_theme  <- function(name = "theme", edit = TRUE) {
   cat(paste(bullet, "Created CSS file at", css), "\n")
   cat(paste(circle, "TODO: Customize it to suit your needs"), "\n")
   cat(
-    paste0(circle, " ", "TODO: Add 'theme: ", css, "' to your site or article YAML"),
+    paste0(circle, " ", "TODO: Add 'theme: ", css, "' to your site or article YAML", "\n"),
     "\n")
   cat("See docs at https://rstudio.github.io/distill/website.html#theming")
 }
