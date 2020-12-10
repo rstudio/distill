@@ -293,14 +293,14 @@ distill_highlighting_args <- function(highlight) {
   #
   #   https://github.com/jgm/skylighting/blob/a1d02a0db6260c73aaf04aae2e6e18b569caacdc/skylighting-core/src/Skylighting/Format/HTML.hs#L117-L147
   #
-  default <- pandoc_path_arg(distill_resource("arrow.theme"))
+  default <- distill_resource("arrow.theme")
 
   # if it's "rstudio", then use an embedded theme file
   if (identical(highlight, "rstudio")) {
-    highlight <- pandoc_path_arg(distill_resource("rstudio.theme"))
+    highlight <- distill_resource("rstudio.theme")
   }
 
-  pandoc_highlight_args(highlight, default)
+  rmarkdown::pandoc_highlight_args(highlight, default)
 }
 
 knitr_preview_hook <- function(options) {
