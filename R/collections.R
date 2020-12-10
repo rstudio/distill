@@ -642,8 +642,8 @@ article_footer_html <- function(site_dir, site_config, collection, article) {
   # disqus
   disqus <- NULL
   disqus_script <- NULL
-  if (!is.null(disqus_shortname)) {
 
+  if (!is.null(disqus_shortname)) {
     disqus <- tags$span(class = "disqus-comments",
       tag("i", list(class = "fas fa-comments")),
       HTML("&nbsp;"),
@@ -659,7 +659,9 @@ article_footer_html <- function(site_dir, site_config, collection, article) {
 
       tags$div(id = "disqus_thread", class = disqus_class),
 
-      tags$script(HTML(paste(sep = "\n",
+      tags$script(type = cc_check(site_config),
+                  `cookie-consent` = "functionality",
+        HTML(paste(sep = "\n",
           sprintf(paste(sep = "\n",
               "\nvar disqus_config = function () {",
               "  this.page.url = '%s';",

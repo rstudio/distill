@@ -48,31 +48,63 @@ site_includes_html<- function(site_config, context) {
   }
 }
 
-site_header_extras <- function(site_config) {
+# Checking if Cookie Consent is enabled
+cc_check <- function(site_config) {
+  cc_tag <- NULL
+  if (!is.null(site_config$cookie_consent)) {
+    cc_tag <- "text/plain"
+  }else{
+    cc_tag <- "text/javascript"
+  }
+}
 
-  # google analytics
+site_header_extras <- function(site_config) {
+  # cookieconsent.com banner
+  cookie_consent <- NULL
+  if (!is.null(site_config$cookie_consent)) {
+    cookie_consent <- tagList(
+      tags$script(type = "text/javascript",
+                  src = "https://www.cookieconsent.com/releases/3.1.0/cookie-consent.js"),
+      tags$script(type = "text/javascript",
+                  HTML(paste(sep = "\n",
+                             "\ndocument.addEventListener('DOMContentLoaded', function () {",
+                             "cookieconsent.run({",
+                             sprintf("'notice_banner_type':'%s',", site_config$cookie_consent$style),
+                             sprintf("'consent_type': '%s',", site_config$cookie_consent$type),
+                             sprintf("'palette': '%s',", site_config$cookie_consent$palette),
+                             sprintf("'language': '%s',", site_config$cookie_consent$lang),
+                             sprintf("'website_name': '%s',", site_config$name),
+                             sprintf("'cookies_policy_url': '%s',", site_config$cookie_consent$cookies_policy),
+                             "'change_preferences_selector':'#changePreferences'",
+                             "});});")))
+      )
+  }
+
+  # google analytics }
   google_analytics <- NULL
   if (!is.null(site_config$google_analytics)) {
     google_analytics <- tagList(
-      tags$script(async = NA,
+      tags$script(type = cc_check(site_config),
+                  `cookie-consent`="tracking",
+                  async = NA,
                   src = sprintf("https://www.googletagmanager.com/gtag/js?id=%s",
                                 site_config$google_analytics)),
-      tags$script(HTML(paste(sep = "\n",
-        "\nwindow.dataLayer = window.dataLayer || [];",
-        "function gtag(){dataLayer.push(arguments);}",
-        "gtag('js', new Date());",
-        sprintf("gtag('config', '%s');\n", site_config$google_analytics)
-      )))
+      tags$script(type = cc_check(site_config),
+                  `cookie-consent`="tracking",
+                  HTML(paste(sep = "\n",
+                             "\nwindow.dataLayer = window.dataLayer || [];",
+                             "function gtag(){dataLayer.push(arguments);}",
+                             "gtag('js', new Date());",
+                             sprintf("gtag('config', '%s');\n", site_config$google_analytics)
+                  )))
     )
   }
-
   # return extras
   tagList(
+    cookie_consent,
     google_analytics
   )
-
 }
-
 
 with_distill_output_options <- function(site_config, f) {
   site_config_output <- site_config[["output"]]
