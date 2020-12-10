@@ -1,6 +1,7 @@
 ## distill v1.2 (Development)
 
 -   Fix an issue with highlighting on Windows when there is a space in the resource's path (\#236).
+-   Add optional cookie consent overlay for opt-in to Google Analytics and Disqus.
 
 ## distill v1.1 (CRAN)
 
