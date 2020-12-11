@@ -52,7 +52,7 @@ To learn about available htmlwidgets see the [showcase page](http://www.htmlwidg
 
 The [r2d3](https://rstudio.github.io/r2d3/) package enables you to easily incorporate interactive graphics created using [D3.js](https://d3js.org/) in your Distill articles.
 
-For example, the following renders an interactive [Veronoi diagram](https://en.wikipedia.org/wiki/Voronoi_diagram) created using D3:
+For example, the following renders an interactive [Voronoi diagram](https://en.wikipedia.org/wiki/Voronoi_diagram) created using D3:
 
 ```` {.clike}
 ```{r, layout="l-page", fig.height=6}`r ''`
