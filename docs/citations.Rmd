@@ -12,7 +12,7 @@ Distill articles support including citations and a corresponding bibliography us
 
 ## Citing other works
 
-Use standard [R Markdown bibliographies](https://rmarkdown.rstudio.com/authoring_bibliographies_and_citations.html) for citing other works. To do this, first create a bibliography file using a supported format (e.g. BibTeX or CSL) and refer to it from the `bibliography` field of the YAML front-matter. For example:
+Use standard [R Markdown bibliographies](https://rmarkdown.rstudio.com/authoring_bibliographies_and_citations.html) for citing other works. To do this, first create a bibliography file using a supported format (e.g. CSL or BibTeX) and refer to it from the `bibliography` field of the YAML front-matter. For example:
 
 ``` {.yaml}
 ---
@@ -26,26 +26,43 @@ author:
     url: https://example.com/norajones
     affiliation: Spacely Sprockets
     affiliation_url: https://example.com/spacelysprokets
-bibliography: biblio.bib
+bibliography: biblio.yaml
 ---
 ```
 
-Here's an example of what one of the entries in your BibTeX file might look like:
+Here's an example of what a CSL bibliography might look like:
 
-``` {.bibtex}
-@Book{xie2015,
-  title = {Dynamic Documents with R and knitr},
-  author = {Yihui Xie},
-  publisher = {Chapman and Hall/CRC},
-  address = {Boca Raton, Florida},
-  year = {2015},
-  edition = {2nd},
-  note = {ISBN 978-1498716963},
-  url = {http://yihui.name/knitr/},
-}
+``` {.yaml}
+---
+references:
+- type: article-journal
+  id: WatsonCrick1953
+  author:
+  - family: Watson
+    given: J. D.
+  - family: Crick
+    given: F. H. C.
+  issued:
+    date-parts:
+    - - 1953
+      - 4
+      - 25
+  title: 'Molecular structure of nucleic acids: a structure for
+    deoxyribose nucleic acid'
+  title-short: Molecular structure of nucleic acids
+  container-title: Nature
+  volume: 171
+  issue: 4356
+  page: 737-738
+  DOI: 10.1038/171737a0
+  URL: https://www.nature.com/articles/171737a0
+  language: en-GB
+...
 ```
 
-To cite this within your article, use standard R Markdown notation, for example: `[@xie2015]` (referencing an id provided in the bibliography). Note that multiple ids (separated by semicolons) can be provided.
+To cite this within your article, use standard R Markdown notation, for example: `[@WatsonCrick1953]` (referencing an id provided in the bibliography). See the documentation on [Pandoc Citations](https://pandoc.org/MANUAL.html#extension-citations) for details on in-text citations, citing multiple works, etc.
+
+Note that both CSL and BibTeX bibliographies are supported. See the [Pandoc Bibliographies](https://pandoc.org/MANUAL.html#specifying-bibliographic-data) documentation for addional details on creating a bibliography for use with Pandoc.
 
 ## Creating citeable articles {#creating-citeable-articles}
 
