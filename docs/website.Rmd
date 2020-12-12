@@ -95,7 +95,7 @@ The `name` field provides a suggested URL path for your website when it is publi
 
 The `output_dir` field indicates which directory to copy site content into ("\_site" is the default if none is specified). Note that this can be "." to keep all content within the root website directory alongside the source code.
 
-The `include` and `exclude` fields enable you to override the default behavior visa-vi what files are copied into the output directory. By default, all files within the website directory are copied into the output directory (e.g. "\_site") save for the following:
+The `include` and `exclude` fields enable you to override the default behavior vis-à-vis what files are copied into the output directory. By default, all files within the website directory are copied into the output directory (e.g. "\_site") save for the following:
 
 1.  Files beginning with `"."` (hidden files).
 
