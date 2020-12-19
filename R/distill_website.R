@@ -133,10 +133,6 @@ remove_site_outputs <- function() {
 
 # if the input file uses an alternate output format then inject
 # requisite distill site header/footer/etc.
-
-# TODO: theme injection?
-# TODO: test w/ unpatched versions
-
 alt_output_format <- function(input_file, config) {
 
   # check for a non distil format
@@ -158,7 +154,8 @@ alt_output_format <- function(input_file, config) {
     # header includes (provide theme if we have one)
     in_header <- c(
       navigation_in_header_file(config),
-      site_in_header_file(config)
+      site_in_header_file(config),
+      alt_format_in_header_file()
     )
     theme <- theme_from_site_config(find_site_dir(input_file), config)
     if (!is.null(theme)) {
@@ -192,7 +189,6 @@ alt_output_format <- function(input_file, config) {
   }
 }
 
-
 non_distill_format <- function(input_file) {
   formats <- rmarkdown::all_output_formats(input_file)
   formats <- formats[formats != "distill::distill_article"]
@@ -200,6 +196,11 @@ non_distill_format <- function(input_file) {
     formats[[1]]
   else
     NULL
+}
+
+alt_format_in_header_file <- function() {
+  system.file("rmarkdown/templates/distill_article/resources/alt-format.html",
+              package = "distill")
 }
 
 
