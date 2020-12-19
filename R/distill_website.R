@@ -135,7 +135,7 @@ remove_site_outputs <- function() {
 # requisite distill site header/footer/etc.
 
 # TODO: theme injection?
-# TODO: jquery dependency
+# TODO: test w/ unpatched versions
 
 alt_output_format <- function(input_file, config) {
 
@@ -152,27 +152,25 @@ alt_output_format <- function(input_file, config) {
       output_format = alt_format
     )
 
-    # provide basic metadata and navbar config
-    metadata <- list(
-      title = config$title,
-      description = config$description
-    )
-    if (!is.null(config$navbar)) {
-      if (is.null(config$navbar$title)) {
-        config$navbar$title <- config$title
-      }
-    }
+    # ensure we have required title config
+    config <- transform_site_config(config)
 
     # inject distill sauce
     args <- c(
       output_format$pandoc$args,
       pandoc_include_args(
-        in_header =  c(
-          metadata_in_header(config, metadata, FALSE),
-          navigation_in_header_file(config)
+        in_header = c(
+          navigation_in_header_file(config),
+          site_in_header_file(site_config)
         ),
-        before_body = navigation_before_body_file(dirname(input_file), config),
-        after_body = navigation_after_body_file(dirname(input_file), config)
+        before_body = c(
+          navigation_before_body_file(dirname(input_file), config),
+          site_before_body_file(site_config)
+        ),
+        after_body = c(
+          site_after_body_file(site_config),
+          navigation_after_body_file(dirname(input_file), config),
+        )
       )
     )
 

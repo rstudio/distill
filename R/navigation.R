@@ -49,7 +49,7 @@ navigation_html_generator <- function() {
 
 navigation_in_header_html <- function(site_config, offset) {
 
-  if (!is.null(site_config[["navbar"]])) {
+  if (have_navigation(site_config)) {
 
     navbar_html <- html_from_file(
       system.file("rmarkdown/templates/distill_article/resources/navbar.html",
@@ -112,7 +112,7 @@ navigation_before_body_html <- function(site_dir, site_config, offset) {
 
   # if we have a navbar/header then generate it
   header <- c()
-  if (!is.null(site_config[["navbar"]])) {
+  if (have_navigation(site_config)) {
     build_menu <- function(menu) {
       item_to_menu <- function(item) {
         item$href <- offset_href(item$href)
@@ -350,6 +350,7 @@ site_dependencies <- function(site_config) {
 
   if (length(site_config) > 0) {
     deps <- list(
+      site_dependency(html_dependency_jquery()),
       site_dependency(html_dependency_font_awesome()),
       site_dependency(html_dependency_headroom())
     )
@@ -377,6 +378,10 @@ site_search_enabled <- function(site_config, default = TRUE) {
   } else {
     FALSE
   }
+}
+
+have_navigation <- function(site_config) {
+  !is.null(site_config[["navbar"]])
 }
 
 

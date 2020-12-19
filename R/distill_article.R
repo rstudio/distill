@@ -162,14 +162,20 @@ distill_article <- function(toc = FALSE,
     # create metadata json
     metadata_json <- embedded_metadata(embedable_metadata)
 
-    # list of html dependencies
-    html_deps <- list(
-      html_dependency_jquery(),
+    # list of html dependencies (if we navigation then we get jquery
+    # from site dependencies so don't include it here)
+    html_deps <- list()
+    if (!have_navigation(site_config)) {
+      html_deps <- list(html_dependency_jquery())
+    } else {
+      html_deps <- list()
+    }
+    html_deps <- append(html_deps, list(
       html_dependency_anchor(),
       html_dependency_bowser(),
       html_dependency_webcomponents(),
       html_dependency_distill()
-    )
+    ))
 
     # resolve listing
     listing <- list()
