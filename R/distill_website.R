@@ -7,8 +7,22 @@
 #' @export
 distill_website <- function(input, encoding = getOption("encoding"), ...) {
 
-  # first great the default site generator
-  default <- rmarkdown::default_site_generator(input, encoding, ...)
+  # create an output format filter that allows for alternate output formats
+  config <- site_config(input, encoding)
+  output_format_filter <- NULL
+  if (!identical(config$alt_formats, FALSE)) {
+    output_format_filter <- function(input_file, output_format) {
+      alt_format <- alt_output_format(input_file, config)
+      if (!is.null(alt_format)) {
+        alt_format
+      } else {
+        output_format
+      }
+    }
+  }
+
+  # create the default site generator
+  default <- rmarkdown::default_site_generator(input, output_format_filter, ...)
 
   # then wrap/delegate to the render and clean functions
   list(
@@ -115,6 +129,72 @@ remove_site_outputs <- function() {
 
   if (.site_outputs$output_dir != ".")
     lapply(.site_outputs$files, file.remove)
+}
+
+# if the input file uses an alternate output format then inject
+# requisite distill site header/footer/etc.
+
+# TODO: theme injection?
+# TODO: jquery dependency
+
+alt_output_format <- function(input_file, config) {
+
+  # check for a non distil format
+  alt_format <- non_distill_format(input_file)
+  if (!is.null(alt_format)) {
+
+    # ensure site deps are copied to the site_libs dir
+    ensure_site_dependencies(config, dirname(input_file))
+
+    # create format
+    output_format <- rmarkdown::resolve_output_format(
+      input = input_file,
+      output_format = alt_format
+    )
+
+    # provide basic metadata and navbar config
+    metadata <- list(
+      title = config$title,
+      description = config$description
+    )
+    if (!is.null(config$navbar)) {
+      if (is.null(config$navbar$title)) {
+        config$navbar$title <- config$title
+      }
+    }
+
+    # inject distill sauce
+    args <- c(
+      output_format$pandoc$args,
+      pandoc_include_args(
+        in_header =  c(
+          metadata_in_header(config, metadata, FALSE),
+          navigation_in_header_file(config)
+        ),
+        before_body = navigation_before_body_file(dirname(input_file), config),
+        after_body = navigation_after_body_file(dirname(input_file), config)
+      )
+    )
+
+    # prevent self-contained
+    args <- args[args != "--self-contained"]
+
+    # set args and return format
+    output_format$pandoc$args <- args
+    output_format
+  } else {
+    NULL
+  }
+}
+
+
+non_distill_format <- function(input_file) {
+  formats <- rmarkdown::all_output_formats(input_file)
+  formats <- formats[formats != "distill::distill_article"]
+  if (length(formats) > 0)
+    formats[[1]]
+  else
+    NULL
 }
 
 

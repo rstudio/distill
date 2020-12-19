@@ -835,6 +835,9 @@ article_contents <- function(path) {
     html,
     "descendant-or-self::*[(@class and contains(concat(' ', normalize-space(@class), ' '), ' d-article '))]"
   )
+  if (is.na(article_html)) {
+    article_html <- xml2::xml_find_first(html, "//body")
+  }
   if (!is.na(article_html)) {
     contents <- as_utf8(xml2::xml_text(article_html))
   }
