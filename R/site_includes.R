@@ -30,6 +30,10 @@ site_after_body_file <- function(site_config) {
   html_file(site_includes_html(site_config, "after_body"))
 }
 
+site_header_extras_file <- function(site_config) {
+  html_file(placeholder_html("site_in_header", site_header_extras(site_config)))
+}
+
 site_includes_html<- function(site_config, context) {
   if (context == "in_header") {
     header_html <- c()

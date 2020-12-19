@@ -412,17 +412,24 @@ distill_in_header_html <- function(theme = NULL) {
     system.file("rmarkdown/templates/distill_article/resources/distill.html",
                 package = "distill")
   )
+  theme_html <- theme_in_header_html(theme)
+  placeholder_html("distill", distill_html, theme_html)
+}
+
+theme_in_header_html <- function(theme) {
   if (!is.null(theme)) {
-    theme_html <- tagList(
+    tagList(
       includeCSS(distill_resource("base-variables.css")),
       includeCSS(theme),
       includeCSS(distill_resource("base-style.css"))
     )
   } else {
-    theme_html <- NULL
+    NULL
   }
-  placeholder_html("distill", distill_html, theme_html)
 }
 
+theme_in_header_file <- function(theme) {
+  html_file(theme_in_header_html(theme))
+}
 
 

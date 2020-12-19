@@ -155,21 +155,28 @@ alt_output_format <- function(input_file, config) {
     # ensure we have required title config
     config <- transform_site_config(config)
 
+    # header includes (provide theme if we have one)
+    in_header <- c(
+      navigation_in_header_file(config),
+      site_in_header_file(config)
+    )
+    theme <- theme_from_site_config(find_site_dir(input_file), config)
+    if (!is.null(theme)) {
+      in_header <- c(in_header, theme_in_header_file(theme))
+    }
+
     # inject distill sauce
     args <- c(
       output_format$pandoc$args,
       pandoc_include_args(
-        in_header = c(
-          navigation_in_header_file(config),
-          site_in_header_file(site_config)
-        ),
+        in_header = in_header,
         before_body = c(
           navigation_before_body_file(dirname(input_file), config),
-          site_before_body_file(site_config)
+          site_before_body_file(config)
         ),
         after_body = c(
-          site_after_body_file(site_config),
-          navigation_after_body_file(dirname(input_file), config),
+          site_after_body_file(config),
+          navigation_after_body_file(dirname(input_file), config)
         )
       )
     )
