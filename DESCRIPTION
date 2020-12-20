@@ -55,6 +55,7 @@ Imports:
     downlit (>= 0.2)
 Suggests:
     htmlwidgets,
+    markdown,
     progress,
     r2d3,
     DiagrammeR,
