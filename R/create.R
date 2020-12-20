@@ -72,7 +72,7 @@ create_blog <- function(dir, title, gh_pages = FALSE, edit = interactive()) {
 #'
 #' @export
 create_article <- function(file,
-                           template = "distll_article",
+                           template = "distill_article",
                            package = "distill",
                            create_dir = FALSE,
                            edit = TRUE) {
