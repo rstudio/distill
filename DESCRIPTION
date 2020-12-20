@@ -34,7 +34,7 @@ Imports:
     utils,
     stats,
     tools,
-    rmarkdown (>= 2.6.0003),
+    rmarkdown (>= 2.5),
     bookdown (>= 0.8),
     xfun (>= 0.2),
     htmltools, 
