@@ -6,6 +6,7 @@
 -   Render markdown within `description` field of RSS feeds.
 -   Enhance `create_article()` function to create articles from alternate formats.
 -   Fix issue w/ broken images in search results for pages with no preview image.
+-   Fix issue w/ attempting to add non-site Rmds (e.g. README.Rmd) to search index.
 
 ## distill v1.1 (CRAN)
 

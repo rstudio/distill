@@ -9,23 +9,31 @@ write_search_json <- function(site_dir, config) {
   # top-level articles
   input_files <- list.files(site_dir, pattern = "^[^_].*\\.[Rr]?md$")
   articles <- lapply(input_files, function(file) {
-    html_file <- file_with_ext(file, "html")
-    path <- normalize_path(file.path(site_output_dir, html_file))
-    contents <- article_contents(path)
-    metadata <- rmarkdown::yaml_front_matter(file.path(site_dir, file))
+
+    # article w/ path
     article <- list()
+    html_file <- file_with_ext(file, "html")
     article$path = as_utf8(html_file)
-    article$title <- as_utf8(metadata$title)
-    article$description <- as_utf8(metadata$description)
-    article$author = lapply(metadata$author, function(author) {
-      list(
-        name = as_utf8(author$name),
-        url = author$url
-      )
-    })
-    article$date <- as_utf8(metadata$date)
-    article$contents = as_utf8(contents)
-    article$last_modified = time_as_iso_8601(file.info(path)$mtime)
+
+    # resolve path and ensure the file exists
+    path <- normalize_path(file.path(site_output_dir, html_file), mustWork = FALSE)
+    if (file.exists(path)) {
+      contents <- article_contents(path)
+      metadata <- rmarkdown::yaml_front_matter(file.path(site_dir, file))
+      article <- list()
+      article$path = as_utf8(html_file)
+      article$title <- as_utf8(metadata$title)
+      article$description <- as_utf8(metadata$description)
+      article$author = lapply(metadata$author, function(author) {
+        list(
+          name = as_utf8(author$name),
+          url = author$url
+        )
+      })
+      article$date <- as_utf8(metadata$date)
+      article$contents = as_utf8(contents)
+      article$last_modified = time_as_iso_8601(file.info(path)$mtime)
+    }
     article
   })
 
