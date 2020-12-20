@@ -4,10 +4,22 @@
 \alias{create_article}
 \title{Create a new article}
 \usage{
-create_article(file, create_dir = FALSE, edit = TRUE)
+create_article(
+  file,
+  template = "distll_article",
+  package = "distill",
+  create_dir = FALSE,
+  edit = TRUE
+)
 }
 \arguments{
 \item{file}{File name for the draft}
+
+\item{template}{Template to use as the basis for the draft. This is either
+the full path to a template directory or the name of a template directory
+within the \code{rmarkdown/templates} directory of a package.}
+
+\item{package}{(Optional) Name of package where the template is located.}
 
 \item{create_dir}{\code{TRUE} to create a new directory for the document
 (defaults to \code{FALSE}).}

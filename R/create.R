@@ -71,11 +71,15 @@ create_blog <- function(dir, title, gh_pages = FALSE, edit = interactive()) {
 #'   (defaults to `FALSE`).
 #'
 #' @export
-create_article <- function(file, create_dir = FALSE, edit = TRUE) {
+create_article <- function(file,
+                           template = "distll_article",
+                           package = "distill",
+                           create_dir = FALSE,
+                           edit = TRUE) {
   article <- rmarkdown::draft(
     file,
-    "distill_article",
-    package = "distill",
+    template,
+    package,
     create_dir = create_dir,
     edit = FALSE
   )

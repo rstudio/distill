@@ -3,6 +3,7 @@
 -   Fix an issue with highlighting on Windows when there is a space in the resource's path (\#236).
 -   Add optional cookie consent overlay for opt-in to Google Analytics and Disqus.
 -   Support for including pages that use alternate R Markdown formats within Distill websites.
+-   Enhance `create_article()` function to create articles from alternate formats.
 
 ## distill v1.1 (CRAN)
 
