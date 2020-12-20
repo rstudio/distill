@@ -39,16 +39,31 @@ distill_website <- function(input, encoding = getOption("encoding"), ...) {
       # check if this is an incremental render
       incremental <- !is.null(input_file)
 
-      # if it's incremental then only render collection specified in 'listing'
-      if (incremental) {
+      # if it's not an incremental render then scan top level Rmds for listings
+      # to add to site_collections
+      if (!incremental) {
+        input_files <- list.files(input, pattern = "^[^_].*\\.[Rr]?md$", full.names = TRUE)
+        sapply(input_files, function(file) {
+          listings <- front_matter_listings (file, encoding)
+          for (listing in listings) {
+            if (is.null(site_collections[[listing]])) {
+              site_collections[[listing]] <<- list(name = listing)
+            }
+          }
+        })
+
+      # if it's incremental then only render collection(s) specified in listing:
+      } else {
         metadata <- yaml_front_matter(input_file, encoding)
-        if (!is.null(metadata$listing)) {
-          if (is.list(metadata$listing))
-            site_collections <- site_collections[names(metadata$listing)]
-          else
-            site_collections <- site_collections[metadata$listing]
-        } else {
-          site_collections <- list()
+        listings <- front_matter_listings(input_file, encoding)
+        if (length(listings) > 0) {
+          site_collections <- lapply(listings, function(listing) {
+            if (!is.null(site_collections[[listing]]))
+              site_collections[[listing]]
+            else
+              list(name = listing)
+          })
+          names(site_collections) <- listings
         }
       }
 

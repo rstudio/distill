@@ -3,6 +3,7 @@
 -   Fix an issue with highlighting on Windows when there is a space in the resource's path (\#236).
 -   Add optional cookie consent overlay for opt-in to Google Analytics and Disqus.
 -   Support for including pages that use alternate R Markdown formats within Distill websites.
+-   Automatically register collections referenced in `listings` YAML metadata.
 -   Render markdown within `description` field of RSS feeds.
 -   Enhance `create_article()` function to create articles from alternate formats.
 -   Fix issue w/ broken images in search results for pages with no preview image.

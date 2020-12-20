@@ -12,6 +12,11 @@ enumerate_collection <- function(site_dir, site_config, collection) {
   # collection_dir
   collection_dir <- file.path(site_dir, paste0("_", collection$name))
 
+  # ensure that it exists
+  if (!dir_exists(collection_dir)) {
+    dir.create(collection_dir)
+  }
+
   # build a list of articles in the collection
   articles <- list()
 
@@ -309,6 +314,18 @@ move_feed_categories_xml <- function(main_feed, site_config) {
     if (!dir.exists(target_path)) dir.create(target_path, recursive = TRUE)
 
     xml2::write_xml(posts, file.path(target_path, basename(main_feed)))
+  }
+}
+
+front_matter_listings <- function(input_file, encoding) {
+  metadata <- yaml_front_matter(input_file, encoding)
+  if (!is.null(metadata$listing)) {
+    if (is.list(metadata$listing))
+      names(metadata$listing)
+    else
+      metadata$listing
+  } else {
+    c()
   }
 }
 
