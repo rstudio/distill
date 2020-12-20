@@ -585,6 +585,9 @@ code span.wa { color: #008000; font-weight: bold; } /* Warning */
           },
           templates: {
             suggestion: function(suggestion) {
+              var img = Object.keys(suggestion.preview).length > 0
+                ? `<img src="${offsetURL(suggestion.preview)}"</img>`
+                : '';
               var html = `
                 <div class="search-item">
                   <h3>${suggestion.title}</h3>
@@ -592,7 +595,7 @@ code span.wa { color: #008000; font-weight: bold; } /* Warning */
                     ${suggestion.description}
                   </div>
                   <div class="search-item-preview">
-                    <img src="${suggestion.preview ? offsetURL(suggestion.preview) : ''}"</img>
+                    ${img}
                   </div>
                 </div>
               `;
