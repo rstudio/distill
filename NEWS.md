@@ -4,6 +4,7 @@
 -   Add optional cookie consent overlay for opt-in to Google Analytics and Disqus.
 -   Support for including pages that use alternate R Markdown formats within Distill websites.
 -   Enhance `create_article()` function to create articles from alternate formats.
+-   Fix issue w/ broken images in search results for pages with no preview image.
 
 ## distill v1.1 (CRAN)
 
