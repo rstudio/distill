@@ -105,6 +105,9 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
         },
         templates: {
           suggestion: function(suggestion) {
+            var img = Object.keys(suggestion.preview).length > 0
+              ? `<img src="${offsetURL(suggestion.preview)}"</img>`
+              : '';
             var html = `
               <div class="search-item">
                 <h3>${suggestion.title}</h3>
@@ -112,7 +115,7 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
                   ${suggestion.description}
                 </div>
                 <div class="search-item-preview">
-                  <img src="${suggestion.preview ? offsetURL(suggestion.preview) : ''}"</img>
+                  ${img}
                 </div>
               </div>
             `;
