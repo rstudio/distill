@@ -105,7 +105,7 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
         },
         templates: {
           suggestion: function(suggestion) {
-            var img = Object.keys(suggestion.preview).length > 0
+            var img = suggestion.preview && Object.keys(suggestion.preview).length > 0
               ? `<img src="${offsetURL(suggestion.preview)}"</img>`
               : '';
             var html = `
