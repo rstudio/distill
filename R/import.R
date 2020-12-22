@@ -362,7 +362,7 @@ resolve_github_url <- function(url, article_tmp) {
     repo <- matches[[1]][[3]]
 
     # determine the default branch
-    branches <- jsonlite::fromJSON("https://api.github.com/repos/rstudio/distill")
+    branches <- jsonlite::fromJSON(sprintf("https://api.github.com/repos/%s/%s", owner, repo))
     branch <- branches$default_branch
 
     # download the file list as json
