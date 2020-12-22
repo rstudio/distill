@@ -567,7 +567,7 @@ code span.wa { color: #008000; font-weight: bold; } /* Warning */
           },
           templates: {
             suggestion: function(suggestion) {
-              var img = Object.keys(suggestion.preview).length > 0
+              var img = suggestion.preview && Object.keys(suggestion.preview).length > 0
                 ? `<img src="${offsetURL(suggestion.preview)}"</img>`
                 : '';
               var html = `
