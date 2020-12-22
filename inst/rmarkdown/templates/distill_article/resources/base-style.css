@@ -125,7 +125,13 @@ d-appendix d-footnote-list a.footnote-backlink {
   font-family: var(--navbar-font), var(--heading-default);
 }
 
-.distill-site-header a:hover {
+.nav-dropdown .nav-dropbtn {
+	color: var(--text-color, rgba(255, 255, 255, 0.8));
+	font-size: var(--text-size, 15px);
+}
+
+.distill-site-header a:hover,
+.nav-dropdown:hover .nav-dropbtn {
 	color: var(--hover-color, white);
 }
 
