@@ -101,7 +101,7 @@ The `include` and `exclude` fields enable you to override the default behavior v
 
 2.  Files beginning with `"_"`
 
-3.  Files known to contain R source code (e.g. `".R"`, `".s"`, `".Rmd"`), R data (e.g. `".RData"`, `".rds"`), or configuration data (e.g. `"rsconnect"` ,`"packrat"`)).
+3.  Files known to contain R source code (e.g. `".R"`, `".s"`, `".Rmd"`), R data (e.g. `".RData"`, `".rds"`), or configuration data (e.g. `"rsconnect"` ,`"packrat"`, `"renv"`)).
 
 The `include` and `exclude` fields of **\_site.yml** can be used to override this default behavior (wildcards can be used to specify groups of files to be included or excluded). Note that the `include` and `exclude` fields target only top-level files and directories (i.e. a directory is either included or not, you can't exclude a subset of files within a directory).
 
