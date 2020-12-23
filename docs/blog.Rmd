@@ -496,7 +496,7 @@ When a blog post is published, resource files located alongside the post in its 
 
 2.  Files beginning with `"_"`
 
-3.  Files known to contain R source code (e.g. `".R"`, `".s"`, `".Rmd"`), R data (e.g. `".RData"`, `".rds"`), or configuration data (e.g. `"rsconnect"` ,`"packrat"`)).
+3.  Files known to contain R source code (e.g. `".R"`, `".s"`, `".Rmd"`), R data (e.g. `".RData"`, `".rds"`), or configuration data (e.g. `"rsconnect"` ,`"packrat"`, `"renv"`)).
 
 You can override this behavior using a `resources` metadata entry for your post, which can specify explicit files to `include` or `exclude`. For example (some fields excluded for brevity):
 
