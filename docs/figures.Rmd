@@ -132,7 +132,7 @@ knitr::include_graphics("images/figure.png")
 If you are including a figure from an external source, it's good practice to delineate this by applying the `external` class and adding a caption indicating where it is from. For example:
 
 ```` {.clike}
-```{r fig.cap="Figure from https://example.com" out.extra="class=external"}`r ''`
+```{r fig.cap="Figure from https://example.com", out.extra="class=external"}`r ''`
 knitr::include_graphics("images/heatmap.png")
 ```
 ````
