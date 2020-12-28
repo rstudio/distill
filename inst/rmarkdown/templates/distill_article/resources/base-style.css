@@ -48,16 +48,13 @@ d-article h6 {
 }
 
 /*-- BODY --*/
-/* only text inside of <p> tags */
-d-article > p {
+d-article > p,  /* only text inside of <p> tags */
+d-article > ul, /* lists */
+d-article > ol {
   color: var(--body-color, rgba(0, 0, 0, 0.8));
   font-size: var(--body-size, 1.06rem);
 }
 
-d-article > ul,
-d-article > ol {
-  font-size: var(--body-size, 1.06rem);
-}
 
 /*-- CODE --*/
 d-article div.sourceCode code,
