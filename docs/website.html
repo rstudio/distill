@@ -2240,7 +2240,7 @@ Publishing
 <ol type="1">
 <li><p>Files beginning with <code>"."</code> (hidden files).</p></li>
 <li><p>Files beginning with <code>"_"</code></p></li>
-<li><p>Files known to contain R source code (e.g. <code>".R"</code>, <code>".s"</code>, <code>".Rmd"</code>), R data (e.g. <code>".RData"</code>, <code>".rds"</code>), or configuration data (e.g. <code>"rsconnect"</code> ,<code>"packrat"</code>)).</p></li>
+<li><p>Files known to contain R source code (e.g. <code>".R"</code>, <code>".s"</code>, <code>".Rmd"</code>), R data (e.g. <code>".RData"</code>, <code>".rds"</code>), or configuration data (e.g. <code>"rsconnect"</code> ,<code>"packrat"</code>, <code>"renv"</code>)).</p></li>
 </ol>
 <p>The <code>include</code> and <code>exclude</code> fields of <strong>_site.yml</strong> can be used to override this default behavior (wildcards can be used to specify groups of files to be included or excluded). Note that the <code>include</code> and <code>exclude</code> fields target only top-level files and directories (i.e. a directory is either included or not, you can’t exclude a subset of files within a directory).</p>
 <p>Note also that <code>include</code> and <code>exclude</code> are <em>not</em> used to determine which Rmd files are rendered (all of them in the root directory save for those named with the <code>_</code> prefix will be rendered).</p>
