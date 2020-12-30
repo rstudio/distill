@@ -446,6 +446,12 @@ code span.wa { color: #008000; font-weight: bold; } /* Warning */
     top: 0;
   }
 
+  /* adjust viewport for navbar height */
+  /* helps vertically center bootstrap (non-distill) content */
+  .min-vh-100 {
+    min-height: calc(100vh - 100px) !important;
+  }
+
   </style>
 
   <script src="site_libs/jquery-1.11.3/jquery.min.js"></script>
@@ -2452,6 +2458,7 @@ ggplot(diamonds, aes(carat, price)) + geom_smooth() +
 <span id="cb20-9"><a href="#cb20-9" aria-hidden="true" tabindex="-1"></a><span class="at">    </span><span class="fu">disqus</span><span class="kw">:</span><span class="at"> reproducible-finance-with-r</span></span>
 <span id="cb20-10"><a href="#cb20-10" aria-hidden="true" tabindex="-1"></a><span class="at">    </span><span class="fu">share</span><span class="kw">:</span><span class="at"> </span><span class="kw">[</span><span class="at">twitter</span><span class="kw">,</span><span class="at"> linkedin</span><span class="kw">]</span></span>
 <span id="cb20-11"><a href="#cb20-11" aria-hidden="true" tabindex="-1"></a><span class="at">    </span><span class="fu">citations</span><span class="kw">:</span><span class="at"> </span><span class="ch">false</span></span></code></pre></div>
+<p>You can also disable citations for an individual post by adding <code>citation: false</code> to the post’s YAML metadata.</p>
 <h3 id="subscriptions">Subscriptions</h3>
 <p>You can add HTML that enables readers to subscribe to your blog by including the <code>collections:posts:subscribe</code> option within <code>_site.yml</code>. The <code>subscribe</code> option in turn points to an HTML file that provides the ability to subscribe to your blog. For example:</p>
 <p><strong>_site.yml</strong></p>
