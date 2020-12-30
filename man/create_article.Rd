@@ -6,7 +6,7 @@
 \usage{
 create_article(
   file,
-  template = "distll_article",
+  template = "distill_article",
   package = "distill",
   create_dir = FALSE,
   edit = TRUE
