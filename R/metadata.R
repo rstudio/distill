@@ -586,6 +586,7 @@ citation_reference <- function(ref) {
 is_citeable <- function(metadata) {
   !is.null(metadata$date) &&
     !is.null(metadata$author) &&
+    !identical(metadata[["citation"]], FALSE) &&
     (!is.null(metadata$citation_url) || !is.null(metadata$journal$title))
 }
 

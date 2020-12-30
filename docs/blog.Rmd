@@ -404,6 +404,8 @@ collections:
     citations: false
 ```
 
+You can also disable citations for an individual post by adding `citation: false` to the post's YAML metadata.
+
 ### Subscriptions
 
 You can add HTML that enables readers to subscribe to your blog by including the `collections:posts:subscribe` option within `_site.yml`. The `subscribe` option in turn points to an HTML file that provides the ability to subscribe to your blog. For example:
