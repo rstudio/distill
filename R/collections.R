@@ -582,7 +582,7 @@ categories_html <- function(site_dir, collection, offset, article) {
     input_files <- list.files(site_dir, pattern = "^[^_].*\\.[Rr]?md$")
     for (file in input_files) {
       file_path = file.path(site_dir, file)
-      listings <- front_matter_listings (file_path, encoding, TRUE)
+      listings <- front_matter_listings (file_path, "UTF-8", TRUE)
       if (collection$name %in% listings) {
         listings_page_html <- file_with_ext(file, "html")
         break
