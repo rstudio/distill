@@ -16,6 +16,11 @@
 #' @param smart Produce typographically correct output, converting straight
 #'   quotes to curly quotes, `---` to em-dashes, `--` to en-dashes, and
 #'   `...` to ellipses.
+#' @param code_folding Include code blocks hidden, and allow users to
+#'   optionally display the code by clicking a "Show code" button just above
+#'   the output. Pass a character vector to customize the text of the
+#'   "Show code" button. You can also specify `code_folding` as chunk option
+#'   for per-chunk folding behavior.
 #' @param highlight Syntax highlighting style. Supported styles include
 #'   "default", "rstudio", "tango", "pygments", "kate", "monochrome", "espresso",
 #'   "zenburn", "breezedark", and  "haddock". Pass NULL to prevent syntax
@@ -38,6 +43,7 @@ distill_article <- function(toc = FALSE,
                           fig_caption = TRUE,
                           dev = "png",
                           smart = TRUE,
+                          code_folding = FALSE,
                           self_contained = TRUE,
                           highlight = "default",
                           highlight_downlit = TRUE,
@@ -87,14 +93,21 @@ distill_article <- function(toc = FALSE,
                                       fig_retina = fig_retina,
                                       keep_md = keep_md,
                                       dev = dev)
-  knitr_options$opts_chunk$echo <- FALSE
+  knitr_options$opts_chunk$echo <- identical(code_folding, FALSE)
   knitr_options$opts_chunk$warning <- FALSE
   knitr_options$opts_chunk$message <- FALSE
   knitr_options$opts_chunk$comment <- NA
   knitr_options$opts_chunk$R.options <- list(width = 70)
+  knitr_options$opts_chunk$code_folding <- code_folding
   knitr_options$opts_knit$bookdown.internal.label <- TRUE
   knitr_options$opts_hooks <- list()
   knitr_options$opts_hooks$preview <- knitr_preview_hook
+  knitr_options$opts_hooks$code_folding <- function(options) {
+    if (!identical(code_folding, FALSE)) {
+      options[["echo"]] <- TRUE
+    }
+    options
+  }
   knitr_options$knit_hooks <- knit_hooks(downlit = highlight_downlit)
 
   # shared variables
@@ -346,29 +359,40 @@ knit_hooks <- function(downlit) {
     }
   )
 
-  # apply source and document hook if downlit is enabled
-  if (downlit) {
+  # source hook to do downlit processing and code_folding
+  hooks$source <- function(x, options) {
 
-    # source hook to do downlit processing
-    hooks$source <- function(x, options) {
-      if (options$engine == "R") {
-        code <- highlight(paste0(x, "\n", collapse = ""),
-                          classes_pandoc(),
-                          pre_class = NULL)
-        if (is.na(code)) {
-          default_source_hook(x, options)
-        } else {
-          x <- paste0("<div class=\"sourceCode\"><pre><code>",
-                      code,
-                      "</code></pre></div>")
-          x <- paste0(x, "\n")
-          x
-        }
+    code_folding <- not_null(options[["code_folding"]], FALSE)
+
+    if (downlit && options$engine == "R") {
+      code <- highlight(paste0(x, "\n", collapse = ""),
+                        classes_pandoc(),
+                        pre_class = NULL)
+      if (is.na(code)) {
+        x <- default_source_hook(x, options)
       } else {
-        default_source_hook(x, options)
+        x <- paste0("<div class=\"sourceCode\"><pre><code>",
+                    code,
+                    "</code></pre></div>")
+        x <- paste0(x, "\n")
       }
+    } else {
+      x <- default_source_hook(x, options)
     }
 
+    if (!identical(code_folding, FALSE)) {
+      if (identical(code_folding, TRUE)) {
+        code_folding <- "Show code"
+      } else {
+        code_folding <- as.character(code_folding)
+      }
+      x <- paste0("<details>\n<summary>", code_folding ,"</summary>\n", x, "\n</details>")
+    }
+
+    x
+  }
+
+  if (downlit) {
     # document hook to inject a fake empty code block a the end of the
     # document (to force pandoc to including highlighting cssm which it
     # might not do if all chunks are handled by downlit)

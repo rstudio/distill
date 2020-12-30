@@ -14,6 +14,7 @@ distill_article(
   fig_caption = TRUE,
   dev = "png",
   smart = TRUE,
+  code_folding = FALSE,
   self_contained = TRUE,
   highlight = "default",
   highlight_downlit = TRUE,
@@ -55,6 +56,12 @@ outputting HTML directly into the markdown document).}
 \item{smart}{Produce typographically correct output, converting straight
 quotes to curly quotes, \verb{---} to em-dashes, \verb{--} to en-dashes, and
 \code{...} to ellipses.}
+
+\item{code_folding}{Include code blocks hidden, and allow users to
+optionally display the code by clicking a "Show code" button just above
+the output. Pass a character vector to customize the text of the
+"Show code" button. You can also specify \code{code_folding} as chunk option
+for per-chunk folding behavior.}
 
 \item{self_contained}{Produce a standalone HTML file with no external
 dependencies, using data: URIs to incorporate the contents of linked

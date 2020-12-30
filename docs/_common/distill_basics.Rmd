@@ -245,6 +245,33 @@ knitr::opts_chunk$set(
 ```
 ````
 
+## Code folding
+
+You can use the `code_folding` option to hide code by default but allow readers to optionally show it. For example:
+
+``` {.yaml}
+---
+title: "Distill for R Markdown"
+description: | 
+  Scientific and technical writing, native to the web
+output:
+  distill::distill_article:
+    code_folding: true
+---
+```
+
+When code folding is enabled, readers will see a "Show code" button like this for each code chunk:
+
+![](images/code-folding.png){.screenshot}
+
+You can also specify `code_folding` on a per-chunk basis. For example:
+
+    ```{r, code_folding=TRUE}`r ''`
+    1 + 1
+    ```
+
+Provide a string rather than `TRUE` to customize the caption (the default is "Show code").
+
 ## Syntax highlighting
 
 Syntax highlighting for R code is done using the [downlit](https://downlit.r-lib.org) package, which provides automatic linking of R functions to their online documentation. By default, highlighting is done using colors [optimized for accessibility and color contrast](https://www.a11yproject.com/).
