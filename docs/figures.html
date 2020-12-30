@@ -906,6 +906,11 @@ code span.wa { color: #008000; font-weight: bold; } /* Warning */
     text-decoration: underline;
   }
 
+  d-article details {
+    grid-column: text;
+    margin-bottom: 0.8em;
+  }
+
   @media(min-width: 768px) {
 
   d-article pre,
@@ -1727,7 +1732,7 @@ code span.wa { color: #008000; font-weight: bold; } /* Warning */
       var layout = $(this).attr('data-layout');
 
       // apply layout to markdown level block elements
-      var elements = $(this).children().not('div.sourceCode, pre, script');
+      var elements = $(this).children().not('details, div.sourceCode, pre, script');
       elements.each(function(i, el) {
         var layout_div = $('<div class="' + layout + '"></div>');
         if (layout_div.hasClass('shaded')) {
@@ -2152,6 +2157,10 @@ Publishing
 </div>
 <p>For example, a plot with the default <code>l-body</code> layout would look like this:</p>
 <div class="layout-chunk" data-layout="l-body">
+<div class="sourceCode">
+<pre><code><span class='fu'><a href='https://rdrr.io/pkg/knitr/man/include_graphics.html'>include_graphics</a></span><span class='op'>(</span><span class='st'>"images/l-body-figure.png"</span><span class='op'>)</span>
+</code></pre>
+</div>
 <p><img src="images/l-body-figure.png" width="576" /></p>
 </div>
 <h2 id="wider-layouts">Wider layouts</h2>
@@ -2173,6 +2182,10 @@ ggplot(diamonds, aes(carat, price)) + geom_smooth() +
   facet_grid(~ cut)
 ```</code></pre>
 <div class="layout-chunk" data-layout="l-body-outset">
+<div class="sourceCode">
+<pre><code><span class='fu'><a href='https://rdrr.io/pkg/knitr/man/include_graphics.html'>include_graphics</a></span><span class='op'>(</span><span class='st'>"images/l-middle-figure.png"</span><span class='op'>)</span>
+</code></pre>
+</div>
 <p><img src="images/l-middle-figure.png" width="576" /></p>
 </div>
 <p>Note that when specifying an alternate <code>layout</code> you should also specify an appropriate <code>fig.width</code> and <code>fig.height</code> for that layout.</p>
@@ -2191,6 +2204,13 @@ leaflet() %&gt;%
   addMarkers(lng=174.768, lat=-36.852, popup=&quot;The birthplace of R&quot;)
 ```</code></pre>
 <div class="layout-chunk" data-layout="l-screen-inset">
+<div class="sourceCode">
+<pre><code><span class='kw'><a href='https://rdrr.io/r/base/library.html'>library</a></span><span class='op'>(</span><span class='va'><a href='http://rstudio.github.io/leaflet/'>leaflet</a></span><span class='op'>)</span>
+<span class='fu'><a href='https://rdrr.io/pkg/leaflet/man/leaflet.html'>leaflet</a></span><span class='op'>(</span><span class='op'>)</span> <span class='op'>%&gt;%</span>
+  <span class='fu'><a href='https://rdrr.io/pkg/leaflet/man/map-layers.html'>addTiles</a></span><span class='op'>(</span><span class='op'>)</span> <span class='op'>%&gt;%</span>  <span class='co'># Add default OpenStreetMap map tiles</span>
+  <span class='fu'><a href='https://rdrr.io/pkg/leaflet/man/map-layers.html'>addMarkers</a></span><span class='op'>(</span>lng<span class='op'>=</span><span class='fl'>174.768</span>, lat<span class='op'>=</span><span class='op'>-</span><span class='fl'>36.852</span>, popup<span class='op'>=</span><span class='st'>"The birthplace of R"</span><span class='op'>)</span>
+</code></pre>
+</div>
 <div id="htmlwidget-01b24343fdb32f1f545a" style="width:624px;height:384px;" class="leaflet html-widget"></div>
 <script type="application/json" data-for="htmlwidget-01b24343fdb32f1f545a">{"x":{"options":{"crs":{"crsClass":"L.CRS.EPSG3857","code":null,"proj4def":null,"projectedBounds":null,"options":{}}},"calls":[{"method":"addTiles","args":["//{s}.tile.openstreetmap.org/{z}/{x}/{y}.png",null,null,{"minZoom":0,"maxZoom":18,"tileSize":256,"subdomains":"abc","errorTileUrl":"","tms":false,"noWrap":false,"zoomOffset":0,"zoomReverse":false,"opacity":1,"zIndex":1,"detectRetina":false,"attribution":"&copy; <a href=\"http://openstreetmap.org\">OpenStreetMap<\/a> contributors, <a href=\"http://creativecommons.org/licenses/by-sa/2.0/\">CC-BY-SA<\/a>"}]},{"method":"addMarkers","args":[-36.852,174.768,null,null,null,{"interactive":true,"draggable":false,"keyboard":true,"title":"","alt":"","zIndexOffset":0,"opacity":1,"riseOnHover":false,"riseOffset":250},"The birthplace of R",null,null,null,null,{"interactive":false,"permanent":false,"direction":"auto","opacity":1,"offset":[0,0],"textsize":"10px","textOnly":false,"className":"","sticky":true},null]}],"limits":{"lat":[-36.852,-36.852],"lng":[174.768,174.768]}},"evals":[],"jsHooks":[]}</script>
 </div>
@@ -2202,6 +2222,13 @@ leaflet() %&gt;%
   addMarkers(lng=174.768, lat=-36.852, popup=&quot;The birthplace of R&quot;)
 ```</code></pre>
 <div class="layout-chunk" data-layout="l-screen-inset shaded">
+<div class="sourceCode">
+<pre><code><span class='kw'><a href='https://rdrr.io/r/base/library.html'>library</a></span><span class='op'>(</span><span class='va'><a href='http://rstudio.github.io/leaflet/'>leaflet</a></span><span class='op'>)</span>
+<span class='fu'><a href='https://rdrr.io/pkg/leaflet/man/leaflet.html'>leaflet</a></span><span class='op'>(</span><span class='op'>)</span> <span class='op'>%&gt;%</span>
+  <span class='fu'><a href='https://rdrr.io/pkg/leaflet/man/map-layers.html'>addTiles</a></span><span class='op'>(</span><span class='op'>)</span> <span class='op'>%&gt;%</span>  <span class='co'># Add default OpenStreetMap map tiles</span>
+  <span class='fu'><a href='https://rdrr.io/pkg/leaflet/man/map-layers.html'>addMarkers</a></span><span class='op'>(</span>lng<span class='op'>=</span><span class='fl'>174.768</span>, lat<span class='op'>=</span><span class='op'>-</span><span class='fl'>36.852</span>, popup<span class='op'>=</span><span class='st'>"The birthplace of R"</span><span class='op'>)</span>
+</code></pre>
+</div>
 <div id="htmlwidget-a6780fca73c1c55c2c9d" style="width:624px;height:384px;" class="leaflet html-widget"></div>
 <script type="application/json" data-for="htmlwidget-a6780fca73c1c55c2c9d">{"x":{"options":{"crs":{"crsClass":"L.CRS.EPSG3857","code":null,"proj4def":null,"projectedBounds":null,"options":{}}},"calls":[{"method":"addTiles","args":["//{s}.tile.openstreetmap.org/{z}/{x}/{y}.png",null,null,{"minZoom":0,"maxZoom":18,"tileSize":256,"subdomains":"abc","errorTileUrl":"","tms":false,"noWrap":false,"zoomOffset":0,"zoomReverse":false,"opacity":1,"zIndex":1,"detectRetina":false,"attribution":"&copy; <a href=\"http://openstreetmap.org\">OpenStreetMap<\/a> contributors, <a href=\"http://creativecommons.org/licenses/by-sa/2.0/\">CC-BY-SA<\/a>"}]},{"method":"addMarkers","args":[-36.852,174.768,null,null,null,{"interactive":true,"draggable":false,"keyboard":true,"title":"","alt":"","zIndexOffset":0,"opacity":1,"riseOnHover":false,"riseOffset":250},"The birthplace of R",null,null,null,null,{"interactive":false,"permanent":false,"direction":"auto","opacity":1,"offset":[0,0],"textsize":"10px","textOnly":false,"className":"","sticky":true},null]}],"limits":{"lat":[-36.852,-36.852],"lng":[174.768,174.768]}},"evals":[],"jsHooks":[]}</script>
 </div>
@@ -2233,6 +2260,10 @@ ggplot(diamonds, aes(carat, price)) + geom_smooth() +
 <p>The label of the figure environment is generated from the label of the code chunk, e.g., if the chunk label is <code>diamonds</code>, the figure label will be <code>fig:diamonds</code> (the prefix <code>fig:</code> is added before <code>diamonds</code>.</p>
 <p>To reference a figure, use the syntax <code>\@ref(label)</code>, where label is the figure label. So for the example above we’d use <code>\@ref(fig:diamonds)</code>, which would result in a cross-reference like this:</p>
 <div class="layout-chunk" data-layout="l-body">
+<div class="sourceCode">
+<pre><code><span class='fu'><a href='https://rdrr.io/pkg/knitr/man/include_graphics.html'>include_graphics</a></span><span class='op'>(</span><span class='st'>"images/figure-cross-references.png"</span><span class='op'>)</span>
+</code></pre>
+</div>
 <p><img src="images/figure-cross-references.png" width="743" class=screenshot /></p>
 </div>
 <p>For additional documentation on figure cross-references see the <a href="https://bookdown.org/yihui/bookdown/figures.html">bookdown documentation on figures</a> (Distill for R Markdown uses the bookdown implementation of cross-references under the hood).</p>
