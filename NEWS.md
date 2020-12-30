@@ -5,7 +5,7 @@
 -   Add optional cookie consent overlay for opt-in to Google Analytics and Disqus.
 -   Support for including pages that use alternate R Markdown formats within Distill websites.
 -   Automatically register collections referenced in `listings` YAML metadata.
--   Render markdown within `description` field of RSS feeds.
+-   Render markdown within `description` field for listing pages and RSS feeds.
 -   Enhance `create_article()` function to create articles from alternate formats.
 -   Fix issue w/ broken images in search results for pages with no preview image.
 -   Fix issue w/ attempting to add non-site Rmds (e.g. README.Rmd) to search index.
