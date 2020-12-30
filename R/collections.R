@@ -317,11 +317,14 @@ move_feed_categories_xml <- function(main_feed, site_config) {
   }
 }
 
-front_matter_listings <- function(input_file, encoding) {
+front_matter_listings <- function(input_file, encoding, full_only = FALSE) {
   metadata <- yaml_front_matter(input_file, encoding)
   if (!is.null(metadata$listing)) {
     if (is.list(metadata$listing))
-      names(metadata$listing)
+      if (!full_only)
+        names(metadata$listing)
+      else
+        c()
     else
       metadata$listing
   } else {
@@ -538,7 +541,7 @@ render_collection_article <- function(site_dir, site_config, collection, article
 
   # categories
   index_content <- fill_placeholder(index_content, "categories", placeholder_html(
-    "categories", categories_html(collection, offset, article)
+    "categories", categories_html(site_dir, collection, offset, article)
   ))
 
   # article footer
@@ -570,15 +573,34 @@ render_collection_article <- function(site_dir, site_config, collection, article
   index_html
 }
 
-categories_html <- function(collection, offset, article) {
+categories_html <- function(site_dir, collection, offset, article) {
 
-  if (identical(collection$name, "posts") && !is.null(article$metadata$categories)) {
-    div(class = "dt-tags",
-      lapply(article$metadata$categories, function(category) {
-        href <- paste0(offset, "/index.html", category_hash(category))
-        a(href = href, class = "dt-tag", category)
-      })
-    )
+  if (!is.null(article$metadata$categories)) {
+
+    # see if there is a listings page we can point categories at
+    listings_page_html <- NULL
+    input_files <- list.files(site_dir, pattern = "^[^_].*\\.[Rr]?md$")
+    for (file in input_files) {
+      file_path = file.path(site_dir, file)
+      listings <- front_matter_listings (file_path, encoding, TRUE)
+      if (collection$name %in% listings) {
+        listings_page_html <- file_with_ext(file, "html")
+        break
+      }
+    }
+
+    # generate categories
+    if (!is.null(listings_page_html)) {
+      div(class = "dt-tags",
+        lapply(article$metadata$categories, function(category) {
+          href <- paste0(offset, "/", listings_page_html, category_hash(category))
+          a(href = href, class = "dt-tag", category)
+        })
+      )
+
+    } else {
+      NULL
+    }
   } else {
     NULL
   }
