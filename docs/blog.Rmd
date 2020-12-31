@@ -516,6 +516,42 @@ resources:
 ---
 ```
 
+## Collections
+
+As described above, adding a blog to a Distill website requires creating a "posts" collection (i.e. a `_posts` directory containing sub-directories, each of which includes an article) and adding a listing page for your posts (most often the site's home page).
+
+In addition to "posts", you can add other collections of articles to your site with their own index pages. The main benefits of including articles within a collection are:
+
+1.  The articles are never re-rendered unless you explicitly Knit them (which keeps your site building even if the R code within the article no longer runs due to e.g. changes in it's package dependencies).
+2.  You can generate an index page and RSS feed for the collection.
+
+### Creating a collection
+
+To create a new article collection, do the following:
+
+1.  Create a top level directory for the collection (e.g "\_analyses")
+
+2.  Add an entry for it to your `_site.yml` file. For example:
+
+    ``` {.yaml}
+    collections:
+      posts: 
+        categories: true
+      analyses:
+        categories: true
+    ```
+
+3.  Optionally, create an index page for your collection by adding the appropriate `listing` YAML front matter. For example, you could create a file named `analyses.Rmd` within the top-level directory of your website with the following YAML:
+
+    ``` {.yaml}
+    ---
+    title: "Analyses"
+    listing: analyses
+    ---
+    ```
+
+You may also want to add a link to your listing page in the [site navigation menu](website.html#site-navigation).
+
 ## Theming
 
 Distill blogs can use [themes](website.html#theming) and [CSS](website.html#custom-style) just like Distill sites. You can use the `create_theme()` function to add a theme CSS file in the current working directory.

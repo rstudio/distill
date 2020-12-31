@@ -2155,6 +2155,10 @@ Publishing
 <li><a href="#custom-html">Custom HTML</a></li>
 <li><a href="#supporting-files">Supporting files</a></li>
 </ul></li>
+<li><a href="#collections">Collections</a>
+<ul>
+<li><a href="#creating-a-collection">Creating a collection</a></li>
+</ul></li>
 <li><a href="#theming">Theming</a>
 <ul>
 <li><a href="#example-themes">Example themes</a></li>
@@ -2542,6 +2546,30 @@ ggplot(diamonds, aes(carat, price)) + geom_smooth() +
 <span id="cb25-9"><a href="#cb25-9" aria-hidden="true" tabindex="-1"></a><span class="at">  </span><span class="fu">exclude</span><span class="kw">:</span></span>
 <span id="cb25-10"><a href="#cb25-10" aria-hidden="true" tabindex="-1"></a><span class="at">    </span><span class="ot">*.csv</span><span class="at">    </span></span>
 <span id="cb25-11"><a href="#cb25-11" aria-hidden="true" tabindex="-1"></a><span class="pp">---</span></span></code></pre></div>
+<h2 id="collections">Collections</h2>
+<p>As described above, adding a blog to a Distill website requires creating a “posts” collection (i.e. a <code>_posts</code> directory containing sub-directories, each of which includes an article) and adding a listing page for your posts (most often the site’s home page).</p>
+<p>In addition to “posts”, you can add other collections of articles to your site with their own index pages. The main benefits of including articles within a collection are:</p>
+<ol type="1">
+<li>The articles are never re-rendered unless you explicitly Knit them (which keeps your site building even if the R code within the article no longer runs due to e.g. changes in it’s package dependencies).</li>
+<li>You can generate an index page and RSS feed for the collection.</li>
+</ol>
+<h3 id="creating-a-collection">Creating a collection</h3>
+<p>To create a new article collection, do the following:</p>
+<ol type="1">
+<li><p>Create a top level directory for the collection (e.g “_analyses”)</p></li>
+<li><p>Add an entry for it to your <code>_site.yml</code> file. For example:</p>
+<div class="sourceCode" id="cb26"><pre class="sourceCode yaml"><code class="sourceCode yaml"><span id="cb26-1"><a href="#cb26-1" aria-hidden="true" tabindex="-1"></a><span class="fu">collections</span><span class="kw">:</span></span>
+<span id="cb26-2"><a href="#cb26-2" aria-hidden="true" tabindex="-1"></a><span class="at">  </span><span class="fu">posts</span><span class="kw">:</span><span class="at"> </span></span>
+<span id="cb26-3"><a href="#cb26-3" aria-hidden="true" tabindex="-1"></a><span class="at">    </span><span class="fu">categories</span><span class="kw">:</span><span class="at"> </span><span class="ch">true</span></span>
+<span id="cb26-4"><a href="#cb26-4" aria-hidden="true" tabindex="-1"></a><span class="at">  </span><span class="fu">analyses</span><span class="kw">:</span></span>
+<span id="cb26-5"><a href="#cb26-5" aria-hidden="true" tabindex="-1"></a><span class="at">    </span><span class="fu">categories</span><span class="kw">:</span><span class="at"> </span><span class="ch">true</span></span></code></pre></div></li>
+<li><p>Optionally, create an index page for your collection by adding the appropriate <code>listing</code> YAML front matter. For example, you could create a file named <code>analyses.Rmd</code> within the top-level directory of your website with the following YAML:</p>
+<div class="sourceCode" id="cb27"><pre class="sourceCode yaml"><code class="sourceCode yaml"><span id="cb27-1"><a href="#cb27-1" aria-hidden="true" tabindex="-1"></a><span class="pp">---</span></span>
+<span id="cb27-2"><a href="#cb27-2" aria-hidden="true" tabindex="-1"></a><span class="fu">title</span><span class="kw">:</span><span class="at"> </span><span class="st">&quot;Analyses&quot;</span></span>
+<span id="cb27-3"><a href="#cb27-3" aria-hidden="true" tabindex="-1"></a><span class="fu">listing</span><span class="kw">:</span><span class="at"> analyses</span></span>
+<span id="cb27-4"><a href="#cb27-4" aria-hidden="true" tabindex="-1"></a><span class="pp">---</span></span></code></pre></div></li>
+</ol>
+<p>You may also want to add a link to your listing page in the <a href="website.html#site-navigation">site navigation menu</a>.</p>
 <h2 id="theming">Theming</h2>
 <p>Distill blogs can use <a href="website.html#theming">themes</a> and <a href="website.html#custom-style">CSS</a> just like Distill sites. You can use the <code>create_theme()</code> function to add a theme CSS file in the current working directory.</p>
 <p>For example:</p>
@@ -2552,11 +2580,11 @@ ggplot(diamonds, aes(carat, price)) + geom_smooth() +
 </div>
 </div>
 <p>Read more about customizing a Distill <a href="website.html#create-theme">theme</a>. To apply a custom theme site-wide, add a <code>theme</code> key to the top-level of your <code>_site.yml</code> configuration file:</p>
-<div class="sourceCode" id="cb26"><pre class="sourceCode yaml"><code class="sourceCode yaml"><span id="cb26-1"><a href="#cb26-1" aria-hidden="true" tabindex="-1"></a><span class="fu">name</span><span class="kw">:</span><span class="at"> </span><span class="st">&quot;distill&quot;</span></span>
-<span id="cb26-2"><a href="#cb26-2" aria-hidden="true" tabindex="-1"></a><span class="fu">title</span><span class="kw">:</span><span class="at"> </span><span class="st">&quot;Distill for R Markdown&quot;</span></span>
-<span id="cb26-3"><a href="#cb26-3" aria-hidden="true" tabindex="-1"></a><span class="fu">theme</span><span class="kw">:</span><span class="at"> theme.css </span></span>
-<span id="cb26-4"><a href="#cb26-4" aria-hidden="true" tabindex="-1"></a><span class="fu">navbar</span><span class="kw">:</span></span>
-<span id="cb26-5"><a href="#cb26-5" aria-hidden="true" tabindex="-1"></a><span class="co"># (navbar definition here)</span></span></code></pre></div>
+<div class="sourceCode" id="cb28"><pre class="sourceCode yaml"><code class="sourceCode yaml"><span id="cb28-1"><a href="#cb28-1" aria-hidden="true" tabindex="-1"></a><span class="fu">name</span><span class="kw">:</span><span class="at"> </span><span class="st">&quot;distill&quot;</span></span>
+<span id="cb28-2"><a href="#cb28-2" aria-hidden="true" tabindex="-1"></a><span class="fu">title</span><span class="kw">:</span><span class="at"> </span><span class="st">&quot;Distill for R Markdown&quot;</span></span>
+<span id="cb28-3"><a href="#cb28-3" aria-hidden="true" tabindex="-1"></a><span class="fu">theme</span><span class="kw">:</span><span class="at"> theme.css </span></span>
+<span id="cb28-4"><a href="#cb28-4" aria-hidden="true" tabindex="-1"></a><span class="fu">navbar</span><span class="kw">:</span></span>
+<span id="cb28-5"><a href="#cb28-5" aria-hidden="true" tabindex="-1"></a><span class="co"># (navbar definition here)</span></span></code></pre></div>
 <p>Blog posts (along with <a href="#listing-pages">listing</a> and <a href="#custom-listings">custom listing pages</a>) will follow the theme. Below are some examples of different themes applied to our demo blog.</p>
 <div class="layout-chunk" data-layout="l-body">
 
@@ -2610,7 +2638,7 @@ ggplot(diamonds, aes(carat, price)) + geom_smooth() +
 <li><p>The <a href="https://pkgs.rstudio.com/distill">distill reference site</a> includes several <a href="https://pkgs.rstudio.com/distill/articles/examples.html">example sites and blogs</a>.</p></li>
 <li><p>An example which reproduces several posts from the Reproducible Finance with R series on the R Views blog can be found here: <a href="https://beta.rstudioconnect.com/content/11424/" class="uri">https://beta.rstudioconnect.com/content/11424/</a></p>
 <p>The source code for the example can be found here: <a href="https://github.com/jjallaire/reproducible-finance-with-r" class="uri">https://github.com/jjallaire/reproducible-finance-with-r</a></p>
-<div class="sourceCode" id="cb27"><pre class="sourceCode r distill-force-highlighting-css"><code class="sourceCode r"></code></pre></div></li>
+<div class="sourceCode" id="cb29"><pre class="sourceCode r distill-force-highlighting-css"><code class="sourceCode r"></code></pre></div></li>
 </ul>
 <!--radix_placeholder_article_footer-->
 <!--/radix_placeholder_article_footer-->
