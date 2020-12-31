@@ -586,7 +586,6 @@ code span.wa { color: #008000; font-weight: bold; } /* Warning */
             var results = fuse.search(query, searchOptions);
             callback(results
               .map(function(result) { return result.item; })
-              .filter(function(item) { return !!item.description; })
             );
           },
           templates: {
@@ -598,7 +597,7 @@ code span.wa { color: #008000; font-weight: bold; } /* Warning */
                 <div class="search-item">
                   <h3>${suggestion.title}</h3>
                   <div class="search-item-description">
-                    ${suggestion.description}
+                    ${suggestion.description || ''}
                   </div>
                   <div class="search-item-preview">
                     ${img}
@@ -703,6 +702,7 @@ code span.wa { color: #008000; font-weight: bold; } /* Warning */
   }
 
   .algolia-autocomplete .aa-dropdown-menu .aa-suggestion .search-item h3 {
+    font-size: 1rem;
     margin-block-start: 0;
     margin-block-end: 5px;
   }

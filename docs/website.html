@@ -562,7 +562,6 @@ code span.wa { color: #008000; font-weight: bold; } /* Warning */
             var results = fuse.search(query, searchOptions);
             callback(results
               .map(function(result) { return result.item; })
-              .filter(function(item) { return !!item.description; })
             );
           },
           templates: {
@@ -574,7 +573,7 @@ code span.wa { color: #008000; font-weight: bold; } /* Warning */
                 <div class="search-item">
                   <h3>${suggestion.title}</h3>
                   <div class="search-item-description">
-                    ${suggestion.description}
+                    ${suggestion.description || ''}
                   </div>
                   <div class="search-item-preview">
                     ${img}
@@ -679,6 +678,7 @@ code span.wa { color: #008000; font-weight: bold; } /* Warning */
   }
 
   .algolia-autocomplete .aa-dropdown-menu .aa-suggestion .search-item h3 {
+    font-size: 1rem;
     margin-block-start: 0;
     margin-block-end: 5px;
   }
@@ -2330,7 +2330,8 @@ Software licensed under the [Apache License, v2.0]
 <div class="sourceCode" id="cb7"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a>remotes<span class="sc">::</span><span class="fu">install_github</span>(<span class="st">&quot;rstudio/distill&quot;</span>)</span>
 <span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a>remotes<span class="sc">::</span><span class="fu">install_github</span>(<span class="st">&quot;rstudio/rmarkdown&quot;</span>)</span>
 <span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a>remotes<span class="sc">::</span><span class="fu">install_github</span>(<span class="st">&quot;seankross/postcards&quot;</span>)</span></code></pre></div>
-<p>Note that you can disable support for rendering alternate formats by including <code>alt_formats: false</code> within your <code>_site.yml</code> file.</p>
+<p>Alternate output formats are supported only for top-level site pages (not for articles within collections, e.g. blog posts).</p>
+<p>You can disable support for rendering alternate formats by including <code>alt_formats: false</code> within your <code>_site.yml</code> file.</p>
 <h2 id="theming">Theming</h2>
 <p>Distill ships with a default CSS framework that can be fully customized. To change the appearance of your Distill site or blog, you can use CSS to override the default values, provided you are comfortable writing CSS rules and selecting CSS elements. Alternatively, you may <a href="#create-theme">create</a> and <a href="#apply-theme">apply</a> a Distill theme, which allows you to customize common elements without needing to create a CSS file from scratch.</p>
 <h3 id="create-theme">Create theme</h3>

@@ -218,7 +218,9 @@ remotes::install_github("rstudio/rmarkdown")
 remotes::install_github("seankross/postcards")
 ```
 
-Note that you can disable support for rendering alternate formats by including `alt_formats: false` within your `_site.yml` file.
+Alternate output formats are supported only for top-level site pages (not for articles within collections, e.g. blog posts).
+
+You can disable support for rendering alternate formats by including `alt_formats: false` within your `_site.yml` file.
 
 ## Theming
 
@@ -903,21 +905,14 @@ Distill articles can include various types of [metadata](metadata.html) to make 
 
 Several metadata values which you might find useful to define in `_site.yml` are:
 
-+--------------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
 | Metadata           | Description                                                                                                                                                              |
-+====================+==========================================================================================================================================================================+
+|--------------------|--------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
 | `base_url`         | Base (root) URL for the location where the website will be deployed (used for providing [preview images](metadata.html#preview-images) for Open Graph and Twitter Card). |
-+--------------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
 | `repository_url`   | URL for the source code of your website. Used to create a navbar link back to the repository and to create a *Corrections* appendix.                                     |
-+--------------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
 | `creative_commons` | [Creative Commons](metadata.html#creative-commons) license terms for website content. Used to automatically generate a *Reuse* appendix.                                 |
-+--------------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
 | `license_url`      | Alternate licensing terms for website content if not using a Creative Commons license.                                                                                   |
-+--------------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
 | `favicon`          | Favicon (image file) to use for browser tabs/bookmarks                                                                                                                   |
-+--------------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
 | `twitter`          | Site handle for Twitter Card metadata                                                                                                                                    |
-+--------------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
 
 Here's a `_site.yml` file that uses all of these fields (save for `license_url` since the license is already specified via `creative_commons`):
 
