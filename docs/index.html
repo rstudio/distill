@@ -1091,6 +1091,17 @@ code span.wa { color: #008000; font-weight: bold; } /* Warning */
     margin-left: 1em; text-indent: -1em;
   }
 
+  /* Citation hover box */
+
+  .tippy-box[data-theme~=light-border] {
+    background-color: rgba(250, 250, 250, 0.95);
+  }
+
+  .tippy-content > p {
+    margin-bottom: 0;
+    padding: 2px;
+  }
+
 
   /* Tweak 1000px media break to show more text */
 
@@ -1872,6 +1883,20 @@ code span.wa { color: #008000; font-weight: bold; } /* Warning */
       $('.appendix-bottom').appendTo('d-appendix').children().unwrap();
       $('.appendix-bottom').remove();
 
+      // hoverable references
+      $('span.citation[data-cites]').each(function() {
+        var refHtml = $('#ref-' + $(this).attr('data-cites')).html();
+        window.tippy(this, {
+          allowHTML: true,
+          content: refHtml,
+          maxWidth: 500,
+          interactive: true,
+          interactiveBorder: 10,
+          theme: 'light-border',
+          placement: 'bottom-start'
+        });
+      });
+
       // clear polling timer
       clearInterval(tid);
 
@@ -2036,6 +2061,10 @@ code span.wa { color: #008000; font-weight: bold; } /* Warning */
   <script src="site_libs/pagedtable-1.1/js/pagedtable.js"></script>
   <link href="site_libs/panelset-0.2.4/panelset.css" rel="stylesheet" />
   <script src="site_libs/panelset-0.2.4/panelset.js"></script>
+  <script src="site_libs/popper-2.6.0/popper.min.js"></script>
+  <link href="site_libs/tippy-6.2.7/tippy.css" rel="stylesheet" />
+  <link href="site_libs/tippy-6.2.7/tippy-light-border.css" rel="stylesheet" />
+  <script src="site_libs/tippy-6.2.7/tippy.umd.min.js"></script>
   <script src="site_libs/anchor-4.2.2/anchor.min.js"></script>
   <script src="site_libs/bowser-1.9.3/bowser.min.js"></script>
   <script src="site_libs/webcomponents-2.0.0/webcomponents.js"></script>
