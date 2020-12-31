@@ -218,7 +218,7 @@ remotes::install_github("rstudio/rmarkdown")
 remotes::install_github("seankross/postcards")
 ```
 
-Alternate output formats are supported only for top-level site pages (not for articles within collections, e.g. blog posts).
+Alternate output formats are supported only for top-level site pages (not for articles within collections, e.g. blog posts). Also note that you need to render pages using an alternate format using the `rmarkdown::render_site()` function to ensure they get site related headers and footers (this happens automatically when you Knit from within an RStudio website project).
 
 You can disable support for rendering alternate formats by including `alt_formats: false` within your `_site.yml` file.
 
