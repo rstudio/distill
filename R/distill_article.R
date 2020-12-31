@@ -184,6 +184,8 @@ distill_article <- function(toc = FALSE,
       html_deps <- list()
     }
     html_deps <- append(html_deps, list(
+      html_dependency_popper(),
+      html_dependency_tippy(),
       html_dependency_anchor(),
       html_dependency_bowser(),
       html_dependency_webcomponents(),

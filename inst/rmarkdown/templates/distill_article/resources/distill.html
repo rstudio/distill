@@ -346,6 +346,17 @@ div.hanging-indent{
   margin-left: 1em; text-indent: -1em;
 }
 
+/* Citation hover box */
+
+.tippy-box[data-theme~=light-border] {
+  background-color: rgba(250, 250, 250, 0.95);
+}
+
+.tippy-content > p {
+  margin-bottom: 0;
+  padding: 2px;
+}
+
 
 /* Tweak 1000px media break to show more text */
 
@@ -1126,6 +1137,20 @@ function init_distill() {
     // move appendix-bottom entries to the bottom
     $('.appendix-bottom').appendTo('d-appendix').children().unwrap();
     $('.appendix-bottom').remove();
+
+    // hoverable references
+    $('span.citation[data-cites]').each(function() {
+      var refHtml = $('#ref-' + $(this).attr('data-cites')).html();
+      window.tippy(this, {
+        allowHTML: true,
+        content: refHtml,
+        maxWidth: 500,
+        interactive: true,
+        interactiveBorder: 10,
+        theme: 'light-border',
+        placement: 'bottom-start'
+      });
+    });
 
     // clear polling timer
     clearInterval(tid);

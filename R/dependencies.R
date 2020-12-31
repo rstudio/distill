@@ -25,6 +25,28 @@ html_dependency_webcomponents <- function() {
   )
 }
 
+
+# https://github.com/popperjs/popper-core
+html_dependency_popper <- function() {
+  htmltools::htmlDependency(
+    name = "popper",
+    version = "2.6.0",
+    src = system.file("www/popper", package = "distill"),
+    script = c("popper.min.js")
+  )
+}
+
+# https://github.com/atomiks/tippyjs
+html_dependency_tippy <- function() {
+  htmltools::htmlDependency(
+    name = "tippy",
+    version = "6.2.7",
+    src = system.file("www/tippy", package = "distill"),
+    script = c("tippy.umd.min.js"),
+    stylesheet = c("tippy.css", "tippy-light-border.css")
+  )
+}
+
 # https://github.com/bryanbraun/anchorjs
 html_dependency_anchor <- function() {
   htmltools::htmlDependency(
