@@ -118,7 +118,7 @@ date_today <- function() {
 date_as_rfc_2822 <- function(date) {
   date <- as.Date(date, tz = "UTC")
   with_locale(
-    new = c("LC_TIME" = "en_US.UTF-8"),
+    new = c("LC_TIME" = ifelse(is_windows(), "English", "en_US.UTF-8")),
     as.character(date, format = "%a, %d %b %Y %H:%M:%S %z", tz = "UTC")
   )
 }
@@ -250,6 +250,10 @@ merge_lists <- function(base_list, overlay_list, recursive = TRUE) {
 
 is_osx <- function() {
   Sys.info()["sysname"] == "Darwin"
+}
+
+is_windows <- function() {
+  .Platform$OS.type == "windows"
 }
 
 # function for resolving resources
