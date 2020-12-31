@@ -1,6 +1,7 @@
 ## distill v1.2 (Development)
 
 -   Support for optional user display of source code via the `code_folding` option.
+-   Display citation popup when hovering over references.
 -   Definitely fix issue w/ importing articles from git repos with `main` default branch. (\#215)
 -   Fix an issue with highlighting on Windows when there is a space in the resource's path (\#236).
 -   Add optional cookie consent overlay for opt-in to Google Analytics and Disqus.
