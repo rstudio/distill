@@ -12,6 +12,7 @@
 -   Fix issue w/ attempting to add non-site Rmds (e.g. README.Rmd) to search index.
 -   Fix issue w/ duplicate `includes` within website articles
 -   Suppress citation for individual articles/posts via `citation: false` metadata.
+-   Add `sourceCode` class to pre and code tags for downlit output.
 
 ## distill v1.1 (CRAN)
 
