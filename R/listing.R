@@ -184,7 +184,7 @@ html_for_articles <- function(articles, caption = NULL, categories = FALSE, cate
       div(class = "description",
         h2(article$title),
         categories_metadata_html,
-        p(HTML(markdown::markdownToHTML(text = article$description, fragment.only = TRUE)))
+        p(article$description)
       )
     )
   })

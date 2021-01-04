@@ -273,11 +273,7 @@ write_feed_xml <- function(feed_xml, site_config, collection, articles) {
       }
     }
     else {
-      description = not_null(article$description, default = article$title)
-      if (requireNamespace("markdown", quietly = TRUE)) {
-        description <- markdown::markdownToHTML(text = description, fragment.only = TRUE)
-      }
-      add_child(item, "description", text = description)
+      add_child(item, "description", text = not_null(article$description, default = article$title))
     }
 
     if (!is.null(article$categories)) {
