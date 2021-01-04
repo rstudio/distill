@@ -386,7 +386,9 @@ knit_hooks <- function(downlit) {
       if (is.na(code)) {
         x <- default_source_hook(x, options)
       } else {
-        x <- paste0("<div class=\"sourceCode\"><pre><code>",
+        x <- paste0("<div class=\"sourceCode\">",
+                    "<pre class=\"sourceCode r\">",
+                    "<code class=\"sourceCode r\">",
                     code,
                     "</code></pre></div>")
         x <- paste0(x, "\n")
