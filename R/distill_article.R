@@ -114,6 +114,10 @@ distill_article <- function(toc = FALSE,
   site_config <- NULL
   encoding <- NULL
 
+  # metadata_includes are includes derived from this file's metadata
+  # (as opposed to site level includes which we already process)
+  metadata_includes <- list()
+
   # post-knit
   post_knit <- function(metadata, input_file, runtime, encoding, ...) {
 
@@ -122,6 +126,15 @@ distill_article <- function(toc = FALSE,
 
     # run R code in metadata
     metadata <- eval_metadata(metadata)
+
+    # determine metadata_includes
+    metadata_output <- metadata[["output"]]
+    if (is.list(metadata_output)) {
+      metadata_distill <- metadata_output[["distill::distill_article"]]
+      if (is.list(metadata_distill)) {
+        metadata_includes <<- metadata_distill[["includes"]]
+      }
+    }
 
     # pandoc args
     args <- c()
@@ -239,11 +252,11 @@ distill_article <- function(toc = FALSE,
     before_body <- c(front_matter_before_body(metadata),
                      navigation_before_body_file(dirname(input_file), site_config),
                      site_before_body_file(site_config),
-                     includes$before_body,
+                     metadata_includes$before_body,
                      listing$html)
 
     # after body includes: user then distill
-    after_body <- c(includes$after_body,
+    after_body <- c(metadata_includes$after_body,
                     site_after_body_file(site_config),
                     appendices_after_body_file(input_file, site_config, metadata),
                     navigation_after_body_file(dirname(input_file), site_config))
@@ -263,7 +276,7 @@ distill_article <- function(toc = FALSE,
   pre_processor <- function(yaml_front_matter, utf8_input, runtime, knit_meta,
                             files_dir, output_dir, ...) {
     pandoc_include_args(in_header = c(site_in_header_file(site_config),
-                                      includes$in_header))
+                                      metadata_includes$in_header))
   }
 
   on_exit <- function() {
