@@ -552,6 +552,12 @@ To create a new article collection, do the following:
 
 You may also want to add a link to your listing page in the [site navigation menu](website.html#site-navigation).
 
+You can use the `create_post()` function to create articles within any collection. For example:
+
+``` {.r}
+create_post("water-quality-trends", collection = "analyses")
+```
+
 ## Theming
 
 Distill blogs can use [themes](website.html#theming) and [CSS](website.html#custom-style) just like Distill sites. You can use the `create_theme()` function to add a theme CSS file in the current working directory.

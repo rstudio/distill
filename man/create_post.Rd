@@ -6,6 +6,7 @@
 \usage{
 create_post(
   title,
+  collection = "posts",
   author = "auto",
   slug = "auto",
   date = Sys.Date(),
@@ -16,6 +17,8 @@ create_post(
 }
 \arguments{
 \item{title}{Post title}
+
+\item{collection}{Collection to create the post within (defaults to "posts")}
 
 \item{author}{Post author. Automatically drawn from previous post if not provided.}
 

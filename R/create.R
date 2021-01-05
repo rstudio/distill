@@ -91,7 +91,9 @@ create_article <- function(file,
 #' Create a new blog post
 #'
 #' @param title Post title
+#'
 #' @param author Post author. Automatically drawn from previous post if not provided.
+#' @param collection Collection to create the post within (defaults to "posts")
 #' @param slug Post slug (directory name). Automatically computed from title if not
 #'   provided.
 #' @param date Post date (defaults to current date)
@@ -111,6 +113,7 @@ create_article <- function(file,
 #'
 #' @export
 create_post <- function(title,
+                        collection = "posts",
                         author = "auto",
                         slug = "auto",
                         date = Sys.Date(),
@@ -125,8 +128,11 @@ create_post <- function(title,
 
   # more discovery
   site_config <- site_config(site_dir)
-  posts_dir <- file.path(site_dir, "_posts")
-  posts_index <- file.path(site_dir, site_config$output_dir, "posts", "posts.json")
+  posts_dir <- file.path(site_dir, paste0("_", collection))
+  posts_index <- file.path(site_dir,
+                           site_config$output_dir,
+                           collection,
+                           paste0(collection, ".json"))
 
   # auto-slug
   slug <- resolve_slug(title, slug)
@@ -198,6 +204,21 @@ Learn more about using Distill at <https://rstudio.github.io/distill>.
   on.exit(close(con), add = TRUE)
   xfun::write_utf8(yaml, con)
   xfun::write_utf8(body, con)
+
+  bullet <- "v"
+  circle <- "o"
+  new_collection <- !(collection %in% names(site_collections(site_dir, site_config)))
+  if (new_collection) {
+    cat(paste0(bullet, " Created new collection at _", collection), "\n")
+  }
+  cat(paste(bullet, "Created post at", paste0("_", collection, "/", basename(post_dir))), "\n")
+  # if the collection isn't registered then print a reminder to do this
+  if (new_collection) {
+    cat(paste0(circle, " ", "TODO: Register '", collection, "' collection in _site.yml\n"))
+    cat(paste0(circle, " ", "TODO: Create listing page for '", collection, "' collection\n\n"))
+    cat("See docs at https://rstudio.github.io/distill/blog.html#creating-a-collection")
+  }
+
 
   # edit if requested
   if (edit)
