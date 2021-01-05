@@ -1067,6 +1067,17 @@ code span.wa { color: #008000; font-weight: bold; } /* Warning */
     margin-left: 1em; text-indent: -1em;
   }
 
+  /* Citation hover box */
+
+  .tippy-box[data-theme~=light-border] {
+    background-color: rgba(250, 250, 250, 0.95);
+  }
+
+  .tippy-content > p {
+    margin-bottom: 0;
+    padding: 2px;
+  }
+
 
   /* Tweak 1000px media break to show more text */
 
@@ -1848,6 +1859,20 @@ code span.wa { color: #008000; font-weight: bold; } /* Warning */
       $('.appendix-bottom').appendTo('d-appendix').children().unwrap();
       $('.appendix-bottom').remove();
 
+      // hoverable references
+      $('span.citation[data-cites]').each(function() {
+        var refHtml = $('#ref-' + $(this).attr('data-cites')).html();
+        window.tippy(this, {
+          allowHTML: true,
+          content: refHtml,
+          maxWidth: 500,
+          interactive: true,
+          interactiveBorder: 10,
+          theme: 'light-border',
+          placement: 'bottom-start'
+        });
+      });
+
       // clear polling timer
       clearInterval(tid);
 
@@ -2017,6 +2042,10 @@ code span.wa { color: #008000; font-weight: bold; } /* Warning */
   <script src="site_libs/Proj4Leaflet-1.0.1/proj4leaflet.js"></script>
   <link href="site_libs/rstudio_leaflet-1.3.1/rstudio_leaflet.css" rel="stylesheet" />
   <script src="site_libs/leaflet-binding-2.0.3/leaflet.js"></script>
+  <script src="site_libs/popper-2.6.0/popper.min.js"></script>
+  <link href="site_libs/tippy-6.2.7/tippy.css" rel="stylesheet" />
+  <link href="site_libs/tippy-6.2.7/tippy-light-border.css" rel="stylesheet" />
+  <script src="site_libs/tippy-6.2.7/tippy.umd.min.js"></script>
   <script src="site_libs/anchor-4.2.2/anchor.min.js"></script>
   <script src="site_libs/bowser-1.9.3/bowser.min.js"></script>
   <script src="site_libs/webcomponents-2.0.0/webcomponents.js"></script>
@@ -2158,7 +2187,7 @@ Publishing
 <p>For example, a plot with the default <code>l-body</code> layout would look like this:</p>
 <div class="layout-chunk" data-layout="l-body">
 <div class="sourceCode">
-<pre><code><span class='fu'><a href='https://rdrr.io/pkg/knitr/man/include_graphics.html'>include_graphics</a></span><span class='op'>(</span><span class='st'>"images/l-body-figure.png"</span><span class='op'>)</span>
+<pre class="sourceCode r"><code class="sourceCode r"><span class='fu'><a href='https://rdrr.io/pkg/knitr/man/include_graphics.html'>include_graphics</a></span><span class='op'>(</span><span class='st'>"images/l-body-figure.png"</span><span class='op'>)</span>
 </code></pre>
 </div>
 <p><img src="images/l-body-figure.png" width="576" /></p>
@@ -2183,7 +2212,7 @@ ggplot(diamonds, aes(carat, price)) + geom_smooth() +
 ```</code></pre>
 <div class="layout-chunk" data-layout="l-body-outset">
 <div class="sourceCode">
-<pre><code><span class='fu'><a href='https://rdrr.io/pkg/knitr/man/include_graphics.html'>include_graphics</a></span><span class='op'>(</span><span class='st'>"images/l-middle-figure.png"</span><span class='op'>)</span>
+<pre class="sourceCode r"><code class="sourceCode r"><span class='fu'><a href='https://rdrr.io/pkg/knitr/man/include_graphics.html'>include_graphics</a></span><span class='op'>(</span><span class='st'>"images/l-middle-figure.png"</span><span class='op'>)</span>
 </code></pre>
 </div>
 <p><img src="images/l-middle-figure.png" width="576" /></p>
@@ -2205,7 +2234,7 @@ leaflet() %&gt;%
 ```</code></pre>
 <div class="layout-chunk" data-layout="l-screen-inset">
 <div class="sourceCode">
-<pre><code><span class='kw'><a href='https://rdrr.io/r/base/library.html'>library</a></span><span class='op'>(</span><span class='va'><a href='http://rstudio.github.io/leaflet/'>leaflet</a></span><span class='op'>)</span>
+<pre class="sourceCode r"><code class="sourceCode r"><span class='kw'><a href='https://rdrr.io/r/base/library.html'>library</a></span><span class='op'>(</span><span class='va'><a href='http://rstudio.github.io/leaflet/'>leaflet</a></span><span class='op'>)</span>
 <span class='fu'><a href='https://rdrr.io/pkg/leaflet/man/leaflet.html'>leaflet</a></span><span class='op'>(</span><span class='op'>)</span> <span class='op'>%&gt;%</span>
   <span class='fu'><a href='https://rdrr.io/pkg/leaflet/man/map-layers.html'>addTiles</a></span><span class='op'>(</span><span class='op'>)</span> <span class='op'>%&gt;%</span>  <span class='co'># Add default OpenStreetMap map tiles</span>
   <span class='fu'><a href='https://rdrr.io/pkg/leaflet/man/map-layers.html'>addMarkers</a></span><span class='op'>(</span>lng<span class='op'>=</span><span class='fl'>174.768</span>, lat<span class='op'>=</span><span class='op'>-</span><span class='fl'>36.852</span>, popup<span class='op'>=</span><span class='st'>"The birthplace of R"</span><span class='op'>)</span>
@@ -2223,7 +2252,7 @@ leaflet() %&gt;%
 ```</code></pre>
 <div class="layout-chunk" data-layout="l-screen-inset shaded">
 <div class="sourceCode">
-<pre><code><span class='kw'><a href='https://rdrr.io/r/base/library.html'>library</a></span><span class='op'>(</span><span class='va'><a href='http://rstudio.github.io/leaflet/'>leaflet</a></span><span class='op'>)</span>
+<pre class="sourceCode r"><code class="sourceCode r"><span class='kw'><a href='https://rdrr.io/r/base/library.html'>library</a></span><span class='op'>(</span><span class='va'><a href='http://rstudio.github.io/leaflet/'>leaflet</a></span><span class='op'>)</span>
 <span class='fu'><a href='https://rdrr.io/pkg/leaflet/man/leaflet.html'>leaflet</a></span><span class='op'>(</span><span class='op'>)</span> <span class='op'>%&gt;%</span>
   <span class='fu'><a href='https://rdrr.io/pkg/leaflet/man/map-layers.html'>addTiles</a></span><span class='op'>(</span><span class='op'>)</span> <span class='op'>%&gt;%</span>  <span class='co'># Add default OpenStreetMap map tiles</span>
   <span class='fu'><a href='https://rdrr.io/pkg/leaflet/man/map-layers.html'>addMarkers</a></span><span class='op'>(</span>lng<span class='op'>=</span><span class='fl'>174.768</span>, lat<span class='op'>=</span><span class='op'>-</span><span class='fl'>36.852</span>, popup<span class='op'>=</span><span class='st'>"The birthplace of R"</span><span class='op'>)</span>
@@ -2261,7 +2290,7 @@ ggplot(diamonds, aes(carat, price)) + geom_smooth() +
 <p>To reference a figure, use the syntax <code>\@ref(label)</code>, where label is the figure label. So for the example above we’d use <code>\@ref(fig:diamonds)</code>, which would result in a cross-reference like this:</p>
 <div class="layout-chunk" data-layout="l-body">
 <div class="sourceCode">
-<pre><code><span class='fu'><a href='https://rdrr.io/pkg/knitr/man/include_graphics.html'>include_graphics</a></span><span class='op'>(</span><span class='st'>"images/figure-cross-references.png"</span><span class='op'>)</span>
+<pre class="sourceCode r"><code class="sourceCode r"><span class='fu'><a href='https://rdrr.io/pkg/knitr/man/include_graphics.html'>include_graphics</a></span><span class='op'>(</span><span class='st'>"images/figure-cross-references.png"</span><span class='op'>)</span>
 </code></pre>
 </div>
 <p><img src="images/figure-cross-references.png" width="743" class=screenshot /></p>

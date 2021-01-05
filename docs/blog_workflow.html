@@ -1067,6 +1067,17 @@ code span.wa { color: #008000; font-weight: bold; } /* Warning */
     margin-left: 1em; text-indent: -1em;
   }
 
+  /* Citation hover box */
+
+  .tippy-box[data-theme~=light-border] {
+    background-color: rgba(250, 250, 250, 0.95);
+  }
+
+  .tippy-content > p {
+    margin-bottom: 0;
+    padding: 2px;
+  }
+
 
   /* Tweak 1000px media break to show more text */
 
@@ -1848,6 +1859,20 @@ code span.wa { color: #008000; font-weight: bold; } /* Warning */
       $('.appendix-bottom').appendTo('d-appendix').children().unwrap();
       $('.appendix-bottom').remove();
 
+      // hoverable references
+      $('span.citation[data-cites]').each(function() {
+        var refHtml = $('#ref-' + $(this).attr('data-cites')).html();
+        window.tippy(this, {
+          allowHTML: true,
+          content: refHtml,
+          maxWidth: 500,
+          interactive: true,
+          interactiveBorder: 10,
+          theme: 'light-border',
+          placement: 'bottom-start'
+        });
+      });
+
       // clear polling timer
       clearInterval(tid);
 
@@ -2008,6 +2033,10 @@ code span.wa { color: #008000; font-weight: bold; } /* Warning */
 
   <!--/radix_placeholder_distill-->
   <script src="site_libs/header-attrs-2.6.3/header-attrs.js"></script>
+  <script src="site_libs/popper-2.6.0/popper.min.js"></script>
+  <link href="site_libs/tippy-6.2.7/tippy.css" rel="stylesheet" />
+  <link href="site_libs/tippy-6.2.7/tippy-light-border.css" rel="stylesheet" />
+  <script src="site_libs/tippy-6.2.7/tippy.umd.min.js"></script>
   <script src="site_libs/anchor-4.2.2/anchor.min.js"></script>
   <script src="site_libs/bowser-1.9.3/bowser.min.js"></script>
   <script src="site_libs/webcomponents-2.0.0/webcomponents.js"></script>
@@ -2195,7 +2224,7 @@ Publishing
 <p>If you work on a post over the course of a few days and/or if you change your post’s title after you begin working on it, you may want to rename the post directory. You can use the <code>rename_post_dir()</code> function to update the date and/or title slug reflected in the directory name. For example:</p>
 <div class="layout-chunk" data-layout="l-body">
 <div class="sourceCode">
-<pre><code><span class='co'># rename to reflect the title and date in the post YAML front-matter</span>
+<pre class="sourceCode r"><code class="sourceCode r"><span class='co'># rename to reflect the title and date in the post YAML front-matter</span>
 <span class='fu'><a href='https://pkgs.rstudio.com/distill//reference/rename_post_dir.html'>rename_post_dir</a></span><span class='op'>(</span><span class='st'>"_posts/2016-11-08-sharpe-ratio"</span><span class='op'>)</span> 
 </code></pre>
 </div>
@@ -2225,7 +2254,7 @@ Publishing
 <p>You can import a post using the <code>import_post()</code> function, passing the URL where the post is published to. For example:</p>
 <div class="layout-chunk" data-layout="l-body">
 <div class="sourceCode">
-<pre><code><span class='fu'><a href='https://pkgs.rstudio.com/distill//reference/import_post.html'>import_post</a></span><span class='op'>(</span><span class='st'>"https://rpubs.com/jjallaire/visualizing-asset-returns"</span><span class='op'>)</span>
+<pre class="sourceCode r"><code class="sourceCode r"><span class='fu'><a href='https://pkgs.rstudio.com/distill//reference/import_post.html'>import_post</a></span><span class='op'>(</span><span class='st'>"https://rpubs.com/jjallaire/visualizing-asset-returns"</span><span class='op'>)</span>
 <span class='fu'><a href='https://pkgs.rstudio.com/distill//reference/import_post.html'>import_post</a></span><span class='op'>(</span><span class='st'>"https://example.com/visualizing-asset-returns.html"</span><span class='op'>)</span>
 </code></pre>
 </div>
@@ -2233,7 +2262,7 @@ Publishing
 <p>You can also import a post from a GitHub repository. For example:</p>
 <div class="layout-chunk" data-layout="l-body">
 <div class="sourceCode">
-<pre><code><span class='fu'><a href='https://pkgs.rstudio.com/distill//reference/import_post.html'>import_post</a></span><span class='op'>(</span><span class='st'>"https://github.com/jjallaire/distill-article"</span><span class='op'>)</span>
+<pre class="sourceCode r"><code class="sourceCode r"><span class='fu'><a href='https://pkgs.rstudio.com/distill//reference/import_post.html'>import_post</a></span><span class='op'>(</span><span class='st'>"https://github.com/jjallaire/distill-article"</span><span class='op'>)</span>
 </code></pre>
 </div>
 </div>
@@ -2242,7 +2271,7 @@ Publishing
 <p>When you import a post, the date for the post will be automatically set to the current day (the idea being that whenever the post was authored, the day you import it is the day it’s been published to your blog). You can modify this behavior using the <code>date</code> parameter. For example:</p>
 <div class="layout-chunk" data-layout="l-body">
 <div class="sourceCode">
-<pre><code><span class='fu'><a href='https://pkgs.rstudio.com/distill//reference/import_post.html'>import_post</a></span><span class='op'>(</span><span class='st'>"https://github.com/jjallaire/distill-article"</span>, 
+<pre class="sourceCode r"><code class="sourceCode r"><span class='fu'><a href='https://pkgs.rstudio.com/distill//reference/import_post.html'>import_post</a></span><span class='op'>(</span><span class='st'>"https://github.com/jjallaire/distill-article"</span>, 
             date <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/as.Date.html'>as.Date</a></span><span class='op'>(</span><span class='st'>"2017-07-12"</span><span class='op'>)</span><span class='op'>)</span>
 </code></pre>
 </div>
@@ -2252,7 +2281,7 @@ Publishing
 <p>You can also override the automatically generated slug entirely using the <code>slug</code> parameter. For example:</p>
 <div class="layout-chunk" data-layout="l-body">
 <div class="sourceCode">
-<pre><code><span class='fu'><a href='https://pkgs.rstudio.com/distill//reference/import_post.html'>import_post</a></span><span class='op'>(</span><span class='st'>"https://github.com/jjallaire/distill-article"</span>, 
+<pre class="sourceCode r"><code class="sourceCode r"><span class='fu'><a href='https://pkgs.rstudio.com/distill//reference/import_post.html'>import_post</a></span><span class='op'>(</span><span class='st'>"https://github.com/jjallaire/distill-article"</span>, 
             slug <span class='op'>=</span> <span class='st'>"an-article-about-distill"</span><span class='op'>)</span>
 </code></pre>
 </div>
@@ -2261,14 +2290,14 @@ Publishing
 <p>If a post that you have imported is subsequently modified and you want to synchronize to the changes, you can use the <code>update_post()</code> post function. For example:</p>
 <div class="layout-chunk" data-layout="l-body">
 <div class="sourceCode">
-<pre><code><span class='fu'><a href='https://pkgs.rstudio.com/distill//reference/import_post.html'>update_post</a></span><span class='op'>(</span><span class='st'>"_posts/2018-07-09-distill-article"</span><span class='op'>)</span>
+<pre class="sourceCode r"><code class="sourceCode r"><span class='fu'><a href='https://pkgs.rstudio.com/distill//reference/import_post.html'>update_post</a></span><span class='op'>(</span><span class='st'>"_posts/2018-07-09-distill-article"</span><span class='op'>)</span>
 </code></pre>
 </div>
 </div>
 <p>You can also just use the post slug (rather than including the <code>_posts</code> directory prefix):</p>
 <div class="layout-chunk" data-layout="l-body">
 <div class="sourceCode">
-<pre><code><span class='fu'><a href='https://pkgs.rstudio.com/distill//reference/import_post.html'>update_post</a></span><span class='op'>(</span><span class='st'>"2018-07-09-distill-article"</span><span class='op'>)</span>
+<pre class="sourceCode r"><code class="sourceCode r"><span class='fu'><a href='https://pkgs.rstudio.com/distill//reference/import_post.html'>update_post</a></span><span class='op'>(</span><span class='st'>"2018-07-09-distill-article"</span><span class='op'>)</span>
 </code></pre>
 </div>
 </div>
