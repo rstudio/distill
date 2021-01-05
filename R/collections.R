@@ -959,6 +959,13 @@ site_collections <- function(site_dir, site_config) {
   ensure_collection("posts")
   ensure_collection("articles")
 
+  # add any collection with a listing
+  input_files <- list.files(site_dir, pattern = "^[^_].*\\.[Rr]?md$", full.names = TRUE)
+  sapply(input_files, function(file) {
+    listings <- front_matter_listings(file, "UTF-8")
+    sapply(listings, ensure_collection)
+  })
+
   # filter on directory existence
   collections <- collections[file.exists(file.path(site_dir, paste0("_", names(collections))))]
 
