@@ -1,4 +1,4 @@
-## distill v1.2 (Development)
+## distill v1.2 (CRAN)
 
 -   Support for optional user display of source code via the `code_folding` option.
 -   Display citation popup when hovering over references.
@@ -14,7 +14,7 @@
 -   Suppress citation for individual articles/posts via `citation: false` metadata.
 -   Add `sourceCode` class to pre and code tags for downlit output.
 
-## distill v1.1 (CRAN)
+## distill v1.1
 
 -   Fixed issue with `overflow: hidden` for code blocks on mobile devices (is now `overflow: auto`).
 -   Improve full text search behavior w/ `ignoreLocation: true` and `threshold: 0`.
