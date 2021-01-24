@@ -220,6 +220,9 @@ figure img.external {
 /* CSS for d-contents */
 
 .d-contents {
+  display: grid;
+  grid-template-columns: [screen-start] 1fr [page-start kicker-start middle-start text-start] 45px 45px 45px 45px 45px 45px 45px 45px [ kicker-end text-end gutter-start] 45px [middle-end] 45px [page-end gutter-end] 1fr [screen-end];
+  grid-column-gap: 16px;
   grid-column: text;
   color: rgba(0,0,0,0.8);
   font-size: 0.9em;
@@ -228,17 +231,17 @@ figure img.external {
   padding-bottom: 0.5em;
   margin-bottom: 1em;
   padding-left: 0.25em;
-  justify-self: start;
 }
 
 @media(min-width: 1000px) {
   .d-contents.d-contents-float {
+    display: inherit;
+    position: sticky;
+    top: 15px;
     height: 0;
-    grid-column-start: 1;
-    grid-column-end: 4;
-    justify-self: center;
     padding-right: 3em;
     padding-left: 2em;
+    border-top: 1px solid rgba(0, 0, 0, 0.1);
   }
 }
 
@@ -268,7 +271,7 @@ figure img.external {
 .d-contents nav a {
   font-size: 13px;
   border-bottom: none;
-  text-decoration: none
+  text-decoration: none;
   color: rgba(0, 0, 0, 0.8);
 }
 
