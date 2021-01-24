@@ -1,6 +1,12 @@
 ## Creating an article
 
-Use the **New R Markdown** dialog within RStudio to create a new Distill article:
+To create an [R Markdown](https://rmarkdown.rstudio.com) document that uses the Distill format, first install the **distill** R package from CRAN:
+
+```{r, eval=FALSE, echo=TRUE}
+install.packages("distill")
+```
+
+Then, use the **New R Markdown** dialog within RStudio to create a new Distill article:
 
 ![](images/new_distill_article.png){.screenshot width="100%"}
 

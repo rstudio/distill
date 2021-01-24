@@ -2199,7 +2199,6 @@ Publishing
 <nav class="l-text toc figcaption" id="TOC">
 <h3>Contents</h3>
 <ul>
-<li><a href="#installation">Installation</a></li>
 <li><a href="#creating-an-article">Creating an article</a></li>
 <li><a href="#figures">Figures</a></li>
 <li><a href="#tables">Tables</a></li>
@@ -2227,18 +2226,15 @@ Publishing
 <li>A variety of ways to <a href="publish_article.html">publish articles</a>, including support for publishing sets of articles as a <a href="website.html">Distill website</a> or as a <a href="blog.html">Distill blog</a>.</li>
 </ul>
 <p>Distill for R Markdown is based on the <a href="https://github.com/distillpub/template">Distill web framework</a>, which was originally created for use in the Distill Machine Learning Journal <span class="citation" data-cites="distill">(<a href="#ref-distill" role="doc-biblioref">Carter, Olah, and Satyanarayan 2016</a>)</span>. Distill for R Markdown combines the technical authoring features of Distill with <a href="https://rmarkdown.rstudio.com/">R Markdown</a>, enabling a fully reproducible workflow based on literate programming <span class="citation" data-cites="knuth1984">(<a href="#ref-knuth1984" role="doc-biblioref">Knuth 1984</a>)</span>.</p>
-<h2 id="installation">Installation</h2>
-<p>To create an <a href="https://rmarkdown.rstudio.com">R Markdown</a> document that uses the Distill format, first install the <strong>distill</strong> R package from GitHub:</p>
+<h2 id="creating-an-article">Creating an article</h2>
+<p>To create an <a href="https://rmarkdown.rstudio.com">R Markdown</a> document that uses the Distill format, first install the <strong>distill</strong> R package from CRAN:</p>
 <div class="layout-chunk" data-layout="l-body">
 <div class="sourceCode">
-<pre class="sourceCode r"><code class="sourceCode r"><span class='fu'>devtools</span><span class='fu'>::</span><span class='fu'><a href='https://devtools.r-lib.org//reference/remote-reexports.html'>install_github</a></span><span class='op'>(</span><span class='st'>"rstudio/distill"</span><span class='op'>)</span>
+<pre class="sourceCode r"><code class="sourceCode r"><span class='fu'><a href='https://rdrr.io/r/utils/install.packages.html'>install.packages</a></span><span class='op'>(</span><span class='st'>"distill"</span><span class='op'>)</span>
 </code></pre>
 </div>
 </div>
-<p>Using Distill for R Markdown requires Pandoc v2.0 or higher. If you are using RStudio then you should use RStudio v1.2.718 or higher (which comes bundled with Pandoc v2.0).</p>
-<p>You can download the latest version of RStudio at <a href="https://www.rstudio.com/products/rstudio/download/" class="uri">https://www.rstudio.com/products/rstudio/download/</a>.</p>
-<h2 id="creating-an-article">Creating an article</h2>
-<p>Use the <strong>New R Markdown</strong> dialog within RStudio to create a new Distill article:</p>
+<p>Then, use the <strong>New R Markdown</strong> dialog within RStudio to create a new Distill article:</p>
 <p><img src="images/new_distill_article.png" class="screenshot" style="width:100.0%" /></p>
 <p>You can also create a new Distill article from the command line with:</p>
 <div class="layout-chunk" data-layout="l-body">
