@@ -172,11 +172,12 @@ create_post <- function(title,
 title: "%s"
 description: |
   A short description of the post.
-%sdate: %s
+author: %s
+date: %s
 output:
   distill::distill_article:
     self_contained: false%s
----', title, author, format.Date(date, "%m-%d-%Y"), draft)
+---', title, author, format.Date(date, "%F"), draft)
 
 
   # body
