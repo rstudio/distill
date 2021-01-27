@@ -155,8 +155,11 @@ create_post <- function(title,
       author <- list(author = posts[[1]]$author)
   }
   # if we still don't have an author then auto-detect
-  if (is.null(author))
+  if (is.null(author)) {
     author <- list(author = list(list(name = fullname(fallback = "Unknown"))))
+  } else { # if author is given as argument to function
+    author <- list(author = author)
+  }
   # author to yaml
   author <- yaml::as.yaml(author, indent.mapping.sequence = TRUE)
 
@@ -172,8 +175,7 @@ create_post <- function(title,
 title: "%s"
 description: |
   A short description of the post.
-author: %s
-date: %s
+%sdate: %s
 output:
   distill::distill_article:
     self_contained: false%s
