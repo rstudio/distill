@@ -62,7 +62,7 @@ appendix_updates_and_corrections <- function(metadata) {
 }
 
 appendix_bibliography <- function(metadata) {
-  if (!is.null(metadata$bibliography)) {
+  if (!is.null(metadata$bibliography) | !is.null(metadata$references)) {
     list(
       tags$h3(id = "references", "References"),
       tags$div(id = "references-listing")
