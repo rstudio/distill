@@ -408,11 +408,12 @@ update_collection_listing <- function(site_dir, site_config, collection, article
         html_content <- readChar(html_file,
                                  nchars = file.info(html_file)$size,
                                  useBytes = TRUE)
-        listing_html <- strip_trailing_newline(
-          readChar(listing$html,
-                   nchars = file.info(listing$html)$size,
-                   useBytes = TRUE)
-        )
+        Encoding(html_content) <- "UTF-8"
+        listing_html <- readChar(listing$html,
+                                 nchars = file.info(listing$html)$size,
+                                 useBytes = TRUE)
+        Encoding(listing_html) <- "UTF-8"
+        listing_html <- strip_trailing_newline(listing_html)
         html_content <- fill_placeholder(html_content, "article_listing", listing_html)
         writeChar(html_content, html_file, eos = NULL, useBytes = TRUE)
       }
