@@ -72,8 +72,15 @@ parse_date <- function(date) {
 }
 
 safe_timezone <- function() {
-  tz <- Sys.timezone()
-  ifelse(is.na(tz), "UTC", tz)
+  # OS X Catalina (10.15.7) has a corrupt timezone database, protect
+  # against this by always returning UTC on OSX until we have a
+  # lubridate fix for this on CRAN
+  if (is_osx()) {
+    "UTC"
+  } else {
+    tz <- Sys.timezone()
+    ifelse(is.na(tz), "UTC", tz)
+  }
 }
 
 time_as_iso_8601 <- function(time) {

@@ -39,7 +39,7 @@ Imports:
     xfun (>= 0.2),
     htmltools, 
     jsonlite (>= 1.3), 
-    lubridate (>= 1.7.9.2), 
+    lubridate, 
     png, 
     mime, 
     rstudioapi, 
