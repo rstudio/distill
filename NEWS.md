@@ -13,7 +13,7 @@
 -   Fix issue w/ duplicate `includes` within website articles
 -   Suppress citation for individual articles/posts via `citation: false` metadata.
 -   Add `sourceCode` class to pre and code tags for downlit output.
--   Fix issue w/ UTF-8 encoded characters in site \_footer.html
+-   Fix issue w/ UTF-8 encoded characters in site \_footer.html and listing creation.
 
 ## distill v1.1
 
