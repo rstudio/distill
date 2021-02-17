@@ -189,7 +189,9 @@ input_as_dir <- function(input) {
 }
 
 html_from_file <- function(file) {
-  HTML(readChar(file, nchars = file.info(file)$size, useBytes = TRUE))
+  contents <- readChar(file, nchars = file.info(file)$size, useBytes = TRUE)
+  Encoding(contents) <- "UTF-8"
+  HTML(contents)
 }
 
 html_file <- function(html) {

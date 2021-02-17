@@ -312,7 +312,7 @@ render_navigation_html <- function(navigation_html) {
 render_navigation_html_file <- function(navigation_html) {
   html <- render_navigation_html(navigation_html)
   file <- tempfile(fileext = "html")
-  writeLines(html, file)
+  writeLines(html, file, useBytes = TRUE)
   file
 }
 
