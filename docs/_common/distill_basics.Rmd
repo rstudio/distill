@@ -49,7 +49,7 @@ Author names can be specified using explicit `first_name` and `last_name` fields
 
 The article's description and author bylines are automatically rendered as part of the title area of the document.
 
-The `date` field should be formatted as month, day, year (various notations are supported as long as the components appear in that order).
+The `date` field should be formatted either as month, day, year or as year, month, day (various notations are supported as long as the components appear in one of these orders).
 
 The `bibliography` field is used to provide a reference to the Bibtex file where all of the sources cited in your article are defined. The [citations] section describes how to include references to these sources in your article.
 
