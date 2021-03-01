@@ -177,7 +177,7 @@ write_feed_xml <- function(feed_xml, site_config, collection, articles) {
     "xmlns:dc" = "http://purl.org/dc/elements/1.1/"
   )
 
-  if (identical(site_config$rss$full_content, TRUE))
+  if (!identical(site_config$rss$full_content, FALSE))
       namespaces <- c(namespaces, list("xmlns:distill" = "https://distill.pub/journal/"))
 
   # create document root
@@ -244,7 +244,7 @@ write_feed_xml <- function(feed_xml, site_config, collection, articles) {
     add_child(item, "link", text = article$base_url)
 
     full_content_path <- NULL
-    if (identical(site_config$rss$full_content, TRUE) && is.character(article$input_file)) {
+    if (!identical(site_config$rss$full_content, FALSE) && is.character(article$input_file)) {
       guess_rmd <- paste0(gsub("\\.utf.*\\.md|\\.md", "", article$input_file), ".Rmd")
       full_content_path <- dir(getwd(), pattern = guess_rmd, full.names = TRUE, recursive = TRUE)
     }
