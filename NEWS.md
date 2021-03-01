@@ -1,3 +1,7 @@
+## distill v1.3 (Development)
+
+-   Require **lubridate** 1.7.10 to fix an issue with timezone parsing on MacOS (\#315)
+
 ## distill v1.2 (CRAN)
 
 -   Support for optional user display of source code via the `code_folding` option.
