@@ -176,6 +176,8 @@ ggplot(mtcars, aes(hp, mpg)) + geom_point() + geom_smooth()
 
 </aside>
 
+In either case, you **must** make sure that the text in the `aside` tags are not part of any other content (say a sentence or paragraph), or the entire content will be rendered as an `aside`.
+
 ## Table of contents
 
 You can add a table of contents using the `toc` option and specify the depth of headers that it applies to using the `toc_depth` option. For example:
