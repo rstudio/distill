@@ -208,31 +208,49 @@ Software licensed under the [Apache License, v2.0]
 
 ## Alternate formats
 
-Note that while you'll typically use the `distill::distill_article` format for pages within a website, you can also use any other HTML based R Markdown format so long as it's underlying template has support for [pandoc includes](https://pandoc.org/MANUAL.html#option--include-in-header).
+While you'll typically use the `distill::distill_article` format for pages within a distill website, you can also use any other HTML-based, single document R Markdown formats so long as it's underlying template has support for [pandoc includes](https://pandoc.org/MANUAL.html#option--include-in-header).
 
-Note that alternate output formats requires the development version of both the distill and rmarkdown packages. You can install these as follows:
+Support for alternate output formats requires up-to-date versions of both the distill and rmarkdown packages:
+
+-   version \>= [1.2](https://pkgs.rstudio.com/distill/news/index.html#distill-v1-2-cran-) of distill
+
+-   version \>= [2.7](https://pkgs.rstudio.com/rmarkdown/news/index.html#rmarkdown-2-7-2021-02-19) of rmarkdown
+
+You can check these package versions as follows:
 
 ``` {.r}
-remotes::install_github("rstudio/distill")
-remotes::install_github("rstudio/rmarkdown")
+packageVersion("distill")
+packageVersion("rmarkdown")
 ```
 
-Alternate output formats are supported only for top-level site pages (not for articles within collections, e.g. blog posts). Also note that pages using an alternate format should be rendered via the `rmarkdown::render_site()` function to ensure they get site related headers and footers (this happens automatically when you Knit from within an RStudio website project).
+Alternate output formats are supported only for top-level site pages (not for articles within collections, e.g. blog posts). Pages using an alternate format should be rendered via the `rmarkdown::render_site()` function to ensure they get site-related headers and footers (this happens automatically when you Knit from within an RStudio website project).
 
 You can disable support for rendering alternate formats by including `alt_formats: false` within your `_site.yml` file.
 
 ### Postcards
 
-The [postcards](https://github.com/seankross/postcards) package enables you to create an attractive personal bio/contact page. To add a postcard to your Distill site, first install the development versions of the distill, rmarkdown, and postcards packages, then use the `create_postcard()` function:
+The [postcards](https://github.com/seankross/postcards) package enables you to create an attractive personal bio/contact page. To add a postcard to your Distill site, first install the postcards packages from CRAN:
 
 ``` {.r}
-remotes::install_github("rstudio/distill")
-remotes::install_github("rstudio/rmarkdown")
-remotes::install_github("seankross/postcards")
+install.packages("postcards")
+```
+
+Then use the `create_postcard()` function:
+
+``` {.r}
 postcards::create_postcard("about.Rmd")
 ```
 
-Note that you can choose from several different [postcard templates](https://github.com/seankross/postcards#the-templates) using the `template` argument of the `create_postcard()` function.
+Note that you can choose from several different [postcard templates](https://github.com/seankross/postcards#the-templates) using the `template` argument of the `create_postcard()` function; the default is `template = "jolla"`. After creating your postcard, you may switch templates by editing the YAML; here we'll switch to using the `trestles` template:
+
+``` {.yaml}
+---
+output:
+  postcards::trestles
+---
+```
+
+When you rebuild your site, the template should update.
 
 You'll likely also want to add a link to the postcard page within your site's navigation bar. For example:
 
@@ -926,21 +944,14 @@ Distill articles can include various types of [metadata](metadata.html) to make 
 
 Several metadata values which you might find useful to define in `_site.yml` are:
 
-+--------------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
 | Metadata           | Description                                                                                                                                                              |
-+====================+==========================================================================================================================================================================+
+|--------------------|--------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
 | `base_url`         | Base (root) URL for the location where the website will be deployed (used for providing [preview images](metadata.html#preview-images) for Open Graph and Twitter Card). |
-+--------------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
 | `repository_url`   | URL for the source code of your website. Used to create a navbar link back to the repository and to create a *Corrections* appendix.                                     |
-+--------------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
 | `creative_commons` | [Creative Commons](metadata.html#creative-commons) license terms for website content. Used to automatically generate a *Reuse* appendix.                                 |
-+--------------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
 | `license_url`      | Alternate licensing terms for website content if not using a Creative Commons license.                                                                                   |
-+--------------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
 | `favicon`          | Favicon (image file) to use for browser tabs/bookmarks                                                                                                                   |
-+--------------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
 | `twitter`          | Site handle for Twitter Card metadata                                                                                                                                    |
-+--------------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
 
 Here's a `_site.yml` file that uses all of these fields (save for `license_url` since the license is already specified via `creative_commons`):
 
