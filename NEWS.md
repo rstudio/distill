@@ -1,14 +1,14 @@
 ## distill v1.3 (Development)
 
--   Require **lubridate** 1.7.10 to fix an issue with timezone parsing on MacOS (\#315)
--   Listing pages are correctly filtered when using categories with special characters, encoded in URI (\#332)
+-   Require **lubridate** 1.7.10 to fix an issue with timezone parsing on MacOS (\#315).
+-   Listing pages are correctly filtered when using categories with special characters, encoded in URI (\#332).
 -   **distill** now works with project folder containing special characters (\#148).
 
 ## distill v1.2 (CRAN)
 
 -   Support for optional user display of source code via the `code_folding` option.
 -   Display citation popup when hovering over references.
--   Definitely fix issue w/ importing articles from git repos with `main` default branch. (\#215)
+-   Definitely fix issue w/ importing articles from git repos with `main` default branch (\#215).
 -   Fix an issue with highlighting on Windows when there is a space in the resource's path (\#236).
 -   Add optional cookie consent overlay for opt-in to Google Analytics and Disqus.
 -   Support for including pages that use alternate R Markdown formats within Distill websites.
