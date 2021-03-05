@@ -747,10 +747,6 @@ strip_trailing_newline <- function(x) {
     x
 }
 
-collection_article_site_path <- function(site_dir, article_path) {
-  xfun::relative_path(article_path, site_dir)
-}
-
 collection_article_output_dir <- function(site_dir, site_config, article_site_path) {
   file.path(site_dir,
             site_config$output_dir,
