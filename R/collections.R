@@ -430,7 +430,7 @@ render_collection_article <- function(site_dir, site_config, collection, article
                                       quiet = FALSE) {
 
   # strip site_dir prefix
-  article_site_path <- collection_article_site_path(site_dir, article$path)
+  article_site_path <- xfun::relative_path(article$path, site_dir, use.. = FALSE)
 
   # determine the target output dir
   output_dir <- collection_article_output_dir(site_dir, site_config, article_site_path)
@@ -748,7 +748,7 @@ strip_trailing_newline <- function(x) {
 }
 
 collection_article_site_path <- function(site_dir, article_path) {
-  sub(paste0("^", site_dir, "/"), "", article_path)
+  xfun::relative_path(article_path, site_dir)
 }
 
 collection_article_output_dir <- function(site_dir, site_config, article_site_path) {
