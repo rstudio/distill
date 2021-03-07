@@ -501,7 +501,7 @@ google_scholar_metadata <- function(site_config, metadata) {
     add_meta("citation_technical_report_number", technical_report$number)
     add_meta("citation_issn", technical_report$issn)
     add_meta("citation_publisher", technical_report$publisher)
-    add_meta("citation_firstpage", technical_report$firstpage)  
+    add_meta("citation_firstpage", technical_report$firstpage)
     add_meta("citation_lastpage", technical_report$lastpage)
   }
 
@@ -530,9 +530,15 @@ citation_references_in_header <- function(file, bibliography) {
     citations <- xml2::xml_find_all(biblio, "//span[@data-cites]")
     citations <- unique(xml2::xml_attr(citations, "data-cites"))
 
+    citation_ids <- c()
+    lapply(citations, function(citation) {
+      citation_ids <<- c(citation_ids, strsplit(citation, " ", TRUE)[[1]])
+    })
+    citation_ids <- unique(citation_ids)
+
     # generate meta tags
     references <- tagList(HTML(''), lapply(pandoc_citeproc_convert(bibliography), function(ref) {
-      if (ref$id %in% citations)
+      if (ref$id %in% citation_ids)
         tags$meta(name = "citation_reference", content = citation_reference(ref))
     }))
 

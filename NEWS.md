@@ -3,6 +3,7 @@
 -   Require **lubridate** 1.7.10 to fix an issue with timezone parsing on MacOS (\#315).
 -   Listing pages are correctly filtered when using categories with special characters, encoded in URI (\#332).
 -   **distill** now works with project folder containing special characters (\#148).
+-   Improved handling for citations with multiple ids (show popup and include in Google Scholar metadata).
 
 ## distill v1.2 (CRAN)
 
