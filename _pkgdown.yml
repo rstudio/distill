@@ -42,6 +42,7 @@ reference:
   - '`create_post`'
   - '`import_post`'
   - '`update_post`'
+  - '`rename_post_dir`'
 - title: Create a theme to add to an article or website
   contents:
   - '`create_theme`'
