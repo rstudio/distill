@@ -3,11 +3,12 @@
 
 #' Import a post into a blog
 #'
-#' Import a post from an external source (e.g. GitHub repo, RPubs article, etc.).
+#' Import a distill post from an external source (e.g. GitHub repo, RPubs article, etc.).
+#' Importable posts must have `distill::distill_article` as the output format in the YAML.
 #'
 #' @inheritParams create_post
 #'
-#' @param url URL for post to import
+#' @param url URL for distill post to import
 #' @param check_license Verify that the imported posted has a creative commons license
 #' @param overwrite Overwrite existing post? (defaults to `FALSE`, use [update_post()]
 #'   to update an existing post in-place).
