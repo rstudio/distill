@@ -34,7 +34,7 @@ Imports:
     utils,
     stats,
     tools,
-    rmarkdown (>= 2.6),
+    rmarkdown (>= 2.7.10),
     bookdown (>= 0.8),
     xfun (>= 0.2),
     htmltools, 
@@ -62,5 +62,6 @@ Suggests:
     rsconnect,
     testthat (>= 3.0.0),
     withr
+Remotes: rstudio/rmarkdown
 Language: en-US
 Config/testthat/edition: 3
