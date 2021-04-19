@@ -139,10 +139,6 @@ distill_article <- function(toc = FALSE,
     # pandoc args
     args <- c()
 
-    # additional user css
-    for (css_file in css)
-      args <- c(args, "--css", pandoc_path_arg(css_file))
-
     # compute knitr output file
     output_file <- file_with_meta_ext(input_file, "knit", "md")
 
@@ -299,6 +295,7 @@ distill_article <- function(toc = FALSE,
       smart = smart,
       self_contained = self_contained,
       lib_dir = lib_dir,
+      css = css,
       mathjax = mathjax,
       template = "default",
       pandoc_args = pandoc_args,
