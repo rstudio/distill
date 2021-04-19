@@ -10,6 +10,8 @@
 #'
 #' @inheritParams rmarkdown::html_document
 #'
+#' @param css CSS and/or Sass files to include. Files with an extension of `.sass` or
+#'  `.scss` are compiled to CSS via `sass::sass()`.
 #' @param toc_float Float the table of contents to the left when the article
 #'   is displayed at widths > 1000px. If set to `FALSE` or the width is less
 #'   than 1000px the table of contents will be placed above the article body.

@@ -87,7 +87,8 @@ base R Markdown HTML output formatter \code{\link[rmarkdown]{html_document_base}
 
 \item{theme}{CSS file with theme variable definitions}
 
-\item{css}{One or more css files to include}
+\item{css}{CSS and/or Sass files to include. Files with an extension of \code{.sass} or
+\code{.scss} are compiled to CSS via \code{sass::sass()}.}
 
 \item{includes}{Named list of additional content to include within the
 document (typically created using the \code{\link[rmarkdown]{includes}} function).}
