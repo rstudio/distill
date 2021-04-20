@@ -157,7 +157,9 @@ create_post <- function(title,
   # if we still don't have an author then auto-detect
   if (is.null(author)) {
     author <- list(author = list(list(name = fullname(fallback = "Unknown"))))
-  } else if (is.character(author)) { # if author is given as argument to function
+  }
+
+  if (is.character(author) & author != "auto") { # if author is given as argument to function
     author <- list(author = author)
   }
   # author to yaml
