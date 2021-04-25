@@ -10,6 +10,8 @@
 #'
 #' @inheritParams rmarkdown::html_document
 #'
+#' @param css CSS and/or Sass files to include. Files with an extension of `.sass` or
+#'  `.scss` are compiled to CSS via `sass::sass()`.
 #' @param toc_float Float the table of contents to the left when the article
 #'   is displayed at widths > 1000px. If set to `FALSE` or the width is less
 #'   than 1000px the table of contents will be placed above the article body.
@@ -138,10 +140,6 @@ distill_article <- function(toc = FALSE,
 
     # pandoc args
     args <- c()
-
-    # additional user css
-    for (css_file in css)
-      args <- c(args, "--css", pandoc_path_arg(css_file))
 
     # compute knitr output file
     output_file <- file_with_meta_ext(input_file, "knit", "md")
@@ -299,6 +297,7 @@ distill_article <- function(toc = FALSE,
       smart = smart,
       self_contained = self_contained,
       lib_dir = lib_dir,
+      css = css,
       mathjax = mathjax,
       template = "default",
       pandoc_args = pandoc_args,
