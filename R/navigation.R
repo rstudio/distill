@@ -276,7 +276,7 @@ fixup_navigation_paths <- function(file, site_dir, site_config, offset) {
 
   # process if necessary
   if (!is.null(offset)) {
-    html <- xml2::read_xml(file)
+    html <- xml2::read_html(file)
     fixup_element_paths(html, "a", "href")
     fixup_element_paths(html, "img", "src")
     tmp <- tempfile(fileext = ".html")
