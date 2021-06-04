@@ -143,7 +143,7 @@ write_feed_xml_html_content <- function(input_path, article, site_config) {
                     ))
 
   # read contents
-  html_contents <- paste(readLines(html_file), collapse = "\n")
+  html_contents <- paste(xfun::read_utf8(html_file), collapse = "\n")
 
   # fix image paths
   html_contents <- gsub(paste0(basename(dirname(rmd_file)), "/"),
