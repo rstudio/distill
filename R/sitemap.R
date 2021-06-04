@@ -245,7 +245,7 @@ write_feed_xml <- function(feed_xml, site_config, collection, articles) {
 
     full_content_path <- NULL
     if (identical(site_config$rss$full_content, TRUE) && is.character(article$input_file)) {
-      guess_rmd <- paste0(gsub("\\.utf.*\\.md|\\.md", "", article$input_file), ".Rmd")
+      guess_rmd <- paste0(gsub("\\.(utf|knit).*\\.md|\\.md", "", article$input_file), ".Rmd")
       full_content_path <- dir(getwd(), pattern = guess_rmd, full.names = TRUE, recursive = TRUE)
     }
 
