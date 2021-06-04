@@ -280,7 +280,7 @@ fixup_navigation_paths <- function(file, site_dir, site_config, offset) {
     fixup_element_paths(html, "a", "href")
     fixup_element_paths(html, "img", "src")
     tmp <- tempfile(fileext = ".html")
-    xml2::write_xml(html, tmp, options = c("format", "no_declaration"))
+    xml2::write_html(html, tmp, options = c("format", "no_declaration"))
     file <- tmp
   }
 
