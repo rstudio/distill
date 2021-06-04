@@ -1,5 +1,6 @@
 ## distill v1.3 (Development)
 
+-   Fix issue w/ full content and categorized rss feed (\#380).
 -   Require **lubridate** 1.7.10 to fix an issue with timezone parsing on MacOS (\#315).
 -   Listing pages are correctly filtered when using categories with special characters, encoded in URI (\#332).
 -   **distill** now works with project folder containing special characters (\#148).
