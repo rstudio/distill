@@ -143,7 +143,7 @@ write_feed_xml_html_content <- function(input_path, article, site_config) {
                     ))
 
   # read contents
-  html_contents <- paste(readLines(html_file), collapse = "\n")
+  html_contents <- paste(xfun::read_utf8(html_file), collapse = "\n")
 
   # fix image paths
   html_contents <- gsub(paste0(basename(dirname(rmd_file)), "/"),
@@ -245,7 +245,7 @@ write_feed_xml <- function(feed_xml, site_config, collection, articles) {
 
     full_content_path <- NULL
     if (identical(site_config$rss$full_content, TRUE) && is.character(article$input_file)) {
-      guess_rmd <- paste0(gsub("\\.utf.*\\.md|\\.md", "", article$input_file), ".Rmd")
+      guess_rmd <- paste0(gsub("\\.(utf|knit).*\\.md|\\.md", "", article$input_file), ".Rmd")
       full_content_path <- dir(getwd(), pattern = guess_rmd, full.names = TRUE, recursive = TRUE)
     }
 
