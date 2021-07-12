@@ -1,5 +1,6 @@
 ## distill v1.3 (Development)
 
+-   Fix references style by adding CSS rules used in Pandoc for citeproc.
 -   Fix issue w/ full content and categorized rss feed (\#380).
 -   Fix issue w/ `_footer.html` containing HTML tags using attributes with no value (\#377).
 -   Require **lubridate** 1.7.10 to fix an issue with timezone parsing on MacOS (\#315).
