@@ -1,11 +1,12 @@
 ## distill v1.3 (Development)
 
+-   Fix homepage not showing any posts after upgrading to **rmarkdown** 2.11 (#403)
 -   Fix references style by adding CSS rules used in Pandoc for citeproc.
--   Fix issue w/ full content and categorized rss feed (\#380).
--   Fix issue w/ `_footer.html` containing HTML tags using attributes with no value (\#377).
--   Require **lubridate** 1.7.10 to fix an issue with timezone parsing on MacOS (\#315).
--   Listing pages are correctly filtered when using categories with special characters, encoded in URI (\#332).
--   **distill** now works with project folder containing special characters (\#148).
+-   Fix issue w/ full content and categorized rss feed (#380).
+-   Fix issue w/ `_footer.html` containing HTML tags using attributes with no value (#377).
+-   Require **lubridate** 1.7.10 to fix an issue with timezone parsing on MacOS (#315).
+-   Listing pages are correctly filtered when using categories with special characters, encoded in URI (#332).
+-   **distill** now works with project folder containing special characters (#148).
 -   Improved handling for citations with multiple ids (show popup and include in Google Scholar metadata).
 -   `css` argument in `distill_article()` now supports new feature from `rmarkdown::html_document_base()` and will compile to CSS any `.scss` or `.sass` file.
 
@@ -13,8 +14,8 @@
 
 -   Support for optional user display of source code via the `code_folding` option.
 -   Display citation popup when hovering over references.
--   Definitely fix issue w/ importing articles from git repos with `main` default branch (\#215).
--   Fix an issue with highlighting on Windows when there is a space in the resource's path (\#236).
+-   Definitely fix issue w/ importing articles from git repos with `main` default branch (#215).
+-   Fix an issue with highlighting on Windows when there is a space in the resource's path (#236).
 -   Add optional cookie consent overlay for opt-in to Google Analytics and Disqus.
 -   Support for including pages that use alternate R Markdown formats within Distill websites.
 -   Automatically register collections referenced in `listings` YAML metadata.
@@ -49,7 +50,7 @@
 
 -   Provide heading anchor links in left margin on hover.
 
--   Display article table of contents in the left sidebar. This is done only when the browser \>= 1000 pixels wide, otherwise it's shown at the top.
+-   Display article table of contents in the left sidebar. This is done only when the browser >= 1000 pixels wide, otherwise it's shown at the top.
 
 -   Added `create_article()` function for straightforward creation of new articles.
 
