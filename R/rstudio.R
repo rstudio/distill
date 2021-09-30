@@ -42,6 +42,11 @@ rstudio_version <- function() {
     # detect version using Rmd new env var added in 1.2.638
     version <- Sys.getenv("RSTUDIO_VERSION", unset = "1.1")
 
+    # Support new scheme when IDE report wrongly
+    # https://github.com/rstudio/rstudio/pull/9796#issuecomment-931200543
+    # TODO: remove when fixed in later release
+    version <- gsub("(?:-(?:preview|daily))?[+](\\d+)(?:.pro\\d+)?", ".\\1", version)
+
     # return version info
     list(
       mode = mode,
