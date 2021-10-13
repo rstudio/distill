@@ -1,4 +1,4 @@
-## distill v1.3 (Development)
+## distill v1.3 (CRAN)
 
 -   Fix homepage not showing any posts after upgrading to **rmarkdown** 2.11 (#403)
 -   Fix references style by adding CSS rules used in Pandoc for citeproc.
@@ -10,7 +10,7 @@
 -   Improved handling for citations with multiple ids (show popup and include in Google Scholar metadata).
 -   `css` argument in `distill_article()` now supports new feature from `rmarkdown::html_document_base()` and will compile to CSS any `.scss` or `.sass` file.
 
-## distill v1.2 (CRAN)
+## distill v1.2
 
 -   Support for optional user display of source code via the `code_folding` option.
 -   Display citation popup when hovering over references.
