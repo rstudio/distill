@@ -18,7 +18,7 @@ import_post(
 update_post(slug, view = interactive())
 }
 \arguments{
-\item{url}{URL for post to import}
+\item{url}{URL for distill post to import}
 
 \item{slug}{Post slug (directory name). Automatically computed from title if not
 provided.}
@@ -41,5 +41,6 @@ Returns (invisibly) a logical indicating whether the operation completed
 that lacked a creative commons license).
 }
 \description{
-Import a post from an external source (e.g. GitHub repo, RPubs article, etc.).
+Import a distill post from an external source (e.g. GitHub repo, RPubs article, etc.).
+Importable posts must have \code{distill::distill_article} as the output format in the YAML.
 }
