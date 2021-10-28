@@ -1,4 +1,6 @@
-## distill v1.3 (CRAN)
+# distill (development version)
+
+# distill v1.3 (CRAN)
 
 -   Fix homepage not showing any posts after upgrading to **rmarkdown** 2.11 (#403)
 -   Fix references style by adding CSS rules used in Pandoc for citeproc.
@@ -10,7 +12,7 @@
 -   Improved handling for citations with multiple ids (show popup and include in Google Scholar metadata).
 -   `css` argument in `distill_article()` now supports new feature from `rmarkdown::html_document_base()` and will compile to CSS any `.scss` or `.sass` file.
 
-## distill v1.2
+# distill v1.2
 
 -   Support for optional user display of source code via the `code_folding` option.
 -   Display citation popup when hovering over references.
@@ -27,14 +29,14 @@
 -   Add `sourceCode` class to pre and code tags for downlit output.
 -   Fix issue w/ UTF-8 encoded characters in site \_footer.html and listing creation.
 
-## distill v1.1
+# distill v1.1
 
 -   Fixed issue with `overflow: hidden` for code blocks on mobile devices (is now `overflow: auto`).
 -   Improve full text search behavior w/ `ignoreLocation: true` and `threshold: 0`.
 -   Fix issue w/ importing articles from git repos with `main` default branch.
 -   Make headroom scroll tolerance a bit more forgiving (5px vs. 1px).
 
-## distill v1.0
+# distill v1.0
 
 -   Add site search feature using [Fuse.js](https://github.com/krisk/Fuse) (enabled by default for blog sites). Can be explicitly enabled or disabled for any site using the `search` field in the `navbar` key of `_site.yml`.
 
@@ -66,7 +68,7 @@
 
 -   Ensure that date fields in RSS feeds and sitemaps use `en_US.UTF-8` locale.
 
-## distill v0.8 (CRAN)
+# distill v0.8 (CRAN)
 
 -   Generate RSS category feeds using rss/categories in site config
 -   Support rendering full RSS content when rss/full_content is TRUE in site config
@@ -76,11 +78,11 @@
 -   Provide alt text for logo image in navigation bar.
 -   Add support some missing Google Scholar meta tags such as `citation_conference_title`, `citation_isbn`, `citation_firstpage`, `citation_lastpage`, `citation_dissertation_institution`, `citation_technical_report_institution`, and `citation_technical_report_number` and their corresponding bibliography entries.
 
-## distill v0.7 (CRAN)
+# distill v0.7 (CRAN)
 
 -   Update to latest version of Distill template from <https://github.com/distillpub/template>
 
-## radix v0.6 (CRAN)
+# radix v0.6 (CRAN)
 
 -   Custom listing pages (e.g. gallery of featured posts)
 -   Support for bookdown-style figure cross-references (e.g. `\@ref{fig:plot1}`)
@@ -104,6 +106,6 @@
 -   Fix problem with mailto links within blog posts
 -   Render welcome post in New Radix Blog RStudio template
 
-## radix v0.5
+# radix v0.5
 
 -   Initial CRAN release
