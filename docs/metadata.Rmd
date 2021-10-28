@@ -40,7 +40,7 @@ description: |
   Scientific and technical writing, native to the web
 output: distill::distill_article
 repository_url: https://github.com/rstudio/distill
-compare_updates_url: https://github.com/rstudio/distill/compare/pubv1...master
+compare_updates_url: https://github.com/rstudio/distill/compare/pubv1...main
 ---
 ```
 

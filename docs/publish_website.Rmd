@@ -46,15 +46,15 @@ Unlike the other website publishing options described below, [RStudio Connect](h
     file.create(".nojekyll")
     ```
 
-2.  Set the `output_dir` within `_site.yml` to match the repository directory your site is served from. You can configure GitHub Pages to publish from the root of your master branch or the `docs` sub-directory:
+2.  Set the `output_dir` within `_site.yml` to match the repository directory your site is served from. You can configure GitHub Pages to publish from the root of your `master` or `main` branch or the `docs` sub-directory:
 
     ![](images/github-pages-directory.png){width="95%"}
 
     Depending on your configuration you should set the `output_dir` as follows:
 
     ``` {.yaml}
-    output_dir: "."     # root of master branch
-    output_dir: "docs"  # docs directory of master branch
+    output_dir: "."     # root of master or main branch
+    output_dir: "docs"  # docs directory of master or main branch
     ```
 
 See the [GitHub Pages](https://pages.github.com/) documentation for additional details on creating and deploying websites with GitHub.

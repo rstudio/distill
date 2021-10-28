@@ -45,7 +45,7 @@ Here are the steps required to publish a Distill article to GitHub Pages:
 
 1)  Create a new Git repository that will be used to host your article.
 
-2)  Configure your repository to publish the contents of the `master` branch (you can do from the *Settings* page for the repository):
+2)  Configure your repository to publish the contents of the `master` or `main` branch (you can do from the *Settings* page for the repository):
 
     ![](images/gh-pages-settings.png){.screenshot width="90%"}
 
