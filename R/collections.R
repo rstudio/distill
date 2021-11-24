@@ -673,7 +673,7 @@ article_footer_html <- function(site_dir, site_config, collection, article) {
       HTML("Share: &nbsp;"),
       tagList(lapply(share_services, function(service) {
         tags$a(href = sharing_link(service), `aria-label` = service,
-          tag("i", list(class = sprintf("fab fa-%s", service)))
+          tag("i", list(class = sprintf("fab fa-%s", service)), `aria-hidden` = "true")
         )
       }))
     )
