@@ -1,5 +1,7 @@
 # distill (development version)
 
+-   Improve WAVE assessment of output by adding `aria-hidden` on icon and setting `aria-label` on wrapping link (thanks, @batpigandme, #426).
+
 # distill v1.3 (CRAN)
 
 -   Fix homepage not showing any posts after upgrading to **rmarkdown** 2.11 (#403)
@@ -52,7 +54,7 @@
 
 -   Provide heading anchor links in left margin on hover.
 
--   Display article table of contents in the left sidebar. This is done only when the browser >= 1000 pixels wide, otherwise it's shown at the top.
+-   Display article table of contents in the left sidebar. This is done only when the browser \>= 1000 pixels wide, otherwise it's shown at the top.
 
 -   Added `create_article()` function for straightforward creation of new articles.
 
