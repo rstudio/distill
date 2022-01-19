@@ -752,7 +752,7 @@ discover_preview <- function(file) {
   while (!completed) {
 
     # read next 500 lines
-    lines <- readLines(con, n = 500, encoding = "UTF-8")
+    lines <- readLines(con, n = 500)
     if (length(lines) == 0)
       break
 
