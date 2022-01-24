@@ -1,5 +1,7 @@
 # distill (development version)
 
+-   Fix an issue when discovering a preview image with UTF-8 characters in its caption (thanks, @egodrive, #436).
+
 -   Improve WAVE assessment of output by adding `aria-hidden` on icon and setting `aria-label` on wrapping link (thanks, @batpigandme, #426).
 
 # distill v1.3 (CRAN)
