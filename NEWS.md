@@ -1,5 +1,7 @@
 # distill (development version)
 
+-   Fix an issue with double tooltip on hover when a note style CSL is used for references (thanks, @sj-io, #423).
+
 -   Fix an issue when discovering a preview image with UTF-8 characters in its caption (thanks, @egodrive, #436).
 
 -   Improve WAVE assessment of output by adding `aria-hidden` on icon and setting `aria-label` on wrapping link (thanks, @batpigandme, #426).
