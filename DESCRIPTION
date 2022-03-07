@@ -63,3 +63,4 @@ Suggests:
     withr
 Language: en-US
 Config/testthat/edition: 3
+Config/Needs/website: rstudio/quillt, pkgdown
