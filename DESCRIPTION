@@ -55,6 +55,7 @@ Imports:
     xml2,
     yaml
 Suggests:
+    covr,
     DiagrammeR,
     htmlwidgets,
     progress,
