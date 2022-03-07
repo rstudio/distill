@@ -3,6 +3,16 @@
 
 # distill for R Markdown <img src="man/figures/logo.png" align="right" height="139"/>
 
+<!-- badges: start -->
+
+[![CRAN
+status](https://www.r-pkg.org/badges/version/distill)](https://CRAN.R-project.org/package=distill)
+[![R-CMD-check](https://github.com/rstudio/distill/actions/workflows/R-CMD-check.yaml/badge.svg)](https://github.com/rstudio/distill/actions/workflows/R-CMD-check.yaml)
+[![Codecov test
+coverage](https://codecov.io/gh/rstudio/distill/branch/main/graph/badge.svg)](https://app.codecov.io/gh/rstudio/distill?branch=main)
+
+<!-- badges: end -->
+
 Distill for R Markdown is a web publishing format optimized for
 scientific and technical communication. Distill articles include:
 
@@ -37,7 +47,7 @@ Or install the development version from GitHub with:
     # install.packages("devtools")
     devtools::install_github("rstudio/distill")
 
-Learn more about using Distill at <https://rstudio.github.io/distill>.
+Learn more about using Distill at <https://rstudio.github.io/distill/>.
 
 ## Get help
 
