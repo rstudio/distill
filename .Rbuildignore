@@ -16,3 +16,4 @@ notes
 ^pkgdown$
 ^vignettes
 ^\.github$
+^codecov\.yml$
