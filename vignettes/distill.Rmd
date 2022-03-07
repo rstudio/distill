@@ -1,5 +1,40 @@
 ---
-title: "Get started"
+title: "Learn distill "
+output: rmarkdown::html_vignette
+vignette: >
+  %\VignetteIndexEntry{Learn distill }
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
 ---
 
+```{r, include = FALSE}
+knitr::opts_chunk$set(
+  collapse = TRUE,
+  comment = "#>"
+)
+```
+
+# Overview
+
+<a href="https://bookdown.org/yihui/rmarkdown/books.html"><img src="https://bookdown.org/yihui/rmarkdown/images/cover.png" alt="R Markdown: The Definitive Guide" width="250" style="padding: 0 15px; float: right;"/></a>
+
+If you are new to **R Markdown**, we recommend you start with [R Markdown: The Definitive Guide](https://bookdown.org/yihui/rmarkdown/books.html) to get an overview. [Part I](https://bookdown.org/yihui/rmarkdown/installation.html) introduces how to install the relevant packages, and provides an overview of R Markdown, including the possible output formats, the Markdown syntax, the R code chunk syntax, and how to use other languages in R Markdown.
+
+## User Guide
+
 Learn more about how to start using Distill at <https://rstudio.github.io/distill>.
+
+## Going further with examples
+
+Look also at the [Examples](https://pkgs.rstudio.com/distill/articles/examples.html) page for a website collection using **distill**
+
+## Cheatsheet
+
+<a href="https://raw.githubusercontent.com/rstudio/cheatsheets/main/rmarkdown.pdf"><img src="https://raw.githubusercontent.com/rstudio/cheatsheets/main/pngs/rmarkdown.png" alt="R Markdown cheatsheet" data-external="1" width="400" style="padding: 0 15px; float: right;"/></a>
+
+The [R Markdown cheatsheet](https://raw.githubusercontent.com/rstudio/cheatsheets/main/rmarkdown.pdf) is a one page (two-sided) reference guide you can download as a quick reference while you work.
+
+You can access it from within the RStudio IDE:
+
+-   *Help \> Cheatsheets \>\
+    R Markdown Cheat Sheet*
