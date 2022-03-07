@@ -40,12 +40,18 @@ workflow based on literate programming.
 
 Install the released version of distill from CRAN:
 
-    install.packages("distill")
+``` r
+install.packages("distill")
+```
 
 Or install the development version from GitHub with:
 
-    # install.packages("devtools")
-    devtools::install_github("rstudio/distill")
+``` r
+# install.packages("remotes")
+remotes::install_github("rstudio/distill")
+# install.packages("pak")
+pak::pak("rstudio/distill")
+```
 
 Learn more about using Distill at <https://rstudio.github.io/distill/>.
 
