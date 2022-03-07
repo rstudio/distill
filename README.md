@@ -37,7 +37,7 @@ Or install the development version from GitHub with:
     # install.packages("devtools")
     devtools::install_github("rstudio/distill")
 
-Learn more about using Distill at <https://rstudio.github.io/distill>.
+Learn more about using Distill at <https://rstudio.github.io/distill/>.
 
 ## Get help
 
