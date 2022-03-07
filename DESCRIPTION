@@ -64,7 +64,9 @@ Suggests:
     shiny,
     testthat (>= 3.0.0),
     withr
-Config/Needs/website: rstudio/quillt, pkgdown
+Config/Needs/website: rstudio/quillt,
+ pkgdown,
+ tidyverse/tidytemplate
 Config/testthat/edition: 3
 Encoding: UTF-8
 Language: en-US
