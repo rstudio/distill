@@ -19,14 +19,14 @@ How do you apply a custom theme to a Distill site or blog? You have two
 options:
 \enumerate{
 \item Apply it site-wide by adding a \code{theme} key to the top-level of your
-\verb{_site.yml} configuration file:\if{html}{\out{<div class="yaml">}}\preformatted{name: "distill"
+\verb{_site.yml} configuration file:\if{html}{\out{<div class="sourceCode yaml">}}\preformatted{name: "distill"
 title: "Distill for R Markdown"
 theme: theme.css
 navbar:
   # (navbar definition here)
 }\if{html}{\out{</div>}}
 \item Apply to an individual article by adding a \code{theme} key to your
-article’s YAML front-matter:\if{html}{\out{<div class="yaml">}}\preformatted{---
+article’s YAML front-matter:\if{html}{\out{<div class="sourceCode yaml">}}\preformatted{---
 title: "The Sharpe Ratio"
 output:
   distill::distill_article:
