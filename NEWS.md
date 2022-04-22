@@ -2,9 +2,6 @@
 
 -   Improve highlighting theme `arrow` regarding accessibility.
 
-```{=html}
-<!-- -->
-```
 -   Fix an issue with encoding when inserting `_footer.html` in posts (thanks, \@shikokuchuo, #417).
 
 -   Fix an issue with double tooltip on hover when a note style CSL is used for references (thanks, \@sj-io, #423).
