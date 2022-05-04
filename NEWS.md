@@ -1,5 +1,6 @@
 # distill (development version)
 
+-   Fix an issue with Leaflet Markers not showing when using non default layout (thanks, \\\@AndersFenger, #106).
 -   `code_folding = FALSE` set on a chunk is now correctly taken into account and does not enforce `echo = TRUE`. As a reminder, setting `code_folding: true` in YAML header will enforce `echo = TRUE` on chunk, unless `code_folding` is unset on a per-chunk basis (thanks, \\\@werkstattcodes, #297).
 -   `create_website()` now works when no `dir` is provided and prompted to user.
 -   Improve highlighting theme `arrow` regarding accessibility.
