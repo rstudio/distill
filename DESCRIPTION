@@ -51,7 +51,7 @@ Imports:
     tools,
     utils,
     whisker,
-    xfun (>= 0.2),
+    xfun (>= 0.18),
     xml2,
     yaml
 Suggests:
