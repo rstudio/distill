@@ -246,7 +246,14 @@ write_feed_xml <- function(feed_xml, site_config, collection, articles) {
     full_content_path <- NULL
     if (identical(site_config$rss$full_content, TRUE) && is.character(article$input_file)) {
       guess_rmd <- paste0(gsub("\\.(utf|knit).*\\.md|\\.md", "", article$input_file), ".Rmd")
-      full_content_path <- dir(getwd(), pattern = guess_rmd, full.names = TRUE, recursive = TRUE)
+      full_content_path <- tryCatch(
+        xfun::magic_path(guess_rmd, root = getwd(), relative = TRUE, error = TRUE, message = FALSE),
+        error = function(e) {
+          warning("Could not find the path ", sQuote(guess_rmd), " to build full content RSS feed for HTML page ", sQuote(article$path),
+                  ". Only simple content will be inserted for this article in RSS feed.")
+          NULL
+        }
+      )
     }
 
     if (length(full_content_path) > 0) {
