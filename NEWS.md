@@ -1,5 +1,6 @@
 # distill (development version)
 
+-   Fix an issue with running `targets::tar_render()` with a distill Rmd document (thanks, \\\@tarensanders, #400)
 -   Fix an issue with `full_content: true` for RSS feed creation (thanks, \\\@yuryzablotski, #454).
 -   Footnotes inserted in tables have now their tooltip correctly place (thanks, \\\@RMRubert, #411).
 -   Fix an issue with Leaflet Markers not showing when using non default layout (thanks, \\\@AndersFenger, #106).
