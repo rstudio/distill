@@ -1,0 +1,49 @@
+---
+title: "Leaflet in layouts"
+description: |
+  Testing behavior of leaflets
+author:
+  - name: C.DERVIEUX
+    date: 04/05/2022
+output:
+  distill::distill_article:
+    self_contained: true
+editor_options:
+  markdown:
+    canonical: false
+---
+
+````{cat, engine.opts = list(file = "template.rmd")}
+# {{ layout }}
+
+```{r, layout = "{{ layout }}" }
+library(leaflet)
+leaflet() %>%
+  addTiles() %>%  # Add default OpenStreetMap map tiles
+  addMarkers(lng=174.768, lat=-36.852, popup="The birthplace of R")
+```
+
+````
+
+```{r}
+insert_leaflet <- function(layout = "l-body") {
+  knitr::knit_child(text = knitr::knit_expand("template.rmd", layout = layout))
+}
+```
+
+`r insert_leaflet('l-body')`
+
+`r insert_leaflet('l-body-outset')`
+
+`r insert_leaflet('l-page')`
+
+`r insert_leaflet('l-screen')`
+
+`r insert_leaflet('l-screen-inset')`
+
+`r insert_leaflet('l-screen-inset shaded')`
+
+```{r}
+unlink("template.rmd")
+```
+

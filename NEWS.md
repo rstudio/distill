@@ -1,11 +1,16 @@
 # distill (development version)
 
+-   Fix an issue prevent sizing of figures produced with **knitr** using `out.width` chunk option (thanks, \\\@ssp3nc3r, #286).
+-   Fix an issue with running `targets::tar_render()` with a distill Rmd document (thanks, \\\@tarensanders, #400)
+-   Fix an issue with `full_content: true` for RSS feed creation (thanks, \\\@yuryzablotski, #454).
+-   Footnotes inserted in tables have now their tooltip correctly place (thanks, \\\@RMRubert, #411).
+-   Fix an issue with Leaflet Markers not showing when using non default layout (thanks, \\\@AndersFenger, #106).
+-   `code_folding = FALSE` set on a chunk is now correctly taken into account and does not enforce `echo = TRUE`. As a reminder, setting `code_folding: true` in YAML header will enforce `echo = TRUE` on chunk, unless `code_folding` is unset on a per-chunk basis (thanks, \\\@werkstattcodes, #297).
+-   `create_website()` now works when no `dir` is provided and prompted to user.
+-   Improve highlighting theme `arrow` regarding accessibility.
 -   Fix an issue with encoding when inserting `_footer.html` in posts (thanks, \@shikokuchuo, #417).
-
 -   Fix an issue with double tooltip on hover when a note style CSL is used for references (thanks, \@sj-io, #423).
-
 -   Fix an issue when discovering a preview image with UTF-8 characters in its caption (thanks, \@egodrive, #436).
-
 -   Improve WAVE assessment of output by adding `aria-hidden` on icon and setting `aria-label` on wrapping link (thanks, \@batpigandme, #426).
 
 # distill v1.3 (CRAN)

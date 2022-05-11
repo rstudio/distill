@@ -105,7 +105,7 @@ distill_article <- function(toc = FALSE,
   knitr_options$opts_hooks <- list()
   knitr_options$opts_hooks$preview <- knitr_preview_hook
   knitr_options$opts_hooks$code_folding <- function(options) {
-    if (!identical(code_folding, FALSE)) {
+    if (!identical(options$code_folding, FALSE)) {
       options[["echo"]] <- TRUE
     }
     options

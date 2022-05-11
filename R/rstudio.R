@@ -30,17 +30,24 @@ rstudio_version <- function() {
   # Running at the RStudio console
   if (rstudioapi::isAvailable()) {
 
-    rstudioapi::versionInfo()
+    rstudioapi::versionInfo()[c("mode", "version")]
 
-    # Running in a child process
-  } else if (!is.na(Sys.getenv("RSTUDIO", unset = NA))) {
+    # Running in a child process of RStudio (e.g render pane)
+  } else if (is_rstudio()) {
+
+    if (is_tty()) {
+      # probably called using callr from within rstudio
+      return(NULL)
+    }
+
+    # detect version using Rmd new env var added in 1.2.638
+    # If not set
+    version <- Sys.getenv("RSTUDIO_VERSION", unset = "1.1")
 
     # detect desktop vs. server using server-only environment variable
     mode <- ifelse(is.na(Sys.getenv("RSTUDIO_HTTP_REFERER", unset = NA)),
                    "desktop", "server")
 
-    # detect version using Rmd new env var added in 1.2.638
-    version <- Sys.getenv("RSTUDIO_VERSION", unset = "1.1")
 
     # Support new scheme when IDE report wrongly
     # https://github.com/rstudio/rstudio/pull/9796#issuecomment-931200543
@@ -62,3 +69,19 @@ rstudio_version <- function() {
 have_rstudio_project_api <- function() {
   rstudioapi::isAvailable("1.1.287")
 }
+
+
+is_rstudio <- function() {
+  Sys.getenv("RSTUDIO") == "1"
+}
+
+is_rstudio_console <- function() {
+  .Platform$GUI == "RStudio"
+}
+
+# should be true when run inside a background process of the console
+# e.g using callr (callr::r(\() isatty(stdin())))
+is_tty <- function() {
+  isatty(stdin())
+}
+

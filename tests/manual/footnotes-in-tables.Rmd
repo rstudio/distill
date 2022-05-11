@@ -1,0 +1,22 @@
+---
+title: "Footnotes inside tables"
+date: 04-05-2022
+output: distill::distill_article
+---
+
+Example of using footnotes inside tables. The tooltip should be correctly placed below the hovered text. Like footnotes in paragraph[^1]
+
+[^1]: like this
+
+|      Genre       | Songs |              Form Song              |
+|:----------------:|:-----:|:-----------------------------------:|
+| alternative rock |  393  |          Muse - Resistance          |
+|   ambient[^2]    |  19   |       Mauro Picotto - Adiemus       |
+|      blues       |  11   |       Leonard Cohen - Suzanne       |
+|   classic rock   |  710  | Dire Straits - Sultans of Swing[^3] |
+
+[^2]: Test 2
+
+[^3]: Some other content
+
+> From issue <https://github.com/rstudio/distill/issues/411>
