@@ -1,6 +1,6 @@
 test_that("blogs can be created", {
 
-  skip_if_pandoc_not_installed()
+  skip_if_not_pandoc()
 
   tmpdir <- withr::local_tempdir()
 
@@ -18,7 +18,7 @@ test_that("blogs can be created", {
 })
 
 test_that("websites can be created", {
-  skip_if_pandoc_not_installed()
+  skip_if_not_pandoc()
   expect_error({
     on.exit(unlink("testsite", recursive = TRUE), add = TRUE)
     create_website("testsite", "Test Site", edit = FALSE)
