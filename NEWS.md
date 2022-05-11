@@ -1,5 +1,6 @@
 # distill (development version)
 
+-   Fix an issue prevent sizing of figures produced with **knitr** using `out.width` chunk option (thanks, \\\@ssp3nc3r, #286).
 -   Fix an issue with running `targets::tar_render()` with a distill Rmd document (thanks, \\\@tarensanders, #400)
 -   Fix an issue with `full_content: true` for RSS feed creation (thanks, \\\@yuryzablotski, #454).
 -   Footnotes inserted in tables have now their tooltip correctly place (thanks, \\\@RMRubert, #411).
