@@ -1,5 +1,6 @@
 # distill (development version)
 
+-   Fix navbar link when a destination page contains `index.html` (thanks, \\\@phillc73, #91).
 -   Content in `<script>` and `<style>` are now considered not searchable and exclude from content in `search.json`. This should make the json file a lot lighter and loading faster as htmlwidget code (e.g plotly graph) would correctly be not included (thanks, \\\@mitchelloharawild, #425).
 -   Fix an issue with `search.json` that was still written even when `search: false` in set in config (thanks, \\\@mitchelloharawild, #425).
 -   Fix an issue prevent sizing of figures produced with **knitr** using `out.width` chunk option (thanks, \\\@ssp3nc3r, #286).

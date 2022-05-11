@@ -1172,7 +1172,7 @@ function init_distill() {
                 x += elem.offsetLeft;
                 y += elem.offsetTop;
             }
-    
+
             return { left: x, top: y };
         }
         // https://developer.mozilla.org/en-US/docs/Web/API/HTMLElement/offsetTop
@@ -1304,7 +1304,7 @@ function init_common() {
   // get rid of index.html references in header
   if (window.location.protocol !== "file:") {
     $('.distill-site-header a[href]').each(function(i,val) {
-      $(this).attr('href', $(this).attr('href').replace("index.html", "./"));
+      $(this).attr('href', $(this).attr('href').replace(/^index[.]html/, "./"));
     });
   }
 
