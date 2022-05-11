@@ -88,7 +88,10 @@ distill_website <- function(input, encoding = getOption("encoding"), ...) {
       write_sitemap_xml(input, config)
 
       # write top level article search index
-      write_search_json(input, config)
+      # if search is activated
+      if (site_search_enabled(config)) {
+        write_search_json(input, config)
+      }
 
       # return result
       result
