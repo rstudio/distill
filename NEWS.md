@@ -1,4 +1,4 @@
-# distill (development version)
+# distill 1.4 (CRAN)
 
 -   Fix navbar link when a destination page contains `index.html` (thanks, \\\@phillc73, #91).
 -   Fix an issue with `search.json` that was still written even when `search: false` in set in config (thanks, \\\@mitchelloharawild, #425).
@@ -16,7 +16,7 @@
 -   Improve highlighting theme `arrow` regarding accessibility.
 -   `code_folding = FALSE` set on a chunk is now correctly taken into account and does not enforce `echo = TRUE`. As a reminder, setting `code_folding: true` in YAML header will enforce `echo = TRUE` on chunk, unless `code_folding` is unset on a per-chunk basis (thanks, \\\@werkstattcodes, #297).
 
-# distill v1.3 (CRAN)
+# distill v1.3
 
 -   Fix homepage not showing any posts after upgrading to **rmarkdown** 2.11 (#403)
 -   Fix references style by adding CSS rules used in Pandoc for citeproc.
