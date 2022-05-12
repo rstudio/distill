@@ -31,7 +31,7 @@ Authors:
 
 Other contributors:
 \itemize{
-  \item  RStudio, Inc. [copyright holder]
+  \item  RStudio, PBC [copyright holder, funder]
   \item  Google LLC (https://distill.pub/guide/) [contributor, copyright holder]
   \item Nick Williams (https://wicky.nillia.ms/headroom.js/) [contributor, copyright holder]
   \item Denis Demchenko (https://github.com/lancedikson/bowser) [contributor, copyright holder]
