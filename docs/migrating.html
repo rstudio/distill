@@ -82,6 +82,7 @@ code span.vs { color: #008080; } /* VerbatimString */
 code span.wa { color: #008000; font-weight: bold; } /* Warning */
 </style>
 
+
   <!--radix_placeholder_meta_tags-->
   <title>Distill for R Markdown: Migrating from Radix</title>
 
@@ -454,7 +455,7 @@ code span.wa { color: #008000; font-weight: bold; } /* Warning */
 
   </style>
 
-  <script src="site_libs/jquery-1.11.3/jquery.min.js"></script>
+  <script src="site_libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
   <link href="site_libs/font-awesome-5.1.0/css/all.css" rel="stylesheet"/>
   <link href="site_libs/font-awesome-5.1.0/css/v4-shims.css" rel="stylesheet"/>
   <script src="site_libs/headroom-0.9.4/headroom.min.js"></script>
@@ -1026,10 +1027,6 @@ code span.wa { color: #008000; font-weight: bold; } /* Warning */
     position: relative;
     margin-bottom: 2.5em;
     margin-top: 1.5em;
-  }
-
-  .figure img {
-    width: 100%;
   }
 
   .figure .caption {
@@ -1861,7 +1858,16 @@ code span.wa { color: #008000; font-weight: bold; } /* Warning */
 
       // hoverable references
       $('span.citation[data-cites]').each(function() {
-        var refHtml = $('#ref-' + $(this).attr('data-cites')).html();
+        if ($(this).children()[0].nodeName == "D-FOOTNOTE") {
+          var fn = $(this).children()[0]
+          $(this).html(fn.shadowRoot.querySelector("sup"))
+          $(this).id = fn.id
+          fn.remove()
+        }
+        var refs = $(this).attr('data-cites').split(" ");
+        var refHtml = refs.map(function(ref) {
+          return "<p>" + $('#ref-' + ref).html() + "</p>";
+        }).join("\n");
         window.tippy(this, {
           allowHTML: true,
           content: refHtml,
@@ -1872,6 +1878,31 @@ code span.wa { color: #008000; font-weight: bold; } /* Warning */
           placement: 'bottom-start'
         });
       });
+
+      // fix footnotes in tables (#411)
+      // replacing broken distill.pub feature
+      $('table d-footnote').each(function() {
+        // we replace internal showAtNode methode which is triggered when hovering a footnote
+        this.hoverBox.showAtNode = function(node) {
+          // ported from https://github.com/distillpub/template/pull/105/files
+          calcOffset = function(elem) {
+              let x = elem.offsetLeft;
+              let y = elem.offsetTop;
+              // Traverse upwards until an `absolute` element is found or `elem`
+              // becomes null.
+              while (elem = elem.offsetParent && elem.style.position != 'absolute') {
+                  x += elem.offsetLeft;
+                  y += elem.offsetTop;
+              }
+
+              return { left: x, top: y };
+          }
+          // https://developer.mozilla.org/en-US/docs/Web/API/HTMLElement/offsetTop
+          const bbox = node.getBoundingClientRect();
+          const offset = calcOffset(node);
+          this.show([offset.left + bbox.width, offset.top + bbox.height]);
+        }
+      })
 
       // clear polling timer
       clearInterval(tid);
@@ -1971,6 +2002,8 @@ code span.wa { color: #008000; font-weight: bold; } /* Warning */
     // mark non-body figures created by knitr chunks as 100% width
     $('.layout-chunk').each(function(i, val) {
       var figures = $(this).find('img, .html-widget');
+      // ignore leaflet img layers (#106)
+      figures = figures.filter(':not(img[class*="leaflet"])')
       if ($(this).attr('data-layout') !== "l-body") {
         figures.css('width', '100%');
       } else {
@@ -1993,7 +2026,7 @@ code span.wa { color: #008000; font-weight: bold; } /* Warning */
     // get rid of index.html references in header
     if (window.location.protocol !== "file:") {
       $('.distill-site-header a[href]').each(function(i,val) {
-        $(this).attr('href', $(this).attr('href').replace("index.html", "./"));
+        $(this).attr('href', $(this).attr('href').replace(/^index[.]html/, "./"));
       });
     }
 
@@ -2032,7 +2065,7 @@ code span.wa { color: #008000; font-weight: bold; } /* Warning */
   </script>
 
   <!--/radix_placeholder_distill-->
-  <script src="site_libs/header-attrs-2.6.3/header-attrs.js"></script>
+  <script src="site_libs/header-attrs-2.14/header-attrs.js"></script>
   <script src="site_libs/popper-2.6.0/popper.min.js"></script>
   <link href="site_libs/tippy-6.2.7/tippy.css" rel="stylesheet" />
   <link href="site_libs/tippy-6.2.7/tippy-light-border.css" rel="stylesheet" />
@@ -2155,12 +2188,24 @@ Publishing
 
 
 <div class="d-article">
-<p>When the <strong>distill</strong> package was initially published on CRAN, it was named <strong>radix</strong>. The name of the package has been subsequently changed to reflect it’s relationship with the <a href="https://github.com/distillpub/template">Distill web framework</a>.</p>
-<p>You can migrate your Radix documents to Distill by simply changing the output format from <code>radix::radix_article</code> to <code>distill::distill_article</code>. For example:</p>
-<p><img src="images/migrate-article.png" class="screenshot" style="width:95.0%" /></p>
-<p>If you have created a blog or website with Radix, you should additionally modify the <code>_site.yml</code> and <code>index.Rmd</code> files to reflect the use of the Distill package:</p>
-<p><img src="images/migrate-site.png" class="screenshot" style="width:95.0%" /></p>
-<div class="sourceCode" id="cb1"><pre class="sourceCode r distill-force-highlighting-css"><code class="sourceCode r"></code></pre></div>
+<p>When the <strong>distill</strong> package was initially published on
+CRAN, it was named <strong>radix</strong>. The name of the package has
+been subsequently changed to reflect it’s relationship with the <a
+href="https://github.com/distillpub/template">Distill web
+framework</a>.</p>
+<p>You can migrate your Radix documents to Distill by simply changing
+the output format from <code>radix::radix_article</code> to
+<code>distill::distill_article</code>. For example:</p>
+<p><img src="images/migrate-article.png" class="screenshot"
+style="width:95.0%" /></p>
+<p>If you have created a blog or website with Radix, you should
+additionally modify the <code>_site.yml</code> and
+<code>index.Rmd</code> files to reflect the use of the Distill
+package:</p>
+<p><img src="images/migrate-site.png" class="screenshot"
+style="width:95.0%" /></p>
+<div class="sourceCode" id="cb1"><pre
+class="sourceCode r distill-force-highlighting-css"><code class="sourceCode r"></code></pre></div>
 <!--radix_placeholder_article_footer-->
 <!--/radix_placeholder_article_footer-->
 </div>
@@ -2181,8 +2226,13 @@ Publishing
 <!--/radix_placeholder_appendices-->
 <!--radix_placeholder_navigation_after_body-->
 <div class="distill-site-nav distill-site-footer">
-<p>© Copyright 2018 <a href="https://github.com/distillpub/template/blob/master/AUTHORS">The Distill Template Authors</a> and <a href="https://www.rstudio.com">RStudio, Inc</a>.</p>
-<p>Software licensed under the <a href="https://www.apache.org/licenses/LICENSE-2.0">Apache License, v2.0</a>.</p>
+<p>© Copyright 2018 <a
+href="https://github.com/distillpub/template/blob/master/AUTHORS">The
+Distill Template Authors</a> and <a
+href="https://www.rstudio.com">RStudio, Inc</a>.</p>
+<p>Software licensed under the <a
+href="https://www.apache.org/licenses/LICENSE-2.0">Apache License,
+v2.0</a>.</p>
 </div>
 <!--/radix_placeholder_navigation_after_body-->
 

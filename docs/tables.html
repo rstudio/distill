@@ -82,6 +82,7 @@ code span.vs { color: #008080; } /* VerbatimString */
 code span.wa { color: #008000; font-weight: bold; } /* Warning */
 </style>
 
+
   <!--radix_placeholder_meta_tags-->
   <title>Distill for R Markdown: Tables</title>
 
@@ -454,7 +455,7 @@ code span.wa { color: #008000; font-weight: bold; } /* Warning */
 
   </style>
 
-  <script src="site_libs/jquery-1.11.3/jquery.min.js"></script>
+  <script src="site_libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
   <link href="site_libs/font-awesome-5.1.0/css/all.css" rel="stylesheet"/>
   <link href="site_libs/font-awesome-5.1.0/css/v4-shims.css" rel="stylesheet"/>
   <script src="site_libs/headroom-0.9.4/headroom.min.js"></script>
@@ -1026,10 +1027,6 @@ code span.wa { color: #008000; font-weight: bold; } /* Warning */
     position: relative;
     margin-bottom: 2.5em;
     margin-top: 1.5em;
-  }
-
-  .figure img {
-    width: 100%;
   }
 
   .figure .caption {
@@ -1861,7 +1858,16 @@ code span.wa { color: #008000; font-weight: bold; } /* Warning */
 
       // hoverable references
       $('span.citation[data-cites]').each(function() {
-        var refHtml = $('#ref-' + $(this).attr('data-cites')).html();
+        if ($(this).children()[0].nodeName == "D-FOOTNOTE") {
+          var fn = $(this).children()[0]
+          $(this).html(fn.shadowRoot.querySelector("sup"))
+          $(this).id = fn.id
+          fn.remove()
+        }
+        var refs = $(this).attr('data-cites').split(" ");
+        var refHtml = refs.map(function(ref) {
+          return "<p>" + $('#ref-' + ref).html() + "</p>";
+        }).join("\n");
         window.tippy(this, {
           allowHTML: true,
           content: refHtml,
@@ -1872,6 +1878,31 @@ code span.wa { color: #008000; font-weight: bold; } /* Warning */
           placement: 'bottom-start'
         });
       });
+
+      // fix footnotes in tables (#411)
+      // replacing broken distill.pub feature
+      $('table d-footnote').each(function() {
+        // we replace internal showAtNode methode which is triggered when hovering a footnote
+        this.hoverBox.showAtNode = function(node) {
+          // ported from https://github.com/distillpub/template/pull/105/files
+          calcOffset = function(elem) {
+              let x = elem.offsetLeft;
+              let y = elem.offsetTop;
+              // Traverse upwards until an `absolute` element is found or `elem`
+              // becomes null.
+              while (elem = elem.offsetParent && elem.style.position != 'absolute') {
+                  x += elem.offsetLeft;
+                  y += elem.offsetTop;
+              }
+
+              return { left: x, top: y };
+          }
+          // https://developer.mozilla.org/en-US/docs/Web/API/HTMLElement/offsetTop
+          const bbox = node.getBoundingClientRect();
+          const offset = calcOffset(node);
+          this.show([offset.left + bbox.width, offset.top + bbox.height]);
+        }
+      })
 
       // clear polling timer
       clearInterval(tid);
@@ -1971,6 +2002,8 @@ code span.wa { color: #008000; font-weight: bold; } /* Warning */
     // mark non-body figures created by knitr chunks as 100% width
     $('.layout-chunk').each(function(i, val) {
       var figures = $(this).find('img, .html-widget');
+      // ignore leaflet img layers (#106)
+      figures = figures.filter(':not(img[class*="leaflet"])')
       if ($(this).attr('data-layout') !== "l-body") {
         figures.css('width', '100%');
       } else {
@@ -1993,7 +2026,7 @@ code span.wa { color: #008000; font-weight: bold; } /* Warning */
     // get rid of index.html references in header
     if (window.location.protocol !== "file:") {
       $('.distill-site-header a[href]').each(function(i,val) {
-        $(this).attr('href', $(this).attr('href').replace("index.html", "./"));
+        $(this).attr('href', $(this).attr('href').replace(/^index[.]html/, "./"));
       });
     }
 
@@ -2032,7 +2065,7 @@ code span.wa { color: #008000; font-weight: bold; } /* Warning */
   </script>
 
   <!--/radix_placeholder_distill-->
-  <script src="site_libs/header-attrs-2.6.3/header-attrs.js"></script>
+  <script src="site_libs/header-attrs-2.14/header-attrs.js"></script>
   <link href="site_libs/pagedtable-1.1/css/pagedtable.css" rel="stylesheet" />
   <script src="site_libs/pagedtable-1.1/js/pagedtable.js"></script>
   <script src="site_libs/popper-2.6.0/popper.min.js"></script>
@@ -2161,23 +2194,34 @@ Publishing
 <nav class="l-text toc figcaption" id="TOC">
 <h3>Contents</h3>
 <ul>
-<li><a href="#knitr-kable">Knitr kable</a></li>
-<li><a href="#paged-tables">Paged tables</a></li>
-<li><a href="#gtsummary-tables">gtsummary tables</a></li>
-<li><a href="#gt-tables">gt tables</a></li>
-<li><a href="#markdown-tables">Markdown tables</a></li>
+<li><a href="#knitr-kable" id="toc-knitr-kable">Knitr kable</a></li>
+<li><a href="#paged-tables" id="toc-paged-tables">Paged tables</a></li>
+<li><a href="#gtsummary-tables" id="toc-gtsummary-tables">gtsummary
+tables</a></li>
+<li><a href="#gt-tables" id="toc-gt-tables">gt tables</a></li>
+<li><a href="#markdown-tables" id="toc-markdown-tables">Markdown
+tables</a></li>
 </ul>
 </nav>
 </div>
-<p>There are a number of options available for displaying tables within Distill articles, including:</p>
+<p>There are a number of options available for displaying tables within
+Distill articles, including:</p>
 <ul>
-<li><p>Using the <code>knitr::kable()</code> function to render a data frame as HTML.</p></li>
-<li><p>Using the <code>rmarkdown::paged_table()</code> function to create a page-able version of a data frame.</p></li>
-<li><p>Use the <a href="http://www.danieldsjoberg.com/gtsummary/">gtsummary</a> and <a href="https://gt.rstudio.com/">gt</a> packages to create to create publication-ready analytical and summary tables.</p></li>
-<li><p>Using standard <a href="https://pandoc.org/MANUAL.html#tables">markdown table syntax</a> to create a custom table.</p></li>
+<li><p>Using the <code>knitr::kable()</code> function to render a data
+frame as HTML.</p></li>
+<li><p>Using the <code>rmarkdown::paged_table()</code> function to
+create a page-able version of a data frame.</p></li>
+<li><p>Use the <a
+href="http://www.danieldsjoberg.com/gtsummary/">gtsummary</a> and <a
+href="https://gt.rstudio.com/">gt</a> packages to create to create
+publication-ready analytical and summary tables.</p></li>
+<li><p>Using standard <a
+href="https://pandoc.org/MANUAL.html#tables">markdown table syntax</a>
+to create a custom table.</p></li>
 </ul>
 <h2 id="knitr-kable">Knitr kable</h2>
-<p>The <code>knitr::kable()</code> function will render an R data frame as an HTML table. For example:</p>
+<p>The <code>knitr::kable()</code> function will render an R data frame
+as an HTML table. For example:</p>
 <pre class="clike"><code>```{r, layout=&quot;l-body-outset&quot;}
 library(knitr)
 kable(head(mtcars))
@@ -2188,7 +2232,21 @@ kable(head(mtcars))
 <span class='fu'><a href='https://rdrr.io/pkg/knitr/man/kable.html'>kable</a></span><span class='op'>(</span><span class='fu'><a href='https://rdrr.io/r/utils/head.html'>head</a></span><span class='op'>(</span><span class='va'>mtcars</span><span class='op'>)</span><span class='op'>)</span>
 </code></pre>
 </div>
-<table>
+<table style="width:100%;">
+<colgroup>
+<col style="width: 26%" />
+<col style="width: 7%" />
+<col style="width: 5%" />
+<col style="width: 7%" />
+<col style="width: 5%" />
+<col style="width: 7%" />
+<col style="width: 8%" />
+<col style="width: 8%" />
+<col style="width: 4%" />
+<col style="width: 4%" />
+<col style="width: 7%" />
+<col style="width: 7%" />
+</colgroup>
 <thead>
 <tr class="header">
 <th style="text-align: left;"></th>
@@ -2293,9 +2351,16 @@ kable(head(mtcars))
 </tbody>
 </table>
 </div>
-<p>Often times tables will require more width for their display than the standard Distill article text width. Here we use <code>layout="l-body-outset"</code> to cause the table to outset slightly from the main text column. All of the available <a href="figures.html">figure layouts</a> can also be used with tables.</p>
+<p>Often times tables will require more width for their display than the
+standard Distill article text width. Here we use
+<code>layout="l-body-outset"</code> to cause the table to outset
+slightly from the main text column. All of the available <a
+href="figures.html">figure layouts</a> can also be used with tables.</p>
 <h2 id="paged-tables">Paged tables</h2>
-<p>If a data frame has a large number of rows it might not be practical to display it fully inline. In these situations you can use the <code>rmarkdown::paged_table()</code> function to create a table that allows pagination of rows and columns. For example:</p>
+<p>If a data frame has a large number of rows it might not be practical
+to display it fully inline. In these situations you can use the
+<code>rmarkdown::paged_table()</code> function to create a table that
+allows pagination of rows and columns. For example:</p>
 <pre class="clike"><code>```{r, layout=&quot;l-body-outset&quot;}
 library(rmarkdown)
 paged_table(mtcars)
@@ -2303,7 +2368,7 @@ paged_table(mtcars)
 <div class="layout-chunk" data-layout="l-body-outset">
 <div class="sourceCode">
 <pre class="sourceCode r"><code class="sourceCode r"><span class='kw'><a href='https://rdrr.io/r/base/library.html'>library</a></span><span class='op'>(</span><span class='va'><a href='https://github.com/rstudio/rmarkdown'>rmarkdown</a></span><span class='op'>)</span>
-<span class='fu'><a href='https://rdrr.io/pkg/rmarkdown/man/paged_table.html'>paged_table</a></span><span class='op'>(</span><span class='va'>mtcars</span><span class='op'>)</span>
+<span class='fu'><a href='https://pkgs.rstudio.com/rmarkdown/reference/paged_table.html'>paged_table</a></span><span class='op'>(</span><span class='va'>mtcars</span><span class='op'>)</span>
 </code></pre>
 </div>
 <div data-pagedtable="false">
@@ -2312,7 +2377,10 @@ paged_table(mtcars)
   </script>
 </div>
 </div>
-<p>There are a number of options available that control the display of paged tables. By default, 10 rows at a time are displayed but you can use the <code>rows.print</code> option to increase this. For example:</p>
+<p>There are a number of options available that control the display of
+paged tables. By default, 10 rows at a time are displayed but you can
+use the <code>rows.print</code> option to increase this. For
+example:</p>
 <pre class="clike"><code>```{r, layout=&quot;l-body-outset&quot;}
 library(rmarkdown)
 paged_table(mtcars, options = list(rows.print = 15))
@@ -2320,7 +2388,7 @@ paged_table(mtcars, options = list(rows.print = 15))
 <div class="layout-chunk" data-layout="l-body-outset">
 <div class="sourceCode">
 <pre class="sourceCode r"><code class="sourceCode r"><span class='kw'><a href='https://rdrr.io/r/base/library.html'>library</a></span><span class='op'>(</span><span class='va'><a href='https://github.com/rstudio/rmarkdown'>rmarkdown</a></span><span class='op'>)</span>
-<span class='fu'><a href='https://rdrr.io/pkg/rmarkdown/man/paged_table.html'>paged_table</a></span><span class='op'>(</span><span class='va'>mtcars</span>, options <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/list.html'>list</a></span><span class='op'>(</span>rows.print <span class='op'>=</span> <span class='fl'>15</span>, cols.print <span class='op'>=</span> <span class='fl'>5</span><span class='op'>)</span><span class='op'>)</span>
+<span class='fu'><a href='https://pkgs.rstudio.com/rmarkdown/reference/paged_table.html'>paged_table</a></span><span class='op'>(</span><span class='va'>mtcars</span>, options <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/list.html'>list</a></span><span class='op'>(</span>rows.print <span class='op'>=</span> <span class='fl'>15</span>, cols.print <span class='op'>=</span> <span class='fl'>5</span><span class='op'>)</span><span class='op'>)</span>
 </code></pre>
 </div>
 <div data-pagedtable="false">
@@ -2357,7 +2425,11 @@ paged_table(mtcars, options = list(rows.print = 15))
 </tbody>
 </table>
 <h2 id="gtsummary-tables">gtsummary tables</h2>
-<p>The <a href="http://www.danieldsjoberg.com/gtsummary/">gtsummary</a> package provides an elegant and flexible way to create publication-ready analytical and summary tables. The package summarizes data sets, regression models, and more, using sensible defaults with highly customizable capabilities. For example:</p>
+<p>The <a href="http://www.danieldsjoberg.com/gtsummary/">gtsummary</a>
+package provides an elegant and flexible way to create publication-ready
+analytical and summary tables. The package summarizes data sets,
+regression models, and more, using sensible defaults with highly
+customizable capabilities. For example:</p>
 <pre class="clike"><code>```{r}
 library(gtsummary)
 library(survival)
@@ -2384,20 +2456,21 @@ tbl_merge(
 
 <span class='co'># build glm table</span>
 <span class='va'>mod1</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/stats/glm.html'>glm</a></span><span class='op'>(</span><span class='va'>response</span> <span class='op'>~</span> <span class='va'>trt</span> <span class='op'>+</span> <span class='va'>age</span> <span class='op'>+</span> <span class='va'>grade</span>, <span class='va'>trial</span>, family <span class='op'>=</span> <span class='va'>binomial</span><span class='op'>)</span>
-<span class='va'>t1</span> <span class='op'>&lt;-</span> <span class='fu'><a href='http://www.danieldsjoberg.com/gtsummary//reference/tbl_regression.html'>tbl_regression</a></span><span class='op'>(</span><span class='va'>mod1</span>, exponentiate <span class='op'>=</span> <span class='cn'>TRUE</span><span class='op'>)</span>
+<span class='va'>t1</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://www.danieldsjoberg.com/gtsummary/reference/tbl_regression.html'>tbl_regression</a></span><span class='op'>(</span><span class='va'>mod1</span>, exponentiate <span class='op'>=</span> <span class='cn'>TRUE</span><span class='op'>)</span>
 
 <span class='co'># build survival model table</span>
 <span class='va'>t2</span> <span class='op'>&lt;-</span>
-  <span class='fu'><a href='https://rdrr.io/pkg/survival/man/coxph.html'>coxph</a></span><span class='op'>(</span><span class='fu'><a href='https://rdrr.io/pkg/survival/man/Surv.html'>Surv</a></span><span class='op'>(</span><span class='va'>ttdeath</span>, <span class='va'>death</span><span class='op'>)</span> <span class='op'>~</span> <span class='va'>trt</span> <span class='op'>+</span> <span class='va'>grade</span> <span class='op'>+</span> <span class='va'>age</span>, <span class='va'>trial</span><span class='op'>)</span> <span class='op'>%&gt;%</span>
-  <span class='fu'><a href='http://www.danieldsjoberg.com/gtsummary//reference/tbl_regression.html'>tbl_regression</a></span><span class='op'>(</span>exponentiate <span class='op'>=</span> <span class='cn'>TRUE</span><span class='op'>)</span>
+  <span class='fu'><a href='https://rdrr.io/pkg/survival/man/coxph.html'>coxph</a></span><span class='op'>(</span><span class='fu'><a href='https://rdrr.io/pkg/survival/man/Surv.html'>Surv</a></span><span class='op'>(</span><span class='va'>ttdeath</span>, <span class='va'>death</span><span class='op'>)</span> <span class='op'>~</span> <span class='va'>trt</span> <span class='op'>+</span> <span class='va'>grade</span> <span class='op'>+</span> <span class='va'>age</span>, <span class='va'>trial</span><span class='op'>)</span> <span class='op'><a href='https://magrittr.tidyverse.org/reference/pipe.html'>%&gt;%</a></span>
+  <span class='fu'><a href='https://www.danieldsjoberg.com/gtsummary/reference/tbl_regression.html'>tbl_regression</a></span><span class='op'>(</span>exponentiate <span class='op'>=</span> <span class='cn'>TRUE</span><span class='op'>)</span>
 
 <span class='co'># merge tables </span>
-<span class='fu'><a href='http://www.danieldsjoberg.com/gtsummary//reference/tbl_merge.html'>tbl_merge</a></span><span class='op'>(</span>
+<span class='fu'><a href='https://www.danieldsjoberg.com/gtsummary/reference/tbl_merge.html'>tbl_merge</a></span><span class='op'>(</span>
   tbls <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/list.html'>list</a></span><span class='op'>(</span><span class='va'>t1</span>, <span class='va'>t2</span><span class='op'>)</span>,
   tab_spanner <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='st'>"**Tumor Response**"</span>, <span class='st'>"**Time to Death**"</span><span class='op'>)</span>
 <span class='op'>)</span>
 </code></pre>
 </div>
+<div id="wfpsyznlwv" style="overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
 <style>html {
   font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Helvetica Neue', 'Fira Sans', 'Droid Sans', Arial, sans-serif;
 }
@@ -2445,6 +2518,8 @@ tbl_merge(
   font-weight: initial;
   padding-top: 4px;
   padding-bottom: 4px;
+  padding-left: 5px;
+  padding-right: 5px;
   border-bottom-color: #FFFFFF;
   border-bottom-width: 0;
 }
@@ -2454,7 +2529,9 @@ tbl_merge(
   font-size: 85%;
   font-weight: initial;
   padding-top: 0;
-  padding-bottom: 4px;
+  padding-bottom: 6px;
+  padding-left: 5px;
+  padding-right: 5px;
   border-top-color: #FFFFFF;
   border-top-width: 0;
 }
@@ -2526,14 +2603,17 @@ tbl_merge(
   border-bottom-color: #D3D3D3;
   vertical-align: bottom;
   padding-top: 5px;
-  padding-bottom: 6px;
+  padding-bottom: 5px;
   overflow-x: hidden;
   display: inline-block;
   width: 100%;
 }
 
 #wfpsyznlwv .gt_group_heading {
-  padding: 8px;
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -2605,7 +2685,26 @@ tbl_merge(
   border-right-style: solid;
   border-right-width: 2px;
   border-right-color: #D3D3D3;
-  padding-left: 12px;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#wfpsyznlwv .gt_stub_row_group {
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: initial;
+  text-transform: inherit;
+  border-right-style: solid;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+  padding-left: 5px;
+  padding-right: 5px;
+  vertical-align: top;
+}
+
+#wfpsyznlwv .gt_row_group_first td {
+  border-top-width: 2px;
 }
 
 #wfpsyznlwv .gt_summary_row {
@@ -2619,13 +2718,22 @@ tbl_merge(
 }
 
 #wfpsyznlwv .gt_first_summary_row {
+  border-top-style: solid;
+  border-top-color: #D3D3D3;
+}
+
+#wfpsyznlwv .gt_first_summary_row.thick {
+  border-top-width: 2px;
+}
+
+#wfpsyznlwv .gt_last_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
   padding-right: 5px;
-  border-top-style: solid;
-  border-top-width: 2px;
-  border-top-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
 }
 
 #wfpsyznlwv .gt_grand_summary_row {
@@ -2678,7 +2786,10 @@ tbl_merge(
 #wfpsyznlwv .gt_footnote {
   margin: 0px;
   font-size: 90%;
-  padding: 4px;
+  padding-left: 4px;
+  padding-right: 4px;
+  padding-left: 5px;
+  padding-right: 5px;
 }
 
 #wfpsyznlwv .gt_sourcenotes {
@@ -2697,7 +2808,10 @@ tbl_merge(
 
 #wfpsyznlwv .gt_sourcenote {
   font-size: 90%;
-  padding: 4px;
+  padding-top: 4px;
+  padding-bottom: 4px;
+  padding-left: 5px;
+  padding-right: 5px;
 }
 
 #wfpsyznlwv .gt_left {
@@ -2729,12 +2843,46 @@ tbl_merge(
   font-size: 65%;
 }
 
+#wfpsyznlwv .gt_two_val_uncert {
+  display: inline-block;
+  line-height: 1em;
+  text-align: right;
+  font-size: 60%;
+  vertical-align: -0.25em;
+  margin-left: 0.1em;
+}
+
 #wfpsyznlwv .gt_footnote_marks {
   font-style: italic;
-  font-size: 65%;
+  font-weight: normal;
+  font-size: 75%;
+  vertical-align: 0.4em;
+}
+
+#wfpsyznlwv .gt_asterisk {
+  font-size: 100%;
+  vertical-align: 0;
+}
+
+#wfpsyznlwv .gt_slash_mark {
+  font-size: 0.7em;
+  line-height: 0.7em;
+  vertical-align: 0.15em;
+}
+
+#wfpsyznlwv .gt_fraction_numerator {
+  font-size: 0.6em;
+  line-height: 0.6em;
+  vertical-align: 0.45em;
+}
+
+#wfpsyznlwv .gt_fraction_denominator {
+  font-size: 0.6em;
+  line-height: 0.6em;
+  vertical-align: -0.05em;
 }
 </style>
-<div id="wfpsyznlwv" style="overflow-x:auto;overflow-y:auto;width:auto;height:auto;"><table class="gt_table">
+<table class="gt_table">
   
   <thead class="gt_col_headings">
     <tr>
@@ -2764,11 +2912,11 @@ tbl_merge(
 <td class="gt_row gt_center"></td>
 <td class="gt_row gt_center"></td></tr>
     <tr><td class="gt_row gt_left" style="text-align: left; text-indent: 10px;">Drug A</td>
-<td class="gt_row gt_center">&mdash;</td>
-<td class="gt_row gt_center">&mdash;</td>
+<td class="gt_row gt_center">—</td>
+<td class="gt_row gt_center">—</td>
 <td class="gt_row gt_center"></td>
-<td class="gt_row gt_center">&mdash;</td>
-<td class="gt_row gt_center">&mdash;</td>
+<td class="gt_row gt_center">—</td>
+<td class="gt_row gt_center">—</td>
 <td class="gt_row gt_center"></td></tr>
     <tr><td class="gt_row gt_left" style="text-align: left; text-indent: 10px;">Drug B</td>
 <td class="gt_row gt_center">1.13</td>
@@ -2792,11 +2940,11 @@ tbl_merge(
 <td class="gt_row gt_center"></td>
 <td class="gt_row gt_center"></td></tr>
     <tr><td class="gt_row gt_left" style="text-align: left; text-indent: 10px;">I</td>
-<td class="gt_row gt_center">&mdash;</td>
-<td class="gt_row gt_center">&mdash;</td>
+<td class="gt_row gt_center">—</td>
+<td class="gt_row gt_center">—</td>
 <td class="gt_row gt_center"></td>
-<td class="gt_row gt_center">&mdash;</td>
-<td class="gt_row gt_center">&mdash;</td>
+<td class="gt_row gt_center">—</td>
+<td class="gt_row gt_center">—</td>
 <td class="gt_row gt_center"></td></tr>
     <tr><td class="gt_row gt_left" style="text-align: left; text-indent: 10px;">II</td>
 <td class="gt_row gt_center">0.85</td>
@@ -2814,24 +2962,21 @@ tbl_merge(
 <td class="gt_row gt_center">0.014</td></tr>
   </tbody>
   
-  <tfoot>
-    <tr class="gt_footnotes">
-      <td colspan="7">
-        <p class="gt_footnote">
-          <sup class="gt_footnote_marks">
-            <em>1</em>
-          </sup>
-           
-          OR = Odds Ratio, CI = Confidence Interval, HR = Hazard Ratio
-          <br />
-        </p>
-      </td>
+  <tfoot class="gt_footnotes">
+    <tr>
+      <td class="gt_footnote" colspan="7"><sup class="gt_footnote_marks">1</sup> OR = Odds Ratio, CI = Confidence Interval, HR = Hazard Ratio</td>
     </tr>
   </tfoot>
-</table></div>
+</table>
+</div>
 </div>
 <h2 id="gt-tables">gt tables</h2>
-<p>The <a href="http://www.danieldsjoberg.com/gtsummary/">gtsummary</a> package is built in top of the <a href="https://gt.rstudio.com/">gt</a> package, which provides a flexible foundation for creating just about any sort of table you can imagine. Here is a brief example of how to use <strong>gt</strong> to create a table from the included <code>sp500</code> dataset:</p>
+<p>The <a href="http://www.danieldsjoberg.com/gtsummary/">gtsummary</a>
+package is built in top of the <a href="https://gt.rstudio.com/">gt</a>
+package, which provides a flexible foundation for creating just about
+any sort of table you can imagine. Here is a brief example of how to use
+<strong>gt</strong> to create a table from the included
+<code>sp500</code> dataset:</p>
 <pre class="clike"><code>```{r}
 library(gt)
 library(tidyverse)
@@ -2867,7 +3012,7 @@ sp500 %&gt;%
 <div class="layout-chunk" data-layout="l-body">
 <div class="sourceCode">
 <pre class="sourceCode r"><code class="sourceCode r"><span class='kw'><a href='https://rdrr.io/r/base/library.html'>library</a></span><span class='op'>(</span><span class='va'><a href='https://gt.rstudio.com/'>gt</a></span><span class='op'>)</span>
-<span class='kw'><a href='https://rdrr.io/r/base/library.html'>library</a></span><span class='op'>(</span><span class='va'><a href='http://tidyverse.tidyverse.org'>tidyverse</a></span><span class='op'>)</span>
+<span class='kw'><a href='https://rdrr.io/r/base/library.html'>library</a></span><span class='op'>(</span><span class='va'><a href='https://tidyverse.tidyverse.org'>tidyverse</a></span><span class='op'>)</span>
 <span class='kw'><a href='https://rdrr.io/r/base/library.html'>library</a></span><span class='op'>(</span><span class='va'><a href='https://github.com/tidyverse/glue'>glue</a></span><span class='op'>)</span>
 
 <span class='co'># Define the start and end dates for the data range</span>
@@ -2876,28 +3021,29 @@ sp500 %&gt;%
 
 <span class='co'># Create a gt table based on preprocessed</span>
 <span class='co'># `sp500` table data</span>
-<span class='va'>sp500</span> <span class='op'>%&gt;%</span>
-  <span class='fu'>dplyr</span><span class='fu'>::</span><span class='fu'><a href='https://dplyr.tidyverse.org/reference/filter.html'>filter</a></span><span class='op'>(</span><span class='va'>date</span> <span class='op'>&gt;=</span> <span class='va'>start_date</span> <span class='op'>&amp;</span> <span class='va'>date</span> <span class='op'>&lt;=</span> <span class='va'>end_date</span><span class='op'>)</span> <span class='op'>%&gt;%</span>
-  <span class='fu'>dplyr</span><span class='fu'>::</span><span class='fu'><a href='https://dplyr.tidyverse.org/reference/select.html'>select</a></span><span class='op'>(</span><span class='op'>-</span><span class='va'>adj_close</span><span class='op'>)</span> <span class='op'>%&gt;%</span>
-  <span class='fu'><a href='https://gt.rstudio.com/reference/gt.html'>gt</a></span><span class='op'>(</span><span class='op'>)</span> <span class='op'>%&gt;%</span>
+<span class='va'>sp500</span> <span class='op'><a href='https://gt.rstudio.com/reference/pipe.html'>%&gt;%</a></span>
+  <span class='fu'>dplyr</span><span class='fu'>::</span><span class='fu'><a href='https://dplyr.tidyverse.org/reference/filter.html'>filter</a></span><span class='op'>(</span><span class='va'>date</span> <span class='op'>&gt;=</span> <span class='va'>start_date</span> <span class='op'>&amp;</span> <span class='va'>date</span> <span class='op'>&lt;=</span> <span class='va'>end_date</span><span class='op'>)</span> <span class='op'><a href='https://gt.rstudio.com/reference/pipe.html'>%&gt;%</a></span>
+  <span class='fu'>dplyr</span><span class='fu'>::</span><span class='fu'><a href='https://dplyr.tidyverse.org/reference/select.html'>select</a></span><span class='op'>(</span><span class='op'>-</span><span class='va'>adj_close</span><span class='op'>)</span> <span class='op'><a href='https://gt.rstudio.com/reference/pipe.html'>%&gt;%</a></span>
+  <span class='fu'><a href='https://gt.rstudio.com/reference/gt.html'>gt</a></span><span class='op'>(</span><span class='op'>)</span> <span class='op'><a href='https://gt.rstudio.com/reference/pipe.html'>%&gt;%</a></span>
   <span class='fu'><a href='https://gt.rstudio.com/reference/tab_header.html'>tab_header</a></span><span class='op'>(</span>
     title <span class='op'>=</span> <span class='st'>"S&amp;P 500"</span>,
     subtitle <span class='op'>=</span> <span class='fu'>glue</span><span class='fu'>::</span><span class='fu'><a href='https://glue.tidyverse.org/reference/glue.html'>glue</a></span><span class='op'>(</span><span class='st'>"{start_date} to {end_date}"</span><span class='op'>)</span>
-  <span class='op'>)</span> <span class='op'>%&gt;%</span>
+  <span class='op'>)</span> <span class='op'><a href='https://gt.rstudio.com/reference/pipe.html'>%&gt;%</a></span>
   <span class='fu'><a href='https://gt.rstudio.com/reference/fmt_date.html'>fmt_date</a></span><span class='op'>(</span>
     columns <span class='op'>=</span> <span class='fu'><a href='https://dplyr.tidyverse.org/reference/vars.html'>vars</a></span><span class='op'>(</span><span class='va'>date</span><span class='op'>)</span>,
     date_style <span class='op'>=</span> <span class='fl'>3</span>
-  <span class='op'>)</span> <span class='op'>%&gt;%</span>
+  <span class='op'>)</span> <span class='op'><a href='https://gt.rstudio.com/reference/pipe.html'>%&gt;%</a></span>
   <span class='fu'><a href='https://gt.rstudio.com/reference/fmt_currency.html'>fmt_currency</a></span><span class='op'>(</span>
     columns <span class='op'>=</span> <span class='fu'><a href='https://dplyr.tidyverse.org/reference/vars.html'>vars</a></span><span class='op'>(</span><span class='va'>open</span>, <span class='va'>high</span>, <span class='va'>low</span>, <span class='va'>close</span><span class='op'>)</span>,
     currency <span class='op'>=</span> <span class='st'>"USD"</span>
-  <span class='op'>)</span> <span class='op'>%&gt;%</span>
+  <span class='op'>)</span> <span class='op'><a href='https://gt.rstudio.com/reference/pipe.html'>%&gt;%</a></span>
   <span class='fu'><a href='https://gt.rstudio.com/reference/fmt_number.html'>fmt_number</a></span><span class='op'>(</span>
     columns <span class='op'>=</span> <span class='fu'><a href='https://dplyr.tidyverse.org/reference/vars.html'>vars</a></span><span class='op'>(</span><span class='va'>volume</span><span class='op'>)</span>,
     suffixing <span class='op'>=</span> <span class='cn'>TRUE</span>
   <span class='op'>)</span>
 </code></pre>
 </div>
+<div id="fdwfbggwkx" style="overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
 <style>html {
   font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Helvetica Neue', 'Fira Sans', 'Droid Sans', Arial, sans-serif;
 }
@@ -2945,6 +3091,8 @@ sp500 %&gt;%
   font-weight: initial;
   padding-top: 4px;
   padding-bottom: 4px;
+  padding-left: 5px;
+  padding-right: 5px;
   border-bottom-color: #FFFFFF;
   border-bottom-width: 0;
 }
@@ -2954,7 +3102,9 @@ sp500 %&gt;%
   font-size: 85%;
   font-weight: initial;
   padding-top: 0;
-  padding-bottom: 4px;
+  padding-bottom: 6px;
+  padding-left: 5px;
+  padding-right: 5px;
   border-top-color: #FFFFFF;
   border-top-width: 0;
 }
@@ -3026,14 +3176,17 @@ sp500 %&gt;%
   border-bottom-color: #D3D3D3;
   vertical-align: bottom;
   padding-top: 5px;
-  padding-bottom: 6px;
+  padding-bottom: 5px;
   overflow-x: hidden;
   display: inline-block;
   width: 100%;
 }
 
 #fdwfbggwkx .gt_group_heading {
-  padding: 8px;
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -3105,7 +3258,26 @@ sp500 %&gt;%
   border-right-style: solid;
   border-right-width: 2px;
   border-right-color: #D3D3D3;
-  padding-left: 12px;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#fdwfbggwkx .gt_stub_row_group {
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: initial;
+  text-transform: inherit;
+  border-right-style: solid;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+  padding-left: 5px;
+  padding-right: 5px;
+  vertical-align: top;
+}
+
+#fdwfbggwkx .gt_row_group_first td {
+  border-top-width: 2px;
 }
 
 #fdwfbggwkx .gt_summary_row {
@@ -3119,13 +3291,22 @@ sp500 %&gt;%
 }
 
 #fdwfbggwkx .gt_first_summary_row {
+  border-top-style: solid;
+  border-top-color: #D3D3D3;
+}
+
+#fdwfbggwkx .gt_first_summary_row.thick {
+  border-top-width: 2px;
+}
+
+#fdwfbggwkx .gt_last_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
   padding-right: 5px;
-  border-top-style: solid;
-  border-top-width: 2px;
-  border-top-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
 }
 
 #fdwfbggwkx .gt_grand_summary_row {
@@ -3178,7 +3359,10 @@ sp500 %&gt;%
 #fdwfbggwkx .gt_footnote {
   margin: 0px;
   font-size: 90%;
-  padding: 4px;
+  padding-left: 4px;
+  padding-right: 4px;
+  padding-left: 5px;
+  padding-right: 5px;
 }
 
 #fdwfbggwkx .gt_sourcenotes {
@@ -3197,7 +3381,10 @@ sp500 %&gt;%
 
 #fdwfbggwkx .gt_sourcenote {
   font-size: 90%;
-  padding: 4px;
+  padding-top: 4px;
+  padding-bottom: 4px;
+  padding-left: 5px;
+  padding-right: 5px;
 }
 
 #fdwfbggwkx .gt_left {
@@ -3229,12 +3416,46 @@ sp500 %&gt;%
   font-size: 65%;
 }
 
+#fdwfbggwkx .gt_two_val_uncert {
+  display: inline-block;
+  line-height: 1em;
+  text-align: right;
+  font-size: 60%;
+  vertical-align: -0.25em;
+  margin-left: 0.1em;
+}
+
 #fdwfbggwkx .gt_footnote_marks {
   font-style: italic;
-  font-size: 65%;
+  font-weight: normal;
+  font-size: 75%;
+  vertical-align: 0.4em;
+}
+
+#fdwfbggwkx .gt_asterisk {
+  font-size: 100%;
+  vertical-align: 0;
+}
+
+#fdwfbggwkx .gt_slash_mark {
+  font-size: 0.7em;
+  line-height: 0.7em;
+  vertical-align: 0.15em;
+}
+
+#fdwfbggwkx .gt_fraction_numerator {
+  font-size: 0.6em;
+  line-height: 0.6em;
+  vertical-align: 0.45em;
+}
+
+#fdwfbggwkx .gt_fraction_denominator {
+  font-size: 0.6em;
+  line-height: 0.6em;
+  vertical-align: -0.05em;
 }
 </style>
-<div id="fdwfbggwkx" style="overflow-x:auto;overflow-y:auto;width:auto;height:auto;"><table class="gt_table">
+<table class="gt_table">
   <thead class="gt_header">
     <tr>
       <th colspan="6" class="gt_heading gt_title gt_font_normal" style>S&amp;P 500</th>
@@ -3293,18 +3514,26 @@ sp500 %&gt;%
   </tbody>
   
   
-</table></div>
+</table>
+</div>
 </div>
 <h2 id="markdown-tables">Markdown tables</h2>
-<p>You can also define <a href="https://pandoc.org/MANUAL.html#tables">tables using markdown</a>. For example, the table from the previous section that describes paged table options was defined with the following markdown:</p>
-<div class="sourceCode" id="cb6"><pre class="sourceCode markdown"><code class="sourceCode markdown"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a>| Option           | Description                                    |</span>
+<p>You can also define <a
+href="https://pandoc.org/MANUAL.html#tables">tables using markdown</a>.
+For example, the table from the previous section that describes paged
+table options was defined with the following markdown:</p>
+<div class="sourceCode" id="cb6"><pre
+class="sourceCode markdown"><code class="sourceCode markdown"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a>| Option           | Description                                    |</span>
 <span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a>|------------------|------------------------------------------------|</span>
 <span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a>| <span class="in">`rows.print`</span>     | Maximum rows to print per page.                |</span>
 <span id="cb6-4"><a href="#cb6-4" aria-hidden="true" tabindex="-1"></a>| <span class="in">`max.print`</span>      | Maximum rows in the table (defaults to 1000).  |</span>
 <span id="cb6-5"><a href="#cb6-5" aria-hidden="true" tabindex="-1"></a>| <span class="in">`cols.print`</span>     | Maximum columns in the table (defaults to 10). |</span>
 <span id="cb6-6"><a href="#cb6-6" aria-hidden="true" tabindex="-1"></a>| <span class="in">`rownames.print`</span> | Print row names as part of the table.          |</span></code></pre></div>
-<p>You can use Distill <a href="figures.html">figure layout</a> classes with markdown tables by enclosing them in markdown div (<code>:::</code>) named with the appropriate class, for example:</p>
-<div class="sourceCode" id="cb7"><pre class="sourceCode markdown"><code class="sourceCode markdown"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a>::: l-body-outset</span>
+<p>You can use Distill <a href="figures.html">figure layout</a> classes
+with markdown tables by enclosing them in markdown div
+(<code>:::</code>) named with the appropriate class, for example:</p>
+<div class="sourceCode" id="cb7"><pre
+class="sourceCode markdown"><code class="sourceCode markdown"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a>::: l-body-outset</span>
 <span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a>| Option           | Description                                    |</span>
 <span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a>|------------------|------------------------------------------------|</span>
 <span id="cb7-4"><a href="#cb7-4" aria-hidden="true" tabindex="-1"></a>| <span class="in">`rows.print`</span>     | Maximum rows to print per page.                |</span>
@@ -3312,7 +3541,8 @@ sp500 %&gt;%
 <span id="cb7-6"><a href="#cb7-6" aria-hidden="true" tabindex="-1"></a>| <span class="in">`cols.print`</span>     | Maximum columns in the table (defaults to 10). |</span>
 <span id="cb7-7"><a href="#cb7-7" aria-hidden="true" tabindex="-1"></a>| <span class="in">`rownames.print`</span> | Print row names as part of the table.          |</span>
 <span id="cb7-8"><a href="#cb7-8" aria-hidden="true" tabindex="-1"></a>:::</span></code></pre></div>
-<div class="sourceCode" id="cb8"><pre class="sourceCode r distill-force-highlighting-css"><code class="sourceCode r"></code></pre></div>
+<div class="sourceCode" id="cb8"><pre
+class="sourceCode r distill-force-highlighting-css"><code class="sourceCode r"></code></pre></div>
 <!--radix_placeholder_article_footer-->
 <!--/radix_placeholder_article_footer-->
 </div>
@@ -3333,8 +3563,13 @@ sp500 %&gt;%
 <!--/radix_placeholder_appendices-->
 <!--radix_placeholder_navigation_after_body-->
 <div class="distill-site-nav distill-site-footer">
-<p>© Copyright 2018 <a href="https://github.com/distillpub/template/blob/master/AUTHORS">The Distill Template Authors</a> and <a href="https://www.rstudio.com">RStudio, Inc</a>.</p>
-<p>Software licensed under the <a href="https://www.apache.org/licenses/LICENSE-2.0">Apache License, v2.0</a>.</p>
+<p>© Copyright 2018 <a
+href="https://github.com/distillpub/template/blob/master/AUTHORS">The
+Distill Template Authors</a> and <a
+href="https://www.rstudio.com">RStudio, Inc</a>.</p>
+<p>Software licensed under the <a
+href="https://www.apache.org/licenses/LICENSE-2.0">Apache License,
+v2.0</a>.</p>
 </div>
 <!--/radix_placeholder_navigation_after_body-->
 

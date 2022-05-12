@@ -82,6 +82,7 @@ code span.vs { color: #008080; } /* VerbatimString */
 code span.wa { color: #008000; font-weight: bold; } /* Warning */
 </style>
 
+
   <!--radix_placeholder_meta_tags-->
   <title>Distill for R Markdown: Blog Post Workflow</title>
 
@@ -454,7 +455,7 @@ code span.wa { color: #008000; font-weight: bold; } /* Warning */
 
   </style>
 
-  <script src="site_libs/jquery-1.11.3/jquery.min.js"></script>
+  <script src="site_libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
   <link href="site_libs/font-awesome-5.1.0/css/all.css" rel="stylesheet"/>
   <link href="site_libs/font-awesome-5.1.0/css/v4-shims.css" rel="stylesheet"/>
   <script src="site_libs/headroom-0.9.4/headroom.min.js"></script>
@@ -1026,10 +1027,6 @@ code span.wa { color: #008000; font-weight: bold; } /* Warning */
     position: relative;
     margin-bottom: 2.5em;
     margin-top: 1.5em;
-  }
-
-  .figure img {
-    width: 100%;
   }
 
   .figure .caption {
@@ -1861,7 +1858,16 @@ code span.wa { color: #008000; font-weight: bold; } /* Warning */
 
       // hoverable references
       $('span.citation[data-cites]').each(function() {
-        var refHtml = $('#ref-' + $(this).attr('data-cites')).html();
+        if ($(this).children()[0].nodeName == "D-FOOTNOTE") {
+          var fn = $(this).children()[0]
+          $(this).html(fn.shadowRoot.querySelector("sup"))
+          $(this).id = fn.id
+          fn.remove()
+        }
+        var refs = $(this).attr('data-cites').split(" ");
+        var refHtml = refs.map(function(ref) {
+          return "<p>" + $('#ref-' + ref).html() + "</p>";
+        }).join("\n");
         window.tippy(this, {
           allowHTML: true,
           content: refHtml,
@@ -1872,6 +1878,31 @@ code span.wa { color: #008000; font-weight: bold; } /* Warning */
           placement: 'bottom-start'
         });
       });
+
+      // fix footnotes in tables (#411)
+      // replacing broken distill.pub feature
+      $('table d-footnote').each(function() {
+        // we replace internal showAtNode methode which is triggered when hovering a footnote
+        this.hoverBox.showAtNode = function(node) {
+          // ported from https://github.com/distillpub/template/pull/105/files
+          calcOffset = function(elem) {
+              let x = elem.offsetLeft;
+              let y = elem.offsetTop;
+              // Traverse upwards until an `absolute` element is found or `elem`
+              // becomes null.
+              while (elem = elem.offsetParent && elem.style.position != 'absolute') {
+                  x += elem.offsetLeft;
+                  y += elem.offsetTop;
+              }
+
+              return { left: x, top: y };
+          }
+          // https://developer.mozilla.org/en-US/docs/Web/API/HTMLElement/offsetTop
+          const bbox = node.getBoundingClientRect();
+          const offset = calcOffset(node);
+          this.show([offset.left + bbox.width, offset.top + bbox.height]);
+        }
+      })
 
       // clear polling timer
       clearInterval(tid);
@@ -1971,6 +2002,8 @@ code span.wa { color: #008000; font-weight: bold; } /* Warning */
     // mark non-body figures created by knitr chunks as 100% width
     $('.layout-chunk').each(function(i, val) {
       var figures = $(this).find('img, .html-widget');
+      // ignore leaflet img layers (#106)
+      figures = figures.filter(':not(img[class*="leaflet"])')
       if ($(this).attr('data-layout') !== "l-body") {
         figures.css('width', '100%');
       } else {
@@ -1993,7 +2026,7 @@ code span.wa { color: #008000; font-weight: bold; } /* Warning */
     // get rid of index.html references in header
     if (window.location.protocol !== "file:") {
       $('.distill-site-header a[href]').each(function(i,val) {
-        $(this).attr('href', $(this).attr('href').replace("index.html", "./"));
+        $(this).attr('href', $(this).attr('href').replace(/^index[.]html/, "./"));
       });
     }
 
@@ -2032,7 +2065,7 @@ code span.wa { color: #008000; font-weight: bold; } /* Warning */
   </script>
 
   <!--/radix_placeholder_distill-->
-  <script src="site_libs/header-attrs-2.6.3/header-attrs.js"></script>
+  <script src="site_libs/header-attrs-2.14/header-attrs.js"></script>
   <script src="site_libs/popper-2.6.0/popper.min.js"></script>
   <link href="site_libs/tippy-6.2.7/tippy.css" rel="stylesheet" />
   <link href="site_libs/tippy-6.2.7/tippy-light-border.css" rel="stylesheet" />
@@ -2150,7 +2183,8 @@ Publishing
 <h1>Blog Post Workflow</h1>
 <!--radix_placeholder_categories-->
 <!--/radix_placeholder_categories-->
-<p><p>Recommendations on managing blog post drafts and a review of tools available to incorporate posts contributed by outside authors.</p></p>
+<p><p>Recommendations on managing blog post drafts and a review of tools
+available to incorporate posts contributed by outside authors.</p></p>
 </div>
 
 
@@ -2159,45 +2193,74 @@ Publishing
 <nav class="l-text toc figcaption" id="TOC">
 <h3>Contents</h3>
 <ul>
-<li><a href="#overview">Overview</a></li>
-<li><a href="#managing-drafts">Managing drafts</a>
+<li><a href="#overview" id="toc-overview">Overview</a></li>
+<li><a href="#managing-drafts" id="toc-managing-drafts">Managing
+drafts</a>
 <ul>
-<li><a href="#draft-option">Draft option</a></li>
-<li><a href="#git-branches">Git branches</a></li>
+<li><a href="#draft-option" id="toc-draft-option">Draft option</a></li>
+<li><a href="#git-branches" id="toc-git-branches">Git branches</a></li>
 </ul></li>
-<li><a href="#renaming-posts">Renaming posts</a></li>
-<li><a href="#importing-posts">Importing posts</a>
+<li><a href="#renaming-posts" id="toc-renaming-posts">Renaming
+posts</a></li>
+<li><a href="#importing-posts" id="toc-importing-posts">Importing
+posts</a>
 <ul>
-<li><a href="#creating-a-post">Creating a post</a></li>
-<li><a href="#importing-a-post">Importing a post</a></li>
-<li><a href="#updating-posts">Updating posts</a></li>
-<li><a href="#creative-commons">Creative Commons</a></li>
-<li><a href="#canonical-urls">Canonical URLs</a></li>
+<li><a href="#creating-a-post" id="toc-creating-a-post">Creating a
+post</a></li>
+<li><a href="#importing-a-post" id="toc-importing-a-post">Importing a
+post</a></li>
+<li><a href="#updating-posts" id="toc-updating-posts">Updating
+posts</a></li>
+<li><a href="#creative-commons" id="toc-creative-commons">Creative
+Commons</a></li>
+<li><a href="#canonical-urls" id="toc-canonical-urls">Canonical
+URLs</a></li>
 </ul></li>
 </ul>
 </nav>
 </div>
 <h2 id="overview">Overview</h2>
-<p>Distill supports a variety of workflows for blog post authoring. For a blog authored by a single individual, the following simple conventions are typically all that’s required:</p>
+<p>Distill supports a variety of workflows for blog post authoring. For
+a blog authored by a single individual, the following simple conventions
+are typically all that’s required:</p>
 <ol type="1">
-<li><p>Author post R Markdown documents within subdirectories of the <code>_posts</code> directory.</p></li>
-<li><p>Mark posts under development as <a href="blog.html#workflow">drafts</a> until they are ready to be published.</p></li>
+<li><p>Author post R Markdown documents within subdirectories of the
+<code>_posts</code> directory.</p></li>
+<li><p>Mark posts under development as <a
+href="blog.html#workflow">drafts</a> until they are ready to be
+published.</p></li>
 </ol>
-<p>For more sophisticated requirements, the following workflows are also supported:</p>
+<p>For more sophisticated requirements, the following workflows are also
+supported:</p>
 <ol type="1">
-<li><p>Authoring posts within their own standalone Git repositories.</p></li>
-<li><p>Importing posts staged elsewhere on the web (e.g. published to RPubs, located in a Git repository, or published within another Distill blog).</p></li>
+<li><p>Authoring posts within their own standalone Git
+repositories.</p></li>
+<li><p>Importing posts staged elsewhere on the web (e.g. published to
+RPubs, located in a Git repository, or published within another Distill
+blog).</p></li>
 </ol>
-<p>Distill also includes tools for verifying that imported posts are available under an appropriate <a href="https://creativecommons.org/">Creative Commons</a> license and ensuring that posts syndicated from one blog to another give credit within the Google search index to the originating blog. These tools are described below in the <a href="#importing-posts">importing posts</a> section.</p>
+<p>Distill also includes tools for verifying that imported posts are
+available under an appropriate <a
+href="https://creativecommons.org/">Creative Commons</a> license and
+ensuring that posts syndicated from one blog to another give credit
+within the Google search index to the originating blog. These tools are
+described below in the <a href="#importing-posts">importing posts</a>
+section.</p>
 <h2 id="managing-drafts">Managing drafts</h2>
-<p>There are two distinct ways to manage work in progress on a Distill post:</p>
+<p>There are two distinct ways to manage work in progress on a Distill
+post:</p>
 <ol type="1">
-<li>Using the <code>draft</code> option to prevent the article from being listed in the article index and in the sitemap; and</li>
-<li>Working on the post within a Git branch and merging/publishing it via pull request.</li>
+<li>Using the <code>draft</code> option to prevent the article from
+being listed in the article index and in the sitemap; and</li>
+<li>Working on the post within a Git branch and merging/publishing it
+via pull request.</li>
 </ol>
 <h3 id="draft-option">Draft option</h3>
-<p>If you want to work on a post for a period of time without having it be added to the listing page, add <code>draft: true</code> to the post’s metadata. For example:</p>
-<div class="sourceCode" id="cb1"><pre class="sourceCode yaml"><code class="sourceCode yaml"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="pp">---</span></span>
+<p>If you want to work on a post for a period of time without having it
+be added to the listing page, add <code>draft: true</code> to the post’s
+metadata. For example:</p>
+<div class="sourceCode" id="cb1"><pre
+class="sourceCode yaml"><code class="sourceCode yaml"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="pp">---</span></span>
 <span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="fu">title</span><span class="kw">:</span><span class="at"> </span><span class="st">&quot;The Sharpe Ratio&quot;</span></span>
 <span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="fu">description</span><span class="kw">: </span><span class="ch">|</span></span>
 <span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a>  In this post we present a classic finance use case using the</span>
@@ -2206,118 +2269,211 @@ Publishing
 <span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a>  and then calculating the Sharpe Ratio. </span>
 <span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a><span class="fu">draft</span><span class="kw">:</span><span class="at"> </span><span class="ch">true</span></span>
 <span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a><span class="pp">---</span></span></code></pre></div>
-<p>When you are ready to publish the post, either remove the <code>draft</code> option or set it to <code>false</code>, then re-Knit the post or build the website using <code>render_site()</code>.</p>
+<p>When you are ready to publish the post, either remove the
+<code>draft</code> option or set it to <code>false</code>, then re-Knit
+the post or build the website using <code>render_site()</code>.</p>
 <h3 id="git-branches">Git branches</h3>
-<p>If the source code for you website is managed within <a href="https://git-scm.com/">a Git repository</a> then another way to organize work on a new post is to create a <a href="https://git-scm.com/book/en/v2/Git-Branching-Basic-Branching-and-Merging">Git branch</a>.</p>
-<p>Once you’ve done enough work on the post within your branch, you can create a <a href="https://help.github.com/articles/about-pull-requests/">pull request</a> and then ask others for feedback on the post before it is merged.</p>
+<p>If the source code for you website is managed within <a
+href="https://git-scm.com/">a Git repository</a> then another way to
+organize work on a new post is to create a <a
+href="https://git-scm.com/book/en/v2/Git-Branching-Basic-Branching-and-Merging">Git
+branch</a>.</p>
+<p>Once you’ve done enough work on the post within your branch, you can
+create a <a
+href="https://help.github.com/articles/about-pull-requests/">pull
+request</a> and then ask others for feedback on the post before it is
+merged.</p>
 <p>This workflow has some nice benefits:</p>
 <ol type="1">
-<li><p>You can use the commenting and feedback system of your Git host (e.g. GitHub) to discuss the post in a structured fashion with clear linkages back to the source code. Depending on the service used to publish your website you might get a preview associated with the PR (e.g. with Netlify and GitHub).</p></li>
-<li><p>You can manage contributions to your blog from others that don’t have commit access to the blog (anyone can create a pull request for a public repository).</p></li>
-<li><p>You can <a href="https://help.github.com/en/github/collaborating-with-issues-and-pull-requests/about-pull-request-merges#squash-and-merge-your-pull-request-commits">squash and merge</a> to have a clean commit history on master.</p></li>
+<li><p>You can use the commenting and feedback system of your Git host
+(e.g. GitHub) to discuss the post in a structured fashion with clear
+linkages back to the source code. Depending on the service used to
+publish your website you might get a preview associated with the PR
+(e.g. with Netlify and GitHub).</p></li>
+<li><p>You can manage contributions to your blog from others that don’t
+have commit access to the blog (anyone can create a pull request for a
+public repository).</p></li>
+<li><p>You can <a
+href="https://help.github.com/en/github/collaborating-with-issues-and-pull-requests/about-pull-request-merges#squash-and-merge-your-pull-request-commits">squash
+and merge</a> to have a clean commit history on master.</p></li>
 </ol>
-<p>The mechanics of creating branches and pull requests are beyond the scope of this article. Follow the links above or reference other online resources to learn more.</p>
+<p>The mechanics of creating branches and pull requests are beyond the
+scope of this article. Follow the links above or reference other online
+resources to learn more.</p>
 <h2 id="renaming-posts">Renaming posts</h2>
-<p>Posts are stored within the <code>_posts</code> sub-directory of your site, and have a directory name that reflects the date that you created the post along with the post’s <a href="https://en.wikipedia.org/wiki/Clean_URL#Slug">title slug</a>. For example:</p>
+<p>Posts are stored within the <code>_posts</code> sub-directory of your
+site, and have a directory name that reflects the date that you created
+the post along with the post’s <a
+href="https://en.wikipedia.org/wiki/Clean_URL#Slug">title slug</a>. For
+example:</p>
 <p><code>_posts/2016-11-08-sharpe-ratio</code></p>
-<p>Note that the date prefix is not strictly required, but is done by default as a convenience so that posts appear in chronological order within the filesystem.</p>
-<p>If you work on a post over the course of a few days and/or if you change your post’s title after you begin working on it, you may want to rename the post directory. You can use the <code>rename_post_dir()</code> function to update the date and/or title slug reflected in the directory name. For example:</p>
+<p>Note that the date prefix is not strictly required, but is done by
+default as a convenience so that posts appear in chronological order
+within the filesystem.</p>
+<p>If you work on a post over the course of a few days and/or if you
+change your post’s title after you begin working on it, you may want to
+rename the post directory. You can use the
+<code>rename_post_dir()</code> function to update the date and/or title
+slug reflected in the directory name. For example:</p>
 <div class="layout-chunk" data-layout="l-body">
 <div class="sourceCode">
 <pre class="sourceCode r"><code class="sourceCode r"><span class='co'># rename to reflect the title and date in the post YAML front-matter</span>
-<span class='fu'><a href='https://pkgs.rstudio.com/distill//reference/rename_post_dir.html'>rename_post_dir</a></span><span class='op'>(</span><span class='st'>"_posts/2016-11-08-sharpe-ratio"</span><span class='op'>)</span> 
+<span class='fu'><a href='https://pkgs.rstudio.com/distill/reference/rename_post_dir.html'>rename_post_dir</a></span><span class='op'>(</span><span class='st'>"_posts/2016-11-08-sharpe-ratio"</span><span class='op'>)</span> 
 </code></pre>
 </div>
 </div>
-<p>You can also specify an explicit <code>slug</code> and/or <code>date_prefix</code> if you prefer not to use values derived from the post’s YAML.</p>
-<p>Note that you should be sure to rebuild your site after renaming a post so that it’s updated URL is reflected in the index page and RSS feed.</p>
-<div class="sourceCode" id="cb2"><pre class="sourceCode r distill-force-highlighting-css"><code class="sourceCode r"></code></pre></div>
+<p>You can also specify an explicit <code>slug</code> and/or
+<code>date_prefix</code> if you prefer not to use values derived from
+the post’s YAML.</p>
+<p>Note that you should be sure to rebuild your site after renaming a
+post so that it’s updated URL is reflected in the index page and RSS
+feed.</p>
+<div class="sourceCode" id="cb2"><pre
+class="sourceCode r distill-force-highlighting-css"><code class="sourceCode r"></code></pre></div>
 <h2 id="importing-posts">Importing posts</h2>
-<p>You may prefer a workflow where posts are worked on separately from your website/blog and then imported when they are ready to be published. This might be the case for a few different reasons:</p>
+<p>You may prefer a workflow where posts are worked on separately from
+your website/blog and then imported when they are ready to be published.
+This might be the case for a few different reasons:</p>
 <ul>
-<li>You want posts to be contained within their own Git repositories</li>
-<li>It’s more convenient for contributors to work on posts independently and then be incorporated into your blog. <a href="https://blogs.rstudio.com/ai/contributing.html">Example in the wild: RStudio AI blog</a>.</li>
-<li>You want to re-publish posts originally published on another blog.</li>
+<li>You want posts to be contained within their own Git
+repositories</li>
+<li>It’s more convenient for contributors to work on posts independently
+and then be incorporated into your blog. <a
+href="https://blogs.rstudio.com/ai/contributing.html">Example in the
+wild: RStudio AI blog</a>.</li>
+<li>You want to re-publish posts originally published on another
+blog.</li>
 </ul>
-<p>Below we will cover how to create a standalone post, how to import posts, synchronize to subsequent updates of those posts, as well as address related copyright and search indexing concerns.</p>
+<p>Below we will cover how to create a standalone post, how to import
+posts, synchronize to subsequent updates of those posts, as well as
+address related copyright and search indexing concerns.</p>
 <h3 id="creating-a-post">Creating a post</h3>
-<p>You want to have a public GitHub repository that contains the html output of a distill post. Here’s a possible workflow using RStudio IDE and <a href="https://usethis.r-lib.org/"><code>usethis</code></a>, and not taking into account your using private data (that’d you need to <a href="https://usethis.r-lib.org/reference/use_git_ignore.html">add to .gitignore</a>)</p>
+<p>You want to have a public GitHub repository that contains the html
+output of a distill post. Here’s a possible workflow using RStudio IDE
+and <a href="https://usethis.r-lib.org/"><code>usethis</code></a>, and
+not taking into account your using private data (that’d you need to <a
+href="https://usethis.r-lib.org/reference/use_git_ignore.html">add to
+.gitignore</a>)</p>
 <ul>
 <li><p>Create a new RStudio project,</p></li>
-<li><p>In that project from the new file menu choose “New file”, “R Markdown”,“From template”: distill article;</p></li>
-<li><p><a href="https://usethis.r-lib.org/reference/use_git.html"><code>usethis::use_git()</code></a>;</p></li>
-<li><p><a href="https://usethis.r-lib.org/reference/use_github.html"><code>usethis::use_github()</code></a>;</p></li>
+<li><p>In that project from the new file menu choose “New file”, “R
+Markdown”,“From template”: distill article;</p></li>
+<li><p><a
+href="https://usethis.r-lib.org/reference/use_git.html"><code>usethis::use_git()</code></a>;</p></li>
+<li><p><a
+href="https://usethis.r-lib.org/reference/use_github.html"><code>usethis::use_github()</code></a>;</p></li>
 <li><p>Edit the Rmd, knit, commit.</p></li>
 </ul>
-<p>Note that with this workflow your name won’t be guessed based on previous posts.</p>
+<p>Note that with this workflow your name won’t be guessed based on
+previous posts.</p>
 <h3 id="importing-a-post">Importing a post</h3>
-<p>You can import a post using the <code>import_post()</code> function, passing the URL where the post is published to. For example:</p>
+<p>You can import a post using the <code>import_post()</code> function,
+passing the URL where the post is published to. For example:</p>
 <div class="layout-chunk" data-layout="l-body">
 <div class="sourceCode">
-<pre class="sourceCode r"><code class="sourceCode r"><span class='fu'><a href='https://pkgs.rstudio.com/distill//reference/import_post.html'>import_post</a></span><span class='op'>(</span><span class='st'>"https://rpubs.com/jjallaire/visualizing-asset-returns"</span><span class='op'>)</span>
-<span class='fu'><a href='https://pkgs.rstudio.com/distill//reference/import_post.html'>import_post</a></span><span class='op'>(</span><span class='st'>"https://example.com/visualizing-asset-returns.html"</span><span class='op'>)</span>
+<pre class="sourceCode r"><code class="sourceCode r"><span class='fu'><a href='https://pkgs.rstudio.com/distill/reference/import_post.html'>import_post</a></span><span class='op'>(</span><span class='st'>"https://rpubs.com/jjallaire/visualizing-asset-returns"</span><span class='op'>)</span>
+<span class='fu'><a href='https://pkgs.rstudio.com/distill/reference/import_post.html'>import_post</a></span><span class='op'>(</span><span class='st'>"https://example.com/visualizing-asset-returns.html"</span><span class='op'>)</span>
 </code></pre>
 </div>
 </div>
 <p>You can also import a post from a GitHub repository. For example:</p>
 <div class="layout-chunk" data-layout="l-body">
 <div class="sourceCode">
-<pre class="sourceCode r"><code class="sourceCode r"><span class='fu'><a href='https://pkgs.rstudio.com/distill//reference/import_post.html'>import_post</a></span><span class='op'>(</span><span class='st'>"https://github.com/jjallaire/distill-article"</span><span class='op'>)</span>
+<pre class="sourceCode r"><code class="sourceCode r"><span class='fu'><a href='https://pkgs.rstudio.com/distill/reference/import_post.html'>import_post</a></span><span class='op'>(</span><span class='st'>"https://github.com/jjallaire/distill-article"</span><span class='op'>)</span>
 </code></pre>
 </div>
 </div>
-<p>Note that importing a post does not require the original R Markdown document used to author the post—you only need access to the published HTML of a post to import it.</p>
+<p>Note that importing a post does not require the original R Markdown
+document used to author the post—you only need access to the published
+HTML of a post to import it.</p>
 <h4 id="post-dates">Post dates</h4>
-<p>When you import a post, the date for the post will be automatically set to the current day (the idea being that whenever the post was authored, the day you import it is the day it’s been published to your blog). You can modify this behavior using the <code>date</code> parameter. For example:</p>
+<p>When you import a post, the date for the post will be automatically
+set to the current day (the idea being that whenever the post was
+authored, the day you import it is the day it’s been published to your
+blog). You can modify this behavior using the <code>date</code>
+parameter. For example:</p>
 <div class="layout-chunk" data-layout="l-body">
 <div class="sourceCode">
-<pre class="sourceCode r"><code class="sourceCode r"><span class='fu'><a href='https://pkgs.rstudio.com/distill//reference/import_post.html'>import_post</a></span><span class='op'>(</span><span class='st'>"https://github.com/jjallaire/distill-article"</span>, 
+<pre class="sourceCode r"><code class="sourceCode r"><span class='fu'><a href='https://pkgs.rstudio.com/distill/reference/import_post.html'>import_post</a></span><span class='op'>(</span><span class='st'>"https://github.com/jjallaire/distill-article"</span>, 
             date <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/as.Date.html'>as.Date</a></span><span class='op'>(</span><span class='st'>"2017-07-12"</span><span class='op'>)</span><span class='op'>)</span>
 </code></pre>
 </div>
 </div>
 <h4 id="post-slugs">Post slugs</h4>
-<p>The “slug” for a post determines the URL for the post within your blog. By default, slugs are automatically computed using the date and title of the post. For example, the slug for the example just above would have been <code>2017-07-12-distill-article</code>.</p>
-<p>You can also override the automatically generated slug entirely using the <code>slug</code> parameter. For example:</p>
+<p>The “slug” for a post determines the URL for the post within your
+blog. By default, slugs are automatically computed using the date and
+title of the post. For example, the slug for the example just above
+would have been <code>2017-07-12-distill-article</code>.</p>
+<p>You can also override the automatically generated slug entirely using
+the <code>slug</code> parameter. For example:</p>
 <div class="layout-chunk" data-layout="l-body">
 <div class="sourceCode">
-<pre class="sourceCode r"><code class="sourceCode r"><span class='fu'><a href='https://pkgs.rstudio.com/distill//reference/import_post.html'>import_post</a></span><span class='op'>(</span><span class='st'>"https://github.com/jjallaire/distill-article"</span>, 
+<pre class="sourceCode r"><code class="sourceCode r"><span class='fu'><a href='https://pkgs.rstudio.com/distill/reference/import_post.html'>import_post</a></span><span class='op'>(</span><span class='st'>"https://github.com/jjallaire/distill-article"</span>, 
             slug <span class='op'>=</span> <span class='st'>"an-article-about-distill"</span><span class='op'>)</span>
 </code></pre>
 </div>
 </div>
 <h3 id="updating-posts">Updating posts</h3>
-<p>If a post that you have imported is subsequently modified and you want to synchronize to the changes, you can use the <code>update_post()</code> post function. For example:</p>
+<p>If a post that you have imported is subsequently modified and you
+want to synchronize to the changes, you can use the
+<code>update_post()</code> post function. For example:</p>
 <div class="layout-chunk" data-layout="l-body">
 <div class="sourceCode">
-<pre class="sourceCode r"><code class="sourceCode r"><span class='fu'><a href='https://pkgs.rstudio.com/distill//reference/import_post.html'>update_post</a></span><span class='op'>(</span><span class='st'>"_posts/2018-07-09-distill-article"</span><span class='op'>)</span>
+<pre class="sourceCode r"><code class="sourceCode r"><span class='fu'><a href='https://pkgs.rstudio.com/distill/reference/import_post.html'>update_post</a></span><span class='op'>(</span><span class='st'>"_posts/2018-07-09-distill-article"</span><span class='op'>)</span>
 </code></pre>
 </div>
 </div>
-<p>You can also just use the post slug (rather than including the <code>_posts</code> directory prefix):</p>
+<p>You can also just use the post slug (rather than including the
+<code>_posts</code> directory prefix):</p>
 <div class="layout-chunk" data-layout="l-body">
 <div class="sourceCode">
-<pre class="sourceCode r"><code class="sourceCode r"><span class='fu'><a href='https://pkgs.rstudio.com/distill//reference/import_post.html'>update_post</a></span><span class='op'>(</span><span class='st'>"2018-07-09-distill-article"</span><span class='op'>)</span>
+<pre class="sourceCode r"><code class="sourceCode r"><span class='fu'><a href='https://pkgs.rstudio.com/distill/reference/import_post.html'>update_post</a></span><span class='op'>(</span><span class='st'>"2018-07-09-distill-article"</span><span class='op'>)</span>
 </code></pre>
 </div>
 </div>
 <h3 id="creative-commons">Creative Commons</h3>
-<p>The Distill tools for importing posts make it very easy to aggregate posts published elsewhere on the web into your blog. Note however that you need to ensure that you have appropriate permission to re-publish these posts!</p>
-<p>To facilitate this, Distill will scan any imported post for <a href="https://creativecommons.org/licenses/">Creative Commons</a> copyright metadata, and in the case that none is found confirm that you still want to import the post. Consequently, you should ask that authors writing posts for your blog always include the <code>creative_commons</code> field in their post metadata. For example:</p>
-<div class="sourceCode" id="cb3"><pre class="sourceCode yaml"><code class="sourceCode yaml"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="pp">---</span></span>
+<p>The Distill tools for importing posts make it very easy to aggregate
+posts published elsewhere on the web into your blog. Note however that
+you need to ensure that you have appropriate permission to re-publish
+these posts!</p>
+<p>To facilitate this, Distill will scan any imported post for <a
+href="https://creativecommons.org/licenses/">Creative Commons</a>
+copyright metadata, and in the case that none is found confirm that you
+still want to import the post. Consequently, you should ask that authors
+writing posts for your blog always include the
+<code>creative_commons</code> field in their post metadata. For
+example:</p>
+<div class="sourceCode" id="cb3"><pre
+class="sourceCode yaml"><code class="sourceCode yaml"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="pp">---</span></span>
 <span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a><span class="fu">title</span><span class="kw">:</span><span class="at"> </span><span class="st">&quot;Distill for R Markdown&quot;</span></span>
 <span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a><span class="fu">description</span><span class="kw">: </span><span class="ch">|</span><span class="at"> </span></span>
 <span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a>  Scientific and technical writing, native to the web</span>
 <span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a><span class="fu">output</span><span class="kw">:</span><span class="at"> distill::distill_article</span></span>
 <span id="cb3-6"><a href="#cb3-6" aria-hidden="true" tabindex="-1"></a><span class="fu">creative_commons</span><span class="kw">:</span><span class="at"> CC BY</span></span>
 <span id="cb3-7"><a href="#cb3-7" aria-hidden="true" tabindex="-1"></a><span class="pp">---</span></span></code></pre></div>
-<p>Learn more about the <code>creative_commons</code> field in the documentation on <a href="metadata.html#creative-commons">post medatata</a>.</p>
-<p>If you know that you have permission to import and republish a post you can suppress this prompt by passing <code>check_license = FALSE</code> to the <code>import_post()</code> function.</p>
+<p>Learn more about the <code>creative_commons</code> field in the
+documentation on <a href="metadata.html#creative-commons">post
+medatata</a>.</p>
+<p>If you know that you have permission to import and republish a post
+you can suppress this prompt by passing
+<code>check_license = FALSE</code> to the <code>import_post()</code>
+function.</p>
 <h3 id="canonical-urls">Canonical URLs</h3>
-<p>When you specify a <code>creative_commons</code> license for a blog post you make it easier for others to re-publish your post, giving you a broader audience for your work. In this case you may also want to ensure that the original URL where your post appeared be the one that appears in search engine results.</p>
-<p>To facilitate this, Distill automatically specifies a <a href="https://en.wikipedia.org/wiki/Canonical_link_element">canonical url</a> for posts published within a blog. That way, when a post is imported into another blog, search indexes still point back to the original article.</p>
-<p>If you prefer to disable this behavior, you can add <code>canonical: false</code> to your blog’s configuration in <code>_site.yml</code>. For example:</p>
-<div class="sourceCode" id="cb4"><pre class="sourceCode yaml"><code class="sourceCode yaml"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="fu">name</span><span class="kw">:</span><span class="at"> </span><span class="st">&quot;reproducible-finance-with-r&quot;</span></span>
+<p>When you specify a <code>creative_commons</code> license for a blog
+post you make it easier for others to re-publish your post, giving you a
+broader audience for your work. In this case you may also want to ensure
+that the original URL where your post appeared be the one that appears
+in search engine results.</p>
+<p>To facilitate this, Distill automatically specifies a <a
+href="https://en.wikipedia.org/wiki/Canonical_link_element">canonical
+url</a> for posts published within a blog. That way, when a post is
+imported into another blog, search indexes still point back to the
+original article.</p>
+<p>If you prefer to disable this behavior, you can add
+<code>canonical: false</code> to your blog’s configuration in
+<code>_site.yml</code>. For example:</p>
+<div class="sourceCode" id="cb4"><pre
+class="sourceCode yaml"><code class="sourceCode yaml"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="fu">name</span><span class="kw">:</span><span class="at"> </span><span class="st">&quot;reproducible-finance-with-r&quot;</span></span>
 <span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a><span class="fu">title</span><span class="kw">:</span><span class="at"> </span><span class="st">&quot;Reproducible Finance with R&quot;</span></span>
 <span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a><span class="fu">description</span><span class="kw">: </span><span class="ch">|</span></span>
 <span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a>  Exploring reproducible finance with the R statistical </span>
@@ -2326,8 +2482,12 @@ Publishing
 <span id="cb4-7"><a href="#cb4-7" aria-hidden="true" tabindex="-1"></a><span class="fu">collections</span><span class="kw">:</span></span>
 <span id="cb4-8"><a href="#cb4-8" aria-hidden="true" tabindex="-1"></a><span class="at">  </span><span class="fu">posts</span><span class="kw">:</span></span>
 <span id="cb4-9"><a href="#cb4-9" aria-hidden="true" tabindex="-1"></a><span class="at">    </span><span class="fu">canonical</span><span class="kw">:</span><span class="at"> </span><span class="ch">false</span></span></code></pre></div>
-<p>While canonical URLs are provided automatically for blog posts, they aren’t for standalone articles. You can explicitly provide a canonical URL for a standalone article using the <code>canonical_url</code> metadata field:</p>
-<div class="sourceCode" id="cb5"><pre class="sourceCode yaml"><code class="sourceCode yaml"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="pp">---</span></span>
+<p>While canonical URLs are provided automatically for blog posts, they
+aren’t for standalone articles. You can explicitly provide a canonical
+URL for a standalone article using the <code>canonical_url</code>
+metadata field:</p>
+<div class="sourceCode" id="cb5"><pre
+class="sourceCode yaml"><code class="sourceCode yaml"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="pp">---</span></span>
 <span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a><span class="fu">title</span><span class="kw">:</span><span class="at"> </span><span class="st">&quot;Distill for R Markdown&quot;</span></span>
 <span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a><span class="fu">description</span><span class="kw">: </span><span class="ch">|</span><span class="at"> </span></span>
 <span id="cb5-4"><a href="#cb5-4" aria-hidden="true" tabindex="-1"></a>  Scientific and technical writing, native to the web</span>
@@ -2337,7 +2497,8 @@ Publishing
 <span id="cb5-8"><a href="#cb5-8" aria-hidden="true" tabindex="-1"></a><span class="at">    </span><span class="fu">url</span><span class="kw">:</span><span class="at"> https://example.com/norajones</span></span>
 <span id="cb5-9"><a href="#cb5-9" aria-hidden="true" tabindex="-1"></a><span class="fu">canonical_url</span><span class="kw">:</span><span class="at"> https://rstudio.github.io/distill</span></span>
 <span id="cb5-10"><a href="#cb5-10" aria-hidden="true" tabindex="-1"></a><span class="pp">---</span></span></code></pre></div>
-<div class="sourceCode" id="cb6"><pre class="sourceCode r distill-force-highlighting-css"><code class="sourceCode r"></code></pre></div>
+<div class="sourceCode" id="cb6"><pre
+class="sourceCode r distill-force-highlighting-css"><code class="sourceCode r"></code></pre></div>
 <!--radix_placeholder_article_footer-->
 <!--/radix_placeholder_article_footer-->
 </div>
@@ -2358,8 +2519,13 @@ Publishing
 <!--/radix_placeholder_appendices-->
 <!--radix_placeholder_navigation_after_body-->
 <div class="distill-site-nav distill-site-footer">
-<p>© Copyright 2018 <a href="https://github.com/distillpub/template/blob/master/AUTHORS">The Distill Template Authors</a> and <a href="https://www.rstudio.com">RStudio, Inc</a>.</p>
-<p>Software licensed under the <a href="https://www.apache.org/licenses/LICENSE-2.0">Apache License, v2.0</a>.</p>
+<p>© Copyright 2018 <a
+href="https://github.com/distillpub/template/blob/master/AUTHORS">The
+Distill Template Authors</a> and <a
+href="https://www.rstudio.com">RStudio, Inc</a>.</p>
+<p>Software licensed under the <a
+href="https://www.apache.org/licenses/LICENSE-2.0">Apache License,
+v2.0</a>.</p>
 </div>
 <!--/radix_placeholder_navigation_after_body-->
 
