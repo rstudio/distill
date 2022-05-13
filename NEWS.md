@@ -1,3 +1,5 @@
+# distill (development version)
+
 # distill 1.4 (CRAN)
 
 -   Fix navbar link when a destination page contains `index.html` (thanks, \\\@phillc73, #91).
