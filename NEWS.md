@@ -1,5 +1,7 @@
 # distill (development version)
 
+-   Fix an issue with compatibility with Pandoc 2.17+ which were breaking some **bookdown** feature supported by **distill**, like text references (thanks, \\\@eliocamp, #463).
+
 # distill 1.4 (CRAN)
 
 -   Fix navbar link when a destination page contains `index.html` (thanks, \@phillc73, #91).

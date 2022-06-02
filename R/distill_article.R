@@ -281,6 +281,13 @@ distill_article <- function(toc = FALSE,
     validate_rstudio_version()
   }
 
+  # do not wrap lines:
+  # https://github.com/rstudio/bookdown/issues/504
+  # https://github.com/rstudio/distill/issues/463
+  if (pandoc_available("2.0") && !length(grep('--wrap', pandoc_args))) {
+    pandoc_args <- c('--wrap', 'preserve', pandoc_args)
+  }
+
   # return format
   output_format(
     knitr = knitr_options,
