@@ -6,7 +6,7 @@
 \alias{distill-package}
 \title{distill: 'R Markdown' Format for Scientific and Technical Writing}
 \description{
-\if{html}{\figure{logo.png}{options: align='right' alt='logo' width='120'}}
+\if{html}{\figure{logo.png}{options: style='float: right' alt='logo' width='120'}}
 
 Scientific and technical article format for the web. 'Distill' articles feature attractive, reader-friendly typography, flexible layout options for visualizations, and full support for footnotes and citations.
 }
