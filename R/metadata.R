@@ -565,7 +565,7 @@ citation_reference <- function(ref) {
     add_field(name, ref[[name]])
   }
   add_ref_field("title")
-  if (!is.null(ref$issued))
+  if (length(ref$issued$`date-parts`) > 1)
     add_field("publication_date", ref[["issued"]][["date-parts"]][[1]][[1]])
   add_ref_field("publisher")
 

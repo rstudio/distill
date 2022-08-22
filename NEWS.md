@@ -1,5 +1,6 @@
 # distill (development version)
 
+-   Fix an issue with bibliography and date parsing (thanks, \\\@mitchelloharawild, #468).
 -   Fix an issue with compatibility with Pandoc 2.17+ which were breaking some **bookdown** feature supported by **distill**, like text references (thanks, \@eliocamp, #463).
 -   Fix an issue with blank HTML in browser when a `@` is used unescaped in a document without `bibliography` YAML key (thanks, \@L-Groeninger, #466).
 
