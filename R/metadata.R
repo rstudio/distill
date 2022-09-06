@@ -138,7 +138,7 @@ transform_metadata <- function(file, site_config, collection_config, metadata, a
 
     # validate
     valid_licenses <- c("CC BY", "CC BY-SA", "CC BY-ND", "CC BY-NC",
-                        "CC BY-NC-SA", "CC BY-NC-ND")
+                        "CC BY-NC-SA", "CC BY-NC-ND", "CC0")
     if (!metadata$creative_commons %in% valid_licenses) {
       stop("creative_commonds license must be one of ",
            paste(valid_licenses, collapse = ", "))
@@ -856,13 +856,14 @@ bibtex_authors <- function(metadata_author) {
 }
 
 creative_commons_url <- function(metadata_creative_commons) {
-  if (!is.null(metadata_creative_commons))
-    paste0(
-      "https://creativecommons.org/licenses/",
-      tolower(sub("^CC ", "", metadata_creative_commons)), "/4.0/"
+  if (is.null(metadata_creative_commons)) return(NULL)
+  if (metadata_creative_commons == "CC0") {
+    "https://creativecommons.org/publicdomain/zero/1.0/"
+  } else {
+    sprintf("https://creativecommons.org/licenses/%s/4.0/",
+            tolower(sub("^CC ", "", metadata_creative_commons))
     )
-  else
-    NULL
+  }
 }
 
 # provide qualified title if specified in site and different from title
