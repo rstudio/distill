@@ -1,6 +1,6 @@
 # distill (development version)
 
--   Add support for [CC0](https://creativecommons.org/share-your-work/public-domain/cc0) license in `creative_commons` (thanks, \\\@fkohrt, #431).
+-   Add support for [CC0](https://creativecommons.org/share-your-work/public-domain/cc0/) license in `creative_commons` (thanks, \\\@fkohrt, #431).
 -   Fix an issue with **gt** table and font size (thanks, \\\@ymer,\\\@lmlicuanan, #399).
 -   Fix an issue with hovering on citation references (thanks, \\\@Abhi-1U).
 -   Fix an issue with bibliography and date parsing (thanks, \\\@mitchelloharawild, #468).
