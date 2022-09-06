@@ -21,7 +21,7 @@ You can enhance Distill articles by providing various types of metadata, includi
 
 You can include the `repository_url` field to indicate where the source code for your article can be found. For example:
 
-``` {.yaml}
+``` yaml
 ---
 title: "Distill for R Markdown"
 description: | 
@@ -33,7 +33,7 @@ repository_url: https://github.com/rstudio/distill
 
 You can optionally also include a `compare_updates_url` to provide a URL that will show the differences between the article's current version and the version that was initially published. For example:
 
-``` {.yaml}
+``` yaml
 ---
 title: "Distill for R Markdown"
 description: | 
@@ -54,16 +54,18 @@ The [Creative Commons](https://creativecommons.org/licenses/) copyright licenses
 
 Here are some of the common forms of Creative Commons content license:
 
-| License                                                     | Name                      | Description                                                                                                                                                                                                                                                                                                                                                                           |
-|-------------------------------------------------------------|---------------------------|---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| [CC BY](https://creativecommons.org/licenses/by/4.0/)       | Attribution               | This license lets others distribute, remix, tweak, and build upon your work, even commercially, as long as they credit you for the original creation. This is the most accommodating of licenses offered.                                                                                                                                                                             |
-| [CC BY-SA](https://creativecommons.org/licenses/by-sa/4.0/) | Attribution-ShareAlike    | This license lets others remix, tweak, and build upon your work even for commercial purposes, as long as they credit you and license their new creations under the identical terms. This license is often compared to "copyleft" free and open source software licenses. All new works based on yours will carry the same license, so any derivatives will also allow commercial use. |
-| [CC BY-ND](https://creativecommons.org/licenses/by-nd/4.0/) | Attribution-NoDerivs      | This license allows for redistribution, commercial and non-commercial, as long as it is passed along unchanged and in whole, with credit to you.                                                                                                                                                                                                                                      |
-| [CC BY-NC](https://creativecommons.org/licenses/by-nc/4.0/) | Attribution-NonCommercial | This license lets others remix, tweak, and build upon your work non-commercially, and although their new works must also acknowledge you and be non-commercial, they don't have to license their derivative works on the same terms.                                                                                                                                                  |
+| License                                                           | Name                                          | Description                                                                                                                                                                                                                                                                                                                                                                                                                                                  ||-----------|-----------|-------------------------------------------------|
+| [CC BY](https://creativecommons.org/licenses/by/4.0/)             | Attribution                                   | This license lets others distribute, remix, tweak, and build upon your work, even commercially, as long as they credit you for the original creation. This is the most accommodating of licenses offered.                                                                                                                                                                                                                                                    |
+| [CC BY-SA](https://creativecommons.org/licenses/by-sa/4.0/)       | Attribution-ShareAlike                        | This license lets others remix, tweak, and build upon your work even for commercial purposes, as long as they credit you and license their new creations under the identical terms. This license is often compared to "copyleft" free and open source software licenses. All new works based on yours will carry the same license, so any derivatives will also allow commercial use.                                                                        |
+| [CC BY-ND](https://creativecommons.org/licenses/by-nd/4.0/)       | Attribution-NoDerivs                          | This license allows for redistribution, commercial and non-commercial, as long as it is passed along unchanged and in whole, with credit to you.                                                                                                                                                                                                                                                                                                             |
+| [CC BY-NC](https://creativecommons.org/licenses/by-nc/4.0/)       | Attribution-NonCommercial                     | This license lets others remix, tweak, and build upon your work non-commercially, and although their new works must also acknowledge you and be non-commercial, they don't have to license their derivative works on the same terms.                                                                                                                                                                                                                         |
+| [CC BY-NC-SA](https://creativecommons.org/licenses/by-nc-nd/4.0/) | Attribution-NonCommercial-ShareAlike          | This license lets others remix, adapt, and build upon your work non-commercially, as long as they credit you and license their new creations under the identical terms.                                                                                                                                                                                                                                                                                      |
+| [CC BY-NC-ND](https://creativecommons.org/licenses/by-nc-nd/4.0)  | Attribution-NonCommercial-NoDerivs            | This license is the most restrictive of our six main licenses, only allowing others to download your works and share them with others as long as they credit you, but they can't change them in any way or use them commercially.                                                                                                                                                                                                                            |
+| [CC0](https://creativecommons.org/publicdomain/zero/1.0/)         | Public Domain Dedication - No Rights Reserved | CC0 enables scientists, educators, artists and other creators and owners of copyright- or database-protected content to waive those interests in their works and thereby place them as completely as possible in the public domain, so that others may freely build upon, enhance and reuse the works for any purposes without restriction under copyright or database law. (See [About CC0](https://creativecommons.org/share-your-work/public-domain/cc0)) |
 
 You can designate articles that you create as Creative Commons licensed by adding the `creative_commons` field and specifying one of the standard Creative Commons licenses. For example:
 
-``` {.yaml}
+``` yaml
 ---
 title: "Distill for R Markdown"
 description: | 
@@ -81,7 +83,7 @@ If you include this field then a *Reuse* appendix is automatically generated. Fo
 
 Note that figures from external sources are explicitly carved out of the license. If you are including a figure from an external source, it's good practice to delineate this by applying the `.external` class and adding a caption indicating where it is from. For example:
 
-``` {.markup}
+``` markup
 ![Figure from https://example.com](heatmap.png){width=100% .external}    
 ```
 
@@ -95,7 +97,7 @@ You can specify a preview image for your article (for sharing on Slack, Twitter,
 
 1.  You can explicitly provide the full URL of the preview image via the `preview` field in the article's metadata. For example:
 
-    ``` {.yaml}
+    ``` yaml
     ---
     title: "JavaScript & D3"
     description: Enhance communication with interactive visualizations 
@@ -107,7 +109,7 @@ You can specify a preview image for your article (for sharing on Slack, Twitter,
 
 2.  If your article is not self-contained (it's part of a [Distill website](publish_website.html) or is generated with `self_contained: false`) then you can include the preview image alongside your document. In this case you still need to specify the root URL where your image will be published to using the `base_url` field:
 
-    ``` {.yaml}
+    ``` yaml
     ---
     title: "JavaScript & D3"
     description: Enhance communication with interactive visualizations 
@@ -120,7 +122,7 @@ You can specify a preview image for your article (for sharing on Slack, Twitter,
 
 3.  You can also specify that a specific figure within your article should be used as the preview image. To do this, just add the `preview = TRUE` chunk option to the chunk which creates the figure. For example:
 
-    ``` {.yaml}
+    ``` yaml
     ---
     title: "JavaScript & D3"
     description: Enhance communication with interactive visualizations 
@@ -128,7 +130,7 @@ You can specify a preview image for your article (for sharing on Slack, Twitter,
     ---
     ```
 
-    ```` {.clike}
+    ```` clike
     ```{r, layout="l-body-outset", preview=TRUE}`r ''`
     library(ggplot2)
     ggplot(diamonds, aes(carat, price)) + geom_smooth() +
@@ -156,7 +158,7 @@ There are two additional fields you can include that provide attribution for you
 
 Here's a complete example that includes the attribution fields as well as a preview image:
 
-``` {.yaml}
+``` yaml
 ---
 title: "JavaScript & D3"
 description: Enhance communication with interactive visualizations 
