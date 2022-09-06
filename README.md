@@ -16,18 +16,18 @@ coverage](https://codecov.io/gh/rstudio/distill/branch/main/graph/badge.svg)](ht
 Distill for R Markdown is a web publishing format optimized for
 scientific and technical communication. Distill articles include:
 
--   Reader-friendly typography that adapts well to mobile devices.
--   Features essential to technical writing like LaTeX math, citations,
-    and footnotes.
--   Flexible figure layout options (e.g. displaying figures at a larger
-    width than the article text).
--   Attractively rendered tables with optional support for pagination.
--   Support for a wide variety of diagramming tools for illustrating
-    concepts.
--   The ability to incorporate JavaScript and D3-based interactive
-    visualizations.
--   A variety of ways to publish articles, including support for
-    publishing collections or articles as a Distill website.
+- Reader-friendly typography that adapts well to mobile devices.
+- Features essential to technical writing like LaTeX math, citations,
+  and footnotes.
+- Flexible figure layout options (e.g. displaying figures at a larger
+  width than the article text).
+- Attractively rendered tables with optional support for pagination.
+- Support for a wide variety of diagramming tools for illustrating
+  concepts.
+- The ability to incorporate JavaScript and D3-based interactive
+  visualizations.
+- A variety of ways to publish articles, including support for
+  publishing collections or articles as a Distill website.
 
 Distill for R Markdown is based on the [Distill web
 framework](https://github.com/distillpub/template), which was originally
