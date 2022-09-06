@@ -787,6 +787,7 @@ code span.wa { color: #008000; font-weight: bold; } /* Warning */
   d-article table.gt_table td,
   d-article table.gt_table th {
     border-bottom: none;
+    font-size: 100%;
   }
 
   .html-widget {
@@ -1859,15 +1860,21 @@ code span.wa { color: #008000; font-weight: bold; } /* Warning */
 
       // hoverable references
       $('span.citation[data-cites]').each(function() {
-        if ($(this).children()[0].nodeName == "D-FOOTNOTE") {
-          var fn = $(this).children()[0]
+        const citeChild = $(this).children()[0]
+        // Do not process if @xyz has been used without escaping and without bibliography activated
+        // https://github.com/rstudio/distill/issues/466
+        if (citeChild === undefined) return true
+
+        if (citeChild.nodeName == "D-FOOTNOTE") {
+          var fn = citeChild
           $(this).html(fn.shadowRoot.querySelector("sup"))
           $(this).id = fn.id
           fn.remove()
         }
         var refs = $(this).attr('data-cites').split(" ");
         var refHtml = refs.map(function(ref) {
-          return "<p>" + $('#ref-' + ref).html() + "</p>";
+          // Could use CSS.escape too here, we insure backward compatibility in navigator
+          return "<p>" + $('div[id="ref-' + ref + '"]').html() + "</p>";
         }).join("\n");
         window.tippy(this, {
           allowHTML: true,
@@ -2066,7 +2073,7 @@ code span.wa { color: #008000; font-weight: bold; } /* Warning */
   </script>
 
   <!--/radix_placeholder_distill-->
-  <script src="site_libs/header-attrs-2.14/header-attrs.js"></script>
+  <script src="site_libs/header-attrs-2.16.1/header-attrs.js"></script>
   <script src="site_libs/popper-2.6.0/popper.min.js"></script>
   <link href="site_libs/tippy-6.2.7/tippy.css" rel="stylesheet" />
   <link href="site_libs/tippy-6.2.7/tippy-light-border.css" rel="stylesheet" />
@@ -2193,35 +2200,20 @@ Publishing
 <nav class="l-text toc figcaption" id="TOC">
 <h3>Contents</h3>
 <ul>
-<li><a href="#citing-other-works" id="toc-citing-other-works">Citing
-other works</a></li>
-<li><a href="#creating-citeable-articles"
-id="toc-creating-citeable-articles">Creating citeable articles</a>
+<li><a href="#citing-other-works" id="toc-citing-other-works">Citing other works</a></li>
+<li><a href="#creating-citeable-articles" id="toc-creating-citeable-articles">Creating citeable articles</a>
 <ul>
 <li><a href="#web-articles" id="toc-web-articles">Web articles</a></li>
-<li><a href="#journal-articles" id="toc-journal-articles">Journal
-articles</a></li>
+<li><a href="#journal-articles" id="toc-journal-articles">Journal articles</a></li>
 </ul></li>
-<li><a href="#google-scholar" id="toc-google-scholar">Google
-Scholar</a></li>
+<li><a href="#google-scholar" id="toc-google-scholar">Google Scholar</a></li>
 </ul>
 </nav>
 </div>
-<p>Distill articles support including citations and a corresponding
-bibliography using standard R Markdown citation syntax. Distill also
-provides tools for making your articles more <a
-href="#creating-citeable-articles">easily citeable</a>, as well as for
-generating <a href="#google-scholar">Google Scholar</a> compatible
-citation metadata.</p>
+<p>Distill articles support including citations and a corresponding bibliography using standard R Markdown citation syntax. Distill also provides tools for making your articles more <a href="#creating-citeable-articles">easily citeable</a>, as well as for generating <a href="#google-scholar">Google Scholar</a> compatible citation metadata.</p>
 <h2 id="citing-other-works">Citing other works</h2>
-<p>Use standard <a
-href="https://rmarkdown.rstudio.com/authoring_bibliographies_and_citations.html">R
-Markdown bibliographies</a> for citing other works. To do this, first
-create a bibliography file using a supported format (e.g. CSL or BibTeX)
-and refer to it from the <code>bibliography</code> field of the YAML
-front-matter. For example:</p>
-<div class="sourceCode" id="cb1"><pre
-class="sourceCode yaml"><code class="sourceCode yaml"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="pp">---</span></span>
+<p>Use standard <a href="https://rmarkdown.rstudio.com/authoring_bibliographies_and_citations.html">R Markdown bibliographies</a> for citing other works. To do this, first create a bibliography file using a supported format (e.g. CSL or BibTeX) and refer to it from the <code>bibliography</code> field of the YAML front-matter. For example:</p>
+<div class="sourceCode" id="cb1"><pre class="sourceCode yaml"><code class="sourceCode yaml"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="pp">---</span></span>
 <span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="fu">title</span><span class="kw">:</span><span class="at"> </span><span class="st">&quot;Distill for R Markdown&quot;</span></span>
 <span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="fu">description</span><span class="kw">: </span><span class="ch">|</span><span class="at"> </span></span>
 <span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a>  Scientific and technical writing, native to the web</span>
@@ -2235,8 +2227,7 @@ class="sourceCode yaml"><code class="sourceCode yaml"><span id="cb1-1"><a href="
 <span id="cb1-12"><a href="#cb1-12" aria-hidden="true" tabindex="-1"></a><span class="fu">bibliography</span><span class="kw">:</span><span class="at"> biblio.yaml</span></span>
 <span id="cb1-13"><a href="#cb1-13" aria-hidden="true" tabindex="-1"></a><span class="pp">---</span></span></code></pre></div>
 <p>Here’s an example of what a CSL bibliography might look like:</p>
-<div class="sourceCode" id="cb2"><pre
-class="sourceCode yaml"><code class="sourceCode yaml"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="pp">---</span></span>
+<div class="sourceCode" id="cb2"><pre class="sourceCode yaml"><code class="sourceCode yaml"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="pp">---</span></span>
 <span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a><span class="fu">references</span><span class="kw">:</span></span>
 <span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a><span class="kw">-</span><span class="at"> </span><span class="fu">type</span><span class="kw">:</span><span class="at"> article-journal</span></span>
 <span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a><span class="at">  </span><span class="fu">id</span><span class="kw">:</span><span class="at"> WatsonCrick1953</span></span>
@@ -2261,29 +2252,13 @@ class="sourceCode yaml"><code class="sourceCode yaml"><span id="cb2-1"><a href="
 <span id="cb2-23"><a href="#cb2-23" aria-hidden="true" tabindex="-1"></a><span class="at">  </span><span class="fu">URL</span><span class="kw">:</span><span class="at"> https://www.nature.com/articles/171737a0</span></span>
 <span id="cb2-24"><a href="#cb2-24" aria-hidden="true" tabindex="-1"></a><span class="at">  </span><span class="fu">language</span><span class="kw">:</span><span class="at"> en-GB</span></span>
 <span id="cb2-25"><a href="#cb2-25" aria-hidden="true" tabindex="-1"></a><span class="co">...</span></span></code></pre></div>
-<p>To cite this within your article, use standard R Markdown notation,
-for example: <code>[@WatsonCrick1953]</code> (referencing an id provided
-in the bibliography). See the documentation on <a
-href="https://pandoc.org/MANUAL.html#extension-citations">Pandoc
-Citations</a> for details on in-text citations, citing multiple works,
-etc.</p>
-<p>Note that both CSL and BibTeX bibliographies are supported. See the
-<a
-href="https://pandoc.org/MANUAL.html#specifying-bibliographic-data">Pandoc
-Bibliographies</a> documentation for addional details on creating a
-bibliography for use with Pandoc.</p>
+<p>To cite this within your article, use standard R Markdown notation, for example: <code>[@WatsonCrick1953]</code> (referencing an id provided in the bibliography). See the documentation on <a href="https://pandoc.org/MANUAL.html#extension-citations">Pandoc Citations</a> for details on in-text citations, citing multiple works, etc.</p>
+<p>Note that both CSL and BibTeX bibliographies are supported. See the <a href="https://pandoc.org/MANUAL.html#specifying-bibliographic-data">Pandoc Bibliographies</a> documentation for addional details on creating a bibliography for use with Pandoc.</p>
 <h2 id="creating-citeable-articles">Creating citeable articles</h2>
-<p>You can make it easier for others to cite your work by providing
-additional metadata with the YAML front-matter of your article.
-Citations can be provided for both articles published to the web or for
-articles published in journals (with or without a <a
-href="https://www.doi.org/">DOI</a>).</p>
+<p>You can make it easier for others to cite your work by providing additional metadata with the YAML front-matter of your article. Citations can be provided for both articles published to the web or for articles published in journals (with or without a <a href="https://www.doi.org/">DOI</a>).</p>
 <h3 id="web-articles">Web articles</h3>
-<p>To provide a citation for an article published to the web, include
-<code>author</code> and <code>date</code> metadata as well as a
-<code>citation_url</code>. For example:</p>
-<div class="sourceCode" id="cb3"><pre
-class="sourceCode yaml"><code class="sourceCode yaml"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="pp">---</span></span>
+<p>To provide a citation for an article published to the web, include <code>author</code> and <code>date</code> metadata as well as a <code>citation_url</code>. For example:</p>
+<div class="sourceCode" id="cb3"><pre class="sourceCode yaml"><code class="sourceCode yaml"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="pp">---</span></span>
 <span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a><span class="fu">title</span><span class="kw">:</span><span class="at"> </span><span class="st">&quot;Distill for R Markdown&quot;</span></span>
 <span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a><span class="fu">description</span><span class="kw">: </span><span class="ch">|</span><span class="at"> </span></span>
 <span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a>  Scientific and technical writing, native to the web</span>
@@ -2297,21 +2272,12 @@ class="sourceCode yaml"><code class="sourceCode yaml"><span id="cb3-1"><a href="
 <span id="cb3-12"><a href="#cb3-12" aria-hidden="true" tabindex="-1"></a><span class="fu">slug</span><span class="kw">:</span><span class="at"> jones2018distill</span></span>
 <span id="cb3-13"><a href="#cb3-13" aria-hidden="true" tabindex="-1"></a><span class="fu">bibliography</span><span class="kw">:</span><span class="at"> biblio.bib</span></span>
 <span id="cb3-14"><a href="#cb3-14" aria-hidden="true" tabindex="-1"></a><span class="pp">---</span></span></code></pre></div>
-<p>Note that the <code>citation_url</code> field is not required for <a
-href="blog.html">blog articles</a> (in that case it’s computed
-automatically using the site’s <code>base_url</code> field).</p>
-<p>When this metadata is available, a citation appendix is automatically
-added to the article which looks like this:</p>
-<p><img src="images/citation.png" class="screenshot"
-style="width:95.0%" /></p>
-<p>Note that we also included a <code>slug</code> field (in this case
-<code>jones2018distill</code>) which affects the abbreviated version of
-the citation included in the BibTeX entry. If you don’t provide a
-<code>slug</code> then one will be automatically generated.</p>
+<p>Note that the <code>citation_url</code> field is not required for <a href="blog.html">blog articles</a> (in that case it’s computed automatically using the site’s <code>base_url</code> field).</p>
+<p>When this metadata is available, a citation appendix is automatically added to the article which looks like this:</p>
+<p><img src="images/citation.png" class="screenshot" style="width:95.0%" /></p>
+<p>Note that we also included a <code>slug</code> field (in this case <code>jones2018distill</code>) which affects the abbreviated version of the citation included in the BibTeX entry. If you don’t provide a <code>slug</code> then one will be automatically generated.</p>
 <h3 id="journal-articles">Journal articles</h3>
-<p>If your article is published within a Journal, you can add the
-following the additional fields to generate the appropriate citation
-entry:</p>
+<p>If your article is published within a Journal, you can add the following the additional fields to generate the appropriate citation entry:</p>
 <table>
 <thead>
 <tr class="header">
@@ -2326,14 +2292,12 @@ entry:</p>
 </tr>
 <tr class="even">
 <td><code>doi</code></td>
-<td>Digital Object Identifier (<a
-href="https://www.doi.org/">DOI</a>)</td>
+<td>Digital Object Identifier (<a href="https://www.doi.org/">DOI</a>)</td>
 </tr>
 </tbody>
 </table>
 <p>Here’s our previous examples amended with these fields:</p>
-<div class="sourceCode" id="cb4"><pre
-class="sourceCode yaml"><code class="sourceCode yaml"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="pp">---</span></span>
+<div class="sourceCode" id="cb4"><pre class="sourceCode yaml"><code class="sourceCode yaml"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="pp">---</span></span>
 <span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a><span class="fu">title</span><span class="kw">:</span><span class="at"> </span><span class="st">&quot;Distill for R Markdown&quot;</span></span>
 <span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a><span class="fu">description</span><span class="kw">: </span><span class="ch">|</span><span class="at"> </span></span>
 <span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a>  Scientific and technical writing, native to the web</span>
@@ -2350,21 +2314,12 @@ class="sourceCode yaml"><code class="sourceCode yaml"><span id="cb4-1"><a href="
 <span id="cb4-15"><a href="#cb4-15" aria-hidden="true" tabindex="-1"></a><span class="fu">bibliography</span><span class="kw">:</span><span class="at"> biblio.bib</span></span>
 <span id="cb4-16"><a href="#cb4-16" aria-hidden="true" tabindex="-1"></a><span class="pp">---</span></span></code></pre></div>
 <p>This is how the citation is presented in the appendix:</p>
-<p><img src="images/citation-journal.png" class="screenshot"
-style="width:95.0%" /></p>
-<p>For Journal articles, the <code>citation_url</code> is included in
-the BibTeX entry within the <code>note</code> field.</p>
+<p><img src="images/citation-journal.png" class="screenshot" style="width:95.0%" /></p>
+<p>For Journal articles, the <code>citation_url</code> is included in the BibTeX entry within the <code>note</code> field.</p>
 <h2 id="google-scholar">Google Scholar</h2>
-<p>Distill articles automatically include metadata compatible with the
-format indexed by <a
-href="https://scholar.google.com/intl/en/scholar/inclusion.html#indexing">Google
-Scholar</a>. This makes it easy for indexing engines (Google Scholar or
-otherwise) to extract not only a citation for your article but also
-information on other sources which you cited.</p>
-<p>For example, here is the Google Scholar metadata automatically
-included for the home page of the Distill for R Markdown website:</p>
-<div class="sourceCode" id="cb5"><pre
-class="sourceCode html"><code class="sourceCode html"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="co">&lt;!--  https://scholar.google.com/intl/en/scholar/inclusion.html#indexing --&gt;</span></span>
+<p>Distill articles automatically include metadata compatible with the format indexed by <a href="https://scholar.google.com/intl/en/scholar/inclusion.html#indexing">Google Scholar</a>. This makes it easy for indexing engines (Google Scholar or otherwise) to extract not only a citation for your article but also information on other sources which you cited.</p>
+<p>For example, here is the Google Scholar metadata automatically included for the home page of the Distill for R Markdown website:</p>
+<div class="sourceCode" id="cb5"><pre class="sourceCode html"><code class="sourceCode html"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="co">&lt;!--  https://scholar.google.com/intl/en/scholar/inclusion.html#indexing --&gt;</span></span>
 <span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a><span class="kw">&lt;meta</span> <span class="er">name</span><span class="ot">=</span><span class="st">&quot;citation_title&quot;</span> <span class="er">content</span><span class="ot">=</span><span class="st">&quot;Distill for R Markdown&quot;</span><span class="kw">/&gt;</span></span>
 <span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a><span class="kw">&lt;meta</span> <span class="er">name</span><span class="ot">=</span><span class="st">&quot;citation_fulltext_html_url&quot;</span> <span class="er">content</span><span class="ot">=</span><span class="st">&quot;https://rstudio.github.io/distill&quot;</span><span class="kw">/&gt;</span></span>
 <span id="cb5-4"><a href="#cb5-4" aria-hidden="true" tabindex="-1"></a><span class="kw">&lt;meta</span> <span class="er">name</span><span class="ot">=</span><span class="st">&quot;citation_fulltext_world_readable&quot;</span> <span class="er">content</span><span class="ot">=</span><span class="st">&quot;&quot;</span><span class="kw">/&gt;</span></span>
@@ -2387,20 +2342,10 @@ class="sourceCode html"><code class="sourceCode html"><span id="cb5-1"><a href="
 <span id="cb5-21"><a href="#cb5-21" aria-hidden="true" tabindex="-1"></a><span class="kw">&lt;meta</span> <span class="er">name</span><span class="ot">=</span><span class="st">&quot;citation_reference&quot;</span> <span class="er">content</span><span class="ot">=</span><span class="st">&quot;citation_title=Dynamic</span></span>
 <span id="cb5-22"><a href="#cb5-22" aria-hidden="true" tabindex="-1"></a><span class="st">documents with r and knitr;citation_publication_date=2015;</span></span>
 <span id="cb5-23"><a href="#cb5-23" aria-hidden="true" tabindex="-1"></a><span class="st">citation_publisher=Chapman; Hall/CRC;citation_author=Yihui Xie&quot;</span><span class="kw">/&gt;</span></span></code></pre></div>
-<p>Note that the <code>citation_reference</code> fields provide
-information on which works your article cited.</p>
-<p>The code above is HTML so don’t worry if you aren’t familiar with the
-syntax. The important thing to know is that citation data is provided in
-a way that machines can easily read and index.</p>
-<p>If you are publishing a Journal article, there are some additional
-metadata fields you can provide to enhance the Google Scholar metadata
-generated by Distill. These include additional fields describing the
-Journal (<code>title</code>, <code>issn</code>, and
-<code>publisher</code>) as well fields describing the
-<code>volume</code> and <code>issue</code> in which your article was
-published. For example:</p>
-<div class="sourceCode" id="cb6"><pre
-class="sourceCode yaml"><code class="sourceCode yaml"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="pp">---</span></span>
+<p>Note that the <code>citation_reference</code> fields provide information on which works your article cited.</p>
+<p>The code above is HTML so don’t worry if you aren’t familiar with the syntax. The important thing to know is that citation data is provided in a way that machines can easily read and index.</p>
+<p>If you are publishing a Journal article, there are some additional metadata fields you can provide to enhance the Google Scholar metadata generated by Distill. These include additional fields describing the Journal (<code>title</code>, <code>issn</code>, and <code>publisher</code>) as well fields describing the <code>volume</code> and <code>issue</code> in which your article was published. For example:</p>
+<div class="sourceCode" id="cb6"><pre class="sourceCode yaml"><code class="sourceCode yaml"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="pp">---</span></span>
 <span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a><span class="fu">title</span><span class="kw">:</span><span class="at"> </span><span class="st">&quot;Distill for R Markdown&quot;</span></span>
 <span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a><span class="fu">description</span><span class="kw">: </span><span class="ch">|</span><span class="at"> </span></span>
 <span id="cb6-4"><a href="#cb6-4" aria-hidden="true" tabindex="-1"></a>  Scientific and technical writing, native to the web</span>
@@ -2421,10 +2366,8 @@ class="sourceCode yaml"><code class="sourceCode yaml"><span id="cb6-1"><a href="
 <span id="cb6-19"><a href="#cb6-19" aria-hidden="true" tabindex="-1"></a><span class="fu">citation_url</span><span class="kw">:</span><span class="at"> https://rstudio.github.io/distill</span></span>
 <span id="cb6-20"><a href="#cb6-20" aria-hidden="true" tabindex="-1"></a><span class="fu">bibliography</span><span class="kw">:</span><span class="at"> biblio.bib</span></span>
 <span id="cb6-21"><a href="#cb6-21" aria-hidden="true" tabindex="-1"></a><span class="pp">---</span></span></code></pre></div>
-<div class="sourceCode" id="cb7"><pre
-class="sourceCode r distill-force-highlighting-css"><code class="sourceCode r"></code></pre></div>
-<div class="sourceCode" id="cb8"><pre
-class="sourceCode r distill-force-highlighting-css"><code class="sourceCode r"></code></pre></div>
+<div class="sourceCode" id="cb7"><pre class="sourceCode r distill-force-highlighting-css"><code class="sourceCode r"></code></pre></div>
+<div class="sourceCode" id="cb8"><pre class="sourceCode r distill-force-highlighting-css"><code class="sourceCode r"></code></pre></div>
 <!--radix_placeholder_article_footer-->
 <!--/radix_placeholder_article_footer-->
 </div>

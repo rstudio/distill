@@ -786,6 +786,7 @@ code span.wa { color: #008000; font-weight: bold; } /* Warning */
   d-article table.gt_table td,
   d-article table.gt_table th {
     border-bottom: none;
+    font-size: 100%;
   }
 
   .html-widget {
@@ -1858,15 +1859,21 @@ code span.wa { color: #008000; font-weight: bold; } /* Warning */
 
       // hoverable references
       $('span.citation[data-cites]').each(function() {
-        if ($(this).children()[0].nodeName == "D-FOOTNOTE") {
-          var fn = $(this).children()[0]
+        const citeChild = $(this).children()[0]
+        // Do not process if @xyz has been used without escaping and without bibliography activated
+        // https://github.com/rstudio/distill/issues/466
+        if (citeChild === undefined) return true
+
+        if (citeChild.nodeName == "D-FOOTNOTE") {
+          var fn = citeChild
           $(this).html(fn.shadowRoot.querySelector("sup"))
           $(this).id = fn.id
           fn.remove()
         }
         var refs = $(this).attr('data-cites').split(" ");
         var refHtml = refs.map(function(ref) {
-          return "<p>" + $('#ref-' + ref).html() + "</p>";
+          // Could use CSS.escape too here, we insure backward compatibility in navigator
+          return "<p>" + $('div[id="ref-' + ref + '"]').html() + "</p>";
         }).join("\n");
         window.tippy(this, {
           allowHTML: true,
@@ -2065,7 +2072,7 @@ code span.wa { color: #008000; font-weight: bold; } /* Warning */
   </script>
 
   <!--/radix_placeholder_distill-->
-  <script src="site_libs/header-attrs-2.14/header-attrs.js"></script>
+  <script src="site_libs/header-attrs-2.16.1/header-attrs.js"></script>
   <script src="site_libs/htmlwidgets-1.5.4/htmlwidgets.js"></script>
   <script src="site_libs/jquery-1.12.4/jquery.min.js"></script>
   <link href="site_libs/leaflet-1.3.1/leaflet.css" rel="stylesheet" />
@@ -2201,44 +2208,31 @@ Publishing
 <nav class="l-text toc figcaption" id="TOC">
 <h3>Contents</h3>
 <ul>
-<li><a href="#default-layout" id="toc-default-layout">Default
-layout</a></li>
-<li><a href="#wider-layouts" id="toc-wider-layouts">Wider
-layouts</a></li>
-<li><a href="#full-screen-layout" id="toc-full-screen-layout">Full
-screen layout</a></li>
-<li><a href="#static-figures" id="toc-static-figures">Static
-figures</a></li>
-<li><a href="#cross-references"
-id="toc-cross-references">Cross-references</a></li>
+<li><a href="#default-layout" id="toc-default-layout">Default layout</a></li>
+<li><a href="#wider-layouts" id="toc-wider-layouts">Wider layouts</a></li>
+<li><a href="#full-screen-layout" id="toc-full-screen-layout">Full screen layout</a></li>
+<li><a href="#static-figures" id="toc-static-figures">Static figures</a></li>
+<li><a href="#cross-references" id="toc-cross-references">Cross-references</a></li>
 </ul>
 </nav>
 </div>
 <h2 id="default-layout">Default layout</h2>
-<p>There are a variety of ways to layout figures included within Distill
-articles. This layout is controlled by a set of layout classes, which
-are in turn applied to R Markdown chunks using the <code>layout</code>
-chunk option.</p>
-<p>The default layout if <code>layout</code> is not specified is
-<code>l-body</code>, which will cause content to span the width of the
-main article body:</p>
+<p>There are a variety of ways to layout figures included within Distill articles. This layout is controlled by a set of layout classes, which are in turn applied to R Markdown chunks using the <code>layout</code> chunk option.</p>
+<p>The default layout if <code>layout</code> is not specified is <code>l-body</code>, which will cause content to span the width of the main article body:</p>
 <div class="fake-img l-body">
 <p>
 <p>l-body</p>
 </p>
 </div>
-<p>For example, a plot with the default <code>l-body</code> layout would
-look like this:</p>
+<p>For example, a plot with the default <code>l-body</code> layout would look like this:</p>
 <div class="layout-chunk" data-layout="l-body">
 <div class="sourceCode">
-<pre class="sourceCode r"><code class="sourceCode r"><span class='fu'><a href='https://rdrr.io/pkg/knitr/man/include_graphics.html'>include_graphics</a></span><span class='op'>(</span><span class='st'>"images/l-body-figure.png"</span><span class='op'>)</span>
-</code></pre>
+<pre class="sourceCode r"><code class="sourceCode r"><span><span class='fu'><a href='https://rdrr.io/pkg/knitr/man/include_graphics.html'>include_graphics</a></span><span class='op'>(</span><span class='st'>"images/l-body-figure.png"</span><span class='op'>)</span></span></code></pre>
 </div>
 <p><img src="images/l-body-figure.png" width="576" /></p>
 </div>
 <h2 id="wider-layouts">Wider layouts</h2>
-<p>For elements you want to display a little larger, try
-<code>l-body-outset</code> or <code>l-page</code>:</p>
+<p>For elements you want to display a little larger, try <code>l-body-outset</code> or <code>l-page</code>:</p>
 <div class="fake-img l-body-outset">
 <p>
 <p>l-body-outset</p>
@@ -2249,8 +2243,7 @@ look like this:</p>
 <p>l-page</p>
 </p>
 </div>
-<p>For example, here the <code>l-body-outset</code> layout is selected
-using the <code>layout</code> chunk option:</p>
+<p>For example, here the <code>l-body-outset</code> layout is selected using the <code>layout</code> chunk option:</p>
 <pre class="clike"><code>```{r, layout=&quot;l-body-outset&quot;, fig.width=6, fig.height=1.5}
 library(ggplot2)
 ggplot(diamonds, aes(carat, price)) + geom_smooth() +
@@ -2258,26 +2251,19 @@ ggplot(diamonds, aes(carat, price)) + geom_smooth() +
 ```</code></pre>
 <div class="layout-chunk" data-layout="l-body-outset">
 <div class="sourceCode">
-<pre class="sourceCode r"><code class="sourceCode r"><span class='fu'><a href='https://rdrr.io/pkg/knitr/man/include_graphics.html'>include_graphics</a></span><span class='op'>(</span><span class='st'>"images/l-middle-figure.png"</span><span class='op'>)</span>
-</code></pre>
+<pre class="sourceCode r"><code class="sourceCode r"><span><span class='fu'><a href='https://rdrr.io/pkg/knitr/man/include_graphics.html'>include_graphics</a></span><span class='op'>(</span><span class='st'>"images/l-middle-figure.png"</span><span class='op'>)</span></span></code></pre>
 </div>
 <p><img src="images/l-middle-figure.png" width="576" /></p>
 </div>
-<p>Note that when specifying an alternate <code>layout</code> you should
-also specify an appropriate <code>fig.width</code> and
-<code>fig.height</code> for that layout.</p>
+<p>Note that when specifying an alternate <code>layout</code> you should also specify an appropriate <code>fig.width</code> and <code>fig.height</code> for that layout.</p>
 <h2 id="full-screen-layout">Full screen layout</h2>
-<p>Occasionally you’ll want to use the full browser width. For this, use
-<code>l-screen</code>:</p>
+<p>Occasionally you’ll want to use the full browser width. For this, use <code>l-screen</code>:</p>
 <div class="fake-img l-screen">
 <p>
 <p>l-screen</p>
 </p>
 </div>
-<p>If you want a bit space at the edges then you can use the
-<code>l-screen-inset</code> layout, which adds 15 pixels of padding to
-each side. Here we use <code>l-screen-inset</code> to display a Leaflet
-map:</p>
+<p>If you want a bit space at the edges then you can use the <code>l-screen-inset</code> layout, which adds 15 pixels of padding to each side. Here we use <code>l-screen-inset</code> to display a Leaflet map:</p>
 <pre class="clike"><code>```{r, layout=&quot;l-screen-inset&quot;}
 library(leaflet)
 leaflet() %&gt;%
@@ -2286,19 +2272,15 @@ leaflet() %&gt;%
 ```</code></pre>
 <div class="layout-chunk" data-layout="l-screen-inset">
 <div class="sourceCode">
-<pre class="sourceCode r"><code class="sourceCode r"><span class='kw'><a href='https://rdrr.io/r/base/library.html'>library</a></span><span class='op'>(</span><span class='va'><a href='https://rstudio.github.io/leaflet/'>leaflet</a></span><span class='op'>)</span>
-<span class='fu'><a href='https://rdrr.io/pkg/leaflet/man/leaflet.html'>leaflet</a></span><span class='op'>(</span><span class='op'>)</span> <span class='op'><a href='https://rdrr.io/pkg/leaflet/man/leaflet-imports.html'>%&gt;%</a></span>
-  <span class='fu'><a href='https://rdrr.io/pkg/leaflet/man/map-layers.html'>addTiles</a></span><span class='op'>(</span><span class='op'>)</span> <span class='op'><a href='https://rdrr.io/pkg/leaflet/man/leaflet-imports.html'>%&gt;%</a></span>  <span class='co'># Add default OpenStreetMap map tiles</span>
-  <span class='fu'><a href='https://rdrr.io/pkg/leaflet/man/map-layers.html'>addMarkers</a></span><span class='op'>(</span>lng<span class='op'>=</span><span class='fl'>174.768</span>, lat<span class='op'>=</span><span class='op'>-</span><span class='fl'>36.852</span>, popup<span class='op'>=</span><span class='st'>"The birthplace of R"</span><span class='op'>)</span>
-</code></pre>
+<pre class="sourceCode r"><code class="sourceCode r"><span><span class='kw'><a href='https://rdrr.io/r/base/library.html'>library</a></span><span class='op'>(</span><span class='va'><a href='https://rstudio.github.io/leaflet/'>leaflet</a></span><span class='op'>)</span></span>
+<span><span class='fu'><a href='https://rdrr.io/pkg/leaflet/man/leaflet.html'>leaflet</a></span><span class='op'>(</span><span class='op'>)</span> <span class='op'><a href='https://magrittr.tidyverse.org/reference/pipe.html'>%&gt;%</a></span></span>
+<span>  <span class='fu'><a href='https://rdrr.io/pkg/leaflet/man/map-layers.html'>addTiles</a></span><span class='op'>(</span><span class='op'>)</span> <span class='op'><a href='https://magrittr.tidyverse.org/reference/pipe.html'>%&gt;%</a></span>  <span class='co'># Add default OpenStreetMap map tiles</span></span>
+<span>  <span class='fu'><a href='https://rdrr.io/pkg/leaflet/man/map-layers.html'>addMarkers</a></span><span class='op'>(</span>lng<span class='op'>=</span><span class='fl'>174.768</span>, lat<span class='op'>=</span><span class='op'>-</span><span class='fl'>36.852</span>, popup<span class='op'>=</span><span class='st'>"The birthplace of R"</span><span class='op'>)</span></span></code></pre>
 </div>
-<div id="htmlwidget-01b24343fdb32f1f545a" style="width:624px;height:384px;" class="leaflet html-widget"></div>
-<script type="application/json" data-for="htmlwidget-01b24343fdb32f1f545a">{"x":{"options":{"crs":{"crsClass":"L.CRS.EPSG3857","code":null,"proj4def":null,"projectedBounds":null,"options":{}}},"calls":[{"method":"addTiles","args":["https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png",null,null,{"minZoom":0,"maxZoom":18,"tileSize":256,"subdomains":"abc","errorTileUrl":"","tms":false,"noWrap":false,"zoomOffset":0,"zoomReverse":false,"opacity":1,"zIndex":1,"detectRetina":false,"attribution":"&copy; <a href=\"https://openstreetmap.org\">OpenStreetMap<\/a> contributors, <a href=\"https://creativecommons.org/licenses/by-sa/2.0/\">CC-BY-SA<\/a>"}]},{"method":"addMarkers","args":[-36.852,174.768,null,null,null,{"interactive":true,"draggable":false,"keyboard":true,"title":"","alt":"","zIndexOffset":0,"opacity":1,"riseOnHover":false,"riseOffset":250},"The birthplace of R",null,null,null,null,{"interactive":false,"permanent":false,"direction":"auto","opacity":1,"offset":[0,0],"textsize":"10px","textOnly":false,"className":"","sticky":true},null]}],"limits":{"lat":[-36.852,-36.852],"lng":[174.768,174.768]}},"evals":[],"jsHooks":[]}</script>
+<div id="htmlwidget-fbc828be881b15a3a261" style="width:624px;height:384px;" class="leaflet html-widget"></div>
+<script type="application/json" data-for="htmlwidget-fbc828be881b15a3a261">{"x":{"options":{"crs":{"crsClass":"L.CRS.EPSG3857","code":null,"proj4def":null,"projectedBounds":null,"options":{}}},"calls":[{"method":"addTiles","args":["https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png",null,null,{"minZoom":0,"maxZoom":18,"tileSize":256,"subdomains":"abc","errorTileUrl":"","tms":false,"noWrap":false,"zoomOffset":0,"zoomReverse":false,"opacity":1,"zIndex":1,"detectRetina":false,"attribution":"&copy; <a href=\"https://openstreetmap.org\">OpenStreetMap<\/a> contributors, <a href=\"https://creativecommons.org/licenses/by-sa/2.0/\">CC-BY-SA<\/a>"}]},{"method":"addMarkers","args":[-36.852,174.768,null,null,null,{"interactive":true,"draggable":false,"keyboard":true,"title":"","alt":"","zIndexOffset":0,"opacity":1,"riseOnHover":false,"riseOffset":250},"The birthplace of R",null,null,null,null,{"interactive":false,"permanent":false,"direction":"auto","opacity":1,"offset":[0,0],"textsize":"10px","textOnly":false,"className":"","sticky":true},null]}],"limits":{"lat":[-36.852,-36.852],"lng":[174.768,174.768]}},"evals":[],"jsHooks":[]}</script>
 </div>
-<p>Depending on the content displayed by <code>l-screen-inset</code>,
-sometimes it’s nice to add some shading to further deliniate the
-display. You can do this by adding <code>shaded</code> to the layout
-declaration:</p>
+<p>Depending on the content displayed by <code>l-screen-inset</code>, sometimes it’s nice to add some shading to further deliniate the display. You can do this by adding <code>shaded</code> to the layout declaration:</p>
 <pre class="clike"><code>```{r, layout=&quot;l-screen-inset shaded&quot;}
 library(leaflet)
 leaflet() %&gt;%
@@ -2307,82 +2289,51 @@ leaflet() %&gt;%
 ```</code></pre>
 <div class="layout-chunk" data-layout="l-screen-inset shaded">
 <div class="sourceCode">
-<pre class="sourceCode r"><code class="sourceCode r"><span class='kw'><a href='https://rdrr.io/r/base/library.html'>library</a></span><span class='op'>(</span><span class='va'><a href='https://rstudio.github.io/leaflet/'>leaflet</a></span><span class='op'>)</span>
-<span class='fu'><a href='https://rdrr.io/pkg/leaflet/man/leaflet.html'>leaflet</a></span><span class='op'>(</span><span class='op'>)</span> <span class='op'><a href='https://rdrr.io/pkg/leaflet/man/leaflet-imports.html'>%&gt;%</a></span>
-  <span class='fu'><a href='https://rdrr.io/pkg/leaflet/man/map-layers.html'>addTiles</a></span><span class='op'>(</span><span class='op'>)</span> <span class='op'><a href='https://rdrr.io/pkg/leaflet/man/leaflet-imports.html'>%&gt;%</a></span>  <span class='co'># Add default OpenStreetMap map tiles</span>
-  <span class='fu'><a href='https://rdrr.io/pkg/leaflet/man/map-layers.html'>addMarkers</a></span><span class='op'>(</span>lng<span class='op'>=</span><span class='fl'>174.768</span>, lat<span class='op'>=</span><span class='op'>-</span><span class='fl'>36.852</span>, popup<span class='op'>=</span><span class='st'>"The birthplace of R"</span><span class='op'>)</span>
-</code></pre>
+<pre class="sourceCode r"><code class="sourceCode r"><span><span class='kw'><a href='https://rdrr.io/r/base/library.html'>library</a></span><span class='op'>(</span><span class='va'><a href='https://rstudio.github.io/leaflet/'>leaflet</a></span><span class='op'>)</span></span>
+<span><span class='fu'><a href='https://rdrr.io/pkg/leaflet/man/leaflet.html'>leaflet</a></span><span class='op'>(</span><span class='op'>)</span> <span class='op'><a href='https://magrittr.tidyverse.org/reference/pipe.html'>%&gt;%</a></span></span>
+<span>  <span class='fu'><a href='https://rdrr.io/pkg/leaflet/man/map-layers.html'>addTiles</a></span><span class='op'>(</span><span class='op'>)</span> <span class='op'><a href='https://magrittr.tidyverse.org/reference/pipe.html'>%&gt;%</a></span>  <span class='co'># Add default OpenStreetMap map tiles</span></span>
+<span>  <span class='fu'><a href='https://rdrr.io/pkg/leaflet/man/map-layers.html'>addMarkers</a></span><span class='op'>(</span>lng<span class='op'>=</span><span class='fl'>174.768</span>, lat<span class='op'>=</span><span class='op'>-</span><span class='fl'>36.852</span>, popup<span class='op'>=</span><span class='st'>"The birthplace of R"</span><span class='op'>)</span></span></code></pre>
 </div>
-<div id="htmlwidget-a6780fca73c1c55c2c9d" style="width:624px;height:384px;" class="leaflet html-widget"></div>
-<script type="application/json" data-for="htmlwidget-a6780fca73c1c55c2c9d">{"x":{"options":{"crs":{"crsClass":"L.CRS.EPSG3857","code":null,"proj4def":null,"projectedBounds":null,"options":{}}},"calls":[{"method":"addTiles","args":["https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png",null,null,{"minZoom":0,"maxZoom":18,"tileSize":256,"subdomains":"abc","errorTileUrl":"","tms":false,"noWrap":false,"zoomOffset":0,"zoomReverse":false,"opacity":1,"zIndex":1,"detectRetina":false,"attribution":"&copy; <a href=\"https://openstreetmap.org\">OpenStreetMap<\/a> contributors, <a href=\"https://creativecommons.org/licenses/by-sa/2.0/\">CC-BY-SA<\/a>"}]},{"method":"addMarkers","args":[-36.852,174.768,null,null,null,{"interactive":true,"draggable":false,"keyboard":true,"title":"","alt":"","zIndexOffset":0,"opacity":1,"riseOnHover":false,"riseOffset":250},"The birthplace of R",null,null,null,null,{"interactive":false,"permanent":false,"direction":"auto","opacity":1,"offset":[0,0],"textsize":"10px","textOnly":false,"className":"","sticky":true},null]}],"limits":{"lat":[-36.852,-36.852],"lng":[174.768,174.768]}},"evals":[],"jsHooks":[]}</script>
+<div id="htmlwidget-20f717fa1db94b1a34fa" style="width:624px;height:384px;" class="leaflet html-widget"></div>
+<script type="application/json" data-for="htmlwidget-20f717fa1db94b1a34fa">{"x":{"options":{"crs":{"crsClass":"L.CRS.EPSG3857","code":null,"proj4def":null,"projectedBounds":null,"options":{}}},"calls":[{"method":"addTiles","args":["https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png",null,null,{"minZoom":0,"maxZoom":18,"tileSize":256,"subdomains":"abc","errorTileUrl":"","tms":false,"noWrap":false,"zoomOffset":0,"zoomReverse":false,"opacity":1,"zIndex":1,"detectRetina":false,"attribution":"&copy; <a href=\"https://openstreetmap.org\">OpenStreetMap<\/a> contributors, <a href=\"https://creativecommons.org/licenses/by-sa/2.0/\">CC-BY-SA<\/a>"}]},{"method":"addMarkers","args":[-36.852,174.768,null,null,null,{"interactive":true,"draggable":false,"keyboard":true,"title":"","alt":"","zIndexOffset":0,"opacity":1,"riseOnHover":false,"riseOffset":250},"The birthplace of R",null,null,null,null,{"interactive":false,"permanent":false,"direction":"auto","opacity":1,"offset":[0,0],"textsize":"10px","textOnly":false,"className":"","sticky":true},null]}],"limits":{"lat":[-36.852,-36.852],"lng":[174.768,174.768]}},"evals":[],"jsHooks":[]}</script>
 </div>
 <h2 id="static-figures">Static figures</h2>
-<p>To include static figures (i.e. figures based on an existing PNG or
-JPEG file rather than a dynamically generated R plot), you can use the
-<code>knitr::include_graphics()</code> function:</p>
+<p>To include static figures (i.e. figures based on an existing PNG or JPEG file rather than a dynamically generated R plot), you can use the <code>knitr::include_graphics()</code> function:</p>
 <pre class="clike"><code>```{r}
 knitr::include_graphics(&quot;images/figure.png&quot;)
 ```</code></pre>
-<p>You can apply Distill layouts to static figures the same way that you
-do plots:</p>
+<p>You can apply Distill layouts to static figures the same way that you do plots:</p>
 <pre class="clike"><code>```{r layout=&quot;l-body-outset&quot;}
 knitr::include_graphics(&quot;images/figure.png&quot;)
 ```</code></pre>
-<p>If you are including a figure from an external source, it’s good
-practice to delineate this by applying the <code>external</code> class
-and adding a caption indicating where it is from. For example:</p>
+<p>If you are including a figure from an external source, it’s good practice to delineate this by applying the <code>external</code> class and adding a caption indicating where it is from. For example:</p>
 <pre class="clike"><code>```{r fig.cap=&quot;Figure from https://example.com&quot;, out.extra=&quot;class=external&quot;}
 knitr::include_graphics(&quot;images/heatmap.png&quot;)
 ```</code></pre>
-<p>Using the <code>external</code> class and providing a “Figure from”
-link makes it clear that the figure originated elsewhere (and is
-therefore not covered by any of your article’s copyright or creative
-commons license grants). For example, here’s how a figure taken from a
-Stack Overflow post might appear:</p>
+<p>Using the <code>external</code> class and providing a “Figure from” link makes it clear that the figure originated elsewhere (and is therefore not covered by any of your article’s copyright or creative commons license grants). For example, here’s how a figure taken from a Stack Overflow post might appear:</p>
 <figure>
-<img src="images/heatmap.png" class="external" style="width:100.0%"
-alt="Figure from https://stackoverflow.com/questions/12196756/" />
-<figcaption aria-hidden="true">Figure from <a
-href="https://stackoverflow.com/questions/12196756/"
-class="uri">https://stackoverflow.com/questions/12196756/</a></figcaption>
+<img src="images/heatmap.png" class="external" style="width:100.0%" alt="Figure from https://stackoverflow.com/questions/12196756/" />
+<figcaption aria-hidden="true">Figure from <a href="https://stackoverflow.com/questions/12196756/" class="uri">https://stackoverflow.com/questions/12196756/</a></figcaption>
 </figure>
 <h2 id="cross-references">Cross-references</h2>
-<p>When you assign a figure caption to a code chunk via the chunk option
-<code>fig.cap</code>, R plots will be put into figure environments,
-which will be automatically labeled and numbered, and can also be
-cross-referenced.</p>
-<p>For example, here we add a <code>fig.cap</code> to one of our
-previous examples:</p>
+<p>When you assign a figure caption to a code chunk via the chunk option <code>fig.cap</code>, R plots will be put into figure environments, which will be automatically labeled and numbered, and can also be cross-referenced.</p>
+<p>For example, here we add a <code>fig.cap</code> to one of our previous examples:</p>
 <pre class="clike"><code>```{r diamonds, fig.cap=&quot;Diamond Prices&quot;}
 library(ggplot2)
 ggplot(diamonds, aes(carat, price)) + geom_smooth() +
   facet_grid(~ cut)
 ```</code></pre>
-<p>The label of the figure environment is generated from the label of
-the code chunk, e.g., if the chunk label is <code>diamonds</code>, the
-figure label will be <code>fig:diamonds</code> (the prefix
-<code>fig:</code> is added before <code>diamonds</code>.</p>
-<p>To reference a figure, use the syntax <code>\@ref(label)</code>,
-where label is the figure label. So for the example above we’d use
-<code>\@ref(fig:diamonds)</code>, which would result in a
-cross-reference like this:</p>
+<p>The label of the figure environment is generated from the label of the code chunk, e.g., if the chunk label is <code>diamonds</code>, the figure label will be <code>fig:diamonds</code> (the prefix <code>fig:</code> is added before <code>diamonds</code>.</p>
+<p>To reference a figure, use the syntax <code>\@ref(label)</code>, where label is the figure label. So for the example above we’d use <code>\@ref(fig:diamonds)</code>, which would result in a cross-reference like this:</p>
 <div class="layout-chunk" data-layout="l-body">
 <div class="sourceCode">
-<pre class="sourceCode r"><code class="sourceCode r"><span class='fu'><a href='https://rdrr.io/pkg/knitr/man/include_graphics.html'>include_graphics</a></span><span class='op'>(</span><span class='st'>"images/figure-cross-references.png"</span><span class='op'>)</span>
-</code></pre>
+<pre class="sourceCode r"><code class="sourceCode r"><span><span class='fu'><a href='https://rdrr.io/pkg/knitr/man/include_graphics.html'>include_graphics</a></span><span class='op'>(</span><span class='st'>"images/figure-cross-references.png"</span><span class='op'>)</span></span></code></pre>
 </div>
 <p><img src="images/figure-cross-references.png" width="743" class=screenshot /></p>
 </div>
-<p>For additional documentation on figure cross-references see the <a
-href="https://bookdown.org/yihui/bookdown/figures.html">bookdown
-documentation on figures</a> (Distill for R Markdown uses the bookdown
-implementation of cross-references under the hood).</p>
-<p>One important constraint to keep in mind is that if you want to
-cross-reference figures or tables generated from a code chunk, please
-make sure the chunk label <em>only contains</em> alphanumeric characters
-(a-z, A-Z, 0-9), slashes (/), or dashes (-).</p>
-<div class="sourceCode" id="cb8"><pre
-class="sourceCode r distill-force-highlighting-css"><code class="sourceCode r"></code></pre></div>
+<p>For additional documentation on figure cross-references see the <a href="https://bookdown.org/yihui/bookdown/figures.html">bookdown documentation on figures</a> (Distill for R Markdown uses the bookdown implementation of cross-references under the hood).</p>
+<p>One important constraint to keep in mind is that if you want to cross-reference figures or tables generated from a code chunk, please make sure the chunk label <em>only contains</em> alphanumeric characters (a-z, A-Z, 0-9), slashes (/), or dashes (-).</p>
+<div class="sourceCode" id="cb8"><pre class="sourceCode r distill-force-highlighting-css"><code class="sourceCode r"></code></pre></div>
 <!--radix_placeholder_article_footer-->
 <!--/radix_placeholder_article_footer-->
 </div>

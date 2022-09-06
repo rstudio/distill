@@ -148,8 +148,8 @@ code span.wa { color: #008000; font-weight: bold; } /* Warning */
   <meta name="citation_author_institution" content="RStudio"/>
   <!--/radix_placeholder_meta_tags-->
   
-  <meta name="citation_reference" content="citation_title=Distill;citation_publication_date=2016;citation_publisher=Distill Working Group;citation_doi=10.23915/distill;citation_author=Shan Carter;citation_author=Chirs Olah;citation_author=Arvind Satyanarayan"/>
-  <meta name="citation_reference" content="citation_title=Literate programming;citation_publication_date=1984;citation_publisher=British Computer Society;citation_volume=27;citation_author=Donald E. Knuth"/>
+  <meta name="citation_reference" content="citation_title=Distill;citation_publisher=Distill Working Group;citation_doi=10.23915/distill;citation_author=Shan Carter;citation_author=Chirs Olah;citation_author=Arvind Satyanarayan"/>
+  <meta name="citation_reference" content="citation_title=Literate programming;citation_publisher=British Computer Society;citation_volume=27;citation_author=Donald E. Knuth"/>
   <!--radix_placeholder_rmarkdown_metadata-->
 
   <script type="text/json" id="radix-rmarkdown-metadata">
@@ -831,6 +831,7 @@ code span.wa { color: #008000; font-weight: bold; } /* Warning */
   d-article table.gt_table td,
   d-article table.gt_table th {
     border-bottom: none;
+    font-size: 100%;
   }
 
   .html-widget {
@@ -1903,15 +1904,21 @@ code span.wa { color: #008000; font-weight: bold; } /* Warning */
 
       // hoverable references
       $('span.citation[data-cites]').each(function() {
-        if ($(this).children()[0].nodeName == "D-FOOTNOTE") {
-          var fn = $(this).children()[0]
+        const citeChild = $(this).children()[0]
+        // Do not process if @xyz has been used without escaping and without bibliography activated
+        // https://github.com/rstudio/distill/issues/466
+        if (citeChild === undefined) return true
+
+        if (citeChild.nodeName == "D-FOOTNOTE") {
+          var fn = citeChild
           $(this).html(fn.shadowRoot.querySelector("sup"))
           $(this).id = fn.id
           fn.remove()
         }
         var refs = $(this).attr('data-cites').split(" ");
         var refHtml = refs.map(function(ref) {
-          return "<p>" + $('#ref-' + ref).html() + "</p>";
+          // Could use CSS.escape too here, we insure backward compatibility in navigator
+          return "<p>" + $('div[id="ref-' + ref + '"]').html() + "</p>";
         }).join("\n");
         window.tippy(this, {
           allowHTML: true,
@@ -2110,7 +2117,7 @@ code span.wa { color: #008000; font-weight: bold; } /* Warning */
   </script>
 
   <!--/radix_placeholder_distill-->
-  <script src="site_libs/header-attrs-2.14/header-attrs.js"></script>
+  <script src="site_libs/header-attrs-2.16.1/header-attrs.js"></script>
   <link href="site_libs/pagedtable-1.1/css/pagedtable.css" rel="stylesheet" />
   <script src="site_libs/pagedtable-1.1/js/pagedtable.js"></script>
   <link href="site_libs/panelset-0.2.6/panelset.css" rel="stylesheet" />
@@ -2236,20 +2243,14 @@ Publishing
 </div>
 
 <div class="d-byline">
-  JJ Allaire <a href="https://github.com/jjallaire"
-class="uri">https://github.com/jjallaire</a> (RStudio)<a
-href="https://www.rstudio.com" class="uri">https://www.rstudio.com</a>
+  JJ Allaire <a href="https://github.com/jjallaire" class="uri">https://github.com/jjallaire</a> (RStudio)<a href="https://www.rstudio.com" class="uri">https://www.rstudio.com</a>
   
-,   Rich Iannone <a href="https://github.com/rich-iannone"
-class="uri">https://github.com/rich-iannone</a> (RStudio)<a
-href="https://www.rstudio.com" class="uri">https://www.rstudio.com</a>
+,   Rich Iannone <a href="https://github.com/rich-iannone" class="uri">https://github.com/rich-iannone</a> (RStudio)<a href="https://www.rstudio.com" class="uri">https://www.rstudio.com</a>
   
 ,   
   true
   
-,   Yihui Xie <a href="https://github.com/yihui"
-class="uri">https://github.com/yihui</a> (RStudio)<a
-href="https://www.rstudio.com" class="uri">https://www.rstudio.com</a>
+,   Yihui Xie <a href="https://github.com/yihui" class="uri">https://github.com/yihui</a> (RStudio)<a href="https://www.rstudio.com" class="uri">https://www.rstudio.com</a>
   
 <br/>September 10, 2018
 </div>
@@ -2259,87 +2260,51 @@ href="https://www.rstudio.com" class="uri">https://www.rstudio.com</a>
 <nav class="l-text toc figcaption" id="TOC">
 <h3>Contents</h3>
 <ul>
-<li><a href="#creating-an-article" id="toc-creating-an-article">Creating
-an article</a></li>
+<li><a href="#creating-an-article" id="toc-creating-an-article">Creating an article</a></li>
 <li><a href="#figures" id="toc-figures">Figures</a></li>
 <li><a href="#tables" id="toc-tables">Tables</a></li>
 <li><a href="#equations" id="toc-equations">Equations</a></li>
 <li><a href="#citations" id="toc-citations">Citations</a></li>
-<li><a href="#footnotes-and-asides"
-id="toc-footnotes-and-asides">Footnotes and asides</a></li>
-<li><a href="#table-of-contents" id="toc-table-of-contents">Table of
-contents</a></li>
+<li><a href="#footnotes-and-asides" id="toc-footnotes-and-asides">Footnotes and asides</a></li>
+<li><a href="#table-of-contents" id="toc-table-of-contents">Table of contents</a></li>
 <li><a href="#code-blocks" id="toc-code-blocks">Code blocks</a></li>
 <li><a href="#code-folding" id="toc-code-folding">Code folding</a></li>
-<li><a href="#syntax-highlighting" id="toc-syntax-highlighting">Syntax
-highlighting</a></li>
+<li><a href="#syntax-highlighting" id="toc-syntax-highlighting">Syntax highlighting</a></li>
 <li><a href="#appendices" id="toc-appendices">Appendices</a></li>
 <li><a href="#theming" id="toc-theming">Theming</a></li>
-<li><a href="#acknowledgments"
-id="toc-acknowledgments">Acknowledgments</a></li>
+<li><a href="#acknowledgments" id="toc-acknowledgments">Acknowledgments</a></li>
 </ul>
 </nav>
 </div>
-<p>Distill for R Markdown is a web publishing format optimized for
-scientific and technical communication. Distill articles include:</p>
+<p>Distill for R Markdown is a web publishing format optimized for scientific and technical communication. Distill articles include:</p>
 <ul>
 <li>Reader-friendly typography that adapts well to mobile devices.</li>
-<li>Features essential to technical writing like <a
-href="#equations">LaTeX math</a>, <a href="#citations">citations</a>,
-and <a href="#footnotes-and-asides">footnotes</a>.</li>
-<li>Flexible <a href="figures.html">figure layout</a> options
-(e.g. displaying figures at a larger width than the article text).</li>
-<li>Attractively rendered <a href="tables.html">tables</a> with optional
-support for pagination.</li>
-<li>Support for a wide variety of <a href="diagrams.html">diagramming
-tools</a> for illustrating concepts.</li>
-<li>The ability to incorporate JavaScript and D3-based <a
-href="interactivity.html">interactive visualizations</a>.</li>
-<li>A variety of ways to <a href="publish_article.html">publish
-articles</a>, including support for publishing sets of articles as a <a
-href="website.html">Distill website</a> or as a <a
-href="blog.html">Distill blog</a>.</li>
+<li>Features essential to technical writing like <a href="#equations">LaTeX math</a>, <a href="#citations">citations</a>, and <a href="#footnotes-and-asides">footnotes</a>.</li>
+<li>Flexible <a href="figures.html">figure layout</a> options (e.g. displaying figures at a larger width than the article text).</li>
+<li>Attractively rendered <a href="tables.html">tables</a> with optional support for pagination.</li>
+<li>Support for a wide variety of <a href="diagrams.html">diagramming tools</a> for illustrating concepts.</li>
+<li>The ability to incorporate JavaScript and D3-based <a href="interactivity.html">interactive visualizations</a>.</li>
+<li>A variety of ways to <a href="publish_article.html">publish articles</a>, including support for publishing sets of articles as a <a href="website.html">Distill website</a> or as a <a href="blog.html">Distill blog</a>.</li>
 </ul>
-<p>Distill for R Markdown is based on the <a
-href="https://github.com/distillpub/template">Distill web framework</a>,
-which was originally created for use in the Distill Machine Learning
-Journal <span class="citation" data-cites="distill">(<a
-href="#ref-distill" role="doc-biblioref">Carter, Olah, and Satyanarayan
-2016</a>)</span>. Distill for R Markdown combines the technical
-authoring features of Distill with <a
-href="https://rmarkdown.rstudio.com/">R Markdown</a>, enabling a fully
-reproducible workflow based on literate programming <span
-class="citation" data-cites="knuth1984">(<a href="#ref-knuth1984"
-role="doc-biblioref">Knuth 1984</a>)</span>.</p>
+<p>Distill for R Markdown is based on the <a href="https://github.com/distillpub/template">Distill web framework</a>, which was originally created for use in the Distill Machine Learning Journal <span class="citation" data-cites="distill">(<a href="#ref-distill" role="doc-biblioref">Carter, Olah, and Satyanarayan 2016</a>)</span>. Distill for R Markdown combines the technical authoring features of Distill with <a href="https://rmarkdown.rstudio.com/">R Markdown</a>, enabling a fully reproducible workflow based on literate programming <span class="citation" data-cites="knuth1984">(<a href="#ref-knuth1984" role="doc-biblioref">Knuth 1984</a>)</span>.</p>
 <h2 id="creating-an-article">Creating an article</h2>
-<p>To create an <a href="https://rmarkdown.rstudio.com">R Markdown</a>
-document that uses the Distill format, first install the
-<strong>distill</strong> R package from CRAN:</p>
+<p>To create an <a href="https://rmarkdown.rstudio.com">R Markdown</a> document that uses the Distill format, first install the <strong>distill</strong> R package from CRAN:</p>
 <div class="layout-chunk" data-layout="l-body">
 <div class="sourceCode">
-<pre class="sourceCode r"><code class="sourceCode r"><span class='fu'><a href='https://rdrr.io/r/utils/install.packages.html'>install.packages</a></span><span class='op'>(</span><span class='st'>"distill"</span><span class='op'>)</span>
-</code></pre>
+<pre class="sourceCode r"><code class="sourceCode r"><span><span class='fu'><a href='https://rdrr.io/r/utils/install.packages.html'>install.packages</a></span><span class='op'>(</span><span class='st'>"distill"</span><span class='op'>)</span></span></code></pre>
 </div>
 </div>
-<p>Then, use the <strong>New R Markdown</strong> dialog within RStudio
-to create a new Distill article:</p>
-<p><img src="images/new_distill_article.png" class="screenshot"
-style="width:100.0%" /></p>
-<p>You can also create a new Distill article from the command line
-with:</p>
+<p>Then, use the <strong>New R Markdown</strong> dialog within RStudio to create a new Distill article:</p>
+<p><img src="images/new_distill_article.png" class="screenshot" style="width:100.0%" /></p>
+<p>You can also create a new Distill article from the command line with:</p>
 <div class="layout-chunk" data-layout="l-body">
 <div class="sourceCode">
-<pre class="sourceCode r"><code class="sourceCode r"><span class='kw'><a href='https://rdrr.io/r/base/library.html'>library</a></span><span class='op'>(</span><span class='va'><a href='https://github.com/rstudio/distill'>distill</a></span><span class='op'>)</span>
-<span class='fu'><a href='https://pkgs.rstudio.com/distill/reference/create_article.html'>create_article</a></span><span class='op'>(</span><span class='st'>"article.Rmd"</span><span class='op'>)</span>
-</code></pre>
+<pre class="sourceCode r"><code class="sourceCode r"><span><span class='kw'><a href='https://rdrr.io/r/base/library.html'>library</a></span><span class='op'>(</span><span class='va'><a href='https://github.com/rstudio/distill'>distill</a></span><span class='op'>)</span></span>
+<span><span class='fu'><a href='https://pkgs.rstudio.com/distill/reference/create_article.html'>create_article</a></span><span class='op'>(</span><span class='st'>"article.Rmd"</span><span class='op'>)</span></span></code></pre>
 </div>
 </div>
-<p>Distill articles use <code>distill::distill_article</code> as their
-output format, and typically include title, description, date,
-author/affiliation, and bibliography entries in their YAML
-front-matter:</p>
-<div class="sourceCode" id="cb1"><pre
-class="sourceCode yaml"><code class="sourceCode yaml"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="pp">---</span></span>
+<p>Distill articles use <code>distill::distill_article</code> as their output format, and typically include title, description, date, author/affiliation, and bibliography entries in their YAML front-matter:</p>
+<div class="sourceCode" id="cb1"><pre class="sourceCode yaml"><code class="sourceCode yaml"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="pp">---</span></span>
 <span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="fu">title</span><span class="kw">:</span><span class="at"> </span><span class="st">&quot;Distill for R Markdown&quot;</span></span>
 <span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="fu">description</span><span class="kw">: </span><span class="ch">|</span><span class="at"> </span></span>
 <span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a>  Scientific and technical writing, native to the web</span>
@@ -2362,33 +2327,15 @@ class="sourceCode yaml"><code class="sourceCode yaml"><span id="cb1-1"><a href="
 <span id="cb1-21"><a href="#cb1-21" aria-hidden="true" tabindex="-1"></a><span class="fu">bibliography</span><span class="kw">:</span><span class="at"> biblio.bib</span></span>
 <span id="cb1-22"><a href="#cb1-22" aria-hidden="true" tabindex="-1"></a><span class="fu">output</span><span class="kw">:</span><span class="at"> distill::distill_article</span></span>
 <span id="cb1-23"><a href="#cb1-23" aria-hidden="true" tabindex="-1"></a><span class="pp">---</span></span></code></pre></div>
-<p>Author names can be specified using explicit <code>first_name</code>
-and <code>last_name</code> fields or with a single <code>name</code>
-field. Author entries must have at least a name and <code>url</code>
-specified (the affiliation fields are optional). Specify an author’s <a
-href="https://orcid.org/">Orcid ID</a> using the <code>orcid_id</code>
-field.</p>
-<p>The article’s description and author bylines are automatically
-rendered as part of the title area of the document.</p>
-<p>The <code>date</code> field should be formatted either as month, day,
-year or as year, month, day (various notations are supported as long as
-the components appear in one of these orders).</p>
-<p>The <code>bibliography</code> field is used to provide a reference to
-the Bibtex file where all of the sources cited in your article are
-defined. The <a href="#citations">citations</a> section describes how to
-include references to these sources in your article.</p>
+<p>Author names can be specified using explicit <code>first_name</code> and <code>last_name</code> fields or with a single <code>name</code> field. Author entries must have at least a name and <code>url</code> specified (the affiliation fields are optional). Specify an author’s <a href="https://orcid.org/">Orcid ID</a> using the <code>orcid_id</code> field.</p>
+<p>The article’s description and author bylines are automatically rendered as part of the title area of the document.</p>
+<p>The <code>date</code> field should be formatted either as month, day, year or as year, month, day (various notations are supported as long as the components appear in one of these orders).</p>
+<p>The <code>bibliography</code> field is used to provide a reference to the Bibtex file where all of the sources cited in your article are defined. The <a href="#citations">citations</a> section describes how to include references to these sources in your article.</p>
 <h2 id="figures">Figures</h2>
-<p>Distill provides a number of options for laying out figures within
-your article. By default figures span the width of the main article
-body:</p>
+<p>Distill provides a number of options for laying out figures within your article. By default figures span the width of the main article body:</p>
 <p><img src="images/l-body-figure.png" /></p>
-<p>However, some figures benefit from using additional horizontal space.
-In this cases the <code>layout</code> chunk option enables you to
-specify a wide variety of other layouts.</p>
-<p>For example, if we wanted to display a figure a bit outside the
-bounds of the article text, we could specify the
-<code>l-body-outset</code> layout via the <code>layout</code> chunk
-option:</p>
+<p>However, some figures benefit from using additional horizontal space. In this cases the <code>layout</code> chunk option enables you to specify a wide variety of other layouts.</p>
+<p>For example, if we wanted to display a figure a bit outside the bounds of the article text, we could specify the <code>l-body-outset</code> layout via the <code>layout</code> chunk option:</p>
 <pre class="clike"><code>```{r, layout=&quot;l-body-outset&quot;, fig.width=6, fig.height=1.5}
 library(ggplot2)
 ggplot(diamonds, aes(carat, price)) + geom_smooth() +
@@ -2397,31 +2344,19 @@ ggplot(diamonds, aes(carat, price)) + geom_smooth() +
 <div class="l-body-outset">
 <p><img src="images/l-middle-figure.png" style="width: 100%" /></p>
 </div>
-<p>Note that when specifying an alternate <code>layout</code> you should
-also specify an appropriate <code>fig.width</code> and
-<code>fig.height</code> for that layout. These values don’t determine
-the absolute size of the figure (that’s dynamic based on the layout) but
-they do determine the aspect ratio of the figure.</p>
-<p>See the documentation on <a href="figures.html">figure layout</a> for
-details on additional layout options.</p>
-<p>The examples above are based on conventional R plots. Distill
-articles can also incorporate <a href="diagrams.html">diagrams</a> and
-<a href="interactivity.html">interactive visualizations</a> based on
-JavaScript and D3.</p>
+<p>Note that when specifying an alternate <code>layout</code> you should also specify an appropriate <code>fig.width</code> and <code>fig.height</code> for that layout. These values don’t determine the absolute size of the figure (that’s dynamic based on the layout) but they do determine the aspect ratio of the figure.</p>
+<p>See the documentation on <a href="figures.html">figure layout</a> for details on additional layout options.</p>
+<p>The examples above are based on conventional R plots. Distill articles can also incorporate <a href="diagrams.html">diagrams</a> and <a href="interactivity.html">interactive visualizations</a> based on JavaScript and D3.</p>
 <h2 id="tables">Tables</h2>
-<p>There are a number of options available for HTML display of data
-frames within Distill articles. Here, we use the
-<code>paged_table()</code> function to display a page-able view of the
-<code>mtcars</code> dataset built in to R:</p>
+<p>There are a number of options available for HTML display of data frames within Distill articles. Here, we use the <code>paged_table()</code> function to display a page-able view of the <code>mtcars</code> dataset built in to R:</p>
 <pre class="clike"><code>```{r, layout=&quot;l-body-outset&quot;}
 library(rmarkdown)
 paged_table(mtcars)
 ```</code></pre>
 <div class="layout-chunk" data-layout="l-body-outset">
 <div class="sourceCode">
-<pre class="sourceCode r"><code class="sourceCode r"><span class='kw'><a href='https://rdrr.io/r/base/library.html'>library</a></span><span class='op'>(</span><span class='va'><a href='https://github.com/rstudio/rmarkdown'>rmarkdown</a></span><span class='op'>)</span>
-<span class='fu'><a href='https://pkgs.rstudio.com/rmarkdown/reference/paged_table.html'>paged_table</a></span><span class='op'>(</span><span class='va'>mtcars</span><span class='op'>)</span>
-</code></pre>
+<pre class="sourceCode r"><code class="sourceCode r"><span><span class='kw'><a href='https://rdrr.io/r/base/library.html'>library</a></span><span class='op'>(</span><span class='va'><a href='https://github.com/rstudio/rmarkdown'>rmarkdown</a></span><span class='op'>)</span></span>
+<span><span class='fu'><a href='https://pkgs.rstudio.com/rmarkdown/reference/paged_table.html'>paged_table</a></span><span class='op'>(</span><span class='va'>mtcars</span><span class='op'>)</span></span></code></pre>
 </div>
 <div data-pagedtable="false">
 <script data-pagedtable-source type="application/json">
@@ -2429,18 +2364,10 @@ paged_table(mtcars)
   </script>
 </div>
 </div>
-<p>Note that we used <code>layout="l-body-outset"</code> to cause the
-table to occupy slightly more horizontal space than the article text.
-All of available <a href="figures.html">figure layout options</a> work
-as expected for tables.</p>
-<p>See the documentation on <a href="tables.html">table display</a> for
-details on the various techniques available for rendering tables.</p>
+<p>Note that we used <code>layout="l-body-outset"</code> to cause the table to occupy slightly more horizontal space than the article text. All of available <a href="figures.html">figure layout options</a> work as expected for tables.</p>
+<p>See the documentation on <a href="tables.html">table display</a> for details on the various techniques available for rendering tables.</p>
 <h2 id="equations">Equations</h2>
-<p>Inline and display equations are supported via standard markdown <a
-href="https://www.mathjax.org/">MathJax</a> syntax. For example, the
-following <a
-href="https://en.wikibooks.org/wiki/LaTeX/Mathematics">LaTeX
-math</a>:</p>
+<p>Inline and display equations are supported via standard markdown <a href="https://www.mathjax.org/">MathJax</a> syntax. For example, the following <a href="https://en.wikibooks.org/wiki/LaTeX/Mathematics">LaTeX math</a>:</p>
 <pre><code>$$
 \sigma = \sqrt{ \frac{1}{N} \sum_{i=1}^N (x_i -\mu)^2}
 $$</code></pre>
@@ -2449,13 +2376,9 @@ $$</code></pre>
 \sigma = \sqrt{ \frac{1}{N} \sum_{i=1}^N (x_i -\mu)^2}
 \]</span></p>
 <h2 id="citations">Citations</h2>
-<p>Bibtex is the supported way of making academic citations. To include
-citations, first create a bibtex file and refer to it from the
-<code>bibliography</code> field of the YAML front-matter (as <a
-href="#front-matter">illustrated above</a>).</p>
+<p>Bibtex is the supported way of making academic citations. To include citations, first create a bibtex file and refer to it from the <code>bibliography</code> field of the YAML front-matter (as <a href="#front-matter">illustrated above</a>).</p>
 <p>For example, your bibliography file might contain:</p>
-<div class="sourceCode" id="cb5"><pre
-class="sourceCode bibtex"><code class="sourceCode bibtex"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="va">@Book</span>{<span class="ot">xie2015</span>,</span>
+<div class="sourceCode" id="cb5"><pre class="sourceCode bibtex"><code class="sourceCode bibtex"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="va">@Book</span>{<span class="ot">xie2015</span>,</span>
 <span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a>  <span class="dt">title</span> = {Dynamic Documents with R and knitr},</span>
 <span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a>  <span class="dt">author</span> = {Yihui Xie},</span>
 <span id="cb5-4"><a href="#cb5-4" aria-hidden="true" tabindex="-1"></a>  <span class="dt">publisher</span> = {Chapman and Hall/CRC},</span>
@@ -2465,36 +2388,19 @@ class="sourceCode bibtex"><code class="sourceCode bibtex"><span id="cb5-1"><a hr
 <span id="cb5-8"><a href="#cb5-8" aria-hidden="true" tabindex="-1"></a>  <span class="dt">note</span> = {ISBN 978-1498716963},</span>
 <span id="cb5-9"><a href="#cb5-9" aria-hidden="true" tabindex="-1"></a>  <span class="dt">url</span> = {http://yihui.name/knitr/},</span>
 <span id="cb5-10"><a href="#cb5-10" aria-hidden="true" tabindex="-1"></a>}</span></code></pre></div>
-<p>Citations are then used in the article body with standard R Markdown
-notation, for example: <code>[@xie2015]</code> (which references an id
-provided in the bibliography). Note that multiple ids (separated by
-semicolons) can be provided.</p>
-<p>The citation is presented inline like this: <span class="citation"
-data-cites="xie2015">(<a href="#ref-xie2015" role="doc-biblioref">Xie
-2015</a>)</span>. If you have an appendix, a bibliography is
-automatically created and populated in it.</p>
-<p>See the article on <a href="citations.html">citations</a> for
-additional details on using citations, including how to provide the
-metadata required to make your article more easily citable for
-others.</p>
+<p>Citations are then used in the article body with standard R Markdown notation, for example: <code>[@xie2015]</code> (which references an id provided in the bibliography). Note that multiple ids (separated by semicolons) can be provided.</p>
+<p>The citation is presented inline like this: <span class="citation" data-cites="xie2015">(<a href="#ref-xie2015" role="doc-biblioref">Xie 2015</a>)</span>. If you have an appendix, a bibliography is automatically created and populated in it.</p>
+<p>See the article on <a href="citations.html">citations</a> for additional details on using citations, including how to provide the metadata required to make your article more easily citable for others.</p>
 <h2 id="footnotes-and-asides">Footnotes and asides</h2>
-<p>Footnotes use standard Pandoc markdown notation, for example
-<code>^[This will become a hover-able footnote]</code>. The number of
-the footnote will be automatically generated. <a href="#fn1"
-class="footnote-ref" id="fnref1" role="doc-noteref"><sup>1</sup></a></p>
-<p>You can also optionally include notes in the gutter of the article
-(immediately to the right of the article text). To do this use the
-<code>&lt;aside&gt;</code> tag.</p>
-<div class="sourceCode" id="cb6"><pre
-class="sourceCode html"><code class="sourceCode html"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="kw">&lt;aside&gt;</span></span>
+<p>Footnotes use standard Pandoc markdown notation, for example <code>^[This will become a hover-able footnote]</code>. The number of the footnote will be automatically generated. <a href="#fn1" class="footnote-ref" id="fnref1" role="doc-noteref"><sup>1</sup></a></p>
+<p>You can also optionally include notes in the gutter of the article (immediately to the right of the article text). To do this use the <code>&lt;aside&gt;</code> tag.</p>
+<div class="sourceCode" id="cb6"><pre class="sourceCode html"><code class="sourceCode html"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="kw">&lt;aside&gt;</span></span>
 <span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a>This content will appear in the gutter of the article.</span>
 <span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a><span class="kw">&lt;/aside&gt;</span></span></code></pre></div>
 <aside>
 <p>This content will appear in the gutter of the article.</p>
 </aside>
-<p>You can also include figures in the gutter. Just enclose the code
-chunk which generates the figure in an <code>&lt;aside&gt;</code>
-tag:</p>
+<p>You can also include figures in the gutter. Just enclose the code chunk which generates the figure in an <code>&lt;aside&gt;</code> tag:</p>
 <pre class="clike"><code>&lt;aside&gt;
 ```{r}
 ggplot(mtcars, aes(hp, mpg)) + geom_point() + geom_smooth()
@@ -2504,11 +2410,8 @@ ggplot(mtcars, aes(hp, mpg)) + geom_point() + geom_smooth()
 <p><img src="images/figure-aside.png" style="width:100.0%" /></p>
 </aside>
 <h2 id="table-of-contents">Table of contents</h2>
-<p>You can add a table of contents using the <code>toc</code> option and
-specify the depth of headers that it applies to using the
-<code>toc_depth</code> option. For example:</p>
-<div class="sourceCode" id="cb8"><pre
-class="sourceCode yaml"><code class="sourceCode yaml"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="pp">---</span></span>
+<p>You can add a table of contents using the <code>toc</code> option and specify the depth of headers that it applies to using the <code>toc_depth</code> option. For example:</p>
+<div class="sourceCode" id="cb8"><pre class="sourceCode yaml"><code class="sourceCode yaml"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="pp">---</span></span>
 <span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a><span class="fu">title</span><span class="kw">:</span><span class="at"> </span><span class="st">&quot;Distill for R Markdown&quot;</span></span>
 <span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a><span class="fu">description</span><span class="kw">: </span><span class="ch">|</span><span class="at"> </span></span>
 <span id="cb8-4"><a href="#cb8-4" aria-hidden="true" tabindex="-1"></a>  Scientific and technical writing, native to the web</span>
@@ -2517,37 +2420,23 @@ class="sourceCode yaml"><code class="sourceCode yaml"><span id="cb8-1"><a href="
 <span id="cb8-7"><a href="#cb8-7" aria-hidden="true" tabindex="-1"></a><span class="at">    </span><span class="fu">toc</span><span class="kw">:</span><span class="at"> </span><span class="ch">true</span></span>
 <span id="cb8-8"><a href="#cb8-8" aria-hidden="true" tabindex="-1"></a><span class="at">    </span><span class="fu">toc_depth</span><span class="kw">:</span><span class="at"> </span><span class="dv">2</span></span>
 <span id="cb8-9"><a href="#cb8-9" aria-hidden="true" tabindex="-1"></a><span class="pp">---</span></span></code></pre></div>
-<p>If the table of contents depth is not explicitly specified, it
-defaults to 3 (meaning that all level 1, 2, and 3 headers will be
-included in the table of contents).</p>
-<p>The table of contents will automatically float to the left when the
-article is displayed at more than 1000px wide. To always show the table
-of contents on top specify <code>toc_float: false</code>:</p>
-<div class="sourceCode" id="cb9"><pre
-class="sourceCode yaml"><code class="sourceCode yaml"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="fu">output</span><span class="kw">:</span></span>
+<p>If the table of contents depth is not explicitly specified, it defaults to 3 (meaning that all level 1, 2, and 3 headers will be included in the table of contents).</p>
+<p>The table of contents will automatically float to the left when the article is displayed at more than 1000px wide. To always show the table of contents on top specify <code>toc_float: false</code>:</p>
+<div class="sourceCode" id="cb9"><pre class="sourceCode yaml"><code class="sourceCode yaml"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="fu">output</span><span class="kw">:</span></span>
 <span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a><span class="at">  distill:</span><span class="fu">:distill_article</span><span class="kw">:</span></span>
 <span id="cb9-3"><a href="#cb9-3" aria-hidden="true" tabindex="-1"></a><span class="at">    </span><span class="fu">toc</span><span class="kw">:</span><span class="at"> </span><span class="ch">true</span></span>
 <span id="cb9-4"><a href="#cb9-4" aria-hidden="true" tabindex="-1"></a><span class="at">    </span><span class="fu">toc_float</span><span class="kw">:</span><span class="at"> </span><span class="ch">false</span></span></code></pre></div>
 <h2 id="code-blocks">Code blocks</h2>
-<p>By default the Distill format does not display the code for chunks
-that are evaluated to produce output (knitr option
-<code>echo = FALSE</code>).</p>
-<p>The <code>echo = FALSE</code> default reflects the fact that Distill
-articles are often used to present the results of analyses rather than
-the underlying code. To display the code that was evaluated to produce
-output you can set the <code>echo</code> chunk option to
-<code>TRUE</code>:</p>
+<p>By default the Distill format does not display the code for chunks that are evaluated to produce output (knitr option <code>echo = FALSE</code>).</p>
+<p>The <code>echo = FALSE</code> default reflects the fact that Distill articles are often used to present the results of analyses rather than the underlying code. To display the code that was evaluated to produce output you can set the <code>echo</code> chunk option to <code>TRUE</code>:</p>
 <pre class="clike"><code>```{r, echo=TRUE}
 1 + 1
 ```</code></pre>
-<p>To include code that is only displayed and not evaluated specify the
-<code>eval=FALSE</code> option:</p>
+<p>To include code that is only displayed and not evaluated specify the <code>eval=FALSE</code> option:</p>
 <pre class="clike"><code>```{r, eval=FALSE, echo=TRUE}
 1 + 1
 ```</code></pre>
-<p>There are a number of default values that Distill establishes for
-knitr chunk options (these defaults also reflect the use case of
-presenting results/output rather than underlying code):</p>
+<p>There are a number of default values that Distill establishes for knitr chunk options (these defaults also reflect the use case of presenting results/output rather than underlying code):</p>
 <table>
 <colgroup>
 <col style="width: 17%" />
@@ -2589,13 +2478,9 @@ presenting results/output rather than underlying code):</p>
 </tr>
 </tbody>
 </table>
-<p>Keeping R code and output at 70 characters wide (or less) is
-recommended for readability on a variety of devices and screen
-sizes.</p>
-<p>As illustrated above, all of these defaults can be overridden on a
-chunk-by-chunk basis by specifying chunk options.</p>
-<p>You can also change the global defaults using a setup chunk. For
-example:</p>
+<p>Keeping R code and output at 70 characters wide (or less) is recommended for readability on a variety of devices and screen sizes.</p>
+<p>As illustrated above, all of these defaults can be overridden on a chunk-by-chunk basis by specifying chunk options.</p>
+<p>You can also change the global defaults using a setup chunk. For example:</p>
 <pre class="clike"><code>```{r setup, include=FALSE}
 knitr::opts_chunk$set(
   echo = TRUE,
@@ -2606,10 +2491,8 @@ knitr::opts_chunk$set(
 )
 ```</code></pre>
 <h2 id="code-folding">Code folding</h2>
-<p>You can use the <code>code_folding</code> option to hide code by
-default but allow readers to optionally show it. For example:</p>
-<div class="sourceCode" id="cb13"><pre
-class="sourceCode yaml"><code class="sourceCode yaml"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a><span class="pp">---</span></span>
+<p>You can use the <code>code_folding</code> option to hide code by default but allow readers to optionally show it. For example:</p>
+<div class="sourceCode" id="cb13"><pre class="sourceCode yaml"><code class="sourceCode yaml"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a><span class="pp">---</span></span>
 <span id="cb13-2"><a href="#cb13-2" aria-hidden="true" tabindex="-1"></a><span class="fu">title</span><span class="kw">:</span><span class="at"> </span><span class="st">&quot;Distill for R Markdown&quot;</span></span>
 <span id="cb13-3"><a href="#cb13-3" aria-hidden="true" tabindex="-1"></a><span class="fu">description</span><span class="kw">: </span><span class="ch">|</span><span class="at"> </span></span>
 <span id="cb13-4"><a href="#cb13-4" aria-hidden="true" tabindex="-1"></a>  Scientific and technical writing, native to the web</span>
@@ -2617,29 +2500,17 @@ class="sourceCode yaml"><code class="sourceCode yaml"><span id="cb13-1"><a href=
 <span id="cb13-6"><a href="#cb13-6" aria-hidden="true" tabindex="-1"></a><span class="at">  distill:</span><span class="fu">:distill_article</span><span class="kw">:</span></span>
 <span id="cb13-7"><a href="#cb13-7" aria-hidden="true" tabindex="-1"></a><span class="at">    </span><span class="fu">code_folding</span><span class="kw">:</span><span class="at"> </span><span class="ch">true</span></span>
 <span id="cb13-8"><a href="#cb13-8" aria-hidden="true" tabindex="-1"></a><span class="pp">---</span></span></code></pre></div>
-<p>When code folding is enabled, readers will see a “Show code” button
-like this for each code chunk:</p>
+<p>When code folding is enabled, readers will see a “Show code” button like this for each code chunk:</p>
 <p><img src="images/code-folding.png" class="screenshot" /></p>
-<p>You can also specify <code>code_folding</code> on a per-chunk basis.
-For example:</p>
+<p>You can also specify <code>code_folding</code> on a per-chunk basis. For example:</p>
 <pre><code>```{r, code_folding=TRUE}
 1 + 1
 ```</code></pre>
-<p>Provide a string rather than <code>TRUE</code> to customize the
-caption (the default is “Show code”).</p>
+<p>Provide a string rather than <code>TRUE</code> to customize the caption (the default is “Show code”).</p>
 <h2 id="syntax-highlighting">Syntax highlighting</h2>
-<p>Syntax highlighting for R code is done using the <a
-href="https://downlit.r-lib.org">downlit</a> package, which provides
-automatic linking of R functions to their online documentation. By
-default, highlighting is done using colors <a
-href="https://www.a11yproject.com/">optimized for accessibility and
-color contrast</a>.</p>
-<p>You can customize highlighting behavior using the
-<code>highlight</code> and <code>highlight_downlit</code> options. For
-example, to use the Pandoc “haddock” highlighting theme and disable the
-use of downlit, you would do this:</p>
-<div class="sourceCode" id="cb15"><pre
-class="sourceCode yaml"><code class="sourceCode yaml"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a><span class="pp">---</span></span>
+<p>Syntax highlighting for R code is done using the <a href="https://downlit.r-lib.org">downlit</a> package, which provides automatic linking of R functions to their online documentation. By default, highlighting is done using colors <a href="https://www.a11yproject.com/">optimized for accessibility and color contrast</a>.</p>
+<p>You can customize highlighting behavior using the <code>highlight</code> and <code>highlight_downlit</code> options. For example, to use the Pandoc “haddock” highlighting theme and disable the use of downlit, you would do this:</p>
+<div class="sourceCode" id="cb15"><pre class="sourceCode yaml"><code class="sourceCode yaml"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a><span class="pp">---</span></span>
 <span id="cb15-2"><a href="#cb15-2" aria-hidden="true" tabindex="-1"></a><span class="fu">title</span><span class="kw">:</span><span class="at"> </span><span class="st">&quot;Distill for R Markdown&quot;</span></span>
 <span id="cb15-3"><a href="#cb15-3" aria-hidden="true" tabindex="-1"></a><span class="fu">description</span><span class="kw">: </span><span class="ch">|</span><span class="at"> </span></span>
 <span id="cb15-4"><a href="#cb15-4" aria-hidden="true" tabindex="-1"></a>  Scientific and technical writing, native to the web</span>
@@ -2670,25 +2541,18 @@ class="sourceCode yaml"><code class="sourceCode yaml"><span id="cb15-1"><a href=
 <td>RStudio editor theme</td>
 </tr>
 <tr class="odd">
-<td><code>haddock</code>, <code>kate</code>, <code>monochrome</code>,
-<code>pygments</code>, <code>tango</code></td>
-<td>Pandoc highlighting <a
-href="https://www.garrickadenbuie.com/blog/pandoc-syntax-highlighting-examples/">themes</a>.</td>
+<td><code>haddock</code>, <code>kate</code>, <code>monochrome</code>, <code>pygments</code>, <code>tango</code></td>
+<td>Pandoc highlighting <a href="https://www.garrickadenbuie.com/blog/pandoc-syntax-highlighting-examples/">themes</a>.</td>
 </tr>
 <tr class="even">
 <td>Path to <code>.theme</code> file</td>
-<td>Custom Pandoc <a
-href="https://pandoc.org/MANUAL.html#syntax-highlighting">theme
-file</a>.</td>
+<td>Custom Pandoc <a href="https://pandoc.org/MANUAL.html#syntax-highlighting">theme file</a>.</td>
 </tr>
 </tbody>
 </table>
 <h2 id="appendices">Appendices</h2>
-<p>Appendices can be added after your article by adding the
-<code>.appendix</code> class to any level 1 or level 2 header. For
-example:</p>
-<div class="sourceCode" id="cb16"><pre
-class="sourceCode html"><code class="sourceCode html"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a>## Acknowledgments {.appendix}</span>
+<p>Appendices can be added after your article by adding the <code>.appendix</code> class to any level 1 or level 2 header. For example:</p>
+<div class="sourceCode" id="cb16"><pre class="sourceCode html"><code class="sourceCode html"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a>## Acknowledgments {.appendix}</span>
 <span id="cb16-2"><a href="#cb16-2" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb16-3"><a href="#cb16-3" aria-hidden="true" tabindex="-1"></a>This is a place to recognize people and institutions. It may also be a good place</span>
 <span id="cb16-4"><a href="#cb16-4" aria-hidden="true" tabindex="-1"></a>to acknowledge and cite software that makes your work possible.</span>
@@ -2697,44 +2561,29 @@ class="sourceCode html"><code class="sourceCode html"><span id="cb16-1"><a href=
 <span id="cb16-7"><a href="#cb16-7" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb16-8"><a href="#cb16-8" aria-hidden="true" tabindex="-1"></a>We strongly encourage you to include an author contributions statement briefly </span>
 <span id="cb16-9"><a href="#cb16-9" aria-hidden="true" tabindex="-1"></a>describing what each author did.</span></code></pre></div>
-<p>Footnotes and references will be included in the same section,
-immediately beneath any custom appendices.</p>
+<p>Footnotes and references will be included in the same section, immediately beneath any custom appendices.</p>
 <h2 id="theming">Theming</h2>
-<p>The appearance of a Distill article can be customized using a <a
-href="website.html#theming">theme</a> and <a
-href="website.html#custom-style">CSS</a> just like Distill sites and
-blogs. You can use the <code>create_theme()</code> function to add a
-theme CSS file in the current working directory.</p>
+<p>The appearance of a Distill article can be customized using a <a href="website.html#theming">theme</a> and <a href="website.html#custom-style">CSS</a> just like Distill sites and blogs. You can use the <code>create_theme()</code> function to add a theme CSS file in the current working directory.</p>
 <p>For example:</p>
 <div class="layout-chunk" data-layout="l-body">
 <div class="sourceCode">
-<pre class="sourceCode r"><code class="sourceCode r"><span class='fu'><a href='https://pkgs.rstudio.com/distill/reference/create_theme.html'>create_theme</a></span><span class='op'>(</span>name <span class='op'>=</span> <span class='st'>"theme"</span><span class='op'>)</span> 
-</code></pre>
+<pre class="sourceCode r"><code class="sourceCode r"><span><span class='fu'><a href='https://pkgs.rstudio.com/distill/reference/create_theme.html'>create_theme</a></span><span class='op'>(</span>name <span class='op'>=</span> <span class='st'>"theme"</span><span class='op'>)</span> </span></code></pre>
 </div>
 </div>
-<p>Read more about how to customize a Distill <a
-href="website.html#create-theme">theme</a>. To apply a custom theme to
-an article, add a <code>theme</code> key to your article’s YAML
-front-matter:</p>
-<div class="sourceCode" id="cb17"><pre
-class="sourceCode yaml"><code class="sourceCode yaml"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a><span class="pp">---</span></span>
+<p>Read more about how to customize a Distill <a href="website.html#create-theme">theme</a>. To apply a custom theme to an article, add a <code>theme</code> key to your article’s YAML front-matter:</p>
+<div class="sourceCode" id="cb17"><pre class="sourceCode yaml"><code class="sourceCode yaml"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a><span class="pp">---</span></span>
 <span id="cb17-2"><a href="#cb17-2" aria-hidden="true" tabindex="-1"></a><span class="fu">title</span><span class="kw">:</span><span class="at"> </span><span class="st">&quot;The Sharpe Ratio&quot;</span></span>
 <span id="cb17-3"><a href="#cb17-3" aria-hidden="true" tabindex="-1"></a><span class="fu">output</span><span class="kw">:</span><span class="at"> </span></span>
 <span id="cb17-4"><a href="#cb17-4" aria-hidden="true" tabindex="-1"></a><span class="at">  distill:</span><span class="fu">:distill_article</span><span class="kw">:</span></span>
 <span id="cb17-5"><a href="#cb17-5" aria-hidden="true" tabindex="-1"></a><span class="at">    </span><span class="fu">toc</span><span class="kw">:</span><span class="at"> </span><span class="ch">true</span></span>
 <span id="cb17-6"><a href="#cb17-6" aria-hidden="true" tabindex="-1"></a><span class="at">    </span><span class="fu">theme</span><span class="kw">:</span><span class="at"> theme.css</span></span>
 <span id="cb17-7"><a href="#cb17-7" aria-hidden="true" tabindex="-1"></a><span class="pp">---</span></span></code></pre></div>
-<p>One of the fastest ways to change the default appearance is to use
-custom Google fonts. To do this, you need to do two things:</p>
+<p>One of the fastest ways to change the default appearance is to use custom Google fonts. To do this, you need to do two things:</p>
 <ol type="1">
-<li><p>Embed the font using the <a
-href="https://developer.mozilla.org/en-US/docs/Web/CSS/@import">@import</a>
-method, and</p></li>
+<li><p>Embed the font using the <a href="https://developer.mozilla.org/en-US/docs/Web/CSS/@import">@import</a> method, and</p></li>
 <li><p>Specify the font in the CSS file.</p></li>
 </ol>
-<p>You can do both of these things inside your <code>theme.css</code>
-file. For example, here is an article styled with the demo theme
-detailed <a href="website.html#theming">here</a>.</p>
+<p>You can do both of these things inside your <code>theme.css</code> file. For example, here is an article styled with the demo theme detailed <a href="website.html#theming">here</a>.</p>
 <div class="layout-chunk" data-layout="l-body">
 
 </div>
@@ -2748,8 +2597,7 @@ detailed <a href="website.html#theming">here</a>.</p>
 </section>
 <section id="theme.css-snippet" class="panel">
 <h4><code>theme.css</code> snippet</h4>
-<div class="sourceCode" id="cb18"><pre
-class="sourceCode css"><code class="sourceCode css"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a><span class="co">/* base variables */</span></span>
+<div class="sourceCode" id="cb18"><pre class="sourceCode css"><code class="sourceCode css"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a><span class="co">/* base variables */</span></span>
 <span id="cb18-2"><a href="#cb18-2" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb18-3"><a href="#cb18-3" aria-hidden="true" tabindex="-1"></a><span class="co">/* Edit the CSS properties in this file to create a custom</span></span>
 <span id="cb18-4"><a href="#cb18-4" aria-hidden="true" tabindex="-1"></a><span class="co">   Distill theme. Only edit values in the right column</span></span>
@@ -2788,48 +2636,24 @@ class="sourceCode css"><code class="sourceCode css"><span id="cb18-1"><a href="#
 </section>
 </div>
 <h2 class="appendix" id="acknowledgments">Acknowledgments</h2>
-<p>Distill for R Markdown builds on the work of many individuals and
-projects. <a href="https://github.com/shancarter">Shan Carter</a>, <a
-href="https://github.com/ludwigschubert">Ludwig Schubert</a>, and <a
-href="https://github.com/colah">Christopher Olah</a> created the Distill
-web framework. <a href="https://github.com/jgm">John MacFarlane</a>
-created the Pandoc universal markup converter. <a
-href="https://github.com/dpvc">Davide Cervone</a> and <a
-href="https://github.com/zorkow">Volker Sorge</a> created the MathJax
-library for rendering mathematical notation on the web. <a
-href="https://github.com/mbostock">Mike Bostock</a> created the D3
-library for producing dynamic, interactive data visualizations for the
-web. We are grateful for the spirit of generosity that moved these
-individuals to create high-quality open source software for the benefit
-of all.</p>
-<div class="sourceCode" id="cb19"><pre
-class="sourceCode r distill-force-highlighting-css"><code class="sourceCode r"></code></pre></div>
-<div class="sourceCode" id="cb20"><pre
-class="sourceCode r distill-force-highlighting-css"><code class="sourceCode r"></code></pre></div>
-<div id="refs" class="references csl-bib-body hanging-indent"
-role="doc-bibliography">
+<p>Distill for R Markdown builds on the work of many individuals and projects. <a href="https://github.com/shancarter">Shan Carter</a>, <a href="https://github.com/ludwigschubert">Ludwig Schubert</a>, and <a href="https://github.com/colah">Christopher Olah</a> created the Distill web framework. <a href="https://github.com/jgm">John MacFarlane</a> created the Pandoc universal markup converter. <a href="https://github.com/dpvc">Davide Cervone</a> and <a href="https://github.com/zorkow">Volker Sorge</a> created the MathJax library for rendering mathematical notation on the web. <a href="https://github.com/mbostock">Mike Bostock</a> created the D3 library for producing dynamic, interactive data visualizations for the web. We are grateful for the spirit of generosity that moved these individuals to create high-quality open source software for the benefit of all.</p>
+<div class="sourceCode" id="cb19"><pre class="sourceCode r distill-force-highlighting-css"><code class="sourceCode r"></code></pre></div>
+<div class="sourceCode" id="cb20"><pre class="sourceCode r distill-force-highlighting-css"><code class="sourceCode r"></code></pre></div>
+<div id="refs" class="references csl-bib-body hanging-indent" role="doc-bibliography">
 <div id="ref-distill" class="csl-entry" role="doc-biblioentry">
-Carter, Shan, Chirs Olah, and Arvind Satyanarayan. 2016.
-<span>“Distill.”</span> Distill Working Group. <a
-href="https://doi.org/10.23915/distill">https://doi.org/10.23915/distill</a>.
+Carter, Shan, Chirs Olah, and Arvind Satyanarayan. 2016. <span>“Distill.”</span> Distill Working Group. <a href="https://doi.org/10.23915/distill">https://doi.org/10.23915/distill</a>.
 </div>
 <div id="ref-knuth1984" class="csl-entry" role="doc-biblioentry">
-Knuth, Donald E. 1984. <span>“Literate Programming.”</span> <em>The
-Computer Journal</em> 27 (2): 97–111.
+Knuth, Donald E. 1984. <span>“Literate Programming.”</span> <em>The Computer Journal</em> 27 (2): 97–111.
 </div>
 <div id="ref-xie2015" class="csl-entry" role="doc-biblioentry">
-Xie, Yihui. 2015. <em>Dynamic Documents with r and Knitr</em>. 2nd ed.
-Boca Raton, Florida: Chapman; Hall/CRC. <a
-href="http://yihui.name/knitr/">http://yihui.name/knitr/</a>.
+Xie, Yihui. 2015. <em>Dynamic Documents with r and Knitr</em>. 2nd ed. Boca Raton, Florida: Chapman; Hall/CRC. <a href="http://yihui.name/knitr/">http://yihui.name/knitr/</a>.
 </div>
 </div>
-<section class="footnotes footnotes-end-of-document"
-role="doc-endnotes">
+<section id="footnotes" class="footnotes footnotes-end-of-document" role="doc-endnotes">
 <hr />
 <ol>
-<li id="fn1" role="doc-endnote"><p>This will become a hover-able
-footnote<a href="#fnref1" class="footnote-back"
-role="doc-backlink">↩︎</a></p></li>
+<li id="fn1"><p>This will become a hover-able footnote<a href="#fnref1" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
 </ol>
 </section>
 <!--radix_placeholder_article_footer-->

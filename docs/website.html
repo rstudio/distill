@@ -786,6 +786,7 @@ code span.wa { color: #008000; font-weight: bold; } /* Warning */
   d-article table.gt_table td,
   d-article table.gt_table th {
     border-bottom: none;
+    font-size: 100%;
   }
 
   .html-widget {
@@ -1858,15 +1859,21 @@ code span.wa { color: #008000; font-weight: bold; } /* Warning */
 
       // hoverable references
       $('span.citation[data-cites]').each(function() {
-        if ($(this).children()[0].nodeName == "D-FOOTNOTE") {
-          var fn = $(this).children()[0]
+        const citeChild = $(this).children()[0]
+        // Do not process if @xyz has been used without escaping and without bibliography activated
+        // https://github.com/rstudio/distill/issues/466
+        if (citeChild === undefined) return true
+
+        if (citeChild.nodeName == "D-FOOTNOTE") {
+          var fn = citeChild
           $(this).html(fn.shadowRoot.querySelector("sup"))
           $(this).id = fn.id
           fn.remove()
         }
         var refs = $(this).attr('data-cites').split(" ");
         var refHtml = refs.map(function(ref) {
-          return "<p>" + $('#ref-' + ref).html() + "</p>";
+          // Could use CSS.escape too here, we insure backward compatibility in navigator
+          return "<p>" + $('div[id="ref-' + ref + '"]').html() + "</p>";
         }).join("\n");
         window.tippy(this, {
           allowHTML: true,
@@ -2065,7 +2072,7 @@ code span.wa { color: #008000; font-weight: bold; } /* Warning */
   </script>
 
   <!--/radix_placeholder_distill-->
-  <script src="site_libs/header-attrs-2.14/header-attrs.js"></script>
+  <script src="site_libs/header-attrs-2.16.1/header-attrs.js"></script>
   <link href="site_libs/panelset-0.2.6/panelset.css" rel="stylesheet" />
   <script src="site_libs/panelset-0.2.6/panelset.js"></script>
   <script src="site_libs/popper-2.6.0/popper.min.js"></script>
@@ -2194,28 +2201,21 @@ Publishing
 <nav class="l-text toc figcaption" id="TOC">
 <h3>Contents</h3>
 <ul>
-<li><a href="#getting-started" id="toc-getting-started">Getting
-started</a>
+<li><a href="#getting-started" id="toc-getting-started">Getting started</a>
 <ul>
-<li><a href="#website-or-blog" id="toc-website-or-blog">Website or
-blog?</a></li>
-<li><a href="#creating-a-website" id="toc-creating-a-website">Creating a
-website</a></li>
-<li><a href="#authoring-articles" id="toc-authoring-articles">Authoring
-articles</a></li>
-<li><a href="#building-the-site" id="toc-building-the-site">Building the
-site</a></li>
+<li><a href="#website-or-blog" id="toc-website-or-blog">Website or blog?</a></li>
+<li><a href="#creating-a-website" id="toc-creating-a-website">Creating a website</a></li>
+<li><a href="#authoring-articles" id="toc-authoring-articles">Authoring articles</a></li>
+<li><a href="#building-the-site" id="toc-building-the-site">Building the site</a></li>
 </ul></li>
 <li><a href="#site-output" id="toc-site-output">Site output</a></li>
-<li><a href="#site-navigation" id="toc-site-navigation">Site
-navigation</a>
+<li><a href="#site-navigation" id="toc-site-navigation">Site navigation</a>
 <ul>
 <li><a href="#site-search" id="toc-site-search">Site search</a></li>
 <li><a href="#source-code" id="toc-source-code">Source code</a></li>
 <li><a href="#site-footer" id="toc-site-footer">Site footer</a></li>
 </ul></li>
-<li><a href="#alternate-formats" id="toc-alternate-formats">Alternate
-formats</a>
+<li><a href="#alternate-formats" id="toc-alternate-formats">Alternate formats</a>
 <ul>
 <li><a href="#postcards" id="toc-postcards">Postcards</a></li>
 </ul></li>
@@ -2223,72 +2223,32 @@ formats</a>
 <ul>
 <li><a href="#create-theme" id="toc-create-theme">Create theme</a></li>
 <li><a href="#apply-theme" id="toc-apply-theme">Apply theme</a></li>
-<li><a href="#custom-style" id="toc-custom-style">Custom CSS
-styles</a></li>
-<li><a href="#example-themes" id="toc-example-themes">Example
-themes</a></li>
+<li><a href="#custom-style" id="toc-custom-style">Custom CSS styles</a></li>
+<li><a href="#example-themes" id="toc-example-themes">Example themes</a></li>
 </ul></li>
-<li><a href="#google-analytics" id="toc-google-analytics">Google
-analytics</a></li>
-<li><a href="#gdpr-compliance" id="toc-gdpr-compliance">GDPR
-compliance</a>
+<li><a href="#google-analytics" id="toc-google-analytics">Google analytics</a></li>
+<li><a href="#gdpr-compliance" id="toc-gdpr-compliance">GDPR compliance</a>
 <ul>
-<li><a href="#cookie-consent" id="toc-cookie-consent">Cookie
-consent</a></li>
-<li><a href="#tagging-scripts" id="toc-tagging-scripts">Tagging
-scripts</a></li>
+<li><a href="#cookie-consent" id="toc-cookie-consent">Cookie consent</a></li>
+<li><a href="#tagging-scripts" id="toc-tagging-scripts">Tagging scripts</a></li>
 </ul></li>
-<li><a href="#site-metadata" id="toc-site-metadata">Site
-metadata</a></li>
-<li><a href="#publishing-a-website"
-id="toc-publishing-a-website">Publishing a website</a></li>
+<li><a href="#site-metadata" id="toc-site-metadata">Site metadata</a></li>
+<li><a href="#publishing-a-website" id="toc-publishing-a-website">Publishing a website</a></li>
 </ul>
 </nav>
 </div>
-<p>This article describes how to create a website that contains a
-collection of Distill articles. Distill websites include a top level
-navigation bar that enables readers to discover and browse articles. For
-example, the documentation pages you are reading now are a Distill
-website. You can view more examples of Distill websites on the package
-<a
-href="https://pkgs.rstudio.com/distill/articles/examples.html">reference
-site</a>.</p>
-<p>Once you’ve created your website locally, there are a variety of ways
-available to <a href="publish_website.html">publish your site</a> to the
-web.</p>
+<p>This article describes how to create a website that contains a collection of Distill articles. Distill websites include a top level navigation bar that enables readers to discover and browse articles. For example, the documentation pages you are reading now are a Distill website. You can view more examples of Distill websites on the package <a href="https://pkgs.rstudio.com/distill/articles/examples.html">reference site</a>.</p>
+<p>Once you’ve created your website locally, there are a variety of ways available to <a href="publish_website.html">publish your site</a> to the web.</p>
 <h2 id="getting-started">Getting started</h2>
 <h3 id="website-or-blog">Website or blog?</h3>
-<p>Structure difference: <a href="website.html">Websites</a> are just
-collections of pages you can navigate to via the top navigation bar,
-whereas <a href="blog.html">blogs</a> have collections of posts that can
-be indexed and syndicated (via their RSS feed). Distill blogs are a
-distill website with added blog posts.</p>
-<p>Layout difference: Within a <a href="blog.html">blog</a>, Distill
-enables a special page on your website called a <a
-href="blog.html#listing-pages">listing page</a>. Whereas websites
-require you to manually set up links to pages, a listing page collects
-links to posts for you, displaying key metadata (like date published,
-author, categories, title, etc.) and a thumbnail image. When you knit
-and publish a new post, this page automatically updates by adding the
-most recent post to the top of the list.</p>
-<p>Workflow difference: Furthermore, <em>website</em> pages and root
-pages of <em>blogs</em> are re-rendered when the site is rebuilt but
-blog articles are not. Each blog article has to be rendered on its own,
-with intent. Why? Given that R package upgrades have a tendency to break
-older code, continuously re-rendering old posts is nearly impossible to
-do without errors, especially over longer periods of time.</p>
-<div class="sourceCode" id="cb1"><pre
-class="sourceCode r distill-force-highlighting-css"><code class="sourceCode r"></code></pre></div>
+<p>Structure difference: <a href="website.html">Websites</a> are just collections of pages you can navigate to via the top navigation bar, whereas <a href="blog.html">blogs</a> have collections of posts that can be indexed and syndicated (via their RSS feed). Distill blogs are a distill website with added blog posts.</p>
+<p>Layout difference: Within a <a href="blog.html">blog</a>, Distill enables a special page on your website called a <a href="blog.html#listing-pages">listing page</a>. Whereas websites require you to manually set up links to pages, a listing page collects links to posts for you, displaying key metadata (like date published, author, categories, title, etc.) and a thumbnail image. When you knit and publish a new post, this page automatically updates by adding the most recent post to the top of the list.</p>
+<p>Workflow difference: Furthermore, <em>website</em> pages and root pages of <em>blogs</em> are re-rendered when the site is rebuilt but blog articles are not. Each blog article has to be rendered on its own, with intent. Why? Given that R package upgrades have a tendency to break older code, continuously re-rendering old posts is nearly impossible to do without errors, especially over longer periods of time.</p>
+<div class="sourceCode" id="cb1"><pre class="sourceCode r distill-force-highlighting-css"><code class="sourceCode r"></code></pre></div>
 <h3 id="creating-a-website">Creating a website</h3>
-<p>If you are using RStudio, the easiest way to get started is to use
-the Distill Website option in the RStudio <strong>New Project</strong>
-dialog:</p>
-<p><img src="images/create-website.png" class="screenshot"
-style="width:95.0%" /></p>
-<p>A new <a
-href="https://support.rstudio.com/hc/en-us/articles/200526207-Using-Projects">RStudio
-Project</a> for the website will be created and opened. The website will
-include the following files:</p>
+<p>If you are using RStudio, the easiest way to get started is to use the Distill Website option in the RStudio <strong>New Project</strong> dialog:</p>
+<p><img src="images/create-website.png" class="screenshot" style="width:95.0%" /></p>
+<p>A new <a href="https://support.rstudio.com/hc/en-us/articles/200526207-Using-Projects">RStudio Project</a> for the website will be created and opened. The website will include the following files:</p>
 <table>
 <thead>
 <tr class="header">
@@ -2311,129 +2271,65 @@ include the following files:</p>
 </tr>
 </tbody>
 </table>
-<p>If you are not using RStudio you can also call the Distill
-<code>create_website()</code> function:</p>
+<p>If you are not using RStudio you can also call the Distill <code>create_website()</code> function:</p>
 <div class="layout-chunk" data-layout="l-body">
 <div class="sourceCode">
-<pre class="sourceCode r"><code class="sourceCode r"><span class='kw'><a href='https://rdrr.io/r/base/library.html'>library</a></span><span class='op'>(</span><span class='va'><a href='https://github.com/rstudio/distill'>distill</a></span><span class='op'>)</span>
-<span class='fu'><a href='https://pkgs.rstudio.com/distill/reference/create_website.html'>create_website</a></span><span class='op'>(</span>dir <span class='op'>=</span> <span class='st'>"my-website"</span>, title <span class='op'>=</span> <span class='st'>"My Website"</span><span class='op'>)</span>
-</code></pre>
+<pre class="sourceCode r"><code class="sourceCode r"><span><span class='kw'><a href='https://rdrr.io/r/base/library.html'>library</a></span><span class='op'>(</span><span class='va'><a href='https://github.com/rstudio/distill'>distill</a></span><span class='op'>)</span></span>
+<span><span class='fu'><a href='https://pkgs.rstudio.com/distill/reference/create_website.html'>create_website</a></span><span class='op'>(</span>dir <span class='op'>=</span> <span class='st'>"my-website"</span>, title <span class='op'>=</span> <span class='st'>"My Website"</span><span class='op'>)</span></span></code></pre>
 </div>
 </div>
-<p>A new website containing Home and About pages will be created within
-the <code>my-website</code> directory.</p>
+<p>A new website containing Home and About pages will be created within the <code>my-website</code> directory.</p>
 <h3 id="authoring-articles">Authoring articles</h3>
-<p>When you use the RStudio <strong>Knit</strong> command on a Distill
-article within a website, only that article will be rendered and
-previewed:</p>
-<p><img src="images/knit-site-article.png" class="screenshot"
-style="width:95.0%" /></p>
-<p>You can also preview a single article from within a website by
-passing the name of the article’s Rmd file to
-<code>render_site()</code>:</p>
+<p>When you use the RStudio <strong>Knit</strong> command on a Distill article within a website, only that article will be rendered and previewed:</p>
+<p><img src="images/knit-site-article.png" class="screenshot" style="width:95.0%" /></p>
+<p>You can also preview a single article from within a website by passing the name of the article’s Rmd file to <code>render_site()</code>:</p>
 <div class="layout-chunk" data-layout="l-body">
 <div class="sourceCode">
-<pre class="sourceCode r"><code class="sourceCode r"><span class='fu'><a href='https://pkgs.rstudio.com/rmarkdown/reference/render_site.html'>render_site</a></span><span class='op'>(</span><span class='st'>"about.Rmd"</span><span class='op'>)</span>
-</code></pre>
+<pre class="sourceCode r"><code class="sourceCode r"><span><span class='fu'><a href='https://pkgs.rstudio.com/rmarkdown/reference/render_site.html'>render_site</a></span><span class='op'>(</span><span class='st'>"about.Rmd"</span><span class='op'>)</span></span></code></pre>
 </div>
 </div>
-<p>This will build only the specified article (as opposed to all
-articles in the site). This is our recommended workflow for authoring
-articles since it offers the fastest turnaround time for previews (since
-only the article you are working on is rendered).</p>
+<p>This will build only the specified article (as opposed to all articles in the site). This is our recommended workflow for authoring articles since it offers the fastest turnaround time for previews (since only the article you are working on is rendered).</p>
 <h3 id="building-the-site">Building the site</h3>
-<p>After you’ve authored the various articles contained within the
-website, you will want to build the entire site before deploying it.</p>
-<p>If your Distill website is contained within an RStudio project, you
-can use the <strong>Build Website</strong> command available in the
-Build pane to generate the site:</p>
-<p><img src="images/build-website.png" class="screenshot"
-style="width:95.0%" /></p>
+<p>After you’ve authored the various articles contained within the website, you will want to build the entire site before deploying it.</p>
+<p>If your Distill website is contained within an RStudio project, you can use the <strong>Build Website</strong> command available in the Build pane to generate the site:</p>
+<p><img src="images/build-website.png" class="screenshot" style="width:95.0%" /></p>
 <p>When you build a website, the following things occur:</p>
 <ol type="1">
-<li><p>All of the Rmd and md files in the root website directory will be
-rendered into HTML. Note however that markdown files beginning with “_”
-are not rendered (this is a convention to designate files that are
-included by top level documents).</p></li>
-<li><p>Blog posts will be copied into the <code>posts</code>
-sub-directory of the output directory and blog <a
-href="blog.html#listing-pages">listing pages</a> will be
-re-generated.</p></li>
-<li><p>The generated HTML files and any supporting files (e.g. CSS and
-JavaScript) are copied into an output directory (<code>_site</code> by
-default).</p></li>
+<li><p>All of the Rmd and md files in the root website directory will be rendered into HTML. Note however that markdown files beginning with “_” are not rendered (this is a convention to designate files that are included by top level documents).</p></li>
+<li><p>Blog posts will be copied into the <code>posts</code> sub-directory of the output directory and blog <a href="blog.html#listing-pages">listing pages</a> will be re-generated.</p></li>
+<li><p>The generated HTML files and any supporting files (e.g. CSS and JavaScript) are copied into an output directory (<code>_site</code> by default).</p></li>
 </ol>
-<p>The HTML files within the <code>_site</code> directory are now ready
-to deploy as a standalone static website.</p>
-<p>To build a website from the command line, use the
-<code>rmarkdown::render_site()</code> function:</p>
+<p>The HTML files within the <code>_site</code> directory are now ready to deploy as a standalone static website.</p>
+<p>To build a website from the command line, use the <code>rmarkdown::render_site()</code> function:</p>
 <div class="layout-chunk" data-layout="l-body">
 <div class="sourceCode">
-<pre class="sourceCode r"><code class="sourceCode r"><span class='kw'><a href='https://rdrr.io/r/base/library.html'>library</a></span><span class='op'>(</span><span class='va'><a href='https://github.com/rstudio/rmarkdown'>rmarkdown</a></span><span class='op'>)</span>
-<span class='fu'><a href='https://pkgs.rstudio.com/rmarkdown/reference/render_site.html'>render_site</a></span><span class='op'>(</span><span class='op'>)</span>
-</code></pre>
+<pre class="sourceCode r"><code class="sourceCode r"><span><span class='kw'><a href='https://rdrr.io/r/base/library.html'>library</a></span><span class='op'>(</span><span class='va'><a href='https://github.com/rstudio/rmarkdown'>rmarkdown</a></span><span class='op'>)</span></span>
+<span><span class='fu'><a href='https://pkgs.rstudio.com/rmarkdown/reference/render_site.html'>render_site</a></span><span class='op'>(</span><span class='op'>)</span></span></code></pre>
 </div>
 </div>
 <h2 id="site-output">Site output</h2>
-<p>The <strong>_site.yml</strong> file has a number of options that
-affect site output including where it is written and what files are
-included and excluded from the site. Here’s an example that makes use of
-a few of these options:</p>
+<p>The <strong>_site.yml</strong> file has a number of options that affect site output including where it is written and what files are included and excluded from the site. Here’s an example that makes use of a few of these options:</p>
 <p><strong>_site.yml</strong></p>
-<div class="sourceCode" id="cb2"><pre
-class="sourceCode yaml"><code class="sourceCode yaml"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="fu">name</span><span class="kw">:</span><span class="at"> </span><span class="st">&quot;my-website&quot;</span></span>
+<div class="sourceCode" id="cb2"><pre class="sourceCode yaml"><code class="sourceCode yaml"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="fu">name</span><span class="kw">:</span><span class="at"> </span><span class="st">&quot;my-website&quot;</span></span>
 <span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a><span class="fu">output_dir</span><span class="kw">:</span><span class="at"> </span><span class="st">&quot;_site&quot;</span></span>
 <span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a><span class="fu">include</span><span class="kw">:</span><span class="at"> </span><span class="kw">[</span><span class="st">&quot;import.R&quot;</span><span class="kw">]</span></span>
 <span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a><span class="fu">exclude</span><span class="kw">:</span><span class="at"> </span><span class="kw">[</span><span class="st">&quot;docs.txt&quot;</span><span class="kw">,</span><span class="at"> </span><span class="st">&quot;*.csv&quot;</span><span class="kw">]</span></span></code></pre></div>
-<p>The <code>name</code> field provides a suggested URL path for your
-website when it is published (by default this is just the name of the
-directory containing the site).</p>
-<p>The <code>output_dir</code> field indicates which directory to copy
-site content into (“_site” is the default if none is specified). Note
-that this can be “.” to keep all content within the root website
-directory alongside the source code.</p>
-<p>The <code>include</code> and <code>exclude</code> fields enable you
-to override the default behavior vis-à-vis what files are copied into
-the output directory. By default, all files within the website directory
-are copied into the output directory (e.g. “_site”) save for the
-following:</p>
+<p>The <code>name</code> field provides a suggested URL path for your website when it is published (by default this is just the name of the directory containing the site).</p>
+<p>The <code>output_dir</code> field indicates which directory to copy site content into (“_site” is the default if none is specified). Note that this can be “.” to keep all content within the root website directory alongside the source code.</p>
+<p>The <code>include</code> and <code>exclude</code> fields enable you to override the default behavior vis-à-vis what files are copied into the output directory. By default, all files within the website directory are copied into the output directory (e.g. “_site”) save for the following:</p>
 <ol type="1">
 <li><p>Files beginning with <code>"."</code> (hidden files).</p></li>
 <li><p>Files beginning with <code>"_"</code></p></li>
-<li><p>Files known to contain R source code (e.g. <code>".R"</code>,
-<code>".s"</code>, <code>".Rmd"</code>), R data
-(e.g. <code>".RData"</code>, <code>".rds"</code>), or configuration data
-(e.g. <code>"rsconnect"</code> ,<code>"packrat"</code>,
-<code>"renv"</code>)).</p></li>
+<li><p>Files known to contain R source code (e.g. <code>".R"</code>, <code>".s"</code>, <code>".Rmd"</code>), R data (e.g. <code>".RData"</code>, <code>".rds"</code>), or configuration data (e.g. <code>"rsconnect"</code> ,<code>"packrat"</code>, <code>"renv"</code>)).</p></li>
 </ol>
-<p>The <code>include</code> and <code>exclude</code> fields of
-<strong>_site.yml</strong> can be used to override this default behavior
-(wildcards can be used to specify groups of files to be included or
-excluded). Note that the <code>include</code> and <code>exclude</code>
-fields target only top-level files and directories (i.e. a directory is
-either included or not, you can’t exclude a subset of files within a
-directory).</p>
-<p>Note also that <code>include</code> and <code>exclude</code> are
-<em>not</em> used to determine which Rmd files are rendered (all of them
-in the root directory save for those named with the <code>_</code>
-prefix will be rendered).</p>
-<p>The R Markdown documentation on <a
-href="https://rmarkdown.rstudio.com/rmarkdown_websites.html">creating
-websites</a> has documentation on additional available features and
-configuration options. The remainder of this article describes features
-that are specific to Distill websites.</p>
+<p>The <code>include</code> and <code>exclude</code> fields of <strong>_site.yml</strong> can be used to override this default behavior (wildcards can be used to specify groups of files to be included or excluded). Note that the <code>include</code> and <code>exclude</code> fields target only top-level files and directories (i.e. a directory is either included or not, you can’t exclude a subset of files within a directory).</p>
+<p>Note also that <code>include</code> and <code>exclude</code> are <em>not</em> used to determine which Rmd files are rendered (all of them in the root directory save for those named with the <code>_</code> prefix will be rendered).</p>
+<p>The R Markdown documentation on <a href="https://rmarkdown.rstudio.com/rmarkdown_websites.html">creating websites</a> has documentation on additional available features and configuration options. The remainder of this article describes features that are specific to Distill websites.</p>
 <h2 id="site-navigation">Site navigation</h2>
-<p>Site navigation bars include the site’s title, an optional logo,
-top-level links to articles, and if need be drop-down menus that include
-links to several articles. For example:</p>
-<p><img src="images/navigation-bar.png" class="screenshot"
-style="width:95.0%" /></p>
-<p>Elements of the site navigation bar are specified within the
-<code>navbar</code> section of the <code>_site.yml</code> file. For
-example, here is the YAML that was used to create the navigation bar
-displayed above:</p>
-<div class="sourceCode" id="cb3"><pre
-class="sourceCode yaml"><code class="sourceCode yaml"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="pp">---</span></span>
+<p>Site navigation bars include the site’s title, an optional logo, top-level links to articles, and if need be drop-down menus that include links to several articles. For example:</p>
+<p><img src="images/navigation-bar.png" class="screenshot" style="width:95.0%" /></p>
+<p>Elements of the site navigation bar are specified within the <code>navbar</code> section of the <code>_site.yml</code> file. For example, here is the YAML that was used to create the navigation bar displayed above:</p>
+<div class="sourceCode" id="cb3"><pre class="sourceCode yaml"><code class="sourceCode yaml"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="pp">---</span></span>
 <span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a><span class="fu">name</span><span class="kw">:</span><span class="at"> </span><span class="st">&quot;distill&quot;</span></span>
 <span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a><span class="fu">title</span><span class="kw">:</span><span class="at"> </span><span class="st">&quot;Distill for R Markdown&quot;</span></span>
 <span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a><span class="fu">navbar</span><span class="kw">:</span></span>
@@ -2460,22 +2356,11 @@ class="sourceCode yaml"><code class="sourceCode yaml"><span id="cb3-1"><a href="
 <span id="cb3-25"><a href="#cb3-25" aria-hidden="true" tabindex="-1"></a><span class="at">      </span><span class="fu">href</span><span class="kw">:</span><span class="at"> https://github.com/rstudio/distill</span></span>
 <span id="cb3-26"><a href="#cb3-26" aria-hidden="true" tabindex="-1"></a><span class="fu">output</span><span class="kw">:</span><span class="at"> distill::distill_article</span></span>
 <span id="cb3-27"><a href="#cb3-27" aria-hidden="true" tabindex="-1"></a><span class="pp">---</span></span></code></pre></div>
-<p>Note that we specify that the menu items appear on the
-<code>right</code> side of the navigation bar. We could have also used
-<code>left</code>, or chosen to put some items on the <code>left</code>
-and some on the <code>right</code>.</p>
-<p>Note also that we used an <code>icon</code> for one of the menus,
-specifying the <a href="https://fontawesome.com/">Font Awesome</a>
-<code>fab fa-github</code> identifier for the GitHub icon (you can use
-any Font Awesome icon). If there isn’t a Font Awesome icon that matches
-the image you want, you can also specify a custom <code>image</code>
-rather than an <code>icon</code>.</p>
+<p>Note that we specify that the menu items appear on the <code>right</code> side of the navigation bar. We could have also used <code>left</code>, or chosen to put some items on the <code>left</code> and some on the <code>right</code>.</p>
+<p>Note also that we used an <code>icon</code> for one of the menus, specifying the <a href="https://fontawesome.com/">Font Awesome</a> <code>fab fa-github</code> identifier for the GitHub icon (you can use any Font Awesome icon). If there isn’t a Font Awesome icon that matches the image you want, you can also specify a custom <code>image</code> rather than an <code>icon</code>.</p>
 <h3 id="site-search">Site search</h3>
-<p>You can add a search box to the navigation bar using the
-<code>search</code> field of the <code>navbar</code> key within
-<code>_site.yml</code>. For example:</p>
-<div class="sourceCode" id="cb4"><pre
-class="sourceCode yaml"><code class="sourceCode yaml"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="pp">---</span></span>
+<p>You can add a search box to the navigation bar using the <code>search</code> field of the <code>navbar</code> key within <code>_site.yml</code>. For example:</p>
+<div class="sourceCode" id="cb4"><pre class="sourceCode yaml"><code class="sourceCode yaml"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="pp">---</span></span>
 <span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a><span class="fu">name</span><span class="kw">:</span><span class="at"> </span><span class="st">&quot;distill&quot;</span></span>
 <span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a><span class="fu">title</span><span class="kw">:</span><span class="at"> </span><span class="st">&quot;Distill for R Markdown&quot;</span></span>
 <span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a><span class="fu">navbar</span><span class="kw">:</span></span>
@@ -2484,15 +2369,10 @@ class="sourceCode yaml"><code class="sourceCode yaml"><span id="cb4-1"><a href="
 <span id="cb4-7"><a href="#cb4-7" aria-hidden="true" tabindex="-1"></a><span class="at">    </span><span class="fu">href</span><span class="kw">:</span><span class="at"> https://www.rstudio.com</span></span>
 <span id="cb4-8"><a href="#cb4-8" aria-hidden="true" tabindex="-1"></a><span class="at">  </span><span class="fu">search</span><span class="kw">:</span><span class="at"> </span><span class="ch">true</span></span>
 <span id="cb4-9"><a href="#cb4-9" aria-hidden="true" tabindex="-1"></a><span class="pp">---</span></span></code></pre></div>
-<p>Note that only articles with a <code>description</code> metadata
-field are included within search results. Also note that search is
-enabled by default for <a href="blog.html">blog sites</a>.</p>
+<p>Note that only articles with a <code>description</code> metadata field are included within search results. Also note that search is enabled by default for <a href="blog.html">blog sites</a>.</p>
 <h3 id="source-code">Source code</h3>
-<p>If you want to display a link to the source code for your website on
-the navigation bar, add a <code>source_url</code> field to the
-<code>navbar</code> definition. For example:</p>
-<div class="sourceCode" id="cb5"><pre
-class="sourceCode yaml"><code class="sourceCode yaml"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="pp">---</span></span>
+<p>If you want to display a link to the source code for your website on the navigation bar, add a <code>source_url</code> field to the <code>navbar</code> definition. For example:</p>
+<div class="sourceCode" id="cb5"><pre class="sourceCode yaml"><code class="sourceCode yaml"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="pp">---</span></span>
 <span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a><span class="fu">name</span><span class="kw">:</span><span class="at"> </span><span class="st">&quot;distill&quot;</span></span>
 <span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a><span class="fu">title</span><span class="kw">:</span><span class="at"> </span><span class="st">&quot;Distill for R Markdown&quot;</span></span>
 <span id="cb5-4"><a href="#cb5-4" aria-hidden="true" tabindex="-1"></a><span class="fu">navbar</span><span class="kw">:</span></span>
@@ -2501,19 +2381,11 @@ class="sourceCode yaml"><code class="sourceCode yaml"><span id="cb5-1"><a href="
 <span id="cb5-7"><a href="#cb5-7" aria-hidden="true" tabindex="-1"></a><span class="at">    </span><span class="fu">href</span><span class="kw">:</span><span class="at"> https://www.rstudio.com</span></span>
 <span id="cb5-8"><a href="#cb5-8" aria-hidden="true" tabindex="-1"></a><span class="at">  </span><span class="fu">source_url</span><span class="kw">:</span><span class="at"> https://github.com/rstudio/distill</span></span>
 <span id="cb5-9"><a href="#cb5-9" aria-hidden="true" tabindex="-1"></a><span class="pp">---</span></span></code></pre></div>
-<p>Note that if you’ve already defined a <code>repository_url</code>
-field in <code>_site.yml</code> you can just use
-<code>source_url: true</code> and your <code>repository_url</code> will
-be used for the link.</p>
+<p>Note that if you’ve already defined a <code>repository_url</code> field in <code>_site.yml</code> you can just use <code>source_url: true</code> and your <code>repository_url</code> will be used for the link.</p>
 <h3 id="site-footer">Site footer</h3>
-<p>When you use a navigation bar, you can optionally also include a site
-footer which uses the same theme (background and foreground colors). For
-example:</p>
-<p><img src="images/footer-bar.png" class="screenshot"
-style="width:95.0%" /></p>
-<p>To add a footer, simply include a file named
-<code>_footer.html</code> within your main site directory. For
-example:</p>
+<p>When you use a navigation bar, you can optionally also include a site footer which uses the same theme (background and foreground colors). For example:</p>
+<p><img src="images/footer-bar.png" class="screenshot" style="width:95.0%" /></p>
+<p>To add a footer, simply include a file named <code>_footer.html</code> within your main site directory. For example:</p>
 <p><strong>_footer.html</strong></p>
 <pre class="markup"><code>© Copyright 2018 [The Distill Template Authors]
 (https://github.com/distillpub/template/blob/master/AUTHORS) 
@@ -2522,98 +2394,50 @@ and [RStudio, Inc](https://www.rstudio.com).
 Software licensed under the [Apache License, v2.0]
 (https://www.apache.org/licenses/LICENSE-2.0).</code></pre>
 <h2 id="alternate-formats">Alternate formats</h2>
-<p>While you’ll typically use the <code>distill::distill_article</code>
-format for pages within a distill website, you can also use any other
-HTML-based, single document R Markdown formats so long as it’s
-underlying template has support for <a
-href="https://pandoc.org/MANUAL.html#option--include-in-header">pandoc
-includes</a>.</p>
-<p>Support for alternate output formats requires up-to-date versions of
-both the distill and rmarkdown packages:</p>
+<p>While you’ll typically use the <code>distill::distill_article</code> format for pages within a distill website, you can also use any other HTML-based, single document R Markdown formats so long as it’s underlying template has support for <a href="https://pandoc.org/MANUAL.html#option--include-in-header">pandoc includes</a>.</p>
+<p>Support for alternate output formats requires up-to-date versions of both the distill and rmarkdown packages:</p>
 <ul>
-<li><p>version &gt;= <a
-href="https://pkgs.rstudio.com/distill/news/index.html#distill-v1-2-cran-">1.2</a>
-of distill</p></li>
-<li><p>version &gt;= <a
-href="https://pkgs.rstudio.com/rmarkdown/news/index.html#rmarkdown-2-7-2021-02-19">2.7</a>
-of rmarkdown</p></li>
+<li><p>version &gt;= <a href="https://pkgs.rstudio.com/distill/news/index.html#distill-v1-2-cran-">1.2</a> of distill</p></li>
+<li><p>version &gt;= <a href="https://pkgs.rstudio.com/rmarkdown/news/index.html#rmarkdown-2-7-2021-02-19">2.7</a> of rmarkdown</p></li>
 </ul>
 <p>You can check these package versions as follows:</p>
 <div class="sourceCode" id="cb7"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="fu">packageVersion</span>(<span class="st">&quot;distill&quot;</span>)</span>
 <span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a><span class="fu">packageVersion</span>(<span class="st">&quot;rmarkdown&quot;</span>)</span></code></pre></div>
-<p>Alternate output formats are supported only for top-level site pages
-(not for articles within collections, e.g. blog posts). Pages using an
-alternate format should be rendered via the
-<code>rmarkdown::render_site()</code> function to ensure they get
-site-related headers and footers (this happens automatically when you
-Knit from within an RStudio website project).</p>
-<p>You can disable support for rendering alternate formats by including
-<code>alt_formats: false</code> within your <code>_site.yml</code>
-file.</p>
+<p>Alternate output formats are supported only for top-level site pages (not for articles within collections, e.g. blog posts). Pages using an alternate format should be rendered via the <code>rmarkdown::render_site()</code> function to ensure they get site-related headers and footers (this happens automatically when you Knit from within an RStudio website project).</p>
+<p>You can disable support for rendering alternate formats by including <code>alt_formats: false</code> within your <code>_site.yml</code> file.</p>
 <h3 id="postcards">Postcards</h3>
-<p>The <a href="https://github.com/seankross/postcards">postcards</a>
-package enables you to create an attractive personal bio/contact page.
-To add a postcard to your Distill site, first install the postcards
-packages from CRAN:</p>
+<p>The <a href="https://github.com/seankross/postcards">postcards</a> package enables you to create an attractive personal bio/contact page. To add a postcard to your Distill site, first install the postcards packages from CRAN:</p>
 <div class="sourceCode" id="cb8"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="fu">install.packages</span>(<span class="st">&quot;postcards&quot;</span>)</span></code></pre></div>
 <p>Then use the <code>create_postcard()</code> function:</p>
 <div class="sourceCode" id="cb9"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a>postcards<span class="sc">::</span><span class="fu">create_postcard</span>(<span class="st">&quot;about.Rmd&quot;</span>)</span></code></pre></div>
-<p>Note that you can choose from several different <a
-href="https://github.com/seankross/postcards#the-templates">postcard
-templates</a> using the <code>template</code> argument of the
-<code>create_postcard()</code> function; the default is
-<code>template = "jolla"</code>. After creating your postcard, you may
-switch templates by editing the YAML; here we’ll switch to using the
-<code>trestles</code> template:</p>
-<div class="sourceCode" id="cb10"><pre
-class="sourceCode yaml"><code class="sourceCode yaml"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="pp">---</span></span>
+<p>Note that you can choose from several different <a href="https://github.com/seankross/postcards#the-templates">postcard templates</a> using the <code>template</code> argument of the <code>create_postcard()</code> function; the default is <code>template = "jolla"</code>. After creating your postcard, you may switch templates by editing the YAML; here we’ll switch to using the <code>trestles</code> template:</p>
+<div class="sourceCode" id="cb10"><pre class="sourceCode yaml"><code class="sourceCode yaml"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="pp">---</span></span>
 <span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a><span class="fu">output</span><span class="kw">:</span></span>
 <span id="cb10-3"><a href="#cb10-3" aria-hidden="true" tabindex="-1"></a><span class="at">  postcards::trestles</span></span>
 <span id="cb10-4"><a href="#cb10-4" aria-hidden="true" tabindex="-1"></a><span class="pp">---</span></span></code></pre></div>
 <p>When you rebuild your site, the template should update.</p>
-<p>You’ll likely also want to add a link to the postcard page within
-your site’s navigation bar. For example:</p>
-<div class="sourceCode" id="cb11"><pre
-class="sourceCode yaml"><code class="sourceCode yaml"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a><span class="fu">navbar</span><span class="kw">:</span></span>
+<p>You’ll likely also want to add a link to the postcard page within your site’s navigation bar. For example:</p>
+<div class="sourceCode" id="cb11"><pre class="sourceCode yaml"><code class="sourceCode yaml"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a><span class="fu">navbar</span><span class="kw">:</span></span>
 <span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a><span class="at">  </span><span class="fu">right</span><span class="kw">:</span></span>
 <span id="cb11-3"><a href="#cb11-3" aria-hidden="true" tabindex="-1"></a><span class="at">    </span><span class="kw">-</span><span class="at"> </span><span class="fu">text</span><span class="kw">:</span><span class="at"> </span><span class="st">&quot;About&quot;</span></span>
 <span id="cb11-4"><a href="#cb11-4" aria-hidden="true" tabindex="-1"></a><span class="at">      </span><span class="fu">href</span><span class="kw">:</span><span class="at"> about.html</span></span></code></pre></div>
 <h2 id="theming">Theming</h2>
-<p>Distill ships with a default CSS framework that can be fully
-customized. To change the appearance of your Distill site or blog, you
-can use CSS to override the default values, provided you are comfortable
-writing CSS rules and selecting CSS elements. Alternatively, you may <a
-href="#create-theme">create</a> and <a href="#apply-theme">apply</a> a
-Distill theme, which allows you to customize common elements without
-needing to create a CSS file from scratch.</p>
+<p>Distill ships with a default CSS framework that can be fully customized. To change the appearance of your Distill site or blog, you can use CSS to override the default values, provided you are comfortable writing CSS rules and selecting CSS elements. Alternatively, you may <a href="#create-theme">create</a> and <a href="#apply-theme">apply</a> a Distill theme, which allows you to customize common elements without needing to create a CSS file from scratch.</p>
 <h3 id="create-theme">Create theme</h3>
-<p>You can use the <code>create_theme()</code> function to add a theme
-CSS file in the current working directory.</p>
+<p>You can use the <code>create_theme()</code> function to add a theme CSS file in the current working directory.</p>
 <p>For example:</p>
 <div class="layout-chunk" data-layout="l-body">
 <div class="sourceCode">
-<pre class="sourceCode r"><code class="sourceCode r"><span class='fu'><a href='https://pkgs.rstudio.com/distill/reference/create_theme.html'>create_theme</a></span><span class='op'>(</span>name <span class='op'>=</span> <span class='st'>"theme"</span><span class='op'>)</span> 
-</code></pre>
+<pre class="sourceCode r"><code class="sourceCode r"><span><span class='fu'><a href='https://pkgs.rstudio.com/distill/reference/create_theme.html'>create_theme</a></span><span class='op'>(</span>name <span class='op'>=</span> <span class='st'>"theme"</span><span class='op'>)</span> </span></code></pre>
 </div>
 </div>
-<p>This function creates a file named <code>theme</code> with the file
-extension <code>.css</code>. The file defines <a
-href="https://developer.mozilla.org/en-US/docs/Web/CSS/--*">CSS custom
-properties</a> that you can edit to create a custom Distill theme. This
-file has several sections, defined by a common <code>scope</code>. For
-each scoped section, you’ll find multiple properties that are defined
-that look something like this:</p>
-<div class="sourceCode" id="cb12"><pre
-class="sourceCode css"><code class="sourceCode css"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a>scope {</span>
+<p>This function creates a file named <code>theme</code> with the file extension <code>.css</code>. The file defines <a href="https://developer.mozilla.org/en-US/docs/Web/CSS/--*">CSS custom properties</a> that you can edit to create a custom Distill theme. This file has several sections, defined by a common <code>scope</code>. For each scoped section, you’ll find multiple properties that are defined that look something like this:</p>
+<div class="sourceCode" id="cb12"><pre class="sourceCode css"><code class="sourceCode css"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a>scope {</span>
 <span id="cb12-2"><a href="#cb12-2" aria-hidden="true" tabindex="-1"></a>  <span class="va">--a-property</span>:       <span class="dv">50</span><span class="dt">px</span><span class="op">;</span></span>
 <span id="cb12-3"><a href="#cb12-3" aria-hidden="true" tabindex="-1"></a>  <span class="va">--another-property</span>: <span class="cn">#fff</span><span class="op">;</span></span>
 <span id="cb12-4"><a href="#cb12-4" aria-hidden="true" tabindex="-1"></a>}</span></code></pre></div>
-<p>The values provided for each property (i.e., those in the right-most
-column) are the default values. For example, this portion at the top of
-the file allows you to quickly change the main font sizes for any
-Distill output format:</p>
-<div class="sourceCode" id="cb13"><pre
-class="sourceCode css"><code class="sourceCode css"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a>html {</span>
+<p>The values provided for each property (i.e., those in the right-most column) are the default values. For example, this portion at the top of the file allows you to quickly change the main font sizes for any Distill output format:</p>
+<div class="sourceCode" id="cb13"><pre class="sourceCode css"><code class="sourceCode css"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a>html {</span>
 <span id="cb13-2"><a href="#cb13-2" aria-hidden="true" tabindex="-1"></a>  <span class="co">/*-- Main font sizes --*/</span></span>
 <span id="cb13-3"><a href="#cb13-3" aria-hidden="true" tabindex="-1"></a>  <span class="va">--title-size</span>:      <span class="dv">50</span><span class="dt">px</span><span class="op">;</span></span>
 <span id="cb13-4"><a href="#cb13-4" aria-hidden="true" tabindex="-1"></a>  <span class="va">--body-size</span>:       <span class="dv">1.06</span><span class="dt">rem</span><span class="op">;</span></span>
@@ -2623,13 +2447,8 @@ class="sourceCode css"><code class="sourceCode css"><span id="cb13-1"><a href="#
 <span id="cb13-8"><a href="#cb13-8" aria-hidden="true" tabindex="-1"></a>  <span class="co">/*-- More properties --*/</span></span>
 <span id="cb13-9"><a href="#cb13-9" aria-hidden="true" tabindex="-1"></a>  <span class="fu">...</span></span>
 <span id="cb13-10"><a href="#cb13-10" aria-hidden="true" tabindex="-1"></a>}</span></code></pre></div>
-<p>Changing the values for each custom property is akin to developing
-your own custom CSS rules, but the theme allows you to bypass the
-detective work typically involved in discovering which CSS selectors are
-needed to change the key elements most users wish to control.</p>
-<p>We’ll demonstrate how to edit and use a theme by showing a single
-article within a Distill website. The default theme is shown in Figure
-<a href="#fig:default-theme">1</a>.</p>
+<p>Changing the values for each custom property is akin to developing your own custom CSS rules, but the theme allows you to bypass the detective work typically involved in discovering which CSS selectors are needed to change the key elements most users wish to control.</p>
+<p>We’ll demonstrate how to edit and use a theme by showing a single article within a Distill website. The default theme is shown in Figure <a href="#fig:default-theme">1</a>.</p>
 <div class="layout-chunk" data-layout="l-body">
 <div class="figure"><span style="display:block;" id="fig:default-theme"></span>
 <img src="images/theme-before.png" alt="The default Distill theme" width="1210" />
@@ -2638,31 +2457,19 @@ Figure 1: The default Distill theme
 </p>
 </div>
 </div>
-<p>One of the fastest ways to change the default appearance is to use
-custom Google fonts. To do this, you need to do two things:</p>
+<p>One of the fastest ways to change the default appearance is to use custom Google fonts. To do this, you need to do two things:</p>
 <ol type="1">
-<li><p>Embed the font using the <a
-href="https://developer.mozilla.org/en-US/docs/Web/CSS/@import">@import</a>
-method, and</p></li>
+<li><p>Embed the font using the <a href="https://developer.mozilla.org/en-US/docs/Web/CSS/@import">@import</a> method, and</p></li>
 <li><p>Specify the font in the CSS file.</p></li>
 </ol>
-<p>You can do both of these things inside your <code>theme.css</code>
-file. For example, let’s import the <a
-href="https://fonts.google.com/specimen/Amiri">Amiri</a>, <a
-href="https://fonts.google.com/specimen/Bitter">Bitter</a>, and <a
-href="https://fonts.google.com/specimen/DM+Mono">DM Mono</a> fonts:</p>
-<div class="sourceCode" id="cb14"><pre
-class="sourceCode css"><code class="sourceCode css"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a><span class="co">/* Optional: embed custom fonts here with `@import`          */</span></span>
+<p>You can do both of these things inside your <code>theme.css</code> file. For example, let’s import the <a href="https://fonts.google.com/specimen/Amiri">Amiri</a>, <a href="https://fonts.google.com/specimen/Bitter">Bitter</a>, and <a href="https://fonts.google.com/specimen/DM+Mono">DM Mono</a> fonts:</p>
+<div class="sourceCode" id="cb14"><pre class="sourceCode css"><code class="sourceCode css"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a><span class="co">/* Optional: embed custom fonts here with `@import`          */</span></span>
 <span id="cb14-2"><a href="#cb14-2" aria-hidden="true" tabindex="-1"></a><span class="co">/* This must remain at the top of this file.                 */</span></span>
 <span id="cb14-3"><a href="#cb14-3" aria-hidden="true" tabindex="-1"></a><span class="im">@import</span> <span class="fu">url(</span><span class="st">&#39;https://fonts.googleapis.com/css2?family=Amiri&#39;</span><span class="fu">)</span><span class="op">;</span></span>
 <span id="cb14-4"><a href="#cb14-4" aria-hidden="true" tabindex="-1"></a><span class="im">@import</span> <span class="fu">url(</span><span class="st">&#39;https://fonts.googleapis.com/css2?family=Bitter&#39;</span><span class="fu">)</span><span class="op">;</span></span>
 <span id="cb14-5"><a href="#cb14-5" aria-hidden="true" tabindex="-1"></a><span class="im">@import</span> <span class="fu">url(</span><span class="st">&#39;https://fonts.googleapis.com/css2?family=DM+Mono&#39;</span><span class="fu">)</span><span class="op">;</span></span></code></pre></div>
-<p>The <code>@import</code> requests <em>must</em> be at the very top of
-your <code>theme.css</code>, before any rules. Next, scroll down to the
-bottom of the properties with the <code>html</code> scope to specify the
-embedded fonts:</p>
-<div class="sourceCode" id="cb15"><pre
-class="sourceCode css"><code class="sourceCode css"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a>html {</span>
+<p>The <code>@import</code> requests <em>must</em> be at the very top of your <code>theme.css</code>, before any rules. Next, scroll down to the bottom of the properties with the <code>html</code> scope to specify the embedded fonts:</p>
+<div class="sourceCode" id="cb15"><pre class="sourceCode css"><code class="sourceCode css"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a>html {</span>
 <span id="cb15-2"><a href="#cb15-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">...</span></span>
 <span id="cb15-3"><a href="#cb15-3" aria-hidden="true" tabindex="-1"></a>  <span class="co">/*-- Specify custom fonts ~~~ must be imported above   --*/</span></span>
 <span id="cb15-4"><a href="#cb15-4" aria-hidden="true" tabindex="-1"></a>  <span class="va">--heading-font</span>:    <span class="st">&quot;Amiri&quot;</span><span class="op">,</span> <span class="dv">serif</span><span class="op">;</span></span>
@@ -2670,12 +2477,8 @@ class="sourceCode css"><code class="sourceCode css"><span id="cb15-1"><a href="#
 <span id="cb15-6"><a href="#cb15-6" aria-hidden="true" tabindex="-1"></a>  <span class="va">--body-font</span>:       <span class="st">&quot;Bitter&quot;</span><span class="op">,</span> <span class="dv">sans-serif</span><span class="op">;</span></span>
 <span id="cb15-7"><a href="#cb15-7" aria-hidden="true" tabindex="-1"></a>  <span class="va">--navbar-font</span>:     <span class="st">&quot;Amiri&quot;</span><span class="op">,</span> <span class="dv">serif</span><span class="op">;</span></span>
 <span id="cb15-8"><a href="#cb15-8" aria-hidden="true" tabindex="-1"></a>}</span></code></pre></div>
-<p>But we can go even further! Let’s also change the background color of
-the navbar, the text color, and the hover color. These three properties
-are listed with the <code>.distill-site-header</code> scope. For
-example:</p>
-<div class="sourceCode" id="cb16"><pre
-class="sourceCode css"><code class="sourceCode css"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a><span class="co">/*-- WEBSITE HEADER + FOOTER --*/</span></span>
+<p>But we can go even further! Let’s also change the background color of the navbar, the text color, and the hover color. These three properties are listed with the <code>.distill-site-header</code> scope. For example:</p>
+<div class="sourceCode" id="cb16"><pre class="sourceCode css"><code class="sourceCode css"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a><span class="co">/*-- WEBSITE HEADER + FOOTER --*/</span></span>
 <span id="cb16-2"><a href="#cb16-2" aria-hidden="true" tabindex="-1"></a><span class="co">/* These properties only apply to Distill sites and blogs  */</span></span>
 <span id="cb16-3"><a href="#cb16-3" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb16-4"><a href="#cb16-4" aria-hidden="true" tabindex="-1"></a><span class="fu">.distill-site-header</span> {</span>
@@ -2688,9 +2491,7 @@ class="sourceCode css"><code class="sourceCode css"><span id="cb16-1"><a href="#
 <div class="layout-chunk" data-layout="l-body">
 
 </div>
-<p>Our new custom theme is shown below. In this example, we only changed
-four font properties and three website header properties, and already
-our site looks quite different from the default.</p>
+<p>Our new custom theme is shown below. In this example, we only changed four font properties and three website header properties, and already our site looks quite different from the default.</p>
 <div class="panelset">
 <section id="themed-site" class="theme-after panel">
 <h4 class="theme-after">Themed site</h4>
@@ -2716,42 +2517,27 @@ Figure 3: The default Distill theme
 </section>
 </div>
 <aside>
-<p>To preview your custom Distill theme, you’ll also need to <a
-href="#apply-theme">apply</a> it to your article or site.</p>
+<p>To preview your custom Distill theme, you’ll also need to <a href="#apply-theme">apply</a> it to your article or site.</p>
 </aside>
-<p>As you can see, we include a lot more properties for you to explore
-and edit in your own custom theme. If you find yourself editing too much
-and want to return back to a default value, you may set any property to
-<code>unset</code>. For example:</p>
-<div class="sourceCode" id="cb17"><pre
-class="sourceCode css"><code class="sourceCode css"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a>html {</span>
+<p>As you can see, we include a lot more properties for you to explore and edit in your own custom theme. If you find yourself editing too much and want to return back to a default value, you may set any property to <code>unset</code>. For example:</p>
+<div class="sourceCode" id="cb17"><pre class="sourceCode css"><code class="sourceCode css"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a>html {</span>
 <span id="cb17-2"><a href="#cb17-2" aria-hidden="true" tabindex="-1"></a>  <span class="co">/*-- Main font sizes --*/</span></span>
 <span id="cb17-3"><a href="#cb17-3" aria-hidden="true" tabindex="-1"></a>  <span class="va">--title-size</span>:      <span class="bu">unset</span><span class="op">;</span></span>
 <span id="cb17-4"><a href="#cb17-4" aria-hidden="true" tabindex="-1"></a>}</span></code></pre></div>
-<p>Of course, there may be additional properties that you’d like to
-change, and you may always add in your own <a
-href="#custom-style">custom CSS rules</a> in the space provided at the
-bottom of your theme file, or in a separate <code>.css</code> file.</p>
-<p>To see your theme in action, you’ll need to also <a
-href="#apply-theme">apply</a> it to your article or site.</p>
+<p>Of course, there may be additional properties that you’d like to change, and you may always add in your own <a href="#custom-style">custom CSS rules</a> in the space provided at the bottom of your theme file, or in a separate <code>.css</code> file.</p>
+<p>To see your theme in action, you’ll need to also <a href="#apply-theme">apply</a> it to your article or site.</p>
 <h3 id="apply-theme">Apply theme</h3>
-<p>The <a href="#create-theme">previous section</a> described how to
-create and customize a Distill theme file.</p>
-<p>How do you apply a custom theme to a Distill site or blog? You have
-two options:</p>
+<p>The <a href="#create-theme">previous section</a> described how to create and customize a Distill theme file.</p>
+<p>How do you apply a custom theme to a Distill site or blog? You have two options:</p>
 <ol type="1">
-<li><p>Apply it site-wide by adding a <code>theme</code> key to the
-top-level of your <code>_site.yml</code> configuration file:</p>
-<div class="sourceCode" id="cb18"><pre
-class="sourceCode yaml"><code class="sourceCode yaml"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a><span class="fu">name</span><span class="kw">:</span><span class="at"> </span><span class="st">&quot;distill&quot;</span></span>
+<li><p>Apply it site-wide by adding a <code>theme</code> key to the top-level of your <code>_site.yml</code> configuration file:</p>
+<div class="sourceCode" id="cb18"><pre class="sourceCode yaml"><code class="sourceCode yaml"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a><span class="fu">name</span><span class="kw">:</span><span class="at"> </span><span class="st">&quot;distill&quot;</span></span>
 <span id="cb18-2"><a href="#cb18-2" aria-hidden="true" tabindex="-1"></a><span class="fu">title</span><span class="kw">:</span><span class="at"> </span><span class="st">&quot;Distill for R Markdown&quot;</span></span>
 <span id="cb18-3"><a href="#cb18-3" aria-hidden="true" tabindex="-1"></a><span class="fu">theme</span><span class="kw">:</span><span class="at"> theme.css</span></span>
 <span id="cb18-4"><a href="#cb18-4" aria-hidden="true" tabindex="-1"></a><span class="fu">navbar</span><span class="kw">:</span></span>
 <span id="cb18-5"><a href="#cb18-5" aria-hidden="true" tabindex="-1"></a><span class="co">  # (navbar definition here)</span></span></code></pre></div></li>
-<li><p>Apply to an individual article by adding a <code>theme</code> key
-to your article’s YAML front-matter:</p>
-<div class="sourceCode" id="cb19"><pre
-class="sourceCode yaml"><code class="sourceCode yaml"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a><span class="pp">---</span></span>
+<li><p>Apply to an individual article by adding a <code>theme</code> key to your article’s YAML front-matter:</p>
+<div class="sourceCode" id="cb19"><pre class="sourceCode yaml"><code class="sourceCode yaml"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a><span class="pp">---</span></span>
 <span id="cb19-2"><a href="#cb19-2" aria-hidden="true" tabindex="-1"></a><span class="fu">title</span><span class="kw">:</span><span class="at"> </span><span class="st">&quot;The Sharpe Ratio&quot;</span></span>
 <span id="cb19-3"><a href="#cb19-3" aria-hidden="true" tabindex="-1"></a><span class="fu">output</span><span class="kw">:</span></span>
 <span id="cb19-4"><a href="#cb19-4" aria-hidden="true" tabindex="-1"></a><span class="at">  distill:</span><span class="fu">:distill_article</span><span class="kw">:</span></span>
@@ -2759,26 +2545,12 @@ class="sourceCode yaml"><code class="sourceCode yaml"><span id="cb19-1"><a href=
 <span id="cb19-6"><a href="#cb19-6" aria-hidden="true" tabindex="-1"></a><span class="at">    </span><span class="fu">theme</span><span class="kw">:</span><span class="at"> theme.css</span></span>
 <span id="cb19-7"><a href="#cb19-7" aria-hidden="true" tabindex="-1"></a><span class="pp">---</span></span></code></pre></div></li>
 </ol>
-<p>The second option allows for you to apply your theme to individual
-articles, while using a different theme for the rest of your site. Note
-that this is only possible for stand-alone articles within a website —
-you cannot apply a theme to individual blog posts <em>only</em>.</p>
-<div class="sourceCode" id="cb20"><pre
-class="sourceCode r distill-force-highlighting-css"><code class="sourceCode r"></code></pre></div>
-<p>Blog posts (along with <a href="blog.html#listing-pages">listing</a>
-and <a href="blog.html#custom-listings">custom listing pages</a>) will
-follow the theme if you use the first option and add it to your
-<code>_site.yml</code>.</p>
+<p>The second option allows for you to apply your theme to individual articles, while using a different theme for the rest of your site. Note that this is only possible for stand-alone articles within a website — you cannot apply a theme to individual blog posts <em>only</em>.</p>
+<div class="sourceCode" id="cb20"><pre class="sourceCode r distill-force-highlighting-css"><code class="sourceCode r"></code></pre></div>
+<p>Blog posts (along with <a href="blog.html#listing-pages">listing</a> and <a href="blog.html#custom-listings">custom listing pages</a>) will follow the theme if you use the first option and add it to your <code>_site.yml</code>.</p>
 <h3 id="custom-style">Custom CSS styles</h3>
-<p>If you prefer working with CSS directly, or you would like to change
-site elements not included in the theme file, you can define your own
-CSS as well. For example, we can override the default styles for bullets
-and links by adding additional CSS rules in the space provided at the
-bottom of your <code>theme.css</code>. We’ll add the following CSS rules
-on top of the theme we made in the <a href="#create-theme">previous
-section</a>:</p>
-<div class="sourceCode" id="cb21"><pre
-class="sourceCode css"><code class="sourceCode css"><span id="cb21-1"><a href="#cb21-1" aria-hidden="true" tabindex="-1"></a><span class="co">/*-- Additional custom styles --*/</span></span>
+<p>If you prefer working with CSS directly, or you would like to change site elements not included in the theme file, you can define your own CSS as well. For example, we can override the default styles for bullets and links by adding additional CSS rules in the space provided at the bottom of your <code>theme.css</code>. We’ll add the following CSS rules on top of the theme we made in the <a href="#create-theme">previous section</a>:</p>
+<div class="sourceCode" id="cb21"><pre class="sourceCode css"><code class="sourceCode css"><span id="cb21-1"><a href="#cb21-1" aria-hidden="true" tabindex="-1"></a><span class="co">/*-- Additional custom styles --*/</span></span>
 <span id="cb21-2"><a href="#cb21-2" aria-hidden="true" tabindex="-1"></a><span class="co">/* Add any additional CSS rules below                      */</span></span>
 <span id="cb21-3"><a href="#cb21-3" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb21-4"><a href="#cb21-4" aria-hidden="true" tabindex="-1"></a><span class="co">/* Change bullets */</span></span>
@@ -2795,18 +2567,12 @@ class="sourceCode css"><code class="sourceCode css"><span id="cb21-1"><a href="#
 <p>Here is the before (left) and after (right):</p>
 <div class="layout-chunk" data-layout="l-body">
 <div class="sourceCode">
-<pre class="sourceCode r"><code class="sourceCode r"><span class='fu'>knitr</span><span class='fu'>::</span><span class='fu'><a href='https://rdrr.io/pkg/knitr/man/include_graphics.html'>include_graphics</a></span><span class='op'>(</span><span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='st'>"images/css-before.png"</span>, <span class='st'>"images/css-after.png"</span><span class='op'>)</span><span class='op'>)</span>
-</code></pre>
+<pre class="sourceCode r"><code class="sourceCode r"><span><span class='fu'>knitr</span><span class='fu'>::</span><span class='fu'><a href='https://rdrr.io/pkg/knitr/man/include_graphics.html'>include_graphics</a></span><span class='op'>(</span><span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='st'>"images/css-before.png"</span>, <span class='st'>"images/css-after.png"</span><span class='op'>)</span><span class='op'>)</span></span></code></pre>
 </div>
 <p><img src="images/css-before.png" width="49%" /><img src="images/css-after.png" width="49%" /></p>
 </div>
-<p>Using CSS, you can change anything about your site’s appearance. For
-example, the <code>distill-site-nav</code> class addresses both the
-header and footer, whereas the <code>distill-site-header</code> and
-<code>distill-site-footer</code> apply (respectively) to just the header
-and footer. Here is the CSS used for the default appearance:</p>
-<div class="sourceCode" id="cb22"><pre
-class="sourceCode css"><code class="sourceCode css"><span id="cb22-1"><a href="#cb22-1" aria-hidden="true" tabindex="-1"></a><span class="fu">.distill-site-nav</span> {</span>
+<p>Using CSS, you can change anything about your site’s appearance. For example, the <code>distill-site-nav</code> class addresses both the header and footer, whereas the <code>distill-site-header</code> and <code>distill-site-footer</code> apply (respectively) to just the header and footer. Here is the CSS used for the default appearance:</p>
+<div class="sourceCode" id="cb22"><pre class="sourceCode css"><code class="sourceCode css"><span id="cb22-1"><a href="#cb22-1" aria-hidden="true" tabindex="-1"></a><span class="fu">.distill-site-nav</span> {</span>
 <span id="cb22-2"><a href="#cb22-2" aria-hidden="true" tabindex="-1"></a>  <span class="kw">color</span>: <span class="fu">rgba(</span><span class="dv">255</span><span class="op">,</span> <span class="dv">255</span><span class="op">,</span> <span class="dv">255</span><span class="op">,</span> <span class="dv">0.8</span><span class="fu">)</span><span class="op">;</span></span>
 <span id="cb22-3"><a href="#cb22-3" aria-hidden="true" tabindex="-1"></a>  <span class="kw">background-color</span>: <span class="cn">#455a64</span><span class="op">;</span></span>
 <span id="cb22-4"><a href="#cb22-4" aria-hidden="true" tabindex="-1"></a>  <span class="kw">font-size</span>: <span class="dv">15</span><span class="dt">px</span><span class="op">;</span></span>
@@ -2833,12 +2599,9 @@ class="sourceCode css"><code class="sourceCode css"><span id="cb22-1"><a href="#
 <span id="cb22-25"><a href="#cb22-25" aria-hidden="true" tabindex="-1"></a>    <span class="kw">display</span>: <span class="dv">none</span><span class="op">;</span></span>
 <span id="cb22-26"><a href="#cb22-26" aria-hidden="true" tabindex="-1"></a>  }</span>
 <span id="cb22-27"><a href="#cb22-27" aria-hidden="true" tabindex="-1"></a>}</span></code></pre></div>
-<p>To override any CSS properties, you may include a
-<code>styles.css</code> file in the main site directory and add a
-reference to it within your site output options. For example:</p>
+<p>To override any CSS properties, you may include a <code>styles.css</code> file in the main site directory and add a reference to it within your site output options. For example:</p>
 <p><strong>_site.yml</strong></p>
-<div class="sourceCode" id="cb23"><pre
-class="sourceCode yaml"><code class="sourceCode yaml"><span id="cb23-1"><a href="#cb23-1" aria-hidden="true" tabindex="-1"></a><span class="fu">name</span><span class="kw">:</span><span class="at"> </span><span class="st">&quot;distill&quot;</span></span>
+<div class="sourceCode" id="cb23"><pre class="sourceCode yaml"><code class="sourceCode yaml"><span id="cb23-1"><a href="#cb23-1" aria-hidden="true" tabindex="-1"></a><span class="fu">name</span><span class="kw">:</span><span class="at"> </span><span class="st">&quot;distill&quot;</span></span>
 <span id="cb23-2"><a href="#cb23-2" aria-hidden="true" tabindex="-1"></a><span class="fu">title</span><span class="kw">:</span><span class="at"> </span><span class="st">&quot;Distill for R Markdown&quot;</span></span>
 <span id="cb23-3"><a href="#cb23-3" aria-hidden="true" tabindex="-1"></a><span class="fu">navbar</span><span class="kw">:</span></span>
 <span id="cb23-4"><a href="#cb23-4" aria-hidden="true" tabindex="-1"></a><span class="co">  # (navbar definition here)</span></span>
@@ -2846,14 +2609,12 @@ class="sourceCode yaml"><code class="sourceCode yaml"><span id="cb23-1"><a href=
 <span id="cb23-6"><a href="#cb23-6" aria-hidden="true" tabindex="-1"></a><span class="at">  distill:</span><span class="fu">:distill_article</span><span class="kw">:</span></span>
 <span id="cb23-7"><a href="#cb23-7" aria-hidden="true" tabindex="-1"></a><span class="at">    </span><span class="fu">css</span><span class="kw">:</span><span class="at"> styles.css</span></span></code></pre></div>
 <h3 id="example-themes">Example themes</h3>
-<p>Below are some sample themes to see what is possible using a Distill
-theme, plus a handful of custom CSS rules.</p>
+<p>Below are some sample themes to see what is possible using a Distill theme, plus a handful of custom CSS rules.</p>
 <h4 id="piping-hot-data">Piping Hot Data</h4>
 <div class="panelset">
 <section id="inspiration" class="panel">
 <h4>Inspiration</h4>
-<p><a href="https://www.pipinghotdata.com/"
-class="uri">https://www.pipinghotdata.com/</a></p>
+<p><a href="https://www.pipinghotdata.com/" class="uri">https://www.pipinghotdata.com/</a></p>
 </section>
 <section id="screenshot" class="phd-screenshot panel">
 <h4 class="phd-screenshot">Screenshot</h4>
@@ -2863,8 +2624,7 @@ class="uri">https://www.pipinghotdata.com/</a></p>
 </section>
 <section id="theme.css" class="phd-css panel">
 <h4 class="phd-css"><code>theme.css</code></h4>
-<div class="sourceCode" id="cb24"><pre
-class="sourceCode css"><code class="sourceCode css"><span id="cb24-1"><a href="#cb24-1" aria-hidden="true" tabindex="-1"></a><span class="co">/* base variables */</span></span>
+<div class="sourceCode" id="cb24"><pre class="sourceCode css"><code class="sourceCode css"><span id="cb24-1"><a href="#cb24-1" aria-hidden="true" tabindex="-1"></a><span class="co">/* base variables */</span></span>
 <span id="cb24-2"><a href="#cb24-2" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb24-3"><a href="#cb24-3" aria-hidden="true" tabindex="-1"></a><span class="co">/* Edit the CSS properties in this file to create a custom</span></span>
 <span id="cb24-4"><a href="#cb24-4" aria-hidden="true" tabindex="-1"></a><span class="co">   Distill theme. Only edit values in the right column</span></span>
@@ -2971,8 +2731,7 @@ class="sourceCode css"><code class="sourceCode css"><span id="cb24-1"><a href="#
 <div class="panelset">
 <section id="inspiration-1" class="panel">
 <h4>Inspiration</h4>
-<p><a href="https://milesmcbain.xyz/"
-class="uri">https://milesmcbain.xyz/</a></p>
+<p><a href="https://milesmcbain.xyz/" class="uri">https://milesmcbain.xyz/</a></p>
 </section>
 <section id="screenshot-1" class="bis-screenshot panel">
 <h4 class="bis-screenshot">Screenshot</h4>
@@ -2982,8 +2741,7 @@ class="uri">https://milesmcbain.xyz/</a></p>
 </section>
 <section id="theme.css-1" class="bis-css panel">
 <h4 class="bis-css"><code>theme.css</code></h4>
-<div class="sourceCode" id="cb25"><pre
-class="sourceCode css"><code class="sourceCode css"><span id="cb25-1"><a href="#cb25-1" aria-hidden="true" tabindex="-1"></a><span class="co">/* base variables */</span></span>
+<div class="sourceCode" id="cb25"><pre class="sourceCode css"><code class="sourceCode css"><span id="cb25-1"><a href="#cb25-1" aria-hidden="true" tabindex="-1"></a><span class="co">/* base variables */</span></span>
 <span id="cb25-2"><a href="#cb25-2" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb25-3"><a href="#cb25-3" aria-hidden="true" tabindex="-1"></a><span class="co">/* Edit the CSS properties in this file to create a custom</span></span>
 <span id="cb25-4"><a href="#cb25-4" aria-hidden="true" tabindex="-1"></a><span class="co">   Distill theme. Only edit values in the right column</span></span>
@@ -3091,9 +2849,7 @@ class="sourceCode css"><code class="sourceCode css"><span id="cb25-1"><a href="#
 <div class="panelset">
 <section id="inspiration-2" class="panel">
 <h4>Inspiration</h4>
-<p><a href="https://tidymodels.org"
-class="uri">https://tidymodels.org</a> (courtesy <a
-href="https://desiree.rbind.io/">Desirée De Leon</a>)</p>
+<p><a href="https://tidymodels.org" class="uri">https://tidymodels.org</a> (courtesy <a href="https://desiree.rbind.io/">Desirée De Leon</a>)</p>
 </section>
 <section id="screenshot-2" class="tmv-screenshot panel">
 <h4 class="tmv-screenshot">Screenshot</h4>
@@ -3103,8 +2859,7 @@ href="https://desiree.rbind.io/">Desirée De Leon</a>)</p>
 </section>
 <section id="theme.css-2" class="tmv-css panel">
 <h4 class="tmv-css"><code>theme.css</code></h4>
-<div class="sourceCode" id="cb26"><pre
-class="sourceCode css"><code class="sourceCode css"><span id="cb26-1"><a href="#cb26-1" aria-hidden="true" tabindex="-1"></a><span class="co">/* base variables */</span></span>
+<div class="sourceCode" id="cb26"><pre class="sourceCode css"><code class="sourceCode css"><span id="cb26-1"><a href="#cb26-1" aria-hidden="true" tabindex="-1"></a><span class="co">/* base variables */</span></span>
 <span id="cb26-2"><a href="#cb26-2" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb26-3"><a href="#cb26-3" aria-hidden="true" tabindex="-1"></a><span class="co">/* Edit the CSS properties in this file to create a custom</span></span>
 <span id="cb26-4"><a href="#cb26-4" aria-hidden="true" tabindex="-1"></a><span class="co">   Distill theme. Only edit values in the right column</span></span>
@@ -3217,93 +2972,49 @@ class="sourceCode css"><code class="sourceCode css"><span id="cb26-1"><a href="#
 </section>
 </div>
 <aside>
-<p>These <a
-href="https://github.com/rstudio/distill/issues/11#issuecomment-692142414">panelsets</a>
-were made with the <a
-href="https://pkg.garrickadenbuie.com/xaringanExtra/#/panelset">xaringanExtra</a>
-package.</p>
+<p>These <a href="https://github.com/rstudio/distill/issues/11#issuecomment-692142414">panelsets</a> were made with the <a href="https://pkg.garrickadenbuie.com/xaringanExtra/#/panelset">xaringanExtra</a> package.</p>
 </aside>
 <h2 id="google-analytics">Google analytics</h2>
-<p>You can add <a href="https://analytics.google.com/">Google
-Analytics</a> to your website by adding a <code>google_analytics</code>
-tracking ID to your <code>_site.yml</code> file. For example:</p>
+<p>You can add <a href="https://analytics.google.com/">Google Analytics</a> to your website by adding a <code>google_analytics</code> tracking ID to your <code>_site.yml</code> file. For example:</p>
 <p><strong>_site.yml</strong></p>
-<div class="sourceCode" id="cb27"><pre
-class="sourceCode yaml"><code class="sourceCode yaml"><span id="cb27-1"><a href="#cb27-1" aria-hidden="true" tabindex="-1"></a><span class="fu">name</span><span class="kw">:</span><span class="at"> </span><span class="st">&quot;distill&quot;</span></span>
+<div class="sourceCode" id="cb27"><pre class="sourceCode yaml"><code class="sourceCode yaml"><span id="cb27-1"><a href="#cb27-1" aria-hidden="true" tabindex="-1"></a><span class="fu">name</span><span class="kw">:</span><span class="at"> </span><span class="st">&quot;distill&quot;</span></span>
 <span id="cb27-2"><a href="#cb27-2" aria-hidden="true" tabindex="-1"></a><span class="fu">title</span><span class="kw">:</span><span class="at"> </span><span class="st">&quot;Distill for R Markdown&quot;</span></span>
 <span id="cb27-3"><a href="#cb27-3" aria-hidden="true" tabindex="-1"></a><span class="fu">base_url</span><span class="kw">:</span><span class="at"> https://rstudio.github.io/distill</span></span>
 <span id="cb27-4"><a href="#cb27-4" aria-hidden="true" tabindex="-1"></a><span class="fu">google_analytics</span><span class="kw">:</span><span class="at"> </span><span class="st">&quot;UA-77306155-2&quot;</span></span>
 <span id="cb27-5"><a href="#cb27-5" aria-hidden="true" tabindex="-1"></a><span class="fu">navbar</span><span class="kw">:</span></span>
 <span id="cb27-6"><a href="#cb27-6" aria-hidden="true" tabindex="-1"></a><span class="co">  # (navbar definition here)</span></span>
 <span id="cb27-7"><a href="#cb27-7" aria-hidden="true" tabindex="-1"></a><span class="fu">output</span><span class="kw">:</span><span class="at"> distill::distill_article</span></span></code></pre></div>
-<p>The Google Analytics tracking code will be automatically included on
-all pages of your website.</p>
+<p>The Google Analytics tracking code will be automatically included on all pages of your website.</p>
 <h2 id="gdpr-compliance">GDPR compliance</h2>
-<p>Disclaimer: The information provided in this section does not, and is
-not intended to, constitute legal advice; instead, all information,
-content, and materials available in this section are for general
-informational purposes only.</p>
-<p>When using Google Analytics, Disqus and other services that set
-cookies in the end-user’s browser, it is important to ensure compliance
-with Data Protection regulations, e.g., <a
-href="https://gdpr.eu/what-is-gdpr/">GDPR</a> among others. Besides the
-GDPR many countries are imposing their own data privacy laws, and
-leading law experts expect that the pace of legislation in this field,
-will continue accelerating through the foreseeable future.</p>
-<p>The GDPR is one of the strictest and most far-reaching of these
-regulations, imposing obligations onto data controllers anywhere in the
-world, who processes personal data of subjects residing in the EU.
-Therefore, the GDPR is also a great standard to ensure compliance with
-most data protection regulations in general. In order to ensure
-compliance with the GDPR, data controllers must acquire consent from
-data subjects, before processing their personal information, and this
-also includes setting web cookies.</p>
+<p>Disclaimer: The information provided in this section does not, and is not intended to, constitute legal advice; instead, all information, content, and materials available in this section are for general informational purposes only.</p>
+<p>When using Google Analytics, Disqus and other services that set cookies in the end-user’s browser, it is important to ensure compliance with Data Protection regulations, e.g., <a href="https://gdpr.eu/what-is-gdpr/">GDPR</a> among others. Besides the GDPR many countries are imposing their own data privacy laws, and leading law experts expect that the pace of legislation in this field, will continue accelerating through the foreseeable future.</p>
+<p>The GDPR is one of the strictest and most far-reaching of these regulations, imposing obligations onto data controllers anywhere in the world, who processes personal data of subjects residing in the EU. Therefore, the GDPR is also a great standard to ensure compliance with most data protection regulations in general. In order to ensure compliance with the GDPR, data controllers must acquire consent from data subjects, before processing their personal information, and this also includes setting web cookies.</p>
 <h3 id="cookie-consent">Cookie consent</h3>
-<p>One way of requesting consent is through a Cookie Consent banner,
-which can be enabled in the _site.yml like so:</p>
+<p>One way of requesting consent is through a Cookie Consent banner, which can be enabled in the _site.yml like so:</p>
 <p><strong>_site.yml</strong></p>
-<div class="sourceCode" id="cb28"><pre
-class="sourceCode yaml"><code class="sourceCode yaml"><span id="cb28-1"><a href="#cb28-1" aria-hidden="true" tabindex="-1"></a><span class="fu">cookie_consent</span><span class="kw">:</span></span>
+<div class="sourceCode" id="cb28"><pre class="sourceCode yaml"><code class="sourceCode yaml"><span id="cb28-1"><a href="#cb28-1" aria-hidden="true" tabindex="-1"></a><span class="fu">cookie_consent</span><span class="kw">:</span></span>
 <span id="cb28-2"><a href="#cb28-2" aria-hidden="true" tabindex="-1"></a><span class="at">  </span><span class="fu">style</span><span class="kw">:</span><span class="at"> simple</span></span>
 <span id="cb28-3"><a href="#cb28-3" aria-hidden="true" tabindex="-1"></a><span class="at">  </span><span class="fu">type</span><span class="kw">:</span><span class="at"> express</span></span>
 <span id="cb28-4"><a href="#cb28-4" aria-hidden="true" tabindex="-1"></a><span class="at">  </span><span class="fu">palette</span><span class="kw">:</span><span class="at"> light</span></span>
 <span id="cb28-5"><a href="#cb28-5" aria-hidden="true" tabindex="-1"></a><span class="at">  </span><span class="fu">lang</span><span class="kw">:</span><span class="at"> en</span></span>
 <span id="cb28-6"><a href="#cb28-6" aria-hidden="true" tabindex="-1"></a><span class="at">  </span><span class="fu">cookies_policy</span><span class="kw">:</span><span class="at"> url</span></span></code></pre></div>
-<p>The cookie consent banner is generated using a javascript plugin from
-<a href="http://cookieconsent.com/">Cookieconsent.com</a>, which
-features different options for customizing the banner.</p>
+<p>The cookie consent banner is generated using a javascript plugin from <a href="http://cookieconsent.com/">Cookieconsent.com</a>, which features different options for customizing the banner.</p>
 <ul>
 <li>style: simple/headline/interstitial/standalone</li>
 <li>type: express/implied</li>
 <li>palette: light/dark</li>
-<li>lang:
-en/de/fr/es/ca_es/it/nl/pt/fi/hu/cs/hr/da/sl/pl/ro/sr/bg/cy</li>
+<li>lang: en/de/fr/es/ca_es/it/nl/pt/fi/hu/cs/hr/da/sl/pl/ro/sr/bg/cy</li>
 <li>cookies_policy: link to cookies policy</li>
 </ul>
-<p>The banner will be shown automatically if you use either Google
-Analytics or Disqus on your site.</p>
+<p>The banner will be shown automatically if you use either Google Analytics or Disqus on your site.</p>
 <h3 id="tagging-scripts">Tagging scripts</h3>
-<p>If your site uses custom JavaScript that sets cookies, these should
-be tagged as <code>text/plai</code>n and either as “strictly-necessary”,
-“functionality”, “tracking” or “targeting”. For example:</p>
-<div class="sourceCode" id="cb29"><pre
-class="sourceCode html"><code class="sourceCode html"><span id="cb29-1"><a href="#cb29-1" aria-hidden="true" tabindex="-1"></a><span class="kw">&lt;script</span><span class="ot"> type=</span><span class="st">&quot;text/plain&quot;</span> <span class="er">cookie-consent</span><span class="ot">=</span><span class="st">&quot;functionality&quot;</span> <span class="er">src</span><span class="ot">=</span><span class="st">&quot;myscript.js&quot;</span><span class="kw">&gt;&lt;/script&gt;</span></span></code></pre></div>
-<p>Note that besides having a cookie consent banner, to ensure GDPR
-compliance, your site should have a Cookies policy separate from your
-Privacy policy, and also allow site users to change cookie preferences.
-A button to open the Cookie Preferences Center can be added to the
-footer, by creating a button or a link with the id-tag set to
-<code>CookiePreferences</code>, in _footer.html. For example:</p>
-<div class="sourceCode" id="cb30"><pre
-class="sourceCode html"><code class="sourceCode html"><span id="cb30-1"><a href="#cb30-1" aria-hidden="true" tabindex="-1"></a><span class="kw">&lt;a</span> <span class="er">id</span><span class="ot">=</span><span class="st">&#39;CookiePreferences&#39;</span><span class="kw">&gt;</span>Cookie Preferences<span class="kw">&lt;/a&gt;</span></span></code></pre></div>
+<p>If your site uses custom JavaScript that sets cookies, these should be tagged as <code>text/plai</code>n and either as “strictly-necessary”, “functionality”, “tracking” or “targeting”. For example:</p>
+<div class="sourceCode" id="cb29"><pre class="sourceCode html"><code class="sourceCode html"><span id="cb29-1"><a href="#cb29-1" aria-hidden="true" tabindex="-1"></a><span class="kw">&lt;script</span><span class="ot"> type=</span><span class="st">&quot;text/plain&quot;</span> <span class="er">cookie-consent</span><span class="ot">=</span><span class="st">&quot;functionality&quot;</span> <span class="er">src</span><span class="ot">=</span><span class="st">&quot;myscript.js&quot;</span><span class="kw">&gt;&lt;/script&gt;</span></span></code></pre></div>
+<p>Note that besides having a cookie consent banner, to ensure GDPR compliance, your site should have a Cookies policy separate from your Privacy policy, and also allow site users to change cookie preferences. A button to open the Cookie Preferences Center can be added to the footer, by creating a button or a link with the id-tag set to <code>CookiePreferences</code>, in _footer.html. For example:</p>
+<div class="sourceCode" id="cb30"><pre class="sourceCode html"><code class="sourceCode html"><span id="cb30-1"><a href="#cb30-1" aria-hidden="true" tabindex="-1"></a><span class="kw">&lt;a</span> <span class="er">id</span><span class="ot">=</span><span class="st">&#39;CookiePreferences&#39;</span><span class="kw">&gt;</span>Cookie Preferences<span class="kw">&lt;/a&gt;</span></span></code></pre></div>
 <h2 id="site-metadata">Site metadata</h2>
-<p>Distill articles can include various types of <a
-href="metadata.html">metadata</a> to make them easier to index, cite,
-and share. Metadata included within your <code>_site.yml</code> file is
-conveniently shared across all articles on your site (individual
-articles can always override any value within their own metadata).</p>
-<p>Several metadata values which you might find useful to define in
-<code>_site.yml</code> are:</p>
+<p>Distill articles can include various types of <a href="metadata.html">metadata</a> to make them easier to index, cite, and share. Metadata included within your <code>_site.yml</code> file is conveniently shared across all articles on your site (individual articles can always override any value within their own metadata).</p>
+<p>Several metadata values which you might find useful to define in <code>_site.yml</code> are:</p>
 <table>
 <colgroup>
 <col style="width: 10%" />
@@ -3318,26 +3029,19 @@ articles can always override any value within their own metadata).</p>
 <tbody>
 <tr class="odd">
 <td><code>base_url</code></td>
-<td>Base (root) URL for the location where the website will be deployed
-(used for providing <a href="metadata.html#preview-images">preview
-images</a> for Open Graph and Twitter Card).</td>
+<td>Base (root) URL for the location where the website will be deployed (used for providing <a href="metadata.html#preview-images">preview images</a> for Open Graph and Twitter Card).</td>
 </tr>
 <tr class="even">
 <td><code>repository_url</code></td>
-<td>URL for the source code of your website. Used to create a navbar
-link back to the repository and to create a <em>Corrections</em>
-appendix.</td>
+<td>URL for the source code of your website. Used to create a navbar link back to the repository and to create a <em>Corrections</em> appendix.</td>
 </tr>
 <tr class="odd">
 <td><code>creative_commons</code></td>
-<td><a href="metadata.html#creative-commons">Creative Commons</a>
-license terms for website content. Used to automatically generate a
-<em>Reuse</em> appendix.</td>
+<td><a href="metadata.html#creative-commons">Creative Commons</a> license terms for website content. Used to automatically generate a <em>Reuse</em> appendix.</td>
 </tr>
 <tr class="even">
 <td><code>license_url</code></td>
-<td>Alternate licensing terms for website content if not using a
-Creative Commons license.</td>
+<td>Alternate licensing terms for website content if not using a Creative Commons license.</td>
 </tr>
 <tr class="odd">
 <td><code>favicon</code></td>
@@ -3349,12 +3053,9 @@ Creative Commons license.</td>
 </tr>
 </tbody>
 </table>
-<p>Here’s a <code>_site.yml</code> file that uses all of these fields
-(save for <code>license_url</code> since the license is already
-specified via <code>creative_commons</code>):</p>
+<p>Here’s a <code>_site.yml</code> file that uses all of these fields (save for <code>license_url</code> since the license is already specified via <code>creative_commons</code>):</p>
 <p><strong>_site.yml</strong></p>
-<div class="sourceCode" id="cb31"><pre
-class="sourceCode yaml"><code class="sourceCode yaml"><span id="cb31-1"><a href="#cb31-1" aria-hidden="true" tabindex="-1"></a><span class="fu">name</span><span class="kw">:</span><span class="at"> </span><span class="st">&quot;distill&quot;</span></span>
+<div class="sourceCode" id="cb31"><pre class="sourceCode yaml"><code class="sourceCode yaml"><span id="cb31-1"><a href="#cb31-1" aria-hidden="true" tabindex="-1"></a><span class="fu">name</span><span class="kw">:</span><span class="at"> </span><span class="st">&quot;distill&quot;</span></span>
 <span id="cb31-2"><a href="#cb31-2" aria-hidden="true" tabindex="-1"></a><span class="fu">title</span><span class="kw">:</span><span class="at"> </span><span class="st">&quot;Distill for R Markdown&quot;</span></span>
 <span id="cb31-3"><a href="#cb31-3" aria-hidden="true" tabindex="-1"></a><span class="fu">favicon</span><span class="kw">:</span><span class="at"> images/favicon.png</span></span>
 <span id="cb31-4"><a href="#cb31-4" aria-hidden="true" tabindex="-1"></a><span class="fu">base_url</span><span class="kw">:</span><span class="at"> https://rstudio.github.io/distill</span></span>
@@ -3365,18 +3066,11 @@ class="sourceCode yaml"><code class="sourceCode yaml"><span id="cb31-1"><a href=
 <span id="cb31-9"><a href="#cb31-9" aria-hidden="true" tabindex="-1"></a><span class="fu">navbar</span><span class="kw">:</span></span>
 <span id="cb31-10"><a href="#cb31-10" aria-hidden="true" tabindex="-1"></a><span class="co">  # (navbar definition here)</span></span>
 <span id="cb31-11"><a href="#cb31-11" aria-hidden="true" tabindex="-1"></a><span class="fu">output</span><span class="kw">:</span><span class="at"> distill::distill_article</span></span></code></pre></div>
-<p>Be sure to enclose Twitter account names in quotes (this is required
-because they start with <code>@</code>).</p>
+<p>Be sure to enclose Twitter account names in quotes (this is required because they start with <code>@</code>).</p>
 <h2 id="publishing-a-website">Publishing a website</h2>
-<p>Website content is by default written to the <code>_site</code>
-sub-directory (you can customize this using the <code>output_dir</code>
-metadata field). Publishing is simply a matter of copying the output
-directory to a web server or web hosting service.</p>
-<p>See the article on <a href="publish_website.html">publishing
-websites</a> for additional details on publishing sites using a variety
-of available hosting services.</p>
-<div class="sourceCode" id="cb32"><pre
-class="sourceCode r distill-force-highlighting-css"><code class="sourceCode r"></code></pre></div>
+<p>Website content is by default written to the <code>_site</code> sub-directory (you can customize this using the <code>output_dir</code> metadata field). Publishing is simply a matter of copying the output directory to a web server or web hosting service.</p>
+<p>See the article on <a href="publish_website.html">publishing websites</a> for additional details on publishing sites using a variety of available hosting services.</p>
+<div class="sourceCode" id="cb32"><pre class="sourceCode r distill-force-highlighting-css"><code class="sourceCode r"></code></pre></div>
 <!--radix_placeholder_article_footer-->
 <!--/radix_placeholder_article_footer-->
 </div>

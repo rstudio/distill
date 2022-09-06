@@ -786,6 +786,7 @@ code span.wa { color: #008000; font-weight: bold; } /* Warning */
   d-article table.gt_table td,
   d-article table.gt_table th {
     border-bottom: none;
+    font-size: 100%;
   }
 
   .html-widget {
@@ -1858,15 +1859,21 @@ code span.wa { color: #008000; font-weight: bold; } /* Warning */
 
       // hoverable references
       $('span.citation[data-cites]').each(function() {
-        if ($(this).children()[0].nodeName == "D-FOOTNOTE") {
-          var fn = $(this).children()[0]
+        const citeChild = $(this).children()[0]
+        // Do not process if @xyz has been used without escaping and without bibliography activated
+        // https://github.com/rstudio/distill/issues/466
+        if (citeChild === undefined) return true
+
+        if (citeChild.nodeName == "D-FOOTNOTE") {
+          var fn = citeChild
           $(this).html(fn.shadowRoot.querySelector("sup"))
           $(this).id = fn.id
           fn.remove()
         }
         var refs = $(this).attr('data-cites').split(" ");
         var refHtml = refs.map(function(ref) {
-          return "<p>" + $('#ref-' + ref).html() + "</p>";
+          // Could use CSS.escape too here, we insure backward compatibility in navigator
+          return "<p>" + $('div[id="ref-' + ref + '"]').html() + "</p>";
         }).join("\n");
         window.tippy(this, {
           allowHTML: true,
@@ -2065,7 +2072,7 @@ code span.wa { color: #008000; font-weight: bold; } /* Warning */
   </script>
 
   <!--/radix_placeholder_distill-->
-  <script src="site_libs/header-attrs-2.14/header-attrs.js"></script>
+  <script src="site_libs/header-attrs-2.16.1/header-attrs.js"></script>
   <script src="site_libs/popper-2.6.0/popper.min.js"></script>
   <link href="site_libs/tippy-6.2.7/tippy.css" rel="stylesheet" />
   <link href="site_libs/tippy-6.2.7/tippy-light-border.css" rel="stylesheet" />
@@ -2188,24 +2195,12 @@ Publishing
 
 
 <div class="d-article">
-<p>When the <strong>distill</strong> package was initially published on
-CRAN, it was named <strong>radix</strong>. The name of the package has
-been subsequently changed to reflect it’s relationship with the <a
-href="https://github.com/distillpub/template">Distill web
-framework</a>.</p>
-<p>You can migrate your Radix documents to Distill by simply changing
-the output format from <code>radix::radix_article</code> to
-<code>distill::distill_article</code>. For example:</p>
-<p><img src="images/migrate-article.png" class="screenshot"
-style="width:95.0%" /></p>
-<p>If you have created a blog or website with Radix, you should
-additionally modify the <code>_site.yml</code> and
-<code>index.Rmd</code> files to reflect the use of the Distill
-package:</p>
-<p><img src="images/migrate-site.png" class="screenshot"
-style="width:95.0%" /></p>
-<div class="sourceCode" id="cb1"><pre
-class="sourceCode r distill-force-highlighting-css"><code class="sourceCode r"></code></pre></div>
+<p>When the <strong>distill</strong> package was initially published on CRAN, it was named <strong>radix</strong>. The name of the package has been subsequently changed to reflect it’s relationship with the <a href="https://github.com/distillpub/template">Distill web framework</a>.</p>
+<p>You can migrate your Radix documents to Distill by simply changing the output format from <code>radix::radix_article</code> to <code>distill::distill_article</code>. For example:</p>
+<p><img src="images/migrate-article.png" class="screenshot" style="width:95.0%" /></p>
+<p>If you have created a blog or website with Radix, you should additionally modify the <code>_site.yml</code> and <code>index.Rmd</code> files to reflect the use of the Distill package:</p>
+<p><img src="images/migrate-site.png" class="screenshot" style="width:95.0%" /></p>
+<div class="sourceCode" id="cb1"><pre class="sourceCode r distill-force-highlighting-css"><code class="sourceCode r"></code></pre></div>
 <!--radix_placeholder_article_footer-->
 <!--/radix_placeholder_article_footer-->
 </div>
