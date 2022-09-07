@@ -2,10 +2,10 @@
 
 # distill 1.5 (CRAN)
 
--   Add support for [CC0](https://creativecommons.org/share-your-work/public-domain/cc0/) license in `creative_commons` (thanks, \\\@fkohrt, #431).
--   Fix an issue with **gt** table and font size (thanks, \\\@ymer,\\\@lmlicuanan, #399).
--   Fix an issue with hovering on citation references (thanks, \\\@Abhi-1U).
--   Fix an issue with bibliography and date parsing (thanks, \\\@mitchelloharawild, #468).
+-   Add support for [CC0](https://creativecommons.org/share-your-work/public-domain/cc0/) license in `creative_commons` (thanks, \@fkohrt, #431).
+-   Fix an issue with **gt** table and font size (thanks, \@ymer, \@lmlicuanan, #399).
+-   Fix an issue with hovering on citation references (thanks, \@Abhi-1U).
+-   Fix an issue with bibliography and date parsing (thanks, \@mitchelloharawild, #468).
 -   Fix an issue with compatibility with Pandoc 2.17+ which were breaking some **bookdown** feature supported by **distill**, like text references (thanks, \@eliocamp, #463).
 -   Fix an issue with blank HTML in browser when a `@` is used unescaped in a document without `bibliography` YAML key (thanks, \@L-Groeninger, #466).
 
