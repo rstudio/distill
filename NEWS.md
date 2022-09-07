@@ -1,4 +1,4 @@
-# distill (development version)
+# distill 1.5 (CRAN)
 
 -   Add support for [CC0](https://creativecommons.org/share-your-work/public-domain/cc0/) license in `creative_commons` (thanks, \\\@fkohrt, #431).
 -   Fix an issue with **gt** table and font size (thanks, \\\@ymer,\\\@lmlicuanan, #399).
@@ -7,7 +7,7 @@
 -   Fix an issue with compatibility with Pandoc 2.17+ which were breaking some **bookdown** feature supported by **distill**, like text references (thanks, \@eliocamp, #463).
 -   Fix an issue with blank HTML in browser when a `@` is used unescaped in a document without `bibliography` YAML key (thanks, \@L-Groeninger, #466).
 
-# distill 1.4 (CRAN)
+# distill 1.4
 
 -   Fix navbar link when a destination page contains `index.html` (thanks, \@phillc73, #91).
 -   Fix an issue with `search.json` that was still written even when `search: false` in set in config (thanks, \@mitchelloharawild, #425).
