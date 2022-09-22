@@ -1,5 +1,7 @@
 # distill (development version)
 
+-   Fix an issue with line numbering on code chunks when `highlight-downlit: false` by tweaking Pandoc's default CSS rules (thanks, \@SES-CE, #473).
+
 # distill 1.5 (CRAN)
 
 -   Add support for [CC0](https://creativecommons.org/share-your-work/public-domain/cc0/) license in `creative_commons` (thanks, \@fkohrt, #431).
