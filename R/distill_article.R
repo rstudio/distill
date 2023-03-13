@@ -435,7 +435,7 @@ validate_pandoc_version <- function() {
       if (!is.null(rstudio_version())) {
         msg <- paste("Distill requires RStudio v1.2 or greater.",
                      "Please update at:",
-                     "https://www.rstudio.com/rstudio/download/preview/")
+                     "https://posit.co/downloads/")
       } else {
         msg <- paste("Distill requires Pandoc v2.0 or greater",
                      "Please update at:",
