@@ -1,5 +1,9 @@
-# For help debugging build failures open an issue on the RStudio community with the 'github-actions' tag.
-# https://community.rstudio.com/new-topic?category=Package%20development&tags=github-actions
+# Workflow derived from https://github.com/r-lib/actions/tree/v2/examples
+# Need help debugging build failures? Start at https://github.com/r-lib/actions#where-to-find-help
+#
+# NOTE: This workflow is overkill for most R packages and
+# check-standard.yaml is likely a better choice.
+# usethis::use_github_action("check-standard") will install it.
 on:
   push:
     branches: [main, master]
@@ -20,12 +24,13 @@ jobs:
       fail-fast: false
       matrix:
         config:
+        config:
           # testing R release with last shipped pandoc version in RStudio IDE and new pandoc
-          - {os: windows-latest, pandoc: '2.19.1',   r: 'release'}
-          - {os: macOS-latest,   pandoc: '2.19.1',   r: 'release'}
-          - {os: ubuntu-latest,  pandoc: '2.19.1',   r: 'release'}
+          - {os: windows-latest, pandoc: '3.1.1',   r: 'release'}
+          - {os: macOS-latest,   pandoc: '3.1.1',   r: 'release'}
           - {os: ubuntu-latest,  pandoc: 'devel',    r: 'release'}
           # testing older pandoc versions
+          - {os: ubuntu-latest,  pandoc: '2.19.2',   r: 'release'}
           - {os: ubuntu-latest,  pandoc: '2.18',     r: 'release'}
           - {os: ubuntu-latest,  pandoc: '2.17.1.1', r: 'release'}
           - {os: ubuntu-latest,  pandoc: '2.16.2',   r: 'release'}
@@ -44,7 +49,16 @@ jobs:
       R_KEEP_PKG_SOURCE: yes
 
     steps:
-      - uses: actions/checkout@v2
+      - uses: actions/checkout@v3
+
+      - uses: r-lib/actions/setup-pandoc@v2
+        if: matrix.config.pandoc != 'devel'
+        with:
+          pandoc-version: ${{ matrix.config.pandoc }}
+
+      - uses: cderv/actions/setup-pandoc-nightly@nightly-pandoc
+        if: matrix.config.pandoc == 'devel'
+
 
       - uses: r-lib/actions/setup-r@v2
         with:
@@ -57,14 +71,6 @@ jobs:
         run: echo "TMPDIR=${{ runner.temp }}" >> $GITHUB_ENV
         shell: bash
 
-      - uses: r-lib/actions/setup-pandoc@v2
-        if: matrix.config.pandoc != 'devel'
-        with:
-          pandoc-version: ${{ matrix.config.pandoc }}
-
-      - uses: cderv/actions/setup-pandoc-nightly@nightly-pandoc
-        if: matrix.config.pandoc == 'devel'
-
       - uses: r-lib/actions/setup-r-dependencies@v2
         with:
           extra-packages: any::rcmdcheck
@@ -75,7 +81,7 @@ jobs:
           upload-snapshots: true
 
       - name: Test coverage
-        if: success() && runner.os == 'Linux' && matrix.config.r == 'release' && matrix.config.pandoc == '2.7.3'
+        if: success() && runner.os == 'Linux' && matrix.config.r == 'release' && matrix.config.pandoc == '2.19.2'
         run: |
           pak::pkg_install('covr')
           covr::codecov()
