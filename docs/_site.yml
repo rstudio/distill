@@ -8,7 +8,7 @@ output_dir: "."
 navbar:
   logo:
     image: images/logo.png
-    href: https://www.rstudio.com
+    href: https://www.posit.co
   search: true
   source_url: true
   right:

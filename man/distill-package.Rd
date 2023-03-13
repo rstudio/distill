@@ -20,11 +20,11 @@ Useful links:
 
 }
 \author{
-\strong{Maintainer}: Christophe Dervieux \email{cderv@rstudio.com} (\href{https://orcid.org/0000-0003-4474-2498}{ORCID})
+\strong{Maintainer}: Christophe Dervieux \email{cderv@posit.co} (\href{https://orcid.org/0000-0003-4474-2498}{ORCID})
 
 Authors:
 \itemize{
-  \item JJ Allaire \email{jj@rstudio.com} (\href{https://orcid.org/0000-0003-0174-9868}{ORCID})
+  \item JJ Allaire \email{jj@posit.co} (\href{https://orcid.org/0000-0003-0174-9868}{ORCID})
   \item Rich Iannone
   \item Alison Presmanes Hill (\href{https://orcid.org/0000-0002-8082-1890}{ORCID})
   \item Yihui Xie (\href{https://orcid.org/0000-0003-0645-5666}{ORCID})

@@ -20,7 +20,7 @@ If you are using RStudio, the easiest way to get started is to use the Distill B
 
 ![](images/create-blog.png){.screenshot width="95%"}
 
-A new [RStudio Project](https://support.rstudio.com/hc/en-us/articles/200526207-Using-Projects) for the blog will be created and opened. The blog will include the following files:
+A new [RStudio Project](https://support.posit.co/hc/en-us/articles/200526207-Using-Projects) for the blog will be created and opened. The blog will include the following files:
 
 | Option                       | Description                 |
 |------------------------------|-----------------------------|
@@ -52,7 +52,7 @@ For example:
 
 **\_site.yml**
 
-``` {.yaml}
+``` yaml
 name: "reproducible-finance-with-r"
 title: "Reproducible Finance with R"
 description: |
@@ -105,7 +105,7 @@ Once you have authored one or more posts you'll want to create a listing page. Y
 
 **index.Rmd**
 
-``` {.yaml}
+``` yaml
 ---
 title: "Reproducible Finance with R"
 site: distill::distill_website
@@ -123,7 +123,7 @@ Above we demonstrated creating a listing page for all posts. You can also create
 
 **gallery.Rmd**
 
-``` {.yaml}
+``` yaml
 ---
 title: "Gallery of featured posts"
 listing:
@@ -138,7 +138,7 @@ listing:
 
 If your posts include `categories` metadata, then the page will also include categories within the article listing. For example, here is some post metadata that includes categories:
 
-``` {.yaml}
+``` yaml
 ---
 title: "The Sharpe Ratio"
 # (additional metadata e.g. description and date, excluded for brevity)
@@ -155,7 +155,7 @@ Categories are listed in the right-hand sidebar and are also displayed as metada
 
 **\_site.yml**
 
-``` {.yaml}
+``` yaml
 name: "reproducible-finance-with-r"
 title: "Reproducible Finance with R"
 description: |
@@ -175,7 +175,7 @@ When you create a listing page an [RSS feed](https://en.wikipedia.org/wiki/RSS) 
 
 **\_site.yml**
 
-``` {.yaml}
+``` yaml
 name: "reproducible-finance-with-r"
 title: "Reproducible Finance with R"
 description: |
@@ -195,7 +195,7 @@ By default the most recent 20 articles will be included in the RSS feed. You can
 
 **\_site.yml**
 
-``` {.yaml}
+``` yaml
 name: "reproducible-finance-with-r"
 title: "Reproducible Finance with R"
 description: |
@@ -215,7 +215,7 @@ By default, RSS feeds include only a summary of each post (based on the `descrip
 
 **\_site.yml**
 
-``` {.yaml}
+``` yaml
 rss:
   full_content: true
 ```
@@ -224,7 +224,7 @@ If you want to create dedicated feeds that map to particular categories (e.g. to
 
 **\_site.yml**
 
-``` {.yaml}
+``` yaml
 rss:
   full_content: true
   categories:
@@ -238,7 +238,7 @@ The category-based feeds will be created in a `categories` directory at the top 
 
 If you want to work on a post for a period of time without having it be added to the listing page, add `draft: true` to the post's metadata. For example:
 
-``` {.yaml}
+``` yaml
 ---
 title: "The Sharpe Ratio"
 description: |
@@ -264,7 +264,7 @@ For example, the following options provide the [Disqus shortname](https://help.d
 
 **\_site.yml**
 
-``` {.yaml}
+``` yaml
 name: "reproducible-finance-with-r"
 title: "Reproducible Finance with R"
 description: |
@@ -287,7 +287,7 @@ Valid values for the `share` option are `twitter`, `linkedin`, `facebook`, `goog
 
 By default, the full text of Disqus comments are not displayed (rather, a link is provided that will expand the comment section). This is done so that a long comment section doesn't obscure the bibliography and other appendices. If you'd rather show the comments by default you can use this alterante syntax for `disqus` configuration:
 
-``` {.yaml}
+``` yaml
 collections:
   posts:
     disqus: 
@@ -302,14 +302,14 @@ Specifying the `hidden: false` option for `disqus` will causes all comments to b
 
 Blog sites automatically include a search box within the navigation bar. You can disable the search box using the the `search` field of the `navbar` key within `_site.yml`. For example:
 
-``` {.yaml}
+``` yaml
 ---
 name: "distill"
 title: "Distill for R Markdown"
 navbar:
   logo:
     image: images/logo.png
-    href: https://www.rstudio.com
+    href: https://www.posit.co
   search: false
 ---
 ```
@@ -320,14 +320,14 @@ Note that top level articles within blog sites will also be included in search r
 
 If you want to display a link to the source code for your blog on the navigation bar, add a `source_url` field to the `navbar` definition. For example:
 
-``` {.yaml}
+``` yaml
 ---
 name: "distill"
 title: "Distill for R Markdown"
 navbar:
   logo:
     image: images/logo.png
-    href: https://www.rstudio.com
+    href: https://www.posit.co
   source_url: https://github.com/rstudio/distill
 ---
 ```
@@ -340,7 +340,7 @@ You can use whatever scheme you like to organize the `_posts` directory. You can
 
 One popular scheme for organizing blog posts is to use a date prefix for the post directory names. For example:
 
-``` {.markup}
+``` markup
 _posts/
   2017-11-09-visualizing-asset-returns/
   2017-09-13-asset-volatility/
@@ -356,7 +356,7 @@ Note that if you use a date-prefixed post directory you are not required to spec
 
 Note that the listing for our example above includes a preview image for each post. Preview thumbnail images are generated automatically based on the first plot encountered within your post. You can specify that a specific plot should be used as the preview image using the `preview` chunk option. For example:
 
-```` {.clike}
+```` clike
 ```{r, layout="l-body-outset", preview=TRUE}`r ''`
 library(ggplot2)
 ggplot(diamonds, aes(carat, price)) + geom_smooth() +
@@ -366,7 +366,7 @@ ggplot(diamonds, aes(carat, price)) + geom_smooth() +
 
 If you want to use another image entirely as a post preview you add a `preview` field to the post's metadata. For example, here we add a `preview` field to the example metadata from above (some fields excluded for brevity):
 
-``` {.yaml}
+``` yaml
 ---
 title: "The Sharpe Ratio"
 description: |
@@ -390,7 +390,7 @@ If you want to disable this behavior you can use the `collections:posts:citation
 
 **\_site.yml**
 
-``` {.yaml}
+``` yaml
 name: "reproducible-finance-with-r"
 title: "Reproducible Finance with R"
 description: |
@@ -412,7 +412,7 @@ You can add HTML that enables readers to subscribe to your blog by including the
 
 **\_site.yml**
 
-``` {.yaml}
+``` yaml
 name: "reproducible-finance-with-r"
 title: "Reproducible Finance with R"
 description: |
@@ -428,7 +428,7 @@ collections:
 
 **\_subscribe.html**
 
-``` {.html}
+``` html
 <form method='post' action='https://blogtrottr.com'>
   <p>Enjoy this blog? Get notified of new posts via email:</p>
   <input type='text' name='btr_email' />
@@ -449,7 +449,7 @@ You can also add arbitrary HTML to the top of the sidebar by including the `coll
 
 **\_site.yml**
 
-``` {.yaml}
+``` yaml
 name: "reproducible-finance-with-r"
 title: "Reproducible Finance with R"
 description: |
@@ -465,7 +465,7 @@ collections:
 
 **\_custom.html**
 
-``` {.html}
+``` html
 <div class="sidebar-section custom">
   <h3>About</h3>
   This blog explores reproducible finance with the 
@@ -502,7 +502,7 @@ When a blog post is published, resource files located alongside the post in its 
 
 You can override this behavior using a `resources` metadata entry for your post, which can specify explicit files to `include` or `exclude`. For example (some fields excluded for brevity):
 
-``` {.yaml}
+``` yaml
 ---
 title: "The Sharpe Ratio"
 description: |
@@ -533,7 +533,7 @@ To create a new article collection, do the following:
 
 2.  Add an entry for it to your `_site.yml` file. For example:
 
-    ``` {.yaml}
+    ``` yaml
     collections:
       posts: 
         categories: true
@@ -543,7 +543,7 @@ To create a new article collection, do the following:
 
 3.  Optionally, create an index page for your collection by adding the appropriate `listing` YAML front matter. For example, you could create a file named `analyses.Rmd` within the top-level directory of your website with the following YAML:
 
-    ``` {.yaml}
+    ``` yaml
     ---
     title: "Analyses"
     listing: analyses
@@ -554,7 +554,7 @@ You may also want to add a link to your listing page in the [site navigation men
 
 You can use the `create_post()` function to create articles within any collection. For example:
 
-``` {.r}
+``` r
 create_post("water-quality-trends", collection = "analyses")
 ```
 
@@ -570,7 +570,7 @@ create_theme(name = "theme")
 
 Read more about customizing a Distill [theme](website.html#create-theme). To apply a custom theme site-wide, add a `theme` key to the top-level of your `_site.yml` configuration file:
 
-``` {.yaml}
+``` yaml
 name: "distill"
 title: "Distill for R Markdown"
 theme: theme.css 
@@ -586,8 +586,8 @@ xaringanExtra::use_panelset()
 
 ### Example themes
 
-::: {.panelset}
-::: {.panel}
+::: panelset
+::: panel
 #### Demo
 
 Demo theme detailed [here](website.html#theming).
@@ -597,7 +597,7 @@ knitr::include_graphics("images/demo-after.png")
 ```
 :::
 
-::: {.panel}
+::: panel
 #### Piping Hot Data
 
 Inspired by: <https://www.pipinghotdata.com/>
@@ -607,7 +607,7 @@ knitr::include_graphics("images/shannon-after.png")
 ```
 :::
 
-::: {.panel}
+::: panel
 #### Before I Sleep
 
 Inspired by: <https://milesmcbain.xyz/>
@@ -617,7 +617,7 @@ knitr::include_graphics("images/miles-after.png")
 ```
 :::
 
-::: {.panel}
+::: panel
 #### Tidymodels
 
 Inspired by: <https://tidymodels.org> (courtesy [Desirée De Leon](https://desiree.rbind.io/))

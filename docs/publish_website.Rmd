@@ -11,9 +11,9 @@ There are a wide variety of ways to publish Distill websites. Website content is
 
 Below we describe several convenient options for Distill website deployment including [RStudio Connect], [GitHub Pages], [Netlify], [Firebase], [Site44], and [Amazon S3]. We'll mostly defer to the documentation provided by the various services, but will note any Distill website specific configuration required.
 
-## RStudio Connect
+## Posit Connect
 
-[RStudio Connect](https://www.rstudio.com/products/connect/) is a server product from RStudio for secure sharing of websites, applications, reports, and plots.
+[Posit Connect](https://posit.co/products/enterprise/connect/) is a server product from RStudio for secure sharing of websites, applications, reports, and plots.
 
 You can deploy a Distill website to RStudio Connect from the command line using the `distill::publish_website()` function. For example:
 
@@ -34,7 +34,7 @@ You can also publish a Distill website directly to an RStudio Connect server fro
 
 Note that you can either publish your website with the source code (so it can be regenerated on a scheduled basis) or publish a copy of the website you built locally. Generally publishing a copy is more straightforward so that's the recommended option unless you have specialized requirements.
 
-Unlike the other website publishing options described below, [RStudio Connect](https://www.rstudio.com/products/connect/) is a server that you run inside an organization, so is suitable for publishing content that you only want visible within your organization's network as opposed to visible to the entire internet.
+Unlike the other website publishing options described below, [Posit Connect](https://posit.co/products/enterprise/connect/) is a server that you run inside an organization, so is suitable for publishing content that you only want visible within your organization's network as opposed to visible to the entire internet.
 
 ## GitHub Pages
 
@@ -52,7 +52,7 @@ Unlike the other website publishing options described below, [RStudio Connect](h
 
     Depending on your configuration you should set the `output_dir` as follows:
 
-    ``` {.yaml}
+    ``` yaml
     output_dir: "."     # root of master or main branch
     output_dir: "docs"  # docs directory of master or main branch
     ```
@@ -73,7 +73,7 @@ Google Firebase has a [web hosting service](https://firebase.google.com/docs/hos
 
 Firebase websites by default deploy content from the `public` directory of the Firebase project directory. This means that you should set the `output_dir` to `"public"` within `_site.yml`:
 
-``` {.yaml}
+``` yaml
 ---
 name: "distill"
 title: "Distill for R Markdown"

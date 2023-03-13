@@ -4,22 +4,27 @@ description: Scientific and technical writing, native to the web
 author:
   - name: "JJ Allaire"
     url: https://github.com/jjallaire
-    affiliation: RStudio
-    affiliation_url: https://www.rstudio.com
+    affiliation: Posit Software, PBC
+    affiliation_url: https://www.posit.co
     orcid_id: 0000-0003-0174-9868
   - name: "Rich Iannone"
     url: https://github.com/rich-iannone
-    affiliation: RStudio
-    affiliation_url: https://www.rstudio.com
+    affiliation: Posit Software, PBC
+    affiliation_url: https://www.posit.co
   - first_name: "Alison"
     last_name: "Presmanes Hill"
-    affiliation: RStudio
-    affiliation_url: https://www.rstudio.com
+    affiliation: Posit Software, PBC
+    affiliation_url: https://www.posit.co
     orcid_id: 0000-0002-8082-1890
   - name: "Yihui Xie"
     url: https://github.com/yihui
-    affiliation: RStudio
-    affiliation_url: https://www.rstudio.com
+    affiliation: Posit Software, PBC
+    affiliation_url: https://www.posit.co
+    orcid_id: 0000-0003-0645-5666
+  - name: "Christophe Dervieux"
+    url: https://github.com/cderv
+    affiliation: Posit Software, PBC
+    affiliation_url: https://www.posit.co
     orcid_id: 0000-0003-0645-5666
 
 date: September 10, 2018
