@@ -1,7 +1,7 @@
 
 <!-- README.md is generated from README.Rmd. Please edit that file -->
 
-# distill for R Markdown <img src="man/figures/logo.png" align="right" height="139"/>
+# distill for R Markdown <a href="https://pkgs.rstudio.com/distill/"><img src="man/figures/logo.png" align="right" height="138"/></a>
 
 <!-- badges: start -->
 
@@ -10,6 +10,7 @@ status](https://www.r-pkg.org/badges/version/distill)](https://CRAN.R-project.or
 [![R-CMD-check](https://github.com/rstudio/distill/actions/workflows/R-CMD-check.yaml/badge.svg)](https://github.com/rstudio/distill/actions/workflows/R-CMD-check.yaml)
 [![Codecov test
 coverage](https://codecov.io/gh/rstudio/distill/branch/main/graph/badge.svg)](https://app.codecov.io/gh/rstudio/distill?branch=main)
+
 <!-- badges: end -->
 
 Distill for R Markdown is a web publishing format optimized for
