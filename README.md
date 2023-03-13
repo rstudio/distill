@@ -47,8 +47,6 @@ install.packages("distill")
 Or install the development version from GitHub with:
 
 ``` r
-# install.packages("remotes")
-remotes::install_github("rstudio/distill")
 # install.packages("pak")
 pak::pak("rstudio/distill")
 ```
