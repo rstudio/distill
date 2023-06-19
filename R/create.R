@@ -326,7 +326,7 @@ resolve_post_dir <- function(posts_dir, slug, date_prefix) {
     else if (is.character(date_prefix))
       date_prefix <- parse_date(date_prefix)
     if (is_date(date_prefix)) {
-      date_prefix <- as.character(date_prefix, format = "%Y-%m-%d")
+      date_prefix <- format(date_prefix, format = "%Y-%m-%d")
     } else {
       stop("You must specify either NULL or a date for date_prefix")
     }

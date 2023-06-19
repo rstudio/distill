@@ -1,6 +1,7 @@
 # distill (development version)
 
 -   Fix an issue with line numbering on code chunks when `highlight-downlit: false` by tweaking Pandoc's default CSS rules (thanks, \@SES-CE, #473).
+-   Internally use `format()` instead of `as.character()` with Dates to account for argument \`format=\` deprecation in R 4.3.0 (thanks, \\\@mbojan, #488).
 
 # distill 1.5 (CRAN)
 
