@@ -105,14 +105,14 @@ fixup_iso_timezone <- function(time) {
 }
 
 date_today <- function() {
-  as.character(Sys.Date(), format = "%m-%d-%Y")
+  format(Sys.Date(), format = "%m-%d-%Y")
 }
 
 date_as_rfc_2822 <- function(date) {
   date <- as.Date(date, tz = "UTC")
   with_locale(
     new = c("LC_TIME" = ifelse(is_windows(), "English", "en_US.UTF-8")),
-    as.character(date, format = "%a, %d %b %Y %H:%M:%S %z", tz = "UTC")
+    format(date, format = "%a, %d %b %Y %H:%M:%S %z", tz = "UTC")
   )
 }
 
