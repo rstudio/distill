@@ -23,9 +23,11 @@ to the \code{name} provided in \verb{_site.yml} (or to the name of the site_dir 
 
 \item{method}{Publishing method (currently only "rsconnect" is available)}
 
-\item{account}{Account to deploy application to. This parameter is only required for
-the initial deployment of an application when there are multiple accounts configured
-on the system.}
+\item{account, server}{Uniquely identify a remote server with either your
+user \code{account}, the \code{server} name, or both. If neither are supplied, and
+there are multiple options, you'll be prompted to pick one.
+
+Use \code{\link[rsconnect:accounts]{accounts()}} to see the full list of available options.}
 
 \item{render}{\code{TRUE} to render the site locally before publishing.}
 
