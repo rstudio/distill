@@ -281,7 +281,7 @@ write_feed_xml <- function(feed_xml, site_config, collection, articles) {
       }
     }
     else {
-      add_child(item, "description", text = not_null(article$description, default = article$title))
+      add_child(item, "description", text = not_null_or_empty(article$description, default = article$title))
     }
 
     if (!is.null(article$categories)) {

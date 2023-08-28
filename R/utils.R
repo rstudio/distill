@@ -31,6 +31,13 @@ not_null <- function(x, default="") {
     x
 }
 
+not_null_or_empty <- function(x, default="") {
+  if (is.null(x) || length(x) == 0)
+    default
+  else
+    x
+}
+
 block_class = function(x){
   if (length(x) == 0) return()
   classes = unlist(strsplit(x, '\\s+'))
