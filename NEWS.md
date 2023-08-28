@@ -1,8 +1,9 @@
 # distill (development version)
 
+-   RSS feed creation now works correctly for listings when no `description` is provided in one of the Rmd post (thanks, \@cpsyctc, \@apeterson91, #490, #448).
 -   Fix an issue with line numbering on code chunks when `highlight-downlit: false` by tweaking Pandoc's default CSS rules (thanks, \@SES-CE, #473).
--   Internally use `format()` instead of `as.character()` with Dates to account for argument \`format=\` deprecation in R 4.3.0 (thanks, \\\@mbojan, #488).
--   Add a `subtitle` variable in HTML template placed between title and categories (thanks, \\\@dicook, #480).
+-   Internally use `format()` instead of `as.character()` with Dates to account for argument `format=` deprecation in R 4.3.0 (thanks, \@mbojan, #488).
+-   Add a `subtitle` variable in HTML template placed between title and categories (thanks, \@dicook, #480).
 
 # distill 1.5 (CRAN)
 
