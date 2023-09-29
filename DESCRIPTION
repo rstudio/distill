@@ -1,7 +1,7 @@
 Type: Package
 Package: distill
 Title: 'R Markdown' Format for Scientific and Technical Writing
-Version: 1.5.4
+Version: 1.5.5
 Authors@R: c(
     person("Christophe", "Dervieux", , "cderv@posit.co", role = c("aut", "cre"),
            comment = c(ORCID = "0000-0003-4474-2498")),
