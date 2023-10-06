@@ -19,3 +19,4 @@ notes
 ^codecov\.yml$
 ^tests/manual$
 ^CRAN-SUBMISSION$
+^revdep$
