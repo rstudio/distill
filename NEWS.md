@@ -5,6 +5,7 @@
 -   Internally use `format()` instead of `as.character()` with Dates to account for argument `format=` deprecation in R 4.3.0 (thanks, \@mbojan, #488).
 -   Add a `subtitle` variable in HTML template placed between title and categories (thanks, \@dicook, #480).
 -   Add author name in orcid image alt text (thanks, \@mitchelloharawild , \@ajrgodfrey, #494, rjournal/rjtools#86).
+-   In `distill_article()`, metadata header in HTML is separated by `<hr>` to improve accessibility (thanks, @mitchelloharawild, #495, @ajrgodfrey, #rjournal/rjtools#92)
 
 # distill 1.5 (CRAN)
 

@@ -775,8 +775,11 @@
 
     init_common();
 
+    // separator
+    var separator = '<hr class="section-separator"/>'
+
      // insert hr after d-title
-    $('.d-title').after($('<hr class="section-separator"/>'));
+    $('.d-title').after(separator);
 
     // check if we have authors
     var front_matter = JSON.parse($("#distill-front-matter").html());
@@ -785,7 +788,7 @@
     // manage byline/border
     if (!have_authors)
       $('.d-byline').remove();
-    $('.d-byline').after($('<hr class="section-separator"/>'));
+    $('.d-byline').after(separator);
     $('.d-byline a').remove();
 
     // remove toc
