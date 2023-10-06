@@ -1,4 +1,4 @@
-# distill (development version)
+# distill 1.6 (CRAN)
 
 -   RSS feed creation now works correctly for listings when no `description` is provided in one of the Rmd post (thanks, \@cpsyctc, \@apeterson91, #490, #448).
 -   Fix an issue with line numbering on code chunks when `highlight-downlit: false` by tweaking Pandoc's default CSS rules (thanks, \@SES-CE, #473).
@@ -7,7 +7,7 @@
 -   Add author name in orcid image alt text (thanks, \@mitchelloharawild , \@ajrgodfrey, #494, rjournal/rjtools#86).
 -   In `distill_article()`, metadata header in HTML is separated by `<hr>` to improve accessibility (thanks, @mitchelloharawild, #495, @ajrgodfrey, #rjournal/rjtools#92)
 
-# distill 1.5 (CRAN)
+# distill 1.5
 
 -   Add support for [CC0](https://creativecommons.org/public-domain/cc0/) license in `creative_commons` (thanks, \@fkohrt, #431).
 -   Fix an issue with **gt** table and font size (thanks, \@ymer, \@lmlicuanan, #399).
