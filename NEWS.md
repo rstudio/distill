@@ -1,3 +1,5 @@
+# distill (development version)
+
 # distill 1.6 (CRAN)
 
 -   RSS feed creation now works correctly for listings when no `description` is provided in one of the Rmd post (thanks, \@cpsyctc, \@apeterson91, #490, #448).
