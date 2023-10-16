@@ -62,6 +62,7 @@ jobs:
           body: |
             This PR was created automatically after rendering vignette because some example website does not seem to use distill anymore.
             Please review and merge.
+          base: main
 
       - name: Check auto PR outputs
         if: steps.cpr.outcome == 'success'
