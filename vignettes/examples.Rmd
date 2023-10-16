@@ -8,6 +8,25 @@ resource_files:
 library(quillt)
 ```
 
+```{r, include = FALSE}
+# check yaml examples
+sites <- yaml::read_yaml("examples.yml")
+is_working_distill <- vapply(sites, function(s) {
+  # check for error
+  if (httr::http_error(httr::GET(s$href))) return(FALSE)
+  html <- rvest::read_html(s$href)
+  generator <- rvest::html_attr(rvest::html_element(rvest::read_html(s$href), "meta[name='generator']"), "content")
+  return (is.na(generator) || generator == "distill")
+}, logical(1))
+yaml::write_yaml(sites[is_working_distill], "examples.yml", handlers = list(
+    # Handle yes/no from 1.1 to 1.2
+    # https://github.com/vubiostat/r-yaml/issues/131
+    logical = function(x) {
+    value <- ifelse(x, "true", "false")
+    structure(value, class = "verbatim")
+  }))
+```
+
 The examples below illustrate the use of Distill for making websites and blogs.
 
 ```{r, echo=FALSE}
