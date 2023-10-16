@@ -45,6 +45,32 @@ jobs:
         run: pkgdown::build_site(new_process = FALSE, install = FALSE)
         shell: Rscript {0}
 
+      - name: update examples file if non distill site detected
+        id: cpr
+        uses: peter-evans/create-pull-request@v5
+        with:
+          token: ${{ secrets.GITHUB_TOKEN }}
+          add-paths: vignettes/examples.yml
+          commit-message: |
+            Remove non-distill example website [auto PR]
+          branch: updates/example-gallery
+          delete-branch: true
+          assignees: cderv
+          reviewers: cderv
+          title: |
+            [CI] Remove non-distill example website
+          body: |
+            This PR was created automatically after rendering vignette because some example website does not seem to use distill anymore.
+            Please review and merge.
+          base: main
+
+      - name: Check auto PR outputs
+        if: steps.cpr.outcome == 'success'
+        run: |
+          echo "Pull Request Number - ${{ steps.cpr.outputs.pull-request-number }}"
+          echo "Pull Request URL - ${{ steps.cpr.outputs.pull-request-url }}"
+          echo "Pull Request Action Performed - ${{ steps.cpr.outputs.pull-request-operation }}"
+
       - name: Deploy to Netlify
         id: netlify-deploy
         uses: nwtgck/actions-netlify@v2
