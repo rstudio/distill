@@ -39,7 +39,7 @@ jobs:
         with:
           path: |
             vignettes/articles/images/*.png
-          key: 1-${{ hashFiles('vignettes/articles/examples.yml') }}
+          key: 1-${{ hashFiles('vignettes/examples.yml') }}
 
       - name: Build pkgdown site
         run: pkgdown::build_site(new_process = FALSE, install = FALSE)
