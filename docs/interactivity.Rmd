@@ -14,7 +14,7 @@ There are a variety of ways to add interactive JavaScript and D3 visualizations 
 
 Including [htmlwidgets](http://www.htmlwidgets.org) within a Distill article is as easy as including an R plot. For example, the following code embeds a Leaflet map:
 
-```` {.clike}
+```` clike
 ```{r}`r ''`
 library(leaflet)
 leaflet() %>%
@@ -32,7 +32,7 @@ leaflet() %>%
 
 You can also use [figure layout](figures.html) options with htmlwidgets. For example, here we set `layout="l-page"` to specify that we want the widget to span the width of the page:
 
-```` {.clike}
+```` clike
 ```{r, layout="l-page", fig.height=3}`r ''`
 library(dygraphs)
 dygraph(ldeaths)
@@ -54,16 +54,16 @@ The [r2d3](https://rstudio.github.io/r2d3/) package enables you to easily incorp
 
 For example, the following renders an interactive [Voronoi diagram](https://en.wikipedia.org/wiki/Voronoi_diagram) created using D3:
 
-```` {.clike}
+```` clike
 ```{r, layout="l-page", fig.height=6}`r ''`
 library(r2d3)
-r2d3(script = "voronoi.js")
+r2d3(script = "voronoi.js", d3_version = 4)
 ```
 ````
 
 ```{r, layout="l-page", fig.height=6}
 library(r2d3)
-r2d3(script = "d3/voronoi/voronoi.js")
+r2d3(script = "d3/voronoi/voronoi.js", d3_version = 4)
 ```
 
 Note that we specify `layout="l-page"` to indicate that we want the visualization to occupy the full width of the page.

@@ -21,7 +21,7 @@
 <style type="text/css">code{white-space: pre;}</style>
 <style type="text/css" data-origin="pandoc">
 pre > code.sourceCode { white-space: pre; position: relative; }
-pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span { line-height: 1.25; }
 pre > code.sourceCode > span:empty { height: 1.2em; }
 .sourceCode { overflow: visible; }
 code.sourceCode > span { color: inherit; text-decoration: inherit; }
@@ -456,8 +456,8 @@ code span.wa { color: #008000; font-weight: bold; } /* Warning */
   </style>
 
   <script src="site_libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
-  <link href="site_libs/font-awesome-5.1.0/css/all.css" rel="stylesheet"/>
-  <link href="site_libs/font-awesome-5.1.0/css/v4-shims.css" rel="stylesheet"/>
+  <link href="site_libs/font-awesome-6.4.2/css/all.min.css" rel="stylesheet"/>
+  <link href="site_libs/font-awesome-6.4.2/css/v4-shims.min.css" rel="stylesheet"/>
   <script src="site_libs/headroom-0.9.4/headroom.min.js"></script>
   <script src="site_libs/autocomplete-0.37.1/autocomplete.min.js"></script>
   <script src="site_libs/fuse-6.4.1/fuse.min.js"></script>
@@ -2072,7 +2072,7 @@ code span.wa { color: #008000; font-weight: bold; } /* Warning */
   </script>
 
   <!--/radix_placeholder_distill-->
-  <script src="site_libs/header-attrs-2.16.1/header-attrs.js"></script>
+  <script src="site_libs/header-attrs-2.25/header-attrs.js"></script>
   <script src="site_libs/popper-2.6.0/popper.min.js"></script>
   <link href="site_libs/tippy-6.2.7/tippy.css" rel="stylesheet" />
   <link href="site_libs/tippy-6.2.7/tippy-light-border.css" rel="stylesheet" />
@@ -2122,7 +2122,7 @@ code span.wa { color: #008000; font-weight: bold; } /* Warning */
 <header class="header header--fixed" role="banner">
 <nav class="distill-site-nav distill-site-header">
 <div class="nav-left">
-<a class="logo" href="https://www.rstudio.com">
+<a class="logo" href="https://www.posit.co">
 <img src="images/logo.png" alt="Logo"/>
 </a>
 <a href="index.html" class="title">Distill for R Markdown</a>
@@ -2241,14 +2241,57 @@ Publishing
 <h2 id="creative-commons">Creative Commons</h2>
 <p>The <a href="https://creativecommons.org/licenses/">Creative Commons</a> copyright licenses and tools forge a balance inside the traditional “all rights reserved” setting that copyright law creates. These tools give everyone from individual creators to large companies and institutions a simple, standardized way to grant copyright permissions to their creative work.</p>
 <p>Here are some of the common forms of Creative Commons content license:</p>
-<div class="line-block">License | Name | Description ||———–|———–|————————————————-|<br />
-<a href="https://creativecommons.org/licenses/by/4.0/">CC BY</a> | Attribution | This license lets others distribute, remix, tweak, and build upon your work, even commercially, as long as they credit you for the original creation. This is the most accommodating of licenses offered. |<br />
-<a href="https://creativecommons.org/licenses/by-sa/4.0/">CC BY-SA</a> | Attribution-ShareAlike | This license lets others remix, tweak, and build upon your work even for commercial purposes, as long as they credit you and license their new creations under the identical terms. This license is often compared to “copyleft” free and open source software licenses. All new works based on yours will carry the same license, so any derivatives will also allow commercial use. |<br />
-<a href="https://creativecommons.org/licenses/by-nd/4.0/">CC BY-ND</a> | Attribution-NoDerivs | This license allows for redistribution, commercial and non-commercial, as long as it is passed along unchanged and in whole, with credit to you. |<br />
-<a href="https://creativecommons.org/licenses/by-nc/4.0/">CC BY-NC</a> | Attribution-NonCommercial | This license lets others remix, tweak, and build upon your work non-commercially, and although their new works must also acknowledge you and be non-commercial, they don’t have to license their derivative works on the same terms. |<br />
-<a href="https://creativecommons.org/licenses/by-nc-nd/4.0/">CC BY-NC-SA</a> | Attribution-NonCommercial-ShareAlike | This license lets others remix, adapt, and build upon your work non-commercially, as long as they credit you and license their new creations under the identical terms. |<br />
-<a href="https://creativecommons.org/licenses/by-nc-nd/4.0">CC BY-NC-ND</a> | Attribution-NonCommercial-NoDerivs | This license is the most restrictive of our six main licenses, only allowing others to download your works and share them with others as long as they credit you, but they can’t change them in any way or use them commercially. |<br />
-<a href="https://creativecommons.org/publicdomain/zero/1.0/">CC0</a> | Public Domain Dedication - No Rights Reserved | CC0 enables scientists, educators, artists and other creators and owners of copyright- or database-protected content to waive those interests in their works and thereby place them as completely as possible in the public domain, so that others may freely build upon, enhance and reuse the works for any purposes without restriction under copyright or database law. (See <a href="https://creativecommons.org/share-your-work/public-domain/cc0">About CC0</a>) |</div>
+<table>
+<colgroup>
+<col style="width: 11%" />
+<col style="width: 8%" />
+<col style="width: 79%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th>License</th>
+<th>Name</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><a href="https://creativecommons.org/licenses/by/4.0/">CC BY</a></td>
+<td>Attribution</td>
+<td>This license lets others distribute, remix, tweak, and build upon your work, even commercially, as long as they credit you for the original creation. This is the most accommodating of licenses offered.</td>
+</tr>
+<tr class="even">
+<td><a href="https://creativecommons.org/licenses/by-sa/4.0/">CC BY-SA</a></td>
+<td>Attribution-ShareAlike</td>
+<td>This license lets others remix, tweak, and build upon your work even for commercial purposes, as long as they credit you and license their new creations under the identical terms. This license is often compared to “copyleft” free and open source software licenses. All new works based on yours will carry the same license, so any derivatives will also allow commercial use.</td>
+</tr>
+<tr class="odd">
+<td><a href="https://creativecommons.org/licenses/by-nd/4.0/">CC BY-ND</a></td>
+<td>Attribution-NoDerivs</td>
+<td>This license allows for redistribution, commercial and non-commercial, as long as it is passed along unchanged and in whole, with credit to you.</td>
+</tr>
+<tr class="even">
+<td><a href="https://creativecommons.org/licenses/by-nc/4.0/">CC BY-NC</a></td>
+<td>Attribution-NonCommercial</td>
+<td>This license lets others remix, tweak, and build upon your work non-commercially, and although their new works must also acknowledge you and be non-commercial, they don’t have to license their derivative works on the same terms.</td>
+</tr>
+<tr class="odd">
+<td><a href="https://creativecommons.org/licenses/by-nc-nd/4.0/">CC BY-NC-SA</a></td>
+<td>Attribution-NonCommercial-ShareAlike</td>
+<td>This license lets others remix, adapt, and build upon your work non-commercially, as long as they credit you and license their new creations under the identical terms.</td>
+</tr>
+<tr class="even">
+<td><a href="https://creativecommons.org/licenses/by-nc-nd/4.0">CC BY-NC-ND</a></td>
+<td>Attribution-NonCommercial-NoDerivs</td>
+<td>This license is the most restrictive of our six main licenses, only allowing others to download your works and share them with others as long as they credit you, but they can’t change them in any way or use them commercially.</td>
+</tr>
+<tr class="odd">
+<td><a href="https://creativecommons.org/publicdomain/zero/1.0/">CC0</a></td>
+<td>Public Domain Dedication - No Rights Reserved</td>
+<td>CC0 enables scientists, educators, artists and other creators and owners of copyright- or database-protected content to waive those interests in their works and thereby place them as completely as possible in the public domain, so that others may freely build upon, enhance and reuse the works for any purposes without restriction under copyright or database law. (See <a href="https://creativecommons.org/share-your-work/public-domain/cc0">About CC0</a>)</td>
+</tr>
+</tbody>
+</table>
 <p>You can designate articles that you create as Creative Commons licensed by adding the <code>creative_commons</code> field and specifying one of the standard Creative Commons licenses. For example:</p>
 <div class="sourceCode" id="cb3"><pre class="sourceCode yaml"><code class="sourceCode yaml"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="pp">---</span></span>
 <span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a><span class="fu">title</span><span class="kw">:</span><span class="at"> </span><span class="st">&quot;Distill for R Markdown&quot;</span></span>
@@ -2321,28 +2364,28 @@ ggplot(diamonds, aes(carat, price)) + geom_smooth() +
 <p>Distill articles automatically include metadata compatible with the format indexed by <a href="https://scholar.google.com/intl/en/scholar/inclusion.html#indexing">Google Scholar</a>. This makes it easy for indexing engines (Google Scholar or otherwise) to extract not only a citation for your article but also information on other sources which you cited.</p>
 <p>For example, here is the Google Scholar metadata automatically included for the home page of the Distill for R Markdown website:</p>
 <div class="sourceCode" id="cb10"><pre class="sourceCode html"><code class="sourceCode html"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="co">&lt;!--  https://scholar.google.com/intl/en/scholar/inclusion.html#indexing --&gt;</span></span>
-<span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a><span class="kw">&lt;meta</span> <span class="er">name</span><span class="ot">=</span><span class="st">&quot;citation_title&quot;</span> <span class="er">content</span><span class="ot">=</span><span class="st">&quot;Distill for R Markdown&quot;</span><span class="kw">/&gt;</span></span>
-<span id="cb10-3"><a href="#cb10-3" aria-hidden="true" tabindex="-1"></a><span class="kw">&lt;meta</span> <span class="er">name</span><span class="ot">=</span><span class="st">&quot;citation_fulltext_html_url&quot;</span> <span class="er">content</span><span class="ot">=</span><span class="st">&quot;https://rstudio.github.io/distill&quot;</span><span class="kw">/&gt;</span></span>
-<span id="cb10-4"><a href="#cb10-4" aria-hidden="true" tabindex="-1"></a><span class="kw">&lt;meta</span> <span class="er">name</span><span class="ot">=</span><span class="st">&quot;citation_fulltext_world_readable&quot;</span> <span class="er">content</span><span class="ot">=</span><span class="st">&quot;&quot;</span><span class="kw">/&gt;</span></span>
-<span id="cb10-5"><a href="#cb10-5" aria-hidden="true" tabindex="-1"></a><span class="kw">&lt;meta</span> <span class="er">name</span><span class="ot">=</span><span class="st">&quot;citation_online_date&quot;</span> <span class="er">content</span><span class="ot">=</span><span class="st">&quot;2018/05/04&quot;</span><span class="kw">/&gt;</span></span>
-<span id="cb10-6"><a href="#cb10-6" aria-hidden="true" tabindex="-1"></a><span class="kw">&lt;meta</span> <span class="er">name</span><span class="ot">=</span><span class="st">&quot;citation_publication_date&quot;</span> <span class="er">content</span><span class="ot">=</span><span class="st">&quot;2018/05/04&quot;</span><span class="kw">/&gt;</span></span>
-<span id="cb10-7"><a href="#cb10-7" aria-hidden="true" tabindex="-1"></a><span class="kw">&lt;meta</span> <span class="er">name</span><span class="ot">=</span><span class="st">&quot;citation_author&quot;</span> <span class="er">content</span><span class="ot">=</span><span class="st">&quot;JJ Allaire&quot;</span><span class="kw">/&gt;</span></span>
-<span id="cb10-8"><a href="#cb10-8" aria-hidden="true" tabindex="-1"></a><span class="kw">&lt;meta</span> <span class="er">name</span><span class="ot">=</span><span class="st">&quot;citation_author_institution&quot;</span> <span class="er">content</span><span class="ot">=</span><span class="st">&quot;RStudio&quot;</span><span class="kw">/&gt;</span></span>
-<span id="cb10-9"><a href="#cb10-9" aria-hidden="true" tabindex="-1"></a><span class="kw">&lt;meta</span> <span class="er">name</span><span class="ot">=</span><span class="st">&quot;citation_author&quot;</span> <span class="er">content</span><span class="ot">=</span><span class="st">&quot;Rich Iannone&quot;</span><span class="kw">/&gt;</span></span>
-<span id="cb10-10"><a href="#cb10-10" aria-hidden="true" tabindex="-1"></a><span class="kw">&lt;meta</span> <span class="er">name</span><span class="ot">=</span><span class="st">&quot;citation_author_institution&quot;</span> <span class="er">content</span><span class="ot">=</span><span class="st">&quot;RStudio&quot;</span><span class="kw">/&gt;</span></span>
-<span id="cb10-11"><a href="#cb10-11" aria-hidden="true" tabindex="-1"></a><span class="kw">&lt;meta</span> <span class="er">name</span><span class="ot">=</span><span class="st">&quot;citation_author&quot;</span> <span class="er">content</span><span class="ot">=</span><span class="st">&quot;Yihui Xie&quot;</span><span class="kw">/&gt;</span></span>
-<span id="cb10-12"><a href="#cb10-12" aria-hidden="true" tabindex="-1"></a><span class="kw">&lt;meta</span> <span class="er">name</span><span class="ot">=</span><span class="st">&quot;citation_author_institution&quot;</span> <span class="er">content</span><span class="ot">=</span><span class="st">&quot;RStudio&quot;</span><span class="kw">/&gt;</span></span>
-<span id="cb10-13"><a href="#cb10-13" aria-hidden="true" tabindex="-1"></a><span class="kw">&lt;meta</span> <span class="er">name</span><span class="ot">=</span><span class="st">&quot;citation_reference&quot;</span> <span class="er">content</span><span class="ot">=</span><span class="st">&quot;citation_title=Distill;</span></span>
+<span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a><span class="dt">&lt;</span><span class="kw">meta</span><span class="ot"> name</span><span class="op">=</span><span class="st">&quot;citation_title&quot;</span><span class="ot"> content</span><span class="op">=</span><span class="st">&quot;Distill for R Markdown&quot;</span><span class="dt">/&gt;</span></span>
+<span id="cb10-3"><a href="#cb10-3" aria-hidden="true" tabindex="-1"></a><span class="dt">&lt;</span><span class="kw">meta</span><span class="ot"> name</span><span class="op">=</span><span class="st">&quot;citation_fulltext_html_url&quot;</span><span class="ot"> content</span><span class="op">=</span><span class="st">&quot;https://rstudio.github.io/distill&quot;</span><span class="dt">/&gt;</span></span>
+<span id="cb10-4"><a href="#cb10-4" aria-hidden="true" tabindex="-1"></a><span class="dt">&lt;</span><span class="kw">meta</span><span class="ot"> name</span><span class="op">=</span><span class="st">&quot;citation_fulltext_world_readable&quot;</span><span class="ot"> content</span><span class="op">=</span><span class="st">&quot;&quot;</span><span class="dt">/&gt;</span></span>
+<span id="cb10-5"><a href="#cb10-5" aria-hidden="true" tabindex="-1"></a><span class="dt">&lt;</span><span class="kw">meta</span><span class="ot"> name</span><span class="op">=</span><span class="st">&quot;citation_online_date&quot;</span><span class="ot"> content</span><span class="op">=</span><span class="st">&quot;2018/05/04&quot;</span><span class="dt">/&gt;</span></span>
+<span id="cb10-6"><a href="#cb10-6" aria-hidden="true" tabindex="-1"></a><span class="dt">&lt;</span><span class="kw">meta</span><span class="ot"> name</span><span class="op">=</span><span class="st">&quot;citation_publication_date&quot;</span><span class="ot"> content</span><span class="op">=</span><span class="st">&quot;2018/05/04&quot;</span><span class="dt">/&gt;</span></span>
+<span id="cb10-7"><a href="#cb10-7" aria-hidden="true" tabindex="-1"></a><span class="dt">&lt;</span><span class="kw">meta</span><span class="ot"> name</span><span class="op">=</span><span class="st">&quot;citation_author&quot;</span><span class="ot"> content</span><span class="op">=</span><span class="st">&quot;JJ Allaire&quot;</span><span class="dt">/&gt;</span></span>
+<span id="cb10-8"><a href="#cb10-8" aria-hidden="true" tabindex="-1"></a><span class="dt">&lt;</span><span class="kw">meta</span><span class="ot"> name</span><span class="op">=</span><span class="st">&quot;citation_author_institution&quot;</span><span class="ot"> content</span><span class="op">=</span><span class="st">&quot;RStudio&quot;</span><span class="dt">/&gt;</span></span>
+<span id="cb10-9"><a href="#cb10-9" aria-hidden="true" tabindex="-1"></a><span class="dt">&lt;</span><span class="kw">meta</span><span class="ot"> name</span><span class="op">=</span><span class="st">&quot;citation_author&quot;</span><span class="ot"> content</span><span class="op">=</span><span class="st">&quot;Rich Iannone&quot;</span><span class="dt">/&gt;</span></span>
+<span id="cb10-10"><a href="#cb10-10" aria-hidden="true" tabindex="-1"></a><span class="dt">&lt;</span><span class="kw">meta</span><span class="ot"> name</span><span class="op">=</span><span class="st">&quot;citation_author_institution&quot;</span><span class="ot"> content</span><span class="op">=</span><span class="st">&quot;RStudio&quot;</span><span class="dt">/&gt;</span></span>
+<span id="cb10-11"><a href="#cb10-11" aria-hidden="true" tabindex="-1"></a><span class="dt">&lt;</span><span class="kw">meta</span><span class="ot"> name</span><span class="op">=</span><span class="st">&quot;citation_author&quot;</span><span class="ot"> content</span><span class="op">=</span><span class="st">&quot;Yihui Xie&quot;</span><span class="dt">/&gt;</span></span>
+<span id="cb10-12"><a href="#cb10-12" aria-hidden="true" tabindex="-1"></a><span class="dt">&lt;</span><span class="kw">meta</span><span class="ot"> name</span><span class="op">=</span><span class="st">&quot;citation_author_institution&quot;</span><span class="ot"> content</span><span class="op">=</span><span class="st">&quot;RStudio&quot;</span><span class="dt">/&gt;</span></span>
+<span id="cb10-13"><a href="#cb10-13" aria-hidden="true" tabindex="-1"></a><span class="dt">&lt;</span><span class="kw">meta</span><span class="ot"> name</span><span class="op">=</span><span class="st">&quot;citation_reference&quot;</span><span class="ot"> content</span><span class="op">=</span><span class="st">&quot;citation_title=Distill;</span></span>
 <span id="cb10-14"><a href="#cb10-14" aria-hidden="true" tabindex="-1"></a><span class="st">citation_publication_date=2016;citation_publisher=Distill Working</span></span>
 <span id="cb10-15"><a href="#cb10-15" aria-hidden="true" tabindex="-1"></a><span class="st">Group;citation_doi=10.23915/distill;citation_author=Shan Carter;</span></span>
-<span id="cb10-16"><a href="#cb10-16" aria-hidden="true" tabindex="-1"></a><span class="st">citation_author=Chirs Olah;citation_author=Arvind Satyanarayan&quot;</span><span class="kw">/&gt;</span></span>
-<span id="cb10-17"><a href="#cb10-17" aria-hidden="true" tabindex="-1"></a><span class="kw">&lt;meta</span> <span class="er">name</span><span class="ot">=</span><span class="st">&quot;citation_reference&quot;</span> <span class="er">content</span><span class="ot">=</span><span class="st">&quot;citation_title=Literate</span></span>
+<span id="cb10-16"><a href="#cb10-16" aria-hidden="true" tabindex="-1"></a><span class="st">citation_author=Chirs Olah;citation_author=Arvind Satyanarayan&quot;</span><span class="dt">/&gt;</span></span>
+<span id="cb10-17"><a href="#cb10-17" aria-hidden="true" tabindex="-1"></a><span class="dt">&lt;</span><span class="kw">meta</span><span class="ot"> name</span><span class="op">=</span><span class="st">&quot;citation_reference&quot;</span><span class="ot"> content</span><span class="op">=</span><span class="st">&quot;citation_title=Literate</span></span>
 <span id="cb10-18"><a href="#cb10-18" aria-hidden="true" tabindex="-1"></a><span class="st">programming;citation_publication_date=1984;</span></span>
 <span id="cb10-19"><a href="#cb10-19" aria-hidden="true" tabindex="-1"></a><span class="st">citation_publisher=British Computer Society;citation_volume=27;</span></span>
-<span id="cb10-20"><a href="#cb10-20" aria-hidden="true" tabindex="-1"></a><span class="st">citation_author=Donald E. Knuth&quot;</span><span class="kw">/&gt;</span></span>
-<span id="cb10-21"><a href="#cb10-21" aria-hidden="true" tabindex="-1"></a><span class="kw">&lt;meta</span> <span class="er">name</span><span class="ot">=</span><span class="st">&quot;citation_reference&quot;</span> <span class="er">content</span><span class="ot">=</span><span class="st">&quot;citation_title=Dynamic</span></span>
+<span id="cb10-20"><a href="#cb10-20" aria-hidden="true" tabindex="-1"></a><span class="st">citation_author=Donald E. Knuth&quot;</span><span class="dt">/&gt;</span></span>
+<span id="cb10-21"><a href="#cb10-21" aria-hidden="true" tabindex="-1"></a><span class="dt">&lt;</span><span class="kw">meta</span><span class="ot"> name</span><span class="op">=</span><span class="st">&quot;citation_reference&quot;</span><span class="ot"> content</span><span class="op">=</span><span class="st">&quot;citation_title=Dynamic</span></span>
 <span id="cb10-22"><a href="#cb10-22" aria-hidden="true" tabindex="-1"></a><span class="st">documents with r and knitr;citation_publication_date=2015;</span></span>
-<span id="cb10-23"><a href="#cb10-23" aria-hidden="true" tabindex="-1"></a><span class="st">citation_publisher=Chapman; Hall/CRC;citation_author=Yihui Xie&quot;</span><span class="kw">/&gt;</span></span></code></pre></div>
+<span id="cb10-23"><a href="#cb10-23" aria-hidden="true" tabindex="-1"></a><span class="st">citation_publisher=Chapman; Hall/CRC;citation_author=Yihui Xie&quot;</span><span class="dt">/&gt;</span></span></code></pre></div>
 <p>Note that the <code>citation_reference</code> fields provide information on which works your article cited.</p>
 <p>The code above is HTML so don’t worry if you aren’t familiar with the syntax. The important thing to know is that citation data is provided in a way that machines can easily read and index.</p>
 <p>If you are publishing a Journal article, there are some additional metadata fields you can provide to enhance the Google Scholar metadata generated by Distill. These include additional fields describing the Journal (<code>title</code>, <code>issn</code>, and <code>publisher</code>) as well fields describing the <code>volume</code> and <code>issue</code> in which your article was published. For example:</p>

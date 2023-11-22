@@ -21,7 +21,7 @@
 <style type="text/css">code{white-space: pre;}</style>
 <style type="text/css" data-origin="pandoc">
 pre > code.sourceCode { white-space: pre; position: relative; }
-pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span { line-height: 1.25; }
 pre > code.sourceCode > span:empty { height: 1.2em; }
 .sourceCode { overflow: visible; }
 code.sourceCode > span { color: inherit; text-decoration: inherit; }
@@ -457,8 +457,8 @@ code span.wa { color: #008000; font-weight: bold; } /* Warning */
   </style>
 
   <script src="site_libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
-  <link href="site_libs/font-awesome-5.1.0/css/all.css" rel="stylesheet"/>
-  <link href="site_libs/font-awesome-5.1.0/css/v4-shims.css" rel="stylesheet"/>
+  <link href="site_libs/font-awesome-6.4.2/css/all.min.css" rel="stylesheet"/>
+  <link href="site_libs/font-awesome-6.4.2/css/v4-shims.min.css" rel="stylesheet"/>
   <script src="site_libs/headroom-0.9.4/headroom.min.js"></script>
   <script src="site_libs/autocomplete-0.37.1/autocomplete.min.js"></script>
   <script src="site_libs/fuse-6.4.1/fuse.min.js"></script>
@@ -2073,7 +2073,7 @@ code span.wa { color: #008000; font-weight: bold; } /* Warning */
   </script>
 
   <!--/radix_placeholder_distill-->
-  <script src="site_libs/header-attrs-2.16.1/header-attrs.js"></script>
+  <script src="site_libs/header-attrs-2.25/header-attrs.js"></script>
   <script src="site_libs/popper-2.6.0/popper.min.js"></script>
   <link href="site_libs/tippy-6.2.7/tippy.css" rel="stylesheet" />
   <link href="site_libs/tippy-6.2.7/tippy-light-border.css" rel="stylesheet" />
@@ -2123,7 +2123,7 @@ code span.wa { color: #008000; font-weight: bold; } /* Warning */
 <header class="header header--fixed" role="banner">
 <nav class="distill-site-nav distill-site-header">
 <div class="nav-left">
-<a class="logo" href="https://www.rstudio.com">
+<a class="logo" href="https://www.posit.co">
 <img src="images/logo.png" alt="Logo"/>
 </a>
 <a href="index.html" class="title">Distill for R Markdown</a>
@@ -2320,28 +2320,28 @@ Publishing
 <p>Distill articles automatically include metadata compatible with the format indexed by <a href="https://scholar.google.com/intl/en/scholar/inclusion.html#indexing">Google Scholar</a>. This makes it easy for indexing engines (Google Scholar or otherwise) to extract not only a citation for your article but also information on other sources which you cited.</p>
 <p>For example, here is the Google Scholar metadata automatically included for the home page of the Distill for R Markdown website:</p>
 <div class="sourceCode" id="cb5"><pre class="sourceCode html"><code class="sourceCode html"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="co">&lt;!--  https://scholar.google.com/intl/en/scholar/inclusion.html#indexing --&gt;</span></span>
-<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a><span class="kw">&lt;meta</span> <span class="er">name</span><span class="ot">=</span><span class="st">&quot;citation_title&quot;</span> <span class="er">content</span><span class="ot">=</span><span class="st">&quot;Distill for R Markdown&quot;</span><span class="kw">/&gt;</span></span>
-<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a><span class="kw">&lt;meta</span> <span class="er">name</span><span class="ot">=</span><span class="st">&quot;citation_fulltext_html_url&quot;</span> <span class="er">content</span><span class="ot">=</span><span class="st">&quot;https://rstudio.github.io/distill&quot;</span><span class="kw">/&gt;</span></span>
-<span id="cb5-4"><a href="#cb5-4" aria-hidden="true" tabindex="-1"></a><span class="kw">&lt;meta</span> <span class="er">name</span><span class="ot">=</span><span class="st">&quot;citation_fulltext_world_readable&quot;</span> <span class="er">content</span><span class="ot">=</span><span class="st">&quot;&quot;</span><span class="kw">/&gt;</span></span>
-<span id="cb5-5"><a href="#cb5-5" aria-hidden="true" tabindex="-1"></a><span class="kw">&lt;meta</span> <span class="er">name</span><span class="ot">=</span><span class="st">&quot;citation_online_date&quot;</span> <span class="er">content</span><span class="ot">=</span><span class="st">&quot;2018/05/04&quot;</span><span class="kw">/&gt;</span></span>
-<span id="cb5-6"><a href="#cb5-6" aria-hidden="true" tabindex="-1"></a><span class="kw">&lt;meta</span> <span class="er">name</span><span class="ot">=</span><span class="st">&quot;citation_publication_date&quot;</span> <span class="er">content</span><span class="ot">=</span><span class="st">&quot;2018/05/04&quot;</span><span class="kw">/&gt;</span></span>
-<span id="cb5-7"><a href="#cb5-7" aria-hidden="true" tabindex="-1"></a><span class="kw">&lt;meta</span> <span class="er">name</span><span class="ot">=</span><span class="st">&quot;citation_author&quot;</span> <span class="er">content</span><span class="ot">=</span><span class="st">&quot;JJ Allaire&quot;</span><span class="kw">/&gt;</span></span>
-<span id="cb5-8"><a href="#cb5-8" aria-hidden="true" tabindex="-1"></a><span class="kw">&lt;meta</span> <span class="er">name</span><span class="ot">=</span><span class="st">&quot;citation_author_institution&quot;</span> <span class="er">content</span><span class="ot">=</span><span class="st">&quot;RStudio&quot;</span><span class="kw">/&gt;</span></span>
-<span id="cb5-9"><a href="#cb5-9" aria-hidden="true" tabindex="-1"></a><span class="kw">&lt;meta</span> <span class="er">name</span><span class="ot">=</span><span class="st">&quot;citation_author&quot;</span> <span class="er">content</span><span class="ot">=</span><span class="st">&quot;Rich Iannone&quot;</span><span class="kw">/&gt;</span></span>
-<span id="cb5-10"><a href="#cb5-10" aria-hidden="true" tabindex="-1"></a><span class="kw">&lt;meta</span> <span class="er">name</span><span class="ot">=</span><span class="st">&quot;citation_author_institution&quot;</span> <span class="er">content</span><span class="ot">=</span><span class="st">&quot;RStudio&quot;</span><span class="kw">/&gt;</span></span>
-<span id="cb5-11"><a href="#cb5-11" aria-hidden="true" tabindex="-1"></a><span class="kw">&lt;meta</span> <span class="er">name</span><span class="ot">=</span><span class="st">&quot;citation_author&quot;</span> <span class="er">content</span><span class="ot">=</span><span class="st">&quot;Yihui Xie&quot;</span><span class="kw">/&gt;</span></span>
-<span id="cb5-12"><a href="#cb5-12" aria-hidden="true" tabindex="-1"></a><span class="kw">&lt;meta</span> <span class="er">name</span><span class="ot">=</span><span class="st">&quot;citation_author_institution&quot;</span> <span class="er">content</span><span class="ot">=</span><span class="st">&quot;RStudio&quot;</span><span class="kw">/&gt;</span></span>
-<span id="cb5-13"><a href="#cb5-13" aria-hidden="true" tabindex="-1"></a><span class="kw">&lt;meta</span> <span class="er">name</span><span class="ot">=</span><span class="st">&quot;citation_reference&quot;</span> <span class="er">content</span><span class="ot">=</span><span class="st">&quot;citation_title=Distill;</span></span>
+<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a><span class="dt">&lt;</span><span class="kw">meta</span><span class="ot"> name</span><span class="op">=</span><span class="st">&quot;citation_title&quot;</span><span class="ot"> content</span><span class="op">=</span><span class="st">&quot;Distill for R Markdown&quot;</span><span class="dt">/&gt;</span></span>
+<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a><span class="dt">&lt;</span><span class="kw">meta</span><span class="ot"> name</span><span class="op">=</span><span class="st">&quot;citation_fulltext_html_url&quot;</span><span class="ot"> content</span><span class="op">=</span><span class="st">&quot;https://rstudio.github.io/distill&quot;</span><span class="dt">/&gt;</span></span>
+<span id="cb5-4"><a href="#cb5-4" aria-hidden="true" tabindex="-1"></a><span class="dt">&lt;</span><span class="kw">meta</span><span class="ot"> name</span><span class="op">=</span><span class="st">&quot;citation_fulltext_world_readable&quot;</span><span class="ot"> content</span><span class="op">=</span><span class="st">&quot;&quot;</span><span class="dt">/&gt;</span></span>
+<span id="cb5-5"><a href="#cb5-5" aria-hidden="true" tabindex="-1"></a><span class="dt">&lt;</span><span class="kw">meta</span><span class="ot"> name</span><span class="op">=</span><span class="st">&quot;citation_online_date&quot;</span><span class="ot"> content</span><span class="op">=</span><span class="st">&quot;2018/05/04&quot;</span><span class="dt">/&gt;</span></span>
+<span id="cb5-6"><a href="#cb5-6" aria-hidden="true" tabindex="-1"></a><span class="dt">&lt;</span><span class="kw">meta</span><span class="ot"> name</span><span class="op">=</span><span class="st">&quot;citation_publication_date&quot;</span><span class="ot"> content</span><span class="op">=</span><span class="st">&quot;2018/05/04&quot;</span><span class="dt">/&gt;</span></span>
+<span id="cb5-7"><a href="#cb5-7" aria-hidden="true" tabindex="-1"></a><span class="dt">&lt;</span><span class="kw">meta</span><span class="ot"> name</span><span class="op">=</span><span class="st">&quot;citation_author&quot;</span><span class="ot"> content</span><span class="op">=</span><span class="st">&quot;JJ Allaire&quot;</span><span class="dt">/&gt;</span></span>
+<span id="cb5-8"><a href="#cb5-8" aria-hidden="true" tabindex="-1"></a><span class="dt">&lt;</span><span class="kw">meta</span><span class="ot"> name</span><span class="op">=</span><span class="st">&quot;citation_author_institution&quot;</span><span class="ot"> content</span><span class="op">=</span><span class="st">&quot;RStudio&quot;</span><span class="dt">/&gt;</span></span>
+<span id="cb5-9"><a href="#cb5-9" aria-hidden="true" tabindex="-1"></a><span class="dt">&lt;</span><span class="kw">meta</span><span class="ot"> name</span><span class="op">=</span><span class="st">&quot;citation_author&quot;</span><span class="ot"> content</span><span class="op">=</span><span class="st">&quot;Rich Iannone&quot;</span><span class="dt">/&gt;</span></span>
+<span id="cb5-10"><a href="#cb5-10" aria-hidden="true" tabindex="-1"></a><span class="dt">&lt;</span><span class="kw">meta</span><span class="ot"> name</span><span class="op">=</span><span class="st">&quot;citation_author_institution&quot;</span><span class="ot"> content</span><span class="op">=</span><span class="st">&quot;RStudio&quot;</span><span class="dt">/&gt;</span></span>
+<span id="cb5-11"><a href="#cb5-11" aria-hidden="true" tabindex="-1"></a><span class="dt">&lt;</span><span class="kw">meta</span><span class="ot"> name</span><span class="op">=</span><span class="st">&quot;citation_author&quot;</span><span class="ot"> content</span><span class="op">=</span><span class="st">&quot;Yihui Xie&quot;</span><span class="dt">/&gt;</span></span>
+<span id="cb5-12"><a href="#cb5-12" aria-hidden="true" tabindex="-1"></a><span class="dt">&lt;</span><span class="kw">meta</span><span class="ot"> name</span><span class="op">=</span><span class="st">&quot;citation_author_institution&quot;</span><span class="ot"> content</span><span class="op">=</span><span class="st">&quot;RStudio&quot;</span><span class="dt">/&gt;</span></span>
+<span id="cb5-13"><a href="#cb5-13" aria-hidden="true" tabindex="-1"></a><span class="dt">&lt;</span><span class="kw">meta</span><span class="ot"> name</span><span class="op">=</span><span class="st">&quot;citation_reference&quot;</span><span class="ot"> content</span><span class="op">=</span><span class="st">&quot;citation_title=Distill;</span></span>
 <span id="cb5-14"><a href="#cb5-14" aria-hidden="true" tabindex="-1"></a><span class="st">citation_publication_date=2016;citation_publisher=Distill Working</span></span>
 <span id="cb5-15"><a href="#cb5-15" aria-hidden="true" tabindex="-1"></a><span class="st">Group;citation_doi=10.23915/distill;citation_author=Shan Carter;</span></span>
-<span id="cb5-16"><a href="#cb5-16" aria-hidden="true" tabindex="-1"></a><span class="st">citation_author=Chirs Olah;citation_author=Arvind Satyanarayan&quot;</span><span class="kw">/&gt;</span></span>
-<span id="cb5-17"><a href="#cb5-17" aria-hidden="true" tabindex="-1"></a><span class="kw">&lt;meta</span> <span class="er">name</span><span class="ot">=</span><span class="st">&quot;citation_reference&quot;</span> <span class="er">content</span><span class="ot">=</span><span class="st">&quot;citation_title=Literate</span></span>
+<span id="cb5-16"><a href="#cb5-16" aria-hidden="true" tabindex="-1"></a><span class="st">citation_author=Chirs Olah;citation_author=Arvind Satyanarayan&quot;</span><span class="dt">/&gt;</span></span>
+<span id="cb5-17"><a href="#cb5-17" aria-hidden="true" tabindex="-1"></a><span class="dt">&lt;</span><span class="kw">meta</span><span class="ot"> name</span><span class="op">=</span><span class="st">&quot;citation_reference&quot;</span><span class="ot"> content</span><span class="op">=</span><span class="st">&quot;citation_title=Literate</span></span>
 <span id="cb5-18"><a href="#cb5-18" aria-hidden="true" tabindex="-1"></a><span class="st">programming;citation_publication_date=1984;</span></span>
 <span id="cb5-19"><a href="#cb5-19" aria-hidden="true" tabindex="-1"></a><span class="st">citation_publisher=British Computer Society;citation_volume=27;</span></span>
-<span id="cb5-20"><a href="#cb5-20" aria-hidden="true" tabindex="-1"></a><span class="st">citation_author=Donald E. Knuth&quot;</span><span class="kw">/&gt;</span></span>
-<span id="cb5-21"><a href="#cb5-21" aria-hidden="true" tabindex="-1"></a><span class="kw">&lt;meta</span> <span class="er">name</span><span class="ot">=</span><span class="st">&quot;citation_reference&quot;</span> <span class="er">content</span><span class="ot">=</span><span class="st">&quot;citation_title=Dynamic</span></span>
+<span id="cb5-20"><a href="#cb5-20" aria-hidden="true" tabindex="-1"></a><span class="st">citation_author=Donald E. Knuth&quot;</span><span class="dt">/&gt;</span></span>
+<span id="cb5-21"><a href="#cb5-21" aria-hidden="true" tabindex="-1"></a><span class="dt">&lt;</span><span class="kw">meta</span><span class="ot"> name</span><span class="op">=</span><span class="st">&quot;citation_reference&quot;</span><span class="ot"> content</span><span class="op">=</span><span class="st">&quot;citation_title=Dynamic</span></span>
 <span id="cb5-22"><a href="#cb5-22" aria-hidden="true" tabindex="-1"></a><span class="st">documents with r and knitr;citation_publication_date=2015;</span></span>
-<span id="cb5-23"><a href="#cb5-23" aria-hidden="true" tabindex="-1"></a><span class="st">citation_publisher=Chapman; Hall/CRC;citation_author=Yihui Xie&quot;</span><span class="kw">/&gt;</span></span></code></pre></div>
+<span id="cb5-23"><a href="#cb5-23" aria-hidden="true" tabindex="-1"></a><span class="st">citation_publisher=Chapman; Hall/CRC;citation_author=Yihui Xie&quot;</span><span class="dt">/&gt;</span></span></code></pre></div>
 <p>Note that the <code>citation_reference</code> fields provide information on which works your article cited.</p>
 <p>The code above is HTML so don’t worry if you aren’t familiar with the syntax. The important thing to know is that citation data is provided in a way that machines can easily read and index.</p>
 <p>If you are publishing a Journal article, there are some additional metadata fields you can provide to enhance the Google Scholar metadata generated by Distill. These include additional fields describing the Journal (<code>title</code>, <code>issn</code>, and <code>publisher</code>) as well fields describing the <code>volume</code> and <code>issue</code> in which your article was published. For example:</p>
